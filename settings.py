@@ -33,7 +33,7 @@ MEDIA_ROOT = '%s/media/' % DOCUMENT_ROOT
 MEDIA_URL = '%s/media/' % WEB_URL
 
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '%s/media/' % WEB_URL
+ADMIN_MEDIA_PREFIX = '%s/media/admin/' % WEB_URL
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'n9-*x3!&!(x*z_!13)cyxil4fh+ov_+3!y($&4t7iit=)d)=93'
