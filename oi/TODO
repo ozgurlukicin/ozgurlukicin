@@ -1,5 +1,5 @@
 =====================================================
-"Don’t code today what you can’t debug tommorow."
+"Don’t code today what you can’t debug tomorrow
 =====================================================
 
 Legend:
@@ -13,3 +13,15 @@ Legend:
 - General 404 error pages (we can use get_object_or_404 function of django)
 - File upload support in wysiwyg editor (tinymce)
 - User management system (basic login/logout and user profiles)
+
+- Move all view in apps/ dir. Now it is not flexible, when we want to add comment support on packages or news section in the future, it would be difficult..
+
+ * apps/news
+     | urls.py
+     | views.py
+
+ * apps/packages
+     | urls.py
+     | views.py
+
+     it's great :)
