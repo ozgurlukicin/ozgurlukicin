@@ -1,0 +1,6 @@
+PythonPath "['/home/ahmet/public_html'] + sys.path"
+
+PythonHandler django.core.handlers.modpython
+SetEnv DJANGO_SETTINGS_MODULE oi.settings
+SetHandler python-program
+PythonDebug On

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{% block title %}{% endblock %}Özgürlük için...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="imagetoolbar" content="no" />
+<link rel="shortcut icon" href="/media/img/favicon.png" />
+<style type="text/css" media="screen">@import url('/media/css/style.css');</style>
+<script type="text/javascript" src="/media/js/mootools.js"></script>
+<script type="text/javascript" src="/media/js/custom.js"></script>
+{% block extrahead %}{% endblock %}
+</head>
+<body>
+<!--<div id="topbar">
+    <div id="topbar_content">
+         <img src="user_16.png" border="0" align="absmiddle" hspace="0" vspace="0"  /> Log in 
+    </div>
+</div>-->
+<div id="{% block pagetype %}page{% endblock %}">
+    <div id="header" class="{% block section %}home{% endblock %}_header">
+        <div id="logo"><a href="/"><img src="/media/img/home_header_logo.png" border="0" /></a></div>
+        <div id="menu_container">
+            <ul id="menu">
+                <li class="menu"><a href="/ia/"><img src="/media/img/tab_fs.png"></a></li>
+                <li class="menu"><a href="/oyun/"><img src="/media/img/tab_games.png"></a></li>
+                <li class="menu"><a href="/paket/"><img src="/media/img/tab_packages.png"></a></li>
+                <li class="menu"><a href="/forum/"><img src="/media/img/tab_forum.png"></a></li>
+            </ul>
+        </div>
+        <div id="section_logo">{% block section_logo %}{% endblock %}</div>
+    </div>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <div id="sidebar">
+        {% block sidebartop %}
+        {% endblock %}
+        {% block sidebar %}
+        {% endblock %}
+        {% block sidebarbottom %}
+        {% endblock %}
+    </div>
+    <div id="footer">
+        {% block footer %}
+        {% endblock %}
+    </div>
+</div>
+<div id="credits">
+    <div class="alignleft">İçerik <a href="http://pardus.org.tr/">Fasafiso</a> ile lisanslanmıştır.</div>
+    <div class="alignright"><a href="/hakkinda/" class="footer_about">Hakkında</a> <a href="/feeds/" class="footer_rss">Takip et</a> <a href="/bocuk/" class="footer_bug">Hata raporla</a></div>
+</div>
+</body>
+</html>
