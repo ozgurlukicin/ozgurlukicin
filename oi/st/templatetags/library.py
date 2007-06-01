@@ -3,8 +3,6 @@ import Image
 from django.template import Library
 from oi.settings import MEDIA_ROOT, MEDIA_URL
 
-register = Library()
-
 def thumbnail(file, size='200x200'):
     # defining the size
     x, y = [int(x) for x in size.split('x')]
@@ -22,4 +20,5 @@ def thumbnail(file, size='200x200'):
         image.save(miniature_filename, image.format)
     return miniature_url
 
+register = Library()
 register.filter(thumbnail)
