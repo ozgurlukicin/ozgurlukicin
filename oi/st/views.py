@@ -77,4 +77,8 @@ def tag_detail(request, tag):
     games = Game.objects.filter(tags__name__contains=tag)
     fs = FS.objects.filter(tags__name__contains=tag)
     flatpages = FlatPage.objects.filter(tags__name__contains=tag)
-    return render_to_response('tag_detail.html', locals())
+
+    if not (len(news) and len(packages) and len(games) and len(fs) and len(flatpages)):
+        return render_to_response('404.html')
+    else:
+        return render_to_response('tag_detail.html', locals())
