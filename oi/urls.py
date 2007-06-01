@@ -17,22 +17,22 @@ urlpatterns = patterns('',
     #(r'^haber/$', 'oi.st.views.archive'),
     (r'^haber/$', 'django.views.generic.simple.redirect_to', {'url': '/'}),
     (r'^$', 'oi.st.views.news_main'),
-    (r'^haber/yazdir/(?P<sef_title>.*)\.html$', 'oi.st.views.news_printable'),
+    (r'^haber/(?P<sef_title>.*)\.html/yazdir/$', 'oi.st.views.news_printable'),
     (r'^haber/(?P<sef_title>.*)\.html$', 'oi.st.views.news_detail'),
 
     #Packages
     (r'^paket/$', 'oi.st.views.pkg_main'),
-    (r'^paket/yazdir/(?P<name>.*)\.html$', 'oi.st.views.pkg_printable'),
+    (r'^paket/(?P<name>.*)\.html/yazdir/$', 'oi.st.views.pkg_printable'),
     (r'^paket/(?P<name>.*)\.html$', 'oi.st.views.pkg_detail'),
 
     #First Steps
     (r'^ia/$', 'oi.st.views.fs_main'),
-    (r'^ia/yazdir/(?P<sef_title>.*)\.html$', 'oi.st.views.fs_printable'),
+    (r'^ia/(?P<sef_title>.*)\.html/yazdir/$', 'oi.st.views.fs_printable'),
     (r'^ia/(?P<sef_title>.*)\.html$', 'oi.st.views.fs_detail'),
 
     #Games
     (r'^oyun/$', 'oi.st.views.game_main'),
-    (r'^oyun/yazdir/(?P<sef_title>.*)\.html$', 'oi.st.views.game_printable'),
+    (r'^oyun/(?P<sef_title>.*)\.html/yazdir/$', 'oi.st.views.game_printable'),
     (r'^oyun/(?P<sef_title>.*)\.html$', 'oi.st.views.game_detail'),
 
     #Tags

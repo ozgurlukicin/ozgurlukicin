@@ -120,7 +120,7 @@ class Game(models.Model):
         return "/oyun/%s.html" % self.sef_title
 
     def get_printable_url(self):
-        return "/oyun/yazdir/%s.html" % self.sef_title
+        return "/oyun/%s.html/yazdir" % self.sef_title
 
     class Admin:
         fields = (
@@ -153,7 +153,7 @@ class News(models.Model):
         return "/haber/%s.html" % self.sef_title
 
     def get_printable_url(self):
-        return "/haber/yazdir/%s.html" % self.sef_title
+        return "/haber/%s.html/yazdir" % self.sef_title
 
     def save(self):
         self.author = threadlocals.get_current_user()
@@ -198,7 +198,7 @@ class Package(models.Model):
         return "/paket/%s.html" % self.name
 
     def get_printable_url(self):
-        return "/paket/yazdir/%s.html" % self.name
+        return "/paket/%s.html/yazdir" % self.name
 
     class Admin:
         list_display = ('name', 'sum')
