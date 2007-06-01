@@ -23,7 +23,7 @@
 {% block sidebar %}
 <div class="sidebar_orange_title">Ayrıntılar</div>
 <div class="sidebar sidebar_orange">
-    <strong>Lisans:</strong> {% for license in licenses %}<a href="{{ license.url }}">{{ license.name }}</a> | {% endfor %}<br />
+    <strong>Lisans:</strong> {% for license in licenses %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}<br />
     <strong>Paket boyutu:</strong> {{ package.download_size|filesizeformat }}<br />
     <strong>Kurulu boyutu:</strong> {{ package.installed_size|filesizeformat }}<br />
     <strong>Web sitesi:</strong> <a href="{{ package.url }}">{{ package.url }}</a><br />
