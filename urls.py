@@ -14,9 +14,7 @@ root = "/".join(WEB_URL.split("/")[3:])
 
 urlpatterns = patterns('',
     #Home/News
-    #(r'^haber/$', 'oi.st.views.archive'),
-    (r'^haber/$', 'django.views.generic.simple.redirect_to', {'url': '/'}),
-    (r'^$', 'oi.st.views.news_main'),
+    (r'^haber/$', 'oi.st.views.news_main'),
     (r'^haber/yazdir/(?P<sef_title>.*)\.html$', 'oi.st.views.news_printable'),
     (r'^haber/(?P<sef_title>.*)\.html$', 'oi.st.views.news_detail'),
 
@@ -45,6 +43,7 @@ urlpatterns = patterns('',
     #(r"^%s/comments/" % root, include("django.contrib.comments.urls.comments")),
 
     #Django
+    (r'^$', 'oi.st.views.home'),
     (r'^user/', include('oi.registration.urls')),
     (r'^admin/', include('django.contrib.admin.urls')),
     (r'^media/(.*)$', 'django.views.static.serve', {'document_root': '%s/media' % DOCUMENT_ROOT, 'show_indexes': True}),

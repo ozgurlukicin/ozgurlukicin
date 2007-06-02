@@ -9,6 +9,9 @@ from django.shortcuts import render_to_response
 from oi.st.models import FS, Game, News, Package, ScreenShot, Tag
 from oi.flatpages.models import FlatPage
 
+def home(request):
+    news = News.objects.all().order_by('-date')[:4]
+    return render_to_response('home.html', locals())
 
 def fs_main(request):
     fs_all = FS.objects.all()

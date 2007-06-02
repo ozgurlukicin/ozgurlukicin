@@ -590,6 +590,10 @@ hr.clear {
     background: #0FACEA url('/media/img/home_header_bg.png') repeat-x;
 }
 
+.news_header {
+    background: #0FACEA url('/media/img/news_header_bg.png') repeat-x;
+}
+
 .forum_header {
     background: #0FACEA url('/media/img/forum_header_bg.png') repeat-x;
 }
