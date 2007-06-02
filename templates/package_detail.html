@@ -1,0 +1,45 @@
+{% load library %}
+{% extends "base.html" %}
+
+{% block title %}{{ package.name }} - Paketler - {% endblock %}
+
+{% block extrahead %}
+<script type="text/javascript" src="/media/js/slimbox_ex.js"></script>
+<style type="text/css" media="screen">@import url('/media/css/slimbox_ex.css');</style>
+{% endblock %}
+
+{% block pagetype %}page{% endblock %}
+
+{% block section %}package{% endblock %}
+{% block section_logo %}<img src="/media/img/package_header_logo.png">{% endblock %}
+
+{% block content %}
+<div class="page_title">{{ package.name }}</div>
+<div class="page_content">
+{{ package.desc }}
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<div class="sidebar_orange_title">Ayrıntılar</div>
+<div class="sidebar sidebar_orange">
+    <strong>Lisans:</strong> {% for license in licenses %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}<br />
+    <strong>Paket boyutu:</strong> {{ package.download_size|filesizeformat }}<br />
+    <strong>Kurulu boyutu:</strong> {{ package.installed_size|filesizeformat }}<br />
+    <strong>Web sitesi:</strong> <a href="{{ package.url }}">{{ package.url }}</a><br />
+</div>
+
+<div class="sidebar_orange_title">Editör notu</div>
+<div class="sidebar sidebar_orange"><div class="rating_bar"><img src="/media/img/rating_{{ package.point }}.png" border="0" height="39px" width="200px" /></div></div>
+
+<div class="sidebar_orange_title">Menüdeki yeri</div>
+<div class="sidebar sidebar_orange">{{ package.path }}</div>
+
+<div class="sidebar_orange_title">Etiketler</div>
+<div class="sidebar sidebar_orange">{% for tag in tags %}<div><img src="/media/img/tag.png" border="0" style="vertical-align:middle;" /> <a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a></div> {% endfor %}</div>
+
+{% if sss %}
+<div class="sidebar_orange_title">Ekran görüntüleri</div>
+<div class="sidebar sidebar_orange">{% for ss in sss %}<a href="/media/{{ ss.file }}" rel="lightbox[{{ package.name }}]" title="{{ ss.desc }}"><img src="{{ ss.file|thumbnail:"235x235" }}" /></a>{% endfor %}</a></div>
+{% endif %}
+{% endblock %}
