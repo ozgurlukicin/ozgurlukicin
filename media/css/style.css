@@ -784,6 +784,10 @@ hr.clear {
     min-height: 16px;
 }
 
+.fs_list_title:hover {
+    cursor: pointer;
+}
+
 .odd{
     background: #FFF url('/media/img/list_odd.png') repeat-x left bottom;
 }

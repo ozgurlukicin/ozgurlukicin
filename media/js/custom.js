@@ -1,5 +1,5 @@
 window.addEvent('domready', function(){
-    var szNormal = 120, szSmall  = 100, szFull   = 175;
+    var szNormal = 120, szSmall  = 106, szFull   = 175;
 
     var kwicks = $$("#menu .menu");
     var fx = new Fx.Elements(kwicks, {wait: false, duration: 200, transition: Fx.Transitions.quadOut});
