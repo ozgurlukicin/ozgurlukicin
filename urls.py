@@ -15,27 +15,27 @@ root = "/".join(WEB_URL.split("/")[3:])
 urlpatterns = patterns('',
     #Home/News
     (r'^haber/$', 'oi.st.views.news_main'),
-    (r'^haber/yazdir/(?P<sef_title>.*)\.html$', 'oi.st.views.news_printable'),
-    (r'^haber/(?P<sef_title>.*)\.html$', 'oi.st.views.news_detail'),
+    (r'^haber/(?P<sef_title>.*)/yazdir/$', 'oi.st.views.news_printable'),
+    (r'^haber/(?P<sef_title>.*)/$', 'oi.st.views.news_detail'),
 
     #Packages
     (r'^paket/$', 'oi.st.views.pkg_main'),
-    (r'^paket/yazdir/(?P<name>.*)\.html$', 'oi.st.views.pkg_printable'),
-    (r'^paket/(?P<name>.*)\.html$', 'oi.st.views.pkg_detail'),
+    (r'^paket/(?P<name>.*)/yazdir/$', 'oi.st.views.pkg_printable'),
+    (r'^paket/(?P<name>.*)/$', 'oi.st.views.pkg_detail'),
 
     #First Steps
     (r'^ia/$', 'oi.st.views.fs_main'),
-    (r'^ia/yazdir/(?P<sef_title>.*)\.html$', 'oi.st.views.fs_printable'),
-    (r'^ia/(?P<sef_title>.*)\.html$', 'oi.st.views.fs_detail'),
+    (r'^ia/(?P<sef_title>.*)/yazdir/$', 'oi.st.views.fs_printable'),
+    (r'^ia/(?P<sef_title>.*)/$', 'oi.st.views.fs_detail'),
 
     #Games
     (r'^oyun/$', 'oi.st.views.game_main'),
-    (r'^oyun/yazdir/(?P<sef_title>.*)\.html$', 'oi.st.views.game_printable'),
-    (r'^oyun/(?P<sef_title>.*)\.html$', 'oi.st.views.game_detail'),
+    (r'^oyun/(?P<sef_title>.*)/yazdir/$', 'oi.st.views.game_printable'),
+    (r'^oyun/(?P<sef_title>.*)/$', 'oi.st.views.game_detail'),
 
     #Tags
     (r'^tag/$', 'oi.st.views.tag_main'),
-    (r'^tag/(?P<tag>.*)\.html$', 'oi.st.views.tag_detail'),
+    (r'^tag/(?P<tag>.*)/$', 'oi.st.views.tag_detail'),
 
     #Forum
     (r'^forum/$', 'django.views.generic.date_based.archive_index', {"queryset": News.objects.all(), "date_field": "date", "template_name": "forum.html", "allow_empty": True}),

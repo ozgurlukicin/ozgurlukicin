@@ -17,7 +17,7 @@ class Tag(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return "/tag/%s.html" % self.name
+        return "/tag/%s/" % self.name
 
     class Admin:
         list_display = ('name', 'id')
@@ -84,10 +84,10 @@ class FS(models.Model):
         return self.sef_title
 
     def get_absolute_url(self):
-        return "/ia/%s.html" % self.sef_title
+        return "/ia/%s/" % self.sef_title
 
     def get_printable_url(self):
-        return "/ia/yazdir/%s.html" % self.sef_title
+        return "/ia/%s/yazdir/" % self.sef_title
 
     class Admin:
         fields = (
@@ -117,10 +117,10 @@ class Game(models.Model):
         return self.sef_title
 
     def get_absolute_url(self):
-        return "/oyun/%s.html" % self.sef_title
+        return "/oyun/%s/" % self.sef_title
 
     def get_printable_url(self):
-        return "/oyun/yazdir/%s.html" % self.sef_title
+        return "/oyun/%s/yazdir/" % self.sef_title
 
     class Admin:
         fields = (
@@ -150,10 +150,10 @@ class News(models.Model):
         return self.sef_title
 
     def get_absolute_url(self):
-        return "/haber/%s.html" % self.sef_title
+        return "/haber/%s/" % self.sef_title
 
     def get_printable_url(self):
-        return "/haber/yazdir/%s.html" % self.sef_title
+        return "/haber/%s/yazdir/" % self.sef_title
 
     def save(self):
         self.author = threadlocals.get_current_user()
@@ -195,10 +195,10 @@ class Package(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return "/paket/%s.html" % self.name
+        return "/paket/%s/" % self.name
 
     def get_printable_url(self):
-        return "/paket/yazdir/%s.html" % self.name
+        return "/paket/%s/yazdir/" % self.name
 
     class Admin:
         list_display = ('name', 'sum')
