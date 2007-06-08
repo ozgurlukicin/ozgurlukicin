@@ -6,8 +6,8 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.conf.urls.defaults import *
-from oi.settings import WEB_URL, DOCUMENT_ROOT
 
+from oi.settings import WEB_URL, DOCUMENT_ROOT
 from oi.st.models import News
 
 root = "/".join(WEB_URL.split("/")[3:])
@@ -22,6 +22,12 @@ urlpatterns = patterns('',
     (r'^paket/$', 'oi.st.views.pkg_main'),
     (r'^paket/(?P<name>.*)/yazdir/$', 'oi.st.views.pkg_printable'),
     (r'^paket/(?P<name>.*)/$', 'oi.st.views.pkg_detail'),
+
+    # Authentication
+    (r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
+    (r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'logout.html'}),
+    (r'^accounts/profile/$', 'oi.st.views.show_profile'),
+    (r'^accounts/$', 'django.views.generic.simple.redirect_to', {'url': '/'}),
 
     #First Steps
     (r'^ia/$', 'oi.st.views.fs_main'),
