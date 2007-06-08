@@ -32,6 +32,24 @@ class UserProfile(models.Model):
     homepage = models.URLField()
     user = models.ForeignKey(User, unique=True)
 
+    class Admin:
+        list_display = ('user', 'homepage',)
+        ordering = ['-user']
+        search_fields = ['user']
+
+        fields = (
+                ('Kullanıcı', {
+                    'fields': ('user',)
+                    }),
+                ('Üyelik Bilgileri', {
+                    'fields': ('homepage',)
+                    }),
+                  )
+
+    class Meta:
+        verbose_name = "Kullanıcı Profili"
+        verbose_name_plural = "Kullanıcı Profilleri"
+
 class ScreenShot(models.Model):
     desc = models.TextField('Açıklama')
     file = models.ImageField(upload_to='ekran_goruntusu/')
