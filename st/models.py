@@ -32,6 +32,9 @@ class UserProfile(models.Model):
     homepage = models.URLField()
     user = models.ForeignKey(User, unique=True)
 
+    def __str__(self):
+        return self.user.username
+
     class Admin:
         list_display = ('user', 'homepage',)
         ordering = ['-user']
