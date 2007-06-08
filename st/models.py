@@ -28,6 +28,10 @@ class Tag(models.Model):
         verbose_name = "Etiket"
         verbose_name_plural = "Etiketler"
 
+class UserProfile(models.Model):
+    homepage = models.URLField()
+    user = models.ForeignKey(User, unique=True)
+
 class ScreenShot(models.Model):
     desc = models.TextField('Açıklama')
     file = models.ImageField(upload_to='ekran_goruntusu/')

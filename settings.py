@@ -22,6 +22,9 @@ DATABASE_PASSWORD = ''
 DATABASE_HOST = ''
 DATABASE_PORT = ''
 
+# For extending User class
+AUTH_PROFILE_MODULE = 'st.UserProfile'
+
 TIME_ZONE = 'Europe/Istanbul'
 LANGUAGE_CODE = 'tr'
 SITE_ID = 1
