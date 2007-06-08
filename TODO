@@ -13,3 +13,4 @@ Legend:
 - General 404 error pages (we can use get_object_or_404 function of django)
 - File upload support in wysiwyg editor (tinymce)
 - User management system (basic login/logout and user profiles)
+- Forum

@@ -611,7 +611,9 @@ hr.clear {
 }
 
 #logo {
-    padding-left: 20px;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 #section_logo {
@@ -912,10 +914,10 @@ hr.clear {
 
 #menu_container {
     height: 60px;
-    width: 642px;
+    width: 722px;
     position: absolute;
-    margin-top: -30px;
-    margin-left: 250px;
+    margin-top: 10px;
+    margin-left: 80px;
 }
 
 #menu {
