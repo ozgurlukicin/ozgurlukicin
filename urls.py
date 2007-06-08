@@ -27,6 +27,7 @@ urlpatterns = patterns('',
     (r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
     (r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'logout.html'}),
     (r'^accounts/profile/$', 'oi.st.views.show_profile'),
+    (r'^accounts/info/(?P<name>[\w-]+)/$', 'oi.st.views.show_profile_info'),
     (r'^accounts/$', 'django.views.generic.simple.redirect_to', {'url': '/'}),
 
     #First Steps

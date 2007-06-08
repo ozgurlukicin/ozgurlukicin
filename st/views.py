@@ -6,7 +6,10 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.shortcuts import render_to_response
-from oi.st.models import FS, Game, News, Package, ScreenShot, Tag
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+
+from oi.st.models import FS, Game, News, Package, ScreenShot, Tag, UserProfile
 from oi.flatpages.models import FlatPage
 
 def home(request):
@@ -81,3 +84,19 @@ def tag_detail(request, tag):
     fs = FS.objects.filter(tags__name__contains=tag)
     flatpages = FlatPage.objects.filter(tags__name__contains=tag)
     return render_to_response('tag_detail.html', locals())
+
+@login_required
+def show_profile(request):
+    user = request.user
+    userprofile = request.user.get_profile()
+    return render_to_response('profile.html', locals())
+
+def show_profile_info(request, name):
+    username = name
+    try:
+        user = User.objects.get(username=name)
+        userprofile = user.get_profile()
+    except:
+        user = None
+
+    return render_to_response('profile_info.html', locals())
