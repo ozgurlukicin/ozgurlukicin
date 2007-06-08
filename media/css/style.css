@@ -618,7 +618,7 @@ hr.clear {
 
 #section_logo {
     padding-left: 755px;
-    margin-top: -136px;
+    margin-top: -96px;
 }
 
 /* page bacground */
@@ -914,10 +914,9 @@ hr.clear {
 
 #menu_container {
     height: 60px;
-    width: 722px;
+    width: 724px;
     position: absolute;
     margin-top: 10px;
-    margin-left: 80px;
 }
 
 #menu {
