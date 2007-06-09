@@ -87,7 +87,6 @@ def tag_detail(request, tag):
 
 @login_required
 def show_profile(request):
-    user = request.user
     userprofile = request.user.get_profile()
     return render_to_response('profile.html', locals())
 
