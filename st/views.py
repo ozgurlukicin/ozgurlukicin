@@ -8,6 +8,7 @@
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.template import RequestContext
 
 from oi.st.models import FS, Game, News, Package, ScreenShot, Tag, UserProfile
 from oi.flatpages.models import FlatPage
@@ -88,7 +89,7 @@ def tag_detail(request, tag):
 @login_required
 def show_profile(request):
     userprofile = request.user.get_profile()
-    return render_to_response('profile.html', locals())
+    return render_to_response('profile.html', locals(), context_instance=RequestContext(request))
 
 def show_profile_info(request, name):
     username = name
