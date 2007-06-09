@@ -32,8 +32,6 @@ class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
     homepage = models.URLField()
     im = models.EmailField()
-    avatar = models.ImageField(upload_to="avatars/", height_field=100, width_field=100)
-
 
     def __str__(self):
         return self.user.username
@@ -41,7 +39,7 @@ class UserProfile(models.Model):
     class Admin:
         fields = (
             ('Kullanıcı', {'fields': ('user',)}),
-            ('Üyelik Bilgileri', {'fields': ('homepage',)}),
+            ('Üyelik Bilgileri', {'fields': ('homepage','im',)}),
         )
 
         list_display = ('user', 'homepage',)
