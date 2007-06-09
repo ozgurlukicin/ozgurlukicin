@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Profil Bilgileri -{% endblock %}
+{% block content %}
+<br />
+
+Kullanıcı Adı: <input type="text" value="{{ user.username }}" /> <br />
+Web Sayfası: <input type="text" value="{{ user.get_profile.homepage }}" /> <br />
+
+{% endblock %}
