@@ -12,7 +12,3 @@ class FileUpload(models.Model):
 
     def __str__(self):
         return self.file
-
-    class Admin:
-        def __main__():
-            return None
