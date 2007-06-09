@@ -87,14 +87,12 @@ def tag_detail(request, tag):
 
 @login_required
 def show_profile(request):
-    userprofile = request.user.get_profile()
     return render_response(request, 'profile.html', locals())
 
 def show_profile_info(request, name):
     infoname = name
     try:
         info = User.objects.get(username=name)
-        infoprofile = info.get_profile()
     except:
         info = None
 

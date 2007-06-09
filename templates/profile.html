@@ -5,6 +5,6 @@
 <br />
 
 Kullanıcı Adı: <input type="text" value="{{ user.username }}" /> <br />
-Web Sayfası: <input type="text" value="{{ userprofile.homepage }}" /> <br />
+Web Sayfası: <input type="text" value="{{ user.get_profile.homepage }}" /> <br />
 
 {% endblock %}
