@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}Kullanıcı: {{ username }} -{% endblock %}
+{% block title %}Kullanıcı: {{ infoname }} -{% endblock %}
 {% block content %}
 
-{% if user %}
+{% if info %}
 
-Ad: {{ user.first_name }} <br />
-Web: {{ userprofile.homepage }} <br />
+Ad: {{ info.first_name }} <br />
+Web: {{ infoprofile.homepage }} <br />
 
 {% else %}
 
