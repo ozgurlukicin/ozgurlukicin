@@ -60,7 +60,7 @@ class ScreenShot(models.Model):
     def __str__(self):
         return self.file
 
-    def get_thumbnail_url(file, size='230x230'):
+    def get_thumbnail_url(file, size='230,230'):
         thumb = 'thumb_' + file
         thumb_filename = os.path.join(settings.MEDIA_ROOT, thumb)
         thumb_url = os.path.join(settings.MEDIA_URL, thumb)
@@ -69,7 +69,7 @@ class ScreenShot(models.Model):
             filename = os.path.join(settings.MEDIA_ROOT, file)
             image = Image.open(filename)
 
-            s = size.split("x")
+            s = size.split(",")
             image.thumbnail([s[0], s[1]])
 
             image.save(thumb_filename, image.format)
