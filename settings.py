@@ -24,6 +24,9 @@ DATABASE_PORT = ''
 
 # For extending User class
 AUTH_PROFILE_MODULE = 'st.UserProfile'
+LOGIN_URL = '/user/login/'
+LOGIN_REDIRECT_URL = '/user/dashboard/'
+LOGOUT_URL = '/user/logout/'
 
 TIME_ZONE = 'Europe/Istanbul'
 LANGUAGE_CODE = 'tr'
@@ -71,4 +74,5 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'oi.flatpages',
     'oi.st',
+    'oi.upload',
 )

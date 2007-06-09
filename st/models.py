@@ -29,25 +29,21 @@ class Tag(models.Model):
         verbose_name_plural = "Etiketler"
 
 class UserProfile(models.Model):
-    homepage = models.URLField()
     user = models.ForeignKey(User, unique=True)
+    homepage = models.URLField()
 
     def __str__(self):
         return self.user.username
 
     class Admin:
+        fields = (
+            ('Kullanıcı', {'fields': ('user',)}),
+            ('Üyelik Bilgileri', {'fields': ('homepage',)}),
+        )
+
         list_display = ('user', 'homepage',)
         ordering = ['-user']
         search_fields = ['user']
-
-        fields = (
-                ('Kullanıcı', {
-                    'fields': ('user',)
-                    }),
-                ('Üyelik Bilgileri', {
-                    'fields': ('homepage',)
-                    }),
-                  )
 
     class Meta:
         verbose_name = "Kullanıcı Profili"

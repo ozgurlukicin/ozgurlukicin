@@ -16,5 +16,23 @@ tinyMCE.init({
     height : "300",
     extended_valid_elements : "a[name|href|target|title],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
     advimage_update_dimensions_onchange: true,
+    file_browser_callback : 'oiFileBrowser',
     plugins : "advimage,advlink,emotions,searchreplace,autosave,fullscreen",
 });
+
+function oiFileBrowser (field_name, url, type, win) {
+    tinyMCE.openWindow({
+        file : "/admin/upload/" + type + "/",
+        title : "File Browser",
+        width : 300,
+        height : 100,
+        close_previous : "no"
+    }, {
+        window : win,
+        input : field_name,
+        resizable : "yes",
+        inline : "yes",
+        editor_id : tinyMCE.getWindowArg("editor_id")
+    });
+    return false;
+}

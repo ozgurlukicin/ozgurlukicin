@@ -86,14 +86,14 @@ def tag_detail(request, tag):
     return render_response(request, 'tag_detail.html', locals())
 
 @login_required
-def show_profile(request):
-    return render_response(request, 'profile.html', locals())
+def user_dashboard(request):
+    return render_response(request, 'dashboard.html', locals())
 
-def show_profile_info(request, name):
+def user_profile(request, name):
     infoname = name
     try:
         info = User.objects.get(username=name)
     except:
         info = None
 
-    return render_response(request, 'profile_info.html', locals())
+    return render_response(request, 'profile.html', locals())

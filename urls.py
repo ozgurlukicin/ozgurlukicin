@@ -24,11 +24,12 @@ urlpatterns = patterns('',
     (r'^paket/(?P<name>.*)/$', 'oi.st.views.pkg_detail'),
 
     # Authentication
-    (r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
-    (r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'logout.html'}),
-    (r'^accounts/profile/$', 'oi.st.views.show_profile'),
-    (r'^accounts/info/(?P<name>[\w-]+)/$', 'oi.st.views.show_profile_info'),
-    (r'^accounts/$', 'django.views.generic.simple.redirect_to', {'url': '/'}),
+    (r'^user/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
+    (r'^user/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'logout.html'}),
+    (r'^user/dashboard/$', 'oi.st.views.user_dashboard'),
+    (r'^user/(?P<name>.*)/$', 'oi.st.views.user_profile'),
+    #FIXME: This view must show list of users.
+    (r'^user/$', 'django.views.generic.simple.redirect_to', {'url': '/'}),
 
     #First Steps
     (r'^ia/$', 'oi.st.views.fs_main'),
@@ -47,11 +48,9 @@ urlpatterns = patterns('',
     #Forum
     (r'^forum/$', 'django.views.generic.date_based.archive_index', {"queryset": News.objects.all(), "date_field": "date", "template_name": "forum.html", "allow_empty": True}),
 
-    #(r"^%s/comments/" % root, include("django.contrib.comments.urls.comments")),
-
     #Django
     (r'^$', 'oi.st.views.home'),
-    (r'^user/', include('oi.registration.urls')),
+    (r'^admin/upload/image/$', 'oi.upload.views.upload'),
     (r'^admin/', include('django.contrib.admin.urls')),
     (r'^media/(.*)$', 'django.views.static.serve', {'document_root': '%s/media' % DOCUMENT_ROOT, 'show_indexes': True}),
 )
