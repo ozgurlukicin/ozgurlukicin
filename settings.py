@@ -24,6 +24,8 @@ DATABASE_PORT = ''
 
 # For extending User class
 AUTH_PROFILE_MODULE = 'st.UserProfile'
+
+# Login stuff, we use different urls for authentication.
 LOGIN_URL = '/user/login/'
 LOGIN_REDIRECT_URL = '/user/dashboard/'
 LOGOUT_URL = '/user/logout/'
