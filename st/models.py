@@ -31,6 +31,9 @@ class Tag(models.Model):
 class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
     homepage = models.URLField()
+    im = models.EmailField()
+    avatar = models.ImageField(upload_to="avatars/", height_field=100, width_field=100)
+
 
     def __str__(self):
         return self.user.username
@@ -65,7 +68,10 @@ class ScreenShot(models.Model):
         if not os.path.exists(thumb_filename):
             filename = os.path.join(settings.MEDIA_ROOT, file)
             image = Image.open(filename)
-            image.thumbnail([230, 230])
+
+            s = size.split("x")
+            image.thumbnail([s[0], s[1]])
+
             image.save(thumb_filename, image.format)
 
         return thumb_url
