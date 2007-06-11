@@ -27,7 +27,7 @@ urlpatterns = patterns('',
     (r'^user/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
     (r'^user/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'logout.html'}),
     (r'^user/dashboard/$', 'oi.st.views.user_dashboard'),
-    (r'^user/(?P<name>[\w-]+)/$', 'oi.st.views.user_profile'),
+    (r'^user/(?P<name>\w+)/$', 'oi.st.views.user_profile'),
     #FIXME: This view must show list of users.
     (r'^user/$', 'django.views.generic.simple.redirect_to', {'url': '/'}),
 
