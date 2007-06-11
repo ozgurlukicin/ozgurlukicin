@@ -5,8 +5,6 @@
 # Licensed under the GNU General Public License, version 2.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-import django.contrib.auth
-
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -31,9 +29,6 @@ AUTH_PROFILE_MODULE = 'st.UserProfile'
 LOGIN_URL = '/user/login/'
 LOGIN_REDIRECT_URL = '/user/dashboard/'
 LOGOUT_URL = '/user/logout/'
-
-#FIXME: in 0.95, login_required decorator redirects to /accounts/login and not uses the value in settings.py. It has been fixed in django svn, maybe in 0.96. We use 0.95, solve it in a ugly way
-django.contrib.auth.LOGIN_URL = LOGIN_URL
 
 TIME_ZONE = 'Europe/Istanbul'
 LANGUAGE_CODE = 'tr'
