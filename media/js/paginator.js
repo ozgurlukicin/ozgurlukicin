@@ -2,7 +2,7 @@ var Paginator =
 {
     jumpToPage: function(pages)
     {
-        var page = prompt("Enter a number between 1 and " + pages + " to jump to that page", "");
+        var page = prompt("Sayfa atlamak için 1 ve " + pages + " arasında bir sayı girin", "");
         if (page != undefined)
         {
             page = parseInt(page, 10)
