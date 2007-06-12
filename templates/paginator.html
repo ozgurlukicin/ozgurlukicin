@@ -1,14 +1,17 @@
 {% spaceless %}
-<span class="paginate-pages" onclick="Paginator.jumpToPage({{ pages }})" title="Page Jump">{{ pages }} Sayfa</span>
-{% if show_first %}<span class="paginate-first"><a href="?page=1" title="First Page">&laquo;</a></span>{% endif %}
-{% if has_previous %}<span class="paginate-previous"><a href="?page={{ previous }}" title="Previous Page">&lt;</a></span>{% endif %}
-{% for num in page_numbers %}
-  {% ifequal num page %}
-    <span class="paginate-current" title="Current Page">{{ num }}</span>
-  {% else %}
-    <span class="paginate-link"><a href="?page={{ num }}" title="Page {{ num }}">{{ num }}</a></span>
-  {% endifequal %}
-{% endfor %}
-{% if has_next %}<span class="paginate-next"><a href="?page={{ next }}" title="Next Page">&gt;</a></span>{% endif %}
-{% if show_last %}<span class="paginate-last"><a href="?page={{ pages }}" title="Last Page">&raquo;</a></span>{% endif %}
+    <i><b>{{total_results}}</b> {% trans " result(s) in " %} <b>{{total_page}}</b> {% trans "page(s)" %}</i>
+
+    {% if prev %}
+        <a href="{{blog_url}}{{url_tip}}{{current_page|add:"-1"}}">{% trans "Previous Page" %}</a>
+    {% else %}
+        {% trans "Previous Page" %}
+    {% endif %}
+
+    &nbsp;- <b>{{current_page|add:"1"}}</b> / <b>{{total_page}}</b> -&nbsp;
+
+    {% if next %}
+        <a href="{{blog_url}}{{url_tip}}{{current_page|add:"1"}}">{% trans "Next Page" %}</a>
+    {% else %}
+        {% trans "Next Page" %}
+    {% endif%}
 {% endspaceless %}
