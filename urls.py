@@ -28,8 +28,7 @@ urlpatterns = patterns('',
     (r'^user/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'logout.html'}),
     (r'^user/dashboard/$', 'oi.st.views.user_dashboard'),
     (r'^user/(?P<name>.*)/$', 'oi.st.views.user_profile'),
-    #FIXME: This view must show list of users.
-    (r'^user/$', 'django.views.generic.simple.redirect_to', {'url': '/'}),
+    (r'^user/$', 'oi.st.views.list_users'),
 
     #First Steps
     (r'^ia/$', 'oi.st.views.fs_main'),

@@ -97,3 +97,6 @@ def user_profile(request, name):
         info = None
 
     return render_response(request, 'profile.html', locals())
+
+def list_users(request):
+    return render_response(request, 'userlist.html')
