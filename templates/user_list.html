@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load library %}
 
 {% block title %}Kullanıcılar - {% endblock %}
 
@@ -8,5 +7,7 @@
     Name: {{ user.username }} <br />
 {% endfor %}
 <br />
-{% paginator %}
+{% if paginator %}
+    {% include "paginator.html" %}
+{% endif %}
 {% endblock %}

@@ -1,17 +1,17 @@
 {% spaceless %}
-    <i><b>{{total_results}}</b> {% trans " result(s) in " %} <b>{{total_page}}</b> {% trans "page(s)" %}</i>
+    <i><b>{{total_results}}</b>  result(s) in  <b>{{total_page}}</b> page(s)</i>
 
     {% if prev %}
-        <a href="{{blog_url}}{{url_tip}}{{current_page|add:"-1"}}">{% trans "Previous Page" %}</a>
+        <a href="{{url_tip}}{{current_page|add:"-1"}}/">Previous Page</a>
     {% else %}
-        {% trans "Previous Page" %}
+        Previous Page
     {% endif %}
 
     &nbsp;- <b>{{current_page|add:"1"}}</b> / <b>{{total_page}}</b> -&nbsp;
 
     {% if next %}
-        <a href="{{blog_url}}{{url_tip}}{{current_page|add:"1"}}">{% trans "Next Page" %}</a>
+        <a href="{{url_tip}}{{current_page|add:"1"}}/">Next Page</a>
     {% else %}
-        {% trans "Next Page" %}
+        Next Page
     {% endif%}
 {% endspaceless %}
