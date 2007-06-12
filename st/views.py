@@ -120,4 +120,4 @@ def user_list(request, page = 0):
     paginator_dict = build_paginator_dict(User.objects.all(), int(page), USER_PER_PAGE)
     response_dict = {'url_tip': '/user/page/'}
     response_dict.update(paginator_dict)
-    return render_to_response("user_list.html", response_dict)
+    return render_response(request, "user_list.html", response_dict)
