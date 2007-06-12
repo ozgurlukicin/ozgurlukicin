@@ -7,6 +7,7 @@
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.paginator import ObjectPaginator, InvalidPage
 
 from oi.st.models import FS, Game, News, Package, ScreenShot, Tag, UserProfile
 from oi.flatpages.models import FlatPage
@@ -99,4 +100,18 @@ def user_profile(request, name):
     return render_response(request, 'profile.html', locals())
 
 def list_users(request):
-    return render_response(request, 'userlist.html')
+    paginator = ObjectPaginator(User.objects.all(), 3)
+    if not request.GET.has_key('page'):
+        page = 1
+    else:
+        try:
+            page = int(request.GET['page'])
+        except ValueError:
+            page = 1
+
+    users = paginator.get_page(page-1)
+
+    return render_response(request, 'userlist.html', {'users': users,
+                                                      'page': page,
+                                                      'pages': paginator.pages,
+                                                      'paginator': paginator})
