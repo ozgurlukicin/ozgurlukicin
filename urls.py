@@ -47,6 +47,9 @@ urlpatterns = patterns('',
     #Forum
     (r'^forum/$', 'django.views.generic.date_based.archive_index', {"queryset": News.objects.all(), "date_field": "date", "template_name": "forum.html", "allow_empty": True}),
 
+    #Bug tracker
+    (r'^bocuk/$', include('oi.bug.urls')),
+
     #Django
     (r'^$', 'oi.st.views.home'),
     (r'^admin/upload/image/$', 'oi.upload.views.upload'),

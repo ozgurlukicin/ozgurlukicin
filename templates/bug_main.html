@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Hata Raporla - {% endblock %}
+
+{% block pagetype %}page{% endblock %}
+
+{% block content %}
+{% for bug in bugs %}
+<div class="fs_list {% cycle odd,even %}">
+    <div class="fs_info" style="margin-bottom: 0;">
+        <div class="fs_title"><a href="{{ bug.get_absolute_url }}">{{ bug.title }}</a></div>
+        <div class="fs_desc">{{ bug.description }}</div>
+    </div>
+    <hr class="fs_separator"/>
+</div>
+{% endfor %}
+{% endblock %}

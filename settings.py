@@ -77,4 +77,5 @@ INSTALLED_APPS = (
     'oi.flatpages',
     'oi.st',
     'oi.upload',
+    'oi.bug',
 )
