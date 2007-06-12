@@ -14,9 +14,10 @@ from oi.st.models import News
 root = "/".join(WEB_URL.split("/")[3:])
 
 user_dict = {
-        'queryset': User.objects.all(),
-        'template_name': 'userlist.html',
-        'paginate_by': USER_PER_PAGE}
+             'queryset': User.objects.all(),
+             'template_name': 'user_list.html',
+             'paginate_by': USER_PER_PAGE
+            }
 
 urlpatterns = patterns('',
     #Home/News
@@ -29,7 +30,7 @@ urlpatterns = patterns('',
     (r'^paket/(?P<name>.*)/yazdir/$', 'oi.st.views.pkg_printable'),
     (r'^paket/(?P<name>.*)/$', 'oi.st.views.pkg_detail'),
 
-    # Authentication
+    #User management
     (r'^user/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
     (r'^user/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'logout.html'}),
     (r'^user/dashboard/$', 'oi.st.views.user_dashboard'),
