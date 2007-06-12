@@ -1,13 +1,12 @@
 {% spaceless %}
-    <i><b>{{total_results}}</b>  result(s) in  <b>{{total_page}}</b> page(s)</i>
+{{ total_page }} sayfada listelenen {{total_results}} kayıt bulundu.<br>
+Şu an {{ total_page }} sayfanın {{ current_page|add:"1" }}. sayfadasınız.
 
     {% if prev %}
         <a href="{{url_tip}}{{current_page|add:"-1"}}/">Previous Page</a>
     {% else %}
         Previous Page
     {% endif %}
-
-    &nbsp;- <b>{{current_page|add:"1"}}</b> / <b>{{total_page}}</b> -&nbsp;
 
     {% if next %}
         <a href="{{url_tip}}{{current_page|add:"1"}}/">Next Page</a>
