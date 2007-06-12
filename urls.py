@@ -6,11 +6,17 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.conf.urls.defaults import *
+from django.contrib.auth.models import User
 
-from oi.settings import WEB_URL, DOCUMENT_ROOT
+from oi.settings import WEB_URL, DOCUMENT_ROOT, USER_PER_PAGE
 from oi.st.models import News
 
 root = "/".join(WEB_URL.split("/")[3:])
+
+user_dict = {
+        'queryset': User.objects.all(),
+        'template_name': 'userlist.html',
+        'paginate_by': USER_PER_PAGE}
 
 urlpatterns = patterns('',
     #Home/News
@@ -27,10 +33,8 @@ urlpatterns = patterns('',
     (r'^user/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
     (r'^user/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'logout.html'}),
     (r'^user/dashboard/$', 'oi.st.views.user_dashboard'),
-    (r'^user/page/(?P<page>\d+)/$', 'oi.st.views.user_list'),
-    (r'^user/$', 'oi.st.views.user_list'),
+    (r'^user/page/(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', dict(user_dict)),
     (r'^user/(?P<name>.*)/$', 'oi.st.views.user_profile'),
-    (r'^user/(?P<name>.*)/edit/$', 'oi.st.views.edit_profile'),
 
     #First Steps
     (r'^ia/$', 'oi.st.views.fs_main'),

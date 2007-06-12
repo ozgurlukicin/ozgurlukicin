@@ -7,32 +7,14 @@
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.shortcuts import render_to_response
-from django.core.paginator import ObjectPaginator, InvalidPage
 
 from oi.st.models import FS, Game, News, Package, ScreenShot, Tag, UserProfile
 from oi.flatpages.models import FlatPage
 from oi.st.wrappers import render_response
-from oi.settings import USER_PER_PAGE
 
 def home(request):
     news = News.objects.all().order_by('-date')[:4]
     return render_response(request, 'home.html', locals())
-
-def build_paginator_dict(results, page, item_per_page):
-    paginator_result = ObjectPaginator(results, item_per_page)
-    try:
-        retval = {"results": paginator_result.get_page(page),
-                 "paginator": True,
-                 "current_page": page,
-                 "total_page": paginator_result.pages,
-                 "total_results": paginator_result.hits,
-                 "next": paginator_result.has_next_page(page),
-                 "prev": paginator_result.has_previous_page(page)}
-    except InvalidPage:
-        retval = {}
-
-    return retval
 
 def fs_main(request):
     fs_all = FS.objects.all()
@@ -115,9 +97,3 @@ def user_profile(request, name):
         info = None
 
     return render_response(request, 'profile.html', locals())
-
-def user_list(request, page = 0):
-    paginator_dict = build_paginator_dict(User.objects.all(), int(page), USER_PER_PAGE)
-    response_dict = {'url_tip': '/user/page/'}
-    response_dict.update(paginator_dict)
-    return render_response(request, "user_list.html", response_dict)
