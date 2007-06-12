@@ -27,8 +27,10 @@ urlpatterns = patterns('',
     (r'^user/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
     (r'^user/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'logout.html'}),
     (r'^user/dashboard/$', 'oi.st.views.user_dashboard'),
+    (r'^user/page/(?P<page>\d+)/$', 'oi.st.views.user_list'),
+    (r'^user/$', 'oi.st.views.user_list'),
     (r'^user/(?P<name>.*)/$', 'oi.st.views.user_profile'),
-    (r'^user/$', 'oi.st.views.list_users'),
+    (r'^user/(?P<name>.*)/edit/$', 'oi.st.views.edit_profile'),
 
     #First Steps
     (r'^ia/$', 'oi.st.views.fs_main'),
