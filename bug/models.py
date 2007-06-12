@@ -31,5 +31,5 @@ class Bug(models.Model):
 
     class Admin:
         list_display = ('status', 'title', 'submitter', 'assigned_to')
-        list_filter = ('assigned_to', 'submitter', 'submitted_date')
-        search_fields = ('title', 'description')
+        list_filter = ('status', 'submitted_date')
+        search_fields = ('assigned_to', 'submitter', 'title', 'description')
