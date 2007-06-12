@@ -8,6 +8,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.paginator import ObjectPaginator, InvalidPage
+from django.views.generic.simple import redirect_to
 
 from oi.st.models import FS, Game, News, Package, ScreenShot, Tag, UserProfile
 from oi.flatpages.models import FlatPage
@@ -109,9 +110,13 @@ def list_users(request):
         except ValueError:
             page = 1
 
-    users = paginator.get_page(page-1)
+    try:
+        users = paginator.get_page(page-1)
+        return render_response(request, 'userlist.html', {'users': users,
+                                                          'page': page,
+                                                          'pages': paginator.pages,
+                                                          'paginator': paginator})
+    except InvalidPage:
+        return redirect_to({'url': '/user/'})
 
-    return render_response(request, 'userlist.html', {'users': users,
-                                                      'page': page,
-                                                      'pages': paginator.pages,
-                                                      'paginator': paginator})
+
