@@ -5,22 +5,31 @@
 # Licensed under the GNU General Public License, version 2.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
+#FIXME: Turn debug mode to False when the development ends.
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = ()
 MANAGERS = ADMINS
 
+#Site configuration
 SITE_NAME = 'Özgürlük için...'
 WEB_URL = 'http://django'
 DOCUMENT_ROOT = '/home/ahmet/public_html/oi'
 
+#Database settings
 DATABASE_ENGINE = 'sqlite3'
 DATABASE_NAME = '%s/db/oi.db' % DOCUMENT_ROOT
 DATABASE_USER = ''
 DATABASE_PASSWORD = ''
 DATABASE_HOST = ''
 DATABASE_PORT = ''
+
+#Pagination
+USER_PER_PAGE = 10
+PACKAGE_PER_PAGE = 10
+FS_PER_PAGE = 10
+GAME_PER_PAGE = 10
 
 # For extending User class
 AUTH_PROFILE_MODULE = 'st.UserProfile'
