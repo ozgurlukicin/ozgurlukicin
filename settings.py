@@ -14,8 +14,8 @@ MANAGERS = ADMINS
 
 #Site configuration
 SITE_NAME = 'Özgürlük için...'
-WEB_URL = 'http://localhost'
-DOCUMENT_ROOT = '/home/mini/pardus/oi'
+WEB_URL = 'http://django'
+DOCUMENT_ROOT = '/home/ahmet/public_html/oi'
 
 #Database settings
 DATABASE_ENGINE = 'sqlite3'
