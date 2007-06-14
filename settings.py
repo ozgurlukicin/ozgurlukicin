@@ -12,12 +12,12 @@ TEMPLATE_DEBUG = DEBUG
 ADMINS = ()
 MANAGERS = ADMINS
 
-#Site configuration
+# Site configuration
 SITE_NAME = 'Özgürlük için...'
 WEB_URL = 'http://django'
 DOCUMENT_ROOT = '/home/ahmet/public_html/oi'
 
-#Database settings
+# Database settings
 DATABASE_ENGINE = 'sqlite3'
 DATABASE_NAME = '%s/db/oi.db' % DOCUMENT_ROOT
 DATABASE_USER = ''
@@ -25,7 +25,11 @@ DATABASE_PASSWORD = ''
 DATABASE_HOST = ''
 DATABASE_PORT = ''
 
-#Pagination
+# Email
+DEFAULT_FROM_EMAIL = 'accounts@ozgurlukicin.com'
+EMAIL_HOST = 'mail.ozgurlukicin.com'
+
+# Pagination
 USER_PER_PAGE = 10
 PACKAGE_PER_PAGE = 10
 FS_PER_PAGE = 10
