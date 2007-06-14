@@ -133,22 +133,19 @@ def user_register(request):
             email_dict = {'date': date,
                     'hour': hour,
                     'ip': request.META['REMOTE_ADDR'],
-                    'link': 'http://www.ozgurlukicin.com/user/confirm/%s' % form.clean_data['username'],
-                    'key': activation_key}
+                    'user': form.clean_data['username'],
+                    'link': 'http://www.ozgurlukicin.com/confirm/%s/%s' % (form.clean_data['username'], activation_key)}
 
-            email_subject = u"Ozgurlukicin.com Kullanıcı Hesabı"
+            email_subject = u"Ozgurlukicin.com Kullanıcı Hesabı, %(user)s"
             email_body = u"""Merhaba!
-%(date)s %(hour)s tarihinde %(ip)s ip adresli bilgisayardan yaptığınız Ozgurlukicin.com kullanıcı hesabınızı onaylamak için aşağıdaki linke 48 saat içerisinde tıklayıp onay anahtarınızı giriniz.
+%(date)s %(hour)s tarihinde %(ip)s ip adresli bilgisayardan yaptığınız Ozgurlukicin.com kullanıcı hesabınızı onaylamak için aşağıdaki linke 48 saat içerisinde tıklayınız.
 
------------------
-Link: %(link)s
-Anahtar: %(key)s
------------------
+<a href="%(link)s">%(link)s</a>
 
 Teşekkürler,
 Ozgurlukicin.com"""
             email_to = form.clean_data['email']
-            email_recipient = ["turkay.eren@gmail.com"]
+            email_recipient = ["turkay.eren@gmail.com"] # this is just for testing, it should be changed when authentication system has been finished
 
             send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, email_recipient, fail_silently=False)
 
@@ -159,3 +156,23 @@ Ozgurlukicin.com"""
     else:
         form = RegisterForm()
         return render_response(request, 'user/register.html', {'form': form})
+
+def user_confirm(request, name, key):
+    if request.user.is_authenticated():
+        return render_response(request, 'user/confirm.html', {'authenticated': True})
+    elif len(User.objects.filter(username=name)) == 0:
+        return render_response(request, 'user/confirm.html', {'no_user': True})
+    else:
+        u = User.objects.get(username=name)
+        if u.is_active:
+            return render_response(request, 'user/confirm.html', {'actived': True})
+        elif u.get_profile().activation_key == key:
+            if u.get_profile().key_expires < datetime.datetime.today():
+                u.delete()
+                return render_response(request, 'user/confirm.html', {'key_expired': True})
+            else:
+                u.is_active = True
+                u.save()
+                return render_response(request, 'user/confirm.html', {'ok': True})
+        else:
+            return render_response(request, 'user/confirm.html', {'key_incorrect': True})
