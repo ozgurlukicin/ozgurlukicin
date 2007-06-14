@@ -65,18 +65,18 @@ def pkg_main(request):
     packages_by_rating = Package.objects.all().order_by('-point')[:10]
     for pkg in packages_by_rating:
         pkg.point = int(round((pkg.point+1)/2))
-    return render_response(request, 'package_main.html', locals())
+    return render_response(request, 'package/package_main.html', locals())
 
 def pkg_detail(request, name):
     package = Package.objects.get(name=name)
     tags = package.tags.all()
     licenses = package.license.all()
     sss = package.ss.all()
-    return render_response(request, 'package_detail.html', locals())
+    return render_response(request, 'package/package_detail.html', locals())
 
 def pkg_printable(request, name):
     package = Package.objects.get(name=name)
-    return render_response(request, 'package_printable.html', locals())
+    return render_response(request, 'package/package_printable.html', locals())
 
 def tag_main(request):
     tags = Tag.objects.all()
