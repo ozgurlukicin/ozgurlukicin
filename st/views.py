@@ -49,16 +49,16 @@ def game_printable(request, sef_title):
 
 def news_main(request):
     news = News.objects.all().order_by('-date')[:4]
-    return render_response(request, 'news_main.html', locals())
+    return render_response(request, 'news/news_main.html', locals())
 
 def news_detail(request, sef_title):
     news = News.objects.get(sef_title=sef_title)
     tags = news.tags.all()
-    return render_response(request, 'news_detail.html', locals())
+    return render_response(request, 'news/news_detail.html', locals())
 
 def news_printable(request, sef_title):
     news = News.objects.get(sef_title=sef_title)
-    return render_response(request, 'news_printable.html', locals())
+    return render_response(request, 'news/news_printable.html', locals())
 
 def pkg_main(request):
     packages = Package.objects.all()
