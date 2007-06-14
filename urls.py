@@ -54,7 +54,7 @@ urlpatterns = patterns('',
     (r'^tag/(?P<tag>.*)/$', 'oi.st.views.tag_detail'),
 
     #Forum
-    (r'^forum/$', 'django.views.generic.date_based.archive_index', {"queryset": News.objects.all(), "date_field": "date", "template_name": "forum.html", "allow_empty": True}),
+    (r'^forum/$', 'django.views.generic.date_based.archive_index', {"queryset": News.objects.all(), "date_field": "date", "template_name": "forum/forum_main.html", "allow_empty": True}),
 
     #Bug tracker
     (r'^bocuk/$', include('oi.bug.urls')),
