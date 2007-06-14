@@ -103,12 +103,13 @@ def user_register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
-            user.first_name = request.POST['firstname']
-            user.last_name = request.POST['lastname']
+            user = User.objects.create_user(form.cleaned_data['username'], form.cleaned_data['email'], form.cleaned_data['password'])
+            user.first_name = form.cleaned_data['firstname']
+            user.last_name = form.cleaned_data['lastname']
+            user.is_active = False
             user.save()
             profile = UserProfile(user=user)
-            profile.homepage = request.POST['homepage']
+            profile.homepage = form.cleaned_data['homepage']
             profile.save()
             return render_response(request, 'register_done.html', {'form': form})
         else:
