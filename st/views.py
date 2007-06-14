@@ -23,16 +23,16 @@ def home(request):
 
 def fs_main(request):
     fs_all = FS.objects.all()
-    return render_response(request, 'fs_main.html', locals())
+    return render_response(request, 'fs/fs_main.html', locals())
 
 def fs_detail(request, sef_title):
     fs = FS.objects.get(sef_title=sef_title)
     tags = fs.tags.all()
-    return render_response(request, 'fs_detail.html', locals())
+    return render_response(request, 'fs/fs_detail.html', locals())
 
 def fs_printable(request, sef_title):
     fs = FS.objects.get(sef_title=sef_title)
-    return render_response(request, 'fs_printable.html', locals())
+    return render_response(request, 'fs/fs_printable.html', locals())
 
 def game_main(request):
     game_all = Game.objects.all()
