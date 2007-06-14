@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Kayıt - {% endblock %}
+
+{% block content %}
+
+
+<!--
+NOT: burası hacky bi çözüm, kendi tasarımımıza göre form öğrelerini bu şekilde döngü ile yerleştireceğiz
+Daha doğrusu, tasarım ile uğraşmayı seven birileri halledecek, bu haliyle sayfanın soluna dayalı görünüyor. Bu arada tasarım özürlüsü olduğumu hatırlatayım :)
+
+-Eren
+
+-->
+
+<form method="POST" action=".">
+    <dt>
+    {% for field in form %}
+
+    <dt><b>{{ field.label }}:</b> </dt>
+    <dd>{{ field }}</dd>
+    {% if field.help_text %}<dd>{{ field.help_text }}</dd>{% endif %}
+    {% if field.errors %}<dd class="error"><font color="red">{{ field.errors }}</font></dd>{% endif %}
+
+    {% endfor %}
+
+<br />
+<center> <input type="submit" value="Kayıt" /> </center>
+</form>
+
+{% endblock %}

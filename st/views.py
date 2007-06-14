@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from oi.st.models import FS, Game, News, Package, ScreenShot, Tag, UserProfile
 from oi.flatpages.models import FlatPage
 from oi.st.wrappers import render_response
+from oi.st.models import RegisterForm
 
 def home(request):
     news = News.objects.all().order_by('-date')[:4]
@@ -97,3 +98,21 @@ def user_profile(request, name):
         info = None
 
     return render_response(request, 'profile.html', locals())
+
+def user_register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
+            user.first_name = request.POST['firstname']
+            user.last_name = request.POST['lastname']
+            user.save()
+            profile = UserProfile(user=user)
+            profile.homepage = request.POST['homepage']
+            profile.save()
+            return render_response(request, 'register_done.html', {'form': form})
+        else:
+            return render_response(request, 'register.html', {'form': form})
+    else:
+        form = RegisterForm()
+        return render_response(request, 'register.html', {'form': form})

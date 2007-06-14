@@ -15,7 +15,7 @@ Legend:
   - avatar support
   + login
   + logout
-  - register
+  / register
   - show profile
   - edit profile
   / user list
@@ -23,3 +23,4 @@ Legend:
 - General 404 error pages
 - Forum
 - Planet
+- Move templates to specific dir. E.g; there are 4 template for user management system (dashboard.html, userlist.html, profile.html, user_register.html and so). Move it 'templates/user/' directory. Apply it to others too
