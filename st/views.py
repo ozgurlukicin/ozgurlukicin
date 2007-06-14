@@ -9,11 +9,13 @@ import sha, datetime, random
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 
 from oi.st.models import FS, Game, News, Package, ScreenShot, Tag, UserProfile
 from oi.flatpages.models import FlatPage
 from oi.st.wrappers import render_response
 from oi.st.models import RegisterForm
+from oi.settings import DEFAULT_FROM_EMAIL
 
 def home(request):
     news = News.objects.all().order_by('-date')[:4]
@@ -123,9 +125,35 @@ def user_register(request):
             profile.key_expires = key_expires
             profile.save()
 
-            for number in form.clean_data['contributes']: # it's ManyToManyField's uniquie id
+            for number in form.clean_data['contributes']: # it's ManyToManyField's unique id
                 user.get_profile().contributes.add(number)
-            return render_response(request, 'register_done.html', {'form': form})
+
+            now = datetime.datetime.now()
+            (date, hour) = now.isoformat()[:16].split("T")
+            email_dict = {'date': date,
+                    'hour': hour,
+                    'ip': request.META['REMOTE_ADDR'],
+                    'link': 'http://www.ozgurlukicin.com/user/confirm/%s' % form.clean_data['username'],
+                    'key': activation_key}
+
+            email_subject = u"Ozgurlukicin.com Kullanıcı Hesabı"
+            email_body = u"""Merhaba!
+%(date)s %(hour)s tarihinde %(ip)s ip adresli bilgisayardan yaptığınız Ozgurlukicin.com kullanıcı hesabınızı onaylamak için aşağıdaki linke 48 saat içerisinde tıklayıp onay anahtarınızı giriniz.
+
+-----------------
+Link: %(link)s
+Anahtar: %(key)s
+-----------------
+
+Teşekkürler,
+Ozgurlukicin.com"""
+            email_to = form.clean_data['email']
+            email_recipient = ["turkay.eren@gmail.com"]
+
+            send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, email_recipient, fail_silently=False)
+
+            return render_response(request, 'register_done.html', {'form': form,
+                                                                   'user': form.clean_data['username']})
         else:
             return render_response(request, 'register.html', {'form': form})
     else:
