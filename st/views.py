@@ -92,7 +92,7 @@ def tag_detail(request, tag):
 
 @login_required
 def user_dashboard(request):
-    return render_response(request, 'dashboard.html', locals())
+    return render_response(request, 'dashboard.html')
 
 def user_profile(request, name):
     infoname = name
