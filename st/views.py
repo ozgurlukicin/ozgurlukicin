@@ -92,7 +92,7 @@ def tag_detail(request, tag):
 
 @login_required
 def user_dashboard(request):
-    return render_response(request, 'dashboard.html')
+    return render_response(request, 'user/dashboard.html')
 
 def user_profile(request, name):
     infoname = name
@@ -101,7 +101,7 @@ def user_profile(request, name):
     except:
         info = None
 
-    return render_response(request, 'profile.html', locals())
+    return render_response(request, 'user/profile.html', locals())
 
 def user_register(request):
     if request.method == 'POST':
@@ -152,10 +152,10 @@ Ozgurlukicin.com"""
 
             send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, email_recipient, fail_silently=False)
 
-            return render_response(request, 'register_done.html', {'form': form,
+            return render_response(request, 'user/register_done.html', {'form': form,
                                                                    'user': form.clean_data['username']})
         else:
-            return render_response(request, 'register.html', {'form': form})
+            return render_response(request, 'user/register.html', {'form': form})
     else:
         form = RegisterForm()
-        return render_response(request, 'register.html', {'form': form})
+        return render_response(request, 'user/register.html', {'form': form})

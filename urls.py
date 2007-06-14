@@ -31,8 +31,8 @@ urlpatterns = patterns('',
     (r'^paket/(?P<name>.*)/$', 'oi.st.views.pkg_detail'),
 
     #User management
-    (r'^user/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
-    (r'^user/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'logout.html'}),
+    (r'^user/login/$', 'django.contrib.auth.views.login', {'template_name': 'user/login.html'}),
+    (r'^user/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'user/logout.html'}),
     (r'^user/register/$', 'oi.st.views.user_register'),
     (r'^user/confirm/(?P<name>[\w-]+)/$', 'oi.st.views.user_confirm'),
     (r'^user/dashboard/$', 'oi.st.views.user_dashboard'),
