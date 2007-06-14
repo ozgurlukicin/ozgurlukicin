@@ -36,16 +36,16 @@ def fs_printable(request, sef_title):
 
 def game_main(request):
     game_all = Game.objects.all()
-    return render_response(request, 'game_main.html', locals())
+    return render_response(request, 'game/game_main.html', locals())
 
 def game_detail(request, sef_title):
     game = Game.objects.get(sef_title=sef_title)
     tags = game.tags.all()
-    return render_response(request, 'game_detail.html', locals())
+    return render_response(request, 'game/game_detail.html', locals())
 
 def game_printable(request, sef_title):
     game = Game.objects.get(sef_title=sef_title)
-    return render_response(request, 'game_printable.html', locals())
+    return render_response(request, 'game/game_printable.html', locals())
 
 def news_main(request):
     news = News.objects.all().order_by('-date')[:4]
