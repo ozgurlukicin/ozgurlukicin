@@ -5,6 +5,8 @@
 # Licensed under the GNU General Public License, version 2.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
+import sha, datetime, random
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
@@ -108,9 +110,21 @@ def user_register(request):
             user.last_name = form.clean_data['lastname']
             user.is_active = False
             user.save()
+
+            # create a key
+            salt = sha.new(str(random.random())).hexdigest()[:5]
+            activation_key = sha.new(salt+form.clean_data['username']).hexdigest() # yes, i'm paranoiac
+            key_expires = datetime.datetime.today() + datetime.timedelta(2)
+
             profile = UserProfile(user=user)
             profile.homepage = form.clean_data['homepage']
+            profile.contributes_summary = form.clean_data['contributes_summary']
+            profile.activation_key = activation_key
+            profile.key_expires = key_expires
             profile.save()
+
+            for number in form.clean_data['contributes']: # it's ManyToManyField's uniquie id
+                user.get_profile().contributes.add(number)
             return render_response(request, 'register_done.html', {'form': form})
         else:
             return render_response(request, 'register.html', {'form': form})

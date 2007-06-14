@@ -32,11 +32,30 @@ class Tag(models.Model):
         verbose_name_plural = "Etiketler"
 
 
+class Contribute(models.Model):
+    name = models.CharField('Ad', maxlength=32, blank=False, unique=True)
+
+    def __str__(self):
+        return self.name
+
+    class Admin:
+        list_display = ('name', 'id')
+        ordering = ['-name']
+        search_fields = ['name']
+
+    class Meta:
+        verbose_name = "Katkı Adı"
+        verbose_name_plural = "Katkı Adları"
+
 class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
     homepage = models.URLField()
     im = models.EmailField()
     show_email = models.BooleanField()
+    contributes = models.ManyToManyField(Contribute)
+    contributes_summary = models.TextField()
+    activation_key = models.CharField(maxlength=40)
+    key_expires = models.DateTimeField()
 
     def __str__(self):
         return self.user.username
@@ -44,7 +63,8 @@ class UserProfile(models.Model):
     class Admin:
         fields = (
             ('Kullanıcı', {'fields': ('user',)}),
-            ('Üyelik Bilgileri', {'fields': ('homepage','im',)}),
+            ('Üyelik Bilgileri', {'fields': ('homepage','im','contributes', 'contributes_summary',)}),
+            ('Diğer', {'fields': ('activation_key', 'key_expires',)}),
         )
 
         list_display = ('user', 'homepage',)
@@ -56,8 +76,6 @@ class UserProfile(models.Model):
         verbose_name_plural = "Kullanıcı Profilleri"
 
 class RegisterForm(forms.Form):
-    TOPICS = (('ilk_adimlar', 'İlk Adımlar'), ('haberler', 'Haberler'), ('oyunlar', 'Oyunlar'), ('paketler', 'Paketler'))
-
     username = forms.CharField(label='Kullanıcı Adı', max_length=30, help_text='En az 3, en fazla 30 karakter')
     firstname = forms.CharField(label='İsim')
     lastname = forms.CharField(label='Soyisim')
@@ -65,8 +83,8 @@ class RegisterForm(forms.Form):
     password = forms.CharField(label='Parola', max_length=32, widget=forms.PasswordInput,)
     password_again = forms.CharField(label='Parola (tekrar)', max_length=32, widget=forms.PasswordInput, help_text='En az 5 karakter')
     homepage = forms.URLField(label='Web Sayfası', verify_exists=False, required=False, help_text='(zorunlu değil)')
-    contribute = forms.MultipleChoiceField(label='Katkı Başlıkları', choices=TOPICS, required=False, help_text='Bize nasıl katkıda bulunabilirsiniz? (ctrl ile birden fazla seçim yapılabilir, zorunlu değil)')
-    contribute_summary = forms.CharField(label='Açıklama', widget=forms.Textarea, required=False, help_text='Katkı sağlayabilecekseniz açıklama yazın (zorunlu değil)')
+    contributes = forms.ModelMultipleChoiceField(label='Katkı Başlıkları', queryset=Contribute.objects.all(), required=False, help_text='Bize nasıl katkıda bulunabilirsiniz? (ctrl ile birden fazla seçim yapılabilir, zorunlu değil)')
+    contributes_summary = forms.CharField(label='Açıklama', widget=forms.Textarea, required=False, help_text='Katkı sağlayabilecekseniz açıklama yazın (zorunlu değil)')
 
     def clean_username(self):
         field_data = self.clean_data['username']
