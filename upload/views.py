@@ -34,12 +34,12 @@ def upload(request):
 
             if not errors:
                 manipulator.save(new_data)
-                return render_to_response('file_upload_success.html', {'url':new_data['file_file']['filename']})
+                return render_to_response('file_upload/file_upload_success.html', {'url':new_data['file_file']['filename']})
             else:
-                return render_to_response('file_upload.html', {'form': form, 'errors': errors})
+                return render_to_response('file_upload/file_upload.html', {'form': form, 'errors': errors})
                 errors = new_data = {}
         else:
-            return render_to_response('file_upload.html', {'form': form})
+            return render_to_response('file_upload/file_upload.html', {'form': form})
 
     else:
         HttpResponseRedirect('/')
