@@ -5,6 +5,7 @@
 # Licensed under the GNU General Public License, version 2.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
+import re
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -12,57 +13,6 @@ from django import newforms as forms
 
 import Image
 from oi.middleware import threadlocals
-
-#======
-# Forms
-#======
-
-class RegisterForm(forms.Form):
-    username = forms.CharField(label='Kullanıcı Adı', max_length=30, help_text='En az 3, en fazla 30 karakter')
-    firstname = forms.CharField(label='İsim')
-    lastname = forms.CharField(label='Soyisim')
-    email = forms.EmailField(label='E-Posta')
-    password = forms.CharField(label='Parola', max_length=32, widget=forms.PasswordInput,)
-    password_again = forms.CharField(label='Parola (tekrar)', max_length=32, widget=forms.PasswordInput, help_text='En az 5 karakter')
-    homepage = forms.URLField(label='Web Sayfası', verify_exists=False, required=False, help_text='(zorunlu değil)')
-    contributes = forms.ModelMultipleChoiceField(label='Katkı Başlıkları', queryset=Contribute.objects.all(), required=False, help_text='Bize nasıl katkıda bulunabilirsiniz? (ctrl ile birden fazla seçim yapılabilir, zorunlu değil)')
-    contributes_summary = forms.CharField(label='Açıklama', widget=forms.Textarea, required=False, help_text='Katkı sağlayabilecekseniz açıklama yazın (zorunlu değil)')
-
-    def clean_username(self):
-        field_data = self.clean_data['username']
-
-        if not field_data:
-            return ''
-
-        if len(field_data.split(' ')) != 1:
-            raise forms.ValidationError(u"Kullanıcı adında boşluk olmamalıdır")
-
-        if len(field_data) < 3:
-            raise forms.ValidationError(u"Kullanıcı adı en az 3 karakter olmalıdır")
-
-        u = User.objects.filter(username__iexact=field_data)
-        if len(u) > 0:
-            raise forms.ValidationError(u"Bu kullanıcı adı daha önce alınmış")
-
-        return self.clean_data['username']
-
-
-    def clean_password_again(self):
-        field_data = self.clean_data['password_again']
-        if not field_data:
-            return ''
-
-        if len(field_data.split(' ')) != 1:
-            raise forms.ValidationError(u"Parolada boşluk olmamalıdır")
-
-        if len(field_data) < 5:
-            raise forms.ValidationError(u"Parola en az 5 karakter olmalıdır")
-
-        if (self.clean_data.get('password') or self.clean_data.get('password_again')) and \
-                self.clean_data['password'] != self.clean_data['password_again']:
-                    raise forms.ValidationError(u"Parolalar eşleşmiyor")
-
-        return self.clean_data['password']
 
 #==========
 # DB Models
@@ -315,3 +265,59 @@ class Package(models.Model):
     class Meta:
         verbose_name = "Paket"
         verbose_name_plural = "Paketler"
+
+#======
+# Forms
+#======
+
+class RegisterForm(forms.Form):
+    username = forms.CharField(label='Kullanıcı Adı', max_length=30, help_text='En az 3, en fazla 30 karakter')
+    firstname = forms.CharField(label='İsim')
+    lastname = forms.CharField(label='Soyisim')
+    email = forms.EmailField(label='E-Posta')
+    password = forms.CharField(label='Parola', max_length=32, widget=forms.PasswordInput,)
+    password_again = forms.CharField(label='Parola (tekrar)', max_length=32, widget=forms.PasswordInput, help_text='En az 5 karakter')
+    homepage = forms.URLField(label='Web Sayfası', verify_exists=False, required=False, help_text='(zorunlu değil)')
+    contributes = forms.ModelMultipleChoiceField(label='Katkı Başlıkları', queryset=Contribute.objects.all(), required=False, help_text='Bize nasıl katkıda bulunabilirsiniz? (ctrl ile birden fazla seçim yapılabilir, zorunlu değil)')
+    contributes_summary = forms.CharField(label='Açıklama', widget=forms.Textarea, required=False, help_text='Katkı sağlayabilecekseniz açıklama yazın (zorunlu değil)')
+
+    def clean_username(self):
+        field_data = self.clean_data['username']
+
+        if not field_data:
+            return ''
+
+        if len(field_data.split(' ')) != 1:
+            raise forms.ValidationError(u"Kullanıcı adında boşluk olmamalıdır")
+
+        if len(field_data) < 3:
+            raise forms.ValidationError(u"Kullanıcı adı en az 3 karakter olmalıdır")
+
+        regexp = re.compile("\w+")
+        if not regexp.match(field_data):
+            raise forms.ValidationError(u"Kullanıcı adı geçersiz")
+
+        u = User.objects.filter(username__iexact=field_data)
+        if len(u) > 0:
+            raise forms.ValidationError(u"Bu kullanıcı adı daha önce alınmış")
+
+        return self.clean_data['username']
+
+
+    def clean_password_again(self):
+        field_data = self.clean_data['password_again']
+        if not field_data:
+            return ''
+
+        if len(field_data.split(' ')) != 1:
+            raise forms.ValidationError(u"Parolada boşluk olmamalıdır")
+
+        if len(field_data) < 5:
+            raise forms.ValidationError(u"Parola en az 5 karakter olmalıdır")
+
+        if (self.clean_data.get('password') or self.clean_data.get('password_again')) and \
+                self.clean_data['password'] != self.clean_data['password_again']:
+                    raise forms.ValidationError(u"Parolalar eşleşmiyor")
+
+        return self.clean_data['password']
+
