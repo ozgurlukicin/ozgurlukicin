@@ -34,9 +34,10 @@ urlpatterns = patterns('',
     (r'^user/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
     (r'^user/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'logout.html'}),
     (r'^user/register/$', 'oi.st.views.user_register'),
+    (r'^user/confirm/(?P<name>[\w-]+)/$', 'oi.st.views.user_confirm'),
     (r'^user/dashboard/$', 'oi.st.views.user_dashboard'),
     (r'^user/page/(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', dict(user_dict)),
-    (r'^user/(?P<name>.*)/$', 'oi.st.views.user_profile'),
+    (r'^user/(?P<name>[\w-]+)/$', 'oi.st.views.user_profile'),
 
     #First Steps
     (r'^ia/$', 'oi.st.views.fs_main'),
