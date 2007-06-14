@@ -13,6 +13,12 @@ Daha doğrusu, tasarım ile uğraşmayı seven birileri halledecek, bu haliyle s
 
 -->
 
+{% if user.is_authenticated %}
+<br />
+Zaten giriş yapmışsınız, ana sayfaya gitmek için <a href="/">tıklayın</a>
+
+{% else %}
+
 <form method="POST" action=".">
     <dt>
     {% for field in form %}
@@ -28,4 +34,5 @@ Daha doğrusu, tasarım ile uğraşmayı seven birileri halledecek, bu haliyle s
 <center> <input type="submit" value="Kayıt" /> </center>
 </form>
 
+{% endif %}
 {% endblock %}
