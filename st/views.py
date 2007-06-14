@@ -80,7 +80,7 @@ def pkg_printable(request, name):
 
 def tag_main(request):
     tags = Tag.objects.all()
-    return render_response(request, 'tag_main.html', locals())
+    return render_response(request, 'tag/tag_main.html', locals())
 
 def tag_detail(request, tag):
     news = News.objects.filter(tags__name__contains=tag)
@@ -88,7 +88,7 @@ def tag_detail(request, tag):
     games = Game.objects.filter(tags__name__contains=tag)
     fs = FS.objects.filter(tags__name__contains=tag)
     flatpages = FlatPage.objects.filter(tags__name__contains=tag)
-    return render_response(request, 'tag_detail.html', locals())
+    return render_response(request, 'tag/tag_detail.html', locals())
 
 @login_required
 def user_dashboard(request):
