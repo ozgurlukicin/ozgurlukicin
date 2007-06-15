@@ -106,7 +106,6 @@ class ScreenShot(models.Model):
 
     class Admin:
         list_display = ('file', 'desc')
-        list_filter = ['tags']
         ordering = ['-id']
         search_fields = ['file', 'desc']
 
@@ -184,7 +183,7 @@ class Game(models.Model):
             ('Diğer', {'fields': ('sef_title',), 'classes': 'collapse'}),
         )
         list_display = ('title', 'sum', 'update')
-        list_filter = ['tags', 'update']
+        list_filter = ['update']
         ordering = ['-id']
         search_fields = ['title', 'sum', 'text', 'tags']
         js = ("js/admin/sef.js", "js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
@@ -258,7 +257,7 @@ class Package(models.Model):
 
     class Admin:
         list_display = ('name', 'sum')
-        list_filter = ['license', 'tags']
+        list_filter = ['license']
         ordering = ['-id']
         search_fields = ['name', 'sum', 'desc']
         js = ("js/admin/package_sef.js", "js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
