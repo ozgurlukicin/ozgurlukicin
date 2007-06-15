@@ -163,6 +163,7 @@ class FS(models.Model):
 class Game(models.Model):
     title = models.CharField('Başlık', maxlength=32, blank=False)
     sef_title = models.CharField('SEF Başlık', maxlength=32, blank=False, unique=True)
+    sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
     ss = models.ManyToManyField(ScreenShot)
     tags = models.ManyToManyField(Tag, blank=False)
@@ -235,8 +236,8 @@ class Package(models.Model):
     ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'))
 
     name = models.CharField('İsim', maxlength=32, help_text='Paket ismi')
-    sum = models.TextField('Özet')
-    desc = models.TextField('Açıklama')
+    sum = models.TextField('Özet', blank=False)
+    desc = models.TextField('Açıklama', blank=False)
     license = models.ManyToManyField(License)
     installed_size = models.IntegerField('Kurulu boyut', help_text='Byte cinsinden')
     download_size = models.IntegerField('İndirilecek boyut', help_text='Byte cinsinden')
