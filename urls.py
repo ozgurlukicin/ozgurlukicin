@@ -59,6 +59,9 @@ urlpatterns = patterns('',
     #Bug tracker
     (r'^bocuk/$', include('oi.bug.urls')),
 
+    #Planet
+    (r'^gezegen/$', include('oi.feedjack.urls')),
+
     #Django
     (r'^$', 'oi.st.views.home'),
     (r'^admin/upload/image/$', 'oi.upload.views.upload'),

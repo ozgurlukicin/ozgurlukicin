@@ -91,4 +91,5 @@ INSTALLED_APPS = (
     'oi.st',
     'oi.upload',
     'oi.bug',
+    'oi.feedjack',
 )

@@ -160,10 +160,24 @@ class FS(models.Model):
         verbose_name_plural = "İlk Adımlar"
 
 class Game(models.Model):
+    ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'))
+
     title = models.CharField('Başlık', maxlength=32, blank=False)
     sef_title = models.CharField('SEF Başlık', maxlength=32, blank=False, unique=True)
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
+    icon = models.ImageField(upload_to='oyun/')
+    license = models.ManyToManyField(License)
+    installed_size = models.IntegerField('Kurulu boyut', help_text='Byte cinsinden')
+    download_size = models.IntegerField('İndirilecek boyut', help_text='Byte cinsinden')
+    url = models.URLField('Sitesi', verify_exists=True, help_text='Başına http:// koymayı unutmayın')
+    path = models.CharField('Çalıştırma Yolu', maxlength=128, help_text='Paketin Pardus menüsündeki yeri (örn. Programlar > Yardımcı Programlar > KNazar)')
+    gameplay = models.SmallIntegerField('Oynanabilirlik', maxlength=1, choices=ratings)
+    graphics = models.SmallIntegerField('Grafik', maxlength=1, choices=ratings)
+    sound = models.SmallIntegerField('Ses', maxlength=1, choices=ratings)
+    scenario = models.SmallIntegerField('Senaryo', maxlength=1, choices=ratings)
+    atmosphere = models.SmallIntegerField('Atmosfer', maxlength=1, choices=ratings)
+    learning_time = models.CharField('Öğrenme Süresi', maxlength=128)
     ss = models.ManyToManyField(ScreenShot)
     tags = models.ManyToManyField(Tag, blank=False)
     update = models.DateTimeField('Tarih', blank=False)
@@ -180,6 +194,7 @@ class Game(models.Model):
     class Admin:
         fields = (
             ('Genel', {'fields': ('title', 'sum', 'text', 'ss', 'tags','update',)}),
+            ('Değerlendirme', {'fields': ('gameplay', 'graphics', 'sound', 'scenario', 'atmosphere',)}),
             ('Diğer', {'fields': ('sef_title',), 'classes': 'collapse'}),
         )
         list_display = ('title', 'sum', 'update')
