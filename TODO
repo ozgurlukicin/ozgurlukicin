@@ -1,5 +1,5 @@
 =====================================================
-"Don’t code today what you can’t debug tomorrow
+Don’t code today what you can’t debug tomorrow
 =====================================================
 
 Legend:
@@ -15,7 +15,7 @@ Legend:
   - avatar support
   + login
   + logout
-  / register
+  + register
   - show profile
   - edit profile
   / user list
