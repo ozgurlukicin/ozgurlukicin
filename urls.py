@@ -15,7 +15,7 @@ root = "/".join(WEB_URL.split("/")[3:])
 
 user_dict = {
              'queryset': User.objects.all(),
-             'template_name': 'user_list.html',
+             'template_name': 'user/user_list.html',
              'paginate_by': USER_PER_PAGE
             }
 
