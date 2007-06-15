@@ -1,5 +1,5 @@
+<div id="pagination" align="center">
 {% spaceless %}
-<span class="paginate-pages" title="Page Jump">{{ pages }} Sayfa</span>
 {% if show_first %}<span class="paginate-first"><a href="../1/" title="First Page">İlk</a></span>{% endif %}
 {% if has_previous %}<span class="paginate-previous"><a href="../{{ previous }}/" title="Previous Page">Önceki</a></span>{% endif %}
 {% for num in page_numbers %}
@@ -12,3 +12,5 @@
 {% if has_next %}<span class="paginate-next"><a href="../{{ next }}/" title="Next Page">Sonraki</a></span>{% endif %}
 {% if show_last %}<span class="paginate-last"><a href="../{{ pages }}/" title="Last Page">Son</a></span>{% endif %}
 {% endspaceless %}
+<br/><span class="paginate-desc">Her sayfada {{ results_per_page }} kayıt olmak üzere {{ pages }} sayfada toplam {{ hits }} kayıt listeleniyor.</span>
+</div>
