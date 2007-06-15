@@ -180,13 +180,13 @@ class Game(models.Model):
 
     class Admin:
         fields = (
-            ('Genel', {'fields': ('title','text', 'ss', 'tags','update',)}),
+            ('Genel', {'fields': ('title', 'sum', 'text', 'ss', 'tags','update',)}),
             ('Diğer', {'fields': ('sef_title',), 'classes': 'collapse'}),
         )
-        list_display = ('title', 'text', 'update')
+        list_display = ('title', 'sum', 'update')
         list_filter = ['tags', 'update']
         ordering = ['-id']
-        search_fields = ['title', 'text', 'tags']
+        search_fields = ['title', 'sum', 'text', 'tags']
         js = ("js/admin/sef.js", "js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
 
     class Meta:
