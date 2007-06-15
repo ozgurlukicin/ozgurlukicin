@@ -37,13 +37,14 @@ def fs_printable(request, sef_title):
 def game_main(request):
     game_all = Game.objects.all()
     for game in game_all:
-        game.avg = ((game.gameplay+game.graphics+game.sound+game.scenario+game.atmosphere)/5)
+        game.avg = ((game.gameplay+game.graphics+game.sound+game.scenario+game.atmosphere)/5.0)
     return render_response(request, 'game/game_main.html', locals())
 
 def game_detail(request, sef_title):
     game = Game.objects.get(sef_title=sef_title)
     tags = game.tags.all()
-    avg = ((game.gameplay+game.graphics+game.sound+game.scenario+game.atmosphere)/5)
+    licenses = game.license.all()
+    game.avg = ((game.gameplay+game.graphics+game.sound+game.scenario+game.atmosphere)/5.0)
     return render_response(request, 'game/game_detail.html', locals())
 
 def game_printable(request, sef_title):
