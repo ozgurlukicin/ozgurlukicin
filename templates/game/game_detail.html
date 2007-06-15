@@ -46,5 +46,5 @@
 <div class="sidebar sidebar_darkblue">{{ game.path }}</div>
 
 <div class="sidebar_darkblue_title">Etiketler</div>
-<div class="sidebar sidebar_darkblue">{% for tag in tags %}<img src="/media/img/tag_darkblue.png" border="0" style="vertical-align:middle;" /><a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a><br />{% endfor %}</div>
+<div class="sidebar sidebar_darkblue">{% for tag in tags %}<div><img src="/media/img/tag_darkblue.png" border="0" style="vertical-align:middle;" /><a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a></div>{% endfor %}</div>
 {% endblock %}
