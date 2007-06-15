@@ -1007,3 +1007,14 @@ hr.clear {
     background:#417690;
     color:#f4f379;
 }
+
+.game_average_point {
+    background: url('/media/img/game_average_point.png') left top no-repeat;
+    margin-left: 75px;
+    height: 80px;
+    width: 80px;
+    font-size: 36px;
+    padding-top: 32px;
+    padding-left: 13px;
+    margin-bottom: -30px;
+}

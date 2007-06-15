@@ -33,13 +33,13 @@
 
 <div class="sidebar_darkblue_title">Değerlendirme</div>
 <div class="sidebar sidebar_darkblue">
+    <strong>Öğrenme süresi:</strong> {{ game.learning_time }}<br />
     <strong>Oynanabilirlik:</strong> {{ game.gameplay }}<br />
     <strong>Grafik:</strong> {{ game.graphics }}<br />
     <strong>Ses:</strong> {{ game.sound }}<br />
     <strong>Senaryo:</strong> {{ game.scenario }}<br />
     <strong>Atmosfer:</strong> {{ game.atmosphere }}<br />
-    <strong>Öğrenme süresi:</strong> {{ game.learning_time }}<br />
-    <strong>Ortalama:</strong> {{ game.avg }}
+    <div class="game_average_point">{{ game.avg }}</div>
 </div>
 
 <div class="sidebar_darkblue_title">Menüdeki yeri</div>
