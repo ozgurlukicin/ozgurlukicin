@@ -13,6 +13,7 @@ from django import forms
 from django.shortcuts import render_to_response
 
 from oi.upload.models import FileUpload
+from oi.settings import WEB_URL
 
 @login_required
 def upload(request):
@@ -34,7 +35,7 @@ def upload(request):
 
             if not errors:
                 manipulator.save(new_data)
-                return render_to_response('file_upload/file_upload_success.html', {'url':new_data['file_file']['filename']})
+                return render_to_response('file_upload/file_upload_success.html', {'url': new_data['file_file']['filename'], 'site_url': WEB_URL})
             else:
                 return render_to_response('file_upload/file_upload.html', {'form': form, 'errors': errors})
                 errors = new_data = {}
