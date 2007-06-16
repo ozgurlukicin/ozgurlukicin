@@ -3,7 +3,7 @@
 {% block title %}Kayıt - {% endblock %}
 
 {% block content %}
-
+<br />
 
 <!--
 NOT: burası hacky bi çözüm, kendi tasarımımıza göre form öğrelerini bu şekilde döngü ile yerleştireceğiz
@@ -13,12 +13,17 @@ Daha doğrusu, tasarım ile uğraşmayı seven birileri halledecek, bu haliyle s
 
 -->
 
+{% if form.errors %}
+<font color="red">Üyelik işleminiz tamamlanamadı, lütfen formu eksiksiz doldurunuz<br /></font>
+{% endif %}
+
 {% if user.is_authenticated %}
 <br />
 Zaten giriş yapmışsınız, ana sayfaya gitmek için <a href="/">tıklayın</a>
 
 {% else %}
 
+<br />
 <form method="POST" action=".">
     <dt>
     {% for field in form %}
