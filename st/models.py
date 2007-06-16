@@ -57,6 +57,7 @@ class UserProfile(models.Model):
     homepage = models.URLField()
     im = models.EmailField()
     show_email = models.BooleanField()
+    register_date = models.DateField(auto_now_add=True) # it adds a date when this class is first created
     contributes = models.ManyToManyField(Contribute)
     contributes_summary = models.TextField()
     activation_key = models.CharField(maxlength=40)
@@ -68,8 +69,7 @@ class UserProfile(models.Model):
     class Admin:
         fields = (
             ('Kullanıcı', {'fields': ('user',)}),
-            ('Üyelik Bilgileri', {'fields': ('homepage','im','contributes', 'contributes_summary',)}),
-            ('Diğer', {'fields': ('activation_key', 'key_expires',)}),
+            ('Üyelik Bilgileri', {'fields': ('homepage','im','register_date', 'contributes', 'contributes_summary',)}),
         )
 
         list_display = ('user', 'homepage',)
