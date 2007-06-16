@@ -181,6 +181,7 @@ class Game(models.Model):
     ss = models.ManyToManyField(ScreenShot)
     tags = models.ManyToManyField(Tag, blank=False)
     update = models.DateTimeField('Tarih', blank=False)
+    author = models.ForeignKey(User, blank=True, editable=False)
 
     def __str__(self):
         return self.sef_title
@@ -202,6 +203,10 @@ class Game(models.Model):
         ordering = ['-id']
         search_fields = ['title', 'sum', 'text', 'tags']
         js = ("js/admin/sef.js", "js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
+
+    def save(self):
+        self.author = threadlocals.get_current_user()
+        super(Game, self).save()
 
     class Meta:
         verbose_name = "Oyun"

@@ -47,4 +47,7 @@
 
 <div class="sidebar_darkblue_title">Etiketler</div>
 <div class="sidebar sidebar_darkblue">{% for tag in tags %}<div><img src="/media/img/tag_darkblue.png" border="0" style="vertical-align:middle;" /><a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a></div>{% endfor %}</div>
+
+<div class="sidebar_darkblue_title">Yazar</div>
+<div class="sidebar sidebar_darkblue">{{ game.author.first_name }} {{ game.author.last_name }}</div>
 {% endblock %}
