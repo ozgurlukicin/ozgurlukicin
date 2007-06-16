@@ -46,7 +46,7 @@ LOGIN_REDIRECT_URL = '/user/dashboard/'
 LOGOUT_URL = '/user/logout/'
 
 # Redirection after logging in wasn't fixed in 0.96, use this method for now
-auth.LOGIN_URL = LOGIN_URL
+auth.LOGIN_URL = LOGIN_REDIRECT_URL
 
 TIME_ZONE = 'Europe/Istanbul'
 LANGUAGE_CODE = 'tr'
