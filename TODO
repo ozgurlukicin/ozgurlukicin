@@ -24,6 +24,8 @@ Legend:
 - Add ignored user names support to register page, database model can be created for the list of ignored users
 - Add country list tuple for user registering. It would be in settings.py
 
+- TinyMce Turkish translation
+
 - General 404 error pages
 - Forum
 + Planet
