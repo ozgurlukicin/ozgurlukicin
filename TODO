@@ -20,6 +20,8 @@ Legend:
   - edit profile
   / user list
 
+- Extend the textarea (contributes summary) with css in register page
+
 - General 404 error pages
 - Forum
 + Planet
