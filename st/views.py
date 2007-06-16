@@ -87,11 +87,11 @@ def tag_main(request):
     return render_response(request, 'tag/tag_main.html', locals())
 
 def tag_detail(request, tag):
-    news = News.objects.filter(tags__name__contains=tag)
-    packages = Package.objects.filter(tags__name__contains=tag)
-    games = Game.objects.filter(tags__name__contains=tag)
-    fs = FS.objects.filter(tags__name__contains=tag)
-    flatpages = FlatPage.objects.filter(tags__name__contains=tag)
+    news = News.objects.filter(tags__name__exact=tag)
+    packages = Package.objects.filter(tags__name__exact=tag)
+    games = Game.objects.filter(tags__name__exact=tag)
+    fs = FS.objects.filter(tags__name__exact=tag)
+    flatpages = FlatPage.objects.filter(tags__name__exact=tag)
     return render_response(request, 'tag/tag_detail.html', locals())
 
 @login_required
