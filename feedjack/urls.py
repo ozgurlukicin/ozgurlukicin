@@ -20,9 +20,9 @@ urlpatterns = patterns('oi.feedjack.views',
     (r'^feed/rss/user/(?P<user>\d+)/$', 'rssfeed'),
     (r'^feed/rss/tag/(?P<tag>.*)/$', 'rssfeed'),
 
-    (r'^user/(?P<user>\d+)/tag/(?P<tag>.*)/$', mainview),
-    (r'^user/(?P<user>\d+)/$', mainview),
-    (r'^tag/(?P<tag>.*)/$', mainview),
+    (r'^user/(?P<user>\d+)/tag/(?P<tag>.*)/$', 'mainview'),
+    (r'^user/(?P<user>\d+)/$', 'mainview'),
+    (r'^tag/(?P<tag>.*)/$', 'mainview'),
 
     #(r'^opml/$', opml),
     #(r'^foaf/$', foaf),
