@@ -7,7 +7,7 @@
 
 import sha, datetime, random
 
-from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_REDIRECT_URL
+from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_REDIRECT_URL, NEWS_PER_PAGE
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -21,7 +21,7 @@ from oi.st.models import RegisterForm, ProfileEditForm
 
 
 def home(request):
-    news = News.objects.all().order_by('-date')[:4]
+    news = News.objects.all().order_by('-date')[:NEWS_PER_PAGE]
     return render_response(request, 'home.html', locals())
 
 def fs_main(request):

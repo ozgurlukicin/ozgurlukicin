@@ -16,6 +16,7 @@ MANAGERS = ADMINS
 SITE_NAME = 'Özgürlük için...'
 WEB_URL = 'http://localhost'
 DOCUMENT_ROOT = '/home/ahmet/public_html/oi'
+#DOCUMENT_ROOT = '/home/mini/pardus/oi'
 
 # Database settings
 DATABASE_ENGINE = 'sqlite3'
@@ -34,6 +35,9 @@ USER_PER_PAGE = 10
 PACKAGE_PER_PAGE = 10
 FS_PER_PAGE = 10
 GAME_PER_PAGE = 10
+
+# News in the home page
+NEWS_PER_PAGE = 6
 
 # For extending User class
 AUTH_PROFILE_MODULE = 'st.UserProfile'
