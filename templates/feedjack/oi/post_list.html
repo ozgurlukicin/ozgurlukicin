@@ -25,8 +25,9 @@
   {% endif %}
   <div class="planet_content">
     <div class="planet_meta">
-      <img src="/media/img/tag.png" border="0" style="vertical-align: middle;" />
-      {% for tag in item.qtags %}<a href="{{ site.url }}/tag/{{ tag.name }}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}
+      {% if item.qtags %}<img src="/media/img/tag.png" border="0" style="vertical-align: middle;" />
+          {% for tag in item.qtags %}<a href="{{ site.url }}/tag/{{ tag.name }}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}
+      {% endif %}
     </div>
     <p>{{ item.content }}</p>
   </div>
