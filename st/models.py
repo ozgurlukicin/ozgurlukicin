@@ -71,7 +71,6 @@ class UserProfile(models.Model):
         fields = (
             ('Kullanıcı', {'fields': ('user',)}),
             ('Üyelik Bilgileri', {'fields': ('homepage','im', 'country', 'contributes', 'contributes_summary','register_date', 'show_email',)}),
-            ('Diğer', {'fields': ('activation_key', 'key_expires'), 'classes': 'collapse',}),
         )
 
         list_display = ('user', 'homepage',)
