@@ -5,10 +5,10 @@
 # Licensed under the GNU General Public License, version 2.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-from django.conf.urls.defaults import *
+from django.conf.urls.defaults import patterns
 
-urlpatterns = patterns('',
-    (r'^ekle/$', 'oi.bug.views.add_bug'),
-    (r'^(?P<id>\d+)/$', 'oi.bug.views.detail'),
-    (r'^$', 'oi.bug.views.main'),
+urlpatterns = patterns('oi.bug.views',
+    (r'^ekle/$', 'add_bug'),
+    (r'^(?P<id>\d+)/$', 'detail'),
+    (r'^$', 'main'),
 )

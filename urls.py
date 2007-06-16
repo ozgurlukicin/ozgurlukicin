@@ -57,7 +57,10 @@ urlpatterns = patterns('',
     (r'^forum/$', 'django.views.generic.date_based.archive_index', {"queryset": News.objects.all(), "date_field": "date", "template_name": "forum/forum_main.html", "allow_empty": True}),
 
     #Bug tracker
-    (r'^bocuk/$', include('oi.bug.urls')),
+    (r'^bocuk/', include('oi.bug.urls')),
+
+    #Gezegen
+    (r'^gezegen/', include('oi.feedjack.urls')),
 
     #Django
     (r'^$', 'oi.st.views.home'),

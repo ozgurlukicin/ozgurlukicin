@@ -587,27 +587,31 @@ hr.clear {
 }
 
 .home_header {
-    background: #0FACEA url('/media/img/home_header_bg.png') repeat-x;
+    background: url('/media/img/home_header_bg.png') repeat-x;
 }
 
 .news_header {
-    background: #0FACEA url('/media/img/news_header_bg.png') repeat-x;
+    background: url('/media/img/news_header_bg.png') repeat-x;
 }
 
 .forum_header {
-    background: #0FACEA url('/media/img/forum_header_bg.png') repeat-x;
+    background: url('/media/img/forum_header_bg.png') repeat-x;
 }
 
 .fs_header {
-    background: #0FACEA url('/media/img/fs_header_bg.png') repeat-x;
+    background: url('/media/img/fs_header_bg.png') repeat-x;
 }
 
 .package_header {
-    background: #0FACEA url('/media/img/package_header_bg.png') repeat-x;
+    background: url('/media/img/package_header_bg.png') repeat-x;
 }
 
 .game_header {
-    background: #0FACEA url('/media/img/game_header_bg.png') repeat-x;
+    background: url('/media/img/game_header_bg.png') repeat-x;
+}
+
+.planet_header {
+    background: url('/media/img/planet_header_bg.png') repeat-x;
 }
 
 #logo {
@@ -744,14 +748,14 @@ hr.clear {
     height: 25px;
     font-size: 14px;
     font-weight: bold;
-    color: #ffffff;
+    color: #827300;
     background-position: 638px 0px;
     background-repeat: no-repeat;
     background-image: url('/media/img/sidebar_yellow.png');
 }
 
 .sidebar_yellow, .sidebar_yellow a {
-    color: #CCCC00;
+    color: #827300;
     font-size: 12px;
 }
 
@@ -1017,4 +1021,44 @@ hr.clear {
     padding-top: 32px;
     padding-left: 13px;
     margin-bottom: -30px;
+}
+
+.planet_date {
+    margin-top: 10px;
+    margin-left: 4px;
+    height: 26px;
+    width: 120px;
+    padding-top: 4px;
+    padding-left: 12px;
+    font-size: 20px;
+    color: #827300;
+    background: url('/media/img/planet_date_bg.png') no-repeat;
+}
+
+.planet_title {
+    margin-top: 10px;
+    padding-top: 4px;
+    padding-left: 10px;
+    margin-left: 4px;
+    height: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #827300;
+    background: url('/media/img/planet_title.png') no-repeat;
+}
+
+.planet_content {
+    padding-left: 12px;
+    padding-right: 20px;
+    text-align: justify;
+    color: #827300;
+}
+
+.planet_meta, .planet_author {
+    color: #827300;
+}
+
+.planet_title a, .planet_title a:hover, .planet_title a:visited, .planet_meta a, .planet_meta a:hover, .planet_meta a:visited, .planet_author a, .planet_author a:hover .planet_author a:visited, .planet_content a, .planet_content a:hover .planet_content a:visited {
+    color: #4B4200;
+    text-decoration: none;
 }

@@ -149,7 +149,7 @@ class FS(models.Model):
             ('Diğer', {'fields': ('sef_title',), 'classes': 'collapse'}),
         )
 
-        list_display = ('title', 'text', 'update')
+        list_display = ('title', 'update')
         list_filter = ['update']
         ordering = ['-update']
         search_fields = ['title', 'text', 'tags']
