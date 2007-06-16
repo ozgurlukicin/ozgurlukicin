@@ -7,15 +7,18 @@
 
 import sha, datetime, random
 
+from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_REDIRECT_URL
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
+from django.http import HttpResponseRedirect
 
 from oi.st.models import FS, Game, News, Package, ScreenShot, Tag, UserProfile
 from oi.flatpages.models import FlatPage
 from oi.st.wrappers import render_response
-from oi.st.models import RegisterForm
-from oi.settings import DEFAULT_FROM_EMAIL
+from oi.st.models import RegisterForm, ProfileEditForm
+
 
 def home(request):
     news = News.objects.all().order_by('-date')[:4]
@@ -97,6 +100,40 @@ def tag_detail(request, tag):
 @login_required
 def user_dashboard(request):
     return render_response(request, 'user/dashboard.html')
+
+@login_required
+def user_profile_edit(request):
+    u = request.user
+    if request.method == 'POST':
+        form = ProfileEditForm(request.POST)
+        form.set_user(request.user)
+
+        if form.is_valid():
+            if len(form.clean_data['password']) > 0:
+                u.set_password(form.clean_data['password'])
+
+            u.first_name = form.clean_data['first_name']
+            u.last_name = form.clean_data['last_name']
+            u.email = form.clean_data['email']
+            u.get_profile().homepage = form.clean_data['homepage']
+            u.get_profile().show_email = form.clean_data['show_email']
+            u.get_profile().save()
+            u.save()
+
+            return HttpResponseRedirect(LOGIN_REDIRECT_URL + "edit/")
+        else:
+            return render_response(request, 'user/profile_edit.html', {'form': form})
+    else:
+        default_data = {'first_name': u.first_name,
+                        'last_name': u.last_name,
+                        'homepage': u.get_profile().homepage,
+                        'email': u.email,
+                        'show_email': u.get_profile().show_email}
+
+        form = ProfileEditForm(default_data)
+        form.set_user(request.user)
+
+        return render_response(request, 'user/profile_edit.html', {'form': form})
 
 def user_profile(request, name):
     infoname = name

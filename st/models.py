@@ -53,13 +53,14 @@ class Contribute(models.Model):
         verbose_name_plural = "Katkı Adları"
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(User, unique=True)
-    homepage = models.URLField()
-    im = models.EmailField()
-    show_email = models.BooleanField()
-    register_date = models.DateField(auto_now_add=True) # it adds a date when this class is first created
-    contributes = models.ManyToManyField(Contribute)
-    contributes_summary = models.TextField()
+    user = models.ForeignKey(User, unique=True, verbose_name='Kullanıcı')
+    homepage = models.URLField('Ana Sayfa', blank=True)
+    im = models.EmailField('Bağlantı Adresi', blank=True, help_text='Jabber, Gtalk, Msn vs.')
+    country = models.CharField('Şehir', maxlength=40, blank=True)
+    show_email = models.BooleanField('E-posta Göster')
+    register_date = models.DateField('Kayıt Tarihi', auto_now_add=True) # it adds a date when this class is first created
+    contributes = models.ManyToManyField(Contribute, blank=True, verbose_name='Katkılar')
+    contributes_summary = models.TextField('Katkı Açıklaması', blank=True)
     activation_key = models.CharField(maxlength=40)
     key_expires = models.DateTimeField()
 
@@ -69,7 +70,8 @@ class UserProfile(models.Model):
     class Admin:
         fields = (
             ('Kullanıcı', {'fields': ('user',)}),
-            ('Üyelik Bilgileri', {'fields': ('homepage','im','register_date', 'contributes', 'contributes_summary',)}),
+            ('Üyelik Bilgileri', {'fields': ('homepage','im', 'country', 'contributes', 'contributes_summary','register_date', 'show_email',)}),
+            ('Diğer', {'fields': ('activation_key', 'key_expires'), 'classes': 'collapse',}),
         )
 
         list_display = ('user', 'homepage',)
@@ -292,8 +294,8 @@ class Package(models.Model):
 
 class RegisterForm(forms.Form):
     username = forms.CharField(label='Kullanıcı Adı', max_length=30, help_text='En az 3, en fazla 30 karakter')
-    firstname = forms.CharField(label='İsim')
-    lastname = forms.CharField(label='Soyisim')
+    firstname = forms.CharField(label='İsim', max_length=30)
+    lastname = forms.CharField(label='Soyisim', max_length=30)
     email = forms.EmailField(label='E-Posta')
     password = forms.CharField(label='Parola', max_length=32, widget=forms.PasswordInput,)
     password_again = forms.CharField(label='Parola (tekrar)', max_length=32, widget=forms.PasswordInput, help_text='En az 5 karakter')
@@ -326,6 +328,7 @@ class RegisterForm(forms.Form):
 
     def clean_password_again(self):
         field_data = self.clean_data['password_again']
+        password = self.clean_data['password']
         if not field_data:
             return ''
 
@@ -335,9 +338,73 @@ class RegisterForm(forms.Form):
         if len(field_data) < 5:
             raise forms.ValidationError(u"Parola en az 5 karakter olmalıdır")
 
-        if (self.clean_data.get('password') or self.clean_data.get('password_again')) and \
-                self.clean_data['password'] != self.clean_data['password_again']:
+        if (password or field_data) and password != field_data:
                     raise forms.ValidationError(u"Parolalar eşleşmiyor")
 
-        return self.clean_data['password']
+        return field_data
 
+class ProfileEditForm(forms.Form):
+    #FIXME: Where's the city selection field?
+    first_name = forms.CharField(label='İsim', max_length=30)
+    last_name = forms.CharField(label='Soyisim', max_length=30)
+    email = forms.EmailField(label='E-posta')
+    homepage = forms.URLField(label='Ana Sayfa', required=False, help_text='http:// ile başlamayı unutmayın')
+    old_password = forms.CharField(label='Eski Parola', widget=forms.PasswordInput, max_length=32, required=False)
+    password = forms.CharField(label='Parola', widget=forms.PasswordInput, max_length=32, required=False, help_text='Değiştirmek istiyorsanız her ikisini de doldurun')
+    password_again = forms.CharField(label='Parola (yeniden)', widget=forms.PasswordInput, max_length=32, required=False)
+    show_email = forms.BooleanField(label='E-posta Adresini Göster', required=False, help_text='Profil sayfasında diğerleri e-posta adresinizi görsün mü?')
+
+    def set_user(self, user):
+        self.user = user
+
+    def clean_old_password(self):
+        field_data = self.clean_data['old_password']
+        if not field_data:
+            return ''
+        else:
+            if len(field_data.split(' ')) != 1:
+                raise forms.ValidationError(u"Parolada boşluk olmamalıdır")
+
+            if len(field_data) < 5:
+                raise forms.ValidationError(u"Parola en az 5 karakter olmalıdır")
+
+            return field_data
+
+    def clean_password(self):
+        field_data = self.clean_data['password']
+        if not field_data:
+            return ''
+        else:
+            if len(field_data.split(' ')) != 1:
+                raise forms.ValidationError(u"Parolada boşluk olmamalıdır")
+
+            if len(field_data) < 5:
+                raise forms.ValidationError(u"Parola en az 5 karakter olmalıdır")
+
+            return field_data
+
+    def clean_password_again(self):
+        field_data = self.clean_data['password_again']
+        password = self.clean_data['password']
+        old_password = self.clean_data['old_password']
+
+        if old_password or password or field_data:
+            if field_data and password and old_password:
+                if len(field_data.split(' ')) != 1:
+                    raise forms.ValidationError(u"Parolada boşluk olmamalıdır")
+
+                if len(field_data) < 5:
+                    raise forms.ValidationError(u"Parola en az 5 karakter olmalıdır")
+
+                if (password or field_data) and password != field_data:
+                    raise forms.ValidationError(u"Parolalar eşleşmiyor")
+
+                u = User.objects.get(username=self.user.username)
+                if not u.check_password(old_password):
+                    raise forms.ValidationError(u"Eski parola yanlış")
+
+                return field_data
+            else:
+                raise forms.ValidationError(u"Parolayı değiştirmek için her 3 alanı da doldurun")
+        else:
+            return ''
