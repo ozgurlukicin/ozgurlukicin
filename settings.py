@@ -5,8 +5,6 @@
 # Licensed under the GNU General Public License, version 2.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-from django.contrib import auth
-
 #FIXME: Turn debug mode to False when the development ends.
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -44,9 +42,6 @@ AUTH_PROFILE_MODULE = 'st.UserProfile'
 LOGIN_URL = '/user/login/'
 LOGIN_REDIRECT_URL = '/user/dashboard/'
 LOGOUT_URL = '/user/logout/'
-
-# Redirection after logging in wasn't fixed in 0.96, use this method for now
-auth.LOGIN_URL = LOGIN_REDIRECT_URL
 
 TIME_ZONE = 'Europe/Istanbul'
 LANGUAGE_CODE = 'tr'
