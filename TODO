@@ -20,7 +20,7 @@ Legend:
   - edit profile
   / user list
 
-- Extend the textarea (contributes summary) with css in register page
+- Extend the textarea (contributes summary) with css in register page (Fix it until monday)
 - Add ignored user names support to register page, database model can be created for the list of ignored users
 
 - General 404 error pages
