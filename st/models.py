@@ -92,7 +92,7 @@ class UserProfile(models.Model):
             ('Diğer', {'fields': ('activation_key', 'key_expires'), 'classes': 'collapse',}),
         )
 
-        list_display = ('user', 'homepage',)
+        list_display = ('user', 'city',)
         ordering = ['-user']
         search_fields = ['user']
 
