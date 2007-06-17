@@ -13,6 +13,7 @@ from django import newforms as forms
 
 import Image
 from oi.middleware import threadlocals
+from oi.settings import CITY_LIST
 
 #==========
 # DB Models
@@ -73,7 +74,7 @@ class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True, verbose_name='Kullanıcı')
     homepage = models.URLField('Ana Sayfa', blank=True)
     im = models.EmailField('Bağlantı Adresi', blank=True, help_text='Jabber, Gtalk, Msn vs.')
-    country = models.CharField('Şehir', maxlength=40, blank=True)
+    city = models.CharField('Şehir', choices=CITY_LIST, maxlength=40)
     show_email = models.BooleanField('E-posta Göster')
     register_date = models.DateField('Kayıt Tarihi', auto_now_add=True) # it adds a date when this class is first created
     contributes = models.ManyToManyField(Contribute, blank=True, verbose_name='Katkılar')
@@ -87,7 +88,8 @@ class UserProfile(models.Model):
     class Admin:
         fields = (
             ('Kullanıcı', {'fields': ('user',)}),
-            ('Üyelik Bilgileri', {'fields': ('homepage','im', 'country', 'contributes', 'contributes_summary','register_date', 'show_email',)}),
+            ('Üyelik Bilgileri', {'fields': ('homepage','im', 'city', 'contributes', 'contributes_summary','register_date', 'show_email',)}),
+            ('Diğer', {'fields': ('activation_key', 'key_expires'), 'classes': 'collapse',}),
         )
 
         list_display = ('user', 'homepage',)
@@ -315,6 +317,7 @@ class RegisterForm(forms.Form):
     email = forms.EmailField(label='E-Posta')
     password = forms.CharField(label='Parola', max_length=32, widget=forms.PasswordInput,)
     password_again = forms.CharField(label='Parola (tekrar)', max_length=32, widget=forms.PasswordInput, help_text='En az 5 karakter')
+    city = forms.ChoiceField(label='Şehir', choices=CITY_LIST)
     homepage = forms.URLField(label='Web Sayfası', verify_exists=False, required=False, help_text='(zorunlu değil)')
     contributes = forms.ModelMultipleChoiceField(label='Katkı Başlıkları', queryset=Contribute.objects.all(), required=False, help_text='Bize nasıl katkıda bulunabilirsiniz? (ctrl ile birden fazla seçim yapılabilir, zorunlu değil)')
     contributes_summary = forms.CharField(label='Açıklama', widget=forms.Textarea, required=False, help_text='Katkı sağlayabilecekseniz açıklama yazın (zorunlu değil)')
@@ -364,10 +367,10 @@ class RegisterForm(forms.Form):
         return field_data
 
 class ProfileEditForm(forms.Form):
-    #FIXME: Where's the city selection field?
-    first_name = forms.CharField(label='İsim', max_length=30)
-    last_name = forms.CharField(label='Soyisim', max_length=30)
+    firstname = forms.CharField(label='İsim', max_length=30)
+    lastname = forms.CharField(label='Soyisim', max_length=30)
     email = forms.EmailField(label='E-posta')
+    city = forms.ChoiceField(label='Şehir', choices=CITY_LIST)
     homepage = forms.URLField(label='Ana Sayfa', required=False, help_text='http:// ile başlamayı unutmayın')
     old_password = forms.CharField(label='Eski Parola', widget=forms.PasswordInput, max_length=32, required=False)
     password = forms.CharField(label='Parola', widget=forms.PasswordInput, max_length=32, required=False, help_text='Değiştirmek istiyorsanız her ikisini de doldurun')

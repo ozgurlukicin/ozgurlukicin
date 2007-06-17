@@ -112,10 +112,11 @@ def user_profile_edit(request):
             if len(form.clean_data['password']) > 0:
                 u.set_password(form.clean_data['password'])
 
-            u.first_name = form.clean_data['first_name']
-            u.last_name = form.clean_data['last_name']
+            u.first_name = form.clean_data['firstname']
+            u.last_name = form.clean_data['lastname']
             u.email = form.clean_data['email']
             u.get_profile().homepage = form.clean_data['homepage']
+            u.get_profile().city = form.clean_data['city']
             u.get_profile().show_email = form.clean_data['show_email']
             u.get_profile().save()
             u.save()
@@ -124,9 +125,10 @@ def user_profile_edit(request):
         else:
             return render_response(request, 'user/profile_edit.html', {'form': form})
     else:
-        default_data = {'first_name': u.first_name,
-                        'last_name': u.last_name,
+        default_data = {'firstname': u.first_name,
+                        'lastname': u.last_name,
                         'homepage': u.get_profile().homepage,
+                        'city': u.get_profile().city,
                         'email': u.email,
                         'show_email': u.get_profile().show_email}
 
@@ -161,6 +163,7 @@ def user_register(request):
 
             profile = UserProfile(user=user)
             profile.homepage = form.clean_data['homepage']
+            profile.city = form.clean_data['city']
             profile.contributes_summary = form.clean_data['contributes_summary']
             profile.activation_key = activation_key
             profile.key_expires = key_expires
