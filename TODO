@@ -21,7 +21,7 @@ Legend:
   / user list
 
 - Extend the textarea (contributes summary) with css in register page (Fix it until monday)
-- Add ignored user names support to register page, database model can be created for the list of ignored users
++ Add ignored user names support to register page, database model can be created for the list of ignored users
 - Add country list tuple for user registering. It would be in settings.py
 
 - TinyMce Turkish translation
