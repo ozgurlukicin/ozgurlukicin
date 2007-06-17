@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}Profil Bilgileri -{% endblock %}
+{% block title %}Kullanıcı Sayfası - {% endblock %}
 {% block content %}
 <br />
 
-Kullanıcı Adı: <input type="text" value="{{ user.username }}" /> <br />
-Web Sayfası: <input type="text" value="{{ user.get_profile.homepage }}" /> <br />
+Merhaba, <b>{{ user.username }}!</b>
+<br />
+Aramıza {{ user.get_profile.register_date }} tarihinde katılmışsınız. <br/><br />İstiyorsanız profilinizi <a href="/user/dashboard/edit">buraya</a> tıklayarak düzenleyebilirsiniz.
 
 {% endblock %}
