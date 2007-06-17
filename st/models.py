@@ -38,6 +38,7 @@ class Tag(models.Model):
 
 
 class Contribute(models.Model):
+    """ Contributes select field in user register page """
     name = models.CharField('Ad', maxlength=32, blank=False, unique=True)
 
     def __str__(self):
@@ -51,6 +52,22 @@ class Contribute(models.Model):
     class Meta:
         verbose_name = "Katkı Adı"
         verbose_name_plural = "Katkı Adları"
+
+class IgnoredUsername(models.Model):
+    """ Ignored user name model to prevent the site from slang :) This is controlled in register page"""
+    name = models.CharField("Kullanıcı adı", maxlength=30)
+
+    def __str__(self):
+        return self.name
+
+    class Admin:
+        list_display = ('name',)
+        ordering = ['-name']
+        search_fields = ['name']
+
+    class Meta:
+        verbose_name = "Yasaklanan Kullanıcı Adı"
+        verbose_name_plural = "Yasaklanan Kullanıcı Adları"
 
 class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True, verbose_name='Kullanıcı')
@@ -317,6 +334,10 @@ class RegisterForm(forms.Form):
         regexp = re.compile("\w+")
         if not regexp.match(field_data):
             raise forms.ValidationError(u"Kullanıcı adı geçersiz")
+
+        ignored = IgnoredUsername.objects.filter(name__iexact=field_data)
+        if len(ignored) > 0:
+            raise forms.ValidationError(u"Bu kullanıcı adının alınması yasaklanmış")
 
         u = User.objects.filter(username__iexact=field_data)
         if len(u) > 0:
