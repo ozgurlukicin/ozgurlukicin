@@ -1063,7 +1063,11 @@ hr.clear {
     margin-bottom: 2px;
 }
 
-.planet_title a, .planet_title a:hover, .planet_title a:visited, .planet_meta a, .planet_meta a:hover, .planet_meta a:visited, .planet_author a, .planet_author a:hover .planet_author a:visited, .planet_content a, .planet_content a:hover .planet_content a:visited {
+.planet_title a, .planet_meta a, .planet_author a, .planet_content a {
     color: #4B4200;
     text-decoration: none;
+}
+
+.planet_title a:hover, .planet_title a:visited, .planet_meta a:hover, .planet_meta a:visited, .planet_author a:hover .planet_author a:visited, .planet_content a:hover .planet_content a:visited {
+    text-decoration: underline;
 }
