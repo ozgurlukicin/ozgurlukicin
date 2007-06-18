@@ -51,4 +51,11 @@
     <a href="{{ site.url }}/feed/rss/" title="RSS 2.0 feed"><img src="/media/img/rss2.png"/></a>
     <a href="{{ site.url }}/feed/atom/" title="Atom 1.0 feed"><img src="/media/img/atom.png"/></a>
 </div>
+
+{% if site.links %}
+<div class="sidebar_yellow_title">Diğer gezegenler</div>
+<div class="sidebar sidebar_yellow">
+{% for link in site.links.all %}<div style="margin-bottom: 4px;"><img src="/media/img/other_planets.png" border="0" style="vertical-align: -4px;" /> <a href="{{ link.link }}">{{ link.name }}</a></div>{% endfor %}
+</div>
+{% endif %}
 {% endblock %}

@@ -23,7 +23,7 @@ class Link(models.Model):
     class Meta:
         verbose_name = 'link'
         verbose_name_plural = 'links'
-        
+
     class Admin:
         pass
 

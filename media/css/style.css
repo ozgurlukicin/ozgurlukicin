@@ -1029,10 +1029,10 @@ hr.clear {
     height: 26px;
     width: 120px;
     padding-top: 4px;
-    padding-left: 12px;
     font-size: 18px;
     color: #827300;
     background: url('/media/img/planet_date_bg.png') no-repeat;
+    text-align: center;
 }
 
 .planet_title {

@@ -137,11 +137,9 @@ def mainview(request, tag=None, user=None):
     if response:
         return response
 
-    ctx = fjlib.page_context(request, site, tag, user, (sfeeds_obj, \
-      sfeeds_ids))
+    ctx = fjlib.page_context(request, site, tag, user, (sfeeds_obj, sfeeds_ids))
 
-    response = render_to_response('feedjack/%s/post_list.html' % \
-      (site.template), ctx)
+    response = render_to_response('feedjack/%s/post_list.html' % (site.template), ctx)
 
     # per host caching, in case the cache middleware is enabled
     patch_vary_headers(response, ['Host'])
