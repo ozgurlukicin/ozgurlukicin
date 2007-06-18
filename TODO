@@ -9,6 +9,9 @@ Legend:
 / In progress
 + Completed
 
+- Install postfix mail server
+- Install mysql server and get the site ready with it. It should use mysql because sqlite is slower than mysql.
+
 + File upload support in wysiwyg editor (tinymce)
 
 / User management system (basic login/logout/register and user profiles)
