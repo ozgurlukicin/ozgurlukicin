@@ -60,7 +60,7 @@ def game_detail(request, sef_title):
         return render_response(request, 'game/game_detail.html', locals())
 
 def game_printable(request, sef_title):
-    if not Game.objects.filter(sef_title__exact=sef_title)) > 0:
+    if not len(Game.objects.filter(sef_title__exact=sef_title)) > 0:
         return HttpResponseRedirect("/oyun/")
     else:
         game = Game.objects.get(sef_title=sef_title)
