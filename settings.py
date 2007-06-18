@@ -5,25 +5,38 @@
 # Licensed under the GNU General Public License, version 2.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-#FIXME: Turn debug mode to False when the development ends.
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+import platform
+
+DEVELOPMENT_MODE = ("beta.ozgurlukicin.com" not in platform.node())
 
 ADMINS = ()
 MANAGERS = ADMINS
 
 # Site configuration
 SITE_NAME = 'Özgürlük için...'
-WEB_URL = 'http://beta.ozgurlukicin.com'
-DOCUMENT_ROOT = '/var/www/ozgurlukicin.com/oi'
 
-# Database settings
-DATABASE_ENGINE = 'sqlite3'
-DATABASE_NAME = '%s/db/oi.db' % DOCUMENT_ROOT
-DATABASE_USER = ''
-DATABASE_PASSWORD = ''
-DATABASE_HOST = ''
-DATABASE_PORT = ''
+if DEVELOPMENT_MODE:
+    DEBUG = True
+    TEMPLATE_DEBUG = DEBUG
+    WEB_URL = 'http://django'
+    DOCUMENT_ROOT = '/home/ahmet/public_html/oi'
+    DATABASE_ENGINE = 'sqlite3'
+    DATABASE_NAME = '%s/db/oi.db' % DOCUMENT_ROOT
+    DATABASE_USER = ''
+    DATABASE_PASSWORD = ''
+    DATABASE_HOST = ''
+    DATABASE_PORT = ''
+else:
+    DEBUG = False
+    TEMPLATE_DEBUG = DEBUG
+    WEB_URL = 'http://beta.ozgurlukicin.com'
+    DOCUMENT_ROOT = '/var/www/ozgurlukicin.com/oi'
+    DATABASE_ENGINE = 'sqlite3'
+    DATABASE_NAME = '%s/db/oi.db' % DOCUMENT_ROOT
+    DATABASE_USER = ''
+    DATABASE_PASSWORD = ''
+    DATABASE_HOST = ''
+    DATABASE_PORT = ''
 
 # Email
 DEFAULT_FROM_EMAIL = 'accounts@ozgurlukicin.com'
@@ -34,9 +47,7 @@ USER_PER_PAGE = 10
 PACKAGE_PER_PAGE = 10
 FS_PER_PAGE = 10
 GAME_PER_PAGE = 10
-
-# News in the home page
-NEWS_PER_PAGE = 4
+NEWS_PER_PAGE = 10
 
 # For extending User class
 AUTH_PROFILE_MODULE = 'st.UserProfile'
@@ -98,81 +109,82 @@ INSTALLED_APPS = (
 )
 
 CITY_LIST = (
-('adana','Adana'),
-('adiyaman','Adıyaman'),
-('afyon','Afyon'),
-('agri','Ağrı'),
-('aksaray','Aksaray'),
-('amasya','Amasya'),
-('ankara','Ankara'),
-('antalya','Antalya'),
-('ardahan','Ardahan'),
-('artvin','Artvin'),
-('aydin','Aydın'),
-('balikesir','Balikesir'),
-('bartin','Bartın'),
-('batman','Batman'),
-('bayburt','Bayburt'),
-('bilecik','Bilecik'),
-('bingol','Bingöl'),
-('bitlis','Bitlis'),
-('bolu','Bolu'),
-('burdur','Burdur'),
-('bursa','Bursa'),
-('canakkale','Çanakkale'),
-('cankiri','Çankırı'),
-('corum','Çorum'),
-('denizli','Denizli'),
-('diyarbakir','Diyarbakır'),
-('duzce','Düzce'),
-('edirne','Edirne'),
-('elazig','Elazığ'),
-('erzincan','Erzincan'),
-('erzurum','Erzurum'),
-('eskisehir','Eskişehir'),
-('gaziantep','Gaziantep'),
-('giresun','Giresun'),
-('gumushane','Gümüşhane'),
-('hakkari','Hakkari'),
-('hatay','Hatay'),
-('igdir','Iğdır'),
-('isparta','Isparta'),
-('istanbul_anadolu','İstanbul (Anadolu)'),
-('istanbul_avrupa','İstanbul (Avrupa)'),
-('izmir','İzmir'),
-('kahramanmaras','KahramanMaraş'),
-('karaman','Karaman'),
-('kars','Kars'),
-('kastamonu','Kastamonu'),
-('kayseri','Kayseri'),
-('kirikkale','Kırıkkale'),
-('kirklareli','Kırklareli'),
-('kirsehir','Kırşehir'),
-('kocaeli','Kocaeli'),
-('konya','Konya'),
-('kutahya','Kütahya'),
-('malatya','Malatya'),
-('manisa','Manisa'),
-('mardin','Mardin'),
-('mersin','Mersin'),
-('mugla','Muğla'),
-('mus','Muş'),
-('nevsehir','Nevşehir'),
-('nigde','Niğde'),
-('ordu','Ordu'),
-('rize','Rize'),
-('sakarya','Sakarya'),
-('samsun','Samsun'),
-('siirt','Siirt'),
-('sinop','Sinop'),
-('sivas','Sivas'),
-('sirnak','Şırnak'),
-('tekirdag','Tekirdag'),
-('tokat','Tokat'),
-('trabzon','Trabzon'),
-('tunceli','Tunceli'),
-('urfa','Urfa'),
-('usak','Uşak'),
-('van','Van'),
-('yozgat','Yozgat'),
-('zonguldak','Zonguldak'))
+    ('adana','Adana'),
+    ('adiyaman','Adıyaman'),
+    ('afyon','Afyon'),
+    ('agri','Ağrı'),
+    ('aksaray','Aksaray'),
+    ('amasya','Amasya'),
+    ('ankara','Ankara'),
+    ('antalya','Antalya'),
+    ('ardahan','Ardahan'),
+    ('artvin','Artvin'),
+    ('aydin','Aydın'),
+    ('balikesir','Balikesir'),
+    ('bartin','Bartın'),
+    ('batman','Batman'),
+    ('bayburt','Bayburt'),
+    ('bilecik','Bilecik'),
+    ('bingol','Bingöl'),
+    ('bitlis','Bitlis'),
+    ('bolu','Bolu'),
+    ('burdur','Burdur'),
+    ('bursa','Bursa'),
+    ('canakkale','Çanakkale'),
+    ('cankiri','Çankırı'),
+    ('corum','Çorum'),
+    ('denizli','Denizli'),
+    ('diyarbakir','Diyarbakır'),
+    ('duzce','Düzce'),
+    ('edirne','Edirne'),
+    ('elazig','Elazığ'),
+    ('erzincan','Erzincan'),
+    ('erzurum','Erzurum'),
+    ('eskisehir','Eskişehir'),
+    ('gaziantep','Gaziantep'),
+    ('giresun','Giresun'),
+    ('gumushane','Gümüşhane'),
+    ('hakkari','Hakkari'),
+    ('hatay','Hatay'),
+    ('igdir','Iğdır'),
+    ('isparta','Isparta'),
+    ('istanbul_anadolu','İstanbul (Anadolu)'),
+    ('istanbul_avrupa','İstanbul (Avrupa)'),
+    ('izmir','İzmir'),
+    ('kahramanmaras','KahramanMaraş'),
+    ('karaman','Karaman'),
+    ('kars','Kars'),
+    ('kastamonu','Kastamonu'),
+    ('kayseri','Kayseri'),
+    ('kirikkale','Kırıkkale'),
+    ('kirklareli','Kırklareli'),
+    ('kirsehir','Kırşehir'),
+    ('kocaeli','Kocaeli'),
+    ('konya','Konya'),
+    ('kutahya','Kütahya'),
+    ('malatya','Malatya'),
+    ('manisa','Manisa'),
+    ('mardin','Mardin'),
+    ('mersin','Mersin'),
+    ('mugla','Muğla'),
+    ('mus','Muş'),
+    ('nevsehir','Nevşehir'),
+    ('nigde','Niğde'),
+    ('ordu','Ordu'),
+    ('rize','Rize'),
+    ('sakarya','Sakarya'),
+    ('samsun','Samsun'),
+    ('siirt','Siirt'),
+    ('sinop','Sinop'),
+    ('sivas','Sivas'),
+    ('sirnak','Şırnak'),
+    ('tekirdag','Tekirdag'),
+    ('tokat','Tokat'),
+    ('trabzon','Trabzon'),
+    ('tunceli','Tunceli'),
+    ('urfa','Urfa'),
+    ('usak','Uşak'),
+    ('van','Van'),
+    ('yozgat','Yozgat'),
+    ('zonguldak','Zonguldak')
+)
