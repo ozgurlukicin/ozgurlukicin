@@ -18,6 +18,7 @@ tinyMCE.init({
     advimage_update_dimensions_onchange: true,
     file_browser_callback : 'oiFileBrowser',
     plugins : "advimage,advlink,emotions,searchreplace,autosave,fullscreen",
+    language : "tr",
 });
 
 function oiFileBrowser (field_name, url, type, win) {
