@@ -7,7 +7,7 @@
 
 import platform
 
-DEVELOPMENT_MODE = ("beta.ozgurlukicin.com" not in platform.node())
+DEVELOPMENT_MODE = ("pardus" not in platform.node())
 
 ADMINS = ()
 MANAGERS = ADMINS
