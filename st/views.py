@@ -29,13 +29,19 @@ def fs_main(request):
     return render_response(request, 'fs/fs_main.html', locals())
 
 def fs_detail(request, sef_title):
-    fs = FS.objects.get(sef_title=sef_title)
-    tags = fs.tags.all()
-    return render_response(request, 'fs/fs_detail.html', locals())
+    if not len(FS.objects.filter(sef_title__exact=sef_title)) > 0:
+        return HttpResponseRedirect("/ia/")
+    else:
+        fs = FS.objects.get(sef_title=sef_title)
+        tags = fs.tags.all()
+        return render_response(request, 'fs/fs_detail.html', locals())
 
 def fs_printable(request, sef_title):
-    fs = FS.objects.get(sef_title=sef_title)
-    return render_response(request, 'fs/fs_printable.html', locals())
+    if not len(FS.objects.filter(sef_title__exact=sef_title)) > 0:
+        return HttpResponseRedirect("/ia/")
+    else:
+        fs = FS.objects.get(sef_title=sef_title)
+        return render_response(request, 'fs/fs_printable.html', locals())
 
 def game_main(request):
     game_all = Game.objects.all()
@@ -44,28 +50,40 @@ def game_main(request):
     return render_response(request, 'game/game_main.html', locals())
 
 def game_detail(request, sef_title):
-    game = Game.objects.get(sef_title=sef_title)
-    tags = game.tags.all()
-    licenses = game.license.all()
-    game.avg = ((game.gameplay+game.graphics+game.sound+game.scenario+game.atmosphere)/5.0)
-    return render_response(request, 'game/game_detail.html', locals())
+    if not len(Game.objects.filter(sef_title__exact=sef_title)) > 0:
+        return HttpResponseRedirect("/oyun/")
+    else:
+        game = Game.objects.get(sef_title=sef_title)
+        tags = game.tags.all()
+        licenses = game.license.all()
+        game.avg = ((game.gameplay+game.graphics+game.sound+game.scenario+game.atmosphere)/5.0)
+        return render_response(request, 'game/game_detail.html', locals())
 
 def game_printable(request, sef_title):
-    game = Game.objects.get(sef_title=sef_title)
-    return render_response(request, 'game/game_printable.html', locals())
+    if not Game.objects.filter(sef_title__exact=sef_title)) > 0:
+        return HttpResponseRedirect("/oyun/")
+    else:
+        game = Game.objects.get(sef_title=sef_title)
+        return render_response(request, 'game/game_printable.html', locals())
 
 def news_main(request):
     news = News.objects.all().order_by('-date')[:4]
     return render_response(request, 'news/news_main.html', locals())
 
 def news_detail(request, sef_title):
-    news = News.objects.get(sef_title=sef_title)
-    tags = news.tags.all()
-    return render_response(request, 'news/news_detail.html', locals())
+    if not len(News.objects.filter(sef_title__exact=sef_title)) > 0:
+        return HttpResponseRedirect("/haber/")
+    else:
+        news = News.objects.get(sef_title=sef_title)
+        tags = news.tags.all()
+        return render_response(request, 'news/news_detail.html', locals())
 
 def news_printable(request, sef_title):
-    news = News.objects.get(sef_title=sef_title)
-    return render_response(request, 'news/news_printable.html', locals())
+    if not len(News.objects.filter(sef_title__exact=sef_title)) > 0:
+        return HttpResponseRedirect("/haber/")
+    else:
+        news = News.objects.get(sef_title=sef_title)
+        return render_response(request, 'news/news_printable.html', locals())
 
 def pkg_main(request):
     packages = Package.objects.all()
@@ -76,7 +94,7 @@ def pkg_main(request):
 
 def pkg_detail(request, name):
     if not len(Package.objects.filter(name__exact=name)) > 0:
-       return HttpResponseRedirect("/paket")
+       return HttpResponseRedirect("/paket/")
     else:
         package = Package.objects.get(name=name)
         tags = package.tags.all()
@@ -85,8 +103,11 @@ def pkg_detail(request, name):
         return render_response(request, 'package/package_detail.html', locals())
 
 def pkg_printable(request, name):
-    package = Package.objects.get(name=name)
-    return render_response(request, 'package/package_printable.html', locals())
+    if not len(Package.objects.filter(name__exact=name)) > 0:
+        return HttpResponseRedirect("/paket/")
+    else:
+        package = Package.objects.get(name=name)
+        return render_response(request, 'package/package_printable.html', locals())
 
 def tag_main(request):
     tags = Tag.objects.all()
