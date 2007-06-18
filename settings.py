@@ -14,9 +14,8 @@ MANAGERS = ADMINS
 
 # Site configuration
 SITE_NAME = 'Özgürlük için...'
-WEB_URL = 'http://localhost'
-DOCUMENT_ROOT = '/home/ahmet/public_html/oi'
-#DOCUMENT_ROOT = '/home/mini/pardus/oi'
+WEB_URL = 'http://beta.ozgurlukicin.com'
+DOCUMENT_ROOT = '/var/www/ozgurlukicin.com/oi'
 
 # Database settings
 DATABASE_ENGINE = 'sqlite3'
@@ -37,7 +36,7 @@ FS_PER_PAGE = 10
 GAME_PER_PAGE = 10
 
 # News in the home page
-NEWS_PER_PAGE = 6
+NEWS_PER_PAGE = 4
 
 # For extending User class
 AUTH_PROFILE_MODULE = 'st.UserProfile'
@@ -177,4 +176,3 @@ CITY_LIST = (
 ('van','Van'),
 ('yozgat','Yozgat'),
 ('zonguldak','Zonguldak'))
-
