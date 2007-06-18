@@ -75,11 +75,14 @@ def pkg_main(request):
     return render_response(request, 'package/package_main.html', locals())
 
 def pkg_detail(request, name):
-    package = Package.objects.get(name=name)
-    tags = package.tags.all()
-    licenses = package.license.all()
-    sss = package.ss.all()
-    return render_response(request, 'package/package_detail.html', locals())
+    if not len(Package.objects.filter(name__exact=name)) > 0:
+       return HttpResponseRedirect("/paket")
+    else:
+        package = Package.objects.get(name=name)
+        tags = package.tags.all()
+        licenses = package.license.all()
+        sss = package.ss.all()
+        return render_response(request, 'package/package_detail.html', locals())
 
 def pkg_printable(request, name):
     package = Package.objects.get(name=name)
