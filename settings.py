@@ -50,9 +50,6 @@ GAME_PER_PAGE = 10
 NEWS_PER_PAGE = 10
 TAG_PER_PAGE = 10
 
-# The url that will be print in paginator, e.g when you paginate /user/list, it writes /user/list/sayfa/2
-PAGINATOR_URL = './sayfa'
-
 # News in homepage
 NEWS_IN_HOMEPAGE = 4
 
