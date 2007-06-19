@@ -1,6 +1,7 @@
-import os
-import Image
+import os, Image
+from datetime import datetime
 from django.template import Library
+from django.utils.timesince import timesince
 from oi.settings import MEDIA_ROOT, MEDIA_URL
 
 register = Library()
@@ -51,3 +52,17 @@ def paginator(context, adjacent_pages=2):
     }
 
 register.inclusion_tag('paginator.html', takes_context=True)(paginator)
+
+def timedelta(value, arg=None):
+    if not value:
+        return ''
+    if arg:
+        cmp = arg
+    else:
+        cmp = datetime.now()
+    if value > cmp:
+        return "%s sonra" % timesince(cmp,value)
+    else:
+        return "%s önce" % timesince(value,cmp)
+
+register.filter('timedelta',timedelta)

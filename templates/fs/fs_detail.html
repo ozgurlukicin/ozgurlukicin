@@ -13,7 +13,7 @@
 {{ fs.text }}
 </div>
 <div class="page_properties"><a href="{{ fs.get_printable_url }}"><img src="/media/img/print.png" /></a></div>
-<div class="page_last_update">{{ fs.update }}</div>
+<div class="page_last_update">Son güncelleme: {{ fs.update|timedelta }}</div>
 {% endblock %}
 
 {% block sidebar %}

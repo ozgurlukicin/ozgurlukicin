@@ -13,7 +13,7 @@
 {{ game.text }}
 </div>
 <div class="page_properties"><a href="{{ game.get_printable_url }}"><img src="/media/img/print.png" /></a></div>
-<div class="page_last_update">{{ game.update }}</div>
+<div class="page_last_update">Son güncelleme: {{ game.update|timedelta }}</div>
 {% endblock %}
 
 {% block sidebar %}

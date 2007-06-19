@@ -200,7 +200,7 @@ class Game(models.Model):
     learning_time = models.CharField('Öğrenme Süresi', maxlength=128, help_text='1 gün, 3 saat, 5 ay, yıllarca gibi.')
     ss = models.ManyToManyField(ScreenShot)
     tags = models.ManyToManyField(Tag, blank=False)
-    update = models.DateTimeField('Tarih', blank=False)
+    update = models.DateTimeField('Son Güncelleme', blank=False)
     author = models.ForeignKey(User, blank=True, editable=False)
 
     def __str__(self):
@@ -285,6 +285,7 @@ class Package(models.Model):
     path = models.CharField('Çalıştırma Yolu', maxlength=128, help_text='Paketin Pardus menüsündeki yeri (örn. Programlar > Yardımcı Programlar > KNazar)')
     ss = models.ManyToManyField(ScreenShot)
     tags = models.ManyToManyField(Tag)
+    update = models.DateTimeField('Son Güncelleme', blank=False)
 
     def __str__(self):
         return self.name

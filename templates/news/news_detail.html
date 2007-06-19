@@ -13,7 +13,7 @@
 {{ news.text }}
 </div>
 <div class="page_properties"><a href="{{ news.get_printable_url }}"><img src="/media/img/print.png" /></a></div>
-<div class="page_last_update">{{ news.date|date:"d" }} {{ news.date|date:"F" }} {{ news.date|date:"Y" }} - {{ news.date|date:"H" }}:{{ news.date|date:"i" }}</div>
+<div class="page_last_update">Son güncelleme: {{ news.date|timedelta }}</div>
 {% endblock %}
 
 {% block sidebar %}
