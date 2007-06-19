@@ -9,8 +9,8 @@
     <span class="paginate-link"><a href="./sayfa/{{ num }}/" title="Page {{ num }}/">{{ num }}</a></span>
   {% endifequal %}
 {% endfor %}
-{% if has_next %}<span class="paginate-next"><a href="./sayfa/{{ next }}/" title="Next Page">Sonraki</a></span>{% endif %}
-{% if show_last %}<span class="paginate-last"><a href="./sayfa/{{ pages }}/" title="Last Page">Son</a></span>{% endif %}
+{% if has_next %}<span class="paginate-next"><a href="{{ page_url }}/{{ next }}/" title="Next Page">Sonraki</a></span>{% endif %}
+{% if show_last %}<span class="paginate-last"><a href="{{ page_url}}/{{ pages }}/" title="Last Page">Son</a></span>{% endif %}
 {% endspaceless %}
 <br/><span class="paginate-desc">Her sayfada {{ results_per_page }} kayıt olmak üzere {{ pages }} sayfada toplam {{ hits }} kayıt listeleniyor.</span>
 </div>

@@ -2,7 +2,7 @@ import os, Image
 from datetime import datetime
 from django.template import Library
 from django.utils.timesince import timesince
-from oi.settings import MEDIA_ROOT, MEDIA_URL
+from oi.settings import MEDIA_ROOT, MEDIA_URL, PAGINATOR_URL
 
 register = Library()
 
@@ -44,6 +44,7 @@ def paginator(context, adjacent_pages=2):
         'pages': context['pages'],
         'page_numbers': page_numbers,
         'next': context['next'],
+        'page_url': PAGINATOR_URL,
         'previous': context['previous'],
         'has_next': context['has_next'],
         'has_previous': context['has_previous'],
