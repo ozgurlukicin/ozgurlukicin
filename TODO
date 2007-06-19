@@ -11,9 +11,7 @@ Legend:
 
 - Install postfix mail server
 - Install mysql server and get the site ready with it. It should use mysql because sqlite is slower than mysql.
-
 + File upload support in wysiwyg editor (tinymce)
-
 / User management system (basic login/logout/register and user profiles)
   - avatar support
   + login
@@ -22,12 +20,10 @@ Legend:
   - show profile
   + edit profile
   / user list
-
-- Extend the textarea (contributes summary) with css in register page (Fix it until monday)
+- Extend the textarea (contributes summary) with css in register page
 + Add ignored user names support to register page, database model can be created for the list of ignored users
-
-- General 404 error pages
+/ General 404 error pages
 - Forum
 + Planet
-- Paginate Game and Package page
++ Paginate Game/Package/First Steps/News
 - FreeComment support for news (also maybe packages, games etc.)

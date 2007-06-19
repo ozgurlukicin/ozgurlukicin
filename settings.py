@@ -48,6 +48,7 @@ PACKAGE_PER_PAGE = 10
 FS_PER_PAGE = 10
 GAME_PER_PAGE = 10
 NEWS_PER_PAGE = 10
+TAG_PER_PAGE = 10
 
 # News in homepage
 NEWS_IN_HOMEPAGE = 4
@@ -56,9 +57,9 @@ NEWS_IN_HOMEPAGE = 4
 AUTH_PROFILE_MODULE = 'st.UserProfile'
 
 # Login stuff, we use different urls for authentication.
-LOGIN_URL = '/user/login/'
-LOGIN_REDIRECT_URL = '/user/dashboard/'
-LOGOUT_URL = '/user/logout/'
+LOGIN_URL = '/kullanici/giris/'
+LOGIN_REDIRECT_URL = '/kullanici/dashboard/'
+LOGOUT_URL = '/kullanici/cikis/'
 
 TIME_ZONE = 'Europe/Istanbul'
 LANGUAGE_CODE = 'tr'

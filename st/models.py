@@ -5,13 +5,12 @@
 # Licensed under the GNU General Public License, version 2.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-import re
+import re, Image
 
 from django.db import models
 from django.contrib.auth.models import User
 from django import newforms as forms
 
-import Image
 from oi.middleware import threadlocals
 from oi.settings import CITY_LIST
 
@@ -26,7 +25,7 @@ class Tag(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return "/tag/%s/" % self.name
+        return "/etiket/%s/" % self.name
 
     class Admin:
         list_display = ('name', 'id')
