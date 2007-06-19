@@ -7,21 +7,20 @@
 
 import sha, datetime, random
 
-from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_REDIRECT_URL, NEWS_PER_PAGE
+from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_REDIRECT_URL, NEWS_IN_HOMEPAGE
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
-from django.http import HttpResponseRedirect
+from django.http import Http404
 
 from oi.st.models import FS, Game, News, Package, ScreenShot, Tag, UserProfile
 from oi.flatpages.models import FlatPage
 from oi.st.wrappers import render_response
 from oi.st.models import RegisterForm, ProfileEditForm
 
-
 def home(request):
-    news = News.objects.all().order_by('-date')[:NEWS_PER_PAGE]
+    news = News.objects.all().order_by('-date')[:NEWS_IN_HOMEPAGE]
     return render_response(request, 'home.html', locals())
 
 def fs_main(request):
@@ -29,19 +28,19 @@ def fs_main(request):
     return render_response(request, 'fs/fs_main.html', locals())
 
 def fs_detail(request, sef_title):
-    if not len(FS.objects.filter(sef_title__exact=sef_title)) > 0:
-        return HttpResponseRedirect("/ia/")
-    else:
+    try:
         fs = FS.objects.get(sef_title=sef_title)
         tags = fs.tags.all()
-        return render_response(request, 'fs/fs_detail.html', locals())
+    except FS.DoesNotExist:
+        raise Http404
+    return render_response(request, 'fs/fs_detail.html', locals())
 
 def fs_printable(request, sef_title):
-    if not len(FS.objects.filter(sef_title__exact=sef_title)) > 0:
-        return HttpResponseRedirect("/ia/")
-    else:
+    try:
         fs = FS.objects.get(sef_title=sef_title)
-        return render_response(request, 'fs/fs_printable.html', locals())
+    except FS.DoesNotExist:
+        raise Http404
+    return render_response(request, 'fs/fs_printable.html', locals())
 
 def game_main(request):
     game_all = Game.objects.all()
@@ -50,40 +49,40 @@ def game_main(request):
     return render_response(request, 'game/game_main.html', locals())
 
 def game_detail(request, sef_title):
-    if not len(Game.objects.filter(sef_title__exact=sef_title)) > 0:
-        return HttpResponseRedirect("/oyun/")
-    else:
+    try:
         game = Game.objects.get(sef_title=sef_title)
         tags = game.tags.all()
         licenses = game.license.all()
         game.avg = ((game.gameplay+game.graphics+game.sound+game.scenario+game.atmosphere)/5.0)
-        return render_response(request, 'game/game_detail.html', locals())
+    except Game.DoesNotExist:
+        raise Http404
+    return render_response(request, 'game/game_detail.html', locals())
 
 def game_printable(request, sef_title):
-    if not len(Game.objects.filter(sef_title__exact=sef_title)) > 0:
-        return HttpResponseRedirect("/oyun/")
-    else:
+    try:
         game = Game.objects.get(sef_title=sef_title)
-        return render_response(request, 'game/game_printable.html', locals())
+    except Game.DoesNotExist:
+        raise Http404
+    return render_response(request, 'game/game_printable.html', locals())
 
 def news_main(request):
-    news = News.objects.all().order_by('-date')[:4]
+    news = News.objects.all()
     return render_response(request, 'news/news_main.html', locals())
 
 def news_detail(request, sef_title):
-    if not len(News.objects.filter(sef_title__exact=sef_title)) > 0:
-        return HttpResponseRedirect("/haber/")
-    else:
+    try:
         news = News.objects.get(sef_title=sef_title)
         tags = news.tags.all()
-        return render_response(request, 'news/news_detail.html', locals())
+    except News.DoesNotExist:
+        raise Http404
+    return render_response(request, 'news/news_detail.html', locals())
 
 def news_printable(request, sef_title):
-    if not len(News.objects.filter(sef_title__exact=sef_title)) > 0:
-        return HttpResponseRedirect("/haber/")
-    else:
+    try:
         news = News.objects.get(sef_title=sef_title)
-        return render_response(request, 'news/news_printable.html', locals())
+    except News.DoesNotExist:
+        raise Http404
+    return render_response(request, 'news/news_printable.html', locals())
 
 def pkg_main(request):
     packages = Package.objects.all()
@@ -93,32 +92,35 @@ def pkg_main(request):
     return render_response(request, 'package/package_main.html', locals())
 
 def pkg_detail(request, name):
-    if not len(Package.objects.filter(name__exact=name)) > 0:
-       return HttpResponseRedirect("/paket/")
-    else:
+    try:
         package = Package.objects.get(name=name)
         tags = package.tags.all()
         licenses = package.license.all()
         sss = package.ss.all()
-        return render_response(request, 'package/package_detail.html', locals())
+    except Package.DoesNotExist:
+        raise Http404
+    return render_response(request, 'package/package_detail.html', locals())
 
 def pkg_printable(request, name):
-    if not len(Package.objects.filter(name__exact=name)) > 0:
-        return HttpResponseRedirect("/paket/")
-    else:
+    try:
         package = Package.objects.get(name=name)
-        return render_response(request, 'package/package_printable.html', locals())
+    except Package.DoesNotExist:
+        raise Http404
+    return render_response(request, 'package/package_printable.html', locals())
 
 def tag_main(request):
     tags = Tag.objects.all()
     return render_response(request, 'tag/tag_main.html', locals())
 
 def tag_detail(request, tag):
-    news = News.objects.filter(tags__name__exact=tag)
-    packages = Package.objects.filter(tags__name__exact=tag)
-    games = Game.objects.filter(tags__name__exact=tag)
-    fs = FS.objects.filter(tags__name__exact=tag)
-    flatpages = FlatPage.objects.filter(tags__name__exact=tag)
+    try:
+        news = News.objects.filter(tags__name__exact=tag)
+        packages = Package.objects.filter(tags__name__exact=tag)
+        games = Game.objects.filter(tags__name__exact=tag)
+        fs = FS.objects.filter(tags__name__exact=tag)
+        flatpages = FlatPage.objects.filter(tags__name__exact=tag)
+    except Tag.DoesNotExist:
+        raise Http404
     return render_response(request, 'tag/tag_detail.html', locals())
 
 @login_required
@@ -162,12 +164,10 @@ def user_profile_edit(request):
         return render_response(request, 'user/profile_edit.html', {'form': form})
 
 def user_profile(request, name):
-    infoname = name
     try:
         info = User.objects.get(username=name)
-    except:
-        info = None
-
+    except User.DoesNotExist:
+        raise Http404
     return render_response(request, 'user/profile.html', locals())
 
 def user_register(request):

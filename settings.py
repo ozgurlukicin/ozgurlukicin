@@ -49,6 +49,9 @@ FS_PER_PAGE = 10
 GAME_PER_PAGE = 10
 NEWS_PER_PAGE = 10
 
+# News in homepage
+NEWS_IN_HOMEPAGE = 4
+
 # For extending User class
 AUTH_PROFILE_MODULE = 'st.UserProfile'
 
