@@ -7,25 +7,20 @@
 
 import sha, datetime, random
 
-from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_REDIRECT_URL, NEWS_IN_HOMEPAGE
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.http import Http404
 
-from oi.st.models import FS, Game, News, Package, ScreenShot, Tag, UserProfile
-from oi.flatpages.models import FlatPage
+from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_REDIRECT_URL, NEWS_IN_HOMEPAGE
+
+from oi.st.models import FS, Game, News, Package, ScreenShot, Tag, UserProfile, RegisterForm, ProfileEditForm
 from oi.st.wrappers import render_response
-from oi.st.models import RegisterForm, ProfileEditForm
+from oi.flatpages.models import FlatPage
 
 def home(request):
     news = News.objects.all().order_by('-date')[:NEWS_IN_HOMEPAGE]
     return render_response(request, 'home.html', locals())
-
-def fs_main(request):
-    fs_all = FS.objects.all()
-    return render_response(request, 'fs/fs_main.html', locals())
 
 def fs_detail(request, sef_title):
     try:
@@ -41,12 +36,6 @@ def fs_printable(request, sef_title):
     except FS.DoesNotExist:
         raise Http404
     return render_response(request, 'fs/fs_printable.html', locals())
-
-def game_main(request):
-    game_all = Game.objects.all()
-    for game in game_all:
-        game.avg = ((game.gameplay+game.graphics+game.sound+game.scenario+game.atmosphere)/5.0)
-    return render_response(request, 'game/game_main.html', locals())
 
 def game_detail(request, sef_title):
     try:
@@ -65,10 +54,6 @@ def game_printable(request, sef_title):
         raise Http404
     return render_response(request, 'game/game_printable.html', locals())
 
-def news_main(request):
-    news = News.objects.all()
-    return render_response(request, 'news/news_main.html', locals())
-
 def news_detail(request, sef_title):
     try:
         news = News.objects.get(sef_title=sef_title)
@@ -83,13 +68,6 @@ def news_printable(request, sef_title):
     except News.DoesNotExist:
         raise Http404
     return render_response(request, 'news/news_printable.html', locals())
-
-def pkg_main(request):
-    packages = Package.objects.all()
-    packages_by_rating = Package.objects.all().order_by('-point')[:10]
-    for pkg in packages_by_rating:
-        pkg.point = int(round((pkg.point+1)/2))
-    return render_response(request, 'package/package_main.html', locals())
 
 def pkg_detail(request, name):
     try:
@@ -107,10 +85,6 @@ def pkg_printable(request, name):
     except Package.DoesNotExist:
         raise Http404
     return render_response(request, 'package/package_printable.html', locals())
-
-def tag_main(request):
-    tags = Tag.objects.all()
-    return render_response(request, 'tag/tag_main.html', locals())
 
 def tag_detail(request, tag):
     try:
