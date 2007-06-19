@@ -14,54 +14,60 @@ from oi.st.models import Package, Game, FS, News, Tag
 user_dict = {
              'queryset': User.objects.all(),
              'template_name': 'user/user_list.html',
-             'paginate_by': USER_PER_PAGE
+             'paginate_by': USER_PER_PAGE,
+             'template_object_name': 'user'
             }
 
 package_dict = {
                 'queryset': Package.objects.all(),
                 'template_name': 'package/package_main.html',
-                'paginate_by': PACKAGE_PER_PAGE
+                'paginate_by': PACKAGE_PER_PAGE,
+                'template_object_name': 'package'
                }
 
 game_dict = {
              'queryset': Game.objects.all(),
              'template_name': 'game/game_main.html',
-             'paginate_by': GAME_PER_PAGE
+             'paginate_by': GAME_PER_PAGE,
+             'template_object_name': 'game'
             }
 
 fs_dict = {
            'queryset': FS.objects.all(),
            'template_name': 'fs/fs_main.html',
-           'paginate_by': FS_PER_PAGE
+           'paginate_by': FS_PER_PAGE,
+           'template_object_name': 'fs'
           }
 
 news_dict = {
              'queryset': News.objects.all(),
              'template_name': 'news/news_main.html',
-             'paginate_by': NEWS_PER_PAGE
+             'paginate_by': NEWS_PER_PAGE,
+             'template_object_name': 'news'
             }
 
 tag_dict = {
             'queryset': Tag.objects.all(),
             'template_name': 'tag/tag_main.html',
-            'paginate_by': TAG_PER_PAGE
+            'paginate_by': TAG_PER_PAGE,
+            'template_object_name': 'tag'
            }
 
 urlpatterns = patterns('',
     #News
-    (r'^haber/$', 'django.views.generic.list_detail.object_list', dict(news_dict, page='1')),
+    (r'^haber/$', 'django.views.generic.list_detail.object_list', dict(news_dict, page=1)),
     (r'^haber/sayfa/(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', dict(news_dict)),
     (r'^haber/(?P<sef_title>.*)/yazdir/$', 'oi.st.views.news_printable'),
     (r'^haber/(?P<sef_title>.*)/$', 'oi.st.views.news_detail'),
 
     #Packages
-    (r'^paket/$', 'django.views.generic.list_detail.object_list', dict(package_dict, page='1')),
+    (r'^paket/$', 'django.views.generic.list_detail.object_list', dict(package_dict, page=1)),
     (r'^paket/sayfa/(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', dict(package_dict)),
     (r'^paket/(?P<name>.*)/yazdir/$', 'oi.st.views.pkg_printable'),
     (r'^paket/(?P<name>.*)/$', 'oi.st.views.pkg_detail'),
 
     #User management
-    (r'^kullanici/liste/$', 'django.views.generic.list_detail.object_list', dict(user_dict, page='1')),
+    (r'^kullanici/liste/$', 'django.views.generic.list_detail.object_list', dict(user_dict, page=1)),
     (r'^kullanici/liste/sayfa/(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', dict(user_dict)),
     (r'^kullanici/giris/$', 'django.contrib.auth.views.login', {'template_name': 'user/login.html'}),
     (r'^kullanici/cikis/$', 'django.contrib.auth.views.logout', {'template_name': 'user/logout.html'}),
@@ -72,19 +78,19 @@ urlpatterns = patterns('',
     (r'^kullanici/(?P<name>[\w-]+)/$', 'oi.st.views.user_profile'),
 
     #First Steps
-    (r'^ia/$', 'django.views.generic.list_detail.object_list', dict(fs_dict, page='1')),
+    (r'^ia/$', 'django.views.generic.list_detail.object_list', dict(fs_dict, page=1)),
     (r'^ia/sayfa/(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', dict(fs_dict)),
     (r'^ia/(?P<sef_title>.*)/yazdir/$', 'oi.st.views.fs_printable'),
     (r'^ia/(?P<sef_title>.*)/$', 'oi.st.views.fs_detail'),
 
     #Games
-    (r'^oyun/$', 'django.views.generic.list_detail.object_list', dict(game_dict, page='1')),
+    (r'^oyun/$', 'django.views.generic.list_detail.object_list', dict(game_dict, page=1)),
     (r'^oyun/sayfa/(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', dict(game_dict)),
     (r'^oyun/(?P<sef_title>.*)/yazdir/$', 'oi.st.views.game_printable'),
     (r'^oyun/(?P<sef_title>.*)/$', 'oi.st.views.game_detail'),
 
     #Tags
-    (r'^etiket/$', 'django.views.generic.list_detail.object_list', dict(tag_dict, page='1')),
+    (r'^etiket/$', 'django.views.generic.list_detail.object_list', dict(tag_dict, page=1)),
     (r'^etiket/sayfa/(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', dict(tag_dict)),
     (r'^etiket/(?P<tag>.*)/$', 'oi.st.views.tag_detail'),
 

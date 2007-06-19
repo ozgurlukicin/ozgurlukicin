@@ -9,7 +9,7 @@
 {% block section_logo %}<img src="/media/img/package_header_logo.png">{% endblock %}
 
 {% block content %}
-{% for package in packages %}
+{% for package in package_list %}
 <div class="fs_list {% cycle odd,even %}">
     <div class="fs_info" style="margin-bottom: 0;">
         <div class="fs_title"><a href="{{ package.get_absolute_url }}">{{ package.name }}</a></div>
@@ -20,6 +20,7 @@
 </div>
 {% endfor %}
 
+<br />
 {% paginator %}
 {% endblock %}
 
