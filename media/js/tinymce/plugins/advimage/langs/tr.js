@@ -23,5 +23,5 @@ mouseover : 'Fare üzerine geldiğinde',
 mouseout : 'Fare üzerinden çıktığında',
 misc : 'Muhtelif Özellikler',
 example_img : 'Görünüm&nbsp;önizleme&nbsp;resim',
-missing_alt : 'Resim açıklaması eklemeden devam etmek istediğinize emin misiniz? Devam ederseniz yazı tabanlı tarayıcılar kullananlar ile resimler kapalı halde tarayıcı kullananlar bu resimlere ulaşamazlar.'
+missing_alt : 'Resim açıklaması eklemeden devam etmek istediğinize emin misiniz? Devam ederseniz yazı tabanlı tarayıcı kullananlar ile resimleri kapatarak tarayıcı kullananlar bu resimlere ulaşamazlar.'
 });
