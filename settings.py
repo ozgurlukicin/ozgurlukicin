@@ -156,10 +156,12 @@ CITY_LIST = (
     ('istanbul_avrupa','İstanbul (Avrupa)'),
     ('izmir','İzmir'),
     ('kahramanmaras','KahramanMaraş'),
+    ('karabuk', 'Karabük'),
     ('karaman','Karaman'),
     ('kars','Kars'),
     ('kastamonu','Kastamonu'),
     ('kayseri','Kayseri'),
+    ('kilis', 'Kilis'),
     ('kirikkale','Kırıkkale'),
     ('kirklareli','Kırklareli'),
     ('kirsehir','Kırşehir'),
@@ -175,6 +177,7 @@ CITY_LIST = (
     ('nevsehir','Nevşehir'),
     ('nigde','Niğde'),
     ('ordu','Ordu'),
+    ('osmaniye', 'Osmaniye'),
     ('rize','Rize'),
     ('sakarya','Sakarya'),
     ('samsun','Samsun'),
@@ -190,5 +193,6 @@ CITY_LIST = (
     ('usak','Uşak'),
     ('van','Van'),
     ('yozgat','Yozgat'),
+    ('yalova', 'Yalova'),
     ('zonguldak','Zonguldak')
 )
