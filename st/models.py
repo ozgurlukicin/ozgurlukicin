@@ -197,7 +197,6 @@ class Game(models.Model):
     scenario = models.SmallIntegerField('Senaryo', maxlength=1, choices=ratings)
     atmosphere = models.SmallIntegerField('Atmosfer', maxlength=1, choices=ratings)
     learning_time = models.CharField('Öğrenme Süresi', maxlength=128, help_text='1 gün, 3 saat, 5 ay, yıllarca gibi.')
-    ss = models.ManyToManyField(ScreenShot)
     tags = models.ManyToManyField(Tag, blank=False)
     update = models.DateTimeField('Son Güncelleme', blank=False)
     author = models.ForeignKey(User, blank=True, editable=False)
