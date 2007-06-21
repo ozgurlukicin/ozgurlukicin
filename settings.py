@@ -31,11 +31,11 @@ else:
     TEMPLATE_DEBUG = DEBUG
     WEB_URL = 'http://beta.ozgurlukicin.com'
     DOCUMENT_ROOT = '/var/www/ozgurlukicin.com/oi'
-    DATABASE_ENGINE = 'sqlite3'
-    DATABASE_NAME = '%s/db/oi.db' % DOCUMENT_ROOT
-    DATABASE_USER = ''
+    DATABASE_ENGINE = 'mysql'
+    DATABASE_NAME = 'ozgur_oi'
+    DATABASE_USER = 'ozgur'
     DATABASE_PASSWORD = ''
-    DATABASE_HOST = ''
+    DATABASE_HOST = 'localhost'
     DATABASE_PORT = ''
 
 # Email
