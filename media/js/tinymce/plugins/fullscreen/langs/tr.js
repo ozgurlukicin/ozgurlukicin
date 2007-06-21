@@ -1,4 +1,4 @@
-// UK lang variables
+// TR lang variables
 
 tinyMCE.addToLang('',{
 fullscreen_title : 'Tam ekran',

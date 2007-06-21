@@ -1,4 +1,4 @@
-// UK lang variables
+// TR lang variables
 
 tinyMCE.addToLang('style',{
 title : 'CSS Stilini düzenle',
