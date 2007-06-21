@@ -33,6 +33,7 @@ class Tag(models.Model):
         search_fields = ['name']
 
     class Meta:
+        ordering = ['name']
         verbose_name = "Etiket"
         verbose_name_plural = "Etiketler"
 
