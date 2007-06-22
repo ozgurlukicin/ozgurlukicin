@@ -19,7 +19,7 @@ from oi.st.wrappers import render_response
 from oi.flatpages.models import FlatPage
 
 def home(request):
-    news = News.objects.all().order_by('-date')[:NEWS_IN_HOMEPAGE]
+    news = News.objects.filter(status=1).order_by('-date')[:NEWS_IN_HOMEPAGE]
     return render_response(request, 'home.html', locals())
 
 def fs_detail(request, sef_title):
