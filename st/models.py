@@ -260,9 +260,9 @@ class News(models.Model):
         )
 
         list_display = ('title', 'author', 'date')
-        list_filter = ['author', 'date']
+        list_filter = ['date']
         ordering = ['-date']
-        search_fields = ['title', 'text']
+        search_fields = ['title', 'author', 'text']
         js = ("js/admin/sef.js", "js/tinymce/tiny_mce.js", "js/tinymce/textareas.js", "js/getElementsBySelector.js", "js/filebrowser/AddFileBrowser.js",)
 
     class Meta:
