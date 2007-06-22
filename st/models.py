@@ -312,19 +312,19 @@ class Package(models.Model):
         verbose_name_plural = "Paketler"
 
 class PardusVersion(models.Model):
-    types = (('Kurulan', 'Kurulan'), ('Çalışan', 'Çalışan'))
-
     number = models.CharField('Sürüm numarası', maxlength = 16, blank = False, unique = True)
     codename = models.CharField('Kod adı', maxlength = 64, unique = True)
-    type = models.CharField('Sürüm tipi', maxlength=7, choices=types)
-    md5sum = models.CharField('md5 özeti', maxlength = 32, blank = False, unique = True)
-    sha1sum = models.CharField('sha1 özeti', maxlength = 41, blank = False, unique = True)
+    install_md5sum = models.CharField('Kurulan md5 özeti', maxlength = 32, blank = False, unique = True)
+    install_sha1sum = models.CharField('Kurulan sha1 özeti', maxlength = 40, blank = False, unique = True)
+    live_md5sum = models.CharField('Çalışan md5 özeti', maxlength = 32, blank = False, unique = True)
+    live_sha1sum = models.CharField('Çalışan sha1 özeti', maxlength = 40, blank = False, unique = True)
     releasenote = models.TextField('Sürüm notu', blank = False)
-    torrent = models.CharField('Torrent', maxlength = 96)
+    install_torrent = models.CharField('Kurulan Torrent', maxlength = 128)
+    live_torrent = models.CharField('Çalışan Torrent', maxlength = 128)
     status = models.BooleanField('Aktif')
 
     def __str__(self):
-        return "%s - %s" % (self.number, self.type)
+        return "Pardus %s" % self.number
 
     def get_absolute_url(self):
         return "/indir/%s/" % self.number
@@ -336,14 +336,12 @@ class PardusVersion(models.Model):
         js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
 
     class Meta:
-        ordering = ['number']
         verbose_name = "Pardus Sürümü"
         verbose_name_plural = "Pardus Sürümleri"
 
 class PardusMirror(models.Model):
     name = models.CharField('Sunucu adı', maxlength = 64, blank = False, unique = True)
-    url = models.URLField('Adres', verify_exists=True)
-    version = models.ForeignKey(PardusVersion)
+    url = models.CharField('Adres', maxlength = 128)
     status = models.BooleanField('Aktif')
 
     def __str__(self):
@@ -355,7 +353,6 @@ class PardusMirror(models.Model):
         search_fields = ['name']
 
     class Meta:
-        ordering = ['name']
         verbose_name = "Pardus Yansısı"
         verbose_name_plural = "Pardus Yansıları"
 

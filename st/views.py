@@ -220,6 +220,10 @@ def user_confirm(request, name, key):
             return render_response(request, 'user/confirm.html', {'key_incorrect': True})
 
 def download(request):
-    version = PardusVersion.objects.all().order_by('-number')[:2]
-    mirror = PardusMirror.objects.all()
+    version = PardusVersion.objects.filter(status=1).order_by('-number')[:1][0]
+    mirrors = PardusMirror.objects.filter(status=1).order_by('-name')
     return render_response(request, 'download.html', locals())
+
+def download_detail_releasenotes(request, version):
+    releasenote = PardusVersion.objects.get(number=version).releasenote
+    return render_response(request, 'download_relnotes.html', locals())
