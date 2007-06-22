@@ -20,5 +20,5 @@
 </div>
 {% endfor %}
 
-{% paginator %}
+{% if is_paginated %}{% paginator %}{% endif %}
 {% endblock %}

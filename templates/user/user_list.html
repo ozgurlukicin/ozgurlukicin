@@ -10,9 +10,6 @@
 Name: {{ user.username }} <br />
 {% endfor %}
 
-<br />
-{% paginator %}
-
-
+{% if is_paginated %}{% paginator %}{% endif %}
 {% endblock %}
 

@@ -21,7 +21,7 @@
 {% endfor %}
 
 <br />
-{% paginator %}
+{% if is_paginated %}{% paginator %}{% endif %}
 {% endblock %}
 
 {% block sidebar %}
