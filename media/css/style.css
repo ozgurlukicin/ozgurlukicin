@@ -978,7 +978,9 @@ hr.clear {
 }
 
 .paginator {
-    padding: .25em .25em .6em .25em;
+    padding-top: 12px;
+    clear: both;
+    text-align: center;
 }
 
 .paginate-pages {

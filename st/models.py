@@ -153,6 +153,7 @@ class FS(models.Model):
     text = models.TextField('Metin', blank=False)
     tags = models.ManyToManyField(Tag, blank=False)
     update = models.DateTimeField('Son Güncelleme', blank=False)
+    status = models.BooleanField('Aktif')
 
     def __str__(self):
         return self.sef_title
@@ -165,7 +166,7 @@ class FS(models.Model):
 
     class Admin:
         fields = (
-            ('Genel', {'fields': ('title','text','tags','update',)}),
+            ('Genel', {'fields': ('title','text','tags','update','status',)}),
             ('Diğer', {'fields': ('sef_title',), 'classes': 'collapse'}),
         )
 
@@ -201,6 +202,7 @@ class Game(models.Model):
     tags = models.ManyToManyField(Tag, blank=False)
     update = models.DateTimeField('Son Güncelleme', blank=False)
     author = models.ForeignKey(User, blank=True, editable=False)
+    status = models.BooleanField('Aktif')
 
     def __str__(self):
         return self.sef_title
@@ -213,8 +215,9 @@ class Game(models.Model):
 
     class Admin:
         fields = (
-            ('Genel', {'fields': ('title', 'sum', 'text', 'icon', 'url', 'path', 'learning_time', 'license', 'installed_size', 'download_size', 'ss', 'tags','update',)}),
-            ('Değerlendirme', {'fields': ('gameplay', 'graphics', 'sound', 'scenario', 'atmosphere',)}),
+            ('Genel', {'fields': ('title', 'sum', 'text', 'tags', 'update', 'status')}),
+            ('Oyun bilgileri', {'fields': ('icon', 'url', 'path', 'learning_time', 'license', 'installed_size', 'download_size')}),
+            ('Değerlendirme', {'fields': ('gameplay', 'graphics', 'sound', 'scenario', 'atmosphere')}),
             ('Diğer', {'fields': ('sef_title',), 'classes': 'collapse'}),
         )
         list_display = ('title', 'sum', 'update')
@@ -239,6 +242,7 @@ class News(models.Model):
     author = models.ForeignKey(User, blank=True, editable=False)
     tags = models.ManyToManyField(Tag, blank=False)
     date = models.DateTimeField('Tarih', blank=False)
+    status = models.BooleanField('Aktif')
 
     def __str__(self):
         return self.sef_title
@@ -255,7 +259,7 @@ class News(models.Model):
 
     class Admin:
         fields = (
-            ('Genel', {'fields': ('title','sum','text','tags','date',)}),
+            ('Genel', {'fields': ('title','sum','text','tags','date','status')}),
             ('Diğer', {'fields': ('sef_title',), 'classes': 'collapse'}),
         )
 
@@ -285,6 +289,7 @@ class Package(models.Model):
     ss = models.ManyToManyField(ScreenShot)
     tags = models.ManyToManyField(Tag)
     update = models.DateTimeField('Son Güncelleme', blank=False)
+    status = models.BooleanField('Aktif')
 
     def __str__(self):
         return self.name
@@ -316,6 +321,7 @@ class PardusVersion(models.Model):
     sha1sum = models.CharField('sha1 özeti', maxlength = 41, blank = False, unique = True)
     releasenote = models.TextField('Sürüm notu', blank = False)
     torrent = models.CharField('Torrent', maxlength = 96)
+    status = models.BooleanField('Aktif')
 
     def __str__(self):
         return "%s - %s" % (self.number, self.type)
@@ -338,6 +344,7 @@ class PardusMirror(models.Model):
     name = models.CharField('Sunucu adı', maxlength = 64, blank = False, unique = True)
     url = models.URLField('Adres', verify_exists=True)
     version = models.ForeignKey(PardusVersion)
+    status = models.BooleanField('Aktif')
 
     def __str__(self):
         return self.name

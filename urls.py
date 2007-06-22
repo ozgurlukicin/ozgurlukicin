@@ -19,28 +19,28 @@ user_dict = {
             }
 
 package_dict = {
-                'queryset': Package.objects.all(),
+                'queryset': Package.objects.filter(status=1),
                 'template_name': 'package/package_main.html',
                 'paginate_by': PACKAGE_PER_PAGE,
                 'template_object_name': 'package'
                }
 
 game_dict = {
-             'queryset': Game.objects.all(),
+             'queryset': Game.objects.filter(status=1),
              'template_name': 'game/game_main.html',
              'paginate_by': GAME_PER_PAGE,
              'template_object_name': 'game'
             }
 
 fs_dict = {
-           'queryset': FS.objects.all(),
+           'queryset': FS.objects.filter(status=1),
            'template_name': 'fs/fs_main.html',
            'paginate_by': FS_PER_PAGE,
            'template_object_name': 'fs'
           }
 
 news_dict = {
-             'queryset': News.objects.all(),
+             'queryset': News.objects.filter(status=1),
              'template_name': 'news/news_main.html',
              'paginate_by': NEWS_PER_PAGE,
              'template_object_name': 'news'
