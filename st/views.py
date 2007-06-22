@@ -14,7 +14,7 @@ from django.http import Http404
 
 from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_REDIRECT_URL, NEWS_IN_HOMEPAGE
 
-from oi.st.models import FS, Game, News, Package, ScreenShot, Tag, UserProfile, RegisterForm, ProfileEditForm
+from oi.st.models import FS, Game, News, Package, ScreenShot, Tag, UserProfile, RegisterForm, ProfileEditForm, PardusVersion, PardusMirror
 from oi.st.wrappers import render_response
 from oi.flatpages.models import FlatPage
 
@@ -218,3 +218,8 @@ def user_confirm(request, name, key):
                 return render_response(request, 'user/confirm.html', {'ok': True})
         else:
             return render_response(request, 'user/confirm.html', {'key_incorrect': True})
+
+def download(request):
+    version = PardusVersion.objects.all().order_by('-number')[:2]
+    mirror = PardusMirror.objects.all()
+    return render_response(request, 'download.html', locals())

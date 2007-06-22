@@ -94,6 +94,9 @@ urlpatterns = patterns('',
     (r'^etiket/sayfa/(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', dict(tag_dict)),
     (r'^etiket/(?P<tag>.*)/$', 'oi.st.views.tag_detail'),
 
+    #Download
+    (r'^indir/$', 'oi.st.views.download'),
+
     #Forum
     (r'^forum/$', 'django.views.generic.date_based.archive_index', {"queryset": News.objects.all(), "date_field": "date", "template_name": "forum/forum_main.html", "allow_empty": True}),
 
