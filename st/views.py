@@ -22,24 +22,24 @@ def home(request):
     news = News.objects.filter(status=1).order_by('-date')[:NEWS_IN_HOMEPAGE]
     return render_response(request, 'home.html', locals())
 
-def fs_detail(request, sef_title):
+def fs_detail(request, slug):
     try:
-        fs = FS.objects.get(sef_title=sef_title)
+        fs = FS.objects.get(slug=slug)
         tags = fs.tags.all()
     except FS.DoesNotExist:
         raise Http404
     return render_response(request, 'fs/fs_detail.html', locals())
 
-def fs_printable(request, sef_title):
+def fs_printable(request, slug):
     try:
-        fs = FS.objects.get(sef_title=sef_title)
+        fs = FS.objects.get(slug=slug)
     except FS.DoesNotExist:
         raise Http404
     return render_response(request, 'fs/fs_printable.html', locals())
 
-def game_detail(request, sef_title):
+def game_detail(request, slug):
     try:
-        game = Game.objects.get(sef_title=sef_title)
+        game = Game.objects.get(slug=slug)
         tags = game.tags.all()
         licenses = game.license.all()
         game.avg = ((game.gameplay+game.graphics+game.sound+game.scenario+game.atmosphere)/5.0)
@@ -47,24 +47,24 @@ def game_detail(request, sef_title):
         raise Http404
     return render_response(request, 'game/game_detail.html', locals())
 
-def game_printable(request, sef_title):
+def game_printable(request, slug):
     try:
-        game = Game.objects.get(sef_title=sef_title)
+        game = Game.objects.get(slug=slug)
     except Game.DoesNotExist:
         raise Http404
     return render_response(request, 'game/game_printable.html', locals())
 
-def news_detail(request, sef_title):
+def news_detail(request, slug):
     try:
-        news = News.objects.get(sef_title=sef_title)
+        news = News.objects.get(slug=slug)
         tags = news.tags.all()
     except News.DoesNotExist:
         raise Http404
     return render_response(request, 'news/news_detail.html', locals())
 
-def news_printable(request, sef_title):
+def news_printable(request, slug):
     try:
-        news = News.objects.get(sef_title=sef_title)
+        news = News.objects.get(slug=slug)
     except News.DoesNotExist:
         raise Http404
     return render_response(request, 'news/news_printable.html', locals())

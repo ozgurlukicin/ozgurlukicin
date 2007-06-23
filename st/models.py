@@ -149,25 +149,25 @@ class License(models.Model):
 
 class FS(models.Model):
     title = models.CharField('Başlık', maxlength=32, blank=False)
-    sef_title = models.CharField('SEF Başlık', maxlength=32, blank=False, unique=True)
+    slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
     text = models.TextField('Metin', blank=False)
     tags = models.ManyToManyField(Tag, blank=False)
     update = models.DateTimeField('Son Güncelleme', blank=False)
     status = models.BooleanField('Aktif')
 
     def __str__(self):
-        return self.sef_title
+        return self.slug
 
     def get_absolute_url(self):
-        return "/ia/%s/" % self.sef_title
+        return "/ia/%s/" % self.slug
 
     def get_printable_url(self):
-        return "/ia/%s/yazdir/" % self.sef_title
+        return "/ia/%s/yazdir/" % self.slug
 
     class Admin:
         fields = (
             ('Genel', {'fields': ('title','text','tags','update','status',)}),
-            ('Diğer', {'fields': ('sef_title',), 'classes': 'collapse'}),
+            ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
 
         list_display = ('title', 'update')
@@ -184,7 +184,7 @@ class Game(models.Model):
     ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'))
 
     title = models.CharField('Başlık', maxlength=32, blank=False)
-    sef_title = models.CharField('SEF Başlık', maxlength=32, blank=False, unique=True)
+    slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
     icon = models.ImageField(upload_to='oyun/')
@@ -205,26 +205,26 @@ class Game(models.Model):
     status = models.BooleanField('Aktif')
 
     def __str__(self):
-        return self.sef_title
+        return self.slug
 
     def get_absolute_url(self):
-        return "/oyun/%s/" % self.sef_title
+        return "/oyun/%s/" % self.slug
 
     def get_printable_url(self):
-        return "/oyun/%s/yazdir/" % self.sef_title
+        return "/oyun/%s/yazdir/" % self.slug
 
     class Admin:
         fields = (
             ('Genel', {'fields': ('title', 'sum', 'text', 'tags', 'update', 'status')}),
             ('Oyun bilgileri', {'fields': ('icon', 'url', 'path', 'learning_time', 'license', 'installed_size', 'download_size')}),
             ('Değerlendirme', {'fields': ('gameplay', 'graphics', 'sound', 'scenario', 'atmosphere')}),
-            ('Diğer', {'fields': ('sef_title',), 'classes': 'collapse'}),
+            ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
         list_display = ('title', 'sum', 'update')
         list_filter = ['update']
         ordering = ['-id']
         search_fields = ['title', 'sum', 'text', 'tags']
-        js = ("js/admin/sef.js", "js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
+        js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
 
     def save(self):
         self.author = threadlocals.get_current_user()
@@ -236,7 +236,7 @@ class Game(models.Model):
 
 class News(models.Model):
     title = models.CharField('Başlık', maxlength=32, blank=False)
-    sef_title = models.CharField('SEF Başlık', maxlength=32, blank=False, unique=True)
+    slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
     author = models.ForeignKey(User, blank=True, editable=False)
@@ -245,13 +245,13 @@ class News(models.Model):
     status = models.BooleanField('Aktif')
 
     def __str__(self):
-        return self.sef_title
+        return self.slug
 
     def get_absolute_url(self):
-        return "/haber/%s/" % self.sef_title
+        return "/haber/%s/" % self.slug
 
     def get_printable_url(self):
-        return "/haber/%s/yazdir/" % self.sef_title
+        return "/haber/%s/yazdir/" % self.slug
 
     def save(self):
         self.author = threadlocals.get_current_user()
@@ -260,14 +260,14 @@ class News(models.Model):
     class Admin:
         fields = (
             ('Genel', {'fields': ('title','sum','text','tags','date','status')}),
-            ('Diğer', {'fields': ('sef_title',), 'classes': 'collapse'}),
+            ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
 
         list_display = ('title', 'author', 'date')
         list_filter = ['date']
         ordering = ['-date']
         search_fields = ['title', 'author', 'text']
-        js = ("js/admin/sef.js", "js/tinymce/tiny_mce.js", "js/tinymce/textareas.js", "js/getElementsBySelector.js", "js/filebrowser/AddFileBrowser.js",)
+        js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js", "js/getElementsBySelector.js", "js/filebrowser/AddFileBrowser.js",)
 
     class Meta:
         verbose_name = "Haber"
