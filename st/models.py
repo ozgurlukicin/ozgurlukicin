@@ -71,7 +71,7 @@ class IgnoredUsername(models.Model):
         verbose_name_plural = "Yasaklanan Kullanıcı Adları"
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(User, unique=True, editable=False, core=True, edit_inline=models.STACKED, max_num_in_admin=1, verbose_name='Kullanıcı')
+    user = models.ForeignKey(User, unique=True)
     homepage = models.URLField('Ana Sayfa', blank=True)
     im = models.EmailField('Bağlantı Adresi', blank=True, help_text='Jabber, Gtalk, Msn vs.')
     city = models.CharField('Şehir', choices=CITY_LIST, maxlength=40)
@@ -86,7 +86,6 @@ class UserProfile(models.Model):
 
     class Admin:
         fields = (
-            ('Kullanıcı', {'fields': ('user',)}),
             ('Üyelik Bilgileri', {'fields': ('homepage','im', 'city', 'contributes', 'contributes_summary', 'show_email',)}),
             ('Diğer', {'fields': ('activation_key', 'key_expires'), 'classes': 'collapse',}),
         )
