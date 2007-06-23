@@ -75,7 +75,7 @@ class UserProfile(models.Model):
     homepage = models.URLField('Ana Sayfa', blank=True)
     im = models.EmailField('Bağlantı Adresi', blank=True, help_text='Jabber, Gtalk, Msn vs.')
     city = models.CharField('Şehir', choices=CITY_LIST, maxlength=40)
-    show_email = models.BooleanField('E-posta Göster')
+    show_email = models.BooleanField('E-posta Göster', default=0)
     contributes = models.ManyToManyField(Contribute, blank=True, verbose_name='Katkılar')
     contributes_summary = models.TextField('Katkı Açıklaması', blank=True)
     activation_key = models.CharField(maxlength=40)
