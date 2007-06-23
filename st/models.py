@@ -71,7 +71,7 @@ class IgnoredUsername(models.Model):
         verbose_name_plural = "Yasaklanan Kullanıcı Adları"
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(User, unique=True, verbose_name='Kullanıcı')
+    user = models.OneToOneField(User, verbose_name='Kullanıcı')
     homepage = models.URLField('Ana Sayfa', blank=True)
     im = models.EmailField('Bağlantı Adresi', blank=True, help_text='Jabber, Gtalk, Msn vs.')
     city = models.CharField('Şehir', choices=CITY_LIST, maxlength=40)
