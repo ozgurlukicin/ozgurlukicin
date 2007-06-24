@@ -120,7 +120,7 @@ def get_entry_data(entry, feed, tagdict, options):
                 if options.verbose:
                     print 'Getting %s to resize' % url
                 req = urllib2.Request(url)
-                req.add_header('User-agent', USER_AGENT)
+                req.add_header('User-Agent', USER_AGENT)
                 image_data = urllib2.urlopen(req).read()
 
                 # write it
