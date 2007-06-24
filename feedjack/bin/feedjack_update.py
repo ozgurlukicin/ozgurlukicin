@@ -102,7 +102,7 @@ def get_entry_data(entry, feed, tagdict, options):
     from django.conf import settings
 
     from BeautifulSoup import BeautifulSoup
-    import os, urllib2
+    import tempfile, urllib2
     from PIL import Image
 
     global USER_AGENT
@@ -124,12 +124,12 @@ def get_entry_data(entry, feed, tagdict, options):
                 image_data = urllib2.urlopen(req).read()
 
                 # write it
-                file = open("/tmp/%s" % image_name, 'w')
+                tmp = tempfile.mktemp()
+                file = open(tmp, 'w')
                 file.write(image_data)
                 file.close()
 
-                im = Image.open("/tmp/%s" % image_name, 'r')
-                os.unlink("/tmp/%s" % image_name)
+                im = Image.open(tmp, 'r')
 
                 if settings.FEEDJACK_MAX_IMAGE_X and im.size[0] > settings.FEEDJACK_MAX_IMAGE_X:
                     resize_x = settings.FEEDJACK_MAX_IMAGE_X
