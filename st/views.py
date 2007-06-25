@@ -10,7 +10,7 @@ import sha, datetime, random
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
-from django.http import Http404
+from django.shortcuts import get_object_or_404
 
 from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_REDIRECT_URL, NEWS_IN_HOMEPAGE
 
@@ -23,67 +23,43 @@ def home(request):
     return render_response(request, 'home.html', locals())
 
 def fs_detail(request, slug):
-    try:
-        fs = FS.objects.get(slug=slug)
-        tags = fs.tags.all()
-    except FS.DoesNotExist:
-        raise Http404
+    fs = get_object_or_404(FS, slug=slug)
+    tags = fs.tags.all()
     return render_response(request, 'fs/fs_detail.html', locals())
 
 def fs_printable(request, slug):
-    try:
-        fs = FS.objects.get(slug=slug)
-    except FS.DoesNotExist:
-        raise Http404
+    fs = get_object_or_404(FS, slug=slug)
     return render_response(request, 'fs/fs_printable.html', locals())
 
 def game_detail(request, slug):
-    try:
-        game = Game.objects.get(slug=slug)
-        tags = game.tags.all()
-        licenses = game.license.all()
-        game.avg = ((game.gameplay+game.graphics+game.sound+game.scenario+game.atmosphere)/5.0)
-    except Game.DoesNotExist:
-        raise Http404
+    game = get_object_or_404(Game, slug=slug)
+    tags = game.tags.all()
+    licenses = game.license.all()
+    game.avg = ((game.gameplay+game.graphics+game.sound+game.scenario+game.atmosphere)/5.0)
     return render_response(request, 'game/game_detail.html', locals())
 
 def game_printable(request, slug):
-    try:
-        game = Game.objects.get(slug=slug)
-    except Game.DoesNotExist:
-        raise Http404
+    game = get_object_or_404(Game, slug=slug)
     return render_response(request, 'game/game_printable.html', locals())
 
 def news_detail(request, slug):
-    try:
-        news = News.objects.get(slug=slug)
-        tags = news.tags.all()
-    except News.DoesNotExist:
-        raise Http404
+    news = get_object_or_404(News, slug=slug)
+    tags = news.tags.all()
     return render_response(request, 'news/news_detail.html', locals())
 
 def news_printable(request, slug):
-    try:
-        news = News.objects.get(slug=slug)
-    except News.DoesNotExist:
-        raise Http404
+    news = get_object_or_404(News, slug=slug)
     return render_response(request, 'news/news_printable.html', locals())
 
 def pkg_detail(request, name):
-    try:
-        package = Package.objects.get(name=name)
-        tags = package.tags.all()
-        licenses = package.license.all()
-        sss = package.ss.all()
-    except Package.DoesNotExist:
-        raise Http404
+    package = get_object_or_404(Package, name=name)
+    tags = package.tags.all()
+    licenses = package.license.all()
+    sss = package.ss.all()
     return render_response(request, 'package/package_detail.html', locals())
 
 def pkg_printable(request, name):
-    try:
-        package = Package.objects.get(name=name)
-    except Package.DoesNotExist:
-        raise Http404
+    package = get_object_or_404(Package, name=name)
     return render_response(request, 'package/package_printable.html', locals())
 
 def tag_detail(request, tag):
@@ -225,5 +201,5 @@ def download(request):
     return render_response(request, 'download.html', locals())
 
 def download_detail_releasenotes(request, version):
-    releasenote = PardusVersion.objects.get(number=version).releasenote
+    releasenote = get_object_or_404(PardusVersion, number=version).releasenote
     return render_response(request, 'download_relnotes.html', locals())
