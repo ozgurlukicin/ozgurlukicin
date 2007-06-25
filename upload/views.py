@@ -5,22 +5,20 @@
 # Licensed under the GNU General Public License, version 2.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-import datetime
-from time import strftime, localtime
 from os import path
 
 from django.contrib.auth.decorators import login_required
 from django import forms
 from django.shortcuts import render_to_response
 
-from oi.upload.models import FileUpload
+from oi.upload.models import Image
 from oi.settings import MEDIA_URL, MEDIA_ROOT
 
 @login_required
-def upload(request):
+def image_upload(request):
 
     if request.user.is_staff:
-        manipulator = FileUpload.AddManipulator()
+        manipulator = Image.AddManipulator()
         form = forms.FormWrapper(manipulator,{},{})
 
         if request.POST or request.FILES:
@@ -31,7 +29,7 @@ def upload(request):
             print(errors)
 
             if not errors:
-                if not path.exists(MEDIA_ROOT + "uploads/" + new_data['file_file']['filename']):
+                if not path.exists(MEDIA_ROOT + "uploads/image/" + new_data['file_file']['filename']):
                     manipulator.save(new_data)
                 return render_to_response('file_upload/file_upload_success.html', {'filename': new_data['file_file']['filename'], 'site_url': MEDIA_URL})
             else:

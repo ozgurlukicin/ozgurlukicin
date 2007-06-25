@@ -109,7 +109,7 @@ urlpatterns = patterns('',
 
     #Django
     (r'^$', 'oi.st.views.home'),
-    (r'^admin/upload/image/$', 'oi.upload.views.upload'),
+    (r'^admin/upload/image/$', 'oi.upload.views.image_upload'),
     (r'^admin/', include('django.contrib.admin.urls')),
     (r'^media/(.*)$', 'django.views.static.serve', {'document_root': '%s/media' % DOCUMENT_ROOT, 'show_indexes': True}),
 )

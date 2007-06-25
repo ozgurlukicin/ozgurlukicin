@@ -7,8 +7,8 @@
 
 from django.db import models
 
-class FileUpload(models.Model):
-    file = models.FileField(upload_to='uploads/')
+class Image(models.Model):
+    file = models.FileField(upload_to='uploads/image/')
 
     def __str__(self):
         return self.file
