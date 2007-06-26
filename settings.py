@@ -75,19 +75,6 @@ MEDIA_URL = '%s/media/' % WEB_URL
 # Examples: "http://foo.com/media/", "/media/".
 ADMIN_MEDIA_PREFIX = '%s/media/' % WEB_URL
 
-# You want feedjack to resize image if it's too big for your site?
-FEEDJACK_RESIZE_IMAGE = True
-
-# append False if you don't want to resize it or originally resize. E.g if you set FEEDJACK_MAX_IMAGE_X=False it will only resize X and leave Y as original
-FEEDJACK_MAX_IMAGE_X = 600
-FEEDJACK_MAX_IMAGE_Y = False
-
-# For keeping resized image for feedjack. Do not write last '/'
-FEEDJACK_UPLOAD_DIR = '%s/feedjack' % MEDIA_ROOT
-
-# The url will be showed in the page, it's similar to UPLOAD_DIR but should be url. Do not write last '/' too
-FEEDJACK_UPLOAD_URL = '%sfeedjack' % MEDIA_URL
-
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'n9-*x3!&!(x*z_!13)cyxil4fh+ov_+3!y($&4t7iit=)d)=93'
 
