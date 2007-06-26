@@ -6,13 +6,15 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 import re, Image
+from os import path, stat, remove
+from commands import getoutput
 
 from django.db import models
 from django.contrib.auth.models import User
 from django import newforms as forms
 
 from oi.middleware import threadlocals
-from oi.settings import CITY_LIST
+from oi.settings import CITY_LIST, MEDIA_ROOT, MEDIA_URL
 
 #==========
 # DB Models
@@ -108,11 +110,11 @@ class ScreenShot(models.Model):
 
     def get_thumbnail_url(file, size='230x230'):
         thumb = 'thumb_' + file
-        thumb_filename = os.path.join(settings.MEDIA_ROOT, thumb)
-        thumb_url = os.path.join(settings.MEDIA_URL, thumb)
+        thumb_filename = path.join(MEDIA_ROOT, thumb)
+        thumb_url = path.join(MEDIA_URL, thumb)
 
-        if not os.path.exists(thumb_filename):
-            filename = os.path.join(settings.MEDIA_ROOT, file)
+        if not path.exists(thumb_filename):
+            filename = path.join(MEDIA_ROOT, file)
             image = Image.open(filename)
 
             s = size.split("x")
@@ -130,6 +132,51 @@ class ScreenShot(models.Model):
     class Meta:
         verbose_name = "Ekran Görüntüsü"
         verbose_name_plural = "Ekran Görüntüleri"
+
+class Video(models.Model):
+    desc = models.CharField('Açıklama', maxlength=64)
+    file = models.FileField(upload_to='upload/video/', unique=True)
+    tags = models.ManyToManyField(Tag)
+
+    def __str__(self):
+        return self.desc
+
+    class Admin:
+        list_display = ('file', 'desc')
+        ordering = ['-id']
+        search_fields = ['file', 'desc']
+
+    class Meta:
+        verbose_name = "Video"
+        verbose_name_plural = "Videolar"
+
+    def convertvideo(self, video):
+        filename = path.splitext(self.file)[0]
+        sourcefile = "%s%s" % (MEDIA_ROOT, self.file)
+        flvfilename = "%s.flv" % filename
+        thumbnailfilename = "%s%s.png" % (MEDIA_ROOT, filename)
+        targetfile = "%s%s" % (MEDIA_ROOT, flvfilename)
+        ffmpeg = "ffmpeg -i %s -acodec mp3 -ar 22050 -ab 32 -f flv -s 320x240 %s" % (sourcefile,  targetfile)
+        grabimage = "ffmpeg -y -i %s -vframes 1 -ss 00:00:02 -an -vcodec png -f rawvideo -s 320x240 %s " % (sourcefile, thumbnailfilename)
+        flvtool = "flvtool2 -U %s" % targetfile
+
+        ffmpegresult = getoutput(ffmpeg)
+
+        s = stat(targetfile)
+        fsize = s.st_size
+        if (fsize == 0):
+            remove(targetfile)
+
+        flvresult = getoutput(flvtool)
+        grab = getoutput(grabimage)
+
+        remove(sourcefile)
+
+        return "%s" % flvfilename
+
+    def save(self):
+        self.file = self.convertvideo(file)
+        super(Video, self).save()
 
 class License(models.Model):
     name = models.CharField(maxlength=16, blank=False, unique=True)
