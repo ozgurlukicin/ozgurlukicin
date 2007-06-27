@@ -26,3 +26,4 @@ Legend:
 + Extend the textarea (contributes summary) with css in register page
 - Forum
 - Statistic tool for entire web site
+- Add about page, (btw do not forget 'django powered' icon in it)
