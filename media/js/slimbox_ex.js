@@ -213,7 +213,7 @@ var Lightbox = {
 				this.p_height = this.preload.h;
 				// Safari would not update iframe content that has static id.
 				this.iframeId = "lbFrame_"+new Date().getTime();
-				new Element('iframe').setProperties({id: this.iframeId, width: this.p_width, height: this.p_height, frameBorder:0, scrolling:'yes', src:this.preload.src}).injectInside(this.canvas);
+				new Element('iframe').setProperties({id: this.iframeId, width: this.p_width, height: this.p_height, frameBorder: 0, align: 'center', scrolling:'no', src:this.preload.src}).injectInside(this.canvas);
 				this.nextLink.style.right = '25px';
 			}
 			this.canvas.style.width = this.bottom.style.width = this.p_width+'px';

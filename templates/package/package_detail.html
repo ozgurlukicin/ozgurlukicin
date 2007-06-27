@@ -45,11 +45,11 @@
 
 {% if videos %}
 <div class="sidebar_orange_title">İlgili Videolar</div>
-<div class="sidebar sidebar_orange">{% for video in videos %}<a href="/video/{{ video.name }}" rel="vidbox[{{ package.name }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
+<div class="sidebar sidebar_orange">{% for video in videos %}<a href="/video/{{ video.name }}" rel="lightbox[video_{{ package.name }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
 {% endif %}
 
 {% if sss %}
 <div class="sidebar_orange_title">Ekran görüntüleri</div>
-<div class="sidebar sidebar_orange">{% for ss in sss %}<a href="/media/{{ ss.file }}" rel="lightbox[{{ package.name }}]" title="{{ ss.desc }}"><img src="{{ ss.file|thumbnail:"235x235" }}" /></a>{% endfor %}</a></div>
+<div class="sidebar sidebar_orange">{% for ss in sss %}<a href="/media/{{ ss.file }}" rel="lightbox[ss_{{ package.name }}]" title="{{ ss.desc }}"><img src="{{ ss.file|thumbnail:"235x235" }}" /></a>{% endfor %}</a></div>
 {% endif %}
 {% endblock %}
