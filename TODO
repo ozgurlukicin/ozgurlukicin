@@ -9,25 +9,20 @@ Legend:
 / In progress
 + Completed
 
-- Install postfix mail server
-+ File upload support in wysiwyg editor (tinymce)
+/ General 404 error pages
+/ Videooooo
 / User management system (basic login/logout/register and user profiles)
-  - avatar support
+  + ignored user names
   + login
   + logout
   + register
-  - show profile
   + edit profile
   / user list
-+ Add ignored user names support to register page, database model can be created for the list of ignored users
-+ Planet
-+ Paginate Game/Package/First Steps/News
-- Extend the textarea (contributes summary) with css in register page
-/ General 404 error pages
+  - show profile
+  - avatar support
+
 - FreeComment support for news (also maybe packages, games etc.)
 - CSS optimizations
-/ Videooooo
+- Extend the textarea (contributes summary) with css in register page
 - Forum
 - Statistic tool for entire web site
-
-? Paginate planet main page
