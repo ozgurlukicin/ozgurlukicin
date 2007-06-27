@@ -98,6 +98,9 @@ urlpatterns = patterns('',
     (r'^indir/$', 'oi.st.views.download'),
     (r'^indir/(?P<version>.*)/surum_notu/$', 'oi.st.views.download_detail_releasenotes'),
 
+    #Video
+    (r'^video/(?P<video>.*)/$', 'oi.st.views.videobox'),
+
     #Forum
     (r'^forum/$', 'django.views.generic.date_based.archive_index', {"queryset": News.objects.all(), "date_field": "date", "template_name": "forum/forum_main.html", "allow_empty": True}),
 

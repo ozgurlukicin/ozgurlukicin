@@ -3,6 +3,12 @@
 
 {% block title %}{{ fs.title }} - İlk Adımlar - {% endblock %}
 
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/videobox.css');</style>
+<script type="text/javascript" src="/media/js/swfobject.js"></script>
+<script type="text/javascript" src="/media/js/videobox.js"></script>
+{% endblock %}
+
 {% block pagetype %}page{% endblock %}
 
 {% block section %}fs{% endblock %}
@@ -20,4 +26,9 @@
 {% block sidebar %}
 <div class="sidebar_green_title">Etiketler</div>
 <div class="sidebar sidebar_green">{% for tag in tags %}<div><img src="/media/img/tag_green.png" border="0" style="vertical-align:middle;" /><a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a></div>{% endfor %}</div>
+
+{% if videos %}
+<div class="sidebar_green_title">İlgili Videolar</div>
+<div class="sidebar sidebar_green">{% for video in videos %}<a href="/media/{{ video.file }}" rel="vidbox[{{ package.name }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
+{% endif %}
 {% endblock %}

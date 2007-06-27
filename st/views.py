@@ -12,9 +12,9 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
 
-from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_REDIRECT_URL, NEWS_IN_HOMEPAGE
+from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_REDIRECT_URL, NEWS_IN_HOMEPAGE, WEB_URL
 
-from oi.st.models import FS, Game, News, Package, ScreenShot, Tag, UserProfile, RegisterForm, ProfileEditForm, PardusVersion, PardusMirror
+from oi.st.models import FS, Game, News, Package, ScreenShot, Tag, UserProfile, RegisterForm, ProfileEditForm, PardusVersion, PardusMirror, Video
 from oi.st.wrappers import render_response
 from oi.flatpages.models import FlatPage
 
@@ -25,6 +25,7 @@ def home(request):
 def fs_detail(request, slug):
     fs = get_object_or_404(FS, slug=slug)
     tags = fs.tags.all()
+    videos = fs.videos.all()
     return render_response(request, 'fs/fs_detail.html', locals())
 
 def fs_printable(request, slug):
@@ -34,6 +35,7 @@ def fs_printable(request, slug):
 def game_detail(request, slug):
     game = get_object_or_404(Game, slug=slug)
     tags = game.tags.all()
+    videos = game.videos.all()
     licenses = game.license.all()
     game.avg = ((game.gameplay+game.graphics+game.sound+game.scenario+game.atmosphere)/5.0)
     return render_response(request, 'game/game_detail.html', locals())
@@ -54,6 +56,7 @@ def news_printable(request, slug):
 def pkg_detail(request, name):
     package = get_object_or_404(Package, name=name)
     tags = package.tags.all()
+    videos = package.videos.all()
     licenses = package.license.all()
     sss = package.ss.all()
     return render_response(request, 'package/package_detail.html', locals())
@@ -203,3 +206,8 @@ def download(request):
 def download_detail_releasenotes(request, version):
     releasenote = get_object_or_404(PardusVersion, number=version).releasenote
     return render_response(request, 'download_relnotes.html', locals())
+
+def videobox(request, video):
+    vid = get_object_or_404(Video, file=("upload/video/%s.flv" % video))
+    web_url = WEB_URL
+    return render_response(request, 'videobox.html', locals())
