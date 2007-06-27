@@ -7,12 +7,14 @@
 
 import sha, datetime, random
 
+from django.http import HttpResponseRedirect
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
 
-from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_REDIRECT_URL, NEWS_IN_HOMEPAGE, WEB_URL
+from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_REDIRECT_URL, NEWS_IN_HOMEPAGE, WEB_URL, PROFILE_EDIT_URL
 
 from oi.st.models import FS, Game, News, Package, ScreenShot, Tag, UserProfile, RegisterForm, ProfileEditForm, PardusVersion, PardusMirror, Video
 from oi.st.wrappers import render_response
@@ -100,7 +102,7 @@ def user_profile_edit(request):
             u.get_profile().save()
             u.save()
 
-            return HttpResponseRedirect(LOGIN_REDIRECT_URL + "edit/")
+            return HttpResponseRedirect(PROFILE_EDIT_URL)
         else:
             return render_response(request, 'user/profile_edit.html', {'form': form})
     else:
@@ -143,6 +145,7 @@ def user_register(request):
             profile.city = form.clean_data['city']
             profile.contributes_summary = form.clean_data['contributes_summary']
             profile.activation_key = activation_key
+            profile.show_email = form.clean_data['show_email']
             profile.key_expires = key_expires
             profile.save()
 

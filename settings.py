@@ -60,6 +60,7 @@ AUTH_PROFILE_MODULE = 'st.UserProfile'
 LOGIN_URL = '/kullanici/giris/'
 LOGIN_REDIRECT_URL = '/kullanici/dashboard/'
 LOGOUT_URL = '/kullanici/cikis/'
+PROFILE_EDIT_URL = '/kullanici/duzenle/'
 
 
 TIME_ZONE = 'Europe/Istanbul'
