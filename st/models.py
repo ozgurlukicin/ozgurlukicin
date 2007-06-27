@@ -141,8 +141,8 @@ class Video(models.Model):
     def __str__(self):
         return self.desc
 
-    def get_thumbnail_url(file):
-        return "%s%s.png" % (MEDIA_ROOT, path.splitext(self.file)[0])
+    def get_thumbnail_url(self):
+        return "%s%s.png" % (MEDIA_URL, path.splitext(self.file)[0])
 
     class Admin:
         list_display = ('file', 'desc')
@@ -160,7 +160,7 @@ class Video(models.Model):
         thumbnailfilename = "%s%s.png" % (MEDIA_ROOT, filename)
         targetfile = "%s%s" % (MEDIA_ROOT, flvfilename)
         ffmpeg = "ffmpeg -i %s -acodec mp3 -ar 22050 -ab 32 -f flv -s 320x240 %s" % (sourcefile,  targetfile)
-        grabimage = "ffmpeg -y -i %s -vframes 1 -ss 00:00:02 -an -vcodec png -f rawvideo -s 320x240 %s " % (sourcefile, thumbnailfilename)
+        grabimage = "ffmpeg -y -i %s -vframes 1 -ss 00:00:02 -an -vcodec png -f rawvideo -s 236x176 %s " % (sourcefile, thumbnailfilename)
         flvtool = "flvtool2 -U %s" % targetfile
 
         ffmpegresult = getoutput(ffmpeg)

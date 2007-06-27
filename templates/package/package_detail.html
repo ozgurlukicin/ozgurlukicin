@@ -45,7 +45,7 @@
 
 {% if videos %}
 <div class="sidebar_orange_title">İlgili Videolar</div>
-<div class="sidebar sidebar_orange">{% for video in videos %}<a href="/media/{{ video.file }}" rel="vidbox[{{ package.name }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
+<div class="sidebar sidebar_orange">{% for video in videos %}<a href="/video/{{ video.name }}" rel="vidbox[{{ package.name }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
 {% endif %}
 
 {% if sss %}

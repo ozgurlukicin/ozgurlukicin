@@ -6,6 +6,7 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 import sha, datetime, random
+from os import path
 
 from django.http import HttpResponseRedirect
 
@@ -59,6 +60,8 @@ def pkg_detail(request, name):
     package = get_object_or_404(Package, name=name)
     tags = package.tags.all()
     videos = package.videos.all()
+    for video in videos:
+        video.name = path.splitext(video.file)[0].split('/')[2]
     licenses = package.license.all()
     sss = package.ss.all()
     return render_response(request, 'package/package_detail.html', locals())
