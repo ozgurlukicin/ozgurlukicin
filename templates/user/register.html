@@ -2,8 +2,49 @@
 
 {% block title %}Kayıt - {% endblock %}
 
-{% block content %}
-<br />
+{% block extrahead %}
+
+<style type="text/css">
+     textarea#id_contributes_summary {
+         width: 450px;
+         height: 100px;
+     }
+
+     input#id_username {
+         width: 210px;
+     }
+
+
+     input#id_firstname {
+         width: 210px;
+     }
+
+     input#id_lastname {
+         width: 210px;
+     }
+
+     input#id_email {
+         width: 210px;
+     }
+
+     input#id_password {
+         width: 210px;
+     }
+
+     input#id_password_again {
+         width: 210px;
+     }
+
+     input#id_homepage {
+         width: 210px;
+     }
+
+     select#id_city {
+         width: 217px;
+     }
+</style>
+
+{% endblock %}
 
 <!--
 NOT: burası hacky bi çözüm, kendi tasarımımıza göre form öğrelerini bu şekilde döngü ile yerleştireceğiz
@@ -12,6 +53,10 @@ Daha doğrusu, tasarım ile uğraşmayı seven birileri halledecek, bu haliyle s
 -Eren
 
 -->
+
+{% block content %}
+<br />
+
 
 {% if form.errors %}
 <font color="red">Üyelik işleminiz tamamlanamadı, lütfen formu eksiksiz doldurunuz<br /></font>
