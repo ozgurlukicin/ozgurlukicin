@@ -135,7 +135,7 @@ class ScreenShot(models.Model):
 
 class Video(models.Model):
     desc = models.CharField('Açıklama', maxlength=64)
-    file = models.FileField(upload_to='upload/video/', unique=True)
+    file = models.FileField(upload_to='upload/video/')
     tags = models.ManyToManyField(Tag)
 
     def __str__(self):
