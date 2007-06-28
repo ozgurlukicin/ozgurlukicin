@@ -200,7 +200,7 @@ class FS(models.Model):
     slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
     text = models.TextField('Metin', blank=False)
     tags = models.ManyToManyField(Tag, blank=False)
-    videos = models.ManyToManyField(Video, blank=False)
+    videos = models.ManyToManyField(Video, blank=True)
     update = models.DateTimeField('Son Güncelleme', blank=False)
     status = models.BooleanField('Aktif')
 
@@ -215,7 +215,7 @@ class FS(models.Model):
 
     class Admin:
         fields = (
-            ('Genel', {'fields': ('title','text','tags','update','status',)}),
+            ('Genel', {'fields': ('title','text','videos','tags','update','status',)}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
 
@@ -249,7 +249,7 @@ class Game(models.Model):
     atmosphere = models.SmallIntegerField('Atmosfer', maxlength=1, choices=ratings)
     learning_time = models.CharField('Öğrenme Süresi', maxlength=128, help_text='1 gün, 3 saat, 5 ay, yıllarca gibi.')
     tags = models.ManyToManyField(Tag, blank=False)
-    videos = models.ManyToManyField(Video, blank=False)
+    videos = models.ManyToManyField(Video, blank=True)
     update = models.DateTimeField('Son Güncelleme', blank=False)
     author = models.ForeignKey(User, blank=True, editable=False)
     status = models.BooleanField('Aktif')
@@ -265,7 +265,7 @@ class Game(models.Model):
 
     class Admin:
         fields = (
-            ('Genel', {'fields': ('title', 'sum', 'text', 'tags', 'update', 'status')}),
+            ('Genel', {'fields': ('title', 'sum', 'text', 'videos', 'tags', 'update', 'status')}),
             ('Oyun bilgileri', {'fields': ('icon', 'url', 'path', 'learning_time', 'license', 'installed_size', 'download_size')}),
             ('Değerlendirme', {'fields': ('gameplay', 'graphics', 'sound', 'scenario', 'atmosphere')}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
@@ -338,7 +338,7 @@ class Package(models.Model):
     path = models.CharField('Çalıştırma Yolu', maxlength=128, help_text='Paketin Pardus menüsündeki yeri (örn. Programlar > Yardımcı Programlar > KNazar)')
     ss = models.ManyToManyField(ScreenShot)
     tags = models.ManyToManyField(Tag)
-    videos = models.ManyToManyField(Video, blank=False)
+    videos = models.ManyToManyField(Video, blank=True)
     update = models.DateTimeField('Son Güncelleme', blank=False)
     status = models.BooleanField('Aktif')
 
