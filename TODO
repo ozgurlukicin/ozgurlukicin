@@ -10,7 +10,6 @@ Legend:
 + Completed
 
 / General 404 error pages
-/ Videooooo
 / User management system (basic login/logout/register and user profiles)
   + ignored user names
   + login
@@ -23,7 +22,6 @@ Legend:
 
 - FreeComment support for news (also maybe packages, games etc.)
 - CSS optimizations
-+ Extend the textarea (contributes summary) with css in register page
 - Forum
 - Statistic tool for entire web site
 - Add about page, (btw do not forget 'django powered' icon in it)
