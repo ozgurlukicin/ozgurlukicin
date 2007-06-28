@@ -29,7 +29,7 @@ def image_upload(request):
             print(errors)
 
             if not errors:
-                if not path.exists(MEDIA_ROOT + "uploads/image/" + new_data['file_file']['filename']):
+                if not path.exists(MEDIA_ROOT + "upload/image/" + new_data['file_file']['filename']):
                     manipulator.save(new_data)
                 return render_to_response('file_upload/file_upload_success.html', {'filename': new_data['file_file']['filename'], 'site_url': MEDIA_URL})
             else:
