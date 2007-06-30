@@ -102,13 +102,16 @@ urlpatterns = patterns('',
     (r'^video/(?P<video>.*)/$', 'oi.st.views.videobox'),
 
     #Forum
-    (r'^forum/$', 'django.views.generic.date_based.archive_index', {"queryset": News.objects.all(), "date_field": "date", "template_name": "forum/forum_main.html", "allow_empty": True}),
+    (r'^forum/', include('oi.forum.urls')),
 
     #Bug tracker
     (r'^bocuk/', include('oi.bug.urls')),
 
     #Gezegen
     (r'^gezegen/', include('oi.feedjack.urls')),
+
+    #FIXME: Delete this...
+    (r'^test/$', 'oi.st.views.test'),
 
     #Django
     (r'^$', 'oi.st.views.home'),

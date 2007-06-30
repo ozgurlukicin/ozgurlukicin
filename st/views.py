@@ -225,3 +225,6 @@ def videobox(request, video):
     vid = get_object_or_404(Video, file=("upload/video/%s.flv" % video))
     web_url = WEB_URL
     return render_response(request, 'videobox.html', locals())
+
+def test(request):
+    return render_response(request, 'test.html')
