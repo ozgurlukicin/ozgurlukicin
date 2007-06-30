@@ -30,7 +30,7 @@ class FlatPage(models.Model):
             ('Diğer', {'classes': 'collapse', 'fields': ('template_name',)}),
         )
 
-        list_display = ('id', 'title', 'text', 'update')
+        list_display = ('id', 'url', 'title', 'update')
         list_filter = ['update']
         ordering = ['-update']
         search_fields = ['title', 'text', 'tags']
@@ -43,7 +43,7 @@ class FlatPage(models.Model):
         return self.url
 
     def get_printable_url(self):
-        return "%sprintable/" % self.url
+        return "%syazdir/" % self.url
 
     def save(self):
         self.author = threadlocals.get_current_user()
