@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 
 from oi.settings import WEB_URL, DOCUMENT_ROOT, USER_PER_PAGE, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, NEWS_PER_PAGE, TAG_PER_PAGE
 from oi.st.models import Package, Game, FS, News, Tag
+from oi.seminar.models import Seminar
 
 user_dict = {
              'queryset': User.objects.all(),
@@ -43,7 +44,8 @@ news_dict = {
              'queryset': News.objects.filter(status=1),
              'template_name': 'news/news_main.html',
              'paginate_by': NEWS_PER_PAGE,
-             'template_object_name': 'news'
+             'template_object_name': 'news',
+             'extra_context': {'seminar': Seminar.objects.filter(status=1)}
             }
 
 tag_dict = {

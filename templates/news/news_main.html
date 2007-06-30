@@ -20,3 +20,21 @@
 
 {% paginator %}
 {% endblock %}
+
+{% block sidebartop %}{% endblock %}
+
+{% block sidebar %}
+{% if seminar %}
+<div class="sidebar_green_title">Pardus Şehrinizde</div>
+<div class="sidebar sidebar_green">
+    {% for sem in seminar %}
+    <div>
+        <strong>{{ sem.date|date:"d F Y" }}</strong><br/>
+        {{ sem.description }}<br/>
+        <strong>Yer:</strong> {{ sem.place.name }}<br/>
+        <strong>Konuşmacılar:</strong> {% for att in sem.attender.all %}{{ att.name }} {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

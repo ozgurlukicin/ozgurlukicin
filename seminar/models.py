@@ -49,6 +49,7 @@ class Seminar(models.Model):
     place = models.ForeignKey(Place)
     attender = models.ManyToManyField(Attender)
     date = models.DateField('Tarih', blank=False)
+    status = models.BooleanField('Aktif')
 
     def __str__(self):
         return self.description
