@@ -27,7 +27,7 @@ def forum(request, slug):
     """
     f = get_object_or_404(Forum, slug=slug)
 
-    return render_to_response('forum/main.html',
+    return render_response(request, 'forum/main.html',
         RequestContext(request, {
             'forum': f,
             'threads': f.thread_set.all()
@@ -45,7 +45,7 @@ def thread(request, forum, thread):
     t.views += 1
     t.save()
 
-    return render_to_response('forum/thread.html',
+    return render_response(request, 'forum/thread.html',
         RequestContext(request, {
             'forum': f,
             'thread': t,
