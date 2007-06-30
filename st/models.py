@@ -75,6 +75,7 @@ class IgnoredUsername(models.Model):
 class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
     homepage = models.URLField('Ana Sayfa', blank=True)
+    birthday = models.DateField()
     im = models.EmailField('Bağlantı Adresi', blank=True, help_text='Jabber, Gtalk, Msn vs.')
     city = models.CharField('Şehir', choices=CITY_LIST, maxlength=40)
     show_email = models.BooleanField('E-posta Göster', default=0)
@@ -88,7 +89,7 @@ class UserProfile(models.Model):
 
     class Admin:
         fields = (
-            ('Üyelik Bilgileri', {'fields': ('homepage','im', 'city', 'contributes', 'contributes_summary', 'show_email',)}),
+            ('Üyelik Bilgileri', {'fields': ('homepage','im', 'city', 'birthday', 'contributes', 'contributes_summary', 'show_email',)}),
             ('Diğer', {'fields': ('activation_key', 'key_expires'), 'classes': 'collapse',}),
         )
 
@@ -415,6 +416,7 @@ class RegisterForm(forms.Form):
     username = forms.CharField(label='Kullanıcı Adı', max_length=30, help_text='En az 3, en fazla 30 karakter')
     firstname = forms.CharField(label='İsim', max_length=30)
     lastname = forms.CharField(label='Soyisim', max_length=30)
+    birthday = forms.DateField(label='Doğum Tarihi', help_text='10/5/1985 gibi.')
     email = forms.EmailField(label='E-Posta')
     password = forms.CharField(label='Parola', max_length=32, widget=forms.PasswordInput,)
     password_again = forms.CharField(label='Parola (tekrar)', max_length=32, widget=forms.PasswordInput, help_text='En az 5 karakter')
@@ -471,6 +473,7 @@ class RegisterForm(forms.Form):
 class ProfileEditForm(forms.Form):
     firstname = forms.CharField(label='İsim', max_length=30)
     lastname = forms.CharField(label='Soyisim', max_length=30)
+    birthday = forms.DateField(label='Doğum Tarihi', help_text='10/5/1985 gibi.')
     email = forms.EmailField(label='E-posta')
     city = forms.ChoiceField(label='Şehir', choices=CITY_LIST)
     homepage = forms.URLField(label='Ana Sayfa', required=False, help_text='http:// ile başlamayı unutmayın')
