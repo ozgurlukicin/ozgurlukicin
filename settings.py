@@ -49,6 +49,7 @@ FS_PER_PAGE = 10
 GAME_PER_PAGE = 10
 NEWS_PER_PAGE = 10
 TAG_PER_PAGE = 10
+SEMINAR_PER_PAGE = 10
 
 # News in homepage
 NEWS_IN_HOMEPAGE = 4
@@ -112,6 +113,7 @@ INSTALLED_APPS = (
     'oi.upload',
     'oi.bug',
     'oi.feedjack',
+    'oi.seminar',
 )
 
 CITY_LIST = (

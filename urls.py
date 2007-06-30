@@ -5,7 +5,7 @@
 # Licensed under the GNU General Public License, version 2.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-from django.conf.urls.defaults import *
+from django.conf.urls.defaults import patterns, include
 from django.contrib.auth.models import User
 
 from oi.settings import WEB_URL, DOCUMENT_ROOT, USER_PER_PAGE, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, NEWS_PER_PAGE, TAG_PER_PAGE
@@ -100,6 +100,9 @@ urlpatterns = patterns('',
 
     #Video
     (r'^video/(?P<video>.*)/$', 'oi.st.views.videobox'),
+
+    #Seminar
+    (r'^seminer/', include('oi.seminar.urls')),
 
     #Forum
     (r'^forum/', include('oi.forum.urls')),
