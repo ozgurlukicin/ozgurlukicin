@@ -47,7 +47,7 @@ class Attender(models.Model):
 class Seminar(models.Model):
     description = models.CharField('Seminer tanımı', maxlength = 64, blank = False, unique = True)
     place = models.ForeignKey(Place)
-    attender = models.ForeignKey(Attender)
+    attender = models.ManyToManyField(Attender)
     date = models.DateField('Tarih', blank=False)
 
     def __str__(self):
