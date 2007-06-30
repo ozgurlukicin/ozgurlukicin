@@ -9,6 +9,7 @@ Legend:
 / In progress
 + Completed
 
+/ Forum
 / General 404 error pages
 / User management system (basic login/logout/register and user profiles)
   + ignored user names
@@ -22,6 +23,5 @@ Legend:
 
 - FreeComment support for news (also maybe packages, games etc.)
 - CSS optimizations
-- Forum
 - Statistic tool for entire web site
 - Add about page, (btw do not forget 'django powered' icon in it)
