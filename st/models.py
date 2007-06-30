@@ -217,7 +217,7 @@ class FS(models.Model):
 
     class Admin:
         fields = (
-            ('Genel', {'fields': ('title','text','videos','tags','update','status',)}),
+            ('Genel', {'fields': ('title','sum','text','videos','tags','update','status',)}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
 
