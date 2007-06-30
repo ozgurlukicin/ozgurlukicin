@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.conf import settings
 
-DEFAULT_TEMPLATE = 'flatpages_default.html'
+DEFAULT_TEMPLATE = 'templates/flatpages_default.html'
 
 def flatpage(request, url):
     """
