@@ -17,9 +17,10 @@ Legend:
   + logout
   + register
   + edit profile
-  / user list
+  - user list
   - show profile
   - avatar support
+  / lost password support
 
 - FreeComment support for news (also maybe packages, games etc.)
 - CSS optimizations
