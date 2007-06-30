@@ -199,6 +199,7 @@ class License(models.Model):
 class FS(models.Model):
     title = models.CharField('Başlık', maxlength=32, blank=False)
     slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
+    sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
     tags = models.ManyToManyField(Tag, blank=False)
     videos = models.ManyToManyField(Video, blank=True)

@@ -13,7 +13,7 @@
 <div class="fs_list {% cycle odd,even %}">
     <div class="fs_info" style="margin-bottom: 0;">
         <div class="fs_title"><a href="{{ fs.get_absolute_url }}">{{ fs.title }}</a></div>
-        <div class="fs_desc">{{ fs.text|truncatewords:"20" }}</div>
+        <div class="fs_desc">{{ fs.sum }}</div>
         <p class="fs_tags"><img src="/media/img/tag.png" /> {% for tag in fs.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
     </div>
     <hr class="fs_separator"/>
