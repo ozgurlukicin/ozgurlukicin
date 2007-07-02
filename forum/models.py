@@ -53,6 +53,14 @@ class Thread(models.Model):
             f.save()
         super(Thread, self).save()
 
+    def delete(self):
+        if self.id:
+            f = Forum.objects.get(id=self.forum.id)
+            f.threads -= 1
+            f.save()
+
+        super(Thread, self).delete()
+
     class Admin:
         pass
 
@@ -73,6 +81,7 @@ class Post(models.Model):
 
     def save(self):
         new_post = False
+
         if not self.id:
             self.time = datetime.now()
             new_post = True
@@ -89,6 +98,22 @@ class Post(models.Model):
             f.forum_latest_post_id = self.id
             f.posts += 1
             f.save()
+
+    def delete(self):
+        if self.id:
+            t = Thread.objects.get(id=self.thread.id)
+            #FIXME: set the latest post after deletion
+            #t.thread_latest_post_id = self.id
+            t.posts -= 1
+            t.save()
+
+            f = Forum.objects.get(id=self.thread.forum.id)
+            #FIXME: set the latest post after deletion
+            #f.forum_latest_post_id = self.id
+            f.posts -= 1
+            f.save()
+
+        super(Post, self).delete()
 
     class Admin:
         pass

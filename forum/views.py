@@ -59,13 +59,16 @@ def reply(request, forum, thread):
     """
     if not request.user.is_authenticated:
         raise HttpResponseServerError
+
     f = get_object_or_404(Forum, slug=forum)
     t = get_object_or_404(Thread, pk=thread)
+
     if t.closed:
         raise HttpResponseServerError
+
     body = request.POST.get('body', False)
     p = Post(
-        thread=t, 
+        thread=t,
         author=request.user,
         body=body,
         time=datetime.now(),
