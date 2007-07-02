@@ -267,7 +267,7 @@ class Game(models.Model):
     class Admin:
         fields = (
             ('Genel', {'fields': ('title', 'sum', 'text', 'videos', 'tags', 'update', 'status')}),
-            ('Oyun bilgileri', {'fields': ('icon', 'url', 'path', 'learning_time', 'license', 'installed_size', 'download_size')}),
+            ('Oyun bilgileri', {'fields': ('url', 'path', 'learning_time', 'license', 'installed_size', 'download_size')}),
             ('Değerlendirme', {'fields': ('gameplay', 'graphics', 'sound', 'scenario', 'atmosphere')}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
