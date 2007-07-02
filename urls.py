@@ -115,7 +115,7 @@ urlpatterns = patterns('',
     #Gezegen
     (r'^gezegen/', include('oi.feedjack.urls')),
 
-    #FIXME: Delete this...
+    #FIXME: Delete this when development ends
     (r'^test/$', 'oi.st.views.test'),
 
     #Django

@@ -28,7 +28,7 @@
 <div class="sidebar_purple_title">Pardus Şehrinizde</div>
 <div class="sidebar sidebar_purple">
     {% for sem in seminar %}
-    <div>
+    <div style="padding-bottom: 2px;{% if not forloop.first %} padding-top: 2px; border-top: 1px solid;{% endif %}">
         <strong>{{ sem.date|date:"d F Y" }}</strong><br/>
         {{ sem.description }}<br/>
         <strong>Yer:</strong> {{ sem.place.name }}<br/>
