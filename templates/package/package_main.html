@@ -20,18 +20,5 @@
 </div>
 {% endfor %}
 
-<br />
 {% paginator %}
-{% endblock %}
-
-{% block sidebar %}
-<div class="sidebar_orange_title">Beğenilen paketler</div>
-<div class="sidebar sidebar_orange">
-    {% for pkg in packages_by_rating %}
-    <div style="padding-top: 2px;">
-        <div style="width: 78px; float: left;"><img src="/media/img/rating_small_{{ pkg.point }}.png" border="0" style="padding-top: 2px;" /></div>
-        <div style="padding-left: 84px;"><a href="{{ pkg.get_absolute_url }}">{{ pkg.name }}</a></div>
-    </div>
-    {% endfor %}
-</div>
 {% endblock %}
