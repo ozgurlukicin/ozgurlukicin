@@ -55,14 +55,13 @@ SEMINAR_PER_PAGE = 10
 NEWS_IN_HOMEPAGE = 4
 
 # For extending User class
-AUTH_PROFILE_MODULE = 'st.UserProfile'
+AUTH_PROFILE_MODULE = 'profile.Profile'
 
 # Login stuff, we use different urls for authentication.
 LOGIN_URL = '/kullanici/giris/'
 LOGIN_REDIRECT_URL = '/kullanici/dashboard/'
 LOGOUT_URL = '/kullanici/cikis/'
 PROFILE_EDIT_URL = '/kullanici/duzenle/'
-
 
 TIME_ZONE = 'Europe/Istanbul'
 LANGUAGE_CODE = 'tr'
