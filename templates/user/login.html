@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Giriş - {% endblock %}
+{% block title %}Kullanıcı Girişi - {% endblock %}
 
 {% block content %}
 
@@ -12,17 +12,14 @@
 <p>Kullanıcı adınız ve parolanız uyuşmuyor, lütfen tekrar deneyin.</p>
 {% endif %}
 
-<form method="post" action=".">
-
-<table>
-    <tr><td>Kullanıcı adı:</td><td>{{ form.username }}</td></tr>
-    <tr><td>Parola:</td><td>{{ form.password }}</td></tr>
-</table>
-
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
-
+<div style="text-align: center;">
+    <form method="post" action=".">
+        {{ form.username }}<br />
+        {{ form.password }}<br />
+        <input type="hidden" name="next" value="{{ next }}" />
+        <input type="submit" value="giriş" />
+    </form>
+</div>
 {% else %}
 Zaten giriş yapmışsınız. Çıkış yapmak için <a href="/kullanici/cikis/">tıklayın</a> <br />
 {% endif %}
