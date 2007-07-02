@@ -13,7 +13,7 @@ from django.shortcuts import get_object_or_404
 
 from oi.settings import NEWS_IN_HOMEPAGE, WEB_URL
 
-from oi.st.models import FS, Game, News, Package, ScreenShot, Tag, RegisterForm, ProfileEditForm, PardusVersion, PardusMirror, Video
+from oi.st.models import FS, Game, News, Package, ScreenShot, Tag, PardusVersion, PardusMirror, Video
 from oi.st.wrappers import render_response
 from oi.flatpages.models import FlatPage
 
