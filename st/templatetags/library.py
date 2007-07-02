@@ -65,4 +65,4 @@ def timedelta(value, arg=None):
     else:
         return "%s önce" % timesince(value,cmp)
 
-register.filter('timedelta',timedelta)
+register.filter(timedelta)

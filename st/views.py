@@ -215,11 +215,11 @@ def user_confirm(request, name, key):
 def download(request):
     version = PardusVersion.objects.filter(status=1).order_by('-number')[:1][0]
     mirrors = PardusMirror.objects.filter(status=1).order_by('-name')
-    return render_response(request, 'download.html', locals())
+    return render_response(request, 'download/download.html', locals())
 
 def download_detail_releasenotes(request, version):
     releasenote = get_object_or_404(PardusVersion, number=version).releasenote
-    return render_response(request, 'download_relnotes.html', locals())
+    return render_response(request, 'download/download_relnotes.html', locals())
 
 def videobox(request, video):
     vid = get_object_or_404(Video, file=("upload/video/%s.flv" % video))

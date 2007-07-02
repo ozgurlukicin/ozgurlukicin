@@ -238,7 +238,6 @@ class Game(models.Model):
     slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
-    icon = models.ImageField(upload_to='oyun/')
     license = models.ManyToManyField(License)
     installed_size = models.IntegerField('Kurulu boyut', help_text='Byte cinsinden')
     download_size = models.IntegerField('İndirilecek boyut', help_text='Byte cinsinden')
