@@ -479,17 +479,13 @@ hr.clear {
 }
 
 #topbar {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #AEB8BE;
     background-image: url('/media/img/topbar_bg.png');
-    width: auto;
-    padding: 0px;
     padding-bottom: 5px;
-    padding-top: 5px;
-    margin: 0px;
     font-family: Verdana,Arial,Sans,Helvetica;
     font-size: 11px;
-    color: black;
-    height: 20px;
+    color: #5A5E60;
+    height: 30px;
     text-align: center;
 }
 
@@ -504,8 +500,14 @@ hr.clear {
     text-decoration: none;
 }
 
+#topbar_content input, img {
+    border: 2px;
+}
+
 #topbar_content {
     font-weight: bold;
+    margin: 0;
+    padding: 0;
 }
 
 #pop {
@@ -1072,4 +1074,22 @@ hr.clear {
 
 .planet_title a:hover, .planet_meta a:hover, .planet_author a:hover, .planet_content a:hover {
     text-decoration: underline;
+}
+
+input#id_username {
+    padding: 0px;
+    padding-left: 18px;
+    background: #ffffff url('/media/img/input_username.png') no-repeat;
+    vertical-align: middle;
+}
+
+input#id_password {
+    padding: 0px;
+    padding-left: 18px;
+    background: #ffffff url('/media/img/input_password.png') no-repeat;
+    vertical-align: middle;
+}
+
+input#form_submit {
+    vertical-align: middle;
 }
