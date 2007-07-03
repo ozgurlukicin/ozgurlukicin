@@ -13,28 +13,28 @@ from oi.st.models import Package, Game, FS, News, Tag
 from oi.seminar.models import Seminar
 
 user_dict = {
-             'queryset': User.objects.all(),
+             'queryset': User.objects.all().order_by('name'),
              'template_name': 'user/user_list.html',
              'paginate_by': USER_PER_PAGE,
              'template_object_name': 'user'
             }
 
 package_dict = {
-                'queryset': Package.objects.filter(status=1),
+                'queryset': Package.objects.filter(status=1).order_by('name'),
                 'template_name': 'package/package_main.html',
                 'paginate_by': PACKAGE_PER_PAGE,
                 'template_object_name': 'package'
                }
 
 game_dict = {
-             'queryset': Game.objects.filter(status=1),
+             'queryset': Game.objects.filter(status=1).order_by('title'),
              'template_name': 'game/game_main.html',
              'paginate_by': GAME_PER_PAGE,
              'template_object_name': 'game'
             }
 
 fs_dict = {
-           'queryset': FS.objects.filter(status=1),
+           'queryset': FS.objects.filter(status=1).order_by('title'),
            'template_name': 'fs/fs_main.html',
            'paginate_by': FS_PER_PAGE,
            'template_object_name': 'fs'
@@ -45,11 +45,11 @@ news_dict = {
              'template_name': 'news/news_main.html',
              'paginate_by': NEWS_PER_PAGE,
              'template_object_name': 'news',
-             'extra_context': {'seminar': Seminar.objects.filter(status=1)}
+             'extra_context': {'seminar': Seminar.objects.filter(status=1).order_by('date')}
             }
 
 tag_dict = {
-            'queryset': Tag.objects.all(),
+            'queryset': Tag.objects.all().order_by('name'),
             'template_name': 'tag/tag_main.html',
             'paginate_by': TAG_PER_PAGE,
             'template_object_name': 'tag'
