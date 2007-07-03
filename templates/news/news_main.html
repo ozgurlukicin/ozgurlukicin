@@ -18,7 +18,7 @@
             {% endfor %}
         </div>
 
-{% paginator %}
+{% if is_paginated %}{% paginator %}{% endif %}
 {% endblock %}
 
 {% block sidebartop %}{% endblock %}

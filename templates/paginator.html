@@ -1,5 +1,3 @@
-{% if is_paginated %}
-
 <div id="pagination" class="paginator">
 {% spaceless %}
 {% if show_first %}<span class="paginate-first"><a href="../1/" title="First Page">İlk</a></span>{% endif %}
@@ -16,5 +14,3 @@
 {% endspaceless %}
 <br/><span class="paginate-desc">Her sayfada {{ results_per_page }} kayıt olmak üzere {{ pages }} sayfada toplam {{ hits }} kayıt listeleniyor.</span>
 </div>
-
-{% endif %}
