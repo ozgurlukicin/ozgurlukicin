@@ -44,6 +44,7 @@ window.addEvent('domready', function(){
 {% block section_logo %}<img src="/media/img/fs_header_logo.png">{% endblock %}
 
 {% block content %}
+<div class="note_question">'{{ tag|escape }}' etiketli içerik aşağıda listelenmektedir,<br />görmek istediğiniz içerik türünün (Oyun, Paket, İlk adım, vb.) üzerine tıklayın.</div>
 <h2>{{ tag|escape }} etiketli içerik</h2>
 <!-- <div class="page_content"> -->
     {% if news %}
