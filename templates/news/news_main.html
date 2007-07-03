@@ -11,7 +11,7 @@
 {% block content %}
         <div id="news_container">
             {% for news in news_list %}
-            <div id="news-{{ news.id }}" class="news {% cycle newsleft,newsright %}">
+            <div id="news-{{ news.id }}" class="news">
                 <div class="news_title"><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></div>
                 <div class="news_content">{{ news.sum }}</div>
             </div>
