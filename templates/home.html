@@ -3,9 +3,36 @@
 {% block content %}
         <div id="news_container">
             {% for object in news %}
-            <div id="news-{{ object.id }}" class="news {% cycle newsleft,newsright %}">
+            <div id="news-{{ object.id }}" class="news">
                 <div class="news_title"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></div>
                 <div class="news_content">{{ object.sum }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        <br />
+        <div id="packages_container">
+            {% for package in packages %}
+            <div id="package-{{ package.id }}" class="packages {% cycle newsleft,newsright %}">
+                <div class="packages_title"><a href="{{ package.get_absolute_url }}">{{ package.name }}</a></div>
+                <div class="packages_content">{{ package.sum }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        <br />
+        <div id="games_container">
+            {% for game in games %}
+            <div id="game-{{ game.id }}" class="games {% cycle newsleft,newsright %}">
+                <div class="games_title"><a href="{{ game.get_absolute_url }}">{{ game.title }}</a></div>
+                <div class="games_content">{{ game.sum }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        <br />
+        <div id="fs_container">
+            {% for fs in fss %}
+            <div id="fs-{{ fs.id }}" class="fs {% cycle newsleft,newsright %}">
+                <div class="fss_title"><a href="{{ fs.get_absolute_url }}">{{ fs.title }}</a></div>
+                <div class="fss_content">{{ fs.sum }}</div>
             </div>
             {% endfor %}
         </div>

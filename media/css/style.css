@@ -563,7 +563,6 @@ hr.clear {
     font-weight: bold;
     padding-top: 5px;
     padding-left: 12px;
-    width: 290px;
     height: 25px;
     margin-top: 10px;
 }
@@ -574,10 +573,78 @@ hr.clear {
 }
 
 .news_content {
+    padding-left: 10px;
+    padding-right: 16px;
+    color: #9218A4;
+}
+
+.packages_title {
+    background: url('/media/img/packages_title.png') no-repeat;
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-left: 12px;
+    height: 25px;
+    margin-top: 10px;
+    width: 280px;
+}
+
+.packages_title a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.packages_content {
     width: 280px;
     padding-left: 10px;
-    padding-right: 6px;
-    color: #9218A4;
+    padding-right: 16px;
+    color: #C85700;
+}
+
+.games_title {
+    background: url('/media/img/games_title.png') no-repeat;
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-left: 12px;
+    height: 25px;
+    margin-top: 10px;
+    width: 280px;
+}
+
+.games_title a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.games_content {
+    width: 280px;
+    padding-left: 10px;
+    padding-right: 16px;
+    color: #33718B;
+}
+
+.fss_title {
+    background: url('/media/img/fs_title.png') no-repeat;
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-left: 12px;
+    height: 25px;
+    margin-top: 10px;
+    width: 280px;
+}
+
+.fss_title a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.fss_content {
+    width: 280px;
+    padding-left: 10px;
+    padding-right: 16px;
+    color: #69A200;
 }
 
 /* header */
