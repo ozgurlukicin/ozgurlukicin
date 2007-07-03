@@ -576,6 +576,7 @@ hr.clear {
     padding-left: 10px;
     padding-right: 16px;
     color: #9218A4;
+    overflow: auto;
 }
 
 .packages_title {
