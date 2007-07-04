@@ -41,7 +41,7 @@ def mtime(ttime):
 def get_tags(entry):
     """ Returns a list of tag objects from an entry.
     """
-    from feedjack import models
+    from oi.feedjack import models
 
     fcat = []
     if entry.has_key('tags'):
@@ -111,7 +111,7 @@ def get_entry_data(entry, feed):
 def process_entry(entry, fpf, feed, postdict, options):
     """ Process a post in a feed and saves it in the DB if necessary.
     """
-    from feedjack import models
+    from oi.feedjack import models
 
     (link, title, guid, author, author_email, content, date_modified, fcat, \
       comments) = get_entry_data(entry, feed)
@@ -172,7 +172,7 @@ def process_entry(entry, fpf, feed, postdict, options):
 def process_feed(feed, options):
     """ Downloads and parses a feed.
     """
-    from feedjack import models
+    from oi.feedjack import models
 
     if options.verbose:
         print '#\n# Processing feed (%d):' % feed.id, feed.feed_url, '\n#'
@@ -255,7 +255,7 @@ def process_feed(feed, options):
 def update_feeds(options):
     """ Updates all active feeds.
     """
-    from feedjack import models
+    from oi.feedjack import models
 
     #for feed in models.Feed.objects.filter(is_active=True).iterator():
     for feed in models.Feed.objects.filter(is_active=True):
@@ -286,7 +286,7 @@ def main():
     if options.settings:
         os.environ["DJANGO_SETTINGS_MODULE"] = options.settings
 
-    from feedjack import models, fjcache
+    from oi.feedjack import models, fjcache
 
     # settting socket timeout (default= 10 seconds)
     socket.setdefaulttimeout(options.timeout)
