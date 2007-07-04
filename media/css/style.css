@@ -1096,8 +1096,9 @@ hr.clear {
 }
 
 .planet_date {
-    margin-top: 10px;
+    margin-top: 20px;
     margin-left: 4px;
+    margin-bottom: -15px;
     height: 26px;
     width: 120px;
     padding-top: 4px;

@@ -23,7 +23,7 @@ tinyMCE.init({
 
 function oiFileBrowser (field_name, url, type, win) {
     tinyMCE.openWindow({
-        file : "/admin/upload/" + type + "/",
+        file : "/admin/upload/image/add/",
         title : "File Browser",
         width : 300,
         height : 100,
