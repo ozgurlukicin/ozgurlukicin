@@ -52,7 +52,7 @@
 
 {% if videos %}
 <div class="sidebar_darkblue_title">İlgili Videolar</div>
-<div class="sidebar sidebar_darkblue">{% for video in videos %}<a href="/video/{{ video.name }}" rel="lightbox[video_{{ package.name }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
+<div class="sidebar sidebar_darkblue">{% for video in videos %}<a href="/video/{{ video.name }}" rel="lightbox[video_{{ game.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
 {% endif %}
 
 <div class="sidebar_darkblue_title">Yazar</div>

@@ -38,6 +38,8 @@ def game_detail(request, slug):
     game = get_object_or_404(Game, slug=slug)
     tags = game.tags.all()
     videos = game.videos.all()
+    for video in videos:
+        video.name = path.splitext(video.file)[0].split('/')[2]
     licenses = game.license.all()
     game.avg = ((game.gameplay+game.graphics+game.sound+game.scenario+game.atmosphere)/5.0)
     return render_response(request, 'game/game_detail.html', locals())
