@@ -116,6 +116,7 @@ INSTALLED_APPS = (
     'oi.bug',
     'oi.feedjack',
     'oi.seminar',
+    'oi.profile',
 )
 
 CITY_LIST = (

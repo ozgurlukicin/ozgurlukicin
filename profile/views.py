@@ -17,7 +17,7 @@ from django.shortcuts import get_object_or_404
 
 from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_REDIRECT_URL, WEB_URL, PROFILE_EDIT_URL
 
-from oi.profile.models import UserProfile
+from oi.profile.models import Profile, RegisterForm, ProfileEditForm
 from oi.st.wrappers import render_response
 
 @login_required
@@ -89,7 +89,7 @@ def user_register(request):
             activation_key = sha.new(salt+form.clean_data['username']).hexdigest() # yes, i'm paranoiac
             key_expires = datetime.datetime.today() + datetime.timedelta(2)
 
-            profile = UserProfile(user=user)
+            profile = Profile(user=user)
             profile.homepage = form.clean_data['homepage']
             profile.birthday = form.clean_data['birthday']
             profile.city = form.clean_data['city']

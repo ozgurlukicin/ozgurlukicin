@@ -30,25 +30,12 @@ class ForbiddenUsername(models.Model):
         verbose_name = "Yasaklanan Kullanıcı Adı"
         verbose_name_plural = "Yasaklanan Kullanıcı Adları"
 
-class Blog(models.Model):
-    url = models.URLField("Blog", blank=False)
-
-    def __str__(self):
-        return self.url
-
-class IM(models.Model):
-    protocol = models.CharField("Protokol", maxlength=16, blank=False)
-    address = models.CharField("Adres", maxlength=96, blank=False, unique=True)
-
-    def __str__(self):
-        return self.address
-
 class Profile(models.Model):
     user = models.ForeignKey(User, unique=True)
-    birthday = models.DateField()
-    homepage = models.OneToOneField(Blog, blank=True)
-    im = models.OneToOneField(IM, blank=True)
-    city = models.CharField('Şehir', choices=CITY_LIST, maxlength=40)
+    birthday = models.DateField(blank=True)
+    homepage = models.URLField('Ana Sayfa', blank=True, verify_exists=False, unique=False)
+    im = models.EmailField('IM', maxlength=50, blank=True)
+    city = models.CharField('Şehir', blank=True, choices=CITY_LIST, maxlength=40)
     show_email = models.BooleanField('E-posta Göster', default=0)
     contributes = models.ManyToManyField(Contribute, blank=True, verbose_name='Katkılar')
     contributes_summary = models.TextField('Katkı Açıklaması', blank=True)
@@ -60,7 +47,7 @@ class Profile(models.Model):
 
     class Admin:
         fields = (
-            ('Üyelik Bilgileri', {'fields': ('homepage','im', 'city', 'birthday', 'contributes', 'contributes_summary', 'show_email',)}),
+            ('Üyelik Bilgileri', {'fields': ('user', 'homepage','im', 'city', 'birthday', 'contributes', 'contributes_summary', 'show_email',)}),
             ('Diğer', {'fields': ('activation_key', 'key_expires'), 'classes': 'collapse',}),
         )
 
@@ -102,8 +89,8 @@ class RegisterForm(forms.Form):
         if not regexp.match(field_data):
             raise forms.ValidationError(u"Kullanıcı adı geçersiz")
 
-        ignored = IgnoredUsername.objects.filter(name__iexact=field_data)
-        if len(ignored) > 0:
+        forbidden = ForbiddenUsername.objects.filter(name__iexact=field_data)
+        if len(forbidden) > 0:
             raise forms.ValidationError(u"Bu kullanıcı adının alınması yasaklanmış")
 
         u = User.objects.filter(username__iexact=field_data)
