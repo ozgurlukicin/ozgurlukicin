@@ -567,7 +567,7 @@ hr.clear {
     margin-top: 10px;
 }
 
-.news_title a {
+.news_title, .news_title a {
     color: #ffffff;
     text-decoration: none;
 }
@@ -590,7 +590,7 @@ hr.clear {
     width: 280px;
 }
 
-.packages_title a {
+.packages_title, .packages_title a {
     color: #ffffff;
     text-decoration: none;
 }
@@ -613,7 +613,7 @@ hr.clear {
     width: 280px;
 }
 
-.games_title a {
+.games_title, .games_title a {
     color: #ffffff;
     text-decoration: none;
 }
@@ -636,7 +636,7 @@ hr.clear {
     width: 280px;
 }
 
-.fss_title a {
+.fss_title, .fss_title a {
     color: #ffffff;
     text-decoration: none;
 }
