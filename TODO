@@ -22,6 +22,7 @@ Legend:
   - avatar support
   / lost password support
 
+- Find a better way of pagination stuff
 - FreeComment support for news (also maybe packages, games etc.)
 - CSS optimizations
 - Statistic tool for entire web site
