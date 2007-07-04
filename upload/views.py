@@ -31,7 +31,7 @@ def image_upload(request):
             if not errors:
                 if not path.exists(MEDIA_ROOT + "upload/image/" + new_data['file_file']['filename']):
                     manipulator.save(new_data)
-                return render_to_response('file_upload/file_upload_success.html', {'filename': new_data['file_file']['filename'], 'site_url': MEDIA_URL})
+                return render_to_response('file_upload/file_upload_success.html', {'filename': new_data['file_file']['filename']})
             else:
                 return render_to_response('file_upload/file_upload.html', {'form': form, 'errors': errors})
                 errors = new_data = {}
