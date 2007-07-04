@@ -1,0 +1,14 @@
+{% if not user.is_authenticated %}
+
+    <form method="post" action="/kullanici/giris/">
+        <input type="text" id="id_username" name="username" size="8" class="vTextField required" value="" maxlength="30" /><br />
+        <input type="password" id="id_password" name="password" size="8" class="vPasswordField required" value="" maxlength="30" /><br />
+        <input type="hidden" name="next" value="{{ next }}" />
+        <input type="submit" value="giriş" id="form_submit" />
+    </form>
+{% else %}
+
+    Hoşgeldin <b>{{ user.username }}</b>!<br />
+    <br />İstiyorsan profil sayfana <a href="/kullanici/dashboard">buradan</a> ulaşabilir veya <a href="/kullanici/cikis">buraya</a> tıklayarak sistemden çıkabilirsin
+
+{% endif %}
