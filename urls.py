@@ -57,19 +57,19 @@ tag_dict = {
 
 urlpatterns = patterns('',
     #News
-    (r'^haber/$', 'django.views.generic.list_detail.object_list', dict(news_dict, page=1)),
+    (r'^haber/$', 'django.views.generic.simple.redirect_to', {'url': "sayfa/1/"}),
     (r'^haber/sayfa/(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', dict(news_dict)),
     (r'^haber/(?P<slug>.*)/yazdir/$', 'oi.st.views.news_printable'),
     (r'^haber/(?P<slug>.*)/$', 'oi.st.views.news_detail'),
 
     #Packages
-    (r'^paket/$', 'django.views.generic.list_detail.object_list', dict(package_dict, page=1)),
+    (r'^paket/$', 'django.views.generic.simple.redirect_to', {'url': "sayfa/1/"}),
     (r'^paket/sayfa/(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', dict(package_dict)),
     (r'^paket/(?P<name>.*)/yazdir/$', 'oi.st.views.pkg_printable'),
     (r'^paket/(?P<name>.*)/$', 'oi.st.views.pkg_detail'),
 
     #User management
-    (r'^kullanici/liste/$', 'django.views.generic.list_detail.object_list', dict(user_dict, page=1)),
+    (r'^kullanici/liste/$', 'django.views.generic.simple.redirect_to', {'url': "sayfa/1/"}),
     (r'^kullanici/liste/sayfa/(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', dict(user_dict)),
     (r'^kullanici/giris/$', 'django.contrib.auth.views.login', {'template_name': 'user/login.html'}),
     (r'^kullanici/cikis/$', 'django.contrib.auth.views.logout', {'template_name': 'user/logout.html'}),
@@ -81,19 +81,19 @@ urlpatterns = patterns('',
     (r'^kullanici/(?P<name>[\w-]+)/$', 'oi.profile.views.user_profile'),
 
     #First Steps
-    (r'^ia/$', 'django.views.generic.list_detail.object_list', dict(fs_dict, page=1)),
+    (r'^ia/$', 'django.views.generic.simple.redirect_to', {'url': "sayfa/1/"}),
     (r'^ia/sayfa/(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', dict(fs_dict)),
     (r'^ia/(?P<slug>.*)/yazdir/$', 'oi.st.views.fs_printable'),
     (r'^ia/(?P<slug>.*)/$', 'oi.st.views.fs_detail'),
 
     #Games
-    (r'^oyun/$', 'django.views.generic.list_detail.object_list', dict(game_dict, page=1)),
+    (r'^oyun/$', 'django.views.generic.simple.redirect_to', {'url': "sayfa/1/"}),
     (r'^oyun/sayfa/(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', dict(game_dict)),
     (r'^oyun/(?P<slug>.*)/yazdir/$', 'oi.st.views.game_printable'),
     (r'^oyun/(?P<slug>.*)/$', 'oi.st.views.game_detail'),
 
     #Tags
-    (r'^etiket/$', 'django.views.generic.list_detail.object_list', dict(tag_dict, page=1)),
+    (r'^etiket/$', 'django.views.generic.simple.redirect_to', {'url': "sayfa/1/"}),
     (r'^etiket/sayfa/(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', dict(tag_dict)),
     (r'^etiket/(?P<tag>.*)/$', 'oi.st.views.tag_detail'),
 
