@@ -266,7 +266,7 @@ class News(models.Model):
         list_filter = ['date']
         ordering = ['-date']
         search_fields = ['title', 'author', 'text']
-        js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js", "js/getElementsBySelector.js", "js/filebrowser/AddFileBrowser.js",)
+        js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js")
 
     class Meta:
         verbose_name = "Haber"
