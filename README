@@ -3,7 +3,11 @@ Requires:
  Apache Web Server
  mod_python
  Django
+ Python Imaging Library (PIL)
 
+Optional (For databases, we recommend MySQL)
+ MySQL
+ Sqlite
 
 Setup:
  1. edit settings.py
