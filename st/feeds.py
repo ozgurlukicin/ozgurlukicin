@@ -11,7 +11,7 @@ from oi.st.models import Game, FS, News, Package
 
 class RssMainFeed(Feed):
     title = 'Özgürlükİçin Pardus...'
-    link = 'www.ozgurlukicin.com'
+    link = '/'
     description = 'Özgürlükİçin Pardus...'
 
     def items(self):
