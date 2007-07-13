@@ -6,19 +6,11 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.conf.urls.defaults import *
-from django.contrib.auth.models import User
 
-from oi.settings import WEB_URL, DOCUMENT_ROOT, USER_PER_PAGE, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, NEWS_PER_PAGE, TAG_PER_PAGE
+from oi.settings import WEB_URL, DOCUMENT_ROOT, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, NEWS_PER_PAGE, TAG_PER_PAGE
 from oi.st.models import Package, Game, FS, News, Tag
 from oi.seminar.models import Seminar
 from oi.st.feeds import RssMainFeed
-
-user_dict = {
-             'queryset': User.objects.all().order_by('name'),
-             'template_name': 'user/user_list.html',
-             'paginate_by': USER_PER_PAGE,
-             'template_object_name': 'user'
-            }
 
 package_dict = {
                 'queryset': Package.objects.filter(status=1).order_by('name'),
@@ -74,16 +66,7 @@ urlpatterns = patterns('',
     (r'^paket/(?P<name>.*)/$', 'oi.st.views.pkg_detail'),
 
     #User management
-    (r'^kullanici/liste/$', 'django.views.generic.simple.redirect_to', {'url': "sayfa/1/"}),
-    (r'^kullanici/liste/sayfa/(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', dict(user_dict)),
-    (r'^kullanici/giris/$', 'django.contrib.auth.views.login', {'template_name': 'user/login.html'}),
-    (r'^kullanici/cikis/$', 'django.contrib.auth.views.logout', {'template_name': 'user/logout.html'}),
-    (r'^kullanici/kayit/$', 'oi.profile.views.user_register'),
-    (r'^kullanici/onay/(?P<name>[\w-]+)/(?P<key>[\w-]+)/$', 'oi.profile.views.user_confirm'),
-    (r'^kullanici/duzenle/$', 'oi.profile.views.user_profile_edit'),
-    (r'^kullanici/dashboard/$', 'oi.profile.views.user_dashboard'),
-    #(r'^kullanici/(?P<name>[\w-]+)/yorumlar/$', 'oi.profile.views.user_comments'),
-    (r'^kullanici/(?P<name>[\w-]+)/$', 'oi.profile.views.user_profile'),
+    (r'^kullanici/', include('oi.profile.urls')),
 
     #First Steps
     (r'^ia/$', 'django.views.generic.simple.redirect_to', {'url': "sayfa/1/"}),

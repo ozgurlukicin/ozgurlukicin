@@ -68,10 +68,7 @@ def user_profile_edit(request):
         return render_response(request, 'user/profile_edit.html', {'form': form})
 
 def user_profile(request, name):
-    try:
-        info = User.objects.get(username=name)
-    except User.DoesNotExist:
-        raise Http404
+    info = get_object_or_404(User, username=name)
     return render_response(request, 'user/profile.html', locals())
 
 def user_register(request):
