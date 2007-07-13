@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from oi.settings import WEB_URL, DOCUMENT_ROOT, USER_PER_PAGE, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, NEWS_PER_PAGE, TAG_PER_PAGE
 from oi.st.models import Package, Game, FS, News, Tag
 from oi.seminar.models import Seminar
+from oi.st.feeds import RssMainFeed
 
 user_dict = {
              'queryset': User.objects.all().order_by('name'),
@@ -54,6 +55,10 @@ tag_dict = {
             'paginate_by': TAG_PER_PAGE,
             'template_object_name': 'tag'
            }
+
+feed_dict = {
+            'rss': RssMainFeed,
+            }
 
 urlpatterns = patterns('',
     #News
@@ -115,6 +120,9 @@ urlpatterns = patterns('',
 
     #Gezegen
     (r'^gezegen/', include('oi.feedjack.urls')),
+
+    #Feeds
+    (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
 
     #FIXME: Delete this when development ends
     (r'^test/$', 'oi.st.views.test'),
