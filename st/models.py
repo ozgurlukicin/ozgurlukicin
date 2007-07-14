@@ -169,7 +169,7 @@ class FS(models.Model):
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
 
-        list_display = ('title', 'update')
+        list_display = ('title', 'update', 'status')
         list_filter = ['update']
         ordering = ['-update']
         search_fields = ['title', 'text', 'tags']
@@ -215,11 +215,11 @@ class Game(models.Model):
     class Admin:
         fields = (
             ('Genel', {'fields': ('title', 'sum', 'text', 'videos', 'tags', 'update', 'status')}),
-            ('Oyun bilgileri', {'fields': ('url', 'path', 'learning_time', 'license', 'installed_size', 'download_size')}),
+            ('Oyun bilgileri', {'fields': ('path', 'learning_time', 'license', 'installed_size', 'download_size')}),
             ('Değerlendirme', {'fields': ('gameplay', 'graphics', 'sound', 'scenario', 'atmosphere')}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
-        list_display = ('title', 'sum', 'update')
+        list_display = ('title', 'sum', 'update', 'status')
         list_filter = ['update']
         ordering = ['-id']
         search_fields = ['title', 'sum', 'text', 'tags']
@@ -262,7 +262,7 @@ class News(models.Model):
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
 
-        list_display = ('title', 'author', 'date')
+        list_display = ('title', 'author', 'date','status')
         list_filter = ['date']
         ordering = ['-date']
         search_fields = ['title', 'author', 'text']
@@ -301,7 +301,7 @@ class Package(models.Model):
         return "/paket/%s/yazdir/" % self.name
 
     class Admin:
-        list_display = ('name', 'sum')
+        list_display = ('name', 'sum', 'status')
         list_filter = ['license']
         ordering = ['-id']
         search_fields = ['name', 'sum', 'desc']
@@ -330,7 +330,7 @@ class PardusVersion(models.Model):
         return "/indir/%s/" % self.number
 
     class Admin:
-        list_display = ('number', 'codename')
+        list_display = ('number', 'codename', 'status')
         ordering = ['-number']
         search_fields = ['codename']
         js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
@@ -348,7 +348,7 @@ class PardusMirror(models.Model):
         return self.name
 
     class Admin:
-        list_display = ('name', 'url')
+        list_display = ('name', 'url', 'status')
         ordering = ['-name']
         search_fields = ['name']
 
