@@ -22,7 +22,10 @@ Legend:
   - avatar support
   / lost password support
 
+- A different page for adding documents, it should create a diff and make "writer", "editor" workflow
+
 - Add original image link support for feedjack, when user clicks resized image, original image should be showed
+- IE png hack (transparent pngs)
 
 - Find a better way of pagination stuff
 - FreeComment support for news (also maybe packages, games etc.)
