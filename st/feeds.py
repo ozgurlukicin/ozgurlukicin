@@ -29,7 +29,7 @@ class RssMainFeed(Feed):
             output.append(game)
 
         for fs in FS.objects.order_by('-update')[:2]:
-            fs.title = 'İlk Adımlar: %s' % fs.title
+            fs.title = 'İlk Adım: %s' % fs.title
             output.append(fs)
 
         return output
