@@ -8,7 +8,7 @@
 from django.contrib.syndication.feeds import Feed
 
 from oi.st.models import Game, FS, News, Package
-from oi.settings import NEWS_IN_HOMEPAGE, PACKAGES_IN_HOMEPAGE, GAMES_IN_HOMAPAGE, FS_IN_HOMEPAGE
+from oi.settings import NEWS_IN_HOMEPAGE, PACKAGES_IN_HOMEPAGE, GAMES_IN_HOMEPAGE, FS_IN_HOMEPAGE
 
 class RssMainFeed(Feed):
     title = 'Özgürlükİçin Pardus...'

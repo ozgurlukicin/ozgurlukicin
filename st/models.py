@@ -132,7 +132,7 @@ class Video(models.Model):
 
 class License(models.Model):
     name = models.CharField(maxlength=16, blank=False, unique=True)
-    #url = models.URLField()
+    url = models.URLField()
 
     def __str__(self):
         return self.name
@@ -189,7 +189,7 @@ class Game(models.Model):
     license = models.ManyToManyField(License)
     installed_size = models.IntegerField('Kurulu boyut', help_text='Byte cinsinden')
     download_size = models.IntegerField('İndirilecek boyut', help_text='Byte cinsinden')
-    #url = models.URLField('Sitesi', verify_exists=True, help_text='Başına http:// koymayı unutmayın')
+    url = models.URLField('Sitesi', verify_exists=True, help_text='Başına http:// koymayı unutmayın')
     path = models.CharField('Çalıştırma Yolu', maxlength=128, help_text='Paketin Pardus menüsündeki yeri (örn. Programlar > Yardımcı Programlar > KNazar)')
     gameplay = models.SmallIntegerField('Oynanabilirlik', maxlength=1, choices=ratings)
     graphics = models.SmallIntegerField('Grafik', maxlength=1, choices=ratings)
@@ -215,7 +215,7 @@ class Game(models.Model):
     class Admin:
         fields = (
             ('Genel', {'fields': ('title', 'sum', 'text', 'videos', 'tags', 'update', 'status')}),
-            ('Oyun bilgileri', {'fields': ('path', 'learning_time', 'license', 'installed_size', 'download_size')}),
+            ('Oyun bilgileri', {'fields': ('url', 'path', 'learning_time', 'license', 'installed_size', 'download_size')}),
             ('Değerlendirme', {'fields': ('gameplay', 'graphics', 'sound', 'scenario', 'atmosphere')}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
@@ -282,7 +282,7 @@ class Package(models.Model):
     license = models.ManyToManyField(License)
     installed_size = models.IntegerField('Kurulu boyut', help_text='Byte cinsinden')
     download_size = models.IntegerField('İndirilecek boyut', help_text='Byte cinsinden')
-    #url = models.URLField('Sitesi', verify_exists=True, help_text='Başına http:// koymayı unutmayın')
+    url = models.URLField('Sitesi', verify_exists=True, help_text='Başına http:// koymayı unutmayın')
     point = models.SmallIntegerField('Editör Notu', maxlength=1, choices=ratings)
     path = models.CharField('Çalıştırma Yolu', maxlength=128, help_text='Paketin Pardus menüsündeki yeri (örn. Programlar > Yardımcı Programlar > KNazar)')
     ss = models.ManyToManyField(ScreenShot)
