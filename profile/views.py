@@ -157,11 +157,30 @@ def lost_password(request):
            key = sha.new(salt).hexdigest()
 
            u = User.objects.get(username=form.clean_data['username'])
-           lostpwd = LostPassword(user=u, key=key)
+           lostpwd = LostPassword(user=u)
+           lostpwd.key = key
+           lostpwd.key_expires = datetime.datetime.today() + datetime.timedelta(1)
            lostpwd.save()
 
-           # mail it
+           now = datetime.datetime.now()
+           (date, hour) = now.isoformat()[:16].split("T")
 
+           # mail it
+           email_dict = {'date': date,
+                         'hour': hour,
+                         'ip': request.META['REMOTE_ADDR'],
+                         'user': form.clean_data['username'],
+                         'link': 'http://www.ozgurlukicin.com/kullanici/kayip/change/%s' % key}
+
+           email_subject = u"Ozgurlukicin.com Kullanıcı Parolası"
+           email_body = u"""Merhaba!
+%(date)s %(hour)s tarihinde %(ip)s ip adresli bilgisayardan kullanıcı parola sıfırlama isteği gönderdiniz. Lütfen parolanızı değiştirmek için aşağıdaki bağlantıya 24 saat içerisinde tıklayın.
+
+<a href="%(link)s">%(link)s</a>"""
+           email_to = form.clean_data['email']
+           email_recipient = ['turkay.eren@gmail.com']
+
+           send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, email_recipient, fail_silently=False)
            return render_response(request, 'user/lostpassword_done.html')
        else:
            return render_response(request, 'user/lostpassword.html', {'form': form})
@@ -169,5 +188,18 @@ def lost_password(request):
         form = LostPasswordForm()
         return render_response(request, 'user/lostpassword.html', {'form': form})
 
-#def change_password(request, key):
-#    change passwd
+def change_password(request, key):
+    if len(LostPassword.objects.filter(key=key)) == 0:
+        return render_response(request, 'user/change_password.html', {'error': True, 'invalid': True})
+
+    lostpwd = LostPassword.objects.get(key=key)
+    if lostpwd.is_expired():
+        lostpwd.delete()
+        return render_response(request, 'user/change_password.html', {'error': True, 'expired': True})
+    else:
+        form = LostPasswordForm()
+        return render_response(request, 'user/change_password.html', {'form': form})
+
+        #if request.method == 'POST':
+        #    form = LostPasswordForm(request.POST)
+        #    if form.is_valid():

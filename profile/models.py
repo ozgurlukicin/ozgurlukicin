@@ -33,21 +33,28 @@ class ForbiddenUsername(models.Model):
 class LostPassword(models.Model):
     user = models.ForeignKey(User)
     key = models.CharField(maxlength=40, unique=True)
-    created = models.DateTimeField(auto_now_add=True)
+    key_expires = models.DateTimeField()
 
     def __str__(self):
         return "%s" % self.key
 
     def is_expired(self):
-        return (datetime.datetime.today() - self.created)
+        if datetime.datetime.today() > self.key_expires:
+            return True
+        else:
+            return False
 
     class Meta:
         verbose_name = "Kayıp Parola"
         verbose_name_plural = "Kayıp Parolalar"
 
     class Admin:
-        list_display = ('user', 'key', 'created',)
+        fields = (
+            ('foo', {'fields': ('user', 'key', 'key_expires'),}),
+            )
+        list_display = ('user', 'key', 'key_expires',)
         ordering = ['-user']
+
 
 
 class Profile(models.Model):
