@@ -17,7 +17,7 @@ from django.shortcuts import get_object_or_404
 
 from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_REDIRECT_URL, WEB_URL, PROFILE_EDIT_URL
 
-from oi.profile.models import Profile, RegisterForm, ProfileEditForm
+from oi.profile.models import Profile, RegisterForm, ProfileEditForm, LostPassword, LostPasswordForm
 from oi.st.wrappers import render_response
 
 @login_required
@@ -147,3 +147,27 @@ def user_confirm(request, name, key):
                 return render_response(request, 'user/confirm.html', {'ok': True})
         else:
             return render_response(request, 'user/confirm.html', {'key_incorrect': True})
+
+def lost_password(request):
+    if request.method == 'POST':
+       form = LostPasswordForm(request.POST)
+       if form.is_valid():
+           # generate new key and e-mail it to user
+           salt = sha.new(str(random.random())).hexdigest()[8:]
+           key = sha.new(salt).hexdigest()
+
+           u = User.objects.get(username=form.clean_data['username'])
+           lostpwd = LostPassword(user=u, key=key)
+           lostpwd.save()
+
+           # mail it
+
+           return render_response(request, 'user/lostpassword_done.html')
+       else:
+           return render_response(request, 'user/lostpassword.html', {'form': form})
+    else:
+        form = LostPasswordForm()
+        return render_response(request, 'user/lostpassword.html', {'form': form})
+
+#def change_password(request, key):
+#    change passwd

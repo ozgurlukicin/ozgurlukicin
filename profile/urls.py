@@ -26,6 +26,8 @@ urlpatterns = patterns('',
     (r'^onay/(?P<name>[\w-]+)/(?P<key>[\w-]+)/$', 'oi.profile.views.user_confirm'),
     (r'^duzenle/$', 'oi.profile.views.user_profile_edit'),
     (r'^dashboard/$', 'oi.profile.views.user_dashboard'),
+    (r'^kayip/$', 'oi.profile.views.lost_password'),
+    (r'^kayip/change/(?P<key>[\w-]+)/$', 'oi.profile.views.change_password'),
     #(r'^kullanici/(?P<name>[\w-]+)/yorumlar/$', 'oi.profile.views.user_comments'),
     (r'^(?P<name>[\w-]+)/$', 'oi.profile.views.user_profile'),
 )

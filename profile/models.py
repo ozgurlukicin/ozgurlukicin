@@ -5,7 +5,7 @@
 # Licensed under the GNU General Public License, version 2.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-import re
+import re, random, datetime, sha
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -29,6 +29,26 @@ class ForbiddenUsername(models.Model):
     class Meta:
         verbose_name = "Yasaklanan Kullanıcı Adı"
         verbose_name_plural = "Yasaklanan Kullanıcı Adları"
+
+class LostPassword(models.Model):
+    user = models.ForeignKey(User)
+    key = models.CharField(maxlength=40, unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "%s" % self.key
+
+    def is_expired(self):
+        return (datetime.datetime.today() - self.created)
+
+    class Meta:
+        verbose_name = "Kayıp Parola"
+        verbose_name_plural = "Kayıp Parolalar"
+
+    class Admin:
+        list_display = ('user', 'key', 'created',)
+        ordering = ['-user']
+
 
 class Profile(models.Model):
     user = models.ForeignKey(User, unique=True)
@@ -183,3 +203,34 @@ class ProfileEditForm(forms.Form):
                 raise forms.ValidationError(u"Parolayı değiştirmek için her 3 alanı da doldurun")
         else:
             return ''
+
+class LostPasswordForm(forms.Form):
+    username = forms.CharField(max_length=30)
+    email = forms.EmailField()
+
+    def clean_username(self):
+        field_data = self.clean_data['username']
+
+        # control username whether it exists or not
+        if len(User.objects.filter(username__iexact=field_data)) == 0:
+            raise forms.ValidationError(u"Böyle bir kullanıcı yok")
+
+        # control if this user has requested a new password
+        if len(LostPassword.objects.filter(user__username__iexact=field_data)) > 0:
+            raise forms.ValidationError(u"Bu kullanıcı daha önce parola isteğinde bulunmuş")
+
+        return field_data
+
+    def clean_email(self):
+        field_data = self.clean_data['email']
+        username = self.clean_data['username']
+
+        # control email if it is correct
+        try:
+            u = User.objects.get(username=username)
+            if u.email != field_data:
+                raise forms.ValidationError(u"E-mail adresi uyuşmuyor")
+        except User.DoesNotExist:
+            pass
+
+        return field_data
