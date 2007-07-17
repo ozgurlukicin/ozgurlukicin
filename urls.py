@@ -13,7 +13,7 @@ from oi.seminar.models import Seminar
 from oi.st.feeds import RssMainFeed
 
 package_dict = {
-                'queryset': Package.objects.filter(status=1).order_by('name'),
+                'queryset': Package.objects.filter(status=1).order_by('title'),
                 'template_name': 'package/package_main.html',
                 'paginate_by': PACKAGE_PER_PAGE,
                 'template_object_name': 'package'
@@ -62,8 +62,8 @@ urlpatterns = patterns('',
     #Packages
     (r'^paket/$', 'django.views.generic.simple.redirect_to', {'url': "sayfa/1/"}),
     (r'^paket/sayfa/(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', dict(package_dict)),
-    (r'^paket/(?P<name>.*)/yazdir/$', 'oi.st.views.pkg_printable'),
-    (r'^paket/(?P<name>.*)/$', 'oi.st.views.pkg_detail'),
+    (r'^paket/(?P<slug>.*)/yazdir/$', 'oi.st.views.pkg_printable'),
+    (r'^paket/(?P<slug>.*)/$', 'oi.st.views.pkg_detail'),
 
     #User management
     (r'^kullanici/', include('oi.profile.urls')),
