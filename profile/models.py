@@ -31,9 +31,9 @@ class ForbiddenUsername(models.Model):
         verbose_name_plural = "Yasaklanan Kullanıcı Adları"
 
 class LostPassword(models.Model):
-    user = models.ForeignKey(User)
-    key = models.CharField(maxlength=40, unique=True)
-    key_expires = models.DateTimeField()
+    user = models.ForeignKey(User, verbose_name='Kullanıcı')
+    key = models.CharField('Anahtar', maxlength=40, unique=True)
+    key_expires = models.DateTimeField('Zaman Aşımı')
 
     def __str__(self):
         return "%s" % self.key
@@ -151,9 +151,9 @@ class ProfileEditForm(forms.Form):
     email = forms.EmailField(label='E-posta')
     city = forms.ChoiceField(label='Şehir', choices=CITY_LIST)
     homepage = forms.URLField(label='Ana Sayfa', required=False, help_text='http:// ile başlamayı unutmayın')
-    old_password = forms.CharField(label='Eski Parola', widget=forms.PasswordInput, max_length=32, required=False)
-    password = forms.CharField(label='Parola', widget=forms.PasswordInput, max_length=32, required=False, help_text='Değiştirmek istiyorsanız her ikisini de doldurun')
-    password_again = forms.CharField(label='Parola (yeniden)', widget=forms.PasswordInput, max_length=32, required=False)
+    old_password = forms.CharField(label='Eski Parola', widget=forms.PasswordInput, required=False)
+    password = forms.CharField(label='Parola', widget=forms.PasswordInput, required=False, help_text='Değiştirmek istiyorsanız her ikisini de doldurun')
+    password_again = forms.CharField(label='Parola (yeniden)', widget=forms.PasswordInput, required=False)
     show_email = forms.BooleanField(label='E-posta Adresini Göster', required=False, help_text='Profil sayfasında diğerleri e-posta adresinizi görsün mü?')
 
     def set_user(self, user):
@@ -163,27 +163,33 @@ class ProfileEditForm(forms.Form):
         field_data = self.clean_data['old_password']
         if not field_data:
             return ''
-        else:
-            if len(field_data.split(' ')) != 1:
-                raise forms.ValidationError(u"Parolada boşluk olmamalıdır")
 
-            if len(field_data) < 5:
-                raise forms.ValidationError(u"Parola en az 5 karakter olmalıdır")
+        if len(field_data.split(' ')) != 1:
+            raise forms.ValidationError(u"Parolada boşluk olmamalıdır")
 
-            return field_data
+        if len(field_data) > 32:
+            raise forms.ValidationError(u"Parola en fazla 32 karakter olmalıdır")
+
+        if len(field_data) < 5:
+            raise forms.ValidationError(u"Parola en az 5 karakter olmalıdır")
+
+        return field_data
 
     def clean_password(self):
         field_data = self.clean_data['password']
         if not field_data:
             return ''
-        else:
-            if len(field_data.split(' ')) != 1:
-                raise forms.ValidationError(u"Parolada boşluk olmamalıdır")
 
-            if len(field_data) < 5:
-                raise forms.ValidationError(u"Parola en az 5 karakter olmalıdır")
+        if len(field_data.split(' ')) != 1:
+            raise forms.ValidationError(u"Parolada boşluk olmamalıdır")
 
-            return field_data
+        if len(field_data) > 32:
+            raise forms.ValidationError(u"Parola en fazla 32 karakter olmalıdır")
+
+        if len(field_data) < 5:
+            raise forms.ValidationError(u"Parola en az 5 karakter olmalıdır")
+
+        return field_data
 
     def clean_password_again(self):
         field_data = self.clean_data['password_again']
@@ -194,6 +200,9 @@ class ProfileEditForm(forms.Form):
             if field_data and password and old_password:
                 if len(field_data.split(' ')) != 1:
                     raise forms.ValidationError(u"Parolada boşluk olmamalıdır")
+
+                if len(field_data) > 32:
+                    raise forms.ValidationError(u"Parola en fazla 32 karakter olmalıdır")
 
                 if len(field_data) < 5:
                     raise forms.ValidationError(u"Parola en az 5 karakter olmalıdır")
@@ -216,6 +225,10 @@ class LostPasswordForm(forms.Form):
     email = forms.EmailField()
 
     def clean_username(self):
+        # clean old keys when it's requested
+        old_keys = LostPassword.objects.filter(key_expires__lt=datetime.date.today())
+        for key in old_keys: key.delete()
+
         field_data = self.clean_data['username']
 
         # control username whether it exists or not
@@ -239,5 +252,18 @@ class LostPasswordForm(forms.Form):
                 raise forms.ValidationError(u"E-mail adresi uyuşmuyor")
         except User.DoesNotExist:
             pass
+
+        return field_data
+
+class ChangePasswordForm(forms.Form):
+    password = forms.CharField(label='Parola', widget=forms.PasswordInput, max_length=32, min_length=5)
+    password_again = forms.CharField(label='Parola (Tekrar)', widget=forms.PasswordInput, max_length=32, min_length=5)
+
+    def clean_password_again(self):
+        field_data = self.clean_data['password_again']
+        password = self.clean_data['password']
+
+        if field_data != password:
+            raise forms.ValidationError('Parolalar eşleşmiyor')
 
         return field_data

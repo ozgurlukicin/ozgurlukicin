@@ -15,9 +15,9 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
 
-from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_REDIRECT_URL, WEB_URL, PROFILE_EDIT_URL
+from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_REDIRECT_URL, LOGIN_URL, WEB_URL, PROFILE_EDIT_URL
 
-from oi.profile.models import Profile, RegisterForm, ProfileEditForm, LostPassword, LostPasswordForm
+from oi.profile.models import Profile, RegisterForm, ProfileEditForm, LostPassword, LostPasswordForm, ChangePasswordForm
 from oi.st.wrappers import render_response
 
 @login_required
@@ -197,9 +197,16 @@ def change_password(request, key):
         lostpwd.delete()
         return render_response(request, 'user/change_password.html', {'error': True, 'expired': True})
     else:
-        form = LostPasswordForm()
-        return render_response(request, 'user/change_password.html', {'form': form})
-
-        #if request.method == 'POST':
-        #    form = LostPasswordForm(request.POST)
-        #    if form.is_valid():
+        if request.method == 'POST':
+            form = ChangePasswordForm(request.POST)
+            if form.is_valid():
+                u = User.objects.get(username=lostpwd.user.username)
+                u.set_password(form.clean_data['password'])
+                u.save()
+                lostpwd.delete()
+                return render_response(request, 'user/change_password_done.html', {'login_url': LOGIN_URL})
+            else:
+                return render_response(request, 'user/change_password.html', {'form': form})
+        else:
+            form = ChangePasswordForm()
+            return render_response(request, 'user/change_password.html', {'form': form})
