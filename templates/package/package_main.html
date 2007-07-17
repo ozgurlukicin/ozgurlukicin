@@ -12,7 +12,7 @@
 {% for package in package_list %}
 <div class="fs_list {% cycle odd,even %}">
     <div class="fs_info" style="margin-bottom: 0;">
-        <div class="fs_title"><a href="{{ package.get_absolute_url }}">{{ package.name }}</a></div>
+        <div class="fs_title"><a href="{{ package.get_absolute_url }}">{{ package.title }}</a></div>
         <div class="fs_desc">{{ package.sum }}</div>
         <p class="fs_tags"><img src="/media/img/tag.png" /> {% for tag in package.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
     </div>

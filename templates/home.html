@@ -13,7 +13,7 @@
         <div id="packages_container">
             {% for package in packages %}
             <div id="package-{{ package.id }}" class="packages {% cycle newsleft,newsright %}">
-                <div class="packages_title">Paket: <a href="{{ package.get_absolute_url }}">{{ package.name }}</a></div>
+                <div class="packages_title">Paket: <a href="{{ package.get_absolute_url }}">{{ package.title }}</a></div>
                 <div class="packages_content">{{ package.sum }}</div>
             </div>
             {% endfor %}
