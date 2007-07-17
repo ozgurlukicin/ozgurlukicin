@@ -276,7 +276,8 @@ class News(models.Model):
 class Package(models.Model):
     ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'))
 
-    name = models.CharField('İsim', maxlength=32, help_text='Paket ismi')
+    title = models.CharField('Başlık', maxlength=32, blank=False, help_text='Paket ismi')
+    slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
     sum = models.TextField('Özet', blank=False)
     desc = models.TextField('Açıklama', blank=False)
     license = models.ManyToManyField(License)
@@ -295,12 +296,16 @@ class Package(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return "/paket/%s/" % self.name
+        return "/paket/%s/" % self.slug
 
     def get_printable_url(self):
         return "/paket/%s/yazdir/" % self.name
 
     class Admin:
+        fields = (
+            ('Genel', {'fields': ('title','sum','desc', 'license','installed_size','download_size','url','point','path','ss','tags','videos','update','status')}),
+            ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
+        )
         list_display = ('name', 'sum', 'status')
         list_filter = ['license']
         ordering = ['-id']
