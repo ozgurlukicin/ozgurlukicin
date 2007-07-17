@@ -57,8 +57,8 @@ def news_printable(request, slug):
     news = get_object_or_404(News, slug=slug)
     return render_response(request, 'news/news_printable.html', locals())
 
-def pkg_detail(request, name):
-    package = get_object_or_404(Package, name=name)
+def pkg_detail(request, slug):
+    package = get_object_or_404(Package, slug=slug)
     tags = package.tags.all()
     videos = package.videos.all()
     for video in videos:
@@ -67,8 +67,8 @@ def pkg_detail(request, name):
     sss = package.ss.all()
     return render_response(request, 'package/package_detail.html', locals())
 
-def pkg_printable(request, name):
-    package = get_object_or_404(Package, name=name)
+def pkg_printable(request, slug):
+    package = get_object_or_404(Package, slug=slug)
     return render_response(request, 'package/package_printable.html', locals())
 
 def tag_detail(request, tag):
