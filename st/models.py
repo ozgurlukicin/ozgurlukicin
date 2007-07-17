@@ -293,23 +293,23 @@ class Package(models.Model):
     status = models.BooleanField('Aktif')
 
     def __str__(self):
-        return self.name
+        return self.title
 
     def get_absolute_url(self):
         return "/paket/%s/" % self.slug
 
     def get_printable_url(self):
-        return "/paket/%s/yazdir/" % self.name
+        return "/paket/%s/yazdir/" % self.slug
 
     class Admin:
         fields = (
             ('Genel', {'fields': ('title','sum','desc', 'license','installed_size','download_size','url','point','path','ss','tags','videos','update','status')}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
-        list_display = ('name', 'sum', 'status')
+        list_display = ('title', 'sum', 'status')
         list_filter = ['license']
         ordering = ['-id']
-        search_fields = ['name', 'sum', 'desc']
+        search_fields = ['title', 'sum', 'desc']
         js = ("js/admin/package_sef.js", "js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
 
     class Meta:
