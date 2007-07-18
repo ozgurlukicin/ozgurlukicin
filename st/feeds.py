@@ -6,14 +6,15 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.contrib.syndication.feeds import Feed
+from django.utils.feedgenerator import Atom1Feed
 
 from oi.st.models import Game, FS, News, Package
-from oi.settings import NEWS_IN_HOMEPAGE, PACKAGES_IN_HOMEPAGE, GAMES_IN_HOMEPAGE, FS_IN_HOMEPAGE
+from oi.settings import WEB_URL, SITE_NAME, SITE_DESC, NEWS_IN_HOMEPAGE, PACKAGES_IN_HOMEPAGE, GAMES_IN_HOMEPAGE, FS_IN_HOMEPAGE, NEWS_PER_PAGE, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE
 
-class RssMainFeed(Feed):
-    title = 'Özgürlükİçin Pardus...'
-    link = '/'
-    description = 'Özgürlükİçin Pardus...'
+class Main_RSS(Feed):
+    title = SITE_NAME
+    link = WEB_URL
+    description = SITE_DESC
 
     def items(self):
         output = []
@@ -22,7 +23,7 @@ class RssMainFeed(Feed):
             output.append(news)
 
         for package in Package.objects.order_by('-update')[:PACKAGES_IN_HOMEPAGE]:
-            package.name = 'Paket: %s' % package.name
+            package.title = 'Paket: %s' % package.title
             output.append(package)
 
         for game in Game.objects.order_by('-update')[:GAMES_IN_HOMEPAGE]:
@@ -34,3 +35,50 @@ class RssMainFeed(Feed):
             output.append(fs)
 
         return output
+
+class Main_Atom(Main_RSS):
+    feed_type = Atom1Feed
+
+class News_RSS(Feed):
+    title = SITE_NAME
+    link = WEB_URL
+    description = SITE_DESC
+
+    def items(self):
+        return News.objects.filter(status=1).order_by('-date')[:NEWS_PER_PAGE]
+
+class News_Atom(News_RSS):
+    feed_type = Atom1Feed
+
+class FS_RSS(Feed):
+    title = SITE_NAME
+    link = WEB_URL
+    description = SITE_DESC
+
+    def items(self):
+        return FS.objects.filter(status=1).order_by('-update')[:FS_PER_PAGE]
+
+class FS_Atom(FS_RSS):
+    feed_type = Atom1Feed
+
+class Game_RSS(Feed):
+    title = SITE_NAME
+    link = WEB_URL
+    description = SITE_DESC
+
+    def items(self):
+        return Game.objects.filter(status=1).order_by('-update')[:GAME_PER_PAGE]
+
+class Game_Atom(Game_RSS):
+    feed_type = Atom1Feed
+
+class Package_RSS(Feed):
+    title = SITE_NAME
+    link = WEB_URL
+    description = SITE_DESC
+
+    def items(self):
+        return Package.objects.filter(status=1).order_by('-update')[:PACKAGE_PER_PAGE]
+
+class Package_Atom(Package_RSS):
+    feed_type = Atom1Feed

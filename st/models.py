@@ -279,7 +279,7 @@ class Package(models.Model):
     title = models.CharField('Başlık', maxlength=32, blank=False, help_text='Paket ismi')
     slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
     sum = models.TextField('Özet', blank=False)
-    desc = models.TextField('Açıklama', blank=False)
+    text = models.TextField('Açıklama', blank=False)
     license = models.ManyToManyField(License)
     installed_size = models.IntegerField('Kurulu boyut', help_text='Byte cinsinden')
     download_size = models.IntegerField('İndirilecek boyut', help_text='Byte cinsinden')
@@ -303,13 +303,13 @@ class Package(models.Model):
 
     class Admin:
         fields = (
-            ('Genel', {'fields': ('title','sum','desc', 'license','installed_size','download_size','url','point','path','ss','tags','videos','update','status')}),
+            ('Genel', {'fields': ('title','sum','text', 'license','installed_size','download_size','url','point','path','ss','tags','videos','update','status')}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
         list_display = ('title', 'sum', 'status')
         list_filter = ['license']
         ordering = ['-id']
-        search_fields = ['title', 'sum', 'desc']
+        search_fields = ['title', 'sum', 'text']
         js = ("js/admin/package_sef.js", "js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
 
     class Meta:

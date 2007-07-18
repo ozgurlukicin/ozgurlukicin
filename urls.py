@@ -10,7 +10,32 @@ from django.conf.urls.defaults import *
 from oi.settings import WEB_URL, DOCUMENT_ROOT, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, NEWS_PER_PAGE, TAG_PER_PAGE
 from oi.st.models import Package, Game, FS, News, Tag
 from oi.seminar.models import Seminar
-from oi.st.feeds import RssMainFeed
+from oi.st.feeds import Main_RSS, Main_Atom, News_RSS, News_Atom, FS_RSS, FS_Atom, Game_RSS, Game_Atom, Package_RSS, Package_Atom
+
+main_feed_dict = {
+                  'rss': Main_RSS,
+                  'atom': Main_Atom,
+                 }
+
+news_feed_dict = {
+                  'rss': News_RSS,
+                  'atom': News_Atom,
+                 }
+
+fs_feed_dict = {
+                'rss': FS_RSS,
+                'atom': FS_Atom,
+               }
+
+game_feed_dict = {
+                  'rss': Game_RSS,
+                  'atom': Game_Atom,
+                 }
+
+package_feed_dict = {
+                     'rss': Package_RSS,
+                     'atom': Package_Atom
+                    }
 
 package_dict = {
                 'queryset': Package.objects.filter(status=1).order_by('title'),
@@ -47,10 +72,6 @@ tag_dict = {
             'paginate_by': TAG_PER_PAGE,
             'template_object_name': 'tag'
            }
-
-feed_dict = {
-            'rss': RssMainFeed,
-            }
 
 urlpatterns = patterns('',
     #News
@@ -104,11 +125,15 @@ urlpatterns = patterns('',
     #Gezegen
     (r'^gezegen/', include('oi.feedjack.urls')),
 
-    #Feeds
-    (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
-
     #FIXME: Delete this when development ends
     (r'^test/$', 'oi.st.views.test'),
+
+    #Feeds
+    (r'^(?P<url>.*)/haber/$', 'django.contrib.syndication.views.feed', {'feed_dict': news_feed_dict}),
+    (r'^(?P<url>.*)/ia/$', 'django.contrib.syndication.views.feed', {'feed_dict': fs_feed_dict}),
+    (r'^(?P<url>.*)/oyun/$', 'django.contrib.syndication.views.feed', {'feed_dict': game_feed_dict}),
+    (r'^(?P<url>.*)/paket/$', 'django.contrib.syndication.views.feed', {'feed_dict': package_feed_dict}),
+    (r'^(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': main_feed_dict}),
 
     #Django
     (r'^$', 'oi.st.views.home'),
