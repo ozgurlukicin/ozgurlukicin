@@ -14,17 +14,18 @@ MANAGERS = ADMINS
 
 # Site configuration
 SITE_NAME = 'Özgürlük için...'
+SITE_DESC = 'Pardus için bir numaralı bilgi kaynağı'
 
 if DEVELOPMENT_MODE:
     DEBUG = True
     TEMPLATE_DEBUG = DEBUG
     WEB_URL = 'http://django'
     DOCUMENT_ROOT = '/home/ahmet/public_html/oi'
-    DATABASE_ENGINE = 'sqlite3'
-    DATABASE_NAME = '%s/db/oi.db' % DOCUMENT_ROOT
-    DATABASE_USER = ''
-    DATABASE_PASSWORD = ''
-    DATABASE_HOST = ''
+    DATABASE_ENGINE = 'mysql'
+    DATABASE_NAME = 'oi'
+    DATABASE_USER = 'root'
+    DATABASE_PASSWORD = 'root'
+    DATABASE_HOST = 'localhost'
     DATABASE_PORT = ''
 else:
     DEBUG = False
