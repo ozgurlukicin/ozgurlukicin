@@ -40,7 +40,7 @@ class Main_Atom(Main_RSS):
     feed_type = Atom1Feed
 
 class News_RSS(Feed):
-    title = SITE_NAME
+    title = SITE_NAME + " - Haberler"
     link = WEB_URL
     description = SITE_DESC
 
@@ -51,7 +51,7 @@ class News_Atom(News_RSS):
     feed_type = Atom1Feed
 
 class FS_RSS(Feed):
-    title = SITE_NAME
+    title = SITE_NAME + " - İlk Adımlar"
     link = WEB_URL
     description = SITE_DESC
 
@@ -62,7 +62,7 @@ class FS_Atom(FS_RSS):
     feed_type = Atom1Feed
 
 class Game_RSS(Feed):
-    title = SITE_NAME
+    title = SITE_NAME + " - Oyunlar"
     link = WEB_URL
     description = SITE_DESC
 
@@ -73,7 +73,7 @@ class Game_Atom(Game_RSS):
     feed_type = Atom1Feed
 
 class Package_RSS(Feed):
-    title = SITE_NAME
+    title = SITE_NAME + " - Paketler"
     link = WEB_URL
     description = SITE_DESC
 
