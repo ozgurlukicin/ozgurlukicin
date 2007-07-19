@@ -12,7 +12,7 @@ from oi.st.models import Game, FS, News, Package
 from oi.settings import WEB_URL, SITE_NAME, SITE_DESC, NEWS_IN_HOMEPAGE, PACKAGES_IN_HOMEPAGE, GAMES_IN_HOMEPAGE, FS_IN_HOMEPAGE, NEWS_PER_PAGE, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE
 
 class Main_RSS(Feed):
-    title = SITE_NAME
+    title = SITE_NAME + " - Anasayfa"
     link = WEB_URL
     description = SITE_DESC
 
