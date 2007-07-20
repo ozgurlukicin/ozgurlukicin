@@ -96,8 +96,5 @@ def videobox(request, video):
     web_url = WEB_URL
     return render_response(request, 'videobox.html', locals())
 
-def feeds_main(request):
-    return render_response(request, "feeds/main.html")
-
 def test(request):
     return render_response(request, 'test.html')

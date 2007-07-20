@@ -135,7 +135,6 @@ urlpatterns = patterns('',
     (r'^media/(.*)$', 'django.views.static.serve', {'document_root': '%s/media' % DOCUMENT_ROOT, 'show_indexes': True}),
 
     #Feeds
-    (r'^feeds/$', 'oi.st.views.feeds_main'),
     (r'^(?P<url>.*)/haber/$', 'django.contrib.syndication.views.feed', {'feed_dict': news_feed_dict}),
     (r'^(?P<url>.*)/ia/$', 'django.contrib.syndication.views.feed', {'feed_dict': fs_feed_dict}),
     (r'^(?P<url>.*)/oyun/$', 'django.contrib.syndication.views.feed', {'feed_dict': game_feed_dict}),
