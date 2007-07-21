@@ -13,20 +13,20 @@ from oi.seminar.models import Seminar
 from oi.st.feeds import Main_RSS, Main_Atom, News_RSS, News_Atom, FS_RSS, FS_Atom, Game_RSS, Game_Atom, Package_RSS, Package_Atom
 
 rss_dict = {
-                  '': Main_RSS,
-                  'haber': News_RSS,
-                  'ia': FS_RSS,
-                  'oyun': Game_RSS,
-                  'paket': Package_RSS,
-                 }
+            '': Main_RSS,
+            'haber': News_RSS,
+            'ia': FS_RSS,
+            'oyun': Game_RSS,
+            'paket': Package_RSS,
+           }
 
 atom_dict = {
-                  '': Main_Atom,
-                  'haber': News_Atom,
-                  'ia': FS_Atom,
-                  'oyun': Game_Atom,
-                  'paket': Package_Atom,
-                 }
+             '': Main_Atom,
+             'haber': News_Atom,
+             'ia': FS_Atom,
+             'oyun': Game_Atom,
+             'paket': Package_Atom,
+            }
 
 package_dict = {
                 'queryset': Package.objects.filter(status=1).order_by('title'),
