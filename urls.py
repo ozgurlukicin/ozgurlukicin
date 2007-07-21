@@ -126,9 +126,6 @@ urlpatterns = patterns('',
     (r'^media/(.*)$', 'django.views.static.serve', {'document_root': '%s/media' % DOCUMENT_ROOT, 'show_indexes': True}),
 
     #Feeds
-    (r'^rss/(?P<url>.*)$', 'django.contrib.syndication.views.feed', {'feed_dict': rss_dict}),
-    (r'^atom/(?P<url>.*)$', 'django.contrib.syndication.views.feed', {'feed_dict': atom_dict}),
-
     (r'^rss/gezegen/$', 'oi.feedjack.views.rssfeed'),
     (r'^rss/gezegen/kullanici/(?P<user>\d+)/etiket/(?P<tag>.*)/$', 'oi.feedjack.views.rssfeed'),
     (r'^rss/gezegen/kullanici/(?P<user>\d+)/$', 'oi.feedjack.views.rssfeed'),
@@ -137,4 +134,7 @@ urlpatterns = patterns('',
     (r'^atom/gezegen/kullanici/(?P<user>\d+)/etiket/(?P<tag>.*)/$', 'oi.feedjack.views.atomfeed'),
     (r'^atom/gezegen/kullanici/(?P<user>\d+)/$', 'oi.feedjack.views.atomfeed'),
     (r'^atom/gezegen/etiket/(?P<tag>.*)/$', 'oi.feedjack.views.atomfeed'),
+
+    (r'^rss/(?P<url>.*)$', 'django.contrib.syndication.views.feed', {'feed_dict': rss_dict}),
+    (r'^atom/(?P<url>.*)$', 'django.contrib.syndication.views.feed', {'feed_dict': atom_dict}),
 )
