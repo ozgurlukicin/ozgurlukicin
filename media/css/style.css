@@ -884,7 +884,7 @@ hr.clear {
     font-size: 12px;
 }
 
-.sidebar_yellow a {
+/*.sidebar_yellow a {
     color: #fff;
     background-color: #827300;
     font-size: 12px;
@@ -893,7 +893,7 @@ hr.clear {
 .sidebar_yellow a:hover {
     text-decoration: none;
     background-color: #000;
-}
+}*/
 
 /* notes */
 .note_std, .note_attention, .note_warning, .note_tip, .note_question {
