@@ -734,9 +734,20 @@ hr.clear {
     background-image: url('/media/img/sidebar_purple.png');
 }
 
-.sidebar_purple, .sidebar_purple a {
+.sidebar_purple {
     color: #9218A4;
     font-size: 12px;
+}
+
+.sidebar_purple a {
+    color: #fff;
+    background-color: #9218A4;
+    font-size: 12px;
+}
+
+.sidebar_purple a:hover {
+    text-decoration: none;
+    background-color: #000;
 }
 
 .sidebar_blue_title {
@@ -752,9 +763,20 @@ hr.clear {
     background-image: url('/media/img/sidebar_blue.png');
 }
 
-.sidebar_blue, .sidebar_blue a {
+.sidebar_blue {
     color: #10A8C1;
     font-size: 12px;
+}
+
+.sidebar_blue a {
+    color: #fff;
+    background-color: #10A8C1;
+    font-size: 12px;
+}
+
+.sidebar_blue a:hover {
+    text-decoration: none;
+    background-color: #000;
 }
 
 .sidebar_darkblue_title {
@@ -770,9 +792,20 @@ hr.clear {
     background-image: url('/media/img/sidebar_darkblue.png');
 }
 
-.sidebar_darkblue, .sidebar_darkblue a {
+.sidebar_darkblue {
     color: #33718B;
     font-size: 12px;
+}
+
+.sidebar_darkblue a {
+    color: #fff;
+    background-color: #33718B;
+    font-size: 12px;
+}
+
+.sidebar_darkblue a:hover {
+    text-decoration: none;
+    background-color: #000;
 }
 
 .sidebar_green_title {
@@ -788,9 +821,20 @@ hr.clear {
     background-image: url('/media/img/sidebar_green.png');
 }
 
-.sidebar_green, .sidebar_green a {
+.sidebar_green {
     color: #69A200;
     font-size: 12px;
+}
+
+.sidebar_green a {
+    color: #fff;
+    background-color: #69A200;
+    font-size: 12px;
+}
+
+.sidebar_green a:hover {
+    text-decoration: none;
+    background-color: #000;
 }
 
 .sidebar_orange_title {
@@ -806,9 +850,20 @@ hr.clear {
     background-image: url('/media/img/sidebar_orange.png');
 }
 
-.sidebar_orange, .sidebar_orange a {
+.sidebar_orange {
     color: #DB5F00;
     font-size: 12px;
+}
+
+.sidebar_orange a {
+    color: #fff;
+    background-color: #DB5F00;
+    font-size: 12px;
+}
+
+.sidebar_orange a:hover {
+    text-decoration: none;
+    background-color: #000;
 }
 
 .sidebar_yellow_title {
@@ -824,9 +879,20 @@ hr.clear {
     background-image: url('/media/img/sidebar_yellow.png');
 }
 
-.sidebar_yellow, .sidebar_yellow a {
+.sidebar_yellow {
     color: #827300;
     font-size: 12px;
+}
+
+.sidebar_yellow a {
+    color: #fff;
+    background-color: #827300;
+    font-size: 12px;
+}
+
+.sidebar_yellow a:hover {
+    text-decoration: none;
+    background-color: #000;
 }
 
 /* notes */
