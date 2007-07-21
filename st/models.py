@@ -155,7 +155,7 @@ class FS(models.Model):
     status = models.BooleanField('Aktif')
 
     def __str__(self):
-        return self.slug
+        return self.title
 
     def get_absolute_url(self):
         return "/ia/%s/" % self.slug
@@ -204,7 +204,7 @@ class Game(models.Model):
     status = models.BooleanField('Aktif')
 
     def __str__(self):
-        return self.slug
+        return self.title
 
     def get_absolute_url(self):
         return "/oyun/%s/" % self.slug
@@ -244,7 +244,7 @@ class News(models.Model):
     status = models.BooleanField('Aktif')
 
     def __str__(self):
-        return self.slug
+        return self.title
 
     def get_absolute_url(self):
         return "/haber/%s/" % self.slug

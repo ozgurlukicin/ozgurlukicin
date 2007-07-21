@@ -126,6 +126,6 @@ urlpatterns = patterns('',
     (r'^media/(.*)$', 'django.views.static.serve', {'document_root': '%s/media' % DOCUMENT_ROOT, 'show_indexes': True}),
 
     #Feeds
-    (r'^rss/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': rss_feed_dict}),
-    (r'^atom/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': atom_feed_dict}),
+    (r'^rss/(?P<url>.*)$', 'django.contrib.syndication.views.feed', {'feed_dict': rss_feed_dict}),
+    (r'^atom/(?P<url>.*)$', 'django.contrib.syndication.views.feed', {'feed_dict': atom_feed_dict}),
 )
