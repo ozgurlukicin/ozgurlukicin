@@ -12,30 +12,21 @@ from oi.st.models import Package, Game, FS, News, Tag
 from oi.seminar.models import Seminar
 from oi.st.feeds import Main_RSS, Main_Atom, News_RSS, News_Atom, FS_RSS, FS_Atom, Game_RSS, Game_Atom, Package_RSS, Package_Atom
 
-main_feed_dict = {
-                  'rss': Main_RSS,
-                  'atom': Main_Atom,
+rss_feed_dict = {
+                  '': Main_RSS,
+                  'haber': News_RSS,
+                  'ia': FS_RSS,
+                  'oyun': Game_RSS,
+                  'paket': Package_RSS,
                  }
 
-news_feed_dict = {
-                  'rss': News_RSS,
-                  'atom': News_Atom,
+atom_feed_dict = {
+                  '': Main_Atom,
+                  'haber': News_Atom,
+                  'ia': FS_Atom,
+                  'oyun': Game_Atom,
+                  'paket': Package_Atom,
                  }
-
-fs_feed_dict = {
-                'rss': FS_RSS,
-                'atom': FS_Atom,
-               }
-
-game_feed_dict = {
-                  'rss': Game_RSS,
-                  'atom': Game_Atom,
-                 }
-
-package_feed_dict = {
-                     'rss': Package_RSS,
-                     'atom': Package_Atom,
-                    }
 
 package_dict = {
                 'queryset': Package.objects.filter(status=1).order_by('title'),
@@ -135,9 +126,6 @@ urlpatterns = patterns('',
     (r'^media/(.*)$', 'django.views.static.serve', {'document_root': '%s/media' % DOCUMENT_ROOT, 'show_indexes': True}),
 
     #Feeds
-    (r'^(?P<url>.*)/haber/$', 'django.contrib.syndication.views.feed', {'feed_dict': news_feed_dict}),
-    (r'^(?P<url>.*)/ia/$', 'django.contrib.syndication.views.feed', {'feed_dict': fs_feed_dict}),
-    (r'^(?P<url>.*)/oyun/$', 'django.contrib.syndication.views.feed', {'feed_dict': game_feed_dict}),
-    (r'^(?P<url>.*)/paket/$', 'django.contrib.syndication.views.feed', {'feed_dict': package_feed_dict}),
-    (r'^(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': main_feed_dict}),
+    (r'^rss/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': rss_feed_dict}),
+    (r'^atom/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': atom_feed_dict}),
 )
