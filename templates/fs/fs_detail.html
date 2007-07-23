@@ -24,7 +24,7 @@
 
 {% block sidebar %}
 <div class="sidebar_green_title">Etiketler</div>
-<div class="sidebar sidebar_green">{% for tag in tags %}<div><img src="/media/img/tag_green.png" border="0" style="vertical-align:middle;" /><a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a></div>{% endfor %}</div>
+<div class="sidebar sidebar_green">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
 
 {% if videos %}
 <div class="sidebar_green_title">İlgili Videolar</div>
