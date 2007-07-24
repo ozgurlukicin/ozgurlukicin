@@ -13,7 +13,9 @@
             {% for news in news_list %}
             <div id="news-{{ news.id }}" class="news">
                 <div class="news_title"><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></div>
-                <div class="news_content">{{ news.sum }}</div>
+                <div class="news_content purple">{{ news.sum }}
+                    <p style="padding-top: 4px;"><img src="/media/img/tag.png" style="vertical-align: middle;" /> {% for tag in news.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</p>
+                </div>
             </div>
             {% endfor %}
         </div>
@@ -38,3 +40,11 @@
 </div>
 {% endif %}
 {% endblock %}
+
+
+<div id="game-{{ game.id }}" class="games">
+    <div class="games_title"><a href="{{ game.get_absolute_url }}">{{ game.title }}</a></div>
+    <div class="games_content darkblue">{{ game.sum }}
+        <p style="padding-top: 4px;"><img src="/media/img/tag_darkblue.png" style="vertical-align: middle;" /> {% for tag in game.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</p>
+    </div>
+</div>

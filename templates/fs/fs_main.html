@@ -10,13 +10,11 @@
 
 {% block content %}
 {% for fs in fs_list %}
-<div class="fs_list {% cycle odd,even %}">
-    <div class="fs_info" style="margin-bottom: 0;">
-        <div class="fs_title"><a href="{{ fs.get_absolute_url }}">{{ fs.title }}</a></div>
-        <div class="fs_desc">{{ fs.sum }}</div>
-        <p class="fs_tags"><img src="/media/img/tag.png" /> {% for tag in fs.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+<div id="fs-{{ fs.id }}" class="fs">
+    <div class="fs_title"><a href="{{ fs.get_absolute_url }}">{{ fs.title }}</a></div>
+    <div class="fs_content green">{{ fs.sum }}
+        <p class="fs_tags" style="padding-top: 4px;"><img src="/media/img/tag_green.png" style="vertical-align: middle;" /> {% for tag in fs.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</p>
     </div>
-    <hr class="fs_separator"/>
 </div>
 {% endfor %}
 
