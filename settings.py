@@ -30,7 +30,7 @@ if DEVELOPMENT_MODE:
 else:
     DEBUG = False
     TEMPLATE_DEBUG = DEBUG
-    WEB_URL = 'http://beta.ozgurlukicin.com'
+    WEB_URL = 'http://www.ozgurlukicin.com'
     DOCUMENT_ROOT = '/var/www/ozgurlukicin.com/oi'
     DATABASE_ENGINE = 'mysql'
     DATABASE_NAME = 'ozgur_oi'
