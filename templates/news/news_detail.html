@@ -9,8 +9,8 @@
 {% block section_logo %}<img src="/media/img/news_header_logo.png">{% endblock %}
 
 {% block content %}
-<div class="page_title">{{ news.title }}</div>
-<div class="page_content">
+<div class="news_title transparent_link">{{ news.title }}</div>
+<div class="page_content purple">
 {{ news.text }}
 </div>
 <div class="page_properties"><a href="{{ news.get_printable_url }}"><img src="/media/img/print.png" /></a></div>
@@ -18,6 +18,6 @@
 {% endblock %}
 
 {% block sidebar %}
-<div class="sidebar_green_title">Etiketler</div>
-<div class="sidebar sidebar_green">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
+<div class="sidebar_purple_title">Etiketler</div>
+<div class="sidebar purple">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
 {% endblock %}
