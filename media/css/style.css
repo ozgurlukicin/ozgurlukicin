@@ -505,12 +505,14 @@ input#form_submit {
     width: 280px;
     padding-left: 10px;
     padding-right: 16px;
+    overflow: auto;
 }
 
 .news_content {
     padding-left: 10px;
     padding-right: 16px;
     margin-bottom: -10px;
+    overflow:auto;
 }
 
 .packages_title_mini {
@@ -538,12 +540,14 @@ input#form_submit {
     width: 280px;
     padding-left: 10px;
     padding-right: 16px;
+    overflow:auto;
 }
 
 .packages_content {
     padding-left: 10px;
     padding-right: 16px;
     margin-bottom: -10px;
+    overflow:auto;
 }
 
 .games_title_mini {
@@ -571,12 +575,14 @@ input#form_submit {
     width: 280px;
     padding-left: 10px;
     padding-right: 16px;
+    overflow:auto;
 }
 
 .games_content {
     padding-left: 10px;
     padding-right: 16px;
     margin-bottom: -10px;
+    overflow:auto;
 }
 
 .fs_title_mini {
@@ -604,12 +610,14 @@ input#form_submit {
     width: 280px;
     padding-left: 10px;
     padding-right: 16px;
+    overflow:auto;
 }
 
 .fs_content {
     padding-left: 10px;
     padding-right: 16px;
     margin-bottom: -10px;
+    overflow:auto;
 }
 
 /* sidebar */
