@@ -5,16 +5,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="imagetoolbar" content="no" />
 <link rel="shortcut icon" href="/media/img/favicon.png" />
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Anasayfa" href="/rss">
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Haberler" href="/rss/haber">
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - İlk Adımlar" href="/rss/ia">
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Paketler" href="/rss/paket">
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Oyunlar" href="/rss/oyun">
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Gezegen" href="/rss/gezegen">
+<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Anasayfa" href="/rss" />
+<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Haberler" href="/rss/haber" />
+<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - İlk Adımlar" href="/rss/ia" />
+<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Paketler" href="/rss/paket" />
+<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Oyunlar" href="/rss/oyun" />
+<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Gezegen" href="/rss/gezegen" />
 <style type="text/css" media="screen">@import url('/media/css/style.css');</style>
 <script type="text/javascript" src="/media/js/mootools.js"></script>
 <script type="text/javascript" src="/media/js/custom.js"></script>
-<script defer type="text/javascript" src="/media/js/pngfix.js"></script>
+<script type="text/javascript" src="/media/js/pngfix.js"></script>
 {% block extrahead %}{% endblock %}
 </head>
 <body>
@@ -32,15 +32,15 @@
 </div>-->
 <div id="{% block pagetype %}page{% endblock %}">
     <div id="header" class="{% block section %}home{% endblock %}_header">
-        <div id="logo"><a href="/"><img src="/media/img/logo.png" border="0" /></a></div>
+        <div id="logo"><a href="/"><img src="/media/img/logo.png" border="0" alt="Özgürlük için Pardus.." /></a></div>
         <div id="menu_container">
             <ul id="menu">
-                <li class="menu"><a href="/haber/"><img src="/media/img/tab_news.png"></a></li>
-                <li class="menu"><a href="/ia/"><img src="/media/img/tab_fs.png"></a></li>
-                <li class="menu"><a href="/oyun/"><img src="/media/img/tab_games.png"></a></li>
-                <li class="menu"><a href="/paket/"><img src="/media/img/tab_packages.png"></a></li>
-                <li class="menu"><a href="/gezegen/"><img src="/media/img/tab_planet.png"></a></li>
-                <li class="menu"><a href="/forum/"><img src="/media/img/tab_forum.png"></a></li>
+                <li class="menu"><a href="/haber/"><img src="/media/img/tab_news.png" border="0" alt="Haberler" /></a></li>
+                <li class="menu"><a href="/ia/"><img src="/media/img/tab_fs.png" border="0" alt="İlk adımlar" /></a></li>
+                <li class="menu"><a href="/oyun/"><img src="/media/img/tab_games.png" border="0" alt="Oyunlar" /></a></li>
+                <li class="menu"><a href="/paket/"><img src="/media/img/tab_packages.png" border="0" alt="Paketler" /></a></li>
+                <li class="menu"><a href="/gezegen/"><img src="/media/img/tab_planet.png" border="0" alt="Gezegen" /></a></li>
+                <li class="menu"><a href="/forum/"><img src="/media/img/tab_forum.png" border="0" alt="Forum" /></a></li>
             </ul>
         </div>
         <div id="section_logo">{% block section_logo %}{% endblock %}</div>
@@ -66,7 +66,7 @@
         {% endif %}
         </div>
         <div class="sidebar_green_title">Pardus'u indirin</div>
-        <div class="green" style="text-align: center;"><a href="/indir/"><img src="/media/img/sidebar_download.png" border="0" /></a></div>
+        <div class="sidebar green" style="text-align: center;"><a href="/indir/"><img src="/media/img/sidebar_download.png" border="0" alt="Pardus'u indir.." /></a></div>
         <div class="sidebar_green_title">Özgürlükiçin'i destekleyin</div>
         <div class="sidebar green">Pardus'un tanıtımına katkıda bulunmak isteyenler için Özgürlükiçin düğmeleri yayınlandı. Sitenizde, blogunuzda yayınlamak için siz de <a href="/banner/">hazır kodlarımızdan</a> yararlanabilirsiniz.</div>
         {% endblock %}
