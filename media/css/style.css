@@ -446,7 +446,6 @@ input#form_submit {
     height: 25px;
     font-size: 14px;
     font-weight: bold;
-    color: #827300;
     background: url('/media/img/planet_title.png') no-repeat;
 }
 
@@ -454,6 +453,9 @@ input#form_submit {
     padding-left: 12px;
     padding-right: 20px;
     text-align: justify;
+}
+
+.planet_link a {
     color: #827300;
 }
 

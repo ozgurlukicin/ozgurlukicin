@@ -52,7 +52,7 @@
     <div id="sidebar">
         {% block sidebartop %}
         <div class="sidebar_green_title">Kullanıcı Kutusu</div>
-        <div class="sidebar green"{% if not user.is_authenticated %} style="text-align: center;"{% endif %}>
+        <div class="green"{% if not user.is_authenticated %} style="text-align: center;"{% endif %}>
         {% if not user.is_authenticated %}
         <form method="post" action="/kullanici/giris/">
             <input type="text" id="id_username" name="username" size="8" class="vTextField required" value="" maxlength="30" /><br />
@@ -66,7 +66,7 @@
         {% endif %}
         </div>
         <div class="sidebar_green_title">Pardus'u indirin</div>
-        <div class="sidebar green" style="text-align: center;"><a href="/indir/"><img src="/media/img/sidebar_download.png" border="0" /></a></div>
+        <div class="green" style="text-align: center;"><a href="/indir/"><img src="/media/img/sidebar_download.png" border="0" /></a></div>
         <div class="sidebar_green_title">Özgürlükiçin'i destekleyin</div>
         <div class="sidebar green">Pardus'un tanıtımına katkıda bulunmak isteyenler için Özgürlükiçin düğmeleri yayınlandı. Sitenizde, blogunuzda yayınlamak için siz de <a href="/banner/">hazır kodlarımızdan</a> yararlanabilirsiniz.</div>
         {% endblock %}

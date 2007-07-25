@@ -17,7 +17,7 @@
 
 {% block sidebar %}
 <div class="sidebar_green_title">İlgili sayfalar</div>
-<div class="sidebar sidebar_green">
+<div class="sidebar green">
     {% ifnotequal flatpage.url "/hakkinda/icerik-politikasi/" %}<a href="/hakkinda/icerik-politikasi/">İçerik Politikası</a><br/>{% endifnotequal %}
     {% ifnotequal flatpage.url "/hakkinda/gizlilik-politikasi/" %}<a href="/hakkinda/gizlilik-politikasi/">Gizlilik Politikası</a><br/>{% endifnotequal %}
     {% ifnotequal flatpage.url "/hakkinda/gezegen-kurallari/" %}<a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a><br/>{% endifnotequal %}
@@ -25,5 +25,5 @@
 </div>
 
 <div class="sidebar_green_title">Etiketler</div>
-<div class="sidebar sidebar_green">{% for tag in flatpage.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
+<div class="sidebar green">{% for tag in flatpage.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
 {% endblock %}
