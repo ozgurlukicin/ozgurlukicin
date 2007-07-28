@@ -19,11 +19,10 @@
   {% else %}
   <div class="planet_title transparent_link"><a href="{{ item.link }}">{{ item.subscriber.name }}</a></div>
   {% endif %}
-  <div class="planet_content">
+  <div class="planet_content yellow">
     <div class="planet_meta">
-      {% if item.qtags %}<div class="yellow"><img src="/media/img/tag.png" border="0" style="vertical-align: middle;" />
+      {% if item.qtags %}<img src="/media/img/tag.png" border="0" style="vertical-align: middle;" />
           {% for tag in item.qtags %}<a href="{{ site.url }}/tag/{{ tag.name }}">{{ tag.name }}</a> {% endfor %}
-          </div>
       {% endif %}
     </div>
     <p>{{ item.content }}</p>

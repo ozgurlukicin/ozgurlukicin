@@ -345,8 +345,11 @@ class PardusVersion(models.Model):
         verbose_name_plural = "Pardus Sürümleri"
 
 class PardusMirror(models.Model):
+    cdtype = (('1','Kurulan'),('2','Çalışan'))
+
     name = models.CharField('Sunucu adı', maxlength = 64, blank = False, unique = True)
     url = models.CharField('Adres', maxlength = 128)
+    type = models.SmallIntegerField('CD Tipi', maxlength=1, choices=cdtype)
     status = models.BooleanField('Aktif')
 
     def __str__(self):

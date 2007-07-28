@@ -6,8 +6,8 @@
 {% block pagetype %}page{% endblock %}
 
 {% block content %}
-<div class="page_title">Pardus {% if version.number %}{{ version.number }} ({{ version.codename }}) {% endif %}Sürüm Notları</div>
-<div class="page_content">
+<div class="fs_title transparent_link">Pardus {% if version.number %}{{ version.number }} ({{ version.codename }}) {% endif %}Sürüm Notları</div>
+<div class="page_content green">
 {{ releasenote }}
 </div>
 {% endblock %}

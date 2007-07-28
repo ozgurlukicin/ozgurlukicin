@@ -2,149 +2,67 @@
 
 {% block title %}{{ tag|escape }} etiketli içerik - {% endblock %}
 
-{% block extrahead %}
-<script type="text/javascript">
-window.addEvent('domready', function(){
-    {% if news %}
-    var newsSlide = new Fx.Slide('taglist_news');
-    newsSlide.hide();
-    $('toggle_news').addEvent('click', function(e){ e = new Event(e); newsSlide.toggle(); e.stop(); });
-    {% endif %}
-
-    {% if packages %}
-    var pkgSlide = new Fx.Slide('taglist_packages');
-    pkgSlide.hide();
-    $('toggle_pkg').addEvent('click', function(e){ e = new Event(e); pkgSlide.toggle(); e.stop(); });
-    {% endif %}
-
-    {% if fs %}
-    var fsSlide = new Fx.Slide('taglist_fs');
-    fsSlide.hide();
-    $('toggle_fs').addEvent('click', function(e){ e = new Event(e); fsSlide.toggle(); e.stop(); });
-    {% endif %}
-
-    {% if flatpages %}
-    var fpSlide = new Fx.Slide('taglist_flatpages');
-    fpSlide.hide();
-    $('toggle_fp').addEvent('click', function(e){ e = new Event(e); fpSlide.toggle(); e.stop(); });
-    {% endif %}
-
-    {% if games %}
-    var gmSlide = new Fx.Slide('taglist_games');
-    gmSlide.hide();
-    $('toggle_gm').addEvent('click', function(e){ e = new Event(e); gmSlide.toggle(); e.stop(); });
-    {% endif %}
-});
-</script>
-{% endblock %}
-
 {% block pagetype %}page{% endblock %}
 
 {% block section %}fs{% endblock %}
 {% block section_logo %}<img src="/media/img/fs_header_logo.png">{% endblock %}
 
 {% block content %}
-<h2>{{ tag|escape }} etiketli içerik</h2>
-<!-- <div class="page_content"> -->
+<div class="fs_title transparent_link">{{ tag|escape }} etiketli içerik</div>
+<div class="fs_content">
     {% if news %}
-        <div class="fs_list_title" id="toggle_news">
-            <div style="float: left; padding-top: 2px;"><img src="/media/img/down_arrow.png" border="0" /></div>
-            <div style="float: left; padding-left: 10px;">Haberler</div>
-            <div style="float: right; padding-right: 10px;">{{ news.count }} adet</div>
-        </div>
-        <div id="taglist_news">
+        <div class="purple">
+            <h1>Haberler ({{ news.count }} adet)</h1>
+            <ul style="padding-left: 16px;">
             {% for obj in news %}
-            <div class="fs_list {% cycle odd,even %}">
-                <div class="fs_info" style="margin-bottom: 0;">
-                    <div class="fs_title"><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></div>
-                    <div class="fs_desc">{{ obj.text|truncatewords:"10"|striptags }}</div>
-                    <p class="fs_tags"><img src="/media/img/tag.png" /> {% for tag in obj.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-                </div>
-                <hr class="fs_separator"/>
-            </div>
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.text|truncatewords:"10"|striptags }}</li>
             {% endfor %}
+            </ul>
         </div>
     {% endif %}
 
     {% if packages %}
-        <div class="fs_list_title" id="toggle_pkg">
-            <div style="float: left; padding-top: 2px;"><img src="/media/img/down_arrow.png" border="0" /></div>
-            <div style="float: left; padding-left: 10px;">Paketler</div>
-            <div style="float: right; padding-right: 10px;">{{ packages.count }} adet</div>
-        </div>
-        <div id="taglist_packages">
+        <div class="orange">
+            <h1>Paketler ({{ packages.count }} adet)</h1>
+            <ul style="padding-left: 16px;">
             {% for obj in packages %}
-            <div class="fs_list {% cycle odd,even %}">
-                <div class="fs_info" style="margin-bottom: 0;">
-                    <div class="fs_title"><a href="{{ obj.get_absolute_url }}">{{ obj.name }}</a></div>
-                    <div class="fs_desc">{{ obj.sum|truncatewords:"10"|striptags }}</div>
-                    <p class="fs_tags"><img src="/media/img/tag.png" /> {% for tag in obj.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-                </div>
-                <hr class="fs_separator"/>
-            </div>
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
             {% endfor %}
+            </ul>
         </div>
     {% endif %}
 
     {% if fs %}
-        <div class="fs_list_title" id="toggle_fs">
-            <div style="float: left; padding-top: 2px;"><img src="/media/img/down_arrow.png" border="0" /></div>
-            <div style="float: left; padding-left: 10px;">İlk adımlar</div>
-            <div style="float: right; padding-right: 10px;">{{ fs.count }} adet</div>
-        </div>
-        <div id="taglist_fs">
+        <div class="green">
+            <h1>İlk adımlar ({{ fs.count }} adet)</h1>
+            <ul style="padding-left: 16px;">
             {% for obj in fs %}
-            <div class="fs_list {% cycle odd,even %}">
-                <div class="fs_info" style="margin-bottom: 0;">
-                    <div class="fs_title"><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></div>
-                    <div class="fs_desc">{{ obj.text|truncatewords:"10"|striptags }}</div>
-                    <p class="fs_tags"><img src="/media/img/tag.png" /> {% for tag in obj.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-                </div>
-                <hr class="fs_separator"/>
-            </div>
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
             {% endfor %}
+            </ul>
         </div>
     {% endif %}
 
     {% if games %}
-        <div class="fs_list_title" id="toggle_gm">
-            <div style="float: left; padding-top: 2px;"><img src="/media/img/down_arrow.png" border="0" /></div>
-            <div style="float: left; padding-left: 10px;">Oyunlar</div>
-            <div style="float: right; padding-right: 10px;">{{ games.count }} adet</div>
-        </div>
-        <div id="taglist_games">
+        <div class="darkblue">
+            <h1>Oyunlar ({{ games.count }} adet)</h1>
+            <ul style="padding-left: 16px;">
             {% for obj in games %}
-            <div class="fs_list {% cycle odd,even %}">
-                <div class="fs_info" style="margin-bottom: 0;">
-                    <div class="fs_title"><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></div>
-                    <div class="fs_desc">{{ obj.text|truncatewords:"10"|striptags }}</div>
-                    <p class="fs_tags"><img src="/media/img/tag.png" /> {% for tag in obj.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-                </div>
-                <hr class="fs_separator"/>
-            </div>
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
             {% endfor %}
+            </ul>
         </div>
     {% endif %}
 
     {% if flatpages %}
-        <div class="fs_list_title" id="toggle_fp">
-            <div style="float: left; padding-top: 2px;"><img src="/media/img/down_arrow.png" border="0" /></div>
-            <div style="float: left; padding-left: 10px;">Sabit içerikli sayfalar</div>
-            <div style="float: right; padding-right: 10px;">{{ flatpages.count }} adet</div>
-        </div>
-        <div id="taglist_flatpages">
+        <div class="green">
+            <h1>Sabit sayfalar ({{ flatpages.count }} adet)</h1>
+            <ul style="padding-left: 16px;">
             {% for obj in flatpages %}
-            <div class="fs_list {% cycle odd,even %}">
-                <div class="fs_info" style="margin-bottom: 0;">
-                    <div class="fs_title"><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></div>
-                    <div class="fs_desc">{{ obj.text|truncatewords:"10"|striptags }}</div>
-                    <p class="fs_tags"><img src="/media/img/tag.png" /> {% for tag in obj.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-                </div>
-                <hr class="fs_separator"/>
-            </div>
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.text|truncatewords:"10"|striptags }}</li>
             {% endfor %}
+            </ul>
         </div>
     {% endif %}
-<div class="note_question">'{{ tag|escape }}' etiketli içerik yukarıda listelenmektedir,<br />görmek istediğiniz içerik türünün (Oyun, Paket, İlk adım, vb.) üzerine tıklayın.</div>
-<!-- </div> -->
+</div>
 {% endblock %}

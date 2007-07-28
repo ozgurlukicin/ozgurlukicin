@@ -6,8 +6,8 @@
 {% block pagetype %}page{% endblock %}
 
 {% block content %}
-<div class="page_title">Pardus {% if version.number %}{{ version.number }} ({{ version.codename }}) {% endif %}indir</div>
-<div class="page_content">
+<div class="fs_title transparent_link">Pardus {% if version.number %}{{ version.number }} ({{ version.codename }}) {% endif %}indir</div>
+<div class="page_content green">
 <h2>Kurulan CD</h2>
     <p>md5: <strong>{{ version.install_md5sum }}</strong><br />
     sha1sum: <strong>{{ version.install_sha1sum }}</strong></p>
@@ -15,11 +15,11 @@
     <div>
         <p>Yardım için, <a href="http://www.pardus.org.tr/belgeler/kurulum_nasil.html">kurulum kılavuzu</a>'na başvurabilir, ayrıca {{ version.number }} {{ version.codename }} sürümü özellikleri hakkında bilgi almak için <a href="/indir/{{ version.number }}/surum_notu/">sürüm notları</a> belgesini okuyabilirsiniz.</p>
 
-        {% if mirrors %}
+        {% if install_mirrors %}
         <p>Pardus {{ version.number }} {{ version.codename }} Kurulan CD'sini indirmek için aşağıdaki linkleri kullanabilirsiniz.</p>
 
         <ul style="margin-top: -6px;">
-            {% for mirror in mirrors %}
+            {% for mirror in install_mirrors %}
             <li><a href="{{ mirror.url }}">{{ mirror.name }}</a></li>
             {% endfor %}
         </ul>
@@ -37,11 +37,11 @@
     <div>
         <p>Çalışan CD bilgisayara kurulmadan CD okuyucunuz üzerinden çalışan Pardus sürümüdür. Pardus'u bilgisayarınıza kurmak için Pardus {{ version.number }} {{ version.codename }} Kurulan'ı tercih etmelisiniz. Daha eski sürümlere ftp arşivinden ulaşabilirsiniz.</p>
 
-        {% if mirrors %}
+        {% if live_mirrors %}
         <p>Pardus {{ version.number }} {{ version.codename }} Çalışan CD'sini indirmek için aşağıdaki linkleri kullanabilirsiniz.</p>
 
         <ul style="margin-top: -6px;">
-            {% for mirror in mirrors %}
+            {% for mirror in live_mirrors %}
             <li><a href="{{ mirror.url }}">{{ mirror.name }}</a></li>
             {% endfor %}
         </ul>

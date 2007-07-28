@@ -372,9 +372,10 @@ img.alignright, img[align="right"] {
     padding-top: 12px;
     clear: both;
     text-align: center;
+    font-size: 12px;
 }
 
-.paginate-pages {
+/*.paginate-pages {
     padding: 2px 3px;
     border: 1px solid #ddd;
     cursor: pointer;
@@ -403,7 +404,7 @@ img.alignright, img[align="right"] {
     font-weight: bold;
     background:#417690;
     color:#f4f379;
-}
+}*/
 
 /* forms */
 input#id_username {
