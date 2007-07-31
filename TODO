@@ -21,8 +21,4 @@ Legend:
   - avatar support
   / lost password support
 
-- A different page for adding documents, it should create a diff and make "writer", "editor" workflow
-
 - FreeComment support for news (also maybe packages, games etc.)
-- Statistic tool for entire web site
-- Add a tickbox for system base apps like kopete, konqueror etc beside installed size and package size. This way it should remove the integer number and insert a string like "Temel sistem bileşeni" or something like that.
