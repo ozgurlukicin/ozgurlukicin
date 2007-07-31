@@ -452,11 +452,26 @@ input#form_submit {
 .planet_content {
     padding-left: 12px;
     padding-right: 20px;
-    text-align: justify;
 }
 
 .planet_link a {
     color: #827300;
+}
+
+.planet_author {
+    min-width: 90px;
+    min-height: 90px;
+    background-color: #DEEBF2;
+    padding: 5px;
+    border: #C6D2D8 solid 1px;
+    float: right;
+    text-align: center;
+    clear: left;
+}
+
+.planet_author a {
+    color: #000;
+    background-color: transparent;
 }
 
 /* kwicks */

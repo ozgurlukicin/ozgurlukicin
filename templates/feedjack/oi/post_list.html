@@ -15,11 +15,15 @@
 
   <div class="post">
   {% if item.title %}
-  <div class="planet_title transparent_link"><!--<a href="{{ item.feed.link }}">{{ item.subscriber.name }}</a>: --><a href="{{ item.link }}">{{ item.title }}</a></div>
+  <div class="planet_title transparent_link"><a href="{{ item.link }}">{{ item.title }}</a></div>
   {% else %}
   <div class="planet_title transparent_link"><a href="{{ item.link }}">{{ item.subscriber.name }}</a></div>
   {% endif %}
   <div class="planet_content yellow">
+    <div class="planet_author ">
+        <img src="/media/hackergotchi/{{ item.subscriber.shortname }}.png" border="0" alt="{{ item.subscriber.name }}" /><br /><br />
+        <a href="{{ item.feed.link }}">{{ item.subscriber.name }}</a>
+    </div>
     <div class="planet_meta">
       {% if item.qtags %}<img src="/media/img/tag.png" border="0" style="vertical-align: middle;" />
           {% for tag in item.qtags %}<a href="{{ site.url }}/tag/{{ tag.name }}">{{ tag.name }}</a> {% endfor %}
