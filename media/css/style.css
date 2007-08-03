@@ -639,7 +639,7 @@ input#form_submit {
 
 /* sidebar */
 #sidebar {
-    float:left;
+    float:right;
     width:268px;
     margin-bottom: 10px;
     margin-right: 10px;
@@ -648,7 +648,6 @@ input#form_submit {
 .sidebar_purple_title {
     margin-top: 10px;
     padding-top: 4px;
-    padding-left: 646px;
     height: 25px;
     font-size: 14px;
     font-weight: bold;
@@ -677,7 +676,6 @@ input#form_submit {
 .sidebar_blue_title {
     margin-top: 10px;
     padding-top: 4px;
-    padding-left: 646px;
     height: 25px;
     font-size: 14px;
     font-weight: bold;
@@ -706,7 +704,6 @@ input#form_submit {
 .sidebar_darkblue_title {
     margin-top: 10px;
     padding-top: 4px;
-    padding-left: 646px;
     height: 25px;
     font-size: 14px;
     font-weight: bold;
@@ -735,7 +732,6 @@ input#form_submit {
 .sidebar_green_title {
     margin-top: 10px;
     padding-top: 4px;
-    padding-left: 646px;
     height: 25px;
     font-size: 14px;
     font-weight: bold;
