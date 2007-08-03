@@ -638,8 +638,7 @@ input#form_submit {
 }
 
 /* sidebar */
-#sidebar, .sidebar {
-    padding-left: 648px;
+#sidebar {
     margin-bottom: 10px;
     margin-right: 20px;
 }
