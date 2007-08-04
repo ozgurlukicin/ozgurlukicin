@@ -15,7 +15,7 @@
 
 {% block content %}
 <div class="games_title transparent_link">{{ game.title }}</div>
-<div class="page_content darkblue">
+<div class="page_content grey">
 {{ game.text }}
 </div>
 <div class="page_properties"><a href="{{ game.get_printable_url }}"><img src="/media/img/print.png" /></a></div>
@@ -26,7 +26,7 @@
 
 {% block sidebar %}
 <div class="sidebar_darkblue_title">Bilgiler</div>
-<div class="sidebar darkblue">
+<div class="sidebar grey">
     <strong>Lisans:</strong> {% for license in licenses %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}<br />
     <strong>Paket boyutu:</strong> {{ game.download_size|filesizeformat }}<br />
     <strong>Kurulu boyutu:</strong> {{ game.installed_size|filesizeformat }}<br />
@@ -34,7 +34,7 @@
 </div>
 
 <div class="sidebar_darkblue_title">Değerlendirme</div>
-<div class="sidebar darkblue">
+<div class="sidebar grey">
     <strong>Öğrenme süresi:</strong> {{ game.learning_time }}<br />
     <strong>Oynanabilirlik:</strong> {{ game.gameplay }}<br />
     <strong>Grafik:</strong> {{ game.graphics }}<br />
@@ -45,16 +45,16 @@
 </div>
 
 <div class="sidebar_darkblue_title">Menüdeki yeri</div>
-<div class="sidebar darkblue">{{ game.path }}</div>
+<div class="sidebar grey">{{ game.path }}</div>
 
 <div class="sidebar_darkblue_title">Etiketler</div>
-<div class="sidebar darkblue">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
+<div class="sidebar grey">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
 
 {% if videos %}
 <div class="sidebar_darkblue_title">İlgili Videolar</div>
-<div class="sidebar darkblue">{% for video in videos %}<a href="/video/{{ video.name }}" rel="lightbox[video_{{ game.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
+<div class="sidebar grey">{% for video in videos %}<a href="/video/{{ video.name }}" rel="lightbox[video_{{ game.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
 {% endif %}
 
 <div class="sidebar_darkblue_title">Yazar</div>
-<div class="sidebar darkblue">{{ game.author.first_name }} {{ game.author.last_name }}</div>
+<div class="sidebar grey">{{ game.author.first_name }} {{ game.author.last_name }}</div>
 {% endblock %}

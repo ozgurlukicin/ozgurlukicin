@@ -5,7 +5,7 @@
             {% for new in news %}
             <div id="news-{{ new.id }}" class="news">
                 <div class="news_title transparent_link"><a href="{{ new.get_absolute_url }}">{{ new.title }}</a></div>
-                <div class="news_content purple">{{ new.sum }}</div>
+                <div class="news_content grey">{{ new.sum }}</div>
             </div>
             {% endfor %}
         </div>
@@ -14,7 +14,7 @@
             {% for package in packages %}
             <div id="package-{{ package.id }}" class="packages {% cycle alignleft,alignright %}">
                 <div class="packages_title_mini transparent_link">Paket: <a href="{{ package.get_absolute_url }}">{{ package.title }}</a></div>
-                <div class="packages_content_mini orange">{{ package.sum }}</div>
+                <div class="packages_content_mini grey">{{ package.sum }}</div>
             </div>
             {% endfor %}
         </div>
@@ -23,7 +23,7 @@
             {% for game in games %}
             <div id="game-{{ game.id }}" class="games {% cycle alignleft,alignright %}">
                 <div class="games_title_mini transparent_link">Oyun: <a href="{{ game.get_absolute_url }}">{{ game.title }}</a></div>
-                <div class="games_content_mini darkblue">{{ game.sum }}</div>
+                <div class="games_content_mini grey">{{ game.sum }}</div>
             </div>
             {% endfor %}
         </div>
@@ -32,7 +32,7 @@
             {% for fs in fss %}
             <div id="fs-{{ fs.id }}" class="fs {% cycle alignleft,alignright %}">
                 <div class="fs_title_mini transparent_link">İlk adım: <a href="{{ fs.get_absolute_url }}">{{ fs.title }}</a></div>
-                <div class="fs_content_mini green">{{ fs.sum }}</div>
+                <div class="fs_content_mini grey">{{ fs.sum }}</div>
             </div>
             {% endfor %}
         </div>

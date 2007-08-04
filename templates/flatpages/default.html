@@ -7,7 +7,7 @@
 
 {% block content %}
 <div class="fs_title transparent_link">{{ flatpage.title }}</div>
-<div class="page_content green">
+<div class="page_content grey">
 {{ flatpage.text }}
 </div>
 <div class="page_last_update">Son güncelleme: {{ flatpage.update|timedelta }}</div>
@@ -15,5 +15,5 @@
 
 {% block sidebar %}
 <div class="sidebar_green_title">Etiketler</div>
-<div class="sidebar green">{% for tag in flatpage.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
+<div class="sidebar grey">{% for tag in flatpage.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
 {% endblock %}

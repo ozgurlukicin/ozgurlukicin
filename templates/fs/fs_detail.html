@@ -15,7 +15,7 @@
 
 {% block content %}
 <div class="fs_title transparent_link">{{ fs.title }}</div>
-<div class="page_content green">
+<div class="page_content grey">
 {{ fs.text }}
 </div>
 <div class="page_properties"><a href="{{ fs.get_printable_url }}"><img src="/media/img/print.png" /></a></div>
@@ -24,10 +24,10 @@
 
 {% block sidebar %}
 <div class="sidebar_green_title">Etiketler</div>
-<div class="sidebar green">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
+<div class="sidebar grey">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
 
 {% if videos %}
 <div class="sidebar_green_title">İlgili Videolar</div>
-<div class="sidebar green">{% for video in videos %}<a href="/video/{{ video.name }}" rel="lightbox[video_{{ package.name }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
+<div class="sidebar grey">{% for video in videos %}<a href="/video/{{ video.name }}" rel="lightbox[video_{{ package.name }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
 {% endif %}
 {% endblock %}

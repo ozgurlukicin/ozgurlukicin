@@ -35,12 +35,12 @@
         <div id="logo"><a href="/"><img src="/media/img/logo.png" border="0" alt="Özgürlük için Pardus.." /></a></div>
         <div id="menu_container">
             <ul id="menu">
-                <li class="menu"><a href="/haber/"><img src="/media/img/tab_news.png" border="0" alt="Haberler" /></a></li>
                 <li class="menu"><a href="/ia/"><img src="/media/img/tab_fs.png" border="0" alt="İlk adımlar" /></a></li>
-                <li class="menu"><a href="/oyun/"><img src="/media/img/tab_games.png" border="0" alt="Oyunlar" /></a></li>
                 <li class="menu"><a href="/paket/"><img src="/media/img/tab_packages.png" border="0" alt="Paketler" /></a></li>
-                <li class="menu"><a href="/gezegen/"><img src="/media/img/tab_planet.png" border="0" alt="Gezegen" /></a></li>
+                <li class="menu"><a href="/oyun/"><img src="/media/img/tab_games.png" border="0" alt="Oyunlar" /></a></li>
+                <li class="menu"><a href="/haber/"><img src="/media/img/tab_news.png" border="0" alt="Haberler" /></a></li>
                 <li class="menu"><a href="/forum/"><img src="/media/img/tab_forum.png" border="0" alt="Forum" /></a></li>
+                <li class="menu"><a href="/gezegen/"><img src="/media/img/tab_planet.png" border="0" alt="Gezegen" /></a></li>
             </ul>
         </div>
         <div id="section_logo">{% block section_logo %}{% endblock %}</div>
@@ -51,8 +51,8 @@
     </div>
     <div id="sidebar">
         {% block sidebartop %}
-        <div class="sidebar_green_title">Kullanıcı Kutusu</div>
-        <div class="green"{% if not user.is_authenticated %} style="text-align: center;"{% endif %}>
+        <div class="sidebar_green_title sidebar">Kullanıcı Kutusu</div>
+        <div class="sidebar grey"{% if not user.is_authenticated %} style="text-align: center;"{% endif %}>
         {% if not user.is_authenticated %}
         <form method="post" action="/kullanici/giris/">
             <input type="text" id="id_username" name="username" size="8" class="vTextField required" value="" maxlength="30" /><br />
@@ -65,10 +65,10 @@
             <br />İstiyorsan profil sayfana <a href="/kullanici/dashboard">buradan</a> ulaşabilir veya <a href="/kullanici/cikis">buraya</a> tıklayarak sistemden çıkabilirsin
         {% endif %}
         </div>
-        <div class="sidebar_green_title">Pardus'u indirin</div>
-        <div class="sidebar green" style="text-align: center;"><a href="/indir/"><img src="/media/img/sidebar_download.png" border="0" alt="Pardus'u indir.." /></a></div>
-        <div class="sidebar_green_title">Özgürlükiçin'i destekleyin</div>
-        <div class="sidebar green">Pardus'un tanıtımına katkıda bulunmak isteyenler için Özgürlükiçin düğmeleri yayınlandı. Sitenizde, blogunuzda yayınlamak için siz de <a href="/banner/">hazır kodlarımızdan</a> yararlanabilirsiniz.</div>
+        <div class="sidebar_green_title sidebar">Pardus'u indirin</div>
+        <div class="sidebar grey" style="text-align: center;"><a href="/indir/"><img src="/media/img/sidebar_download.png" border="0" alt="Pardus'u indir.." /></a></div>
+        <div class="sidebar_green_title sidebar">Özgürlükiçin'i destekleyin</div>
+        <div class="sidebar grey">Pardus'un tanıtımına katkıda bulunmak isteyenler için Özgürlükiçin düğmeleri yayınlandı. Sitenizde, blogunuzda yayınlamak için siz de <a href="/banner/">hazır kodlarımızdan</a> yararlanabilirsiniz.</div>
         {% endblock %}
         {% block sidebar %}
         {% endblock %}
