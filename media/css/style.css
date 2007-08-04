@@ -154,7 +154,7 @@
 #content {
     padding: 10px 0px 20px 10px;
     float: left;
-    width: 70%;
+    width: 68%;
 }
 
 .page_title {
@@ -650,14 +650,14 @@ input#form_submit {
 
 /* sidebar */
 #sidebar {
-    float: left;
-    position: absolute;
+    float: right;
+    position: relative;
 }
 
 .sidebar {
     position: relative;
-    left: 635px;
-    width: 250px;
+/*     left: 635px; */
+    width: 258px;
     padding-left: 6px;
 }
 

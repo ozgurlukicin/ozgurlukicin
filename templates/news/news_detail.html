@@ -18,6 +18,6 @@
 {% endblock %}
 
 {% block sidebar %}
-<div class="sidebar_purple_title">Etiketler</div>
+<div class="sidebar sidebar_purple_title">Etiketler</div>
 <div class="sidebar grey">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
 {% endblock %}
