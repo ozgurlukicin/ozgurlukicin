@@ -638,11 +638,10 @@ input#form_submit {
 }
 
 /* sidebar */
-#sidebar {
-    float:right;
-    width:268px;
+.sidebar {
+    padding-left: 648px;
     margin-bottom: 10px;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 .sidebar_purple_title {
@@ -744,7 +743,6 @@ input#form_submit {
 .sidebar_orange_title {
     margin-top: 10px;
     padding-top: 4px;
-    padding-left: 646px;
     height: 25px;
     font-size: 14px;
     font-weight: bold;
@@ -773,7 +771,6 @@ input#form_submit {
 .sidebar_yellow_title {
     margin-top: 10px;
     padding-top: 4px;
-    padding-left: 646px;
     height: 25px;
     font-size: 14px;
     font-weight: bold;
