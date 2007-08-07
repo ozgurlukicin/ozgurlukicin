@@ -20,7 +20,7 @@ class Main_RSS(Feed):
 
     def items(self):
         output = []
-        for news in News.objects.filter(status=1).order_by('-date')[:NEWS_IN_HOMEPAGE]:
+        for news in News.objects.filter(status=1).order_by('-update')[:NEWS_IN_HOMEPAGE]:
             news.title = 'Haber: %s' % news.title
             output.append(news)
 
@@ -50,7 +50,7 @@ class News_RSS(Feed):
     description_template = 'feeds/feed_description.html'
 
     def items(self):
-        return News.objects.filter(status=1).order_by('-date')[:NEWS_PER_PAGE]
+        return News.objects.filter(status=1).order_by('-update')[:NEWS_PER_PAGE]
 
 class News_Atom(News_RSS):
     feed_type = Atom1Feed
