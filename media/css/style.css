@@ -390,7 +390,7 @@ img.alignright, img[align="right"] {
 }*/
 
 .paginate-current {
-    background-color: #000;
+    font-weight: bold;
 }
 
 /* forms */
