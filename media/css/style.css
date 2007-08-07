@@ -439,6 +439,7 @@ input#form_submit {
 .planet_content {
     padding-left: 12px;
     padding-right: 20px;
+    min-height: 120px;
 }
 
 .planet_link a {
@@ -454,11 +455,6 @@ input#form_submit {
     float: right;
     text-align: center;
     clear: left;
-}
-
-.planet_author a {
-    color: #000;
-    background-color: transparent;
 }
 
 /* kwicks */
