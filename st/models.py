@@ -251,13 +251,13 @@ class News(models.Model):
 
     class Admin:
         fields = (
-            ('Genel', {'fields': ('author', 'title','sum','text','tags','date','status')}),
+            ('Genel', {'fields': ('author', 'title', 'sum', 'text', 'tags', 'update', 'status')}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
 
-        list_display = ('title', 'author', 'date','status')
-        list_filter = ['date']
-        ordering = ['-date']
+        list_display = ('title', 'author', 'update','status')
+        list_filter = ['update']
+        ordering = ['-update']
         search_fields = ['title', 'author', 'text']
         js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js")
 

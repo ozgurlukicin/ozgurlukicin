@@ -50,7 +50,7 @@ fs_dict = {
           }
 
 news_dict = {
-             'queryset': News.objects.filter(status=1).order_by('-date'),
+             'queryset': News.objects.filter(status=1).order_by('-update'),
              'template_name': 'news/news_main.html',
              'paginate_by': NEWS_PER_PAGE,
              'template_object_name': 'news',
