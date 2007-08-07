@@ -152,6 +152,7 @@ class FS(models.Model):
     tags = models.ManyToManyField(Tag, blank=False)
     videos = models.ManyToManyField(Video, blank=True)
     update = models.DateTimeField('Son Güncelleme', blank=False)
+    author = models.ForeignKey(User)
     status = models.BooleanField('Aktif')
 
     def __str__(self):
@@ -165,7 +166,7 @@ class FS(models.Model):
 
     class Admin:
         fields = (
-            ('Genel', {'fields': ('title','sum','text','videos','tags','update','status',)}),
+            ('Genel', {'fields': ('author', 'title','sum','text','videos','tags','update','status',)}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
 
@@ -200,7 +201,7 @@ class Game(models.Model):
     tags = models.ManyToManyField(Tag, blank=False)
     videos = models.ManyToManyField(Video, blank=True)
     update = models.DateTimeField('Son Güncelleme', blank=False)
-    author = models.ForeignKey(User, blank=True, editable=False)
+    author = models.ForeignKey(User)
     status = models.BooleanField('Aktif')
 
     def __str__(self):
@@ -214,7 +215,7 @@ class Game(models.Model):
 
     class Admin:
         fields = (
-            ('Genel', {'fields': ('title', 'sum', 'text', 'videos', 'tags', 'update', 'status')}),
+            ('Genel', {'fields': ('author', 'title', 'sum', 'text', 'videos', 'tags', 'update', 'status')}),
             ('Oyun bilgileri', {'fields': ('url', 'path', 'learning_time', 'license', 'installed_size', 'download_size')}),
             ('Değerlendirme', {'fields': ('gameplay', 'graphics', 'sound', 'scenario', 'atmosphere')}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
@@ -225,10 +226,6 @@ class Game(models.Model):
         search_fields = ['title', 'sum', 'text', 'tags']
         js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
 
-    def save(self):
-        self.author = threadlocals.get_current_user()
-        super(Game, self).save()
-
     class Meta:
         verbose_name = "Oyun"
         verbose_name_plural = "Oyunlar"
@@ -238,9 +235,9 @@ class News(models.Model):
     slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
-    author = models.ForeignKey(User, blank=True, editable=False)
     tags = models.ManyToManyField(Tag, blank=False)
-    date = models.DateTimeField('Tarih', blank=False)
+    update = models.DateTimeField('Tarih', blank=False)
+    author = models.ForeignKey(User)
     status = models.BooleanField('Aktif')
 
     def __str__(self):
@@ -252,13 +249,9 @@ class News(models.Model):
     def get_printable_url(self):
         return "/haber/%s/yazdir/" % self.slug
 
-    def save(self):
-        self.author = threadlocals.get_current_user()
-        super(News, self).save()
-
     class Admin:
         fields = (
-            ('Genel', {'fields': ('title','sum','text','tags','date','status')}),
+            ('Genel', {'fields': ('author', 'title','sum','text','tags','date','status')}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
 
@@ -290,6 +283,7 @@ class Package(models.Model):
     tags = models.ManyToManyField(Tag)
     videos = models.ManyToManyField(Video, blank=True)
     update = models.DateTimeField('Son Güncelleme', blank=False)
+    author = models.ForeignKey(User)
     status = models.BooleanField('Aktif')
 
     def __str__(self):
@@ -303,7 +297,7 @@ class Package(models.Model):
 
     class Admin:
         fields = (
-            ('Genel', {'fields': ('title','sum','text', 'license','installed_size','download_size','url','point','path','ss','tags','videos','update','status')}),
+            ('Genel', {'fields': ('author', 'title','sum','text', 'license','installed_size','download_size','url','point','path','ss','tags','videos','update','status')}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
         list_display = ('title', 'sum', 'status')
