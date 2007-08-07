@@ -389,6 +389,10 @@ img.alignright, img[align="right"] {
     color:#f4f379;
 }*/
 
+.paginate-current {
+    background-color: #000;
+}
+
 /* forms */
 input#id_username {
     padding: 0px;
