@@ -539,8 +539,7 @@ input#form_submit {
 .news_content {
     padding-left: 10px;
     padding-right: 16px;
-    margin-bottom: -10px;
-    overflow:auto;
+    overflow: auto;
 }
 
 .packages_title_mini {
@@ -568,14 +567,13 @@ input#form_submit {
     width: 280px;
     padding-left: 10px;
     padding-right: 16px;
-    overflow:auto;
+    overflow: auto;
 }
 
 .packages_content {
     padding-left: 10px;
     padding-right: 16px;
-    margin-bottom: -10px;
-    overflow:auto;
+    overflow: auto;
 }
 
 .games_title_mini {
@@ -603,14 +601,13 @@ input#form_submit {
     width: 280px;
     padding-left: 10px;
     padding-right: 16px;
-    overflow:auto;
+    overflow: auto;
 }
 
 .games_content {
     padding-left: 10px;
     padding-right: 16px;
-    margin-bottom: -10px;
-    overflow:auto;
+    overflow: auto;
 }
 
 .fs_title_mini {
@@ -638,14 +635,13 @@ input#form_submit {
     width: 280px;
     padding-left: 10px;
     padding-right: 16px;
-    overflow:auto;
+    overflow: auto;
 }
 
 .fs_content {
     padding-left: 10px;
     padding-right: 16px;
-    margin-bottom: -10px;
-    overflow:auto;
+    overflow: auto;
 }
 
 /* sidebar */
@@ -656,9 +652,13 @@ input#form_submit {
 
 .sidebar {
     position: relative;
-/*     left: 635px; */
     width: 258px;
     padding-left: 6px;
+}
+
+.sidebar ul {
+    margin-top: 0px;
+    padding-left: 16px;
 }
 
 .sidebar_purple_title {
