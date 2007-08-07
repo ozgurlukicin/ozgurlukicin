@@ -3,20 +3,12 @@
     color: #9218A4;
 }
 
-.purple a {
-    background-color: #9218A4;
-}
-
 .purple h1, .purple h2, .purple h3, .purple h4, .purple h5, .purple h6 {
     color: #7C1889;
 }
 
 .green {
     color: #69A200;
-}
-
-.green a {
-    background-color: #69A200;
 }
 
 .green h1, .green h2, .green h3, .green h4, .green h5, .green h6 {
@@ -27,20 +19,12 @@
     color: #10A8C1;
 }
 
-.blue a {
-    background-color: #10A8C1;
-}
-
 .blue h1, .blue h2, .blue h3, .blue h4, .blue h5, .blue h6 {
     color: #339966;
 }
 
 .darkblue {
     color: #33718B;
-}
-
-.darkblue a {
-    background-color: #33718B;
 }
 
 .darkblue h1, .darkblue h2, .darkblue h3, .darkblue h4, .darkblue h5, .darkblue h6 {
@@ -51,10 +35,6 @@
     color: #DB5F00;
 }
 
-.orange a {
-    background-color: #DB5F00;
-}
-
 .orange h1, .orange h2, .orange h3, .orange h4, .orange h5, .orange h6 {
     color: #CE5900;
 }
@@ -63,20 +43,12 @@
     color: #827300;
 }
 
-.yellow a {
-    background-color: #E2CD1E;
-}
-
 .yellow h1, .yellow h2, .yellow h3, .yellow h4, .yellow h5, .yellow h6 {
     color: #339966;
 }
 
 .grey {
     color: #585D60;
-}
-
-.grey a {
-    background-color: #323436;
 }
 
 .yellow h1, .yellow h2, .yellow h3, .yellow h4, .yellow h5, .yellow h6 {
@@ -744,17 +716,6 @@ img {
 p {
     padding: 0px 0px 15px;
     margin: 0px;
-}
-
-a {
-    color: #fff;
-    text-decoration: none;
-}
-
-a:hover {
-    color: #fff;
-    background-color: #000;
-    text-decoration: none;
 }
 
 h1 {
