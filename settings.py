@@ -67,6 +67,13 @@ LOGIN_REDIRECT_URL = '/kullanici/dashboard/'
 LOGOUT_URL = '/kullanici/cikis/'
 PROFILE_EDIT_URL = '/kullanici/duzenle/'
 
+# Feedjack Settings for resizing images
+FEEDJACK_RESIZE_IMAGE = True
+FEEDJACK_MAX_IMAGE_Y = False
+FEEDJACK_MAX_IMAGE_X = 550
+FEEDJACK_UPLOAD_DIR = "%s/media/feedjack" % DOCUMENT_ROOT
+FEEDJACK_UPLOAD_URL = "%s/media/feedjack" % WEB_URL
+
 TIME_ZONE = 'Europe/Istanbul'
 LANGUAGE_CODE = 'tr'
 SITE_ID = 1

@@ -68,7 +68,7 @@ def get_tags(entry):
                 fcat.append(models.Tag.objects.get(name=tagname))
     return fcat
 
-def get_entry_data(entry, feed):
+def get_entry_data(entry, feed, options):
     """ Retrieves data from a post and returns it in a tuple.
     """
     try:
@@ -97,6 +97,69 @@ def get_entry_data(entry, feed):
     except:
         content = encode(entry.get('summary', entry.get('description', '')))
     
+
+    # Patch for resizing images, Eren Turkay <turkay.eren@gmail.com>
+    # 2007-07-01
+
+    from django.conf import settings
+
+    if settings.FEEDJACK_RESIZE_IMAGE:
+
+        from BeautifulSoup import BeautifulSoup
+        import tempfile, urllib2
+        from PIL import Image
+
+        global USER_AGENT
+
+        soup = BeautifulSoup(content)
+        images = soup.findAll("img")
+        if len(images) > 0:
+            for img in images:
+                # get image src and split the last value of /
+                url = img.get("src")
+                image_name = url.split("/")[-1]
+
+                # create a request and get the image data
+                if options.verbose:
+                    print 'Getting %s to resize' % url
+                req = urllib2.Request(url)
+                req.add_header('User-Agent', USER_AGENT)
+                image_data = urllib2.urlopen(req).read()
+
+                # write it
+                tmp = tempfile.mktemp()
+                file = open(tmp, 'w')
+                file.write(image_data)
+                file.close()
+
+                im = Image.open(tmp, 'r')
+
+                if settings.FEEDJACK_MAX_IMAGE_X and im.size[0] > settings.FEEDJACK_MAX_IMAGE_X:
+                    resize_x = settings.FEEDJACK_MAX_IMAGE_X
+                else:
+                    resize_x = im.size[0]
+
+                if settings.FEEDJACK_MAX_IMAGE_Y and im.size[1] > settings.FEEDJACK_MAX_IMAGE_Y:
+                    resize_y = settings.FEEDJACK_MAX_IMAGE_Y
+                else:
+                    resize_y = im.size[1]
+
+                # if there is a change on images, continue the process
+                if im.size[0] != resize_x or im.size[1] != resize_y:
+                    res = im.resize((resize_x, resize_y), Image.ANTIALIAS)
+                    res.save("%s/%s" % (settings.FEEDJACK_UPLOAD_DIR, image_name))
+
+                    # generate a site url that will be showed in feedjack index and replace it with original
+                    resized_image_url = "%s/%s" % (settings.FEEDJACK_UPLOAD_URL, image_name)
+                    content = content.replace(url, resized_image_url)
+                    if options.verbose:
+                        print 'Image resized %s, %s' % (url, resized_image_url)
+                else:
+                    if options.verbose:
+                        print 'Skipped, there is no change\n'
+
+            # endpatch
+
     if entry.has_key('modified_parsed'):
         date_modified = mtime(entry.modified_parsed)
     else:
@@ -114,7 +177,7 @@ def process_entry(entry, fpf, feed, postdict, options):
     from oi.feedjack import models
 
     (link, title, guid, author, author_email, content, date_modified, fcat, \
-      comments) = get_entry_data(entry, feed)
+      comments) = get_entry_data(entry, feed, options)
 
     if options.verbose:
         print 'entry:'
