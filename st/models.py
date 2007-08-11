@@ -152,7 +152,7 @@ class FS(models.Model):
     tags = models.ManyToManyField(Tag, blank=False)
     videos = models.ManyToManyField(Video, blank=True)
     update = models.DateTimeField('Son Güncelleme', blank=False)
-    author = models.ForeignKey(User)
+    author = models.CharField('Yazar', maxlength=32)
     status = models.BooleanField('Aktif')
 
     def __str__(self):
@@ -201,7 +201,7 @@ class Game(models.Model):
     tags = models.ManyToManyField(Tag, blank=False)
     videos = models.ManyToManyField(Video, blank=True)
     update = models.DateTimeField('Son Güncelleme', blank=False)
-    author = models.ForeignKey(User)
+    author = models.CharField('Yazar', maxlength=32)
     status = models.BooleanField('Aktif')
 
     def __str__(self):
@@ -237,7 +237,7 @@ class News(models.Model):
     text = models.TextField('Metin', blank=False)
     tags = models.ManyToManyField(Tag, blank=False)
     update = models.DateTimeField('Tarih', blank=False)
-    author = models.ForeignKey(User)
+    author = models.CharField('Yazar', maxlength=32)
     status = models.BooleanField('Aktif')
 
     def __str__(self):
@@ -283,7 +283,7 @@ class Package(models.Model):
     tags = models.ManyToManyField(Tag)
     videos = models.ManyToManyField(Video, blank=True)
     update = models.DateTimeField('Son Güncelleme', blank=False)
-    author = models.ForeignKey(User)
+    author = models.CharField('Yazar', maxlength=32)
     status = models.BooleanField('Aktif')
 
     def __str__(self):
