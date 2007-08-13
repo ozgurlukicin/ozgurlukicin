@@ -20,4 +20,7 @@
 {% block sidebar %}
 <div class="sidebar sidebar_purple_title">Etiketler</div>
 <div class="sidebar grey">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
+
+<div class="sidebar sidebar_purple_title">Yazar</div>
+<div class="sidebar grey">{{ news.author }}</div>
 {% endblock %}

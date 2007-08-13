@@ -30,4 +30,7 @@
 <div class="sidebar sidebar_green_title">İlgili Videolar</div>
 <div class="sidebar grey">{% for video in videos %}<a href="/video/{{ video.name }}" rel="lightbox[video_{{ package.name }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
 {% endif %}
+
+<div class="sidebar sidebar_green_title">Yazar</div>
+<div class="sidebar grey">{{ fs.author }}</div>
 {% endblock %}

@@ -51,4 +51,7 @@
 <div class="sidebar sidebar_orange_title">Ekran görüntüleri</div>
 <div class="sidebar grey">{% for ss in sss %}<a href="/media/{{ ss.file }}" rel="lightbox[ss_{{ package.title }}]" title="{{ ss.desc }}"><img src="{{ ss.file|thumbnail:"235x235" }}" /></a>{% endfor %}</a></div>
 {% endif %}
+
+<div class="sidebar sidebar_orange_title">Yazar</div>
+<div class="sidebar grey">{{ package.author }}</div>
 {% endblock %}
