@@ -1,6 +1,6 @@
-=====================================================
+===============================================
 Don’t code today what you can’t debug tomorrow
-=====================================================
+===============================================
 
 Legend:
 - To do
@@ -8,7 +8,6 @@ Legend:
 / In progress
 + Completed
 
-/ Forum
 / General 404 error pages
 / User management system (basic login/logout/register and user profiles)
   + ignored user names
@@ -22,3 +21,33 @@ Legend:
   + lost password support
 
 - FreeComment support for news (also maybe packages, games etc.)
+
+- Forum
+  - Multi language
+  - Tags
+    - Thread
+  - Category
+    - Sorting
+  - Forum
+    - Category
+    - Public/Private
+    - Lock
+  - Thread
+    - Hot or Not (Reddit style)
+    - Ghost
+    - Lock
+    ? Split
+    ? Merge
+  - Post
+    - Hot or Not (Reddit style)
+    - Ghost
+    - Delete
+    - Markup language (BBCode??)
+    - Maximum characters in post, maximum images in post, maximum posts in X minute
+    - Smiley
+    - Quotations
+    - Akismet spam protection
+  - Feeds
+  - Search
+  - Log & monitor all IP's
+  - Migration
