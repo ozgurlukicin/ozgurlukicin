@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 # Copyright 2007 Artistanbul
-# Licensed under the GNU General Public License, version 2.
+# Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 import re, Image
@@ -16,7 +16,7 @@ from oi.middleware import threadlocals
 from oi.settings import CITY_LIST, MEDIA_ROOT, MEDIA_URL
 
 class Tag(models.Model):
-    name = models.CharField('Etiket', maxlength = 32, blank=False, unique=True)
+    name = models.CharField('Etiket', maxlength=32, blank=False, unique=True)
 
     def __str__(self):
         return self.name
