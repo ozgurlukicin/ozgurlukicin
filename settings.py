@@ -118,13 +118,14 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.sites',
     'django.contrib.humanize',
-    'oi.flatpages',
-    'oi.st',
-    'oi.upload',
-    'oi.bug',
-    'oi.feedjack',
-    'oi.seminar',
+    #'oi.flatpages',
+    #'oi.st',
+    #'oi.upload',
+    #'oi.bug',
+    #'oi.feedjack',
+    #'oi.seminar',
     'oi.profile',
+    'oi.forum',
 )
 
 CITY_LIST = (
