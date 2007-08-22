@@ -14,15 +14,16 @@ from django.template import RequestContext
 from django import newforms as forms
 
 from oi.st.wrappers import render_response
-from oi.forum.models import Forum, Thread, Post, Moderator, AbuseReport, WatchList
+from oi.forum.models import Category, Forum, Topic, Post, Moderator, AbuseReport, WatchList
 
 def main(request):
-    return render_response(request, 'forum/main.html')
+    forums = Forum.objects.all()
+    return render_response(request, 'forum/main.html', locals())
 
 def forum(request, slug):
     """
     Displays a list of threads within a forum.
-    Threads are sorted by their sticky flag, followed by their 
+    Topics are sorted by their sticky flag, followed by their 
     most recent post.
     """
     f = get_object_or_404(Forum, slug=slug)
@@ -39,7 +40,7 @@ def thread(request, forum, thread):
     posts for that thread, in chronological order.
     """
     f = get_object_or_404(Forum, slug=forum)
-    t = get_object_or_404(Thread, pk=thread)
+    t = get_object_or_404(Topic, pk=thread)
     p = t.post_set.all().order_by('time')
 
     t.views += 1
@@ -61,7 +62,7 @@ def reply(request, forum, thread):
         raise HttpResponseServerError
 
     f = get_object_or_404(Forum, slug=forum)
-    t = get_object_or_404(Thread, pk=thread)
+    t = get_object_or_404(Topic, pk=thread)
 
     if t.closed:
         raise HttpResponseServerError
@@ -87,7 +88,7 @@ def newthread(request, forum):
     if not request.user.is_authenticated:
         raise HttpResponseServerError
     f = get_object_or_404(Forum, slug=forum)
-    t = Thread(
+    t = Topic(
         forum=f,
         title=request.POST.get('title'),
     )

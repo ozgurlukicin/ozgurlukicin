@@ -7,13 +7,22 @@
 
 from django.conf.urls.defaults import patterns
 
-urlpatterns = patterns('oi.forum.views',
-    (r'^feed/rss/$', 'rssfeed'),
-    (r'^feed/atom/$', 'atomfeed'),
-    (r'^feed/$', 'rssfeed'),
+from models import Forum, Category
 
-    (r'^feed/atom/user/(?P<user>\d+)/$', 'atomfeed'),
-    (r'^feed/rss/user/(?P<user>\d+)/$', 'rssfeed'),
+main_dict = {
+             'queryset': Forum.objects.filter(hidden=0).order_by('name'),
+             'template_name': 'forum/main.html',
+             'template_object_name': 'forum',
+             'extra_context': {'categories': Category.objects.filter(hidden=0).order_by('name')}
+            }
 
-    (r'^$', 'main'),
+urlpatterns = patterns('',
+    #(r'^feed/rss/$', 'rssfeed'),
+    #(r'^feed/atom/$', 'atomfeed'),
+    #(r'^feed/$', 'rssfeed'),
+
+    #(r'^feed/atom/user/(?P<user>\d+)/$', 'atomfeed'),
+    #(r'^feed/rss/user/(?P<user>\d+)/$', 'rssfeed'),
+
+    (r'^$', 'django.views.generic.list_detail.object_list', dict(main_dict)),
 )
