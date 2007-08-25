@@ -10,48 +10,34 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
-from django.template import RequestContext
-from django import newforms as forms
+from django.core.paginator import ObjectPaginator
+
+from oi.forum.settings import *
 
 from oi.st.wrappers import render_response
 from oi.forum.models import Category, Forum, Topic, Post, Moderator, AbuseReport, WatchList
 
 def main(request):
-    forums = Forum.objects.all()
-    return render_response(request, 'forum/main.html', locals())
+    forums = Forum.objects.filter(hidden=0).order_by('name')
 
-def forum(request, slug):
-    """
-    Displays a list of threads within a forum.
-    Topics are sorted by their sticky flag, followed by their 
-    most recent post.
-    """
-    f = get_object_or_404(Forum, slug=slug)
+    return render_response(request, 'forum/forum_list.html', locals())
 
-    return render_response(request, 'forum/main.html',
-        RequestContext(request, {
-            'forum': f,
-            'threads': f.thread_set.all()
-        }))
+def forum(request, forum_slug):
+    forum = get_object_or_404(Forum, slug=forum_slug)
+    topics = forum.topic_set.all()
+    paginator = ObjectPaginator(topics, TOPICS_PER_PAGE)
 
-def thread(request, forum, thread):
-    """
-    Increments the viewed count on a thread then displays the 
-    posts for that thread, in chronological order.
-    """
-    f = get_object_or_404(Forum, slug=forum)
-    t = get_object_or_404(Topic, pk=thread)
-    p = t.post_set.all().order_by('time')
+    return render_response(request, 'forum/forum_detail.html', locals())
 
-    t.views += 1
-    t.save()
+def topic(request, forum_slug, topic_id):
+    forum = get_object_or_404(Forum, slug=forum_slug)
+    topic = get_object_or_404(Topic, pk=topic_id)
+    posts = topic.post_set.all().order_by('update')
 
-    return render_response(request, 'forum/thread.html',
-        RequestContext(request, {
-            'forum': f,
-            'thread': t,
-            'posts': p,
-        }))
+    topic.views += 1
+    topic.save()
+
+    return render_response(request, 'forum/topic.html', locals())
 
 def reply(request, forum, thread):
     """

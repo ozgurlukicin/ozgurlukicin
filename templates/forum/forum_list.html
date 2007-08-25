@@ -8,9 +8,9 @@
 {% block section_logo %}<img src="/media/img/forum_header_logo.png">{% endblock %}
 
 {% block content %}
-{% regroup forum_list by category as forum_list %}
+{% regroup forums by category as forums %}
 
-{% for category in forum_list %}
+{% for category in forums %}
 <strong>{{ category.grouper }}</strong>
 {% for item in category.list %}<a href="{{ item.get_absolute_url }}">{{ item.name }}</a><br />{% endfor %}
 <hr>

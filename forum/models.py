@@ -57,6 +57,9 @@ class Post(models.Model):
             f.posts += 1
             f.save()
 
+        else:
+            self.update_count += 1
+
         self.ip = threadlocals.get_current_ip()
         super(Post, self).save()
 
@@ -78,7 +81,7 @@ class Post(models.Model):
 
 class Topic(models.Model):
     """
-    Post model.
+    Topic model.
     """
     forum = models.ForeignKey('Forum', verbose_name='Forum')
     title = models.CharField(maxlength=100, verbose_name='Başlık')

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Forum - {% endblock %}
+
+{% block pagetype %}page-single{% endblock %}
+
+{% block section %}forum{% endblock %}
+{% block section_logo %}<img src="/media/img/forum_header_logo.png">{% endblock %}
+
+{% block content %}
+<strong>{{ forum.name }} > {{ topic.title }}</strong><br />
+{% for post in posts %}
+<a name="post{{ post.id }}"></a>
+<a href="{{ post.get_absolute_url }}">{{ post.id }}</a> - {{ post.author }} - {{ post.hidden }} - {{ post.created }}<br />
+{{ post.text }}<br />
+{% ifnotequal post.update_count 0 %}Bu ileti {{ post.update_count }} kez değiştirilmiştir, son kez {{ post.update }} tarihinde değiştirilmiştir.<br />{% endifnotequal %}
+{{ post.ip }}
+<hr>
+{% endfor %}
+{% endblock %}
+
+{% block sidebartop %}{% endblock %}

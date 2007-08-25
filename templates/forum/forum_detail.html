@@ -11,6 +11,11 @@
 <strong>{{ forum.name }}</strong><br />
 {% for topic in topics %}
 <a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a><br />
+sticky: {{ topic.sticky }}<br />
+locked: {{ topic.locked }}<br />
+hidden: {{ topic.hidden }}<br />
+posts: {{ topic.posts }}<br />
+views: {{ topic.views }}<br />
 {% endfor %}
 {% endblock %}
 
