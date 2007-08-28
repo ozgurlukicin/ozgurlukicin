@@ -7,6 +7,7 @@
 
 from datetime import datetime
 
+from django.http import HttpResponseRedirect, HttpResponseServerError
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
@@ -87,32 +88,30 @@ def newthread(request, forum):
     return HttpResponseRedirect(t.get_absolute_url())
 
 def new_topic(request, forum_slug):
-    #if not request.user.is_authenticated:
-    #    raise HttpResponseServerError
+    if not request.user.is_authenticated:
+        raise HttpResponseServerError #FIXME: Give an error message
 
-    forum = get_object_or_404(Forum, slug=forum_slug)
+    if request.user.is_authenticated and request.method == 'POST':
+        forum = get_object_or_404(Forum, slug=forum_slug)
 
-    #if forum.locked:
-    #    raise HttpResponseServerError
+        if forum.locked:
+            raise HttpResponseServerError #FIXME: Give an error message
 
-    if request.method == 'POST':
-        form = TopicForm(request.POST)
+        form = TopicForm(request.POST.copy())
         if form.is_valid():
             topic = Topic(forum=forum,
-                          title=title
+                          title=form.clean_data['title']
                          )
             topic.save()
 
-            #text = request.POST.get('text', False)
             post = Post(topic=topic,
                         author=request.user,
-                        text=text,
+                        text=form.clean_data['text']
                        )
             post.save()
 
-        return HttpResponseRedirect(post.get_absolute_url())
-
+            return HttpResponseRedirect(post.get_absolute_url())
     else:
-        form = TopicForm()
+        form = TopicForm(auto_id=True).as_p()
 
     return render_response(request, 'forum/new_topic.html', {'form': form})

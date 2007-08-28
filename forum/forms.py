@@ -4,8 +4,8 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
 class TopicForm(forms.Form):
-    title = forms.CharField(label='Başlık', required=True, max_length=100, widget=forms.TextInput(attrs={'rows': '5', 'cols': '10',}))
-    text = forms.CharField(label='İleti', required=True, widget=forms.Textarea(attrs={'rows': '5', 'cols': '10',}))
+    title = forms.CharField(label='Başlık', required=True, max_length=100, widget=forms.TextInput(attrs={'size': '40',}))
+    text = forms.CharField(label='İleti', required=True, widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
 
 class PostForm(forms.Form):
     post = forms.CharField(
@@ -14,15 +14,6 @@ class PostForm(forms.Form):
 
 
 class ThreadForm(forms.Form):
-    def __init__( self, *args, **kwargs ):
-        super( ThreadForm, self ).__init__( *args, **kwargs )
-        self.fields['category'] = forms.ChoiceField(
-                choices = [(str(x.id), x.label) for x in Category.objects.all()] 
-                )
-
-    # this is here to set the order
-    category = forms.CharField()
-
     subject = forms.CharField(max_length=80,
             widget=forms.TextInput(
                 attrs={
