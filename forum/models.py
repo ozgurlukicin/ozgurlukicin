@@ -127,7 +127,7 @@ class Forum(models.Model):
     slug = models.SlugField(prepopulate_from=('name',), verbose_name='SEF isim')
     description = models.TextField(verbose_name='Açıklama')
     hidden = models.BooleanField(blank=True, null=True, verbose_name='Gizli')
-    closed = models.BooleanField(blank=True, null=True, verbose_name='Kapalı')
+    locked = models.BooleanField(blank=True, null=True, verbose_name='Kapalı')
     topics = models.IntegerField(default=0, verbose_name='Konu sayısı')
     posts = models.IntegerField(default=0, verbose_name='İleti sayısı')
     forum_latest_post = models.ForeignKey(Post, blank=True, null=True, related_name='forum_latest_post', verbose_name='Son ileti')

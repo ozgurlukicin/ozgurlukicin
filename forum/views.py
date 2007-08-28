@@ -14,6 +14,8 @@ from django.core.paginator import ObjectPaginator
 
 from oi.forum.settings import *
 
+from oi.forum.forms import TopicForm
+
 from oi.st.wrappers import render_response
 from oi.forum.models import Category, Forum, Topic, Post, Moderator, AbuseReport, WatchList
 
@@ -40,17 +42,13 @@ def topic(request, forum_slug, topic_id):
     return render_response(request, 'forum/topic.html', locals())
 
 def reply(request, forum, thread):
-    """
-    If a thread isn't closed, and the user is logged in, post a reply
-    to a thread. Note we don't have "nested" replies at this stage.
-    """
     if not request.user.is_authenticated:
         raise HttpResponseServerError
 
     f = get_object_or_404(Forum, slug=forum)
     t = get_object_or_404(Topic, pk=thread)
 
-    if t.closed:
+    if t.locked or f.locked:
         raise HttpResponseServerError
 
     body = request.POST.get('body', False)
@@ -87,3 +85,34 @@ def newthread(request, forum):
     )
     p.save()
     return HttpResponseRedirect(t.get_absolute_url())
+
+def new_topic(request, forum_slug):
+    #if not request.user.is_authenticated:
+    #    raise HttpResponseServerError
+
+    forum = get_object_or_404(Forum, slug=forum_slug)
+
+    #if forum.locked:
+    #    raise HttpResponseServerError
+
+    if request.method == 'POST':
+        form = TopicForm(request.POST)
+        if form.is_valid():
+            topic = Topic(forum=forum,
+                          title=title
+                         )
+            topic.save()
+
+            #text = request.POST.get('text', False)
+            post = Post(topic=topic,
+                        author=request.user,
+                        text=text,
+                       )
+            post.save()
+
+        return HttpResponseRedirect(post.get_absolute_url())
+
+    else:
+        form = TopicForm()
+
+    return render_response(request, 'forum/new_topic.html', {'form': form})
