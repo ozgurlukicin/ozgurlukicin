@@ -67,6 +67,36 @@ def reply(request, forum_slug, topic_id):
 
     return render_response(request, 'forum/new_topic.html', {'form': form})
 
+def quote(request, forum_slug, topic_id, post_id):
+    if not request.user.is_authenticated:
+        raise HttpResponseServerError #FIXME: Give an error message
+
+    forum = get_object_or_404(Forum, slug=forum_slug)
+    topic = get_object_or_404(Topic, pk=topic_id)
+
+    if forum.locked or topic.locked:
+        raise HttpResponseServerError #FIXME: Give an error message
+
+    if request.user.is_authenticated and request.method == 'POST':
+        form = PostForm(request.POST.copy())
+        if form.is_valid():
+            post = Post(topic=topic,
+                        author=request.user,
+                        text=form.clean_data['text']
+                       )
+            post.save()
+
+            return HttpResponseRedirect(post.get_absolute_url())
+    else:
+        post = get_object_or_404(Post, pk=post_id)
+
+        if post in topic.post_set.all():
+            form = PostForm(auto_id=True, initial={'text': '[quote|'+post_id+']'+post.text+'[/quote]'}).as_p()
+        else:
+            pass #Give an exception
+
+    return render_response(request, 'forum/new_topic.html', {'form': form})
+
 def new_topic(request, forum_slug):
     if not request.user.is_authenticated:
         raise HttpResponseServerError #FIXME: Give an error message

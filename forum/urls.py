@@ -17,7 +17,7 @@ urlpatterns = patterns('',
 
     (r'^$', 'oi.forum.views.main'),
     (r'^(?P<forum_slug>.*)/new/$', 'oi.forum.views.new_topic'),
-    (r'^(?P<forum_slug>.*)/(?P<topic_id>\d+)/quote/(?P<post_id>\d+)$', 'oi.forum.views.quote'),
+    (r'^(?P<forum_slug>.*)/(?P<topic_id>\d+)/quote/(?P<post_id>\d+)/$', 'oi.forum.views.quote'),
     (r'^(?P<forum_slug>.*)/(?P<topic_id>\d+)/reply/$', 'oi.forum.views.reply'),
     (r'^(?P<forum_slug>.*)/(?P<topic_id>\d+)/$', 'oi.forum.views.topic'),
     (r'^(?P<forum_slug>.*)/$', 'oi.forum.views.forum'),
