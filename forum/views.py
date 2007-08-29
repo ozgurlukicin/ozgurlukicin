@@ -15,7 +15,7 @@ from django.core.paginator import ObjectPaginator
 
 from oi.forum.settings import *
 
-from oi.forum.forms import TopicForm
+from oi.forum.forms import TopicForm, PostForm
 
 from oi.st.wrappers import render_response
 from oi.forum.models import Category, Forum, Topic, Post, Moderator, AbuseReport, WatchList
@@ -42,50 +42,30 @@ def topic(request, forum_slug, topic_id):
 
     return render_response(request, 'forum/topic.html', locals())
 
-def reply(request, forum, thread):
+def reply(request, forum_slug, topic_id):
     if not request.user.is_authenticated:
-        raise HttpResponseServerError
+        raise HttpResponseServerError #FIXME: Give an error message
 
-    f = get_object_or_404(Forum, slug=forum)
-    t = get_object_or_404(Topic, pk=thread)
+    forum = get_object_or_404(Forum, slug=forum_slug)
+    topic = get_object_or_404(Topic, pk=topic_id)
 
-    if t.locked or f.locked:
-        raise HttpResponseServerError
+    if forum.locked or topic.locked:
+        raise HttpResponseServerError #FIXME: Give an error message
 
-    body = request.POST.get('body', False)
-    p = Post(
-        thread=t,
-        author=request.user,
-        body=body,
-        time=datetime.now(),
-        )
-    p.save()
-    return HttpResponseRedirect(p.get_absolute_url())
+    if request.user.is_authenticated and request.method == 'POST':
+        form = PostForm(request.POST.copy())
+        if form.is_valid():
+            post = Post(topic=topic,
+                        author=request.user,
+                        text=form.clean_data['text']
+                       )
+            post.save()
 
-def newthread(request, forum):
-    """
-    Rudimentary post function - this should probably use 
-    newforms, although not sure how that goes when we're updating 
-    two models.
+            return HttpResponseRedirect(post.get_absolute_url())
+    else:
+        form = PostForm(auto_id=True).as_p()
 
-    Only allows a user to post if they're logged in.
-    """
-    if not request.user.is_authenticated:
-        raise HttpResponseServerError
-    f = get_object_or_404(Forum, slug=forum)
-    t = Topic(
-        forum=f,
-        title=request.POST.get('title'),
-    )
-    t.save()
-    p = Post(
-        thread=t,
-        author=request.user,
-        body=request.POST.get('body'),
-        time=datetime.now(),
-    )
-    p.save()
-    return HttpResponseRedirect(t.get_absolute_url())
+    return render_response(request, 'forum/new_topic.html', {'form': form})
 
 def new_topic(request, forum_slug):
     if not request.user.is_authenticated:
