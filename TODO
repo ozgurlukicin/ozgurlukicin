@@ -25,23 +25,24 @@ Legend:
 - Search support
 
 - Forum
-  - Tags
-    - Thread
-  - Category
-    - Sorting
-  - Forum
-    - Category
-    - Public/Private
+  + Category
+    + Hidden
+    ? Sorting
+  / Forum
+    + Category
+    + Hidden
     - Lock
-  - Thread
+    - Pagination
+  / Topic
+    + Tags
     - Hot or Not (Reddit style)
-    - Ghost
+    + Hidden
     - Lock
     ? Split
     ? Merge
-  - Post
+  / Post
     - Hot or Not (Reddit style)
-    - Ghost
+    + Hidden
     - Delete
     - Markup language (BBCode??)
     - Maximum characters in post, maximum images in post, maximum posts in X minute

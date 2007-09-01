@@ -5,4 +5,4 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-TOPICS_PER_PAGE = 30
+TOPICS_PER_PAGE = 2

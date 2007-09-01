@@ -44,6 +44,10 @@ class Post(models.Model):
         ordering = ('-update',)
         verbose_name = 'İleti'
         verbose_name_plural = 'İletiler'
+        permissions = (
+                       ("can_hide", "Can hide"),
+                       ("can_see_hidden_posts", "Can see hidden posts"),
+                      )
 
     def save(self):
         if not self.id:
@@ -106,6 +110,13 @@ class Topic(models.Model):
         ordering = ('-sticky', '-topic_latest_post')
         verbose_name = 'Konu'
         verbose_name_plural = 'Konular'
+        permissions = (
+                       ("can_hide", "Can hide"),
+                       ("can_stick", "Can stick"),
+                       ("can_lock", "Can lock"),
+                       ("can_tag", "Can tag"),
+                       ("can_see_hidden_topics", "Can see hidden topics"),
+                      )
 
     def save(self):
         if not self.id:
@@ -118,6 +129,7 @@ class Topic(models.Model):
         if self.id:
             f = Forum.objects.get(id=self.forum.id)
             f.topics -= 1
+            f.posts -= self.posts
             f.save()
         super(Topic, self).delete()
 
@@ -144,6 +156,11 @@ class Forum(models.Model):
     class Meta:
         verbose_name = 'Forum'
         verbose_name_plural = 'Forumlar'
+        permissions = (
+                       ("can_hide", "Can hide"),
+                       ("can_lock", "Can lock"),
+                       ("can_see_hidden_forums", "Can see hidden forums"),
+                      )
 
 class Category(models.Model):
     name = models.CharField(maxlength=255, verbose_name='Kategori ismi')
@@ -151,14 +168,6 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-
-    def get_moderators(self):
-        mods = Moderator.objects.filter(category=self.id)
-
-        if mods.count() > 0:
-            return ', '.join([m.user.username for m in mods])
-        else:
-            return None
 
     class Admin:
         list_display = ('id', 'name')
@@ -169,17 +178,10 @@ class Category(models.Model):
         ordering = ['name']
         verbose_name = 'Kategori'
         verbose_name_plural = 'Kategoriler'
-
-class Moderator(models.Model):
-    forum = models.ForeignKey(Forum, verbose_name='Forum')
-    user = models.ForeignKey(User, verbose_name='Kullanıcı')
-
-    class Admin:
-        pass
-
-    class Meta:
-        verbose_name = 'Yönetici'
-        verbose_name_plural = 'Yöneticiler'
+        permissions = (
+                       ("can_hide", "Can hide"),
+                       ("can_see_hidden_categories", "Can see hidden categories"),
+                      )
 
 class AbuseReport(models.Model):
     post = models.ForeignKey(Post, verbose_name='İleti')
@@ -202,15 +204,3 @@ class WatchList(models.Model):
     class Meta:
         verbose_name = 'İzleme listesi'
         verbose_name_plural = 'İzleme listeleri'
-
-#class Profile(models.Model):
-#    user = models.ForeignKey(User, unique=True, editable=False, core=True, edit_inline=models.STACKED, max_num_in_admin=1)
-#    profile = models.TextField(blank=True)
-#    avatar = models.ImageField(blank=True, upload_to='upload/avatars/')
-#    ppp = models.IntegerField(choices = ((5, '5'), (10, '10'), (20, '20'), (50, '50')), default = 20, help_text = "Posts per page")
-#    tpp = models.IntegerField(choices = ((5, '5'), (10, '10'), (20, '20'), (50, '50')), default = 20, help_text = "Threads per page")
-#    notify_email = models.BooleanField(default=False, blank=True, help_text = "Email notifications for watched discussions.")
-#    reverse_posts = models.BooleanField(default=False, help_text = "Display newest posts first.")
-
-#    class Admin:
-#        pass

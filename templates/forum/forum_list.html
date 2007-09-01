@@ -11,9 +11,25 @@
 {% regroup forums by category as forums %}
 
 {% for category in forums %}
-<strong>{{ category.grouper }}</strong>
-{% for item in category.list %}<a href="{{ item.get_absolute_url }}">{{ item.name }}</a><br />{% endfor %}
-<hr>
+    {% if category.grouper.hidden and perms.forum.can_see_hidden_categories %}
+        <div style="opacity: 0.5;">
+        <h1>{{ category.grouper }}</h1>
+        <ul>
+        {% for item in category.list %}<li><a href="{{ item.get_absolute_url }}">{{ item.name }}</a></li>{% endfor %}
+        </ul>
+        </div>
+    {% endif %}
+    {% if not category.grouper.hidden %}
+        <h1>{{ category.grouper }}</h1>
+        <ul>
+        {% for item in category.list %}
+        {% if item.hidden and perms.forum.can_see_hidden_forums %}<div style="opacity: 0.5;"><li><a href="{{ item.get_absolute_url }}">{{ item.name }}</a></li></div>{% endif %}
+        {% if not item.hidden %}
+        <li><a href="{{ item.get_absolute_url }}">{{ item.name }}</a></li>
+        {% endif %}
+        {% endfor %}
+        </ul>
+    {% endif %}
 {% endfor %}
 {% endblock %}
 

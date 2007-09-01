@@ -18,17 +18,17 @@ from oi.forum.settings import *
 from oi.forum.forms import TopicForm, PostForm
 
 from oi.st.wrappers import render_response
-from oi.forum.models import Category, Forum, Topic, Post, Moderator, AbuseReport, WatchList
+from oi.forum.models import Category, Forum, Topic, Post, AbuseReport, WatchList
 
 def main(request):
-    forums = Forum.objects.filter(hidden=0).order_by('name')
+    forums = Forum.objects.order_by('name')
 
     return render_response(request, 'forum/forum_list.html', locals())
 
 def forum(request, forum_slug):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topics = forum.topic_set.all()
-    paginator = ObjectPaginator(topics, TOPICS_PER_PAGE)
+    #paginator = ObjectPaginator(topics, TOPICS_PER_PAGE)
 
     return render_response(request, 'forum/forum_detail.html', locals())
 
@@ -37,11 +37,13 @@ def topic(request, forum_slug, topic_id):
     topic = get_object_or_404(Topic, pk=topic_id)
     posts = topic.post_set.all().order_by('update')
 
-    topic.views += 1
-    topic.save()
+    if request.user.is_authenticated():
+        topic.views += 1
+        topic.save()
 
     return render_response(request, 'forum/topic.html', locals())
 
+@login_required
 def reply(request, forum_slug, topic_id):
     if not request.user.is_authenticated:
         raise HttpResponseServerError #FIXME: Give an error message
@@ -67,6 +69,7 @@ def reply(request, forum_slug, topic_id):
 
     return render_response(request, 'forum/new_topic.html', {'form': form})
 
+@login_required
 def quote(request, forum_slug, topic_id, post_id):
     if not request.user.is_authenticated:
         raise HttpResponseServerError #FIXME: Give an error message
@@ -97,6 +100,7 @@ def quote(request, forum_slug, topic_id, post_id):
 
     return render_response(request, 'forum/new_topic.html', {'form': form})
 
+@login_required
 def new_topic(request, forum_slug):
     if not request.user.is_authenticated:
         raise HttpResponseServerError #FIXME: Give an error message
