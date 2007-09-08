@@ -37,14 +37,17 @@ def topic(request, forum_slug, topic_id):
     topic = get_object_or_404(Topic, pk=topic_id)
     posts = topic.post_set.all().order_by('update')
 
-    if request.user.is_authenticated():
+    session_key = 'visited_'+topic_id
+
+    if request.user.is_authenticated() and not session_key in request.session:
         topic.views += 1
+        request.session[session_key] = True
         topic.save()
 
     return render_response(request, 'forum/topic.html', locals())
 
 @login_required
-def reply(request, forum_slug, topic_id):
+def reply(request, forum_slug, topic_id, post_id=False):
     if not request.user.is_authenticated:
         raise HttpResponseServerError #FIXME: Give an error message
 
@@ -56,7 +59,15 @@ def reply(request, forum_slug, topic_id):
 
     if request.user.is_authenticated and request.method == 'POST':
         form = PostForm(request.POST.copy())
-        if form.is_valid():
+
+        if 'flood_control' in request.session and ((datetime.now() - request.session['flood_control']).seconds < FLOOD_TIMEOUT):
+            flood = True
+            timeout = (FLOOD_TIMEOUT - (datetime.now() - request.session['flood_control']).seconds)
+        if not 'flood_control' in request.session or ((datetime.now() - request.session['flood_control']).seconds > FLOOD_TIMEOUT):
+            flood = False
+            request.session['flood_control'] = datetime.now()
+
+        if form.is_valid() and not flood:
             post = Post(topic=topic,
                         author=request.user,
                         text=form.clean_data['text']
@@ -65,40 +76,15 @@ def reply(request, forum_slug, topic_id):
 
             return HttpResponseRedirect(post.get_absolute_url())
     else:
-        form = PostForm(auto_id=True).as_p()
+        if post_id:
+            post = get_object_or_404(Post, pk=post_id)
 
-    return render_response(request, 'forum/new_topic.html', {'form': form})
-
-@login_required
-def quote(request, forum_slug, topic_id, post_id):
-    if not request.user.is_authenticated:
-        raise HttpResponseServerError #FIXME: Give an error message
-
-    forum = get_object_or_404(Forum, slug=forum_slug)
-    topic = get_object_or_404(Topic, pk=topic_id)
-
-    if forum.locked or topic.locked:
-        raise HttpResponseServerError #FIXME: Give an error message
-
-    if request.user.is_authenticated and request.method == 'POST':
-        form = PostForm(request.POST.copy())
-        if form.is_valid():
-            post = Post(topic=topic,
-                        author=request.user,
-                        text=form.clean_data['text']
-                       )
-            post.save()
-
-            return HttpResponseRedirect(post.get_absolute_url())
-    else:
-        post = get_object_or_404(Post, pk=post_id)
-
-        if post in topic.post_set.all():
-            form = PostForm(auto_id=True, initial={'text': '[quote|'+post_id+']'+post.text+'[/quote]'}).as_p()
+            if post in topic.post_set.all():
+                form = PostForm(auto_id=True, initial={'text': '[quote|'+post_id+']'+post.text+'[/quote]'})
         else:
-            pass #Give an exception
+            form = PostForm(auto_id=True)
 
-    return render_response(request, 'forum/new_topic.html', {'form': form})
+    return render_response(request, 'forum/reply.html', locals())
 
 @login_required
 def new_topic(request, forum_slug):

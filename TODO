@@ -37,15 +37,16 @@ Legend:
     + Tags
     - Hot or Not (Reddit style)
     + Hidden
+    - Hide
     - Lock
     ? Split
     ? Merge
   / Post
-    - Hot or Not (Reddit style)
+    + Flood control
     + Hidden
+    - Hide
     - Delete
     - Markup language (BBCode??)
-    - Maximum characters in post, maximum images in post, maximum posts in X minute
     - Smiley
     - Quotations
   - Feeds

@@ -15,7 +15,7 @@
         <div style="opacity: 0.5;">
         <h1>{{ category.grouper }}</h1>
         <ul>
-        {% for item in category.list %}<li><a href="{{ item.get_absolute_url }}">{{ item.name }}</a></li>{% endfor %}
+        {% for item in category.list %}<li><a href="{{ item.get_absolute_url }}">{{ item.name }}</a> ({{ item.topics }} konu, {{ item.posts }} ileti)</li>{% endfor %}
         </ul>
         </div>
     {% endif %}
@@ -23,10 +23,8 @@
         <h1>{{ category.grouper }}</h1>
         <ul>
         {% for item in category.list %}
-        {% if item.hidden and perms.forum.can_see_hidden_forums %}<div style="opacity: 0.5;"><li><a href="{{ item.get_absolute_url }}">{{ item.name }}</a></li></div>{% endif %}
-        {% if not item.hidden %}
-        <li><a href="{{ item.get_absolute_url }}">{{ item.name }}</a></li>
-        {% endif %}
+        {% if item.hidden and perms.forum.can_see_hidden_forums %}<div style="opacity: 0.5;"><li><a href="{{ item.get_absolute_url }}">{{ item.name }}</a> ({{ item.topics }} konu, {{ item.posts }} ileti)</li></div>{% endif %}
+        {% if not item.hidden %}<li><a href="{{ item.get_absolute_url }}">{{ item.name }}</a> ({{ item.topics }} konu, {{ item.posts }} ileti)</li>{% endif %}
         {% endfor %}
         </ul>
     {% endif %}

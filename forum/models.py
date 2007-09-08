@@ -30,12 +30,26 @@ class Post(models.Model):
     update_count = models.IntegerField(default=0, verbose_name='Güncellenme sayısı')
     ip = models.IPAddressField(blank=True, verbose_name='IP adresi')
 
-
     def __str__(self):
         return "%s" % self.id
 
     def get_absolute_url(self):
         return '/forum/%s/%s/#post%s' % (self.topic.forum.slug, self.topic.id, self.id)
+
+    def get_reply_url(self):
+        return '/forum/%s/%s/reply/' % (self.topic.forum.slug, self.topic.id)
+
+    def get_quote_url(self):
+        return '/forum/%s/%s/quote/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
+
+    def get_edit_url(self):
+        return '/forum/%s/%s/edit/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
+
+    def get_hide_url(self):
+        return '/forum/%s/%s/hide/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
+
+    def get_delete_url(self):
+        return '/forum/%s/%s/delete/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
 
     class Admin:
         list_display = ('id', 'topic', 'author', 'created', 'ip')
@@ -51,21 +65,23 @@ class Post(models.Model):
 
     def save(self):
         if not self.id:
-            t = Topic.objects.get(id=self.topic.id)
-            t.topic_latest_post_id = self.id
-            t.posts += 1
-            t.save()
-
-            f = Forum.objects.get(id=self.topic.forum.id)
-            f.forum_latest_post_id = self.id
-            f.posts += 1
-            f.save()
-
+            new_post = True
         else:
             self.update_count += 1
 
         self.ip = threadlocals.get_current_ip()
         super(Post, self).save()
+
+        if new_post:
+            t = Topic.objects.get(pk=self.topic.id)
+            t.topic_latest_post_id = self.id
+            t.posts += 1
+            t.save()
+
+            f = Forum.objects.get(pk=self.topic.forum.id)
+            f.forum_latest_post_id = self.id
+            f.posts += 1
+            f.save()
 
     def delete(self):
         if self.id:
