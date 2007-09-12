@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.core.paginator import ObjectPaginator
+from django.views.generic.list_detail import object_list
 
 from oi.forum.settings import *
 
@@ -27,10 +28,9 @@ def main(request):
 
 def forum(request, forum_slug):
     forum = get_object_or_404(Forum, slug=forum_slug)
-    topics = forum.topic_set.all()
-    #paginator = ObjectPaginator(topics, TOPICS_PER_PAGE)
+    topics = forum.topic_set.all().order_by('-sticky', '-topic_latest_post')
 
-    return render_response(request, 'forum/forum_detail.html', locals())
+    return object_list(request, topics, template_name='forum/forum_detail.html', template_object_name='topic', extra_context={'forum': forum}, paginate_by=5, allow_empty=True)
 
 def topic(request, forum_slug, topic_id):
     forum = get_object_or_404(Forum, slug=forum_slug)
@@ -60,12 +60,7 @@ def reply(request, forum_slug, topic_id, post_id=False):
     if request.user.is_authenticated and request.method == 'POST':
         form = PostForm(request.POST.copy())
 
-        if 'flood_control' in request.session and ((datetime.now() - request.session['flood_control']).seconds < FLOOD_TIMEOUT):
-            flood = True
-            timeout = (FLOOD_TIMEOUT - (datetime.now() - request.session['flood_control']).seconds)
-        if not 'flood_control' in request.session or ((datetime.now() - request.session['flood_control']).seconds > FLOOD_TIMEOUT):
-            flood = False
-            request.session['flood_control'] = datetime.now()
+        flood,timeout = flood_control(request)
 
         if form.is_valid() and not flood:
             post = Post(topic=topic,
@@ -91,14 +86,16 @@ def new_topic(request, forum_slug):
     if not request.user.is_authenticated:
         raise HttpResponseServerError #FIXME: Give an error message
 
+    forum = get_object_or_404(Forum, slug=forum_slug)
+
+    if forum.locked:
+        raise HttpResponseServerError #FIXME: Give an error message
+
     if request.user.is_authenticated and request.method == 'POST':
-        forum = get_object_or_404(Forum, slug=forum_slug)
-
-        if forum.locked:
-            raise HttpResponseServerError #FIXME: Give an error message
-
         form = TopicForm(request.POST.copy())
-        if form.is_valid():
+        flood,timeout = flood_control(request)
+
+        if form.is_valid() and not flood:
             topic = Topic(forum=forum,
                           title=form.clean_data['title']
                          )
@@ -112,6 +109,17 @@ def new_topic(request, forum_slug):
 
             return HttpResponseRedirect(post.get_absolute_url())
     else:
-        form = TopicForm(auto_id=True).as_p()
+        form = TopicForm(auto_id=True)
 
     return render_response(request, 'forum/new_topic.html', {'form': form})
+
+def flood_control(request):
+    if 'flood_control' in request.session and ((datetime.now() - request.session['flood_control']).seconds < FLOOD_TIMEOUT):
+        flood = True
+        timeout = (FLOOD_TIMEOUT - (datetime.now() - request.session['flood_control']).seconds)
+    if not 'flood_control' in request.session or ((datetime.now() - request.session['flood_control']).seconds > FLOOD_TIMEOUT):
+        flood = False
+        timeout = False
+        request.session['flood_control'] = datetime.now()
+
+    return flood,timeout

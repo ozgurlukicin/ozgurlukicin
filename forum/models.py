@@ -24,7 +24,7 @@ class Post(models.Model):
     topic = models.ForeignKey('Topic', verbose_name='Konu')
     author = models.ForeignKey(User, verbose_name='Yazar')
     text = models.TextField(verbose_name='İleti')
-    hidden = models.BooleanField(blank=True, null=True, verbose_name='Gizli')
+    hidden = models.BooleanField(blank=True, null=True, default=0, verbose_name='Gizli')
     created = models.DateTimeField(blank=True, null=True, auto_now_add=True, verbose_name='Oluşturulma tarihi')
     update = models.DateTimeField(blank=True, null=True, auto_now=True, verbose_name='Güncellenme tarihi')
     update_count = models.IntegerField(default=0, verbose_name='Güncellenme sayısı')
@@ -35,9 +35,6 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return '/forum/%s/%s/#post%s' % (self.topic.forum.slug, self.topic.id, self.id)
-
-    def get_reply_url(self):
-        return '/forum/%s/%s/reply/' % (self.topic.forum.slug, self.topic.id)
 
     def get_quote_url(self):
         return '/forum/%s/%s/quote/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
@@ -105,9 +102,9 @@ class Topic(models.Model):
     """
     forum = models.ForeignKey('Forum', verbose_name='Forum')
     title = models.CharField(maxlength=100, verbose_name='Başlık')
-    sticky = models.BooleanField(blank=True, null=True, verbose_name='Sabit')
-    locked = models.BooleanField(blank=True, null=True, verbose_name='Kilitli')
-    hidden = models.BooleanField(blank=True, null=True, verbose_name='Gizli')
+    sticky = models.BooleanField(blank=True, null=True, default=0, verbose_name='Sabit')
+    locked = models.BooleanField(blank=True, null=True, default=0, verbose_name='Kilitli')
+    hidden = models.BooleanField(blank=True, null=True, default=0, verbose_name='Gizli')
     posts = models.IntegerField(default=0, verbose_name='İleti sayısı')
     views = models.IntegerField(default=0, verbose_name='Görüntülenme sayısı')
     topic_latest_post = models.ForeignKey(Post, blank=True, null=True, related_name='topic_latest_post', verbose_name='Son ileti')
@@ -118,6 +115,9 @@ class Topic(models.Model):
 
     def get_absolute_url(self):
         return '/forum/%s/%s/' % (self.forum.slug, self.id)
+
+    def get_reply_url(self):
+        return '/forum/%s/%s/reply/' % (self.topic.forum.slug, self.topic.id)
 
     class Admin:
         list_display = ('forum', 'title', 'sticky', 'locked', 'hidden')
@@ -154,11 +154,12 @@ class Forum(models.Model):
     name = models.CharField(maxlength=100, verbose_name='İsim')
     slug = models.SlugField(prepopulate_from=('name',), verbose_name='SEF isim')
     description = models.TextField(verbose_name='Açıklama')
-    hidden = models.BooleanField(blank=True, null=True, verbose_name='Gizli')
-    locked = models.BooleanField(blank=True, null=True, verbose_name='Kapalı')
+    hidden = models.BooleanField(blank=True, null=True, default=0, verbose_name='Gizli')
+    locked = models.BooleanField(blank=True, null=True, default=0, verbose_name='Kapalı')
     topics = models.IntegerField(default=0, verbose_name='Konu sayısı')
     posts = models.IntegerField(default=0, verbose_name='İleti sayısı')
     forum_latest_post = models.ForeignKey(Post, blank=True, null=True, related_name='forum_latest_post', verbose_name='Son ileti')
+    order = models.PositiveIntegerField(verbose_name='Sıralama')
 
     def get_absolute_url(self):
         return '/forum/%s/' % self.slug
@@ -170,6 +171,8 @@ class Forum(models.Model):
         list_display = ('category', 'name')
 
     class Meta:
+        ordering = ('order',)
+        unique_together = (('category', 'order'),)
         verbose_name = 'Forum'
         verbose_name_plural = 'Forumlar'
         permissions = (
@@ -181,6 +184,7 @@ class Forum(models.Model):
 class Category(models.Model):
     name = models.CharField(maxlength=255, verbose_name='Kategori ismi')
     hidden = models.BooleanField(blank=True, null=True, verbose_name='Gizli')
+    order = models.PositiveIntegerField(verbose_name='Sıralama')
 
     def __str__(self):
         return self.name

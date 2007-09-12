@@ -27,18 +27,21 @@ Legend:
 - Forum
   + Category
     + Hidden
-    ? Sorting
+    + Sorting
   / Forum
     + Category
     + Hidden
-    - Lock
-    - Pagination
+    + Sorting
+    + Lock
+    / Pagination
   / Topic
+    + Flood Control
     + Tags
     - Hot or Not (Reddit style)
     + Hidden
     - Hide
     - Lock
+    - Edit
     ? Split
     ? Merge
   / Post
@@ -46,6 +49,7 @@ Legend:
     + Hidden
     - Hide
     - Delete
+    - Edit
     - Markup language (BBCode??)
     - Smiley
     - Quotations
