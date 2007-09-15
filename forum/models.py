@@ -26,7 +26,7 @@ class Post(models.Model):
     text = models.TextField(verbose_name='İleti')
     hidden = models.BooleanField(blank=True, null=True, default=0, verbose_name='Gizli')
     created = models.DateTimeField(blank=True, null=True, auto_now_add=True, verbose_name='Oluşturulma tarihi')
-    update = models.DateTimeField(blank=True, null=True, auto_now=True, verbose_name='Güncellenme tarihi')
+    update = models.DateTimeField(blank=True, null=True, auto_now_add=True, verbose_name='Güncellenme tarihi')
     update_count = models.IntegerField(default=0, verbose_name='Güncellenme sayısı')
     ip = models.IPAddressField(blank=True, verbose_name='IP adresi')
 
@@ -44,6 +44,9 @@ class Post(models.Model):
 
     def get_hide_url(self):
         return '/forum/%s/%s/hide/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
+
+    def get_unhide_url(self):
+        return '/forum/%s/%s/unhide/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
 
     def get_delete_url(self):
         return '/forum/%s/%s/delete/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
@@ -63,8 +66,8 @@ class Post(models.Model):
     def save(self):
         if not self.id:
             new_post = True
-        else:
-            self.update_count += 1
+        #else:
+            #self.update_count += 1
 
         self.ip = threadlocals.get_current_ip()
         super(Post, self).save()
@@ -117,7 +120,28 @@ class Topic(models.Model):
         return '/forum/%s/%s/' % (self.forum.slug, self.id)
 
     def get_reply_url(self):
-        return '/forum/%s/%s/reply/' % (self.topic.forum.slug, self.topic.id)
+        return '/forum/%s/%s/reply/' % (self.forum.slug, self.id)
+
+    def get_stick_url(self):
+        return '/forum/%s/%s/stick/' % (self.forum.slug, self.id)
+
+    def get_unstick_url(self):
+        return '/forum/%s/%s/unstick/' % (self.forum.slug, self.id)
+
+    def get_lock_url(self):
+        return '/forum/%s/%s/lock/' % (self.forum.slug, self.id)
+
+    def get_unlock_url(self):
+        return '/forum/%s/%s/unlock/' % (self.forum.slug, self.id)
+
+    def get_hide_url(self):
+        return '/forum/%s/%s/hide/' % (self.forum.slug, self.id)
+
+    def get_unhide_url(self):
+        return '/forum/%s/%s/unhide/' % (self.forum.slug, self.id)
+
+    def get_delete_url(self):
+        return '/forum/%s/%s/delete/' % (self.forum.slug, self.id)
 
     class Admin:
         list_display = ('forum', 'title', 'sticky', 'locked', 'hidden')
@@ -188,6 +212,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return '/forum/'
 
     class Admin:
         list_display = ('id', 'name')

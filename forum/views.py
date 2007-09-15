@@ -7,7 +7,7 @@
 
 from datetime import datetime
 
-from django.http import HttpResponseRedirect, HttpResponseServerError
+from django.http import HttpResponseRedirect, HttpResponseServerError, HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
@@ -112,6 +112,58 @@ def new_topic(request, forum_slug):
         form = TopicForm(auto_id=True)
 
     return render_response(request, 'forum/new_topic.html', {'form': form})
+
+@login_required
+def hide(request, forum_slug, topic_id, post_id=False):
+    forum = get_object_or_404(Forum, slug=forum_slug)
+    topic = get_object_or_404(Topic, pk=topic_id)
+
+    if request.user.has_perm('post.can_hide') and post_id:
+        post = get_object_or_404(Post, pk=post_id)
+        post.hidden = 1
+        post.save()
+
+        return HttpResponseRedirect(topic.get_absolute_url())
+
+    if request.user.has_perm('topic.can_hide') and not post_id:
+        topic.hidden = 1
+        topic.save()
+
+        return HttpResponseRedirect(forum.get_absolute_url())
+
+@login_required
+def stick(request, forum_slug, topic_id):
+    forum = get_object_or_404(Forum, slug=forum_slug)
+    topic = get_object_or_404(Topic, pk=topic_id)
+
+    if request.user.has_perm('topic.can_stick') and not topic.sticky:
+        topic.sticky = 1
+        topic.save()
+
+        return HttpResponseRedirect(forum.get_absolute_url())
+
+    if request.user.has_perm('topic.can_stick') and topic.sticky:
+        topic.sticky = 0
+        topic.save()
+
+        return HttpResponseRedirect(forum.get_absolute_url())
+
+@login_required
+def lock(request, forum_slug, topic_id):
+    forum = get_object_or_404(Forum, slug=forum_slug)
+    topic = get_object_or_404(Topic, pk=topic_id)
+
+    if request.user.has_perm('topic.can_lock') and not topic.locked:
+        topic.locked = 1
+        topic.save()
+
+        return HttpResponseRedirect(forum.get_absolute_url())
+
+    if request.user.has_perm('topic.can_lock') and topic.locked:
+        topic.locked = 0
+        topic.save()
+
+        return HttpResponseRedirect(forum.get_absolute_url())
 
 def flood_control(request):
     if 'flood_control' in request.session and ((datetime.now() - request.session['flood_control']).seconds < FLOOD_TIMEOUT):
