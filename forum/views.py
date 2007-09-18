@@ -105,7 +105,7 @@ def new_topic(request, forum_slug):
     else:
         form = TopicForm(auto_id=True)
 
-    return render_response(request, 'forum/new_topic.html', {'form': form})
+    return render_response(request, 'forum/new_topic.html', locals())
 
 @login_required
 def hide(request, forum_slug, topic_id, post_id=False):
