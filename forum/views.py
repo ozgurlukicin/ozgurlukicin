@@ -120,13 +120,22 @@ def hide(request, forum_slug, topic_id, post_id=False):
 
     if request.user.has_perm('post.can_hide') and post_id:
         post = get_object_or_404(Post, pk=post_id)
-        post.hidden = 1
+
+        if post.hidden:
+            post.hidden = 0
+        else:
+            post.hidden = 1
+
         post.save()
 
         return HttpResponseRedirect(topic.get_absolute_url())
 
     if request.user.has_perm('topic.can_hide') and not post_id:
-        topic.hidden = 1
+        if topic.hidden:
+            topic.hidden = 0
+        else:
+            topic.hidden = 1
+
         topic.save()
 
         return HttpResponseRedirect(forum.get_absolute_url())

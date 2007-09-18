@@ -45,9 +45,6 @@ class Post(models.Model):
     def get_hide_url(self):
         return '/forum/%s/%s/hide/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
 
-    def get_unhide_url(self):
-        return '/forum/%s/%s/unhide/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
-
     def get_delete_url(self):
         return '/forum/%s/%s/delete/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
 
@@ -66,8 +63,9 @@ class Post(models.Model):
     def save(self):
         if not self.id:
             new_post = True
-        #else:
+        else:
             #self.update_count += 1
+            new_post = False
 
         self.ip = threadlocals.get_current_ip()
         super(Post, self).save()
@@ -125,20 +123,11 @@ class Topic(models.Model):
     def get_stick_url(self):
         return '/forum/%s/%s/stick/' % (self.forum.slug, self.id)
 
-    def get_unstick_url(self):
-        return '/forum/%s/%s/unstick/' % (self.forum.slug, self.id)
-
     def get_lock_url(self):
         return '/forum/%s/%s/lock/' % (self.forum.slug, self.id)
 
-    def get_unlock_url(self):
-        return '/forum/%s/%s/unlock/' % (self.forum.slug, self.id)
-
     def get_hide_url(self):
         return '/forum/%s/%s/hide/' % (self.forum.slug, self.id)
-
-    def get_unhide_url(self):
-        return '/forum/%s/%s/unhide/' % (self.forum.slug, self.id)
 
     def get_delete_url(self):
         return '/forum/%s/%s/delete/' % (self.forum.slug, self.id)

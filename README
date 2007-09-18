@@ -1,13 +1,7 @@
 Requires:
- Python
- Apache Web Server
- mod_python
- Django
+ Django environment (Python, Web Server (Apache recommended), mod_python (if Apache preferred), Django)
  Python Imaging Library (PIL)
-
-Optional (For databases, we recommend MySQL)
- MySQL
- Sqlite
+ DBMS (MySQL recommended)
 
 Setup:
  1. edit settings.py

@@ -28,11 +28,11 @@
 <hr>
 {% endfor %}
 {% if perms.topic.can_hide and not topic.hidden %}<a href="{{ topic.get_hide_url }}">hide</a> - {% endif %}
-{% if perms.topic.can_hide and topic.hidden %}<a href="{{ topic.get_unhide_url }}">unhide</a> - {% endif %}
+{% if perms.topic.can_hide and topic.hidden %}<a href="{{ topic.get_hide_url }}">unhide</a> - {% endif %}
 {% if perms.topic.can_stick and not topic.sticky %}<a href="{{ topic.get_stick_url }}">stick</a> - {% endif %}
-{% if perms.topic.can_stick and topic.sticky %}<a href="{{ topic.get_unstick_url }}">unstick</a> - {% endif %}
+{% if perms.topic.can_stick and topic.sticky %}<a href="{{ topic.get_stick_url }}">unstick</a> - {% endif %}
 {% if perms.topic.can_lock and not topic.locked %}<a href="{{ topic.get_lock_url }}">lock</a>{% endif %}
-{% if perms.topic.can_lock and topic.locked %}<a href="{{ topic.get_unlock_url }}">unlock</a>{% endif %} - <a href="{{ topic.get_reply_url }}">reply</a>
+{% if perms.topic.can_lock and topic.locked %}<a href="{{ topic.get_lock_url }}">unlock</a>{% endif %} - <a href="{{ topic.get_reply_url }}">reply</a>
 {% if perms.topic.can_delete %} - <a href="{{ topic.get_delete_url }}">delete</a>{% endif %}
 {% endblock %}
 
