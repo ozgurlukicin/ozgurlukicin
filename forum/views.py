@@ -48,16 +48,13 @@ def topic(request, forum_slug, topic_id):
 
 @login_required
 def reply(request, forum_slug, topic_id, post_id=False):
-    if not request.user.is_authenticated:
-        raise HttpResponseServerError #FIXME: Give an error message
-
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
 
     if forum.locked or topic.locked:
         raise HttpResponseServerError #FIXME: Give an error message
 
-    if request.user.is_authenticated and request.method == 'POST':
+    if request.method == 'POST':
         form = PostForm(request.POST.copy())
 
         flood,timeout = flood_control(request)
@@ -83,15 +80,12 @@ def reply(request, forum_slug, topic_id, post_id=False):
 
 @login_required
 def new_topic(request, forum_slug):
-    if not request.user.is_authenticated:
-        raise HttpResponseServerError #FIXME: Give an error message
-
     forum = get_object_or_404(Forum, slug=forum_slug)
 
     if forum.locked:
         raise HttpResponseServerError #FIXME: Give an error message
 
-    if request.user.is_authenticated and request.method == 'POST':
+    if request.method == 'POST':
         form = TopicForm(request.POST.copy())
         flood,timeout = flood_control(request)
 
