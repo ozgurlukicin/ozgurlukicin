@@ -125,7 +125,6 @@ INSTALLED_APPS = (
     'oi.feedjack',
     'oi.seminar',
     'oi.profile',
-    'oi.forum',
 )
 
 CITY_LIST = (
