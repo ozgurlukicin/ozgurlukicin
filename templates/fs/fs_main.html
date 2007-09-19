@@ -1,0 +1,45 @@
+{% load library %}
+{% extends "base.html" %}
+
+{% block title %}İlk Adımlar - {% endblock %}
+
+{% block pagetype %}page{% endblock %}
+
+{% block section %}fs{% endblock %}
+{% block section_logo %}<img src="/media/img/fs_header_logo.png" width="140" height="136">{% endblock %}
+
+{% block content %}
+{% for fs in fs_list %}
+<div id="fs-{{ fs.id }}" class="fs">
+    <div class="fs_title transparent_link"><a href="{{ fs.get_absolute_url }}">{{ fs.title }}</a></div>
+    <div class="fs_content grey">{{ fs.sum }}
+        <p class="fs_tags" style="padding-top: 4px;"><img src="/media/img/tag_green.png" style="vertical-align: middle;" /> {% for tag in fs.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</p>
+    </div>
+</div>
+{% endfor %}
+
+{% if is_paginated %}{% paginator %}{% endif %}
+{% endblock %}
+
+{% block sidebartop %}{% endblock %}
+
+{% block sidebar %}
+<div class="sidebar sidebar_green_title">En önemli 'İlk Adımlar'</div>
+<div class="sidebar grey">
+    <ul>
+        <li><a href="/ia/linux-nedir/">Linux nedir?</a></li>
+        <li><a href="/ia/pardus-nasil-okunur/">Pardus nasıl okunur?</a></li>
+        <li><a href="/ia/pardus-nasil-kurulur/">Pardus nasıl kurulur?</a></li>
+        <li><a href="/ia/pardus-kullaniminin-temelleri/">Pardus kullanımının temelleri</a></li>
+        <li><a href="/ia/pardusu-guncel-tutun/">Pardus'u güncel tutun</a></li>
+        <li><a href="/ia/pardusda-cddvd-nasil-yazilir/">Pardus'ta CD/DVD yazın</a></li>
+        <li><a href="/ia/kablosuz-aglara-baglanin/">Kablosuz ağlara bağlanın</a></li>
+        <li><a href="/ia/kmail-kullanimi-ve-ayarlari/">KMail kullanımı ve ayarları</a></li>
+        <li><a href="/ia/kopeteye-msn-hesabi-ekleme/">Kopete'ye MSN ekleme</a></li>
+        <li><a href="/ia/amarok-denen-muzik-calici/">Amarok denen müzikçalar</a></li>
+    </ul>
+</div>
+
+<div class="sidebar sidebar_green_title">Katkıda bulunun</div>
+<div class="sidebar grey">İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a href="/katki/ilk_adimlar/">buraya</a> tıklayarak size kılavuzluk edecek sayfaya gidebilirsiniz.</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% load library %}
+{% extends "base.html" %}
+
+{% block title %}Pardus {% if version.number %}{{ version.number }} ({{ version.codename }}) {% endif %}Sürüm Notları - {% endblock %}
+
+{% block pagetype %}page{% endblock %}
+
+{% block content %}
+<div class="fs_title transparent_link">Pardus {% if version.number %}{{ version.number }} ({{ version.codename }}) {% endif %}Sürüm Notları</div>
+<div class="page_content grey">
+{{ releasenote }}
+</div>
+{% endblock %}

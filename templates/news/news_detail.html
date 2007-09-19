@@ -1,0 +1,26 @@
+{% load library %}
+{% extends "base.html" %}
+
+{% block title %}{{ news.title }} - Haberler - {% endblock %}
+
+{% block pagetype %}page{% endblock %}
+
+{% block section %}news{% endblock %}
+{% block section_logo %}<img src="/media/img/news_header_logo.png">{% endblock %}
+
+{% block content %}
+<div class="news_title transparent_link">{{ news.title }}</div>
+<div class="page_content grey">
+{{ news.text }}
+</div>
+<div class="page_properties"><a href="{{ news.get_printable_url }}"><img src="/media/img/print.png" /></a></div>
+<div class="page_last_update">Son güncelleme: {{ news.date|timedelta }}</div>
+{% endblock %}
+
+{% block sidebar %}
+<div class="sidebar sidebar_purple_title">Etiketler</div>
+<div class="sidebar grey">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
+
+<div class="sidebar sidebar_purple_title">Yazar</div>
+<div class="sidebar grey">{{ news.author }}</div>
+{% endblock %}

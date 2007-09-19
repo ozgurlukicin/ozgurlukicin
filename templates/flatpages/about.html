@@ -1,0 +1,30 @@
+{% load library %}
+{% extends "base.html" %}
+
+{% block title %}{{ flatpage.title }} - {% endblock %}
+
+{% block pagetype %}page{% endblock %}
+
+{% block content %}
+<div class="fs_title transparent_link">{{ flatpage.title }}</div>
+<div class="page_content grey">
+{{ flatpage.text }}
+</div>
+<div class="page_last_update">Son güncelleme: {{ flatpage.update|timedelta }}</div>
+{% endblock %}
+
+{% block sidebartop %}{% endblock %}
+
+{% block sidebar %}
+<div class="sidebar_green_title">İlgili sayfalar</div>
+<div class="sidebar grey">
+    {% ifnotequal flatpage.url "/hakkinda/icerik-politikasi/" %}<a href="/hakkinda/icerik-politikasi/">İçerik Politikası</a><br/>{% endifnotequal %}
+    {% ifnotequal flatpage.url "/hakkinda/gizlilik-politikasi/" %}<a href="/hakkinda/gizlilik-politikasi/">Gizlilik Politikası</a><br/>{% endifnotequal %}
+    {% ifnotequal flatpage.url "/hakkinda/gezegen-kurallari/" %}<a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a><br/>{% endifnotequal %}
+    {% ifnotequal flatpage.url "/hakkinda/" %}<a href="/hakkinda/">Hakkında</a><br/>{% endifnotequal %}
+    {% ifnotequal flatpage.url "/bize_ulasmak_icin/" %}<a href="/bize_ulasmak_icin/">Bize Ulaşın</a><br/>{% endifnotequal %}
+</div>
+
+<div class="sidebar_green_title">Etiketler</div>
+<div class="sidebar grey">{% for tag in flatpage.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
+{% endblock %}

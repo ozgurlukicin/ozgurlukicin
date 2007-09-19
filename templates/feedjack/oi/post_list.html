@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Pardus Dünyası - {% endblock %}
+
+{% block pagetype %}page{% endblock %}
+
+{% block section %}planet{% endblock %}
+{% block section_logo %}<img src="/media/img/planet_header_logo.png">{% endblock %}
+
+{% block content %}
+{% for item in object_list %}
+  {% ifchanged %}
+  <div class="planet_date">{{ item.date_modified|date:"j F" }}</div>
+  {% endifchanged %}
+
+  <div class="post">
+  {% if item.title %}
+  <div class="planet_title transparent_link"><a href="{{ item.link }}">{{ item.title }}</a></div>
+  {% else %}
+  <div class="planet_title transparent_link"><a href="{{ item.link }}">{{ item.subscriber.name }}</a></div>
+  {% endif %}
+  <div class="planet_content grey">
+    <div class="planet_author">
+        <img src="/media/hackergotchi/{{ item.subscriber.shortname }}.png" border="0" alt="{{ item.subscriber.name }}" /><br /><br />
+        <a href="{{ item.feed.link }}">{{ item.subscriber.name }}</a>
+    </div>
+    <div class="planet_meta">
+      {% if item.qtags %}<img src="/media/img/tag.png" border="0" style="vertical-align: middle;" />
+          {% for tag in item.qtags %}<a href="{{ site.url }}/tag/{{ tag.name }}">{{ tag.name }}</a> {% endfor %}
+      {% endif %}
+    </div>
+    <p>{{ item.content }}</p>
+  </div>
+  </div>
+{% endfor %}
+{% endblock %}
+
+{% block sidebartop %}{%endblock%}
+
+{% block sidebar %}
+<div class="sidebar sidebar_yellow_title">Kurallar</div>
+<div class="sidebar planet_link">
+    <a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a>
+</div>
+
+<div class="sidebar sidebar_yellow_title">Yazarlar</div>
+<div class="sidebar">
+    {% for feed in subscribers %}
+    <div class="planet_link"><a href="{{ feed.feed.feed_url }}"><img src="/media/img/feed_icon.png" border="0" style="vertical-align: -3px;" /></a> <a href="{{ site.url }}/user/{{ feed.feed.id }}">{{ feed.name }}</a></div>
+    {% endfor %}
+</div>
+
+<div class="sidebar sidebar_yellow_title">Son güncelleme</div>
+<div class="sidebar yellow" align="center">{{ last_modified }}</div>
+
+<div class="sidebar sidebar_yellow_title">Feed</div>
+<div class="sidebar transparent_link" align="center">
+    <a href="/rss/gezegen/" title="RSS 2.0 feed"><img src="/media/img/rss2.png"/></a>
+    <a href="/atom/gezegen/" title="Atom 1.0 feed"><img src="/media/img/atom.png"/></a>
+</div>
+
+{% if site.links %}
+<div class="sidebar sidebar_yellow_title">Diğer gezegenler</div>
+<div class="sidebar">
+{% for link in site.links.all %}<div style="margin-bottom: 4px;" class="planet_link"><img src="/media/img/other_planets.png" border="0" style="vertical-align: -4px;" /> <a href="{{ link.link }}">{{ link.name }}</a></div>{% endfor %}
+</div>
+{% endif %}
+{% endblock %}

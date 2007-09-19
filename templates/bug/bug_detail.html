@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}{{ bug.name }} - Hata Raporla - {% endblock %}
+
+{% block content %}
+<div class="page_title">{{ bug.title }}</div>
+<div class="page_content">
+{{ bug.description }}
+</div>
+{% endblock %}
