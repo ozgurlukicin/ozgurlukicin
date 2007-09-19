@@ -1,0 +1,170 @@
+/*##########################################
+Name:  Default styling for Niceforms v.1.0
+Author:  Lucian Slatineanu
+URL:  http://www.badboy.ro/
+##########################################*/
+
+/*Forms defaults - change as needed*/
+input, textarea {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+/*    color:  #404040;*/
+}
+
+label {
+    cursor: pointer;
+    padding-left: 2px;
+    line-height: 16px;
+}
+
+/*Transparent items*/
+.outtaHere {
+    position: absolute;
+    left: -3000px;
+}
+
+/*Radio buttons*/
+.radioArea, .radioAreaChecked {
+    display: block;
+    float: left;
+    clear: left;
+    width: 15px;
+    height: 14px;
+    font-size: 0;
+    cursor: pointer;
+}
+.radioArea {background: url('/media/img/niceforms/radio.png') no-repeat left top;}
+.radioAreaChecked {background: url('/media/img/niceforms/radio.png') no-repeat left bottom;}
+
+/*Checkboxes*/
+.checkboxArea, .checkboxAreaChecked {
+    display: block;
+    float: left;
+    clear: left;
+    width: 13px;
+    height: 13px;
+    font-size: 0;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+.checkboxArea {background: url('/media/img/niceforms/checkbox.png') no-repeat left top;}
+.checkboxAreaChecked {background: url('/media/img/niceforms/checkbox.png') no-repeat left bottom;}
+.focused {border: 1px dotted #ddd;}
+
+/*Text inputs*/
+.textinput, .textinputHovered {
+    height: 15px;
+    background: url('/media/img/niceforms/input_bg.png') repeat-x left top;
+    border: none;
+    padding: 4px 0;
+    vertical-align: middle;
+}
+.textinputHovered {background-position: left bottom;}
+.inputCorner {
+    padding-bottom: 0;
+    vertical-align: middle;
+}
+
+/*Text areas*/
+.txtarea .tr, .txtarea .tr_xon {background: url('/media/img/niceforms/txtarea_tr.png') no-repeat top right;}
+.txtarea .tr_xon {background: url('/media/img/niceforms/txtarea_tr_xon.png') no-repeat top right;}
+.txtarea img.txt_corner {
+    width: 5px;
+    height: 5px;
+    display: block;
+}
+.txtarea .br, .txtarea .br_xon {background: url('/media/img/niceforms/txtarea_br.png') no-repeat top right;}
+.txtarea .br_xon {background: url('/media/img/niceforms/txtarea_br_xon.png') no-repeat top right;}
+.txtarea .cntr {background: url('/media/img/niceforms/txtarea_cntr.png') repeat-y right top;}
+.txtarea .cntr_xon {background: url('/media/img/niceforms/txtarea_cntr_xon.png') repeat-y right top;}
+.txtarea .cntr_l, .txtarea .cntr_l_xon {
+    width: 5px;
+    background: url('/media/img/niceforms/txtarea_l.png') repeat-y left top;
+    float: left;
+}
+.txtarea .cntr_l_xon {background: url('/media/img/niceforms/txtarea_l_xon.png') repeat-y left top;}
+.txtarea textarea {
+    border: 0;
+    background: none;
+    padding: 0;
+    margin: 5px;
+}
+
+/*Selects*/
+.selectArea {
+    width: 200px;
+    height: 21px;
+    background: url('/media/img/niceforms/select_bg.png') repeat-x left top;
+}
+.selectArea .left {
+    width: 8px;
+    height: 21px;
+    float: left;
+    background: url('/media/img/niceforms/select_left.png') no-repeat left top;
+}
+.selectArea .right {
+    width: 21px;
+    height: 21px;
+    float: right;
+    background: url('/media/img/niceforms/select_right.png') no-repeat left top;
+}
+.selectArea .right a {
+    display: block;
+    width: 200px;
+    height: 21px;
+    margin-left: -179px;
+    position: absolute;
+}
+.selectArea .right i {display: none;}
+.selectArea .center {
+    width: 160px;
+    color: #FFF;
+    padding-top: 3px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/*Selects drop-down*/
+.optionsDivInvisible, .optionsDivVisible {
+    position: absolute;
+    margin-top: -1px;
+    margin-left: 3px;
+    width: 172px;
+    background: #6f7074;
+    padding: 2px;
+    font-size: 11px;
+    z-index: 20;
+}
+.optionsDivInvisible {display: none;}
+.optionsDivVisible {display: block;}
+.optionsDivVisible p {
+    margin: 0;
+    padding: 0;
+}
+.optionsDivVisible a {
+    color: #F2F2F2;
+    text-decoration: none;
+    display: block;
+    padding: 1px 4px;
+    border: 1px solid #6f7074;
+}
+.optionsDivVisible a: hover {
+    color: #FFF;
+    background: #5F6062;
+    border-color: #cfd0d6;
+}
+
+/*Button*/
+.buttonSubmit, .buttonSubmitHovered {
+    width: auto;
+    height: 26px;
+    color: #FFF;
+    font-weight: bold;
+    padding: 2px;
+    background: url('/media/img/niceforms/button_bg.png') repeat-x left top;
+    cursor: pointer;
+    border: none;
+}
+.buttonSubmitHovered {background-position: left bottom;}
+.buttonImg {vertical-align: bottom;}

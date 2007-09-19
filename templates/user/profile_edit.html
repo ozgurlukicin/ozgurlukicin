@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Profil Düzenle -  {% endblock %}
+
+{% block extrahead %}
+
+<style type="text/css">
+     textarea {
+         width: 450px;
+         height: 100px;
+     }
+
+     input {
+         width: 210px;
+     }
+
+     select {
+         width: 217px;
+     }
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+<br />
+
+<!--
+NOT: register.html'den çaldım, bunu da düzeltmek gerekecek
+
+-Eren
+
+-->
+
+{% if form.errors %}
+<font color="red">Profil güncellenemedi, lütfen aşağıdaki hataları düzeltin<br /></font>
+{% endif %}
+
+<br />
+<form method="POST" action=".">
+    <dt>
+    {% for field in form %}
+
+    <dt><b>{{ field.label }}:</b> </dt>
+    <dd>{{ field }}</dd>
+    {% if field.help_text %}<dd>{{ field.help_text }}</dd>{% endif %}
+    {% if field.errors %}<dd class="error"><font color="red">{{ field.errors }}</font></dd>{% endif %}
+
+    {% endfor %}
+
+<br />
+<center> <input type="submit" value="Düzenle" /> </center>
+</form>
+
+{% endblock %}

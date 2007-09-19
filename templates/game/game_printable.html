@@ -1,0 +1,11 @@
+{% extends "printable.html" %}
+
+{% block title %}{{ game.title }} - Oyunlar - {% endblock %}
+
+{% block content %}
+<h1>{{ game.title }}</h1>
+<div class="page_content">
+{{ game.text }}
+</div>
+<div style="margin-top: 10px; float: right; font-size: 12px;">{{ game.update|date:"d" }} {{ game.update|date:"F" }} {{ game.update|date:"Y" }} - {{ game.update|date:"H" }}:{{ game.update|date:"i" }}</div>
+{% endblock %}

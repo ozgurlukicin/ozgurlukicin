@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{% block title %}{% endblock %}Özgürlük için...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="imagetoolbar" content="no" />
+<link rel="shortcut icon" href="/media/img/favicon.png" />
+<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Anasayfa" href="/rss" />
+<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Haberler" href="/rss/haber" />
+<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - İlk Adımlar" href="/rss/ia" />
+<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Paketler" href="/rss/paket" />
+<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Oyunlar" href="/rss/oyun" />
+<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Gezegen" href="/rss/gezegen" />
+<style type="text/css" media="screen">@import url('/media/css/style.css');</style>
+<script type="text/javascript" src="/media/js/mootools.js"></script>
+<script type="text/javascript" src="/media/js/custom.js"></script>
+<script type="text/javascript" src="/media/js/pngfix.js"></script>
+{% block extrahead %}{% endblock %}
+</head>
+<body>
+<!--<div id="topbar">
+    <div id="topbar_content">
+        {% if not user.is_authenticated %}
+            <form method="post" action="/kullanici/giris/">
+                Kullanıcı adı: <input type="text" id="id_username" name="username" size="8" class="vTextField required" value="" maxlength="30" />
+                Parola: <input type="password" id="id_password" name="password" size="8" class="vPasswordField required" value="" maxlength="30" />
+                <input type="submit" value="login" id="form_submit" />
+                <input type="hidden" name="next" value="{{ next }}" />
+            </form>
+        {% endif %}
+    </div>
+</div>-->
+<div id="{% block pagetype %}page{% endblock %}">
+    <div id="header" class="{% block section %}home{% endblock %}_header">
+        <div id="logo"><a href="/"><img src="/media/img/logo.png" border="0" alt="Özgürlük için Pardus.." /></a></div>
+        <div id="menu_container">
+            <ul id="menu">
+                <li class="menu"><a href="/ia/"><img src="/media/img/tab_fs.png" border="0" alt="İlk adımlar" /></a></li>
+                <li class="menu"><a href="/paket/"><img src="/media/img/tab_packages.png" border="0" alt="Paketler" /></a></li>
+                <li class="menu"><a href="/oyun/"><img src="/media/img/tab_games.png" border="0" alt="Oyunlar" /></a></li>
+                <li class="menu"><a href="/haber/"><img src="/media/img/tab_news.png" border="0" alt="Haberler" /></a></li>
+                <li class="menu"><a href="/forum/"><img src="/media/img/tab_forum.png" border="0" alt="Forum" /></a></li>
+                <li class="menu"><a href="/gezegen/"><img src="/media/img/tab_planet.png" border="0" alt="Gezegen" /></a></li>
+            </ul>
+        </div>
+        <div id="section_logo">{% block section_logo %}{% endblock %}</div>
+    </div>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <div id="sidebar">
+        {% block sidebartop %}
+        <div class="sidebar_green_title sidebar">Kullanıcı Kutusu</div>
+        <div class="sidebar grey"{% if not user.is_authenticated %} style="text-align: center;"{% endif %}>
+        {% if not user.is_authenticated %}
+        <form method="post" action="/kullanici/giris/">
+            <input type="text" id="id_username" name="username" size="8" class="vTextField required" value="" maxlength="30" /><br />
+            <input type="password" id="id_password" name="password" size="8" class="vPasswordField required" value="" maxlength="30" /><br />
+            <input type="hidden" name="next" value="{{ next }}" />
+            <input type="submit" value="giriş" id="form_submit" />
+        </form>
+        {% else %}
+            Hoşgeldin <b>{{ user.username }}</b>!<br />
+            <br />İstiyorsan profil sayfana <a href="/kullanici/dashboard">buradan</a> ulaşabilir veya <a href="/kullanici/cikis">buraya</a> tıklayarak sistemden çıkabilirsin
+        {% endif %}
+        </div>
+        <div class="sidebar_green_title sidebar">Pardus'u indirin</div>
+        <div class="sidebar grey" style="text-align: center;"><a href="/indir/"><img src="/media/img/sidebar_download.png" border="0" alt="Pardus'u indir.." /></a></div>
+        <div class="sidebar_green_title sidebar">Özgürlükiçin'i destekleyin</div>
+        <div class="sidebar grey">Pardus'un tanıtımına katkıda bulunmak isteyenler için Özgürlükiçin düğmeleri yayınlandı. Sitenizde, blogunuzda yayınlamak için siz de <a href="/banner/">hazır kodlarımızdan</a> yararlanabilirsiniz.</div>
+        {% endblock %}
+        {% block sidebar %}
+        {% endblock %}
+        {% block sidebarbottom %}
+        {% endblock %}
+    </div>
+    <div id="footer">
+        {% block footer %}
+        {% endblock %}
+    </div>
+</div>
+<div id="credits">
+    <div class="alignleft">İçerik <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons (by-nc-sa)</a> ile lisanslanmıştır.</div>
+    <div class="alignright"><a href="/hakkinda/" class="footer_about">Hakkında</a> <a href="/takip_et/" class="footer_rss">Takip et</a> <a href="/bocuk/" class="footer_bug">Hata raporla</a></div>
+</div>
+</body>
+</html>

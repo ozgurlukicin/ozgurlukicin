@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Çıkış - {% endblock %}
+
+{% block content %}
+
+<br />
+
+{% if user.is_authenticated %}
+Sistemden çıktınız. Ansayfaya gitmek için <a href="/">tıklayın</a> <br />
+{% else %}
+Henüz giriş yapmamışsınız, giriş yapmak için <a href="/kullanici/giris/">buraya</a> tıklayın. <br />
+{% endif %}
+
+{% endblock %}

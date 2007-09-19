@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}{{ tag|escape }} etiketli içerik - {% endblock %}
+
+{% block pagetype %}page{% endblock %}
+
+{% block section %}fs{% endblock %}
+{% block section_logo %}<img src="/media/img/fs_header_logo.png">{% endblock %}
+
+{% block content %}
+<div class="fs_title transparent_link">{{ tag|escape }} etiketli içerik</div>
+<div class="fs_content">
+    {% if news %}
+        <div class="purple">
+            <h1>Haberler ({{ news.count }} adet)</h1>
+            <ul style="padding-left: 16px;" class="grey">
+            {% for obj in news %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.text|truncatewords:"10"|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if packages %}
+        <div class="orange">
+            <h1>Paketler ({{ packages.count }} adet)</h1>
+            <ul style="padding-left: 16px;" class="grey">
+            {% for obj in packages %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if fs %}
+        <div class="green">
+            <h1>İlk adımlar ({{ fs.count }} adet)</h1>
+            <ul style="padding-left: 16px;" class="grey">
+            {% for obj in fs %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if games %}
+        <div class="darkblue">
+            <h1>Oyunlar ({{ games.count }} adet)</h1>
+            <ul style="padding-left: 16px;" class="grey">
+            {% for obj in games %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if flatpages %}
+        <div class="green">
+            <h1>Sabit sayfalar ({{ flatpages.count }} adet)</h1>
+            <ul style="padding-left: 16px;" class="grey">
+            {% for obj in flatpages %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.text|truncatewords:"10"|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% load library %}
+{% extends "base.html" %}
+
+{% block title %}{{ flatpage.title }} - {% endblock %}
+
+{% block pagetype %}page{% endblock %}
+
+{% block content %}
+<div class="fs_title transparent_link">{{ flatpage.title }}</div>
+<div class="page_content grey">
+{{ flatpage.text }}
+</div>
+<div class="page_last_update">Son güncelleme: {{ flatpage.update|timedelta }}</div>
+{% endblock %}
+
+{% block sidebar %}
+<div class="sidebar_green_title">Etiketler</div>
+<div class="sidebar grey">{% for tag in flatpage.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
+{% endblock %}

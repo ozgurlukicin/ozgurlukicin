@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Üyelik Onayı - {% endblock %}
+
+{% block content %}
+
+<br />
+
+{% if no_user %}Böyle bir kullanıcı mevcut değil!{% endif %}
+{% if authenticated %}Zaten giriş yapmışsınız. Anasayfaya gitmek için <a href="/">tıklayın</a>{% endif %}
+{% if actived %}Bu hesap zaten aktif edilmiş! Anasayfaya gitmek için <a href="/">tıklayınız</a>{% endif %}
+{% if key_expired %}Anahtar zaman aşımına uğradı, lütfen yeniden kayıt olun ve hesabınızı mail adresinize gönderilen anahtarla birlikte 48 saat içerisinde aktif hale getirin.{% endif %}
+{% if key_incorrect %}Anahtar geçersiz, lütfen e-posta adresinize gönderilen linki kullanın! Tekrar kayıt olmak için <a href="/kullanici/kayit/">tıklayın</a>{% endif %}
+
+{% if ok %}Üyeliğiniz aktif hale getirildi! <a href="/kullanici/giris/">Buraya</a> tıklayarak giriş yapabilirsiniz.{% endif %}
+
+{% endblock %}

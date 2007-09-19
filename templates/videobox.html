@@ -1,0 +1,25 @@
+<div align="center">
+<object type="application/x-shockwave-flash" data="{{ web_url }}/media/swf/FlowPlayerBlack.swf" width="320" height="240" id="FlowPlayer">
+    <param name="allowScriptAccess" value="sameDomain" />
+    <param name="movie" value="{{ web_url }}/media/swf/FlowPlayerBlack.swf" />
+    <param name="quality" value="high" />
+
+    <param name="scale" value="noScale" />
+    <param name="allowfullscreen" value="false" />
+    <param name="wmode" value="transparent" />
+    <param name="allowNetworking" value="all" />
+    <param name="flashvars" value="config={
+        autoPlay: true,
+        loop: false,
+        initialScale: 'fit',
+        showMenu: false,
+        autoBuffering: false,
+        showLoopButton: false,
+        showPlayListButtons: false,
+        showFullScreenButton: false,
+        scaleSplash: false,
+        splashImageFile: '{{ web_url }}/media/img/video_play.png',
+        videoFile: '{{ web_url }}/media/{{ vid.file }}',
+        }" />
+</object>
+</div>

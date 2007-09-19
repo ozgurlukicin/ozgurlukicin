@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Forum - {% endblock %}
+
+{% block pagetype %}page-single{% endblock %}
+
+{% block section %}forum{% endblock %}
+{% block section_logo %}<img src="/media/img/forum_header_logo.png">{% endblock %}
+
+{% block content %}
+{% regroup forums by category as forums %}
+
+{% for category in forums %}
+    {% if category.grouper.hidden and perms.forum.can_see_hidden_categories %}
+        <div style="opacity: 0.5;">
+        <h1>{{ category.grouper }}</h1>
+        <ul>
+        {% for item in category.list %}<li><a href="{{ item.get_absolute_url }}">{{ item.name }}</a> ({{ item.topics }} konu, {{ item.posts }} ileti)</li>{% endfor %}
+        </ul>
+        </div>
+    {% endif %}
+    {% if not category.grouper.hidden %}
+        <h1>{{ category.grouper }}</h1>
+        <ul>
+        {% for item in category.list %}
+        {% if item.hidden and perms.forum.can_see_hidden_forums %}<div style="opacity: 0.5;"><li><a href="{{ item.get_absolute_url }}">{{ item.name }}</a> ({{ item.topics }} konu, {{ item.posts }} ileti)</li></div>{% endif %}
+        {% if not item.hidden %}<li><a href="{{ item.get_absolute_url }}">{{ item.name }}</a> ({{ item.topics }} konu, {{ item.posts }} ileti)</li>{% endif %}
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endfor %}
+{% endblock %}
+
+{% block sidebartop %}{% endblock %}

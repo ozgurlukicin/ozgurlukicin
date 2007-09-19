@@ -1,0 +1,13 @@
+Requires:
+ Django environment (Python, Web Server (Apache recommended), mod_python (if Apache preferred), Django)
+ Python Imaging Library (PIL)
+ DBMS (MySQL recommended)
+
+Setup:
+ 1. edit settings.py
+ 2. run 'python manage.py syncdb'
+ 3. run 'mkdir media/upload/{image,video} -p'
+ 4. run 'chmod 777 -R media/upload'
+ 5. copy htaccess file into the web directory as .htaccess and
+    edit it.
+ 6. restart apache and go to WEB_URL/admin
