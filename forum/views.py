@@ -7,5 +7,5 @@
 
 from oi.st.wrappers import render_response
 
-def home(request):
+def main(request):
     return render_response(request, 'forum/main.html')
