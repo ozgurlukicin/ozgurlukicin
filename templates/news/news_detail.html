@@ -14,7 +14,7 @@
 {{ news.text }}
 </div>
 <div class="page_properties"><a href="{{ news.get_printable_url }}"><img src="/media/img/print.png" /></a></div>
-<div class="page_last_update">Son güncelleme: {{ news.date|timedelta }}</div>
+<div class="page_last_update">Son güncelleme: {{ news.update|timedelta }}</div>
 {% endblock %}
 
 {% block sidebar %}
