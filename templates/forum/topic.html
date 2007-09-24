@@ -10,6 +10,7 @@
 {% block content %}
 <strong><a href="{{ forum.category.get_absolute_url }}">{{ forum.category.name }}</a> > <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> > {{ topic.title }}</strong><br />
 {% for post in posts %}
+{% if post.hidden %}<div style="opacity: 0.4">{% endif %}
 <a name="post{{ post.id }}"></a>
 <a href="{{ post.get_absolute_url }}">{{ post.id }}</a> - {{ post.author }} - {{ post.hidden }} - {{ post.created }}<br />
 {{ post.text|linebreaksbr }}<br />
@@ -19,13 +20,15 @@
 
 {% ifequal post.author.id request.user.id %}{% ifequal post topic.topic_latest_post %}<a href="{{ post.get_edit_url }}">edit</a>{% endifequal %}{% endifequal %}
 
-{% if perms.post.can_hide and not forloop.first %}<a href="{{ post.get_hide_url }}">hide</a>{% endif %}
+{% if perms.post.can_hide and not forloop.first and not post.hidden %}<a href="{{ post.get_hide_url }}">hide</a>{% endif %}
+{% if perms.post.can_hide and not forloop.first and post.hidden %}<a href="{{ post.get_hide_url }}">unhide</a>{% endif %}
 
 {% if perms.post.can_delete and not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>{% else %}
 {% ifequal post.author.id request.user.id %}{% ifequal post topic.topic_latest_post %}{% if not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>{% endif %}{% endifequal %}{% endifequal %}
 {% endif %}
 
 <hr>
+{% if post.hidden %}</div>{% endif %}
 {% endfor %}
 {% if perms.topic.can_hide and not topic.hidden %}<a href="{{ topic.get_hide_url }}">hide</a> - {% endif %}
 {% if perms.topic.can_hide and topic.hidden %}<a href="{{ topic.get_hide_url }}">unhide</a> - {% endif %}
