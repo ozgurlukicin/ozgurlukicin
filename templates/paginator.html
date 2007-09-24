@@ -1,16 +1,17 @@
-<div id="pagination" class="paginator grey">
+<div id="pagination" class="paginator">
+<br/>
 {% spaceless %}
-{% if show_first %}<span class="paginate-first"><a href="../1/" title="First Page">İlk</a></span>{% endif %}
-{% if has_previous %}<span class="paginate-previous"><a href="../{{ previous }}/" title="Previous Page">Önceki</a></span>{% endif %}
+{% if show_first %}<span class="prev"><a href="?page=1" title="First Page">İlk</a></span>{% endif %}
+{% if has_previous %}<span class="prev"><a href="?page={{ previous }}" title="Previous Page">Önceki</a></span>{% else %}<span class="prev-na">Önceki</span>{% endif %}
 {% for num in page_numbers %}
-  {% ifequal num page %}
-    <span class="paginate-current" title="Current Page">{{ num }}</span>
-  {% else %}
-    <span class="paginate-link"><a href="../{{ num }}/" title="Page {{ num }}/">{{ num }}</a></span>
-  {% endifequal %}
+    {% ifequal num page %}
+        <span class="curr" title="Current Page">{{ num }}</span>
+    {% else %}
+        <span class="page"><a href="?page={{ num }}" title="Page {{ num }}">{{ num }}</a></span>
+    {% endifequal %}
 {% endfor %}
-{% if has_next %}<span class="paginate-next"><a href="../{{ next }}/" title="Next Page">Sonraki</a></span>{% endif %}
-{% if show_last %}<span class="paginate-last"><a href="../{{ pages }}/" title="Last Page">Son</a></span>{% endif %}
+{% if has_next %}<span class="next"><a href="?page={{ next }}" title="Next Page">Sonraki</a></span>{% else %}<span class="next-na">Sonraki</span>{% endif %}
+{% if show_last %}<span class="next"><a href="?page={{ pages }}" title="Last Page">Son</a></span>{% endif %}
 {% endspaceless %}
-<br/><span class="paginate-desc">Her sayfada {{ results_per_page }} kayıt olmak üzere {{ pages }} sayfada toplam {{ hits }} kayıt listeleniyor.</span>
+<br/><br/><span class="paginate-desc">Her sayfada {{ results_per_page }} kayıt olmak üzere {{ pages }} sayfada toplam {{ hits }} kayıt listeleniyor.</span>
 </div>

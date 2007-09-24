@@ -33,7 +33,7 @@ Legend:
     + Hidden
     + Sorting
     + Lock
-    / Pagination
+    + Pagination
   / Topic
     + Flood Control
     + Tags
@@ -60,3 +60,5 @@ Legend:
   - User/IP Ban
   - Migration
   - Multi language
+
+- Move common functions to utils
