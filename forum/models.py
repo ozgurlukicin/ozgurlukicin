@@ -28,7 +28,7 @@ class Post(models.Model):
     created = models.DateTimeField(blank=True, null=True, auto_now_add=True, verbose_name='Oluşturulma tarihi')
     edited = models.DateTimeField(blank=True, null=True, auto_now_add=True, verbose_name='Güncellenme tarihi')
     edit_count = models.IntegerField(default=0, verbose_name='Güncellenme sayısı')
-    last_edited_by = models.ForeignKey(User, blank=True, related_name='last edited by', verbose_name='Yazar')
+    last_edited_by = models.ForeignKey(User, blank=True, null=True, related_name='last edited by', verbose_name='Yazar')
     ip = models.IPAddressField(blank=True, verbose_name='IP adresi')
 
     def __str__(self):

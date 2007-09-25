@@ -18,8 +18,6 @@
 {{ post.ip }}
 <br />{% if forloop.first %}{% if perms.topic.can_edit %}<a href="{{ topic.get_edit_url }}">edit</a>{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ topic.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% else %}{% if perms.post.can_edit %}<a href="{{ post.get_edit_url }}">edit</a>{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% endif %} <a href="{{ post.get_quote_url }}">quote</a>
 
-{% ifequal post.author.id request.user.id %}{% ifequal post topic.topic_latest_post %}<a href="{{ post.get_edit_url }}">edit</a>{% endifequal %}{% endifequal %}
-
 {% if perms.post.can_hide and not forloop.first and not post.hidden %}<a href="{{ post.get_hide_url }}">hide</a>{% endif %}
 {% if perms.post.can_hide and not forloop.first and post.hidden %}<a href="{{ post.get_hide_url }}">unhide</a>{% endif %}
 
@@ -35,7 +33,7 @@
 {% if perms.topic.can_stick and not topic.sticky %}<a href="{{ topic.get_stick_url }}">stick</a> - {% endif %}
 {% if perms.topic.can_stick and topic.sticky %}<a href="{{ topic.get_stick_url }}">unstick</a> - {% endif %}
 {% if perms.topic.can_lock and not topic.locked %}<a href="{{ topic.get_lock_url }}">lock</a>{% endif %}
-{% if perms.topic.can_lock and topic.locked %}<a href="{{ topic.get_lock_url }}">unlock</a>{% endif %} - <a href="{{ topic.get_reply_url }}">reply</a>
+{% if perms.topic.can_lock and topic.locked %}<a href="{{ topic.get_lock_url }}">unlock</a>{% endif %} - {% if not topic.locked %}<a href="{{ topic.get_reply_url }}">reply</a>{% endif %}
 {% endblock %}
 
 {% block sidebartop %}{% endblock %}

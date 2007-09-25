@@ -16,12 +16,12 @@
 {% if topic.hidden and perms.forum.can_see_hidden_topics %}
 <div style="opacity: 0.5;">
 <a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a><br />
-sticky: {{ topic.sticky }} | locked: {{ topic.locked }} | hidden: {{ topic.hidden }} | posts: {{ topic.posts }} | views: {{ topic.views }} | latest post: {{ topic.topic_latest_post.update|timedelta }}<br />
+sticky: {{ topic.sticky }} | locked: {{ topic.locked }} | hidden: {{ topic.hidden }} | posts: {{ topic.posts }} | views: {{ topic.views }} | latest post: {{ topic.topic_latest_post.edited|timedelta }}<br />
 </div>
 {% endif %}
 {% if not topic.hidden %}
 <a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a><br />
-sticky: {{ topic.sticky }} | locked: {{ topic.locked }} | hidden: {{ topic.hidden }} | posts: {{ topic.posts }} | views: {{ topic.views }} | latest post: {{ topic.topic_latest_post.update|timedelta }}<br />
+sticky: {{ topic.sticky }} | locked: {{ topic.locked }} | hidden: {{ topic.hidden }} | posts: {{ topic.posts }} | views: {{ topic.views }} | latest post: {{ topic.topic_latest_post.edited|timedelta }}<br />
 {% endif %}
 {% endfor %}
 

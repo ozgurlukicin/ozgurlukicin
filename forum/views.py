@@ -30,7 +30,7 @@ def forum(request, forum_slug):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topics = forum.topic_set.all().order_by('-sticky', '-topic_latest_post')
 
-    return object_list(request, topics, template_name='forum/forum_detail.html', template_object_name='topic', extra_context={'forum': forum}, paginate_by=5, allow_empty=True)
+    return object_list(request, topics, template_name='forum/forum_detail.html', template_object_name='topic', extra_context={'forum': forum}, paginate_by=TOPICS_PER_PAGE, allow_empty=True)
 
 def topic(request, forum_slug, topic_id):
     forum = get_object_or_404(Forum, slug=forum_slug)
