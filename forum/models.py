@@ -48,6 +48,9 @@ class Post(models.Model):
     def get_delete_url(self):
         return '/forum/%s/%s/delete/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
 
+    def get_delete_confirm_url(self):
+        return '/forum/%s/%s/delete/%s/yes/' % (self.topic.forum.slug, self.topic.id, self.id)
+
     class Admin:
         list_display = ('id', 'topic', 'author', 'created', 'ip')
 
@@ -120,6 +123,9 @@ class Topic(models.Model):
     def get_reply_url(self):
         return '/forum/%s/%s/reply/' % (self.forum.slug, self.id)
 
+    def get_edit_url(self):
+        return '/forum/%s/%s/edit/' % (self.forum.slug, self.id)
+
     def get_stick_url(self):
         return '/forum/%s/%s/stick/' % (self.forum.slug, self.id)
 
@@ -131,6 +137,9 @@ class Topic(models.Model):
 
     def get_delete_url(self):
         return '/forum/%s/%s/delete/' % (self.forum.slug, self.id)
+
+    def get_delete_url(self):
+        return '/forum/%s/%s/delete/yes/' % (self.forum.slug, self.id)
 
     class Admin:
         list_display = ('forum', 'title', 'sticky', 'locked', 'hidden')

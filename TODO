@@ -28,7 +28,7 @@ Legend:
   + Category
     + Hidden
     + Sorting
-  / Forum
+  + Forum
     + Category
     + Hidden
     + Sorting
@@ -42,15 +42,14 @@ Legend:
     + Hide
     + Lock
     + Stick
-    - Edit
+    + Edit
     ? Split
     ? Merge
   / Post
     + Flood control
     + Hidden
     + Hide
-    - Delete
-    - Edit
+    + Edit
     - Markup language (BBCode??)
     - Smiley
     - Quotations
