@@ -26,8 +26,9 @@ class Post(models.Model):
     text = models.TextField(verbose_name='İleti')
     hidden = models.BooleanField(blank=True, null=True, default=0, verbose_name='Gizli')
     created = models.DateTimeField(blank=True, null=True, auto_now_add=True, verbose_name='Oluşturulma tarihi')
-    update = models.DateTimeField(blank=True, null=True, auto_now_add=True, verbose_name='Güncellenme tarihi')
-    update_count = models.IntegerField(default=0, verbose_name='Güncellenme sayısı')
+    edited = models.DateTimeField(blank=True, null=True, auto_now_add=True, verbose_name='Güncellenme tarihi')
+    edit_count = models.IntegerField(default=0, verbose_name='Güncellenme sayısı')
+    last_edited_by = models.ForeignKey(User, blank=True, related_name='last edited by', verbose_name='Yazar')
     ip = models.IPAddressField(blank=True, verbose_name='IP adresi')
 
     def __str__(self):
@@ -55,7 +56,7 @@ class Post(models.Model):
         list_display = ('id', 'topic', 'author', 'created', 'ip')
 
     class Meta:
-        ordering = ('-update',)
+        ordering = ('-edited',)
         verbose_name = 'İleti'
         verbose_name_plural = 'İletiler'
         permissions = (
@@ -64,11 +65,10 @@ class Post(models.Model):
                       )
 
     def save(self):
+        new_post = False
+
         if not self.id:
             new_post = True
-        else:
-            #self.update_count += 1
-            new_post = False
 
         self.ip = threadlocals.get_current_ip()
         super(Post, self).save()
@@ -86,15 +86,16 @@ class Post(models.Model):
 
     def delete(self):
         if self.id:
+            f = Forum.objects.get(id=self.topic.forum.id)
             t = Topic.objects.get(id=self.topic.id)
-            #FIXME: set the latest post after deletion
-            #t.topic_latest_post_id = self.id
+
+            latest_post = t.post_set.all().order_by('-created')[0].id
+
+            t.topic_latest_post_id = latest_post
             t.posts -= 1
             t.save()
 
-            f = Forum.objects.get(id=self.topic.forum.id)
-            #FIXME: set the latest post after deletion
-            #f.forum_latest_post_id = self.id
+            f.forum_latest_post_id = latest_post
             f.posts -= 1
             f.save()
 
@@ -206,7 +207,7 @@ class Forum(models.Model):
 class Category(models.Model):
     name = models.CharField(maxlength=255, verbose_name='Kategori ismi')
     hidden = models.BooleanField(blank=True, null=True, verbose_name='Gizli')
-    order = models.PositiveIntegerField(verbose_name='Sıralama')
+    order = models.PositiveIntegerField(unique=True, verbose_name='Sıralama')
 
     def __str__(self):
         return self.name

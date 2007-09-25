@@ -8,7 +8,6 @@ Legend:
 / In progress
 + Completed
 
-/ General 404 error pages
 / User management system (basic login/logout/register and user profiles)
   + ignored user names
   + login
@@ -20,9 +19,9 @@ Legend:
   - avatar support
   + lost password support
 
-- FreeComment support for news (also maybe packages, games etc.)
-- Download documents as PDF support (packages, first steps)
-- Search support
+? FreeComment support for news (also maybe packages, games etc.)
+? Download documents as PDF (packages, first steps)
+- Search
 
 - Forum
   + Category
@@ -61,3 +60,6 @@ Legend:
   - Multi language
 
 - Move common functions to utils
+- ErrorHandler
+  - General error pages
+- Logging

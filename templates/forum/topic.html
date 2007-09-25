@@ -14,7 +14,7 @@
 <a name="post{{ post.id }}"></a>
 <a href="{{ post.get_absolute_url }}">{{ post.id }}</a> - {{ post.author }} - {{ post.created }}<br />
 {{ post.text|linebreaksbr }}<br />
-{% ifnotequal post.update_count 0 %}Bu ileti {{ post.update_count }} kez değiştirilmiştir, son kez {{ post.update }} tarihinde değiştirilmiştir.<br />{% endifnotequal %}
+{% ifnotequal post.edit_count 0 %}Bu ileti {{ post.edit_count }} kez değiştirilmiştir, son kez {{ post.edited }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.<br />{% endifnotequal %}
 {{ post.ip }}
 <br />{% if forloop.first %}{% if perms.topic.can_edit %}<a href="{{ topic.get_edit_url }}">edit</a>{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ topic.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% else %}{% if perms.post.can_edit %}<a href="{{ post.get_edit_url }}">edit</a>{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% endif %} <a href="{{ post.get_quote_url }}">quote</a>
 

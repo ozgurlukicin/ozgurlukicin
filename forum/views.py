@@ -94,8 +94,9 @@ def edit_post(request, forum_slug, topic_id, post_id):
 
         if form.is_valid() and not flood:
             post.text = form.clean_data['text']
-            post.update_count += 1
-            post.update = datetime.now()
+            post.edit_count += 1
+            post.edited = datetime.now()
+            post.last_edited_by = request.user
             post.save()
 
             return HttpResponseRedirect(post.get_absolute_url())
@@ -152,8 +153,9 @@ def edit_topic(request, forum_slug, topic_id):
             topic.topic_latest_post = first_post
             topic.save()
 
-            first_post.update_count += 1
-            first_post.update = datetime.now()
+            first_post.edit_count += 1
+            first_post.edited = datetime.now()
+            first_post.last_edited_by = request.user
             first_post.save()
 
             return HttpResponseRedirect(topic.get_absolute_url())
