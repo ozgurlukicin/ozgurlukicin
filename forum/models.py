@@ -124,6 +124,9 @@ class Topic(models.Model):
     def get_reply_url(self):
         return '/forum/%s/%s/reply/' % (self.forum.slug, self.id)
 
+    def get_merge_url(self):
+        return '/forum/%s/%s/merge/' % (self.forum.slug, self.id)
+
     def get_edit_url(self):
         return '/forum/%s/%s/edit/' % (self.forum.slug, self.id)
 
@@ -135,12 +138,6 @@ class Topic(models.Model):
 
     def get_hide_url(self):
         return '/forum/%s/%s/hide/' % (self.forum.slug, self.id)
-
-    def get_delete_url(self):
-        return '/forum/%s/%s/delete/' % (self.forum.slug, self.id)
-
-    def get_delete_url(self):
-        return '/forum/%s/%s/delete/yes/' % (self.forum.slug, self.id)
 
     class Admin:
         list_display = ('forum', 'title', 'sticky', 'locked', 'hidden')

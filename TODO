@@ -62,4 +62,5 @@ Legend:
 - Move common functions to utils
 - ErrorHandler
   - General error pages
-- Logging
+- Logging (django-logging)
+- Tests

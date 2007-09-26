@@ -28,6 +28,7 @@
 <hr>
 {% if post.hidden %}</div>{% endif %}
 {% endfor %}
+{% if perms.topic.can_merge %}<a href="{{ topic.get_merge_url }}">merge</a> - {% endif %}
 {% if perms.topic.can_hide and not topic.hidden %}<a href="{{ topic.get_hide_url }}">hide</a> - {% endif %}
 {% if perms.topic.can_hide and topic.hidden %}<a href="{{ topic.get_hide_url }}">unhide</a> - {% endif %}
 {% if perms.topic.can_stick and not topic.sticky %}<a href="{{ topic.get_stick_url }}">stick</a> - {% endif %}
