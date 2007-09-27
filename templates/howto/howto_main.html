@@ -12,7 +12,7 @@
 {% for howto in howto_list %}
 <div id="howto-{{ howto.id }}" class="howtos">
     <div class="howtos_title transparent_link"><a href="{{ howto.get_absolute_url }}">{{ howto.title }}</a></div>
-    <div class="howtos_content grey">{{ fs.sum }}
+    <div class="howtos_content grey">{{ howto.sum }}
         <p class="howtos_tags" style="padding-top: 4px;"><img src="/media/img/tag_red.png" style="vertical-align: middle;" /> {% for tag in howto.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</p>
     </div>
 </div>
@@ -24,6 +24,6 @@
 {% block sidebartop %}{% endblock %}
 
 {% block sidebar %}
-<div class="sidebar sidebar_green_title">Katkıda bulunun</div>
-<div class="sidebar grey">İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a href="/katki/ilk_adimlar/">buraya</a> tıklayarak size kılavuzluk edecek sayfaya gidebilirsiniz.</div>
+<div class="sidebar sidebar_red_title">Katkıda bulunun</div>
+<div class="sidebar grey">Nasıl bölümüne katkıda bulunmak istiyorsanız <a href="/katki/nasil/">buraya</a> tıklayarak size kılavuzluk edecek sayfaya gidebilirsiniz.</div>
 {% endblock %}

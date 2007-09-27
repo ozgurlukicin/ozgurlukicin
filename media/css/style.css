@@ -738,6 +738,17 @@ input#form_submit {
     background-image: url('/media/img/sidebar_yellow.png');
 }
 
+.sidebar_red_title {
+    margin-top: 10px;
+    padding-top: 4px;
+    height: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+    background-repeat: no-repeat;
+    background-image: url('/media/img/sidebar_red.png');
+}
+
 /* base */
 body {
     font: 75%/150% "Trebuchet MS", Tahoma, Arial;
