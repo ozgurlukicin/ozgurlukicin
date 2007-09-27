@@ -8,7 +8,7 @@
 from django.contrib.syndication.feeds import Feed
 from django.utils.feedgenerator import Atom1Feed
 
-from oi.st.models import Game, FS, News, Package
+from oi.st.models import Game, FS, News, Package, HowTo
 from oi.settings import WEB_URL, SITE_NAME, SITE_DESC, NEWS_IN_HOMEPAGE, PACKAGES_IN_HOMEPAGE, GAMES_IN_HOMEPAGE, FS_IN_HOMEPAGE, HOWTOS_IN_HOMEPAGE, NEWS_PER_PAGE, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, HOWTO_PER_PAGE
 
 class Main_RSS(Feed):
@@ -82,11 +82,11 @@ class HowTo_RSS(Feed):
     description_template = 'feeds/feed_description.html'
 
     def items(self):
-        return HowTo.objects.filter(status=1).order_by('-update')[:HOWTOS_PER_PAGE]
+        return HowTo.objects.filter(status=1).order_by('-update')[:HOWTO_PER_PAGE]
 
-class HowTo_Atom(FS_RSS):
+class HowTo_Atom(HowTo_RSS):
     feed_type = Atom1Feed
-    subtitle = FS_RSS.description
+    subtitle = HowTo_RSS.description
 
 class Game_RSS(Feed):
     title = SITE_NAME + " - Oyunlar"
