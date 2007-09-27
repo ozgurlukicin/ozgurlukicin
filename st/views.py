@@ -34,6 +34,16 @@ def fs_printable(request, slug):
     fs = get_object_or_404(FS, slug=slug)
     return render_response(request, 'fs/fs_printable.html', locals())
 
+def howto_detail(request, slug):
+    howto = get_object_or_404(HowTo, slug=slug)
+    tags = howto.tags.all()
+    videos = howto.videos.all()
+    return render_response(request, 'howto/howto_detail.html', locals())
+
+def howto_printable(request, slug):
+    howto = get_object_or_404(HowTo, slug=slug)
+    return render_response(request, 'howto/howto_detail.html', locals())
+
 def game_detail(request, slug):
     game = get_object_or_404(Game, slug=slug)
     tags = game.tags.all()
