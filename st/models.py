@@ -170,7 +170,7 @@ class FS(models.Model):
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
 
-        list_display = ('title', 'status', 'update')
+        list_display = ('title', 'author', 'status', 'update')
         list_filter = ['update']
         ordering = ['-update']
         search_fields = ['title', 'text', 'tags']
@@ -206,7 +206,7 @@ class HowTo(models.Model):
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
 
-        list_display = ('title', 'status', 'update')
+        list_display = ('title', 'author', 'status', 'update')
         list_filter = ['update']
         ordering = ['-update']
         search_fields = ['title', 'text', 'tags']
@@ -256,7 +256,7 @@ class Game(models.Model):
             ('Değerlendirme', {'fields': ('gameplay', 'graphics', 'sound', 'scenario', 'atmosphere')}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
-        list_display = ('title', 'status', 'update')
+        list_display = ('title', 'author', 'status', 'update')
         list_filter = ['update']
         ordering = ['-id']
         search_fields = ['title', 'sum', 'text', 'tags']
@@ -336,7 +336,7 @@ class Package(models.Model):
             ('Genel', {'fields': ('author', 'title','sum','text', 'license','installed_size','download_size','url','point','path','ss','tags','videos','update','status')}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
-        list_display = ('title', 'status', 'update')
+        list_display = ('title', 'author', 'status', 'update')
         list_filter = ['license']
         ordering = ['-id']
         search_fields = ['title', 'sum', 'text']
