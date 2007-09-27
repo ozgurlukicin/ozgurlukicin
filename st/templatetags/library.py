@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os, Image
 from datetime import datetime
 from django.template import Library
