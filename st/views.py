@@ -11,9 +11,9 @@ from os import path
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 
-from oi.settings import WEB_URL, NEWS_IN_HOMEPAGE, PACKAGES_IN_HOMEPAGE, GAMES_IN_HOMEPAGE, FS_IN_HOMEPAGE
+from oi.settings import WEB_URL, NEWS_IN_HOMEPAGE, PACKAGES_IN_HOMEPAGE, GAMES_IN_HOMEPAGE, FS_IN_HOMEPAGE, HOWTOS_IN_HOMEPAGE
 
-from oi.st.models import FS, Game, News, Package, ScreenShot, Tag, PardusVersion, PardusMirror, Video
+from oi.st.models import *
 from oi.st.wrappers import render_response
 from oi.flatpages.models import FlatPage
 
@@ -22,6 +22,7 @@ def home(request):
     packages = Package.objects.filter(status=1).order_by('-update')[:PACKAGES_IN_HOMEPAGE]
     games = Game.objects.filter(status=1).order_by('-update')[:GAMES_IN_HOMEPAGE]
     fss = FS.objects.filter(status=1).order_by('-update')[:FS_IN_HOMEPAGE]
+    howtos = HowTo.objects.filter(status=1).order_by('-update')[:HOWTOS_IN_HOMEPAGE]
     return render_response(request, 'home.html', locals())
 
 def fs_detail(request, slug):
@@ -33,6 +34,16 @@ def fs_detail(request, slug):
 def fs_printable(request, slug):
     fs = get_object_or_404(FS, slug=slug)
     return render_response(request, 'fs/fs_printable.html', locals())
+
+def howto_detail(request, slug):
+    howto = get_object_or_404(HowTo, slug=slug)
+    tags = howto.tags.all()
+    videos = howto.videos.all()
+    return render_response(request, 'howto/howto_detail.html', locals())
+
+def howto_printable(request, slug):
+    howto = get_object_or_404(HowTo, slug=slug)
+    return render_response(request, 'howto/howto_printable.html', locals())
 
 def game_detail(request, slug):
     game = get_object_or_404(Game, slug=slug)
