@@ -6,6 +6,7 @@ from oi.settings import MEDIA_ROOT, MEDIA_URL
 
 register = Library()
 
+@register.filter
 def thumbnail(file, size='200x200'):
     # defining the size
     x, y = [int(x) for x in size.split('x')]
@@ -23,8 +24,7 @@ def thumbnail(file, size='200x200'):
         image.save(miniature_filename, image.format)
     return miniature_url
 
-register.filter(thumbnail)
-
+@register.inclusion_tag('paginator.html', takes_context=True)
 def paginator(context, adjacent_pages=2):
     """
     To be used in conjunction with the object_list generic view.
@@ -51,8 +51,7 @@ def paginator(context, adjacent_pages=2):
         'show_last': context['pages'] not in page_numbers,
     }
 
-register.inclusion_tag('paginator.html', takes_context=True)(paginator)
-
+@register.filter
 def timedelta(value, arg=None):
     if not value:
         return ''
@@ -64,5 +63,3 @@ def timedelta(value, arg=None):
         return "%s sonra" % timesince(cmp,value)
     else:
         return "%s önce" % timesince(value,cmp)
-
-register.filter(timedelta)

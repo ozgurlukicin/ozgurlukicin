@@ -170,7 +170,7 @@ class FS(models.Model):
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
 
-        list_display = ('title', 'author', 'status', 'update')
+        list_display = ('title', 'status', 'update')
         list_filter = ['update']
         ordering = ['-update']
         search_fields = ['title', 'text', 'tags']
@@ -179,6 +179,42 @@ class FS(models.Model):
     class Meta:
         verbose_name = "İlk Adım"
         verbose_name_plural = "İlk Adımlar"
+
+class HowTo(models.Model):
+    title = models.CharField('Başlık', maxlength=32, blank=False)
+    slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
+    sum = models.TextField('Özet', blank=False)
+    text = models.TextField('Metin', blank=False)
+    tags = models.ManyToManyField(Tag, blank=False)
+    videos = models.ManyToManyField(Video, blank=True)
+    update = models.DateTimeField('Son Güncelleme', blank=False)
+    author = models.CharField('Yazar', maxlength=32)
+    status = models.BooleanField('Aktif')
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return "/nasil/%s/" % self.slug
+
+    def get_printable_url(self):
+        return "/nasil/%s/yazdir/" % self.slug
+
+    class Admin:
+        fields = (
+            ('Genel', {'fields': ('author', 'title','sum','text','videos','tags','update','status',)}),
+            ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
+        )
+
+        list_display = ('title', 'status', 'update')
+        list_filter = ['update']
+        ordering = ['-update']
+        search_fields = ['title', 'text', 'tags']
+        js = ("js/admin/sef.js", "js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
+
+    class Meta:
+        verbose_name = "Nasıl"
+        verbose_name_plural = "Nasıl Belgeleri"
 
 class Game(models.Model):
     ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'))
@@ -220,7 +256,7 @@ class Game(models.Model):
             ('Değerlendirme', {'fields': ('gameplay', 'graphics', 'sound', 'scenario', 'atmosphere')}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
-        list_display = ('title', 'author', 'status', 'update')
+        list_display = ('title', 'status', 'update')
         list_filter = ['update']
         ordering = ['-id']
         search_fields = ['title', 'sum', 'text', 'tags']
@@ -300,7 +336,7 @@ class Package(models.Model):
             ('Genel', {'fields': ('author', 'title','sum','text', 'license','installed_size','download_size','url','point','path','ss','tags','videos','update','status')}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
-        list_display = ('title', 'author', 'status', 'update')
+        list_display = ('title', 'status', 'update')
         list_filter = ['license']
         ordering = ['-id']
         search_fields = ['title', 'sum', 'text']
