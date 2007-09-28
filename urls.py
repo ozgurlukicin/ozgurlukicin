@@ -7,10 +7,10 @@
 
 from django.conf.urls.defaults import *
 
-from oi.settings import WEB_URL, DOCUMENT_ROOT, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, NEWS_PER_PAGE, TAG_PER_PAGE
-from oi.st.models import Package, Game, FS, News, Tag
+from oi.settings import WEB_URL, DOCUMENT_ROOT, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, NEWS_PER_PAGE, TAG_PER_PAGE, HOWTO_PER_PAGE
+from oi.st.models import Package, Game, FS, News, Tag, HowTo
 from oi.seminar.models import Seminar
-from oi.st.feeds import Main_RSS, Main_Atom, News_RSS, News_Atom, FS_RSS, FS_Atom, Game_RSS, Game_Atom, Package_RSS, Package_Atom
+from oi.st.feeds import *
 
 rss_dict = {
             '': Main_RSS,
@@ -18,6 +18,7 @@ rss_dict = {
             'ia': FS_RSS,
             'oyun': Game_RSS,
             'paket': Package_RSS,
+            'nasil': HowTo_RSS,
            }
 
 atom_dict = {
@@ -26,6 +27,7 @@ atom_dict = {
              'ia': FS_Atom,
              'oyun': Game_Atom,
              'paket': Package_Atom,
+             'nasil': HowTo_Atom,
             }
 
 package_dict = {
@@ -48,6 +50,13 @@ fs_dict = {
            'paginate_by': FS_PER_PAGE,
            'template_object_name': 'fs'
           }
+
+howto_dict = {
+              'queryset': HowTo.objects.filter(status=1).order_by('title'),
+              'template_name': 'howto/howto_main.html',
+              'paginate_by': HOWTO_PER_PAGE,
+              'template_object_name': 'howto'
+             }
 
 news_dict = {
              'queryset': News.objects.filter(status=1).order_by('-update'),
@@ -82,6 +91,11 @@ urlpatterns = patterns('',
     (r'^ia/$', 'django.views.generic.list_detail.object_list', dict(fs_dict)),
     (r'^ia/(?P<slug>.*)/yazdir/$', 'oi.st.views.fs_printable'),
     (r'^ia/(?P<slug>.*)/$', 'oi.st.views.fs_detail'),
+
+    #How to
+    (r'^nasil/$', 'django.views.generic.list_detail.object_list', dict(howto_dict)),
+    (r'^nasil/(?P<slug>.*)/yazdir/$', 'oi.st.views.howto_printable'),
+    (r'^nasil/(?P<slug>.*)/$', 'oi.st.views.howto_detail'),
 
     #Games
     (r'^oyun/$', 'django.views.generic.list_detail.object_list', dict(game_dict)),

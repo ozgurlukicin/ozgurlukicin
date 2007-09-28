@@ -11,12 +11,10 @@ from django.http import HttpResponseRedirect, HttpResponseServerError, HttpRespo
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
-from django.core.paginator import ObjectPaginator
 from django.views.generic.list_detail import object_list
 
 from oi.forum.settings import *
-
-from oi.forum.forms import TopicForm, PostForm
+from oi.forum.forms import *
 
 from oi.st.wrappers import render_response
 from oi.forum.models import Category, Forum, Topic, Post, AbuseReport, WatchList

@@ -10,6 +10,15 @@
             {% endfor %}
         </div>
         <br />
+        <div id="howto_container">
+            {% for howto in howtos %}
+            <div id="howto-{{ howto.id }}" class="howtos {% cycle alignleft,alignright %}">
+                <div class="howtos_title_mini transparent_link">Nasıl: <a href="{{ howto.get_absolute_url }}">{{ howto.title }}</a></div>
+                <div class="howtos_content_mini grey">{{ howto.sum }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        <br />
         <div id="packages_container">
             {% for package in packages %}
             <div id="package-{{ package.id }}" class="packages {% cycle alignleft,alignright %}">

@@ -9,7 +9,7 @@ from django.contrib.syndication.feeds import Feed
 from django.utils.feedgenerator import Atom1Feed
 
 from oi.st.models import Game, FS, News, Package
-from oi.settings import WEB_URL, SITE_NAME, SITE_DESC, NEWS_IN_HOMEPAGE, PACKAGES_IN_HOMEPAGE, GAMES_IN_HOMEPAGE, FS_IN_HOMEPAGE, NEWS_PER_PAGE, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE
+from oi.settings import WEB_URL, SITE_NAME, SITE_DESC, NEWS_IN_HOMEPAGE, PACKAGES_IN_HOMEPAGE, GAMES_IN_HOMEPAGE, FS_IN_HOMEPAGE, HOWTOS_IN_HOMEPAGE, NEWS_PER_PAGE, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, HOWTO_PER_PAGE
 
 class Main_RSS(Feed):
     title = SITE_NAME + " - Anasayfa"
@@ -35,6 +35,10 @@ class Main_RSS(Feed):
         for fs in FS.objects.filter(status=1).order_by('-update')[:FS_IN_HOMEPAGE]:
             fs.title = 'İlk Adım: %s' % fs.title
             output.append(fs)
+
+        for howto in HowTo.objects.filter(status=1).order_by('-update')[:HOWTOS_IN_HOMEPAGE]:
+            howto.title = 'İlk Adım: %s' % howto.title
+            output.append(howto)
 
         return output
 
@@ -67,6 +71,20 @@ class FS_RSS(Feed):
         return FS.objects.filter(status=1).order_by('-update')[:FS_PER_PAGE]
 
 class FS_Atom(FS_RSS):
+    feed_type = Atom1Feed
+    subtitle = FS_RSS.description
+
+class HowTo_RSS(Feed):
+    title = SITE_NAME + " - Nasıl"
+    link = WEB_URL
+    description = SITE_DESC
+    title_template = 'feeds/feed_title.html'
+    description_template = 'feeds/feed_description.html'
+
+    def items(self):
+        return HowTo.objects.filter(status=1).order_by('-update')[:HOWTOS_PER_PAGE]
+
+class HowTo_Atom(FS_RSS):
     feed_type = Atom1Feed
     subtitle = FS_RSS.description
 
