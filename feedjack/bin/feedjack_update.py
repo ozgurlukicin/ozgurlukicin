@@ -121,7 +121,7 @@ def get_entry_data(entry, feed, options):
 
                 # create a request and get the image data
                 if options.verbose:
-                    print 'Getting %s to resize' % url
+                    print '  RESIZE: Getting %s to resize' % url
                 req = urllib2.Request(url)
                 req.add_header('User-Agent', USER_AGENT)
                 image_data = urllib2.urlopen(req).read()
@@ -151,12 +151,22 @@ def get_entry_data(entry, feed, options):
 
                     # generate a site url that will be showed in feedjack index and replace it with original
                     resized_image_url = "%s/%s" % (settings.FEEDJACK_UPLOAD_URL, image_name)
-                    content = content.replace(url, resized_image_url)
+                    img['src'] = resized_image_url
+
+                    # if it has width
+                    if img.has_key("width"):
+                        img['width'] = resize_x
+
+                    # if it has height
+                    if img.has_key("height"):
+                        img['height'] = resize_y
+
+                    content = soup
                     if options.verbose:
-                        print 'Image resized %s, %s' % (url, resized_image_url)
+                        print '  RESIZE: Image resized %s, %s' % (url, resized_image_url)
                 else:
                     if options.verbose:
-                        print 'Skipped, there is no change\n'
+                        print '  RESIZE: Skipped, there is no change\n'
 
             # endpatch
 
