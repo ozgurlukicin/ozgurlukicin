@@ -153,6 +153,7 @@ class FS(models.Model):
     videos = models.ManyToManyField(Video, blank=True)
     update = models.DateTimeField('Son Güncelleme', blank=False)
     author = models.CharField('Yazar', maxlength=32)
+    order = models.PositiveIntegerField(unique=True, verbose_name='Sıralama')
     status = models.BooleanField('Aktif')
 
     def __str__(self):
@@ -166,13 +167,13 @@ class FS(models.Model):
 
     class Admin:
         fields = (
-            ('Genel', {'fields': ('author', 'title','sum','text','videos','tags','update','status',)}),
+            ('Genel', {'fields': ('author', 'title','sum','text','videos','tags','order','update','status',)}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
 
         list_display = ('title', 'author', 'status', 'update')
         list_filter = ['update']
-        ordering = ['-update']
+        ordering = ['order']
         search_fields = ['title', 'text', 'tags']
         js = ("js/admin/sef.js", "js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
 
@@ -380,6 +381,7 @@ class PardusMirror(models.Model):
     name = models.CharField('Sunucu adı', maxlength = 64, blank = False, unique = True)
     url = models.CharField('Adres', maxlength = 128)
     type = models.SmallIntegerField('CD Tipi', maxlength=1, choices=cdtype)
+    order = models.PositiveIntegerField(verbose_name='Sıralama')
     status = models.BooleanField('Aktif')
 
     def __str__(self):
@@ -391,5 +393,6 @@ class PardusMirror(models.Model):
         search_fields = ['name']
 
     class Meta:
+        unique_together = (('type', 'order'),)
         verbose_name = "Pardus Yansısı"
         verbose_name_plural = "Pardus Yansıları"
