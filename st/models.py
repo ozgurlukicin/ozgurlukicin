@@ -223,7 +223,7 @@ class HowTo(models.Model):
 
     class Admin:
         fields = (
-            ('Genel', {'fields': ('author', 'title','sum','text','videos','tags','update','status',)}),
+            ('Genel', {'fields': ('author', 'title','sum','text','videos','tags','wiki','update','status',)}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
 
@@ -273,7 +273,7 @@ class Game(models.Model):
 
     class Admin:
         fields = (
-            ('Genel', {'fields': ('author', 'title', 'sum', 'text', 'videos', 'tags', 'update', 'status')}),
+            ('Genel', {'fields': ('author', 'title', 'sum', 'text', 'videos', 'tags', 'wiki', 'update', 'status')}),
             ('Oyun bilgileri', {'fields': ('url', 'path', 'learning_time', 'license', 'installed_size', 'download_size')}),
             ('Değerlendirme', {'fields': ('gameplay', 'graphics', 'sound', 'scenario', 'atmosphere')}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
@@ -356,7 +356,7 @@ class Package(models.Model):
 
     class Admin:
         fields = (
-            ('Genel', {'fields': ('author', 'title','sum','text', 'license','installed_size','download_size','url','point','path','ss','tags','videos','update','status')}),
+            ('Genel', {'fields': ('author', 'title','sum','text', 'license','installed_size','download_size','url','point','path','ss','tags','wiki','videos','update','status')}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
         list_display = ('title', 'author', 'status', 'update')
