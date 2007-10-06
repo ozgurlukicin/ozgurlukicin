@@ -45,7 +45,7 @@ game_dict = {
             }
 
 fs_dict = {
-           'queryset': FS.objects.filter(status=1).order_by('title'),
+           'queryset': FS.objects.filter(status=1).order_by('order'),
            'template_name': 'fs/fs_main.html',
            'paginate_by': FS_PER_PAGE,
            'template_object_name': 'fs'
