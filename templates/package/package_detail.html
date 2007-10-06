@@ -42,6 +42,11 @@
 <div class="sidebar sidebar_orange_title">Etiketler</div>
 <div class="sidebar grey">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
 
+{% if package.wiki.all %}
+<div class="sidebar sidebar_green_title">İlgili wiki sayfaları</div>
+<div class="sidebar grey">{% for wiki in package.wiki.all %}<a href="{{ wiki.get_absolute_url }}">{{ wiki.name }}</a><br />{% endfor %}</div>
+{% endif %}
+
 {% if videos %}
 <div class="sidebar sidebar_orange_title">İlgili Videolar</div>
 <div class="sidebar grey">{% for video in videos %}<a href="/video/{{ video.name }}" rel="lightbox[video_{{ package.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>

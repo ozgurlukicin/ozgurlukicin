@@ -34,6 +34,25 @@ class Tag(models.Model):
         verbose_name = "Etiket"
         verbose_name_plural = "Etiketler"
 
+class Wiki(models.Model):
+    name = models.CharField('Madde adı', maxlength=128, blank=False, unique=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return "http://tr.pardus-wiki.org/%s" % self.name
+
+    class Admin:
+        list_display = ('name', 'id')
+        ordering = ['-name']
+        search_fields = ['name']
+
+    class Meta:
+        ordering = ['name']
+        verbose_name = "Wiki sayfası"
+        verbose_name_plural = "Wiki sayfaları"
+
 class Contribute(models.Model):
     name = models.CharField('Tanım', maxlength=64, blank=False, unique=True)
 
@@ -187,6 +206,7 @@ class HowTo(models.Model):
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
     tags = models.ManyToManyField(Tag, blank=False)
+    wiki = models.ManyToManyField(Wiki, blank=True)
     videos = models.ManyToManyField(Video, blank=True)
     update = models.DateTimeField('Son Güncelleme', blank=False)
     author = models.CharField('Yazar', maxlength=32)
@@ -236,6 +256,7 @@ class Game(models.Model):
     atmosphere = models.SmallIntegerField('Atmosfer', maxlength=1, choices=ratings)
     learning_time = models.CharField('Öğrenme Süresi', maxlength=128, help_text='1 gün, 3 saat, 5 ay, yıllarca gibi.')
     tags = models.ManyToManyField(Tag, blank=False)
+    wiki = models.ManyToManyField(Wiki, blank=True)
     videos = models.ManyToManyField(Video, blank=True)
     update = models.DateTimeField('Son Güncelleme', blank=False)
     author = models.CharField('Yazar', maxlength=32)
@@ -318,6 +339,7 @@ class Package(models.Model):
     path = models.CharField('Çalıştırma Yolu', maxlength=128, help_text='Paketin Pardus menüsündeki yeri (örn. Programlar > Yardımcı Programlar > KNazar)')
     ss = models.ManyToManyField(ScreenShot)
     tags = models.ManyToManyField(Tag)
+    wiki = models.ManyToManyField(Wiki, blank=True)
     videos = models.ManyToManyField(Video, blank=True)
     update = models.DateTimeField('Son Güncelleme', blank=False)
     author = models.CharField('Yazar', maxlength=32)
