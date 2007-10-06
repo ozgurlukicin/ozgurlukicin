@@ -95,8 +95,8 @@ def tag_detail(request, tag):
 
 def download(request):
     version = PardusVersion.objects.filter(status=1).order_by('-number')[:1][0]
-    install_mirrors = PardusMirror.objects.filter(status=1, type=1).order_by('-name')
-    live_mirrors = PardusMirror.objects.filter(status=1, type=2).order_by('-name')
+    install_mirrors = PardusMirror.objects.filter(status=1, type=1).order_by('order')
+    live_mirrors = PardusMirror.objects.filter(status=1, type=2).order_by('order')
     return render_response(request, 'download/download.html', locals())
 
 def download_detail_releasenotes(request, version):
