@@ -378,7 +378,7 @@ class PardusVersion(models.Model):
 class PardusMirror(models.Model):
     cdtype = (('1','Kurulan'),('2','Çalışan'))
 
-    name = models.CharField('Sunucu adı', maxlength = 64, blank = False, unique = True)
+    name = models.CharField('Sunucu adı', maxlength = 64, blank = False)
     url = models.CharField('Adres', maxlength = 128)
     type = models.SmallIntegerField('CD Tipi', maxlength=1, choices=cdtype)
     order = models.PositiveIntegerField(verbose_name='Sıralama')
@@ -393,6 +393,6 @@ class PardusMirror(models.Model):
         search_fields = ['name']
 
     class Meta:
-        unique_together = (('type', 'order'),)
+        unique_together = (('type', 'order'),('type', 'name'),)
         verbose_name = "Pardus Yansısı"
         verbose_name_plural = "Pardus Yansıları"
