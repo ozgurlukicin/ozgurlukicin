@@ -60,7 +60,7 @@ def reply(request, forum_slug, topic_id, post_id=False):
         if form.is_valid() and not flood:
             post = Post(topic=topic,
                         author=request.user,
-                        text=form.clean_data['text']
+                        text=form.cleaned_data['text']
                        )
             post.save()
 
@@ -91,7 +91,7 @@ def edit_post(request, forum_slug, topic_id, post_id):
         flood,timeout = flood_control(request)
 
         if form.is_valid() and not flood:
-            post.text = form.clean_data['text']
+            post.text = form.cleaned_data['text']
             post.edit_count += 1
             post.edited = datetime.now()
             post.last_edited_by = request.user
@@ -117,13 +117,13 @@ def new_topic(request, forum_slug):
 
         if form.is_valid() and not flood:
             topic = Topic(forum=forum,
-                          title=form.clean_data['title']
+                          title=form.cleaned_data['title']
                          )
             topic.save()
 
             post = Post(topic=topic,
                         author=request.user,
-                        text=form.clean_data['text']
+                        text=form.cleaned_data['text']
                        )
             post.save()
 
@@ -147,7 +147,7 @@ def edit_topic(request, forum_slug, topic_id):
         flood,timeout = flood_control(request)
 
         if form.is_valid() and not flood:
-            topic.title = form.clean_data['title']
+            topic.title = form.cleaned_data['title']
             topic.topic_latest_post = first_post
             topic.save()
 
