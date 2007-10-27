@@ -1,0 +1,31 @@
+{% load library %}
+{% extends "base.html" %}
+
+{% block title %}Forum - {% endblock %}
+
+{% block pagetype %}page-single{% endblock %}
+
+{% block section %}forum{% endblock %}
+{% block section_logo %}<img src="/media/img/forum_header_logo.png">{% endblock %}
+
+{% block content %}
+<strong>{{ forum.name }}</strong> - <a href="/forum/{{ forum.name }}/new/">new topic</a><br />
+{% for topic in topic_list %}
+{% if topic.locked %}LOCKED - {% endif %}
+{% if topic.sticky %}STICKY - {% endif %}
+{% if topic.hidden and perms.forum.can_see_hidden_topics %}
+<div style="opacity: 0.5;">
+<a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a><br />
+sticky: {{ topic.sticky }} | locked: {{ topic.locked }} | hidden: {{ topic.hidden }} | posts: {{ topic.posts }} | views: {{ topic.views }} | latest post: {{ topic.topic_latest_post.edited|timedelta }}<br />
+</div>
+{% endif %}
+{% if not topic.hidden %}
+<a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a><br />
+sticky: {{ topic.sticky }} | locked: {{ topic.locked }} | hidden: {{ topic.hidden }} | posts: {{ topic.posts }} | views: {{ topic.views }} | latest post: {{ topic.topic_latest_post.edited|timedelta }}<br />
+{% endif %}
+{% endfor %}
+
+{% if is_paginated %}{% paginator %}{% endif %}
+{% endblock %}
+
+{% block sidebartop %}{% endblock %}
