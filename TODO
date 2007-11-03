@@ -24,7 +24,7 @@ Legend:
 - Download documents as PDF support (packages, first steps)
 - Search support
 
-- Forum
+/ Forum
   + Category
     + Hidden
     + Sorting
@@ -33,13 +33,12 @@ Legend:
     + Hidden
     + Sorting
     + Lock
-    / Pagination
+    + Pagination
   / Topic
     + Flood Control
     + Tags
-    - Hot or Not (Reddit style)
     + Hidden
-    - Hide
+    + Hide
     + Lock
     + Stick
     - Edit
@@ -48,12 +47,11 @@ Legend:
   / Post
     + Flood control
     + Hidden
-    - Hide
-    - Delete
-    - Edit
+    + Hide
+    + Edit
     - Markup language (BBCode??)
     - Smiley
-    - Quotations
+    + Quotations
   - Feeds
   - Search
   - Log & monitor all IP's
