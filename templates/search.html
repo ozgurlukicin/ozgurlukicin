@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="post" action="">
+<input type="text" name="term">
+<input type="submit">
+</form>
+
+{{ searched }}
+
+{% for package in packages %}
+<a href="{{ package.get_absolute_url }}">{{ package.title }}</a>
+{% endfor %}
+{% endblock %}

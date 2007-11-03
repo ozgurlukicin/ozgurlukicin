@@ -13,6 +13,8 @@ from django.shortcuts import get_object_or_404
 
 from oi.settings import WEB_URL, NEWS_IN_HOMEPAGE, PACKAGES_IN_HOMEPAGE, GAMES_IN_HOMEPAGE, FS_IN_HOMEPAGE, HOWTOS_IN_HOMEPAGE
 
+from oi.st.forms import SearchForm
+
 from oi.st.models import *
 from oi.st.wrappers import render_response
 from oi.flatpages.models import FlatPage
@@ -88,6 +90,7 @@ def tag_detail(request, tag):
         packages = Package.objects.filter(tags__name__exact=tag)
         games = Game.objects.filter(tags__name__exact=tag)
         fs = FS.objects.filter(tags__name__exact=tag)
+        howto = HOWTO.objects.filter(tags__name__exact=tag)
         flatpages = FlatPage.objects.filter(tags__name__exact=tag)
     except Tag.DoesNotExist:
         raise Http404
@@ -108,5 +111,21 @@ def videobox(request, video):
     web_url = WEB_URL
     return render_response(request, 'videobox.html', locals())
 
-def test(request):
-    return render_response(request, 'test.html')
+def search(request):
+    if request.method == 'POST':
+        form = SearchForm(request.POST.copy())
+        if form.is_valid():
+            term = form.cleaned_data['term']
+
+            searched = 1
+            news = News.objects.filter(text__contains=term)
+            fs = FS.objects.filter(text__contains=term)
+            howto = HowTo.objects.filter(text__contains=term)
+            packages = Package.objects.filter(text__contains=term)
+            games = Game.objects.filter(text__contains=term)
+            flatpages = FlatPage.objects.filter(text__contains=term)
+
+    else:
+        pass
+
+    return render_response(request, 'search.html', locals())
