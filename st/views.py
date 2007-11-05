@@ -90,7 +90,7 @@ def tag_detail(request, tag):
         packages = Package.objects.filter(tags__name__exact=tag)
         games = Game.objects.filter(tags__name__exact=tag)
         fs = FS.objects.filter(tags__name__exact=tag)
-        howto = HOWTO.objects.filter(tags__name__exact=tag)
+        howto = HowTo.objects.filter(tags__name__exact=tag)
         flatpages = FlatPage.objects.filter(tags__name__exact=tag)
     except Tag.DoesNotExist:
         raise Http404
@@ -117,13 +117,15 @@ def search(request):
         if form.is_valid():
             term = form.cleaned_data['term']
 
-            searched = 1
-            news = News.objects.filter(text__contains=term)
-            fs = FS.objects.filter(text__contains=term)
-            howto = HowTo.objects.filter(text__contains=term)
-            packages = Package.objects.filter(text__contains=term)
-            games = Game.objects.filter(text__contains=term)
-            flatpages = FlatPage.objects.filter(text__contains=term)
+            searched = True
+            tags = Tag.objects.filter(name__contains=term)
+            news = News.objects.filter(tags__name__contains=term)
+            packages = Package.objects.filter(tags__name__contains=term)
+            games = Game.objects.filter(tags__name__contains=term)
+            fs = FS.objects.filter(tags__name__contains=term)
+            howto = HowTo.objects.filter(tags__name__contains=term)
+            flatpages = FlatPage.objects.filter(tags__name__contains=term)
+            total = (tags.count()+news.count()+packages.count()+games.count()+fs.count()+howto.count()+flatpages.count())
 
     else:
         pass

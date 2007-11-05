@@ -1,14 +1,74 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form method="post" action="">
-<input type="text" name="term">
-<input type="submit">
-</form>
+<div class="center">
+    <form method="post" action="">
+    Anahtar kelime: <input type="text" name="term">
+    <input type="submit" value="Sonuçları göster">
+    </form>
+</div>
+{% if searched %}
+<div class="fs_title transparent_link">{{ term|escape }} kelimesini içeren sayfalar</div>
+{% ifnotequal total 0 %}
+<div class="fs_content">
+    {% if news %}
+        <div class="purple">
+            <h1>Haberler ({{ news.count }} adet)</h1>
+            <ul style="padding-left: 16px;" class="grey">
+            {% for obj in news %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.text|truncatewords:"10"|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
 
-{{ searched }}
+    {% if packages %}
+        <div class="orange">
+            <h1>Paketler ({{ packages.count }} adet)</h1>
+            <ul style="padding-left: 16px;" class="grey">
+            {% for obj in packages %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
 
-{% for package in packages %}
-<a href="{{ package.get_absolute_url }}">{{ package.title }}</a>
-{% endfor %}
+    {% if fs %}
+        <div class="green">
+            <h1>İlk adımlar ({{ fs.count }} adet)</h1>
+            <ul style="padding-left: 16px;" class="grey">
+            {% for obj in fs %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if games %}
+        <div class="darkblue">
+            <h1>Oyunlar ({{ games.count }} adet)</h1>
+            <ul style="padding-left: 16px;" class="grey">
+            {% for obj in games %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if flatpages %}
+        <div class="green">
+            <h1>Sabit sayfalar ({{ flatpages.count }} adet)</h1>
+            <ul style="padding-left: 16px;" class="grey">
+            {% for obj in flatpages %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.text|truncatewords:"10"|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</div>
+{% endifnotequal %}
+{% ifequal total 0 %}
+<div class="fs_content">İçerik bulunamadı.</div>
+{% endifequal %}
+{% endif %}
 {% endblock %}
