@@ -163,6 +163,31 @@ def edit_topic(request, forum_slug, topic_id):
     return render_response(request, 'forum/new_topic.html', locals())
 
 @login_required
+def merge(request, forum_slug, topic_id):
+    forum = get_object_or_404(Forum, slug=forum_slug)
+    topic = get_object_or_404(Topic, pk=topic_id)
+
+    if forum.locked or topic.locked:
+        raise HttpResponseServerError #FIXME: Give an error message
+
+    if request.method == 'POST':
+        form = TopicForm(request.POST.copy())
+        flood,timeout = flood_control(request)
+
+        if form.is_valid() and not flood:
+            topic2 = form.cleaned_data['topic2']
+            for post in Post.objects.filter(topic.id=topic.id):
+                post.topic.id = topic2.id
+
+            topic.delete()
+
+            return HttpResponseRedirect(topic2.get_absolute_url())
+    else:
+        form = MergeForm(auto_id=True)
+
+    return render_response(request, 'forum/merge.html', locals())
+
+@login_required
 def hide(request, forum_slug, topic_id, post_id=False):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
