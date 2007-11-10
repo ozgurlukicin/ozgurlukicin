@@ -106,6 +106,9 @@ urlpatterns = patterns('',
     (r'^etiket/$', 'django.views.generic.list_detail.object_list', dict(tag_dict)),
     (r'^etiket/(?P<tag>.*)/$', 'oi.st.views.tag_detail'),
 
+    #Search
+    (r'^arama/$', 'oi.st.views.search'),
+
     #Download
     (r'^indir/$', 'oi.st.views.download'),
     (r'^indir/(?P<version>.*)/surum_notu/$', 'oi.st.views.download_detail_releasenotes'),
@@ -122,11 +125,8 @@ urlpatterns = patterns('',
     #Bug tracker
     (r'^bocuk/', include('oi.bug.urls')),
 
-    #Gezegen
+    #Planet
     (r'^gezegen/', include('oi.feedjack.urls')),
-
-    #FIXME: Delete this when development ends
-    (r'^test/$', 'oi.st.views.test'),
 
     #Django
     (r'^$', 'oi.st.views.home'),
