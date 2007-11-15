@@ -118,14 +118,20 @@ def search(request):
             term = form.cleaned_data['term']
 
             searched = True
-            tags = Tag.objects.filter(name__contains=term)
-            news = News.objects.filter(tags__name__contains=term)
-            packages = Package.objects.filter(tags__name__contains=term)
-            games = Game.objects.filter(tags__name__contains=term)
-            fs = FS.objects.filter(tags__name__contains=term)
-            howto = HowTo.objects.filter(tags__name__contains=term)
-            flatpages = FlatPage.objects.filter(tags__name__contains=term)
-            total = (tags.count()+news.count()+packages.count()+games.count()+fs.count()+howto.count()+flatpages.count())
+            tags = Tag.objects.filter(name__icontains=term)
+            news = News.objects.filter(tags__name__icontains=term)
+            packages = Package.objects.filter(tags__name__icontains=term)
+            games = Game.objects.filter(tags__name__icontains=term)
+            fs = FS.objects.filter(tags__name__icontains=term)
+            howto = HowTo.objects.filter(tags__name__icontains=term)
+            flatpages = FlatPage.objects.filter(tags__name__icontains=term)
+            total = tags.count()
+            total += news.count()
+            total += packages.count()
+            total += games.count()
+            total += fs.count()
+            total += howto.count()
+            total += flatpages.count()
 
     else:
         pass
