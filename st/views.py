@@ -115,7 +115,7 @@ def search(request):
     if request.method == 'POST':
         form = SearchForm(request.POST.copy())
         if form.is_valid():
-            term = form.cleaned_data['term']
+            term = form.clean_data['term']
 
             searched = True
             tags = Tag.objects.filter(name__icontains=term).order_by('name')
@@ -124,7 +124,7 @@ def search(request):
             games = Game.objects.filter(tags__name__icontains=term).order_by('-update')
             fs = FS.objects.filter(tags__name__icontains=term).order_by('-update')
             howto = HowTo.objects.filter(tags__name__icontains=term).order_by('-update')
-            flatpages = FlatPage.objects.filter(tags__name__icontains=term).order_by('name')
+            flatpages = FlatPage.objects.filter(tags__name__icontains=term).order_by('title')
             total = tags.count()
             total += news.count()
             total += packages.count()
