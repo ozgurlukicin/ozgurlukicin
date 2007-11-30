@@ -16,7 +16,7 @@
             <h1>Haberler ({{ news.count }} adet)</h1>
             <ul style="padding-left: 16px;" class="grey">
             {% for obj in news %}
-                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.text|truncatewords:"10"|striptags }}</li>
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
             {% endfor %}
             </ul>
         </div>
