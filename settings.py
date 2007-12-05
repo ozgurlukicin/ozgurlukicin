@@ -29,7 +29,7 @@ if DEVELOPMENT_MODE:
     DATABASE_PORT = ''
 else:
     DEBUG = False
-    TEMPLATE_DEBUG = DEBUG
+    TEMPLATE_DEBUG = False
     WEB_URL = 'http://www.ozgurlukicin.com'
     DOCUMENT_ROOT = '/var/www/ozgurlukicin.com/oi'
     DATABASE_ENGINE = 'mysql'
