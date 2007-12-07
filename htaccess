@@ -1,4 +1,4 @@
-PythonPath "['/var/www/ozgurlukicin.com'] + sys.path"
+PythonPath "['/var/www/ozgurlukicin.com','/home/makkalot/public_html'] + sys.path"
 
 PythonHandler django.core.handlers.modpython
 SetEnv DJANGO_SETTINGS_MODULE oi.settings

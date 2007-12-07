@@ -6,8 +6,8 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 import platform
-
-DEVELOPMENT_MODE = ("pardus" not in platform.node())
+#not kaldirdik simdilik
+DEVELOPMENT_MODE = ("pardus" in platform.node())
 
 ADMINS = ()
 MANAGERS = ADMINS
@@ -19,12 +19,12 @@ SITE_DESC = 'Pardus için bir numaralı bilgi kaynağı'
 if DEVELOPMENT_MODE:
     DEBUG = True
     TEMPLATE_DEBUG = DEBUG
-    WEB_URL = 'http://django'
-    DOCUMENT_ROOT = '/home/ahmet/public_html/oi'
+    WEB_URL = 'http://127.0.0.1:9999/'
+    DOCUMENT_ROOT = '/home/makkalot/public_html/oi'
     DATABASE_ENGINE = 'mysql'
     DATABASE_NAME = 'oi'
     DATABASE_USER = 'root'
-    DATABASE_PASSWORD = 'root'
+    DATABASE_PASSWORD = '010684'
     DATABASE_HOST = 'localhost'
     DATABASE_PORT = ''
 else:

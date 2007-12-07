@@ -1,48 +1,176 @@
 {% extends "base.html" %}
 
 {% block content %}
-        <div id="fs_container">
-            {% for fs in fss %}
-            <div id="fs-{{ fs.id }}" class="fs">
-                <div class="fs_title transparent_link">İlk adım: <a href="{{ fs.get_absolute_url }}">{{ fs.title }}</a></div>
-                <div class="fs_content grey">{{ fs.sum }}</div>
-            </div>
-            {% endfor %}
+        
+   			{% for fs in fss %}
+			
+			<tr>
+    <td valign="top" bgcolor="#7C7C7C" style="padding-left:30px; padding-right:25px; padding-bottom:15px;"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="640" align="left" valign="top" style="padding-right:20px;"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="padding-bottom:22px;"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                <td align="left" class="txtBigTtl" style="padding-bottom:6px;"><a href="{{ fs.get_absolute_url }}">{{ fs.title }}</a></td>
+              </tr>
+              <tr>
+                <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td width="134" align="left" style="padding-right:12px;"><img src="/media/dijital/img/p_nasilkurulur.gif" width="134" height="83" /></td>
+                    <td valign="top" style="padding-top:3px;"><table border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td class="txtNrm">{{ fs.sum }}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding-top:10px;"><a href="{{ fs.get_absolute_url }}" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image14','','/media/dijital/img/bt_detay_off.gif',1)"><img src="/media/dijital/img/bt_detay.gif" alt="Detay" name="Image14" width="60" height="18" border="0" id="Image14" /></a></td>
+                      </tr>
+                    </table></td>
+                  </tr>
+                </table></td>
+              </tr>
+            </table></td>
+          </tr>
+		{% endfor %}
+
+
         </div>
         <br />
-        <div id="howto_container">
+        
             {% for howto in howtos %}
-            <div id="howto-{{ howto.id }}" class="howtos {% cycle alignleft,alignright %}">
-                <div class="howtos_title_mini transparent_link">Nasıl: <a href="{{ howto.get_absolute_url }}">{{ howto.title }}</a></div>
-                <div class="howtos_content_mini grey">{{ howto.sum }}</div>
-            </div>
-            {% endfor %}
-        </div>
+            	
+				<tr>
+    <td valign="top" bgcolor="#7C7C7C" style="padding-left:30px; padding-right:25px; padding-bottom:15px;"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="640" align="left" valign="top" style="padding-right:20px;"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="padding-bottom:22px;"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                <td align="left" class="txtBigTtl" style="padding-bottom:6px;"><a href="{{ howto.get_absolute_url }}">{{ howto.title }}</a></td>
+              </tr>
+              <tr>
+                <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td width="134" align="left" style="padding-right:12px;"><img src="/media/dijital/img/p_nasilkurulur.gif" width="134" height="83" /></td>
+                    <td valign="top" style="padding-top:3px;"><table border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td class="txtNrm">{{ howto.sum }}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding-top:10px;"><a href="{{ howto.get_absolute_url }}" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image14','','/media/dijital/img/bt_detay_off.gif',1)"><img src="/media/dijital/img/bt_detay.gif" alt="Detay" name="Image14" width="60" height="18" border="0" id="Image14" /></a></td>
+                      </tr>
+                    </table></td>
+                  </tr>
+                </table></td>
+              </tr>
+            </table></td>
+          </tr>
+
+		{% endfor %}
+        
         <br />
-        <div id="packages_container">
+        
+		
             {% for package in packages %}
-            <div id="package-{{ package.id }}" class="packages {% cycle alignleft,alignright %}">
-                <div class="packages_title_mini transparent_link">Paket: <a href="{{ package.get_absolute_url }}">{{ package.title }}</a></div>
-                <div class="packages_content_mini grey">{{ package.sum }}</div>
-            </div>
+            
+			<tr>
+    	<td valign="top" bgcolor="#7C7C7C" style="padding-left:30px; padding-right:25px; padding-bottom:15px;"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+      	<tr>
+        <td width="640" align="left" valign="top" style="padding-right:20px;"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="padding-bottom:22px;"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                <td align="left" class="txtBigTtl" style="padding-bottom:6px;"><a href="{{ package.get_absolute_url }}">{{ package.title }}</a></td>
+              </tr>
+              <tr>
+                <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td width="134" align="left" style="padding-right:12px;"><img src="/media/dijital/img/p_nasilkurulur.gif" width="134" height="83" /></td>
+                    <td valign="top" style="padding-top:3px;"><table border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td class="txtNrm">{{ package.sum }}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding-top:10px;"><a href="{{ package.get_absolute_url }}" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image14','','/media/dijital/img/bt_detay_off.gif',1)"><img src="/media/dijital/img/bt_detay.gif" alt="Detay" name="Image14" width="60" height="18" border="0" id="Image14" /></a></td>
+                      </tr>
+                    </table></td>
+                  </tr>
+                </table></td>
+              </tr>
+            </table></td>
+          </tr>
+
             {% endfor %}
-        </div>
+
+        
         <br />
-        <div id="games_container">
+        
+		
             {% for game in games %}
-            <div id="game-{{ game.id }}" class="games {% cycle alignleft,alignright %}">
-                <div class="games_title_mini transparent_link">Oyun: <a href="{{ game.get_absolute_url }}">{{ game.title }}</a></div>
-                <div class="games_content_mini grey">{{ game.sum }}</div>
-            </div>
-            {% endfor %}
-        </div>
+
+			
+			<tr>
+    	<td valign="top" bgcolor="#7C7C7C" style="padding-left:30px; padding-right:25px; padding-bottom:15px;"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+      	<tr>
+        <td width="640" align="left" valign="top" style="padding-right:20px;"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="padding-bottom:22px;"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                <td align="left" class="txtBigTtl" style="padding-bottom:6px;"><a href="{{ game.get_absolute_url }}">{{ game.title }}</a></td>
+              </tr>
+              <tr>
+                <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td width="134" align="left" style="padding-right:12px;"><img src="/media/dijital/img/p_nasilkurulur.gif" width="134" height="83" /></td>
+                    <td valign="top" style="padding-top:3px;"><table border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td class="txtNrm">{{ game.sum }}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding-top:10px;"><a href="{{ game.get_absolute_url }}" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image14','','/media/dijital/img/bt_detay_off.gif',1)"><img src="/media/dijital/img/bt_detay.gif" alt="Detay" name="Image14" width="60" height="18" border="0" id="Image14" /></a></td>
+                      </tr>
+                    </table></td>
+                  </tr>
+                </table></td>
+              </tr>
+            </table></td>
+          </tr>
+
+			{% endfor %}
+
+
         <br />
-        <div id="news_container">
+        
             {% for new in news %}
-            <div id="news-{{ new.id }}" class="news {% cycle alignleft,alignright %}">
-                <div class="news_title_mini transparent_link">Haber: <a href="{{ new.get_absolute_url }}">{{ new.title }}</a></div>
-                <div class="news_content_mini grey">{{ new.sum }}</div>
-            </div>
+            	
+				
+			<tr>
+    	<td valign="top" bgcolor="#7C7C7C" style="padding-left:30px; padding-right:25px; padding-bottom:15px;"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+      	<tr>
+        <td width="640" align="left" valign="top" style="padding-right:20px;"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="padding-bottom:22px;"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                <td align="left" class="txtBigTtl" style="padding-bottom:6px;"><a href="{{ new.get_absolute_url }}">{{ new.title }}</a></td>
+              </tr>
+              <tr>
+                <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td width="134" align="left" style="padding-right:12px;"><img src="/media/dijital/img/p_nasilkurulur.gif" width="134" height="83" /></td>
+                    <td valign="top" style="padding-top:3px;"><table border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td class="txtNrm">{{ new.sum }}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding-top:10px;"><a href="{{ new.get_absolute_url }}" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image14','','/media/dijital/img/bt_detay_off.gif',1)"><img src="/media/dijital/img/bt_detay.gif" alt="Detay" name="Image14" width="60" height="18" border="0" id="Image14" /></a></td>
+                      </tr>
+                    </table></td>
+                  </tr>
+                </table></td>
+              </tr>
+            </table></td>
+          </tr>
+				
+                
             {% endfor %}
         </div>
 {% endblock %}

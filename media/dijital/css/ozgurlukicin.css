@@ -1,0 +1,95 @@
+/* CSS Document */
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-color: #000000;
+	background-image: url(/media/dijital/img/bg.jpg);
+	background-repeat: repeat-x;
+}
+.txtNrm {
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #202020;
+	font-weight:normal;
+	text-align:left;
+}
+.txtTtlNrm {
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #707070;
+	font-weight:normal;
+}
+.txtTtl{
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 17px;
+	color: #FFCA06;
+	font-weight:normal;
+	text-decoration:none;
+	text-align:left;
+}
+.txtBigTtl{
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 22px;
+	color: #FFCC00;
+	font-weight:normal;
+	text-decoration:none;
+	text-align:left;
+}
+.txtSub{
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 11px;
+	color: #000000;
+	font-weight:normal;
+	text-decoration:none;
+	text-align:left;
+}
+.txtAlt{
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	color: #FFCC00;
+	font-weight:normal;
+	text-decoration:none;
+}
+.txtAltlink{
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	color: #FFCC00;
+	font-weight:normal;
+	text-decoration:none;
+}
+.txtAltlink:hover{
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	color: #FFCC00;
+	font-weight:normal;
+	text-decoration: underline;
+}
+.txtDtyBigTtl{
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 22px;
+	color: #000000;
+	font-weight:normal;
+	text-decoration:none;
+}
+.txtDtyPuan{
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 31px;
+	color: #000000;
+	font-weight:normal;
+	text-decoration:none;
+}
+.txtDtyNrm {
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #FFCB00;
+	font-weight:normal;
+}
+.txtDtyPuanNrm {
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #666666;
+	font-weight:normal;
+}
+
