@@ -129,6 +129,7 @@ INSTALLED_APPS = (
     'oi.seminar',
     'oi.profile',
     'oi.forum',
+    'oi.sanat',
 )
 
 CITY_LIST = (
