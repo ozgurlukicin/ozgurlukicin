@@ -31,7 +31,7 @@ class Category(models.Model):
 		return self.cat_name
 	
 	def get_absolute_url(self):
-		return "/sanat/kategori/%s/"%(self.slug)
+		return "/tema/kategori/%s/"%(self.slug)
 		
 	def get_parent_choice(self):
 		"""Get the current parent category of the model"""
@@ -120,7 +120,7 @@ class Dosya(models.Model):
 		return self.name
 	
 	def get_absolute_url(self):
-		return "/sanat/dosya/%s/"%(self.id)
+		return "/tema/dosya/%s/"%(self.id)
 		
 	class Admin:
 		list_display=('name','rate','state','counter','update','parent_cat')

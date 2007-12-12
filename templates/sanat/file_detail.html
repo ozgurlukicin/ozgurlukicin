@@ -1,0 +1,49 @@
+{% block content %}
+		<table summary="Submitted table designs" border="1" align="center">
+			<caption>Tema Dosyalar</caption>
+			<thead>
+				<tr>
+					<th scope="col">Kategori</th>
+					<th scope="col">İsim</th>
+					<th scope="col">Thumb</th>
+
+					<th scope="col">Link</th>
+					<th scope="col">Gönderen</th>
+					<th scope="col">Lisans</th>
+
+					<th scope="col">Görülmüş</th>
+					<th scope="col">Oy</th>	
+			</tr>
+
+			</thead>	
+			
+			<tbody>
+			{% if dosya %}
+								
+					<tr >
+						<th scope="row"><a href="{{dosya.parent_cat.get_absolute_url}}">{{dosya.parent_cat}}</a></th>
+						<td>{{dosya.name}}</td>
+
+						<td>{% for screen in dosya.screens.all %}
+								<img src="../../../media/{{screen}}" width="100" height="100"/><br/>								
+							{% endfor %}
+						</td>
+
+						<td>{% for file in dosya.file_data.all %}
+								<a href="../../../media/{{file}}">Link</a><br/>
+							{% endfor %}</td>
+
+						<td>{{dosya.user}}</td>
+						<td>{{dosya.licence}}</td>
+						<td>{{dosya.counter}}</td>
+						<td>{{dosya.rate}}</td>
+					</tr>
+				
+			{% endif %}
+			
+</tbody>
+</table> 
+
+
+
+{% endblock %}

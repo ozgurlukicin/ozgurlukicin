@@ -128,6 +128,9 @@ urlpatterns = patterns('',
     #Planet
     (r'^gezegen/', include('oi.feedjack.urls')),
 
+	#Tema
+	(r'^tema/', include('oi.sanat.urls')),
+	
     #Django
     (r'^$', 'oi.st.views.home'),
     (r'^admin/upload/image/add/$', 'oi.upload.views.image_upload'),

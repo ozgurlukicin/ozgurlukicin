@@ -12,7 +12,7 @@
 
 from django import template
 from django.template import TemplateSyntaxError
-from nesh.thumbnail.utils import make_thumbnail, get_image_size
+from oi.sanat.utils import make_thumbnail, get_image_size
 register = template.Library()
 ##################################################
 ## FILTERS ##
@@ -73,9 +73,8 @@ or if only a width is requested (to be compatibile with admin interface)::
     #
     
     if ('width' not in kwargs) and ('height' not in kwargs):
-        kwargs['width']=DEFAULT_WIDTH
+		kwargs['width']=DEFAULT_WIDTH
 		kwargs['height']=DEFAULT_HEIGHT
-		
 		#raise template.TemplateSyntaxError, "thumbnail filter requires arguments (width and/or height)"
     
     ret = make_thumbnail(url, **kwargs)
