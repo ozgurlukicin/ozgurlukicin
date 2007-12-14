@@ -128,8 +128,8 @@ urlpatterns = patterns('',
     #Planet
     (r'^gezegen/', include('oi.feedjack.urls')),
 
-	#Tema
-	(r'^tema/', include('oi.sanat.urls')),
+    #Tema
+    (r'^tema/', include('oi.sanat.urls')),
 	
     #Django
     (r'^$', 'oi.st.views.home'),

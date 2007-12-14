@@ -60,7 +60,7 @@ def reply(request, forum_slug, topic_id, post_id=False):
         if form.is_valid() and not flood:
             post = Post(topic=topic,
                         author=request.user,
-                        text=form.cleaned_data['text']
+                        text=form.clean_data['text']
                        )
             post.save()
 
@@ -91,7 +91,7 @@ def edit_post(request, forum_slug, topic_id, post_id):
         flood,timeout = flood_control(request)
 
         if form.is_valid() and not flood:
-            post.text = form.cleaned_data['text']
+            post.text = form.clean_data['text']
             post.edit_count += 1
             post.edited = datetime.now()
             post.last_edited_by = request.user
@@ -117,13 +117,13 @@ def new_topic(request, forum_slug):
 
         if form.is_valid() and not flood:
             topic = Topic(forum=forum,
-                          title=form.cleaned_data['title']
+                          title=form.clean_data['title']
                          )
             topic.save()
 
             post = Post(topic=topic,
                         author=request.user,
-                        text=form.cleaned_data['text']
+                        text=form.clean_data['text']
                        )
             post.save()
 
@@ -147,7 +147,7 @@ def edit_topic(request, forum_slug, topic_id):
         flood,timeout = flood_control(request)
 
         if form.is_valid() and not flood:
-            topic.title = form.cleaned_data['title']
+            topic.title = form.clean_data['title']
             topic.topic_latest_post = first_post
             topic.save()
 
@@ -162,30 +162,30 @@ def edit_topic(request, forum_slug, topic_id):
 
     return render_response(request, 'forum/new_topic.html', locals())
 
-@login_required
-def merge(request, forum_slug, topic_id):
-    forum = get_object_or_404(Forum, slug=forum_slug)
-    topic = get_object_or_404(Topic, pk=topic_id)
+#@login_required
+#def merge(request, forum_slug, topic_id):
+    #forum = get_object_or_404(Forum, slug=forum_slug)
+    #topic = get_object_or_404(Topic, pk=topic_id)
 
-    if forum.locked or topic.locked:
-        raise HttpResponseServerError #FIXME: Give an error message
+    #if forum.locked or topic.locked:
+        #raise HttpResponseServerError #FIXME: Give an error message
 
-    if request.method == 'POST':
-        form = TopicForm(request.POST.copy())
-        flood,timeout = flood_control(request)
+    #if request.method == 'POST':
+        #form = TopicForm(request.POST.copy())
+        #flood,timeout = flood_control(request)
 
-        if form.is_valid() and not flood:
-            topic2 = form.cleaned_data['topic2']
-            for post in Post.objects.filter(topic.id=topic.id):
-                post.topic.id = topic2.id
+        #if form.is_valid() and not flood:
+            #topic2 = form.clean_data['topic2']
+            #for post in Post.objects.filter(topic.id=topic.id):
+                #post.topic.id = topic2.id
 
-            topic.delete()
+            #topic.delete()
 
-            return HttpResponseRedirect(topic2.get_absolute_url())
-    else:
-        form = MergeForm(auto_id=True)
+            #return HttpResponseRedirect(topic2.get_absolute_url())
+    #else:
+        #form = MergeForm(auto_id=True)
 
-    return render_response(request, 'forum/merge.html', locals())
+    #return render_response(request, 'forum/merge.html', locals())
 
 @login_required
 def hide(request, forum_slug, topic_id, post_id=False):
@@ -253,8 +253,7 @@ def flood_control(request):
         flood = True
         timeout = (FLOOD_TIMEOUT - (datetime.now() - request.session['flood_control']).seconds)
     if not 'flood_control' in request.session or ((datetime.now() - request.session['flood_control']).seconds > FLOOD_TIMEOUT):
-        flood = False
-        timeout = False
+        flood = timeout = False
         request.session['flood_control'] = datetime.now()
 
     return flood,timeout

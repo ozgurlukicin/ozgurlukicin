@@ -1,21 +1,15 @@
-{% extends "base.html" %}
-
-{% block title %}Forum - {% endblock %}
-
-{% block pagetype %}page-single{% endblock %}
-
-{% block section %}forum{% endblock %}
-{% block section_logo %}<img src="/media/img/forum_header_logo.png">{% endblock %}
-
 {% block content %}
-<strong><a href="{{ forum.category.get_absolute_url }}">{{ forum.category.name }}</a> > <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> > {{ topic.title }}</strong><br />
+<strong><a href="{{ forum.category.get_absolute_url }}">{{ forum.category.name }}</a> > <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> > {{ topic.title }}</strong><br /><br />
+
 {% for post in posts %}
-{% if post.hidden %}<div style="opacity: 0.4">{% endif %}
-<a name="post{{ post.id }}"></a>
-<a href="{{ post.get_absolute_url }}">#{{ forloop.counter }}</a> - {{ post.author }} - {{ post.created }}<br />
-{{ post.text|linebreaksbr }}<br />
-{% ifnotequal post.edit_count 0 %}Bu ileti {{ post.edit_count }} kez değiştirilmiştir, son kez {{ post.edited }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.<br />{% endifnotequal %}
-{{ post.ip }}
+<div {% if post.hidden %}style="opacity: 0.5;"{% endif %}><a name="post{{ post.id }}"></a>
+<span style="float: left;"><a href="{{ post.get_absolute_url }}">#{{ forloop.counter }}</a></span>
+<span style="float: right;">{{ post.created|date:"d-m-Y H:i" }}</span><br />
+<div id="author_info">{{ post.author.avatar }} {{ post.author }}{% if perms.post.can_see_ip %} ({{ post.ip }}){% endif %}</div>
+<div style="padding-top: 10px;">{{ post.text|linebreaksbr }}<br />
+{% ifnotequal post.edit_count 0 %}<br />Bu ileti {{ post.edit_count }} kez değiştirilmiştir, son kez {{ post.edited }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.<br />{% endifnotequal %}
+</div>
+
 <br />{% if forloop.first %}{% if perms.topic.can_edit %}<a href="{{ topic.get_edit_url }}">edit</a>{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ topic.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% else %}{% if perms.post.can_edit %}<a href="{{ post.get_edit_url }}">edit</a>{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% endif %} <a href="{{ post.get_quote_url }}">quote</a>
 
 {% if perms.post.can_hide and not forloop.first and not post.hidden %}<a href="{{ post.get_hide_url }}">hide</a>{% endif %}

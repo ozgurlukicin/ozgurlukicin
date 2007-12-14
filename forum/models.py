@@ -60,6 +60,7 @@ class Post(models.Model):
         verbose_name = 'İleti'
         verbose_name_plural = 'İletiler'
         permissions = (
+                       ("can_see_ip", "Can see author ip"),
                        ("can_hide", "Can hide"),
                        ("can_see_hidden_posts", "Can see hidden posts"),
                       )
