@@ -19,7 +19,7 @@ SITE_DESC = 'Pardus için bir numaralı bilgi kaynağı'
 if DEVELOPMENT_MODE:
     DEBUG = True
     TEMPLATE_DEBUG = DEBUG
-    WEB_URL = 'http://127.0.0.1:9999/'
+    WEB_URL = 'http://127.0.0.1:9999'
     DOCUMENT_ROOT = '/home/makkalot/public_html/oi'
     DATABASE_ENGINE = 'mysql'
     DATABASE_NAME = 'oi'
@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.sites',
     'django.contrib.humanize',
+	'django.contrib.comments',
     'oi.flatpages',
     'oi.st',
     'oi.upload',

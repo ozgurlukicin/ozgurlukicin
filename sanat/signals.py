@@ -19,3 +19,18 @@ def rm_thumb(sender, instance, signal, *args,**kwargs):
 	
 	remove_model_thumbnails(instance)
 	
+
+def rmv_files(sender, instance, signal, *args,**kwargs):
+	""" Delete the files associated with the tema file when it is deleted
+	we need that one because the relation is manytomany"""
+	
+	#may add not to remove the default one ???
+	
+	#remove the associated screens
+	for screen in instance.screens.all():
+		screen.delete()
+		
+	#remove the assciated files
+	for file in instance.file_data.all():
+		file.delete()
+	

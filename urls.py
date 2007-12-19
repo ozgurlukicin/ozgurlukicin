@@ -6,6 +6,7 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.conf.urls.defaults import *
+from django.contrib.comments.models import FreeComment
 
 from oi.settings import WEB_URL, DOCUMENT_ROOT, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, NEWS_PER_PAGE, TAG_PER_PAGE, HOWTO_PER_PAGE
 from oi.st.models import Package, Game, FS, News, Tag, HowTo
@@ -74,6 +75,11 @@ tag_dict = {
            }
 
 urlpatterns = patterns('',
+	
+	#comments
+	(r'^comments/', include('django.contrib.comments.urls.comments')),
+	(r'^comments/postfree/', 'oi.sanat.views.my_post_free_comment'),	
+	
     #News
     (r'^haber/$', 'django.views.generic.list_detail.object_list', dict(news_dict)),
     (r'^haber/(?P<slug>.*)/yazdir/$', 'oi.st.views.news_printable'),

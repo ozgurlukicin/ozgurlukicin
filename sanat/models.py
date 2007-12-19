@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from oi.st.models import License
 from django.db.models import signals
 from django.dispatch import dispatcher
-from oi.sanat.signals import rm_thumb,crt_thumb
+from oi.sanat.signals import rm_thumb,crt_thumb,rmv_files
  
 
 # Create your models here.
@@ -121,9 +121,17 @@ class Dosya(models.Model):
 	
 	def get_absolute_url(self):
 		return "/tema/dosya/%s/"%(self.id)
+	
+	def get_screens(self):
+		""" Screen linklerini al"""
+		sc=self.screens.all()
+		
+		for i in sc:
+			link="".join(["\n <a href=\"%s\">Link</a>"%(i)])
+		return link
 		
 	class Admin:
-		list_display=('name','rate','state','counter','update','parent_cat')
+		list_display=('name','rate','state','counter','update','parent_cat','get_screens')
 		search_fields=['name','parent_cat']
 		list_filter=['update']
 		ordering=['-update']
@@ -134,3 +142,4 @@ class Dosya(models.Model):
 		verbose_name="Sanat Dosya"
 		verbose_name_plural="Sanat Dosyaları"
 
+dispatcher.connect(rmv_files,signal=signals.pre_delete, sender=Dosya)
