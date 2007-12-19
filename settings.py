@@ -13,6 +13,7 @@ SITE_NAME = 'Özgürlük için...'
 SITE_DESC = 'Pardus için bir numaralı bilgi kaynağı'
 
 DEBUG = True
+TESTING = False
 TEMPLATE_DEBUG = DEBUG
 WEB_URL = 'http://127.0.0.1:8000'
 DOCUMENT_ROOT = '/home/username/public_html/oi'
