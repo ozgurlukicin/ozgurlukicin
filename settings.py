@@ -12,28 +12,16 @@ MANAGERS = ADMINS
 SITE_NAME = 'Özgürlük için...'
 SITE_DESC = 'Pardus için bir numaralı bilgi kaynağı'
 
-if DEVELOPMENT_MODE:
-    DEBUG = True
-    TEMPLATE_DEBUG = DEBUG
-    WEB_URL = 'http://127.0.0.1:8000'
-    DOCUMENT_ROOT = '/home/username/public_html/oi'
-    DATABASE_ENGINE = 'mysql'
-    DATABASE_NAME = 'oi'
-    DATABASE_USER = 'root'
-    DATABASE_PASSWORD = ''
-    DATABASE_HOST = 'localhost'
-    DATABASE_PORT = ''
-else:
-    DEBUG = False
-    TEMPLATE_DEBUG = DEBUG
-    WEB_URL = 'http://www.ozgurlukicin.com'
-    DOCUMENT_ROOT = '/var/www/ozgurlukicin.com/oi'
-    DATABASE_ENGINE = 'mysql'
-    DATABASE_NAME = 'ozgur_oi'
-    DATABASE_USER = 'ozgur'
-    DATABASE_PASSWORD = ''
-    DATABASE_HOST = 'localhost'
-    DATABASE_PORT = ''
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+WEB_URL = 'http://127.0.0.1:8000'
+DOCUMENT_ROOT = '/home/username/public_html/oi'
+DATABASE_ENGINE = 'mysql'
+DATABASE_NAME = 'oi'
+DATABASE_USER = 'root'
+DATABASE_PASSWORD = ''
+DATABASE_HOST = 'localhost'
+DATABASE_PORT = ''
 
 # Email
 DEFAULT_FROM_EMAIL = 'accounts@ozgurlukicin.com'
