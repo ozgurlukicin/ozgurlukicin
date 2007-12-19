@@ -5,10 +5,6 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-import platform
-#not kaldirdik simdilik
-DEVELOPMENT_MODE = ("pardus" in platform.node())
-
 ADMINS = ()
 MANAGERS = ADMINS
 
@@ -19,12 +15,12 @@ SITE_DESC = 'Pardus için bir numaralı bilgi kaynağı'
 if DEVELOPMENT_MODE:
     DEBUG = True
     TEMPLATE_DEBUG = DEBUG
-    WEB_URL = 'http://127.0.0.1:9999'
-    DOCUMENT_ROOT = '/home/makkalot/public_html/oi'
+    WEB_URL = 'http://127.0.0.1:8000'
+    DOCUMENT_ROOT = '/home/username/public_html/oi'
     DATABASE_ENGINE = 'mysql'
     DATABASE_NAME = 'oi'
     DATABASE_USER = 'root'
-    DATABASE_PASSWORD = '010684'
+    DATABASE_PASSWORD = ''
     DATABASE_HOST = 'localhost'
     DATABASE_PORT = ''
 else:
