@@ -65,23 +65,18 @@ TIME_ZONE = 'Europe/Istanbul'
 LANGUAGE_CODE = 'tr'
 SITE_ID = 1
 
-# Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = '%s/media/' % DOCUMENT_ROOT
-
-# Example: "http://media.lawrence.com"
 MEDIA_URL = '%s/media/' % WEB_URL
-
-# Examples: "http://foo.com/media/", "/media/".
 ADMIN_MEDIA_PREFIX = '%s/media/' % WEB_URL
 
-# Make this unique, and don't share it with anybody.
 SECRET_KEY = 'n9-*x3!&!(x*z_!13)cyxil4fh+ov_+3!y($&4t7iit=)d)=93'
 
-# List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
     'django.template.loaders.app_directories.load_template_source',
 )
+
+TEMPLATE_CONTEXT_PROCESSORS = ("oi.context_processors.testing",)
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -106,7 +101,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.sites',
     'django.contrib.humanize',
-	'django.contrib.comments',
+    'django.contrib.comments',
     'oi.flatpages',
     'oi.st',
     'oi.upload',
