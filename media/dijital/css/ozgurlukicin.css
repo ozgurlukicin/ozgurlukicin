@@ -1,0 +1,169 @@
+/* CSS Document */
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-color: #000000;
+	background-image: url(/media/dijital/img/bg.jpg);
+	background-repeat: repeat-x;
+}
+.txtNrm {
+	font-family: "Liberation Sans", "Liberation Serif", Arial;
+	font-size: 11px;
+	color: #202020;
+	font-weight:normal;
+	text-align:left;
+}
+.txtTtlNrm {
+	font-family: "Liberation Sans", "Liberation Serif", Arial;
+	font-size: 11px;
+	color: #707070;
+	font-weight:normal;
+}
+.txtTtl{
+	font-family: Gentium, Georgia;
+	font-size: 17px;
+	color: #FFCA06;
+	font-weight:normal;
+	text-decoration:none;
+	text-align:left;
+}
+.txtBigTtl{
+	font-family: Gentium, Georgia;
+	font-size: 22px;
+	color: #FFCC00;
+	font-weight:normal;
+	text-decoration:none;
+	text-align:left;
+}
+.txtSub{
+	font-family: Gentium, Georgia;
+	font-size: 11px;
+	color: #000000;
+	font-weight:normal;
+	text-decoration:none;
+	text-align:left;
+}
+.txtAlt{
+	font-family: "Liberation Sans", "Liberation Serif", Arial;
+	font-size: 9px;
+	color: #FFCC00;
+	font-weight:normal;
+	text-decoration:none;
+}
+.txtAltlink{
+	font-family: "Liberation Sans", "Liberation Serif", Arial;
+	font-size: 9px;
+	color: #FFCC00;
+	font-weight:normal;
+	text-decoration:none;
+}
+.txtAltlink:hover{
+	font-family: "Liberation Sans", "Liberation Serif", Arial;
+	font-size: 9px;
+	color: #FFCC00;
+	font-weight:normal;
+	text-decoration: underline;
+}
+.txtDtyBigTtl{
+	font-family: Gentium, Georgia;
+	font-size: 22px;
+	color: #000000;
+	font-weight:normal;
+	text-decoration:none;
+}
+.txtDtyPuan{
+	font-family: Gentium, Georgia;
+	font-size: 31px;
+	color: #000000;
+	font-weight:normal;
+	text-decoration:none;
+}
+.txtDtyNrm {
+	font-family: "Liberation Sans", "Liberation Serif", Arial;
+	font-size: 11px;
+	color: #FFCB00;
+	font-weight:normal;
+}
+.txtDtyPuanNrm {
+	font-family: "Liberation Sans", "Liberation Serif", Arial;
+	font-size: 11px;
+	color: #666666;
+	font-weight:normal;
+}
+#tab1{
+	font-family: "Liberation Sans", "Liberation Serif", Arial;
+	position:relative;
+	overflow:visible;
+	width:900px;
+	height:135px;
+	font-size:11px;
+	font-weight:normal;
+	text-decoration:none;
+	visibility: visible;
+	vertical-align:bottom;
+}
+#tab2{
+	font-family: "Liberation Sans", "Liberation Serif", Arial;
+	background:url(/media/dijital/img/td_bg.jpg);
+	background-repeat:no-repeat;
+	background-color: #000000;
+	position:relative;
+	overflow:visible;
+	width:900px;
+	height:400px;
+	font-size:11px;
+	font-weight:normal;
+	text-decoration:none;
+	visibility: visible;
+}
+#tab3{
+	font-family: "Liberation Sans", "Liberation Serif", Arial;
+	background:url(/media/dijital/img/ara_bg.jpg);
+	background-repeat:no-repeat;
+	background-color: #7C7C7C;
+	position:relative;
+	overflow:visible;
+	width:900px;
+	height:640px;
+	font-size:11px;
+	font-weight:normal;
+	text-decoration:none;
+	visibility: visible;
+}
+#tab4{
+	font-family: "Liberation Sans", "Liberation Serif", Arial;
+	background-color: #000000;
+	color:#FFCC00;
+	position:relative;
+	overflow:visible;
+	width:900px;
+	height:30px;
+	font-size:11px;
+	font-weight:normal;
+	text-decoration:none;
+	visibility: visible;
+}
+/* #tab2 - elementleri */
+#tabtxt1 {
+	font-family: Gentium, Georgia;
+	font-size: 11px;
+	color: #000000;
+	font-weight:normal;
+	text-decoration:none;
+	text-align:left;
+	float:left;
+	margin-top:12px; 
+	margin-left:15px;
+}
+#tabtxt2 {
+	font-family: "Liberation Sans", "Liberation Serif", Arial;
+	font-size: 11px;
+	color: #707070;
+	font-weight:normal;
+	float:left;
+	margin-left:15px; 
+	margin-top:20px;
+}
+#IMGindir {float: right;}

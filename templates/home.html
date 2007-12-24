@@ -1,48 +1,108 @@
 {% extends "base.html" %}
 
+		
+
 {% block content %}
-        <div id="fs_container">
+        	<!-- FS KISMI-->
             {% for fs in fss %}
-            <div id="fs-{{ fs.id }}" class="fs">
-                <div class="fs_title transparent_link">İlk adım: <a href="{{ fs.get_absolute_url }}">{{ fs.title }}</a></div>
-                <div class="fs_content grey">{{ fs.sum }}</div>
-            </div>
+
+			<div class="txtTtlNrm" style="width:670px; float: left; margin-left:15px; margin-top:20px; position:absolute; left: 0px; height: 135px;">
+    				<div align="center" style="width:134px; position:absolute; top: 36px;"><img src="/media/dijital/img/p_nasilkurulur.gif" width="134" height="83" /></div>
+    				<div class="txtBigTtl" style="width:314px; position:absolute; left: 0px; top: 1px;">{{ fs.title }}</div>
+    				<div class="txtNrm" style="width:513px; position:absolute; left: 146px; top: 37px; height: 38px;">{{ fs.sum }}</div>
+    				<div class="txtNrm" style="width:60px; position:absolute; left: 146px; top: 77px; height: 18px;"><a href="{{ fs.get_absolute_url }}" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image14','','/media/dijital/img/bt_detay_off.gif',1)"><img src="/media/dijital/img/bt_detay.gif" alt="Detay" name="Image14" width="60" height="18" border="0" id="Image14" /></a></div>
+  			</div>
+			
+			<br />
+			<br />
+            <br />
+            <br />
+			<br />
+			<br />
+			<br />
             {% endfor %}
-        </div>
-        <br />
-        <div id="howto_container">
+        	<br/>
+			<br />
+			
+
+        	<!-- HOWTO KISMI-->
             {% for howto in howtos %}
-            <div id="howto-{{ howto.id }}" class="howtos {% cycle alignleft,alignright %}">
-                <div class="howtos_title_mini transparent_link">Nasıl: <a href="{{ howto.get_absolute_url }}">{{ howto.title }}</a></div>
-                <div class="howtos_content_mini grey">{{ howto.sum }}</div>
-            </div>
+
+			<div class="txtTtlNrm" style="width:670px; float: left; margin-left:15px; margin-top:20px; position:absolute; left: 0px; height: 135px;">
+    				<div align="center" style="width:134px; position:absolute; top: 36px;"><img src="/media/dijital/img/p_nasilkurulur.gif" width="134" height="83" /></div>
+    				<div class="txtBigTtl" style="width:314px; position:absolute; left: 0px; top: 1px;">{{ howto.title }}</div>
+    				<div class="txtNrm" style="width:513px; position:absolute; left: 146px; top: 37px; height: 38px;">{{ howto.sum }}</div>
+    				<div class="txtNrm" style="width:60px; position:absolute; left: 146px; top: 77px; height: 18px;"><a href="{{ howto.get_absolute_url }}" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image14','','/media/dijital/img/bt_detay_off.gif',1)"><img src="/media/dijital/img/bt_detay.gif" alt="Detay" name="Image14" width="60" height="18" border="0" id="Image14" /></a></div>
+  			</div>
+			
+			<br />
+			<br />
+            <br />
+            <br />
+			<br />
+			<br />
+			<br />
             {% endfor %}
-        </div>
-        <br />
-        <div id="packages_container">
+			<br/>        
+			<br />
+			
+        	<!-- PACKAGES KISMI-->
             {% for package in packages %}
-            <div id="package-{{ package.id }}" class="packages {% cycle alignleft,alignright %}">
-                <div class="packages_title_mini transparent_link">Paket: <a href="{{ package.get_absolute_url }}">{{ package.title }}</a></div>
-                <div class="packages_content_mini grey">{{ package.sum }}</div>
-            </div>
+            
+			<div class="txtTtlNrm" style="width:670px; float: left; margin-left:15px; margin-top:20px; position:absolute; left: 0px; height: 135px;">
+    				<div align="center" style="width:134px; position:absolute; top: 36px;"><img src="/media/dijital/img/p_nasilkurulur.gif" width="134" height="83" /></div>
+    				<div class="txtBigTtl" style="width:314px; position:absolute; left: 0px; top: 1px;">{{ package.title }}</div>
+    				<div class="txtNrm" style="width:513px; position:absolute; left: 146px; top: 37px; height: 38px;">{{ package.sum }}</div>
+    				<div class="txtNrm" style="width:60px; position:absolute; left: 146px; top: 77px; height: 18px;"><a href="{{ package.get_absolute_url }}" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image14','','/media/dijital/img/bt_detay_off.gif',1)"><img src="/media/dijital/img/bt_detay.gif" alt="Detay" name="Image14" width="60" height="18" border="0" id="Image14" /></a></div>
+  			</div>			
+			
+			<br />
+			<br />
+            <br />
+            <br />
+			<br />
+			<br />
+			<br />
             {% endfor %}
-        </div>
-        <br />
-        <div id="games_container">
+			<br/>        
+			<br />
+			
+        	<!-- GAMES KISMI-->
             {% for game in games %}
-            <div id="game-{{ game.id }}" class="games {% cycle alignleft,alignright %}">
-                <div class="games_title_mini transparent_link">Oyun: <a href="{{ game.get_absolute_url }}">{{ game.title }}</a></div>
-                <div class="games_content_mini grey">{{ game.sum }}</div>
-            </div>
+			<div class="txtTtlNrm" style="width:670px; float: left; margin-left:15px; margin-top:20px; position:absolute; left: 0px; height: 135px;">
+    				<div align="center" style="width:134px; position:absolute; top: 36px;"><img src="/media/dijital/img/p_nasilkurulur.gif" width="134" height="83" /></div>
+    				<div class="txtBigTtl" style="width:314px; position:absolute; left: 0px; top: 1px;">{{ game.title }}</div>
+    				<div class="txtNrm" style="width:513px; position:absolute; left: 146px; top: 37px; height: 38px;">{{ game.sum }}</div>
+    				<div class="txtNrm" style="width:60px; position:absolute; left: 146px; top: 77px; height: 18px;"><a href="{{ game.get_absolute_url }}" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image14','','/media/dijital/img/bt_detay_off.gif',1)"><img src="/media/dijital/img/bt_detay.gif" alt="Detay" name="Image14" width="60" height="18" border="0" id="Image14" /></a></div>
+  			</div>
+			<br />
+			<br />
+            <br />
+			<br />
+            <br />
+			<br />
+			<br />
+			{% endfor %}
+        	<br/>
+        	<br />
+			<!-- NEWS KISMI-->
+			{% for new in news %}
+
+			<div class="txtTtlNrm" style="width:670px; float: left; margin-left:15px; margin-top:20px; position:absolute; left: 0px; height: 135px;">
+    				<div align="center" style="width:134px; position:absolute; top: 36px;"><img src="/media/dijital/img/p_nasilkurulur.gif" width="134" height="83" /></div>
+    				<div class="txtBigTtl" style="width:314px; position:absolute; left: 0px; top: 1px;">{{ new.title }}</div>
+    				<div class="txtNrm" style="width:513px; position:absolute; left: 146px; top: 37px; height: 38px;">{{ new.sum }}</div>
+    				<div class="txtNrm" style="width:60px; position:absolute; left: 146px; top: 77px; height: 18px;"><a href="{{ new.get_absolute_url }}" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image14','','/media/dijital/img/bt_detay_off.gif',1)"><img src="/media/dijital/img/bt_detay.gif" alt="Detay" name="Image14" width="60" height="18" border="0" id="Image14" /></a></div>
+  			</div>			
+
+			<br />
+			<br />
+			<br />
+			<br />
+            <br />
+			<br />
+			<br />
             {% endfor %}
-        </div>
-        <br />
-        <div id="news_container">
-            {% for new in news %}
-            <div id="news-{{ new.id }}" class="news {% cycle alignleft,alignright %}">
-                <div class="news_title_mini transparent_link">Haber: <a href="{{ new.get_absolute_url }}">{{ new.title }}</a></div>
-                <div class="news_content_mini grey">{{ new.sum }}</div>
-            </div>
-            {% endfor %}
-        </div>
+			<br/>        
+			
 {% endblock %}
