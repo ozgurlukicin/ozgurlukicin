@@ -1,4 +1,6 @@
-{% load comments %}
+
+{% load comment_honeypot %}
+{% load comment_utils %}
 
 {% block content %}
 		<a href="/tema/goster/son/">Tema Anasayfa</a> 
@@ -47,13 +49,22 @@
 			
 </tbody>
 </table> 
-	{% free_comment_form for sanat.dosya dosya.id %}
+
+	<br/>
+	<br/>
+	<br/>
+
+	<div align="center">
+	{% comment_form for sanat.dosya dosya.id %}
 	
+	</div>
 	
 
-	{% get_free_comment_list for sanat.dosya dosya.id as comment_list %}
 	
-	{% if comment_list %}
+	{% get_public_comment_list for sanat.dosya dosya.id as comments %}
+	<br/>
+	<br/><br/>
+	{% if comments %}
 			<table summary="Submitted table designs" border="1" align="center">
 			<caption>Yorumlar</caption>
 			<thead>
@@ -70,7 +81,7 @@
 			</thead>	
 			
 			<tbody>
-		{% for comment in comment_list%}
+		{% for comment in comments %}
 			 
 			
 				<tr >

@@ -1,5 +1,5 @@
 {% load thumbman %}
-
+{% load comment_utils %}
 
 
 {% block content %}
@@ -20,6 +20,7 @@
 
 					<th scope="col">Görülmüş</th>
 					<th scope="col">Oy</th>	
+					<th scope="col">Yorum</th>	
 			</tr>
 
 			</thead>	
@@ -44,6 +45,8 @@
 						<td>{{dosya.licence}}</td>
 						<td>{{dosya.counter}}</td>
 						<td>{{dosya.rate}}</td>
+						<td>{% get_public_comment_count for sanat.dosya dosya.id as comment_count %}{{comment_count}}</td>						
+						
 					</tr>
 				{% endfor %}
 			{% endif %}
