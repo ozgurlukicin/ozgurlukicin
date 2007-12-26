@@ -1,0 +1,101 @@
+{# Copyright (c) 2006-2007, PreFab Software Inc. #}
+
+
+{% comment %}
+Form fields for comments.
+   Shared between the primary comment form and the preview page.
+   Form fields are hashed for security against spammers.
+{% endcomment %}
+{% if comment_form.has_errors %}
+<span class='error'>Please correct the following errors:</span>
+{% endif %}
+
+<div class="comment_form">
+
+<table cellspacing="0" cellpadding="2">
+<tr>
+<td>
+<label for="id_{{ fields.person_name }}">Name:</label>
+</td>
+<td>
+{% if comment_form.person_name.errors %}
+<span class="error">{{ comment_form.person_name.html_error_list }}</span>
+{% endif %}
+<input type="text" size="25" id="id_{{ fields.person_name }}" name="{{ fields.person_name }}" class="input-text" value="{{ comment.person_name }}"/>
+</td>
+</tr>
+
+<tr>
+<td>
+<label for="id_{{ fields.person_email }}">Email:</label>
+</td>
+<td>
+<div style="display:none">
+Ignore this field:<br />
+<input type="text" id="id_{{ fields.honeypot1 }}" name="{{ fields.honeypot1 }}" class="input-text" />
+</div>
+<input type="text" size="25" id="id_{{ fields.person_email }}" name="{{ fields.person_email }}" class="input-text" value="{{ comment.person_email }}"/>&nbsp;<span class="note">optional; will <i>not</i> be displayed</span>
+<div style="display:none">
+Don't put anything in this field:<br />
+<input type="text" id="id_{{ fields.honeypot2 }}" name="{{ fields.honeypot2 }}" class="input-text" />
+</div>
+</td>
+</tr>
+
+<tr>
+<td>
+<label for="id_{{ fields.person_www }}">URL:</label>
+</td>
+<td>
+<input type="text" size="25" id="id_{{ fields.person_www }}" name="{{ fields.person_www }}" class="input-text" value="{{ comment.person_www }}"/>&nbsp;<span class="note">optional</span>
+</td>
+</tr>
+
+<tr>
+<td valign="top">
+<label for="id_{{ fields.comment }}">Comment:</label>
+</td>
+<td>
+
+<div align="center" style="display:none">
+Don't put anything here:<br />
+<textarea name="{{ fields.honeypot3 }}" id="id_{{ fields.honeypot3 }}" rows='15' cols='40'></textarea>
+</div>
+{% if comment_form.comment.errors %}
+<span class="error">{{ comment_form.comment.html_error_list }}</span>
+{% endif %}
+<textarea name="{{ fields.comment }}" id="id_{{ fields.comment }}" rows='15' cols='40'>{{ comment.comment }}</textarea>
+<div align="center" style="display:none">
+Leave this empty:<br />
+<textarea name="{{ fields.honeypot4 }}" id="id_{{ fields.honeypot4 }}" rows='15' cols='40'></textarea>
+</div>
+</td>
+</tr>
+
+<tr>
+<td></td>
+<td class="note" align="right">
+URLs auto-link and some tags are allowed: &lt;a>&lt;b>&lt;i>&lt;p>.
+</td>
+</tr>
+
+<tr class="comment_form_submits">
+<td></td>
+<td>
+<input type="submit" name="{{ fields.preview }}" value="{{ previewText }}" class="input-button" />
+{% if not comment_form.has_errors %}
+<input type="submit" name="{{ fields.post }}" value="Post public comment" />
+{% endif %}
+<span style="display:none">
+<input type="submit" name="{{ fields.submit }}" value="I'm a spambot">
+</span>
+</td>
+</tr>
+</table>
+
+</div>
+
+<input type="hidden" name="{{ fields.target }}" value="{{ target }}" />
+<input type="hidden" name="spinner" value="{{ spinner }}" />  
+<input type="hidden" name="{{ fields.timestamp }}" value="{{ timestamp }}" />  
+

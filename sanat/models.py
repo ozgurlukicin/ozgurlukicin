@@ -12,10 +12,10 @@ from oi.st.models import License
 from django.db.models import signals
 from django.dispatch import dispatcher
 from oi.sanat.signals import rm_thumb,crt_thumb,rmv_files
- 
 
-# Create your models here.
-		
+from oi.comments.moderation import CommentModerator, moderator
+
+
 class Category(models.Model):
 	""" The categories of thing that are published they maybe 
 	neseted in each other a tree hieararchy.."""
@@ -115,6 +115,9 @@ class Dosya(models.Model):
 	counter= models.IntegerField(verbose_name="Sayaç",default=0)
 	update=models.DateField(auto_now=True,verbose_name="Yayın Tarihi")
 	
+	#added later ...
+	enable_comments = models.BooleanField()
+	
 	
 	def __str__(self):
 		return self.name
@@ -143,3 +146,12 @@ class Dosya(models.Model):
 		verbose_name_plural="Sanat Dosyaları"
 
 dispatcher.connect(rmv_files,signal=signals.pre_delete, sender=Dosya)
+
+class DosyaCommentModerator(CommentModerator):
+	""" Dosya models class Comment moderation""",
+	akismet = False
+	email_notification = False
+	enable_field = 'enable_comments'
+	
+#register it 
+moderator.register(Dosya, DosyaCommentModerator)

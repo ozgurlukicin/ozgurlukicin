@@ -15,12 +15,12 @@ SITE_DESC = 'Pardus için bir numaralı bilgi kaynağı'
 DEBUG = True
 TESTING = False
 TEMPLATE_DEBUG = DEBUG
-WEB_URL = 'http://127.0.0.1:8000'
-DOCUMENT_ROOT = '/home/username/public_html/oi'
+WEB_URL = 'http://127.0.0.1:9999'
+DOCUMENT_ROOT = '/home/makkalot/public_html/oi'
 DATABASE_ENGINE = 'mysql'
 DATABASE_NAME = 'oi'
 DATABASE_USER = 'root'
-DATABASE_PASSWORD = ''
+DATABASE_PASSWORD = '010684'
 DATABASE_HOST = 'localhost'
 DATABASE_PORT = ''
 
@@ -76,7 +76,7 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.load_template_source',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = ("oi.context_processors.testing","django.core.context_processors.auth",)
+TEMPLATE_CONTEXT_PROCESSORS = ("oi.context_processors.testing","django.core.context_processors.auth")
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -101,7 +101,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.sites',
     'django.contrib.humanize',
-    'django.contrib.comments',
+    #'django.contrib.comments',
     'oi.flatpages',
     'oi.st',
     'oi.upload',
@@ -111,6 +111,8 @@ INSTALLED_APPS = (
     'oi.profile',
     'oi.forum',
     'oi.sanat',
+	'oi.comments',
+	
 )
 
 CITY_LIST = (
