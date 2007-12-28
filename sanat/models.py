@@ -110,7 +110,7 @@ class Dosya(models.Model):
 	
 	name=models.CharField(maxlength=100,unique=True,verbose_name="Dosya ismi")
 	description=models.TextField(verbose_name="Açıklama")
-	rate=models.CharField(maxlength=1,verbose_name="Oy",default="0")
+	rate=models.FloatField(verbose_name="Puan",default=0,max_digits=2, decimal_places=1)
 	state=models.BooleanField(verbose_name="Yayınla",default=False)
 	counter= models.IntegerField(verbose_name="Sayaç",default=0)
 	update=models.DateField(auto_now=True,verbose_name="Yayın Tarihi")
@@ -147,6 +147,7 @@ class Dosya(models.Model):
 
 dispatcher.connect(rmv_files,signal=signals.pre_delete, sender=Dosya)
 
+#dont forget to disable it before uploading pff
 class DosyaCommentModerator(CommentModerator):
 	""" Dosya models class Comment moderation""",
 	akismet = False

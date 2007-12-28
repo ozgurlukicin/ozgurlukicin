@@ -18,11 +18,13 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.datastructures import MultiValueDictKeyError
+from django.contrib.auth.decorators import login_required
 
 from oi.util.fetch import read_html
 
 from oi.comments.models import Comment
 from oi.comments.templatetags.comment_honeypot import makeFieldNames, makeSpinner
+
 
 COMMENTS_PER_PAGE = 20
 
@@ -73,6 +75,7 @@ class PublicCommentManipulator(oldforms.Manipulator):
 
 class SpamComment(Exception): pass
 
+@login_required
 def post_comment(request):
     ''' This is a rewrite of django.contrib.comments.views.comments.post_free_comment
         implementing the honeypot ideas from
@@ -201,6 +204,7 @@ def post_comment(request):
         raise Http404
         
         
+@login_required
 def comment_was_posted(request):
     """
     Display "comment was posted" success page
@@ -226,6 +230,7 @@ _ignores = [
     '''I couldn't understand some parts of this article, but it sounds interesting'''
 ]
 
+@login_required
 def trackback(request, content_type_id, obj_id, entry_url):
     ''' Generic trackback handler
         @param request: Django request
@@ -264,7 +269,7 @@ def trackback(request, content_type_id, obj_id, entry_url):
     
     return trackbackOk()
 
-
+@login_required
 def validateTrackback(client_url, target_url):
     ''' Verify that the target URL actually appears in the page referenced by the client URL. '''
     try:

@@ -4,8 +4,11 @@ from sanat_settings import HOME_ITEMS
 from oi.sanat.models import Dosya,Category 
 from django.shortcuts import render_to_response,get_object_or_404
 from django.contrib.auth.models import User
-from django.contrib.comments.views.comments import post_free_comment
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+
+from forms import VoteForm
+from django.core.urlresolvers import reverse
 
 def list_material(request,sort_by="son"):
 	""" That view vill show the ones that are submitted and approved by admin
@@ -92,7 +95,7 @@ def file_detail(request,file_id):
 	if request.user.is_authenticated():
 		auth=request.user.username
 	
-	return render_to_response('sanat/detail.html', {'dosya':dosya,'auth':auth})
+	return render_to_response('sanat/detail.html', {'dosya':dosya,'auth':auth,'form':VoteForm()})
 
 	
 def list_user(request,username):
@@ -118,6 +121,57 @@ def list_user(request,username):
 	return object_list(request,**params)
     
 
+@login_required
 def add_file(request):
-	""" That one will add a file to the system the hardest one !"""
+	""" That one will add a file to the system the hardest one !
+	Offf svn sürümünde varmış file upload..."""
 	pass
+
+@login_required
+def vote_it(request):
+	""" That one is for voting thing for uploaded files
+	Also pass the id of detail you are looking at to pass it to previous page!"""
+	
+	#<input type="hidden" name="dosya_id" value="{{ dosya.id }}"
+	
+	
+	
+	if request.method== 'POST':
+		
+		#we dont want nasty users :)
+		if not request.POST.has_key('dosya_id'):
+			return render_to_response('404.html')
+		
+		d_id=int(request.POST['dosya_id'])
+		
+		dosya = get_object_or_404(Dosya, pk=d_id)
+		auth=dosya.user.username
+		
+		if request.session.get('voter'):
+		#it was voted before #should add a new error arg
+			return render_to_response('sanat/detail.html',{'dosya':dosya,'auth':auth,'form':VoteForm(),'error':u'2 kez oy kullanamzsiniz'})
+		
+		vf=VoteForm( { 'vote':request.POST['vote'] } )
+		
+		if vf.is_valid():
+			
+			fv=vf.clean_data['vote']
+			
+			dosya.rate=(dosya.rate+int(fv))/2
+			
+			try:
+				dosya.save()
+			
+			except Exception:
+				render_to_response('db_error.html')
+				
+			request.session['voter']=dosya.user.username
+			
+			
+			
+			return render_to_response('sanat/detail.html', {'dosya':dosya,'auth':auth,'form':VoteForm()}) 
+			
+	return render_to_response('404.html')
+		
+#end of voting sheyisi
+	

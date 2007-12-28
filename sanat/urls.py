@@ -7,5 +7,6 @@ urlpatterns = patterns ('oi.sanat.views',
 						(r'^kategori/(?P<cat_name>[a-z]+)/$','list_category'),
 		  				(r'^dosya/(?P<file_id>[0-9]+)/$','file_detail'),
 						(r'^kullanici/(?P<username>[a-z]+)/$','list_user'),
+		  				(r'^oy/$','vote_it'),
 		  				
 )

@@ -19,8 +19,10 @@
 
 					<th scope="col">Görülmüş</th>
 					<th scope="col">Oy</th>	
-			</tr>
-
+					{% if auth %}
+					<th scope="col">Oy kullan</th>
+					{% endif %}
+				</tr>
 			</thead>	
 			
 			<tbody>
@@ -43,6 +45,21 @@
 						<td>{{dosya.licence}}</td>
 						<td>{{dosya.counter}}</td>
 						<td>{{dosya.rate}}</td>
+						{% if auth %}
+						<td>
+							<form method="post" action="/tema/oy/">
+								
+								{{form.vote.label}}:{{form.vote}}
+								<input type="hidden" name="dosya_id" value="{{ dosya.id }}" />
+								<button type="submit">Yolla</button>
+						
+							</form>
+						{% if error %}
+							<b>{{error}}</b>
+						{% endif %}
+						</td>
+						
+						{% endif %}					
 					</tr>
 				
 			{% endif %}
