@@ -87,8 +87,12 @@ def file_detail(request,file_id):
 	dosya.counter +=1
 	dosya.save()
 	
+	auth=False
 	
-	return render_to_response('sanat/detail.html', {'dosya':dosya})
+	if request.user.is_authenticated():
+		auth=request.user.username
+	
+	return render_to_response('sanat/detail.html', {'dosya':dosya,'auth':auth})
 
 	
 def list_user(request,username):
@@ -117,14 +121,3 @@ def list_user(request,username):
 def add_file(request):
 	""" That one will add a file to the system the hardest one !"""
 	pass
-
-def my_post_free_comment(request):
-	""" Comment wrapper for free comments"""
-	if request.has_key('url') and not request.has_key('preview'):
-		response = post_free_comment(request)
-		# ensure there's a url to redirect to, and that post_free_comment worked
-		if len(request['url'].strip()) > 0 and isinstance(response, HttpResponseRedirect):
-			return redirect_to(request, request['url'])
-		# fallback on the default post_free_comment response
-		return response
-	return post_free_comment(request)

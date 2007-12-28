@@ -53,52 +53,58 @@
 	<br/>
 	<br/>
 	<br/>
-
+	{% if auth %}
 	<div align="center">
 	{% comment_form for sanat.dosya dosya.id %}
 	
 	</div>
-	
-
-	
-	{% get_public_comment_list for sanat.dosya dosya.id as comments %}
-	<br/>
-	<br/><br/>
-	{% if comments %}
-			<table summary="Submitted table designs" border="1" align="center">
-			<caption>Yorumlar</caption>
-			<thead>
-				<tr>
-					<th scope="col">link#</th>
-					<th scope="col">İsim</th>
-					<th scope="col">Yorum</th>
-					<th scope="col">IP</th>
-
-					<th scope="col">Tarih</th>
-					
-			</tr>
-
-			</thead>	
-			
-			<tbody>
-		{% for comment in comments %}
-			 
-			
-				<tr >
-						<th scope="row">{{comment.get_absolute_url}}</a></th>
-						<td>{{comment.person_name}}</td>
-						<td>{{comment.comment}}</td>
-						<td>{{comment.ip_address}}</td>
-						<td>{{comment.submit_date}}</td>
-					</tr>
-		{% endfor %}		
-			
-			
-			</tbody>
-			</table>	
-		
-	
 	{% endif %}
 
+	{% if not auth %}
+		<b>Yorum yapabilmek için giriş yapmanız gerekir!</b>
+	{% endif %}
+
+	
+
+		{% get_public_comment_list for sanat.dosya dosya.id as comments %}
+		<br/>
+		<br/><br/>
+		{% if comments %}
+				<table summary="Submitted table designs" border="1" align="center">
+				<caption>Yorumlar</caption>
+				<thead>
+					<tr>
+						<th scope="col">link#</th>
+						<th scope="col">İsim</th>
+						<th scope="col">Yorum</th>
+						<th scope="col">IP</th>
+	
+						<th scope="col">Tarih</th>
+						
+				</tr>
+	
+				</thead>	
+				
+				<tbody>
+			{% for comment in comments %}
+				
+				
+					<tr >
+							<th scope="row">{{comment.get_absolute_url}}</a></th>
+							<td>{{comment.person_name}}</td>
+							<td>{{comment.comment}}</td>
+							<td>{{comment.ip_address}}</td>
+							<td>{{comment.submit_date}}</td>
+						</tr>
+			{% endfor %}		
+				
+				
+				</tbody>
+				</table>	
+			
+		
+		{% endif %}
+
+	
 
 {% endblock %}

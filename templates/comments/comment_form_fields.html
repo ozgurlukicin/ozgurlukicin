@@ -21,7 +21,7 @@ Form fields for comments.
 {% if comment_form.person_name.errors %}
 <span class="error">{{ comment_form.person_name.html_error_list }}</span>
 {% endif %}
-<input type="text" size="25" id="id_{{ fields.person_name }}" name="{{ fields.person_name }}" class="input-text" value="{{ comment.person_name }}"/>
+<input type="text" size="25" id="id_{{ fields.person_name }}" name="{{ fields.person_name }}" class="input-text" value="{{ auth }}"/>
 </td>
 </tr>
 
