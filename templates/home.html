@@ -1,13 +1,23 @@
 {% extends "base.html" %}
 
-		
+{% block header_menu %}
+    <!-- Burası header kısmı -->
+	{% include "header.html" %}
+{% endblock %}
 
+		
+{% block ust_menu %}
+	{% include "ust_menu.html" %}
+{% endblock %}
+
+{% block main_structure %}
+<div id="tab3" style="margin:0px auto;">	
 {% block content %}
         	<!-- FS KISMI-->
             {% for fs in fss %}
 
 			<div class="txtTtlNrm" style="width:670px; float: left; margin-left:15px; margin-top:20px; position:absolute; left: 0px; height: 135px;">
-    				<div align="center" style="width:134px; position:absolute; top: 36px;"><img src="/media/dijital/img/p_nasilkurulur.gif" width="134" height="83" /></div>
+    				
     				<div class="txtBigTtl" style="width:314px; position:absolute; left: 0px; top: 1px;">{{ fs.title }}</div>
     				<div class="txtNrm" style="width:513px; position:absolute; left: 146px; top: 37px; height: 38px;">{{ fs.sum }}</div>
     				<div class="txtNrm" style="width:60px; position:absolute; left: 146px; top: 77px; height: 18px;"><a href="{{ fs.get_absolute_url }}" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image14','','/media/dijital/img/bt_detay_off.gif',1)"><img src="/media/dijital/img/bt_detay.gif" alt="Detay" name="Image14" width="60" height="18" border="0" id="Image14" /></a></div>
@@ -105,4 +115,23 @@
             {% endfor %}
 			<br/>        
 			
+{% endblock %}
+
+{% block sidebar %}
+        	
+        	
+<!-- Burasi sağ kısım Eski sidebar olduğu gibi kalktı ???-->
+			<div class="txtTtlNrm" style="width:183px; float: left; margin-left:15px; margin-top:20px; position:absolute; left: 682px; top: 14px; height: 251px;">
+    			<div class="txtBigTtl" style="width:182px; height:10px; position:absolute; left: 0px; top: 0px; background:url(/media/dijital/img/tbl_ust.jpg); background-repeat:no-repeat;"></div>
+    			
+    			<div class="txtTtlNrm" style="width:172px; position:absolute; left: 0px; top: 146px; height: 91px; padding-left:10px; background:url(/media/dijital/img/tbl_bg.jpg);">Pardus'un tanıtımına katkıda bulunmak isteyenler için Özgürlükiçin  düğmeleri yayınlandı. Sitenizde, blogunuzda yayınlamak için siz de <a href="file://///supermana/wwwroot/ozgurlukicin/divindex.html#" class="txtTtlNrm">hazır kodlarımızdan</a> yararlanabilirsiniz.</div>
+    			<div class="txtTtl" style="width:172px; position:absolute; left: 0px; top: 99px; height: 47px; padding-left:10px; background:url(/media/dijital/img/tbl_bg.jpg);">ozgurlukicin'i destekleyin</div>
+    			<div class="txtBigTtl" style="width:182px; height:10px; position:absolute; left: 0px; top: 237px; background:url(/media/dijital/img/tbl_alt.jpg); background-repeat:no-repeat;"></div>
+				
+				
+  			</div>
+			
+{% endblock %}
+
+</div>
 {% endblock %}

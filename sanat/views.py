@@ -142,14 +142,21 @@ def vote_it(request):
 		if not request.POST.has_key('dosya_id'):
 			return render_to_response('404.html')
 		
-		d_id=int(request.POST['dosya_id'])
+		try:
+			d_id=int(request.POST['dosya_id'])
+		except Exception:
+			render_to_response('404.html')
+			
 		
 		dosya = get_object_or_404(Dosya, pk=d_id)
 		auth=dosya.user.username
 		
-		if request.session.get('voter'):
-		#it was voted before #should add a new error arg
+		
+		
+		if request.session.get(d_id):
+			#it was voted before #should add a new error arg
 			return render_to_response('sanat/detail.html',{'dosya':dosya,'auth':auth,'form':VoteForm(),'error':u'2 kez oy kullanamzsiniz'})
+		
 		
 		vf=VoteForm( { 'vote':request.POST['vote'] } )
 		
@@ -157,7 +164,10 @@ def vote_it(request):
 			
 			fv=vf.clean_data['vote']
 			
-			dosya.rate=(dosya.rate+int(fv))/2
+			if dosya.rate==0:
+				dosya.rate=int(fv)
+			else:
+				dosya.rate=(dosya.rate+int(fv))/2
 			
 			try:
 				dosya.save()
@@ -165,7 +175,7 @@ def vote_it(request):
 			except Exception:
 				render_to_response('db_error.html')
 				
-			request.session['voter']=dosya.user.username
+			request.session[d_id]=True
 			
 			
 			

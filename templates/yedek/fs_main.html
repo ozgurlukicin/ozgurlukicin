@@ -1,0 +1,37 @@
+{% load library %}
+{% extends "base.html" %}
+
+{% block title %}İlk Adımlar - {% endblock %}
+
+{% block pagetype %}page{% endblock %}
+
+{% block section %}fs{% endblock %}
+{% block section_logo %}<img src="/media/img/fs_header_logo.png" width="140" height="136">{% endblock %}
+
+{% block ust_menu %}
+	<!-- Burası üst menü kısmı -->
+	{% include "ust_menu_ayrinti.html" %}
+	
+	{% endblock %}
+
+	
+{% block content %}
+{% for fs in fs_list %}
+<div id="fs-{{ fs.id }}" class="fs">
+    <div class="fs_title transparent_link"><a href="{{ fs.get_absolute_url }}">{{ fs.title }}</a></div>
+    <div class="fs_content grey">{{ fs.sum }}
+        <p class="fs_tags" style="padding-top: 4px;"><img src="/media/img/tag_green.png" style="vertical-align: middle;" /> {% for tag in fs.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</p>
+    </div>
+</div>
+{% endfor %}
+
+{% if is_paginated %}{% paginator %}{% endif %}
+{% endblock %}
+
+
+{% block sidebartop %}{% endblock %}
+
+{% block sidebar %}
+<div class="sidebar sidebar_green_title">Katkıda bulunun</div>
+<div class="sidebar grey">İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a href="/katki/ilk_adimlar/">buraya</a> tıklayarak size kılavuzluk edecek sayfaya gidebilirsiniz.</div>
+{% endblock %}

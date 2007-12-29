@@ -145,6 +145,49 @@ body {
 	text-decoration:none;
 	visibility: visible;
 }
+/* Altsayfa */
+#Alttab1{
+	font-family: "Liberation Sans", "Liberation Serif", Arial;
+	background:url(/media/dijital/img/td_bg.jpg);
+	background-repeat:no-repeat;
+	background-color: #000000;
+	position:relative;
+	overflow:visible;
+	width:900px;
+	height:180px;
+	font-size:11px;
+	font-weight:normal;
+	text-decoration:none;
+	visibility: visible;
+}
+#Alttab2{
+	font-family: "Liberation Sans", "Liberation Serif", Arial;
+	background:url(/media/dijital/img/ara_bg.jpg);
+	background-repeat:no-repeat;
+	background-color: #7C7C7C;
+	position:relative;
+	overflow:visible;
+	width:900px;
+	height:auto;
+	font-size:11px;
+	font-weight:normal;
+	text-decoration:none;
+	visibility: visible;
+}
+#Alttab3{
+	font-family: "Liberation Sans", "Liberation Serif", Arial;
+	background:url(/media/dijital/img/ara_bg.jpg);
+	background-repeat:no-repeat;
+	background-color: #7C7C7C;
+	position:relative;
+	overflow:visible;
+	width:900px;
+	height:1500px;
+	font-size:11px;
+	font-weight:normal;
+	text-decoration:none;
+	visibility: visible;
+}
 /* #tab2 - elementleri */
 #tabtxt1 {
 	font-family: Gentium, Georgia;
