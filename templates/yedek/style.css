@@ -48,15 +48,11 @@
 }
 
 .grey {
-    color: #000000;
+    color: #585D60;
 }
 
 .yellow h1, .yellow h2, .yellow h3, .yellow h4, .yellow h5, .yellow h6 {
     color: #323436;
-}
-
-.gri{
-	color:#707070;
 }
 
 /* header */
@@ -116,14 +112,10 @@
 #page {
     margin: 0px auto;
     width: 900px;
-    border-bottom: 5px solid #7C7C7C;
-    border-left: 5px solid #7C7C7C;
-    border-right: 5px solid #7C7C7C;
-    /*background: #FFFFFF url('/media/img/content_bg.png') repeat-y;*/
-	
-	background:url(/media/dijital/img/ara_bg.jpg);
-	background-repeat:no-repeat;
-	background-color: #7C7C7C;
+    border-bottom: 5px solid #d5e6eb;
+    border-left: 5px solid #d5e6eb;
+    border-right: 5px solid #d5e6eb;
+    background: #FFFFFF url('/media/img/content_bg.png') repeat-y;
 }
 
 #page-single {
@@ -139,7 +131,6 @@
     padding: 10px 0px 20px 10px;
     float: left;
     width: 68%;
-	
 }
 
 .page_title {
@@ -227,7 +218,7 @@
 }
 
 .game_average_point {
-    background: url('/media/img/game_average_point.jpg') left top no-repeat;
+    background: url('/media/img/game_average_point.png') left top no-repeat;
     margin-left: 75px;
     height: 80px;
     width: 80px;
@@ -235,7 +226,6 @@
     text-align: center;
     padding-top: 32px;
     margin-bottom: -30px;
-	color: #000000;
 }
 
 .transparent_link {
@@ -495,7 +485,7 @@ input#form_submit {
 
 /* content */
 .news_title_mini {
-    /*background: url('/media/img/news_title_mini.png') no-repeat;*/
+    background: url('/media/img/news_title_mini.png') no-repeat;
     font-size: 14px;
     font-weight: bold;
     padding-top: 5px;
@@ -506,7 +496,7 @@ input#form_submit {
 }
 
 .news_title {
-    /*background: url('/media/img/news_title.png') no-repeat;*/
+    background: url('/media/img/news_title.png') no-repeat;
     font-size: 14px;
     font-weight: bold;
     padding-top: 5px;
@@ -563,7 +553,7 @@ input#form_submit {
 }
 
 .games_title_mini {
-    /*background: url('/media/img/games_title_mini.png') no-repeat;*/
+    background: url('/media/img/games_title_mini.png') no-repeat;
     font-size: 14px;
     font-weight: bold;
     padding-top: 5px;
@@ -574,9 +564,8 @@ input#form_submit {
 }
 
 .games_title {
-    /*background: url('/media/img/games_title.png') no-repeat;*/
-	color:#000000;
-    font-size: 22px;
+    background: url('/media/img/games_title.png') no-repeat;
+    font-size: 14px;
     font-weight: bold;
     padding-top: 5px;
     padding-left: 12px;
@@ -592,8 +581,6 @@ input#form_submit {
 }
 
 .games_content {
-	color:#202020;
-	font-family:"Liberation Sans","Liberation Serif",Arial;
     padding-left: 10px;
     padding-right: 16px;
     overflow: auto;
@@ -671,23 +658,17 @@ input#form_submit {
 #sidebar {
     float: right;
     position: relative;
-	
-	
 }
 
 .sidebar {
-	position: relative;
-    width: 220px;
+    position: relative;
+    width: 258px;
     padding-left: 6px;
-	background-color: #000000;
-	color:#FFCA06;
 }
 
 .sidebar ul {
     margin-top: 0px;
     padding-left: 16px;
-	background-color: #000000;
-	color:#FFCA06;
 }
 
 .sidebar_purple_title {
@@ -707,45 +688,20 @@ input#form_submit {
     height: 25px;
     font-size: 14px;
     font-weight: bold;
-    color:#FFCA06;
+    color: #ffffff;
     background-repeat: no-repeat;
-    /*background-image: url('/media/img/sidebar_blue.png');*/
+    background-image: url('/media/img/sidebar_blue.png');
 }
 
 .sidebar_darkblue_title {
-    margin-top: 0px;
+    margin-top: 10px;
     padding-top: 4px;
     height: 25px;
     font-size: 14px;
     font-weight: bold;
-    color:#FFCA06;
+    color: #ffffff;
     background-repeat: no-repeat;
-    /*background-image: url('/media/img/sidebar_darkblue.png');*/
-	background-color: #000000;
-	border:0px;
-}
-.sidebar_top_img{
-	margin-top: 40px;
-	background-repeat: no-repeat;
-	background-image: url('/media/dijital/img/d_tblust.jpg');
-	
-}
-.sidebar_alt_img{
-	background-image: url('/media/dijital/img/d_tblalt.jpg');
-	background-position: top center;
-	
-}
-
-.sidebar_darkblue_con {
-    margin-top: 0px;
-    padding-top: 4px;
-    height: 25px;
-    font-size: 14px;
-    font-weight: bold;
-    color:#FFCA06;
-    background-repeat: no-repeat;
-    /*background-image: url('/media/img/sidebar_darkblue.png');*/
-	background-color: #000000;
+    background-image: url('/media/img/sidebar_darkblue.png');
 }
 
 .sidebar_green_title {

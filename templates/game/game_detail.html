@@ -11,8 +11,20 @@
 {% block pagetype %}page{% endblock %}
 
 {% block section %}game{% endblock %}
-{% block section_logo %}<img src="/media/img/game_header_logo.png">{% endblock %}
 
+{% block header_menu %}
+    <!-- Burası header kısmı -->
+	{% include "header.html" %}
+{% endblock %}
+<br/>
+{% block ust_menu %}
+	<!-- Burası üst menü kısmı -->
+	{% include "ust_menu_ayrinti.html" %}
+	
+{% endblock %}
+<br/>
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 {% block content %}
 <div class="games_title transparent_link">{{ game.title }}</div>
 <div class="page_content grey">
@@ -24,42 +36,45 @@
 
 {% block sidebartop %}{% endblock %}
 
+
 {% block sidebar %}
+
+<div class="sidebar sidebar_top_img"></div>
 <div class="sidebar sidebar_darkblue_title">Bilgiler</div>
 <div class="sidebar grey">
-    <strong>Lisans:</strong> {% for license in licenses %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}<br />
-    <strong>Paket boyutu:</strong> {{ game.download_size|filesizeformat }}<br />
-    <strong>Kurulu boyutu:</strong> {{ game.installed_size|filesizeformat }}<br />
-    <strong>Web sitesi:</strong> <a href="{{ game.url }}">{{ game.url }}</a><br />
+    <strong>Lisans:</strong> {% for license in licenses %}<a href="{{ license.url }}"><span class="gri" >{{ license.name }}</span></a> {% endfor %}<br />
+    <strong>Paket boyutu:</strong> <span class="gri" >{{ game.download_size|filesizeformat }}</span><br />
+    <strong>Kurulu boyutu:</strong><span class="gri" > {{ game.installed_size|filesizeformat }}</span><br />
+    <strong>Web sitesi:</strong> <a href="{{ game.url }}"><span class="gri" >{{ game.url }}</span></a><br />
 </div>
 
-<div class="sidebar sidebar_darkblue_title">Değerlendirme</div>
+<div class="sidebar sidebar_darkblue_con">Değerlendirme</div>
 <div class="sidebar grey">
-    <strong>Öğrenme süresi:</strong> {{ game.learning_time }}<br />
-    <strong>Oynanabilirlik:</strong> {{ game.gameplay }}<br />
-    <strong>Grafik:</strong> {{ game.graphics }}<br />
-    <strong>Ses:</strong> {{ game.sound }}<br />
-    <strong>Senaryo:</strong> {{ game.scenario }}<br />
-    <strong>Atmosfer:</strong> {{ game.atmosphere }}<br />
+    <strong>Öğrenme süresi:</strong><span class="gri" >{{ game.learning_time }}</span><br />
+    <strong>Oynanabilirlik:</strong> <span class="gri" >{{ game.gameplay }}</span><br />
+    <strong>Grafik:</strong><span class="gri" > {{ game.graphics }}</span><br />
+    <strong>Ses:</strong> <span class="gri" >{{ game.sound }}</span><br />
+    <strong>Senaryo:</strong> <span class="gri" >{{ game.scenario }}</span><br />
+    <strong>Atmosfer:</strong> <span class="gri" >{{ game.atmosphere }}</span><br />
     <div class="game_average_point">{{ game.avg }}</div>
 </div>
 
-<div class="sidebar sidebar_darkblue_title">Menüdeki yeri</div>
-<div class="sidebar grey">{{ game.path }}</div>
+<div class="sidebar sidebar_darkblue_con">Menüdeki yeri</div>
+<div class="sidebar grey"><span class="gri" >{{ game.path }}</div>
 
-<div class="sidebar sidebar_darkblue_title">Etiketler</div>
-<div class="sidebar grey">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
+<div class="sidebar sidebar_darkblue_con">Etiketler</div>
+<div class="sidebar grey">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}"><span class="gri" >{{ tag.name }}</span></a> {% endfor %}</div>
 
 {% if game.wiki.all %}
-<div class="sidebar sidebar_darkblue_title">İlgili wiki sayfaları</div>
-<div class="sidebar grey">{% for wiki in game.wiki.all %}<a href="{{ wiki.get_absolute_url }}">{{ wiki.name }}</a><br />{% endfor %}</div>
+<div class="sidebar sidebar_darkblue_con">İlgili wiki sayfaları</div>
+<div class="sidebar grey">{% for wiki in game.wiki.all %}<a href="{{ wiki.get_absolute_url }}"><span class="gri" >{{ wiki.name }}</span></a><br />{% endfor %}</div>
 {% endif %}
 
 {% if videos %}
-<div class="sidebar sidebar_darkblue_title">İlgili Videolar</div>
+<div class="sidebar sidebar_darkblue_con">İlgili Videolar</div>
 <div class="sidebar grey">{% for video in videos %}<a href="/video/{{ video.name }}" rel="lightbox[video_{{ game.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
 {% endif %}
 
-<div class="sidebar sidebar_darkblue_title">Yazar</div>
-<div class="sidebar grey">{{ game.author }}</div>
+<div class="sidebar sidebar_darkblue_con">Yazar</div>
+<div class="sidebar grey"><span class="gri" >{{ game.author }}</span></div>
 {% endblock %}
