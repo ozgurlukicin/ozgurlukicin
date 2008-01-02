@@ -6,24 +6,88 @@
 {% block pagetype %}page{% endblock %}
 
 {% block section %}news{% endblock %}
-{% block section_logo %}<img src="/media/img/news_header_logo.png" width="127" height="136">{% endblock %}
 
+{% block header_menu %}
+    <!-- Burası header kısmı -->
+	{% include "header.html" %}
+{% endblock %}
+<br/>
+{% block ust_menu %}
+	<!-- Burası üst menü kısmı -->
+	{% include "ust_menu_ayrinti.html" %}
+	
+{% endblock %}
+<br/>
+
+{% block main_structure %}
+<div id="Alttab2" style="margin:0px auto;">
 {% block content %}
-        <div id="news_container">
-            {% for news in news_list %}
-            <div id="news-{{ news.id }}" class="news">
-                <div class="news_title transparent_link"><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></div>
-                <div class="news_content grey">{{ news.sum }}
-                    <p style="padding-top: 4px;"><img src="/media/img/tag.png" style="vertical-align: middle;" /> {% for tag in news.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</p>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
+
+<!-- Burada bu content başlıo farklı kategori için -->
+{% for news in news_list %}
+<div class="txtTtlNrm" style="width:670px; float: left; margin-left:15px; margin-top:20px; position:absolute; left: 0px;  height: auto;">
+    
+	<!-- Title part -->
+    <div class="txtBigTtl" style="width:134px; position:absolute; left: 0px; top: 1px;">{{ news.title }}
+	</div>
+	<!-- Image part -->
+    <div class="txtBigTtl" style="width:18; position:absolute; left: 140px; top: 5px; height: 18;"><a href="{{ news.get_absolute_url }}"><img src="/media/dijital/img/l_pozitif.jpg" width="18" height="18" /></a>
+	</div>
+    <!-- The tag part -->
+	<div class="txtNrm" style="width:18; position:absolute; left: 31px; top: 143px; height: 18;">
+		{% for tag in news.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
+	</div>
+    <!-- tag image -->
+	<div class="txtBigTtl" style="width:18; position:absolute; left: 4px; top: 145px; height: 18;"><img src="/media/dijital/img/i_link.jpg" width="20" height="10" />
+	</div>
+    <!-- The text -->
+	<div class="txtNrm" style="width:513px; position:absolute; left: 146px; top: 37px; height: auto;">{{ news.sum }}
+	</div>
+<!-- Ends here -->
+</div>
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+{% endfor %}
+
+
+{% if is_paginated %}{% paginator %}{% endif %}
+<!-- Content ends here -->
+{% endblock %}
+
 
 {% if is_paginated %}{% paginator %}{% endif %}
 {% endblock %}
 
 {% block sidebartop %}{% endblock %}
+
+
+<!-- sidebar starts here -->
+{% block sidebar %}
+<div class="txtTtlNrm" style="width:183px; float: left; margin-left:15px; margin-top:20px; position:absolute; left: 682px; top: 14px; height: 251px;">
+    <div class="txtBigTtl" style="width:182px; height:10px; position:absolute; left: 0px; top: 0px; background:url(/media/dijital/img/tbl_ust.jpg); background-repeat:no-repeat;">
+	</div>
+    <div class="txtTtlNrm" align="center" style="width:182px; position:absolute; left: 0px; top: 10px; height: 89px; background:url(/media/dijital/img/tbl_bg.jpg);">Pardus Etkinlikleri
+	</div>
+    <div class="txtTtlNrm" style="width:172px; position:absolute; left: 0px; top: 146px; height: 91px; padding-left:10px; background:url(/media/dijital/img/tbl_bg.jpg);">
+		{% for sem in seminar %}
+    	<div style="padding-bottom: 4px;{% if not forloop.first %} padding-top: 4px; border-top: 1px solid;{% endif %}">
+        	<strong>{{ sem.date|date:"d F Y" }}</strong><br/>
+        	{{ sem.description }}<br/>
+        	<strong>Yer:</strong> {{ sem.place.name }}<br/>
+        	<strong>Konuşmacılar:</strong> {% for att in sem.attender.all %}{{ att.name }} {% endfor %}
+    	</div>
+    	{% endfor %}
+	</div>
+    
+	<div class="txtBigTtl" style="width:182px; height:10px; position:absolute; left: 0px; top: 237px; background:url(/media/dijital/img/tbl_alt.jpg); background-repeat:no-repeat;">
+	</div>
+ 
+</div>
+{% endblock %}
+<!-- sidebar ends here -->
+
+
 
 {% block sidebar %}
 {% if seminar %}
@@ -39,4 +103,8 @@
     {% endfor %}
 </div>
 {% endif %}
+{% endblock %}
+
+<!-- Main structure bitti -->
+</div>
 {% endblock %}
