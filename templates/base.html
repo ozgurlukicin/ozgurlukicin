@@ -13,6 +13,7 @@
 <link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Oyunlar" href="/rss/oyun" />
 <link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Gezegen" href="/rss/gezegen" />
 <style type="text/css" media="screen">@import url('/media/css/style.css');</style>
+<style type="text/css" media="screen">@import url('/media/dijital/css/ozgurlukicin.css');</style>
 <script type="text/javascript" src="/media/js/mootools.js"></script>
 <script type="text/javascript" src="/media/js/custom.js"></script>
 <script type="text/javascript" src="/media/js/pngfix.js"></script>
@@ -31,26 +32,23 @@
         {% endif %}
     </div>
 </div>-->
+{% block header_menu %}
+    <!-- Burası header kısmı -->
+	{% endblock %}
+
+	{% block ust_menu %}
+	<!-- Burası üst menü kısmı -->
+	{% endblock %}    
+
+
 <div id="{% block pagetype %}page{% endblock %}">
-    <div id="header" class="{% block section %}home{% endblock %}_header">
-        <div id="logo"><a href="/"><img src="/media/img/logo.png" border="0" alt="Özgürlük için Pardus.." /></a></div>
-        <div id="menu_container">
-            <ul id="menu">
-                <li class="menu"><a href="/ia/"><img src="/media/img/tab_fs.png" border="0" alt="İlk adımlar" /></a></li>
-                <li class="menu"><a href="/nasil/"><img src="/media/img/tab_howtos.png" border="0" alt="Nasıl" /></a></li>
-                <li class="menu"><a href="/paket/"><img src="/media/img/tab_packages.png" border="0" alt="Paketler" /></a></li>
-                <li class="menu"><a href="/oyun/"><img src="/media/img/tab_games.png" border="0" alt="Oyunlar" /></a></li>
-                <li class="menu"><a href="/haber/"><img src="/media/img/tab_news.png" border="0" alt="Haberler" /></a></li>
-                <!-- <li class="menu"><a href="/forum/"><img src="/media/img/tab_forum.png" border="0" alt="Forum" /></a></li> -->
-                <li class="menu"><a href="/gezegen/"><img src="/media/img/tab_planet.png" border="0" alt="Gezegen" /></a></li>
-            </ul>
-        </div>
-        <div id="section_logo">{% block section_logo %}{% endblock %}</div>
-    </div>
+	
+	
     <div id="content">
         {% block content %}
         {% endblock %}
     </div>
+
     <div id="sidebar">
         {% block sidebartop %}
         <div class="sidebar_green_title sidebar">Kullanıcı Kutusu</div>

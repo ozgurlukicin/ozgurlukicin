@@ -3,11 +3,14 @@
 
 {% block title %}{{ fs.title }} - İlk Adımlar - {% endblock %}
 
+{% block extrahead %}
+<script type="text/javascript" src="/media/js/slimbox_ex.js"></script>
+<style type="text/css" media="screen">@import url('/media/css/slimbox_ex.css');</style>
+{% endblock %}
 
 {% block pagetype %}page{% endblock %}
 
 {% block section %}fs{% endblock %}
-
 
 {% block header_menu %}
     <!-- Burası header kısmı -->
@@ -21,117 +24,24 @@
 {% endblock %}
 <br/>
 
-{% block main_structure %}
-<div id="Alttab3" style="margin:0px auto;">
 {% block content %}
-	<div class="txtDtyBigTtl" style="width:501px; float: left; margin-left:15px; margin-top:20px; position:absolute; left: 0px; top: 15px; height: 55px;"><strong>{{ fs.title }}</strong><br />
-  
-	</div>
-  	
-	<div class="txtNrm" style="width:600px; float: left; margin-left:15px; margin-top:20px; position:absolute; left: 0px; ">
-    {{ fs.text }} 
-	<br/>
-	<br/>
-	<a href="{{ fs.get_printable_url }}"><img src="/media/img/print.png" /></a>
-	<div class="page_last_update">Son güncelleme: {{ fs.update|timedelta }}</div>
-	
-	<br/>
-	<br/>
-	
-	</div>
-	
-
-
-	
-
-{% endblock %}
-
-	{% block sidebar %}
-
-		<div class="txtTtlNrm" style="width:234px; float: left; margin-left:15px; margin-top:20px; position:absolute; left: 629px; top: 74px;">
-    
-			<div style="width:234px; height:10px; position:absolute; left: 0px; top: 0px; background:url(/media/dijital/img/d_tblust.jpg); background-repeat:no-repeat;">
-			</div>
-    
-			<div class="txtTtlNrm" align="left" style="width:234px; position:absolute; left: 0px; top: 10px; height: 526px; background:url(/media/dijital/img/d_tblbg.jpg);">
-      
-				{% if videos %}
-				<div class="txtTtlNrm" align="left" style="width:220px; position:absolute; left: 7px; top: 8px;"><span class="txtTtl">Bilgiler</span><br /><br />
-        		<span class="txtDtyNrm">İlgili Videolar:</span> GPL <br />
-          			{% for video in videos %}<a href="/video/{{ video.name }}" rel="lightbox[video_{{ package.name }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}
-				</div>
-				{% endif %}
-        
-			<div class="txtTtlNrm" align="left" style="width:220px; position:absolute; left: 7px; top: 411px;">
-				<span class="txtTtl">İlgili wiki sayfaları</span><br />
-        		<br />
-        		<span class="txtDtyNrm"></span>Enemy Territory 
-			</div>
-
-        	<div class="txtTtlNrm" align="left" style="width:220px; position:absolute; left: 7px; top: 472px;">
-				<span class="txtTtl">Yazarı</span><br />
-        		<br />
-      			<span class="txtDtyNrm"></span>{{ fs.author }}
-
-			</div>
-        
-			<div class="txtTtlNrm" align="left" style="width:220px; position:absolute; left: 7px; top: 344px;">
-				<span class="txtTtl">Etiketler</span><br />
-        		<br />{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
-			</div>
-
-      		<div class="txtTtlNrm" align="left" style="width:220px; position:absolute; left: 7px; top: 263px;">
-				<span class="txtTtl">Menüdeki yeri</span><br />
-        		<br />
-        		<span class="txtDtyNrm"></span>Programlar &gt; Oyunlar &gt; Oyun Makinesi &gt; Enemy Territory
-	
-			</div>
-        
-			<div class="txtTtlNrm" align="left" style="width:121px; position:absolute; left: 7px; top: 120px;">
-				<span class="txtTtl">Değerlendirme</span><br />
-        		<br />
-        		<span class="txtDtyNrm">Öğrenme süresi:</span> 1 hafta<br />
-        		<span class="txtDtyNrm">Oynanabilirlik:</span> 9<br />
-        		<span class="txtDtyNrm">Grafik:</span> 8<br />
-        		<span class="txtDtyNrm">Ses:</span> 8<br />
-        		<span class="txtDtyNrm">Senaryo:</span> 7<br />
-        		<span class="txtDtyNrm">Atmosfer:</span> 10<br />
-        	</div>
-      
-			<div class="txtTtlNrm" align="center" style="width:81px; position:absolute; left: 141px; top: 157px; height: 81px; background:url(/media/dijital/img/l_daire.jpg);"><br />
-      		</div>
-
-      		<div class="txtDtyPuan" align="center" style="position:absolute; left: 164px; top: 181px;">8.5<br />
-      		</div>
-      
-			<div class="txtTtlNrm" align="left" style="width:220px; position:absolute; left: 4px; top: 103px; height: 2px;">
-				<span style="padding-top:8px; padding-bottom:11px; padding-left:2px;"><img src="/media/dijital/img/line2.jpg" width="220" height="2" /></span><br />
-      		</div>
-
-      		<div class="txtTtlNrm" align="left" style="width:220px; position:absolute; left: 4px; top: 395px; height: 2px;">
-				<span style="padding-top:8px; padding-bottom:11px; padding-left:2px;"><img src="/media/dijital/img/line2.jpg" width="220" height="2" /></span><br />
-      		</div>
-      
-			<div class="txtTtlNrm" align="left" style="width:220px; position:absolute; left: 4px; top: 463px; height: 2px;">
-				<span style="padding-top:8px; padding-bottom:11px; padding-left:2px;"><img src="/media/dijital/img/line2.jpg" width="220" height="2" /></span><br />
-      		</div>
-      
-			<div class="txtTtlNrm" align="left" style="width:220px; position:absolute; left: 6px; top: 328px; height: 2px;">
-				<span style="padding-top:8px; padding-bottom:11px; padding-left:2px;"><img src="/media/dijital/img/line2.jpg" width="220" height="2" /></span><br />
-      		</div>
-	
-			<div class="txtTtlNrm" align="left" style="width:220px; position:absolute; left: 4px; top: 247px; height: 2px;">
-				<span style="padding-top:8px; padding-bottom:11px; padding-left:2px;"><img src="/media/dijital/img/line2.jpg" width="220" height="2" /></span><br />
-      		</div>
-      </div>
-    
-			<div class="txtBigTtl" style="width:234px; height:10px; position:absolute; left: 0px; top: 536px; background:url(/media/dijital/img/d_tblalt.jpg); background-repeat:no-repeat;">
-			</div>
-  </div>
-
-
-	
-
-{% endblock %}
+<div class="fs_title transparent_link">{{ fs.title }}</div>
+<div class="page_content grey">
+{{ fs.text }}
 </div>
+<div class="page_properties"><a href="{{ fs.get_printable_url }}"><img src="/media/img/print.png" /></a></div>
+<div class="page_last_update">Son güncelleme: {{ fs.update|timedelta }}</div>
+{% endblock %}
+
+{% block sidebar %}
+<div class="sidebar sidebar_green_title">Etiketler</div>
+<div class="sidebar grey">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
+
+{% if videos %}
+<div class="sidebar sidebar_green_title">İlgili Videolar</div>
+<div class="sidebar grey">{% for video in videos %}<a href="/video/{{ video.name }}" rel="lightbox[video_{{ package.name }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
+{% endif %}
+
+<div class="sidebar sidebar_green_title">Yazar</div>
+<div class="sidebar grey">{{ fs.author }}</div>
 {% endblock %}

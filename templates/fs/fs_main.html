@@ -18,57 +18,25 @@
 	
 {% endblock %}
 <br/>
-{% block main_structure %}
-<div id="Alttab2" style="margin:0px auto;">	
+
+	
 {% block content %}
-
-<!-- Burada bu content başlıo farklı kategori için -->
 {% for fs in fs_list %}
-<div class="txtTtlNrm" style="width:670px; float: left; margin-left:15px; margin-top:20px; position:absolute; left: 0px;  height: auto;">
-    
-	<!-- Title part -->
-    <div class="txtBigTtl" style="width:134px; position:absolute; left: 0px; top: 1px;">{{ fs.title }}
-	</div>
-	<!-- Image part -->
-    <div class="txtBigTtl" style="width:18; position:absolute; left: 140px; top: 5px; height: 18;"><a href="{{ fs.get_absolute_url }}"><img src="/media/dijital/img/l_pozitif.jpg" width="18" height="18" /></a>
-	</div>
-    <!-- The tag part -->
-	<div class="txtNrm" style="width:18; position:absolute; left: 31px; top: 143px; height: 18;">
-		{% for tag in fs.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
-	</div>
-    <!-- tag image -->
-	<div class="txtBigTtl" style="width:18; position:absolute; left: 4px; top: 145px; height: 18;"><img src="/media/dijital/img/i_link.jpg" width="20" height="10" />
-	</div>
-    <!-- The text -->
-	<div class="txtNrm" style="width:513px; position:absolute; left: 146px; top: 37px; height: auto;">{{ fs.sum }}
-	</div>
-<!-- Ends here -->
+<div id="fs-{{ fs.id }}" class="fs">
+    <div class="fs_title transparent_link"><a href="{{ fs.get_absolute_url }}">{{ fs.title }}</a></div>
+    <div class="fs_content grey">{{ fs.sum }}
+        <p class="fs_tags" style="padding-top: 4px;"><img src="/media/img/tag_green.png" style="vertical-align: middle;" /> {% for tag in fs.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</p>
+    </div>
 </div>
-
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-
 {% endfor %}
 
-
 {% if is_paginated %}{% paginator %}{% endif %}
-<!-- Content ends here -->
 {% endblock %}
+
 
 {% block sidebartop %}{% endblock %}
 
-<!-- sidebar starts here -->
 {% block sidebar %}
-<div class="txtTtlNrm" style="width:183px; float: left; margin-left:15px; margin-top:20px; position:absolute; left: 682px; top: 14px; height: 251px;">
-    <div class="txtBigTtl" style="width:182px; height:10px; position:absolute; left: 0px; top: 0px; background:url(/media/dijital/img/tbl_ust.jpg); background-repeat:no-repeat;"></div>
-    <div class="txtTtlNrm" align="center" style="width:182px; position:absolute; left: 0px; top: 10px; height: 89px; background:url(/media/dijital/img/tbl_bg.jpg);"><img src="/media/dijital/img/lo_pardus.jpg" width="48" height="82" /></div>
-    <div class="txtTtlNrm" style="width:172px; position:absolute; left: 0px; top: 146px; height: 91px; padding-left:10px; background:url(/media/dijital/img/tbl_bg.jpg);">Pardus'un tanıtımına katkıda bulunmak isteyenler için Özgürlükiçin  düğmeleri yayınlandı. Sitenizde, blogunuzda yayınlamak için siz de <a href="file://///supermana/wwwroot/ozgurlukicin/divindex.html#" class="txtTtlNrm">hazır kodlarımızdan</a> yararlanabilirsiniz.</div>
-    <div class="txtTtl" style="width:172px; position:absolute; left: 0px; top: 99px; height: 47px; padding-left:10px; background:url(/media/dijital/img/tbl_bg.jpg);">ozgurlukicin'i destekleyin</div>
-    <div class="txtBigTtl" style="width:182px; height:10px; position:absolute; left: 0px; top: 237px; background:url(/media/dijital/img/tbl_alt.jpg); background-repeat:no-repeat;"></div>
-  </div>
+<div class="sidebar sidebar_green_title">Katkıda bulunun</div>
+<div class="sidebar grey">İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a href="/katki/ilk_adimlar/">buraya</a> tıklayarak size kılavuzluk edecek sayfaya gidebilirsiniz.</div>
 {% endblock %}
-<!-- sidebar ends here -->
-
-<!-- Main structure bitti -->
-</div>
-{% endblock %}
-
