@@ -30,9 +30,10 @@
 {% endblock %}
 
 {% block sidebar %}
-<div class="sidebar sidebar_purple_title">Etiketler</div>
-<div class="sidebar grey">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
+<div class="sidebar sidebar_baslik">Etiketler</div>
+<div class="sidebar sidebar_ic">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
 
-<div class="sidebar sidebar_purple_title">Yazar</div>
-<div class="sidebar grey">{{ news.author }}</div>
+<div class="sidebar sidebar_baslik">Yazar</div>
+<div class="sidebar sidebar_ic">{{ news.author }}</div>
+<div class="sidebar sidebar_alt_img">&nbsp;</div>
 {% endblock %}

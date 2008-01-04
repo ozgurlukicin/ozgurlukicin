@@ -38,9 +38,11 @@
 {% block sidebartop %}{% endblock %}
 
 {% block sidebar %}
+<div class="sidebar sidebar_top_img">&nbsp;</div>
 {% if seminar %}
-<div class="sidebar sidebar_purple_title">Pardus Etkinlikleri</div>
-<div class="sidebar grey">
+<div class="sidebar sidebar_baslik ">Pardus Etkinlikleri</div>
+
+<div class="sidebar sidebar_ic">
     {% for sem in seminar %}
     <div style="padding-bottom: 4px;{% if not forloop.first %} padding-top: 4px; border-top: 1px solid;{% endif %}">
         <strong>{{ sem.date|date:"d F Y" }}</strong><br/>
@@ -51,4 +53,5 @@
     {% endfor %}
 </div>
 {% endif %}
+<div class="sidebar sidebar_alt_img">&nbsp;</div>
 {% endblock %}
