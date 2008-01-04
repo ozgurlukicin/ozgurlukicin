@@ -117,9 +117,9 @@ h3, .orange h4, .orange h5, .orange h6 {
 #page {
     margin: 0px auto;
     width: 900px;
-    border-bottom: 5px solid #7C7C7C;
+    /*border-bottom: 5px solid #7C7C7C;
     border-left: 5px solid #7C7C7C;
-    border-right: 5px solid #7C7C7C;
+    border-right: 5px solid #7C7C7C;*/
     /*background: #FFFFFF url('/media/img/content_bg.png') repeat-y;*/
 	
 	background:url(/media/dijital/img/ara_bg.jpg);
@@ -247,7 +247,7 @@ h3, .orange h4, .orange h5, .orange h6 {
 }
 
 .transparent_link a, .transparent_link a:visited {
-    color: #ffffff;
+    color: #000000;
     text-decoration: none;
 }
 
@@ -533,7 +533,7 @@ input#form_submit {
 }
 
 .packages_title_mini {
-    background: url('/media/img/packages_title_mini.png') no-repeat;
+    /*background: url('/media/img/packages_title_mini.png') no-repeat; */
     font-size: 14px;
     font-weight: bold;
     padding-top: 5px;
@@ -604,7 +604,7 @@ input#form_submit {
 }
 
 .fs_title_mini {
-    background: url('/media/img/fs_title_mini.png') no-repeat;
+/*    background: url('/media/img/fs_title_mini.png') no-repeat; */
     font-size: 14px;
     font-weight: bold;
     padding-top: 5px;
@@ -638,7 +638,7 @@ input#form_submit {
 }
 
 .howtos_title_mini {
-    background: url('/media/img/howto_title_mini.png') no-repeat;
+/*    background: url('/media/img/howto_title_mini.png') no-repeat;*/
     font-size: 14px;
     font-weight: bold;
     padding-top: 5px;

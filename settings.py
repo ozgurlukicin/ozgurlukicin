@@ -13,7 +13,7 @@ SITE_NAME = 'Özgürlük için...'
 SITE_DESC = 'Pardus için bir numaralı bilgi kaynağı'
 
 DEBUG = True
-TESTING = False
+TESTING = True
 TEMPLATE_DEBUG = DEBUG
 WEB_URL = 'http://127.0.0.1:9999'
 DOCUMENT_ROOT = '/home/makkalot/public_html/oi'
@@ -110,8 +110,8 @@ INSTALLED_APPS = (
     'oi.seminar',
     'oi.profile',
     'oi.forum',
-    'oi.sanat',
-    'oi.comments',
+    #'oi.sanat',
+#	'oi.comments',
 	
 )
 
