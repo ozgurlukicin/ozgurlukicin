@@ -39,10 +39,10 @@
 <div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Ayrıntılar</div>
 <div class="sidebar sidebar_ic">
-    <strong>Lisans:</strong> {% for license in licenses %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}<br />
-    <strong>Paket boyutu:</strong> {{ package.download_size|filesizeformat }}<br />
-    <strong>Kurulu boyutu:</strong> {{ package.installed_size|filesizeformat }}<br />
-    <strong>Web sitesi:</strong> <a href="{{ package.url }}">{{ package.url }}</a><br />
+    <strong><span class="sari">Lisans:</span></strong> {% for license in licenses %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}<br />
+    <strong><span class="sari">Paket boyutu:</span></strong> {{ package.download_size|filesizeformat }}<br />
+    <strong><span class="sari">Kurulu boyutu:</span></strong> {{ package.installed_size|filesizeformat }}<br />
+    <strong><span class="sari">Web sitesi:</span></strong> <a href="{{ package.url }}">{{ package.url }}</a><br />
 </div>
 
 <div class="sidebar sidebar_baslik">Editör notu</div>

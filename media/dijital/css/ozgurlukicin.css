@@ -117,6 +117,11 @@ body {
 	font-weight:normal;
 	text-decoration:none;
 	visibility: visible;
+	
+	a:link {text-decoration: none};
+	a:visited {text-decoration: none};
+	a:active {text-decoration: none};
+	a:hover {text-decoration: none};
 }
 #tab3{
 	font-family: "Liberation Sans", "Liberation Serif", Arial;

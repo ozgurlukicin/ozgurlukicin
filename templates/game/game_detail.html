@@ -42,20 +42,20 @@
 <div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Bilgiler</div>
 <div class="sidebar sidebar_ic">
-    <strong>Lisans:</strong> {% for license in licenses %}<a href="{{ license.url }}"><span class="gri" >{{ license.name }}</span></a> {% endfor %}<br />
-    <strong>Paket boyutu:</strong> <span class="gri" >{{ game.download_size|filesizeformat }}</span><br />
-    <strong>Kurulu boyutu:</strong><span class="gri" > {{ game.installed_size|filesizeformat }}</span><br />
-    <strong>Web sitesi:</strong> <a href="{{ game.url }}"><span class="gri" >{{ game.url }}</span></a><br />
+    <strong><span class="sari">Lisans:</span></strong> {% for license in licenses %}<a href="{{ license.url }}"><span class="gri" >{{ license.name }}</span></a> {% endfor %}<br />
+    <strong><span class="sari">Paket boyutu:</span></strong> <span class="gri" >{{ game.download_size|filesizeformat }}</span><br />
+    <strong><span class="sari">Kurulu boyutu:</span></strong><span class="gri" > {{ game.installed_size|filesizeformat }}</span><br />
+    <strong><span class="sari">Web sitesi:</span></strong> <a href="{{ game.url }}"><span class="gri" >{{ game.url }}</span></a><br />
 </div>
 
 <div class="sidebar sidebar_baslik">Değerlendirme</div>
 <div class="sidebar sidebar_ic">
-    <strong>Öğrenme süresi:</strong><span class="gri" >{{ game.learning_time }}</span><br />
-    <strong>Oynanabilirlik:</strong> <span class="gri" >{{ game.gameplay }}</span><br />
-    <strong>Grafik:</strong><span class="gri" > {{ game.graphics }}</span><br />
-    <strong>Ses:</strong> <span class="gri" >{{ game.sound }}</span><br />
-    <strong>Senaryo:</strong> <span class="gri" >{{ game.scenario }}</span><br />
-    <strong>Atmosfer:</strong> <span class="gri" >{{ game.atmosphere }}</span><br />
+    <strong><span class="sari">Öğrenme süresi:</span></strong><span class="gri" >{{ game.learning_time }}</span><br />
+    <strong><span class="sari">Oynanabilirlik:</span></strong> <span class="gri" >{{ game.gameplay }}</span><br />
+    <strong><span class="sari">Grafik:</span></strong><span class="gri" > {{ game.graphics }}</span><br />
+    <strong><span class="sari">Ses:</span></strong> <span class="gri" >{{ game.sound }}</span><br />
+    <strong><span class="sari">Senaryo:</span></strong> <span class="gri" >{{ game.scenario }}</span><br />
+    <strong><span class="sari">Atmosfer:</span></strong> <span class="gri" >{{ game.atmosphere }}</span><br />
     <div class="game_average_point">{{ game.avg }}</div>
 </div>
 

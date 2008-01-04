@@ -115,7 +115,7 @@ def search(request):
     if request.method == 'POST':
         form = SearchForm(request.POST.copy())
         if form.is_valid():
-            term = form.cleaned_data['term']
+            term = form.clean_data['term']
 
             searched = True
             tags = Tag.objects.filter(name__icontains=term).order_by('name')

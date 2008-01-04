@@ -16,11 +16,20 @@
         
 <br/>
 {% block content %}
+		<div id="news_container">
+            {% for new in news %}
+            <div id="news-{{ new.id }}" class="news {% cycle alignleft,alignright %}">
+                <div class="news_title_mini transparent_link"><span class="sari">Haber:</span> <a href="{{ new.get_absolute_url }}">{{ new.title }}</a></div>
+                <div class="news_content_mini grey">{{ new.sum }}</div>
+            </div>
+            {% endfor %}
+        </div>		
+
         <div id="fs_container">
             {% for fs in fss %}
             <div id="fs-{{ fs.id }}" class="fs">
-                <div class="fs_title transparent_link">İlk adım: <a href="{{ fs.get_absolute_url }}">{{ fs.title }}</a></div>
-                <div class="fs_content grey">{{ fs.sum }}</div>
+                <div class="fs_title_mini transparent_link"><span class="sari">İlk adım: </span><a href="{{ fs.get_absolute_url }}">{{ fs.title }}</a></div>
+                <div class="fs_content_mini grey">{{ fs.sum }}</div>
             </div>
             {% endfor %}
         </div>
@@ -28,7 +37,7 @@
         <div id="howto_container">
             {% for howto in howtos %}
             <div id="howto-{{ howto.id }}" class="howtos {% cycle alignleft,alignright %}">
-                <div class="howtos_title_mini transparent_link">Nasıl: <a href="{{ howto.get_absolute_url }}">{{ howto.title }}</a></div>
+                <div class="howtos_title_mini transparent_link"><span class="sari">Nasıl:</span> <a href="{{ howto.get_absolute_url }}">{{ howto.title }}</a></div>
                 <div class="howtos_content_mini grey">{{ howto.sum }}</div>
             </div>
             {% endfor %}
@@ -37,7 +46,7 @@
         <div id="packages_container">
             {% for package in packages %}
             <div id="package-{{ package.id }}" class="packages {% cycle alignleft,alignright %}">
-                <div class="packages_title_mini transparent_link">Paket: <a href="{{ package.get_absolute_url }}">{{ package.title }}</a></div>
+                <div class="packages_title_mini transparent_link"><span class="sari">Paket: </span><a href="{{ package.get_absolute_url }}">{{ package.title }}</a></div>
                 <div class="packages_content_mini grey">{{ package.sum }}</div>
             </div>
             {% endfor %}
@@ -46,18 +55,11 @@
         <div id="games_container">
             {% for game in games %}
             <div id="game-{{ game.id }}" class="games {% cycle alignleft,alignright %}">
-                <div class="games_title_mini transparent_link">Oyun: <a href="{{ game.get_absolute_url }}">{{ game.title }}</a></div>
+                <div class="games_title_mini transparent_link"><span class="sari">Oyun:</span> <a href="{{ game.get_absolute_url }}">{{ game.title }}</a></div>
                 <div class="games_content_mini grey">{{ game.sum }}</div>
             </div>
             {% endfor %}
         </div>
         <br />
-        <div id="news_container">
-            {% for new in news %}
-            <div id="news-{{ new.id }}" class="news {% cycle alignleft,alignright %}">
-                <div class="news_title_mini transparent_link">Haber: <a href="{{ new.get_absolute_url }}">{{ new.title }}</a></div>
-                <div class="news_content_mini grey">{{ new.sum }}</div>
-            </div>
-            {% endfor %}
-        </div>
+        
 {% endblock %}

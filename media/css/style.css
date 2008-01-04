@@ -60,12 +60,17 @@ h3, .orange h4, .orange h5, .orange h6 {
 	color:#707070;
 }
 
+.sari{
+	color:#FFCA06;
+}
+
 /* header */
 #header {
     height: 140px;
     border-bottom: 3px solid #59780a;
 }
 
+/*burası uçacak*/
 .home_header {
     background: url('/media/img/home_header_bg.png') repeat-x;
 }
@@ -97,6 +102,7 @@ h3, .orange h4, .orange h5, .orange h6 {
 .planet_header {
     background: url('/media/img/planet_header_bg.png') repeat-x;
 }
+/*burası uçacak soon*/
 
 #logo {
     text-align: center;
@@ -120,9 +126,7 @@ h3, .orange h4, .orange h5, .orange h6 {
     /*border-bottom: 5px solid #7C7C7C;
     border-left: 5px solid #7C7C7C;
     border-right: 5px solid #7C7C7C;*/
-    /*background: #FFFFFF url('/media/img/content_bg.png') repeat-y;*/
-	
-	background:url(/media/dijital/img/ara_bg.jpg);
+    background:url(/media/dijital/img/ara_bg.jpg);
 	background-repeat:no-repeat;
 	background-color: #7C7C7C;
 }
@@ -241,6 +245,7 @@ h3, .orange h4, .orange h5, .orange h6 {
     margin-bottom: -30px;
 	color: #000000;
 }
+
 
 .transparent_link {
     color: #000000;
@@ -497,9 +502,29 @@ input#form_submit {
     overflow: hidden;
 }
 
+/*Daha emin değilim ? gerek var mı*/
+ortak_title{
+	font-size: 14px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-left: 12px;
+    height: 25px;
+    margin-top: 10px;
+}
+
+ortak_title_mini{
+	font-size: 14px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-left: 12px;
+    height: 25px;
+    margin-top: 10px;
+    width: 280px;
+
+}
+
 /* content */
 .news_title_mini {
-    /*background: url('/media/img/news_title_mini.png') no-repeat;*/
     font-size: 14px;
     font-weight: bold;
     padding-top: 5px;
@@ -510,7 +535,6 @@ input#form_submit {
 }
 
 .news_title {
-    /*background: url('/media/img/news_title.png') no-repeat;*/
     font-size: 14px;
     font-weight: bold;
     padding-top: 5px;
@@ -533,7 +557,6 @@ input#form_submit {
 }
 
 .packages_title_mini {
-    /*background: url('/media/img/packages_title_mini.png') no-repeat; */
     font-size: 14px;
     font-weight: bold;
     padding-top: 5px;
@@ -544,7 +567,6 @@ input#form_submit {
 }
 
 .packages_title {
-    /*background: url('/media/img/packages_title.png') no-repeat;*/
     font-size: 14px;
     font-weight: bold;
     padding-top: 5px;
@@ -567,7 +589,6 @@ input#form_submit {
 }
 
 .games_title_mini {
-    /*background: url('/media/img/games_title_mini.png') no-repeat;*/
     font-size: 14px;
     font-weight: bold;
     padding-top: 5px;
@@ -578,7 +599,6 @@ input#form_submit {
 }
 
 .games_title {
-    /*background: url('/media/img/games_title.png') no-repeat;*/
 	color:#000000;
     font-size: 22px;
     font-weight: bold;
@@ -604,7 +624,6 @@ input#form_submit {
 }
 
 .fs_title_mini {
-/*    background: url('/media/img/fs_title_mini.png') no-repeat; */
     font-size: 14px;
     font-weight: bold;
     padding-top: 5px;
@@ -615,7 +634,6 @@ input#form_submit {
 }
 
 .fs_title {
-    /*background: url('/media/img/fs_title.png') no-repeat;*/
     font-size: 14px;
     font-weight: bold;
     padding-top: 5px;
@@ -638,7 +656,6 @@ input#form_submit {
 }
 
 .howtos_title_mini {
-/*    background: url('/media/img/howto_title_mini.png') no-repeat;*/
     font-size: 14px;
     font-weight: bold;
     padding-top: 5px;
@@ -649,7 +666,6 @@ input#form_submit {
 }
 
 .howtos_title {
-    /*background: url('/media/img/howto_title.png') no-repeat;*/
     font-size: 14px;
     font-weight: bold;
     padding-top: 5px;
@@ -705,29 +721,6 @@ input#form_submit {
     background-image: url('/media/img/sidebar_purple.png');
 }
 
-.sidebar_blue_title {
-    margin-top: 10px;
-    padding-top: 4px;
-    height: 25px;
-    font-size: 14px;
-    font-weight: bold;
-    color:#FFCA06;
-    background-repeat: no-repeat;
-    /*background-image: url('/media/img/sidebar_blue.png');*/
-}
-
-.sidebar_darkblue_title {
-    margin-top: 0px;
-    padding-top: 4px;
-    height: 25px;
-    font-size: 14px;
-    font-weight: bold;
-    color:#FFCA06;
-    background-repeat: no-repeat;
-    /*background-image: url('/media/img/sidebar_darkblue.png');*/
-	background-color: #000000;
-	border:0px;
-}
 .sidebar_top_img{
 	margin-top: 40px;
 	/*background-repeat: no-repeat;*/
