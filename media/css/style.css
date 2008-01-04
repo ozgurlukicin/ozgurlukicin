@@ -35,7 +35,8 @@
     color: #DB5F00;
 }
 
-.orange h1, .orange h2, .orange h3, .orange h4, .orange h5, .orange h6 {
+.orange h1, .orange h2, .
+h3, .orange h4, .orange h5, .orange h6 {
     color: #CE5900;
 }
 
@@ -171,14 +172,17 @@
 
 
 /* footer */
+
+
 #footer {
     clear: both;
-    background: #048DB4 url('/media/img/footer_bg.png') no-repeat;
+    /* Disable edelim yeni tasarım için    background: #048DB4 url('/media/img/footer_bg.png') no-repeat; */
     color: #ACD7EE;
     font-size: 95%;
     line-height: 130%;
     padding-bottom: 10px;
 }
+
 
 #credits {
     margin: 0px auto;
@@ -239,7 +243,7 @@
 }
 
 .transparent_link {
-    color: #ffffff;
+    color: #000000;
 }
 
 .transparent_link a, .transparent_link a:visited {
@@ -540,7 +544,7 @@ input#form_submit {
 }
 
 .packages_title {
-    background: url('/media/img/packages_title.png') no-repeat;
+    /*background: url('/media/img/packages_title.png') no-repeat;*/
     font-size: 14px;
     font-weight: bold;
     padding-top: 5px;
@@ -611,7 +615,7 @@ input#form_submit {
 }
 
 .fs_title {
-    background: url('/media/img/fs_title.png') no-repeat;
+    /*background: url('/media/img/fs_title.png') no-repeat;*/
     font-size: 14px;
     font-weight: bold;
     padding-top: 5px;
@@ -645,7 +649,7 @@ input#form_submit {
 }
 
 .howtos_title {
-    background: url('/media/img/howto_title.png') no-repeat;
+    /*background: url('/media/img/howto_title.png') no-repeat;*/
     font-size: 14px;
     font-weight: bold;
     padding-top: 5px;
@@ -677,7 +681,7 @@ input#form_submit {
 
 .sidebar {
 	position: relative;
-    width: 220px;
+    width: 228px;
     padding-left: 6px;
 	background-color: #000000;
 	color:#FFCA06;
@@ -726,14 +730,14 @@ input#form_submit {
 }
 .sidebar_top_img{
 	margin-top: 40px;
-	background-repeat: no-repeat;
+	/*background-repeat: no-repeat;*/
 	background-image: url('/media/dijital/img/d_tblust.jpg');
-	
+        height: 10px;
 }
 .sidebar_alt_img{
 	background-image: url('/media/dijital/img/d_tblalt.jpg');
-	background-position: top center;
-	
+	/*background-position: top center;*/
+        height: 10px;
 }
 
 .sidebar_darkblue_con {
@@ -760,16 +764,30 @@ input#form_submit {
     background-image: url('/media/img/sidebar_green.png');
 }
 
-.sidebar_orange_title {
-    margin-top: 10px;
-    padding-top: 4px;
-    height: 25px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #ffffff;
-    background-repeat: no-repeat;
-    background-image: url('/media/img/sidebar_orange.png');
+/* buradan itibaren başlık ve iç diye iki tane sınıf yarattım başlık Etiketler, Ayrıntılar gibi yerleri göstermek için iç ise bunlarda yer alan bilgileri görmek için fakat içle ilgili biraz font oynaması yapmak lazım */
+
+
+.sidebar_baslik {
+margin-top: 0px;
+padding-top: 4px;
+height: 25px;
+font-size: 14px;
+font-weight: bold;
+color: #FFCA06;
+/*background-repeat: no-repeat;*/
+background-image: url('/media/dijital/img/d_tblbg.jpg');
 }
+
+.sidebar_ic {
+margin-top: 0px;
+padding-top: 4px;
+/*height: 50px;*/
+font-size: 8px;
+color: #707070;
+/*background-repeat: no-repeat;*/
+background-image: url('/media/dijital/img/d_tblbg.jpg');
+}
+
 
 .sidebar_yellow_title {
     margin-top: 10px;

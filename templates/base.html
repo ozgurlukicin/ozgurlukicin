@@ -56,8 +56,9 @@
 
     <div id="sidebar">
         {% block sidebartop %}
-        <div class="sidebar_green_title sidebar">Kullanıcı Kutusu</div>
-        <div class="sidebar grey"{% if not user.is_authenticated %} style="text-align: center;"{% endif %}>
+        <div class="sidebar sidebar_top_img">&nbsp;</div>
+        <div class="sidebar sidebar_baslik">Kullanıcı Kutusu</div>
+        <div class="sidebar sidebar_ic"{% if not user.is_authenticated %} style="text-align: center;"{% endif %}>
         {% if not user.is_authenticated %}
         <form method="post" action="/kullanici/giris/">
             <input type="text" id="id_username" name="username" size="8" class="vTextField required" value="" maxlength="30" /><br />
@@ -70,17 +71,17 @@
             <br />İstiyorsan profil sayfana <a href="/kullanici/dashboard">buradan</a> ulaşabilir veya <a href="/kullanici/cikis">buraya</a> tıklayarak sistemden çıkabilirsin
         {% endif %}
         </div>
-        <div class="sidebar_green_title sidebar">Pardus'u indirin</div>
-        <div class="sidebar grey" style="text-align: center;"><a href="/indir/"><img src="/media/img/sidebar_download.png" border="0" alt="Pardus'u indir.." /></a></div>
-        <div class="sidebar_green_title sidebar">Arama</div>
-        <div class="sidebar grey" style="text-align: center;">
+        <div class="sidebar sidebar_baslik">Pardus'u indirin</div>
+        <div class="sidebar sidebar_ic" align="center" style="text-align: center;"><center><a href="/indir/"><img src="/media/img/sidebar_download.png" border="0" alt="Pardus'u indir.." /></a></center></div>
+        <div class="sidebar sidebar_baslik">Arama</div>
+        <div class="sidebar sidebar_ic" style="text-align: center;">
             <form method="post" action="/arama/">
                 <input type="text" name="term" size="12">
                 <input type="submit" value="Ara">
             </form>
         </div>
-        <div class="sidebar_green_title sidebar">Özgürlükiçin'i destekleyin</div>
-        <div class="sidebar grey">Pardus'un tanıtımına katkıda bulunmak isteyenler için Özgürlükiçin düğmeleri yayınlandı. Sitenizde, blogunuzda yayınlamak için siz de <a href="/banner/">hazır kodlarımızdan</a> yararlanabilirsiniz.</div>
+        <div class="sidebar sidebar_baslik">Özgürlükiçin'i destekleyin</div>
+        <div class="sidebar sidebar_ic">Pardus'un tanıtımına katkıda bulunmak isteyenler için Özgürlükiçin düğmeleri yayınlandı. Sitenizde, blogunuzda yayınlamak için siz de <a href="/banner/">hazır kodlarımızdan</a> yararlanabilirsiniz.</div>
         {% endblock %}
         {% block sidebar %}
         {% endblock %}

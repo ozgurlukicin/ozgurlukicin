@@ -39,17 +39,17 @@
 
 {% block sidebar %}
 
-<div class="sidebar sidebar_top_img"></div>
-<div class="sidebar sidebar_darkblue_title">Bilgiler</div>
-<div class="sidebar grey">
+<div class="sidebar sidebar_top_img">&nbsp;</div>
+<div class="sidebar sidebar_baslik">Bilgiler</div>
+<div class="sidebar sidebar_ic">
     <strong>Lisans:</strong> {% for license in licenses %}<a href="{{ license.url }}"><span class="gri" >{{ license.name }}</span></a> {% endfor %}<br />
     <strong>Paket boyutu:</strong> <span class="gri" >{{ game.download_size|filesizeformat }}</span><br />
     <strong>Kurulu boyutu:</strong><span class="gri" > {{ game.installed_size|filesizeformat }}</span><br />
     <strong>Web sitesi:</strong> <a href="{{ game.url }}"><span class="gri" >{{ game.url }}</span></a><br />
 </div>
 
-<div class="sidebar sidebar_darkblue_con">Değerlendirme</div>
-<div class="sidebar grey">
+<div class="sidebar sidebar_baslik">Değerlendirme</div>
+<div class="sidebar sidebar_ic">
     <strong>Öğrenme süresi:</strong><span class="gri" >{{ game.learning_time }}</span><br />
     <strong>Oynanabilirlik:</strong> <span class="gri" >{{ game.gameplay }}</span><br />
     <strong>Grafik:</strong><span class="gri" > {{ game.graphics }}</span><br />
@@ -59,22 +59,23 @@
     <div class="game_average_point">{{ game.avg }}</div>
 </div>
 
-<div class="sidebar sidebar_darkblue_con">Menüdeki yeri</div>
-<div class="sidebar grey"><span class="gri" >{{ game.path }}</div>
+<div class="sidebar sidebar_baslik">Menüdeki yeri</div>
+<div class="sidebar sidebar_ic"><span class="gri" >{{ game.path }}</div>
 
-<div class="sidebar sidebar_darkblue_con">Etiketler</div>
-<div class="sidebar grey">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}"><span class="gri" >{{ tag.name }}</span></a> {% endfor %}</div>
+<div class="sidebar sidebar_baslik">Etiketler</div>
+<div class="sidebar sidebar_ic">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}"><span class="gri" >{{ tag.name }}</span></a> {% endfor %}</div>
 
 {% if game.wiki.all %}
-<div class="sidebar sidebar_darkblue_con">İlgili wiki sayfaları</div>
-<div class="sidebar grey">{% for wiki in game.wiki.all %}<a href="{{ wiki.get_absolute_url }}"><span class="gri" >{{ wiki.name }}</span></a><br />{% endfor %}</div>
+<div class="sidebar sidebar_baslik">İlgili wiki sayfaları</div>
+<div class="sidebar sidebar_ic">{% for wiki in game.wiki.all %}<a href="{{ wiki.get_absolute_url }}"><span class="gri" >{{ wiki.name }}</span></a><br />{% endfor %}</div>
 {% endif %}
 
 {% if videos %}
-<div class="sidebar sidebar_darkblue_con">İlgili Videolar</div>
-<div class="sidebar grey">{% for video in videos %}<a href="/video/{{ video.name }}" rel="lightbox[video_{{ game.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
+<div class="sidebar sidebar_baslik">İlgili Videolar</div>
+<div class="sidebar sidebar_ic">{% for video in videos %}<a href="/video/{{ video.name }}" rel="lightbox[video_{{ game.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
 {% endif %}
 
-<div class="sidebar sidebar_darkblue_con">Yazar</div>
-<div class="sidebar grey"><span class="gri" >{{ game.author }}</span></div>
+<div class="sidebar sidebar_baslik">Yazar</div>
+<div class="sidebar sidebar_ic"><span class="gri" >{{ game.author }}</span></div>
+<div class="sidebar sidebar_alt_img">&nbsp;</div>
 {% endblock %}
