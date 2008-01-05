@@ -45,7 +45,7 @@ def user_profile_edit(request):
             u.get_profile().save()
             u.save()
 
-            return HttpResponseRedirect(PROFILE_EDIT_URL)
+            return HttpResponseRedirect(LOGIN_REDIRECT_URL)
         else:
             return render_response(request, 'user/profile_edit.html', {'form': form})
     else:
@@ -105,7 +105,7 @@ def user_register(request):
                     'hour': hour,
                     'ip': request.META['REMOTE_ADDR'],
                     'user': form.clean_data['username'],
-                    'link': 'http://www.ozgurlukicin.com/confirm/%s/%s' % (form.clean_data['username'], activation_key)}
+                    'link': 'http://www.ozgurlukicin.com/kullanici/onay/%s/%s' % (form.clean_data['username'], activation_key)}
 
             email_subject = u"Ozgurlukicin.com Kullanıcı Hesabı, %(user)s"
             email_body = u"""Merhaba!
@@ -116,9 +116,8 @@ def user_register(request):
 Teşekkürler,
 Ozgurlukicin.com"""
             email_to = form.clean_data['email']
-            email_recipient = ["turkay.eren@gmail.com"] # this is just for testing, it should be changed when authentication system has been finished
 
-            send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, email_recipient, fail_silently=False)
+            send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, email_to, fail_silently=False)
 
             return render_response(request, 'user/register_done.html', {'form': form,
                                                                    'user': form.clean_data['username']})
@@ -170,7 +169,7 @@ def lost_password(request):
                          'hour': hour,
                          'ip': request.META['REMOTE_ADDR'],
                          'user': form.clean_data['username'],
-                         'link': 'http://www.ozgurlukicin.com/kullanici/kayip/change/%s' % key}
+                         'link': 'http://www.ozgurlukicin.com/kullanici/kayip/degistir/%s' % key}
 
            email_subject = u"Ozgurlukicin.com Kullanıcı Parolası"
            email_body = u"""Merhaba!
@@ -178,9 +177,8 @@ def lost_password(request):
 
 <a href="%(link)s">%(link)s</a>"""
            email_to = form.clean_data['email']
-           email_recipient = ['turkay.eren@gmail.com']
 
-           send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, email_recipient, fail_silently=False)
+           send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, email_to, fail_silently=False)
            return render_response(request, 'user/lostpassword_done.html')
        else:
            return render_response(request, 'user/lostpassword.html', {'form': form})
