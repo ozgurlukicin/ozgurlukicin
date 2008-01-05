@@ -64,6 +64,10 @@ h3, .orange h4, .orange h5, .orange h6 {
 	color:#FFCA06;
 }
 
+.siyah{
+	color: #000000;
+}
+
 /* header */
 #header {
     height: 140px;
@@ -439,24 +443,25 @@ input#form_submit {
 .planet_date {
     margin-top: 20px;
     margin-left: 4px;
-    height: 26px;
+    height: 20px;
     width: 120px;
     padding-top: 4px;
     font-size: 18px;
-    color: #827300;
-    background: url('/media/img/planet_date_bg.png') no-repeat;
+    color: #000000;
+    /*background: url('/media/img/planet_date_bg.png') no-repeat;*/
     text-align: center;
+	background-color: #FFCA06;;
 }
 
 .planet_title {
     margin-top: 10px;
     padding-top: 4px;
     padding-left: 10px;
-    margin-left: 4px;
+    margin-left: 2px;
     height: 25px;
     font-size: 14px;
     font-weight: bold;
-    background: url('/media/img/planet_title.png') no-repeat;
+    /*background: url('/media/img/planet_title.png') no-repeat;*/
 }
 
 .planet_content {
@@ -472,12 +477,15 @@ input#form_submit {
 .planet_author {
     min-width: 90px;
     min-height: 90px;
-    background-color: #DEEBF2;
+    background-color: #7C7C7C;
     padding: 5px;
-    border: #C6D2D8 solid 1px;
+    border: 1px;
+	border-style: solid;
+	border-color: #FFCA06;
     float: right;
-    text-align: center;
+    text-align: right;
     clear: left;
+	
 }
 
 /* kwicks */

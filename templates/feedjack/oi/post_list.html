@@ -5,19 +5,30 @@
 {% block pagetype %}page{% endblock %}
 
 {% block section %}planet{% endblock %}
-{% block section_logo %}<img src="/media/img/planet_header_logo.png">{% endblock %}
+
+{% block header_menu %}
+    <!-- Burası header kısmı -->
+	{% include "header.html" %}
+{% endblock %}
+<br/>
+{% block ust_menu %}
+	<!-- Burası üst menü kısmı -->
+	{% include "ust_menu_ayrinti.html" %}
+	
+{% endblock %}
+<br/>
 
 {% block content %}
 {% for item in object_list %}
   {% ifchanged %}
-  <div class="planet_date">{{ item.date_modified|date:"j F" }}</div>
+  <div class="planet_date siyah">{{ item.date_modified|date:"j F" }}</div>
   {% endifchanged %}
 
   <div class="post">
   {% if item.title %}
-  <div class="planet_title transparent_link"><a href="{{ item.link }}">{{ item.title }}</a></div>
+  <div class="planet_title"><a class="sari" href="{{ item.link }}">{{ item.title }}</a></div>
   {% else %}
-  <div class="planet_title transparent_link"><a href="{{ item.link }}">{{ item.subscriber.name }}</a></div>
+  <div class="planet_title siyah"><a href="{{ item.link }}">{{ item.subscriber.name }}</a></div>
   {% endif %}
   <div class="planet_content grey">
     <div class="planet_author">
@@ -38,31 +49,33 @@
 {% block sidebartop %}{%endblock%}
 
 {% block sidebar %}
-<div class="sidebar sidebar_yellow_title">Kurallar</div>
-<div class="sidebar planet_link">
-    <a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a>
+<div class="sidebar sidebar_top_img">&nbsp;</div>
+<div class="sidebar sidebar_baslik">Kurallar</div>
+<div class="sidebar sidebar_ic">
+    <a class="sari" href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a>
 </div>
 
-<div class="sidebar sidebar_yellow_title">Yazarlar</div>
-<div class="sidebar">
+<div class="sidebar sidebar_baslik">Yazarlar</div>
+<div class="sidebar sidebar_ic">
     {% for feed in subscribers %}
     <div class="planet_link"><a href="{{ feed.feed.feed_url }}"><img src="/media/img/feed_icon.png" border="0" style="vertical-align: -3px;" /></a> <a href="{{ site.url }}/user/{{ feed.feed.id }}">{{ feed.name }}</a></div>
     {% endfor %}
 </div>
 
-<div class="sidebar sidebar_yellow_title">Son güncelleme</div>
-<div class="sidebar yellow" align="center">{{ last_modified }}</div>
+<div class="sidebar sidebar_baslik">Son güncelleme</div>
+<div class="sidebar sidebar_ic" align="center">{{ last_modified }}</div>
 
-<div class="sidebar sidebar_yellow_title">Feed</div>
-<div class="sidebar transparent_link" align="center">
+<div class="sidebar sidebar_baslik">Feed</div>
+<div class="sidebar sidebar_ic" align="center">
     <a href="/rss/gezegen/" title="RSS 2.0 feed"><img src="/media/img/rss2.png"/></a>
     <a href="/atom/gezegen/" title="Atom 1.0 feed"><img src="/media/img/atom.png"/></a>
 </div>
 
 {% if site.links %}
-<div class="sidebar sidebar_yellow_title">Diğer gezegenler</div>
-<div class="sidebar">
-{% for link in site.links.all %}<div style="margin-bottom: 4px;" class="planet_link"><img src="/media/img/other_planets.png" border="0" style="vertical-align: -4px;" /> <a href="{{ link.link }}">{{ link.name }}</a></div>{% endfor %}
+<div class="sidebar sidebar_baslik">Diğer gezegenler</div>
+<div class="sidebar sidebar_ic" align="left">
+{% for link in site.links.all %}<img src="/media/img/other_planets.png" border="0" style="vertical-align: -4px;" /> <a class="sari" href="{{ link.link }}">{{ link.name }}</a><br/>{% endfor %}
 </div>
 {% endif %}
+<div class="sidebar sidebar_alt_img">&nbsp;</div>
 {% endblock %}
