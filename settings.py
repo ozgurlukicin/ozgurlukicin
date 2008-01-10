@@ -110,8 +110,8 @@ INSTALLED_APPS = (
     'oi.seminar',
     'oi.profile',
     'oi.forum',
-    'oi.sanat',
-	'oi.comments',
+    #'oi.sanat',
+	#'oi.comments',
 	
 )
 
