@@ -45,10 +45,10 @@
 <div class="sidebar sidebar_ic">
     {% for sem in seminar %}
     <div style="padding-bottom: 4px;{% if not forloop.first %} padding-top: 4px; border-top: 1px solid;{% endif %}">
-        <strong>{{ sem.date|date:"d F Y" }}</strong><br/>
-        {{ sem.description }}<br/>
-        <strong>Yer:</strong> {{ sem.place.name }}<br/>
-        <strong>Konuşmacılar:</strong> {% for att in sem.attender.all %}{{ att.name }} {% endfor %}
+        <strong class="gri">{{ sem.date|date:"d F Y" }}</strong><br/>
+        <span class="gri">{{ sem.description }}</span><br/>
+        <strong class="sari">Yer:</strong> <span class="gri">{{ sem.place.name }}</span><br/>
+        <strong class="sari">Konuşmacılar:</strong><span class="hri"> {% for att in sem.attender.all %}{{ att.name }} {% endfor %}</span>
     </div>
     {% endfor %}
 </div>

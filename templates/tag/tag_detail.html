@@ -26,7 +26,7 @@
             <h1><span class="sari">Haberler ({{ news.count }} adet)</span></h1>
             <ul style="padding-left: 16px;" class="grey">
             {% for obj in news %}
-                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.text|truncatewords:"10"|striptags }}</li>
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.text|striptags|truncatewords:"10" }}</li>
             {% endfor %}
             </ul>
         </div>
@@ -70,7 +70,7 @@
             <h1><span class="sari">Sabit sayfalar ({{ flatpages.count }} adet)</span></h1>
             <ul style="padding-left: 16px;" class="grey">
             {% for obj in flatpages %}
-                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.text|truncatewords:"10"|striptags }}</li>
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.text|striptags|truncatewords:"10" }}</li>
             {% endfor %}
             </ul>
         </div>

@@ -7,7 +7,7 @@ Form fields for comments.
    Form fields are hashed for security against spammers.
 {% endcomment %}
 {% if comment_form.has_errors %}
-<span class='error'>Please correct the following errors:</span>
+<span class='error'>Aşağıdaki hataları düzeltin!</span>
 {% endif %}
 
 <div class="comment_form">
@@ -15,7 +15,7 @@ Form fields for comments.
 <table cellspacing="0" cellpadding="2">
 <tr>
 <td>
-<label for="id_{{ fields.person_name }}">Name:</label>
+<label for="id_{{ fields.person_name }}">İsim:</label>
 </td>
 <td>
 {% if comment_form.person_name.errors %}
@@ -34,7 +34,7 @@ Form fields for comments.
 Ignore this field:<br />
 <input type="text" id="id_{{ fields.honeypot1 }}" name="{{ fields.honeypot1 }}" class="input-text" />
 </div>
-<input type="text" size="25" id="id_{{ fields.person_email }}" name="{{ fields.person_email }}" class="input-text" value="{{ comment.person_email }}"/>&nbsp;<span class="note">optional; will <i>not</i> be displayed</span>
+<input type="text" size="25" id="id_{{ fields.person_email }}" name="{{ fields.person_email }}" class="input-text" value="{{ comment.person_email }}"/>&nbsp;<span class="note">seçimlik <i>gösterilmeyecek</i></span>
 <div style="display:none">
 Don't put anything in this field:<br />
 <input type="text" id="id_{{ fields.honeypot2 }}" name="{{ fields.honeypot2 }}" class="input-text" />
@@ -47,13 +47,13 @@ Don't put anything in this field:<br />
 <label for="id_{{ fields.person_www }}">URL:</label>
 </td>
 <td>
-<input type="text" size="25" id="id_{{ fields.person_www }}" name="{{ fields.person_www }}" class="input-text" value="{{ comment.person_www }}"/>&nbsp;<span class="note">optional</span>
+<input type="text" size="25" id="id_{{ fields.person_www }}" name="{{ fields.person_www }}" class="input-text" value="{{ comment.person_www }}"/>&nbsp;<span class="note">seçimlik</span>
 </td>
 </tr>
 
 <tr>
 <td valign="top">
-<label for="id_{{ fields.comment }}">Comment:</label>
+<label for="id_{{ fields.comment }}">Yorum:</label>
 </td>
 <td>
 
@@ -75,7 +75,7 @@ Leave this empty:<br />
 <tr>
 <td></td>
 <td class="note" align="right">
-URLs auto-link and some tags are allowed: &lt;a>&lt;b>&lt;i>&lt;p>.
+İzin verilen taglar: &lt;a>&lt;b>&lt;i>&lt;p>.
 </td>
 </tr>
 
