@@ -81,8 +81,6 @@ urlpatterns = patterns('',
     (r'^comments/post/$', 'oi.comments.views.post_comment'),
     (r'^comments/posted/$', 'oi.comments.views.comment_was_posted'),
 
-	#(r'^comments/', include('django.contrib.comments.urls.comments')),
-	#(r'^comments/postfree/', 'oi.sanat.views.my_post_free_comment'),	
 	
     #News
     (r'^haber/$', 'django.views.generic.list_detail.object_list', dict(news_dict)),

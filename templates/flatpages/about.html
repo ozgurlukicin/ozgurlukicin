@@ -5,6 +5,18 @@
 
 {% block pagetype %}page{% endblock %}
 
+{% block header_menu %}
+    <!-- Burası header kısmı -->
+	{% include "header.html" %}
+{% endblock %}
+<br/>
+{% block ust_menu %}
+	<!-- Burası üst menü kısmı -->
+	{% include "ust_menu_ayrinti.html" %}
+	
+{% endblock %}
+<br/>
+
 {% block content %}
 <div class="fs_title transparent_link">{{ flatpage.title }}</div>
 <div class="page_content grey">
@@ -16,8 +28,8 @@
 {% block sidebartop %}{% endblock %}
 
 {% block sidebar %}
-<div class="sidebar_green_title">İlgili sayfalar</div>
-<div class="sidebar grey">
+<div class="sidebar sidebar_baslik">İlgili sayfalar</div>
+<div class="sidebar sidebar_ic">
     {% ifnotequal flatpage.url "/hakkinda/icerik-politikasi/" %}<a href="/hakkinda/icerik-politikasi/">İçerik Politikası</a><br/>{% endifnotequal %}
     {% ifnotequal flatpage.url "/hakkinda/gizlilik-politikasi/" %}<a href="/hakkinda/gizlilik-politikasi/">Gizlilik Politikası</a><br/>{% endifnotequal %}
     {% ifnotequal flatpage.url "/hakkinda/gezegen-kurallari/" %}<a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a><br/>{% endifnotequal %}
@@ -25,6 +37,7 @@
     {% ifnotequal flatpage.url "/bize_ulasmak_icin/" %}<a href="/bize_ulasmak_icin/">Bize Ulaşın</a><br/>{% endifnotequal %}
 </div>
 
-<div class="sidebar_green_title">Etiketler</div>
-<div class="sidebar grey">{% for tag in flatpage.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
+<div class="sidebar sidebar_baslik">Etiketler</div>
+<div class="sidebar sidebar_ic">{% for tag in flatpage.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
+<div class="sidebar sidebar_alt_img">&nbsp;</div>
 {% endblock %}

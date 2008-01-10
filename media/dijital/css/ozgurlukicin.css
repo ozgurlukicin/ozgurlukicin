@@ -142,7 +142,7 @@ body {
 	font-family: "Liberation Sans", "Liberation Serif", Arial;
 	background-color: #FFCA06;
 	color: #000000;
-	height: 30px;
+	height: 45px;
 	position:relative;
 	overflow:visible;
 	width:900px;
@@ -216,3 +216,8 @@ body {
 	margin-top:20px;
 }
 #IMGindir {float: right;}
+
+.siyahd{
+color : #000000;
+text-decoration: none;
+}
