@@ -31,6 +31,17 @@
             </ul>
         </div>
     {% endif %}
+	
+	{% if howto %}
+        <div class="purple">
+            <h1><span class="sari">Nasıl ({{ howto.count }} adet)</span></h1>
+            <ul style="padding-left: 16px;" class="grey">
+            {% for obj in howto %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.text|striptags|truncatewords:"10" }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
 
     {% if packages %}
         <div class="orange">
