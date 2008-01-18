@@ -179,11 +179,16 @@ def merge(request, forum_slug, topic_id):
 
         if form.is_valid() and not flood:
             topic2 = form.clean_data['topic2']
+            topic2_object=get_object_or_404(Topic, pk=int(topic2))
             
-            for post in Post.objects.filter(topic=topic.id):
-                post.topic.id = int(topic2)
+            posts_tomove=Post.objects.filter(topic=topic.id)
+            for post in posts_tomove:
+                post.topic = topic2_object
                 post.save()
-            
+                
+            #bir de simdi ileti sayisini arttirmak gerekir.
+            topic2_object.posts += posts_tomove.count()
+            topic2_object.save()
             #topic2_object=get_object_or_404(Topic, pk=topic2)
             
             topic.delete()
