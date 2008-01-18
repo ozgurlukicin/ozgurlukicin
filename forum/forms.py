@@ -8,7 +8,7 @@
 from django import newforms as forms
 from oi.forum.models import Topic
 
-choices = ((u'1', 'Unknown'), (u'2', 'Yes'), (u'3', 'No'))
+#choices = ((u'1', 'Unknown'), (u'2', 'Yes'), (u'3', 'No'))
 
 
 class TopicForm(forms.Form):

@@ -55,9 +55,9 @@ class Category(models.Model):
 	class Admin:
 		
 		list_display = ('cat_name','parent_id','update')
-        	list_filter = ['update']
-        	search_fields = ['cat_name']
-		ordering=["-id"]
+        list_filter = ['update']
+        search_fields = ['cat_name']
+        ordering=["-id"]
 	
 	class Meta:
 		verbose_name="Kategori"
@@ -89,13 +89,14 @@ dispatcher.connect(rm_thumb,signal=signals.post_delete, sender=SanatScreen)
 
 
 class ArsivDosya(models.Model):
-	""" The data file that includes the archives for templates and etc"""
-	a_file=models.FileField(upload_to="upload/sanat/dosya/")
-	
-	class Admin:
+    """ The data file that includes the archives for templates and etc"""
+    a_file=models.FileField(upload_to="upload/sanat/dosya/")
+    #download=models.IntegerField(verbose_name="İndirilme",default=0)
+    
+    class Admin:
 		pass
-		
-	def __str__(self):
+    
+    def __str__(self):
 		return self.a_file
 	
 class Dosya(models.Model):
@@ -125,16 +126,8 @@ class Dosya(models.Model):
 	def get_absolute_url(self):
 		return "/tema/dosya/%s/"%(self.id)
 	
-	def get_screens(self):
-		""" Screen linklerini al"""
-		sc=self.screens.all()
-		
-		for i in sc:
-			link="".join(["\n <a href=\"%s\">Link</a>"%(i)])
-		return link
-		
 	class Admin:
-		list_display=('name','rate','state','counter','update','parent_cat','get_screens')
+		list_display=('name','rate','state','counter','update','parent_cat')
 		search_fields=['name','parent_cat']
 		list_filter=['update']
 		ordering=['-update']
@@ -148,11 +141,11 @@ class Dosya(models.Model):
 dispatcher.connect(rmv_files,signal=signals.pre_delete, sender=Dosya)
 
 #dont forget to disable it before uploading pff
-class DosyaCommentModerator(CommentModerator):
-	""" Dosya models class Comment moderation""",
-	akismet = False
-	email_notification = False
-	enable_field = 'enable_comments'
+#class DosyaCommentModerator(CommentModerator):
+#	""" Dosya models class Comment moderation""",
+#	akismet = False
+#	email_notification = False
+#	enable_field = 'enable_comments'
 	
 #register it 
-moderator.register(Dosya, DosyaCommentModerator)
+#moderator.register(Dosya, DosyaCommentModerator)
