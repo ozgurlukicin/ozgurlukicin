@@ -19,6 +19,8 @@ from oi.forum.forms import *
 from oi.st.wrappers import render_response
 from oi.forum.models import Category, Forum, Topic, Post, AbuseReport, WatchList
 
+from django.core.urlresolvers import reverse
+
 def main(request):
     forums = Forum.objects.order_by('name')
 
@@ -162,30 +164,42 @@ def edit_topic(request, forum_slug, topic_id):
 
     return render_response(request, 'forum/new_topic.html', locals())
 
-#@login_required
-#def merge(request, forum_slug, topic_id):
-    #forum = get_object_or_404(Forum, slug=forum_slug)
-    #topic = get_object_or_404(Topic, pk=topic_id)
+@login_required
+def merge(request, forum_slug, topic_id):
+    forum = get_object_or_404(Forum, slug=forum_slug)
+    topic = get_object_or_404(Topic, pk=topic_id)
+    
+    if forum.locked or topic.locked:
+        hata="Kilitli konularda bu tür işlemler yapılamaz!"
+        return render_response(request, 'forum/merge.html', locals())
 
-    #if forum.locked or topic.locked:
-        #raise HttpResponseServerError #FIXME: Give an error message
+    if request.method == 'POST':
+        form = MergeForm(request.POST.copy())
+        flood,timeout = flood_control(request)
 
-    #if request.method == 'POST':
-        #form = TopicForm(request.POST.copy())
-        #flood,timeout = flood_control(request)
+        if form.is_valid() and not flood:
+            topic2 = form.clean_data['topic2']
+            
+            for post in Post.objects.filter(topic=topic.id):
+                post.topic.id = int(topic2)
+                post.save()
+            
+            #topic2_object=get_object_or_404(Topic, pk=topic2)
+            
+            topic.delete()
+            #return render_response(request, 'forum/merge.html', locals())
+            return HttpResponseRedirect(forum.get_absolute_url())
+            #return HttpResponseRedirect(reverse(viewname="oi.forum.views.main"))
+            #return HttpResponseRedirect(topic2_object.get_absolute_url())
+        
+        else:
+            hata="Forum valid degil veya floood yapıyorsun!"
+            return render_response(request, 'forum/merge.html', locals())
+        
+    else:
+        form = MergeForm(auto_id=True)
 
-        #if form.is_valid() and not flood:
-            #topic2 = form.clean_data['topic2']
-            #for post in Post.objects.filter(topic.id=topic.id):
-                #post.topic.id = topic2.id
-
-            #topic.delete()
-
-            #return HttpResponseRedirect(topic2.get_absolute_url())
-    #else:
-        #form = MergeForm(auto_id=True)
-
-    #return render_response(request, 'forum/merge.html', locals())
+    return render_response(request, 'forum/merge.html', locals())
 
 @login_required
 def hide(request, forum_slug, topic_id, post_id=False):

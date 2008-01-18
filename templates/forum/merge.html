@@ -12,16 +12,20 @@
 <br/>{{ topic.title }} başlıklı konu ile birleştirmek istediğiniz konuyu seçin.<br />
 <form action="" method="POST">
 <dl>
-{% for field in form %}
-    <dt>{{ field.label_tag }}</dt>
-    <dd>{{ field }}</dd>
-    {% if field.help_text %}<dd>{{ field.help_text }}</dd>{% endif %}
-    {% if field.errors %}<dd class="myerrors">{{ field.errors }}</dd>{% endif %}
-{% endfor %}
+
+    <dt>{{ form.topic2.label_tag }}</dt>
+    <dd>{{ form.topic2 }}</dd>
+    {% if form.topic2.help_text %}<dd>{{ field.topic2.help_text }}</dd>{% endif %}
+    {% if form.topic2.errors %}<dd class="myerrors">{{ field.topic2.errors }}</dd>{% endif %}
+
 </dl>
 <input type="submit" value="Merge">
 </form>
 {% else %}
 <p>You must be signed in to merge topics.</p>
+{% endif %}
+
+{% if hata %}
+	<strong>{{hata}}</strong>
 {% endif %}
 {% endblock %}
