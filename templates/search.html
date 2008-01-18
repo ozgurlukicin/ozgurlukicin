@@ -22,6 +22,17 @@
         </div>
     {% endif %}
 
+	{% if howto %}
+        <div class="purple">
+            <h2><span class="sari">Nasıl ({{ howto.count }} adet)</span></h2>
+            <ul style="padding-left: 16px;" class="grey">
+            {% for obj in howto %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+	
     {% if packages %}
         <div class="orange">
             <h1>Paketler ({{ packages.count }} adet)</h1>
