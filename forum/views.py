@@ -179,6 +179,12 @@ def merge(request, forum_slug, topic_id):
 
         if form.is_valid() and not flood:
             topic2 = form.clean_data['topic2']
+            
+            if int(topic2)==topic.id:
+                hata="Aynı konuyu mu merge edeceksiniz !"
+                return render_response(request, 'forum/merge.html', locals())
+            
+            
             topic2_object=get_object_or_404(Topic, pk=int(topic2))
             
             posts_tomove=Post.objects.filter(topic=topic.id)
@@ -189,13 +195,13 @@ def merge(request, forum_slug, topic_id):
             #bir de simdi ileti sayisini arttirmak gerekir.
             topic2_object.posts += posts_tomove.count()
             topic2_object.save()
-            #topic2_object=get_object_or_404(Topic, pk=topic2)
+            
             
             topic.delete()
-            #return render_response(request, 'forum/merge.html', locals())
+            
             return HttpResponseRedirect(forum.get_absolute_url())
-            #return HttpResponseRedirect(reverse(viewname="oi.forum.views.main"))
-            #return HttpResponseRedirect(topic2_object.get_absolute_url())
+            
+            
         
         else:
             hata="Forum valid degil veya floood yapıyorsun!"
