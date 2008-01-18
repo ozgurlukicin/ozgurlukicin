@@ -4,6 +4,20 @@
 
 {% block pagetype %}page{% endblock %}
 
+{% block header_menu %}
+    <!-- Burası header kısmı -->
+	{% include "header.html" %}
+{% endblock %}
+
+<br/>		
+{% block ust_menu %}
+	{% include "ust_menu.html" %}
+{% endblock %}
+
+{% block alt_resim %}
+    <div class="sidebar sidebar_alt_img">&nbsp;</div>
+{% endblock %}
+
 {% block content %}
 {% for bug in bugs %}
 <div class="fs_list {% cycle odd,even %}">
