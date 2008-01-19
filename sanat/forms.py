@@ -14,6 +14,7 @@ from django import newforms as forms
 import sanat_settings as settings
 from oi.sanat.models import  Dosya,SanatScreen,Category,License
 import Image
+from django.shortcuts import get_object_or_404
  
 vote_choices=(
 				(0,u'Berbat'),
@@ -62,8 +63,7 @@ class ScreenField(forms.Field):
             raise forms.ValidationError(_('Resim çok büyük max %s byte'%(settings.MAX_PHOTO_UPLOAD_SIZE)))
 
         #get the width and height
-        #img=Image.open(StringIO.StringIO(photo_data['content']))
-        #raise forms.ValidationError(_('Buradayız %s'%(photo_data['dimensions'])))
+      
         width, height = photo_data['dimensions']
         #raise forms.ValidationError(_('Buradayız %s %s'%(width, height)))
         
@@ -99,7 +99,7 @@ class TemaUploadForm(forms.Form):
     description=forms.CharField(label="Açıklama",required=True,max_length=100,widget=forms.Textarea())
     
     #file upload kısımları
-    screen=ScreenField(widget=forms.FileInput,required=True, label=("Photo"), 
+    screen=ScreenField(widget=forms.FileInput(),required=True, label=_("Photo"), 
                                     help_text=_("Resim Yükleyiniz (max %s kilobytes) izin verilenler (jpeg,png,gif)"% (settings.MAX_PHOTO_UPLOAD_SIZE)))
                                     
     #file_up=FileUploadField(widget=forms.FileInput(),required=True, label=("Dosya"), 
@@ -121,12 +121,15 @@ class TemaUploadForm(forms.Form):
         name=self.clean_data['name']
         description=self.clean_data['description']
         screen=self.clean_data['screen']
+        user=screen['user']
         
-        s=SanatScreen(file=screen)
-        s.save()
+        s=SanatScreen()
+        s.save_file_file(screen['filename'],screen['content'])
         
+        cat=get_object_or_404(Category, pk=parent_category)
+        li=get_object_or_404(License, pk= license)
         
-        d=Dosya(parent_cat=parent_category,licence=licence,user=self.request.user,screens=s,name=name,description=description)
+        d=Dosya(parent_cat=cat,licence=li,user=user,name=name,description=description,enable_comments=True)
         d.save()
-        
+        d.screens.add(s)
 

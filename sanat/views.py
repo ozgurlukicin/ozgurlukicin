@@ -139,6 +139,7 @@ def add_file(request):
             try :
                 img= Image.open(StringIO.StringIO(request.FILES['screen']['content']))
                 request.FILES['screen']['dimensions'] = img.size
+                request.FILES['screen']['user']=request.user
             except :
                 request.FILES['screen']['error'] = True
                 
@@ -152,7 +153,8 @@ def add_file(request):
                 form.save()
                 
                 sort_by="son"
-                return HttpResponseRedirect(reverse(viewname="mysite.iptables.views.list_category",args=[sort_by]))
+                return render_to_response('sanat/upload.html',{'form':form})
+                #return HttpResponseRedirect(reverse(viewname="oi.sanat.views.list_category",args=[sort_by]))
                 
             else:
                 return render_to_response('sanat/upload.html',{'form':form})
