@@ -107,7 +107,7 @@ class Dosya(models.Model):
 	user=models.ForeignKey(User,verbose_name="Gönderen")
 	
 	screens=models.ManyToManyField(SanatScreen,verbose_name="Görüntüler",blank=True)
-	#file_data=models.ManyToManyField(ArsivDosya,verbose_name="İçerik Dosyası",blank=True)
+	file_data=models.ManyToManyField(ArsivDosya,verbose_name="İçerik Dosyası",blank=True)
 	
 	name=models.CharField(maxlength=100,unique=True,verbose_name="Dosya ismi")
 	description=models.TextField(verbose_name="Açıklama")
