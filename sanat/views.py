@@ -7,8 +7,15 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
-from forms import VoteForm
+from oi.sanat.forms import VoteForm,TemaUploadForm
 from django.core.urlresolvers import reverse
+
+try:
+    import cStringIO as StringIO
+except ImportError:
+    import StringIO
+#the pil thing
+import Image
 
 def list_material(request,sort_by="son"):
 	""" That view vill show the ones that are submitted and approved by admin
@@ -123,9 +130,42 @@ def list_user(request,username):
 
 @login_required
 def add_file(request):
-	""" That one will add a file to the system the hardest one !
-	Offf svn sürümünde varmış file upload..."""
-	pass
+    """ That one will add a file to the system the hardest one !buraya ayrica permssion da eklenecek."""
+    
+    if request.method== 'POST':
+    
+        if "screen" in request.FILES:
+            
+            try :
+                img= Image.open(StringIO.StringIO(request.FILES['screen']['content']))
+                request.FILES['screen']['dimensions'] = img.size
+            except :
+                request.FILES['screen']['error'] = True
+                
+            new_data = request.POST.copy()
+            new_data.update(request.FILES)
+            
+            form=TemaUploadForm(new_data)
+            
+            if form.is_valid():
+                #save all the things
+                form.save()
+                
+                sort_by="son"
+                return HttpResponseRedirect(reverse(viewname="mysite.iptables.views.list_category",args=[sort_by]))
+                
+            else:
+                return render_to_response('sanat/upload.html',{'form':form})
+                
+
+    form=TemaUploadForm()
+    return render_to_response('sanat/upload.html',{'form':form})
+        
+                
+                
+                
+    
+	
 
 @login_required
 def vote_it(request):

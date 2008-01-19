@@ -107,7 +107,7 @@ class Dosya(models.Model):
 	user=models.ForeignKey(User,verbose_name="Gönderen")
 	
 	screens=models.ManyToManyField(SanatScreen,verbose_name="Görüntüler",blank=True)
-	file_data=models.ManyToManyField(ArsivDosya,verbose_name="İçerik Dosyası",blank=True)
+	#file_data=models.ManyToManyField(ArsivDosya,verbose_name="İçerik Dosyası",blank=True)
 	
 	name=models.CharField(maxlength=100,unique=True,verbose_name="Dosya ismi")
 	description=models.TextField(verbose_name="Açıklama")
@@ -141,11 +141,11 @@ class Dosya(models.Model):
 dispatcher.connect(rmv_files,signal=signals.pre_delete, sender=Dosya)
 
 #dont forget to disable it before uploading pff
-#class DosyaCommentModerator(CommentModerator):
-#	""" Dosya models class Comment moderation""",
-#	akismet = False
-#	email_notification = False
-#	enable_field = 'enable_comments'
+class DosyaCommentModerator(CommentModerator):
+	""" Dosya models class Comment moderation""",
+	akismet = False
+	email_notification = False
+	enable_field = 'enable_comments'
 	
 #register it 
-#moderator.register(Dosya, DosyaCommentModerator)
+moderator.register(Dosya, DosyaCommentModerator)

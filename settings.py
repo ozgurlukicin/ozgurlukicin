@@ -101,7 +101,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.sites',
     'django.contrib.humanize',
-    #'django.contrib.comments',
     'oi.flatpages',
     'oi.st',
     'oi.upload',
@@ -110,8 +109,8 @@ INSTALLED_APPS = (
     'oi.seminar',
     'oi.profile',
     'oi.forum',
-    #'oi.sanat',
-	#'oi.comments',
+    'oi.sanat',
+	'oi.comments',
 	
 )
 
