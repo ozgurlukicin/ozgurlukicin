@@ -1,5 +1,10 @@
 from django.conf.urls.defaults import *
+from oi.sanat.feeds import *
 
+feed_dict = {
+             'rss': Tema_RSS,
+             'atom': Tema_Atom,
+            }
 
 urlpatterns = patterns ('oi.sanat.views',
 	 					#the first page listing
@@ -9,5 +14,12 @@ urlpatterns = patterns ('oi.sanat.views',
 						(r'^kullanici/(?P<username>[a-z]+)/$','list_user'),
 		  				(r'^oy/$','vote_it'),
                         (r'^ekle/$','add_file'),
-		  				
+                        
+                        
 )
+
+urlpatterns+=patterns('',
+        #the rss feeds
+        (r'^(?P<url>.*)/yeni/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
+        
+        )
