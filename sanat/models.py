@@ -143,11 +143,11 @@ class Dosya(models.Model):
 dispatcher.connect(rmv_files,signal=signals.pre_delete, sender=Dosya)
 
 #dont forget to disable it before uploading pff
-class DosyaCommentModerator(CommentModerator):
-	""" Dosya models class Comment moderation""",
-	akismet = False
-	email_notification = False
-	enable_field = 'enable_comments'
+#class DosyaCommentModerator(CommentModerator):
+#	""" Dosya models class Comment moderation""",
+#	akismet = False
+#	email_notification = False
+#	enable_field = 'enable_comments'
 	
 #register it 
-moderator.register(Dosya, DosyaCommentModerator)
+#moderator.register(Dosya, DosyaCommentModerator)
