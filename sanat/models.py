@@ -137,7 +137,9 @@ class Dosya(models.Model):
 		
 		verbose_name="Sanat Dosya"
 		verbose_name_plural="Sanat Dosyaları"
-
+        permissions = (
+                       ("can_upload_tema", "Can upload tema files"),
+                            )
 dispatcher.connect(rmv_files,signal=signals.pre_delete, sender=Dosya)
 
 #dont forget to disable it before uploading pff

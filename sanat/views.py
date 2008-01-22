@@ -1,3 +1,10 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#
+# Copyright 2007 ArtIstanbul
+# Licensed under the GNU General Public License, version 3.
+# See the file http://www.gnu.org/copyleft/gpl.txt.
+
 # Create your views here.
 from django.views.generic.list_detail import object_list
 from sanat_settings import HOME_ITEMS
@@ -132,7 +139,7 @@ def list_user(request,username):
 def add_file(request):
     """ That one will add a file to the system the hardest one !buraya ayrica permssion da eklenecek."""
     
-    if request.method== 'POST':
+    if request.method== 'POST' and request.user.has_perm('dosya.can_upload_tema'): # bu kısmı başka yere yönlendirr
     
         if "screen" in request.FILES:
             

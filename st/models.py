@@ -15,6 +15,11 @@ from django.contrib.auth.models import User
 from oi.middleware import threadlocals
 from oi.settings import CITY_LIST, MEDIA_ROOT, MEDIA_URL
 
+#the signal stuff
+from django.db.models import signals
+from django.dispatch import dispatcher
+from oi.st.signals import open_forum_topic
+
 class Tag(models.Model):
     name = models.CharField('Etiket', maxlength=32, blank=False, unique=True)
 
@@ -323,6 +328,7 @@ class News(models.Model):
         verbose_name = "Haber"
         verbose_name_plural = "Haberler"
 
+dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=News)
 
 class Package(models.Model):
     ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'))
