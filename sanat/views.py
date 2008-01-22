@@ -159,8 +159,8 @@ def add_file(request):
             else:
                 return render_to_response('sanat/upload.html',{'form':form})
                 
-
-    form=TemaUploadForm()
+    
+    form=TemaUploadForm(auto_id=True)
     return render_to_response('sanat/upload.html',{'form':form})
         
                 

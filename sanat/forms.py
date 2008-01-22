@@ -119,8 +119,8 @@ class TemaUploadForm(forms.Form):
     file uploading in 0.96 is not good change it later maybe in 1.0....
     """
     
-    parent_category=forms.ChoiceField(label='Kategori', required=True)
-    license=forms.ChoiceField(label='Lisans', required=True)
+    parent_category=forms.ChoiceField(label='Kategori', required=True,widget=forms.Select)
+    license=forms.ChoiceField(label='Lisans', required=True,widget=forms.Select)
     name=forms.CharField(label="İsim",required=True,max_length=100)
     description=forms.CharField(label="Açıklama",required=True,max_length=100,widget=forms.Textarea())
     
@@ -138,6 +138,10 @@ class TemaUploadForm(forms.Form):
         
         self.base_fields['parent_category'].choices=[(cat.id, cat.cat_name) for cat in Category.objects.all()]
         self.base_fields['license'].choices=[(l.id, l.name) for l in License.objects.all()]
+        
+        #the widget thing update it pff
+        self.base_fields['parent_category'].widget.choices=[(cat.id, cat.cat_name) for cat in Category.objects.all()]
+        self.base_fields['license'].widget.choices=[(l.id, l.name) for l in License.objects.all()]
         
     def save(self):
         """ That part is adding the thning to the system"""
