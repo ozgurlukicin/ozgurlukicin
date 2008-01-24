@@ -27,6 +27,16 @@
 </div>
 <div class="page_properties"><a href="{{ news.get_printable_url }}"><img src="/media/img/print.png" /></a></div>
 <div class="page_last_update">Son güncelleme: {{ news.update|timedelta }}</div>
+	{% if user.is_authenticated %}
+		{% if form %}
+			<form method="post" action="/haber/yorum/{{news.id}}/">
+								
+				{{form}}
+				<input type="submit" value="Yolla">
+			</form>
+		{% endif %}
+	{% endif %}
+
 {% endblock %}
 
 {% block sidebar %}

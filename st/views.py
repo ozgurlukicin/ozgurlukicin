@@ -13,11 +13,16 @@ from django.shortcuts import get_object_or_404
 
 from oi.settings import WEB_URL, NEWS_IN_HOMEPAGE, PACKAGES_IN_HOMEPAGE, GAMES_IN_HOMEPAGE, FS_IN_HOMEPAGE, HOWTOS_IN_HOMEPAGE
 
-from oi.st.forms import SearchForm
+from oi.st.forms import SearchForm,CommentForm
 
 from oi.st.models import *
 from oi.st.wrappers import render_response
 from oi.flatpages.models import FlatPage
+
+#for comments
+from django.contrib.auth.decorators import login_required
+from oi.forum.models import Forum,Topic,Post
+from oi.forum.views import flood_control
 
 def home(request):
     news = News.objects.filter(status=1).order_by('-update')[:NEWS_IN_HOMEPAGE]
@@ -64,6 +69,7 @@ def game_printable(request, slug):
 def news_detail(request, slug):
     news = get_object_or_404(News, slug=slug)
     tags = news.tags.all()
+    form=CommentForm()
     return render_response(request, 'news/news_detail.html', locals())
 
 def news_printable(request, slug):
@@ -137,3 +143,50 @@ def search(request):
         pass
 
     return render_response(request, 'search.html', locals())
+    
+@login_required
+def comment_news(request,id):
+    """ When someone comments it is adde to forum (check for flooding also !)...
+    validate the html tags all for now...(may change!)
+    """
+    news = get_object_or_404(News, id=id)
+    
+    if request.method== 'POST':
+            
+        new_data = request.POST.copy()
+        
+        form=CommentForm(new_data)
+        
+        #flood control
+        flood,timeout = flood_control(request)
+        
+        if form.is_valid() and not flood:
+            
+            t=Topic.objects.filter(title=news.title)
+            if not t:
+                tags = news.tags.all()
+                return render_response('news/news_detail.html',{'news':news,'tags':tags,'form':form})
+        
+            post = Post(topic=t[0],
+                                author=request.user,
+                                text=form.clean_data['yorum']
+                               )
+            try:
+				post.save()
+            except Exception:
+                render_to_response('db_error.html')
+                
+            return HttpResponseRedirect(post.get_absolute_url())
+            
+        
+        else:
+            #hata mesaji gonder
+            tags = news.tags.all()
+            return render_response('news/news_detail.html',{'news':news,'tags':tags,'form':form})
+            
+    
+    form=CommentForm()
+    tags = news.tags.all()
+    return render_response('news/news_detail.html',{'news':news,'tags':tags,'form':form})
+        
+    #do something here
