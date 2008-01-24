@@ -23,6 +23,7 @@ from oi.flatpages.models import FlatPage
 from django.contrib.auth.decorators import login_required
 from oi.forum.models import Forum,Topic,Post
 from oi.forum.views import flood_control
+from django.http import HttpResponseRedirect
 
 def home(request):
     news = News.objects.filter(status=1).order_by('-update')[:NEWS_IN_HOMEPAGE]
@@ -70,10 +71,15 @@ def news_detail(request, slug):
     news = get_object_or_404(News, slug=slug)
     tags = news.tags.all()
     form=CommentForm()
+    
+    if request.user.is_authenticated():
+        auth=True
+    
     return render_response(request, 'news/news_detail.html', locals())
 
 def news_printable(request, slug):
     news = get_object_or_404(News, slug=slug)
+    
     return render_response(request, 'news/news_printable.html', locals())
 
 def pkg_detail(request, slug):
@@ -145,11 +151,12 @@ def search(request):
     return render_response(request, 'search.html', locals())
     
 @login_required
-def comment_news(request,id):
+def comment_news(request,slug):
     """ When someone comments it is adde to forum (check for flooding also !)...
     validate the html tags all for now...(may change!)
     """
-    news = get_object_or_404(News, id=id)
+    news = get_object_or_404(News, slug=slug)
+    #news = News.objects.filter(id=id)
     
     if request.method== 'POST':
             
@@ -165,7 +172,7 @@ def comment_news(request,id):
             t=Topic.objects.filter(title=news.title)
             if not t:
                 tags = news.tags.all()
-                return render_response('news/news_detail.html',{'news':news,'tags':tags,'form':form})
+                return render_response(request,'news/news_detail.html',{'news':news,'tags':tags,'form':form,'auth':True})
         
             post = Post(topic=t[0],
                                 author=request.user,
@@ -182,11 +189,11 @@ def comment_news(request,id):
         else:
             #hata mesaji gonder
             tags = news.tags.all()
-            return render_response('news/news_detail.html',{'news':news,'tags':tags,'form':form})
+            return render_response(request,'news/news_detail.html',{'news':news,'tags':tags,'form':form,'auth':True})
             
     
     form=CommentForm()
     tags = news.tags.all()
-    return render_response('news/news_detail.html',{'news':news,'tags':tags,'form':form})
+    return render_response(request,'news/news_detail.html',{'news':news,'tags':tags,'form':form,'auth':True})
         
     #do something here

@@ -6,4 +6,4 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 TOPICS_PER_PAGE = 20
-FLOOD_TIMEOUT = 1
+FLOOD_TIMEOUT = 10

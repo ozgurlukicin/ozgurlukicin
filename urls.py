@@ -83,10 +83,12 @@ urlpatterns = patterns('',
 
 	
     #News
+    #(r'^haber/yorum/(?P<id>\d+)/$', 'oi.st.views.comment_news'),
+    (r'^haber/yorum/(?P<slug>.*)/$', 'oi.st.views.comment_news'),
     (r'^haber/$', 'django.views.generic.list_detail.object_list', dict(news_dict)),
     (r'^haber/(?P<slug>.*)/yazdir/$', 'oi.st.views.news_printable'),
     (r'^haber/(?P<slug>.*)/$', 'oi.st.views.news_detail'),
-    (r'^haber/yorum/(?P<id>\d+)/$', 'oi.st.views.comment_news'),
+    
 
     #Packages
     (r'^paket/$', 'django.views.generic.list_detail.object_list', dict(package_dict)),
