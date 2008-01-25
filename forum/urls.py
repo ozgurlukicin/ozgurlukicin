@@ -17,19 +17,19 @@ topic_feed_dict={
             'rss': Topic_Rss,
             'atom': Topic_Atom,
              }
+             
+tag_feed_dict={
+            'rss': Tag_Rss,
+            'atom': Tag_Atom,
+            }
 
 urlpatterns = patterns('',
-    #(r'^feed/rss/$', 'rssfeed'),
-    #(r'^feed/atom/$', 'atomfeed'),
-    #(r'^feed/$', 'rssfeed'),
-
-    #(r'^feed/atom/user/(?P<user>\d+)/$', 'atomfeed'),
-    #(r'^feed/rss/user/(?P<user>\d+)/$', 'rssfeed'),
-    #(r'^feed/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
+  
+    (r'^feed/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
     #(r'^(?P<url>.*)/user/(?P<user>\d+)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
-    #(r'^feed/topic/(?P<url>.*)/topic/(?P<topic_id>\d+)/$', 'django.contrib.syndication.views.feed', {'feed_dict': topic_feed_dict}),
+    
     (r'^feed/topic/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': topic_feed_dict}),
-    #(r'^feed/(?P<url>.*)/tag/(?P<tag>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
+    (r'^feed/tag/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': tag_feed_dict}),
     
     (r'^$', 'oi.forum.views.main'),
     (r'^(?P<forum_slug>.*)/new/$', 'oi.forum.views.new_topic'),

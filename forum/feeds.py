@@ -14,6 +14,7 @@ from oi.settings import SITE_NAME, WEB_URL, SITE_DESC
 from django.contrib.syndication.feeds import FeedDoesNotExist
 from django.core.exceptions import ObjectDoesNotExist
 from oi.forum.models import Topic,Post
+from oi.st.models import Tag
 
 
 class RSS(Feed):
@@ -75,6 +76,34 @@ class Topic_Atom(Topic_Rss):
     feed_type = Atom1Feed
     subtitle = Topic_Rss.description
     
+
+class Tag_Rss(Topic_Rss):
+    """ Acilan Taglara göre Rss"""
+    
+    def get_object(self,bits):
+        """ The forum object
+        (r'^(?P<url>.*)/topic/(?P<topic_id>\d+)/$' for that kind of urls
+        """
+        if not len(bits)==1:
+            raise ObjectDoesNotExist
+        
+        return Tag.objects.get(id=bits[0]) # get the topic thing
+        
+        
+    def title(self,obj):
+        """ Istenilen tag baslik kismi """
+        return SITE_NAME + " Forum Tag sıralaması : "+obj.name
+        
+        
+    def items(self,obj):
+        """ Istenilen Konular burada olacak"""
+        return Topic.objects.filter(tags=obj,hidden=0).order_by('title')[:10]
+        
+class Tag_Atom(Tag_Rss):
+    """ Bir de atom ayağı """
+    feed_type = Atom1Feed
+    subtitle = Tag_Rss.description
+        
 
 
     
