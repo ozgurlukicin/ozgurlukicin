@@ -6,6 +6,12 @@ feed_dict = {
              'atom': Tema_Atom,
             }
 
+cat_feed_dict = {
+             'rss': Category_Tema_Rss,
+             'atom': Category_Tema_Atom,
+            }
+
+
 urlpatterns = patterns ('oi.sanat.views',
 	 					#the first page listing
 						(r'^goster/(?P<sort_by>[a-z]+)/$','list_material'),
@@ -20,6 +26,7 @@ urlpatterns = patterns ('oi.sanat.views',
 
 urlpatterns+=patterns('',
         #the rss feeds
-        (r'^(?P<url>.*)/yeni/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
+        (r'^feed/(?P<url>.*)/yeni/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
+        (r'^feed/kategori/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': cat_feed_dict}),
         
         )

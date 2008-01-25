@@ -30,7 +30,7 @@
 			{% if object_list %}
 				{% for dosya in object_list %}				
 					<tr >
-						<th scope="row"><a href="{{dosya.parent_cat.get_absolute_url}}">{{dosya.parent_cat}}</a></th>
+						<th scope="row"><a href="{{dosya.parent_cat.get_absolute_url}}">{{dosya.parent_cat}}</a> |<a href="/tema/feed/kategori/rss/{{dosya.parent_cat.id}}/"> RSS</a> |<a href="/tema/feed/kategori/atom/{{dosya.parent_cat.id}}/">ATOM</a></th>
 						<td><a href="{{dosya.get_absolute_url}}">{{dosya.name}}</a></td>
 
 						<td>{% for screen in dosya.screens.all %}
