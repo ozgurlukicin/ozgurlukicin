@@ -10,6 +10,12 @@ cat_feed_dict = {
              'rss': Category_Tema_Rss,
              'atom': Category_Tema_Atom,
             }
+         
+            
+user_feed_dict = {
+             'rss': User_Tema_Rss,
+             'atom': User_Tema_Atom,
+            }
 
 
 urlpatterns = patterns ('oi.sanat.views',
@@ -28,5 +34,6 @@ urlpatterns+=patterns('',
         #the rss feeds
         (r'^feed/(?P<url>.*)/yeni/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
         (r'^feed/kategori/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': cat_feed_dict}),
+        (r'^feed/kullanici/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': user_feed_dict}),
         
         )

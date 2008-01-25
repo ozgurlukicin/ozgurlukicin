@@ -42,7 +42,10 @@
 								<a href="../../../media/{{file}}">Link</a><br/>
 							{% endfor %}</td>
 
-						<td><a href="/tema/kullanici/{{dosya.user}}/">{{dosya.user}}</a><br/></td>
+						
+						<td><a href="/tema/kullanici/{{dosya.user}}/">{{dosya.user}}</a>
+						 |<a href="/tema/feed/kullanici/rss/{{dosya.user.id}}/"> RSS</a> |<a href="/tema/feed/kullanici/atom/{{dosya.user.id}}/">ATOM</a>
+						<br/></td>
 						<td>{{dosya.licence}}</td>
 						<td>{{dosya.counter}}</td>
 						<td>{{dosya.rate}}</td>
