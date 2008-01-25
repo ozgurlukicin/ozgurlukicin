@@ -1,13 +1,14 @@
 {% block content %}
 
  <form action="/tema/ekle/" method="post" enctype="multipart/form-data">
+
 			 <dl>
 
     			<dt>{{ form.parent_category.label_tag }}</dt>
     			<dd>{{ form.parent_category }}</dd>
     			{% if form.parent_category.help_text %}<dd>{{ form.parent_category.help_text }}</dd>{% endif %}
     			{% if form.parent_category.errors %}<dd class="myerrors">{{ form.parent_category.errors }}</dd>{% endif %}
-
+				
 			</dl>
 			<dl>
 

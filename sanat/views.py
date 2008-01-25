@@ -140,7 +140,7 @@ def add_file(request):
     """ That one will add a file to the system the hardest one !buraya ayrica permssion da eklenecek."""
     
     if request.method== 'POST' and request.user.has_perm('dosya.can_upload_tema'): # bu kısmı başka yere yönlendirr
-    
+        
         if "screen" in request.FILES:
             
             try :
@@ -151,23 +151,24 @@ def add_file(request):
                 request.FILES['screen']['error'] = True
                 
             new_data = request.POST.copy()
+            new_data.setlist('parent_category',[int(request.POST['parent_category'].strip())])
             new_data.update(request.FILES)
             
             form=TemaUploadForm(new_data)
-            
+            #return render_to_response('sanat/upload.html',{'form':form,'extralar':new_data['parent_category'],'secenek':form.base_fields['parent_category'].choices})
             if form.is_valid():
+                
                 #save all the things
                 form.save()
                 
                 sort_by="son"
-                return render_to_response('sanat/upload.html',{'form':form})
-                #return HttpResponseRedirect(reverse(viewname="oi.sanat.views.list_category",args=[sort_by]))
-                
-            else:
-                return render_to_response('sanat/upload.html',{'form':form})
-                
-    
-    form=TemaUploadForm(auto_id=True)
+                #return render_to_response('sanat/upload.html',{'form':form})
+                return HttpResponseRedirect(reverse(viewname="oi.sanat.views.list_category",args=[sort_by]))
+        else:
+            form=TemaUploadForm(auto_id=True)
+        
+    else:
+        form=TemaUploadForm(auto_id=True)
     return render_to_response('sanat/upload.html',{'form':form})
         
                 

@@ -12,6 +12,11 @@ feed_dict = {
              'rss': RSS,
              'atom': Atom,
             }
+            
+topic_feed_dict={
+            'rss': Topic_Rss,
+            'atom': Topic_Atom,
+             }
 
 urlpatterns = patterns('',
     #(r'^feed/rss/$', 'rssfeed'),
@@ -20,7 +25,12 @@ urlpatterns = patterns('',
 
     #(r'^feed/atom/user/(?P<user>\d+)/$', 'atomfeed'),
     #(r'^feed/rss/user/(?P<user>\d+)/$', 'rssfeed'),
-
+    #(r'^feed/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
+    #(r'^(?P<url>.*)/user/(?P<user>\d+)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
+    #(r'^feed/topic/(?P<url>.*)/topic/(?P<topic_id>\d+)/$', 'django.contrib.syndication.views.feed', {'feed_dict': topic_feed_dict}),
+    (r'^feed/topic/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': topic_feed_dict}),
+    #(r'^feed/(?P<url>.*)/tag/(?P<tag>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
+    
     (r'^$', 'oi.forum.views.main'),
     (r'^(?P<forum_slug>.*)/new/$', 'oi.forum.views.new_topic'),
     (r'^(?P<forum_slug>.*)/(?P<topic_id>\d+)/quote/(?P<post_id>\d+)/$', 'oi.forum.views.reply'),
@@ -35,8 +45,5 @@ urlpatterns = patterns('',
     (r'^(?P<forum_slug>.*)/(?P<topic_id>\d+)/$', 'oi.forum.views.topic'),
     (r'^(?P<forum_slug>.*)/$', 'oi.forum.views.forum'),
 
-    (r'^(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
-    (r'^(?P<url>.*)/user/(?P<user>\d+)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
-    (r'^(?P<url>.*)/topic/(?P<topic_id>\d+)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
-    (r'^(?P<url>.*)/tag/(?P<tag>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
+    
 )

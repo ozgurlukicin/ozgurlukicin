@@ -26,6 +26,8 @@
     <span id="topic_lastpost">Son İleti</span>
     <span id="topic_posts">İletiler</span>
     <span id="topic_views">Görüntüleme</span>
+	<span id="topic_views">RSS</span>
+	<span id="topic_views">ATOM</span>
 </div>
 
 <div id="forum_topics">
@@ -36,6 +38,8 @@
         <div id="topics_item_lastpost"><a href="{{ topic.topic_latest_post.get_absolute_url }}">{{ topic.topic_latest_post.author }}</a> tarafından {{ topic.topic_latest_post.edited|timedelta }}</div>
         <div id="topics_item_posts">{{ topic.posts }}</div>
         <div id="topics_item_views">{{ topic.views }}</div>
+		<div id="topics_item_icon"><a href="/forum/feed/topic/rss/{{topic.id}}/">RSS</a></div>
+        <div id="topics_item_icon"><a href="/forum/feed/topic/atom/{{topic.id}}/">ATOM</a></div>
     </div>
     {% endfor %}
 </div>

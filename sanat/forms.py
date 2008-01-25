@@ -74,7 +74,7 @@ class ScreenField(forms.Field):
             raise forms.ValidationError(_('Yükseklik çok büyük max %s byte'%(settings.MAX_PHOTO_HEIGHT)))
             
         return value
-
+        
 class FileUploadField(forms.Field):
     """ That will validate the files that are uploaded"""
     
@@ -126,7 +126,7 @@ class TemaUploadForm(forms.Form):
     
     #file upload kısımları
     screen=ScreenField(widget=forms.FileInput(),required=True, label=_("Photo"), 
-                                    help_text=_("Resim Yükleyiniz (max %s kilobytes) izin verilenler (jpeg,png,gif)"% (settings.MAX_PHOTO_UPLOAD_SIZE)))
+                                help_text=_("Resim Yükleyiniz (max %s kilobytes) izin verilenler (jpeg,png,gif)"% (settings.MAX_PHOTO_UPLOAD_SIZE)))
                                     
     file_up=FileUploadField(widget=forms.FileInput(),required=True, label=("Dosya"), 
                                     help_text=_("Dosya Yükleyiniz (max %s kilobytes) izin verilenler (zip simdlik)"% (settings.MAX_FILE_UPLOAD))) 
@@ -136,12 +136,15 @@ class TemaUploadForm(forms.Form):
         """ It is for topic tihng they are dinamyc"""
         super(TemaUploadForm, self).__init__(*args, **kwargs)
         
-        self.base_fields['parent_category'].choices=[(cat.id, cat.cat_name) for cat in Category.objects.all()]
-        self.base_fields['license'].choices=[(l.id, l.name) for l in License.objects.all()]
+        self.base_fields['license'].choices=[(int(l.id), l.name) for l in License.objects.all()]
+        self.base_fields['parent_category'].choices=[(int(cat.id), cat.cat_name) for cat in Category.objects.all()]
+        
+        
+        #self.base_fields['topic2'].choices=[(topic.id, topic.title) for topic in Topic.objects.all()]
         
         #the widget thing update it pff
-        self.base_fields['parent_category'].widget.choices=[(cat.id, cat.cat_name) for cat in Category.objects.all()]
-        self.base_fields['license'].widget.choices=[(l.id, l.name) for l in License.objects.all()]
+        #self.base_fields['parent_category'].widget.choices=[(int(cat.id), cat.cat_name) for cat in Category.objects.all()]
+        #self.base_fields['license'].widget.choices=[(int(l.id), l.name) for l in License.objects.all()]
         
     def save(self):
         """ That part is adding the thning to the system"""

@@ -19,7 +19,7 @@ class Tema_RSS(Feed):
     description_template = 'sanat/feed_description.html'
 
     def items(self):
-        return Dosya.objects.filter(state=True).order_by("update")[:10]
+        return Dosya.objects.filter(state=True).order_by("-update")[:10]
 
 class Tema_Atom(Tema_RSS):
     feed_type = Atom1Feed
