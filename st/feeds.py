@@ -37,7 +37,7 @@ class Main_RSS(Feed):
             output.append(fs)
 
         for howto in HowTo.objects.filter(status=1).order_by('-update')[:HOWTOS_IN_HOMEPAGE]:
-            howto.title = 'İlk Adım: %s' % howto.title
+            howto.title = 'Nasıl: %s' % howto.title
             output.append(howto)
 
         return output
