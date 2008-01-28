@@ -60,8 +60,9 @@ h3, .orange h4, .orange h5, .orange h6 {
 	color:#707070;
 }
 
+/*sorry the name is not meaningful*/
 .sari{
-	color:#FFCA06;
+	color:#51798E;
 }
 
 .siyah{
@@ -132,7 +133,7 @@ h3, .orange h4, .orange h5, .orange h6 {
     border-right: 5px solid #7C7C7C;*/
     background:url(/media/dijital/img/ara_bg.jpg);
 	background-repeat:no-repeat;
-	background-color: #7C7C7C;
+	background-color: #CFD7D7;
 }
 
 #page-single {
@@ -239,7 +240,7 @@ h3, .orange h4, .orange h5, .orange h6 {
 }
 
 .game_average_point {
-    background: url('/media/img/game_average_point.jpg') left top no-repeat;
+    background: url('/media/dijital/img/game_average_point.jpg') left top no-repeat;
     margin-left: 75px;
     height: 80px;
     width: 80px;
@@ -707,7 +708,7 @@ ortak_title_mini{
 	position: relative;
     width: 228px;
     padding-left: 6px;
-	background-color: #000000;
+	background-color: #F7F7F7;
 	color:#FFCA06;
 }
 
@@ -774,7 +775,7 @@ padding-top: 4px;
 height: 25px;
 font-size: 14px;
 font-weight: bold;
-color: #FFCA06;
+color: #51798E;
 /*background-repeat: no-repeat;*/
 background-image: url('/media/dijital/img/d_tblbg.jpg');
 }
@@ -784,7 +785,7 @@ margin-top: 0px;
 padding-top: 4px;
 /*height: 50px;*/
 font-size: 8px;
-color: #707070;
+color: #696569;
 /*background-repeat: no-repeat;*/
 background-image: url('/media/dijital/img/d_tblbg.jpg');
 }

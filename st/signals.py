@@ -9,8 +9,9 @@ def open_forum_topic(sender, instance, signal, *args,**kwargs):
     """When we add a news we should open a new topic in forum with the same text"""
     from django.contrib.auth.models import User
     from oi.forum.models import Forum,Topic,Post
+    from oi.middleware import threadlocals
     
-    user=User.objects.filter(username="admin")
+    user=User.objects.filter(username=threadlocals.get_current_user())
     forum=Forum.objects.filter(name="Haberler")
     
     ch=sender.objects.filter(id=instance.id)
