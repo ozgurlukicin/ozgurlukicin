@@ -106,7 +106,9 @@ body {
 }
 #tab2{
 	font-family: "Liberation Sans", "Liberation Serif", Arial;
-	background:url(/media/dijital/img/td_bg.jpg);
+
+	background:url(/media/dijital/img/ara_bg.jpg);
+	/*background:url(/media/dijital/img/td_bg.jpg);*/
 	background-repeat:no-repeat;
 	background-color: #FFFFFF;
 	position:relative;
@@ -154,7 +156,8 @@ body {
 /* Altsayfa */
 #Alttab1{
 	font-family: "Liberation Sans", "Liberation Serif", Arial;
-	background:url(/media/dijital/img/td_bg.jpg);
+	/*background:url(/media/dijital/img/td_bg.jpg);*/
+	background:url(/media/dijital/img/ara_bg.jpg);
 	background-repeat:no-repeat;
 	background-color: #FFFFFF;
 	position:relative;
