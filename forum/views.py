@@ -22,7 +22,7 @@ from oi.forum.models import Category, Forum, Topic, Post, AbuseReport, WatchList
 from django.core.urlresolvers import reverse
 
 def main(request):
-    forums = Forum.objects.order_by('name')
+    categories = Category.objects.order_by('order')
 
     return render_response(request, 'forum/forum_list.html', locals())
 
