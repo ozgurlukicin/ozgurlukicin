@@ -117,7 +117,7 @@ Teşekkürler,
 Ozgurlukicin.com"""
             email_to = form.clean_data['email']
 
-            send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, email_to, fail_silently=False)
+            send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, email_to, fail_silently=True)
 
             return render_response(request, 'user/register_done.html', {'form': form,
                                                                    'user': form.clean_data['username']})
@@ -178,7 +178,7 @@ def lost_password(request):
 <a href="%(link)s">%(link)s</a>"""
            email_to = form.clean_data['email']
 
-           send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, email_to, fail_silently=False)
+           send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, email_to, fail_silently=True)
            return render_response(request, 'user/lostpassword_done.html')
        else:
            return render_response(request, 'user/lostpassword.html', {'form': form})

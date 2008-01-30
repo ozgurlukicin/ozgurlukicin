@@ -66,9 +66,11 @@
             <input type="hidden" name="next" value="{{ next }}" />
             <input type="submit" value="giriş" id="form_submit" />
         </form>
+		<br/>
+		<a href="/kullanici/kayit/">Kayit Ol</a>|<a href="/kullanici/kayip/">Kayip parola?</a>
         {% else %}
             Hoşgeldin <b>{{ user.username }}</b>!<br />
-            <br />İstiyorsan profil sayfana <a class="sari" href="/kullanici/dashboard">buradan</a> ulaşabilir veya <a class="sari" href="/kullanici/cikis">buraya</a> tıklayarak sistemden çıkabilirsin
+            <br />İstiyorsan profil sayfana <a class="sari" href="/kullanici/duzenle/">buradan</a> ulaşabilir veya <a class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsin
         {% endif %}
         </div>
         <!--  <div class="sidebar sidebar_baslik">Pardus'u indirin</div>
