@@ -151,8 +151,9 @@ def add_file(request):
                 request.FILES['screen']['error'] = True
                 
             new_data = request.POST.copy()
-            new_data.setlist('parent_category',[int(request.POST['parent_category'].strip())])
+            
             new_data.update(request.FILES)
+            #new_data.setlist('parent_category',[int(request.POST['parent_category'].strip())])
             
             form=TemaUploadForm(new_data)
             #return render_to_response('sanat/upload.html',{'form':form,'extralar':new_data['parent_category'],'secenek':form.base_fields['parent_category'].choices})
@@ -163,12 +164,13 @@ def add_file(request):
                 
                 sort_by="son"
                 #return render_to_response('sanat/upload.html',{'form':form})
-                return HttpResponseRedirect(reverse(viewname="oi.sanat.views.list_category",args=[sort_by]))
+                #return HttpResponseRedirect(reverse(viewname="oi.sanat.views.list_category",args=[sort_by]))
+                return HttpResponseRedirect("/tema/goster/begenilen/")
         else:
-            form=TemaUploadForm(auto_id=True)
+            form=TemaUploadForm()
         
     else:
-        form=TemaUploadForm(auto_id=True)
+        form=TemaUploadForm()
     return render_to_response('sanat/upload.html',{'form':form})
         
                 

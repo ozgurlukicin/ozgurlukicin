@@ -119,8 +119,8 @@ class TemaUploadForm(forms.Form):
     file uploading in 0.96 is not good change it later maybe in 1.0....
     """
     
-    parent_category=forms.ChoiceField(label='Kategori', required=True,widget=forms.Select)
-    license=forms.ChoiceField(label='Lisans', required=True,widget=forms.Select)
+    parent_category=forms.ChoiceField(label='Kategori', required=True)
+    license=forms.ChoiceField(label='Lisans', required=True)
     name=forms.CharField(label="İsim",required=True,max_length=100)
     description=forms.CharField(label="Açıklama",required=True,max_length=100,widget=forms.Textarea())
     
@@ -134,12 +134,12 @@ class TemaUploadForm(forms.Form):
     
     def __init__(self,*args,**kwargs):
         """ It is for topic tihng they are dinamyc"""
-        super(TemaUploadForm, self).__init__(*args, **kwargs)
+        #super(TemaUploadForm, self).__init__(*args, **kwargs)
         
         self.base_fields['license'].choices=[(int(l.id), l.name) for l in License.objects.all()]
         self.base_fields['parent_category'].choices=[(int(cat.id), cat.cat_name) for cat in Category.objects.all()]
         
-        
+        super(TemaUploadForm, self).__init__(*args, **kwargs)
         #self.base_fields['topic2'].choices=[(topic.id, topic.title) for topic in Topic.objects.all()]
         
         #the widget thing update it pff
