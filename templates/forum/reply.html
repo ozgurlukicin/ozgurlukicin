@@ -1,3 +1,4 @@
+{% load library %}
 {% block title %}Forum - {% endblock %}
 
 {% block pagetype %}page-single{% endblock %}
@@ -6,6 +7,8 @@
 {% block section_logo %}<img src="/media/img/forum_header_logo.png">{% endblock %}
 
 {% block content %}
+
+
 {% if user.is_authenticated %}
 {% if flood %}Flood yapma lan, {{ timeout }}sn var.{% endif %}
 <form action="" method="POST">
@@ -22,6 +25,31 @@
 {% else %}
 <p>You must be signed in to send a reply.</p>
 {% endif %}
+
+
+{% for post in posts %}
+<div {% if post.hidden %}style="opacity: 0.5;"{% endif %}><a name="post{{ post.id }}"></a>
+<span style="float: left;"><a href="{{ post.get_absolute_url }}">#{{ forloop.counter }}</a></span>
+<span style="float: right;">{{ post.created|date:"d-m-Y H:i" }}</span><br />
+<div id="author_info">{{ post.author.avatar }} {{ post.author }}{% if perms.post.can_see_ip %} ({{ post.ip }}){% endif %}</div>
+<div style="padding-top: 10px;">{{ post.text|linebreaksbr }}<br />
+{% ifnotequal post.edit_count 0 %}<br />Bu ileti {{ post.edit_count }} kez değiştirilmiştir, son kez {{ post.edited }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.<br />{% endifnotequal %}
+</div>
+
+<br />{% if forloop.first %}{% if perms.topic.can_edit %}<a href="{{ topic.get_edit_url }}">edit</a>{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ topic.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% else %}{% if perms.post.can_edit %}<a href="{{ post.get_edit_url }}">edit</a>{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% endif %} <a href="{{ post.get_quote_url }}">quote</a>
+
+{% if perms.post.can_hide and not forloop.first and not post.hidden %}<a href="{{ post.get_hide_url }}">hide</a>{% endif %}
+{% if perms.post.can_hide and not forloop.first and post.hidden %}<a href="{{ post.get_hide_url }}">unhide</a>{% endif %}
+
+{% if perms.post.can_delete and not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>{% else %}
+{% ifequal post.author.id request.user.id %}{% ifequal post topic.topic_latest_post %}{% if not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>{% endif %}{% endifequal %}{% endifequal %}
+{% endif %}
+
+<hr>
+{% if post.hidden %}</div>{% endif %}
+{% endfor %}
+
+
 {% endblock %}
 
 {% block sidebartop %}{% endblock %}

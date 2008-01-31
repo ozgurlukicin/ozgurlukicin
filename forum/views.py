@@ -50,6 +50,8 @@ def topic(request, forum_slug, topic_id):
 def reply(request, forum_slug, topic_id, post_id=False):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
+    
+    posts = topic.post_set.all().order_by('created')
 
     if forum.locked or topic.locked:
         raise HttpResponseServerError #FIXME: Give an error message
