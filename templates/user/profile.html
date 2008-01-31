@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Kullanıcı: {{ infoname }} -{% endblock %}
+{% block content %}
+
+{% if info %}
+
+Ad: {{ info.first_name }} <br />
+Web: {{ info.get_profile.homepage }} <br />
+
+{% else %}
+
+Böyle bir kullanıcı yok! <br />
+
+{% endif %}
+
+{% endblock %}

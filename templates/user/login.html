@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Kullanıcı Girişi - {% endblock %}
+
+{% block content %}
+
+<br />
+
+{% if not user.is_authenticated %}
+
+{% if form.has_errors %}
+<p>Kullanıcı adınız ve parolanız uyuşmuyor, lütfen tekrar deneyin.</p>
+{% endif %}
+
+<div style="text-align: center;">
+    <form method="post" action=".">
+        {{ form.username }}<br />
+        {{ form.password }}<br />
+        <input type="hidden" name="next" value="{{ next }}" />
+        <input type="submit" value="giriş" />
+    </form>
+</div>
+{% else %}
+Zaten giriş yapmışsınız. Çıkış yapmak için <a href="/kullanici/cikis/">tıklayın</a> <br />
+{% endif %}
+
+{% endblock %}

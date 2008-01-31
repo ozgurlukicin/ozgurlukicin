@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>upload</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="/media/js/tinymce/tiny_mce_popup.js"></script>
+<script type="text/javascript">
+function mySubmit() {
+  var URL = document.getElementById("url").innerHTML;
+  var win = tinyMCE.getWindowArg("window");
+
+  win.document.getElementById(tinyMCE.getWindowArg("input")).value = URL;
+
+  if (win.getImageData) win.getImageData();
+
+  tinyMCEPopup.close();
+}
+</script>
+</head>
+<body onload="mySubmit();">
+<div id="url">/media/upload/image/{{ filename }}</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Kullanıcı Sayfası - {% endblock %}
+{% block content %}
+<br />
+
+Merhaba, <b>{{ user.username }}!</b>
+<br />
+Aramıza {{ user.date_joined }} tarihinde katılmışsın. <br/><br />İstiyorsan kullanıcı bilgilerini <a href="/kullanici/duzenle/">buraya</a> tıklayarak düzenleyebilirsin.
+
+{% endblock %}

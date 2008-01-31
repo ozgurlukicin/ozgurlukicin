@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Kayıt - {% endblock %}
+
+{% block content %}
+<div style="text-align: left; padding-left: 50px;">
+    {% if form.errors %}
+    <font color="red">Üyelik işleminiz tamamlanamadı, lütfen formu eksiksiz doldurunuz<br /></font>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+    <br />
+    Zaten giriş yapmışsınız, ana sayfaya gitmek için <a href="/">tıklayın</a>
+    {% else %}
+    <form method="POST" action=".">
+        <dt>
+        {% for field in form %}
+        <dd>{{ field.label }} {{ field }} {% if field.help_text %} ({{ field.help_text }}){% endif %}</dd>
+        {% if field.errors %}<dd class="error"><font color="red">{{ field.errors }}</font></dd>{% endif %}
+        {% endfor %}
+    <br />
+    <a href="/hakkinda/icerik-politikasi">Özgürlükİçin İçerik Politikası</a> 'nı okudum ve<br /><br />
+    <center> <input type="button" value="Kabul Etmiyorum" onClick="javascript:window.location.href='/'"> &nbsp; <input type="submit" value="Kabul Ediyorum" /> </center>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}
