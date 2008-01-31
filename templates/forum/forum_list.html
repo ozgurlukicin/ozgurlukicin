@@ -18,6 +18,20 @@
 #category_forums_item_posts { width: 10%; float: left; }
 </style>
 
+{% if not user.is_authenticated %}
+        <form method="post" action="/kullanici/giris/">
+            <input type="text" id="id_username" name="username" size="8" class="vTextField required" value="" maxlength="30" /><br />
+            <input type="password" id="id_password" name="password" size="8" class="vPasswordField required" value="" maxlength="30" /><br />
+            <input type="hidden" name="next" value="/" />
+            <input type="submit" value="giriş" id="form_submit" />
+        </form>
+		
+		<a href="/kullanici/kayit/">Kayit Ol</a>|<a href="/kullanici/kayip/">Kayip parola?</a><a href="/">Ana sayfa</a>
+        {% else %}
+            Hoşgeldin <b>{{ user.username }}</b>!<br />
+            <br />İstiyorsan profil sayfana <a class="sari" href="/kullanici/duzenle/">buradan</a> ulaşabilir veya <a class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsin. Yada : <a href="/">Ana sayfa</a>
+        
+{% endif %}
 <div id="forum_header">
     <span id="forum_icon">&nbsp;</span>
     <span id="forum_name">Forum</span>
