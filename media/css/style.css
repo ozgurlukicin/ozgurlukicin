@@ -448,10 +448,10 @@ input#form_submit {
     width: 120px;
     padding-top: 4px;
     font-size: 18px;
-    color: #000000;
+    color: #51798E;
     /*background: url('/media/img/planet_date_bg.png') no-repeat;*/
     text-align: center;
-	background-color: #FFCA06;;
+	/*background-color: #FFCA06;;*/
 }
 
 .planet_title {
@@ -472,7 +472,7 @@ input#form_submit {
 }
 
 .planet_link a {
-    color: #827300;
+color: #51798E;
 }
 
 .planet_author {
