@@ -61,8 +61,8 @@
         <div class="sidebar sidebar_ic"{% if not user.is_authenticated %} style="text-align: center;"{% endif %}>
         {% if not user.is_authenticated %}
         <form method="post" action="/kullanici/giris/">
-            <input type="text" id="id_username" name="username" size="8" class="vTextField required" value="" maxlength="30" /><br />
-            <input type="password" id="id_password" name="password" size="8" class="vPasswordField required" value="" maxlength="30" /><br />
+            <input type="text" id="id_username" name="username" size="18" class="vTextField required" value="" maxlength="30" /><br />
+            <input type="password" id="id_password" name="password" size="18" class="vPasswordField required" value="" maxlength="30" /><br />
             <input type="hidden" name="next" value="/" />
             <input type="submit" value="giriş" id="form_submit" />
         </form>
@@ -78,7 +78,7 @@
         <div class="sidebar sidebar_baslik">Arama</div>
         <div class="sidebar sidebar_ic" style="text-align: center;">
             <form method="post" action="/arama/">
-                <input type="text" name="term" size="12">
+                <input type="text" name="term" size="20"><br />
                 <input type="submit" value="Ara">
             </form>
         </div>
