@@ -770,6 +770,7 @@ ortak_title_mini{
 
 
 .sidebar_baslik {
+margin-right: 20px;
 margin-top: 0px;
 padding-top: 4px;
 height: 25px;
@@ -782,7 +783,9 @@ background-image: url('/media/dijital/img/d_tblbg.jpg');
 
 .sidebar_ic {
 margin-top: 0px;
+margin-right: 20px;
 padding-top: 4px;
+/*padding-right: 4px;*/
 /*height: 50px;*/
 font-size: 8px;
 color: #696569;
