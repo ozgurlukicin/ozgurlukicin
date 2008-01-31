@@ -5,6 +5,16 @@
 {% block section %}forum{% endblock %}
 {% block section_logo %}<img src="/media/img/forum_header_logo.png">{% endblock %}
 
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
+<script language="javascript" type="text/javascript">
+tinyMCE.init({
+	theme : "advanced",
+		mode : "textareas",
+		plugins : "fullpage",
+		theme_advanced_buttons3_add : "fullpage"
+});
+</script>
+
 {% block content %}
 {% if user.is_authenticated %}
 {% if flood %}Flood yapma lan, {{ timeout }}sn var.{% endif %}
