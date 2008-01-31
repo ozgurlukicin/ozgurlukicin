@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 
-{% block title %}Kayıp Parola -{% endblock %}
-
 {% block header_menu %}
     <!-- Burası header kısmı -->
 	{% include "header.html" %}
@@ -15,8 +13,13 @@
 
 <br/>
 
-
-<br />
 {% block content %}
-E-mail adresinize parolanızı değişirmeniz için bir adres gönderildi, 24 saat içerisinde tıklayarak yeni parolanızı alabilirsiniz.
+	<form action="." method="post">
+
+	<p align="center">Bu nesneyi silmek üzeresiniz?</p>
+	
+	<div align="center"><input type="submit" value="Sil"/></div>
+		
+	</form>	
+
 {% endblock %}

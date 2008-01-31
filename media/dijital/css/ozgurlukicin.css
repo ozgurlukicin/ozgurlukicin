@@ -4,7 +4,7 @@ body {
 	margin-top: 0px;
 	margin-right: 0px;
 	margin-bottom: 0px;
-	background-color: #000000;
+	background-color: #FFFFFF;
 	background-image: url(/media/dijital/img/bg.jpg);
 	background-repeat: repeat-x;
 }
@@ -106,7 +106,9 @@ body {
 }
 #tab2{
 	font-family: "Liberation Sans", "Liberation Serif", Arial;
-	background:url(/media/dijital/img/td_bg.jpg);
+
+	background:url(/media/dijital/img/indir_ust.jpg);
+	/*background:url(/media/dijital/img/td_bg.jpg);*/
 	background-repeat:no-repeat;
 	background-color: #FFFFFF;
 	position:relative;
@@ -154,7 +156,8 @@ body {
 /* Altsayfa */
 #Alttab1{
 	font-family: "Liberation Sans", "Liberation Serif", Arial;
-	background:url(/media/dijital/img/td_bg.jpg);
+	/*background:url(/media/dijital/img/td_bg.jpg);*/
+	background:url(/media/dijital/img/indir_ust.jpg);
 	background-repeat:no-repeat;
 	background-color: #FFFFFF;
 	position:relative;

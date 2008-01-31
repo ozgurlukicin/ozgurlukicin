@@ -20,6 +20,7 @@ user_dict = {
 urlpatterns = patterns('',
     (r'^liste/$', 'django.views.generic.simple.redirect_to', {'url': "sayfa/1/"}),
     (r'^liste/sayfa/(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', dict(user_dict)),
+    #the tested ones
     (r'^giris/$', 'django.contrib.auth.views.login', {'template_name': 'user/login.html'}),
     (r'^cikis/$', 'django.contrib.auth.views.logout', {'template_name': 'user/logout.html'}),
     (r'^kayit/$', 'oi.profile.views.user_register'),
