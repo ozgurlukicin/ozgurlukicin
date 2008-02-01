@@ -707,7 +707,8 @@ ortak_title_mini{
 .sidebar {
 	position: relative;
     width: 228px;
-    padding-left: 6px;
+    padding-left: 4px;
+    padding-right: 3px;
 	background-color: #F7F7F7;
 	color:#FFCA06;
 }
@@ -787,7 +788,7 @@ margin-right: 20px;
 padding-top: 4px;
 /*padding-right: 4px;*/
 /*height: 50px;*/
-font-size: 8px;
+font-size: 12px;
 color: #696569;
 /*background-repeat: no-repeat;*/
 background-image: url('/media/dijital/img/d_tblbg.jpg');
