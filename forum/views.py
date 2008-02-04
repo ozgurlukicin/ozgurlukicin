@@ -20,6 +20,7 @@ from oi.st.wrappers import render_response
 from oi.forum.models import Category, Forum, Topic, Post, AbuseReport, WatchList
 
 from django.core.urlresolvers import reverse
+from oi.st.models import Tag
 
 def main(request):
     categories = Category.objects.order_by('order')
@@ -123,7 +124,14 @@ def new_topic(request, forum_slug):
             topic = Topic(forum=forum,
                           title=form.clean_data['title']
                          )
+                         
+        #tags
             topic.save()
+            
+            for tag in form.clean_data['tags']:
+                t=Tag.objects.get(name=tag)
+                topic.tags.add(t)
+            
 
             post = Post(topic=topic,
                         author=request.user,
