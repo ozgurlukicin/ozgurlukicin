@@ -197,11 +197,6 @@ class ProfileEditForm(forms.Form):
         password = self.clean_data['password']
         old_password = self.clean_data['old_password']
 
-        #if the user don't want to change his/her password that part is needed
-        #otherwise we have errors when dontfill the newpass and other field
-        if len(password)==0 and len(field_data)==0:
-            return ''
-        
         if old_password or password or field_data:
             if field_data and password and old_password:
                 if len(field_data.split(' ')) != 1:
