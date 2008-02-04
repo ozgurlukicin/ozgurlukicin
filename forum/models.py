@@ -90,13 +90,26 @@ class Post(models.Model):
             f = Forum.objects.get(id=self.topic.forum.id)
             t = Topic.objects.get(id=self.topic.id)
 
-            latest_post = t.post_set.all().order_by('-created')[0].id
+            posts=t.post_set.all().order_by('-created')
+            
+            #if the latest post is the one we are deleting 
+            if posts[0].id == self.id :
+                #if there are more than one topic we should prevent the disaster othewise let it go :)
+                if posts.count()>1:
+                    latest_post=posts[1]
+                else:
+                    latest_post=posts[0]
+            
+            else : #if we dont delete the latest one the last one is suitable
+                latest_post=posts[0]
+            
+            #latest_post = t.post_set.all().order_by('-created')[0].id
 
-            t.topic_latest_post_id = latest_post
+            t.topic_latest_post = latest_post
             t.posts -= 1
             t.save()
 
-            f.forum_latest_post_id = latest_post
+            f.forum_latest_post = latest_post
             f.posts -= 1
             f.save()
 
