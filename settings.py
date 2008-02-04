@@ -81,7 +81,7 @@ TEMPLATE_CONTEXT_PROCESSORS = ("oi.context_processors.testing","django.core.cont
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.csrf.middleware.CsrfMiddleware',
+    #'django.contrib.csrf.middleware.CsrfMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'oi.flatpages.middleware.FlatpageFallbackMiddleware',

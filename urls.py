@@ -97,6 +97,8 @@ urlpatterns = patterns('',
 
     #User management
     (r'^kullanici/', include('oi.profile.urls')),
+    (r'^accounts/login/$', 'django.views.generic.simple.redirect_to', {'url': "/kullanici/giris/"}),
+    (r'^accounts/profile/$', 'django.views.generic.simple.redirect_to', {'url': "/kullanici/duzenle/"}),
 
     #First Steps
     (r'^ia/$', 'django.views.generic.list_detail.object_list', dict(fs_dict)),
