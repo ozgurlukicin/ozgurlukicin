@@ -63,11 +63,10 @@
         <form method="post" action="/kullanici/giris/">
             <input type="text" id="id_username" name="username" size="18" class="vTextField required" value="" maxlength="30" /><br />
             <input type="password" id="id_password" name="password" size="18" class="vPasswordField required" value="" maxlength="30" /><br />
-            <input type="hidden" name="next" value="{{next}}" />
             <input type="submit" value="giriş" id="form_submit" />
         </form>
-		<br />
-		<a class="sari" href="/kullanici/kayit/">Kayit Ol</a> | <a class="sari"  href="/kullanici/kayip/">Kayip parola?</a>
+        <br />
+        <a class="sari" href="/kullanici/kayit/">Kayit Ol</a> | <a class="sari"  href="/kullanici/kayip/">Kayip parola?</a>
         {% else %}
             Hoşgeldin <b>{{ user.username }}</b>!
             <br />İstiyorsan kullanıcı sayfana <a class="sari" href="/kullanici/sayfam/">buradan</a> ulaşabilir veya <a class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsin
