@@ -15,7 +15,7 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
 
-from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_REDIRECT_URL, LOGIN_URL, WEB_URL, PROFILE_EDIT_URL
+from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_URL, WEB_URL, PROFILE_EDIT_URL
 
 from oi.profile.models import Profile, RegisterForm, ProfileEditForm, LostPassword, LostPasswordForm, ChangePasswordForm
 from oi.st.wrappers import render_response
@@ -45,7 +45,8 @@ def user_profile_edit(request):
             u.get_profile().save()
             u.save()
 
-            return HttpResponseRedirect(LOGIN_REDIRECT_URL)
+            # return page which form has been posted
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
             return render_response(request, 'user/profile_edit.html', {'form': form})
     else:
