@@ -422,7 +422,7 @@ img.alignright, img[align="right"] {
 }
 
 /* forms */
-input#id_username {
+/*input#id_username {
     padding: 0px;
     padding-left: 18px;
     background: #ffffff url('/media/img/input_username.png') no-repeat;
@@ -434,7 +434,7 @@ input#id_password {
     padding-left: 18px;
     background: #ffffff url('/media/img/input_password.png') no-repeat;
     vertical-align: middle;
-}
+}*/
 
 input#form_submit {
     vertical-align: middle;
@@ -732,7 +732,7 @@ ortak_title_mini{
 }
 
 .sidebar_top_img{
-	margin-top: 40px;
+	margin-top: 10px;
 	/*background-repeat: no-repeat;*/
 	background-image: url('/media/dijital/img/d_tblust.jpg');
         height: 10px;
@@ -773,7 +773,6 @@ ortak_title_mini{
 .sidebar_baslik {
 margin-right: 20px;
 margin-top: 0px;
-padding-top: 4px;
 height: 25px;
 font-size: 14px;
 font-weight: bold;
@@ -785,8 +784,9 @@ background-image: url('/media/dijital/img/d_tblbg.jpg');
 .sidebar_ic {
 margin-top: 0px;
 margin-right: 20px;
-padding-top: 4px;
-/*padding-right: 4px;*/
+padding-top: 2px;
+padding-left: 4px;
+padding-rigt: 3px;
 /*height: 50px;*/
 font-size: 12px;
 color: #696569;
@@ -912,4 +912,8 @@ h6 {
 	color:#fff;
 	background-color:#234f32;
 	border:1px solid #234f32;
+}
+
+label {
+    font-weight: bold;
 }

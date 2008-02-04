@@ -44,7 +44,7 @@ class Topic_Rss(Feed):
         if not len(bits)==1:
             raise ObjectDoesNotExist
         
-        return Topic.objects.get(id=bits[0]) # get the topic thing
+        return Topic.objects.get(id=bits[0].strip()) # get the topic thing
         
         
     def title(self,obj):

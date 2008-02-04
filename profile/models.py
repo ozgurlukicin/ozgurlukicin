@@ -88,8 +88,8 @@ class Profile(models.Model):
 
 class RegisterForm(forms.Form):
     username = forms.CharField(label='Kullanıcı Adı', max_length=30, help_text='En az 3, en fazla 30 karakter')
-    firstname = forms.CharField(label='İsim', max_length=30)
-    lastname = forms.CharField(label='Soyisim', max_length=30)
+    firstname = forms.CharField(label='Adı', max_length=30)
+    lastname = forms.CharField(label='Soyadı', max_length=30)
     birthday = forms.DateField(label='Doğum Tarihi', help_text='10/5/1985 gibi.')
     email = forms.EmailField(label='E-Posta')
     password = forms.CharField(label='Parola', max_length=32, widget=forms.PasswordInput,)
@@ -145,8 +145,8 @@ class RegisterForm(forms.Form):
         return field_data
 
 class ProfileEditForm(forms.Form):
-    firstname = forms.CharField(label='İsim', max_length=30)
-    lastname = forms.CharField(label='Soyisim', max_length=30)
+    firstname = forms.CharField(label='Adı', max_length=30)
+    lastname = forms.CharField(label='Soyadı', max_length=30)
     birthday = forms.DateField(label='Doğum Tarihi', help_text='10/5/1985 gibi.')
     email = forms.EmailField(label='E-posta')
     city = forms.ChoiceField(label='Şehir', choices=CITY_LIST)
@@ -177,6 +177,7 @@ class ProfileEditForm(forms.Form):
 
     def clean_password(self):
         field_data = self.clean_data['password']
+        
         if not field_data:
             return ''
 
@@ -196,6 +197,11 @@ class ProfileEditForm(forms.Form):
         password = self.clean_data['password']
         old_password = self.clean_data['old_password']
 
+        #if the user don't want to change his/her password that part is needed
+        #otherwise we have errors when dontfill the newpass and other field
+        if len(password)==0 and len(field_data)==0:
+            return ''
+        
         if old_password or password or field_data:
             if field_data and password and old_password:
                 if len(field_data.split(' ')) != 1:
