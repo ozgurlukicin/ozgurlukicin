@@ -21,7 +21,12 @@
 <br />
 
 {% if user.is_authenticated %}
-Sistemden çıktınız. Ansayfaya gitmek için <a href="/">tıklayın</a> <br />
+<script type="text/javascript">
+    <!--
+    setTimeout("window.location = '/';", 5000);
+    //-->
+</script>
+Ana sayfaya yönlendiriliyorsunuz. Beklemek istemiyorsanız <a href="/">buraya tıklayın.</a> <br />
 {% else %}
 Henüz giriş yapmamışsınız, giriş yapmak için <a href="/kullanici/giris/">buraya</a> tıklayın. <br />
 {% endif %}
