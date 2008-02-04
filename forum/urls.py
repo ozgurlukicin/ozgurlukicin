@@ -25,13 +25,10 @@ tag_feed_dict={
             }
 
 urlpatterns = patterns('',
-  
-    (r'^feed/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
-    #(r'^(?P<url>.*)/user/(?P<user>\d+)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
-    
+   
     (r'^feed/topic/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': topic_feed_dict}),
     (r'^feed/tag/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': tag_feed_dict}),
-    
+    (r'^feed/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
     (r'^$', 'oi.forum.views.main'),
     
     #delete part yoo!!!
