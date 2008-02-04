@@ -47,7 +47,9 @@
     <strong><span class="sari">Kurulu boyutu:</span></strong><span class="gri" > {{ game.installed_size|filesizeformat }}</span><br />
     <strong><span class="sari">Web sitesi:</span></strong> <a href="{{ game.url }}"><span class="gri" >{{ game.url }}</span></a><br />
 </div>
+<div class="sidebar sidebar_alt_img">&nbsp;</div>
 
+<div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Değerlendirme</div>
 <div class="sidebar sidebar_ic">
     <strong><span class="sari">Öğrenme süresi:</span></strong><span class="gri" >{{ game.learning_time }}</span><br />
@@ -57,17 +59,25 @@
     <strong><span class="sari">Senaryo:</span></strong> <span class="gri" >{{ game.scenario }}</span><br />
     <strong><span class="sari">Atmosfer:</span></strong> <span class="gri" >{{ game.atmosphere }}</span><br />
     <div class="game_average_point">{{ game.avg }}</div>
+    <br />
 </div>
+<div class="sidebar sidebar_alt_img">&nbsp;</div>
 
+<div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Menüdeki yeri</div>
 <div class="sidebar sidebar_ic"><span class="gri" >{{ game.path }}</div>
+<div class="sidebar sidebar_alt_img">&nbsp;</div>
 
+<div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Etiketler</div>
 <div class="sidebar sidebar_ic">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}"><span class="gri" >{{ tag.name }}</span></a> {% endfor %}</div>
+<div class="sidebar sidebar_alt_img">&nbsp;</div>
 
 {% if game.wiki.all %}
+<div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">İlgili wiki sayfaları</div>
 <div class="sidebar sidebar_ic">{% for wiki in game.wiki.all %}<a href="{{ wiki.get_absolute_url }}"><span class="gri" >{{ wiki.name }}</span></a><br />{% endfor %}</div>
+<div class="sidebar sidebar_alt_img">&nbsp;</div>
 {% endif %}
 
 {% if videos %}
@@ -75,6 +85,7 @@
 <div class="sidebar sidebar_ic">{% for video in videos %}<a href="/video/{{ video.name }}" rel="lightbox[video_{{ game.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
 {% endif %}
 
+<div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Yazar</div>
 <div class="sidebar sidebar_ic"><span class="gri" >{{ game.author }}</span></div>
 <div class="sidebar sidebar_alt_img">&nbsp;</div>

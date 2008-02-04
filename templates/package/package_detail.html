@@ -44,31 +44,45 @@
     <strong><span class="sari">Kurulu boyutu:</span></strong> {{ package.installed_size|filesizeformat }}<br />
     <a href="{{ package.url }}"><strong><span class="sari">Web sitesi</span></strong></a><br />
 </div>
+<div class="sidebar sidebar_alt_img">&nbsp;</div>
 
+<div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Editör notu</div>
 <div class="sidebar sidebar_ic"><div class="rating_bar"><img src="/media/img/rating_{{ package.point }}.png" border="0" height="39px" width="200px" /></div></div>
+<div class="sidebar sidebar_alt_img">&nbsp;</div>
 
+<div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Menüdeki yeri</div>
 <div class="sidebar sidebar_ic">{{ package.path }}</div>
+<div class="sidebar sidebar_alt_img">&nbsp;</div>
 
+<div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Etiketler</div>
 <div class="sidebar sidebar_ic">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
+<div class="sidebar sidebar_alt_img">&nbsp;</div>
 
 {% if package.wiki.all %}
+<div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">İlgili wiki sayfaları</div>
 <div class="sidebar sidebar_ic">{% for wiki in package.wiki.all %}<a href="{{ wiki.get_absolute_url }}">{{ wiki.name }}</a><br />{% endfor %}</div>
+<div class="sidebar sidebar_alt_img">&nbsp;</div>
 {% endif %}
 
 {% if videos %}
+<div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">İlgili Videolar</div>
 <div class="sidebar sidebar_ic">{% for video in videos %}<a href="/video/{{ video.name }}" rel="lightbox[video_{{ package.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
+<div class="sidebar sidebar_alt_img">&nbsp;</div>
 {% endif %}
 
 {% if sss %}
+<div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Ekran görüntüleri</div>
 <div class="sidebar sidebar_ic">{% for ss in sss %}<a href="/media/{{ ss.file }}" rel="lightbox[ss_{{ package.title }}]" title="{{ ss.desc }}"><img src="{{ ss.file|thumbnail:"200x200" }}" /></a>{% endfor %}</a></div>
+<div class="sidebar sidebar_alt_img">&nbsp;</div>
 {% endif %}
 
+<div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Yazar</div>
 <div class="sidebar sidebar_ic">{{ package.author }}</div>
 <div class="sidebar sidebar_alt_img">&nbsp;</div>
