@@ -45,8 +45,8 @@ def user_profile_edit(request):
             u.get_profile().save()
             u.save()
 
-            # return page which form has been posted
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            return render_response(request, 'user/profile_edit.html', {'profile_updated': True,
+                                                                       'form': form})
         else:
             return render_response(request, 'user/profile_edit.html', {'form': form})
     else:

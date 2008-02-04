@@ -34,6 +34,10 @@ NOT: register.html'den çaldım, bunu da düzeltmek gerekecek
 <font color="red">Profil güncellenemedi, lütfen aşağıdaki hataları düzeltin<br /></font>
 {% endif %}
 
+{% if profile_updated %}
+<font color="green">Profiliniz başarıyla güncellendi<br /></font>
+{% endif %}
+
 <br />
 <form method="POST" action=".">
     <table><tbody>
