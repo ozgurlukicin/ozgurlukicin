@@ -56,7 +56,7 @@
 
     <div id="sidebar">
         {% block sidebartop %}
-        <div class="sidebar sidebar_top_img">&nbsp;</div>
+        <div class="sidebar sidebar_top_img" style="margin-top: 40px;">&nbsp;</div>
         <div class="sidebar sidebar_baslik">Kullanıcı Kutusu</div>
         <div class="sidebar sidebar_ic"{% if not user.is_authenticated %} style="text-align: center;"{% endif %}>
         {% if not user.is_authenticated %}
