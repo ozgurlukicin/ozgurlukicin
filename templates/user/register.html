@@ -27,11 +27,15 @@
     Zaten giriş yapmışsınız, ana sayfaya gitmek için <a href="/">tıklayın</a>
     {% else %}
     <form method="POST" action=".">
-        <dt>
+        <table><tbody>
         {% for field in form %}
-        <dd>{{ field.label }} {{ field }} {% if field.help_text %} ({{ field.help_text }}){% endif %}</dd>
-        {% if field.errors %}<dd class="error"><font color="red">{{ field.errors }}</font></dd>{% endif %}
+        <tr>
+            <td width="30%"><label for="id_{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}</td>
+            <td>{{ field }}</td>
+            <td>{% if field.errors %}{{ field.errors }}{% endif %}</td>
+        </tr>
         {% endfor %}
+        </table></tbody>
     <br />
     <a href="/hakkinda/icerik-politikasi">Özgürlükİçin İçerik Politikası</a> 'nı okudum ve<br /><br />
     <center> <input type="button" value="Kabul Etmiyorum" onClick="javascript:window.location.href='/'"> &nbsp; <input type="submit" value="Kabul Ediyorum" /> </center>

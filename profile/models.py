@@ -88,8 +88,8 @@ class Profile(models.Model):
 
 class RegisterForm(forms.Form):
     username = forms.CharField(label='Kullanıcı Adı', max_length=30, help_text='En az 3, en fazla 30 karakter')
-    firstname = forms.CharField(label='İsim', max_length=30)
-    lastname = forms.CharField(label='Soyisim', max_length=30)
+    firstname = forms.CharField(label='Adı', max_length=30)
+    lastname = forms.CharField(label='Soyadı', max_length=30)
     birthday = forms.DateField(label='Doğum Tarihi', help_text='10/5/1985 gibi.')
     email = forms.EmailField(label='E-Posta')
     password = forms.CharField(label='Parola', max_length=32, widget=forms.PasswordInput,)
@@ -145,8 +145,8 @@ class RegisterForm(forms.Form):
         return field_data
 
 class ProfileEditForm(forms.Form):
-    firstname = forms.CharField(label='İsim', max_length=30)
-    lastname = forms.CharField(label='Soyisim', max_length=30)
+    firstname = forms.CharField(label='Adı', max_length=30)
+    lastname = forms.CharField(label='Soyadı', max_length=30)
     birthday = forms.DateField(label='Doğum Tarihi', help_text='10/5/1985 gibi.')
     email = forms.EmailField(label='E-posta')
     city = forms.ChoiceField(label='Şehir', choices=CITY_LIST)

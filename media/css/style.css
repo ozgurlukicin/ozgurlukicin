@@ -422,7 +422,7 @@ img.alignright, img[align="right"] {
 }
 
 /* forms */
-input#id_username {
+/*input#id_username {
     padding: 0px;
     padding-left: 18px;
     background: #ffffff url('/media/img/input_username.png') no-repeat;
@@ -434,7 +434,7 @@ input#id_password {
     padding-left: 18px;
     background: #ffffff url('/media/img/input_password.png') no-repeat;
     vertical-align: middle;
-}
+}*/
 
 input#form_submit {
     vertical-align: middle;
@@ -912,4 +912,8 @@ h6 {
 	color:#fff;
 	background-color:#234f32;
 	border:1px solid #234f32;
+}
+
+label {
+    font-weight: bold;
 }
