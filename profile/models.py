@@ -90,7 +90,7 @@ class RegisterForm(forms.Form):
     username = forms.CharField(label='Kullanıcı Adı', max_length=30, help_text='En az 3, en fazla 30 karakter')
     firstname = forms.CharField(label='Adı', max_length=30)
     lastname = forms.CharField(label='Soyadı', max_length=30)
-    birthday = forms.DateField(label='Doğum Tarihi', help_text='10/5/1985 gibi.')
+    birthday = forms.DateField(label='Doğum Tarihi', input_formats=('%d/%m/%Y', '%d/%m/%Y'), help_text='(Gün/Ay/Yıl)')
     email = forms.EmailField(label='E-Posta')
     password = forms.CharField(label='Parola', max_length=32, widget=forms.PasswordInput,)
     password_again = forms.CharField(label='Parola (tekrar)', max_length=32, widget=forms.PasswordInput, help_text='En az 5 karakter')
@@ -147,7 +147,7 @@ class RegisterForm(forms.Form):
 class ProfileEditForm(forms.Form):
     firstname = forms.CharField(label='Adı', max_length=30)
     lastname = forms.CharField(label='Soyadı', max_length=30)
-    birthday = forms.DateField(label='Doğum Tarihi', help_text='10/5/1985 gibi.')
+    birthday = forms.DateField(label='Doğum Tarihi', input_formats=('%d/%m/%Y', '%d/%m/%y'), help_text='(Gün/Ay/Yıl)')
     email = forms.EmailField(label='E-posta')
     city = forms.ChoiceField(label='Şehir', choices=CITY_LIST)
     homepage = forms.URLField(label='Ana Sayfa', required=False, help_text='http:// ile başlamayı unutmayın')
