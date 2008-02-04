@@ -29,7 +29,7 @@ def user_profile_edit(request):
     u = request.user
     if request.method == 'POST':
         form = ProfileEditForm(request.POST)
-        form.set_user(request.user)
+        form.set_user(u)
 
         if form.is_valid():
             if len(form.clean_data['password']) > 0:
