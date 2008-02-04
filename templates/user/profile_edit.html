@@ -52,16 +52,15 @@ NOT: register.html'den çaldım, bunu da düzeltmek gerekecek
 
 <br />
 <form method="POST" action=".">
-    <dt>
+    <table><tbody>
     {% for field in form %}
-
-    <dt><b>{{ field.label }}:</b> </dt>
-    <dd>{{ field }}</dd>
-    {% if field.help_text %}<dd>{{ field.help_text }}</dd>{% endif %}
-    {% if field.errors %}<dd class="error"><font color="red">{{ field.errors }}</font></dd>{% endif %}
-
+    <tr>
+        <td width="30%"><label for="id_{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}</td>
+        <td>{{ field }}</td>
+        <td>{% if field.errors %}{{ field.errors }}{% endif %}</td>
+    </tr>
     {% endfor %}
-
+    </tbody></table>
 <br />
 <center> <input type="submit" value="Düzenle" /> </center>
 </form>
