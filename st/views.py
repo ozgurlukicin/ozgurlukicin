@@ -35,8 +35,6 @@ def home(request):
 
 def fs_detail(request, slug):
     fs = get_object_or_404(FS, slug=slug)
-    tags = fs.tags.all()
-    videos = fs.videos.all()
     return render_response(request, 'fs/fs_detail.html', locals())
 
 def fs_printable(request, slug):
@@ -45,8 +43,6 @@ def fs_printable(request, slug):
 
 def howto_detail(request, slug):
     howto = get_object_or_404(HowTo, slug=slug)
-    tags = howto.tags.all()
-    videos = howto.videos.all()
     return render_response(request, 'howto/howto_detail.html', locals())
 
 def howto_printable(request, slug):
@@ -55,12 +51,7 @@ def howto_printable(request, slug):
 
 def game_detail(request, slug):
     game = get_object_or_404(Game, slug=slug)
-    tags = game.tags.all()
-    videos = game.videos.all()
-    for video in videos:
-        video.name = path.splitext(video.file)[0].split('/')[2]
-    licenses = game.license.all()
-    game.avg = ((game.gameplay+game.graphics+game.sound+game.scenario+game.atmosphere)/5.0)
+    game.avg = ((game.gameplay + game.graphics + game.sound + game.scenario + game.atmosphere)/5.0)
     return render_response(request, 'game/game_detail.html', locals())
 
 def game_printable(request, slug):
@@ -69,27 +60,20 @@ def game_printable(request, slug):
 
 def news_detail(request, slug):
     news = get_object_or_404(News, slug=slug)
-    tags = news.tags.all()
     form=CommentForm()
-    
+
     if request.user.is_authenticated():
         auth=True
-    
+
     return render_response(request, 'news/news_detail.html', locals())
 
 def news_printable(request, slug):
     news = get_object_or_404(News, slug=slug)
-    
+
     return render_response(request, 'news/news_printable.html', locals())
 
 def pkg_detail(request, slug):
     package = get_object_or_404(Package, slug=slug)
-    tags = package.tags.all()
-    videos = package.videos.all()
-    for video in videos:
-        video.name = path.splitext(video.file)[0].split('/')[2]
-    licenses = package.license.all()
-    sss = package.ss.all()
     return render_response(request, 'package/package_detail.html', locals())
 
 def pkg_printable(request, slug):
@@ -157,43 +141,36 @@ def comment_news(request,slug):
     """
     news = get_object_or_404(News, slug=slug)
     #news = News.objects.filter(id=id)
-    
+
     if request.method== 'POST':
-            
         new_data = request.POST.copy()
-        
         form=CommentForm(new_data)
-        
+
         #flood control
         flood,timeout = flood_control(request)
-        
+
         if form.is_valid() and not flood:
-            
             t=Topic.objects.filter(title=news.title)
             if not t:
                 tags = news.tags.all()
                 return render_response(request,'news/news_detail.html',{'news':news,'tags':tags,'form':form,'auth':True})
-        
+
             post = Post(topic=t[0],
-                                author=request.user,
-                                text=form.clean_data['yorum']
-                               )
+                        author=request.user,
+                        text=form.clean_data['yorum'])
             try:
-				post.save()
+                post.save()
             except Exception:
                 render_to_response('db_error.html')
-                
+
             return HttpResponseRedirect(post.get_absolute_url())
-            
-        
         else:
             #hata mesaji gonder
             tags = news.tags.all()
             return render_response(request,'news/news_detail.html',{'news':news,'tags':tags,'form':form,'auth':True})
-            
-    
+
     form=CommentForm()
     tags = news.tags.all()
     return render_response(request,'news/news_detail.html',{'news':news,'tags':tags,'form':form,'auth':True})
-        
+
     #do something here

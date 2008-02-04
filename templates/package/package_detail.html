@@ -39,7 +39,7 @@
 <div class="sidebar sidebar_top_img" style="margin-top: 40px;">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Ayrıntılar</div>
 <div class="sidebar sidebar_ic">
-    <strong><span class="sari">Lisans:</span></strong> {% for license in licenses %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}<br />
+    <strong><span class="sari">Lisans:</span></strong> {% for license in package.license.all %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}<br />
     <strong><span class="sari">Paket boyutu:</span></strong> {{ package.download_size|filesizeformat }}<br />
     <strong><span class="sari">Kurulu boyutu:</span></strong> {{ package.installed_size|filesizeformat }}<br />
     <a href="{{ package.url }}"><strong><span class="sari">Web sitesi</span></strong></a><br />
@@ -58,7 +58,7 @@
 
 <div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Etiketler</div>
-<div class="sidebar sidebar_ic">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
+<div class="sidebar sidebar_ic">{% for tag in package.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
 <div class="sidebar sidebar_alt_img">&nbsp;</div>
 
 {% if package.wiki.all %}
@@ -68,17 +68,17 @@
 <div class="sidebar sidebar_alt_img">&nbsp;</div>
 {% endif %}
 
-{% if videos %}
+{% if package.videos.all %}
 <div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">İlgili Videolar</div>
-<div class="sidebar sidebar_ic">{% for video in videos %}<a href="/video/{{ video.name }}" rel="lightbox[video_{{ package.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
+<div class="sidebar sidebar_ic">{% for video in package.videos.all %}<a href="/video/{{ video.get_video_name }}" rel="lightbox[video_{{ package.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
 <div class="sidebar sidebar_alt_img">&nbsp;</div>
 {% endif %}
 
-{% if sss %}
+{% if package.ss.all %}
 <div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Ekran görüntüleri</div>
-<div class="sidebar sidebar_ic">{% for ss in sss %}<a href="/media/{{ ss.file }}" rel="lightbox[ss_{{ package.title }}]" title="{{ ss.desc }}"><img src="{{ ss.file|thumbnail:"200x200" }}" /></a>{% endfor %}</a></div>
+<div class="sidebar sidebar_ic">{% for ss in package.ss.all %}<a href="/media/{{ ss.file }}" rel="lightbox[ss_{{ package.title }}]" title="{{ ss.desc }}"><img src="{{ ss.file|thumbnail:"200x200" }}" /></a>{% endfor %}</a></div>
 <div class="sidebar sidebar_alt_img">&nbsp;</div>
 {% endif %}
 

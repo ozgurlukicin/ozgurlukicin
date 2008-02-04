@@ -36,12 +36,12 @@
 {% block sidebar %}
 <div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Etiketler</div>
-<div class="sidebar sidebar_ic">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
+<div class="sidebar sidebar_ic">{% for tag in fs.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
 <div class="sidebar sidebar_alt_img">&nbsp;</div>
 
-{% if videos %}
+{% if fs.videos.all %}
 <div class="sidebar sidebar_baslik">İlgili Videolar</div>
-<div class="sidebar sidebar_ic">{% for video in videos %}<a href="/video/{{ video.name }}" rel="lightbox[video_{{ package.name }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
+<div class="sidebar sidebar_ic">{% for video in fs.videos.all %}<a href="/video/{{ video.get_video_name }}" rel="lightbox[video_{{ video.get_video_name }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
 {% endif %}
 
 <div class="sidebar sidebar_top_img">&nbsp;</div>

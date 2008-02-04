@@ -36,7 +36,7 @@
 {% block sidebar %}
 <div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Etiketler</div>
-<div class="sidebar sidebar_ic">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
+<div class="sidebar sidebar_ic">{% for tag in howto.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
 <div class="sidebar sidebar_alt_img">&nbsp;</div>
 
 {% if howto.wiki.all %}
@@ -44,9 +44,9 @@
 <div class="sidebar sidebar_ic">{% for wiki in howto.wiki.all %}<a href="{{ wiki.get_absolute_url }}">{{ wiki.name }}</a><br />{% endfor %}</div>
 {% endif %}
 
-{% if videos %}
+{% if howto.videos.all %}
 <div class="sidebar sidebar_baslik">İlgili Videolar</div>
-<div class="sidebar sidebar_ic">{% for video in videos %}<a href="/video/{{ video.name }}" rel="lightbox[video_{{ package.name }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
+<div class="sidebar sidebar_ic">{% for video in howto.videos.all %}<a href="/video/{{ video.get_video_name }}" rel="lightbox[video_{{ howto.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
 {% endif %}
 
 <div class="sidebar sidebar_top_img">&nbsp;</div>
