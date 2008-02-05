@@ -60,8 +60,8 @@ class Post(models.Model):
         verbose_name = 'İleti'
         verbose_name_plural = 'İletiler'
         permissions = (
-                       ("can_see_ip", "Can see author ip"),
-                       ("can_hide", "Can hide"),
+                       ("can_see_post_ip", "Can see author ip"),
+                       ("can_hide_post", "Can hide"),
                        ("can_see_hidden_posts", "Can see hidden posts"),
                       )
 
@@ -91,7 +91,7 @@ class Post(models.Model):
             t = Topic.objects.get(id=self.topic.id)
 
             posts=t.post_set.all().order_by('-created')
-            
+
             #if the latest post is the one we are deleting 
             if posts[0].id == self.id :
                 #if there are more than one topic we should prevent the disaster othewise let it go :)
@@ -99,10 +99,10 @@ class Post(models.Model):
                     latest_post=posts[1]
                 else:
                     latest_post=posts[0]
-            
+
             else : #if we dont delete the latest one the last one is suitable
                 latest_post=posts[0]
-            
+
             #latest_post = t.post_set.all().order_by('-created')[0].id
 
             t.topic_latest_post = latest_post
@@ -161,11 +161,12 @@ class Topic(models.Model):
         verbose_name = 'Konu'
         verbose_name_plural = 'Konular'
         permissions = (
-                       ("can_hide", "Can hide"),
-                       ("can_stick", "Can stick"),
-                       ("can_lock", "Can lock"),
-                       ("can_tag", "Can tag"),
+                       ("can_hide_topic", "Can hide topic"),
+                       ("can_stick_topic", "Can stick topic"),
+                       ("can_lock_topic", "Can lock topic"),
+                       ("can_tag_topic", "Can tag topic"),
                        ("can_see_hidden_topics", "Can see hidden topics"),
+                       ("can_merge_topic", "Can merge topic"),
                       )
 
     def save(self):
@@ -210,8 +211,8 @@ class Forum(models.Model):
         verbose_name = 'Forum'
         verbose_name_plural = 'Forumlar'
         permissions = (
-                       ("can_hide", "Can hide"),
-                       ("can_lock", "Can lock"),
+                       ("can_hide_forum", "Can hide forum"),
+                       ("can_lock_forum", "Can lock forum"),
                        ("can_see_hidden_forums", "Can see hidden forums"),
                       )
 
@@ -236,7 +237,7 @@ class Category(models.Model):
         verbose_name = 'Kategori'
         verbose_name_plural = 'Kategoriler'
         permissions = (
-                       ("can_hide", "Can hide"),
+                       ("can_hide_category", "Can hide category"),
                        ("can_see_hidden_categories", "Can see hidden categories"),
                       )
 
