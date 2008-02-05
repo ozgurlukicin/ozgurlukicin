@@ -76,6 +76,18 @@
         </div>
     {% endif %}
 
+	{% if topic %}
+        <div class="darkblue">
+            <h1><span>Forum ({{ topic.count }} adet)</span></h1>
+            <ul style="padding-left: 16px;" class="grey">
+            {% for obj in topic %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+
     {% if flatpages %}
         <div class="green">
             <h1><span>Sabit sayfalar ({{ flatpages.count }} adet)</span></h1>

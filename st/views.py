@@ -105,6 +105,8 @@ def tag_detail(request, tag):
         fs = FS.objects.filter(tags__name__exact=tag)
         howto = HowTo.objects.filter(tags__name__exact=tag)
         flatpages = FlatPage.objects.filter(tags__name__exact=tag)
+        topic=Topic.objects.filter(tags__name__exact=tag)
+        
     except Tag.DoesNotExist:
         raise Http404
     return render_response(request, 'tag/tag_detail.html', locals())
