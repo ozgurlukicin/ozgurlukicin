@@ -53,22 +53,22 @@
 <div class="sidebar sidebar_top_img" style="margin-top: 40px;">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Bilgiler</div>
 <div class="sidebar sidebar_ic">
-    <strong><span class="sari">Lisans:</span></strong> {% for license in game.license.all %}<a href="{{ license.url }}"><span class="gri" >{{ license.name }}</span></a> {% endfor %}<br />
-    <strong><span class="sari">Paket boyutu:</span></strong> <span class="gri" >{{ game.download_size|filesizeformat }}</span><br />
-    <strong><span class="sari">Kurulu boyutu:</span></strong><span class="gri" > {{ game.installed_size|filesizeformat }}</span><br />
-    <a href="{{ game.url }}"><strong><span class="sari">Web sitesi</span></strong></a><br />
+    <strong><span>Lisans:</span></strong> {% for license in game.license.all %}<a href="{{ license.url }}"><span class="gri" >{{ license.name }}</span></a> {% endfor %}<br />
+    <strong><span>Paket boyutu:</span></strong> <span class="gri" >{{ game.download_size|filesizeformat }}</span><br />
+    <strong><span>Kurulu boyutu:</span></strong><span class="gri" > {{ game.installed_size|filesizeformat }}</span><br />
+    <a href="{{ game.url }}"><strong>Web sitesi</strong></a><br />
 </div>
 <div class="sidebar sidebar_alt_img">&nbsp;</div>
 
 <div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Değerlendirme</div>
 <div class="sidebar sidebar_ic">
-    <strong><span class="sari">Öğrenme süresi:</span></strong><span class="gri" >{{ game.learning_time }}</span><br />
-    <strong><span class="sari">Oynanabilirlik:</span></strong> <span class="gri" >{{ game.gameplay }}</span><br />
-    <strong><span class="sari">Grafik:</span></strong><span class="gri" > {{ game.graphics }}</span><br />
-    <strong><span class="sari">Ses:</span></strong> <span class="gri" >{{ game.sound }}</span><br />
-    <strong><span class="sari">Senaryo:</span></strong> <span class="gri" >{{ game.scenario }}</span><br />
-    <strong><span class="sari">Atmosfer:</span></strong> <span class="gri" >{{ game.atmosphere }}</span><br />
+    <strong><span>Öğrenme süresi:</span></strong><span class="gri" >{{ game.learning_time }}</span><br />
+    <strong><span>Oynanabilirlik:</span></strong> <span class="gri" >{{ game.gameplay }}</span><br />
+    <strong><span>Grafik:</span></strong><span class="gri" > {{ game.graphics }}</span><br />
+    <strong><span>Ses:</span></strong> <span class="gri" >{{ game.sound }}</span><br />
+    <strong><span>Senaryo:</span></strong> <span class="gri" >{{ game.scenario }}</span><br />
+    <strong><span>Atmosfer:</span></strong> <span class="gri" >{{ game.atmosphere }}</span><br />
     <div class="game_average_point">{{ game.avg }}</div>
     <br />
 </div>

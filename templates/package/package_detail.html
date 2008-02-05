@@ -50,10 +50,10 @@
 <div class="sidebar sidebar_top_img" style="margin-top: 40px;">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Ayrıntılar</div>
 <div class="sidebar sidebar_ic">
-    <strong><span class="sari">Lisans:</span></strong> {% for license in package.license.all %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}<br />
-    <strong><span class="sari">Paket boyutu:</span></strong> {{ package.download_size|filesizeformat }}<br />
-    <strong><span class="sari">Kurulu boyutu:</span></strong> {{ package.installed_size|filesizeformat }}<br />
-    <a href="{{ package.url }}"><strong><span class="sari">Web sitesi</span></strong></a><br />
+    <strong><span>Lisans:</span></strong> {% for license in package.license.all %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}<br />
+    <strong><span>Paket boyutu:</span></strong> {{ package.download_size|filesizeformat }}<br />
+    <strong><span>Kurulu boyutu:</span></strong> {{ package.installed_size|filesizeformat }}<br />
+    <a href="{{ package.url }}"><strong><span>Web sitesi</span></strong></a><br />
 </div>
 <div class="sidebar sidebar_alt_img">&nbsp;</div>
 

@@ -23,7 +23,7 @@
 <div class="fs_content">
     {% if news %}
         <div class="purple">
-            <h1><span class="sari">Haberler ({{ news.count }} adet)</span></h1>
+            <h1><span>Haberler ({{ news.count }} adet)</span></h1>
             <ul style="padding-left: 16px;" class="grey">
             {% for obj in news %}
                 <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.text|striptags|truncatewords:"10" }}</li>
@@ -34,7 +34,7 @@
 	
 	{% if howto %}
         <div class="purple">
-            <h1><span class="sari">Nasıl ({{ howto.count }} adet)</span></h1>
+            <h1><span>Nasıl ({{ howto.count }} adet)</span></h1>
             <ul style="padding-left: 16px;" class="grey">
             {% for obj in howto %}
                 <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.text|striptags|truncatewords:"10" }}</li>
@@ -45,7 +45,7 @@
 
     {% if packages %}
         <div class="orange">
-            <h1><span class="sari">Paketler ({{ packages.count }} adet)</span></h1>
+            <h1><span>Paketler ({{ packages.count }} adet)</span></h1>
             <ul style="padding-left: 16px;" class="grey">
             {% for obj in packages %}
                 <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
@@ -56,7 +56,7 @@
 
     {% if fs %}
         <div class="green">
-            <h1><span class="sari">İlk adımlar ({{ fs.count }} adet)</span></h1>
+            <h1><span>İlk adımlar ({{ fs.count }} adet)</span></h1>
             <ul style="padding-left: 16px;" class="grey">
             {% for obj in fs %}
                 <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
@@ -67,7 +67,7 @@
 
     {% if games %}
         <div class="darkblue">
-            <h1><span class="sari">Oyunlar ({{ games.count }} adet)</span></h1>
+            <h1><span>Oyunlar ({{ games.count }} adet)</span></h1>
             <ul style="padding-left: 16px;" class="grey">
             {% for obj in games %}
                 <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
@@ -78,7 +78,7 @@
 
     {% if flatpages %}
         <div class="green">
-            <h1><span class="sari">Sabit sayfalar ({{ flatpages.count }} adet)</span></h1>
+            <h1><span>Sabit sayfalar ({{ flatpages.count }} adet)</span></h1>
             <ul style="padding-left: 16px;" class="grey">
             {% for obj in flatpages %}
                 <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.text|striptags|truncatewords:"10" }}</li>

@@ -26,7 +26,7 @@
 
   <div class="post">
   {% if item.title %}
-  <div class="planet_title"><a class="sari" href="{{ item.link }}">{{ item.title }}</a></div>
+  <div class="planet_title"><a href="{{ item.link }}">{{ item.title }}</a></div>
   {% else %}
   <div class="planet_title siyah"><a href="{{ item.link }}">{{ item.subscriber.name }}</a></div>
   {% endif %}
@@ -52,7 +52,7 @@
 <div class="sidebar sidebar_top_img" style="margin-top: 40px;">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Kurallar</div>
 <div class="sidebar sidebar_ic">
-    <a class="sari" href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a>
+    <a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a>
 </div>
 <div class="sidebar sidebar_alt_img">&nbsp;</div>
 
@@ -82,7 +82,7 @@
 <div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Diğer gezegenler</div>
 <div class="sidebar sidebar_ic" align="left">
-{% for link in site.links.all %}<img src="/media/img/other_planets.png" border="0" style="vertical-align: -4px;" /> <a class="sari" href="{{ link.link }}">{{ link.name }}</a><br/>{% endfor %}
+{% for link in site.links.all %}<img src="/media/img/other_planets.png" border="0" style="vertical-align: -4px;" /> <a href="{{ link.link }}">{{ link.name }}</a><br/>{% endfor %}
 </div>
 {% endif %}
 <div class="sidebar sidebar_alt_img">&nbsp;</div>

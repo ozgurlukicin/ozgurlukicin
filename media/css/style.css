@@ -60,6 +60,27 @@ h3, .orange h4, .orange h5, .orange h6 {
 	color:#707070;
 }
 
+span {
+    color: #51798E;
+}
+
+a:link {
+    color: #51798E;
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:visited {
+    color: #375261;
+}
+
+a:active {
+    color: #375261;
+}
+
 /*sorry the name is not meaningful*/
 .sari{
 	color:#51798E;
@@ -244,7 +265,7 @@ h3, .orange h4, .orange h5, .orange h6 {
     margin-left: 75px;
     height: 80px;
     width: 80px;
-    font-size: 36px;
+    font-size: 30px;
     text-align: center;
     padding-top: 32px;
     margin-bottom: -30px;
