@@ -92,6 +92,7 @@ urlpatterns = patterns('',
     
 
     #Packages
+    (r'^paket/yorum/(?P<slug>.*)/$', 'oi.st.views.comment_package'),
     (r'^paket/$', 'django.views.generic.list_detail.object_list', dict(package_dict)),
     (r'^paket/(?P<slug>.*)/yazdir/$', 'oi.st.views.pkg_printable'),
     (r'^paket/(?P<slug>.*)/$', 'oi.st.views.pkg_detail'),
@@ -107,11 +108,13 @@ urlpatterns = patterns('',
     (r'^ia/(?P<slug>.*)/$', 'oi.st.views.fs_detail'),
 
     #How to
+    (r'^nasil/yorum/(?P<slug>.*)/$', 'oi.st.views.comment_howto'),
     (r'^nasil/$', 'django.views.generic.list_detail.object_list', dict(howto_dict)),
     (r'^nasil/(?P<slug>.*)/yazdir/$', 'oi.st.views.howto_printable'),
     (r'^nasil/(?P<slug>.*)/$', 'oi.st.views.howto_detail'),
 
     #Games
+    (r'^oyun/yorum/(?P<slug>.*)/$', 'oi.st.views.comment_game'),
     (r'^oyun/$', 'django.views.generic.list_detail.object_list', dict(game_dict)),
     (r'^oyun/(?P<slug>.*)/yazdir/$', 'oi.st.views.game_printable'),
     (r'^oyun/(?P<slug>.*)/$', 'oi.st.views.game_detail'),

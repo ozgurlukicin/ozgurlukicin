@@ -31,6 +31,17 @@
 </div>
 <div class="page_properties"><a href="{{ package.get_printable_url }}"><img src="/media/img/print.png" /></a></div>
 <div class="page_last_update">Son güncelleme: {{ package.update|timedelta }}</div>
+			
+				{% if auth %}
+		{% if form %}
+			<form method="post" action="/paket/yorum/{{package.slug}}/">
+								
+				{{form}}
+				<input type="submit" value="Yolla">
+			</form>
+		{% endif %}
+	{% endif %}
+
 {% endblock %}
 
 {% block sidebartop %}{% endblock %}

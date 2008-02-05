@@ -42,6 +42,12 @@ def fs_printable(request, slug):
 
 def howto_detail(request, slug):
     howto = get_object_or_404(HowTo, slug=slug)
+    
+    form=CommentForm()
+
+    if request.user.is_authenticated():
+        auth=True
+
     return render_response(request, 'howto/howto_detail.html', locals())
 
 def howto_printable(request, slug):
@@ -51,6 +57,12 @@ def howto_printable(request, slug):
 def game_detail(request, slug):
     game = get_object_or_404(Game, slug=slug)
     game.avg = ((game.gameplay + game.graphics + game.sound + game.scenario + game.atmosphere)/5.0)
+    
+    form=CommentForm()
+
+    if request.user.is_authenticated():
+        auth=True
+
     return render_response(request, 'game/game_detail.html', locals())
 
 def game_printable(request, slug):
@@ -73,6 +85,12 @@ def news_printable(request, slug):
 
 def pkg_detail(request, slug):
     package = get_object_or_404(Package, slug=slug)
+    
+    form=CommentForm()
+
+    if request.user.is_authenticated():
+        auth=True
+    
     return render_response(request, 'package/package_detail.html', locals())
 
 def pkg_printable(request, slug):
@@ -173,3 +191,128 @@ def comment_news(request,slug):
     return render_response(request,'news/news_detail.html',{'news':news,'tags':tags,'form':form,'auth':True})
 
     #do something here
+    
+
+@login_required
+def comment_howto(request,slug):
+    """ When someone comments it is adde to forum (check for flooding also !)...
+    validate the html tags all for now...(may change!)
+    """
+    howto = get_object_or_404(HowTo, slug=slug)
+    #news = News.objects.filter(id=id)
+
+    if request.method== 'POST':
+        new_data = request.POST.copy()
+        form=CommentForm(new_data)
+
+        #flood control
+        flood,timeout = flood_control(request)
+
+        if form.is_valid() and not flood:
+            t=Topic.objects.filter(title=howto.title)
+            if not t:
+                tags = howto.tags.all()
+                return render_response(request,'howto/howto_detail.html',{'howto':howto,'tags':tags,'form':form,'auth':True})
+
+            post = Post(topic=t[0],
+                        author=request.user,
+                        text=form.clean_data['yorum'])
+            try:
+                post.save()
+            except Exception:
+                render_to_response('db_error.html')
+
+            return HttpResponseRedirect(post.get_absolute_url())
+        else:
+            #hata mesaji gonder
+            tags = howto.tags.all()
+            return render_response(request,'howto/howto_detail.html',{'howto':howto,'tags':tags,'form':form,'auth':True})
+
+    form=CommentForm()
+    tags = howto.tags.all()
+    return render_response(request,'howto/howto_detail.html',{'howto':howto,'tags':tags,'form':form,'auth':True})
+
+    #do something here
+    
+@login_required
+def comment_game(request,slug):
+    """ When someone comments it is adde to forum (check for flooding also !)...
+    validate the html tags all for now...(may change!)
+    """
+    game = get_object_or_404(Game, slug=slug)
+    #news = News.objects.filter(id=id)
+
+    if request.method== 'POST':
+        new_data = request.POST.copy()
+        form=CommentForm(new_data)
+
+        #flood control
+        flood,timeout = flood_control(request)
+
+        if form.is_valid() and not flood:
+            t=Topic.objects.filter(title=game.title)
+            if not t:
+                tags = game.tags.all()
+                return render_response(request,'game/game_detail.html',{'game':game,'tags':tags,'form':form,'auth':True})
+
+            post = Post(topic=t[0],
+                        author=request.user,
+                        text=form.clean_data['yorum'])
+            try:
+                post.save()
+            except Exception:
+                render_to_response('db_error.html')
+
+            return HttpResponseRedirect(post.get_absolute_url())
+        else:
+            #hata mesaji gonder
+            tags = game.tags.all()
+            return render_response(request,'game/game_detail.html',{'game':game,'tags':tags,'form':form,'auth':True})
+
+    form=CommentForm()
+    tags = game.tags.all()
+    return render_response(request,'game/game_detail.html',{'game':game,'tags':tags,'form':form,'auth':True})
+
+    #do something here
+    
+@login_required
+def comment_package(request,slug):
+    """ When someone comments it is adde to forum (check for flooding also !)...
+    validate the html tags all for now...(may change!)
+    """
+    package = get_object_or_404(Package, slug=slug)
+    #news = News.objects.filter(id=id)
+
+    if request.method== 'POST':
+        new_data = request.POST.copy()
+        form=CommentForm(new_data)
+
+        #flood control
+        flood,timeout = flood_control(request)
+
+        if form.is_valid() and not flood:
+            t=Topic.objects.filter(title=package.title)
+            if not t:
+                tags = package.tags.all()
+                return render_response(request,'package/package_detail.html',{'package':package,'tags':tags,'form':form,'auth':True})
+
+            post = Post(topic=t[0],
+                        author=request.user,
+                        text=form.clean_data['yorum'])
+            try:
+                post.save()
+            except Exception:
+                render_to_response('db_error.html')
+
+            return HttpResponseRedirect(post.get_absolute_url())
+        else:
+            #hata mesaji gonder
+            tags = package.tags.all()
+            return render_response(request,'package/package_detail.html',{'package':package,'tags':tags,'form':form,'auth':True})
+
+    form=CommentForm()
+    tags = package.tags.all()
+    return render_response(request,'package/package_detail.html',{'package':package,'tags':tags,'form':form,'auth':True})
+
+    #do something here
+

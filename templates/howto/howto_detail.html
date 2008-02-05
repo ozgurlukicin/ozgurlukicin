@@ -31,6 +31,17 @@
 </div>
 <div class="page_properties"><a href="{{ howto.get_printable_url }}"><img src="/media/img/print.png" /></a></div>
 <div class="page_last_update">Son güncelleme: {{ howto.update|timedelta }}</div>
+	
+	{% if auth %}
+		{% if form %}
+			<form method="post" action="/nasil/yorum/{{howto.slug}}/">
+								
+				{{form}}
+				<input type="submit" value="Yolla">
+			</form>
+		{% endif %}
+	{% endif %}
+	
 {% endblock %}
 
 {% block sidebar %}

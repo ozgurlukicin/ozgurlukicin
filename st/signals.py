@@ -21,7 +21,22 @@ def open_forum_topic(sender, instance, signal, *args, **kwargs):
     from oi.middleware import threadlocals
 
     user=User.objects.filter(username=threadlocals.get_current_user())
-    forum=Forum.objects.filter(name="Haberler")
+    
+    #gerekenler :howto,game,package,news ??? _meta.module_name
+    
+    #lets make it more flexible:
+    if instance._meta.module_name=="howto":
+        name="Nasıl"
+    elif instance._meta.module_name=="game":
+        name="Oyunlar"
+        
+    elif instance._meta.module_name=="package":
+        name="Paketler"
+        
+    elif instance._meta.module_name=="news":
+        name="Haberler"
+        
+    forum=Forum.objects.filter(name=name)
 
     ch=sender.objects.filter(id=instance.id)
     #if it is a new newss
@@ -29,7 +44,7 @@ def open_forum_topic(sender, instance, signal, *args, **kwargs):
         if instance.status and forum and user:
 
             topic = Topic(forum=forum[0],
-                                  title=instance.title #news title
+                                  title=instance.title #or any
                                  )
             topic.save()
 

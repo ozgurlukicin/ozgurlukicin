@@ -248,6 +248,8 @@ class HowTo(models.Model):
         verbose_name = "Nasıl"
         verbose_name_plural = "Nasıl Belgeleri"
 
+dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=HowTo)
+
 class Game(models.Model):
     ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'))
 
@@ -298,6 +300,8 @@ class Game(models.Model):
     class Meta:
         verbose_name = "Oyun"
         verbose_name_plural = "Oyunlar"
+        
+dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=Game)
 
 class News(models.Model):
     title = models.CharField('Başlık', maxlength=32, blank=False)
@@ -380,6 +384,8 @@ class Package(models.Model):
     class Meta:
         verbose_name = "Paket"
         verbose_name_plural = "Paketler"
+        
+dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=Package)
 
 class PardusVersion(models.Model):
     number = models.CharField('Sürüm numarası', maxlength = 16, blank = False, unique = True)
