@@ -1,12 +1,4 @@
 
-{% block pagetype %}page-single{% endblock %}
-
-{% block section %}forum{% endblock %}
-{% block section_logo %}<img src="/media/img/forum_header_logo.png">{% endblock %}
-
-
-
-
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
 <script language="javascript" type="text/javascript">
 tinyMCE.init({
@@ -17,7 +9,7 @@ tinyMCE.init({
 });
 </script>
 
-
+{% extends "forum/forum_base.html" %}
 {% block content %}
 {% if user.is_authenticated %}
 {% if flood %}Flood yapma lan, {{ timeout }}sn var.{% endif %}
@@ -30,9 +22,9 @@ tinyMCE.init({
     {% if field.errors %}<dd class="myerrors">{{ field.errors }}</dd>{% endif %}
 {% endfor %}
 </dl>
-<input type="submit" value="Send">
+<input type="submit" value="Konu Aç">
 </form>
 {% else %}
-<p>You must be signed in to send a reply.</p>
+<p>Başlık açmak için oturum açmanız gerekiyor.</p>
 {% endif %}
 {% endblock %}
