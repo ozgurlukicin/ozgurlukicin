@@ -29,7 +29,6 @@ def home(request):
     news = News.objects.filter(status=1).order_by('-update')[:NEWS_IN_HOMEPAGE]
     packages = Package.objects.filter(status=1).order_by('-update')[:PACKAGES_IN_HOMEPAGE]
     games = Game.objects.filter(status=1).order_by('-update')[:GAMES_IN_HOMEPAGE]
-    fss = FS.objects.filter(status=1).order_by('-update')[:FS_IN_HOMEPAGE]
     howtos = HowTo.objects.filter(status=1).order_by('-update')[:HOWTOS_IN_HOMEPAGE]
     return render_response(request, 'home.html', locals())
 

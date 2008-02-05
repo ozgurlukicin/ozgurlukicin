@@ -25,14 +25,6 @@
             {% endfor %}
         </div>		
 
-        <div id="fs_container">
-            {% for fs in fss %}
-            <div id="fs-{{ fs.id }}" class="fs {% cycle alignleft,alignright %}">
-                <div class="fs_title_mini transparent_link"><span class="sari">İlk adım: </span><a href="{{ fs.get_absolute_url }}">{{ fs.title }}</a></div>
-                <div class="fs_content_mini grey">{{ fs.sum }}</div>
-            </div>
-            {% endfor %}
-        </div>
         <br />
         <div id="howto_container">
             {% for howto in howtos %}
