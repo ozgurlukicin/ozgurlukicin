@@ -36,7 +36,7 @@
 {% block sidebar %}
 <div class="sidebar sidebar_top_img">&nbsp;</div>
 <div class="sidebar sidebar_baslik">Etiketler</div>
-<div class="sidebar sidebar_ic">{% for tag in howto.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
+<div class="sidebar sidebar_ic"><img src="/media/img/tag.png" style="vertical-align: middle;" /> {% for tag in howto.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
 <div class="sidebar sidebar_alt_img">&nbsp;</div>
 
 {% if howto.wiki.all %}
