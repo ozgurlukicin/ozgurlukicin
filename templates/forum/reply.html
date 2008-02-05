@@ -1,11 +1,4 @@
 {% load library %}
-
-{% block pagetype %}page-single{% endblock %}
-
-{% block section %}forum{% endblock %}
-{% block section_logo %}<img src="/media/img/forum_header_logo.png">{% endblock %}
-
-
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
 <script language="javascript" type="text/javascript">
 tinyMCE.init({
@@ -18,12 +11,12 @@ tinyMCE.init({
 
 
 
-
+{% extends "forum/forum_base.html" %}
 {% block content %}
 
 
 {% if user.is_authenticated %}
-{% if flood %}Flood yapma lan, {{ timeout }}sn var.{% endif %}
+{% if flood %}Flood koruması aktif, lütfen {{ timeout }}saniye bekleyin.{% endif %}
 <form action="" method="POST">
 <dl>
 {% for field in form %}
