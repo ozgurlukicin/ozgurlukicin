@@ -224,3 +224,29 @@ body {
 color : #000000;
 text-decoration: none;
 }
+
+
+/* taken from django trac and modified */
+/* input, textarea, select { margin: 2px } */
+
+input[type=button], input[type=submit], input[type=reset] {
+    background-color: #EEEEEE;
+    color: #222222;
+    border: 1px outset #CCCCCC;
+    padding: .1em .5em;
+}
+
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
+     background-color: #6992AE;
+     color: #FFFFFF;
+}
+
+input[type=text], input[type=password], textarea {
+    padding: 2px;
+    border: 1px solid #D7D7D7
+}
+
+input[type=text]:focus, input[type=password]:focus, textarea:focus {
+    padding: 2px;
+    border: 1px solid #45586F;
+}
