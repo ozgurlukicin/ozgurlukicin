@@ -1,46 +1,28 @@
 {% load library %}
-
+{% extends "forum/forum_base.html" %}
 
 {% block content %}
-<style>
-#forum_header { background-color: #c0c0c0; clear: both; }
-#topic_icon { width: 5%; float: left; }
-#topic_title { width: 40%; float: left; }
-#topic_lastpost { width: 25%; float: left; }
-#topic_posts { width: 10%; float: left; }
-#topic_views { width: 10%; float: left; }
-#topics_item { clear: left; }
-#topics_item_icon { width: 5%; float: left; }
-#topics_item_title { width: 40%; float: left; }
-#topics_item_lastpost { width: 25%; float: left; }
-#topics_item_posts { width: 10%; float: left; }
-#topics_item_views { width: 10%; float: left; }
-</style>
 
 <div id="forum_path" style="float: left;">Forum > {{ forum.name }}</div>
 <div style="float: right;"><a href="/forum/{{ forum.slug }}/new/">new topic</a></div>
 <br><br>
 
 <div id="forum_header">
-    <span id="topic_icon">&nbsp;</span>
+    <span id="topic_icon">Icon</span>
     <span id="topic_title">Konu</span>
     <span id="topic_lastpost">Son İleti</span>
     <span id="topic_posts">İletiler</span>
     <span id="topic_views">Görüntüleme</span>
-	<span id="topic_views">RSS</span>
-	<span id="topic_views">ATOM</span>
 </div>
-
+<br/>
 <div id="forum_topics">
     {% for topic in topic_list %}
     <div id="topics_item" {% if topic.hidden and perms.forum.can_see_hidden_topics %}style="opacity: 0.5;"{% endif %}>
-        <div id="topics_item_icon">{% if topic.locked %}L{% endif %}{% if topic.sticky %}S{% endif %}&nbsp;</div>
+        <div id="topics_item_icon">{% if topic.locked %}L{% endif %}{% if topic.sticky %}S{% endif %}<img src="/media/dijital/img/forum/eski_konu.gif" /></div>
         <div id="topics_item_title"><a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a></div>
         <div id="topics_item_lastpost"><a href="{{ topic.topic_latest_post.get_absolute_url }}">{{ topic.topic_latest_post.author }}</a> tarafından {{ topic.topic_latest_post.edited|timedelta }}</div>
         <div id="topics_item_posts">{{ topic.posts }}</div>
         <div id="topics_item_views">{{ topic.views }}</div>
-		<div id="topics_item_icon"><a href="/forum/feed/topic/rss/{{topic.id}}/">RSS</a></div>
-        <div id="topics_item_icon"><a href="/forum/feed/topic/atom/{{topic.id}}/">ATOM</a></div>
     </div>
     {% endfor %}
 </div>
