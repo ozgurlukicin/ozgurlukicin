@@ -1,4 +1,4 @@
-
+{% extends "forum/forum_base.html" %}
 
 {% block content %}
 <strong><a href="{{ forum.category.get_absolute_url }}">{{ forum.category.name }}</a> > <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> > {{ topic.title }}</strong><br /><br />

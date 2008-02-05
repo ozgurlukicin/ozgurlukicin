@@ -169,16 +169,16 @@ body {
 /*The topic list part is here */
 
 #forum_header { background:url(/media/dijital/img/forum/forum_bar.gif); }
-#topic_icon { width: 5%; float: left; }
-#topic_title {  width: 25%; float: left; }
-#topic_lastpost { width: 25%; float: left; }
+#topic_icon { width: 10%; float: left; }
+#topic_title {  width: 35%; float: left; }
+#topic_lastpost { width: 35%; float: left; }
 #topic_posts { width: 10%; float: left; }
 #topic_views { width: 10%; float: left; }
 #topics_item { float: left; clear: left; width: 100%;}
-#topics_item_icon { width: 5%; float: left; }
-#topics_item_title { width: 30%; float: left; }
+#topics_item_icon { width: 10%; float: left; }
+#topics_item_title { width: 35%; float: left; }
 #topics_item_lastpost { width: 45%; float: left; }
-#topics_item_posts { width: 10%; float: left; }
-#topics_item_views { width: 10%; float: left; }
+#topics_item_posts { width: 5%; float: left; }
+#topics_item_views { width: 5%; float: left; }
 
 /*Also ends here*/
