@@ -56,7 +56,8 @@ howto_dict = {
               'queryset': HowTo.objects.filter(status=1).order_by('title'),
               'template_name': 'howto/howto_main.html',
               'paginate_by': HOWTO_PER_PAGE,
-              'template_object_name': 'howto'
+              'template_object_name': 'howto',
+              'extra_context': {'firststep': FS.objects.filter(status=1).order_by('order')[:10]},
              }
 
 news_dict = {
