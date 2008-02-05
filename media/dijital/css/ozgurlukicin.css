@@ -227,7 +227,7 @@ text-decoration: none;
 
 
 /* taken from django trac and modified */
-/* input, textarea, select { margin: 2px } */
+input, textarea, select { margin: 2px }
 
 input[type=button], input[type=submit], input[type=reset] {
     background-color: #EEEEEE;
