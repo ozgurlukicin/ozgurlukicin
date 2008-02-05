@@ -18,9 +18,9 @@
 }
 
 #content {
-    padding: 10px 0px 20px 10px;
+    padding: 0px 0px 20px 0px;
     float: left;
-    width: 99%;
+    width: 100%;
 	
 }
 
@@ -182,3 +182,8 @@ body {
 #topics_item_views { width: 5%; float: left; }
 
 /*Also ends here*/
+
+/* Topic page part is here*/
+#forum_editor { background:url(/media/dijital/img/forum/forum_bar.gif); }
+#forum_adres { background:url(/media/dijital/img/forum/forum_bar.gif); }
+/* Ends here*/
