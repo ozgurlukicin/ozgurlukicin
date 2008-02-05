@@ -138,6 +138,9 @@ def search(request):
             fs = FS.objects.filter(tags__name__icontains=term).order_by('-update')
             howto = HowTo.objects.filter(tags__name__icontains=term).order_by('-update')
             flatpages = FlatPage.objects.filter(tags__name__icontains=term).order_by('title')
+            #for forum also
+            topic=Topic.objects.filter(tags__name__icontains=term).order_by('title')
+            
             total = tags.count()
             total += news.count()
             total += packages.count()
@@ -145,7 +148,8 @@ def search(request):
             total += fs.count()
             total += howto.count()
             total += flatpages.count()
-
+            total += topic.count()
+            
     else:
         pass
 
