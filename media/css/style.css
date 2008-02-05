@@ -894,50 +894,50 @@ h6 {
 
 .paginator .prev-na,
 .paginator .next-na {
-	padding:.3em;
-	font:bold .875em arial;
+    padding:.3em;
+    font:bold .875em arial;
 }
- 
+
 .paginator .prev-na,
 .paginator .next-na {
-	border:1px solid #ccc;
-	background-color:#f9f9f9;
-	color:#aaa;
-	font-weight:normal;
+    border:1px solid #CCCCCC;
+    background-color:#F9F9F9;
+    color:#AAAAAA;
+    font-weight:normal;
 }
- 
+
 .paginator .prev a, .paginator .prev a:visited,
 .paginator .next a, .paginator .next a:visited {
-	border:1px solid #c2ee62;
-	background-color:#edfdd0;
-	color:#234f32;
-	padding:.3em;
-	font:bold .875em arial;
+    border:1px solid #CCCCCC;
+    background-color:#EEEEEE;
+    color:#6992AE;
+    padding:.3em;
+    font:bold .875em arial;
 }
 
 .paginator .page a, .paginator .page a:visited, .paginator .curr {
-	padding:.25em;
-	font:normal .875em verdana;
-	border:1px solid #C2EE62;
-	background-color:#EDFDD0;
-	color:#006000;
+    padding:.25em;
+    font:normal .875em verdana;
+    border:1px solid #CCCCCC;
+    background-color:#EEEEEE;
+    color:#6288A2;
 }
- 
+
 .paginator .curr { 
-	background-color:#234f32;
-	color:#fff;
-	border:1px solid #234f32;
-	font-weight:bold;
-	font-size:1.2em;
+    background-color:#4E6D81;
+    color: #FFFFFF;
+    border:1px solid #CCCCCC;
+    font-weight:bold;
+    font-size:1.2em;
 }
- 
+
 .paginator .page a:hover,
 .paginator .curr a:hover,
 .paginator .prev a:hover,
 .paginator .next a:hover {
-	color:#fff;
-	background-color:#234f32;
-	border:1px solid #234f32;
+    color:#FFFFFF;
+    background-color:#6992AE;
+    border:1px solid #234F32;
 }
 
 label {
