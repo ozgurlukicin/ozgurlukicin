@@ -1,25 +1,9 @@
-
-
 {% load library %}
 {% extends "forum/forum_base.html" %}
 
 {% block content %}
 
 
-{% if not user.is_authenticated %}
-        <form method="post" action="/kullanici/giris/">
-            <input type="text" id="id_username" name="username" size="8" class="vTextField required" value="" maxlength="30" /><br />
-            <input type="password" id="id_password" name="password" size="8" class="vPasswordField required" value="" maxlength="30" /><br />
-            <input type="hidden" name="next" value="{{next}}" />
-            <input type="submit" value="giriş" id="form_submit" />
-        </form>
-		
-		<a href="/kullanici/kayit/">Kayit Ol</a>|<a href="/kullanici/kayip/">Kayip parola?</a><a href="/">Ana sayfa</a>
-        {% else %}
-            Hoşgeldin <b>{{ user.username }}</b>!<br />
-            <br />İstiyorsan profil sayfana <a class="sari" href="/kullanici/duzenle/">buradan</a> ulaşabilir veya <a class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsin. Yada : <a href="/">Ana sayfa</a>
-        
-{% endif %}
 <div id="forum_header">
     <span id="forum_icon">&nbsp;</span>
     <span id="forum_name">Forum</span>
@@ -33,7 +17,7 @@
 <div id="category_forums">
     {% for forum in category.forum_set.all %}
     <div id="category_forums_item" {% if forum.hidden and perms.forum.can_see_hidden_forums %}style="opacity: 0.5;"{% endif %}>
-        <div id="category_forums_item_icon">icon</div>
+        <div id="category_forums_item_icon"><img src="/media/dijital/img/forum/eski_konu.gif" /></div>
         <div id="category_forums_item_title"><a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a></div>
         <div id="category_forums_item_lastpost"><a href="{{ forum.forum_latest_post.get_absolute_url }}">{{ forum.forum_latest_post.topic.title }}</a> {{ forum.forum_latest_post.author }} tarafından {{ forum.forum_latest_post.edited|timedelta }}</div>
         <div id="category_forums_item_topics">{{ forum.topics }}</div>
