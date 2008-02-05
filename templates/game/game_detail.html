@@ -56,7 +56,7 @@
     <strong><span class="sari">Lisans:</span></strong> {% for license in game.license.all %}<a href="{{ license.url }}"><span class="gri" >{{ license.name }}</span></a> {% endfor %}<br />
     <strong><span class="sari">Paket boyutu:</span></strong> <span class="gri" >{{ game.download_size|filesizeformat }}</span><br />
     <strong><span class="sari">Kurulu boyutu:</span></strong><span class="gri" > {{ game.installed_size|filesizeformat }}</span><br />
-    <strong><a href="{{ game.url }}"><strong><span class="sari">Web sitesi</span></strong></a><br />
+    <a href="{{ game.url }}"><strong><span class="sari">Web sitesi</span></strong></a><br />
 </div>
 <div class="sidebar sidebar_alt_img">&nbsp;</div>
 
