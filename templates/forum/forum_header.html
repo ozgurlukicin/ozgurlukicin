@@ -1,6 +1,6 @@
 <div id="page">
 
-	<div id="header" style="padding-top:100px;">
+	<div id="header" style="padding-top:100px; padding-left:10px; font-size:16px;">
 	{% if not user.is_authenticated %}
         <form method="post" action="/kullanici/giris/">
             <input type="text" id="id_username" name="username" size="18" class="vTextField required" value="" maxlength="30" />
@@ -12,7 +12,7 @@
 		<a href="/kullanici/kayit/">Kayıt Ol</a> | <a href="/kullanici/kayip/">Kayıp parola?</a> <a href="/">Ana sayfa</a>
         {% else %}
             Hoşgeldin <b>{{ user.username }}</b>!<br />
-            <br />İstiyorsan profil sayfana <a href="/kullanici/duzenle/">buradan</a> ulaşabilir veya <a class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsin. Yada : <a href="/">Ana sayfa</a>
+            Profil sayfanıza <a href="/kullanici/duzenle/">buradan</a> ulaşabilir veya <a class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.
 
 {% endif %}
 	</div>
