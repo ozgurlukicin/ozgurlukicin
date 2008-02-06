@@ -102,10 +102,11 @@ def user_register(request):
 
             now = datetime.datetime.now()
             (date, hour) = now.isoformat()[:16].split("T")
+
             email_dict = {'date': date,
                     'hour': hour,
                     'ip': request.META['REMOTE_ADDR'],
-                    'user': form.clean_data['username'],
+                    'user': user.username,
                     'link': 'http://www.ozgurlukicin.com/kullanici/onay/%s/%s' % (form.clean_data['username'], activation_key)}
 
             email_subject = u"Ozgurlukicin.com Kullanıcı Hesabı, %(user)s"
@@ -118,7 +119,7 @@ Teşekkürler,
 Ozgurlukicin.com"""
             email_to = form.clean_data['email']
 
-            send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, email_to, fail_silently=True)
+            send_mail(email_subject % email_dict, email_body % email_dict, DEFAULT_FROM_EMAIL, email_to, fail_silently=True)
 
             return render_response(request, 'user/register_done.html', {'form': form,
                                                                    'user': form.clean_data['username']})
