@@ -8,12 +8,12 @@
 
 /* header */
 #header {
-    background:url(/media/dijital/img/forum/header.jpg); 
+    background:url(/media/dijital/img/forum/header.png); 
 }
 
 #page {
     margin: 0px auto;
-    width: 833px;
+    width: 900px;
 
 }
 
@@ -21,7 +21,7 @@
     padding: 0px 0px 20px 0px;
     float: left;
     width: 100%;
-	
+    background-color:#FFFFFF;	
 }
 
 .page_title {
@@ -87,11 +87,14 @@
 body {
     font: 75%/150% "Trebuchet MS", Tahoma, Arial;
     color: #333333;
-    background: #FFFFFF; 
-/* 	url('/media/dijital/img/bg.jpg'); */
     margin: 0px;
     padding: 0px 0px 30px;
-}
+    background-color:#FFFFFF;
+    background-image:url(/media/dijital/img/bg.jpg);
+    background-repeat:repeat-x;
+margin:0px;
+    
+    }
 
 
 /** PAGINATOR **/
