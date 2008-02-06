@@ -124,8 +124,19 @@ class RegisterForm(forms.Form):
         if len(u) > 0:
             raise forms.ValidationError(u"Bu kullanıcı adı daha önce alınmış")
 
-        return self.clean_data['username']
+        return field_data
 
+    def clean_email(self):
+        field_data = self.clean_data['email']
+
+        if not field_data:
+            return ''
+
+        u = User.objects.filter(email=field_data)
+        if len(u) > 0:
+            raise forms.ValidationError(u"Bu e-posta adresi ile daha önceden kayıt yapılmış")
+
+        return field_data
 
     def clean_password_again(self):
         field_data = self.clean_data['password_again']
