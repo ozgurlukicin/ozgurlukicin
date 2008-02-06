@@ -154,7 +154,7 @@ body {
 #forum_icon { width: 5%; float: left; }
 #forum_name { width: 30%; float: left; }
 #forum_lastpost { width: 45%; float: left; }
-#forum_topics { width: 7%; float: left; }
+#forum_topics { width: 10%; float: left; }
 #forum_posts { width: 10%; float: left; }
 #category { float: left; clear: left; width: 100%; }
 #category_title { background:url(/media/dijital/img/forum/forum_bar.gif); }
@@ -168,6 +168,7 @@ body {
 
 /*The topic list part is here */
 
+#forum_topic { width: 100%; float: left; }
 #forum_header { background:url(/media/dijital/img/forum/forum_bar.gif); }
 #topic_icon { width: 10%; float: left; }
 #topic_title {  width: 35%; float: left; }
@@ -177,9 +178,9 @@ body {
 #topics_item { float: left; clear: left; width: 100%;}
 #topics_item_icon { width: 10%; float: left; }
 #topics_item_title { width: 35%; float: left; }
-#topics_item_lastpost { width: 45%; float: left; }
-#topics_item_posts { width: 5%; float: left; }
-#topics_item_views { width: 5%; float: left; }
+#topics_item_lastpost { width: 35%; float: left; }
+#topics_item_posts { width: 10%; float: left; }
+#topics_item_views { width: 10%; float: left; }
 
 /*Also ends here*/
 
@@ -187,26 +188,3 @@ body {
 #forum_editor { background:url(/media/dijital/img/forum/forum_bar.gif); }
 #forum_adres { background:url(/media/dijital/img/forum/forum_bar.gif); }
 /* Ends here*/
-
-/* Taken From original css*/
-input[type=button], input[type=submit], input[type=reset] {
-background-color: #EEEEEE;
-color: #222222;
-border: 1px outset #CCCCCC;
-padding: .1em .5em;
-}
-
-input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
-background-color: #6992AE;
-color: #FFFFFF;
-}
-
-input[type=text], input[type=password], textarea {
-padding: 2px;
-border: 1px solid #D7D7D7
-}
-
-input[type=text]:focus, input[type=password]:focus, textarea:focus {
-padding: 2px;
-border: 1px solid #45586F;
-}

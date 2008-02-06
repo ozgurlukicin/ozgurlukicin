@@ -14,7 +14,7 @@
     <span id="topic_views">Görüntüleme</span>
 </div>
 <br/>
-<div id="forum_topics">
+<div id="forum_topic">
     {% for topic in topic_list %}
 
     {% if topic.hidden and not perms.forum.can_see_hidden_topics %}
