@@ -28,7 +28,7 @@
     <tr>
       <td style="width: 189px;" valign=TOP>
       	{{ post.author }}<br/>
-				{{ post.author.avatar }}<br/>
+				<!-- post.author.avatar buraya gelecek --><img src="/media/dijital/img/forum/avatar.jpg" /><br/>
 				{% if perms.forum.can_see_post_ip %} ({{ post.ip }})<br/>{% endif %}
 				Kayit Tarihi : {{ post.author.date_joined }}<br/>
 				<a href="/kullanici/duzenle/"><img src="/media/dijital/img/forum/bilgi.jpg" border="0"</a><br/>
@@ -78,7 +78,7 @@
 				{% if perms.forum.can_hide_post and not forloop.first and not post.hidden %}<a href="{{ post.get_hide_url }}">hide</a>{% endif %}
 				{% if perms.forum.can_hide_post and not forloop.first and post.hidden %}<a href="{{ post.get_hide_url }}">unhide</a>{% endif %}
 
-				{% if perms.forum.delete_post and not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>
+				{% if perms.forum.delete_post and not forloop.first %}<a href="{{ post.get_delete_url }}"><img src="/media/dijital/img/forum/sil.gif" border="0" /></a>
 		
 			{% else %}
 <!-- end forum_editor div -->
@@ -86,7 +86,7 @@
 
 			{% ifequal post.author.id request.user.id %}
 				{% ifequal post topic.topic_latest_post %}
-					{% if not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>
+                                {% if not forloop.first %}<a href="{{ post.get_delete_url }}"><img src="/media/dijital/img/forum/sil.gif" border="0" /></a>
 					{% endif %}
 			{% endifequal %}
 			{% endifequal %}
