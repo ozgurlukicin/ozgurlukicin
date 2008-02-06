@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<div id="forum_adres"><strong><a href="{{ forum.category.get_absolute_url }}">{{ forum.category.name }}</a> > <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> > {{ topic.title }}</strong></div><br /><br />
+<div id="forum_adres"><strong><a href="{{ forum.category.get_absolute_url }}">{{ forum.category.name|striptags }}</a> > <a href="{{ forum.get_absolute_url }}">{{ forum.name|striptags }}</a> > {{ topic.title|striptags }}</strong></div><br /><br />
 
 {% for post in posts %}
 
@@ -18,26 +18,46 @@
 <div id="author_info">{{ post.author.avatar }} {{ post.author }}{% if perms.forum.can_see_post_ip %} ({{ post.ip }}){% endif %}</div>
 <div style="padding-top: 10px;">{{ post.text|linebreaksbr }}<br />
 {% ifnotequal post.edit_count 0 %}<br />Bu ileti {{ post.edit_count }} kez değiştirilmiş olup, son kez {{ post.edited }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.<br />{% endifnotequal %}
-</div>
 
-<br /><div id="forum_editor">{% if forloop.first %}
+<br />{% if forloop.first %}
         Etiketler :{% for tag in topic.tags.all %}
             <a href="/etiket/{{tag.name}}/">{{tag.name}}</a> |
         {% endfor %}
 
-    <br/>
-    <br/>
- {% if perms.forum.change_topic %}{% if not topic.locked %}<a href="{{ topic.get_edit_url }}">edit</a>{% endif %}{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ topic.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% else %}{% if perms.forum.change_post %}<a href="{{ post.get_edit_url }}">edit</a>{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% endif %} {% if not topic.locked %}<a href="{{ post.get_quote_url }}">quote</a>{% endif %}
+    <br/><br/>
+
+</div>
+<div id="forum_editor">
+
+ {% if perms.forum.change_topic %}
+	
+	{% if not topic.locked %}<a href="{{ topic.get_edit_url }}">edit</a>{% endif %}
+	{% else %}
+	
+		{% ifequal post.author.id request.user.id %}<a href="{{ topic.get_edit_url }}">edit</a>{% endifequal %}
+	{% endif %}
+</div>
+<div id="forum_editor">
+		{% else %}
+		{% if perms.forum.change_post %}<a href="{{ post.get_edit_url }}">edit</a>
+			{% else %}
+				{% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}">edit</a>{% endifequal %}
+			{% endif %}
+		{% endif %} 
+	{% if not topic.locked %}<a href="{{ post.get_quote_url }}">quote</a>{% endif %}
+
 
 {% if perms.forum.can_hide_post and not forloop.first and not post.hidden %}<a href="{{ post.get_hide_url }}">hide</a>{% endif %}
 {% if perms.forum.can_hide_post and not forloop.first and post.hidden %}<a href="{{ post.get_hide_url }}">unhide</a>{% endif %}
 
 {% if perms.forum.delete_post and not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>{% else %}
-{% ifequal post.author.id request.user.id %}{% ifequal post topic.topic_latest_post %}{% if not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>{% endif %}{% endifequal %}{% endifequal %}
-{% endif %}
-
 <!-- end forum_editor div -->
 </div>
+
+{% ifequal post.author.id request.user.id %}{% ifequal post topic.topic_latest_post %}{% if not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>{% endif %}{% endifequal %}{% endifequal %}
+	
+{% endif %}
+
 
 {% endif %}
 
@@ -45,6 +65,7 @@
 </div>
 {% endfor %}
 <hr>
+<div id="forum_editor">
 {% if perms.forum.can_merge_topic %}<a href="{{ topic.get_merge_url }}">merge</a> - {% endif %}
 {% if perms.forum.can_hide_topic and not topic.hidden %}<a href="{{ topic.get_hide_url }}">hide</a> - {% endif %}
 {% if perms.forum.can_hide_topic and topic.hidden %}<a href="{{ topic.get_hide_url }}">unhide</a> - {% endif %}
@@ -52,6 +73,7 @@
 {% if perms.forum.can_stick_topic and topic.sticky %}<a href="{{ topic.get_stick_url }}">unstick</a> - {% endif %}
 {% if perms.forum.can_lock_topic and not topic.locked %}<a href="{{ topic.get_lock_url }}">lock</a>{% endif %}
 {% if perms.forum.can_lock_topic and topic.locked %}<a href="{{ topic.get_lock_url }}">unlock</a>{% endif %} - {% if not topic.locked %}<a href="{{ topic.get_reply_url }}">reply</a>{% endif %}
+</div>
 {% endblock %}
 
 {% block sidebartop %}{% endblock %}
