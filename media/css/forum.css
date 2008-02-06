@@ -188,7 +188,7 @@ margin:0px;
 /*The topic list part is here */
 
 #forum_topic { width: 100%; vertical-align: middle; }
-#forum_header { background:url(/media/dijital/img/forum/forum_bar.gif); height:32px; width:100%; }
+#forum_header { background:url(/media/dijital/img/forum/forum_bar_ciz.gif); height:32px; width:100%; }
 #topic_icon { width: 5%; vertical-align: middle; }
 #topic_title {  width: 30%; vertical-align: middle; }
 #topic_lastpost { width: 45%; vertical-align: middle; }
