@@ -7,6 +7,7 @@
 <link rel="shortcut icon" href="/media/img/favicon.png" />
 
 <style type="text/css" media="screen">@import url('/media/css/forum.css');</style>
+<style type="text/css" media="screen">@import url('/media/dijital/css/ozgurlukicin.css');</style>
 <script type="text/javascript" src="/media/js/mootools.js"></script>
 <script type="text/javascript" src="/media/js/custom.js"></script>
 <script type="text/javascript" src="/media/js/pngfix.js"></script>
@@ -15,14 +16,17 @@
 
 <body>
 
-{% include "forum/forum_header.html" %}
 
+{% include "forum/forum_header.html" %}
 <div id="page">
-    <div id="content">
+	<div id="content">
         {% block content %}
         {% endblock %}
+	
     </div>
 </div>
+
+
 
 </body>
 </html>
