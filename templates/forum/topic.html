@@ -62,10 +62,10 @@
 				
 				|
 				{% if perms.forum.change_post %}
-					<a href="{{ post.get_edit_url }}">edit</a>
+					<a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>
 		
 				{% else %}
-					{% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}">edit</a>{% endifequal %}
+                                {% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>{% endifequal %}
 		
 				{% endif %}
 				|
