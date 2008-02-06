@@ -15,7 +15,7 @@
 {% block ust_menu %}
 	<!-- Burası üst menü kısmı -->
 	{% include "ust_menu_ayrinti.html" %}
-	
+
 {% endblock %}
 <br/>
 
@@ -30,7 +30,7 @@
 	{% if auth %}
 		{% if form %}
 			<form method="post" action="/haber/yorum/{{news.slug}}/">
-								
+
 				{{form}}
 				<input type="submit" value="Yolla">
 			</form>

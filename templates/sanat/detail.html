@@ -3,7 +3,7 @@
 {% load comment_utils %}
 
 {% block content %}
-		<a href="/tema/goster/son/">Tema Anasayfa</a> 
+		<a href="/tema/goster/son/">Tema Anasayfa</a>
 		<table summary="Submitted table designs" border="1" align="center">
 			<caption>Tema Dosyalar</caption>
 			<thead>
@@ -18,22 +18,22 @@
 					<th scope="col">Lisans</th>
 
 					<th scope="col">Görülmüş</th>
-					<th scope="col">Oy</th>	
+					<th scope="col">Oy</th>
 					{% if auth %}
 					<th scope="col">Oy kullan</th>
 					{% endif %}
 				</tr>
-			</thead>	
-			
+			</thead>
+
 			<tbody>
 			{% if dosya %}
-								
+
 					<tr >
 						<th scope="row"><a href="{{dosya.parent_cat.get_absolute_url}}">{{dosya.parent_cat}}</a></th>
 						<td>{{dosya.name}}</td>
 						<td>{{dosya.description}}</td>
 						<td>{% for screen in dosya.screens.all %}
-								<img src="../../../media/{{screen}}" width="100" height="100"/><br/>								
+								<img src="../../../media/{{screen}}" width="100" height="100"/><br/>
 							{% endfor %}
 						</td>
 
@@ -48,24 +48,24 @@
 						{% if auth %}
 						<td>
 							<form method="post" action="/tema/oy/">
-								
+
 								{{form.vote.label}}:{{form.vote}}
 								<input type="hidden" name="dosya_id" value="{{ dosya.id }}" />
 								<button type="submit">Yolla</button>
-						
+
 							</form>
 						{% if error %}
 							<b>{{error}}</b>
 						{% endif %}
 						</td>
-						
-						{% endif %}					
+
+						{% endif %}
 					</tr>
-				
+
 			{% endif %}
-			
+
 </tbody>
-</table> 
+</table>
 
 	<br/>
 	<br/>
@@ -73,7 +73,7 @@
 	{% if auth %}
 	<div align="center">
 	{% comment_form for sanat.dosya dosya.id %}
-	
+
 	</div>
 	{% endif %}
 
@@ -81,7 +81,7 @@
 		<b>Yorum yapabilmek için giriş yapmanız gerekir!</b>
 	{% endif %}
 
-	
+
 
 		{% get_public_comment_list for sanat.dosya dosya.id as comments %}
 		<br/>
@@ -95,17 +95,17 @@
 						<th scope="col">İsim</th>
 						<th scope="col">Yorum</th>
 						<th scope="col">IP</th>
-	
+
 						<th scope="col">Tarih</th>
-						
+
 				</tr>
-	
-				</thead>	
-				
+
+				</thead>
+
 				<tbody>
 			{% for comment in comments %}
-				
-				
+
+
 					<tr >
 							<th scope="row">{{comment.get_absolute_url}}</a></th>
 							<td>{{comment.person_name}}</td>
@@ -113,15 +113,15 @@
 							<td>{{comment.ip_address}}</td>
 							<td>{{comment.submit_date}}</td>
 						</tr>
-			{% endfor %}		
-				
-				
+			{% endfor %}
+
+
 				</tbody>
-				</table>	
-			
-		
+				</table>
+
+
 		{% endif %}
 
-	
+
 
 {% endblock %}
