@@ -222,8 +222,8 @@ class ProfileEditForm(forms.Form):
             return ''
 
 class LostPasswordForm(forms.Form):
-    username = forms.CharField(max_length=30)
-    email = forms.EmailField()
+    username = forms.CharField(label='Kullanıcı adı', max_length=30)
+    email = forms.EmailField(label='E-posta')
 
     def clean_username(self):
         # clean old keys when it's requested
