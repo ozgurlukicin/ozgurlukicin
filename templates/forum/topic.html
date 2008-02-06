@@ -26,28 +26,12 @@
  border="0" cellpadding="2" cellspacing="2">
   <tbody>
     <tr>
-      <td style="width: 189px;">
-      <table style="text-align: left; width: 100%;"
- border="0" cellpadding="2" cellspacing="2">
-        <tbody>
-          <tr>
-            <td>{{ post.author }}</td>
-          </tr>
-          <tr>
-            <td>{{ post.author.avatar }}</td>
-          </tr>
-          <tr>
-            <td>
-			{% if perms.forum.can_see_post_ip %} ({{ post.ip }}){% endif %}</td>
-          </tr>
-          <tr>
-            <td>Kayit Tarihi : {{ post.author.date_joined }}</td>
-          </tr>
-          <tr>
-            <td><a href="/kullanici/duzenle/">Profil</a></td>
-          </tr>
-        </tbody>
-      </table>
+      <td style="width: 189px;" valign=TOP>
+      	{{ post.author }}<br/>
+				{{ post.author.avatar }}<br/>
+				{% if perms.forum.can_see_post_ip %} ({{ post.ip }})<br/>{% endif %}
+				Kayit Tarihi : {{ post.author.date_joined }}<br/>
+				<a href="/kullanici/duzenle/">Profil</a><br/>
       </td>
       <td style="width: 703px;">
       <table style="text-align: left; width: 100%; height: 100%;"
@@ -55,7 +39,9 @@
         <tbody>
           <tr>
             <td style="text-align: left; width: 100%; height: 80%;">
-			<span style="float: left;"><a href="{{ post.get_absolute_url }}">#{{ forloop.counter }}</a></span>
+			<span style="float: right;">{{ post.created|date:"d-m-Y H:i" }}</span>
+			<span style="float: right;"><a href="{{ post.get_absolute_url }}">#{{ forloop.counter }}</a></span>
+			
 			{{ post.text|linebreaksbr }}
 			<br/>
 			{% ifnotequal post.edit_count 0 %}
@@ -70,7 +56,7 @@
         		Etiketler :{% for tag in topic.tags.all %}<a href="/etiket/{{tag.name}}/">{{tag.name}}</a> |{% endfor %}
 				{%endif%}
 				<br/><br/>
-				<span style="float: right;">{{ post.created|date:"d-m-Y H:i" }}</span><br />
+				<br />
 				
 				{% if perms.forum.change_topic %}
 
