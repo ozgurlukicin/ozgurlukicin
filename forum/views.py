@@ -285,7 +285,7 @@ def flood_control(request):
     if 'flood_control' in request.session and ((datetime.now() - request.session['flood_control']).seconds < FLOOD_TIMEOUT):
         flood = True
         timeout = (FLOOD_TIMEOUT - (datetime.now() - request.session['flood_control']).seconds)
-    if not 'flood_control' in request.session or ((datetime.now() - request.session['flood_control']).seconds > FLOOD_TIMEOUT):
+    else:
         flood = timeout = False
         request.session['flood_control'] = datetime.now()
 
