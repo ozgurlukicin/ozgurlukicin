@@ -58,13 +58,7 @@
 				<br/><br/>
 				<br />
 				
-				{% if perms.forum.change_topic %}
-
-					{% if not topic.locked %}<a href="{{ topic.get_edit_url }}">edit</a>{% endif %}
-
-				{% else %}
-					{% ifequal post.author.id request.user.id %}<a href="{{ topic.get_edit_url }}">edit</a>{% endifequal %}
-				{% endif %}
+			
 				
 				|
 				{% if perms.forum.change_post %}
