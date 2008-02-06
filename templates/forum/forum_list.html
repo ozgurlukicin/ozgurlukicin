@@ -16,7 +16,7 @@
 {% else %}
 
 <div id="category" {% if category.hidden %}style="opacity: 0.5;"{% endif %}>
-<div id="category_title">{{ category.name|striptags }}</div>
+<div id="category_title">{{ category.name|escape }}</div>
 <div id="category_forums">
     {% for forum in category.forum_set.all %}
     {% if forum.hidden and not perms.forum.can_see_hidden_forums %}
@@ -24,7 +24,7 @@
 
     <div id="category_forums_item" {% if forum.hidden %}style="opacity: 0.5;"{% endif %}>
         <div id="category_forums_item_icon"><img src="/media/dijital/img/forum/eski_konu.gif" /></div>
-        <div id="category_forums_item_title"><a href="{{ forum.get_absolute_url }}">{{ forum.name|striptags }}</a></div>
+        <div id="category_forums_item_title"><a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a></div>
         <div id="category_forums_item_lastpost"><a href="{{ forum.forum_latest_post.get_absolute_url }}">{{ forum.forum_latest_post.topic.title|striptags }}</a> {{ forum.forum_latest_post.author }} tarafından {{ forum.forum_latest_post.edited|timedelta }}</div>
         <div id="category_forums_item_topics">{{ forum.topics }}</div>
         <div id="category_forums_item_posts">{{ forum.posts }}</div>

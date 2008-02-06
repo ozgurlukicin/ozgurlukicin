@@ -1,11 +1,11 @@
 {% extends "forum/forum_base.html" %}
 
 {% block title %}
-{{topic.title}} -
+{{topic.title|escape}} -
 {% endblock %}
 
 {% block content %}
-<div id="forum_adres"><strong><a href="{{ forum.category.get_absolute_url }}">{{ forum.category.name|striptags }}</a> > <a href="{{ forum.get_absolute_url }}">{{ forum.name|striptags }}</a> > {{ topic.title|striptags }}</strong></div><br /><br />
+<div id="forum_adres"><strong><a href="{{ forum.category.get_absolute_url }}">{{ forum.category.name|escape }}</a> > <a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a> > {{ topic.title|escape }}</strong></div><br /><br />
 
 {% for post in posts %}
 
@@ -30,10 +30,10 @@
 <div id="forum_editor">
 
  {% if perms.forum.change_topic %}
-	
+
 	{% if not topic.locked %}<a href="{{ topic.get_edit_url }}">edit</a>{% endif %}
 	{% else %}
-	
+
 		{% ifequal post.author.id request.user.id %}<a href="{{ topic.get_edit_url }}">edit</a>{% endifequal %}
 	{% endif %}
 </div>
@@ -43,7 +43,7 @@
 			{% else %}
 				{% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}">edit</a>{% endifequal %}
 			{% endif %}
-		{% endif %} 
+		{% endif %}
 	{% if not topic.locked %}<a href="{{ post.get_quote_url }}">quote</a>{% endif %}
 
 
@@ -55,7 +55,7 @@
 </div>
 
 {% ifequal post.author.id request.user.id %}{% ifequal post topic.topic_latest_post %}{% if not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>{% endif %}{% endifequal %}{% endifequal %}
-	
+
 {% endif %}
 
 
