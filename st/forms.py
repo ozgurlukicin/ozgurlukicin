@@ -20,7 +20,7 @@ class XssField(forms.CharField):
             raise forms.ValidationError(_(u'Bos birakilamaz'))
 
         #strip the tags we dont want
-        value=html2safehtml(value,valid_tags=('a','b','i','li','img','ul'))
+        value=html2safehtml(value,valid_tags=('a','b','i','li','img','ul', 'h1', 'h2', 'h3', 'h4', 'h5'))
 
         if not value:
             raise forms.ValidationError(_(u'Xss mi lutfen ama !'))
@@ -30,5 +30,3 @@ class XssField(forms.CharField):
 class CommentForm(forms.Form):
     """ The comment thngyy add validation please..."""
     yorum=XssField(label="Yorum",required=True,max_length=100,widget=forms.Textarea())
-
-
