@@ -111,7 +111,7 @@ def user_register(request):
 
             email_subject = u"Ozgurlukicin.com Kullanıcı Hesabı, %(user)s"
             email_body = u"""Merhaba!
-%(date)s %(hour)s tarihinde %(ip_addr)s ip adresli bilgisayardan yaptiginiz Ozgurlukicin.com kullanici hesabinizi onaylamak icin lütfen asagidaki baglantiyi 48 saat icerisinde ziyaret ediniz.
+%(date)s %(hour)s tarihinde %(ip_addr)s ip adresli bilgisayardan yaptiginiz Ozgurlukicin.com kullanici hesabinizi onaylamak icin lutfen asagidaki baglantiyi 48 saat icerisinde ziyaret ediniz.
 
 %(link)s
 
