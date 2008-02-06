@@ -180,8 +180,8 @@ def merge(request, forum_slug, topic_id):
     if forum.locked or topic.locked:
         hata="Kilitli konularda bu tür işlemler yapılamaz!"
         return render_response(request, 'forum/merge.html', locals())
-
-    if request.method == 'POST':
+        
+    if request.method == 'POST' and request.user.has_perm('forum.can_merge_topic'):
         form = MergeForm(request.POST.copy())
         flood,timeout = flood_control(request)
 

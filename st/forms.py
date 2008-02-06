@@ -29,4 +29,4 @@ class XssField(forms.CharField):
 
 class CommentForm(forms.Form):
     """ The comment thngyy add validation please..."""
-    yorum=XssField(label="Yorum",required=True,max_length=100,widget=forms.Textarea())
+    yorum=XssField(label="Yorum",required=True,max_length=100,widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
