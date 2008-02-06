@@ -157,8 +157,8 @@ height:32px;
 color: #FFFFFF; 
 font-size: 14px; 
 font-weight: bold; 
-vertical-align: middle;
 margin-top: 20px;
+
 }
 #forum_icon { width: 5%; float: left; }
 #forum_name { width: 30%; float: left;  }
@@ -171,7 +171,7 @@ margin-top: 20px;
 #category_forums_item_icon { width: 5%; float: left; }
 #category_forums_item_title { width: 30%; float: left; }
 #category_forums_item_lastpost { width: 45%; float: left; }
-#category_forums_item_topics { width: 7%; float: left; }
+#category_forums_item_topics { width: 10%; float: left; }
 #category_forums_item_posts { width: 10%; float: left; }
 /*Ends here (yes i was a ...)*/
 
