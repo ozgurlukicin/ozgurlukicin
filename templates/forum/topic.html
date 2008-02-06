@@ -65,15 +65,14 @@
 </div>
 {% endfor %}
 <hr>
-<div id="forum_editor">
-{% if perms.forum.can_merge_topic %}<a href="{{ topic.get_merge_url }}">merge</a> - {% endif %}
-{% if perms.forum.can_hide_topic and not topic.hidden %}<a href="{{ topic.get_hide_url }}">hide</a> - {% endif %}
-{% if perms.forum.can_hide_topic and topic.hidden %}<a href="{{ topic.get_hide_url }}">unhide</a> - {% endif %}
-{% if perms.forum.can_stick_topic and not topic.sticky %}<a href="{{ topic.get_stick_url }}">stick</a> - {% endif %}
-{% if perms.forum.can_stick_topic and topic.sticky %}<a href="{{ topic.get_stick_url }}">unstick</a> - {% endif %}
-{% if perms.forum.can_lock_topic and not topic.locked %}<a href="{{ topic.get_lock_url }}">lock</a>{% endif %}
-{% if perms.forum.can_lock_topic and topic.locked %}<a href="{{ topic.get_lock_url }}">unlock</a>{% endif %} - {% if not topic.locked %}<a href="{{ topic.get_reply_url }}">reply</a>{% endif %}
-</div>
-{% endblock %}
+    <div id="forum_editor" vertical-align="center">
+        {% if perms.forum.can_merge_topic %}<a href="{{ topic.get_merge_url }}"><img src="/media/dijital/img/forum/merge.jpg" border="0" /></a> - {% endif %}
+        {% if perms.forum.can_hide_topic and not topic.hidden %}<a href="{{ topic.get_hide_url }}">hide</a> - {% endif %}
+        {% if perms.forum.can_hide_topic and topic.hidden %}<a href="{{ topic.get_hide_url }}">unhide</a> - {% endif %}
+        {% if perms.forum.can_stick_topic and not topic.sticky %}<a href="{{ topic.get_stick_url }}">stick</a> - {% endif %}
+        {% if perms.forum.can_stick_topic and topic.sticky %}<a href="{{ topic.get_stick_url }}">unstick</a> - {% endif %}
+        {% if perms.forum.can_lock_topic and not topic.locked %}<a href="{{ topic.get_lock_url }}" border="0"><img src="/media/dijital/img/forum/lock.jpg" border="0" /></a>{% endif %}
+        {% if perms.forum.can_lock_topic and topic.locked %}<a href="{{ topic.get_lock_url }}"><img src="/media/dijital/img/forum/unlock.jpg" border="0" /></a>{% endif %} - {% if not topic.locked %}<a href="{{ topic.get_reply_url }}"><img src="/media/dijital/img/forum/reply.gif" border="0" /></a>{% endif %}
+</div>{% endblock %}
 
 {% block sidebartop %}{% endblock %}
