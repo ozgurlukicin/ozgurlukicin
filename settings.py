@@ -50,7 +50,7 @@ AUTH_PROFILE_MODULE = 'profile.Profile'
 
 # Login stuff, we use different urls for authentication.
 LOGIN_URL = '/kullanici/giris/'
-LOGIN_REDIRECT_URL = WEB_URL
+LOGIN_REDIRECT_URL = '/kullanici/sayfam'
 LOGOUT_URL = '/kullanici/cikis/'
 PROFILE_EDIT_URL = '/kullanici/duzenle/'
 
