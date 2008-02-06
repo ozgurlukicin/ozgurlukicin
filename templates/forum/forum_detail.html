@@ -27,7 +27,7 @@
     {% else %}
 
     <tr id="topics_item" {% if topic.hidden %}style="opacity: 0.5;"{% endif %}>
-        <td id="topics_item_icon"><a href="{{ topic.get_absolute_url }}">{% if topic.locked %}L{% endif %}{% if topic.sticky %}S{% endif %}{% if not topic.locked and not topic.sticky %}<img src="/media/dijital/img/forum/eski_konu.gif" border="0" />{% endif %}</a></td>
+        <td id="topics_item_icon"><a href="{{ topic.get_absolute_url }}">{% if topic.locked and not topic.sticky %}L{% endif %}{% if topic.sticky and not topic.locked %}S{% endif %}{% if not topic.locked and not topic.sticky %}<img src="/media/dijital/img/forum/eski_konu.gif" border="0" />{% endif %}{% if topic.locked and topic.sticky %}H{% endif %}</a></td>
         <td id="topics_item_title"><a href="{{ topic.get_absolute_url }}">{{ topic.title|escape }}</a></td>
         <td id="topics_item_lastpost"><a href="{{ topic.topic_latest_post.get_absolute_url }}">{{ topic.topic_latest_post.author }}</a> tarafından {{ topic.topic_latest_post.edited|timedelta }}</td>
         <td id="topics_item_posts">{{ topic.posts }}</td>
