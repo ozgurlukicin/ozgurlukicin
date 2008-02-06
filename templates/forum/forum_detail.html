@@ -16,13 +16,20 @@
 <br/>
 <div id="forum_topics">
     {% for topic in topic_list %}
-    <div id="topics_item" {% if topic.hidden and perms.forum.can_see_hidden_topics %}style="opacity: 0.5;"{% endif %}>
+
+    {% if topic.hidden and not perms.forum.can_see_hidden_topics %}
+    {% else %}
+
+    <div id="topics_item" {% if topic.hidden %}style="opacity: 0.5;"{% endif %}>
         <div id="topics_item_icon">{% if topic.locked %}L{% endif %}{% if topic.sticky %}S{% endif %}<img src="/media/dijital/img/forum/eski_konu.gif" /></div>
         <div id="topics_item_title"><a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a></div>
         <div id="topics_item_lastpost"><a href="{{ topic.topic_latest_post.get_absolute_url }}">{{ topic.topic_latest_post.author }}</a> tarafından {{ topic.topic_latest_post.edited|timedelta }}</div>
         <div id="topics_item_posts">{{ topic.posts }}</div>
         <div id="topics_item_views">{{ topic.views }}</div>
     </div>
+
+    {% endif %}
+
     {% endfor %}
 </div>
 <br>
