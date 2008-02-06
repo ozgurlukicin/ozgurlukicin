@@ -26,12 +26,21 @@
 <p>Kullanıcı adınız ve parolanız uyuşmuyor, lütfen tekrar deneyin.</p>
 {% endif %}
 
-<div style="text-align: center;">
+<div style="text-align: left; padding-left: 50px;">
+    Lütfen giriş yapmak için kullanıcı adınızı ve parolanızı giriniz.<br /><br />
     <form method="post" action=".">
-        {{ form.username }}<br />
-        {{ form.password }}<br />
+        <table><tbody>
+        <tr>
+            <td width="30%"><label for="id_username">Kullanıcı adı</label></td>
+            <td>{{ form.username }}</td>
+        </tr>
+        <tr>
+            <td width="30%"><label for="id_password">Parola</label></td>
+            <td>{{ form.password }}</td>
+        </tr>
+        </tbody></table>
         <input type="hidden" name="next" value="{{ next }}" />
-        <input type="submit" value="giriş" />
+        <input type="submit" value="Giriş" />
     </form>
 </div>
 {% else %}
