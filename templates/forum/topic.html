@@ -60,7 +60,7 @@
 				
 			
 				
-				|
+				
 				{% if perms.forum.change_post %}
 					<a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>
 		
@@ -68,7 +68,7 @@
                                 {% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>{% endifequal %}
 		
 				{% endif %}
-				|
+				
 				
 
 				
@@ -117,7 +117,7 @@
         {% if perms.forum.can_stick_topic and not topic.sticky %}<a href="{{ topic.get_stick_url }}">stick</a> - {% endif %}
         {% if perms.forum.can_stick_topic and topic.sticky %}<a href="{{ topic.get_stick_url }}">unstick</a> - {% endif %}
         {% if perms.forum.can_lock_topic and not topic.locked %}<a href="{{ topic.get_lock_url }}" border="0"><img src="/media/dijital/img/forum/lock.jpg" border="0" /></a>{% endif %}
-        {% if perms.forum.can_lock_topic and topic.locked %}<a href="{{ topic.get_lock_url }}"><img src="/media/dijital/img/forum/unlock.jpg" border="0" /></a>{% endif %} - {% if not topic.locked %}<a href="{{ topic.get_reply_url }}"><img src="/media/dijital/img/forum/reply.gif" border="0" /></a>{% endif %}
+        {% if perms.forum.can_lock_topic and topic.locked %}<a href="{{ topic.get_lock_url }}"><img src="/media/dijital/img/forum/unlock.jpg" border="0" /></a>{% endif %}  {% if not topic.locked %}<a href="{{ topic.get_reply_url }}"><img src="/media/dijital/img/forum/reply.gif" border="0" /></a>{% endif %}
 </div>{% endblock %}
 
 {% block sidebartop %}{% endblock %}
