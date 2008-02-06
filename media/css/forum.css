@@ -151,6 +151,7 @@ body {
 
 
 /*That part is for forum list*/
+#forum_main_header { background:url(/media/dijital/img/forum/mavi_bar.gif); }
 #forum_icon { width: 5%; float: left; }
 #forum_name { width: 30%; float: left; }
 #forum_lastpost { width: 45%; float: left; }
