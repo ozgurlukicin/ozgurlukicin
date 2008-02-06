@@ -175,7 +175,8 @@ margin:0px;
     display: table-cell;
     vertical-align: middle;
     width: 900px;
-    padding-left: 10px;
+    padding-left: 46px;
+    font-weight: bold;
 }
 #category_forums_item { clear: left; }
 #category_forums_item_icon { width: 5%; float: left; }
