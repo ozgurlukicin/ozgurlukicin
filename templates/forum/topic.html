@@ -7,45 +7,76 @@
 {% block content %}
 <div id="forum_adres"><strong><a href="{{ forum.category.get_absolute_url }}">{{ forum.category.name|escape }}</a> > <a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a> > {{ topic.title|escape }}</strong></div><br /><br />
 
+<!-- buraya table hali gelcekmis -->
+
 {% for post in posts %}
+	
+	
 
-	{% if post.hidden and not perms.forum.can_see_hidden_topics %}
-	{% else %}
-
-		<div {% if post.hidden %}style="opacity: 0.5;"{% endif %}><a name="post{{ post.id }}"></a>
-		<span style="float: left;"><a href="{{ post.get_absolute_url }}">#{{ forloop.counter }}</a></span>
-		<span style="float: right;">{{ post.created|date:"d-m-Y H:i" }}</span><br />
-		<div id="author_info">{{ post.author.avatar }} {{ post.author }}{% if perms.forum.can_see_post_ip %} ({{ post.ip }}){% endif %}</div>
-		<div style="padding-top: 10px;">{{ post.text|linebreaksbr }}<br />
+<!-- <div {% if post.hidden %}style="opacity: 0.5;"{% endif %}><a name="post{{ post.id }}"></a> -->
 		
+		
+	
+
+<table style="text-align: left; width: 900px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="width: 189px;">
+      <table style="text-align: left; width: 100%;"
+ border="0" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td>{{ post.author }}</td>
+          </tr>
+          <tr>
+            <td>{{ post.author.avatar }}</td>
+          </tr>
+          <tr>
+            <td>mesaj-sayisi
+			{% if perms.forum.can_see_post_ip %} ({{ post.ip }}){% endif %}</td>
+          </tr>
+          <tr>
+            <td>Kayit</td>
+          </tr>
+          <tr>
+            <td>Profile git</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+      <td style="width: 703px;">
+      <table style="text-align: left; width: 100%; height: 100%;"
+ border="0" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="text-align: left; width: 100%; height: 80%;">
+			<span style="float: left;"><a href="{{ post.get_absolute_url }}">#{{ forloop.counter }}</a></span>
+			{{ post.text|linebreaksbr }}
+			<br/>
 			{% ifnotequal post.edit_count 0 %}
 				<br />Bu ileti {{ post.edit_count }} kez değiştirilmiş olup, son kez {{ post.edited }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.<br />
 			{% endifnotequal %}
-
-			<br />
-			{% if forloop.first %}
+	
+			</td>
+          </tr>
+          <tr>
+            <td style="text-align: left; width: 100%; height: 20%;">
+				{% if forloop.first %}
         		Etiketler :{% for tag in topic.tags.all %}<a href="/etiket/{{tag.name}}/">{{tag.name}}</a> |{% endfor %}
-
-    			<br/><br/>
-
-		</div>
-
-			<div id="forum_editor">
-
- 				{% if perms.forum.change_topic %}
+				{%endif%}
+				<br/><br/>
+				<span style="float: right;">{{ post.created|date:"d-m-Y H:i" }}</span><br />
+				
+				{% if perms.forum.change_topic %}
 
 					{% if not topic.locked %}<a href="{{ topic.get_edit_url }}">edit</a>{% endif %}
 
 				{% else %}
 					{% ifequal post.author.id request.user.id %}<a href="{{ topic.get_edit_url }}">edit</a>{% endifequal %}
 				{% endif %}
-
-			
-
-			
-
-			{% else %}
-			
+				
+				|
 				{% if perms.forum.change_post %}
 					<a href="{{ post.get_edit_url }}">edit</a>
 		
@@ -53,42 +84,44 @@
 					{% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}">edit</a>{% endifequal %}
 		
 				{% endif %}
-			</div>
+				|
+				
+
+				{% if not topic.locked %}<a href="{{ post.get_quote_url }}">quote</a>{% endif %}
+
+
+
+				{% if perms.forum.can_hide_post and not forloop.first and not post.hidden %}<a href="{{ post.get_hide_url }}">hide</a>{% endif %}
+				{% if perms.forum.can_hide_post and not forloop.first and post.hidden %}<a href="{{ post.get_hide_url }}">unhide</a>{% endif %}
+
+				{% if perms.forum.delete_post and not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>
 		
-			{% endif %}
-
- 
-		<div id="forum_editor">
-		{% if not topic.locked %}<a href="{{ post.get_quote_url }}">quote</a>{% endif %}
-
-		{% endif %}
-	{% if not topic.locked %}<a href="{{ post.get_quote_url }}">quote</a>{% endif %}
-
-
-
-		{% if perms.forum.can_hide_post and not forloop.first and not post.hidden %}<a href="{{ post.get_hide_url }}">hide</a>{% endif %}
-		{% if perms.forum.can_hide_post and not forloop.first and post.hidden %}<a href="{{ post.get_hide_url }}">unhide</a>{% endif %}
-
-		{% if perms.forum.delete_post and not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>
-		
-		{% else %}
+			{% else %}
 <!-- end forum_editor div -->
 	
 
-		{% ifequal post.author.id request.user.id %}
-			{% ifequal post topic.topic_latest_post %}
-				{% if not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>
-				{% endif %}
+			{% ifequal post.author.id request.user.id %}
+				{% ifequal post topic.topic_latest_post %}
+					{% if not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>
+					{% endif %}
 			{% endifequal %}
-		{% endifequal %}
+			{% endifequal %}
 
 		{% endif %}
 
-		</div>
-		
+	
+				</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-<!-- end first div -->
-</div>
+<hr>
+
+
 {% endfor %}
 
 
