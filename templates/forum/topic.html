@@ -109,7 +109,7 @@
 {% endfor %}
 
 
-<hr>
+
     <div id="forum_editor" vertical-align="center">
         {% if perms.forum.can_merge_topic %}<a href="{{ topic.get_merge_url }}"><img src="/media/dijital/img/forum/merge.jpg" border="0" /></a> - {% endif %}
         {% if perms.forum.can_hide_topic and not topic.hidden %}<a href="{{ topic.get_hide_url }}">hide</a> - {% endif %}
