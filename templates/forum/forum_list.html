@@ -3,13 +3,18 @@
 
 {% block content %}
 
-<div id="forum_main_header">
-    <span id="forum_icon">&nbsp;</span>
-    <span id="forum_name">Forum</span>
-    <span id="forum_lastpost">Son İleti</span>
-    <span id="forum_topics">Konular</span>
-    <span id="forum_posts">İletiler</span>
-</div>
+<div id="forum_main_header_space">&nbsp;</div>
+<table id="forum_main_header">
+    <tbody>
+        <tr>
+            <td id="forum_icon">&nbsp;</td>
+            <td id="forum_name">Forum</td>
+            <td id="forum_lastpost">Son İleti</td>
+            <td id="forum_topics">Konular</td>
+            <td id="forum_posts">İletiler</td>
+        </tr>
+    </tbody>
+</table>
 {% for category in categories %}
 
 {% if category.hidden and not perms.forum.can_see_hidden_categories %}
