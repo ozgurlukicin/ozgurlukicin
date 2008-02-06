@@ -210,8 +210,8 @@ margin:0px;
     height: 32px;
     width: 100%;
 }
-#current_topic { display:table-cell; padding-left: 10px; float:left; vertical-align: middle; }
-#new_topic { display:table-cell; text-align: right; float:right; vertical-align: middle; }
+#current_topic { display:table-cell; padding-left: 10px; padding-top: 8px; float:left; vertical-align: middle; }
+#new_topic { display:table-cell; padding-top: 3px; padding-right: 3px; text-align: right; float:right; vertical-align: middle; }
 /* Ends here */
 
 /* taken from django trac and modified */
