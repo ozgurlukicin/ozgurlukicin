@@ -9,13 +9,14 @@ from django import newforms as forms
 from oi.forum.models import Topic
 from oi.st.models import Tag
 
+from oi.st.forms import XssField
 
 #choices = ((u'1', 'Unknown'), (u'2', 'Yes'), (u'3', 'No'))
 
 
 class TopicForm(forms.Form):
     title = forms.CharField(label='Başlık', required=True, max_length=100, widget=forms.TextInput(attrs={'size': '40',}))
-    text = forms.CharField(label='İleti', required=True, widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
+    text = XssField(label='İleti', required=True, widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
     tags=forms.MultipleChoiceField(label='Etiket', required=True,help_text=_("CTRL basılı tutarak birden fazla etiket seçebilirsiniz!"))
 
     def __init__(self,*args,**kwargs):
@@ -24,7 +25,7 @@ class TopicForm(forms.Form):
         super(TopicForm, self).__init__(*args, **kwargs)
 
 class PostForm(forms.Form):
-    text = forms.CharField(label='İleti', required=True, widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
+    text = XssField(label='İleti', required=True, widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
 
 class MergeForm(forms.Form):
     topic2 = forms.ChoiceField(label='Konu', required=True)

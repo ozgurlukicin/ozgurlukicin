@@ -13,13 +13,16 @@ class XssField(forms.CharField):
         super(XssField,self).__init__(*args,**kwargs)
 
     def clean(self,value):
+        #for filtering malicious code
+        from oi.forum.stripogram import html2text,html2safehtml 
+
         if self.required and not value:
             raise forms.ValidationError(_(u'Bos birakilamaz'))
 
-        #cok strict mi oldu ne  sonra olmazsa uzerinde calisilir :)
-        xss_prevent=re.compile('[^A-Za-z0-9, ]')
+        #strip the tags we dont want
+        value=html2safehtml(value,valid_tags=('a','b','i','li','img','ul'))
 
-        if re.search(xss_prevent,value):
+        if not value:
             raise forms.ValidationError(_(u'Xss mi lutfen ama !'))
 
         return value
