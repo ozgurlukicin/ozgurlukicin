@@ -22,7 +22,7 @@ tinyMCE.init({
 });
 
 function oiFileBrowser (field_name, url, type, win) {
-    tinyMCE.openWindow({
+    tinyMCE.activeEditor.windowManager.open({
         file : "/admin/upload/image/add/",
         title : "File Browser",
         width : 300,
@@ -33,7 +33,6 @@ function oiFileBrowser (field_name, url, type, win) {
         input : field_name,
         resizable : "yes",
         inline : "yes",
-        editor_id : tinyMCE.getWindowArg("editor_id")
     });
     return false;
 }
