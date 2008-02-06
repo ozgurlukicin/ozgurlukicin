@@ -1,4 +1,4 @@
-''' 
+'''
 Copyright (c) 2005, the Lawrence Journal-World
 All rights reserved.
 

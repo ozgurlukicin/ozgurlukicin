@@ -51,10 +51,10 @@ class PublicCommentManipulator(oldforms.Manipulator):
         "Helper function"
         return Comment(content_type=ContentType.objects.get(pk=new_data["content_type_id"]),
             object_id=new_data["object_id"], comment=new_data["comment"].strip(),
-            person_name=new_data["person_name"].strip(), person_email=new_data["person_email"].strip(), 
-            person_www=new_data["person_www"].strip(), 
+            person_name=new_data["person_name"].strip(), person_email=new_data["person_email"].strip(),
+            person_www=new_data["person_www"].strip(),
             submit_date=datetime.datetime.now(), is_public=new_data["is_public"],
-            ip_address=new_data["ip_address"], site=Site.objects.get(id=settings.SITE_ID), 
+            ip_address=new_data["ip_address"], site=Site.objects.get(id=settings.SITE_ID),
             comment_type='comment')
 
     def save(self, new_data):
@@ -80,18 +80,18 @@ def post_comment(request):
     ''' This is a rewrite of django.contrib.comments.views.comments.post_free_comment
         implementing the honeypot ideas from
         http://www.nedbatchelder.com/text/stopbots.html
-        
-        If you want to try it out, you can use the Firefox Web Developer plugin 
-        to disable CSS on the comment page. That will show the honeypot fields and buttons. 
-        Filling in any of the honeypots or submitting with the "I'm a spambot" button 
+
+        If you want to try it out, you can use the Firefox Web Developer plugin
+        to disable CSS on the comment page. That will show the honeypot fields and buttons.
+        Filling in any of the honeypots or submitting with the "I'm a spambot" button
         will cause the posting to be ignored.
 
-        The field names are all obfuscated with md5 hashes. 
-        The hashes include the IP address of the poster, the ID of the entry being commented on, 
+        The field names are all obfuscated with md5 hashes.
+        The hashes include the IP address of the poster, the ID of the entry being commented on,
         and a timestamp, so they will be different each time the form is used.
 
-        The form is timestamped. Any submission that takes less than MIN_COMMENT_TIME seconds 
-        or more than MAX_COMMENT_TIME seconds will be ignored. 
+        The form is timestamped. Any submission that takes less than MIN_COMMENT_TIME seconds
+        or more than MAX_COMMENT_TIME seconds will be ignored.
         Any attempt to change the timestamp will be detected.
 
         The IP address that requested the form must match the IP address that posts the comment.
@@ -99,20 +99,20 @@ def post_comment(request):
         See comments there for why you might want to do this.
 
         If any of the tests fail, the browser is redirected to the same page
-        as it would go to with a successful post. This is a little different than 
-        what would normally happen if the preview button is pressed but I think it's ok. 
+        as it would go to with a successful post. This is a little different than
+        what would normally happen if the preview button is pressed but I think it's ok.
         I didn't put up an error because I want it to look to the spambot as if it succeeded.
 
         Failures are logged to the logging system.
     '''
-    
+
     try:
         if not request.POST:
             raise SpamComment, "GET request in comment submission"
-        
+
         spinner = request.POST['spinner']   # Key used to hash field names
         fieldMap = makeFieldNames(spinner)  # Map from cleartext name to hashed name
-            
+
         # Validate the spinner. This checks that the timestamp hasn't been tampered
         # and the IP address is the same as the original request
         target = request.POST[fieldMap['target']]
@@ -127,17 +127,17 @@ def post_comment(request):
             raise SpamComment, 'Comment posted too fast: %s seconds' % timeToPost
         elif timeToPost > MAX_COMMENT_TIME:
             raise SpamComment, 'Comment posted too slow: %s minutes' % (timeToPost / 60)
-            
+
         if request.POST.has_key(fieldMap['submit']):
             raise SpamComment, 'User clicked Spambot button in comment submission'
-        
+
         # Check the honeypot fields. If any of these are filled in, the request is
         # bogus and we redirect directly to the 'posted' page
         honeypots = 'honeypot1 honeypot2 honeypot3 honeypot4'.split()
         for honey in honeypots:
             if request.POST.get(fieldMap[honey]):
                 raise SpamComment, 'User supplied honeypot field "%s" in comment submission' % honey
-            
+
         content_type = ContentType.objects.get(pk=content_type_id)
         try:
             obj = content_type.get_object_for_this_type(pk=object_id)
@@ -148,7 +148,7 @@ def post_comment(request):
         for name, scrambled in fieldMap.items():
             if request.POST.has_key(scrambled):
                 new_data[name] = request.POST[scrambled]
-                
+
         new_data['content_type_id'] = content_type_id
         new_data['object_id'] = object_id
         new_data['ip_address'] = request.META['REMOTE_ADDR']
@@ -168,7 +168,7 @@ def post_comment(request):
                 'spinner': spinner,
                 'timestamp': timestamp,
                 'previewText': 'Preview modified comment'
-                
+
             }, context_instance=RequestContext(request))
         elif request.POST.has_key(fieldMap['post']):
             # If the IP is banned, mail the admins, do NOT save the comment, and
@@ -182,28 +182,28 @@ def post_comment(request):
             return HttpResponseRedirect("../posted/?c=%s:%s" % (content_type_id, object_id))
         else:
             raise Http404, "The comment form didn't provide either 'preview' or 'post'"
-        
+
     except SpamComment, e:
         logging.info('Spam attempt from %s: %s' % (request.META['REMOTE_ADDR'], e))
     except MultiValueDictKeyError, e:
         key = re.search("Key '(.*?)' not found", str(e)).group(1) # The key we were looking up
-        
+
         # Get the unobfuscated key name if possible
         try:
             if key in fieldMap.values():
                 key = [ k for k,v in fieldMap.items() if key==v ][0]
         except NameError:   # no fieldMap
             pass
-        logging.info('Missing field in comment form: %s' % key)        
-        
+        logging.info('Missing field in comment form: %s' % key)
+
     # This is shared exception handling, the only way to get here is after an exception
     try:
         # If we have a target, act like a successful post
         return HttpResponseRedirect("../posted/?c=%s" % (target))
     except NameError:
         raise Http404
-        
-        
+
+
 @login_required
 def comment_was_posted(request):
     """
@@ -245,28 +245,28 @@ def trackback(request, content_type_id, obj_id, entry_url):
     url = request.POST.get('url')
     if not url:
         return trackbackError('Missing URL')
-    
+
     title = request.POST.get('title', '')
     excerpt = request.POST.get('excerpt', '')
     blog_name = request.POST.get('blog_name', '')
 
     if not validateTrackback(url, entry_url):
         return trackbackError('This appears to be spam')
-    
+
     for ignore in _ignores:
         if ignore in excerpt:
             # Pretent we liked it...
             return trackbackOk()
-            
+
     content_type = ContentType.objects.get(pk=content_type_id)
-        
+
     site = Site.objects.get(id=settings.SITE_ID)
     comment = Comment(content_type=content_type, object_id=obj_id, comment=excerpt,
         ip_address=request.META['REMOTE_ADDR'], site=site,
         trackback_title=title, trackback_www=url, trackback_name=blog_name,
         is_public=True, comment_type='trackback')
     comment.save()
-    
+
     return trackbackOk()
 
 @login_required
@@ -278,10 +278,10 @@ def validateTrackback(client_url, target_url):
             return True
     except:
         pass
-    
+
     return False
-    
-    
+
+
 def trackbackError(msg):
     content = '''<?xml version="1.0" encoding="utf-8"?>
 <response>

@@ -53,7 +53,7 @@ or if only a width is requested (to be compatibile with admin interface)::
     %(dirname)s/%(basename)s_t%(width)d.%(extension)s
 
 """
-    
+
     kwargs = {}
     if args:
         if ',' not in args:
@@ -71,12 +71,12 @@ or if only a width is requested (to be compatibile with admin interface)::
             kwargs[kw] = val
         # for
     #
-    
+
     if ('width' not in kwargs) and ('height' not in kwargs):
 		kwargs['width']=DEFAULT_WIDTH
 		kwargs['height']=DEFAULT_HEIGHT
 		#raise template.TemplateSyntaxError, "thumbnail filter requires arguments (width and/or height)"
-    
+
     ret = make_thumbnail(url, **kwargs)
     if ret is None:
         return url

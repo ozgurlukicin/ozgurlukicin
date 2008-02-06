@@ -125,7 +125,7 @@ def rssfeed(request, tag=None, user=None):
     return buildfeed(request, feedgenerator.Rss201rev2Feed, tag, user)
 
 def atomfeed(request, tag=None, user=None):
-    """ Generates the Atom 1.0 feed. 
+    """ Generates the Atom 1.0 feed.
     """
     return buildfeed(request, feedgenerator.Atom1Feed, tag, user)
 

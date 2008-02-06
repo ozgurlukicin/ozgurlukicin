@@ -9,7 +9,7 @@ spinner is re-computed and checked against the submitted value. If they differ, 
 submission is considered to be spam.
 
 This will not work if the comment form is cached - each request gets the same spinner,
-from the cache, and the following submission will be rejected because it comes from a 
+from the cache, and the following submission will be rejected because it comes from a
 different IP address.
 
 Possible solutions:
@@ -23,7 +23,7 @@ less than the comment timeout (comments.views.MAX_COMMENT_TIME).
 Copyright (c) 2006-2007, PreFab Software Inc.
 
 Copyright (c) 2005, the Lawrence Journal-World
-All rights reserved.  
+All rights reserved.
 '''
 
 import time
@@ -39,7 +39,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from oi.middleware import threadlocals
 
 register = template.Library()
-    
+
 #: Flag for whether to check the poster's IP address or not
 # Turn this OFF if your comment form will be cached in any way
 CHECK_IP = False
@@ -117,7 +117,7 @@ class CommentFormNode(template.Node):
         context['spinner'] = spinner = makeSpinner(timestamp, threadlocals.get_current_ip(), context['target'])
         context['fields'] = makeFieldNames(spinner)
         context['previewText'] = 'Preview comment'
-        
+
         default_form = template.loader.get_template('comments/comment_form.html')
         output = default_form.render(context)
         context.pop()

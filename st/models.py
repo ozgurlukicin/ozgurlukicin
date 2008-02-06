@@ -300,7 +300,7 @@ class Game(models.Model):
     class Meta:
         verbose_name = "Oyun"
         verbose_name_plural = "Oyunlar"
-        
+
 dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=Game)
 
 class News(models.Model):
@@ -384,7 +384,7 @@ class Package(models.Model):
     class Meta:
         verbose_name = "Paket"
         verbose_name_plural = "Paketler"
-        
+
 dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=Package)
 
 class PardusVersion(models.Model):

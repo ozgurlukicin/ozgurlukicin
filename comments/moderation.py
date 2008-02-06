@@ -17,9 +17,9 @@ Example
 
 First, we define a simple model class which might represent entries in
 a weblog::
-    
+
     from django.db import models
-    
+
     class Entry(models.Model):
         title = models.CharField(maxlength=250)
         body = models.TextField()
@@ -28,16 +28,16 @@ a weblog::
 
 Then we create a ``CommentModerator`` subclass specifying some
 moderation options::
-    
+
     from blogmaker.comments.moderation import CommentModerator, moderator
-    
+
     class EntryModerator(CommentModerator):
         akismet = True
         email_notification = True
         enable_field = 'enable_comments'
 
 And finally register it for moderation::
-    
+
     moderator.register(Entry, EntryModerator)
 
 This sample class would apply several moderation steps to each new
@@ -88,7 +88,7 @@ class AlreadyModerated(Exception):
     """
     Raised when a model which is already registered for moderation is
     attempting to be registered again.
-    
+
     """
     pass
 
@@ -97,7 +97,7 @@ class NotModerated(Exception):
     """
     Raised when a model which is not registered for moderation is
     attempting to be unregistered.
-    
+
     """
     pass
 
@@ -105,11 +105,11 @@ class NotModerated(Exception):
 class CommentModerator(object):
     """
     Encapsulates comment-moderation options for a given model.
-    
+
     This class is not designed to be used directly, since it doesn't
     enable any of the available moderation options. Instead, subclass
     it and override attributes to enable different options::
-    
+
         ``akismet``
             If ``True``, comments will be submitted to an Akismet spam
             check and, if Akismet thinks they're spam, will have their
@@ -119,7 +119,7 @@ class CommentModerator(object):
             ``AKISMET_API_KEY`` to your Django settings file; the
             value of this setting should be a valid Akismet API
             key. Default value is ``False``.
-    
+
         ``auto_close_field``
             If this is set to the name of a ``DateField`` or
             ``DateTimeField`` on the model for which comments are
@@ -130,7 +130,7 @@ class CommentModerator(object):
             ``close_after``, which specifies the number of days past
             which comments should be disallowed. Default value is
             ``None``.
-    
+
         ``auto_moderate_field``
             Like ``auto_close_field``, but instead of outright
             deleting new comments when the requisite number of days
@@ -139,18 +139,18 @@ class CommentModerator(object):
             used in conjunction with ``moderate_after``, which
             specifies the number of days past which comments should be
             moderated. Default value is ``None``.
-    
+
         ``close_after``
             If ``auto_close_field`` is used, this must specify the
             number of days past the value of the field specified by
             ``auto_close_field`` after which new comments for an
             object should be disallowed. Default value is ``None``.
-    
+
         ``email_notification``
             If ``True``, any new comment on an object of this model
             which survives moderation will generate an email to site
             staff. Default value is ``False``.
-    
+
         ``enable_field``
             If this is set to the name of a ``BooleanField`` on the
             model for which comments are being moderated, new comments
@@ -158,41 +158,41 @@ class CommentModerator(object):
             deleted) whenever the value of that field is ``False`` on
             the object the comment would be attached to. Default value
             is ``None``.
-    
+
         ``moderate_after``
             If ``auto_moderate`` is used, this must specify the number
             of days past the value of the field specified by
             ``auto_moderate_field`` after which new comments for an
             object should be marked non-public. Default value is
             ``None``.
-    
+
     Most common moderation needs can be covered by changing these
     attributes, but further customization can be obtained by
     subclassing and overriding the following methods. Each method will
     be called with two arguments: ``comment``, which is the comment
     being submitted, and ``content_object``, which is the object the
     comment will be attached to::
-    
+
         ``allow``
             Should return ``True`` if the comment should be allowed to
             post on the content object, and ``False`` otherwise (in
             which case the comment will be immediately deleted).
-    
+
         ``email``
             If email notification of the new comment should be sent to
             site staff or moderators, this method is responsible for
             sending the email.
-    
+
         ``moderate``
             Should return ``True`` if the comment should be moderated
             (in which case its ``is_public`` field will be set to
             ``False`` before saving), and ``False`` otherwise (in
             which case the ``is_public`` field will not be changed).
-    
+
     Subclasses which want to introspect the model for which comments
     are being moderated can do so through the attribute ``_model``,
     which will be the model class.
-    
+
     """
     akismet = False
     auto_close_field = None
@@ -201,10 +201,10 @@ class CommentModerator(object):
     email_notification = False
     enable_field = None
     moderate_after = None
-    
+
     def __init__(self, model):
         self._model = model
-    
+
     def allow(self, comment, content_object):
         """
         Determines whether a given comment is allowed to be posted on
@@ -212,7 +212,7 @@ class CommentModerator(object):
 
         Returns ``True`` if the comment should be allowed, ``False
         otherwise.
-        
+
         """
         if self.enable_field:
             if not getattr(content_object, self.enable_field):
@@ -221,7 +221,7 @@ class CommentModerator(object):
             if datetime.datetime.now() - datetime.timedelta(days=self.close_after) > getattr(content_object, self.auto_close_field):
                 return False
         return True
-    
+
     def moderate(self, comment, content_object):
         """
         Determines whether a given comment on a given object should be
@@ -230,7 +230,7 @@ class CommentModerator(object):
 
         Returns ``True`` if the comment should be moderated (marked
         non-public), ``False`` otherwise.
-        
+
         """
         if self.auto_moderate_field and self.moderate_after:
             if datetime.datetime.now() - datetime.timedelta(days=self.moderate_after) > getattr(content_object, self.auto_moderate_field):
@@ -252,7 +252,7 @@ class CommentModerator(object):
         """
         Emails notification of a new comment to site staff when email
         notifications have been requested.
-        
+
         """
         if not self.email_notification:
             return
@@ -270,7 +270,7 @@ class AkismetModerator(CommentModerator):
     """
     Subclass of ``CommentModerator`` which applies Akismet spam
     filtering to all new comments for its model.
-    
+
     """
     akismet = True
 
@@ -280,14 +280,14 @@ class AlwaysModerate(CommentModerator):
     Subclass of ``CommentModerator`` which forces all new comments for
     its model into moderation (marks all comments non-public to begin
     with).
-    
+
     """
     def moderate(self, comment, content_object):
         """
         Always returns ``True``, no matter what comment or content
         object is supplied, so that new comments always get marked
         non-public to start with.
-        
+
         """
         return True
 
@@ -297,15 +297,15 @@ class ModerateFirstTimers(CommentModerator):
     Subclass of ``CommentModerator`` which automatically moderates all
     comments from anyone who has not previously had a comment
     approved, while allowing all other comments to skip moderation.
-    
+
     """
-    
+
     def moderate(self, comment, content_object):
         """
         For each new comment, checks to see if the person submitting
         it has any previously-approved comments; if not, the comment
         will be moderated.
-        
+
         """
         comment_class = comment.__class__
         if comment.comment_type == 'comment':
@@ -321,26 +321,26 @@ class ModerateFirstTimers(CommentModerator):
 class Moderator(object):
     """
     Handles moderation of a set of models.
-    
+
     An instance of this class will maintain a list of one or more
     models registered for comment moderation, and their associated
     moderation classes, and apply moderation to all incoming comments.
-    
+
     To register a model, obtain an instance of ``CommentModerator``
     (this module exports one as ``moderator``), and call its
     ``register`` method, passing the model class and a moderation
     class (which should be a subclass of ``CommentModerator``). Note
     that both of these should be the actual classes, not instances of
     the classes.
-    
+
     To cease moderation for a model, call the ``unregister`` method,
     passing the model class.
-    
+
     For convenience, both ``register`` and ``unregister`` can also
     accept a list of model classes in place of a single model; this
     allows easier registration of multiple models with the same
     ``CommentModerator`` class.
-    
+
     The actual moderation is applied in two phases: one prior to
     saving a new comment, and the other immediately after saving. The
     pre-save moderation may mark a comment as non-public or mark it to
@@ -348,29 +348,29 @@ class Moderator(object):
     was disallowed (there is currently no way to prevent the comment
     being saved once before removal) and, if the comment is still
     around, will send any notification emails the comment generated.
-    
+
     """
     def __init__(self):
         self._registry = {}
         self.connect()
-    
+
     def connect(self):
         """
         Hooks up the moderation methods to pre- and post-save signals
         from the comment models.
-        
+
         """
         dispatcher.connect(self.pre_save_moderation, sender=Comment, signal=signals.pre_save)
         dispatcher.connect(self.post_save_moderation, sender=Comment, signal=signals.post_save)
-    
+
     def register(self, model_or_iterable, moderation_class):
         """
         Registers a model or a list of models for comment moderation,
         using a particular moderation class.
-        
+
         Raises ``AlreadyModerated`` if any of the models are already
         registered.
-        
+
         """
         if isinstance(model_or_iterable, ModelBase):
             model_or_iterable = [model_or_iterable]
@@ -379,15 +379,15 @@ class Moderator(object):
             if ctype_id in self._registry:
                 raise AlreadyModerated("The model '%s' is already being moderated" % model._meta.module_name)
             self._registry[ctype_id] = moderation_class(model)
-    
+
     def unregister(self, model_or_iterable):
         """
         Removes a model or a list of models from the list of models
         whose comments will be moderated.
-        
+
         Raises ``NotModerated`` if any of the models are not currently
         registered for moderation.
-        
+
         """
         if isinstance(model_or_iterable, ModelBase):
             model_or_iterable = [model_or_iterable]
@@ -396,12 +396,12 @@ class Moderator(object):
             if ctype_id not in self._registry:
                 raise NotModerated("The model '%s' is not currently being moderated" % model._meta.module_name)
             del self._registry[ctype_id]
-    
+
     def pre_save_moderation(self, sender, instance):
         """
         Applies any necessary pre-save moderation steps to new
         comments.
-        
+
         """
         ctype_id = int(instance.content_type_id)
         if instance.id or (ctype_id not in self._registry):
@@ -415,12 +415,12 @@ class Moderator(object):
         if moderation_class.moderate(instance, content_object):
             instance.is_public = False
         moderation_class.email(instance, content_object)
-    
+
     def post_save_moderation(self, sender, instance):
         """
         Applies any necessary post-save moderation steps to new
         comments.
-        
+
         """
         if instance.content_type_id not in self._registry:
             return

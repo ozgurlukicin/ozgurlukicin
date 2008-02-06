@@ -21,21 +21,21 @@ def open_forum_topic(sender, instance, signal, *args, **kwargs):
     from oi.middleware import threadlocals
 
     user=User.objects.filter(username=threadlocals.get_current_user())
-    
+
     #gerekenler :howto,game,package,news ??? _meta.module_name
-    
+
     #lets make it more flexible:
     if instance._meta.module_name=="howto":
         name="Nasıl"
     elif instance._meta.module_name=="game":
         name="Oyunlar"
-        
+
     elif instance._meta.module_name=="package":
         name="Paketler"
-        
+
     elif instance._meta.module_name=="news":
         name="Haberler"
-        
+
     forum=Forum.objects.filter(name=name)
 
     ch=sender.objects.filter(id=instance.id)

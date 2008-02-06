@@ -42,7 +42,7 @@ def fs_printable(request, slug):
 
 def howto_detail(request, slug):
     howto = get_object_or_404(HowTo, slug=slug)
-    
+
     form=CommentForm()
 
     if request.user.is_authenticated():
@@ -57,7 +57,7 @@ def howto_printable(request, slug):
 def game_detail(request, slug):
     game = get_object_or_404(Game, slug=slug)
     game.avg = ((game.gameplay + game.graphics + game.sound + game.scenario + game.atmosphere)/5.0)
-    
+
     form=CommentForm()
 
     if request.user.is_authenticated():
@@ -85,12 +85,12 @@ def news_printable(request, slug):
 
 def pkg_detail(request, slug):
     package = get_object_or_404(Package, slug=slug)
-    
+
     form=CommentForm()
 
     if request.user.is_authenticated():
         auth=True
-    
+
     return render_response(request, 'package/package_detail.html', locals())
 
 def pkg_printable(request, slug):
@@ -106,7 +106,7 @@ def tag_detail(request, tag):
         howto = HowTo.objects.filter(tags__name__exact=tag)
         flatpages = FlatPage.objects.filter(tags__name__exact=tag)
         topic=Topic.objects.filter(tags__name__exact=tag)
-        
+
     except Tag.DoesNotExist:
         raise Http404
     return render_response(request, 'tag/tag_detail.html', locals())
@@ -142,7 +142,7 @@ def search(request):
             flatpages = FlatPage.objects.filter(tags__name__icontains=term).order_by('title')
             #for forum also
             topic=Topic.objects.filter(tags__name__icontains=term).order_by('title')
-            
+
             total = tags.count()
             total += news.count()
             total += packages.count()
@@ -151,12 +151,12 @@ def search(request):
             total += howto.count()
             total += flatpages.count()
             total += topic.count()
-            
+
     else:
         pass
 
     return render_response(request, 'search.html', locals())
-    
+
 @login_required
 def comment_news(request,slug):
     """ When someone comments it is adde to forum (check for flooding also !)...
@@ -197,7 +197,7 @@ def comment_news(request,slug):
     return render_response(request,'news/news_detail.html',{'news':news,'tags':tags,'form':form,'auth':True})
 
     #do something here
-    
+
 
 @login_required
 def comment_howto(request,slug):
@@ -239,7 +239,7 @@ def comment_howto(request,slug):
     return render_response(request,'howto/howto_detail.html',{'howto':howto,'tags':tags,'form':form,'auth':True})
 
     #do something here
-    
+
 @login_required
 def comment_game(request,slug):
     """ When someone comments it is adde to forum (check for flooding also !)...
@@ -280,7 +280,7 @@ def comment_game(request,slug):
     return render_response(request,'game/game_detail.html',{'game':game,'tags':tags,'form':form,'auth':True})
 
     #do something here
-    
+
 @login_required
 def comment_package(request,slug):
     """ When someone comments it is adde to forum (check for flooding also !)...

@@ -22,15 +22,15 @@ class TopicForm(forms.Form):
         """ It is for topic tihng they are dinamyc"""
         self.base_fields['tags'].choices=[(tag.name,tag.name) for tag in Tag.objects.all()]
         super(TopicForm, self).__init__(*args, **kwargs)
-    
+
 class PostForm(forms.Form):
     text = forms.CharField(label='İleti', required=True, widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
 
 class MergeForm(forms.Form):
     topic2 = forms.ChoiceField(label='Konu', required=True)
-    
+
     def __init__(self,*args,**kwargs):
         """ It is for topic tihng they are dinamyc"""
         super(MergeForm, self).__init__(*args, **kwargs)
         self.base_fields['topic2'].choices=[(topic.id, topic.title) for topic in Topic.objects.all()]
-        
+

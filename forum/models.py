@@ -92,7 +92,7 @@ class Post(models.Model):
 
             posts=t.post_set.all().order_by('-created')
 
-            #if the latest post is the one we are deleting 
+            #if the latest post is the one we are deleting
             if posts[0].id == self.id :
                 #if there are more than one topic we should prevent the disaster othewise let it go :)
                 if posts.count()>1:

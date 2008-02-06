@@ -39,25 +39,25 @@ def _get_comment_list(parser, token, comment_type):
     moderation which sets ``is_public=False``, you'll probably want to
     use this tag, as it makes the template logic simpler by only
     returning approved comments.
-    
+
     Syntax::
-    
+
         {% get_public_comment_list for [app_name].[model_name] [object_id] as [varname] %}
-    
-        
+
+
     To retrieve comments in reverse order (e.g., newest comments
     first), pass 'reversed' as an extra argument after ``varname``.
-    
+
     So, for example, to retrieve registered comments for a flatpage
     with ``id`` 12, use like this::
-    
+
         {% get_public_comment_list for flatpages.flatpage 12 as comment_list %}
-    
-    
+
+
     To retrieve in reverse order (newest comments first)::
-    
+
         {% get_public_comment_list for flatpages.flatpage 12 as comment_list reversed %}
-        
+
     """
     bits = token.contents.split()
     if len(bits) not in (6, 7):
@@ -134,12 +134,12 @@ def _get_comment_count(parser, token, comment_type):
     moderation which sets ``is_public=False``, you'll probably want to
     use this tag, as it gives an accurate count of the comments which
     will be publicly displayed.
-    
+
     Syntax::
-    
+
         {% get_public_comment_count for [app_name].[model_name] [object_id] as [varname] %}
-    
-    
+
+
     Example::
 
         {% get_public_comment_count for weblog.entry entry.id as comment_count %}
@@ -169,7 +169,7 @@ def _get_comment_count(parser, token, comment_type):
         var_name = bits[3]
     if bits[4] != 'as':
         raise template.TemplateSyntaxError("fourth argument to '%s' tag must be 'as'" % bits[0])
-    
+
     return PublicCommentCountNode(app_name, model_name, var_name, object_id, bits[5], comment_type)
 
 

@@ -10,8 +10,8 @@ cat_feed_dict = {
              'rss': Category_Tema_Rss,
              'atom': Category_Tema_Atom,
             }
-         
-            
+
+
 user_feed_dict = {
              'rss': User_Tema_Rss,
              'atom': User_Tema_Atom,
@@ -26,8 +26,8 @@ urlpatterns = patterns ('oi.sanat.views',
 						(r'^kullanici/(?P<username>[a-z]+)/$','list_user'),
 		  				(r'^oy/$','vote_it'),
                         (r'^ekle/$','add_file'),
-                        
-                        
+
+
 )
 
 urlpatterns+=patterns('',
@@ -35,5 +35,5 @@ urlpatterns+=patterns('',
         #(r'^feed/(?P<url>.*)/yeni/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
         (r'^feed/kategori/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': cat_feed_dict}),
         (r'^feed/kullanici/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': user_feed_dict}),
-        
+
         )

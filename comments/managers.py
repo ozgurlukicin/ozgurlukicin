@@ -18,29 +18,29 @@ class CommentedObjectManager(models.Manager):
     """
     A custom manager class which provides useful methods for types of
     objects which allow comments.
-    
+
     Models which allow comments but don't need the overhead of their
     own fully-defined custom manager should use an instance of this
     manager as their default manager.
-    
+
     Models which allow comments and which do have fully-defined custom
     managers should have those managers subclass this one.
-    
+
     """
     def most_commented(self, num=5):
         """
         Returns the ``num`` objects of a given model with the highest
         comment counts, in order.
-        
+
         The return value will be a list of dictionaries, each with the
         following keys::
-        
+
             object
                 An object of this model.
-        
+
             comment_count
                 The number of comments on the object.
-        
+
         """
         comment_opts = Comment._meta
 
@@ -53,11 +53,11 @@ class CommentedObjectManager(models.Manager):
         ORDER BY score DESC""" % (backend.quote_name('object_id'),
                                   backend.quote_name(comment_opts.db_table),
                                   backend.quote_name('object_id'),)
-        
+
         cursor = connection.cursor()
         cursor.execute(query, [ctype.id])
         object_data = [row for row in cursor.fetchall()[:num]]
-        
+
         # Use ``in_bulk`` here instead of an ``id__in`` filter, because ``id__in``
         # would clobber the ordering.
         object_dict = self.in_bulk([tup[0] for tup in object_data])
