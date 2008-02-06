@@ -3,8 +3,8 @@
 	<div id="header" style="padding-top:100px;">
 	{% if not user.is_authenticated %}
         <form method="post" action="/kullanici/giris/">
-            <input type="text" id="id_username" name="username" size="8" class="vTextField required" value="" maxlength="30" />
-            <input type="password" id="id_password" name="password" size="8" class="vPasswordField required" value="" maxlength="30" />
+            <input type="text" id="id_username" name="username" size="18" class="vTextField required" value="" maxlength="30" />
+            <input type="password" id="id_password" name="password" size="18" class="vPasswordField required" value="" maxlength="30" />
             <input type="hidden" name="next" value="{{next}}" />
 			<input type="submit" value="Giriş" id="form_submit" />
         </form>

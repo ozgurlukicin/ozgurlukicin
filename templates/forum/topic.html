@@ -9,61 +9,89 @@
 
 {% for post in posts %}
 
-{% if post.hidden and not perms.forum.can_see_hidden_topics %}
-{% else %}
-
-<div {% if post.hidden %}style="opacity: 0.5;"{% endif %}><a name="post{{ post.id }}"></a>
-<span style="float: left;"><a href="{{ post.get_absolute_url }}">#{{ forloop.counter }}</a></span>
-<span style="float: right;">{{ post.created|date:"d-m-Y H:i" }}</span><br />
-<div id="author_info">{{ post.author.avatar }} {{ post.author }}{% if perms.forum.can_see_post_ip %} ({{ post.ip }}){% endif %}</div>
-<div style="padding-top: 10px;">{{ post.text|linebreaksbr }}<br />
-{% ifnotequal post.edit_count 0 %}<br />Bu ileti {{ post.edit_count }} kez değiştirilmiş olup, son kez {{ post.edited }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.<br />{% endifnotequal %}
-
-<br />{% if forloop.first %}
-        Etiketler :{% for tag in topic.tags.all %}
-            <a href="/etiket/{{tag.name}}/">{{tag.name}}</a> |
-        {% endfor %}
-
-    <br/><br/>
-
-</div>
-<div id="forum_editor">
-
- {% if perms.forum.change_topic %}
-
-	{% if not topic.locked %}<a href="{{ topic.get_edit_url }}">edit</a>{% endif %}
+	{% if post.hidden and not perms.forum.can_see_hidden_topics %}
 	{% else %}
 
-		{% ifequal post.author.id request.user.id %}<a href="{{ topic.get_edit_url }}">edit</a>{% endifequal %}
-	{% endif %}
-</div>
-<div id="forum_editor">
-		{% else %}
-		{% if perms.forum.change_post %}<a href="{{ post.get_edit_url }}">edit</a>
+		<div {% if post.hidden %}style="opacity: 0.5;"{% endif %}><a name="post{{ post.id }}"></a>
+		<span style="float: left;"><a href="{{ post.get_absolute_url }}">#{{ forloop.counter }}</a></span>
+		<span style="float: right;">{{ post.created|date:"d-m-Y H:i" }}</span><br />
+		<div id="author_info">{{ post.author.avatar }} {{ post.author }}{% if perms.forum.can_see_post_ip %} ({{ post.ip }}){% endif %}</div>
+		<div style="padding-top: 10px;">{{ post.text|linebreaksbr }}<br />
+		
+			{% ifnotequal post.edit_count 0 %}
+				<br />Bu ileti {{ post.edit_count }} kez değiştirilmiş olup, son kez {{ post.edited }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.<br />
+			{% endifnotequal %}
+
+			<br />
+			{% if forloop.first %}
+        		Etiketler :{% for tag in topic.tags.all %}<a href="/etiket/{{tag.name}}/">{{tag.name}}</a> |{% endfor %}
+
+    			<br/><br/>
+
+		</div>
+
+			<div id="forum_editor">
+
+ 				{% if perms.forum.change_topic %}
+
+					{% if not topic.locked %}<a href="{{ topic.get_edit_url }}">edit</a>{% endif %}
+
+				{% else %}
+					{% ifequal post.author.id request.user.id %}<a href="{{ topic.get_edit_url }}">edit</a>{% endifequal %}
+				{% endif %}
+
+			
+
+			
+
 			{% else %}
-				{% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}">edit</a>{% endifequal %}
+			
+				{% if perms.forum.change_post %}
+					<a href="{{ post.get_edit_url }}">edit</a>
+		
+				{% else %}
+					{% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}">edit</a>{% endifequal %}
+		
+				{% endif %}
+			</div>
+		
 			{% endif %}
+
+ 
+		<div id="forum_editor">
+		{% if not topic.locked %}<a href="{{ post.get_quote_url }}">quote</a>{% endif %}
+
 		{% endif %}
 	{% if not topic.locked %}<a href="{{ post.get_quote_url }}">quote</a>{% endif %}
 
 
-{% if perms.forum.can_hide_post and not forloop.first and not post.hidden %}<a href="{{ post.get_hide_url }}">hide</a>{% endif %}
-{% if perms.forum.can_hide_post and not forloop.first and post.hidden %}<a href="{{ post.get_hide_url }}">unhide</a>{% endif %}
 
-{% if perms.forum.delete_post and not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>{% else %}
+		{% if perms.forum.can_hide_post and not forloop.first and not post.hidden %}<a href="{{ post.get_hide_url }}">hide</a>{% endif %}
+		{% if perms.forum.can_hide_post and not forloop.first and post.hidden %}<a href="{{ post.get_hide_url }}">unhide</a>{% endif %}
+
+		{% if perms.forum.delete_post and not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>
+		
+		{% else %}
 <!-- end forum_editor div -->
-</div>
+	
 
-{% ifequal post.author.id request.user.id %}{% ifequal post topic.topic_latest_post %}{% if not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>{% endif %}{% endifequal %}{% endifequal %}
+		{% ifequal post.author.id request.user.id %}
+			{% ifequal post topic.topic_latest_post %}
+				{% if not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>
+				{% endif %}
+			{% endifequal %}
+		{% endifequal %}
 
-{% endif %}
+		{% endif %}
 
-
-{% endif %}
+		</div>
+		
 
 <!-- end first div -->
 </div>
 {% endfor %}
+
+
 <hr>
     <div id="forum_editor" vertical-align="center">
         {% if perms.forum.can_merge_topic %}<a href="{{ topic.get_merge_url }}"><img src="/media/dijital/img/forum/merge.jpg" border="0" /></a> - {% endif %}

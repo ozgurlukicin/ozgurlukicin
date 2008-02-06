@@ -20,7 +20,7 @@ class XssField(forms.CharField):
             raise forms.ValidationError(_(u'Bos birakilamaz'))
 
         #strip the tags we dont want
-        value=html2safehtml(value,valid_tags=('a','b','i','li','img','ul', 'h1', 'h2', 'h3', 'h4', 'h5'))
+        value=html2safehtml(value,valid_tags=('a','b','i','li','img','ul', 'h1', 'h2', 'h3', 'h4', 'h5','title'))
 
         if not value:
             raise forms.ValidationError(_(u'Xss mi lutfen ama !'))
