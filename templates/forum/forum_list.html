@@ -3,7 +3,6 @@
 
 {% block content %}
 
-
 <div id="forum_header">
     <span id="forum_icon">&nbsp;</span>
     <span id="forum_name">Forum</span>
@@ -12,19 +11,31 @@
     <span id="forum_posts">İletiler</span>
 </div>
 {% for category in categories %}
-<div id="category" {% if category.hidden and perms.forum.can_see_hidden_categories %}style="opacity: 0.5;"{% endif %}>
+
+{% if category.hidden and not perms.forum.can_see_hidden_categories %}
+{% else %}
+
+<div id="category" {% if category.hidden %}style="opacity: 0.5;"{% endif %}>
 <div id="category_title">{{ category.name }}</div>
 <div id="category_forums">
     {% for forum in category.forum_set.all %}
-    <div id="category_forums_item" {% if forum.hidden and perms.forum.can_see_hidden_forums %}style="opacity: 0.5;"{% endif %}>
+    {% if forum.hidden and not perms.forum.can_see_hidden_forums %}
+    {% else %}
+
+    <div id="category_forums_item" {% if forum.hidden %}style="opacity: 0.5;"{% endif %}>
         <div id="category_forums_item_icon"><img src="/media/dijital/img/forum/eski_konu.gif" /></div>
         <div id="category_forums_item_title"><a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a></div>
         <div id="category_forums_item_lastpost"><a href="{{ forum.forum_latest_post.get_absolute_url }}">{{ forum.forum_latest_post.topic.title }}</a> {{ forum.forum_latest_post.author }} tarafından {{ forum.forum_latest_post.edited|timedelta }}</div>
         <div id="category_forums_item_topics">{{ forum.topics }}</div>
         <div id="category_forums_item_posts">{{ forum.posts }}</div>
     </div>
+    {% endif %}
     {% endfor %}
 </div>
 </div>
+
+{% endif %}
+
 {% endfor %}
+
 {% endblock %}
