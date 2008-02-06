@@ -1,5 +1,9 @@
 {% extends "forum/forum_base.html" %}
 
+{% block title %}
+{{topic.title}} -
+{% endblock %}
+
 {% block content %}
 <div id="forum_adres"><strong><a href="{{ forum.category.get_absolute_url }}">{{ forum.category.name }}</a> > <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> > {{ topic.title }}</strong></div><br /><br />
 
