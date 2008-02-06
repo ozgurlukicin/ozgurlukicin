@@ -42,7 +42,7 @@ tinyMCE.init({
 {% ifnotequal post.edit_count 0 %}<br />Bu ileti {{ post.edit_count }} kez değiştirilmiştir, son kez {{ post.edited }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.<br />{% endifnotequal %}
 </div>
 
-<br />{% if forloop.first %}{% if perms.topic.can_edit %}<a href="{{ topic.get_edit_url }}">edit</a>{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ topic.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% else %}{% if perms.post.can_edit %}<a href="{{ post.get_edit_url }}">edit</a>{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% endif %} <a href="{{ post.get_quote_url }}">quote</a>
+<br />{% if forloop.first %}{% if perms.topic.can_edit %}<a href="{{ topic.get_edit_url }}">edit</a>{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ topic.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% else %}{% if perms.post.can_edit %}<a href="{{ post.get_edit_url }}">edit</a>{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% endif %} 
 
 {% if perms.post.can_hide and not forloop.first and not post.hidden %}<a href="{{ post.get_hide_url }}">hide</a>{% endif %}
 {% if perms.post.can_hide and not forloop.first and post.hidden %}<a href="{{ post.get_hide_url }}">unhide</a>{% endif %}
