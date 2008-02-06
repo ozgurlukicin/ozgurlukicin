@@ -120,7 +120,7 @@ Ozgurlukicin.com"""
 
             email_to = form.clean_data['email']
 
-            send_mail(email_subject % email_dict, email_body % email_dict, DEFAULT_FROM_EMAIL, email_to, fail_silently=True)
+            send_mail(email_subject % email_dict, email_body % email_dict, DEFAULT_FROM_EMAIL, [email_to], fail_silently=True)
 
             return render_response(request, 'user/register_done.html', {'form': form,
                                                                    'user': form.clean_data['username']})
