@@ -25,7 +25,7 @@ DATABASE_HOST = 'localhost'
 DATABASE_PORT = ''
 
 # Email
-DEFAULT_FROM_EMAIL = 'noREPLY@ozgurlukicin.com'
+DEFAULT_FROM_EMAIL = 'noreply@ozgurlukicin.com'
 #EMAIL_USE_TLS = True
 
 # Pagination
