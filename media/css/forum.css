@@ -205,7 +205,12 @@ margin:0px;
 
 /* Topic page part is here*/
 #forum_editor { background:url(/media/dijital/img/forum/forum_bar.gif); height:32px; }
-#forum_adres { background:url(/media/dijital/img/forum/forum_bar.gif); height:32px; width:100%; }
+#forum_adres {
+    background: url(/media/dijital/img/forum/forum_bar.gif);
+    height: 32px;
+    width: 100%;
+    padding: 8px 0px 0px 10px;
+}
 #current_topic { padding-left: 10px; vertical-align: middle; }
 #new_topic { text-align: right; vertical-align: middle; }
 /* Ends here */

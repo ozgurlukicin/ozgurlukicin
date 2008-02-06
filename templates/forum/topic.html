@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<div id="forum_adres"><strong><a href="{{ forum.category.get_absolute_url }}">{{ forum.category.name|escape }}</a> > <a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a> > {{ topic.title|escape }}</strong></div><br /><br />
+<div id="forum_adres"><strong><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a> &#62; {{ topic.title|escape }}</strong></div><br /><br />
 
 <!-- buraya table hali gelcekmis -->
 
