@@ -2,36 +2,46 @@
 {% extends "forum/forum_base.html" %}
 
 {% block content %}
+<table id="forum_adres" >
+    <tbody>
+        <tr>
+            <td id="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; {{ forum.name|escape }}</td>
+            <td id="new_topic"><a href="/forum/{{ forum.slug }}/new/"><img src="/media/dijital/img/forum/yeni_baslik.jpg" border="0" /></a></td>
+        </tr>
+    </tbody>
+</table>
+<br /><br />
 
-<div id="forum_adres" >Forum > {{ forum.name|escape }} <a href="/forum/{{ forum.slug }}/new/"  style="float: right;"><img src="/media/dijital/img/forum/yeni_baslik.jpg" /></a></div>
-<br><br>
-
-<div id="forum_header">
-    <span id="topic_icon">Icon</span>
-    <span id="topic_title">Konu</span>
-    <span id="topic_lastpost">Son İleti</span>
-    <span id="topic_posts">İletiler</span>
-    <span id="topic_views">Görüntüleme</span>
-</div>
+<table id="forum_header">
+    <tbody>
+        <tr>
+            <td id="topic_icon">Icon</td>
+            <td id="topic_title">Konu</td>
+            <td id="topic_lastpost">Son İleti</td>
+            <td id="topic_posts">İletiler</td>
+            <td id="topic_views">Görüntüleme</td>
+        </tr>
+    </tbody>
+</table>
 <br/>
-<div id="forum_topic">
+<table id="forum_topic">
+    <tbody>
     {% for topic in topic_list %}
 
     {% if topic.hidden and not perms.forum.can_see_hidden_topics %}
     {% else %}
 
-    <div id="topics_item" {% if topic.hidden %}style="opacity: 0.5;"{% endif %}>
-        <div id="topics_item_icon">{% if topic.locked %}L{% endif %}{% if topic.sticky %}S{% endif %}{% if not topic.locked and not topic.sticky %}<img src="/media/dijital/img/forum/eski_konu.gif" />{% endif %}</div>
-        <div id="topics_item_title"><a href="{{ topic.get_absolute_url }}">{{ topic.title|escape }}</a></div>
-        <div id="topics_item_lastpost"><a href="{{ topic.topic_latest_post.get_absolute_url }}">{{ topic.topic_latest_post.author }}</a> tarafından {{ topic.topic_latest_post.edited|timedelta }}</div>
-        <div id="topics_item_posts">{{ topic.posts }}</div>
-        <div id="topics_item_views">{{ topic.views }}</div>
-    </div>
-
+    <tr id="topics_item" {% if topic.hidden %}style="opacity: 0.5;"{% endif %}>
+        <td id="topics_item_icon"><a href="{{ topic.get_absolute_url }}">{% if topic.locked %}L{% endif %}{% if topic.sticky %}S{% endif %}{% if not topic.locked and not topic.sticky %}<img src="/media/dijital/img/forum/eski_konu.gif" border="0" />{% endif %}</a></td>
+        <td id="topics_item_title"><a href="{{ topic.get_absolute_url }}">{{ topic.title|escape }}</a></td>
+        <td id="topics_item_lastpost"><a href="{{ topic.topic_latest_post.get_absolute_url }}">{{ topic.topic_latest_post.author }}</a> tarafından {{ topic.topic_latest_post.edited|timedelta }}</td>
+        <td id="topics_item_posts">{{ topic.posts }}</td>
+        <td id="topics_item_views">{{ topic.views }}</td>
+    </tr>
     {% endif %}
-
     {% endfor %}
-</div>
+    </tbody>
+</table>
 <br>
 {% if is_paginated %}{% paginator %}{% endif %}
 {% endblock %}

@@ -187,26 +187,28 @@ margin:0px;
 
 /*The topic list part is here */
 
-#forum_topic { width: 100%; float: left; }
-#forum_header { background:url(/media/dijital/img/forum/forum_bar.gif); height:32px; }
-#topic_icon { width: 10%; float: left; }
-#topic_title {  width: 35%; float: left; }
-#topic_lastpost { width: 35%; float: left; }
-#topic_posts { width: 10%; float: left; }
-#topic_views { width: 10%; float: left; }
-#topics_item { float: left; clear: left; width: 100%;}
-#topics_item_icon { width: 10%; float: left; }
-#topics_item_title { width: 35%; float: left; }
-#topics_item_lastpost { width: 35%; float: left; }
-#topics_item_posts { width: 10%; float: left; }
-#topics_item_views { width: 10%; float: left; }
+#forum_topic { width: 100%; vertical-align: middle; }
+#forum_header { background:url(/media/dijital/img/forum/forum_bar.gif); height:32px; width:100%; }
+#topic_icon { width: 5%; vertical-align: middle; }
+#topic_title {  width: 30%; vertical-align: middle; }
+#topic_lastpost { width: 45%; vertical-align: middle; }
+#topic_posts { width: 10%; vertical-align: middle; text-align: center; }
+#topic_views { width: 10%; vertical-align: middle; text-align: center; }
+#topics_item { width: 100%; }
+#topics_item_icon { width: 5%; vertical-align: middle; }
+#topics_item_title { width: 30%; vertical-align: middle; }
+#topics_item_lastpost { width: 45%; vertical-align: middle; }
+#topics_item_posts { width: 10%; text-align: center; }
+#topics_item_views { width: 10%; text-align: center; }
 
 /*Also ends here*/
 
 /* Topic page part is here*/
-#forum_editor { background:url(/media/dijital/img/forum/forum_bar.gif); height:32px;}
-#forum_adres { background:url(/media/dijital/img/forum/forum_bar.gif); height:32px; }
-/* Ends here*/
+#forum_editor { background:url(/media/dijital/img/forum/forum_bar.gif); height:32px; }
+#forum_adres { background:url(/media/dijital/img/forum/forum_bar.gif); height:32px; width:100%; }
+#current_topic { padding-left: 10px; vertical-align: middle; }
+#new_topic { text-align: right; vertical-align: middle; }
+/* Ends here */
 
 /* taken from django trac and modified */
 input, textarea, select { margin: 2px }
