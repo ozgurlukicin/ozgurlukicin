@@ -209,10 +209,9 @@ margin:0px;
     background: url(/media/dijital/img/forum/forum_bar.gif);
     height: 32px;
     width: 100%;
-    padding: 8px 0px 0px 10px;
 }
-#current_topic { padding-left: 10px; vertical-align: middle; }
-#new_topic { text-align: right; vertical-align: middle; }
+#current_topic { display:table-cell; padding-left: 10px; float:left; vertical-align: middle; }
+#new_topic { display:table-cell; text-align: right; float:right; vertical-align: middle; }
 /* Ends here */
 
 /* taken from django trac and modified */

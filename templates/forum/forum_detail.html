@@ -2,14 +2,10 @@
 {% extends "forum/forum_base.html" %}
 
 {% block content %}
-<table id="forum_adres" >
-    <tbody>
-        <tr>
-            <td id="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; {{ forum.name|escape }}</td>
-            <td id="new_topic"><a href="/forum/{{ forum.slug }}/new/"><img src="/media/dijital/img/forum/yeni_baslik.jpg" border="0" /></a></td>
-        </tr>
-    </tbody>
-</table>
+<div id="forum_adres" >
+    <div id="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; {{ forum.name|escape }}</div>
+    <div id="new_topic"><a href="/forum/{{ forum.slug }}/new/"><img src="/media/dijital/img/forum/yeni_baslik.jpg" border="0" /></a></div>
+</div>
 <br /><br />
 
 <table id="forum_header">
