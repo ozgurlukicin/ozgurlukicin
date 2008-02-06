@@ -166,7 +166,7 @@ margin-top: 20px;
 #forum_topics { width: 10%; float: left; }
 #forum_posts { width: 10%; float: left; }
 #category { float: left; clear: left; width: 100%; }
-#category_title { background:url(/media/dijital/img/forum/forum_bar.gif); }
+#category_title { background:url(/media/dijital/img/forum/forum_bar.gif); height:32px; }
 #category_forums_item { clear: left; }
 #category_forums_item_icon { width: 5%; float: left; }
 #category_forums_item_title { width: 30%; float: left; }
@@ -178,7 +178,7 @@ margin-top: 20px;
 /*The topic list part is here */
 
 #forum_topic { width: 100%; float: left; }
-#forum_header { background:url(/media/dijital/img/forum/forum_bar.gif); }
+#forum_header { background:url(/media/dijital/img/forum/forum_bar.gif); height:32px; }
 #topic_icon { width: 10%; float: left; }
 #topic_title {  width: 35%; float: left; }
 #topic_lastpost { width: 35%; float: left; }
@@ -194,8 +194,8 @@ margin-top: 20px;
 /*Also ends here*/
 
 /* Topic page part is here*/
-#forum_editor { background:url(/media/dijital/img/forum/forum_bar.gif); }
-#forum_adres { background:url(/media/dijital/img/forum/forum_bar.gif); }
+#forum_editor { background:url(/media/dijital/img/forum/forum_bar.gif); height:32px;}
+#forum_adres { background:url(/media/dijital/img/forum/forum_bar.gif); height:32px; }
 /* Ends here*/
 
 /* taken from django trac and modified */
