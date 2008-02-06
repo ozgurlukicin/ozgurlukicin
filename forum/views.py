@@ -51,7 +51,7 @@ def topic(request, forum_slug, topic_id):
 def reply(request, forum_slug, topic_id, post_id=False):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
-    
+
     posts = topic.post_set.all().order_by('-created')
 
     if forum.locked or topic.locked:
@@ -122,21 +122,19 @@ def new_topic(request, forum_slug):
 
         if form.is_valid() and not flood:
             topic = Topic(forum=forum,
-                          title=form.clean_data['title']
-                         )
-                         
+                          title=form.clean_data['title'])
+
         #tags
             topic.save()
-            
+
             for tag in form.clean_data['tags']:
                 t=Tag.objects.get(name=tag)
                 topic.tags.add(t)
-            
 
             post = Post(topic=topic,
                         author=request.user,
-                        text=form.clean_data['text']
-                       )
+                        text=form.clean_data['text'])
+
             post.save()
 
             return HttpResponseRedirect(post.get_absolute_url())
@@ -178,7 +176,7 @@ def edit_topic(request, forum_slug, topic_id):
 def merge(request, forum_slug, topic_id):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
-    
+
     if forum.locked or topic.locked:
         hata="Kilitli konularda bu tür işlemler yapılamaz!"
         return render_response(request, 'forum/merge.html', locals())
@@ -189,34 +187,31 @@ def merge(request, forum_slug, topic_id):
 
         if form.is_valid() and not flood:
             topic2 = form.clean_data['topic2']
-            
+
             if int(topic2)==topic.id:
                 hata="Aynı konuyu mu merge edeceksiniz !"
                 return render_response(request, 'forum/merge.html', locals())
-            
-            
+
+
             topic2_object=get_object_or_404(Topic, pk=int(topic2))
-            
+
             posts_tomove=Post.objects.filter(topic=topic.id)
             for post in posts_tomove:
                 post.topic = topic2_object
                 post.save()
-                
+
             #bir de simdi ileti sayisini arttirmak gerekir.
             topic2_object.posts += posts_tomove.count()
             topic2_object.save()
-            
-            
+
             topic.delete()
-            
+
             return HttpResponseRedirect(forum.get_absolute_url())
-            
-            
-        
+
         else:
             hata="Forum valid degil veya floood yapıyorsun!"
             return render_response(request, 'forum/merge.html', locals())
-        
+
     else:
         form = MergeForm(auto_id=True)
 
@@ -227,7 +222,7 @@ def hide(request, forum_slug, topic_id, post_id=False):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
 
-    if request.user.has_perm('post.can_hide') and post_id:
+    if request.user.has_perm('forum.can_hide_post') and post_id:
         post = get_object_or_404(Post, pk=post_id)
 
         if post.hidden:
@@ -238,8 +233,7 @@ def hide(request, forum_slug, topic_id, post_id=False):
         post.save()
 
         return HttpResponseRedirect(topic.get_absolute_url())
-
-    if request.user.has_perm('topic.can_hide') and not post_id:
+    elif request.user.has_perm('forum.can_hide_topic') and not post_id:
         if topic.hidden:
             topic.hidden = 0
         else:
@@ -248,40 +242,44 @@ def hide(request, forum_slug, topic_id, post_id=False):
         topic.save()
 
         return HttpResponseRedirect(forum.get_absolute_url())
+    else:
+        return HttpResponseServerError # FIXME: Given an error message
 
 @login_required
 def stick(request, forum_slug, topic_id):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
 
-    if request.user.has_perm('topic.can_stick') and not topic.sticky:
+    if request.user.has_perm('forum.can_stick_stopic') and not topic.sticky:
         topic.sticky = 1
         topic.save()
 
         return HttpResponseRedirect(forum.get_absolute_url())
-
-    if request.user.has_perm('topic.can_stick') and topic.sticky:
+    elif request.user.has_perm('forum.can_stick_topic') and topic.sticky:
         topic.sticky = 0
         topic.save()
 
         return HttpResponseRedirect(forum.get_absolute_url())
+    else:
+        return HttpResponseServerError # FIXME: Give an error message
 
 @login_required
 def lock(request, forum_slug, topic_id):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
 
-    if request.user.has_perm('topic.can_lock') and not topic.locked:
+    if request.user.has_perm('forum.can_lock_topic') and not topic.locked:
         topic.locked = 1
         topic.save()
 
         return HttpResponseRedirect(forum.get_absolute_url())
-
-    if request.user.has_perm('topic.can_lock') and topic.locked:
+    elif request.user.has_perm('forum.can_lock_topic') and topic.locked:
         topic.locked = 0
         topic.save()
 
         return HttpResponseRedirect(forum.get_absolute_url())
+    else:
+        return HttpResponseServerError # FIXME: Give an error message
 
 def flood_control(request):
     if 'flood_control' in request.session and ((datetime.now() - request.session['flood_control']).seconds < FLOOD_TIMEOUT):

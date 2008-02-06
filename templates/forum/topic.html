@@ -4,40 +4,50 @@
 <div id="forum_adres"><strong><a href="{{ forum.category.get_absolute_url }}">{{ forum.category.name }}</a> > <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> > {{ topic.title }}</strong></div><br /><br />
 
 {% for post in posts %}
+
+{% if post.hidden and not perms.forum.can_see_hidden_topics %}
+{% else %}
+
 <div {% if post.hidden %}style="opacity: 0.5;"{% endif %}><a name="post{{ post.id }}"></a>
 <span style="float: left;"><a href="{{ post.get_absolute_url }}">#{{ forloop.counter }}</a></span>
 <span style="float: right;">{{ post.created|date:"d-m-Y H:i" }}</span><br />
-<div id="author_info">{{ post.author.avatar }} {{ post.author }}{% if perms.post.can_see_ip %} ({{ post.ip }}){% endif %}</div>
+<div id="author_info">{{ post.author.avatar }} {{ post.author }}{% if perms.forum.can_see_post_ip %} ({{ post.ip }}){% endif %}</div>
 <div style="padding-top: 10px;">{{ post.text|linebreaksbr }}<br />
-{% ifnotequal post.edit_count 0 %}<br />Bu ileti {{ post.edit_count }} kez değiştirilmiştir, son kez {{ post.edited }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.<br />{% endifnotequal %}
+{% ifnotequal post.edit_count 0 %}<br />Bu ileti {{ post.edit_count }} kez değiştirilmiş olup, son kez {{ post.edited }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.<br />{% endifnotequal %}
 </div>
 
 <br /><div id="forum_editor">{% if forloop.first %}
-		Etiketler :{% for tag in topic.tags.all %}
-			<a href="/etiket/{{tag.name}}/">{{tag.name}}</a> |
-		{% endfor %}	
+        Etiketler :{% for tag in topic.tags.all %}
+            <a href="/etiket/{{tag.name}}/">{{tag.name}}</a> |
+        {% endfor %}
 
-	<br/>
-	<br/>
- {% if perms.topic.can_edit %}{% if not topic.locked %}<a href="{{ topic.get_edit_url }}">edit</a>{% endif %}{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ topic.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% else %}{% if perms.post.can_edit %}<a href="{{ post.get_edit_url }}">edit</a>{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% endif %} {% if not topic.locked %}<a href="{{ post.get_quote_url }}">quote</a>{% endif %}
+    <br/>
+    <br/>
+ {% if perms.forum.change_topic %}{% if not topic.locked %}<a href="{{ topic.get_edit_url }}">edit</a>{% endif %}{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ topic.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% else %}{% if perms.forum.change_post %}<a href="{{ post.get_edit_url }}">edit</a>{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% endif %} {% if not topic.locked %}<a href="{{ post.get_quote_url }}">quote</a>{% endif %}
 
-{% if perms.post.can_hide and not forloop.first and not post.hidden %}<a href="{{ post.get_hide_url }}">hide</a>{% endif %}
-{% if perms.post.can_hide and not forloop.first and post.hidden %}<a href="{{ post.get_hide_url }}">unhide</a>{% endif %}
+{% if perms.forum.can_hide_post and not forloop.first and not post.hidden %}<a href="{{ post.get_hide_url }}">hide</a>{% endif %}
+{% if perms.forum.can_hide_post and not forloop.first and post.hidden %}<a href="{{ post.get_hide_url }}">unhide</a>{% endif %}
 
-{% if perms.post.can_delete and not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>{% else %}
+{% if perms.forum.delete_post and not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>{% else %}
 {% ifequal post.author.id request.user.id %}{% ifequal post topic.topic_latest_post %}{% if not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>{% endif %}{% endifequal %}{% endifequal %}
 {% endif %}
+
+<!-- end forum_editor div -->
 </div>
-<hr>
-{% if post.hidden %}</div>{% endif %}
+
+{% endif %}
+
+<!-- end first div -->
+</div>
 {% endfor %}
-{% if perms.topic.can_merge %}<a href="{{ topic.get_merge_url }}">merge</a> - {% endif %}
-{% if perms.topic.can_hide and not topic.hidden %}<a href="{{ topic.get_hide_url }}">hide</a> - {% endif %}
-{% if perms.topic.can_hide and topic.hidden %}<a href="{{ topic.get_hide_url }}">unhide</a> - {% endif %}
-{% if perms.topic.can_stick and not topic.sticky %}<a href="{{ topic.get_stick_url }}">stick</a> - {% endif %}
-{% if perms.topic.can_stick and topic.sticky %}<a href="{{ topic.get_stick_url }}">unstick</a> - {% endif %}
-{% if perms.topic.can_lock and not topic.locked %}<a href="{{ topic.get_lock_url }}">lock</a>{% endif %}
-{% if perms.topic.can_lock and topic.locked %}<a href="{{ topic.get_lock_url }}">unlock</a>{% endif %} - {% if not topic.locked %}<a href="{{ topic.get_reply_url }}">reply</a>{% endif %}
+<hr>
+{% if perms.forum.can_merge_topic %}<a href="{{ topic.get_merge_url }}">merge</a> - {% endif %}
+{% if perms.forum.can_hide_topic and not topic.hidden %}<a href="{{ topic.get_hide_url }}">hide</a> - {% endif %}
+{% if perms.forum.can_hide_topic and topic.hidden %}<a href="{{ topic.get_hide_url }}">unhide</a> - {% endif %}
+{% if perms.forum.can_stick_topic and not topic.sticky %}<a href="{{ topic.get_stick_url }}">stick</a> - {% endif %}
+{% if perms.forum.can_stick_topic and topic.sticky %}<a href="{{ topic.get_stick_url }}">unstick</a> - {% endif %}
+{% if perms.forum.can_lock_topic and not topic.locked %}<a href="{{ topic.get_lock_url }}">lock</a>{% endif %}
+{% if perms.forum.can_lock_topic and topic.locked %}<a href="{{ topic.get_lock_url }}">unlock</a>{% endif %} - {% if not topic.locked %}<a href="{{ topic.get_reply_url }}">reply</a>{% endif %}
 {% endblock %}
 
 {% block sidebartop %}{% endblock %}
