@@ -6,10 +6,10 @@ Nasıl kullanılırım :
 
 Aşağıya yapılması gereken işleri belirttim. 
 
-(-) yapılmayan işleri
-(+) yapılan işleri
-(/) yapım sürecinde olan işleri temsil eder.
-
+(-)  yapılmayan işleri
+(+)  yapılan işleri
+(/)  yapım sürecinde olan işleri temsil eder.
+(+s) yapıldı ve  sunucuda güncel
 
 Ana site:
 
@@ -17,10 +17,10 @@ Ana site:
 (-) Fav icon değişecek (Denis'de olan minik pati)
 (+) Footer'da Tübitak tescili yazılacak. 
 (+) Hakkında ve takip et linkleri düzelecek
-(+svn st) Oyun main sayfasında başlıklarda problem var düzeltilecek
+(+s) Oyun main sayfasında başlıklarda problem var düzeltilecek
 (-) Foruma yorum göndermek için kullanılan kutuya tinymce eklenecek. Yolla butonu alt sayfaya alınacak. Print ve son güncelleme kısmı ise yorum 
 kutusunun altına gelecek
-(-) Haberler sayfasının sidebar başlangıcında sa yazıyor silelim :)
+(+) Haberler sayfasının sidebar başlangıcında sa yazıyor silelim :)
 (-) Gezgende <p> tagı strip edilecek (Resimlerin görüntüyü bozmasının suçlusu gibi duruyor)
 (-) Forum üye olurken kuralları nanesi javascript popup olsun böylece kuralları okuması için formu kapatmaya gerek olmasın
 (-) İndexte yer alan içeriğin görselleri de o içeriği link olsun (high-end feature :P)
@@ -28,7 +28,7 @@ kutusunun altına gelecek
 Forum:
 /forum sayfası:
 
-(+) /forum sayfasına header'ın altında Navigation Bar gelecek (Anasayfa > Forum gibi )
+(+s) /forum sayfasına header'ın altında Navigation Bar gelecek (Anasayfa > Forum gibi )
 (-) Bir konu admin panelinde başka bir kategoriye taşındığında forum ana sayfasında sanki o konu taşınmamış gibi duruyor çözülmeli
 (-) Foruma footer eklenecek
 (-) Arka plan doldurulacak
@@ -47,7 +47,7 @@ Forum:
 Yanıtla Sayfası
 
 (-) İleti ve Buton metin kutusu ile aynı hizada olacak
-(+) Send butonu Gönder olarak değişecek
+(+s) Send butonu Gönder olarak değişecek
 (-) Tersten sıralanan mesajlarda topic sayfasındaki yapı include edilecek
 (-) İptal butonu olacak
 
@@ -68,3 +68,5 @@ Forum Geneli :
 
 (-) Yazı tipi / rengi / boyutu css'de belirtilecek
 (/) Var olan içerik ile ilgili Özgürlükiçin Hakkında bölümüne konular açılacak ( Denis ilgileniyor)
+(-) Yeni mesaj geldiğinde değişen ikon
+(-) Profil sayfası
