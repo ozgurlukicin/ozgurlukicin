@@ -87,7 +87,10 @@ def edit_post(request, forum_slug, topic_id, post_id):
     topic = get_object_or_404(Topic, pk=topic_id)
     post = get_object_or_404(Post, pk=post_id)
 
-    if forum.locked or topic.locked or request.user.has_perm('forum.change_post'):
+    if not request.user.has_perm('forum.change_post'):
+        raise HttpResponseServerError
+
+    if forum.locked or topic.locked or:
         raise HttpResponseServerError #FIXME: Give an error message
 
     if request.method == 'POST':
@@ -149,7 +152,10 @@ def edit_topic(request, forum_slug, topic_id):
     topic = get_object_or_404(Topic, pk=topic_id)
     first_post = topic.post_set.order_by('created')[0]
 
-    if forum.locked or topic.locked or request.user.has_perm('forum.change_topic'):
+    if not request.user.has_perm('forum.change_topic'):
+        raise HttpResponseServerError
+
+    if forum.locked or topic.locked:
         raise HttpResponseServerError #FIXME: Give an error message
 
     if request.method == 'POST':
