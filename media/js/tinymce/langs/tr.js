@@ -11,7 +11,7 @@ class_name:"Sınıf",
 not_set:"-- Ayarlama --",
 clipboard_msg:"Kes/Kopyala/Yapıştır özellikleri Mozilla ve Firefox'da çalışmamaktadır.\n Bu konu hakkında daha fazla bilgi almak ister misiniz?",
 clipboard_no_support:"Tarayıcınız tarafından desteklenmiyor, lütfen klavye kısa yollarını kullanın.",
-popup_blocked:"Açılır pencere engelleyiciniz uygulamanın doğru çalışmasını engelliyor. Bu aracaı kullanmak için lütfen açılır pencere engelleyicinizi kapatın.",
+popup_blocked:"Açılır pencere engelleyiciniz uygulamanın doğru çalışmasını engelliyor. Bu aracı kullanmak için lütfen açılır pencere engelleyicinizi kapatın.",
 invalid_data:"Hata: Geçersiz değerler girildi, Bu değerler kırmızı renkle vurgulanmıştır.",
 more_colors:"Daha fazla renk"
 },
@@ -36,7 +36,7 @@ print:{
 print_desc:"Yazdır"
 },
 preview:{
-preview_desc:"Önüzleme"
+preview_desc:"Önizleme"
 },
 directionality:{
 ltr_desc:"Yön: Soldan sağa",
@@ -54,14 +54,14 @@ save_desc:"Kaydet",
 cancel_desc:"Tüm değişiklikleri iptal et"
 },
 nonbreaking:{
-nonbreaking_desc:"Insert non-breaking space character"
+nonbreaking_desc:"Satır atlamayan boşluk karakteri ekle"
 },
 iespell:{
 iespell_desc:"İmla kontrolü yap",
 download:"ieSpell algılanmadı. Yüklemek ister misiniz?"
 },
 advhr:{
-advhr_desc:"Horizontale rule"
+advhr_desc:"Yatay kural"
 },
 emotions:{
 emotions_desc:"Gülümsemeler"
@@ -78,11 +78,11 @@ link_desc:"Link düzenle/ekle"
 },
 xhtmlxtras:{
 cite_desc:"Citation",
-abbr_desc:"Abbreviation",
+abbr_desc:"Kısaltma",
 acronym_desc:"Acronym",
-del_desc:"Deletion",
-ins_desc:"Insertion",
-attribs_desc:"Insert/Edit Attributes"
+del_desc:"Silme",
+ins_desc:"Ekleme",
+attribs_desc:"Ekle/Değiştir Özellikleri"
 },
 style:{
 desc:"CSS Stilini düzenle"
@@ -93,31 +93,31 @@ paste_word_desc:"Word dökümanından yapıştır",
 selectall_desc:"Hepsini Seç"
 },
 paste_dlg:{
-text_title:"Use CTRL+V on your keyboard to paste the text into the window.",
-text_linebreaks:"Keep linebreaks",
-word_title:"Use CTRL+V on your keyboard to paste the text into the window."
+text_title:"Metni pencereye yapıştırmak için klavyenizde CTRL+V tuş bileşimini kullanın.",
+text_linebreaks:"Satır kesmelerini koru",
+word_title:"Metni pencereye yapıştırmak için klavyenizde CTRL+V tuş bileşimini kullanın."
 },
 table:{
-desc:"Inserts a new table",
-row_before_desc:"Insert row before",
-row_after_desc:"Insert row after",
-delete_row_desc:"Delete row",
-col_before_desc:"Insert column before",
-col_after_desc:"Insert column after",
-delete_col_desc:"Remove column",
-split_cells_desc:"Split merged table cells",
-merge_cells_desc:"Merge table cells",
-row_desc:"Table row properties",
-cell_desc:"Table cell properties",
-props_desc:"Table properties",
-paste_row_before_desc:"Paste table row before",
-paste_row_after_desc:"Paste table row after",
-cut_row_desc:"Cut table row",
-copy_row_desc:"Copy table row",
-del:"Delete table",
-row:"Row",
-col:"Column",
-cell:"Cell"
+desc:"Yeni bir tablo ekler",
+row_before_desc:"Öncesine satır ekle",
+row_after_desc:"Sonrasına satır ekle",
+delete_row_desc:"Satırı kaldır",
+col_before_desc:"Öncesine sütun ekle",
+col_after_desc:"Sonrasına sütun ekle",
+delete_col_desc:"Sütunu sil",
+split_cells_desc:"Birleştirilmiş tablo hücrelerini ayır",
+merge_cells_desc:"Tablo hücelerini birleştir",
+row_desc:"Tablo satır özellikleri",
+cell_desc:"Tablo hücre özellikleri",
+props_desc:"Tablo özellikleri",
+paste_row_before_desc:"Öncesine tablo satırını yapıştır",
+paste_row_after_desc:"Sonrasına tablo satırını yapıştır",
+cut_row_desc:"Tablo satırını kes",
+copy_row_desc:"Tablo satırını kopyala",
+del:"Tabloyu sil",
+row:"Satır",
+col:"Sütun",
+cell:"Hücre"
 },
 autosave:{
 unload_msg:"Eğer bu sayfadan ayrılırsanız yaptığınız tüm değişiklikler kaybolacaktır."
@@ -136,7 +136,7 @@ template:{
 desc:"Önceden belirlenmiş taslak içeriğini yapıştır"
 },
 visualchars:{
-desc:"Visual control characters on/off."
+desc:"Görsel denetim karakterleri açık/kapalı."
 },
 spellchecker:{
 desc:"İmla kontrolü yap",
