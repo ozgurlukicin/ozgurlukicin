@@ -7,7 +7,7 @@
 
 from datetime import datetime
 
-from django.http import HttpResponseRedirect, HttpResponseServerError, HttpResponseForbidden
+from django.http import HttpResponseRedirect, HttpResponseServerError, HttpResponseForbidden, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
@@ -55,7 +55,7 @@ def reply(request, forum_slug, topic_id, post_id=False):
     posts = topic.post_set.all().order_by('-created')
 
     if forum.locked or topic.locked:
-        raise HttpResponseServerError #FIXME: Give an error message
+        raise HttpResponse("Forum or topic is locked") #FIXME: Give an error message
 
     if request.method == 'POST':
         form = PostForm(request.POST.copy())
@@ -88,10 +88,11 @@ def edit_post(request, forum_slug, topic_id, post_id):
     post = get_object_or_404(Post, pk=post_id)
 
     if not request.user.has_perm('forum.change_post'):
-        raise HttpResponseServerError
+        raise HttpResponse("Opps, wrong way :)")
 
-    if forum.locked or topic.locked or:
-        raise HttpResponseServerError #FIXME: Give an error message
+    if forum.locked or topic.locked:
+        # FIXME: Give an error message
+        raise HttpResponse("Forum or topic is locked")
 
     if request.method == 'POST':
         form = PostForm(request.POST.copy())
@@ -153,10 +154,10 @@ def edit_topic(request, forum_slug, topic_id):
     first_post = topic.post_set.order_by('created')[0]
 
     if not request.user.has_perm('forum.change_topic'):
-        raise HttpResponseServerError
+        raise HttpResponse('Opps, wrong way :)')
 
     if forum.locked or topic.locked:
-        raise HttpResponseServerError #FIXME: Give an error message
+        raise HttpResponse('Forum or topic is locked')
 
     if request.method == 'POST':
         form = TopicForm(request.POST.copy())
