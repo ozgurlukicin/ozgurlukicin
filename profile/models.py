@@ -109,9 +109,10 @@ class RegisterForm(forms.Form):
         if len(field_data) < 3:
             raise forms.ValidationError(u"Kullanıcı adı en az 3 karakter olmalıdır")
 
-        regexp = re.compile("\w+")
-        if not regexp.match(field_data):
-            raise forms.ValidationError(u"Kullanıcı adı geçersiz")
+        # get non-alphanumeric chars
+        regexp = re.compile("\W+")
+        if regexp.match(field_data):
+            raise forms.ValidationError(u"Kullanıcı adı geçersiz. Kullanıcı adı sadece \"a-z A-Z 0-9 _\" alabilir.")
 
         forbidden = ForbiddenUsername.objects.filter(name__iexact=field_data)
         if len(forbidden) > 0:
