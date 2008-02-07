@@ -55,7 +55,7 @@ def reply(request, forum_slug, topic_id, post_id=False):
     posts = topic.post_set.all().order_by('-created')
 
     if forum.locked or topic.locked:
-        raise HttpResponse("Forum or topic is locked") #FIXME: Give an error message
+        return HttpResponse("Forum or topic is locked") #FIXME: Give an error message
 
     if request.method == 'POST':
         form = PostForm(request.POST.copy())
@@ -88,11 +88,11 @@ def edit_post(request, forum_slug, topic_id, post_id):
     post = get_object_or_404(Post, pk=post_id)
 
     if not request.user.has_perm('forum.change_post'):
-        raise HttpResponse("Opps, wrong way :)")
+        return HttpResponse("Opps, wrong way :)")
 
     if forum.locked or topic.locked:
         # FIXME: Give an error message
-        raise HttpResponse("Forum or topic is locked")
+        return HttpResponse("Forum or topic is locked")
 
     if request.method == 'POST':
         form = PostForm(request.POST.copy())
@@ -118,7 +118,7 @@ def new_topic(request, forum_slug):
     forum = get_object_or_404(Forum, slug=forum_slug)
 
     if forum.locked:
-        raise HttpResponseServerError #FIXME: Give an error message
+        return HttpResponse('Forum is locked')
 
     if request.method == 'POST':
         form = TopicForm(request.POST.copy())
@@ -154,10 +154,10 @@ def edit_topic(request, forum_slug, topic_id):
     first_post = topic.post_set.order_by('created')[0]
 
     if not request.user.has_perm('forum.change_topic'):
-        raise HttpResponse('Opps, wrong way :)')
+        return HttpResponse('Opps, wrong way :)')
 
     if forum.locked or topic.locked:
-        raise HttpResponse('Forum or topic is locked')
+        return HttpResponse('Forum or topic is locked')
 
     if request.method == 'POST':
         form = TopicForm(request.POST.copy())
