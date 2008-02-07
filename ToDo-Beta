@@ -1,0 +1,54 @@
+(-) Nasıl bölümünde duran ilk adımlara pati eklenecek (Denis'de olan minik pati)
+(-) Fav icon değişecek (Denis'de olan minik pati)
+(-) Footer'da Tübitak tescili yazılacak. Hakkında ve takip et linkleri düzelecek
+(-) Oyun main sayfasında başlıklarda problem var düzeltilecek
+(-) Foruma yorum göndermek için kullanılan kutuya tinymce eklenecek. Yolla butonu alt sayfaya alınacak. Print ve son güncelleme kısmı ise yorum 
+kutusunun altına gelecek
+(-) Haberler sayfasının sidebar başlangıcında sa yazıyor silelim :)
+(-) Gezgende <p> tagı strip edilecek (Resimlerin görüntüyü bozmasının suçlusu gibi duruyor)
+(-) Forum üye olurken kuralları nanesi javascript popup olsun böylece kuralları okuması için formu kapatmaya gerek olmasın
+(-) İndexte yer alan içeriğin görselleri de o içeriği link olsun (high-end feature :P)
+
+Forum:
+/forum sayfası:
+
+(-) /forum sayfasına header'ın altında Navigation Bar gelecek (Anasayfa > Forum gibi )
+(-) Bir konu admin panelinde başka bir kategoriye taşındığında forum ana sayfasında sanki o konu taşınmamış gibi duruyor çözülmeli
+(-) Foruma footer eklenecek
+(-) Arka plan doldurulacak
+(-) Bir mesaj atıldığında 8 saat 17 dakika demek yerine sadece saat gösterilse daha derli toplu olur.
+(-) Her forum elemanın arasına çizgi çizelim (Duyurular ve Haberler <hr> İlk Adımlar gibi)
+
+/forum/kategori sayfası :
+
+(-) Her elemanın arasına border çizilecek (renk olarak çizgili gümüş barın çizgilerinin rengi şık olur :)
+
+/forum/kategori/topic sayfası
+
+(-) Mesaj bölümü düzenlecek (uğur yapıyor)
+(-) Eksik yönetici butonları konacak
+
+Yanıtla Sayfası
+
+(-) İleti ve Buton metin kutusu ile aynı hizada olacak
+(-) Send butonu Gönder olarak değişecek
+(-) Tersten sıralanan mesajlarda topic sayfasındaki yapı include edilecek
+(-) İptal butonu olacak
+
+Düzenle Sayfası
+
+(-) Eğer ilk mesaj düzenleniyorsa başlık ve etiketlerin de düzenlenmesine izin verilecek
+(-) İleti yazısı ve buton metin kutusu ile aynı hizada olacak
+(-) Send butonu Gönder olarak değişecek
+(-) Düzenlemekten vazgeçerse basması için iptal butonu olacak
+
+Yeni Başlık Sayfası
+
+(-) Kutular arası birer boşluk daha bırakılacak. 
+(-) Yazı ile kutular aynı hizada olacak
+(-) İptal butonu olacak
+
+Forum Geneli :
+
+(-) Yazı tipi / rengi / boyutu css'de belirtilecek
+(-) Var olan içerik ile ilgili Özgürlükiçin Hakkında bölümüne konular açılacak ( Denis ilgileniyor)
