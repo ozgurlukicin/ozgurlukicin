@@ -2,6 +2,12 @@
 {% extends "base.html" %}
 
 {% block title %}{{ news.title }} - Haberler - {% endblock %}
+{% block extrahead %}
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/st.js"></script>
+{% endblock %}
+
+
 
 {% block pagetype %}page{% endblock %}
 
@@ -25,17 +31,19 @@
 <div class="page_content grey">
 {{ news.text }}
 </div>
-<div class="page_properties"><a href="{{ news.get_printable_url }}"><img src="/media/img/print.png" /></a></div>
-<div class="page_last_update">Son güncelleme: {{ news.update|timedelta }}</div>
+
 	{% if auth %}
 		{% if form %}
 			<form method="post" action="/haber/yorum/{{news.slug}}/">
 
 				{{form}}
+				<br/>
 				<input type="submit" value="Yolla">
 			</form>
 		{% endif %}
 	{% endif %}
+<div class="page_properties"><a href="{{ news.get_printable_url }}"><img src="/media/img/print.png" /></a></div>
+<div class="page_last_update">Son güncelleme: {{ news.update|timedelta }}</div>
 
 {% endblock %}
 
