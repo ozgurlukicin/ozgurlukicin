@@ -15,9 +15,9 @@ Ana site:
 
 (-) Nasıl bölümünde duran ilk adımlara pati eklenecek (Denis'de olan minik pati)
 (-) Fav icon değişecek (Denis'de olan minik pati)
-(-) Footer'da Tübitak tescili yazılacak. 
+(+) Footer'da Tübitak tescili yazılacak. 
 (+) Hakkında ve takip et linkleri düzelecek
-(-) Oyun main sayfasında başlıklarda problem var düzeltilecek
+(+svn st) Oyun main sayfasında başlıklarda problem var düzeltilecek
 (-) Foruma yorum göndermek için kullanılan kutuya tinymce eklenecek. Yolla butonu alt sayfaya alınacak. Print ve son güncelleme kısmı ise yorum 
 kutusunun altına gelecek
 (-) Haberler sayfasının sidebar başlangıcında sa yazıyor silelim :)
@@ -47,7 +47,7 @@ Forum:
 Yanıtla Sayfası
 
 (-) İleti ve Buton metin kutusu ile aynı hizada olacak
-(-) Send butonu Gönder olarak değişecek
+(+) Send butonu Gönder olarak değişecek
 (-) Tersten sıralanan mesajlarda topic sayfasındaki yapı include edilecek
 (-) İptal butonu olacak
 
