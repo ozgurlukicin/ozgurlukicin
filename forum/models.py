@@ -71,7 +71,8 @@ class Post(models.Model):
         if not self.id:
             new_post = True
 
-        self.ip = threadlocals.get_current_ip()
+        if not self.ip:
+            self.ip = threadlocals.get_current_ip()
         super(Post, self).save()
 
         if new_post:

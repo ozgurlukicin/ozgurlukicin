@@ -50,7 +50,8 @@ def open_forum_topic(sender, instance, signal, *args, **kwargs):
 
             post = Post(topic=topic,
                                 author=user[0],
-                                text=instance.text
+                                text=instance.text,
+                                ip="127.0.0.1"
                                )
             post.save()
 
