@@ -87,9 +87,13 @@ def edit_post(request, forum_slug, topic_id, post_id):
     topic = get_object_or_404(Topic, pk=topic_id)
     post = get_object_or_404(Post, pk=post_id)
 
+    #the normal users dont have that permission actually
     if not request.user.has_perm('forum.change_post'):
-        return HttpResponse("Opps, wrong way :)")
-
+        post_user=[(p.id) for p in Post.objects.filter(author =request.user)]
+    
+        if post.id not in post_user:
+            return HttpResponse("That is a Wrong way my friend :) ")
+    
     if forum.locked or topic.locked:
         # FIXME: Give an error message
         return HttpResponse("Forum or topic is locked")
