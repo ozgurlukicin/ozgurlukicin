@@ -176,9 +176,9 @@ def lost_password(request):
 
            email_subject = u"Ozgurlukicin.com Kullanıcı Parolası"
            email_body = u"""Merhaba!
-%(date)s %(hour)s tarihinde %(ip)s ip adresli bilgisayardan kullanıcı parola sıfırlama isteği gönderdiniz. Lütfen parolanızı değiştirmek için aşağıdaki bağlantıya 24 saat içerisinde tıklayın.
+%(date)s %(hour)s tarihinde %(ip)s ip adresli bilgisayardan kullanici parola sifirlama istegi gonderildi. Lutfen parolanizi degistirmek icin asagidaki baglantiyi 24 saat icerisinde ziyaret edin.
 
-<a href="%(link)s">%(link)s</a>"""
+%(link)s"""
            email_to = form.clean_data['email']
 
            send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, email_to, fail_silently=True)
