@@ -45,7 +45,7 @@
 			{{ post.text|linebreaksbr }}
 			<br/>
 			{% ifnotequal post.edit_count 0 %}
-				<br />Bu ileti {{ post.edit_count }} kez değiştirilmiş olup, son kez {{ post.edited }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.<br />
+            <br /><font style="font-size:8px; font-style:italic;">Bu ileti {{ post.edit_count }} kez değiştirilmiş olup, son kez {{ post.edited }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.</font><br />
 			{% endifnotequal %}
 	
 			</td>
