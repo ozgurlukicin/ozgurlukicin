@@ -14,13 +14,8 @@
 <!-- buraya table hali gelcekmis -->
 
 {% for post in posts %}
-	
-	
 
 <!-- <div {% if post.hidden %}style="opacity: 0.5;"{% endif %}><a name="post{{ post.id }}"></a> -->
-		
-		
-	
 
 <table style="text-align: left; width: 900px;"
  border="0" cellpadding="2" cellspacing="2">
@@ -30,8 +25,8 @@
           <span style="font-weight: bold; font-size: 16px;">{{ post.author }}</span><br/><br/>
           <!-- post.author.avatar buraya gelecek --><img src="/media/dijital/img/forum/avatar.jpg" /><br/><br/>
           {% if perms.forum.can_see_post_ip %} ({{ post.ip }})<br/><br/>{% endif %}
-				Kayit Tarihi : {{ post.author.date_joined }}<br/>
-				<!-- <a href="/kullanici/duzenle/"><img src="/media/dijital/img/forum/bilgi.jpg" border="0"</a><br/> -->
+                Kayit Tarihi : {{ post.author.date_joined }}<br/>
+                <!-- <a href="/kullanici/duzenle/"><img src="/media/dijital/img/forum/bilgi.jpg" border="0"</a><br/> -->
       </td>
       <td style="width: 703px;">
       <table style="text-align: left; width: 100%; height: 100%;"
@@ -41,60 +36,48 @@
             <td style="text-align: left; width: 100%; height: 80%;">
                 <span style="float: right;">{{ post.created|date:"d-m-Y H:i" }}</span>&nbsp;&nbsp;&nbsp;
                         <span style="float: right;"><a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" border="0"/></a></span>
-			
-			{{ post.text|linebreaksbr }}
-			<br/>
-			{% ifnotequal post.edit_count 0 %}
+            {{ post.text|linebreaksbr }}
+            <br/>
+            {% ifnotequal post.edit_count 0 %}
             <br /><font style="font-size:8px; font-style:italic;">Bu ileti {{ post.edit_count }} kez değiştirilmiş olup, son kez {{ post.edited }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.</font><br />
-			{% endifnotequal %}
-	
-			</td>
+            {% endifnotequal %}
+
+            </td>
           </tr>
           <tr>
             <td style="text-align: left; width: 100%; height: 20%;">
-				{% if forloop.first %}
+                {% if forloop.first %}
                                 <img src="/media/img/tag.png" /> {% for tag in topic.tags.all %}<a href="/etiket/{{tag.name}}/">{{tag.name}}</a> |{% endfor %}
-				{%endif%}
-				<br/><br/>
-				<br />
-				
-			
-				<div id="forum_editor">
-				
-				{% if perms.forum.change_post %}
-					<a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>
-		
-				{% else %}
-                                {% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>{% endifequal %}
-		
-				{% endif %}
-				
-				
+                {%endif%}
+                <br/><br/>
+                <br />
+                <div id="forum_editor">
 
-				
+                {% if perms.forum.change_post %}
+                    <a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>
+
+                {% else %}
+                        {% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>{% endifequal %}
+                {% endif %}
 
 
+                {% if perms.forum.can_hide_post and not forloop.first and not post.hidden %}<a href="{{ post.get_hide_url }}">hide</a>{% endif %}
+                {% if perms.forum.can_hide_post and not forloop.first and post.hidden %}<a href="{{ post.get_hide_url }}">unhide</a>{% endif %}
 
-				{% if perms.forum.can_hide_post and not forloop.first and not post.hidden %}<a href="{{ post.get_hide_url }}">hide</a>{% endif %}
-				{% if perms.forum.can_hide_post and not forloop.first and post.hidden %}<a href="{{ post.get_hide_url }}">unhide</a>{% endif %}
-
-				{% if perms.forum.delete_post and not forloop.first %}<a href="{{ post.get_delete_url }}"><img src="/media/dijital/img/forum/sil.gif" border="0" /></a>
-		
-			{% else %}
+                {% if perms.forum.delete_post and not forloop.first %}<a href="{{ post.get_delete_url }}"><img src="/media/dijital/img/forum/sil.gif" border="0" /></a>
+            {% else %}
 <!-- end forum_editor div -->
-	
 
-			{% ifequal post.author.id request.user.id %}
-				{% ifequal post topic.topic_latest_post %}
-                                {% if not forloop.first %}<a href="{{ post.get_delete_url }}"><img src="/media/dijital/img/forum/sil.gif" border="0" /></a>
-					{% endif %}
-			{% endifequal %}
-			{% endifequal %}
+            {% ifequal post.author.id request.user.id %}
+                {% ifequal post topic.topic_latest_post %}
+                    {% if not forloop.first %}<a href="{{ post.get_delete_url }}"><img src="/media/dijital/img/forum/sil.gif" border="0" /></a>
+                    {% endif %}
+            {% endifequal %}
+            {% endifequal %}
 
-		{% endif %}
-
+        {% endif %}
             </div>
-				</td>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -107,7 +90,6 @@
 
 
 {% endfor %}
-
 
 
     <div id="forum_editor" vertical-align="center">
