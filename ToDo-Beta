@@ -1,6 +1,22 @@
+Neyim ben? :
+
+Yapılması gereken ToDo listesiyim...
+
+Nasıl kullanılırım :
+
+Aşağıya yapılması gereken işleri belirttim. 
+
+(-) yapılmayan işleri
+(+) yapılan işleri
+(/) yapım sürecinde olan işleri temsil eder.
+
+
+Ana site:
+
 (-) Nasıl bölümünde duran ilk adımlara pati eklenecek (Denis'de olan minik pati)
 (-) Fav icon değişecek (Denis'de olan minik pati)
-(-) Footer'da Tübitak tescili yazılacak. Hakkında ve takip et linkleri düzelecek
+(-) Footer'da Tübitak tescili yazılacak. 
+(+) Hakkında ve takip et linkleri düzelecek
 (-) Oyun main sayfasında başlıklarda problem var düzeltilecek
 (-) Foruma yorum göndermek için kullanılan kutuya tinymce eklenecek. Yolla butonu alt sayfaya alınacak. Print ve son güncelleme kısmı ise yorum 
 kutusunun altına gelecek
@@ -25,7 +41,7 @@ Forum:
 
 /forum/kategori/topic sayfası
 
-(-) Mesaj bölümü düzenlecek (uğur yapıyor)
+(/) Mesaj bölümü düzenlecek (uğur yapıyor)
 (-) Eksik yönetici butonları konacak
 
 Yanıtla Sayfası
@@ -51,4 +67,4 @@ Yeni Başlık Sayfası
 Forum Geneli :
 
 (-) Yazı tipi / rengi / boyutu css'de belirtilecek
-(-) Var olan içerik ile ilgili Özgürlükiçin Hakkında bölümüne konular açılacak ( Denis ilgileniyor)
+(/) Var olan içerik ile ilgili Özgürlükiçin Hakkında bölümüne konular açılacak ( Denis ilgileniyor)
