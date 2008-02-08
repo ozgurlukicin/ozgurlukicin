@@ -172,8 +172,6 @@ margin:0px;
 #category_title {
     background: url(/media/dijital/img/forum/forum_bar.gif);
     height: 32px;
-    display: table-cell;
-    vertical-align: middle;
     width: 900px;
     padding-left: 46px;
     font-weight: bold;
@@ -205,7 +203,6 @@ margin:0px;
 /*Also ends here*/
 
 /* Topic page part is here*/
-#forum_editor { background:url(/media/dijital/img/forum/forum_bar.gif); height:26px; padding-top: 8px; padding-left: 10px; }
 #forum_adres {
     background: url(/media/dijital/img/forum/forum_bar.gif);
     height: 32px;
@@ -213,6 +210,50 @@ margin:0px;
 }
 #current_topic { padding-left: 10px; padding-top: 8px; float:left; }
 #new_topic { padding-top: 3px; padding-right: 3px; float:right; }
+/* Ends here */
+
+/* Topic posts */
+#post_base {
+    border-bottom: 5px solid #6A91A6;
+    border-top: 2px solid #D7E1E7;
+    overflow: auto;
+    width: 100%; }
+#post_profile {
+    width: 190px;
+    float: left;
+    padding: 10px;
+}
+#post_message {
+    width: 688px;
+    float: right;
+    border-left: 2px solid #D7E1E7;
+}
+#post_message_top {
+    background: url(/media/dijital/img/forum/forum_bar.gif);
+    height: 32px;
+    overflow: auto;
+    width: 100%;
+}
+#post_message_top_icon { float:left; padding-top: 13px; padding-left: 10px; }
+#post_message_top_date { float:left; padding-top: 9px; padding-left: 10px; }
+#post_message_top_buttons { float:right; padding-top:7px; padding-right: 10px; }
+#post_message_content { padding: 10px; }
+#post_message_tags { padding: 10px; }
+#post_bottom {
+    background: url(/media/dijital/img/forum/forum_bar.gif);
+    height: 32px;
+    overflow: auto;
+    width: 100%;
+    clear: both;
+}
+#post_bottom_small {
+    float: right;
+    padding: 7px 10px 0px 0px;
+}
+#post_bottom_big {
+    float: right;
+    padding: 4px 10px 0px 0px;
+}
 /* Ends here */
 
 /* taken from django trac and modified */
