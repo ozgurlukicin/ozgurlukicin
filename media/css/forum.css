@@ -254,6 +254,9 @@ margin:0px;
     float: right;
     padding: 4px 10px 0px 0px;
 }
+.tag {
+    padding-left: 5px;
+}
 /* Ends here */
 
 /* taken from django trac and modified */
