@@ -9,31 +9,27 @@ from django.conf.urls.defaults import patterns
 from oi.forum.feeds import *
 from oi.forum.models import Post
 
-feed_dict = {
-             'rss': RSS,
-             'atom': Atom,
+rss_dict = {
+            'post': RSS,
+            'topic': Topic_Rss,
+            'tag': Tag_Rss,
             }
 
-topic_feed_dict={
-            'rss': Topic_Rss,
-            'atom': Topic_Atom,
-             }
-
-tag_feed_dict={
-            'rss': Tag_Rss,
-            'atom': Tag_Atom,
+atom_dict = {
+            'post': Atom,
+            'topic': Topic_Atom,
+            'tag': Tag_Atom,
             }
 
 urlpatterns = patterns('',
 
-    (r'^feed/topic/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': topic_feed_dict}),
-    (r'^feed/tag/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': tag_feed_dict}),
-    (r'^feed/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
     (r'^$', 'oi.forum.views.main'),
+    (r'^rss/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': rss_dict}),
+    (r'^atom/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': atom_dict}),
 
-    #delete part yoo!!!
+    # delete part yoo!!!
     (r'^.*/\d+/delete/(?P<object_id>[0-9]+)/$','django.views.generic.create_update.delete_object',
-	dict(model=Post,template_name="delete.html",post_delete_redirect="/forum/")),
+    dict(model=Post,template_name="delete.html",post_delete_redirect="/forum/")),
 
     (r'^(?P<forum_slug>.*)/new/$', 'oi.forum.views.new_topic'),
     (r'^(?P<forum_slug>.*)/(?P<topic_id>\d+)/quote/(?P<post_id>\d+)/$', 'oi.forum.views.reply'),
@@ -47,5 +43,6 @@ urlpatterns = patterns('',
     (r'^(?P<forum_slug>.*)/(?P<topic_id>\d+)/edit/$', 'oi.forum.views.edit_topic'),
     (r'^(?P<forum_slug>.*)/(?P<topic_id>\d+)/$', 'oi.forum.views.topic'),
     (r'^(?P<forum_slug>.*)/$', 'oi.forum.views.forum'),
+
 
 )

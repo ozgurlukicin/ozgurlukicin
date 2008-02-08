@@ -1,5 +1,5 @@
-##############################################################################  
-#   
+##############################################################################
+#
 # This software is released under the Zope Public License (ZPL) Version 1.0
 #
 # Copyright (c) Zope Corportation.  All rights reserved.

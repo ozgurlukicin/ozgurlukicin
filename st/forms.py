@@ -14,7 +14,7 @@ class XssField(forms.CharField):
 
     def clean(self,value):
         #for filtering malicious code
-        from oi.forum.stripogram import html2text,html2safehtml 
+        from oi.forum.stripogram import html2text,html2safehtml
 
         if self.required and not value:
             raise forms.ValidationError(_(u'Bos birakilamaz'))
