@@ -5,6 +5,8 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
+from os.path import realpath
+
 ADMINS = ()
 MANAGERS = ADMINS
 
@@ -16,7 +18,7 @@ DEBUG = True
 TESTING = True
 TEMPLATE_DEBUG = DEBUG
 WEB_URL = 'http://django'
-DOCUMENT_ROOT = '/home/ahmet/public_html/oi'
+DOCUMENT_ROOT = realpath('.')
 DATABASE_ENGINE = 'mysql'
 DATABASE_NAME = 'oi'
 DATABASE_USER = 'root'
