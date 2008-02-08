@@ -253,7 +253,8 @@ margin:0px;
 
 #post_message_tags {
     padding-left: 9px;
-    border-left: 1px solid #D7E1E7; 
+    border-left: 1px solid #D7E1E7;
+    overflow: hidden;
 }
 
 #post_bottom {
