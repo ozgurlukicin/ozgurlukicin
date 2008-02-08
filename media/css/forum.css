@@ -236,11 +236,6 @@ margin:0px;
     width: 100%;
 }
 
-#post_message_bottom {
-    border-left: 1px solid #D7E1E7;
-    padding-left: 9px;
-}
-
 #post_message_top_icon { float:left; padding-top: 13px; padding-left: 10px; }
 #post_message_top_date { float:left; padding-top: 9px; padding-left: 10px; }
 #post_message_top_buttons { float:right; padding-top:7px; padding-right: 10px; }
@@ -248,13 +243,18 @@ margin:0px;
     padding-left: 10px;
     padding-top: 10px;
     min-height: 159px;
-    border-left: 1px solid #D7E1E7;
+    border-left: 2px solid #D7E1E7;
 }
 
 #post_message_tags {
     padding-left: 9px;
-    border-left: 1px solid #D7E1E7;
+    border-left: 2px solid #D7E1E7;
     overflow: hidden;
+}
+
+#post_message_bottom {
+    border-left: 2px solid #D7E1E7;
+    padding-left: 9px;
 }
 
 #post_bottom {
