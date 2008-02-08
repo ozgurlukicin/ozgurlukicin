@@ -20,7 +20,7 @@
         <span style="font-weight: bold; font-size: 16px;">{{ post.author }}</span><br/><br/>
         <!-- post.author.avatar buraya gelecek --><img src="/media/dijital/img/forum/avatar.jpg" /><br/><br/>
         {% if perms.forum.can_see_post_ip %}({{ post.ip }})<br/><br/>{% endif %}
-        Kayıt Tarihi : {{ post.author.date_joined|date:"d-m-y" }}<br/>
+        Kayıt Tarihi : {{ post.author.date_joined|date:"d-m-Y" }}<br/>
         <!-- <a href="/kullanici/duzenle/"><img src="/media/dijital/img/forum/bilgi.jpg" border="0"</a><br/> -->
     </div>
     <div id="post_message">
