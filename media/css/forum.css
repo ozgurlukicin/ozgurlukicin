@@ -246,6 +246,7 @@ margin:0px;
 #post_message_top_buttons { float:right; padding-top:7px; padding-right: 10px; }
 #post_message_content {
     padding-left: 10px;
+    padding-top: 10px;
     min-height: 159px;
     border-left: 1px solid #D7E1E7;
 }
