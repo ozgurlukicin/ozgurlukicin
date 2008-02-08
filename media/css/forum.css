@@ -219,14 +219,15 @@ margin:0px;
     overflow: auto;
     width: 100%; }
 #post_profile {
-    width: 190px;
+    width: 165px;
     float: left;
-    padding: 10px;
+    padding-left: 8px;
+    padding-top: 8px;
+    padding-right: 3px;
 }
 #post_message {
-    width: 688px;
-    float: right;
-    border-left: 2px solid #D7E1E7;
+    width: 722px;
+    float: left;
 }
 #post_message_top {
     background: url(/media/dijital/img/forum/forum_bar.gif);
@@ -234,11 +235,26 @@ margin:0px;
     overflow: auto;
     width: 100%;
 }
+
+#post_message_bottom {
+    border-left: 1px solid #D7E1E7;
+    padding-left: 9px;
+}
+
 #post_message_top_icon { float:left; padding-top: 13px; padding-left: 10px; }
 #post_message_top_date { float:left; padding-top: 9px; padding-left: 10px; }
 #post_message_top_buttons { float:right; padding-top:7px; padding-right: 10px; }
-#post_message_content { padding: 10px; }
-#post_message_tags { padding: 10px; }
+#post_message_content {
+    padding-left: 10px;
+    min-height: 159px;
+    border-left: 1px solid #D7E1E7;
+}
+
+#post_message_tags {
+    padding-left: 9px;
+    border-left: 1px solid #D7E1E7; 
+}
+
 #post_bottom {
     background: url(/media/dijital/img/forum/forum_bar.gif);
     height: 32px;

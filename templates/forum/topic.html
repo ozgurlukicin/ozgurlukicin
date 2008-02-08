@@ -20,7 +20,7 @@
         <span style="font-weight: bold; font-size: 16px;">{{ post.author }}</span><br/><br/>
         <!-- post.author.avatar buraya gelecek --><img src="/media/dijital/img/forum/avatar.jpg" /><br/><br/>
         {% if perms.forum.can_see_post_ip %}({{ post.ip }})<br/><br/>{% endif %}
-        Kayıt Tarihi : {{ post.author.date_joined|date:"d-m-Y H:i" }}<br/>
+        Kayıt Tarihi : {{ post.author.date_joined|date:"d-m-y" }}<br/>
         <!-- <a href="/kullanici/duzenle/"><img src="/media/dijital/img/forum/bilgi.jpg" border="0"</a><br/> -->
     </div>
     <div id="post_message">
@@ -54,16 +54,19 @@
         </div>
         <div id="post_message_content">
             {{ post.text|linebreaksbr }}
-            <br/>
+        </div>
+        <div id="post_message_tags">
+            &nbsp;
+            {% if forloop.first %}
+            <img src="/media/img/tag.png" />{% for tag in topic.tags.all %}<span class="tag"><a href="/etiket/{{tag.name}}/">{{tag.name}}</a></span>{% endfor %}
+            {% endif %}
+        </div>
+        <div id="post_message_bottom">
+            &nbsp;
             {% ifnotequal post.edit_count 0 %}
-                <br /><span style="font-size:x-small; font-style:italic;">Bu ileti {{ post.edit_count }} kez değiştirilmiş olup, son kez {{ post.edited|date:"d-m-Y H:i" }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.</span><br />
+            <span style="font-size:x-small; font-style:italic;">Bu ileti {{ post.edit_count }} kez değiştirilmiş olup, son kez {{ post.edited|date:"d-m-Y H:i" }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.</span><br />
             {% endifnotequal %}
         </div>
-        {% if forloop.first %}
-        <div id="post_message_tags">
-            <img src="/media/img/tag.png" />{% for tag in topic.tags.all %}<span class="tag"><a href="/etiket/{{tag.name}}/">{{tag.name}}</a></span>{% endfor %}
-        </div>
-        {%endif%}
     </div>
 </div>
 {% endfor %}
