@@ -170,7 +170,7 @@ margin:0px;
 #forum_posts { width: 10%; vertical-align: middle; text-align: center; }
 #category { float: left; clear: left; width: 100%; }
 #category_title {
-    background: url(/media/dijital/img/forum/forum_bar.gif);
+    background: url(/media/dijital/img/forum/forum_bar.gif) repeat-y;
     height: 32px;
     width: 900px;
     padding-left: 46px;
