@@ -1,3 +1,5 @@
+{% load library %}
+
 {% extends "forum/forum_base.html" %}
 
 {% block title %}
@@ -11,7 +13,7 @@
 <br />
 <!-- buraya table hali gelcekmis -->
 
-{% for post in posts %}
+{% for post in post_list %}
 
 <!-- <div {% if post.hidden %}style="opacity: 0.5;"{% endif %}><a name="post{{ post.id }}"></a> -->
 
@@ -96,7 +98,10 @@
     {% if perms.forum.can_lock_topic and not topic.locked %}
         <div id="post_bottom_big"><a href="{{ topic.get_lock_url }}" border="0"><img src="/media/dijital/img/forum/lock.jpg" border="0" /></a></div>
     {% endif %}
+    {% if is_paginated %} <div id="post_bottom_right">(Toplam {{ pages }} sayfa, {{ hits }} kayıt) {% paginator %}</div>{% endif %}
 </div>
+
+
 {% endblock %}
 
 {% block sidebartop %}{% endblock %}

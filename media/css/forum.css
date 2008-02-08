@@ -93,65 +93,7 @@ body {
     background-image:url(/media/dijital/img/bg.jpg);
     background-repeat:repeat-x;
 margin:0px;
-    
     }
-
-
-/** PAGINATOR **/
-.paginator { padding:.5em .75em; float:left; font:normal .8em arial; }
-
-.paginator a {
-    text-decoration: none;
-}
-
-.paginator .prev-na,
-.paginator .next-na {
-	padding:.3em;
-	font:bold .875em arial;
-}
- 
-.paginator .prev-na,
-.paginator .next-na {
-	border:1px solid #ccc;
-	background-color:#f9f9f9;
-	color:#aaa;
-	font-weight:normal;
-}
- 
-.paginator .prev a, .paginator .prev a:visited,
-.paginator .next a, .paginator .next a:visited {
-	border:1px solid #c2ee62;
-	background-color:#edfdd0;
-	color:#234f32;
-	padding:.3em;
-	font:bold .875em arial;
-}
-
-.paginator .page a, .paginator .page a:visited, .paginator .curr {
-	padding:.25em;
-	font:normal .875em verdana;
-	border:1px solid #C2EE62;
-	background-color:#EDFDD0;
-	color:#006000;
-}
- 
-.paginator .curr { 
-	background-color:#234f32;
-	color:#fff;
-	border:1px solid #234f32;
-	font-weight:bold;
-	font-size:1.2em;
-}
- 
-.paginator .page a:hover,
-.paginator .curr a:hover,
-.paginator .prev a:hover,
-.paginator .next a:hover {
-	color:#fff;
-	background-color:#234f32;
-	border:1px solid #234f32;
-}
-
 
 /*That part is for forum list*/
 #forum_main_header_space { height:20px; }
@@ -258,6 +200,7 @@ margin:0px;
 }
 
 #post_bottom {
+    margin-top: 15px;
     background: url(/media/dijital/img/forum/forum_bar.gif);
     height: 32px;
     overflow: auto;
@@ -265,17 +208,26 @@ margin:0px;
     clear: both;
 }
 #post_bottom_small {
-    float: right;
+    float: left;
     padding: 7px 10px 0px 0px;
 }
+
 #post_bottom_big {
-    float: right;
+    float: left;
     padding: 4px 10px 0px 0px;
 }
+
+#post_bottom_right {
+    float: right;
+    text-align: right;
+    padding: 4px 10px 0px 0px;
+}
+
 .tag {
     padding-left: 5px;
 }
 /* Ends here */
+
 
 /* taken from django trac and modified */
 input, textarea, select { margin: 2px }
@@ -300,4 +252,63 @@ border: 1px solid #D7D7D7
 input[type=text]:focus, input[type=password]:focus, textarea:focus {
 padding: 2px;
 border: 1px solid #45586F;
+}
+
+/** PAGINATOR **/
+.paginator { float:right; font-size: 10px; font-weight: normal; margin-right: 2px; }
+
+.paginator a {
+    text-decoration: none;
+}
+
+.paginator .prev-na,
+.paginator .next-na {
+    /*padding:.3em;*/
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.paginator .prev-na,
+.paginator .next-na {
+    /*border:1px solid #CCCCCC;*/
+    /*background-color:#F9F9F9;*/
+    color:#AAAAAA;
+    font-weight:normal;
+}
+
+.paginator .prev a, .paginator .prev a:visited,
+.paginator .next a, .paginator .next a:visited {
+    /*border:1px solid #CCCCCC;*/
+    /*background-color:#EEEEEE;*/
+    color:#6992AE;
+    /*padding:.3em;*/
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.paginator .page a, .paginator .page a:visited, .paginator .curr {
+    /*padding:.25em;*/
+    font-weight: normal;
+    font-size: 10px;
+    /*border:1px solid #CCCCCC;*/
+    /*background-color:#EEEEEE;*/
+    color:#6288A2;
+}
+
+.paginator .curr { 
+    /*background-color:#4E6D81;*/
+    color: #000000;
+    /*border:1px solid #CCCCCC;*/
+    font-weight:bold;
+    font-size: 10px;
+}
+
+.paginator .page a:hover,
+.paginator .curr a:hover,
+.paginator .prev a:hover,
+.paginator .next a:hover {
+    color: #5C7E90;
+    text-decoration: underline;
+    /*background-color:#6992AE;*/
+    /*border:1px solid #234F32;*/
 }

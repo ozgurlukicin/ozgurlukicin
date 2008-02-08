@@ -31,7 +31,12 @@ def forum(request, forum_slug):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topics = forum.topic_set.all().order_by('-sticky', '-topic_latest_post')
 
-    return object_list(request, topics, template_name='forum/forum_detail.html', template_object_name='topic', extra_context={'forum': forum}, paginate_by=TOPICS_PER_PAGE, allow_empty=True)
+    return object_list(request, topics,
+                       template_name = 'forum/forum_detail.html',
+                       template_object_name = 'topic',
+                       extra_context = {'forum': forum},
+                       paginate_by = TOPICS_PER_PAGE,
+                       allow_empty = True)
 
 def topic(request, forum_slug, topic_id):
     forum = get_object_or_404(Forum, slug=forum_slug)
@@ -45,7 +50,13 @@ def topic(request, forum_slug, topic_id):
         request.session[session_key] = True
         topic.save()
 
-    return render_response(request, 'forum/topic.html', locals())
+    # we love Django, just 1 line and pagination is ready :)
+    return object_list(request, posts,
+                       template_name = 'forum/topic.html',
+                       template_object_name = 'post',
+                       extra_context = {'forum': forum, 'topic': topic,},
+                       paginate_by = POSTS_PER_PAGE,
+                       allow_empty = True)
 
 @login_required
 def reply(request, forum_slug, topic_id, post_id=False):
