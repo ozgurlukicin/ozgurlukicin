@@ -1,9 +1,9 @@
 <div id="page">
     <div id="header">
-    {% if not user.is_authenticated %}
+        {% if not user.is_authenticated %}
         <form method="post" action="/kullanici/giris/">
             <div>
-                <span style="float:left; padding-top:7px; padding-left:10px;">
+                <span style="float:left; padding:7px 0px 0px 10px;">
                     <input type="text" name="username" size="18" value="" maxlength="30" style="width:105px;height:22px;color:#6A91A6;border:none;" />
                     <input type="password" id="id_password" name="password" size="18" style="width:105px;height:22px;color:#6A91A6;border:none;margin-right: 0;" value="" maxlength="30" />
                 </span>
