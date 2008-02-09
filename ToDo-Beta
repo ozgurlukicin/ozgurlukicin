@@ -18,7 +18,7 @@ Ana site:
 (+s) Footer'da Tübitak tescili yazılacak. 
 (+s) Hakkında ve takip et linkleri düzelecek
 (+s) Oyun main sayfasında başlıklarda problem var düzeltilecek
-(-) Foruma yorum göndermek için kullanılan kutuya tinymce eklenecek. Yolla butonu alt sayfaya alınacak. Print ve son güncelleme kısmı ise yorum 
+(+) Foruma yorum göndermek için kullanılan kutuya tinymce eklenecek. Yolla butonu alt sayfaya alınacak. Print ve son güncelleme kısmı ise yorum 
 kutusunun altına gelecek
 (+s) Haberler sayfasının sidebar başlangıcında sa yazıyor silelim :)
 (-) Gezgende <p> tagı strip edilecek (Resimlerin görüntüyü bozmasının suçlusu gibi duruyor)
@@ -26,7 +26,6 @@ kutusunun altına gelecek
 (-) İndexte yer alan içeriğin görselleri de o içeriği link olsun (high-end feature :P)
 
 Forum:
-/forum sayfası:
 
 (+s) /forum sayfasına header'ın altında Navigation Bar gelecek (Anasayfa > Forum gibi )
 (-) Bir konu admin panelinde başka bir kategoriye taşındığında forum ana sayfasında sanki o konu taşınmamış gibi duruyor çözülmeli
@@ -34,6 +33,14 @@ Forum:
 (-) Arka plan doldurulacak
 (-) Bir mesaj atıldığında 8 saat 17 dakika demek yerine sadece saat gösterilse daha derli toplu olur.
 (-) Her forum elemanın arasına çizgi çizelim (Duyurular ve Haberler <hr> İlk Adımlar gibi)
+(-) Forumda yeni gelen meseajlar filtrelenip ayrı ikonla gösterilmeli
+(-) TinyMCE ile ilgili raporlanan sorunlar çözülmeli
+(-) Forumda ikonların anlamını belirten bir kısım yapılmalı
+(-) Sayfanın altına kaç üye kaç konu var gibi bir istatistik konmalı (forum sayfasının altına)
+(-) Reply sayfasında çıkan mesajlar topic sayfasında çıkan mesajlarla aynı görünüme sahip olmalı
+(-) Konu açarken en fazla 4 etiket seçilmeli
+(-) Duyurular bölümü sadece yöneticilerin mesaj atabileceği bir yer haline gelmeli
+
 
 /forum/kategori sayfası :
 
@@ -48,7 +55,6 @@ Yanıtla Sayfası
 
 (-) İleti ve Buton metin kutusu ile aynı hizada olacak
 (+s) Send butonu Gönder olarak değişecek
-(-) Tersten sıralanan mesajlarda topic sayfasındaki yapı include edilecek
 (-) İptal butonu olacak
 
 Düzenle Sayfası
@@ -68,7 +74,6 @@ Forum Geneli :
 
 (-) Yazı tipi / rengi / boyutu css'de belirtilecek
 (+s) Var olan içerik ile ilgili Özgürlükiçin Hakkında bölümüne konular açılacak ( Denis ilgileniyor)
-(-) Yeni mesaj geldiğinde değişen ikon
 (-) Profil sayfası
 (-) Kullanıcı silme sanat bileşeninin eksik olması nedeniyle çalışmıyor, düzeltilecek
 (-) TinyMCE resim hizalamasını, yazı biçimlendirmesini (bold vs.)... yiyiyor, bu da düzeltilmeli
