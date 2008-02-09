@@ -210,12 +210,12 @@ margin:0px;
     clear: both;
 }
 #post_bottom_small {
-    float: left;
+    float: right;
     padding: 7px 10px 0px 0px;
 }
 
 #post_bottom_big {
-    float: left;
+    float: right;
     padding: 4px 10px 0px 0px;
 }
 
