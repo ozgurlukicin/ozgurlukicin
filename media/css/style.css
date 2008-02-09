@@ -725,17 +725,15 @@ ortak_title_mini{
 #sidebar {
     float: right;
     position: relative;
-	
-	
 }
 
 .sidebar {
-	position: relative;
+/*     position: relative; */
     width: 228px;
     padding-left: 4px;
-    padding-right: 3px;
-	background-color: #F7F7F7;
-	color:#FFCA06;
+    padding-right: 2px;
+    background-color: #F7F7F7;
+    color:#FFCA06;
 }
 
 .sidebar ul {
@@ -803,19 +801,13 @@ font-size: 14px;
 font-weight: bold;
 color: #51798E;
 /*background-repeat: no-repeat;*/
+text-align: center;
 background-image: url('/media/dijital/img/d_tblbg.jpg');
 }
 
 .sidebar_ic {
-margin-top: 0px;
-margin-right: 20px;
-padding-top: 2px;
-padding-left: 4px;
-padding-rigt: 3px;
-/*height: 50px;*/
 font-size: 12px;
 color: #696569;
-/*background-repeat: no-repeat;*/
 background-image: url('/media/dijital/img/d_tblbg.jpg');
 }
 
