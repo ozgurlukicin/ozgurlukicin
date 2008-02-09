@@ -13,14 +13,14 @@ Aşağıya yapılması gereken işleri belirttim.
 
 Ana site:
 
-(+) Nasıl bölümünde duran ilk adımlara pati eklenecek (Denis'de olan minik pati)
-(+) Fav icon değişecek (Denis'de olan minik pati)
-(+) Footer'da Tübitak tescili yazılacak. 
-(+) Hakkında ve takip et linkleri düzelecek
+(+s) Nasıl bölümünde duran ilk adımlara pati eklenecek (Denis'de olan minik pati)
+(+s) Fav icon değişecek (Denis'de olan minik pati)
+(+s) Footer'da Tübitak tescili yazılacak. 
+(+s) Hakkında ve takip et linkleri düzelecek
 (+s) Oyun main sayfasında başlıklarda problem var düzeltilecek
 (-) Foruma yorum göndermek için kullanılan kutuya tinymce eklenecek. Yolla butonu alt sayfaya alınacak. Print ve son güncelleme kısmı ise yorum 
 kutusunun altına gelecek
-(+) Haberler sayfasının sidebar başlangıcında sa yazıyor silelim :)
+(+s) Haberler sayfasının sidebar başlangıcında sa yazıyor silelim :)
 (-) Gezgende <p> tagı strip edilecek (Resimlerin görüntüyü bozmasının suçlusu gibi duruyor)
 (-) Forum üye olurken kuralları nanesi javascript popup olsun böylece kuralları okuması için formu kapatmaya gerek olmasın
 (-) İndexte yer alan içeriğin görselleri de o içeriği link olsun (high-end feature :P)
@@ -41,7 +41,7 @@ Forum:
 
 /forum/kategori/topic sayfası
 
-(/) Mesaj bölümü düzenlecek (uğur yapıyor)
+(+s) Mesaj bölümü düzenlecek (uğur yapıyor)
 (-) Eksik yönetici butonları konacak
 
 Yanıtla Sayfası
@@ -60,13 +60,16 @@ Düzenle Sayfası
 
 Yeni Başlık Sayfası
 
-(-) Kutular arası birer boşluk daha bırakılacak. 
+(-) Kutular arası birer boşluk daha bırakılacak.
 (-) Yazı ile kutular aynı hizada olacak
 (-) İptal butonu olacak
 
 Forum Geneli :
 
 (-) Yazı tipi / rengi / boyutu css'de belirtilecek
-(/) Var olan içerik ile ilgili Özgürlükiçin Hakkında bölümüne konular açılacak ( Denis ilgileniyor)
+(+s) Var olan içerik ile ilgili Özgürlükiçin Hakkında bölümüne konular açılacak ( Denis ilgileniyor)
 (-) Yeni mesaj geldiğinde değişen ikon
 (-) Profil sayfası
+(-) Kullanıcı silme sanat bileşeninin eksik olması nedeniyle çalışmıyor, düzeltilecek
+(-) TinyMCE resim hizalamasını, yazı biçimlendirmesini (bold vs.)... yiyiyor, bu da düzeltilmeli
+(+) Üstteki giriş alanı düzenlendi
