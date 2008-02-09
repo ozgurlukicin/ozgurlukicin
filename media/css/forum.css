@@ -8,7 +8,8 @@
 
 /* header */
 #header {
-    background:url(/media/dijital/img/forum/header.png); 
+    background: url(/media/dijital/img/forum/header.png);
+    padding: 100px 0px 0px 10px;
 }
 
 #page {

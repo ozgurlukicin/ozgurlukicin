@@ -1,21 +1,24 @@
 <div id="page">
-
-	<div id="header" style="padding-top:100px; padding-left:10px; font-size:16px;">
-	{% if not user.is_authenticated %}
+    <div id="header">
+    {% if not user.is_authenticated %}
         <form method="post" action="/kullanici/giris/">
-            <input type="text" id="id_username" name="username" size="18" class="vTextField required" value="" maxlength="30" />
-            <input type="password" id="id_password" name="password" size="18" class="vPasswordField required" value="" maxlength="30" />
-            <input type="hidden" name="next" value="{{next}}" />
-			<input type="submit" value="Giriş" id="form_submit" />
+            <div>
+                <span style="float:left; padding-top:7px">
+                    <input type="text" name="username" size="18" value="" maxlength="30" style="width:105px;height:22px;color:#6A91A6;border:none;" />
+                    <input type="password" id="id_password" name="password" size="18" style="width:105px;height:22px;color:#6A91A6;border:none;margin-right: 0;" value="" maxlength="30" />
+                </span>
+                <span style="padding:0px float:right;">
+                    <input type="image" src="/media/dijital/img/forum/login.png" alt="Giriş" id="form_submit" style="border: 0; margin: 0;" />
+                    <input type="hidden" name="next" value="{{next}}" />
+                </span>
+                <span style="padding-left: 0px 0px 10px 10px;"><a href="/kullanici/kayit/">Kayıt ol</a> | <a href="/kullanici/kayip/">Kayıp parola</a></span>
+            </div>
         </form>
-
-		<a href="/kullanici/kayit/">Kayıt ol</a> | <a href="/kullanici/kayip/">Kayıp parola</a>
+        <div>
         {% else %}
             Hoşgeldin <b>{{ user.username }}</b>!<br />
             Profil sayfanıza <a href="/kullanici/duzenle/">buradan</a> ulaşabilir veya <a class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.
-
-{% endif %}
-	</div>
-
-
+        {% endif %}
+        </div>
+    </div>
 </div>
