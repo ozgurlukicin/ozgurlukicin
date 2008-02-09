@@ -15,9 +15,11 @@
 
 {% for post in post_list %}
 
-<!-- <div {% if post.hidden %}style="opacity: 0.5;"{% endif %}><a name="post{{ post.id }}"></a> -->
+{% if post.hidden and not perms.forum.can_see_hidden_posts %}
+sie
+{% else %}
 
-<div id="post_base">
+<div id="post_base" {% if post.hidden %}style="opacity: 0.5"{% endif %}>
     <div id="post_profile">
         <span style="font-weight: bold; font-size: 16px;">{{ post.author }}</span><br/><br/>
         <!-- post.author.avatar buraya gelecek --><img src="/media/dijital/img/forum/avatar.jpg" /><br/><br/>
@@ -35,8 +37,8 @@
             </div>
             <div id="post_message_top_buttons">
             {% if perms.forum.change_post %}
-                <a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>
-            {% else %}
+            <a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>
+            {% endif %}
             {% if perms.forum.can_hide_post and not forloop.first and not post.hidden %}<a href="{{ post.get_hide_url }}">hide</a>{% endif %}
             {% if perms.forum.can_hide_post and not forloop.first and post.hidden %}<a href="{{ post.get_hide_url }}">unhide</a>{% endif %}
             {% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>{% endifequal %}
@@ -51,7 +53,6 @@
                     {% endifequal %}
                 {% endifequal %}
                 {% endif %}
-            {% endif %}
             </div>
         </div>
         <div id="post_message_content">
@@ -71,6 +72,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 {% endfor %}
 
 <div id="post_bottom">
