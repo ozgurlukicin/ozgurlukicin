@@ -559,6 +559,10 @@ ortak_title_mini{
 }
 
 /* content */
+#news_container, #howto_container, #packages_container, #games_container {
+    overflow: auto;
+    width: 100%;
+}
 .news_title_mini {
     font-size: 14px;
     font-weight: bold;
