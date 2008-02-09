@@ -16,7 +16,6 @@
 {% for post in post_list %}
 
 {% if post.hidden and not perms.forum.can_see_hidden_posts %}
-sie
 {% else %}
 
 <div id="post_base" {% if post.hidden %}style="opacity: 0.5"{% endif %}>
