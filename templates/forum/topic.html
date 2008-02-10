@@ -34,29 +34,45 @@
             <div id="post_message_top_date">
                 {{ post.created|date:"d-m-Y H:i" }}
             </div>
-            <div id="post_message_top_buttons">
             {% if perms.forum.change_post %}
-            <a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>
+            <div id="post_message_top_button">
+                <a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>
+            </div>
             {% endif %}
-            {% if perms.forum.can_hide_post and not forloop.first and not post.hidden %}<a href="{{ post.get_hide_url }}">hide</a>{% endif %}
-            {% if perms.forum.can_hide_post and not forloop.first and post.hidden %}<a href="{{ post.get_hide_url }}">unhide</a>{% endif %}
-            {% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>{% endifequal %}
+            {% if perms.forum.can_hide_post and not forloop.first and not post.hidden %}
+            <div id="post_message_top_button">
+                <a href="{{ post.get_hide_url }}">hide</a>
+            </div>
+            {% endif %}
+            {% if perms.forum.can_hide_post and not forloop.first and post.hidden %}
+            <div id="post_message_top_button">
+                <a href="{{ post.get_hide_url }}">unhide</a>
+            </div>
+            {% endif %}
+            {% ifequal post.author.id request.user.id %}
+            <div id="post_message_top_button">
+                <a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>
+            </div>
+            {% endifequal %}
             {% if perms.forum.delete_post and not forloop.first %}
-                <form method="post" action="{{post.get_delete_url}}">
-					<input type="image" src="/media/dijital/img/forum/sil.gif" alt="sil" id="form_submit" style="border: 0; margin: 0;" />
-				</form>
+            <div id="post_message_top_button">
+            <form method="post" action="{{post.get_delete_url}}">
+                <input type="image" src="/media/dijital/img/forum/sil.gif" alt="sil" id="form_submit" style="border: 0; margin: 0;" />
+            </form>
+            </div>
             {% else %}
                 {% ifequal post.author.id request.user.id %}
                     {% ifequal post topic.topic_latest_post %}
                         {% if not forloop.first %}
-                            <form method="post" action="{{post.get_delete_url}}">
-								<input type="image" src="/media/dijital/img/forum/sil.gif" alt="sil" id="form_submit" style="border: 0; margin: 0;" />
-							</form>
+                        <div id="post_message_top_button">
+                        <form method="post" action="{{post.get_delete_url}}">
+                            <input type="image" src="/media/dijital/img/forum/sil.gif" alt="sil" id="form_submit" style="border: 0; margin: 0;" />
+                        </form>
+                        </div>
                         {% endif %}
                     {% endifequal %}
                 {% endifequal %}
                 {% endif %}
-            </div>
         </div>
         <div id="post_message_content">
             {{ post.text|linebreaksbr }}
@@ -103,8 +119,10 @@
     {% if perms.forum.can_lock_topic and not topic.locked %}
         <div id="post_bottom_big"><a href="{{ topic.get_lock_url }}" border="0"><img src="/media/dijital/img/forum/lock.jpg" border="0" /></a></div>
     {% endif %}
-    {% if is_paginated %} <div id="post_bottom_right">(Toplam {{ pages }} sayfa, {{ hits }} kayıt) {% paginator %}</div>{% endif %}
 </div>
+{% if is_paginated %}
+    <div id="post_pagination">(Toplam {{ pages }} sayfa, {{ hits }} kayıt) {% paginator %}</div>
+{% endif %}
 
 
 {% endblock %}

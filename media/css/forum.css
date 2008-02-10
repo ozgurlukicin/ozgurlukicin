@@ -182,7 +182,7 @@ margin:0px;
 
 #post_message_top_icon { float:left; padding-top: 13px; padding-left: 10px; }
 #post_message_top_date { float:left; padding-top: 9px; padding-left: 10px; }
-#post_message_top_buttons { float:right; padding-top:7px; padding-right: 10px; }
+#post_message_top_button { float:right; padding-top:7px; padding-right: 10px; }
 #post_message_content {
     padding-left: 10px;
     padding-top: 10px;
@@ -216,7 +216,7 @@ margin:0px;
 
 #post_bottom_big {
     float: right;
-    padding: 4px 10px 0px 0px;
+    padding: 3px 10px 0px 0px;
 }
 
 #post_bottom_right {
