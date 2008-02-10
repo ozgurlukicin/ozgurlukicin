@@ -15,6 +15,7 @@
     {% if field.help_text %}<dd>{{ field.help_text }}</dd>{% endif %}
     {% if field.errors %}<dd class="myerrors">{{ field.errors }}</dd>{% endif %}
 {% endfor %}
+	{% if msg_error %}<dd class="myerrors"><b>{{ msg_error }}</b></dd>{% endif %}
 </dl>
 <input type="submit" value="Konu Aç">
 </form>

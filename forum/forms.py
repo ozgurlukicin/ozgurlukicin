@@ -17,7 +17,7 @@ from oi.st.forms import XssField
 class TopicForm(forms.Form):
     title = forms.CharField(label='Başlık', required=True, max_length=100, widget=forms.TextInput(attrs={'size': '40',}))
     text = XssField(label='İleti', required=True, widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
-    tags=forms.MultipleChoiceField(label='Etiket', required=True,help_text="CTRL basılı tutarak birden fazla etiket seçebilirsiniz!")
+    tags=forms.MultipleChoiceField(label='Etiket', required=True,help_text="CTRL basılı tutarak birden fazla etiket seçebilirsiniz!(En çok 5)")
 
     def __init__(self,*args,**kwargs):
         """ It is for topic tihng they are dinamyc"""
