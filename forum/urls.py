@@ -27,10 +27,8 @@ urlpatterns = patterns('',
     (r'^rss/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': rss_dict}),
     (r'^atom/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': atom_dict}),
 
-    # delete part yoo!!!
-    (r'^.*/\d+/delete/(?P<object_id>[0-9]+)/$','django.views.generic.create_update.delete_object',
-    dict(model=Post,template_name="delete.html",post_delete_redirect="/forum/")),
-
+    
+    (r'^(?P<forum_slug>.*)/(?P<topic_id>\d+)/delete/(?P<post_id>\d+)/$','oi.forum.views.delete_post'),
     (r'^(?P<forum_slug>.*)/new/$', 'oi.forum.views.new_topic'),
     (r'^(?P<forum_slug>.*)/(?P<topic_id>\d+)/quote/(?P<post_id>\d+)/$', 'oi.forum.views.reply'),
     (r'^(?P<forum_slug>.*)/(?P<topic_id>\d+)/reply/$', 'oi.forum.views.reply'),

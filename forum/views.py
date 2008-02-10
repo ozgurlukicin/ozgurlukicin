@@ -21,6 +21,7 @@ from oi.forum.models import Category, Forum, Topic, Post, AbuseReport, WatchList
 
 from django.core.urlresolvers import reverse
 from oi.st.models import Tag
+from django.contrib.auth.models import User
 
 def main(request):
     categories = Category.objects.order_by('order')
@@ -100,7 +101,7 @@ def edit_post(request, forum_slug, topic_id, post_id):
 
     #the normal users dont have that permission actually
     if not request.user.has_perm('forum.change_post'):
-        post_user=Post.objects.get(author =request.user)
+        post_user=get_object_or_404(Post,author =request.user)
 
         if not post.id == post_user.id:
             return HttpResponse("That is a Wrong way my friend :) ")
@@ -314,3 +315,31 @@ def flood_control(request):
         flood = timeout = False
 
     return flood,timeout
+    
+
+def delete_post(request,forum_slug,topic_id, post_id):
+    """ The delete part should be controlled better !"""
+    forum = get_object_or_404(Forum, slug=forum_slug)
+    topic = get_object_or_404(Topic, pk=topic_id)
+    post = get_object_or_404(Post, pk=post_id)
+    
+    if not request.user.has_perm('forum.delete_post'):
+        #that one is wrong of course it can return more than one query ...
+        #post_user=get_object_or_404(Post,author =request.user)
+        user=get_object_or_404(User, username=request.user.username)
+        post_user=user.post_set.filter(id=post_id)
+        
+        if not post_user:
+            return HttpResponse("That is a Wrong way my friend :) ")
+
+    if forum.locked or topic.locked:
+        return HttpResponse("Forum or topic is locked")
+
+    if request.method == 'POST':
+        post.delete()
+        
+    return HttpResponseRedirect(topic.get_absolute_url())
+    
+    
+    
+    

@@ -42,12 +42,16 @@
             {% if perms.forum.can_hide_post and not forloop.first and post.hidden %}<a href="{{ post.get_hide_url }}">unhide</a>{% endif %}
             {% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>{% endifequal %}
             {% if perms.forum.delete_post and not forloop.first %}
-                <a href="{{ post.get_delete_url }}"><img src="/media/dijital/img/forum/sil.gif" border="0" /></a>
+                <form method="post" action="{{post.get_delete_url}}">
+					<input type="image" src="/media/dijital/img/forum/sil.gif" alt="sil" id="form_submit" style="border: 0; margin: 0;" />
+				</form>
             {% else %}
                 {% ifequal post.author.id request.user.id %}
                     {% ifequal post topic.topic_latest_post %}
                         {% if not forloop.first %}
-                            <a href="{{ post.get_delete_url }}"><img src="/media/dijital/img/forum/sil.gif" border="0" /></a>
+                            <form method="post" action="{{post.get_delete_url}}">
+								<input type="image" src="/media/dijital/img/forum/sil.gif" alt="sil" id="form_submit" style="border: 0; margin: 0;" />
+							</form>
                         {% endif %}
                     {% endifequal %}
                 {% endifequal %}
