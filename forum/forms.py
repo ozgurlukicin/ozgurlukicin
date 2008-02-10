@@ -24,6 +24,15 @@ class TopicForm(forms.Form):
         self.base_fields['tags'].choices=[(tag.name,tag.name) for tag in Tag.objects.all()]
         super(TopicForm, self).__init__(*args, **kwargs)
 
+    def clean_tags(self):
+        field_data = self.clean_data['tags']
+
+        # we don't want users to choice tags more than 5
+        if len(field_data) > 5:
+            raise forms.ValidationError("En fazla 5 tag seçebilirsiniz. Lütfen açtığınız başlığa uygun tag seçin")
+
+        return field_data
+
 class PostForm(forms.Form):
     text = XssField(label='İleti', required=True, widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
 

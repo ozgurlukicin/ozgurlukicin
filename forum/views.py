@@ -142,14 +142,8 @@ def new_topic(request, forum_slug):
         flood,timeout = flood_control(request)
 
         if form.is_valid() and not flood:
-            
-            if len(form.clean_data['tags'])>5:
-                msg_error="En çok 5 tane etiket seçebilirsiniz!"
-                return render_response(request, 'forum/new_topic.html', locals())
-                
             topic = Topic(forum=forum,
                           title=form.clean_data['title'])
-
         #tags
             topic.save()
 
