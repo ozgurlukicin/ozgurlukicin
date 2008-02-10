@@ -18,7 +18,7 @@ Ana site:
 (+s) Footer'da Tübitak tescili yazılacak. 
 (+s) Hakkında ve takip et linkleri düzelecek
 (+s) Oyun main sayfasında başlıklarda problem var düzeltilecek
-(+) Foruma yorum göndermek için kullanılan kutuya tinymce eklenecek. Yolla butonu alt sayfaya alınacak. Print ve son güncelleme kısmı ise yorum 
+(+s) Foruma yorum göndermek için kullanılan kutuya tinymce eklenecek. Yolla butonu alt sayfaya alınacak. Print ve son güncelleme kısmı ise yorum 
 kutusunun altına gelecek
 (+s) Haberler sayfasının sidebar başlangıcında sa yazıyor silelim :)
 (-) Gezgende <p> tagı strip edilecek (Resimlerin görüntüyü bozmasının suçlusu gibi duruyor)
@@ -38,7 +38,7 @@ Forum:
 (-) Forumda ikonların anlamını belirten bir kısım yapılmalı
 (-) Sayfanın altına kaç üye kaç konu var gibi bir istatistik konmalı (forum sayfasının altına)
 (-) Reply sayfasında çıkan mesajlar topic sayfasında çıkan mesajlarla aynı görünüme sahip olmalı
-(+) Konu açarken en fazla 5 etiket seçilmeli
+(+s) Konu açarken en fazla 5 etiket seçilmeli
 (-) Duyurular bölümü sadece yöneticilerin mesaj atabileceği bir yer haline gelmeli
 
 
@@ -77,5 +77,5 @@ Forum Geneli :
 (-) Profil sayfası
 (-) Kullanıcı silme sanat bileşeninin eksik olması nedeniyle çalışmıyor, düzeltilecek
 (-) TinyMCE resim hizalamasını, yazı biçimlendirmesini (bold vs.)... yiyiyor, bu da düzeltilmeli
-(+) Üstteki giriş alanı düzenlendi
+(+s) Üstteki giriş alanı düzenlendi
 (-) Pardus logosu değişecek
