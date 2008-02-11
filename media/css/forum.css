@@ -314,3 +314,24 @@ border: 1px solid #45586F;
     /*background-color:#6992AE;*/
     /*border:1px solid #234F32;*/
 }
+#footer {
+    background-color: #6992A6;
+    height: 30px;
+    line-height: 30px;
+    vertical-align: middle;
+    width: 100%;
+    font-size: 11px;
+    font-family: "Liberation Sans","Liberation Serif", Arial;
+    overflow: auto;
+    clear: both;
+    text-decoration: none;
+    color: #202020;
+}
+#footer_copyright {
+    float: left;
+    padding-left: 10px;
+}
+#footer_links {
+    float: right;
+    padding-right: 10px;
+}
