@@ -872,7 +872,7 @@ h6 {
 }
 
 /** PAGINATOR **/
-.paginator { padding:.5em .75em; float:left; font:normal .8em arial; }
+.paginator { padding:.5em .75em; font:normal .8em arial; }
 
 .paginator a {
     text-decoration: none;
