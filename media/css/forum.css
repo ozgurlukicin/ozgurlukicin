@@ -11,6 +11,10 @@
     background: url(/media/dijital/img/forum/header.png);
     padding: 100px 0px 0px 10px;
     height: 50px;
+    color: #FFF;
+}
+#header a {
+    color: #FFF;
 }
 #page {
     margin: 0px auto;
