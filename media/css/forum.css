@@ -12,20 +12,16 @@
     padding: 100px 0px 0px 10px;
     height: 50px;
 }
-
 #page {
     margin: 0px auto;
     width: 900px;
-
 }
-
 #content {
     padding: 0px 0px 20px 0px;
     float: left;
     width: 100%;
     background-color:#FFFFFF;	
 }
-
 .page_title {
     font-size: 18px;
     border-bottom: 1px dashed #c0c0c0;
@@ -34,41 +30,21 @@
     margin-right: 10px;
     color: #339966;
 }
-
-
 .page_content {
     padding-top: 10px;
     padding-left: 10px;
     padding-right: 10px;
 }
-
-
 .transparent_link {
     color: #000000;
 }
-
 .transparent_link a, .transparent_link a:visited {
     color: #000000;
     text-decoration: none;
 }
-
 .transparent_link a:hover {
     background-color: transparent;
 }
- 
-
-.paginator {
-    padding-top: 12px;
-    clear: both;
-    text-align: center;
-    font-size: 12px;
-}
-
-.paginate-current {
-    font-weight: bold;
-}
-
-
 .forum_title {
     margin-top: 10px;
     padding-top: 4px;
@@ -179,7 +155,6 @@ margin:0px;
     overflow: auto;
     width: 100%;
 }
-
 #post_message_top_icon { float:left; padding-top: 13px; padding-left: 10px; }
 #post_message_top_date { float:left; padding-top: 9px; padding-left: 10px; }
 #post_message_top_button { float:right; padding-top:7px; padding-right: 10px; }
@@ -189,18 +164,15 @@ margin:0px;
     min-height: 159px;
     border-left: 2px solid #D7E1E7;
 }
-
 #post_message_tags {
     padding-left: 9px;
     border-left: 2px solid #D7E1E7;
     overflow: hidden;
 }
-
 #post_message_bottom {
     border-left: 2px solid #D7E1E7;
     padding-left: 9px;
 }
-
 #post_bottom {
     margin-top: 15px;
     background: url(/media/dijital/img/forum/forum_bar.gif);
@@ -213,18 +185,19 @@ margin:0px;
     float: right;
     padding: 7px 10px 0px 0px;
 }
-
 #post_bottom_big {
     float: right;
     padding: 3px 10px 0px 0px;
 }
-
 #post_bottom_right {
     float: right;
     text-align: right;
     padding: 4px 10px 0px 0px;
 }
-
+#post_pagination {
+    float:left;
+    padding: 8px 0px 0px 10px;
+}
 .tag {
     padding-left: 5px;
 }
@@ -257,7 +230,7 @@ border: 1px solid #45586F;
 }
 
 /** PAGINATOR **/
-.paginator { float:right; font-size: 10px; font-weight: normal; margin-right: 2px; }
+.paginator { font-size: 10px; font-weight: normal; }
 
 .paginator a {
     text-decoration: none;
@@ -265,54 +238,52 @@ border: 1px solid #45586F;
 
 .paginator .prev-na,
 .paginator .next-na {
-    /*padding:.3em;*/
+    padding:.3em;
     font-size: 10px;
     font-weight: bold;
 }
 
 .paginator .prev-na,
 .paginator .next-na {
-    /*border:1px solid #CCCCCC;*/
-    /*background-color:#F9F9F9;*/
+    border:1px solid #CCCCCC;
+    background-color:#F9F9F9;
     color:#AAAAAA;
     font-weight:normal;
 }
 
 .paginator .prev a, .paginator .prev a:visited,
 .paginator .next a, .paginator .next a:visited {
-    /*border:1px solid #CCCCCC;*/
-    /*background-color:#EEEEEE;*/
+    border:1px solid #CCCCCC;
+    background-color:#EEEEEE;
     color:#6992AE;
-    /*padding:.3em;*/
+    padding:.3em;
     font-size: 10px;
     font-weight: bold;
 }
 
 .paginator .page a, .paginator .page a:visited, .paginator .curr {
-    /*padding:.25em;*/
+    padding:.25em;
     font-weight: normal;
     font-size: 10px;
-    /*border:1px solid #CCCCCC;*/
-    /*background-color:#EEEEEE;*/
+    border:1px solid #CCCCCC;
+    background-color:#EEEEEE;
     color:#6288A2;
 }
 
 .paginator .curr { 
-    /*background-color:#4E6D81;*/
-    color: #000000;
-    /*border:1px solid #CCCCCC;*/
+    background-color:#4E6D81;
+    color: #FFF;
+    border:1px solid #CCCCCC;
     font-weight:bold;
     font-size: 10px;
 }
-
 .paginator .page a:hover,
 .paginator .curr a:hover,
 .paginator .prev a:hover,
 .paginator .next a:hover {
-    color: #5C7E90;
-    text-decoration: underline;
-    /*background-color:#6992AE;*/
-    /*border:1px solid #234F32;*/
+    background-color:#6992AE;
+    border:1px solid #234F32;
+    color: #FFFFFF;
 }
 #footer {
     background-color: #6992A6;

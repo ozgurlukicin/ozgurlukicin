@@ -119,12 +119,9 @@
     {% if perms.forum.can_lock_topic and not topic.locked %}
         <div id="post_bottom_big"><a href="{{ topic.get_lock_url }}" border="0"><img src="/media/dijital/img/forum/lock.jpg" border="0" /></a></div>
     {% endif %}
-</div>
 {% if is_paginated %}
-    <div id="post_pagination">(Toplam {{ pages }} sayfa, {{ hits }} kayıt) {% paginator %}</div>
+    <div id="post_pagination">{% paginator %}</div>
 {% endif %}
-
-
+</div>
 {% endblock %}
-
 {% block sidebartop %}{% endblock %}
