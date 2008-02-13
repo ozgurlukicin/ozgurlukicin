@@ -32,7 +32,8 @@
     <div id="category_forums_item" {% if forum.hidden %}style="opacity: 0.5;"{% endif %}>
         <div id="category_forums_item_icon"><img src="/media/dijital/img/forum/eski_konu.gif" /></div>
         <div id="category_forums_item_title"><a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a></div>
-        <div id="category_forums_item_lastpost"><a href="{{ forum.forum_latest_post.get_absolute_url }}">{{ forum.forum_latest_post.topic.title|striptags }}</a> {{ forum.forum_latest_post.author }} tarafından {{ forum.forum_latest_post.edited|timedelta }}</div>
+        <div id="category_forums_item_lastpost">{% if forum.forum_latest_post %}<a href="{{ forum.forum_latest_post.get_absolute_url }}">{{ forum.forum_latest_post.topic.title|striptags }}</a> {{ forum.forum_latest_post.author }} tarafından {{ forum.forum_latest_post.edited|date:"d F Y H:i" }} tarihinde{% else %}Henüz mesaj yok{% endif %}
+        </div>
         <div id="category_forums_item_topics">{{ forum.topics }}</div>
         <div id="category_forums_item_posts">{{ forum.posts }}</div>
     </div>
