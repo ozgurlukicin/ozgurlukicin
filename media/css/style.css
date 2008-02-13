@@ -954,3 +954,28 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
     padding: 2px;
     border: 1px solid #45586F;
 }
+
+/* Footer */
+#footer_new {
+    background-color: #6992A6;
+    height: 32px;
+    width: 100%;
+    font-size: 11px;
+    font-family: "Liberation Sans","Liberation Serif", Arial;
+    overflow: auto;
+    clear: both;
+    color: #FFF;
+}
+#footer_new a {
+    text-decoration: none;
+    color: #FFF;
+}
+#footer_copyright {
+    float: left;
+    padding: 10px 0px 0px 10px;
+}
+#footer_links {
+    float: right;
+    padding: 10px 10px 0px 0px;
+}
+/* End of footer */

@@ -297,11 +297,11 @@ border: 1px solid #45586F;
     font-family: "Liberation Sans","Liberation Serif", Arial;
     overflow: auto;
     clear: both;
-    color: #202020;
+    color: #FFF;
 }
 #footer a {
     text-decoration: none;
-    color: #202020;
+    color: #FFF;
 }
 #footer_copyright {
     float: left;
