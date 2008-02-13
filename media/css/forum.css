@@ -95,9 +95,9 @@ margin:0px;
 #category { float: left; clear: left; width: 100%; }
 #category_title {
     background: url(/media/dijital/img/forum/forum_bar.gif) repeat-y;
-    height: 32px;
-    width: 900px;
-    padding-left: 46px;
+    height: 22px;
+    width: 854px;
+    padding: 10px 0px 0px 46px;
     font-weight: bold;
 }
 #category_forums_item { width: 900px; overflow:auto; clear: left; border-bottom: 1px solid #CBD8E0; padding-top: 10px; }
