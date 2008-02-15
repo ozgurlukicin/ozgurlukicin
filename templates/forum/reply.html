@@ -15,33 +15,39 @@
     {% if field.errors %}<dd class="myerrors">{{ field.errors }}</dd>{% endif %}
 {% endfor %}
 </dl>
-<input type="submit" value="Yanıtla">
+<input type="submit" value="Yanıtla" />
 </form>
 {% else %}
-<p>You must be signed in to send a reply.</p>
+<p>Yanıt göndermek için giriş yapmalısınız.</p>
 {% endif %}
-
 
 {% for post in posts %}
-<div {% if post.hidden %}style="opacity: 0.5;"{% endif %}><a name="post{{ post.id }}"></a>
-<span style="float: left;"><a href="{{ post.get_absolute_url }}">#{{ forloop.counter }}</a></span>
-<span style="float: right;">{{ post.created|date:"d-m-Y H:i" }}</span><br />
-<div id="author_info">{{ post.author.avatar }} {{ post.author }}{% if perms.post.can_see_ip %} ({{ post.ip }}){% endif %}</div>
-<div style="padding-top: 10px;">{{ post.text|linebreaksbr }}<br />
-{% ifnotequal post.edit_count 0 %}<br />Bu ileti {{ post.edit_count }} kez değiştirilmiştir, son kez {{ post.edited }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.<br />{% endifnotequal %}
+
+{% if post.hidden and not perms.forum.can_see_hidden_posts %}
+{% else %}
+<div id="post_base" {% if post.hidden %}style="opacity: 0.5;"{% endif %}>
+    <div id="post_profile">
+        <span style="font-weight: bold; font-size: 16px;">{{ post.author }}</span><br/><br/>
+        <!-- post.author.avatar buraya gelecek --><img src="/media/dijital/img/forum/avatar.jpg" /><br/><br/>
+        {% if perms.forum.can_see_post_ip %}({{ post.ip }})<br/><br/>{% endif %}
+        Kayıt Tarihi: {{ post.author.date_joined|date:"d-m-Y" }}<br/>
+        <!-- <a href="/kullanici/duzenle/"><img src="/media/dijital/img/forum/bilgi.jpg" border="0"</a><br/> -->
+    </div>
+    <div id="post_message">
+        <div id="post_message_top">
+            <div id="post_message_top_icon">
+                <a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" border="0" /></a>
+            </div>
+            <div id="post_message_top_date">
+                {{ post.created|date:"d-m-Y H:i" }}
+            </div>
+        </div>
+        <div id="post_message_content">
+            {{ post.text|linebreaksbr }}
+        </div>
+    </div>
 </div>
-
-<br />{% if forloop.first %}{% if perms.topic.can_edit %}<a href="{{ topic.get_edit_url }}">edit</a>{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ topic.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% else %}{% if perms.post.can_edit %}<a href="{{ post.get_edit_url }}">edit</a>{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% endif %}
-
-{% if perms.post.can_hide and not forloop.first and not post.hidden %}<a href="{{ post.get_hide_url }}">hide</a>{% endif %}
-{% if perms.post.can_hide and not forloop.first and post.hidden %}<a href="{{ post.get_hide_url }}">unhide</a>{% endif %}
-
-{% if perms.post.can_delete and not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>{% else %}
-{% ifequal post.author.id request.user.id %}{% ifequal post topic.topic_latest_post %}{% if not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>{% endif %}{% endifequal %}{% endifequal %}
 {% endif %}
-
-<hr>
-{% if post.hidden %}</div>{% endif %}
 {% endfor %}
 
 
