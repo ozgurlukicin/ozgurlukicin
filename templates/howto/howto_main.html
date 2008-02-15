@@ -29,7 +29,7 @@
 </div>
 {% endfor %}
 
-{% if is_paginated %}{% paginator %}{% endif %}
+{% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div><div class="paginator_description">{{ pages }} sayfada toplam {{ hits }} nasıl yazısı bulunmaktadır.</div></div>{% endif %}
 {% endblock %}
 
 {% block sidebartop %}{% endblock %}

@@ -719,7 +719,7 @@ ortak_title_mini{
     float: right;
     position: relative;
     width: 234px;
-    margin: 40px 20px 0px 0px;
+    margin: 40px 10px 0px 0px;
 }
 #sidebar_box {
     margin-bottom: 10px;
@@ -742,7 +742,7 @@ ortak_title_mini{
     text-align: center;
     margin-top: 0px;
 }
-#sidebar_middle ul { margin: 0px 0px 0px -20px; text-align: left; }
+#sidebar_middle ul { margin: 0px 0px 0px -10px; text-align: left; }
 #sidebar_middle form { margin: 0px; }
 #sidebar_middle p { margin: 0px; }
 #sidebar_bottom {
@@ -841,6 +841,7 @@ h6 {
     background-color:#6992AE;
     border:1px solid #234F32;
 }
+.paginator_block { text-align: center; }
 
 label {
     font-weight: bold;
