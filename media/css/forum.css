@@ -16,6 +16,13 @@
 #header a {
     color: #FFF;
 }
+#top_menu {
+    background: #FFF;
+    overflow: visible;
+    position: relative;
+    width: 900px;
+    height: 140px;
+}
 #page {
     margin: 0px auto;
     width: 900px;
