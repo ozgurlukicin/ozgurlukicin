@@ -14,6 +14,7 @@
             <td id="topic_posts">İletiler</td>
             <td id="topic_views">Görüntüleme</td>
             <td id="topic_lastpost">Son İleti</td>
+            <td id="topic_rss">Takip Et</td>
         </tr>
     </tbody>
 </table>
@@ -30,6 +31,7 @@
         <td id="topics_item_posts">{{ topic.posts }}</td>
         <td id="topics_item_views">{{ topic.views }}</td>
         <td id="topics_item_lastpost">{{ topic.topic_latest_post.edited|date:"d F Y H:i" }}<br />{{ topic.topic_latest_post.author }} <a href="{{ topic.topic_latest_post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" border="0"/></a></td>
+        <td id="topics_item_rss"><a href="/forum/rss/topic/{{ topic.id }}"><img src="/media/img/bt_next.png" style="border:0px;" /></a></td>
     </tr>
     {% endif %}
     {% endfor %}
