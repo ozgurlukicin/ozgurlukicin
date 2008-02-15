@@ -49,41 +49,57 @@
 {% block sidebartop %}{%endblock%}
 
 {% block sidebar %}
-<div class="sidebar sidebar_top_img" style="margin-top: 40px;">&nbsp;</div>
-<div class="sidebar sidebar_baslik">Kurallar</div>
-<div class="sidebar sidebar_ic">
-    <a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a>
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Kurallar</h2>
+        <a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a>
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
 </div>
-<div class="sidebar sidebar_alt_img">&nbsp;</div>
 
-<div class="sidebar sidebar_top_img">&nbsp;</div>
-<div class="sidebar sidebar_baslik">Yazarlar</div>
-<div class="sidebar sidebar_ic">
-    {% for feed in subscribers %}
-    <div class="planet_link"><a href="{{ feed.feed.feed_url }}"><img src="/media/img/bt_next.png" border="0" style="vertical-align: -3px;" /></a> <a href="{{ site.url }}/user/{{ feed.feed.id }}">{{ feed.name }}</a></div>
-    {% endfor %}
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Yazarlar</h2>
+        <ul class="sidebar_subscribers">
+        {% for feed in subscribers %}
+            <li><a href="{{ feed.feed.feed_url }}"><a href="{{ site.url }}/user/{{ feed.feed.id }}">{{ feed.name }}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
 </div>
-<div class="sidebar sidebar_alt_img">&nbsp;</div>
 
-<div class="sidebar sidebar_top_img">&nbsp;</div>
-<div class="sidebar sidebar_baslik">Son güncelleme</div>
-<div class="sidebar sidebar_ic" align="center">{{ last_modified }}</div>
-<div class="sidebar sidebar_alt_img">&nbsp;</div>
-
-<div class="sidebar sidebar_top_img">&nbsp;</div>
-<div class="sidebar sidebar_baslik">Feed</div>
-<div class="sidebar sidebar_ic" align="center">
-    <a href="/rss/gezegen/" title="RSS 2.0 feed"><img src="/media/dijital/img/bt_rss.jpg"/></a>
-    <a href="/atom/gezegen/" title="Atom 1.0 feed"><img src="/media/img/atom.png"/></a>
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Son güncelleme</h2>
+        {{ last_modified }}
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
 </div>
-<div class="sidebar sidebar_alt_img">&nbsp;</div>
+
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Feed</h2>
+        <a href="/rss/gezegen/" title="RSS 2.0 feed"><img src="/media/dijital/img/bt_rss.jpg"/></a>
+        <a href="/atom/gezegen/" title="Atom 1.0 feed"><img src="/media/img/atom.png"/></a>
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
 
 {% if site.links %}
-<div class="sidebar sidebar_top_img">&nbsp;</div>
-<div class="sidebar sidebar_baslik" style="height: 32px;">Diğer gezegenler &nbsp;&nbsp;&nbsp;<img src="/media/dijital/img/diger_gez.png" /></div>
-<div class="sidebar sidebar_ic" align="left">
-{% for link in site.links.all %}<img src="/media/img/other_planets.png" border="0" style="vertical-align: -4px;" /> <a href="{{ link.link }}">{{ link.name }}</a><br/>{% endfor %}
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Diğer gezegenler&nbsp;&nbsp;&nbsp;<img src="/media/dijital/img/diger_gez.png" /></h2>
+        <ul class="sidebar_planets">
+            {% for link in site.links.all %}<li><a href="{{ link.link }}">{{ link.name }}</a></li>{% endfor %}
+        </ul>
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
 </div>
 {% endif %}
-<div class="sidebar sidebar_alt_img">&nbsp;</div>
 {% endblock %}

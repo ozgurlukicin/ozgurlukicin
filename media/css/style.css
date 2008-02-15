@@ -154,12 +154,9 @@ a.siyah {
 #page {
     margin: 0px auto;
     width: 900px;
-    /*border-bottom: 5px solid #7C7C7C;
-    border-left: 5px solid #7C7C7C;
-    border-right: 5px solid #7C7C7C;*/
     background:url(/media/dijital/img/ara_bg.jpg);
-	background-repeat:no-repeat;
-	background-color: #CFD7D7;
+    background-repeat:no-repeat;
+    background-color: #CFD7D7;
 }
 
 #page-single {
@@ -175,7 +172,6 @@ a.siyah {
     padding: 10px 0px 20px 10px;
     float: left;
     width: 68%;
-	
 }
 
 .page_title {
@@ -211,7 +207,6 @@ a.siyah {
 
 #footer {
     clear: both;
-    /* Disable edelim yeni tasarım için    background: #048DB4 url('/media/img/footer_bg.png') no-repeat; */
     color: #ACD7EE;
     font-size: 95%;
     line-height: 130%;
@@ -497,10 +492,6 @@ input#form_submit {
     min-height: 120px;
 }
 
-.planet_link a {
-color: #51798E;
-}
-
 .planet_author {
     max-width: 120px;
     max-height: 120px;
@@ -711,132 +702,57 @@ ortak_title_mini{
     height: 25px;
     margin-top: 10px;
 }
-
 .howtos_content_mini {
     width: 280px;
     padding-left: 10px;
     padding-right: 16px;
     overflow: auto;
 }
-
 .howtos_content {
     padding-left: 10px;
     padding-right: 16px;
     overflow: auto;
 }
 
-/* sidebar */
+/* Sidebar */
 #sidebar {
     float: right;
     position: relative;
+    width: 234px;
+    margin: 40px 20px 0px 0px;
 }
-
-.sidebar {
-/*     position: relative; */
-    width: 228px;
-    padding-left: 4px;
-    padding-right: 2px;
-    background-color: #F7F7F7;
-    color:#FFCA06;
+#sidebar_box {
+    margin-bottom: 10px;
 }
-
-.sidebar ul {
+#sidebar_top {
+    background-image: url('/media/dijital/img/d_tblust.jpg');
+    height: 10px;
+    line-height: 0px;
+}
+#sidebar_middle {
+    background-image: url('/media/dijital/img/d_tblbg.jpg');
+    padding: 0px 10px;
+    text-align: center;
+    color: #696569;
+}
+#sidebar_middle h2 {
+    color: #51798E;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
     margin-top: 0px;
-    padding-left: 16px;
-	background-color: #000000;
-	color:#FFCA06;
 }
-
-.sidebar_purple_title {
-    margin-top: 10px;
-    padding-top: 4px;
-    height: 25px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #ffffff;
-    background-repeat: no-repeat;
-    background-image: url('/media/img/sidebar_purple.png');
+#sidebar_middle ul { margin-bottom:0px; text-align: left; }
+#sidebar_middle form { margin: 0px; }
+#sidebar_middle p { margin: 0px; }
+#sidebar_bottom {
+    background-image: url('/media/dijital/img/d_tblalt.jpg');
+    height: 12px;
+    line-height: 0px;
 }
-
-.sidebar_top_img{
-	margin-top: 10px;
-	/*background-repeat: no-repeat;*/
-	background-image: url('/media/dijital/img/d_tblust.jpg');
-        height: 10px;
-}
-.sidebar_alt_img{
-	background-image: url('/media/dijital/img/d_tblalt.jpg');
-	/*background-position: top center;*/
-        height: 10px;
-}
-
-.sidebar_darkblue_con {
-    margin-top: 0px;
-    padding-top: 4px;
-    height: 25px;
-    font-size: 14px;
-    font-weight: bold;
-    color:#FFCA06;
-    background-repeat: no-repeat;
-    /*background-image: url('/media/img/sidebar_darkblue.png');*/
-	background-color: #000000;
-}
-
-.sidebar_green_title {
-    padding-left: 8px;
-    margin-top: 10px;
-    padding-top: 4px;
-    height: 25px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #ffffff;
-    background-repeat: no-repeat;
-    background-image: url('/media/img/sidebar_green.png');
-}
-
-/* buradan itibaren başlık ve iç diye iki tane sınıf yarattım başlık Etiketler, Ayrıntılar gibi yerleri göstermek için iç ise bunlarda yer alan bilgileri görmek için fakat içle ilgili biraz font oynaması yapmak lazım */
-
-
-.sidebar_baslik {
-margin-right: 20px;
-margin-top: 0px;
-height: 25px;
-font-size: 14px;
-font-weight: bold;
-color: #51798E;
-/*background-repeat: no-repeat;*/
-text-align: center;
-background-image: url('/media/dijital/img/d_tblbg.jpg');
-}
-
-.sidebar_ic {
-font-size: 12px;
-color: #696569;
-background-image: url('/media/dijital/img/d_tblbg.jpg');
-}
-
-
-.sidebar_yellow_title {
-    margin-top: 10px;
-    padding-top: 4px;
-    height: 25px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #827300;
-    background-repeat: no-repeat;
-    background-image: url('/media/img/sidebar_yellow.png');
-}
-
-.sidebar_red_title {
-    margin-top: 10px;
-    padding-top: 4px;
-    height: 25px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #ffffff;
-    background-repeat: no-repeat;
-    background-image: url('/media/img/sidebar_red.png');
-}
+ul.sidebar_firststeps { list-style-image: url("/media/img/fav.png"); }
+ul.sidebar_subscribers { list-style-image: url('/media/img/bt_next.png'); }
+ul.sidebar_planets { list-style-image: url('/media/img/other_planets.png'); }
 
 img {
     border: none;

@@ -52,55 +52,79 @@
 
 
 {% block sidebar %}
-
-<div class="sidebar sidebar_top_img" style="margin-top: 40px;">&nbsp;</div>
-<div class="sidebar sidebar_baslik">Bilgiler</div>
-<div class="sidebar sidebar_ic">
-    <strong><span>Lisans:</span></strong> {% for license in game.license.all %}<a href="{{ license.url }}"><span class="gri" >{{ license.name }}</span></a> {% endfor %}<br />
-    <strong><span>Paket boyutu:</span></strong> <span class="gri" >{{ game.download_size|filesizeformat }}</span><br />
-    <strong><span>Kurulu boyutu:</span></strong><span class="gri" > {{ game.installed_size|filesizeformat }}</span><br />
-    <a href="{{ game.url }}"><strong>Web sitesi</strong></a><br />
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Bilgiler</h2>
+        <strong><span>Lisans:</span></strong> {% for license in game.license.all %}<a href="{{ license.url }}"><span class="gri" >{{ license.name }}</span></a> {% endfor %}<br />
+        <strong><span>Paket boyutu:</span></strong> <span class="gri" >{{ game.download_size|filesizeformat }}</span><br />
+        <strong><span>Kurulu boyutu:</span></strong><span class="gri" > {{ game.installed_size|filesizeformat }}</span><br />
+        <a href="{{ game.url }}"><strong>Web sitesi</strong></a><br />
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
 </div>
-<div class="sidebar sidebar_alt_img">&nbsp;</div>
 
-<div class="sidebar sidebar_top_img">&nbsp;</div>
-<div class="sidebar sidebar_baslik">Değerlendirme</div>
-<div class="sidebar sidebar_ic">
-    <strong><span>Öğrenme süresi:</span></strong><span class="gri" >{{ game.learning_time }}</span><br />
-    <strong><span>Oynanabilirlik:</span></strong> <span class="gri" >{{ game.gameplay }}</span><br />
-    <strong><span>Grafik:</span></strong><span class="gri" > {{ game.graphics }}</span><br />
-    <strong><span>Ses:</span></strong> <span class="gri" >{{ game.sound }}</span><br />
-    <strong><span>Senaryo:</span></strong> <span class="gri" >{{ game.scenario }}</span><br />
-    <strong><span>Atmosfer:</span></strong> <span class="gri" >{{ game.atmosphere }}</span><br />
-    <div class="game_average_point">{{ game.avg }}</div>
-    <br />
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Değerlendirme</h2>
+        <strong><span>Öğrenme süresi:</span></strong><span class="gri" > {{ game.learning_time }}</span><br />
+        <strong><span>Oynanabilirlik:</span></strong><span class="gri" > {{ game.gameplay }}</span><br />
+        <strong><span>Grafik:</span></strong><span class="gri" > {{ game.graphics }}</span><br />
+        <strong><span>Ses:</span></strong><span class="gri" > {{ game.sound }}</span><br />
+        <strong><span>Senaryo:</span></strong><span class="gri" > {{ game.scenario }}</span><br />
+        <strong><span>Atmosfer:</span></strong><span class="gri" > {{ game.atmosphere }}</span><br />
+        <div class="game_average_point">{{ game.avg }}</div>
+        <br />
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
 </div>
-<div class="sidebar sidebar_alt_img">&nbsp;</div>
 
-<div class="sidebar sidebar_top_img">&nbsp;</div>
-<div class="sidebar sidebar_baslik">Menüdeki yeri</div>
-<div class="sidebar sidebar_ic"><span class="gri" >{{ game.path }}</div>
-<div class="sidebar sidebar_alt_img">&nbsp;</div>
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Menüdeki yeri</h2>
+        <span class="gri" >{{ game.path }}</span>
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
 
-<div class="sidebar sidebar_top_img">&nbsp;</div>
-<div class="sidebar sidebar_baslik">Etiketler</div>
-<div class="sidebar sidebar_ic"><img src="/media/img/tag.png" style="vertical-align: middle;" /> {% for tag in game.tags.all %}<a href="{{ tag.get_absolute_url }}"><span class="gri" >{{ tag.name }}</span></a> {% endfor %}</div>
-<div class="sidebar sidebar_alt_img">&nbsp;</div>
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Etiketler</h2>
+        <img src="/media/img/tag.png" style="vertical-align: middle;" /> {% for tag in game.tags.all %}<a href="{{ tag.get_absolute_url }}"><span class="gri" >{{ tag.name }}</span></a> {% endfor %}
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
 
 {% if game.wiki.all %}
-<div class="sidebar sidebar_top_img">&nbsp;</div>
-<div class="sidebar sidebar_baslik">İlgili wiki sayfaları</div>
-<div class="sidebar sidebar_ic">{% for wiki in game.wiki.all %}<a href="{{ wiki.get_absolute_url }}"><span class="gri" >{{ wiki.name }}</span></a><br />{% endfor %}</div>
-<div class="sidebar sidebar_alt_img">&nbsp;</div>
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>İlgili wiki sayfaları</h2>
+        {% for wiki in game.wiki.all %}<a href="{{ wiki.get_absolute_url }}"><span class="gri" >{{ wiki.name }}</span></a><br />{% endfor %}
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
 {% endif %}
 
 {% if game.videos.all %}
-<div class="sidebar sidebar_baslik">İlgili Videolar</div>
-<div class="sidebar sidebar_ic">{% for video in game.videos.all %}<a href="/video/{{ video.get_video_name }}" rel="lightbox[video_{{ game.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>İlgili Videolar</h2>
+        {% for video in game.videos.all %}<a href="/video/{{ video.get_video_name }}" rel="lightbox[video_{{ game.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a>
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
 {% endif %}
-
-<div class="sidebar sidebar_top_img">&nbsp;</div>
-<div class="sidebar sidebar_baslik">Yazar</div>
-<div class="sidebar sidebar_ic"><span class="gri" >{{ game.author }}</span></div>
-<div class="sidebar sidebar_alt_img">&nbsp;</div>
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Yazar</h2>
+        <span class="gri" >{{ game.author }}</span>
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
 {% endblock %}

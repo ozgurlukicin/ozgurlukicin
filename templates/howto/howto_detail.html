@@ -47,23 +47,44 @@
 {% endblock %}
 
 {% block sidebar %}
-<div class="sidebar sidebar_top_img">&nbsp;</div>
-<div class="sidebar sidebar_baslik">Etiketler</div>
-<div class="sidebar sidebar_ic"><img src="/media/img/tag.png" style="vertical-align: middle;" /> {% for tag in howto.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
-<div class="sidebar sidebar_alt_img">&nbsp;</div>
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Etiketler</h2>
+        <img src="/media/img/tag.png" style="vertical-align: middle;" /> {% for tag in howto.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
 
 {% if howto.wiki.all %}
-<div class="sidebar sidebar_baslik">İlgili wiki sayfaları</div>
-<div class="sidebar sidebar_ic">{% for wiki in howto.wiki.all %}<a href="{{ wiki.get_absolute_url }}">{{ wiki.name }}</a><br />{% endfor %}</div>
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>İlgili wiki sayfaları</h2>
+        <ul class="sidebar_firststeps">
+            {% for wiki in howto.wiki.all %}<li><a href="{{ wiki.get_absolute_url }}">{{ wiki.name }}</a></li>{% endfor %}
+        </ul>
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
 {% endif %}
 
 {% if howto.videos.all %}
-<div class="sidebar sidebar_baslik">İlgili Videolar</div>
-<div class="sidebar sidebar_ic">{% for video in howto.videos.all %}<a href="/video/{{ video.get_video_name }}" rel="lightbox[video_{{ howto.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>İlgili Videolar</h2>
+        {% for video in howto.videos.all %}<a href="/video/{{ video.get_video_name }}" rel="lightbox[video_{{ howto.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
 {% endif %}
-
-<div class="sidebar sidebar_top_img">&nbsp;</div>
-<div class="sidebar sidebar_baslik">Yazar</div>
-<div class="sidebar sidebar_ic">{{ howto.author }}</div>
-<div class="sidebar sidebar_alt_img">&nbsp;</div>
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Yazar</h2>
+        {{ howto.author }}
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
 {% endblock %}

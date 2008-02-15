@@ -28,20 +28,25 @@
 {% block sidebartop %}{% endblock %}
 
 {% block sidebar %}
-
-<div class="sidebar sidebar_top_img" style="margin-top: 40px;">&nbsp;</div>
-<div class="sidebar sidebar_baslik">İlgili sayfalar</div>
-<div class="sidebar sidebar_ic">
-    {% ifnotequal flatpage.url "/hakkinda/icerik-politikasi/" %}<a href="/hakkinda/icerik-politikasi/">İçerik Politikası</a><br/>{% endifnotequal %}
-    {% ifnotequal flatpage.url "/hakkinda/gizlilik-politikasi/" %}<a href="/hakkinda/gizlilik-politikasi/">Gizlilik Politikası</a><br/>{% endifnotequal %}
-    {% ifnotequal flatpage.url "/hakkinda/gezegen-kurallari/" %}<a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a><br/>{% endifnotequal %}
-    {% ifnotequal flatpage.url "/hakkinda/" %}<a href="/hakkinda/">Hakkında</a><br/>{% endifnotequal %}
-    {% ifnotequal flatpage.url "/bize_ulasmak_icin/" %}<a href="/bize_ulasmak_icin/">Bize Ulaşın</a><br/>{% endifnotequal %}
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>İlgili sayfalar</h2>
+        {% ifnotequal flatpage.url "/hakkinda/icerik-politikasi/" %}<a href="/hakkinda/icerik-politikasi/">İçerik Politikası</a><br/>{% endifnotequal %}
+        {% ifnotequal flatpage.url "/hakkinda/gizlilik-politikasi/" %}<a href="/hakkinda/gizlilik-politikasi/">Gizlilik Politikası</a><br/>{% endifnotequal %}
+        {% ifnotequal flatpage.url "/hakkinda/gezegen-kurallari/" %}<a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a><br/>{% endifnotequal %}
+        {% ifnotequal flatpage.url "/hakkinda/" %}<a href="/hakkinda/">Hakkında</a><br/>{% endifnotequal %}
+        {% ifnotequal flatpage.url "/bize_ulasmak_icin/" %}<a href="/bize_ulasmak_icin/">Bize Ulaşın</a><br/>{% endifnotequal %}
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
 </div>
-<div class="sidebar sidebar_alt_img">&nbsp;</div>
 
-<div class="sidebar sidebar_top_img">&nbsp;</div>
-<div class="sidebar sidebar_baslik">Etiketler</div>
-<div class="sidebar sidebar_ic">{% for tag in flatpage.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
-<div class="sidebar sidebar_alt_img">&nbsp;</div>
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Etiketler</h2>
+        {% for tag in flatpage.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
 {% endblock %}

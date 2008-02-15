@@ -48,13 +48,20 @@
 {% endblock %}
 
 {% block sidebar %}
-<div class="sidebar sidebar_top_img">&nbsp;</div>
-<div class="sidebar sidebar_baslik">Etiketler</div>
-<div class="sidebar sidebar_ic"><img src="/media/img/tag.png" style="vertical-align: middle;" /> {% for tag in news.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
-<div class="sidebar sidebar_alt_img">&nbsp;</div>
-
-<div class="sidebar sidebar_top_img">&nbsp;</div>
-<div class="sidebar sidebar_baslik">Yazar</div>
-<div class="sidebar sidebar_ic">{{ news.author }}</div>
-<div class="sidebar sidebar_alt_img">&nbsp;</div>
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Etiketler</h2>
+        <img src="/media/img/tag.png" style="vertical-align: middle;" /> {% for tag in news.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Yazar</h2>
+        {{ news.author }}
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
 {% endblock %}

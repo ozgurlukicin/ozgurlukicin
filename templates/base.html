@@ -23,30 +23,16 @@
 {% block extrahead %}{% endblock %}
 </head>
 <body>
-<!--<div id="topbar">
-    <div id="topbar_content">
-        {% if not user.is_authenticated %}
-            <form method="post" action="/kullanici/giris/">
-                Kullanıcı adı: <input type="text" id="id_username" name="username" size="8" class="vTextField required" value="" maxlength="30" />
-                Parola: <input type="password" id="id_password" name="password" size="8" class="vPasswordField required" value="" maxlength="30" />
-                <input type="submit" value="login" id="form_submit" />
-                <input type="hidden" name="next" value="{{ next }}" />
-            </form>
-        {% endif %}
-    </div>
-</div>-->
 {% block header_menu %}
     <!-- Burası header kısmı -->
-	{% endblock %}
+    {% endblock %}
 
-	{% block ust_menu %}
-	<!-- Burası üst menü kısmı -->
-	{% endblock %}
+    {% block ust_menu %}
+    <!-- Burası üst menü kısmı -->
+    {% endblock %}
 
 
 <div id="{% block pagetype %}page{% endblock %}">
-
-
     <div id="content">
         {% block content %}
         {% endblock %}
@@ -54,45 +40,55 @@
 
     <div id="sidebar">
         {% block sidebartop %}
-        <div class="sidebar sidebar_top_img" style="margin-top: 40px;">&nbsp;</div>
-        <div class="sidebar sidebar_baslik">Kullanıcı Kutusu</div>
-        <div class="sidebar sidebar_ic"{% if not user.is_authenticated %} style="text-align: center;"{% endif %}>
-        {% if not user.is_authenticated %}
-        <form method="post" action="/kullanici/giris/">
-            <input type="text" id="id_username" name="username" size="18" class="vTextField required" value="" maxlength="30" /><br />
-            <input type="password" id="id_password" name="password" size="18" class="vPasswordField required" value="" maxlength="30" /><br />
-            <input type="submit" value="Giriş" id="form_submit" />
-        </form>
-        <br />
-        <a href="/kullanici/kayit/">Kayıt Ol</a> | <a class="sari"  href="/kullanici/kayip/">Kayıp parola?</a>
-        {% else %}
-            Merhaba <b>{{ user.username }}</b>!
-            <br />Kullanıcı sayfanıza <a href="/kullanici/sayfam/">buradan</a> ulaşabilir veya <a class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.
-        {% endif %}
+        <div id="sidebar_box">
+            <div id="sidebar_top">&nbsp;</div>
+            <div id="sidebar_middle">
+                <h2>Kullanıcı Kutusu</h2>
+                {% if not user.is_authenticated %}
+                    <form method="post" action="/kullanici/giris/">
+                        <input type="text" id="id_username" name="username" size="18" class="vTextField required" value="" maxlength="30" /><br />
+                        <input type="password" id="id_password" name="password" size="18" class="vPasswordField required" value="" maxlength="30" /><br />
+                        <input type="submit" value="Giriş" id="form_submit" />
+                    </form>
+                    <p><a href="/kullanici/kayit/">Kayıt ol</a> | <a class="sari"  href="/kullanici/kayip/">Kayıp parola</a></p>
+                {% else %}
+                    <p>Merhaba <b>{{ user.username }}</b>!
+                    <br />Kullanıcı sayfanıza <a href="/kullanici/sayfam/">buradan</a> ulaşabilir veya <a class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.</p>
+                {% endif %}
+            </div>
+            <div id="sidebar_bottom">&nbsp;</div>
         </div>
-        <div class="sidebar sidebar_alt_img">&nbsp;</div>
-        <!--  <div class="sidebar sidebar_baslik">Pardus'u indirin</div>
-        <div class="sidebar sidebar_ic"  ><a href="/indir/"><img align="center" src="/media/img/sidebar_download.png" border="0" alt="Pardus'u indir.." /></a></div> -->
-        <div class="sidebar sidebar_top_img">&nbsp;</div>
-        <div class="sidebar sidebar_baslik">Arama</div>
-        <div class="sidebar sidebar_ic" style="text-align: center;">
-            <form method="post" action="/arama/">
-                <input type="text" name="term" size="20"><br />
+        <div id="sidebar_box">
+            <div id="sidebar_top">&nbsp;</div>
+            <div id="sidebar_middle">
+                <h2>Arama</h2>
+                <form method="post" action="/arama/">
+                    <input type="text" name="term" size="20"><br />
                     <input type="submit" value="Ara">
-            </form>
+                </form>
+            </div>
+            <div id="sidebar_bottom">&nbsp;</div>
         </div>
-        <div class="sidebar sidebar_alt_img">&nbsp;</div>
 
-        <div class="sidebar sidebar_top_img">&nbsp;</div>
-        <div class="sidebar sidebar_baslik">Özgürlükİçin OOXML'e Karşı</div>
-        <div class="sidebar sidebar_ic"><center><a href="/ooxml_banner/"><img src="/media/ooxml/ooxmlekarsi.png" /></a></center><br /><a href="/ooxml/">"Özgürlükİçin OOXML'e Hayır!"</a> diyoruz. <a href="/ooxml_banner/">Banner ve düğmelerimizi</a> kullanarak kampanyamıza katkıda bulunabilirsiniz.</div>
-            <div class="sidebar sidebar_alt_img">&nbsp;</div>
+        <div id="sidebar_box">
+            <div id="sidebar_top">&nbsp;</div>
+            <div id="sidebar_middle">
+                <h2>Özgürlükİçin OOXML'e Karşı</h2>
+                <a href="/ooxml_banner/"><img src="/media/ooxml/ooxmlekarsi.png" /></a>
+                <p><a href="/ooxml/">"Özgürlükİçin OOXML'e Hayır!"</a> diyoruz. <a href="/ooxml_banner/">Banner ve düğmelerimizi</a> kullanarak kampanyamıza katkıda bulunabilirsiniz.</p>
+            </div>
+            <div id="sidebar_bottom">&nbsp;</div>
+        </div>
 
-
-        <div class="sidebar sidebar_top_img">&nbsp;</div>
-        <div class="sidebar sidebar_baslik">Özgürlükiçin'i destekleyin</div>
-        <div class="sidebar sidebar_ic"><center><a href="/banner/"><img src="/media/img/pardus_ozgurluk.png" /></a></center><br />Pardus'un tanıtımına katkıda bulunmak isteyenler için Özgürlükiçin düğmeleri yayınlandı. Sitenizde, blogunuzda yayınlamak için siz de <a href="/banner/">hazır kodlarımızdan</a> yararlanabilirsiniz.</div>
-        <div class="sidebar sidebar_alt_img">&nbsp;</div>
+        <div id="sidebar_box">
+            <div id="sidebar_top">&nbsp;</div>
+            <div id="sidebar_middle">
+                <h2>Özgürlükiçin'i destekleyin</h2>
+                <a href="/banner/"><img src="/media/img/pardus_ozgurluk.png" /></a>
+                <p>Pardus'un tanıtımına katkıda bulunmak isteyenler için Özgürlükiçin düğmeleri yayınlandı. Sitenizde, blogunuzda yayınlamak için siz de <a href="/banner/">hazır kodlarımızdan</a> yararlanabilirsiniz.</p>
+            </div>
+            <div id="sidebar_bottom">&nbsp;</div>
+        </div>
         {% block alt_resim %}
         {% endblock %}
 
