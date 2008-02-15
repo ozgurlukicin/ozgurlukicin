@@ -4,6 +4,9 @@
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
 {% endblock %}
 {% block content %}
+<div id="forum_address">
+    <div id="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a> &#62; {{ topic.title|escape }}</div>
+</div>
 {% if user.is_authenticated %}
 {% if flood %}Flood koruması aktif, lütfen {{ timeout }} saniye bekleyin.{% endif %}
 <form action="" method="POST">
