@@ -94,11 +94,11 @@ margin:0px;
     font-weight: bold;
     width: 100%;
 }
-#forum_icon { width: 5%; vertical-align: middle; }
-#forum_name { width: 50%; vertical-align: middle; }
-#forum_lastpost { width: 25%; vertical-align: middle; text-align: center; }
-#forum_topics { width: 10%; vertical-align: middle; text-align: center; }
-#forum_posts { width: 10%; vertical-align: middle; text-align: center; }
+#forum_icon { width: 7%; float:left; padding-top: 8px; }
+#forum_name { width: 48%; float:left; padding-top: 8px; }
+#forum_lastpost { width: 25%; float:left; padding-top: 8px; text-align: center; }
+#forum_topics { width: 10%; float:left; padding-top: 8px; text-align: center; }
+#forum_posts { width: 10%; float:left; padding-top: 8px; text-align: center; }
 #category { float: left; clear: left; width: 100%; }
 #category_title {
     background: url(/media/dijital/img/forum/forum_bar.gif) repeat-y;

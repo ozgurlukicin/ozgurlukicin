@@ -6,17 +6,13 @@
 <div id="forum_address">
     <div id="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a></div>
 </div>
-<table id="forum_main_header">
-    <tbody>
-        <tr>
-            <td id="forum_icon">&nbsp;</td>
-            <td id="forum_name">Forum</td>
-            <td id="forum_topics">Konular</td>
-            <td id="forum_posts">İletiler</td>
-            <td id="forum_lastpost">Son İleti</td>
-        </tr>
-    </tbody>
-</table>
+<div id="forum_main_header">
+    <div id="forum_icon">&nbsp;</div>
+    <div id="forum_name">Forum</div>
+    <div id="forum_topics">Konular</div>
+    <div id="forum_posts">İletiler</div>
+    <div id="forum_lastpost">Son İleti</div>
+</div>
 {% for category in categories %}
 
 {% if category.hidden and not perms.forum.can_see_hidden_categories %}
