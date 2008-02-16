@@ -125,13 +125,13 @@ margin:0px;
 #topic_posts { width: 10%; vertical-align: middle; text-align: center; }
 #topic_views { width: 10%; vertical-align: middle; text-align: center; }
 #topic_rss { width: 7%; vertical-align: middle; text-align: center; }
-#topics_item { width: 100%; }
-#topics_item_icon { width: 5%; vertical-align: middle; }
-#topics_item_title { width: 50%; vertical-align: middle; }
-#topics_item_lastpost { width: 18%; vertical-align: middle; text-align: center; }
-#topics_item_posts { width: 10%; text-align: center; }
-#topics_item_views { width: 10%; text-align: center; }
-#topics_item_rss { width: 7%; vertical-align: middle; text-align: center; }
+#topics_item { width: 100%; overflow: hidden; border-bottom: 1px solid #CBD8E0; padding-top: 10px; }
+#topics_item_icon { width: 5%; float: left; vertical-align: middle; }
+#topics_item_title { width: 50%; float: left; vertical-align: middle; }
+#topics_item_lastpost { width: 18%; float: left; vertical-align: middle; text-align: center; }
+#topics_item_posts { width: 10%; float: left; text-align: center; }
+#topics_item_views { width: 10%; float: left; text-align: center; }
+#topics_item_rss { width: 7%; float: left; vertical-align: middle; text-align: center; }
 
 /*Also ends here*/
 

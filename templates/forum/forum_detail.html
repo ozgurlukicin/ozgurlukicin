@@ -18,24 +18,26 @@
         </tr>
     </tbody>
 </table>
-<table id="forum_topic">
-    <tbody>
+<div id="forum_topic">
     {% for topic in topic_list %}
 
     {% if topic.hidden and not perms.forum.can_see_hidden_topics %}
     {% else %}
 
-    <tr id="topics_item" {% if topic.hidden %}style="opacity: 0.5;"{% endif %}>
-        <td id="topics_item_icon"><a href="{{ topic.get_absolute_url }}">{% if topic.locked and not topic.sticky %}L{% endif %}{% if topic.sticky and not topic.locked %}<img src="/media/dijital/img/forum/sabit_konu.gif" border="0" alt="Sabit Konu" title="Sabit Konu" />{% endif %}{% if not topic.locked and not topic.sticky %}<img src="/media/dijital/img/forum/eski_konu.gif" border="0" />{% endif %}{% if topic.locked and topic.sticky %}H{% endif %}</a></td>
-        <td id="topics_item_title"><a href="{{ topic.get_absolute_url }}">{{ topic.title|escape }}</a></td>
-        <td id="topics_item_posts">{{ topic.posts }}</td>
-        <td id="topics_item_views">{{ topic.views }}</td>
-        <td id="topics_item_lastpost">{{ topic.topic_latest_post.edited|date:"d F Y H:i" }}<br />{{ topic.topic_latest_post.author }} <a href="{{ topic.topic_latest_post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" border="0"/></a></td>
-        <td id="topics_item_rss"><a href="/forum/rss/topic/{{ topic.id }}"><img src="/media/img/bt_next.png" style="border:0px;" /></a></td>
-    </tr>
+    <div id="topics_item" {% if topic.hidden %}style="opacity: 0.5;"{% endif %}>
+        <div id="topics_item_icon"><a href="{{ topic.get_absolute_url }}">{% if topic.locked and not topic.sticky %}L{% endif %}{% if topic.sticky and not topic.locked %}<img src="/media/dijital/img/forum/sabit_konu.gif" border="0" alt="Sabit Konu" title="Sabit Konu" />{% endif %}{% if not topic.locked and not topic.sticky %}<img src="/media/dijital/img/forum/eski_konu.gif" border="0" />{% endif %}{% if topic.locked and topic.sticky %}H{% endif %}</a></div>
+        <div id="topics_item_title"><a href="{{ topic.get_absolute_url }}">{{ topic.title|escape }}</a></div>
+        <div id="topics_item_posts">{{ topic.posts }}</div>
+        <div id="topics_item_views">{{ topic.views }}</div>
+        <div id="topics_item_lastpost">{{ topic.topic_latest_post.edited|date:"d F Y H:i" }}<br />{{ topic.topic_latest_post.author }} <a href="{{ topic.topic_latest_post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" border="0"/></a></div>
+        <div id="topics_item_rss"><a href="/forum/rss/topic/{{ topic.id }}"><img src="/media/img/bt_next.png" style="border:0px;" /></a></div>
+    </div>
     {% endif %}
     {% endfor %}
-    </tbody>
-</table>
-{% if is_paginated %}{% paginator %}{% endif %}
+</div>
+<div id="post_bottom">
+{% if is_paginated %}
+    <div id="post_pagination">{% paginator %}</div>
+{% endif %}
+</div>
 {% endblock %}
