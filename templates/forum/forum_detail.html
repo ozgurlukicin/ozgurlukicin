@@ -6,18 +6,14 @@
     <div id="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; {{ forum.name|escape }}</div>
     <div id="new_topic"><a href="/forum/{{ forum.slug }}/new/"><img src="/media/dijital/img/forum/yeni_baslik.jpg" border="0" /></a></div>
 </div>
-<table id="forum_header">
-    <tbody>
-        <tr>
-            <td id="topic_icon">&nbsp;</td>
-            <td id="topic_title">Konu</td>
-            <td id="topic_posts">İletiler</td>
-            <td id="topic_views">Görüntüleme</td>
-            <td id="topic_lastpost">Son İleti</td>
-            <td id="topic_rss">Takip Et</td>
-        </tr>
-    </tbody>
-</table>
+<div id="forum_header">
+    <div id="topic_icon">&nbsp;</div>
+    <div id="topic_title">Konu</div>
+    <div id="topic_posts">İletiler</div>
+    <div id="topic_views">Görüntüleme</div>
+    <div id="topic_lastpost">Son İleti</div>
+    <div id="topic_rss">Takip Et</div>
+</div>
 <div id="forum_topic">
     {% for topic in topic_list %}
 
