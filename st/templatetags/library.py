@@ -65,3 +65,9 @@ def timedelta(value, arg=None):
         return "%s sonra" % timesince(cmp,value)
     else:
         return "%s önce" % timesince(value,cmp)
+
+@register.filter
+def paginatedPost(value, arg="1"):
+    url = value[:value.rfind("/")+1]
+    post = value[value.rfind("/")+1:]
+    return "%s?page=%s%s" % (url, arg, post)
