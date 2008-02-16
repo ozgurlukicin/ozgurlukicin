@@ -53,7 +53,7 @@
 {% block sidebar %}
 <div id="sidebar_box">
     <div id="sidebar_top">&nbsp;</div>
-    <div id="sidebar_middle">
+    <div id="sidebar_middle" style="text-align:left;">
         <h2>Bilgiler</h2>
         <strong><span>Lisans:</span></strong> {% for license in game.license.all %}<a href="{{ license.url }}"><span class="gri" >{{ license.name }}</span></a> {% endfor %}<br />
         <strong><span>Paket boyutu:</span></strong> <span class="gri" >{{ game.download_size|filesizeformat }}</span><br />
@@ -65,7 +65,7 @@
 
 <div id="sidebar_box">
     <div id="sidebar_top">&nbsp;</div>
-    <div id="sidebar_middle">
+    <div id="sidebar_middle" style="text-align:left;">
         <h2>Değerlendirme</h2>
         <strong><span>Öğrenme süresi:</span></strong><span class="gri" > {{ game.learning_time }}</span><br />
         <strong><span>Oynanabilirlik:</span></strong><span class="gri" > {{ game.gameplay }}</span><br />

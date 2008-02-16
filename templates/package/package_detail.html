@@ -51,7 +51,7 @@
 {% block sidebar %}
 <div id="sidebar_box">
     <div id="sidebar_top">&nbsp;</div>
-    <div id="sidebar_middle">
+    <div id="sidebar_middle" style="text-align:left;">
         <h2>Ayrıntılar</h2>
         <strong><span>Lisans:</span></strong> {% for license in package.license.all %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}<br />
         <strong><span>Paket boyutu:</span></strong> {{ package.download_size|filesizeformat }}<br />

@@ -262,14 +262,14 @@ a.siyah {
 
 .game_average_point {
     background: url('/media/dijital/img/game_average_point.jpg') left top no-repeat;
-    margin-left: 75px;
-    height: 80px;
-    width: 80px;
+    margin-left: 65px;
+    height: 85px;
+    width: 85px;
     font-size: 30px;
     text-align: center;
     padding-top: 32px;
     margin-bottom: -30px;
-	color: #000000;
+    color: #000000;
 }
 
 
