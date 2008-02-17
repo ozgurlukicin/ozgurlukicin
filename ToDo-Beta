@@ -22,33 +22,33 @@ Ana site:
 kutusunun altına gelecek
 (+s) Haberler sayfasının sidebar başlangıcında sa yazıyor silelim :)
 (-) Gezgende <p> tagı strip edilecek (Resimlerin görüntüyü bozmasının suçlusu gibi duruyor)
-(-) Forum üye olurken kuralları nanesi javascript popup olsun böylece kuralları okuması için formu kapatmaya gerek olmasın
-(-) İndexte yer alan içeriğin görselleri de o içeriği link olsun (high-end feature :P)
+(+s) Forum üye olurken kurallar ayrı pencerede açılsın, böylece kuralları okuması için formu kapatmaya gerek olmasın
+(+s) İndexte yer alan içeriğin görselleri de o içeriği link olsun (high-end feature :P)
 
 Forum:
 
 (+s) /forum sayfasına header'ın altında Navigation Bar gelecek (Anasayfa > Forum gibi )
 (-) Bir konu admin panelinde başka bir kategoriye taşındığında forum ana sayfasında sanki o konu taşınmamış gibi duruyor çözülmeli
-(-) Foruma footer eklenecek
+(+s) Foruma footer eklenecek
 (-) Arka plan doldurulacak
-(-) Bir mesaj atıldığında 8 saat 17 dakika demek yerine sadece saat gösterilse daha derli toplu olur.
-(-) Her forum elemanın arasına çizgi çizelim (Duyurular ve Haberler <hr> İlk Adımlar gibi)
+(+s) Bir mesaj atıldığında 8 saat 17 dakika demek yerine sadece saat gösterilse daha derli toplu olur.
+(+s) Her forum elemanın arasına çizgi çizelim (Duyurular ve Haberler <hr> İlk Adımlar gibi)
 (-) Forumda yeni gelen meseajlar filtrelenip ayrı ikonla gösterilmeli
 (-) TinyMCE ile ilgili raporlanan sorunlar çözülmeli
 (-) Forumda ikonların anlamını belirten bir kısım yapılmalı
-(-) Sayfanın altına kaç üye kaç konu var gibi bir istatistik konmalı (forum sayfasının altına)
-(-) Reply sayfasında çıkan mesajlar topic sayfasında çıkan mesajlarla aynı görünüme sahip olmalı
+(+) Sayfanın altına kaç üye kaç konu var gibi bir istatistik konmalı (forum sayfasının altına)
+(+s) Reply sayfasında çıkan mesajlar topic sayfasında çıkan mesajlarla aynı görünüme sahip olmalı
 (+s) Konu açarken en fazla 5 etiket seçilmeli
 (-) Duyurular bölümü sadece yöneticilerin mesaj atabileceği bir yer haline gelmeli
 
 
 /forum/kategori sayfası :
 
-(-) Her elemanın arasına border çizilecek (renk olarak çizgili gümüş barın çizgilerinin rengi şık olur :)
+(+s) Her elemanın arasına border çizilecek (renk olarak çizgili gümüş barın çizgilerinin rengi şık olur :)
 
 /forum/kategori/topic sayfası
 
-(+s) Mesaj bölümü düzenlecek (uğur yapıyor)
+(+s) Mesaj bölümü düzenlecek
 (-) Eksik yönetici butonları konacak
 
 Yanıtla Sayfası
