@@ -35,7 +35,15 @@ class Post(models.Model):
         return "%s" % self.id
 
     def get_absolute_url(self):
-        return '/forum/%s/%s/#post%s' % (self.topic.forum.slug, self.topic.id, self.id)
+        import oi.forum.settings
+        from django.db import connection
+        cursor = connection.cursor()
+        cursor.execute("select id from forum_post where topic_id = %s", [self.topic.id])
+        order = 0
+        while not self.id == cursor.fetchone()[0]:
+            order += 1
+        page = order / oi.forum.settings.POSTS_PER_PAGE + 1
+        return '/forum/%s/%s/?page=%s#post%s' % (self.topic.forum.slug, self.topic.id, page, self.id)
 
     def get_quote_url(self):
         return '/forum/%s/%s/quote/%s/' % (self.topic.forum.slug, self.topic.id, self.id)

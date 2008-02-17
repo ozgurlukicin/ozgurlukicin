@@ -30,7 +30,7 @@
         <div id="post_message_top">
             <a name="post{{ post.id }}" />
             <div id="post_message_top_icon">
-                <a href="{{ post.get_absolute_url|paginatedPost:page }}"><img src="/media/dijital/img/forum/msg_sim.gif" border="0" /></a>
+                <a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" border="0" /></a>
             </div>
             <div id="post_message_top_date">
                 {{ post.created|date:"d-m-Y H:i" }}

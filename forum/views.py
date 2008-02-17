@@ -21,7 +21,6 @@ from oi.forum.models import Category, Forum, Topic, Post, AbuseReport, WatchList
 
 from django.core.urlresolvers import reverse
 from oi.st.models import Tag
-from django.contrib.auth.models import User
 
 def main(request):
     categories = Category.objects.order_by('order')
