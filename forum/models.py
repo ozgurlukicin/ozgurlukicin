@@ -150,7 +150,7 @@ class Topic(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return '/forum/%s/%s/' % (self.forum.slug, self.id)
+        return '/forum/%s/%s/?page=1' % (self.forum.slug, self.id)
 
     def get_reply_url(self):
         return '/forum/%s/%s/reply/' % (self.forum.slug, self.id)
