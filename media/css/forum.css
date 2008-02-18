@@ -173,8 +173,10 @@ margin:0px;
 #post_message_content {
     padding-left: 10px;
     padding-top: 10px;
-    min-height: 159px;
     border-left: 2px solid #D7E1E7;
+}
+#post_message_text {
+    min-height: 159px;
 }
 #post_message_tags {
     padding-left: 9px;
