@@ -35,14 +35,22 @@ class Post(models.Model):
         return "%s" % self.id
 
     def get_absolute_url(self):
+        # all the mess is about pages
         import oi.forum.settings
-        from django.db import connection
-        cursor = connection.cursor()
-        cursor.execute("select id from forum_post where topic_id = %s", [self.topic.id])
-        order = 0
-        while not self.id == cursor.fetchone()[0]:
-            order += 1
-        page = order / oi.forum.settings.POSTS_PER_PAGE + 1
+
+        posts = self.topic.post_set.all().order_by('created')
+
+        # binary search position of this post
+        i, j = 0, len(posts)
+        k = (i + j) / 2
+        while i < j and posts[k].id != self.id:
+            k = (i + j) / 2
+            if self.id > posts[k].id:
+                i = k
+            else:
+                j = k
+        page = k / oi.forum.settings.POSTS_PER_PAGE + 1
+
         return '/forum/%s/%s/?page=%s#post%s' % (self.topic.forum.slug, self.topic.id, page, self.id)
 
     def get_quote_url(self):
