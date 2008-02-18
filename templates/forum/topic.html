@@ -77,18 +77,17 @@
         </div>
         <div id="post_message_content">
             {{ post.text|linebreaksbr }}
-        </div>
-        <div id="post_message_tags">
-            &nbsp;
             {% if forloop.first %}
-            <img src="/media/img/tag.png" />{% for tag in topic.tags.all %}<span class="tag"><a href="/etiket/{{tag.name}}/">{{tag.name}}</a></span>{% endfor %}
+            <div id="post_message_tags">
+                <img src="/media/img/tag.png" />{% for tag in topic.tags.all %}<span class="tag"><a href="/etiket/{{tag.name}}/">{{tag.name}}</a></span>{% endfor %}
+            </div>
             {% endif %}
-        </div>
-        <div id="post_message_bottom">
-            &nbsp;
-            {% ifnotequal post.edit_count 0 %}
-            <span style="font-size:x-small; font-style:italic;">Bu ileti {{ post.edit_count }} kez değiştirilmiş olup, son kez {{ post.edited|date:"d-m-Y H:i" }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.</span><br />
-            {% endifnotequal %}
+            <div id="post_message_bottom">
+                &nbsp;
+                {% ifnotequal post.edit_count 0 %}
+                <span style="font-size:x-small; font-style:italic;">Bu ileti {{ post.edit_count }} kez değiştirilmiş olup, son kez {{ post.edited|date:"d-m-Y H:i" }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.</span><br />
+                {% endifnotequal %}
+            </div>
         </div>
     </div>
 </div>
