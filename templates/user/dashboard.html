@@ -3,24 +3,18 @@
 {% block title %}Kullanıcı Sayfası - {% endblock %}
 
 {% block header_menu %}
-    <!-- Burası header kısmı -->
-	{% include "header.html" %}
+    {% include "header.html" %}
 {% endblock %}
 <br/>
 {% block ust_menu %}
-	<!-- Burası üst menü kısmı -->
-	{% include "ust_menu_ayrinti.html" %}
-
+    {% include "ust_menu_ayrinti.html" %}
 {% endblock %}
 
 <br/>
-
-
 {% block content %}
 <br />
 
 Merhaba, <b>{{ user.username }}!</b>
 <br />
-Aramıza {{ user.date_joined }} tarihinde katılmışsın. <br/><br />İstiyorsan kullanıcı bilgilerini <a href="/kullanici/duzenle/">buraya</a> tıklayarak düzenleyebilirsin.
-
+Aramıza {{ user.date_joined }} tarihinde katılmışsınız. <br/><br />İstiyorsanız kullanıcı bilgilerinizi <a href="/kullanici/duzenle/">buraya</a> tıklayarak düzenleyebilirsiniz.
 {% endblock %}
