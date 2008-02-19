@@ -35,6 +35,7 @@ class Post(models.Model):
         return "%s" % self.id
 
     def get_absolute_url(self):
+        """Use topic/forum.get_latest_post_url whenever you can"""
         # all the mess is about pages
         import oi.forum.settings
 
@@ -153,6 +154,11 @@ class Topic(models.Model):
     def get_absolute_url(self):
         return '/forum/%s/%s/?page=1' % (self.forum.slug, self.id)
 
+    def get_latest_post_url(self):
+        import oi.forum.settings
+        lastpage = ((self.posts - 1) / oi.forum.settings.POSTS_PER_PAGE) + 1
+        return '/forum/%s/%s/?page=%s#post%s' % (self.forum.slug, self.id, lastpage, self.topic_latest_post.id)
+
     def get_reply_url(self):
         return '/forum/%s/%s/reply/' % (self.forum.slug, self.id)
 
@@ -216,6 +222,13 @@ class Forum(models.Model):
 
     def get_absolute_url(self):
         return '/forum/%s/' % self.slug
+
+    def get_latest_post_url(self):
+        import oi.forum.settings
+
+        latest_topic = self.forum_latest_post.topic
+        lastpage = ((latest_topic.posts - 1) / oi.forum.settings.POSTS_PER_PAGE) + 1
+        return '/forum/%s/%s/?page=%s#post%s' % (self.slug, latest_topic.id, lastpage, self.forum_latest_post.id)
 
     def __str__(self):
         return self.name
