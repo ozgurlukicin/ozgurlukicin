@@ -30,6 +30,7 @@ def main(request):
             forums += 1
             topics += forum.topics
             posts += forum.posts
+    usercount = User.objects.count()
 
     return render_response(request, 'forum/forum_list.html', locals())
 
