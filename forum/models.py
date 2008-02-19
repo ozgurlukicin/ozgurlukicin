@@ -41,15 +41,15 @@ class Post(models.Model):
         posts = self.topic.post_set.all().order_by('created')
 
         # binary search position of this post
-        i, j = 0, len(posts)
+        i, j = 0, len(posts) - 1
         k = (i + j) / 2
-        while i < j and posts[k].id != self.id:
+        while i < j:
             k = (i + j) / 2
             if self.id > posts[k].id:
-                i = k
+                i = k + 1
             else:
                 j = k
-        page = k / oi.forum.settings.POSTS_PER_PAGE + 1
+        page = i / oi.forum.settings.POSTS_PER_PAGE + 1
 
         return '/forum/%s/%s/?page=%s#post%s' % (self.topic.forum.slug, self.topic.id, page, self.id)
 
