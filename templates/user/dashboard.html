@@ -16,5 +16,5 @@
 
 Merhaba, <b>{{ user.username }}!</b>
 <br />
-Aramıza {{ user.date_joined }} tarihinde katılmışsınız. <br/><br />İstiyorsanız kullanıcı bilgilerinizi <a href="/kullanici/duzenle/">buraya</a> tıklayarak düzenleyebilirsiniz.
+Aramıza {{ user.date_joined|date:"d F Y" }} tarihinde katılmışsınız. <br/><br />İstiyorsanız kullanıcı bilgilerinizi <a href="/kullanici/duzenle/">buraya</a> tıklayarak düzenleyebilirsiniz.
 {% endblock %}
