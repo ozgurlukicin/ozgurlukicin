@@ -41,7 +41,8 @@ class Post(models.Model):
         posts = self.topic.post_set.all().order_by('created')
 
         # binary search position of this post
-        i, j = 0, len(posts) - 1
+        i = 0
+        j = int(self.topic.posts)
         k = (i + j) / 2
         while i < j:
             k = (i + j) / 2
