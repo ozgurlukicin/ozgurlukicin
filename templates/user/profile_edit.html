@@ -22,35 +22,23 @@
 
 {% block content %}
 <br />
-
-<!--
-NOT: register.html'den çaldım, bunu da düzeltmek gerekecek
-
--Eren
-
--->
-
 {% if form.errors %}
-<font color="red">Profil güncellenemedi, lütfen aşağıdaki hataları düzeltin<br /></font>
+<span class="error">Profil güncellenemedi, lütfen aşağıdaki hataları düzeltin</span>
 {% endif %}
 
 {% if profile_updated %}
-<font color="green">Profiliniz başarıyla güncellendi<br /></font>
+<span style="color:green;">Profiliniz başarıyla güncellendi</span>
 {% endif %}
 
 <br />
 <form method="POST" action=".">
-    <table><tbody>
     {% for field in form %}
-    <tr>
-        <td width="30%"><label for="id_{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}</td>
-        <td>{{ field }}</td>
-        <td>{% if field.errors %}{{ field.errors }}{% endif %}</td>
-    </tr>
+    <dl>
+        <dt><label for="id_{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
+        <dt>{{ field }}</dt>
+    </dl>
     {% endfor %}
-    </tbody></table>
-<br />
-<center> <input type="submit" value="Düzenle" /> </center>
+    <div style="clear:left; text-align:center;"><input type="submit" value="Düzenle" /></div>
 </form>
 
 {% endblock %}
