@@ -461,6 +461,10 @@ input#form_submit {
     vertical-align: middle;
 }
 
+dl {clear: left; padding: 4px 0px;}
+dt {width: 30%; float:left;}
+.error {color: red;}
+
 /* planet */
 .planet_date {
     margin-top: 20px;
