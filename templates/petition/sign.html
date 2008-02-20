@@ -1,7 +1,7 @@
 {% load library %}
 {% extends "base.html" %}
 
-{% block title %}Petition - {% endblock %}
+{% block title %}{{ flatpage.title }} - {% endblock %}
 
 {% block header_menu %}
     {% include "header.html" %}
@@ -12,16 +12,17 @@
 {% endblock %}
 
 <br/>
-
 {% block content %}
-<div style="text-align: left; padding-left: 50px;">
+<div class="fs_title transparent_link">{{ flatpage.title }}</div>
+<div class="page_content grey">
+{{ flatpage.text }}
+</div>
+<h2 style="text-align: center;">OOXML'e ben de hayır demek istiyorum!</h2>
+<div style="text-align: left; padding-left: 50px; clear: left;">
     {% if form.errors %}
     <span class="error">Lütfen formu eksiksiz doldurunuz<br /></span>
     {% endif %}
 
-    {% for petitioner in petitioners %}
-    {{ petitioner.firstname }} {{ petitioner.lastname }} {{ petitioner.city|cityname }} {{ petitioner.job }} {{ petitioner.homepage }} {{ petitioner.signed|timedelta }}<br />
-    {% endfor %}
     <form method="POST" action=".">
         {% for field in form %}
         <dl>
@@ -31,5 +32,37 @@
         {% endfor %}
     <input type="submit" value="İmzala" />
     </form>
+
+    <span>Son 20 imza:</span>
+    {% for petitioner in petitioners %}
+    <ul class="sidebar_firststeps">
+        <li style="margin-bottom:-10px;">{{ petitioner.firstname }} {{ petitioner.lastname }} - {{ petitioner.city|cityname }} - {{ petitioner.job }} {% if petitioner.homepage %}<a href="{{ petitioner.homepage }}" target="_blank"><img src="/media/dijital/img/forum/msg_sim.gif" border="0" /></a>{% else %}-{% endif %} {{ petitioner.signed|timedelta }}</li>
+    </ul>
+    {% endfor %}
+</div>
+{% endblock %}
+{% block sidebartop %}{% endblock %}
+
+{% block sidebar %}
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>İlgili sayfalar</h2>
+        {% ifnotequal flatpage.url "/hakkinda/icerik-politikasi/" %}<a href="/hakkinda/icerik-politikasi/">İçerik Politikası</a><br/>{% endifnotequal %}
+        {% ifnotequal flatpage.url "/hakkinda/gizlilik-politikasi/" %}<a href="/hakkinda/gizlilik-politikasi/">Gizlilik Politikası</a><br/>{% endifnotequal %}
+        {% ifnotequal flatpage.url "/hakkinda/gezegen-kurallari/" %}<a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a><br/>{% endifnotequal %}
+        {% ifnotequal flatpage.url "/hakkinda/" %}<a href="/hakkinda/">Hakkında</a><br/>{% endifnotequal %}
+        {% ifnotequal flatpage.url "/bize_ulasmak_icin/" %}<a href="/bize_ulasmak_icin/">Bize Ulaşın</a><br/>{% endifnotequal %}
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
+
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Etiketler</h2>
+        {% for tag in flatpage.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
 </div>
 {% endblock %}

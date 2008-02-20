@@ -8,6 +8,7 @@
 from datetime import datetime
 
 from oi.petition.models import PetitionForm, Petitioner
+from oi.flatpages.models import FlatPage
 from oi.st.wrappers import render_response
 
 def petition_sign(request):
@@ -24,11 +25,13 @@ def petition_sign(request):
                     signed = datetime.now(),
                     )
             petitioner.save()
+            flatpage = FlatPage.objects.get(url="/ooxml/")
 
             return render_response(request, 'petition/sign_done.html', locals())
         else:
             return render_response(request, 'petition/sign.html', locals())
     else:
-        petitioners = Petitioner.objects.all()
+        petitioners = Petitioner.objects.order_by("-signed")[:20]
         form = PetitionForm()
+        flatpage = FlatPage.objects.get(url="/ooxml/")
         return render_response(request, 'petition/sign.html', locals())

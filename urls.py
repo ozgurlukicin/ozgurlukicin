@@ -150,6 +150,7 @@ urlpatterns = patterns('',
 
     #Petition
     (r'^petition/', include('oi.petition.urls')),
+    (r'^ooxml/', 'oi.petition.views.petition_sign'),
 
     #Django
     (r'^$', 'oi.st.views.home'),
