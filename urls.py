@@ -148,6 +148,9 @@ urlpatterns = patterns('',
     #Tema
     (r'^tema/', include('oi.sanat.urls')),
 
+    #Petition
+    (r'^petition/', include('oi.petition.urls')),
+
     #Django
     (r'^$', 'oi.st.views.home'),
     (r'^admin/upload/image/add/$', 'oi.upload.views.image_upload'),
