@@ -26,6 +26,8 @@ def petition_sign(request):
                     )
             petitioner.save()
             flatpage = FlatPage.objects.get(url="/ooxml/")
+            numberofpetitioners = Petitioner.objects.count()
+            petitionpercent = numberofpetitioners / 30
 
             return render_response(request, 'petition/sign_done.html', locals())
         else:
