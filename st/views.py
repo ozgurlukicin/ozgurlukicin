@@ -22,6 +22,7 @@ from oi.flatpages.models import FlatPage
 #for comments
 from django.contrib.auth.decorators import login_required
 from oi.forum.models import Forum,Topic,Post
+from oi.petition.models import Petitioner
 from oi.forum.views import flood_control
 from django.http import HttpResponseRedirect
 
@@ -30,6 +31,8 @@ def home(request):
     packages = Package.objects.filter(status=1).order_by('-update')[:PACKAGES_IN_HOMEPAGE]
     games = Game.objects.filter(status=1).order_by('-update')[:GAMES_IN_HOMEPAGE]
     howtos = HowTo.objects.filter(status=1).order_by('-update')[:HOWTOS_IN_HOMEPAGE]
+    numberofpetitioners = Petitioner.objects.count()
+    petitionpercent = numberofpetitioners / 30
     return render_response(request, 'home.html', locals())
 
 def fs_detail(request, slug):

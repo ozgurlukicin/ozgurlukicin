@@ -11,6 +11,7 @@ from django.contrib.comments.models import FreeComment
 from oi.settings import WEB_URL, DOCUMENT_ROOT, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, NEWS_PER_PAGE, TAG_PER_PAGE, HOWTO_PER_PAGE
 from oi.st.models import Package, Game, FS, News, Tag, HowTo
 from oi.seminar.models import Seminar
+from oi.petition.models import Petitioner
 from oi.st.feeds import *
 
 rss_dict = {
@@ -35,21 +36,33 @@ package_dict = {
                 'queryset': Package.objects.filter(status=1).order_by('title'),
                 'template_name': 'package/package_main.html',
                 'paginate_by': PACKAGE_PER_PAGE,
-                'template_object_name': 'package'
+                'template_object_name': 'package',
+                'extra_context': {
+                    'numberofpetitioners': Petitioner.objects.count(),
+                    'petitionpercent': Petitioner.objects.count() / 30,
+                    },
                }
 
 game_dict = {
              'queryset': Game.objects.filter(status=1).order_by('title'),
              'template_name': 'game/game_main.html',
              'paginate_by': GAME_PER_PAGE,
-             'template_object_name': 'game'
+             'template_object_name': 'game',
+             'extra_context': {
+                 'numberofpetitioners': Petitioner.objects.count(),
+                 'petitionpercent': Petitioner.objects.count() / 30,
+                 },
             }
 
 fs_dict = {
            'queryset': FS.objects.filter(status=1).order_by('order'),
            'template_name': 'fs/fs_main.html',
            'paginate_by': FS_PER_PAGE,
-           'template_object_name': 'fs'
+           'template_object_name': 'fs',
+           'extra_context': {
+               'numberofpetitioners': Petitioner.objects.count(),
+               'petitionpercent': Petitioner.objects.count() / 30,
+               },
           }
 
 howto_dict = {
@@ -57,7 +70,11 @@ howto_dict = {
               'template_name': 'howto/howto_main.html',
               'paginate_by': HOWTO_PER_PAGE,
               'template_object_name': 'howto',
-              'extra_context': {'firststep': FS.objects.filter(status=1).order_by('order')[:10]},
+              'extra_context': {
+                  'firststep': FS.objects.filter(status=1).order_by('order')[:10],
+                  'numberofpetitioners': Petitioner.objects.count(),
+                  'petitionpercent': Petitioner.objects.count() / 30,
+                  },
              }
 
 news_dict = {
@@ -65,7 +82,11 @@ news_dict = {
              'template_name': 'news/news_main.html',
              'paginate_by': NEWS_PER_PAGE,
              'template_object_name': 'news',
-             'extra_context': {'seminar': Seminar.objects.filter(status=1).order_by('date')}
+             'extra_context': {
+                 'seminar': Seminar.objects.filter(status=1).order_by('date'),
+                 'numberofpetitioners': Petitioner.objects.count(),
+                 'petitionpercent': Petitioner.objects.count() / 30,
+                 }
             }
 
 tag_dict = {
