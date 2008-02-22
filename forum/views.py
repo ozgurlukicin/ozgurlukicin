@@ -31,6 +31,8 @@ def main(request):
             topics += forum.topics
             posts += forum.posts
     usercount = User.objects.count()
+    currentdate = datetime.now()
+    latest_posts = Post.objects.all().order_by('-edited')[:5]
 
     return render_response(request, 'forum/forum_list.html', locals())
 
@@ -53,10 +55,10 @@ def topic(request, forum_slug, topic_id):
     session_key = 'visited_'+topic_id
 
     if request.user.is_authenticated() and not session_key in request.session:
-        topic.views += 1
         request.session[session_key] = True
-        topic.save()
 
+    topic.views += 1
+    topic.save()
     # we love Django, just 1 line and pagination is ready :)
     return object_list(request, posts,
                        template_name = 'forum/topic.html',
