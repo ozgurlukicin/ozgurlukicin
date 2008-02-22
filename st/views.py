@@ -37,6 +37,8 @@ def home(request):
 
 def fs_detail(request, slug):
     fs = get_object_or_404(FS, slug=slug)
+    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
+    petitionpercent = numberofpetitioners / 30
     return render_response(request, 'fs/fs_detail.html', locals())
 
 def fs_printable(request, slug):
@@ -51,6 +53,8 @@ def howto_detail(request, slug):
     if request.user.is_authenticated():
         auth=True
 
+    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
+    petitionpercent = numberofpetitioners / 30
     return render_response(request, 'howto/howto_detail.html', locals())
 
 def howto_printable(request, slug):
@@ -79,6 +83,8 @@ def news_detail(request, slug):
     if request.user.is_authenticated():
         auth=True
 
+    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
+    petitionpercent = numberofpetitioners / 30
     return render_response(request, 'news/news_detail.html', locals())
 
 def news_printable(request, slug):
@@ -112,6 +118,8 @@ def tag_detail(request, tag):
 
     except Tag.DoesNotExist:
         raise Http404
+    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
+    petitionpercent = numberofpetitioners / 30
     return render_response(request, 'tag/tag_detail.html', locals())
 
 def download(request):
@@ -122,6 +130,8 @@ def download(request):
 
 def download_detail_releasenotes(request, version):
     releasenote = get_object_or_404(PardusVersion, number=version).releasenote
+    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
+    petitionpercent = numberofpetitioners / 30
     return render_response(request, 'download/download_relnotes.html', locals())
 
 def videobox(request, video):
@@ -158,6 +168,8 @@ def search(request):
     else:
         pass
 
+    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
+    petitionpercent = numberofpetitioners / 30
     return render_response(request, 'search.html', locals())
 
 @login_required
