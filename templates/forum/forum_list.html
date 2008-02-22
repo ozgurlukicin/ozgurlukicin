@@ -37,7 +37,26 @@
 </div>
 {% endif %}
 {% endfor %}
-<div id="post_bottom">
-    <div id="post_pagination">{{ forums }} tartışma odasında bulunan {{ topics }} konuda, {{ usercount }} kayıtlı kullanıcı tarafından oluşturulmuş toplam {{ posts }} ileti bulunmaktadır.</div>
+<div id="category_title">Son 5 ileti</div>
+<div id="forum_stats_latest_posts">
+{% for post in latest_posts %}
+<div class="forum_stats_latest_post">
+    <div class="forum_stats_latest_post_topic">[ <a href="{{ post.topic.forum.get_absolute_url }}">{{ post.topic.forum }}</a> ]</div>
+    <div class="forum_stats_latest_post_summary"><a href="{{ post.get_absolute_url }}">{{ post.topic }}</a> <a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" border="0"/></a> {{ post.author|escape }}</div>
+    <div class="forum_stats_latest_post_date">{{ post.edited|date:"d F Y H:i" }}</div>
+</div>
+{% endfor %}
+</div>
+<div id="category_title">İstatistikler</div>
+<div id="forum_stats">
+    <div id="forum_stats_left">
+        Tarih: {{ currentdate|date:"d F Y H:i" }}<br />
+        Üye Sayısı: {{ usercount }}<br />
+        Toplam İleti Sayısı: {{ posts }}
+    </div>
+    <div id="forum_stats_right">
+        Toplam Kategori Sayısı: {{ forums }}<br />
+        Konu Sayısı: {{ topics }}
+    </div>
 </div>
 {% endblock %}

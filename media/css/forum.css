@@ -318,3 +318,32 @@ border: 1px solid #45586F;
     float: right;
     padding: 10px 10px 0px 0px;
 }
+
+.forum_stats_latest_post {
+    width: 100%;
+    overflow: auto;
+    clear: both;
+    border-bottom: 1px solid #CBD8E0;
+    padding-top: 10px;
+}
+.forum_stats_latest_post_topic {
+    float: left;
+    width: 20%;
+    text-align: right;
+}
+.forum_stats_latest_post_summary {
+    float:left;
+    padding-left: 10px;
+}
+.forum_stats_latest_post_date { float:right; }
+#forum_stats_left {
+    float: left;
+    width: 40%;
+    padding: 10px;
+}
+#forum_stats_right {
+    float:right;
+    text-align:left;
+    width: 40%;
+    padding: 10px;
+}
