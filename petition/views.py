@@ -15,6 +15,9 @@ from oi.st.wrappers import render_response
 from oi.settings import DEFAULT_FROM_EMAIL
 
 def petition_sign(request):
+    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
+    petitionpercent = numberofpetitioners / 30
+
     if request.method == 'POST':
         form = PetitionForm(request.POST)
         if form.is_valid():
@@ -35,6 +38,8 @@ def petition_sign(request):
             # create key taken from profile/views.py
             salt = sha.new(str(random.random())).hexdigest()[:5]
             activation_key = sha.new(salt).hexdigest()
+            petitioner.activation_key = activation_key
+            petitioner.save()
             activation_link = "http://www.ozgurlukicin.com/petition/onay/%s/%s" % (petitioner.id, activation_key),
 
             email_subject = u"Ozgurlukicin.com OOXML'e hayır kampanyası"
@@ -50,13 +55,9 @@ Ozgurlukicin.com"""
 
             email_to = form.clean_data['email']
 
-            petitioner.activation_key = activation_key
-            petitioner.save()
             send_mail(email_subject, email_body % activation_link, DEFAULT_FROM_EMAIL, [email_to], fail_silently=True)
 
             flatpage = FlatPage.objects.get(url="/ooxml/")
-            numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
-            petitionpercent = numberofpetitioners / 30
             notconfirmed = True
 
             return render_response(request, 'petition/sign_done.html', locals())
@@ -64,14 +65,14 @@ Ozgurlukicin.com"""
             return render_response(request, 'petition/sign.html', locals())
     else:
         petitioners = Petitioner.objects.order_by("-signed").filter(is_active=True)[:20]
-        numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
-        petitionpercent = numberofpetitioners / 30
         form = PetitionForm()
         flatpage = FlatPage.objects.get(url="/ooxml/")
 
         return render_response(request, 'petition/sign.html', locals())
 
 def petitioner_confirm(request, pid, key):
+    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
+    petitionpercent = numberofpetitioners / 30
     petitioner = Petitioner.objects.get(id=pid)
     if petitioner.is_active:
         already_active = True
