@@ -8,11 +8,13 @@
 import sha, datetime, random
 
 from django.core.mail import send_mail
+from django.views.generic.list_detail import object_list
 
 from oi.petition.models import PetitionForm, Petitioner
 from oi.flatpages.models import FlatPage
 from oi.st.wrappers import render_response
 from oi.settings import DEFAULT_FROM_EMAIL
+from oi.petition.settings import PETITIONERS_PER_PAGE
 
 def petition_sign(request):
     numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
@@ -89,3 +91,17 @@ def petitioner_confirm(request, pid, key):
         wrongkey = True
 
         return render_response(request, 'petition/sign_done.html', locals())
+
+def petitioner_list(request):
+    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
+    petitionpercent = numberofpetitioners / 30
+    petitioners = Petitioner.objects.filter(is_active=True)
+
+    return object_list(
+            request,
+            petitioners,
+            template_name = "petition/list.html",
+            template_object_name = "petitioner_list",
+            paginate_by = PETITIONERS_PER_PAGE,
+            allow_empty = True
+            )
