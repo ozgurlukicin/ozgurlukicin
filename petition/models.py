@@ -26,7 +26,7 @@ class Petitioner(models.Model):
         return "%s %s" % (self.firstname, self.lastname)
 
     class Admin:
-        list_display = ("firstname", "lastname", "job", "city", "email", "homepage", "signed", "activation_key", "is_active", "inform")
+        list_display = ("firstname", "lastname", "job", "city", "email", "homepage", "signed", "is_active", "inform")
         ordering = ["-signed"]
         search_fields = ["firstname", "lastname", "job"]
 
