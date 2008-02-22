@@ -35,13 +35,13 @@ class Petitioner(models.Model):
         verbose_name_plural = "İmzalayanlar"
 
 class PetitionForm(forms.Form):
-    firstname = forms.CharField(label="Ad", max_length=30)
-    lastname = forms.CharField(label="Soyad", max_length=30)
-    city = forms.ChoiceField(label="Şehir", choices=CITY_LIST)
-    job = forms.CharField(label="Meslek", max_length=30)
-    email = forms.EmailField(label="E-Posta")
-    homepage = forms.URLField(label="Web Sayfası", verify_exists=False, required=False, help_text='(zorunlu değil)')
-    inform = forms.BooleanField(label='Etkinliklerden haberdar et', required=False, help_text="Özgürlükİçin'in diğer etkinliklerinden haberdar olmak için işaretleyin.")
+    firstname = forms.CharField(label="Ad:", max_length=30)
+    lastname = forms.CharField(label="Soyad:", max_length=30)
+    city = forms.ChoiceField(label="Şehir:", choices=CITY_LIST)
+    job = forms.CharField(label="Meslek:", max_length=30)
+    email = forms.EmailField(label="E-Posta:")
+    homepage = forms.URLField(label="Web Sayfası:", verify_exists=False, required=False, help_text="(zorunlu değil)")
+    inform = forms.BooleanField(label="Etkinliklerden haberdar et:", required=False, help_text="Özgürlükİçin'in diğer etkinliklerinden haberdar olmak için işaretleyin.")
 
     def clean_email(self):
         field_data = self.clean_data["email"]

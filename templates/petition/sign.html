@@ -26,7 +26,7 @@
     <form method="POST" action=".">
         {% for field in form %}
         <dl>
-            <dt><label for="id_{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
+            <dt style="width:40%;"><label for="id_{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
             <dd>{{ field }}</dd>
         </dl>
         {% endfor %}
