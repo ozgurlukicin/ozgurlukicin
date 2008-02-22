@@ -20,7 +20,7 @@
 
 <div id="post_base" {% if post.hidden %}style="opacity: 0.5"{% endif %}>
     <div id="post_profile">
-        <span style="font-weight: bold; font-size: 16px;">{{ post.author }}</span><br/><br/>
+        <span style="font-weight: bold; font-size: 16px;">{{ post.author }}</span>{% if post.author.is_staff %}<span><br />Forum Yöneticisi{% endif %}</span><br/><br/>
         <!-- post.author.avatar buraya gelecek --><img src="/media/dijital/img/forum/avatar.jpg" /><br/><br/>
         {% if perms.forum.can_see_post_ip %}({{ post.ip }})<br/><br/>{% endif %}
         Kayıt Tarihi: {{ post.author.date_joined|date:"d-m-Y" }}<br/>
