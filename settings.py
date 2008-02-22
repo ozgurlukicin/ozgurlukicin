@@ -196,5 +196,6 @@ CITY_LIST = (
     ('van','Van'),
     ('yozgat','Yozgat'),
     ('yalova', 'Yalova'),
-    ('zonguldak','Zonguldak')
+    ('zonguldak','Zonguldak'),
+    ('zzyurtdisi', 'Yurtdışı'),
 )
