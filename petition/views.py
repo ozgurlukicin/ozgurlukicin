@@ -29,6 +29,7 @@ def petition_sign(request):
                     homepage = form.clean_data['homepage'],
                     signed = now,
                     is_active = False,
+                    inform = form.clean_data['inform'],
                     )
 
             # create key taken from profile/views.py

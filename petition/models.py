@@ -20,12 +20,13 @@ class Petitioner(models.Model):
     signed = models.DateTimeField(blank=True, null=True, auto_now_add=True, verbose_name='İmzalama tarihi')
     activation_key = models.CharField("Etkinleştirme Anahtarı", maxlength=40)
     is_active = models.BooleanField("Etkin")
+    inform = models.BooleanField("Haberdar Et")
 
     def __str__(self):
         return "%s %s" % (self.firstname, self.lastname)
 
     class Admin:
-        list_display = ("firstname", "lastname", "job", "city", "email", "homepage", "signed", "activation_key", "is_active")
+        list_display = ("firstname", "lastname", "job", "city", "email", "homepage", "signed", "activation_key", "is_active", "inform")
         ordering = ["-signed"]
         search_fields = ["firstname", "lastname", "job"]
 
@@ -40,6 +41,7 @@ class PetitionForm(forms.Form):
     job = forms.CharField(label="Meslek", max_length=30)
     email = forms.EmailField(label="E-Posta")
     homepage = forms.URLField(label="Web Sayfası", verify_exists=False, required=False, help_text='(zorunlu değil)')
+    inform = forms.BooleanField(label='Etkinliklerden haberdar et', required=False, help_text="Özgürlükİçin'in diğer etkinliklerinden haberdar olmak için işaretleyin.")
 
     def clean_email(self):
         field_data = self.clean_data["email"]
