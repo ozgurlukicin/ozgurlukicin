@@ -335,7 +335,10 @@ border: 1px solid #45586F;
     float:left;
     padding-left: 10px;
 }
-.forum_stats_latest_post_date { float:right; }
+.forum_stats_latest_post_date {
+    float:right;
+    padding-right: 10px;
+}
 #forum_stats_left {
     float: left;
     width: 40%;
