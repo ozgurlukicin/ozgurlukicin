@@ -31,7 +31,7 @@ def home(request):
     packages = Package.objects.filter(status=1).order_by('-update')[:PACKAGES_IN_HOMEPAGE]
     games = Game.objects.filter(status=1).order_by('-update')[:GAMES_IN_HOMEPAGE]
     howtos = HowTo.objects.filter(status=1).order_by('-update')[:HOWTOS_IN_HOMEPAGE]
-    numberofpetitioners = Petitioner.objects.count()
+    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
     petitionpercent = numberofpetitioners / 30
     return render_response(request, 'home.html', locals())
 

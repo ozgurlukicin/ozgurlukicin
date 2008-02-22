@@ -38,8 +38,8 @@ package_dict = {
                 'paginate_by': PACKAGE_PER_PAGE,
                 'template_object_name': 'package',
                 'extra_context': {
-                    'numberofpetitioners': Petitioner.objects.count(),
-                    'petitionpercent': Petitioner.objects.count() / 30,
+                    'numberofpetitioners': Petitioner.objects.filter(is_active=True).count(),
+                    'petitionpercent': Petitioner.objects.filter(is_active=True).count() / 30,
                     },
                }
 
@@ -49,8 +49,8 @@ game_dict = {
              'paginate_by': GAME_PER_PAGE,
              'template_object_name': 'game',
              'extra_context': {
-                 'numberofpetitioners': Petitioner.objects.count(),
-                 'petitionpercent': Petitioner.objects.count() / 30,
+                 'numberofpetitioners': Petitioner.objects.filter(is_active=True).count(),
+                 'petitionpercent': Petitioner.objects.filter(is_active=True).count() / 30,
                  },
             }
 
@@ -60,8 +60,8 @@ fs_dict = {
            'paginate_by': FS_PER_PAGE,
            'template_object_name': 'fs',
            'extra_context': {
-               'numberofpetitioners': Petitioner.objects.count(),
-               'petitionpercent': Petitioner.objects.count() / 30,
+               'numberofpetitioners': Petitioner.objects.filter(is_active=True).count(),
+               'petitionpercent': Petitioner.objects.filter(is_active=True).count() / 30,
                },
           }
 
@@ -72,8 +72,8 @@ howto_dict = {
               'template_object_name': 'howto',
               'extra_context': {
                   'firststep': FS.objects.filter(status=1).order_by('order')[:10],
-                  'numberofpetitioners': Petitioner.objects.count(),
-                  'petitionpercent': Petitioner.objects.count() / 30,
+                  'numberofpetitioners': Petitioner.objects.filter(is_active=True).count(),
+                  'petitionpercent': Petitioner.objects.filter(is_active=True).count() / 30,
                   },
              }
 
@@ -84,8 +84,8 @@ news_dict = {
              'template_object_name': 'news',
              'extra_context': {
                  'seminar': Seminar.objects.filter(status=1).order_by('date'),
-                 'numberofpetitioners': Petitioner.objects.count(),
-                 'petitionpercent': Petitioner.objects.count() / 30,
+                 'numberofpetitioners': Petitioner.objects.filter(is_active=True).count(),
+                 'petitionpercent': Petitioner.objects.filter(is_active=True).count() / 30,
                  }
             }
 

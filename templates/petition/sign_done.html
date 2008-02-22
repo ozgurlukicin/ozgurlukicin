@@ -14,6 +14,14 @@
 
 {% block content %}
 <br />
-<b>{{ petitioner.firstname }} {{ petitioner.lastname }}</b>, OOXML'e hayır kampanyamıza katıldığınız için teşekkür ederiz. <a href="/">Anasayfa</a>
+{% if already_active %}
+    Desteğinizi zaten onaylamışsınız.
+{% else %}
+    {% if wrongkey %}
+        <span class="error">Hatalı anahtar!</span>
+    {% else %}
+        <b>{{ petitioner.firstname }} {{ petitioner.lastname }}</b>, OOXML'e hayır kampanyamıza katıldığınız için teşekkür ederiz. {% if activation_done %}Katılımınız onaylanmıştır. {% endif %}{% if notconfirmed %}Lütfen adresinize gönderilen onay bağlantısına tıklayarak desteğinizi onaylayınız. {% endif %}
+    {% endif %}
+{% endif %}
 
 {% endblock %}

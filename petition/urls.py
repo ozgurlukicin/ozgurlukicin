@@ -9,4 +9,5 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
     (r'^imzala/$', 'oi.petition.views.petition_sign'),
+    (r'^onay/(?P<pid>[\w-]+)/(?P<key>[\w-]+)/$', 'oi.petition.views.petitioner_confirm'),
 )

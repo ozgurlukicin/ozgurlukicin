@@ -18,6 +18,8 @@ class Petitioner(models.Model):
     email = models.EmailField("E-posta", maxlength=50)
     homepage = models.URLField("Ana Sayfa", blank=True, verify_exists=False, unique=False)
     signed = models.DateTimeField(blank=True, null=True, auto_now_add=True, verbose_name='İmzalama tarihi')
+    activation_key = models.CharField(maxlength=40)
+    is_active = models.BooleanField()
 
     def __str__(self):
         return "%s %s" % (self.firstname, self.lastname)
