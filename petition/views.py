@@ -80,6 +80,7 @@ def petitioner_confirm(request, pid, key):
         return render_response(request, 'petition/sign_done.html', locals())
     elif petitioner.activation_key == key:
         petitioner.is_active = True
+        petitioner.signed = datetime.datetime.now()
         petitioner.save()
         activation_done = True
 
