@@ -32,7 +32,7 @@ def main(request):
             posts += forum.posts
     usercount = User.objects.count()
     currentdate = datetime.now()
-    latest_posts = Post.objects.all().order_by('-edited')[:5]
+    latest_posts = Post.objects.all().filter(hidden=False).order_by('-edited')[:5]
 
     return render_response(request, 'forum/forum_list.html', locals())
 
