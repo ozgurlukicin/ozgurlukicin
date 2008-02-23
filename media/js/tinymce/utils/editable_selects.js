@@ -1,12 +1,10 @@
 /**
- * $RCSfile: editable_selects.js,v $
- * $Revision: 1.1 $
- * $Date: 2006/04/10 09:30:19 $
+ * $Id: editable_selects.js 520 2008-01-07 16:30:32Z spocke $
  *
  * Makes select boxes editable.
  *
  * @author Moxiecode
- * @copyright Copyright © 2004-2006, Moxiecode Systems AB, All rights reserved.
+ * @copyright Copyright © 2004-2008, Moxiecode Systems AB, All rights reserved.
  */
 
 var TinyMCE_EditableSelects = {
@@ -22,13 +20,13 @@ var TinyMCE_EditableSelects = {
 				o.className = 'mceAddSelectValue';
 
 				nl[i].options[nl[i].options.length] = o;
-				nl[i].setAttribute('onchange', 'TinyMCE_EditableSelects.onChangeEditableSelect(this);');
+				nl[i].onchange = TinyMCE_EditableSelects.onChangeEditableSelect;
 			}
 		}
 	},
 
-	onChangeEditableSelect : function(se) {
-		var d = document, ne;
+	onChangeEditableSelect : function(e) {
+		var d = document, ne, se = window.event ? window.event.srcElement : e.target;
 
 		if (se.options[se.selectedIndex].value == '__mce_add_custom__') {
 			ne = d.createElement("input");
@@ -36,7 +34,7 @@ var TinyMCE_EditableSelects = {
 			ne.name = se.name + "_custom";
 			ne.type = "text";
 
-			ne.style.width = se.clientWidth;
+			ne.style.width = se.offsetWidth + 'px';
 			se.parentNode.insertBefore(ne, se);
 			se.style.display = 'none';
 			ne.focus();

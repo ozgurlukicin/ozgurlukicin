@@ -4,7 +4,7 @@
 <title>{% block title %}{% endblock %}Özgürlük için...</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="imagetoolbar" content="no" />
-<link rel="shortcut icon" href="/media/img/favicon.png" />
+<link rel="shortcut icon" href="/media/img/fav.png" />
 <link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Anasayfa" href="/rss" />
 <link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Haberler" href="/rss/haber" />
 <link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Nasıl" href="/rss/nasil" />
@@ -13,47 +13,87 @@
 <link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Oyunlar" href="/rss/oyun" />
 <link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Gezegen" href="/rss/gezegen" />
 <style type="text/css" media="screen">@import url('/media/css/style.css');</style>
-<script type="text/javascript" src="/media/js/mootools.js"></script>
-<script type="text/javascript" src="/media/js/custom.js"></script>
+
+<!-- dijital template kısmı burası -->
+<style type="text/css" media="screen">@import url('/media/dijital/css/ozgurlukicin.css');</style>
+<script type="text/javascript" src="/media/dijital/js/base.js"></script>
+<!-- dijital template kısmı bitti -->
+
 <script type="text/javascript" src="/media/js/pngfix.js"></script>
 {% block extrahead %}{% endblock %}
 </head>
 <body>
+{% block header_menu %}
+    <!-- Burası header kısmı -->
+    {% endblock %}
+
+    {% block ust_menu %}
+    <!-- Burası üst menü kısmı -->
+    {% endblock %}
+
+
 <div id="{% block pagetype %}page{% endblock %}">
-    <div id="header" class="{% block section %}home{% endblock %}_header">
-        <div id="logo"><a href="/"><img src="/media/img/logo.png" border="0" alt="Özgürlük için Pardus.." /></a></div>
-        <div id="menu_container">
-            <ul id="menu">
-                <li class="menu"><a href="/ia/"><img src="/media/img/tab_fs.png" border="0" alt="İlk adımlar" /></a></li>
-                <li class="menu"><a href="/nasil/"><img src="/media/img/tab_howtos.png" border="0" alt="Nasıl" /></a></li>
-                <li class="menu"><a href="/paket/"><img src="/media/img/tab_packages.png" border="0" alt="Paketler" /></a></li>
-                <li class="menu"><a href="/oyun/"><img src="/media/img/tab_games.png" border="0" alt="Oyunlar" /></a></li>
-                <li class="menu"><a href="/haber/"><img src="/media/img/tab_news.png" border="0" alt="Haberler" /></a></li>
-                <!-- <li class="menu"><a href="/forum/"><img src="/media/img/tab_forum.png" border="0" alt="Forum" /></a></li> -->
-                <li class="menu"><a href="/gezegen/"><img src="/media/img/tab_planet.png" border="0" alt="Gezegen" /></a></li>
-            </ul>
-        </div>
-        <div id="section_logo">{% block section_logo %}{% endblock %}</div>
-    </div>
     <div id="content">
         {% block content %}
         {% endblock %}
     </div>
+
     <div id="sidebar">
         {% block sidebartop %}
-        <div class="sidebar_green_title sidebar">Pardus'u indirin</div>
-        <div class="sidebar grey" style="text-align: center;"><a href="/indir/"><img src="/media/img/sidebar_download.png" border="0" alt="Pardus'u indir.." /></a></div>
-        <div class="sidebar_green_title sidebar">Arama</div>
-        <div class="sidebar grey" style="text-align: center;">
-            <form method="post" action="/arama/">
-                <input type="text" name="term" size="12">
-                <input type="submit" value="Ara">
-            </form>
+        <div id="sidebar_box">
+            <div id="sidebar_top">&nbsp;</div>
+            <div id="sidebar_middle">
+                <h2>Kullanıcı Kutusu</h2>
+                {% if not user.is_authenticated %}
+                    <form method="post" action="/kullanici/giris/">
+                        <input type="text" id="id_username" name="username" size="18" class="vTextField required" value="" maxlength="30" /><br />
+                        <input type="password" id="id_password" name="password" size="18" class="vPasswordField required" value="" maxlength="30" /><br />
+                        <input type="submit" value="Giriş" id="form_submit" />
+                    </form>
+                    <p><a href="/kullanici/kayit/">Kayıt ol</a> | <a class="sari"  href="/kullanici/kayip/">Kayıp parola</a></p>
+                {% else %}
+                    <p>Merhaba <b>{{ user.username }}</b>!
+                    <br />Kullanıcı sayfanıza <a href="/kullanici/sayfam/">buradan</a> ulaşabilir veya <a class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.</p>
+                {% endif %}
+            </div>
+            <div id="sidebar_bottom">&nbsp;</div>
         </div>
-        <div class="sidebar_green_title sidebar">Özgürlükiçin'i destekleyin</div>
-        <div class="sidebar grey">Pardus'un tanıtımına katkıda bulunmak isteyenler için Özgürlükiçin düğmeleri yayınlandı. Sitenizde, blogunuzda yayınlamak için siz de <a href="/banner/">hazır kodlarımızdan</a> yararlanabilirsiniz.</div>
-        <div class="sidebar_green_title sidebar">Özgürlükiçin OOXML'e Karşı</div>
-		<div class="sidebar grey"><a href="/ooxml/">"Özgürlükİçin OOXML'e Hayır!" </a>diyoruz.<a href="/ooxml_banner/"> Banner ve düğmelerimizi</a> sitenizde ya da blogunuzda yayınlayarak kampanyamıza katkıda bulunabilirsiniz.</div>
+        <div id="sidebar_box">
+            <div id="sidebar_top">&nbsp;</div>
+            <div id="sidebar_middle">
+                <h2>Arama</h2>
+                <form method="post" action="/arama/">
+                    <input type="text" name="term" size="20"><br />
+                    <input type="submit" value="Ara">
+                </form>
+            </div>
+            <div id="sidebar_bottom">&nbsp;</div>
+        </div>
+
+        <div id="sidebar_box">
+            <div id="sidebar_top">&nbsp;</div>
+            <div id="sidebar_middle">
+                <h2>Özgürlükİçin OOXML'e Karşı</h2>
+                <a href="/ooxml/"><img src="/media/ooxml/ooxmlekarsi.png" /></a>
+                <p><a href="/ooxml/">"Özgürlükİçin OOXML'e Hayır!"</a> diyoruz. <a href="/ooxml_banner/">Banner ve düğmelerimizi</a> kullanarak kampanyamıza katkıda bulunabilir ve manifestomuzu destekleyerek siz de OOXML'e hayır diyebilirsiniz.</p>
+                <div id="ooxmlbar" style="width:210px;height:20px;border:1px #6992A6 solid;"><div id="ooxmlbar_completed" style="background-color:#51798E;height:100%;float:left;width:{{ petitionpercent }}%;">&nbsp;</div></div>
+                <p style="font-weight:bold;">Destekleyenler: {{ numberofpetitioners }} / 3000</p>
+            </div>
+            <div id="sidebar_bottom">&nbsp;</div>
+        </div>
+
+        <div id="sidebar_box">
+            <div id="sidebar_top">&nbsp;</div>
+            <div id="sidebar_middle">
+                <h2>Özgürlükiçin'i destekleyin</h2>
+                <a href="/banner/"><img src="/media/img/pardus_ozgurluk.png" /></a>
+                <p>Pardus'un tanıtımına katkıda bulunmak isteyenler için Özgürlükiçin düğmeleri yayınlandı. Sitenizde, blogunuzda yayınlamak için siz de <a href="/banner/">hazır kodlarımızdan</a> yararlanabilirsiniz.</p>
+            </div>
+            <div id="sidebar_bottom">&nbsp;</div>
+        </div>
+        {% block alt_resim %}
+        {% endblock %}
+
         {% endblock %}
         {% block sidebar %}
         {% endblock %}
@@ -64,12 +104,7 @@
         {% block footer %}
         {% endblock %}
     </div>
+    {% include "footer.html" %}
 </div>
-<div id="credits">
-    <div class="alignleft">İçerik <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons (by-nc-sa)</a> ile lisanslanmıştır.</div>
-    <div class="alignright"><a href="/hakkinda/" class="footer_about">Hakkında</a> <a href="/takip_et/" class="footer_rss">Takip et</a> <a href="/bocuk/" class="footer_bug">Hata raporla</a></div>
-</div>
-<!-- google analytics -->
-<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script><script type="text/javascript">_uacct = "";urchinTracker();</script>
 </body>
 </html>

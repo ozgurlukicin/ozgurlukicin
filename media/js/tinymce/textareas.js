@@ -7,7 +7,7 @@ tinyMCE.init({
     theme_advanced_toolbar_location : "top",
     theme_advanced_toolbar_align : "left",
     theme_advanced_path_location : "bottom",
-    browsers : "msie,gecko,opera",
+    browsers : "msie,gecko,opera,safari",
     dialog_type : "modal",
     entity_encoding : "raw",
     relative_urls : false,
@@ -17,12 +17,12 @@ tinyMCE.init({
     extended_valid_elements : "a[name|href|target|title],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
     advimage_update_dimensions_onchange: true,
     file_browser_callback : 'oiFileBrowser',
-    plugins : "advimage,advlink,emotions,searchreplace,autosave,fullscreen",
-    language : "tr",
+    plugins : "advimage,autosave,contextmenu,searchreplace,table,visualchars,advlink,emotions,media,style,template,xhtmlxtras",
+    language : "en",
 });
 
 function oiFileBrowser (field_name, url, type, win) {
-    tinyMCE.openWindow({
+    tinyMCE.activeEditor.windowManager.open({
         file : "/admin/upload/image/add/",
         title : "File Browser",
         width : 300,
@@ -33,7 +33,6 @@ function oiFileBrowser (field_name, url, type, win) {
         input : field_name,
         resizable : "yes",
         inline : "yes",
-        editor_id : tinyMCE.getWindowArg("editor_id")
     });
     return false;
 }

@@ -88,23 +88,20 @@ class Profile(models.Model):
 
 class RegisterForm(forms.Form):
     username = forms.CharField(label='Kullanıcı Adı', max_length=30, help_text='En az 3, en fazla 30 karakter')
-    firstname = forms.CharField(label='İsim', max_length=30)
-    lastname = forms.CharField(label='Soyisim', max_length=30)
-    birthday = forms.DateField(label='Doğum Tarihi', help_text='10/5/1985 gibi.')
+    firstname = forms.CharField(label='Adı', max_length=30)
+    lastname = forms.CharField(label='Soyadı', max_length=30)
+    birthday = forms.DateField(label='Doğum Tarihi', input_formats=('%d/%m/%Y', '%d/%m/%Y'), help_text='23/4/1985 gibi')
     email = forms.EmailField(label='E-Posta')
     password = forms.CharField(label='Parola', max_length=32, widget=forms.PasswordInput,)
     password_again = forms.CharField(label='Parola (tekrar)', max_length=32, widget=forms.PasswordInput, help_text='En az 5 karakter')
     city = forms.ChoiceField(label='Şehir', choices=CITY_LIST)
     homepage = forms.URLField(label='Web Sayfası', verify_exists=False, required=False, help_text='(zorunlu değil)')
     contributes = forms.ModelMultipleChoiceField(label='Katkı Başlıkları', queryset=Contribute.objects.all(), required=False, help_text='Bize nasıl katkıda bulunabilirsiniz? (ctrl ile birden fazla seçim yapılabilir, zorunlu değil)')
-    contributes_summary = forms.CharField(label='Açıklama', widget=forms.Textarea, required=False, help_text='Katkı sağlayabilecekseniz açıklama yazın (zorunlu değil)')
+    contributes_summary = forms.CharField(label='Açıklama', widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), required=False, help_text='Katkı sağlayabilecekseniz açıklama yazın (zorunlu değil)')
     show_email = forms.BooleanField(label='E-posta Adresini Göster', required=False, help_text='Profil sayfasında diğerleri e-posta adresinizi görebilsin mi?')
 
     def clean_username(self):
         field_data = self.clean_data['username']
-
-        if not field_data:
-            return ''
 
         if len(field_data.split(' ')) != 1:
             raise forms.ValidationError(u"Kullanıcı adında boşluk olmamalıdır")
@@ -112,9 +109,8 @@ class RegisterForm(forms.Form):
         if len(field_data) < 3:
             raise forms.ValidationError(u"Kullanıcı adı en az 3 karakter olmalıdır")
 
-        regexp = re.compile("\w+")
-        if not regexp.match(field_data):
-            raise forms.ValidationError(u"Kullanıcı adı geçersiz")
+        if not re.match("[a-zA-Z0-9_.]+$", field_data):
+            raise forms.ValidationError(u"Kullanıcı adı geçersiz. Kullanıcı adı sadece \"a-z A-Z 0-9 _ .\" alabilir.")
 
         forbidden = ForbiddenUsername.objects.filter(name__iexact=field_data)
         if len(forbidden) > 0:
@@ -124,14 +120,27 @@ class RegisterForm(forms.Form):
         if len(u) > 0:
             raise forms.ValidationError(u"Bu kullanıcı adı daha önce alınmış")
 
-        return self.clean_data['username']
+        return field_data
 
+    def clean_email(self):
+        field_data = self.clean_data['email']
+
+        if not field_data:
+            return ''
+
+        u = User.objects.filter(email=field_data)
+        if len(u) > 0:
+            raise forms.ValidationError(u"Bu e-posta adresi ile daha önceden kayıt yapılmış")
+
+        return field_data
 
     def clean_password_again(self):
         field_data = self.clean_data['password_again']
-        password = self.clean_data['password']
-        if not field_data:
-            return ''
+
+        if not self.clean_data.has_key('password'):
+            return
+        else:
+            password = self.clean_data['password']
 
         if len(field_data.split(' ')) != 1:
             raise forms.ValidationError(u"Parolada boşluk olmamalıdır")
@@ -145,9 +154,9 @@ class RegisterForm(forms.Form):
         return field_data
 
 class ProfileEditForm(forms.Form):
-    firstname = forms.CharField(label='İsim', max_length=30)
-    lastname = forms.CharField(label='Soyisim', max_length=30)
-    birthday = forms.DateField(label='Doğum Tarihi', help_text='10/5/1985 gibi.')
+    firstname = forms.CharField(label='Adı', max_length=30)
+    lastname = forms.CharField(label='Soyadı', max_length=30)
+    birthday = forms.DateField(label='Doğum Tarihi', input_formats=('%d/%m/%Y', '%d/%m/%y'), help_text='23/4/1985 gibi')
     email = forms.EmailField(label='E-posta')
     city = forms.ChoiceField(label='Şehir', choices=CITY_LIST)
     homepage = forms.URLField(label='Ana Sayfa', required=False, help_text='http:// ile başlamayı unutmayın')
@@ -161,8 +170,6 @@ class ProfileEditForm(forms.Form):
 
     def clean_old_password(self):
         field_data = self.clean_data['old_password']
-        if not field_data:
-            return ''
 
         if len(field_data.split(' ')) != 1:
             raise forms.ValidationError(u"Parolada boşluk olmamalıdır")
@@ -177,8 +184,6 @@ class ProfileEditForm(forms.Form):
 
     def clean_password(self):
         field_data = self.clean_data['password']
-        if not field_data:
-            return ''
 
         if len(field_data.split(' ')) != 1:
             raise forms.ValidationError(u"Parolada boşluk olmamalıdır")
@@ -193,8 +198,12 @@ class ProfileEditForm(forms.Form):
 
     def clean_password_again(self):
         field_data = self.clean_data['password_again']
-        password = self.clean_data['password']
-        old_password = self.clean_data['old_password']
+
+        if not self.clean_data.has_key('password') or not self.clean_data.has_key('old_password'):
+            return
+        else:
+            password = self.clean_data['password']
+            old_password = self.clean_data['old_password']
 
         if old_password or password or field_data:
             if field_data and password and old_password:
@@ -221,8 +230,8 @@ class ProfileEditForm(forms.Form):
             return ''
 
 class LostPasswordForm(forms.Form):
-    username = forms.CharField(max_length=30)
-    email = forms.EmailField()
+    username = forms.CharField(label='Kullanıcı adı', max_length=30)
+    email = forms.EmailField(label='E-posta')
 
     def clean_username(self):
         # clean old keys when it's requested
@@ -243,7 +252,11 @@ class LostPasswordForm(forms.Form):
 
     def clean_email(self):
         field_data = self.clean_data['email']
-        username = self.clean_data['username']
+
+        if not self.clean_data.has_key('username'):
+            return
+        else:
+            username = self.clean_data['username']
 
         # control email if it is correct
         try:
@@ -261,7 +274,11 @@ class ChangePasswordForm(forms.Form):
 
     def clean_password_again(self):
         field_data = self.clean_data['password_again']
-        password = self.clean_data['password']
+
+        if not self.clean_data.has_key('password'):
+            return
+        else:
+            password = self.clean_data['password']
 
         if field_data != password:
             raise forms.ValidationError('Parolalar eşleşmiyor')

@@ -91,12 +91,12 @@ def get_entry_data(entry, feed, options):
         author = encode(entry.get('author', entry.get('creator', '')))
     if not author_email:
         author_email = 'nospam@nospam.com'
-    
+
     try:
         content = encode(entry.content[0].value)
     except:
         content = encode(entry.get('summary', entry.get('description', '')))
-    
+
 
     # Patch for resizing images, Eren Turkay <turkay.eren@gmail.com>
     # 2007-07-01
@@ -251,7 +251,7 @@ def process_feed(feed, options):
         print '#\n# Processing feed (%d):' % feed.id, feed.feed_url, '\n#'
     else:
         print '# Processing feed (%d):' % feed.id, feed.feed_url
-    
+
     # we check the etag and the modified time to save bandwith and avoid bans
     try:
         fpf = feedparser.parse(feed.feed_url, agent=USER_AGENT,
@@ -259,7 +259,7 @@ def process_feed(feed, options):
     except:
         print '! ERROR: feed cannot be parsed'
         return 1
-    
+
     if hasattr(fpf, 'status'):
         if options.verbose:
             print 'fpf.status:', fpf.status
@@ -284,7 +284,7 @@ def process_feed(feed, options):
         feed.last_modified = mtime(fpf.modified)
     except:
         pass
-    
+
     feed.title = encode(fpf.feed.get('title', ''))[0:254]
     feed.tagline = encode(fpf.feed.get('tagline', ''))
     feed.link = encode(fpf.feed.get('link', ''))
@@ -363,7 +363,7 @@ def main():
 
     # settting socket timeout (default= 10 seconds)
     socket.setdefaulttimeout(options.timeout)
-    
+
     if options.feed:
         for feed in options.feed:
             try:

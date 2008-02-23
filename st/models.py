@@ -15,6 +15,11 @@ from django.contrib.auth.models import User
 from oi.middleware import threadlocals
 from oi.settings import CITY_LIST, MEDIA_ROOT, MEDIA_URL
 
+# the signal stuff
+from django.db.models import signals
+from django.dispatch import dispatcher
+from oi.st.signals import open_forum_topic, remove_video_thumbnail_on_delete
+
 class Tag(models.Model):
     name = models.CharField('Etiket', maxlength=32, blank=False, unique=True)
 
@@ -127,8 +132,9 @@ class Video(models.Model):
         flvfilename = "%s.flv" % filename
         thumbnailfilename = "%s%s.png" % (MEDIA_ROOT, filename)
         targetfile = "%s%s" % (MEDIA_ROOT, flvfilename)
+        # FIXME: What if there is a filename containing "Foo File & rm -f *.flv" ?!?
         ffmpeg = "ffmpeg -i %s -acodec mp3 -ar 22050 -ab 32 -f flv -s 320x240 %s" % (sourcefile,  targetfile)
-        grabimage = "ffmpeg -y -i %s -vframes 1 -ss 00:00:02 -an -vcodec png -f rawvideo -s 236x176 %s " % (sourcefile, thumbnailfilename)
+        grabimage = "ffmpeg -y -i %s -vframes 1 -ss 00:00:02 -an -vcodec png -f rawvideo -s 220x176 %s " % (sourcefile, thumbnailfilename)
         flvtool = "flvtool2 -U %s" % targetfile
 
         ffmpegresult = getoutput(ffmpeg)
@@ -148,6 +154,11 @@ class Video(models.Model):
     def save(self):
         self.file = self.convertvideo(file)
         super(Video, self).save()
+
+    def get_video_name(self):
+        return path.splitext(self.file)[0].split('/')[2]
+
+dispatcher.connect(remove_video_thumbnail_on_delete, signal=signals.pre_delete, sender=Video)
 
 class License(models.Model):
     name = models.CharField(maxlength=16, blank=False, unique=True)
@@ -237,6 +248,8 @@ class HowTo(models.Model):
         verbose_name = "Nasıl"
         verbose_name_plural = "Nasıl Belgeleri"
 
+dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=HowTo)
+
 class Game(models.Model):
     ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'))
 
@@ -288,6 +301,8 @@ class Game(models.Model):
         verbose_name = "Oyun"
         verbose_name_plural = "Oyunlar"
 
+dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=Game)
+
 class News(models.Model):
     title = models.CharField('Başlık', maxlength=32, blank=False)
     slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
@@ -323,6 +338,7 @@ class News(models.Model):
         verbose_name = "Haber"
         verbose_name_plural = "Haberler"
 
+dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=News)
 
 class Package(models.Model):
     ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'))
@@ -368,6 +384,8 @@ class Package(models.Model):
     class Meta:
         verbose_name = "Paket"
         verbose_name_plural = "Paketler"
+
+dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=Package)
 
 class PardusVersion(models.Model):
     number = models.CharField('Sürüm numarası', maxlength = 16, blank = False, unique = True)

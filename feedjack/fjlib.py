@@ -63,7 +63,7 @@ def get_extra_content(site, sfeeds_ids, ctx):
 
 def get_posts_tags(object_list, sfeeds_obj, user_id, tag_name):
     """ Adds a qtags property in every post object in a page.
-    
+
     Use "qtags" instead of "tags" in templates to avoid innecesary DB hits.
     """
     tagd = {}

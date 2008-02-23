@@ -6,10 +6,12 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.conf.urls.defaults import *
+from django.contrib.comments.models import FreeComment
 
 from oi.settings import WEB_URL, DOCUMENT_ROOT, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, NEWS_PER_PAGE, TAG_PER_PAGE, HOWTO_PER_PAGE
 from oi.st.models import Package, Game, FS, News, Tag, HowTo
 from oi.seminar.models import Seminar
+from oi.petition.models import Petitioner
 from oi.st.feeds import *
 
 rss_dict = {
@@ -34,28 +36,45 @@ package_dict = {
                 'queryset': Package.objects.filter(status=1).order_by('title'),
                 'template_name': 'package/package_main.html',
                 'paginate_by': PACKAGE_PER_PAGE,
-                'template_object_name': 'package'
+                'template_object_name': 'package',
+                'extra_context': {
+                    'numberofpetitioners': Petitioner.objects.filter(is_active=True).count(),
+                    'petitionpercent': Petitioner.objects.filter(is_active=True).count() / 30,
+                    },
                }
 
 game_dict = {
              'queryset': Game.objects.filter(status=1).order_by('title'),
              'template_name': 'game/game_main.html',
              'paginate_by': GAME_PER_PAGE,
-             'template_object_name': 'game'
+             'template_object_name': 'game',
+             'extra_context': {
+                 'numberofpetitioners': Petitioner.objects.filter(is_active=True).count(),
+                 'petitionpercent': Petitioner.objects.filter(is_active=True).count() / 30,
+                 },
             }
 
 fs_dict = {
            'queryset': FS.objects.filter(status=1).order_by('order'),
            'template_name': 'fs/fs_main.html',
            'paginate_by': FS_PER_PAGE,
-           'template_object_name': 'fs'
+           'template_object_name': 'fs',
+           'extra_context': {
+               'numberofpetitioners': Petitioner.objects.filter(is_active=True).count(),
+               'petitionpercent': Petitioner.objects.filter(is_active=True).count() / 30,
+               },
           }
 
 howto_dict = {
               'queryset': HowTo.objects.filter(status=1).order_by('title'),
               'template_name': 'howto/howto_main.html',
               'paginate_by': HOWTO_PER_PAGE,
-              'template_object_name': 'howto'
+              'template_object_name': 'howto',
+              'extra_context': {
+                  'firststep': FS.objects.filter(status=1).order_by('order')[:10],
+                  'numberofpetitioners': Petitioner.objects.filter(is_active=True).count(),
+                  'petitionpercent': Petitioner.objects.filter(is_active=True).count() / 30,
+                  },
              }
 
 news_dict = {
@@ -63,7 +82,11 @@ news_dict = {
              'template_name': 'news/news_main.html',
              'paginate_by': NEWS_PER_PAGE,
              'template_object_name': 'news',
-             'extra_context': {'seminar': Seminar.objects.filter(status=1).order_by('date')}
+             'extra_context': {
+                 'seminar': Seminar.objects.filter(status=1).order_by('date'),
+                 'numberofpetitioners': Petitioner.objects.filter(is_active=True).count(),
+                 'petitionpercent': Petitioner.objects.filter(is_active=True).count() / 30,
+                 }
             }
 
 tag_dict = {
@@ -74,18 +97,31 @@ tag_dict = {
            }
 
 urlpatterns = patterns('',
+
+	#comments
+
+    (r'^comments/post/$', 'oi.comments.views.post_comment'),
+    (r'^comments/posted/$', 'oi.comments.views.comment_was_posted'),
+
+
     #News
+    #(r'^haber/yorum/(?P<id>\d+)/$', 'oi.st.views.comment_news'),
+    (r'^haber/yorum/(?P<slug>.*)/$', 'oi.st.views.comment_news'),
     (r'^haber/$', 'django.views.generic.list_detail.object_list', dict(news_dict)),
     (r'^haber/(?P<slug>.*)/yazdir/$', 'oi.st.views.news_printable'),
     (r'^haber/(?P<slug>.*)/$', 'oi.st.views.news_detail'),
 
+
     #Packages
+    (r'^paket/yorum/(?P<slug>.*)/$', 'oi.st.views.comment_package'),
     (r'^paket/$', 'django.views.generic.list_detail.object_list', dict(package_dict)),
     (r'^paket/(?P<slug>.*)/yazdir/$', 'oi.st.views.pkg_printable'),
     (r'^paket/(?P<slug>.*)/$', 'oi.st.views.pkg_detail'),
 
     #User management
     (r'^kullanici/', include('oi.profile.urls')),
+    (r'^accounts/login/$', 'django.views.generic.simple.redirect_to', {'url': "/kullanici/giris/"}),
+    (r'^accounts/profile/$', 'django.views.generic.simple.redirect_to', {'url': "/kullanici/duzenle/"}),
 
     #First Steps
     (r'^ia/$', 'django.views.generic.list_detail.object_list', dict(fs_dict)),
@@ -93,11 +129,13 @@ urlpatterns = patterns('',
     (r'^ia/(?P<slug>.*)/$', 'oi.st.views.fs_detail'),
 
     #How to
+    (r'^nasil/yorum/(?P<slug>.*)/$', 'oi.st.views.comment_howto'),
     (r'^nasil/$', 'django.views.generic.list_detail.object_list', dict(howto_dict)),
     (r'^nasil/(?P<slug>.*)/yazdir/$', 'oi.st.views.howto_printable'),
     (r'^nasil/(?P<slug>.*)/$', 'oi.st.views.howto_detail'),
 
     #Games
+    (r'^oyun/yorum/(?P<slug>.*)/$', 'oi.st.views.comment_game'),
     (r'^oyun/$', 'django.views.generic.list_detail.object_list', dict(game_dict)),
     (r'^oyun/(?P<slug>.*)/yazdir/$', 'oi.st.views.game_printable'),
     (r'^oyun/(?P<slug>.*)/$', 'oi.st.views.game_detail'),
@@ -127,6 +165,13 @@ urlpatterns = patterns('',
 
     #Planet
     (r'^gezegen/', include('oi.feedjack.urls')),
+
+    #Tema
+    (r'^tema/', include('oi.sanat.urls')),
+
+    #Petition
+    (r'^petition/', include('oi.petition.urls')),
+    (r'^ooxml/', 'oi.petition.views.petition_sign'),
 
     #Django
     (r'^$', 'oi.st.views.home'),

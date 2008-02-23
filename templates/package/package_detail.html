@@ -6,57 +6,127 @@
 {% block extrahead %}
 <script type="text/javascript" src="/media/js/slimbox_ex.js"></script>
 <style type="text/css" media="screen">@import url('/media/css/slimbox_ex.css');</style>
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/st.js"></script>
 {% endblock %}
 
 {% block pagetype %}page{% endblock %}
 
 {% block section %}package{% endblock %}
-{% block section_logo %}<img src="/media/img/package_header_logo.png">{% endblock %}
+
+{% block header_menu %}
+    <!-- Burası header kısmı -->
+	{% include "header.html" %}
+{% endblock %}
+<br/>
+{% block ust_menu %}
+	<!-- Burası üst menü kısmı -->
+	{% include "ust_menu_ayrinti.html" %}
+
+{% endblock %}
+<br/>
 
 {% block content %}
 <div class="packages_title transparent_link">{{ package.title }}</div>
 <div class="page_content grey">
 {{ package.text }}
 </div>
+
+				{% if auth %}
+		{% if form %}
+			<form method="post" action="/paket/yorum/{{package.slug}}/">
+
+				{{form}}<br/>
+				<input type="submit" value="Yolla">
+			</form>
+		{% endif %}
+	{% endif %}
 <div class="page_properties"><a href="{{ package.get_printable_url }}"><img src="/media/img/print.png" /></a></div>
 <div class="page_last_update">Son güncelleme: {{ package.update|timedelta }}</div>
+
+
 {% endblock %}
 
 {% block sidebartop %}{% endblock %}
 
 {% block sidebar %}
-<div class="sidebar sidebar_orange_title">Ayrıntılar</div>
-<div class="sidebar grey">
-    <strong>Lisans:</strong> {% for license in licenses %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}<br />
-    <strong>Paket boyutu:</strong> {{ package.download_size|filesizeformat }}<br />
-    <strong>Kurulu boyutu:</strong> {{ package.installed_size|filesizeformat }}<br />
-    <strong>Web sitesi:</strong> <a href="{{ package.url }}">{{ package.url }}</a><br />
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle" style="text-align:left;">
+        <h2>Ayrıntılar</h2>
+        <strong><span>Lisans:</span></strong> {% for license in package.license.all %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}<br />
+        <strong><span>Paket boyutu:</span></strong> {{ package.download_size|filesizeformat }}<br />
+        <strong><span>Kurulu boyutu:</span></strong> {{ package.installed_size|filesizeformat }}<br />
+        <a href="{{ package.url }}"><strong><span>Web sitesi</span></strong></a>
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
 </div>
 
-<div class="sidebar sidebar_orange_title">Editör notu</div>
-<div class="sidebar grey"><div class="rating_bar"><img src="/media/img/rating_{{ package.point }}.png" border="0" height="39px" width="200px" /></div></div>
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Editör notu</h2>
+        <div class="rating_bar"><img src="/media/img/rating_{{ package.point }}.png" border="0" height="39px" width="200px" /></div>
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
 
-<div class="sidebar sidebar_orange_title">Menüdeki yeri</div>
-<div class="sidebar grey">{{ package.path }}</div>
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Menüdeki yeri</h2>
+        {{ package.path }}
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
 
-<div class="sidebar sidebar_orange_title">Etiketler</div>
-<div class="sidebar grey">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Etiketler</h2>
+        <img src="/media/img/tag.png" style="vertical-align: middle;" /> {% for tag in package.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
 
 {% if package.wiki.all %}
-<div class="sidebar sidebar_orange_title">İlgili wiki sayfaları</div>
-<div class="sidebar grey">{% for wiki in package.wiki.all %}<a href="{{ wiki.get_absolute_url }}">{{ wiki.name }}</a><br />{% endfor %}</div>
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>İlgili wiki sayfaları</h2>
+        {% for wiki in package.wiki.all %}<a href="{{ wiki.get_absolute_url }}">{{ wiki.name }}</a><br />{% endfor %}
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
 {% endif %}
 
-{% if videos %}
-<div class="sidebar sidebar_orange_title">İlgili Videolar</div>
-<div class="sidebar grey">{% for video in videos %}<a href="/video/{{ video.name }}" rel="lightbox[video_{{ package.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a></div>
+{% if package.videos.all %}
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>İlgili Videolar</h2>
+        {% for video in package.videos.all %}<a href="/video/{{ video.get_video_name }}" rel="lightbox[video_{{ package.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a>
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
 {% endif %}
 
-{% if sss %}
-<div class="sidebar sidebar_orange_title">Ekran görüntüleri</div>
-<div class="sidebar grey">{% for ss in sss %}<a href="/media/{{ ss.file }}" rel="lightbox[ss_{{ package.title }}]" title="{{ ss.desc }}"><img src="{{ ss.file|thumbnail:"235x235" }}" /></a>{% endfor %}</a></div>
+{% if package.ss.all %}
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Ekran görüntüleri</h2>
+        {% for ss in package.ss.all %}<a href="/media/{{ ss.file }}" rel="lightbox[ss_{{ package.title }}]" title="{{ ss.desc }}"><img src="{{ ss.file|thumbnail:"200x200" }}" /></a>{% endfor %}</a>
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
 {% endif %}
-
-<div class="sidebar sidebar_orange_title">Yazar</div>
-<div class="sidebar grey">{{ package.author }}</div>
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Yazar</h2>
+        {{ package.author }}
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
 {% endblock %}

@@ -1,0 +1,8 @@
+{# Copyright (c) 2006-2007, PreFab Software Inc. #}
+
+
+{# Display the trackback #}
+<div class="comment_display">
+<div class='comment_infos'><a href="{{ trackback.trackback_www }}" rel="nofollow">{{ trackback.trackback_name|default:"Trackback"|striptags }}</a> on {% if trackback.submit_date %}{{ trackback.submit_date|date:"F d, Y" }} at {{ trackback.submit_date|time }}{% else %}{% now "F d" %} at {% now "f:i a" %}{% endif %}</div>
+<div class='comment_body'>{% if trackback.trackback_title %}<b>{{ trackback.trackback_title|striptags }}:</b> {% endif %}{{ trackback.comment|urlize|linebreaksbr|removetags:"script embed object frameset frame iframe meta link style" }}</div>
+</div>

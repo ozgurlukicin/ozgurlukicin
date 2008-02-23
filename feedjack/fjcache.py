@@ -54,7 +54,7 @@ def cache_get(site_id, key):
 
 def cache_set(site, key, data):
     """ Sets cache data for a site.
-    
+
     All keys related to a site are stored in a meta key. This key is per-site.
     """
     tkey = getkey(T_ITEM, site.id, key)

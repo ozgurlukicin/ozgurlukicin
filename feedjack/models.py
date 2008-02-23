@@ -47,7 +47,7 @@ class Site(models.Model):
       choices=SITE_ORDERBY_CHOICES)
     tagcloud_levels = models.IntegerField('tagcloud level', default=5)
     show_tagcloud = models.BooleanField('show tagcloud', default=True)
-    
+
     use_internal_cache = models.BooleanField('use internal cache', default=True)
     cache_duration = models.IntegerField('cache duration', default=60*60*24, \
       help_text='Duration in seconds of the cached pages and data.')
@@ -134,7 +134,7 @@ class Tag(models.Model):
         verbose_name = 'tag'
         verbose_name_plural = 'tags'
         ordering = ('name',)
-    
+
     def __str__(self):
         return self.name
 

@@ -5,10 +5,6 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-import platform
-
-DEVELOPMENT_MODE = ("pardus" not in platform.node())
-
 ADMINS = ()
 MANAGERS = ADMINS
 
@@ -16,32 +12,21 @@ MANAGERS = ADMINS
 SITE_NAME = 'Özgürlük için...'
 SITE_DESC = 'Pardus için bir numaralı bilgi kaynağı'
 
-if DEVELOPMENT_MODE:
-    DEBUG = True
-    TEMPLATE_DEBUG = DEBUG
-    WEB_URL = 'http://django'
-    DOCUMENT_ROOT = '/home/ahmet/public_html/oi'
-    DATABASE_ENGINE = 'mysql'
-    DATABASE_NAME = 'oi'
-    DATABASE_USER = 'root'
-    DATABASE_PASSWORD = 'root'
-    DATABASE_HOST = 'localhost'
-    DATABASE_PORT = ''
-else:
-    DEBUG = False
-    TEMPLATE_DEBUG = DEBUG
-    WEB_URL = 'http://www.ozgurlukicin.com'
-    DOCUMENT_ROOT = '/var/www/ozgurlukicin.com/oi'
-    DATABASE_ENGINE = 'mysql'
-    DATABASE_NAME = 'ozgur_oi'
-    DATABASE_USER = 'ozgur'
-    DATABASE_PASSWORD = ''
-    DATABASE_HOST = 'localhost'
-    DATABASE_PORT = ''
+DEBUG = True
+TESTING = True
+TEMPLATE_DEBUG = DEBUG
+WEB_URL = 'http://django'
+DOCUMENT_ROOT = '/home/ahmet/public_html/oi'
+DATABASE_ENGINE = 'mysql'
+DATABASE_NAME = 'oi'
+DATABASE_USER = 'root'
+DATABASE_PASSWORD = 'root'
+DATABASE_HOST = 'localhost'
+DATABASE_PORT = ''
 
 # Email
-DEFAULT_FROM_EMAIL = 'accounts@ozgurlukicin.com'
-EMAIL_HOST = 'mail.ozgurlukicin.com'
+DEFAULT_FROM_EMAIL = 'noreply@ozgurlukicin.com'
+#EMAIL_USE_TLS = True
 
 # Pagination
 USER_PER_PAGE = 10
@@ -65,7 +50,7 @@ AUTH_PROFILE_MODULE = 'profile.Profile'
 
 # Login stuff, we use different urls for authentication.
 LOGIN_URL = '/kullanici/giris/'
-LOGIN_REDIRECT_URL = '/kullanici/dashboard/'
+LOGIN_REDIRECT_URL = '/kullanici/sayfam'
 LOGOUT_URL = '/kullanici/cikis/'
 PROFILE_EDIT_URL = '/kullanici/duzenle/'
 
@@ -80,28 +65,23 @@ TIME_ZONE = 'Europe/Istanbul'
 LANGUAGE_CODE = 'tr'
 SITE_ID = 1
 
-# Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = '%s/media/' % DOCUMENT_ROOT
-
-# Example: "http://media.lawrence.com"
 MEDIA_URL = '%s/media/' % WEB_URL
-
-# Examples: "http://foo.com/media/", "/media/".
 ADMIN_MEDIA_PREFIX = '%s/media/' % WEB_URL
 
-# Make this unique, and don't share it with anybody.
 SECRET_KEY = 'n9-*x3!&!(x*z_!13)cyxil4fh+ov_+3!y($&4t7iit=)d)=93'
 
-# List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
     'django.template.loaders.app_directories.load_template_source',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = ("oi.context_processors.testing","django.core.context_processors.auth")
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.csrf.middleware.CsrfMiddleware',
+    #'django.contrib.csrf.middleware.CsrfMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'oi.flatpages.middleware.FlatpageFallbackMiddleware',
@@ -129,6 +109,9 @@ INSTALLED_APPS = (
     'oi.seminar',
     'oi.profile',
     'oi.forum',
+    'oi.sanat',
+    'oi.comments',
+    'oi.petition',
 )
 
 CITY_LIST = (
@@ -213,5 +196,6 @@ CITY_LIST = (
     ('van','Van'),
     ('yozgat','Yozgat'),
     ('yalova', 'Yalova'),
-    ('zonguldak','Zonguldak')
+    ('zonguldak','Zonguldak'),
+    ('zzyurtdisi', 'Yurtdışı'),
 )

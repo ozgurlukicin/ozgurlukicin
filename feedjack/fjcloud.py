@@ -18,7 +18,7 @@ def getsteps(levels, tagmax):
     if ntw < 2:
         ntw = 2
 
-    steps = [(stp, 1 + (stp * int(math.ceil(tagmax * 1.0 / ntw - 1)))) 
+    steps = [(stp, 1 + (stp * int(math.ceil(tagmax * 1.0 / ntw - 1))))
               for stp in range(ntw)]
     # just to be sure~
     steps[-1] = (steps[-1][0], tagmax+1)
@@ -27,7 +27,7 @@ def getsteps(levels, tagmax):
 def build(site, tagdata):
     """ Returns the tag cloud for a list of tags.
     """
-    
+
     tagdata.sort()
 
     # we get the most popular tag to calculate the tags' weigth
@@ -36,7 +36,7 @@ def build(site, tagdata):
         if tagcount > tagmax:
             tagmax = tagcount
     steps = getsteps(site.tagcloud_levels, tagmax)
-    
+
     tags = []
     for tagname, tagcount in tagdata:
         weight = [twt[0] \
@@ -47,7 +47,7 @@ def build(site, tagdata):
 def cloudata(site):
     """ Returns a dictionary with all the tag clouds related to a site.
     """
-    
+
     tagdata = fjlib.getquery("""
           SELECT feedjack_post.feed_id, feedjack_tag.name, COUNT(*)
           FROM feedjack_post, feedjack_subscriber, feedjack_tag,

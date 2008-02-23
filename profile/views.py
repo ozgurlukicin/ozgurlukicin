@@ -15,7 +15,7 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
 
-from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_REDIRECT_URL, LOGIN_URL, WEB_URL, PROFILE_EDIT_URL
+from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_URL, WEB_URL, PROFILE_EDIT_URL
 
 from oi.profile.models import Profile, RegisterForm, ProfileEditForm, LostPassword, LostPasswordForm, ChangePasswordForm
 from oi.st.wrappers import render_response
@@ -29,7 +29,7 @@ def user_profile_edit(request):
     u = request.user
     if request.method == 'POST':
         form = ProfileEditForm(request.POST)
-        form.set_user(request.user)
+        form.set_user(u)
 
         if form.is_valid():
             if len(form.clean_data['password']) > 0:
@@ -45,7 +45,8 @@ def user_profile_edit(request):
             u.get_profile().save()
             u.save()
 
-            return HttpResponseRedirect(PROFILE_EDIT_URL)
+            return render_response(request, 'user/profile_edit.html', {'profile_updated': True,
+                                                                       'form': form})
         else:
             return render_response(request, 'user/profile_edit.html', {'form': form})
     else:
@@ -101,24 +102,25 @@ def user_register(request):
 
             now = datetime.datetime.now()
             (date, hour) = now.isoformat()[:16].split("T")
+
             email_dict = {'date': date,
                     'hour': hour,
-                    'ip': request.META['REMOTE_ADDR'],
-                    'user': form.clean_data['username'],
-                    'link': 'http://www.ozgurlukicin.com/confirm/%s/%s' % (form.clean_data['username'], activation_key)}
+                    'ip_addr': request.META['REMOTE_ADDR'],
+                    'user': user.username,
+                    'link': 'http://www.ozgurlukicin.com/kullanici/onay/%s/%s' % (form.clean_data['username'], activation_key)}
 
             email_subject = u"Ozgurlukicin.com Kullanıcı Hesabı, %(user)s"
             email_body = u"""Merhaba!
-%(date)s %(hour)s tarihinde %(ip)s ip adresli bilgisayardan yaptığınız Ozgurlukicin.com kullanıcı hesabınızı onaylamak için aşağıdaki linke 48 saat içerisinde tıklayınız.
+%(date)s %(hour)s tarihinde %(ip_addr)s ip adresli bilgisayardan yaptiginiz Ozgurlukicin.com kullanici hesabinizi onaylamak icin lutfen asagidaki baglantiyi 48 saat icerisinde ziyaret ediniz.
 
-<a href="%(link)s">%(link)s</a>
+%(link)s
 
-Teşekkürler,
+Tesekkurler,
 Ozgurlukicin.com"""
-            email_to = form.clean_data['email']
-            email_recipient = ["turkay.eren@gmail.com"] # this is just for testing, it should be changed when authentication system has been finished
 
-            send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, email_recipient, fail_silently=False)
+            email_to = form.clean_data['email']
+
+            send_mail(email_subject % email_dict, email_body % email_dict, DEFAULT_FROM_EMAIL, [email_to], fail_silently=True)
 
             return render_response(request, 'user/register_done.html', {'form': form,
                                                                    'user': form.clean_data['username']})
@@ -170,17 +172,16 @@ def lost_password(request):
                          'hour': hour,
                          'ip': request.META['REMOTE_ADDR'],
                          'user': form.clean_data['username'],
-                         'link': 'http://www.ozgurlukicin.com/kullanici/kayip/change/%s' % key}
+                         'link': 'http://www.ozgurlukicin.com/kullanici/kayip/degistir/%s' % key}
 
            email_subject = u"Ozgurlukicin.com Kullanıcı Parolası"
            email_body = u"""Merhaba!
-%(date)s %(hour)s tarihinde %(ip)s ip adresli bilgisayardan kullanıcı parola sıfırlama isteği gönderdiniz. Lütfen parolanızı değiştirmek için aşağıdaki bağlantıya 24 saat içerisinde tıklayın.
+%(date)s %(hour)s tarihinde %(ip)s ip adresli bilgisayardan kullanici parola sifirlama istegi gonderildi. Lutfen parolanizi degistirmek icin asagidaki baglantiyi 24 saat icerisinde ziyaret edin.
 
-<a href="%(link)s">%(link)s</a>"""
+%(link)s"""
            email_to = form.clean_data['email']
-           email_recipient = ['turkay.eren@gmail.com']
 
-           send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, email_recipient, fail_silently=False)
+           send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, email_to, fail_silently=True)
            return render_response(request, 'user/lostpassword_done.html')
        else:
            return render_response(request, 'user/lostpassword.html', {'form': form})
