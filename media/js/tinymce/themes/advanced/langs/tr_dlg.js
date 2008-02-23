@@ -1,4 +1,4 @@
-tinyMCE.addI18n('en.advanced_dlg',{
+tinyMCE.addI18n('tr.advanced_dlg',{
 about_title:"TinyMCE Hakkında",
 about_general:"Hakkında",
 about_help:"Yardım",

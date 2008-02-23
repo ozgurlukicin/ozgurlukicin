@@ -1,4 +1,4 @@
-tinyMCE.addI18n('en.advanced',{
+tinyMCE.addI18n('tr.advanced',{
 style_select:"Biçemler",
 font_size:"Yazıyüzü boyutu",
 fontdefault:"Yazıyüzü ailesi",
