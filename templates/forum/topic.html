@@ -76,7 +76,7 @@
                 {% endif %}
         </div>
         <div id="post_message_content">
-            <div id="post_message_text">{% autoescape off %}{{ post.text|linebreaksbr }}{% endautoescape %}</div>
+            <div id="post_message_text">{% autoescape off %}{{ post.text }}{% endautoescape %}</div>
             {% if forloop.first %}
             <div id="post_message_tags">
                 <img src="/media/img/tag.png" />{% for tag in topic.tags.all %}<span class="tag"><a href="/etiket/{{tag.name}}/">{{tag.name}}</a></span>{% endfor %}
