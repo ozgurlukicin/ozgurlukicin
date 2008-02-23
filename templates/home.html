@@ -16,9 +16,9 @@
 
 <br/>
 {% block content %}
-		<div id="news_container">
+        <div id="news_container">
             {% for new in news %}
-            <div id="news-{{ new.id }}" class="news {% cycle alignleft,alignright %}"">
+            <div id="news-{{ new.id }}" class="news {% cycle alignleft,alignright %}">
                 <div class="news_title_mini transparent_link"><span>Haber:</span> <a href="{{ new.get_absolute_url }}">{{ new.title }}</a></div>
                 <div class="news_content_mini grey">{{ new.sum }}</div>
             </div>
