@@ -95,13 +95,16 @@ def petitioner_confirm(request, pid, key):
 def petitioner_list(request):
     numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
     petitionpercent = numberofpetitioners / 30
-    petitioners = Petitioner.objects.filter(is_active=True)
+    petitioners = Petitioner.objects.filter(is_active=True).order_by("-signed")
 
     return object_list(
             request,
             petitioners,
-            template_name = "petition/list.html",
-            template_object_name = "petitioner_list",
+            template_object_name = "petitioner",
             paginate_by = PETITIONERS_PER_PAGE,
-            allow_empty = True
+            allow_empty = True,
+            extra_context = {
+                'numberofpetitioners': numberofpetitioners,
+                'petitionpercent': petitionpercent,
+                },
             )

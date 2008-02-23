@@ -39,6 +39,7 @@
         <li style="margin-bottom:-10px;">{{ petitioner.firstname|escape }} {{ petitioner.lastname|escape }} - {{ petitioner.city|cityname }} - {{ petitioner.job|escape }} {% if petitioner.homepage|escape %}<a href="{{ petitioner.homepage|escape }}" target="_blank"><img src="/media/dijital/img/forum/msg_sim.gif" border="0" /></a>{% else %}-{% endif %} {{ petitioner.signed|timedelta }}</li>
     </ul>
     {% endfor %}
+    <span><a href="/petition/liste/?page=1">Tüm İmzalar</a></span>
 </div>
 {% endblock %}
 
