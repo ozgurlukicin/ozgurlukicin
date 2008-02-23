@@ -32,16 +32,16 @@ def user_profile_edit(request):
         form.set_user(u)
 
         if form.is_valid():
-            if len(form.clean_data['password']) > 0:
-                u.set_password(form.clean_data['password'])
+            if len(form.cleaned_data['password']) > 0:
+                u.set_password(form.cleaned_data['password'])
 
-            u.first_name = form.clean_data['firstname']
-            u.last_name = form.clean_data['lastname']
-            u.email = form.clean_data['email']
-            u.get_profile().homepage = form.clean_data['homepage']
-            u.get_profile().city = form.clean_data['city']
-            u.get_profile().birthday = form.clean_data['birthday']
-            u.get_profile().show_email = form.clean_data['show_email']
+            u.first_name = form.cleaned_data['firstname']
+            u.last_name = form.cleaned_data['lastname']
+            u.email = form.cleaned_data['email']
+            u.get_profile().homepage = form.cleaned_data['homepage']
+            u.get_profile().city = form.cleaned_data['city']
+            u.get_profile().birthday = form.cleaned_data['birthday']
+            u.get_profile().show_email = form.cleaned_data['show_email']
             u.get_profile().save()
             u.save()
 
@@ -76,28 +76,28 @@ def user_register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = User.objects.create_user(form.clean_data['username'], form.clean_data['email'], form.clean_data['password'])
-            user.first_name = form.clean_data['firstname']
-            user.last_name = form.clean_data['lastname']
+            user = User.objects.create_user(form.cleaned_data['username'], form.cleaned_data['email'], form.cleaned_data['password'])
+            user.first_name = form.cleaned_data['firstname']
+            user.last_name = form.cleaned_data['lastname']
             user.is_active = False
             user.save()
 
             # create a key
             salt = sha.new(str(random.random())).hexdigest()[:5]
-            activation_key = sha.new(salt+form.clean_data['username']).hexdigest() # yes, i'm paranoiac
+            activation_key = sha.new(salt+form.cleaned_data['username']).hexdigest() # yes, i'm paranoiac
             key_expires = datetime.datetime.today() + datetime.timedelta(2)
 
             profile = Profile(user=user)
-            profile.homepage = form.clean_data['homepage']
-            profile.birthday = form.clean_data['birthday']
-            profile.city = form.clean_data['city']
-            profile.contributes_summary = form.clean_data['contributes_summary']
+            profile.homepage = form.cleaned_data['homepage']
+            profile.birthday = form.cleaned_data['birthday']
+            profile.city = form.cleaned_data['city']
+            profile.contributes_summary = form.cleaned_data['contributes_summary']
             profile.activation_key = activation_key
-            profile.show_email = form.clean_data['show_email']
+            profile.show_email = form.cleaned_data['show_email']
             profile.key_expires = key_expires
             profile.save()
 
-            for number in form.clean_data['contributes']: # it's ManyToManyField's unique id
+            for number in form.cleaned_data['contributes']: # it's ManyToManyField's unique id
                 user.get_profile().contributes.add(number)
 
             now = datetime.datetime.now()
@@ -107,7 +107,7 @@ def user_register(request):
                     'hour': hour,
                     'ip_addr': request.META['REMOTE_ADDR'],
                     'user': user.username,
-                    'link': 'http://www.ozgurlukicin.com/kullanici/onay/%s/%s' % (form.clean_data['username'], activation_key)}
+                    'link': 'http://www.ozgurlukicin.com/kullanici/onay/%s/%s' % (form.cleaned_data['username'], activation_key)}
 
             email_subject = u"Ozgurlukicin.com Kullanıcı Hesabı, %(user)s"
             email_body = u"""Merhaba!
@@ -118,12 +118,12 @@ def user_register(request):
 Tesekkurler,
 Ozgurlukicin.com"""
 
-            email_to = form.clean_data['email']
+            email_to = form.cleaned_data['email']
 
             send_mail(email_subject % email_dict, email_body % email_dict, DEFAULT_FROM_EMAIL, [email_to], fail_silently=True)
 
             return render_response(request, 'user/register_done.html', {'form': form,
-                                                                   'user': form.clean_data['username']})
+                                                                   'user': form.cleaned_data['username']})
         else:
             return render_response(request, 'user/register.html', {'form': form})
     else:
@@ -158,7 +158,7 @@ def lost_password(request):
            salt = sha.new(str(random.random())).hexdigest()[8:]
            key = sha.new(salt).hexdigest()
 
-           u = User.objects.get(username=form.clean_data['username'])
+           u = User.objects.get(username=form.cleaned_data['username'])
            lostpwd = LostPassword(user=u)
            lostpwd.key = key
            lostpwd.key_expires = datetime.datetime.today() + datetime.timedelta(1)
@@ -171,7 +171,7 @@ def lost_password(request):
            email_dict = {'date': date,
                          'hour': hour,
                          'ip': request.META['REMOTE_ADDR'],
-                         'user': form.clean_data['username'],
+                         'user': form.cleaned_data['username'],
                          'link': 'http://www.ozgurlukicin.com/kullanici/kayip/degistir/%s' % key}
 
            email_subject = u"Ozgurlukicin.com Kullanıcı Parolası"
@@ -179,7 +179,7 @@ def lost_password(request):
 %(date)s %(hour)s tarihinde %(ip)s ip adresli bilgisayardan kullanici parola sifirlama istegi gonderildi. Lutfen parolanizi degistirmek icin asagidaki baglantiyi 24 saat icerisinde ziyaret edin.
 
 %(link)s"""
-           email_to = form.clean_data['email']
+           email_to = form.cleaned_data['email']
 
            send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, email_to, fail_silently=True)
            return render_response(request, 'user/lostpassword_done.html')
@@ -202,7 +202,7 @@ def change_password(request, key):
             form = ChangePasswordForm(request.POST)
             if form.is_valid():
                 u = User.objects.get(username=lostpwd.user.username)
-                u.set_password(form.clean_data['password'])
+                u.set_password(form.cleaned_data['password'])
                 u.save()
                 lostpwd.delete()
                 return render_response(request, 'user/change_password_done.html', {'login_url': LOGIN_URL})

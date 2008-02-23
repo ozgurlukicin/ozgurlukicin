@@ -101,7 +101,7 @@ class RegisterForm(forms.Form):
     show_email = forms.BooleanField(label='E-posta Adresini Göster', required=False, help_text='Profil sayfasında diğerleri e-posta adresinizi görebilsin mi?')
 
     def clean_username(self):
-        field_data = self.clean_data['username']
+        field_data = self.cleaned_data['username']
 
         if len(field_data.split(' ')) != 1:
             raise forms.ValidationError(u"Kullanıcı adında boşluk olmamalıdır")
@@ -123,7 +123,7 @@ class RegisterForm(forms.Form):
         return field_data
 
     def clean_email(self):
-        field_data = self.clean_data['email']
+        field_data = self.cleaned_data['email']
 
         if not field_data:
             return ''
@@ -135,12 +135,12 @@ class RegisterForm(forms.Form):
         return field_data
 
     def clean_password_again(self):
-        field_data = self.clean_data['password_again']
+        field_data = self.cleaned_data['password_again']
 
-        if not self.clean_data.has_key('password'):
+        if not self.cleaned_data.has_key('password'):
             return
         else:
-            password = self.clean_data['password']
+            password = self.cleaned_data['password']
 
         if len(field_data.split(' ')) != 1:
             raise forms.ValidationError(u"Parolada boşluk olmamalıdır")
@@ -169,7 +169,7 @@ class ProfileEditForm(forms.Form):
         self.user = user
 
     def clean_old_password(self):
-        field_data = self.clean_data['old_password']
+        field_data = self.cleaned_data['old_password']
 
         if len(field_data.split(' ')) != 1:
             raise forms.ValidationError(u"Parolada boşluk olmamalıdır")
@@ -183,7 +183,7 @@ class ProfileEditForm(forms.Form):
         return field_data
 
     def clean_password(self):
-        field_data = self.clean_data['password']
+        field_data = self.cleaned_data['password']
 
         if len(field_data.split(' ')) != 1:
             raise forms.ValidationError(u"Parolada boşluk olmamalıdır")
@@ -197,13 +197,13 @@ class ProfileEditForm(forms.Form):
         return field_data
 
     def clean_password_again(self):
-        field_data = self.clean_data['password_again']
+        field_data = self.cleaned_data['password_again']
 
-        if not self.clean_data.has_key('password') or not self.clean_data.has_key('old_password'):
+        if not self.cleaned_data.has_key('password') or not self.cleaned_data.has_key('old_password'):
             return
         else:
-            password = self.clean_data['password']
-            old_password = self.clean_data['old_password']
+            password = self.cleaned_data['password']
+            old_password = self.cleaned_data['old_password']
 
         if old_password or password or field_data:
             if field_data and password and old_password:
@@ -238,7 +238,7 @@ class LostPasswordForm(forms.Form):
         old_keys = LostPassword.objects.filter(key_expires__lt=datetime.date.today())
         for key in old_keys: key.delete()
 
-        field_data = self.clean_data['username']
+        field_data = self.cleaned_data['username']
 
         # control username whether it exists or not
         if len(User.objects.filter(username__iexact=field_data)) == 0:
@@ -251,12 +251,12 @@ class LostPasswordForm(forms.Form):
         return field_data
 
     def clean_email(self):
-        field_data = self.clean_data['email']
+        field_data = self.cleaned_data['email']
 
-        if not self.clean_data.has_key('username'):
+        if not self.cleaned_data.has_key('username'):
             return
         else:
-            username = self.clean_data['username']
+            username = self.cleaned_data['username']
 
         # control email if it is correct
         try:
@@ -273,12 +273,12 @@ class ChangePasswordForm(forms.Form):
     password_again = forms.CharField(label='Parola (Tekrar)', widget=forms.PasswordInput, max_length=32, min_length=5)
 
     def clean_password_again(self):
-        field_data = self.clean_data['password_again']
+        field_data = self.cleaned_data['password_again']
 
-        if not self.clean_data.has_key('password'):
+        if not self.cleaned_data.has_key('password'):
             return
         else:
-            password = self.clean_data['password']
+            password = self.cleaned_data['password']
 
         if field_data != password:
             raise forms.ValidationError('Parolalar eşleşmiyor')
