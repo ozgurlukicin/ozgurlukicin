@@ -17,5 +17,5 @@ tinyMCE.init({
     extended_valid_elements : "a[name|href|target|title],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
     advimage_update_dimensions_onchange: true,
     plugins : "advimage,autosave,contextmenu,searchreplace,table,visualchars,advlink,emotions,media,style,template,xhtmlxtras",
-    language : "tr",
+    language : "en",
 });
