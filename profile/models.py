@@ -16,7 +16,7 @@ from oi.settings import CITY_LIST
 from oi.st.models import Contribute
 
 class ForbiddenUsername(models.Model):
-    name = models.CharField("Kullanıcı adı", maxlength=30)
+    name = models.CharField("Kullanıcı adı", max_length=30)
 
     def __str__(self):
         return self.name
@@ -32,7 +32,7 @@ class ForbiddenUsername(models.Model):
 
 class LostPassword(models.Model):
     user = models.ForeignKey(User, verbose_name='Kullanıcı')
-    key = models.CharField('Anahtar', maxlength=40, unique=True)
+    key = models.CharField('Anahtar', max_length=40, unique=True)
     key_expires = models.DateTimeField('Zaman Aşımı')
 
     def __str__(self):
@@ -61,12 +61,12 @@ class Profile(models.Model):
     user = models.ForeignKey(User, unique=True)
     birthday = models.DateField(blank=True)
     homepage = models.URLField('Ana Sayfa', blank=True, verify_exists=False, unique=False)
-    im = models.EmailField('IM', maxlength=50, blank=True)
-    city = models.CharField('Şehir', blank=True, choices=CITY_LIST, maxlength=40)
+    im = models.EmailField('IM', max_length=50, blank=True)
+    city = models.CharField('Şehir', blank=True, choices=CITY_LIST, max_length=40)
     show_email = models.BooleanField('E-posta Göster', default=0)
     contributes = models.ManyToManyField(Contribute, blank=True, verbose_name='Katkılar')
     contributes_summary = models.TextField('Katkı Açıklaması', blank=True)
-    activation_key = models.CharField(maxlength=40)
+    activation_key = models.CharField(max_length=40)
     key_expires = models.DateTimeField()
 
     def __str__(self):

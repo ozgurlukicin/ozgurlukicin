@@ -25,7 +25,7 @@ class TopicForm(forms.Form):
         super(TopicForm, self).__init__(*args, **kwargs)
 
     def clean_tags(self):
-        field_data = self.clean_data['tags']
+        field_data = self.cleaned_data['tags']
 
         # we don't want users to choice tags more than 5
         if len(field_data) > 5:

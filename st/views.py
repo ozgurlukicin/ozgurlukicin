@@ -145,7 +145,7 @@ def search(request):
     if request.method == 'POST':
         form = SearchForm(request.POST.copy())
         if form.is_valid():
-            term = form.clean_data['term']
+            term = form.cleaned_data['term']
 
             searched = True
             tags = Tag.objects.filter(name__icontains=term).order_by('name')
@@ -197,7 +197,7 @@ def comment_news(request,slug):
 
             post = Post(topic=t[0],
                         author=request.user,
-                        text=form.clean_data['yorum'])
+                        text=form.cleaned_data['yorum'])
             try:
                 post.save()
             except Exception:
@@ -239,7 +239,7 @@ def comment_howto(request,slug):
 
             post = Post(topic=t[0],
                         author=request.user,
-                        text=form.clean_data['yorum'])
+                        text=form.cleaned_data['yorum'])
             try:
                 post.save()
             except Exception:
@@ -280,7 +280,7 @@ def comment_game(request,slug):
 
             post = Post(topic=t[0],
                         author=request.user,
-                        text=form.clean_data['yorum'])
+                        text=form.cleaned_data['yorum'])
             try:
                 post.save()
             except Exception:
@@ -321,7 +321,7 @@ def comment_package(request,slug):
 
             post = Post(topic=t[0],
                         author=request.user,
-                        text=form.clean_data['yorum'])
+                        text=form.cleaned_data['yorum'])
             try:
                 post.save()
             except Exception:
