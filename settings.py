@@ -12,7 +12,6 @@ MANAGERS = ADMINS
 SITE_NAME = 'Özgürlük için...'
 SITE_DESC = 'Pardus için bir numaralı bilgi kaynağı'
 
-USE_I18N = False
 DEBUG = True
 TESTING = True
 TEMPLATE_DEBUG = DEBUG
