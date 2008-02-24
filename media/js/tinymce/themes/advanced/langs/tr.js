@@ -1,7 +1,7 @@
 tinyMCE.addI18n('tr.advanced',{
 style_select:"Biçemler",
-font_size:"Yazıyüzü boyutu",
-fontdefault:"Yazıyüzü ailesi",
+font_size:"Yazıtipi boyutu",
+fontdefault:"Yazıtipi ailesi",
 block:"Biçim",
 paragraph:"Paragraf",
 div:"Bölüm",
