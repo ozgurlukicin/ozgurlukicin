@@ -1,4 +1,4 @@
-tinyMCE.addI18n({en:{
+tinyMCE.addI18n({tr:{
 common:{
 edit_confirm:"WYSIWYG özelliğini bu yazı alanı için kullanmak ister misiniz?",
 apply:"Kabul et",
