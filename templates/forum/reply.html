@@ -10,14 +10,12 @@
 {% if user.is_authenticated %}
 {% if flood %}Flood koruması aktif, lütfen {{ timeout }} saniye bekleyin.{% endif %}
 <form action="" method="POST">
-<dl>
 {% for field in form %}
-    <dt>{{ field.label_tag }}</dt>
-    <dd>{{ field }}</dd>
-    {% if field.help_text %}<dd>{{ field.help_text }}</dd>{% endif %}
-    {% if field.errors %}<dd class="myerrors">{{ field.errors }}</dd>{% endif %}
+    <dl>
+        <dt><label for="id_{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
+        <dd>{{ field }}</dd>
+    </dl>
 {% endfor %}
-</dl>
 <input type="submit" value="Yanıtla" />
 </form>
 {% else %}
