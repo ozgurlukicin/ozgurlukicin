@@ -106,6 +106,7 @@ def edit_post(request, forum_slug, topic_id, post_id):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
     post = get_object_or_404(Post, pk=post_id)
+    posts = topic.post_set.filter(created__lt = post.created).order_by('-created')
 
     #the normal users dont have that permission actually
     if not request.user.has_perm('forum.change_post'):
@@ -136,7 +137,7 @@ def edit_post(request, forum_slug, topic_id, post_id):
         if post in topic.post_set.all():
             form = PostForm(auto_id=True, initial={'text': post.text})
 
-    return render_response(request, 'forum/reply.html', locals())
+    return render_response(request, 'forum/post_edit.html', locals())
 
 @login_required
 def new_topic(request, forum_slug):
