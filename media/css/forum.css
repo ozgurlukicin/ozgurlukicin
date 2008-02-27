@@ -175,6 +175,9 @@ margin:0px;
     border-left: 2px solid #D7E1E7;
     min-height: 200px;
 }
+#post_message_text {
+    min-height: 160px;
+}
 #post_message_tags {
     padding-left: 9px;
     overflow: hidden;
