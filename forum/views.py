@@ -72,7 +72,7 @@ def reply(request, forum_slug, topic_id, post_id=False):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
 
-    posts = topic.post_set.all().order_by('-created')
+    posts = topic.post_set.all().order_by('-created')[:POSTS_PER_PAGE]
 
     if forum.locked or topic.locked:
         return HttpResponse("Forum or topic is locked") #FIXME: Give an error message
@@ -106,7 +106,7 @@ def edit_post(request, forum_slug, topic_id, post_id):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
     post = get_object_or_404(Post, pk=post_id)
-    posts = topic.post_set.filter(created__lt = post.created).order_by('-created')
+    posts = topic.post_set.filter(created__lt = post.created).order_by('-created')[:POSTS_PER_PAGE]
 
     #the normal users dont have that permission actually
     if not request.user.has_perm('forum.change_post'):
