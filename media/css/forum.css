@@ -107,7 +107,7 @@ margin:0px;
     padding: 10px 0px 0px 46px;
     font-weight: bold;
 }
-#category_forums_item { width: 900px; overflow:auto; clear: left; border-bottom: 1px solid #CBD8E0; padding-top: 10px; }
+#category_forums_item { width: 900px; overflow:hidden; clear: left; border-bottom: 1px solid #CBD8E0; padding-top: 10px; }
 #category_forums_item_icon { width: 5%; float: left; }
 #category_forums_item_title { width: 50%; float: left; }
 #category_forums_item_lastpost { width: 25%; float: left; text-align: center; }
@@ -147,7 +147,7 @@ margin:0px;
 #post_base {
     border-bottom: 5px solid #6A91A6;
     border-top: 2px solid #D7E1E7;
-    overflow: auto;
+    overflow: hidden;
     width: 100%; }
 #post_profile {
     width: 165px;
@@ -159,11 +159,12 @@ margin:0px;
 #post_message {
     width: 724px;
     float: left;
+    overflow: hidden;
 }
 #post_message_top {
     background: url(/media/dijital/img/forum/forum_bar.gif);
     height: 32px;
-    overflow: auto;
+    overflow: hidden;
     width: 100%;
 }
 #post_message_top_icon { float:left; padding-top: 13px; padding-left: 10px; }
@@ -177,6 +178,7 @@ margin:0px;
 }
 #post_message_text {
     min-height: 160px;
+    overflow: auto;
 }
 #post_message_tags {
     padding-left: 9px;
@@ -189,7 +191,7 @@ margin:0px;
     margin-top: 15px;
     background: url(/media/dijital/img/forum/forum_bar.gif);
     height: 32px;
-    overflow: auto;
+    overflow: hidden;
     width: 100%;
     clear: both;
 }
@@ -303,7 +305,7 @@ border: 1px solid #45586F;
     width: 100%;
     font-size: 11px;
     font-family: "Liberation Sans","Liberation Serif", Arial;
-    overflow: auto;
+    overflow: hidden;
     clear: both;
     color: #FFF;
 }
@@ -322,7 +324,7 @@ border: 1px solid #45586F;
 
 .forum_stats_latest_post {
     width: 100%;
-    overflow: auto;
+    overflow: hidden;
     clear: both;
     border-bottom: 1px solid #CBD8E0;
     padding-top: 10px;
