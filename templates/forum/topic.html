@@ -43,6 +43,12 @@
             <div id="post_message_top_button">
                 <a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>
             </div>
+            {% else %}
+            {% ifequal post.author.id request.user.id %}
+            <div id="post_message_top_button">
+                <a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>
+            </div>
+            {% endifequal %}
             {% endif %}
             {% if perms.forum.can_hide_post and not forloop.first and not post.hidden %}
             <div id="post_message_top_button">
@@ -54,11 +60,6 @@
                 <a href="{{ post.get_hide_url }}">unhide</a>
             </div>
             {% endif %}
-            {% ifequal post.author.id request.user.id %}
-            <div id="post_message_top_button">
-                <a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>
-            </div>
-            {% endifequal %}
             {% if perms.forum.delete_post and not forloop.first %}
             <div id="post_message_top_button">
             <form method="post" action="{{post.get_delete_url}}">
