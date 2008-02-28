@@ -731,7 +731,7 @@ ortak_title_mini{
 #sidebar_top {
     background-image: url('/media/dijital/img/d_tblust.jpg');
     height: 10px;
-    line-height: 0px;
+    line-height: 10px;
 }
 #sidebar_middle {
     background-image: url('/media/dijital/img/d_tblbg.jpg');
@@ -757,7 +757,7 @@ ortak_title_mini{
 #sidebar_bottom {
     background-image: url('/media/dijital/img/d_tblalt.jpg');
     height: 12px;
-    line-height: 0px;
+    line-height: 12px;
 }
 ul.sidebar_firststeps { list-style-image: url("/media/img/fav.png"); }
 ul.sidebar_subscribers { list-style-image: url('/media/img/bt_next.png'); }
