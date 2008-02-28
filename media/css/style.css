@@ -746,7 +746,12 @@ ortak_title_mini{
     text-align: center;
     margin-top: 0px;
 }
-#sidebar_middle ul { margin: 0px 0px 0px -10px; text-align: left; }
+#sidebar_middle ul {
+    margin: 0px 0px 0px 10px;
+    padding: 0px;
+    text-align: left;
+    list-style-position: inside;
+}
 #sidebar_middle form { margin: 0px; }
 #sidebar_middle p { margin: 0px; }
 #sidebar_bottom {
