@@ -706,6 +706,11 @@ div.main_news img, div.main_howtos img, div.main_packages img, div.main_games im
     overflow: auto;
 }
 
+div.post {
+    width: 100%;
+    overflow: hidden;
+}
+
 /* Sidebar */
 #sidebar {
     float: right;
