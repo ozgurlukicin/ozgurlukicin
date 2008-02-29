@@ -543,8 +543,8 @@ div.news, div.howtos, div.packages, div.games {
     width: 100%;
 }
 
-div.news img, div.howtos img, div.packages img, div.games img { margin: 10px; }
-div.main_news img, div.main_howtos img, div.main_packages img, div.main_games img { margin: 10px; }
+/*div.news img, div.howtos img, div.packages img, div.games img,
+div.main_news img, div.main_howtos img, div.main_packages img, div.main_games img { margin: 10px; padding: 0px; }*/
 
 .news_title_mini {
     font-size: 14px;
@@ -553,7 +553,7 @@ div.main_news img, div.main_howtos img, div.main_packages img, div.main_games im
     padding-left: 12px;
     height: 25px;
     margin-top: 10px;
-    width: 290px;
+    width: 293px;
 }
 
 .news_title {
@@ -566,7 +566,7 @@ div.main_news img, div.main_howtos img, div.main_packages img, div.main_games im
 }
 
 .news_content_mini {
-    width: 290px;
+    width: 293px;
     padding-left: 10px;
     padding-right: 16px;
     overflow: auto;
@@ -585,7 +585,7 @@ div.main_news img, div.main_howtos img, div.main_packages img, div.main_games im
     padding-left: 12px;
     height: 25px;
     margin-top: 10px;
-    width: 290px;
+    width: 293px;
 }
 
 .packages_title {
@@ -598,7 +598,7 @@ div.main_news img, div.main_howtos img, div.main_packages img, div.main_games im
 }
 
 .packages_content_mini {
-    width: 290px;
+    width: 293px;
     padding-left: 10px;
     padding-right: 16px;
     overflow: auto;
@@ -617,7 +617,7 @@ div.main_news img, div.main_howtos img, div.main_packages img, div.main_games im
     padding-left: 12px;
     height: 25px;
     margin-top: 10px;
-    width: 290px;
+    width: 293px;
 }
 
 .games_title {
@@ -630,7 +630,7 @@ div.main_news img, div.main_howtos img, div.main_packages img, div.main_games im
 }
 
 .games_content_mini {
-    width: 290px;
+    width: 293px;
     padding-left: 10px;
     padding-right: 16px;
     overflow: auto;
@@ -651,7 +651,7 @@ div.main_news img, div.main_howtos img, div.main_packages img, div.main_games im
     padding-left: 12px;
     height: 25px;
     margin-top: 10px;
-    width: 290px;
+    width: 293px;
 }
 
 .fs_title {
@@ -664,7 +664,7 @@ div.main_news img, div.main_howtos img, div.main_packages img, div.main_games im
 }
 
 .fs_content_mini {
-    width: 290px;
+    width: 293px;
     padding-left: 10px;
     padding-right: 16px;
     overflow: auto;
@@ -683,7 +683,7 @@ div.main_news img, div.main_howtos img, div.main_packages img, div.main_games im
     padding-left: 12px;
     height: 25px;
     margin-top: 10px;
-    width: 290px;
+    width: 293px;
 }
 
 .howtos_title {
@@ -695,7 +695,7 @@ div.main_news img, div.main_howtos img, div.main_packages img, div.main_games im
     margin-top: 10px;
 }
 .howtos_content_mini {
-    width: 290px;
+    width: 293px;
     padding-left: 10px;
     padding-right: 16px;
     overflow: auto;
