@@ -532,32 +532,20 @@ dt {width: 30%; float:left;}
     overflow: hidden;
 }
 
-/*Daha emin değilim ? gerek var mı*/
-ortak_title{
-	font-size: 14px;
-    font-weight: bold;
-    padding-top: 5px;
-    padding-left: 12px;
-    height: 25px;
-    margin-top: 10px;
-}
-
-ortak_title_mini{
-	font-size: 14px;
-    font-weight: bold;
-    padding-top: 5px;
-    padding-left: 12px;
-    height: 25px;
-    margin-top: 10px;
-    width: 280px;
-
-}
-
 /* content */
 #news_container, #howto_container, #packages_container, #games_container {
     overflow: auto;
     width: 100%;
 }
+
+div.news, div.howtos, div.packages, div.games {
+    overflow: hidden;
+    width: 100%;
+}
+
+div.news img, div.howtos img, div.packages img, div.games img { margin: 10px; }
+div.main_news img, div.main_howtos img, div.main_packages img, div.main_games img { margin: 10px; }
+
 .news_title_mini {
     font-size: 14px;
     font-weight: bold;
@@ -565,7 +553,7 @@ ortak_title_mini{
     padding-left: 12px;
     height: 25px;
     margin-top: 10px;
-    width: 280px;
+    width: 290px;
 }
 
 .news_title {
@@ -578,7 +566,7 @@ ortak_title_mini{
 }
 
 .news_content_mini {
-    width: 280px;
+    width: 290px;
     padding-left: 10px;
     padding-right: 16px;
     overflow: auto;
@@ -597,7 +585,7 @@ ortak_title_mini{
     padding-left: 12px;
     height: 25px;
     margin-top: 10px;
-    width: 280px;
+    width: 290px;
 }
 
 .packages_title {
@@ -610,7 +598,7 @@ ortak_title_mini{
 }
 
 .packages_content_mini {
-    width: 280px;
+    width: 290px;
     padding-left: 10px;
     padding-right: 16px;
     overflow: auto;
@@ -629,7 +617,7 @@ ortak_title_mini{
     padding-left: 12px;
     height: 25px;
     margin-top: 10px;
-    width: 280px;
+    width: 290px;
 }
 
 .games_title {
@@ -642,7 +630,7 @@ ortak_title_mini{
 }
 
 .games_content_mini {
-    width: 280px;
+    width: 290px;
     padding-left: 10px;
     padding-right: 16px;
     overflow: auto;
@@ -663,7 +651,7 @@ ortak_title_mini{
     padding-left: 12px;
     height: 25px;
     margin-top: 10px;
-    width: 280px;
+    width: 290px;
 }
 
 .fs_title {
@@ -676,7 +664,7 @@ ortak_title_mini{
 }
 
 .fs_content_mini {
-    width: 280px;
+    width: 290px;
     padding-left: 10px;
     padding-right: 16px;
     overflow: auto;
@@ -695,7 +683,7 @@ ortak_title_mini{
     padding-left: 12px;
     height: 25px;
     margin-top: 10px;
-    width: 280px;
+    width: 290px;
 }
 
 .howtos_title {
@@ -707,7 +695,7 @@ ortak_title_mini{
     margin-top: 10px;
 }
 .howtos_content_mini {
-    width: 280px;
+    width: 290px;
     padding-left: 10px;
     padding-right: 16px;
     overflow: auto;
