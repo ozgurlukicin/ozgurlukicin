@@ -181,7 +181,7 @@ def lost_password(request):
 %(link)s"""
            email_to = form.cleaned_data['email']
 
-           send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, email_to, fail_silently=True)
+           send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, [email_to], fail_silently=True)
            return render_response(request, 'user/lostpassword_done.html')
        else:
            return render_response(request, 'user/lostpassword.html', {'form': form})
