@@ -371,7 +371,10 @@ border: 1px solid #45586F;
 #forum_stats_left {
     float: left;
     width: 40%;
-    padding: 10px;
+    padding: 10px 10px 10px 45px;
+    background-image: url(/media/dijital/img/forum/stats.gif);
+    background-repeat: no-repeat;
+    background-position: center left;
 }
 #forum_stats_right {
     float:right;
