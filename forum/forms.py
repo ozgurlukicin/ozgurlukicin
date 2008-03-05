@@ -27,7 +27,7 @@ class TopicForm(forms.Form):
     def clean_tags(self):
         field_data = self.cleaned_data['tags']
 
-        # we don't want users to choice tags more than 5
+        # we don't want users to choose more than 5 tags
         if len(field_data) > 5:
             raise forms.ValidationError("En fazla 5 tag seçebilirsiniz. Lütfen açtığınız başlığa uygun tag seçin")
 

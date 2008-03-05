@@ -59,7 +59,11 @@ class Post(models.Model):
         return '/forum/%s/%s/quote/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
 
     def get_edit_url(self):
-        return '/forum/%s/%s/edit/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
+        """ returns topic edit url if it's first post """
+        if self.topic.post_set.order_by("created")[0].id == self.id:
+            return '/forum/%s/%s/edit/' % (self.topic.forum.slug, self.topic.id)
+        else:
+            return '/forum/%s/%s/edit/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
 
     def get_hide_url(self):
         return '/forum/%s/%s/hide/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
