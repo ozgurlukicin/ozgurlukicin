@@ -53,6 +53,12 @@ def howto_detail(request, slug):
     if request.user.is_authenticated():
         auth=True
 
+    try:
+        topic = Topic.objects.filter(title=howto.title)[0]
+        comment_count = topic.posts - 1
+        comment_url = topic.get_latest_post_url()
+    except:
+        pass
     numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
     petitionpercent = numberofpetitioners / 30
     return render_response(request, 'howto/howto_detail.html', locals())
@@ -70,6 +76,13 @@ def game_detail(request, slug):
     if request.user.is_authenticated():
         auth=True
 
+    try:
+        topic = Topic.objects.filter(title=game.title)[0]
+        comment_count = topic.posts - 1
+        comment_url = topic.get_latest_post_url()
+    except:
+        pass
+
     return render_response(request, 'game/game_detail.html', locals())
 
 def game_printable(request, slug):
@@ -83,6 +96,12 @@ def news_detail(request, slug):
     if request.user.is_authenticated():
         auth=True
 
+    try:
+        topic = Topic.objects.filter(title=news.title)[0]
+        comment_count = topic.posts - 1
+        comment_url = topic.get_latest_post_url()
+    except:
+        pass
     numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
     petitionpercent = numberofpetitioners / 30
     return render_response(request, 'news/news_detail.html', locals())
@@ -99,6 +118,14 @@ def pkg_detail(request, slug):
 
     if request.user.is_authenticated():
         auth=True
+
+    # we need to handle page titles that changed after creating
+    try:
+        topic = Topic.objects.filter(title=package.title)[0]
+        comment_count = topic.posts - 1
+        comment_url = topic.get_latest_post_url()
+    except:
+        pass
 
     return render_response(request, 'package/package_detail.html', locals())
 
@@ -209,7 +236,7 @@ def comment_news(request,slug):
             tags = news.tags.all()
             return render_response(request,'news/news_detail.html',{'news':news,'tags':tags,'form':form,'auth':True})
 
-    form=CommentForm()
+    form = CommentForm()
     tags = news.tags.all()
     return render_response(request,'news/news_detail.html',{'news':news,'tags':tags,'form':form,'auth':True})
 

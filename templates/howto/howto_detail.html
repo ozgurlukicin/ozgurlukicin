@@ -31,15 +31,17 @@
 <div class="page_content grey">
 {{ howto.text }}
 </div>
-	{% if auth %}
-		{% if form %}
-			<form method="post" action="/nasil/yorum/{{howto.slug}}/">
-
-				{{form}}<br/>
-				<input type="submit" value="Yolla">
-			</form>
-		{% endif %}
-	{% endif %}
+{% if auth %}
+    {% if form %}
+        <form method="post" action="/nasil/yorum/{{howto.slug}}/">
+            {{form}}
+            <br/>
+            <input type="submit" value="Yolla">
+            <br/>
+            <a href="{{comment_url}}">Yorumlar ({{ comment_count }})</a>
+        </form>
+    {% endif %}
+{% endif %}
 
 <div class="page_properties"><a href="{{ howto.get_printable_url }}"><img src="/media/img/print.png" /></a></div>
 <div class="page_last_update">Son güncelleme: {{ howto.update|timedelta }}</div>
