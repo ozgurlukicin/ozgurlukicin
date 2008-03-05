@@ -96,6 +96,15 @@
     </div>
 </div>
 {% endif %}
+{% if forloop.first %}
+<div class="topic_news_area">
+    {% for news in news_list %}
+    <div class="topic_news_box">
+        <a href="{{news.get_absolute_url}}"><h2>{{ news.title }}</h2><span>{{ news.sum }}<span></a>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
 {% endfor %}
 
 <div id="post_bottom">

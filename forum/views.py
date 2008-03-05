@@ -20,7 +20,7 @@ from oi.st.wrappers import render_response
 from oi.forum.models import Category, Forum, Topic, Post, AbuseReport, WatchList
 
 from django.core.urlresolvers import reverse
-from oi.st.models import Tag
+from oi.st.models import Tag, News
 
 def main(request):
     categories = Category.objects.order_by('order')
@@ -51,6 +51,7 @@ def topic(request, forum_slug, topic_id):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
     posts = topic.post_set.all().order_by('created')
+    news_list = News.objects.filter(status=1).order_by('-update')[:3]
 
     session_key = 'visited_'+topic_id
 
@@ -63,7 +64,7 @@ def topic(request, forum_slug, topic_id):
     return object_list(request, posts,
                        template_name = 'forum/topic.html',
                        template_object_name = 'post',
-                       extra_context = {'forum': forum, 'topic': topic, 'request': request},
+                       extra_context = {'forum': forum, 'topic': topic, 'news_list':news_list, 'request': request},
                        paginate_by = POSTS_PER_PAGE,
                        allow_empty = True)
 

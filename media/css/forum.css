@@ -214,6 +214,32 @@ margin:0px;
 .tag {
     padding-left: 5px;
 }
+div.topic_news_area {
+    width: 100%;
+    overflow: hidden;
+}
+div.topic_news_box {
+    float: left;
+    width: 290px;
+    height: 200px;
+    border-width: 0px 1px;
+    border-style: solid;
+    border-color: #D7E1E7;
+    padding: 0px 4px;
+}
+div.topic_news_box:hover {
+    background-color: #D7E1E7;
+}
+div.topic_news_box h2 {
+    font-size: 14px;
+    font-weight: bold;
+}
+div.topic_news_box a:hover,
+div.topic_news_box a:visited,
+div.topic_news_box a {
+    color: black;
+    text-decoration: none;
+}
 /* Ends here */
 
 
