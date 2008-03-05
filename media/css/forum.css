@@ -217,6 +217,7 @@ margin:0px;
 div.topic_news_area {
     width: 100%;
     overflow: hidden;
+    border-bottom: 5px solid #6A91A6;
 }
 div.topic_news_box {
     float: left;
