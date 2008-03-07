@@ -82,7 +82,6 @@ class Post(models.Model):
                        ("can_see_post_ip", "Can see author ip"),
                        ("can_hide_post", "Can hide"),
                        ("can_see_hidden_posts", "Can see hidden posts"),
-                       ("can_edit_post", "Can edit post"),
                       )
 
     def save(self):
@@ -193,7 +192,6 @@ class Topic(models.Model):
                        ("can_tag_topic", "Can tag topic"),
                        ("can_see_hidden_topics", "Can see hidden topics"),
                        ("can_merge_topic", "Can merge topic"),
-                       ("can_edit_topic", "Can edit topic"),
                       )
 
     def save(self):
