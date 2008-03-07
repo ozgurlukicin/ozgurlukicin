@@ -39,7 +39,12 @@
             <div id="post_message_top_date">
                 {{ post.created|date:"d-m-Y H:i" }}
             </div>
-            {% if perms.forum.change_post %}
+            {% if perms.forum.can_edit_topic %}
+            <div id="post_message_top_button">
+                <a href="{{ topic.get_edit_url }}">edit_topic</a>
+            </div>
+            {% endif %}
+            {% if perms.forum.can_edit_post %}
             <div id="post_message_top_button">
                 <a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>
             </div>

@@ -179,7 +179,7 @@ def edit_topic(request, forum_slug, topic_id):
     topic = get_object_or_404(Topic, pk=topic_id)
     first_post = topic.post_set.order_by('created')[0]
 
-    if not request.user.has_perm('forum.change_topic') and not first_post.author == request.user:
+    if not request.user.has_perm('forum.change_topic'):
         return HttpResponse('Opps, wrong way :)')
 
     if forum.locked or topic.locked:

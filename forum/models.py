@@ -59,11 +59,8 @@ class Post(models.Model):
         return '/forum/%s/%s/quote/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
 
     def get_edit_url(self):
-        """ returns topic edit url if it's first post """
-        if self.topic.post_set.order_by("created")[0].id == self.id:
-            return '/forum/%s/%s/edit/' % (self.topic.forum.slug, self.topic.id)
-        else:
-            return '/forum/%s/%s/edit/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
+        """ returns topic edit url of the post """
+        return '/forum/%s/%s/edit/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
 
     def get_hide_url(self):
         return '/forum/%s/%s/hide/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
@@ -85,6 +82,7 @@ class Post(models.Model):
                        ("can_see_post_ip", "Can see author ip"),
                        ("can_hide_post", "Can hide"),
                        ("can_see_hidden_posts", "Can see hidden posts"),
+                       ("can_edit_post", "Can edit post"),
                       )
 
     def save(self):
@@ -195,6 +193,7 @@ class Topic(models.Model):
                        ("can_tag_topic", "Can tag topic"),
                        ("can_see_hidden_topics", "Can see hidden topics"),
                        ("can_merge_topic", "Can merge topic"),
+                       ("can_edit_topic", "Can edit topic"),
                       )
 
     def save(self):
