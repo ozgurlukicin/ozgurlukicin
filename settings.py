@@ -76,7 +76,7 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.load_template_source',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = ("oi.context_processors.testing","django.core.context_processors.auth")
+TEMPLATE_CONTEXT_PROCESSORS = ('oi.context_processors.testing', 'django.core.context_processors.auth')
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',

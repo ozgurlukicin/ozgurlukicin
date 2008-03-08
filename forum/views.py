@@ -23,6 +23,8 @@ from django.core.urlresolvers import reverse
 from oi.st.models import Tag, News
 
 def main(request):
+    lastvisit_control(request)
+
     categories = Category.objects.order_by('order')
     forums = topics = posts = 0
     for category in categories:
@@ -30,6 +32,11 @@ def main(request):
             forums += 1
             topics += forum.topics
             posts += forum.posts
+            if forum.forum_latest_post.edited > request.session['last_visit']:
+                forum.is_unread = True
+            else:
+                forum.is_unread = False
+
     usercount = User.objects.count()
     currentdate = datetime.now()
     latest_posts = Post.objects.filter(hidden=False).order_by("-created")[:5]
@@ -37,8 +44,16 @@ def main(request):
     return render_response(request, 'forum/forum_list.html', locals())
 
 def forum(request, forum_slug):
+    lastvisit_control(request)
+
     forum = get_object_or_404(Forum, slug=forum_slug)
     topics = forum.topic_set.all().order_by('-sticky', '-topic_latest_post')
+
+    for topic in topics:
+        if topic.topic_latest_post.edited > request.session['last_visit']:
+            topic.is_unread = True
+        else:
+            topic.is_unread = False
 
     return object_list(request, topics,
                        template_name = 'forum/forum_detail.html',
@@ -48,6 +63,8 @@ def forum(request, forum_slug):
                        allow_empty = True)
 
 def topic(request, forum_slug, topic_id):
+    lastvisit_control(request)
+
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
     posts = topic.post_set.all().order_by('created')
@@ -325,6 +342,10 @@ def flood_control(request):
         flood = timeout = False
 
     return flood,timeout
+
+def lastvisit_control(request):
+    if not 'last_visit' in request.session:
+        request.session['last_visit'] = datetime.now()
 
 def delete_post(request,forum_slug,topic_id, post_id):
     """ The delete part should be controlled better !"""
