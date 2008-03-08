@@ -26,6 +26,9 @@ from oi.petition.models import Petitioner
 from oi.forum.views import flood_control
 from django.http import HttpResponseRedirect
 
+def robots(request):
+    return render_response(request, 'robots.txt')
+
 def home(request):
     news = News.objects.filter(status=1).order_by('-update')[:NEWS_IN_HOMEPAGE]
     packages = Package.objects.filter(status=1).order_by('-update')[:PACKAGES_IN_HOMEPAGE]

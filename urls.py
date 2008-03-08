@@ -98,6 +98,8 @@ tag_dict = {
 
 urlpatterns = patterns('',
 
+    (r'^robots.txt$', 'oi.st.views.robots'),
+
 	#comments
 
     (r'^comments/post/$', 'oi.comments.views.post_comment'),
