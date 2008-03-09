@@ -27,7 +27,7 @@
 
     <div id="topics_item" {% if topic.hidden %}style="opacity: 0.5;"{% endif %}>
         <div id="topics_item_icon"><a href="{{ topic.get_absolute_url }}">{% if topic.locked and not topic.sticky %}<img src="/media/dijital/img/forum/topic_locked.png" border="0" alt="Kilitli Konu" title="Kilitli Konu" />{% endif %}{% if topic.sticky and not topic.locked %}<img src="/media/dijital/img/forum/topic_sticky.png" border="0" alt="Sabit Konu" title="Sabit Konu" />{% endif %}{% if not topic.locked and not topic.sticky %}<img src="/media/dijital/img/forum/eski_konu.gif" border="0" />{% endif %}{% if topic.locked and topic.sticky %}<img src="/media/dijital/img/forum/topic_sticky_locked.png" border="0" alt="Sabit ve Kilitli Konu" title="Sabit ve Kilitli Konu" />{% endif %}</a></div>
-        <div id="topics_item_title">{% if topic.is_unread %}unread{% else %}read{% endif %}<a href="{{ topic.get_absolute_url }}">{{ topic.title|escape }}</a></div>
+        <div id="topics_item_title">{% if not topic.is_read %}un{% endif %}read<a href="{{ topic.get_absolute_url }}">{{ topic.title|escape }}</a></div>
         <div id="topics_item_posts">{{ topic.posts }}</div>
         <div id="topics_item_views">{{ topic.views }}</div>
         <div id="topics_item_lastpost">{{ topic.topic_latest_post.edited|date:"d F Y H:i" }}<br />{{ topic.topic_latest_post.author }} <a href="{{ topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" border="0"/></a></div>

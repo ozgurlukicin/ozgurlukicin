@@ -32,10 +32,12 @@ def main(request):
             forums += 1
             topics += forum.topics
             posts += forum.posts
-            if forum.forum_latest_post and forum.forum_latest_post.edited > request.session['last_visit']:
-                forum.is_unread = True
+            if forum.forum_latest_post and \
+                    forum.forum_latest_post.edited > request.session['last_visit']\
+                    and not forum_latest_post.topic.id in request.session['read_topics_set']:
+                forum.is_read = False
             else:
-                forum.is_unread = False
+                forum.is_read = True
 
     usercount = User.objects.count()
     currentdate = datetime.now()
@@ -50,10 +52,11 @@ def forum(request, forum_slug):
     topics = forum.topic_set.all().order_by('-sticky', '-topic_latest_post')
 
     for topic in topics:
-        if topic.topic_latest_post.edited > request.session['last_visit']:
-            topic.is_unread = True
+        if topic.topic_latest_post.edited > request.session['last_visit'] and \
+                not topic.id in request.session["read_topics_set"]:
+            topic.is_read = False
         else:
-            topic.is_unread = False
+            topic.is_read = True
 
     return object_list(request, topics,
                        template_name = 'forum/forum_detail.html',
@@ -70,10 +73,11 @@ def topic(request, forum_slug, topic_id):
     posts = topic.post_set.all().order_by('created')
     news_list = News.objects.filter(status=1).order_by('-update')[:3]
 
-    session_key = 'visited_'+topic_id
-
-    if request.user.is_authenticated() and not session_key in request.session:
-        request.session[session_key] = True
+    try:
+        request.session["read_topics_set"].add(topic.id)
+    except:
+        request.session["read_topics_set"] = set()
+        request.session["read_topics_set"].add(topic.id)
 
     topic.views += 1
     topic.save()
@@ -344,8 +348,9 @@ def flood_control(request):
     return flood,timeout
 
 def lastvisit_control(request):
-    if not 'last_visit' in request.session:
-        request.session['last_visit'] = datetime.now()
+    if not "last_visit" in request.session:
+        request.session["last_visit"] = datetime.now()
+        request.session["read_topics_set"] = set()
 
 def delete_post(request,forum_slug,topic_id, post_id):
     """ The delete part should be controlled better !"""
