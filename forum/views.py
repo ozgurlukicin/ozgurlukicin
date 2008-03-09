@@ -32,7 +32,7 @@ def main(request):
             forums += 1
             topics += forum.topics
             posts += forum.posts
-            if forum.forum_latest_post.edited > request.session['last_visit']:
+            if forum.forum_latest_post and forum.forum_latest_post.edited > request.session['last_visit']:
                 forum.is_unread = True
             else:
                 forum.is_unread = False

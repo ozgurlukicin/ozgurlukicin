@@ -27,7 +27,7 @@
             {% else %}
             <div id="category_forums_item" {% if forum.hidden %}style="opacity: 0.5;"{% endif %}>
             <div id="category_forums_item_icon"><img src="/media/dijital/img/forum/eski_konu.gif" /></div>
-            <div id="category_forums_item_title"><a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a><br />{{ forum.description }}</div>
+            <div id="category_forums_item_title"><a href="{{ forum.get_absolute_url }}">{% if forum.is_unread %}un{% endif %}read{{ forum.name|escape }}</a><br />{{ forum.description }}</div>
             <div id="category_forums_item_topics">{{ forum.topics }}</div>
             <div id="category_forums_item_posts">{{ forum.posts }}</div>
             <div id="category_forums_item_lastpost">{% if forum.forum_latest_post %}{{ forum.forum_latest_post.edited|date:"d F Y H:i" }}<br />{{ forum.forum_latest_post.author }} <a href="{{ forum.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" border="0"/></a>{% else %}Henüz ileti yok{% endif %}
