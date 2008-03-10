@@ -25,7 +25,10 @@ class RSS(Feed):
     description_template = 'forum/feed_description.html'
 
     def items(self):
-        return Post.objects.filter(hidden=0).order_by('-edited')[:10]
+        objects = Post.objects.filter(hidden=0).order_by('-edited')[:10]
+        for post in objects:
+            post.title = post.topic.title
+        return objects
 
 class Atom(RSS):
     feed_type = Atom1Feed
@@ -45,7 +48,6 @@ class Topic_Rss(Feed):
             raise ObjectDoesNotExist
 
         return Topic.objects.get(id=bits[0].strip()) # get the topic thing
-
 
     def title(self,obj):
         """ Istenilen forumun baslik kismi """
@@ -71,11 +73,9 @@ class Topic_Rss(Feed):
             raise FeedDoesNotExist
         return WEB_URL+item.get_absolute_url()
 
-
 class Topic_Atom(Topic_Rss):
     feed_type = Atom1Feed
     subtitle = Topic_Rss.description
-
 
 class Tag_Rss(Topic_Rss):
     """ Acilan Taglara göre Rss"""
@@ -89,11 +89,9 @@ class Tag_Rss(Topic_Rss):
 
         return Tag.objects.get(id=bits[0]) # get the topic thing
 
-
     def title(self,obj):
         """ Istenilen tag baslik kismi """
         return SITE_NAME + " Forum Tag sıralaması : "+obj.name
-
 
     def items(self,obj):
         """ Istenilen Konular burada olacak"""
@@ -103,7 +101,3 @@ class Tag_Atom(Tag_Rss):
     """ Bir de atom ayağı """
     feed_type = Atom1Feed
     subtitle = Tag_Rss.description
-
-
-
-
