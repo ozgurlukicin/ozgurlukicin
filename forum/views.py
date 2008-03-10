@@ -34,7 +34,7 @@ def main(request):
             posts += forum.posts
             if forum.forum_latest_post and \
                     forum.forum_latest_post.edited > request.session['last_visit']\
-                    and not forum_latest_post.topic.id in request.session['read_topics_set']:
+                    and not forum.forum_latest_post.topic.id in request.session['read_topics_set']:
                 forum.is_read = False
             else:
                 forum.is_read = True
