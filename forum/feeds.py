@@ -30,6 +30,9 @@ class RSS(Feed):
             post.title = post.topic.title
         return objects
 
+    def item_author_name(self, item):
+        return item.author
+
 class Atom(RSS):
     feed_type = Atom1Feed
     subtitle = RSS.description
