@@ -35,10 +35,9 @@
     {% if form %}
         <form method="post" action="/nasil/yorum/{{howto.slug}}/">
             {{form}}
-            <br/>
-            <input type="submit" value="Yolla">
-            <br/>
-            <a href="{{comment_url}}">Yorumlar ({{ comment_count }})</a>
+            <br />
+            <span style="float:right;margin-right:10px"><a href="{{comment_url}}">Yorumlar ({{ comment_count }})</a> <a href="{{comment_url}}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a></span>
+            <input type="submit" value="Gönder">
         </form>
     {% endif %}
 {% endif %}
