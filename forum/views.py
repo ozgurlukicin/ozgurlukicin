@@ -42,7 +42,7 @@ def main(request):
                 for topic in forum.topic_set.all():
                     counter += 1
                     if topic.topic_latest_post.edited > request.session['last_visit'] or\
-                            "read_topic_%s" % topic.id in request.session:
+                            topic.id in request.session["read_topic_set"]:
                                 readTopics += 1
                 if counter == readTopics:
                     forum.is_read = True
@@ -64,7 +64,7 @@ def forum(request, forum_slug):
     if request.user.is_authenticated():
         for topic in topics:
             if topic.topic_latest_post.edited > request.session['last_visit'] or\
-                    "read_topic_%s" % topic.id in request.session:
+                    topic.id in request.session["read_topic_set"]:
                 topic.is_read = True
             else:
                 topic.is_read = False
@@ -84,8 +84,9 @@ def topic(request, forum_slug, topic_id):
     posts = topic.post_set.all().order_by('created')
     news_list = News.objects.filter(status=1).order_by('-update')[:3]
 
-    if request.user.is_authenticated():
-        request.session["read_topic_%s" % topic.id] = True
+    if request.user.is_authenticated() and not topic.id in request.session["read_topic_set"]:
+        request.session["read_topic_set"].add(topic.id)
+        request.session.modified = True
 
     topic.views += 1
     topic.save()
@@ -358,6 +359,8 @@ def flood_control(request):
 def lastvisit_control(request):
     if not "last_visit" in request.session:
         request.session["last_visit"] = datetime.now()
+    if not "read_topic_set" in request.session:
+        request.session["read_topic_set"] = set()
 
 def delete_post(request,forum_slug,topic_id, post_id):
     """ The delete part should be controlled better !"""
