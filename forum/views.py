@@ -18,6 +18,7 @@ from oi.forum.forms import *
 
 from oi.st.wrappers import render_response
 from oi.forum.models import Category, Forum, Topic, Post, AbuseReport, WatchList
+from oi.forum import customgeneric
 
 from django.core.urlresolvers import reverse
 from oi.st.models import Tag, News
@@ -69,7 +70,7 @@ def forum(request, forum_slug):
             else:
                 topic.is_read = False
 
-    return object_list(request, topics,
+    return customgeneric.object_list(request, topics,
                        template_name = 'forum/forum_detail.html',
                        template_object_name = 'topic',
                        extra_context = {'forum': forum},
