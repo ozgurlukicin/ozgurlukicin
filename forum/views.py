@@ -26,18 +26,28 @@ def main(request):
     lastvisit_control(request)
 
     categories = Category.objects.order_by('order')
+    categories = [(category, category.forum_set.all()) for category in categories]
     forums = topics = posts = 0
     for category in categories:
-        for forum in category.forum_set.all():
+        for forum in category[1]:
             forums += 1
             topics += forum.topics
             posts += forum.posts
-            if forum.forum_latest_post and \
-                    forum.forum_latest_post.edited > request.session['last_visit']\
-                    and not forum.forum_latest_post.topic.id in request.session['read_topics_set']:
-                forum.is_read = False
-            else:
-                forum.is_read = True
+
+            # read/unread stuff
+            if request.user.is_authenticated():
+                readTopics = 0
+                counter = 0
+                for topic in forum.topic_set.all():
+                    counter += 1
+                    if topic.topic_latest_post.edited > request.session['last_visit'] or\
+                            "read_topic_%s" % topic.id in request.session:
+                                readTopics += 1
+                print counter, readTopics
+                if counter == readTopics:
+                    forum.is_read = True
+                else:
+                    forum.is_read = False
 
     usercount = User.objects.count()
     currentdate = datetime.now()
@@ -51,12 +61,13 @@ def forum(request, forum_slug):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topics = forum.topic_set.all().order_by('-sticky', '-topic_latest_post')
 
-    for topic in topics:
-        if topic.topic_latest_post.edited > request.session['last_visit'] and \
-                not topic.id in request.session["read_topics_set"]:
-            topic.is_read = False
-        else:
-            topic.is_read = True
+    if request.user.is_authenticated():
+        for topic in topics:
+            if topic.topic_latest_post.edited > request.session['last_visit'] or\
+                    "read_topic_%s" % topic.id in request.session:
+                topic.is_read = True
+            else:
+                topic.is_read = False
 
     return object_list(request, topics,
                        template_name = 'forum/forum_detail.html',
@@ -73,11 +84,8 @@ def topic(request, forum_slug, topic_id):
     posts = topic.post_set.all().order_by('created')
     news_list = News.objects.filter(status=1).order_by('-update')[:3]
 
-    try:
-        request.session["read_topics_set"].add(topic.id)
-    except:
-        request.session["read_topics_set"] = set()
-        request.session["read_topics_set"].add(topic.id)
+    if request.user.is_authenticated():
+        request.session["read_topic_%s" % topic.id] = True
 
     topic.views += 1
     topic.save()
@@ -350,7 +358,6 @@ def flood_control(request):
 def lastvisit_control(request):
     if not "last_visit" in request.session:
         request.session["last_visit"] = datetime.now()
-        request.session["read_topics_set"] = set()
 
 def delete_post(request,forum_slug,topic_id, post_id):
     """ The delete part should be controlled better !"""
