@@ -44,7 +44,6 @@ def main(request):
                     if topic.topic_latest_post.edited > request.session['last_visit'] or\
                             "read_topic_%s" % topic.id in request.session:
                                 readTopics += 1
-                print counter, readTopics
                 if counter == readTopics:
                     forum.is_read = True
                 else:
