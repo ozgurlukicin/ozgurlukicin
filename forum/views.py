@@ -79,8 +79,10 @@ def forum(request, forum_slug):
 def topic(request, forum_slug, topic_id):
     lastvisit_control(request)
 
-    forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
+    forum = topic.forum
+    if forum.slug != forum_slug:
+        return HttpResponseRedirect(topic.get_absolute_url())
     posts = topic.post_set.all().order_by('created')
     news_list = News.objects.filter(status=1).order_by('-update')[:3]
 
