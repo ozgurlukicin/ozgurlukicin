@@ -359,10 +359,11 @@ def flood_control(request):
     return flood,timeout
 
 def lastvisit_control(request):
-    if not "last_visit" in request.session:
-        request.session["last_visit"] = datetime.now()
-    if not "read_topic_set" in request.session:
-        request.session["read_topic_set"] = set()
+    if request.user.is_authenticated():
+        if not "last_visit" in request.session:
+            request.session["last_visit"] = datetime.now()
+        if not "read_topic_set" in request.session:
+            request.session["read_topic_set"] = set()
 
 def delete_post(request,forum_slug,topic_id, post_id):
     """ The delete part should be controlled better !"""
