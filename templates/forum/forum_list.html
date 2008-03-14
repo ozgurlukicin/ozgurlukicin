@@ -26,7 +26,7 @@
             {% if forum.hidden and not perms.forum.can_see_hidden_forums %}
             {% else %}
             <div id="category_forums_item" {% if forum.hidden %}style="opacity: 0.5;"{% endif %}>
-            <div id="category_forums_item_icon">{% if forum.is_read %}<img src="/media/dijital/img/forum/eski_konu.gif" />{% else %}<img src="/media/dijital/img/forum/topic_unread.png" />{% endif %}</div>
+                <div id="category_forums_item_icon"><img src="/media/dijital/img/forum/topic{% if not forum.is_read %}_unread{% endif %}.png" /></div>
             <div id="category_forums_item_title"><a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a><br />{{ forum.description }}</div>
             <div id="category_forums_item_topics">{{ forum.topics }}</div>
             <div id="category_forums_item_posts">{{ forum.posts }}</div>
