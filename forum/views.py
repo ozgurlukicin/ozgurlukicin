@@ -365,6 +365,7 @@ def lastvisit_control(request):
         if not "read_topic_set" in request.session:
             request.session["read_topic_set"] = set()
 
+@login_required
 def delete_post(request,forum_slug,topic_id, post_id):
     """ The delete part should be controlled better !"""
     forum = get_object_or_404(Forum, slug=forum_slug)
