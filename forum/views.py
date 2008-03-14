@@ -36,15 +36,8 @@ def main(request):
             posts += forum.posts
 
             # read/unread stuff
-            if request.user.is_authenticated():
-                readTopics = 0
-                counter = 0
-                for topic in forum.topic_set.all():
-                    counter += 1
-                    if topic.topic_latest_post.edited > request.session['last_visit'] or\
-                            topic.id in request.session["read_topic_set"]:
-                                readTopics += 1
-                if counter == readTopics:
+            if forum.id in request.session["read_forum_dict"]:
+                if forum.topics == request.session["read_forum_dict"][forum.id]:
                     forum.is_read = True
                 else:
                     forum.is_read = False
@@ -88,6 +81,10 @@ def topic(request, forum_slug, topic_id):
 
     if request.user.is_authenticated() and not topic.id in request.session["read_topic_set"]:
         request.session["read_topic_set"].add(topic.id)
+        if not forum.id in request.session["read_forum_dict"]:
+            request.session["read_forum_dict"][forum.id] = 1
+        else:
+            request.session["read_forum_dict"][forum.id] += 1
         request.session.modified = True
 
     topic.views += 1
@@ -364,6 +361,8 @@ def lastvisit_control(request):
             request.session["last_visit"] = datetime.now()
         if not "read_topic_set" in request.session:
             request.session["read_topic_set"] = set()
+        if not "read_forum_dict" in request.session:
+            request.session["read_forum_dict"] = {}
 
 @login_required
 def delete_post(request,forum_slug,topic_id, post_id):
