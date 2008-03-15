@@ -362,6 +362,7 @@ def flood_control(request):
 def lastvisit_control(request):
     if request.user.is_authenticated():
         if not "last_visit" in request.session:
+            request.session["oi_version"] = 1141
             request.session["last_visit"] = datetime.now()
         if not "read_topic_dict" in request.session:
             request.session["read_topic_dict"] = {}
