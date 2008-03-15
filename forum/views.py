@@ -36,7 +36,7 @@ def main(request):
             posts += forum.posts
 
             # read/unread stuff
-            if forum.id in request.session["read_forum_dict"]:
+            if request.user.is_authenticated() and forum.id in request.session["read_forum_dict"]:
                 if forum.topics == request.session["read_forum_dict"][forum.id]:
                     forum.is_read = True
                 else:
