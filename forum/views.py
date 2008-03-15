@@ -36,8 +36,11 @@ def main(request):
             posts += forum.posts
 
             # read/unread stuff
-            if request.user.is_authenticated() and forum.id in request.session["read_forum_dict"]:
-                if forum.topics == request.session["read_forum_dict"][forum.id]:
+            if request.user.is_authenticated():
+                if forum.id in request.session["read_forum_dict"] and\
+                        forum.forum_latest_post.edited < request.session["read_forum_dict"][forum.id]:
+                    forum.is_read = True
+                elif not forum.forum_latest_post or request.session["last_visit"] > forum.forum_latest_post.edited:
                     forum.is_read = True
                 else:
                     forum.is_read = False
@@ -56,8 +59,12 @@ def forum(request, forum_slug):
 
     if request.user.is_authenticated():
         for topic in topics:
-            if topic.topic_latest_post.edited > request.session['last_visit'] or\
-                    topic.id in request.session["read_topic_set"]:
+            if topic.topic_latest_post.edited > request.session['last_visit'] and\
+                    not topic.id in request.session["read_topic_dict"]:
+                topic.is_read = False
+            elif topic.topic_latest_post.edited < request.session['last_visit'] or\
+                    not topic.id in request.session["read_topic_dict"] or\
+                    request.session["read_topic_dict"][topic.id] > topic.topic_latest_post.edited:
                 topic.is_read = True
             else:
                 topic.is_read = False
@@ -79,12 +86,9 @@ def topic(request, forum_slug, topic_id):
     posts = topic.post_set.all().order_by('created')
     news_list = News.objects.filter(status=1).order_by('-update')[:3]
 
-    if request.user.is_authenticated() and not topic.id in request.session["read_topic_set"]:
-        request.session["read_topic_set"].add(topic.id)
-        if not forum.id in request.session["read_forum_dict"]:
-            request.session["read_forum_dict"][forum.id] = 1
-        else:
-            request.session["read_forum_dict"][forum.id] += 1
+    if request.user.is_authenticated():
+        request.session["read_topic_dict"][topic.id] = datetime.now()
+        request.session["read_forum_dict"][forum.id] = datetime.now()
         request.session.modified = True
 
     topic.views += 1
@@ -359,8 +363,8 @@ def lastvisit_control(request):
     if request.user.is_authenticated():
         if not "last_visit" in request.session:
             request.session["last_visit"] = datetime.now()
-        if not "read_topic_set" in request.session:
-            request.session["read_topic_set"] = set()
+        if not "read_topic_dict" in request.session:
+            request.session["read_topic_dict"] = {}
         if not "read_forum_dict" in request.session:
             request.session["read_forum_dict"] = {}
 
