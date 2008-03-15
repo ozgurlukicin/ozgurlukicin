@@ -3,7 +3,11 @@
 .blue{
 	color:#51798E;
 }
-
+a {
+    color: #0000EE;
+    text-decoration: underline;
+}
+a:visited { color: #551A8B; }
 /*The colors end here */
 
 /* header */
