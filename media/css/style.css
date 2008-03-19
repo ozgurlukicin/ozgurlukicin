@@ -790,6 +790,17 @@ h6 {
     font-size: 10px;
 }
 
+#user_profile {
+    padding: 20px;
+}
+#user_profile_left {
+    float:left;
+    text-align: center;
+}
+#user_profile_right {
+    float:left;
+}
+
 /** PAGINATOR **/
 .paginator { padding:.5em .75em; font:normal .8em arial; }
 

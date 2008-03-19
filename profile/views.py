@@ -70,6 +70,8 @@ def user_profile_edit(request):
 
 def user_profile(request, name):
     info = get_object_or_404(User, username=name)
+    if not info.is_active:
+        del info
     return render_response(request, 'user/profile.html', locals())
 
 def user_register(request):
