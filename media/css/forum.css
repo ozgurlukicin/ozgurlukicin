@@ -351,7 +351,10 @@ border: 1px solid #45586F;
     float: right;
     padding: 10px 10px 0px 0px;
 }
-
+#forum_stats {
+    overflow: hidden;
+    width: 100%;
+}
 .forum_stats_latest_post {
     width: 100%;
     overflow: hidden;
