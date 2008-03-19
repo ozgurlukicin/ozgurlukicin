@@ -16,7 +16,6 @@
 {% endblock %}
 <br/>
 
-
 {% block content %}
         <div id="news_container">
             {% for news in news_list %}
@@ -32,15 +31,13 @@
 {% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div><div class="paginator_description">{{ pages }} sayfada toplam {{ hits }} haber bulunmaktadır.</div></div>{% endif %}
 {% endblock %}
 
-{% block sidebartop %}{% endblock %}
-
 {% block sidebar %}
 {% if seminar %}
 <div id="sidebar_box">
     <div id="sidebar_top">&nbsp;</div>
     <div id="sidebar_middle">
         <h2>Pardus Etkinlikleri</h2>
-        <ul class="sidebar_firststeps">
+        <ul class="sidebar_seminar">
         {% for sem in seminar %}
         <li>
             <div style="padding-bottom: 4px;{% if not forloop.first %} padding-top: 4px; border-top: 1px solid;{% endif %}">
@@ -51,28 +48,6 @@
         </li>
         {% endfor %}
         </ul>
-    </div>
-    <div id="sidebar_bottom">&nbsp;</div>
-</div>
-<div id="sidebar_box">
-    <div id="sidebar_top">&nbsp;</div>
-    <div id="sidebar_middle">
-        <h2>Özgürlükİçin OOXML'e Karşı</h2>
-        <a href="/ooxml/"><img src="/media/ooxml/ooxmlekarsi.png" /></a>
-        <p><a href="/ooxml/">"Özgürlükİçin OOXML'e Hayır!"</a> diyoruz. <a href="/ooxml_banner/">Banner ve düğmelerimizi</a> kullanarak kampanyamıza katkıda bulunabilir ve manifestomuzu destekleyerek siz de OOXML'e hayır diyebilirsiniz.</p>
-        <div id="ooxmlbar" style="width:210px;height:20px;border:1px #6992A6 solid;"><div id="ooxmlbar_completed" style="background-color:#51798E;height:100%;float:left;width:{{ petitionpercent }}%;">&nbsp;</div></div>
-        <p style="font-weight:bold;">Destekleyenler: {{ numberofpetitioners }} / 3000</p>
-    </div>
-    <div id="sidebar_bottom">&nbsp;</div>
-</div>
-<div id="sidebar_box">
-    <div id="sidebar_top">&nbsp;</div>
-    <div id="sidebar_middle">
-        <h2>Özgürlükiçin'i destekleyin</h2>
-        <a href="/banner/"><img src="/media/img/pardus_ozgurluk.png"></a>
-        <p>Pardus'un tanıtımına katkıda bulunmak isteyenler için Özgürlükiçin
-        düğmeleri yayınlandı. Sitenizde, blogunuzda yayınlamak için siz de <a
-            href="/banner/">hazır kodlarımızdan</a> yararlanabilirsiniz.</p>
     </div>
     <div id="sidebar_bottom">&nbsp;</div>
 </div>

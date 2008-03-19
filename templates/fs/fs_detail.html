@@ -34,12 +34,19 @@
 <div id="sidebar_box">
     <div id="sidebar_top">&nbsp;</div>
     <div id="sidebar_middle">
+        <h2>Katkıda bulunun</h2>
+        <p>İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a href="/katki/ilk_adimlar/">buraya</a> tıklayarak size kılavuzluk edecek sayfaya gidebilirsiniz.</p>
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
         <h2>Etiketler</h2>
         <img src="/media/img/tag.png" style="vertical-align: middle;" /> {% for tag in fs.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
     </div>
     <div id="sidebar_bottom">&nbsp;</div>
 </div>
-
 {% if fs.videos.all %}
 <div id="sidebar_box">
     <div id="sidebar_top">&nbsp;</div>

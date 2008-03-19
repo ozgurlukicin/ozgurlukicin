@@ -15,14 +15,11 @@
 {% block section %}howto{% endblock %}
 
 {% block header_menu %}
-    <!-- Burası header kısmı -->
-	{% include "header.html" %}
+    {% include "header.html" %}
 {% endblock %}
 <br/>
 {% block ust_menu %}
-	<!-- Burası üst menü kısmı -->
-	{% include "ust_menu_ayrinti.html" %}
-
+    {% include "ust_menu_ayrinti.html" %}
 {% endblock %}
 <br/>
 
@@ -85,6 +82,16 @@
     <div id="sidebar_middle">
         <h2>Yazar</h2>
         {{ howto.author }}
+    </div>
+    <div id="sidebar_bottom">&nbsp;</div>
+</div>
+<div id="sidebar_box">
+    <div id="sidebar_top">&nbsp;</div>
+    <div id="sidebar_middle">
+        <h2>Katkıda bulunun</h2>
+        <p>Nasıl bölümüne katkıda bulunmak istiyorsanız <a
+            href="/katki/nasil/">buraya</a> tıklayarak size kılavuzluk edecek
+        sayfaya gidebilirsiniz.</p>
     </div>
     <div id="sidebar_bottom">&nbsp;</div>
 </div>

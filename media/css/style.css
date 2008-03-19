@@ -753,6 +753,7 @@ div.post {
     line-height: 12px;
 }
 ul.sidebar_firststeps { list-style-image: url("/media/img/fav.png"); }
+ul.sidebar_seminar { list-style-type: none; }
 ul.sidebar_subscribers { list-style-image: url('/media/img/bt_next.png'); }
 ul.sidebar_planets { list-style-image: url('/media/img/other_planets.png'); }
 
