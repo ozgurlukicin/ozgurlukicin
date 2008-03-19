@@ -389,3 +389,18 @@ border: 1px solid #45586F;
     width: 40%;
     padding: 10px;
 }
+#forum_icons_help {
+    overflow: hidden;
+    width: 100%;
+}
+#forum_icons_help_left {
+    float: left;
+    width: 40%;
+    padding: 10px;
+}
+#forum_icons_help_right {
+    float:right;
+    text-align:left;
+    width: 40%;
+    padding: 10px;
+}
