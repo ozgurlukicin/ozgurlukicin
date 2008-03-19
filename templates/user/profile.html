@@ -17,22 +17,25 @@
 
 {% if info %}
 <div id="user_profile">
-    <h2>Kullanıcı profili: {{ info }}</h2>
+    <h2>{{ info }} ({{ info.date_joined|date:"d F Y" }} tarihinden beri üye)</h2>
     <div id="user_profile_left">
         <h3>Avatar</h3>
         <img src="/media/dijital/img/forum/avatar.jpg" />
     </div>
     <div id="user_profile_right">
-    <ul>
-        <li>Ad: {{ info.first_name }}</li>
-        <li>Soyad: {{ info.last_name }}</li>
-        <li>Kayıt Tarihi: {{ info.date_joined }}</li>
-        {% if info.get_profile.show_email %}<li>E-posta: {{ info.email }}</li>{% endif %}
-        <li>Web: {{ info.get_profile.homepage }}</li>
-        <li>Şehir: {{ info.get_profile.get_city_display }}</li>
-        <li>Anlık Haberleşme: {{ info.get_profile.im }}</li>
-        <li>Doğum günü: {{ info.get_profile.birthday }}</li>
-    </ul>
+        <h3>Kişisel Bilgiler</h3>
+        <ul>
+            <li>Adı: {{ info.first_name }}</li>
+            <li>Soyadı: {{ info.last_name }}</li>
+            <li>Şehir: {{ info.get_profile.get_city_display }}</li>
+            <li>Doğum tarihi: {{ info.get_profile.birthday|date:"d F Y" }}</li>
+        </ul>
+        <h3>İletişim Bilgileri</h3>
+        <ul>
+            {% if info.get_profile.show_email %}<li>E-posta: <a href="mailto:{{ info.email }}">{{ info.email }}</a></li>{% endif %}
+            <li>Web: {{ info.get_profile.homepage }}</li>
+            <li>Jabber: {{ info.get_profile.im }}</li>
+        </ul>
     </div>
 </div>
 {% else %}

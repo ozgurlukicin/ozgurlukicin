@@ -791,14 +791,16 @@ h6 {
 }
 
 #user_profile {
-    padding: 20px;
+    padding: 10px;
 }
 #user_profile_left {
     float:left;
     text-align: center;
+    padding: 10px;
 }
 #user_profile_right {
     float:left;
+    padding: 10px;
 }
 
 /** PAGINATOR **/
