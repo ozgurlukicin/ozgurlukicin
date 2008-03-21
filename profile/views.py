@@ -19,6 +19,7 @@ from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_URL, WEB_URL, PROFILE_EDIT_URL
 
 from oi.profile.models import Profile, RegisterForm, ProfileEditForm, LostPassword, LostPasswordForm, ChangePasswordForm
 from oi.st.wrappers import render_response
+from oi.petition.models import Petitioner
 
 @login_required
 def user_dashboard(request):
@@ -70,6 +71,8 @@ def user_profile_edit(request):
 
 def user_profile(request, name):
     info = get_object_or_404(User, username=name)
+    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
+    petitionpercent = numberofpetitioners / 30
     if not info.is_active:
         del info
     return render_response(request, 'user/profile.html', locals())
