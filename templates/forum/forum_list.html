@@ -26,7 +26,7 @@
             {% if forum.hidden and not perms.forum.can_see_hidden_forums %}
             {% else %}
             <div id="category_forums_item" {% if forum.hidden %}style="opacity: 0.5;"{% endif %}>
-                <div id="category_forums_item_icon"><img src="/media/dijital/img/forum/topic{% if not forum.is_read %}_unread{% endif %}.png" /></div>
+                <div id="category_forums_item_icon"><a href="{{ forum.get_absolute_url }}"><img border=0px"{% if forum.is_read %} src="/media/dijital/img/forum/topic.png" alt="Okunmuş forum" title="Okunmuş forum"{% else %} src="/media/dijital/img/forum/topic_unread.png" alt="Okunmamış forum" title="Okunmamış forum"{% endif %} /></a></div>
             <div id="category_forums_item_title"><a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a><br />{{ forum.description }}</div>
             <div id="category_forums_item_topics">{{ forum.topics }}</div>
             <div id="category_forums_item_posts">{{ forum.posts }}</div>
@@ -63,15 +63,16 @@
 <div id="category_title">Forumdaki simgelerin anlamları</div>
 <div id="forum_icons_help">
     <div>
-        <img src="/media/dijital/img/forum/topic.png" /> Okunmuş forum ya da konu<br />
-        <img src="/media/dijital/img/forum/topic_unread.png" /> Yeni ileti var<br />
+        <img src="/media/dijital/img/forum/topic.png" alt="Okunmuş Konu" title="Okunmuş Konu" /> Okunmuş forum ya da konu<br />
+        <img src="/media/dijital/img/forum/topic_unread.png" alt="Okunmamış Konu" title="Okunmamış Konu" /> Yeni ileti var<br />
     </div>
     <div>
-        <img src="/media/dijital/img/forum/topic_locked.png" /> Yeni iletilere kapalı<br />
-        <img src="/media/dijital/img/forum/topic_sticky.png" /> Sabit (her zaman üstte kalır)<br />
+        <img src="/media/dijital/img/forum/topic_locked.png" alt="Kilitli Konu" title="Kilitli Konu" /> Kilitli (yeni iletilere kapalı)<br />
+        <img src="/media/dijital/img/forum/topic_unread_locked.png" alt="Kilitli ve Okunmamış Konu" title="Kilitli ve Okunmamış Konu" /> Kilitli ve yeni ileti var<br />
     </div>
     <div>
-        <img src="/media/dijital/img/forum/topic_sticky_locked.png" /> Yeni iletilere kapalı ve sabit<br />
+        <img src="/media/dijital/img/forum/topic_sticky.png" alt="Sabit Konu" title="Sabit Konu" /> Sabit (her zaman üstte kalır)<br />
+        <img src="/media/dijital/img/forum/topic_sticky_locked.png" alt="Kilitli ve Sabit Konu" title="Kilitli ve Sabit Konu" /> Kilitli ve sabit<br />
     </div>
 </div>
 {% endblock %}
