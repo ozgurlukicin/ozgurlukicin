@@ -17,7 +17,8 @@ from django.shortcuts import get_object_or_404
 
 from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_URL, WEB_URL, PROFILE_EDIT_URL
 
-from oi.profile.models import Profile, RegisterForm, ProfileEditForm, LostPassword, LostPasswordForm, ChangePasswordForm
+from oi.profile.models import Avatar, Profile, LostPassword
+from oi.profile.forms import RegisterForm, ProfileEditForm, LostPasswordForm, ChangePasswordForm
 from oi.st.wrappers import render_response
 from oi.petition.models import Petitioner
 
@@ -27,29 +28,38 @@ def user_dashboard(request):
 
 @login_required
 def user_profile_edit(request):
+    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
+    petitionpercent = numberofpetitioners / 30
     u = request.user
     if request.method == 'POST':
         form = ProfileEditForm(request.POST)
         form.set_user(u)
 
         if form.is_valid():
-            if len(form.cleaned_data['password']) > 0:
-                u.set_password(form.cleaned_data['password'])
-
             u.first_name = form.cleaned_data['firstname']
             u.last_name = form.cleaned_data['lastname']
             u.email = form.cleaned_data['email']
             u.get_profile().homepage = form.cleaned_data['homepage']
+            u.get_profile().signature = form.cleaned_data['signature']
+            u.get_profile().avatar = Avatar.objects.get(id=form.cleaned_data['avatar'])
             u.get_profile().city = form.cleaned_data['city']
             u.get_profile().birthday = form.cleaned_data['birthday']
             u.get_profile().show_email = form.cleaned_data['show_email']
             u.get_profile().save()
             u.save()
 
-            return render_response(request, 'user/profile_edit.html', {'profile_updated': True,
-                                                                       'form': form})
+            return render_response(request, 'user/profile_edit.html', {
+                'profile_updated': True,
+                "numberofpetitioners": numberofpetitioners,
+                "petitionpercent": petitionpercent,
+                'form': form,
+                })
         else:
-            return render_response(request, 'user/profile_edit.html', {'form': form})
+            return render_response(request, 'user/profile_edit.html', {
+                'form': form,
+                "numberofpetitioners": numberofpetitioners,
+                "petitionpercent": petitionpercent,
+                })
     else:
         # convert returned value "day/month/year"
         get = str(u.get_profile().birthday)
@@ -58,8 +68,10 @@ def user_profile_edit(request):
         birthday = "%s/%s/%s" % (get[2], get[1], get[0])
         default_data = {'firstname': u.first_name,
                         'lastname': u.last_name,
+                        'avatar': u.get_profile().avatar.id,
                         'birthday': birthday,
                         'homepage': u.get_profile().homepage,
+                        'signature': u.get_profile().signature,
                         'city': u.get_profile().city,
                         'email': u.email,
                         'show_email': u.get_profile().show_email}
@@ -67,7 +79,11 @@ def user_profile_edit(request):
         form = ProfileEditForm(default_data)
         form.set_user(request.user)
 
-        return render_response(request, 'user/profile_edit.html', {'form': form})
+        return render_response(request, 'user/profile_edit.html', {
+            "form": form,
+            "numberofpetitioners": numberofpetitioners,
+            "petitionpercent": petitionpercent,
+            })
 
 def user_profile(request, name):
     info = get_object_or_404(User, username=name)
@@ -100,6 +116,7 @@ def user_register(request):
             profile.activation_key = activation_key
             profile.show_email = form.cleaned_data['show_email']
             profile.key_expires = key_expires
+            profile.avatar = Avatar.objects.get(id=1)
             profile.save()
 
             for number in form.cleaned_data['contributes']: # it's ManyToManyField's unique id
