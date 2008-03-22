@@ -43,6 +43,9 @@ def user_profile_edit(request):
             u.get_profile().signature = form.cleaned_data['signature']
             u.get_profile().avatar = Avatar.objects.get(id=form.cleaned_data['avatar'])
             u.get_profile().city = form.cleaned_data['city']
+            u.get_profile().jabber = form.cleaned_data['jabber']
+            u.get_profile().msn = form.cleaned_data['msn']
+            u.get_profile().icq = form.cleaned_data['icq']
             u.get_profile().birthday = form.cleaned_data['birthday']
             u.get_profile().show_email = form.cleaned_data['show_email']
             u.get_profile().save()
@@ -70,6 +73,9 @@ def user_profile_edit(request):
                         'lastname': u.last_name,
                         'avatar': u.get_profile().avatar.id,
                         'birthday': birthday,
+                        'jabber': u.get_profile().jabber,
+                        'msn': u.get_profile().msn,
+                        'icq': u.get_profile().icq,
                         'homepage': u.get_profile().homepage,
                         'signature': u.get_profile().signature,
                         'city': u.get_profile().city,
@@ -117,6 +123,9 @@ def user_register(request):
             profile.show_email = form.cleaned_data['show_email']
             profile.key_expires = key_expires
             profile.avatar = Avatar.objects.get(id=1)
+            profile.jabber = form.cleaned_data['jabber']
+            profile.msn = form.cleaned_data['msn']
+            profile.icq = form.cleaned_data['icq']
             profile.save()
 
             for number in form.cleaned_data['contributes']: # it's ManyToManyField's unique id

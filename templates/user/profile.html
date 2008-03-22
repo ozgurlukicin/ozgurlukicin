@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Kullanıcı: {{ infoname }} -{% endblock %}
+{% block title %}Kullanıcı profili: {{ info }} - {% endblock %}
 
 {% block header_menu %}
     {% include "header.html" %}
@@ -34,7 +34,9 @@
         <ul>
             {% if info.get_profile.show_email %}<li>E-posta: <a href="mailto:{{ info.email }}">{{ info.email }}</a></li>{% endif %}
             <li>Web: {{ info.get_profile.homepage }}</li>
-            <li>Jabber: {{ info.get_profile.im }}</li>
+            <li>Jabber: {{ info.get_profile.jabber }}</li>
+            <li>MSN: {{ info.get_profile.msn }}</li>
+            <li>ICQ: {{ info.get_profile.icq }}</li>
         </ul>
     </div>
 </div>
