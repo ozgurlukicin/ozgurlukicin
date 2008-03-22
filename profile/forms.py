@@ -96,9 +96,6 @@ class ProfileEditForm(forms.Form):
     msn = forms.EmailField(label='MSN', max_length=50, required=False)
     jabber = forms.EmailField(label='Jabber', max_length=50, required=False)
     icq = forms.EmailField(label='ICQ', max_length=50, required=False)
-    #old_password = forms.CharField(label='Eski Parola', widget=forms.PasswordInput, required=False)
-    #password = forms.CharField(label='Parola', widget=forms.PasswordInput, required=False, help_text='Değiştirmek istiyorsanız her ikisini de doldurun')
-    #password_again = forms.CharField(label='Parola (yeniden)', widget=forms.PasswordInput, required=False)
     show_email = forms.BooleanField(label='E-posta Adresini Göster', required=False, help_text='Profil sayfasında diğerleri e-posta adresinizi görsün mü?')
     signature = forms.CharField(label='İmza', widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), required=False, help_text='Forumdaki her iletinizin altında görünecek imzanız (zorunlu değil)')
     avatar = forms.ChoiceField(label='Avatar')
@@ -106,6 +103,53 @@ class ProfileEditForm(forms.Form):
     def __init__(self,*args,**kwargs):
         super(ProfileEditForm, self).__init__(*args, **kwargs)
         self.base_fields['avatar'].choices = [(avatar.id, avatar.name) for avatar in Avatar.objects.all()]
+
+    def set_user(self, user):
+        self.user = user
+
+class LostPasswordForm(forms.Form):
+    username = forms.CharField(label='Kullanıcı adı', max_length=30)
+    email = forms.EmailField(label='E-posta')
+
+    def clean_username(self):
+        # clean old keys when it's requested
+        old_keys = LostPassword.objects.filter(key_expires__lt=datetime.date.today())
+        for key in old_keys: key.delete()
+
+        field_data = self.cleaned_data['username']
+
+        # control username whether it exists or not
+        if len(User.objects.filter(username__iexact=field_data)) == 0:
+            raise forms.ValidationError(u"Böyle bir kullanıcı yok")
+
+        # control if this user has requested a new password
+        if len(LostPassword.objects.filter(user__username__iexact=field_data)) > 0:
+            raise forms.ValidationError(u"Bu kullanıcı daha önce parola isteğinde bulunmuş")
+
+        return field_data
+
+    def clean_email(self):
+        field_data = self.cleaned_data['email']
+
+        if not self.cleaned_data.has_key('username'):
+            return
+        else:
+            username = self.cleaned_data['username']
+
+        # control email if it is correct
+        try:
+            u = User.objects.get(username=username)
+            if u.email != field_data:
+                raise forms.ValidationError(u"E-mail adresi uyuşmuyor")
+        except User.DoesNotExist:
+            pass
+
+        return field_data
+
+class ChangePasswordForm(forms.Form):
+    old_password = forms.CharField(label='Eski Parola', widget=forms.PasswordInput, required=False)
+    password = forms.CharField(label='Parola', widget=forms.PasswordInput, required=False, help_text='Değiştirmek istiyorsanız her ikisini de doldurun')
+    password_again = forms.CharField(label='Parola (Tekrar)', widget=forms.PasswordInput, required=False)
 
     def set_user(self, user):
         self.user = user
@@ -171,46 +215,7 @@ class ProfileEditForm(forms.Form):
         else:
             return ''
 
-class LostPasswordForm(forms.Form):
-    username = forms.CharField(label='Kullanıcı adı', max_length=30)
-    email = forms.EmailField(label='E-posta')
-
-    def clean_username(self):
-        # clean old keys when it's requested
-        old_keys = LostPassword.objects.filter(key_expires__lt=datetime.date.today())
-        for key in old_keys: key.delete()
-
-        field_data = self.cleaned_data['username']
-
-        # control username whether it exists or not
-        if len(User.objects.filter(username__iexact=field_data)) == 0:
-            raise forms.ValidationError(u"Böyle bir kullanıcı yok")
-
-        # control if this user has requested a new password
-        if len(LostPassword.objects.filter(user__username__iexact=field_data)) > 0:
-            raise forms.ValidationError(u"Bu kullanıcı daha önce parola isteğinde bulunmuş")
-
-        return field_data
-
-    def clean_email(self):
-        field_data = self.cleaned_data['email']
-
-        if not self.cleaned_data.has_key('username'):
-            return
-        else:
-            username = self.cleaned_data['username']
-
-        # control email if it is correct
-        try:
-            u = User.objects.get(username=username)
-            if u.email != field_data:
-                raise forms.ValidationError(u"E-mail adresi uyuşmuyor")
-        except User.DoesNotExist:
-            pass
-
-        return field_data
-
-class ChangePasswordForm(forms.Form):
+class ResetPasswordForm(forms.Form):
     password = forms.CharField(label='Parola', widget=forms.PasswordInput, max_length=32, min_length=5)
     password_again = forms.CharField(label='Parola (Tekrar)', widget=forms.PasswordInput, max_length=32, min_length=5)
 

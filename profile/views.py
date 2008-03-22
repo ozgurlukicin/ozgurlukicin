@@ -18,7 +18,7 @@ from django.shortcuts import get_object_or_404
 from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_URL, WEB_URL, PROFILE_EDIT_URL
 
 from oi.profile.models import Avatar, Profile, LostPassword
-from oi.profile.forms import RegisterForm, ProfileEditForm, LostPasswordForm, ChangePasswordForm
+from oi.profile.forms import RegisterForm, ProfileEditForm, LostPasswordForm, ChangePasswordForm, ResetPasswordForm
 from oi.st.wrappers import render_response
 from oi.petition.models import Petitioner
 
@@ -91,6 +91,7 @@ def user_profile_edit(request):
             "petitionpercent": petitionpercent,
             })
 
+@login_required
 def user_profile(request, name):
     info = get_object_or_404(User, username=name)
     numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
@@ -220,8 +221,33 @@ def lost_password(request):
         form = LostPasswordForm()
         return render_response(request, 'user/lostpassword.html', {'form': form})
 
-def change_password(request, key):
-    if len(LostPassword.objects.filter(key=key)) == 0:
+@login_required
+def change_password(request):
+    u = request.user
+    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
+    petitionpercent = numberofpetitioners / 30
+    password_changed = False
+
+    if request.method == 'POST':
+        form = ChangePasswordForm(request.POST)
+        form.user = u
+
+        if form.is_valid() and len(form.cleaned_data['password']) > 0:
+            u.set_password(form.cleaned_data['password'])
+            u.save()
+            password_changed = True
+    else:
+        form = ChangePasswordForm()
+
+    return render_response(request, 'user/password.html', {
+        "form": form,
+        "numberofpetitioners": numberofpetitioners,
+        "petitionpercent": petitionpercent,
+        "password_changed": password_changed,
+        })
+
+def reset_password(request, key):
+    if LostPassword.objects.count() == 0:
         return render_response(request, 'user/change_password.html', {'error': True, 'invalid': True})
 
     lostpwd = LostPassword.objects.get(key=key)
@@ -230,7 +256,7 @@ def change_password(request, key):
         return render_response(request, 'user/change_password.html', {'error': True, 'expired': True})
     else:
         if request.method == 'POST':
-            form = ChangePasswordForm(request.POST)
+            form = ResetPasswordForm(request.POST)
             if form.is_valid():
                 u = User.objects.get(username=lostpwd.user.username)
                 u.set_password(form.cleaned_data['password'])
@@ -240,5 +266,5 @@ def change_password(request, key):
             else:
                 return render_response(request, 'user/change_password.html', {'form': form})
         else:
-            form = ChangePasswordForm()
+            form = ResetPasswordForm()
             return render_response(request, 'user/change_password.html', {'form': form})
