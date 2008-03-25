@@ -15,8 +15,6 @@
     <div id="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a> &#62; {{ topic.title|escape }}</div>
 </div>
 <br />
-<!-- buraya table hali gelcekmis -->
-
 {% for post in post_list %}
 
 {% if post.hidden and not perms.forum.can_see_hidden_posts %}
@@ -25,7 +23,7 @@
 <div id="post_base" {% if post.hidden %}style="opacity: 0.5"{% endif %}>
     <div id="post_profile">
         <span style="font-weight: bold; font-size: 16px;">{{ post.author }}</span>{% if post.author.is_staff %}<span><br />Forum Yöneticisi{% endif %}</span><br/><br/>
-        <!-- post.author.avatar buraya gelecek --><img src="/media/dijital/img/forum/avatar.jpg" /><br/><br/>
+        <img src="{{ post.author.get_profile.avatar.get_file_url }}" alt="avatar" /><br/><br/>
         {% if perms.forum.can_see_post_ip %}({{ post.ip }})<br/><br/>{% endif %}
         Kayıt Tarihi: {{ post.author.date_joined|date:"d-m-Y" }}<br/>
         <a href="/kullanici/profil/{{ post.author }}"><img src="/media/dijital/img/forum/bilgi.jpg" border="0" /></a><br/>
