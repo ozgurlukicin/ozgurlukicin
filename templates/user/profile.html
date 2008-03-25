@@ -17,10 +17,10 @@
 
 {% if info %}
 <div id="user_profile">
-    <h2>{{ info }} ({{ info.date_joined|date:"d F Y" }} tarihinden beri üye)</h2>
+    <h2>{{ info }}</h2>
     <div id="user_profile_left">
         <h3>Avatar</h3>
-        <img src="/media/dijital/img/forum/avatar.jpg" />
+        <img src="{{ info.get_profile.avatar.get_file_url }}" />
     </div>
     <div id="user_profile_right">
         <h3>Kişisel Bilgiler</h3>
@@ -28,7 +28,8 @@
             <li>Adı: {{ info.first_name }}</li>
             <li>Soyadı: {{ info.last_name }}</li>
             <li>Şehir: {{ info.get_profile.get_city_display }}</li>
-            <li>Doğum tarihi: {{ info.get_profile.birthday|date:"d F Y" }}</li>
+            <li>Doğum Tarihi: {{ info.get_profile.birthday|date:"d F Y" }}</li>
+            <li>Kayıt Tarihi: {{ info.date_joined|date:"d F Y" }}</li>
         </ul>
         <h3>İletişim Bilgileri</h3>
         <ul>
