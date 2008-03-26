@@ -17,12 +17,12 @@ from oi.st.forms import XssField
 class TopicForm(forms.Form):
     title = forms.CharField(label='Başlık', required=True, max_length=100, widget=forms.TextInput(attrs={'size': '40',}))
     text = XssField(label='İleti', required=True, widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
-    tags=forms.MultipleChoiceField(label='Etiket', required=True,help_text="CTRL basılı tutarak birden fazla etiket seçebilirsiniz!(En çok 5)")
+    tags = forms.MultipleChoiceField(label='Etiket', required=True,help_text="CTRL basılı tutarak birden fazla etiket seçebilirsiniz!(En çok 5)")
 
     def __init__(self,*args,**kwargs):
         """ It is for topic tihng they are dinamyc"""
-        self.base_fields['tags'].choices=[(tag.name,tag.name) for tag in Tag.objects.all()]
         super(TopicForm, self).__init__(*args, **kwargs)
+        self.fields['tags'].choices=[(tag.name, tag.name) for tag in Tag.objects.all()]
 
     def clean_tags(self):
         field_data = self.cleaned_data['tags']
@@ -43,4 +43,3 @@ class MergeForm(forms.Form):
         """ It is for topic tihng they are dinamyc"""
         super(MergeForm, self).__init__(*args, **kwargs)
         self.base_fields['topic2'].choices=[(topic.id, topic.title) for topic in Topic.objects.all()]
-

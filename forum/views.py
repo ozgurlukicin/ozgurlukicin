@@ -225,6 +225,10 @@ def edit_topic(request, forum_slug, topic_id):
         if form.is_valid() and not flood:
             topic.title = form.cleaned_data['title']
             topic.topic_latest_post = first_post
+            for tag in form.cleaned_data['tags']:
+                t=Tag.objects.get(name=tag)
+                topic.tags.add(t)
+
             topic.save()
 
             first_post.edit_count += 1
@@ -234,7 +238,11 @@ def edit_topic(request, forum_slug, topic_id):
 
             return HttpResponseRedirect(topic.get_absolute_url())
     else:
-        form = TopicForm(auto_id=True, initial={'title': topic.title, 'text': first_post.text})
+        form = TopicForm(auto_id=True, initial={
+            "title": topic.title,
+            "text": first_post.text,
+            "tags": [tag.name for tag in topic.tags.all()],
+            })
 
     return render_response(request, 'forum/new_topic.html', locals())
 
