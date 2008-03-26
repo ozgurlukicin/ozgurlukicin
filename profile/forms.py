@@ -102,7 +102,7 @@ class ProfileEditForm(forms.Form):
 
     def __init__(self,*args,**kwargs):
         super(ProfileEditForm, self).__init__(*args, **kwargs)
-        self.fields['avatar'].choices = [(avatar.file, avatar.name) for avatar in Avatar.objects.all()]
+        self.fields['avatar'].choices = [(avatar.file, avatar.name) for avatar in Avatar.objects.order_by("name")]
 
     def set_user(self, user):
         self.user = user
