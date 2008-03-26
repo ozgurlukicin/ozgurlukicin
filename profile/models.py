@@ -38,9 +38,9 @@ class Avatar(models.Model):
         return self.file
 
     class Admin:
-        list_display = ('file', 'name')
-        ordering = ['name']
-        search_fields = ['file', 'name']
+        list_display = ("name", "file")
+        ordering = ["name"]
+        search_fields = ["name", "file"]
 
     class Meta:
         verbose_name = "Avatar"
