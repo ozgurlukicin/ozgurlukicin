@@ -98,11 +98,11 @@ class ProfileEditForm(forms.Form):
     icq = forms.EmailField(label='ICQ', max_length=50, required=False)
     show_email = forms.BooleanField(label='E-posta Adresini Göster', required=False, help_text='Profil sayfasında diğerleri e-posta adresinizi görsün mü?')
     signature = forms.CharField(label='İmza', widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), required=False, help_text='Forumdaki her iletinizin altında görünecek imzanız (zorunlu değil)')
-    avatar = forms.ChoiceField(label='Avatar')
+    avatar = forms.ChoiceField(label='Avatar', widget=forms.Select(attrs={"onchange":"updateAvatar(this);"}))
 
     def __init__(self,*args,**kwargs):
         super(ProfileEditForm, self).__init__(*args, **kwargs)
-        self.fields['avatar'].choices = [(avatar.id, avatar.name) for avatar in Avatar.objects.all()]
+        self.fields['avatar'].choices = [(avatar.file, avatar.name) for avatar in Avatar.objects.all()]
 
     def set_user(self, user):
         self.user = user

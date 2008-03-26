@@ -15,8 +15,6 @@
 
 <br/>
 
-
-
 {% block content %}
 <br />
 {% if form.errors %}
@@ -28,11 +26,16 @@
 {% endif %}
 
 <br />
-<form method="POST" action=".">
+<script language="JavaScript">
+    function updateAvatar(obj) {
+        document.avatarImage.src = "/media/" + obj[obj.selectedIndex].value;
+    }
+</script>
+<form name="profileEditForm" method="POST" action=".">
     {% for field in form %}
     <dl>
         <dt><label for="id_{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
-        <dt>{{ field }}</dt>
+        <dt>{{ field }}{% ifequal field.name "avatar" %}<br /><img name="avatarImage" src="{{user.get_profile.avatar.get_file_url}}" alt="avatar" />{% endifequal %}</dt>
     </dl>
     {% endfor %}
     <div style="clear:left; text-align:center;"><input type="submit" value="Düzenle" /></div>

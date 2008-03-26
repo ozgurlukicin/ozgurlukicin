@@ -41,7 +41,7 @@ def user_profile_edit(request):
             u.email = form.cleaned_data['email']
             u.get_profile().homepage = form.cleaned_data['homepage']
             u.get_profile().signature = form.cleaned_data['signature']
-            u.get_profile().avatar = Avatar.objects.get(id=form.cleaned_data['avatar'])
+            u.get_profile().avatar = Avatar.objects.get(file=form.cleaned_data['avatar'])
             u.get_profile().city = form.cleaned_data['city']
             u.get_profile().jabber = form.cleaned_data['jabber']
             u.get_profile().msn = form.cleaned_data['msn']
@@ -71,7 +71,7 @@ def user_profile_edit(request):
         birthday = "%s/%s/%s" % (get[2], get[1], get[0])
         default_data = {'firstname': u.first_name,
                         'lastname': u.last_name,
-                        'avatar': u.get_profile().avatar.id,
+                        'avatar': u.get_profile().avatar.file,
                         'birthday': birthday,
                         'jabber': u.get_profile().jabber,
                         'msn': u.get_profile().msn,
