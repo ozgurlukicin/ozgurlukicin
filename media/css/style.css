@@ -880,8 +880,7 @@ input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
 
 input[type=text], input[type=password], textarea {
     padding: 2px;
-    border: 1px solid #D7D7D7;
-    width: 250px;
+    border: 1px solid #D7D7D7
 }
 
 input[type=text]:focus, input[type=password]:focus, textarea:focus {
