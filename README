@@ -1,6 +1,7 @@
 Requires:
  Django environment (Python, Web Server (Apache recommended), mod_python (if Apache preferred), Django*)
  Python Imaging Library (PIL)
+ BeautifulSoup
  DBMS (MySQL recommended)
 
 * We're using r7046 of Django, so use: svn co http://code.djangoproject.com/svn/django/trunk -r7046
