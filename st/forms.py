@@ -1,3 +1,4 @@
+from BeautifulSoup import BeautifulSoup, Comment
 from django import newforms as forms
 import re
 
@@ -9,7 +10,22 @@ class XssField(forms.CharField):
 
     def __init__(self,*args,**kwargs):
         """ Calling the upper function"""
-        super(XssField,self).__init__(*args,**kwargs)
+        super(XssField, self).__init__(*args, **kwargs)
+
+    def clean(self, value):
+        super(XssField, self).clean(value)
+        validTags = "address em p i strong b u a h1 h2 h3 h4 h5 h6 pre br img span sub sup ol ul li".split()
+        validAttrs = "align alt border href src style target title".split()
+        soup = BeautifulSoup(value)
+        comments = soup.findAll(text=lambda text:isinstance(text, Comment))
+        [comment.extract() for comment in comments]
+        for tag in soup.findAll(True):
+            if tag.name not in validTags:
+                tag.hidden = True
+            elif tag.name == "a":
+                tag["target"] = "_blank"
+            tag.attrs = [(attr, val) for attr, val in tag.attrs if attr in validAttrs]
+        return soup.renderContents().decode('utf8')
 
 class CommentForm(forms.Form):
     """ The comment thingy add validation please..."""
