@@ -23,8 +23,8 @@
 <div id="post_base" {% if post.hidden %}style="opacity: 0.5"{% endif %}>
     <div id="post_profile">
         <span style="font-weight: bold; font-size: 16px;">{{ post.author }}</span>{% if post.author.is_staff %}<span><br />Forum Yöneticisi{% endif %}</span><br/><br/>
-        <img src="{{ post.author.get_profile.avatar.get_file_url }}" alt="avatar" /><br/><br/>
-        {% if perms.forum.can_see_post_ip %}({{ post.ip }})<br/><br/>{% endif %}
+        <img src="{{ post.author.get_profile.avatar.get_file_url }}" alt="avatar" /><br/>
+        {% if perms.forum.can_see_post_ip %}({{ post.ip }})<br/>{% endif %}
         Kayıt Tarihi: {{ post.author.date_joined|date:"d-m-Y" }}<br/>
         <a href="/kullanici/profil/{{ post.author }}"><img src="/media/dijital/img/forum/bilgi.jpg" border="0" /></a><br/>
     </div>
