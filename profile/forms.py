@@ -88,6 +88,7 @@ class RegisterForm(forms.Form):
         return field_data
 
 class ProfileEditForm(forms.Form):
+    avatar = forms.ChoiceField(label='Avatar', widget=forms.Select(attrs={"onchange":"updateAvatar(this);"}))
     firstname = forms.CharField(label='Adı', max_length=30)
     lastname = forms.CharField(label='Soyadı', max_length=30)
     birthday = forms.DateField(label='Doğum Tarihi', input_formats=('%d/%m/%Y', '%d/%m/%y'), help_text='23/4/1985 gibi')
@@ -99,7 +100,6 @@ class ProfileEditForm(forms.Form):
     icq = forms.EmailField(label='ICQ', max_length=50, required=False)
     show_email = forms.BooleanField(label='E-posta Adresini Göster', required=False, help_text='Profil sayfasında diğerleri e-posta adresinizi görsün mü?')
     signature = XssField(label='İmza', widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), required=False, help_text='Forumdaki her iletinizin altında görünecek imzanız (html tagları kullanabilirsiniz, en fazla 512 karakter olabilir)', max_length=512)
-    avatar = forms.ChoiceField(label='Avatar', widget=forms.Select(attrs={"onchange":"updateAvatar(this);"}))
 
     def __init__(self,*args,**kwargs):
         super(ProfileEditForm, self).__init__(*args, **kwargs)
