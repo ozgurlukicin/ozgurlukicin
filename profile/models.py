@@ -85,7 +85,7 @@ class Profile(models.Model):
     contributes_summary = models.TextField('Katkı Açıklaması', blank=True)
     activation_key = models.CharField(max_length=40)
     key_expires = models.DateTimeField()
-    signature = models.TextField('İmza', blank=True)
+    signature = models.TextField('İmza', blank=True, max_length=512)
 
     def __str__(self):
         return self.user.username
