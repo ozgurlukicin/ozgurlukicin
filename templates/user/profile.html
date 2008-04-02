@@ -17,9 +17,8 @@
 
 {% if info %}
 <div id="user_profile">
-    <h2>{{ info }}</h2>
     <div id="user_profile_left">
-        <h3>Avatar</h3>
+        <h3>{{ info }}</h3>
         <img src="{{ info.get_profile.avatar.get_file_url }}" />
     </div>
     <div id="user_profile_right">
