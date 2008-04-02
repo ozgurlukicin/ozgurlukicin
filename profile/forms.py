@@ -14,6 +14,7 @@ from django import newforms as forms
 from oi.middleware import threadlocals
 from oi.settings import CITY_LIST
 from oi.st.models import Contribute
+from oi.st.forms import XssField
 from oi.profile.models import *
 
 class RegisterForm(forms.Form):
@@ -97,7 +98,7 @@ class ProfileEditForm(forms.Form):
     jabber = forms.EmailField(label='Jabber', max_length=50, required=False)
     icq = forms.EmailField(label='ICQ', max_length=50, required=False)
     show_email = forms.BooleanField(label='E-posta Adresini Göster', required=False, help_text='Profil sayfasında diğerleri e-posta adresinizi görsün mü?')
-    signature = forms.CharField(label='İmza', widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), required=False, help_text='Forumdaki her iletinizin altında görünecek imzanız (zorunlu değil)', max_length=512)
+    signature = XssField(label='İmza', widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), required=False, help_text='Forumdaki her iletinizin altında görünecek imzanız (html tagları kullanabilirsiniz, en fazla 512 karakter olabilir)', max_length=512)
     avatar = forms.ChoiceField(label='Avatar', widget=forms.Select(attrs={"onchange":"updateAvatar(this);"}))
 
     def __init__(self,*args,**kwargs):
