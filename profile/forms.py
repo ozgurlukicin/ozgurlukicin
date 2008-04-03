@@ -88,7 +88,7 @@ class RegisterForm(forms.Form):
         return field_data
 
 class ProfileEditForm(forms.Form):
-    avatar = forms.ChoiceField(label='Avatar', widget=forms.Select(attrs={"onchange":"updateAvatar(this);"}))
+    avatar = forms.ChoiceField(label='Avatar', widget=forms.Select(attrs={"onchange":"updateAvatar(this)", "onkeyup":"updateAvatar(this)"}))
     firstname = forms.CharField(label='Adı', max_length=30)
     lastname = forms.CharField(label='Soyadı', max_length=30)
     birthday = forms.DateField(label='Doğum Tarihi', input_formats=('%d/%m/%Y', '%d/%m/%y'), help_text='23/4/1985 gibi')
