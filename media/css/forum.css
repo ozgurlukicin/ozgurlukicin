@@ -8,6 +8,10 @@ a {
     text-decoration: underline;
 }
 a:visited { color: #551A8B; }
+a.profile_link {
+    text-decoration: none;
+    color: #333333;
+}
 /*The colors end here */
 
 /* header */

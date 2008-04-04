@@ -30,7 +30,7 @@
         <div id="topics_item_title"><a href="{{ topic.get_absolute_url }}">{{ topic.title|escape }}</a></div>
         <div id="topics_item_posts">{{ topic.posts }}</div>
         <div id="topics_item_views">{{ topic.views }}</div>
-        <div id="topics_item_lastpost">{{ topic.topic_latest_post.edited|date:"d F Y H:i" }}<br />{{ topic.topic_latest_post.author }} <a href="{{ topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" border="0"/></a></div>
+        <div id="topics_item_lastpost">{{ topic.topic_latest_post.edited|date:"d F Y H:i" }}<br /><a href="/kullanici/profil/{{ topic.topic_latest_post.author }}" class="profile_link">{{ topic.topic_latest_post.author }}</a> <a href="{{ topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" border="0"/></a></div>
         <div id="topics_item_rss"><a href="/forum/rss/topic/{{ topic.id }}"><img src="/media/img/bt_next.png" style="border:0px;" /></a></div>
     </div>
     {% endif %}
