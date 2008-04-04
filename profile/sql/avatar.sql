@@ -1,0 +1,16 @@
+INSERT INTO `profile_avatar` (`id` , `name` , `file`) VALUES ('1', 'Pardus 07', 'avatar/pard07.png');
+INSERT INTO `profile_avatar` (`id` , `name` , `file`) VALUES ('2', 'Pardus 02', 'avatar/pard02.png');
+INSERT INTO `profile_avatar` (`id` , `name` , `file`) VALUES ('3', 'Pardus 03', 'avatar/pard03.png');
+INSERT INTO `profile_avatar` (`id` , `name` , `file`) VALUES ('4', 'Pardus 04', 'avatar/pard04.png');
+INSERT INTO `profile_avatar` (`id` , `name` , `file`) VALUES ('5', 'Pardus 05', 'avatar/pard05.png');
+INSERT INTO `profile_avatar` (`id` , `name` , `file`) VALUES ('6', 'Pardus 06', 'avatar/pard06.png');
+INSERT INTO `profile_avatar` (`id` , `name` , `file`) VALUES ('7', 'Pardus 01', 'avatar/pard01.png');
+INSERT INTO `profile_avatar` (`id` , `name` , `file`) VALUES ('8', 'Pardus 08', 'avatar/pard08.png');
+INSERT INTO `profile_avatar` (`id` , `name` , `file`) VALUES ('9', 'Penguen 01', 'avatar/peng01.png');
+INSERT INTO `profile_avatar` (`id` , `name` , `file`) VALUES ('10', 'Penguen 02', 'avatar/peng02.png');
+INSERT INTO `profile_avatar` (`id` , `name` , `file`) VALUES ('11', 'Penguen 03', 'avatar/peng03.png');
+INSERT INTO `profile_avatar` (`id` , `name` , `file`) VALUES ('12', 'Penguen 04', 'avatar/peng04.png');
+INSERT INTO `profile_avatar` (`id` , `name` , `file`) VALUES ('13', 'Penguen 05', 'avatar/peng05.png');
+INSERT INTO `profile_avatar` (`id` , `name` , `file`) VALUES ('14', 'Penguen 06', 'avatar/peng06.png');
+INSERT INTO `profile_avatar` (`id` , `name` , `file`) VALUES ('15', 'Penguen 07', 'avatar/peng07.png');
+INSERT INTO `profile_avatar` (`id` , `name` , `file`) VALUES ('16', 'Penguen 08', 'avatar/peng08.png');

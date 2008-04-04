@@ -76,7 +76,7 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.load_template_source',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = ("oi.context_processors.testing","django.core.context_processors.auth")
+TEMPLATE_CONTEXT_PROCESSORS = ('oi.context_processors.testing', 'django.core.context_processors.auth')
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -185,8 +185,8 @@ CITY_LIST = (
     ('samsun','Samsun'),
     ('siirt','Siirt'),
     ('sinop','Sinop'),
-    ('sivas','Sivas'),
     ('sirnak','Şırnak'),
+    ('sivas','Sivas'),
     ('tekirdag','Tekirdag'),
     ('tokat','Tokat'),
     ('trabzon','Trabzon'),
@@ -194,8 +194,8 @@ CITY_LIST = (
     ('urfa','Urfa'),
     ('usak','Uşak'),
     ('van','Van'),
-    ('yozgat','Yozgat'),
     ('yalova', 'Yalova'),
+    ('yozgat','Yozgat'),
     ('zonguldak','Zonguldak'),
     ('zzyurtdisi', 'Yurtdışı'),
 )

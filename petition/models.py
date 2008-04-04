@@ -11,14 +11,14 @@ from django import newforms as forms
 from oi.settings import CITY_LIST
 
 class Petitioner(models.Model):
-    firstname = models.CharField("Ad", maxlength=30)
-    lastname = models.CharField("Soyad", maxlength=30)
-    city = models.CharField("Şehir", blank=True, choices=CITY_LIST, maxlength=40)
-    job = models.CharField("Meslek", maxlength=30)
-    email = models.EmailField("E-posta", maxlength=50)
+    firstname = models.CharField("Ad", max_length=30)
+    lastname = models.CharField("Soyad", max_length=30)
+    city = models.CharField("Şehir", blank=True, choices=CITY_LIST, max_length=40)
+    job = models.CharField("Meslek", max_length=30)
+    email = models.EmailField("E-posta", max_length=50)
     homepage = models.URLField("Ana Sayfa", blank=True, verify_exists=False, unique=False)
     signed = models.DateTimeField(blank=True, null=True, auto_now_add=True, verbose_name='İmzalama tarihi')
-    activation_key = models.CharField("Etkinleştirme Anahtarı", maxlength=40)
+    activation_key = models.CharField("Etkinleştirme Anahtarı", max_length=40)
     is_active = models.BooleanField("Etkin")
     inform = models.BooleanField("Haberdar Et")
 
@@ -44,7 +44,7 @@ class PetitionForm(forms.Form):
     inform = forms.BooleanField(label="Etkinliklerden haberdar et:", required=False, help_text="Özgürlükİçin'in diğer etkinliklerinden haberdar olmak için işaretleyin.")
 
     def clean_email(self):
-        field_data = self.clean_data["email"]
+        field_data = self.cleaned_data["email"]
 
         if not field_data:
             return ''

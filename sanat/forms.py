@@ -143,13 +143,13 @@ class TemaUploadForm(forms.Form):
     def save(self):
         """ That part is adding the thning to the system"""
 
-        parent_category=self.clean_data['parent_category']
-        license=self.clean_data['license']
-        name=self.clean_data['name']
-        description=self.clean_data['description']
-        screen=self.clean_data['screen']
+        parent_category=self.cleaned_data['parent_category']
+        license=self.cleaned_data['license']
+        name=self.cleaned_data['name']
+        description=self.cleaned_data['description']
+        screen=self.cleaned_data['screen']
         user=screen['user']
-        dosya=self.clean_data['file_up']
+        dosya=self.cleaned_data['file_up']
 
         s=SanatScreen()
         s.save_file_file(screen['filename'],screen['content'])

@@ -31,7 +31,7 @@ class Comment(models.Model):
 
     content_type = models.ForeignKey(ContentType)
     object_id = models.IntegerField(_('object ID'))
-    comment = models.TextField(_('comment'), maxlength=3000)
+    comment = models.TextField(_('comment'), max_length=3000)
     submit_date = models.DateTimeField(_('date/time submitted'), auto_now_add=True)
     is_public = models.BooleanField(_('is public'))
     ip_address = models.IPAddressField(_('ip address'))
@@ -42,16 +42,16 @@ class Comment(models.Model):
         ('comment', 'Comment'),
         ('trackback', 'Trackback'),
     )
-    comment_type = models.CharField(maxlength=10, blank=False, choices=typeChoices, default='comment')
+    comment_type = models.CharField(max_length=10, blank=False, choices=typeChoices, default='comment')
 
     # These fields are used only for comments
-    person_name = models.CharField(_("person's name"), maxlength=50, blank=True)
+    person_name = models.CharField(_("person's name"), max_length=50, blank=True)
     person_email = models.EmailField(_('e-mail address'), blank=True)
     person_www = models.URLField("person's URL", verify_exists=False, blank=True)
 
     # These fields are used only for trackbacks
-    trackback_name = models.CharField(_("blog name"), maxlength=255, blank=True)
-    trackback_title = models.CharField(_('blog entry'), maxlength=255, blank=True)
+    trackback_name = models.CharField(_("blog name"), max_length=255, blank=True)
+    trackback_title = models.CharField(_('blog entry'), max_length=255, blank=True)
     trackback_www = models.URLField('entry URL', verify_exists=False, blank=True)
 
 

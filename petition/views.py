@@ -26,15 +26,15 @@ def petition_sign(request):
             now = datetime.datetime.now()
 
             petitioner = Petitioner(
-                    firstname = form.clean_data['firstname'],
-                    lastname = form.clean_data['lastname'],
-                    city = form.clean_data['city'],
-                    job = form.clean_data['job'],
-                    email = form.clean_data['email'],
-                    homepage = form.clean_data['homepage'],
+                    firstname = form.cleaned_data['firstname'],
+                    lastname = form.cleaned_data['lastname'],
+                    city = form.cleaned_data['city'],
+                    job = form.cleaned_data['job'],
+                    email = form.cleaned_data['email'],
+                    homepage = form.cleaned_data['homepage'],
                     signed = now,
                     is_active = False,
-                    inform = form.clean_data['inform'],
+                    inform = form.cleaned_data['inform'],
                     )
 
             # create key taken from profile/views.py
@@ -55,7 +55,7 @@ onaylama islemini yapiniz.
 Tesekkurler,
 Ozgurlukicin.com"""
 
-            email_to = form.clean_data['email']
+            email_to = form.cleaned_data['email']
 
             send_mail(email_subject, email_body % activation_link, DEFAULT_FROM_EMAIL, [email_to], fail_silently=True)
 

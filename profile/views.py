@@ -17,8 +17,10 @@ from django.shortcuts import get_object_or_404
 
 from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_URL, WEB_URL, PROFILE_EDIT_URL
 
-from oi.profile.models import Profile, RegisterForm, ProfileEditForm, LostPassword, LostPasswordForm, ChangePasswordForm
+from oi.profile.models import Avatar, Profile, LostPassword
+from oi.profile.forms import RegisterForm, ProfileEditForm, LostPasswordForm, ChangePasswordForm, ResetPasswordForm
 from oi.st.wrappers import render_response
+from oi.petition.models import Petitioner
 
 @login_required
 def user_dashboard(request):
@@ -26,29 +28,41 @@ def user_dashboard(request):
 
 @login_required
 def user_profile_edit(request):
+    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
+    petitionpercent = numberofpetitioners / 30
     u = request.user
     if request.method == 'POST':
         form = ProfileEditForm(request.POST)
         form.set_user(u)
 
         if form.is_valid():
-            if len(form.clean_data['password']) > 0:
-                u.set_password(form.clean_data['password'])
-
-            u.first_name = form.clean_data['firstname']
-            u.last_name = form.clean_data['lastname']
-            u.email = form.clean_data['email']
-            u.get_profile().homepage = form.clean_data['homepage']
-            u.get_profile().city = form.clean_data['city']
-            u.get_profile().birthday = form.clean_data['birthday']
-            u.get_profile().show_email = form.clean_data['show_email']
+            u.first_name = form.cleaned_data['firstname']
+            u.last_name = form.cleaned_data['lastname']
+            u.email = form.cleaned_data['email']
+            u.get_profile().homepage = form.cleaned_data['homepage']
+            u.get_profile().signature = form.cleaned_data['signature']
+            u.get_profile().avatar = Avatar.objects.get(file=form.cleaned_data['avatar'])
+            u.get_profile().city = form.cleaned_data['city']
+            u.get_profile().jabber = form.cleaned_data['jabber']
+            u.get_profile().msn = form.cleaned_data['msn']
+            u.get_profile().icq = form.cleaned_data['icq']
+            u.get_profile().birthday = form.cleaned_data['birthday']
+            u.get_profile().show_email = form.cleaned_data['show_email']
             u.get_profile().save()
             u.save()
 
-            return render_response(request, 'user/profile_edit.html', {'profile_updated': True,
-                                                                       'form': form})
+            return render_response(request, 'user/profile_edit.html', {
+                'profile_updated': True,
+                "numberofpetitioners": numberofpetitioners,
+                "petitionpercent": petitionpercent,
+                'form': form,
+                })
         else:
-            return render_response(request, 'user/profile_edit.html', {'form': form})
+            return render_response(request, 'user/profile_edit.html', {
+                'form': form,
+                "numberofpetitioners": numberofpetitioners,
+                "petitionpercent": petitionpercent,
+                })
     else:
         # convert returned value "day/month/year"
         get = str(u.get_profile().birthday)
@@ -57,8 +71,13 @@ def user_profile_edit(request):
         birthday = "%s/%s/%s" % (get[2], get[1], get[0])
         default_data = {'firstname': u.first_name,
                         'lastname': u.last_name,
+                        'avatar': u.get_profile().avatar.file,
                         'birthday': birthday,
+                        'jabber': u.get_profile().jabber,
+                        'msn': u.get_profile().msn,
+                        'icq': u.get_profile().icq,
                         'homepage': u.get_profile().homepage,
+                        'signature': u.get_profile().signature,
                         'city': u.get_profile().city,
                         'email': u.email,
                         'show_email': u.get_profile().show_email}
@@ -66,38 +85,51 @@ def user_profile_edit(request):
         form = ProfileEditForm(default_data)
         form.set_user(request.user)
 
-        return render_response(request, 'user/profile_edit.html', {'form': form})
+        return render_response(request, 'user/profile_edit.html', {
+            "form": form,
+            "numberofpetitioners": numberofpetitioners,
+            "petitionpercent": petitionpercent,
+            })
 
+@login_required
 def user_profile(request, name):
     info = get_object_or_404(User, username=name)
+    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
+    petitionpercent = numberofpetitioners / 30
+    if not info.is_active:
+        del info
     return render_response(request, 'user/profile.html', locals())
 
 def user_register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = User.objects.create_user(form.clean_data['username'], form.clean_data['email'], form.clean_data['password'])
-            user.first_name = form.clean_data['firstname']
-            user.last_name = form.clean_data['lastname']
+            user = User.objects.create_user(form.cleaned_data['username'], form.cleaned_data['email'], form.cleaned_data['password'])
+            user.first_name = form.cleaned_data['firstname']
+            user.last_name = form.cleaned_data['lastname']
             user.is_active = False
             user.save()
 
             # create a key
             salt = sha.new(str(random.random())).hexdigest()[:5]
-            activation_key = sha.new(salt+form.clean_data['username']).hexdigest() # yes, i'm paranoiac
+            activation_key = sha.new(salt+form.cleaned_data['username']).hexdigest() # yes, i'm paranoiac
             key_expires = datetime.datetime.today() + datetime.timedelta(2)
 
             profile = Profile(user=user)
-            profile.homepage = form.clean_data['homepage']
-            profile.birthday = form.clean_data['birthday']
-            profile.city = form.clean_data['city']
-            profile.contributes_summary = form.clean_data['contributes_summary']
+            profile.homepage = form.cleaned_data['homepage']
+            profile.birthday = form.cleaned_data['birthday']
+            profile.city = form.cleaned_data['city']
+            profile.contributes_summary = form.cleaned_data['contributes_summary']
             profile.activation_key = activation_key
-            profile.show_email = form.clean_data['show_email']
+            profile.show_email = form.cleaned_data['show_email']
             profile.key_expires = key_expires
+            profile.avatar = Avatar.objects.get(id=1)
+            profile.jabber = form.cleaned_data['jabber']
+            profile.msn = form.cleaned_data['msn']
+            profile.icq = form.cleaned_data['icq']
             profile.save()
 
-            for number in form.clean_data['contributes']: # it's ManyToManyField's unique id
+            for number in form.cleaned_data['contributes']: # it's ManyToManyField's unique id
                 user.get_profile().contributes.add(number)
 
             now = datetime.datetime.now()
@@ -107,7 +139,7 @@ def user_register(request):
                     'hour': hour,
                     'ip_addr': request.META['REMOTE_ADDR'],
                     'user': user.username,
-                    'link': 'http://www.ozgurlukicin.com/kullanici/onay/%s/%s' % (form.clean_data['username'], activation_key)}
+                    'link': 'http://www.ozgurlukicin.com/kullanici/onay/%s/%s' % (form.cleaned_data['username'], activation_key)}
 
             email_subject = u"Ozgurlukicin.com Kullanıcı Hesabı, %(user)s"
             email_body = u"""Merhaba!
@@ -118,12 +150,12 @@ def user_register(request):
 Tesekkurler,
 Ozgurlukicin.com"""
 
-            email_to = form.clean_data['email']
+            email_to = form.cleaned_data['email']
 
             send_mail(email_subject % email_dict, email_body % email_dict, DEFAULT_FROM_EMAIL, [email_to], fail_silently=True)
 
             return render_response(request, 'user/register_done.html', {'form': form,
-                                                                   'user': form.clean_data['username']})
+                                                                   'user': form.cleaned_data['username']})
         else:
             return render_response(request, 'user/register.html', {'form': form})
     else:
@@ -158,7 +190,7 @@ def lost_password(request):
            salt = sha.new(str(random.random())).hexdigest()[8:]
            key = sha.new(salt).hexdigest()
 
-           u = User.objects.get(username=form.clean_data['username'])
+           u = User.objects.get(username=form.cleaned_data['username'])
            lostpwd = LostPassword(user=u)
            lostpwd.key = key
            lostpwd.key_expires = datetime.datetime.today() + datetime.timedelta(1)
@@ -171,7 +203,7 @@ def lost_password(request):
            email_dict = {'date': date,
                          'hour': hour,
                          'ip': request.META['REMOTE_ADDR'],
-                         'user': form.clean_data['username'],
+                         'user': form.cleaned_data['username'],
                          'link': 'http://www.ozgurlukicin.com/kullanici/kayip/degistir/%s' % key}
 
            email_subject = u"Ozgurlukicin.com Kullanıcı Parolası"
@@ -179,9 +211,9 @@ def lost_password(request):
 %(date)s %(hour)s tarihinde %(ip)s ip adresli bilgisayardan kullanici parola sifirlama istegi gonderildi. Lutfen parolanizi degistirmek icin asagidaki baglantiyi 24 saat icerisinde ziyaret edin.
 
 %(link)s"""
-           email_to = form.clean_data['email']
+           email_to = form.cleaned_data['email']
 
-           send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, email_to, fail_silently=True)
+           send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, [email_to], fail_silently=True)
            return render_response(request, 'user/lostpassword_done.html')
        else:
            return render_response(request, 'user/lostpassword.html', {'form': form})
@@ -189,8 +221,33 @@ def lost_password(request):
         form = LostPasswordForm()
         return render_response(request, 'user/lostpassword.html', {'form': form})
 
-def change_password(request, key):
-    if len(LostPassword.objects.filter(key=key)) == 0:
+@login_required
+def change_password(request):
+    u = request.user
+    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
+    petitionpercent = numberofpetitioners / 30
+    password_changed = False
+
+    if request.method == 'POST':
+        form = ChangePasswordForm(request.POST)
+        form.user = u
+
+        if form.is_valid() and len(form.cleaned_data['password']) > 0:
+            u.set_password(form.cleaned_data['password'])
+            u.save()
+            password_changed = True
+    else:
+        form = ChangePasswordForm()
+
+    return render_response(request, 'user/password.html', {
+        "form": form,
+        "numberofpetitioners": numberofpetitioners,
+        "petitionpercent": petitionpercent,
+        "password_changed": password_changed,
+        })
+
+def reset_password(request, key):
+    if LostPassword.objects.count() == 0:
         return render_response(request, 'user/change_password.html', {'error': True, 'invalid': True})
 
     lostpwd = LostPassword.objects.get(key=key)
@@ -199,15 +256,15 @@ def change_password(request, key):
         return render_response(request, 'user/change_password.html', {'error': True, 'expired': True})
     else:
         if request.method == 'POST':
-            form = ChangePasswordForm(request.POST)
+            form = ResetPasswordForm(request.POST)
             if form.is_valid():
                 u = User.objects.get(username=lostpwd.user.username)
-                u.set_password(form.clean_data['password'])
+                u.set_password(form.cleaned_data['password'])
                 u.save()
                 lostpwd.delete()
                 return render_response(request, 'user/change_password_done.html', {'login_url': LOGIN_URL})
             else:
                 return render_response(request, 'user/change_password.html', {'form': form})
         else:
-            form = ChangePasswordForm()
+            form = ResetPasswordForm()
             return render_response(request, 'user/change_password.html', {'form': form})

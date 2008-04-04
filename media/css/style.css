@@ -171,7 +171,7 @@ a.siyah {
 #content {
     padding: 10px 0px 20px 10px;
     float: left;
-    width: 68%;
+    width: 71%;
 }
 
 .page_title {
@@ -532,32 +532,20 @@ dt {width: 30%; float:left;}
     overflow: hidden;
 }
 
-/*Daha emin değilim ? gerek var mı*/
-ortak_title{
-	font-size: 14px;
-    font-weight: bold;
-    padding-top: 5px;
-    padding-left: 12px;
-    height: 25px;
-    margin-top: 10px;
-}
-
-ortak_title_mini{
-	font-size: 14px;
-    font-weight: bold;
-    padding-top: 5px;
-    padding-left: 12px;
-    height: 25px;
-    margin-top: 10px;
-    width: 280px;
-
-}
-
 /* content */
 #news_container, #howto_container, #packages_container, #games_container {
     overflow: auto;
     width: 100%;
 }
+
+div.news, div.howtos, div.packages, div.games {
+    overflow: hidden;
+    width: 100%;
+}
+
+/*div.news img, div.howtos img, div.packages img, div.games img,
+div.main_news img, div.main_howtos img, div.main_packages img, div.main_games img { margin: 10px; padding: 0px; }*/
+
 .news_title_mini {
     font-size: 14px;
     font-weight: bold;
@@ -565,7 +553,7 @@ ortak_title_mini{
     padding-left: 12px;
     height: 25px;
     margin-top: 10px;
-    width: 280px;
+    width: 293px;
 }
 
 .news_title {
@@ -578,7 +566,7 @@ ortak_title_mini{
 }
 
 .news_content_mini {
-    width: 280px;
+    width: 293px;
     padding-left: 10px;
     padding-right: 16px;
     overflow: auto;
@@ -597,7 +585,7 @@ ortak_title_mini{
     padding-left: 12px;
     height: 25px;
     margin-top: 10px;
-    width: 280px;
+    width: 293px;
 }
 
 .packages_title {
@@ -610,7 +598,7 @@ ortak_title_mini{
 }
 
 .packages_content_mini {
-    width: 280px;
+    width: 293px;
     padding-left: 10px;
     padding-right: 16px;
     overflow: auto;
@@ -629,7 +617,7 @@ ortak_title_mini{
     padding-left: 12px;
     height: 25px;
     margin-top: 10px;
-    width: 280px;
+    width: 293px;
 }
 
 .games_title {
@@ -642,7 +630,7 @@ ortak_title_mini{
 }
 
 .games_content_mini {
-    width: 280px;
+    width: 293px;
     padding-left: 10px;
     padding-right: 16px;
     overflow: auto;
@@ -663,7 +651,7 @@ ortak_title_mini{
     padding-left: 12px;
     height: 25px;
     margin-top: 10px;
-    width: 280px;
+    width: 293px;
 }
 
 .fs_title {
@@ -676,7 +664,7 @@ ortak_title_mini{
 }
 
 .fs_content_mini {
-    width: 280px;
+    width: 293px;
     padding-left: 10px;
     padding-right: 16px;
     overflow: auto;
@@ -695,7 +683,7 @@ ortak_title_mini{
     padding-left: 12px;
     height: 25px;
     margin-top: 10px;
-    width: 280px;
+    width: 293px;
 }
 
 .howtos_title {
@@ -707,7 +695,7 @@ ortak_title_mini{
     margin-top: 10px;
 }
 .howtos_content_mini {
-    width: 280px;
+    width: 293px;
     padding-left: 10px;
     padding-right: 16px;
     overflow: auto;
@@ -716,6 +704,11 @@ ortak_title_mini{
     padding-left: 10px;
     padding-right: 16px;
     overflow: auto;
+}
+
+div.post {
+    width: 100%;
+    overflow: hidden;
 }
 
 /* Sidebar */
@@ -731,7 +724,7 @@ ortak_title_mini{
 #sidebar_top {
     background-image: url('/media/dijital/img/d_tblust.jpg');
     height: 10px;
-    line-height: 0px;
+    line-height: 10px;
 }
 #sidebar_middle {
     background-image: url('/media/dijital/img/d_tblbg.jpg');
@@ -746,15 +739,21 @@ ortak_title_mini{
     text-align: center;
     margin-top: 0px;
 }
-#sidebar_middle ul { margin: 0px 0px 0px -10px; text-align: left; }
+#sidebar_middle ul {
+    margin: 0px 0px 0px 10px;
+    padding: 0px;
+    text-align: left;
+    list-style-position: inside;
+}
 #sidebar_middle form { margin: 0px; }
 #sidebar_middle p { margin: 0px; }
 #sidebar_bottom {
     background-image: url('/media/dijital/img/d_tblalt.jpg');
     height: 12px;
-    line-height: 0px;
+    line-height: 12px;
 }
 ul.sidebar_firststeps { list-style-image: url("/media/img/fav.png"); }
+ul.sidebar_seminar { list-style-type: none; }
 ul.sidebar_subscribers { list-style-image: url('/media/img/bt_next.png'); }
 ul.sidebar_planets { list-style-image: url('/media/img/other_planets.png'); }
 
@@ -789,6 +788,19 @@ h5 {
 
 h6 {
     font-size: 10px;
+}
+
+#user_profile {
+    padding: 10px;
+}
+#user_profile_left {
+    float:left;
+    text-align: center;
+    padding: 10px;
+}
+#user_profile_right {
+    float:left;
+    padding: 10px;
 }
 
 /** PAGINATOR **/

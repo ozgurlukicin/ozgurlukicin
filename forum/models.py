@@ -59,6 +59,7 @@ class Post(models.Model):
         return '/forum/%s/%s/quote/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
 
     def get_edit_url(self):
+        """ returns topic edit url of the post """
         return '/forum/%s/%s/edit/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
 
     def get_hide_url(self):
@@ -139,7 +140,7 @@ class Topic(models.Model):
     Topic model.
     """
     forum = models.ForeignKey('Forum', verbose_name='Forum')
-    title = models.CharField(maxlength=100, verbose_name='Başlık')
+    title = models.CharField(max_length=100, verbose_name='Başlık')
     sticky = models.BooleanField(blank=True, null=True, default=0, verbose_name='Sabit')
     locked = models.BooleanField(blank=True, null=True, default=0, verbose_name='Kilitli')
     hidden = models.BooleanField(blank=True, null=True, default=0, verbose_name='Gizli')
@@ -210,7 +211,7 @@ class Topic(models.Model):
 
 class Forum(models.Model):
     category = models.ForeignKey('Category', null=True, verbose_name='Kategori')
-    name = models.CharField(maxlength=100, verbose_name='İsim')
+    name = models.CharField(max_length=100, verbose_name='İsim')
     slug = models.SlugField(prepopulate_from=('name',), verbose_name='SEF isim')
     description = models.TextField(verbose_name='Açıklama')
     hidden = models.BooleanField(blank=True, null=True, default=0, verbose_name='Gizli')
@@ -248,7 +249,7 @@ class Forum(models.Model):
                       )
 
 class Category(models.Model):
-    name = models.CharField(maxlength=255, verbose_name='Kategori ismi')
+    name = models.CharField(max_length=255, verbose_name='Kategori ismi')
     hidden = models.BooleanField(blank=True, null=True, verbose_name='Gizli')
     order = models.PositiveIntegerField(unique=True, verbose_name='Sıralama')
 

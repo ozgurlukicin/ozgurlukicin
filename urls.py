@@ -98,11 +98,11 @@ tag_dict = {
 
 urlpatterns = patterns('',
 
-	#comments
+    (r'^robots.txt$', 'oi.st.views.robots'),
 
+    #comments
     (r'^comments/post/$', 'oi.comments.views.post_comment'),
     (r'^comments/posted/$', 'oi.comments.views.comment_was_posted'),
-
 
     #News
     #(r'^haber/yorum/(?P<id>\d+)/$', 'oi.st.views.comment_news'),
@@ -110,7 +110,6 @@ urlpatterns = patterns('',
     (r'^haber/$', 'django.views.generic.list_detail.object_list', dict(news_dict)),
     (r'^haber/(?P<slug>.*)/yazdir/$', 'oi.st.views.news_printable'),
     (r'^haber/(?P<slug>.*)/$', 'oi.st.views.news_detail'),
-
 
     #Packages
     (r'^paket/yorum/(?P<slug>.*)/$', 'oi.st.views.comment_package'),

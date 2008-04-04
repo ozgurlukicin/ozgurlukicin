@@ -21,7 +21,7 @@ from django.dispatch import dispatcher
 from oi.st.signals import open_forum_topic, remove_video_thumbnail_on_delete
 
 class Tag(models.Model):
-    name = models.CharField('Etiket', maxlength=32, blank=False, unique=True)
+    name = models.CharField('Etiket', max_length=32, blank=False, unique=True)
 
     def __str__(self):
         return self.name
@@ -40,7 +40,7 @@ class Tag(models.Model):
         verbose_name_plural = "Etiketler"
 
 class Wiki(models.Model):
-    name = models.CharField('Madde adı', maxlength=128, blank=False, unique=True)
+    name = models.CharField('Madde adı', max_length=128, blank=False, unique=True)
 
     def __str__(self):
         return self.name
@@ -59,7 +59,7 @@ class Wiki(models.Model):
         verbose_name_plural = "Wiki sayfaları"
 
 class Contribute(models.Model):
-    name = models.CharField('Tanım', maxlength=64, blank=False, unique=True)
+    name = models.CharField('Tanım', max_length=64, blank=False, unique=True)
 
     def __str__(self):
         return self.name
@@ -107,7 +107,7 @@ class ScreenShot(models.Model):
         verbose_name_plural = "Ekran Görüntüleri"
 
 class Video(models.Model):
-    desc = models.CharField('Açıklama', maxlength=64)
+    desc = models.CharField('Açıklama', max_length=64)
     file = models.FileField(upload_to='upload/video/')
     tags = models.ManyToManyField(Tag)
 
@@ -161,7 +161,7 @@ class Video(models.Model):
 dispatcher.connect(remove_video_thumbnail_on_delete, signal=signals.pre_delete, sender=Video)
 
 class License(models.Model):
-    name = models.CharField(maxlength=16, blank=False, unique=True)
+    name = models.CharField(max_length=16, blank=False, unique=True)
     url = models.URLField()
 
     def __str__(self):
@@ -175,14 +175,14 @@ class License(models.Model):
         verbose_name_plural = "Lisanslar"
 
 class FS(models.Model):
-    title = models.CharField('Başlık', maxlength=32, blank=False)
+    title = models.CharField('Başlık', max_length=32, blank=False)
     slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
     tags = models.ManyToManyField(Tag, blank=False)
     videos = models.ManyToManyField(Video, blank=True)
     update = models.DateTimeField('Son Güncelleme', blank=False)
-    author = models.CharField('Yazar', maxlength=32)
+    author = models.CharField('Yazar', max_length=32)
     order = models.PositiveIntegerField(unique=True, verbose_name='Sıralama')
     status = models.BooleanField('Aktif')
 
@@ -212,7 +212,7 @@ class FS(models.Model):
         verbose_name_plural = "İlk Adımlar"
 
 class HowTo(models.Model):
-    title = models.CharField('Başlık', maxlength=32, blank=False)
+    title = models.CharField('Başlık', max_length=32, blank=False)
     slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
@@ -220,7 +220,7 @@ class HowTo(models.Model):
     wiki = models.ManyToManyField(Wiki, blank=True)
     videos = models.ManyToManyField(Video, blank=True)
     update = models.DateTimeField('Son Güncelleme', blank=False)
-    author = models.CharField('Yazar', maxlength=32)
+    author = models.CharField('Yazar', max_length=32)
     status = models.BooleanField('Aktif')
 
     def __str__(self):
@@ -253,7 +253,7 @@ dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=HowTo)
 class Game(models.Model):
     ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'))
 
-    title = models.CharField('Başlık', maxlength=32, blank=False)
+    title = models.CharField('Başlık', max_length=32, blank=False)
     slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
@@ -261,18 +261,18 @@ class Game(models.Model):
     installed_size = models.IntegerField('Kurulu boyut', help_text='Byte cinsinden')
     download_size = models.IntegerField('İndirilecek boyut', help_text='Byte cinsinden')
     url = models.URLField('Sitesi', verify_exists=True, help_text='Başına http:// koymayı unutmayın')
-    path = models.CharField('Çalıştırma Yolu', maxlength=128, help_text='Paketin Pardus menüsündeki yeri (örn. Programlar > Yardımcı Programlar > KNazar)')
-    gameplay = models.SmallIntegerField('Oynanabilirlik', maxlength=1, choices=ratings)
-    graphics = models.SmallIntegerField('Grafik', maxlength=1, choices=ratings)
-    sound = models.SmallIntegerField('Ses', maxlength=1, choices=ratings)
-    scenario = models.SmallIntegerField('Senaryo', maxlength=1, choices=ratings)
-    atmosphere = models.SmallIntegerField('Atmosfer', maxlength=1, choices=ratings)
-    learning_time = models.CharField('Öğrenme Süresi', maxlength=128, help_text='1 gün, 3 saat, 5 ay, yıllarca gibi.')
+    path = models.CharField('Çalıştırma Yolu', max_length=128, help_text='Paketin Pardus menüsündeki yeri (örn. Programlar > Yardımcı Programlar > KNazar)')
+    gameplay = models.SmallIntegerField('Oynanabilirlik', max_length=1, choices=ratings)
+    graphics = models.SmallIntegerField('Grafik', max_length=1, choices=ratings)
+    sound = models.SmallIntegerField('Ses', max_length=1, choices=ratings)
+    scenario = models.SmallIntegerField('Senaryo', max_length=1, choices=ratings)
+    atmosphere = models.SmallIntegerField('Atmosfer', max_length=1, choices=ratings)
+    learning_time = models.CharField('Öğrenme Süresi', max_length=128, help_text='1 gün, 3 saat, 5 ay, yıllarca gibi.')
     tags = models.ManyToManyField(Tag, blank=False)
     wiki = models.ManyToManyField(Wiki, blank=True)
     videos = models.ManyToManyField(Video, blank=True)
     update = models.DateTimeField('Son Güncelleme', blank=False)
-    author = models.CharField('Yazar', maxlength=32)
+    author = models.CharField('Yazar', max_length=32)
     status = models.BooleanField('Aktif')
 
     def __str__(self):
@@ -304,13 +304,13 @@ class Game(models.Model):
 dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=Game)
 
 class News(models.Model):
-    title = models.CharField('Başlık', maxlength=32, blank=False)
+    title = models.CharField('Başlık', max_length=32, blank=False)
     slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
     tags = models.ManyToManyField(Tag, blank=False)
     update = models.DateTimeField('Tarih', blank=False)
-    author = models.CharField('Yazar', maxlength=32)
+    author = models.CharField('Yazar', max_length=32)
     status = models.BooleanField('Aktif')
 
     def __str__(self):
@@ -343,7 +343,7 @@ dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=News)
 class Package(models.Model):
     ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'))
 
-    title = models.CharField('Başlık', maxlength=32, blank=False, help_text='Paket ismi')
+    title = models.CharField('Başlık', max_length=32, blank=False, help_text='Paket ismi')
     slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Açıklama', blank=False)
@@ -351,14 +351,14 @@ class Package(models.Model):
     installed_size = models.IntegerField('Kurulu boyut', help_text='Byte cinsinden')
     download_size = models.IntegerField('İndirilecek boyut', help_text='Byte cinsinden')
     url = models.URLField('Sitesi', verify_exists=True, help_text='Başına http:// koymayı unutmayın')
-    point = models.SmallIntegerField('Editör Notu', maxlength=1, choices=ratings)
-    path = models.CharField('Çalıştırma Yolu', maxlength=128, help_text='Paketin Pardus menüsündeki yeri (örn. Programlar > Yardımcı Programlar > KNazar)')
+    point = models.SmallIntegerField('Editör Notu', max_length=1, choices=ratings)
+    path = models.CharField('Çalıştırma Yolu', max_length=128, help_text='Paketin Pardus menüsündeki yeri (örn. Programlar > Yardımcı Programlar > KNazar)')
     ss = models.ManyToManyField(ScreenShot)
     tags = models.ManyToManyField(Tag)
     wiki = models.ManyToManyField(Wiki, blank=True)
     videos = models.ManyToManyField(Video, blank=True)
     update = models.DateTimeField('Son Güncelleme', blank=False)
-    author = models.CharField('Yazar', maxlength=32)
+    author = models.CharField('Yazar', max_length=32)
     status = models.BooleanField('Aktif')
 
     def __str__(self):
@@ -388,15 +388,15 @@ class Package(models.Model):
 dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=Package)
 
 class PardusVersion(models.Model):
-    number = models.CharField('Sürüm numarası', maxlength = 16, blank = False, unique = True)
-    codename = models.CharField('Kod adı', maxlength = 64, unique = True)
-    install_md5sum = models.CharField('Kurulan md5 özeti', maxlength = 32, blank = False, unique = True)
-    install_sha1sum = models.CharField('Kurulan sha1 özeti', maxlength = 40, blank = False, unique = True)
-    live_md5sum = models.CharField('Çalışan md5 özeti', maxlength = 32, blank = False, unique = True)
-    live_sha1sum = models.CharField('Çalışan sha1 özeti', maxlength = 40, blank = False, unique = True)
+    number = models.CharField('Sürüm numarası', max_length = 16, blank = False, unique = True)
+    codename = models.CharField('Kod adı', max_length = 64, unique = True)
+    install_md5sum = models.CharField('Kurulan md5 özeti', max_length = 32, blank = False, unique = True)
+    install_sha1sum = models.CharField('Kurulan sha1 özeti', max_length = 40, blank = False, unique = True)
+    live_md5sum = models.CharField('Çalışan md5 özeti', max_length = 32, blank = False, unique = True)
+    live_sha1sum = models.CharField('Çalışan sha1 özeti', max_length = 40, blank = False, unique = True)
     releasenote = models.TextField('Sürüm notu', blank = False)
-    install_torrent = models.CharField('Kurulan Torrent', maxlength = 128)
-    live_torrent = models.CharField('Çalışan Torrent', maxlength = 128)
+    install_torrent = models.CharField('Kurulan Torrent', max_length = 128)
+    live_torrent = models.CharField('Çalışan Torrent', max_length = 128)
     status = models.BooleanField('Aktif')
 
     def __str__(self):
@@ -418,9 +418,9 @@ class PardusVersion(models.Model):
 class PardusMirror(models.Model):
     cdtype = (('1','Kurulan'),('2','Çalışan'))
 
-    name = models.CharField('Sunucu adı', maxlength = 64, blank = False)
-    url = models.CharField('Adres', maxlength = 128)
-    type = models.SmallIntegerField('CD Tipi', maxlength=1, choices=cdtype)
+    name = models.CharField('Sunucu adı', max_length = 64, blank = False)
+    url = models.CharField('Adres', max_length = 128)
+    type = models.SmallIntegerField('CD Tipi', max_length=1, choices=cdtype)
     order = models.PositiveIntegerField(verbose_name='Sıralama')
     status = models.BooleanField('Aktif')
 

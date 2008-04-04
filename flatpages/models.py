@@ -12,13 +12,13 @@ from oi.st.models import Tag
 from oi.middleware import threadlocals
 
 class FlatPage(models.Model):
-    url = models.CharField('URL', maxlength=100, validator_list=[validators.isAlphaNumericURL])
-    title = models.CharField('Başlık', maxlength=200)
+    url = models.CharField('URL', max_length=100, validator_list=[validators.isAlphaNumericURL])
+    title = models.CharField('Başlık', max_length=200)
     text = models.TextField('Metin')
     author = models.ForeignKey(User, blank=True, editable=False)
     tags = models.ManyToManyField(Tag)
     update = models.DateTimeField('Tarih', blank=False)
-    template_name = models.CharField('Şablon adı', maxlength=70, blank=True)
+    template_name = models.CharField('Şablon adı', max_length=70, blank=True)
 
     class Meta:
         verbose_name = 'Statik sayfa'

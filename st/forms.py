@@ -1,32 +1,32 @@
+from BeautifulSoup import BeautifulSoup, Comment
 from django import newforms as forms
 import re
 
 class SearchForm(forms.Form):
     term = forms.CharField(label='Anahtar kelime', required=True, widget=forms.TextInput(attrs={'size': '40',}))
 
-
 class XssField(forms.CharField):
     """ That one will validate the screen upload things"""
 
     def __init__(self,*args,**kwargs):
         """ Calling the upper function"""
-        super(XssField,self).__init__(*args,**kwargs)
+        super(XssField, self).__init__(*args, **kwargs)
 
-    def clean(self,value):
-        #for filtering malicious code
-        from oi.forum.stripogram import html2text,html2safehtml
-
-        if self.required and not value:
-            raise forms.ValidationError(_(u'Bos birakilamaz'))
-
-        #strip the tags we dont want
-        value=html2safehtml(value,valid_tags=('a','b','i','li','img','ul', 'h1', 'h2', 'h3', 'h4', 'h5','title'))
-
-        if not value:
-            raise forms.ValidationError(_(u'Xss mi lutfen ama !'))
-
-        return value
+    def clean(self, value):
+        super(XssField, self).clean(value)
+        validTags = "address em p i strong b u a h1 h2 h3 h4 h5 h6 pre br img span sub sup ol ul li".split()
+        validAttrs = "align alt border href src style target title".split()
+        soup = BeautifulSoup(value)
+        comments = soup.findAll(text=lambda text:isinstance(text, Comment))
+        [comment.extract() for comment in comments]
+        for tag in soup.findAll(True):
+            if tag.name not in validTags:
+                tag.hidden = True
+            elif tag.name == "a":
+                tag["target"] = "_blank"
+            tag.attrs = [(attr, val) for attr, val in tag.attrs if attr in validAttrs]
+        return soup.renderContents().decode('utf8')
 
 class CommentForm(forms.Form):
-    """ The comment thngyy add validation please..."""
-    yorum=XssField(label="Yorum",required=True,max_length=100,widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
+    """ The comment thingy add validation please..."""
+    yorum=XssField(label="Yorum",required=True,max_length=1000,widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))

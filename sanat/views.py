@@ -214,7 +214,7 @@ def vote_it(request):
 
 		if vf.is_valid():
 
-			fv=vf.clean_data['vote']
+			fv=vf.cleaned_data['vote']
 
 			if dosya.rate==0:
 				dosya.rate=int(fv)

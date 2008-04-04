@@ -16,7 +16,7 @@ STATUS_CODES = (
     )
 
 class Bug(models.Model):
-    title = models.CharField(maxlength=100)
+    title = models.CharField(max_length=100)
     submitted_date = models.DateField(auto_now_add=True)
     submitter = models.ForeignKey(User, related_name="submitter")
     assigned_to = models.ForeignKey(User)

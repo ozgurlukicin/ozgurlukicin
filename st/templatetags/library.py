@@ -4,7 +4,7 @@ import os, Image
 from datetime import datetime
 from django.template import Library
 from django.utils.timesince import timesince
-from oi.settings import MEDIA_ROOT, MEDIA_URL, CITY_LIST
+from oi.settings import MEDIA_ROOT, MEDIA_URL
 
 register = Library()
 
@@ -65,17 +65,3 @@ def timedelta(value, arg=None):
         return "%s sonra" % timesince(cmp,value)
     else:
         return "%s önce" % timesince(value,cmp)
-
-@register.filter
-def cityname(value, arg=None):
-    # binary search the city name
-    i = 0
-    j = len(CITY_LIST)
-    k = (i + j) / 2
-    while i < j:
-        k = (i + j) / 2
-        if value > CITY_LIST[k][0]:
-            i = k + 1
-        else:
-            j = k
-    return CITY_LIST[i][1]

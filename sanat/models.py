@@ -21,7 +21,7 @@ class Category(models.Model):
 	neseted in each other a tree hieararchy.."""
 
 	#100 is enough for now
-	cat_name=models.CharField(maxlength=100,verbose_name="Kategori adı",unique=True)
+	cat_name=models.CharField(max_length=100,verbose_name="Kategori adı",unique=True)
 	#if they are nested it is needed
 	slug=models.SlugField(verbose_name="SEF Başlık",prepopulate_from=("cat_name",))
 	parent_id=models.IntegerField(verbose_name="Ebeveyn Kategori",default=0)
@@ -109,9 +109,9 @@ class Dosya(models.Model):
 	screens=models.ManyToManyField(SanatScreen,verbose_name="Görüntüler",blank=True)
 	file_data=models.ManyToManyField(ArsivDosya,verbose_name="İçerik Dosyası",blank=True)
 
-	name=models.CharField(maxlength=100,unique=True,verbose_name="Dosya ismi")
+	name=models.CharField(max_length=100,unique=True,verbose_name="Dosya ismi")
 	description=models.TextField(verbose_name="Açıklama")
-	rate=models.FloatField(verbose_name="Puan",default=0,max_digits=2, decimal_places=1)
+	rate=models.DecimalField(verbose_name="Puan",default=0, max_digits=2, decimal_places=1)
 	state=models.BooleanField(verbose_name="Yayınla",default=False)
 	counter= models.IntegerField(verbose_name="Sayaç",default=0)
 	update=models.DateField(auto_now=True,verbose_name="Yayın Tarihi")

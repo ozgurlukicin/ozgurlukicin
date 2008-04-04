@@ -22,12 +22,10 @@ atom_dict = {
             }
 
 urlpatterns = patterns('',
-
     (r'^$', 'oi.forum.views.main'),
     (r'^rss/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': rss_dict}),
     (r'^atom/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': atom_dict}),
 
-    
     (r'^(?P<forum_slug>.*)/(?P<topic_id>\d+)/delete/(?P<post_id>\d+)/$','oi.forum.views.delete_post'),
     (r'^(?P<forum_slug>.*)/new/$', 'oi.forum.views.new_topic'),
     (r'^(?P<forum_slug>.*)/(?P<topic_id>\d+)/quote/(?P<post_id>\d+)/$', 'oi.forum.views.reply'),
@@ -41,6 +39,4 @@ urlpatterns = patterns('',
     (r'^(?P<forum_slug>.*)/(?P<topic_id>\d+)/edit/$', 'oi.forum.views.edit_topic'),
     (r'^(?P<forum_slug>.*)/(?P<topic_id>\d+)/$', 'oi.forum.views.topic'),
     (r'^(?P<forum_slug>.*)/$', 'oi.forum.views.forum'),
-
-
 )

@@ -10,8 +10,8 @@ from django.db import models
 from oi.settings import CITY_LIST
 
 class Place(models.Model):
-    name = models.CharField('Seminer Yeri', maxlength=64, blank=False, unique=True)
-    city = models.CharField('Şehir', choices=CITY_LIST, maxlength=40)
+    name = models.CharField('Seminer Yeri', max_length=64, blank=False, unique=True)
+    city = models.CharField('Şehir', choices=CITY_LIST, max_length=40)
     direction = models.TextField('Adres Tarifi', blank=False)
     phone = models.PhoneNumberField('Telefon')
 
@@ -29,7 +29,7 @@ class Place(models.Model):
         verbose_name_plural = "Seminer Yerleri"
 
 class Attender(models.Model):
-    name = models.CharField('Konuşmacı', maxlength=64, blank=False, unique=True)
+    name = models.CharField('Konuşmacı', max_length=64, blank=False, unique=True)
 
     def __str__(self):
         return self.name
@@ -45,7 +45,7 @@ class Attender(models.Model):
         verbose_name_plural = "Konuşmacılar"
 
 class Seminar(models.Model):
-    description = models.CharField('Seminer tanımı', maxlength = 64, blank = False, unique = True)
+    description = models.CharField('Seminer tanımı', max_length = 64, blank = False, unique = True)
     place = models.ForeignKey(Place)
     attender = models.ManyToManyField(Attender)
     date = models.DateField('Tarih', blank=False)

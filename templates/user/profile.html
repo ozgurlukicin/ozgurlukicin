@@ -1,16 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %}Kullanıcı: {{ infoname }} -{% endblock %}
+{% block title %}Kullanıcı profili: {{ info }} - {% endblock %}
 
 {% block header_menu %}
-    <!-- Burası header kısmı -->
-	{% include "header.html" %}
+    {% include "header.html" %}
 {% endblock %}
 <br/>
 {% block ust_menu %}
-	<!-- Burası üst menü kısmı -->
-	{% include "ust_menu_ayrinti.html" %}
-
+    {% include "ust_menu_ayrinti.html" %}
 {% endblock %}
 
 <br/>
@@ -19,14 +16,32 @@
 {% block content %}
 
 {% if info %}
-
-Ad: {{ info.first_name }} <br />
-Web: {{ info.get_profile.homepage }} <br />
-
+<div id="user_profile">
+    <div id="user_profile_left">
+        <h3>{{ info }}</h3>
+        <img src="{{ info.get_profile.avatar.get_file_url }}" />
+    </div>
+    <div id="user_profile_right">
+        <h3>Kişisel Bilgiler</h3>
+        <ul>
+            <li>Adı: {{ info.first_name }}</li>
+            <li>Soyadı: {{ info.last_name }}</li>
+            <li>Şehir: {{ info.get_profile.get_city_display }}</li>
+            <li>Doğum Tarihi: {{ info.get_profile.birthday|date:"d F Y" }}</li>
+            <li>Kayıt Tarihi: {{ info.date_joined|date:"d F Y" }}</li>
+        </ul>
+        <h3>İletişim Bilgileri</h3>
+        <ul>
+            {% if info.get_profile.show_email %}<li>E-posta: <a href="mailto:{{ info.email }}">{{ info.email }}</a></li>{% endif %}
+            <li>Web: <a href="{{ info.get_profile.homepage }}" target="_blank">{{ info.get_profile.homepage }}</a></li>
+            <li>Jabber: {{ info.get_profile.jabber }}</li>
+            <li>MSN: {{ info.get_profile.msn }}</li>
+            <li>ICQ: {{ info.get_profile.icq }}</li>
+        </ul>
+    </div>
+</div>
 {% else %}
-
 Böyle bir kullanıcı yok! <br />
-
 {% endif %}
 
 {% endblock %}

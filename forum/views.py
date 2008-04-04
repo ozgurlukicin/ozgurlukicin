@@ -18,29 +18,58 @@ from oi.forum.forms import *
 
 from oi.st.wrappers import render_response
 from oi.forum.models import Category, Forum, Topic, Post, AbuseReport, WatchList
+from oi.forum import customgeneric
 
 from django.core.urlresolvers import reverse
-from oi.st.models import Tag
+from oi.st.models import Tag, News
 
 def main(request):
+    lastvisit_control(request)
+
     categories = Category.objects.order_by('order')
+    categories = [(category, category.forum_set.all()) for category in categories]
     forums = topics = posts = 0
     for category in categories:
-        for forum in category.forum_set.all():
+        for forum in category[1]:
             forums += 1
             topics += forum.topics
             posts += forum.posts
+
+            # read/unread stuff
+            if request.user.is_authenticated():
+                if forum.id in request.session["read_forum_dict"] and\
+                        forum.forum_latest_post.edited < request.session["read_forum_dict"][forum.id]:
+                    forum.is_read = True
+                elif not forum.forum_latest_post or request.session["last_visit"] > forum.forum_latest_post.edited:
+                    forum.is_read = True
+                else:
+                    forum.is_read = False
+
     usercount = User.objects.count()
     currentdate = datetime.now()
-    latest_posts = Post.objects.all().filter(hidden=False).order_by('-edited')[:5]
+    latest_posts = Post.objects.filter(hidden=False).order_by("-created")[:5]
 
     return render_response(request, 'forum/forum_list.html', locals())
 
 def forum(request, forum_slug):
+    lastvisit_control(request)
+
     forum = get_object_or_404(Forum, slug=forum_slug)
     topics = forum.topic_set.all().order_by('-sticky', '-topic_latest_post')
 
-    return object_list(request, topics,
+    if request.user.is_authenticated():
+        for topic in topics:
+            if topic.topic_latest_post.edited > request.session['last_visit'] and\
+                    not topic.id in request.session["read_topic_dict"]:
+                topic.is_read = False
+            elif topic.topic_latest_post.edited < request.session['last_visit'] or\
+                    not topic.id in request.session["read_topic_dict"] or\
+                    request.session["read_topic_dict"][topic.id] > topic.topic_latest_post.edited:
+                topic.is_read = True
+            else:
+                topic.is_read = False
+
+    return customgeneric.object_list(request, topics,
                        template_name = 'forum/forum_detail.html',
                        template_object_name = 'topic',
                        extra_context = {'forum': forum},
@@ -48,14 +77,19 @@ def forum(request, forum_slug):
                        allow_empty = True)
 
 def topic(request, forum_slug, topic_id):
-    forum = get_object_or_404(Forum, slug=forum_slug)
+    lastvisit_control(request)
+
     topic = get_object_or_404(Topic, pk=topic_id)
+    forum = topic.forum
+    if forum.slug != forum_slug:
+        return HttpResponseRedirect(topic.get_absolute_url())
     posts = topic.post_set.all().order_by('created')
+    news_list = News.objects.filter(status=1).order_by('-update')[:3]
 
-    session_key = 'visited_'+topic_id
-
-    if request.user.is_authenticated() and not session_key in request.session:
-        request.session[session_key] = True
+    if request.user.is_authenticated():
+        request.session["read_topic_dict"][topic.id] = datetime.now()
+        request.session["read_forum_dict"][forum.id] = datetime.now()
+        request.session.modified = True
 
     topic.views += 1
     topic.save()
@@ -63,7 +97,7 @@ def topic(request, forum_slug, topic_id):
     return object_list(request, posts,
                        template_name = 'forum/topic.html',
                        template_object_name = 'post',
-                       extra_context = {'forum': forum, 'topic': topic,},
+                       extra_context = {'forum': forum, 'topic': topic, 'news_list':news_list, 'request': request},
                        paginate_by = POSTS_PER_PAGE,
                        allow_empty = True)
 
@@ -72,7 +106,7 @@ def reply(request, forum_slug, topic_id, post_id=False):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
 
-    posts = topic.post_set.all().order_by('-created')
+    posts = topic.post_set.all().order_by('-created')[:POSTS_PER_PAGE]
 
     if forum.locked or topic.locked:
         return HttpResponse("Forum or topic is locked") #FIXME: Give an error message
@@ -85,7 +119,7 @@ def reply(request, forum_slug, topic_id, post_id=False):
         if form.is_valid() and not flood:
             post = Post(topic=topic,
                         author=request.user,
-                        text=form.clean_data['text']
+                        text=form.cleaned_data['text']
                        )
             post.save()
 
@@ -106,12 +140,13 @@ def edit_post(request, forum_slug, topic_id, post_id):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
     post = get_object_or_404(Post, pk=post_id)
+    posts = topic.post_set.filter(created__lt = post.created).order_by('-created')[:POSTS_PER_PAGE]
 
     #the normal users dont have that permission actually
     if not request.user.has_perm('forum.change_post'):
         user=get_object_or_404(User, username=request.user.username)
         post_user=user.post_set.filter(id=post_id)
-        
+
         if not post_user:
             return HttpResponse("That is a Wrong way my friend :) ")
 
@@ -125,7 +160,7 @@ def edit_post(request, forum_slug, topic_id, post_id):
         flood,timeout = flood_control(request)
 
         if form.is_valid() and not flood:
-            post.text = form.clean_data['text']
+            post.text = form.cleaned_data['text']
             post.edit_count += 1
             post.edited = datetime.now()
             post.last_edited_by = request.user
@@ -136,7 +171,7 @@ def edit_post(request, forum_slug, topic_id, post_id):
         if post in topic.post_set.all():
             form = PostForm(auto_id=True, initial={'text': post.text})
 
-    return render_response(request, 'forum/reply.html', locals())
+    return render_response(request, 'forum/post_edit.html', locals())
 
 @login_required
 def new_topic(request, forum_slug):
@@ -151,17 +186,17 @@ def new_topic(request, forum_slug):
 
         if form.is_valid() and not flood:
             topic = Topic(forum=forum,
-                          title=form.clean_data['title'])
+                          title=form.cleaned_data['title'])
         #tags
             topic.save()
 
-            for tag in form.clean_data['tags']:
+            for tag in form.cleaned_data['tags']:
                 t=Tag.objects.get(name=tag)
                 topic.tags.add(t)
 
             post = Post(topic=topic,
                         author=request.user,
-                        text=form.clean_data['text'])
+                        text=form.cleaned_data['text'])
 
             post.save()
 
@@ -188,8 +223,12 @@ def edit_topic(request, forum_slug, topic_id):
         flood,timeout = flood_control(request)
 
         if form.is_valid() and not flood:
-            topic.title = form.clean_data['title']
+            topic.title = form.cleaned_data['title']
             topic.topic_latest_post = first_post
+            for tag in form.cleaned_data['tags']:
+                t=Tag.objects.get(name=tag)
+                topic.tags.add(t)
+
             topic.save()
 
             first_post.edit_count += 1
@@ -199,7 +238,11 @@ def edit_topic(request, forum_slug, topic_id):
 
             return HttpResponseRedirect(topic.get_absolute_url())
     else:
-        form = TopicForm(auto_id=True, initial={'title': topic.title, 'text': first_post.text})
+        form = TopicForm(auto_id=True, initial={
+            "title": topic.title,
+            "text": first_post.text,
+            "tags": [tag.name for tag in topic.tags.all()],
+            })
 
     return render_response(request, 'forum/new_topic.html', locals())
 
@@ -217,7 +260,7 @@ def merge(request, forum_slug, topic_id):
         flood,timeout = flood_control(request)
 
         if form.is_valid() and not flood:
-            topic2 = form.clean_data['topic2']
+            topic2 = form.cleaned_data['topic2']
 
             if int(topic2)==topic.id:
                 hata="Aynı konuyu mu merge edeceksiniz !"
@@ -323,20 +366,30 @@ def flood_control(request):
         flood = timeout = False
 
     return flood,timeout
-    
 
+def lastvisit_control(request):
+    if request.user.is_authenticated():
+        if not "last_visit" in request.session:
+            request.session["oi_version"] = 1141
+            request.session["last_visit"] = datetime.now()
+        if not "read_topic_dict" in request.session:
+            request.session["read_topic_dict"] = {}
+        if not "read_forum_dict" in request.session:
+            request.session["read_forum_dict"] = {}
+
+@login_required
 def delete_post(request,forum_slug,topic_id, post_id):
     """ The delete part should be controlled better !"""
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
     post = get_object_or_404(Post, pk=post_id)
-    
+
     if not request.user.has_perm('forum.delete_post'):
         #that one is wrong of course it can return more than one query ...
         #post_user=get_object_or_404(Post,author =request.user)
         user=get_object_or_404(User, username=request.user.username)
         post_user=user.post_set.filter(id=post_id)
-        
+
         if not post_user:
             return HttpResponse("That is a Wrong way my friend :) ")
 
@@ -345,9 +398,5 @@ def delete_post(request,forum_slug,topic_id, post_id):
 
     if request.method == 'POST':
         post.delete()
-        
+
     return HttpResponseRedirect(topic.get_absolute_url())
-    
-    
-    
-    
