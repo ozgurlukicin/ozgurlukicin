@@ -43,7 +43,7 @@
 {% for post in latest_posts %}
 <div class="forum_stats_latest_post">
     <div class="forum_stats_latest_post_topic">[ <a href="{{ post.topic.forum.get_absolute_url }}">{{ post.topic.forum }}</a> ]</div>
-    <div class="forum_stats_latest_post_summary"><a href="{{ post.get_absolute_url }}">{{ post.topic }}</a> <a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" border="0px"/></a> {{ post.author|escape }}</div>
+    <div class="forum_stats_latest_post_summary"><a href="{{ post.get_absolute_url }}">{{ post.topic }}</a> <a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" border="0px"/></a> <a href="/kullanici/profil/{{ post.author }}" class="profile_link">{{ post.author }}</a></div>
     <div class="forum_stats_latest_post_date">{{ post.created|date:"d F Y H:i" }}</div>
 </div>
 {% endfor %}
