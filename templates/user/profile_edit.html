@@ -3,7 +3,46 @@
 {% block title %}Profil Düzenle -  {% endblock %}
 
 {% block extrahead %}
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={{ apikey }}" type="text/javascript"></script>
+    <script type="text/javascript">
+    //<![CDATA[
+    function load() {
+        if (GBrowserIsCompatible()) {
+            var map = new GMap2(document.getElementById("id_map"));
+            map.enableScrollWheelZoom();
+
+            // initialize user location
+            var center = new GLatLng(39, 35);
+            var heightLevel = 5;
+            var lng = document.getElementById("id_longitude");
+            var ltd = document.getElementById("id_latitude");
+
+            if ((lng.value != 0) || (ltd.value != 0)) {
+                center = new GLatLng(ltd.value, lng.value);
+                heightLevel = 9;
+            }
+            map.setCenter(center, heightLevel);
+            map.addControl(new GSmallMapControl());
+            map.addControl(new GMapTypeControl());
+
+            var marker = new GMarker(center, {draggable: true});
+
+            GEvent.addListener(marker, "dragstart", function() {
+                    map.closeInfoWindow();
+                    });
+            GEvent.addListener(marker, "dragend", function() {
+                    marker.openInfoWindowHtml("Koordinatlar:<br />" + marker.getLatLng().lng().toFixed(6) + "<br />" + marker.getLatLng().lat().toFixed(6));
+                    lng.value = marker.getLatLng().lng().toFixed(6);
+                    ltd.value = marker.getLatLng().lat().toFixed(6);
+                    });
+            map.addOverlay(marker);
+        }
+    }
+    //]]>
+    </script>
 {% endblock %}
+
+{% block extrabody %} onload="load()" onunload="GUnload()"{% endblock %}
 
 {% block header_menu %}
     {% include "header.html" %}
@@ -31,7 +70,7 @@
         document.avatarImage.src = "/media/" + obj[obj.selectedIndex].value;
     }
 </script>
-<form name="profileEditForm" method="POST" action=".">
+<form id="profileEditForm" method="POST" action=".">
     {% for field in form %}
         {% ifequal field.name "avatar" %}
         <div style="float:right;margin-right:40px;text-align:right;">
@@ -45,7 +84,8 @@
         </dl>
         {% endifequal %}
     {% endfor %}
-    <div style="clear:left; text-align:center;"><input type="submit" value="Düzenle" /></div>
+    <dl><dt><label for="id_map">Harita</label><dt><div id="id_map" class="googlemap"></div></dt></dl>
+    <div style="clear:left; text-align:center; padding-top:5px;"><input type="submit" value="Düzenle" /></div>
     <div style="clear:left; text-align:center;"><a href="/kullanici/parola_degistir/">Parolayı Değiştir</a></div>
 </form>
 

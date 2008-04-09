@@ -86,6 +86,8 @@ class Profile(models.Model):
     activation_key = models.CharField(max_length=40)
     key_expires = models.DateTimeField()
     signature = models.TextField('İmza', blank=True, max_length=512)
+    latitude = models.DecimalField('Enlem', max_digits=10, decimal_places=6, default=0)
+    longitude = models.DecimalField('Boylam', max_digits=10, decimal_places=6, default=0)
 
     def __str__(self):
         return self.user.username

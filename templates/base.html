@@ -22,7 +22,7 @@
 <script type="text/javascript" src="/media/js/pngfix.js"></script>
 {% block extrahead %}{% endblock %}
 </head>
-<body>
+<body{% block extrabody %}{% endblock %}>
 {% block header_menu %}
     <!-- Burası header kısmı -->
     {% endblock %}

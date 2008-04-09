@@ -2,6 +2,37 @@
 
 {% block title %}Kullanıcı profili: {{ info }} - {% endblock %}
 
+{% block extrabody %} onload="load()" onunload="GUnload()"{% endblock %}
+
+{% block extrahead %}
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={{ apikey }}" type="text/javascript"></script>
+    <script type="text/javascript">
+    //<![CDATA[
+    function load() {
+        if (GBrowserIsCompatible()) {
+            var map = new GMap2(document.getElementById("id_map"));
+            map.enableScrollWheelZoom();
+
+            // initialize user location
+            var center = new GLatLng(39, 35);
+            var heightLevel = 5;
+            var lng = {{ info.get_profile.longitude }};
+            var ltd = {{ info.get_profile.latitude }};
+
+            if ((lng != 0) || (ltd != 0)) {
+                center = new GLatLng(ltd, lng);
+                heightLevel = 9;
+            }
+            map.setCenter(center, heightLevel);
+
+            var marker = new GMarker(center);
+            map.addOverlay(marker);
+        }
+    }
+    //]]>
+    </script>
+{% endblock %}
+
 {% block header_menu %}
     {% include "header.html" %}
 {% endblock %}
@@ -40,6 +71,7 @@
         </ul>
     </div>
 </div>
+<div id="id_map" class="googlemap"></div>
 {% else %}
 Böyle bir kullanıcı yok! <br />
 {% endif %}

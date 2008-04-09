@@ -18,7 +18,7 @@ from oi.st.forms import XssField
 from oi.profile.models import *
 
 class RegisterForm(forms.Form):
-    username = forms.CharField(label='Kullanıcı Adı', max_length=30, help_text='En az 3, en fazla 30 karakter')
+    username = forms.CharField(label='Kullanıcı Adı', max_length=20, help_text='En az 3, en fazla 20 karakter')
     firstname = forms.CharField(label='Adı', max_length=30)
     lastname = forms.CharField(label='Soyadı', max_length=30)
     birthday = forms.DateField(label='Doğum Tarihi', input_formats=('%d/%m/%Y', '%d/%m/%Y'), help_text='23/4/1985 gibi')
@@ -100,6 +100,8 @@ class ProfileEditForm(forms.Form):
     icq = forms.EmailField(label='ICQ', max_length=50, required=False)
     show_email = forms.BooleanField(label='E-posta Adresini Göster', required=False, help_text='Profil sayfasında diğerleri e-posta adresinizi görsün mü?')
     signature = XssField(label='İmza', widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), required=False, help_text='Forumdaki her iletinizin altında görünecek imzanız (html tagları kullanabilirsiniz, en fazla 512 karakter olabilir)', max_length=512)
+    latitude = forms.DecimalField(label='Enlem', max_digits=10, decimal_places=6)
+    longitude = forms.DecimalField(label='Boylam', max_digits=10, decimal_places=6)
 
     def __init__(self,*args,**kwargs):
         super(ProfileEditForm, self).__init__(*args, **kwargs)

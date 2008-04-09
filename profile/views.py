@@ -19,6 +19,7 @@ from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_URL, WEB_URL, PROFILE_EDIT_URL
 
 from oi.profile.models import Avatar, Profile, LostPassword
 from oi.profile.forms import RegisterForm, ProfileEditForm, LostPasswordForm, ChangePasswordForm, ResetPasswordForm
+from oi.profile.settings import googleMapsApiKey
 from oi.st.wrappers import render_response
 from oi.petition.models import Petitioner
 
@@ -48,18 +49,22 @@ def user_profile_edit(request):
             u.get_profile().icq = form.cleaned_data['icq']
             u.get_profile().birthday = form.cleaned_data['birthday']
             u.get_profile().show_email = form.cleaned_data['show_email']
+            u.get_profile().latitude = form.cleaned_data['latitude']
+            u.get_profile().longitude = form.cleaned_data['longitude']
             u.get_profile().save()
             u.save()
 
             return render_response(request, 'user/profile_edit.html', {
-                'profile_updated': True,
+                "profile_updated": True,
+                "apikey": googleMapsApiKey,
                 "numberofpetitioners": numberofpetitioners,
                 "petitionpercent": petitionpercent,
                 'form': form,
                 })
         else:
             return render_response(request, 'user/profile_edit.html', {
-                'form': form,
+                "form": form,
+                "apikey": googleMapsApiKey,
                 "numberofpetitioners": numberofpetitioners,
                 "petitionpercent": petitionpercent,
                 })
@@ -80,6 +85,8 @@ def user_profile_edit(request):
                         'signature': u.get_profile().signature,
                         'city': u.get_profile().city,
                         'email': u.email,
+                        'latitude': u.get_profile().latitude,
+                        'longitude': u.get_profile().longitude,
                         'show_email': u.get_profile().show_email}
 
         form = ProfileEditForm(default_data)
@@ -87,6 +94,7 @@ def user_profile_edit(request):
 
         return render_response(request, 'user/profile_edit.html', {
             "form": form,
+            "apikey": googleMapsApiKey,
             "numberofpetitioners": numberofpetitioners,
             "petitionpercent": petitionpercent,
             })
@@ -96,6 +104,7 @@ def user_profile(request, name):
     info = get_object_or_404(User, username=name)
     numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
     petitionpercent = numberofpetitioners / 30
+    apikey = googleMapsApiKey
     if not info.is_active:
         del info
     return render_response(request, 'user/profile.html', locals())
