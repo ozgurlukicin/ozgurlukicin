@@ -888,6 +888,16 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
     border: 1px solid #45586F;
 }
 
+#profileEditForm input[type=text]{
+    width:230px;
+}
+
+div.googlemap {
+    width: 407px;
+    height: 300px;
+    clear: left;
+    overflow: hidden;
+}
 /* Footer */
 #footer_new {
     background-color: #6992A6;
