@@ -18,7 +18,7 @@ from oi.st.forms import XssField
 from oi.profile.models import *
 
 class RegisterForm(forms.Form):
-    username = forms.CharField(label='Kullanıcı Adı', max_length=30, help_text='En az 3, en fazla 30 karakter')
+    username = forms.CharField(label='Kullanıcı Adı', max_length=20, help_text='En az 3, en fazla 20 karakter')
     firstname = forms.CharField(label='Adı', max_length=30)
     lastname = forms.CharField(label='Soyadı', max_length=30)
     birthday = forms.DateField(label='Doğum Tarihi', input_formats=('%d/%m/%Y', '%d/%m/%Y'), help_text='23/4/1985 gibi')
