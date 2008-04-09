@@ -8,7 +8,7 @@
     //<![CDATA[
     function load() {
         if (GBrowserIsCompatible()) {
-            var map = new GMap2(document.getElementById("map"));
+            var map = new GMap2(document.getElementById("id_map"));
             map.enableScrollWheelZoom();
 
             // initialize user location
@@ -84,7 +84,7 @@
         </dl>
         {% endifequal %}
     {% endfor %}
-    <div id="map" style="width: 600px; height: 380px"></div>
+    <dl><dt><label for="id_map">Harita</label><dt><div id="id_map" style="width: 400px; height: 300px; clear:left;"></div></dt></dl>
     <div style="clear:left; text-align:center;"><input type="submit" value="Düzenle" /></div>
     <div style="clear:left; text-align:center;"><a href="/kullanici/parola_degistir/">Parolayı Değiştir</a></div>
 </form>
