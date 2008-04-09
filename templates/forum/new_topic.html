@@ -6,6 +6,9 @@
 
 {% block content %}
 {% if user.is_authenticated %}
+<div id="forum_address">
+    <div id="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a> &#62; Yeni Konu</div>
+</div>
 {% if form.errors %}
 <font color="red">Başlık açılamadı, lütfen aşağıdaki hataları düzeltin</font><br />
 {% endif %}
