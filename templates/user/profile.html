@@ -19,8 +19,8 @@
             var lng = {{ info.get_profile.longitude }};
             var ltd = {{ info.get_profile.latitude }};
 
-            if ((lng.value != 0.000000) || (ltd.value != 0.000000)) {
-                center = new GLatLng(ltd.value, lng.value);
+            if ((lng != 0) || (ltd != 0)) {
+                center = new GLatLng(ltd, lng);
                 heightLevel = 9;
             }
             map.setCenter(center, heightLevel);
