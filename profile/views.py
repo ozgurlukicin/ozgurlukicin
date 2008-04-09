@@ -104,6 +104,7 @@ def user_profile(request, name):
     info = get_object_or_404(User, username=name)
     numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
     petitionpercent = numberofpetitioners / 30
+    apikey = googleMapsApiKey
     if not info.is_active:
         del info
     return render_response(request, 'user/profile.html', locals())
