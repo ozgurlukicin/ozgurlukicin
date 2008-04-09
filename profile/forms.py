@@ -100,6 +100,8 @@ class ProfileEditForm(forms.Form):
     icq = forms.EmailField(label='ICQ', max_length=50, required=False)
     show_email = forms.BooleanField(label='E-posta Adresini Göster', required=False, help_text='Profil sayfasında diğerleri e-posta adresinizi görsün mü?')
     signature = XssField(label='İmza', widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), required=False, help_text='Forumdaki her iletinizin altında görünecek imzanız (html tagları kullanabilirsiniz, en fazla 512 karakter olabilir)', max_length=512)
+    latitude = forms.DecimalField('Enlem', max_digits=10, decimal_places=6)
+    longitude = forms.DecimalField('Boylam', max_digits=10, decimal_places=6)
 
     def __init__(self,*args,**kwargs):
         super(ProfileEditForm, self).__init__(*args, **kwargs)
