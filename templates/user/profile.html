@@ -2,6 +2,48 @@
 
 {% block title %}Kullanıcı profili: {{ info }} - {% endblock %}
 
+{% block extrabody %} onload="load()" onunload="GUnload()"{% endblock %}
+
+{% block extrahead %}
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={{ apikey }}" type="text/javascript"></script>
+    <script type="text/javascript">
+    //<![CDATA[
+    function load() {
+        if (GBrowserIsCompatible()) {
+            var map = new GMap2(document.getElementById("id_map"));
+            map.enableScrollWheelZoom();
+
+            // initialize user location
+            var center = new GLatLng(39, 35);
+            var heightLevel = 5;
+            var lng = {{ info.get_profile.longitude }};
+            var ltd = {{ info.get_profile.latitude }};
+
+            if ((lng.value != 0) || (ltd.value != 0)) {
+                center = new GLatLng(ltd.value, lng.value);
+                heightLevel = 9;
+            }
+            map.setCenter(center, heightLevel);
+            map.addControl(new GSmallMapControl());
+            map.addControl(new GMapTypeControl());
+
+            var marker = new GMarker(center);
+
+            GEvent.addListener(marker, "dragstart", function() {
+                    map.closeInfoWindow();
+                    });
+            GEvent.addListener(marker, "dragend", function() {
+                    marker.openInfoWindowHtml("Koordinatlar:<br />" + marker.getLatLng().lng().toFixed(6) + "<br />" + marker.getLatLng().lat().toFixed(6));
+                    lng.value = marker.getLatLng().lng().toFixed(6);
+                    ltd.value = marker.getLatLng().lat().toFixed(6);
+                    });
+            map.addOverlay(marker);
+        }
+    }
+    //]]>
+    </script>
+{% endblock %}
+
 {% block header_menu %}
     {% include "header.html" %}
 {% endblock %}
@@ -17,6 +59,7 @@
 
 {% if info %}
 <div id="user_profile">
+    <div id="id_map" class="googlemap2"></div>
     <div id="user_profile_left">
         <h3>{{ info }}</h3>
         <img src="{{ info.get_profile.avatar.get_file_url }}" />

@@ -898,6 +898,13 @@ div.googlemap {
     clear: left;
     overflow: hidden;
 }
+
+div.googlemap2 {
+    width: 200px;
+    height: 150px;
+    float: right;
+    overflow: hidden;
+}
 /* Footer */
 #footer_new {
     background-color: #6992A6;
