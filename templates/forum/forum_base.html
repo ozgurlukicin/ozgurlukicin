@@ -13,9 +13,9 @@
     {% block extrahead %}{% endblock %}
 </head>
 <body>
-    {% include "forum/forum_header.html" %}
-    {% include "forum/top_menu.html" %}
     <div id="page">
+        {% include "forum/forum_header.html" %}
+        {% include "forum/top_menu.html" %}
         <div id="content">
             {% block content %}
             {% endblock %}
