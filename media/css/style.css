@@ -712,42 +712,42 @@ div.post {
 }
 
 /* Sidebar */
-#sidebar {
+div #sidebar {
     float: right;
     position: relative;
     width: 234px;
     margin: 40px 10px 0px 0px;
 }
-#sidebar_box {
+div.sidebar_box {
     margin-bottom: 10px;
 }
-#sidebar_top {
+div.sidebar_top {
     background-image: url('/media/dijital/img/d_tblust.jpg');
     height: 10px;
     line-height: 10px;
 }
-#sidebar_middle {
+div.sidebar_middle {
     background-image: url('/media/dijital/img/d_tblbg.jpg');
     padding: 0px 10px;
     text-align: center;
     color: #696569;
 }
-#sidebar_middle h2 {
+div.sidebar_middle h2 {
     color: #51798E;
     font-size: 14px;
     font-weight: bold;
     text-align: center;
     margin-top: 0px;
 }
-#sidebar_middle ul {
+div.sidebar_middle ul {
     margin: 0px 0px 0px 10px;
     padding: 0px;
     text-align: left;
     list-style-position: inside;
 }
-#sidebar_middle form { margin: 0px; }
-#sidebar_middle p { margin: 0px; }
-#sidebar_bottom {
+div.sidebar_middle form { margin: 0px; }
+div.sidebar_middle p { margin: 0px; }
+div.sidebar_bottom {
     background-image: url('/media/dijital/img/d_tblalt.jpg');
     height: 12px;
     line-height: 12px;

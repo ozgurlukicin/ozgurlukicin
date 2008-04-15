@@ -32,19 +32,19 @@
 {% endblock %}
 
 {% block sidebar %}
-<div id="sidebar_box">
-    <div id="sidebar_top">&nbsp;</div>
-    <div id="sidebar_middle">
+<div class="sidebar_box">
+    <div class="sidebar_top">&nbsp;</div>
+    <div class="sidebar_middle">
         <h2>Özgürlükiçin E-Dergisi</h2>
         <a href="/e-dergi/"><img src="/media/img/oi-edergi-kapak.jpg" alt="e-dergi" /></a>
         Özgürlükiçin'in şimdi bir de e-dergisi var! Okumak için <a href="/e-dergi/">buraya</a> tıklayın.
     </div>
-    <div id="sidebar_bottom">&nbsp;</div>
+    <div class="sidebar_bottom">&nbsp;</div>
 </div>
 {% if seminar %}
-<div id="sidebar_box">
-    <div id="sidebar_top">&nbsp;</div>
-    <div id="sidebar_middle">
+<div class="sidebar_box">
+    <div class="sidebar_top">&nbsp;</div>
+    <div class="sidebar_middle">
         <h2>Pardus Etkinlikleri</h2>
         <ul class="sidebar_seminar">
         {% for sem in seminar %}
@@ -58,7 +58,7 @@
         {% endfor %}
         </ul>
     </div>
-    <div id="sidebar_bottom">&nbsp;</div>
+    <div class="sidebar_bottom">&nbsp;</div>
 </div>
 {% endif %}
 {% endblock %}

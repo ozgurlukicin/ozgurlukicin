@@ -45,54 +45,54 @@
 {% endblock %}
 
 {% block sidebar %}
-<div id="sidebar_box">
-    <div id="sidebar_top">&nbsp;</div>
-    <div id="sidebar_middle">
+<div class="sidebar_box">
+    <div class="sidebar_top">&nbsp;</div>
+    <div class="sidebar_middle">
         <h2>Etiketler</h2>
         <img src="/media/img/tag.png" style="vertical-align: middle;" /> {% for tag in howto.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
     </div>
-    <div id="sidebar_bottom">&nbsp;</div>
+    <div class="sidebar_bottom">&nbsp;</div>
 </div>
 
 {% if howto.wiki.all %}
-<div id="sidebar_box">
-    <div id="sidebar_top">&nbsp;</div>
-    <div id="sidebar_middle">
+<div class="sidebar_box">
+    <div class="sidebar_top">&nbsp;</div>
+    <div class="sidebar_middle">
         <h2>İlgili wiki sayfaları</h2>
         <ul class="sidebar_firststeps">
             {% for wiki in howto.wiki.all %}<li><a href="{{ wiki.get_absolute_url }}">{{ wiki.name }}</a></li>{% endfor %}
         </ul>
     </div>
-    <div id="sidebar_bottom">&nbsp;</div>
+    <div class="sidebar_bottom">&nbsp;</div>
 </div>
 {% endif %}
 
 {% if howto.videos.all %}
-<div id="sidebar_box">
-    <div id="sidebar_top">&nbsp;</div>
-    <div id="sidebar_middle">
+<div class="sidebar_box">
+    <div class="sidebar_top">&nbsp;</div>
+    <div class="sidebar_middle">
         <h2>İlgili Videolar</h2>
         {% for video in howto.videos.all %}<a href="/video/{{ video.get_video_name }}" rel="lightbox[video_{{ howto.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}
     </div>
-    <div id="sidebar_bottom">&nbsp;</div>
+    <div class="sidebar_bottom">&nbsp;</div>
 </div>
 {% endif %}
-<div id="sidebar_box">
-    <div id="sidebar_top">&nbsp;</div>
-    <div id="sidebar_middle">
+<div class="sidebar_box">
+    <div class="sidebar_top">&nbsp;</div>
+    <div class="sidebar_middle">
         <h2>Yazar</h2>
         {{ howto.author }}
     </div>
-    <div id="sidebar_bottom">&nbsp;</div>
+    <div class="sidebar_bottom">&nbsp;</div>
 </div>
-<div id="sidebar_box">
-    <div id="sidebar_top">&nbsp;</div>
-    <div id="sidebar_middle">
+<div class="sidebar_box">
+    <div class="sidebar_top">&nbsp;</div>
+    <div class="sidebar_middle">
         <h2>Katkıda bulunun</h2>
         <p>Nasıl bölümüne katkıda bulunmak istiyorsanız <a
             href="/katki/nasil/">buraya</a> tıklayarak size kılavuzluk edecek
         sayfaya gidebilirsiniz.</p>
     </div>
-    <div id="sidebar_bottom">&nbsp;</div>
+    <div class="sidebar_bottom">&nbsp;</div>
 </div>
 {% endblock %}
