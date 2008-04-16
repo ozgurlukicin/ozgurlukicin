@@ -97,7 +97,7 @@ def topic(request, forum_slug, topic_id):
     return object_list(request, posts,
                        template_name = 'forum/topic.html',
                        template_object_name = 'post',
-                       extra_context = {'forum': forum, 'topic': topic, 'news_list':news_list, 'request': request},
+                       extra_context = {'forum': forum, 'topic': topic, 'news_list':news_list},
                        paginate_by = POSTS_PER_PAGE,
                        allow_empty = True)
 
