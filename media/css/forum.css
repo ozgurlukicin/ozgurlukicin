@@ -133,13 +133,13 @@ div.category_forums_item_posts { width: 10%; float: left; text-align: center; }
 #topic_posts { width: 10%; float: left; text-align: center; padding-top: 8px; }
 #topic_views { width: 10%; float: left; text-align: center; padding-top: 8px; }
 #topic_rss { width: 7%; float: left; text-align: center; padding-top: 8px; }
-#topics_item { width: 100%; overflow: hidden; border-bottom: 1px solid #CBD8E0; padding-top: 10px; clear:both; }
-#topics_item_icon { width: 5%; float: left; }
-#topics_item_title { width: 50%; float: left; }
-#topics_item_lastpost { width: 18%; float: left; text-align: center; }
-#topics_item_posts { width: 10%; float: left; text-align: center; }
-#topics_item_views { width: 10%; float: left; text-align: center; }
-#topics_item_rss { width: 7%; float: left; text-align: center; }
+div.topics_item { width: 100%; overflow: hidden; border-bottom: 1px solid #CBD8E0; padding-top: 10px; clear:both; }
+div.topics_item_icon { width: 5%; float: left; }
+div.topics_item_title { width: 50%; float: left; }
+div.topics_item_lastpost { width: 18%; float: left; text-align: center; }
+div.topics_item_posts { width: 10%; float: left; text-align: center; }
+div.topics_item_views { width: 10%; float: left; text-align: center; }
+div.topics_item_rss { width: 7%; float: left; text-align: center; }
 
 /*Also ends here*/
 
