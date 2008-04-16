@@ -46,18 +46,18 @@
 {% block sidebartop %}{%endblock%}
 
 {% block sidebar %}
-<div id="sidebar_box">
-    <div id="sidebar_top">&nbsp;</div>
-    <div id="sidebar_middle">
+<div class="sidebar_box">
+    <div class="sidebar_top">&nbsp;</div>
+    <div class="sidebar_middle">
         <h2>Kurallar</h2>
         <a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a>
     </div>
-    <div id="sidebar_bottom">&nbsp;</div>
+    <div class="sidebar_bottom">&nbsp;</div>
 </div>
 
-<div id="sidebar_box">
-    <div id="sidebar_top">&nbsp;</div>
-    <div id="sidebar_middle">
+<div class="sidebar_box">
+    <div class="sidebar_top">&nbsp;</div>
+    <div class="sidebar_middle">
         <h2>Yazarlar</h2>
         <ul class="sidebar_subscribers">
         {% for feed in subscribers %}
@@ -65,38 +65,38 @@
         {% endfor %}
         </ul>
     </div>
-    <div id="sidebar_bottom">&nbsp;</div>
+    <div class="sidebar_bottom">&nbsp;</div>
 </div>
 
-<div id="sidebar_box">
-    <div id="sidebar_top">&nbsp;</div>
-    <div id="sidebar_middle">
+<div class="sidebar_box">
+    <div class="sidebar_top">&nbsp;</div>
+    <div class="sidebar_middle">
         <h2>Son güncelleme</h2>
         {{ last_modified }}
     </div>
-    <div id="sidebar_bottom">&nbsp;</div>
+    <div class="sidebar_bottom">&nbsp;</div>
 </div>
 
-<div id="sidebar_box">
-    <div id="sidebar_top">&nbsp;</div>
-    <div id="sidebar_middle">
+<div class="sidebar_box">
+    <div class="sidebar_top">&nbsp;</div>
+    <div class="sidebar_middle">
         <h2>Feed</h2>
         <a href="/rss/gezegen/" title="RSS 2.0 feed"><img src="/media/dijital/img/bt_rss.jpg"/></a>
         <a href="/atom/gezegen/" title="Atom 1.0 feed"><img src="/media/img/atom.png"/></a>
     </div>
-    <div id="sidebar_bottom">&nbsp;</div>
+    <div class="sidebar_bottom">&nbsp;</div>
 </div>
 
 {% if site.links %}
-<div id="sidebar_box">
-    <div id="sidebar_top">&nbsp;</div>
-    <div id="sidebar_middle">
+<div class="sidebar_box">
+    <div class="sidebar_top">&nbsp;</div>
+    <div class="sidebar_middle">
         <h2>Diğer gezegenler&nbsp;&nbsp;&nbsp;<img src="/media/dijital/img/diger_gez.png" /></h2>
         <ul class="sidebar_planets">
             {% for link in site.links.all %}<li><a href="{{ link.link }}">{{ link.name }}</a></li>{% endfor %}
         </ul>
     </div>
-    <div id="sidebar_bottom">&nbsp;</div>
+    <div class="sidebar_bottom">&nbsp;</div>
 </div>
 {% endif %}
 {% endblock %}

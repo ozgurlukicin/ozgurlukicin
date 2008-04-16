@@ -4,8 +4,8 @@
     <link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Forum" href="/forum/rss/post/" />
 {% endblock %}
 {% block content %}
-<div id="forum_address">
-    <div id="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a></div>
+<div class="forum_address">
+    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a></div>
 </div>
 <div id="forum_main_header">
     <div id="forum_icon">&nbsp;</div>
@@ -19,36 +19,36 @@
 {% if category.hidden and not perms.forum.can_see_hidden_categories %}
 {% else %}
 
-<div id="category" {% if category.hidden %}style="opacity: 0.5;"{% endif %}>
-    <div id="category_title">{{ category.name|escape }}</div>
-        <div id="category_forums">
-            {% for forum in forum_list %}
-            {% if forum.hidden and not perms.forum.can_see_hidden_forums %}
-            {% else %}
-            <div id="category_forums_item" {% if forum.hidden %}style="opacity: 0.5;"{% endif %}>
-                <div id="category_forums_item_icon"><a href="{{ forum.get_absolute_url }}"><img border=0px"{% if forum.is_read %} src="/media/dijital/img/forum/topic.png" alt="Okunmuş forum" title="Okunmuş forum"{% else %} src="/media/dijital/img/forum/topic_unread.png" alt="Okunmamış forum" title="Okunmamış forum"{% endif %} /></a></div>
-            <div id="category_forums_item_title"><a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a><br />{{ forum.description }}</div>
-            <div id="category_forums_item_topics">{{ forum.topics }}</div>
-            <div id="category_forums_item_posts">{{ forum.posts }}</div>
-            <div id="category_forums_item_lastpost">{% if forum.forum_latest_post %}{{ forum.forum_latest_post.edited|date:"d F Y H:i" }}<br /><a href="/kullanici/profil/{{ forum.forum_latest_post.author }}" class="profile_link">{{ forum.forum_latest_post.author }}</a> <a href="{{ forum.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" border="0"/></a>{% else %}Henüz ileti yok{% endif %}
+<div class="category" {% if category.hidden %}style="opacity: 0.5;"{% endif %}>
+    <div class="category_title">{{ category.name|escape }}</div>
+    <div class="category_forums">
+        {% for forum in forum_list %}
+        {% if forum.hidden and not perms.forum.can_see_hidden_forums %}
+        {% else %}
+        <div class="category_forums_item" {% if forum.hidden %}style="opacity: 0.5;"{% endif %}>
+            <div class="category_forums_item_icon"><a href="{{ forum.get_absolute_url }}"><img border="0px"{% if forum.is_read %} src="/media/dijital/img/forum/topic.png" alt="Okunmuş forum" title="Okunmuş forum"{% else %} src="/media/dijital/img/forum/topic_unread.png" alt="Okunmamış forum" title="Okunmamış forum"{% endif %} /></a></div>
+            <div class="category_forums_item_title"><a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a><br />{{ forum.description }}</div>
+            <div class="category_forums_item_topics">{{ forum.topics }}</div>
+            <div class="category_forums_item_posts">{{ forum.posts }}</div>
+            <div class="category_forums_item_lastpost">{% if forum.forum_latest_post %}{{ forum.forum_latest_post.edited|date:"d F Y H:i" }}<br /><a href="/kullanici/profil/{{ forum.forum_latest_post.author }}" class="profile_link">{{ forum.forum_latest_post.author }}</a> <a href="{{ forum.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="iletiye git" border="0" /></a>{% else %}Henüz ileti yok{% endif %}</div>
         </div>
+        {% endif %}
+        {% endfor %}
     </div>
-    {% endif %}
-    {% endfor %}
 </div>
 {% endif %}
 {% endfor %}
-<div id="category_title">Son 5 ileti <a href="/forum/rss/post/"><img src="/media/img/bt_next.png" border="0px" /></a></div>
+<div class="category_title">Son 5 ileti <a href="/forum/rss/post/"><img src="/media/img/bt_next.png" alt="RSS" border="0px" /></a></div>
 <div id="forum_stats_latest_posts">
 {% for post in latest_posts %}
-<div class="forum_stats_latest_post">
-    <div class="forum_stats_latest_post_topic">[ <a href="{{ post.topic.forum.get_absolute_url }}">{{ post.topic.forum }}</a> ]</div>
-    <div class="forum_stats_latest_post_summary"><a href="{{ post.get_absolute_url }}">{{ post.topic }}</a> <a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" border="0px"/></a> <a href="/kullanici/profil/{{ post.author }}" class="profile_link">{{ post.author }}</a></div>
-    <div class="forum_stats_latest_post_date">{{ post.created|date:"d F Y H:i" }}</div>
-</div>
+    <div class="forum_stats_latest_post">
+        <div class="forum_stats_latest_post_topic">[ <a href="{{ post.topic.forum.get_absolute_url }}">{{ post.topic.forum }}</a> ]</div>
+        <div class="forum_stats_latest_post_summary"><a href="{{ post.get_absolute_url }}">{{ post.topic }}</a> <a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="iletiye git" border="0px" /></a> <a href="/kullanici/profil/{{ post.author }}" class="profile_link">{{ post.author }}</a></div>
+        <div class="forum_stats_latest_post_date">{{ post.created|date:"d F Y H:i" }}</div>
+    </div>
 {% endfor %}
 </div>
-<div id="category_title">İstatistikler</div>
+<div class="category_title">İstatistikler</div>
 <div id="forum_stats">
     <div id="forum_stats_left">
         Tarih: {{ currentdate|date:"d F Y H:i" }}<br />
@@ -60,7 +60,7 @@
         Toplam Konu Sayısı: {{ topics }}
     </div>
 </div>
-<div id="category_title">Forumdaki simgelerin anlamları</div>
+<div class="category_title">Forumdaki simgelerin anlamları</div>
 <div id="forum_icons_help">
     <div>
         <img src="/media/dijital/img/forum/topic.png" alt="Okunmuş Konu" title="Okunmuş Konu" /> Okunmuş forum ya da konu<br />

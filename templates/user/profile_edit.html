@@ -70,7 +70,7 @@
         document.avatarImage.src = "/media/" + obj[obj.selectedIndex].value;
     }
 </script>
-<form id="profileEditForm" method="POST" action=".">
+<form id="profileEditForm" method="post" action=".">
     {% for field in form %}
         {% ifequal field.name "avatar" %}
         <div style="float:right;margin-right:40px;text-align:right;">

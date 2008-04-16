@@ -25,9 +25,9 @@
 {% block sidebartop %}{% endblock %}
 
 {% block sidebar %}
-<div id="sidebar_box">
-    <div id="sidebar_top">&nbsp;</div>
-    <div id="sidebar_middle">
+<div class="sidebar_box">
+    <div class="sidebar_top">&nbsp;</div>
+    <div class="sidebar_middle">
         <h2>İlgili sayfalar</h2>
         {% ifnotequal flatpage.url "/hakkinda/icerik-politikasi/" %}<a href="/hakkinda/icerik-politikasi/">İçerik Politikası</a><br/>{% endifnotequal %}
         {% ifnotequal flatpage.url "/hakkinda/gizlilik-politikasi/" %}<a href="/hakkinda/gizlilik-politikasi/">Gizlilik Politikası</a><br/>{% endifnotequal %}
@@ -36,15 +36,15 @@
         {% ifnotequal flatpage.url "/hakkinda/" %}<a href="/hakkinda/">Hakkında</a><br/>{% endifnotequal %}
         {% ifnotequal flatpage.url "/bize_ulasmak_icin/" %}<a href="/bize_ulasmak_icin/">Bize Ulaşın</a><br/>{% endifnotequal %}
     </div>
-    <div id="sidebar_bottom">&nbsp;</div>
+    <div class="sidebar_bottom">&nbsp;</div>
 </div>
 
-<div id="sidebar_box">
-    <div id="sidebar_top">&nbsp;</div>
-    <div id="sidebar_middle">
+<div class="sidebar_box">
+    <div class="sidebar_top">&nbsp;</div>
+    <div class="sidebar_middle">
         <h2>Etiketler</h2>
         <img src="/media/img/tag.png" alt="etiket" />{% for tag in flatpage.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
     </div>
-    <div id="sidebar_bottom">&nbsp;</div>
+    <div class="sidebar_bottom">&nbsp;</div>
 </div>
 {% endblock %}

@@ -1,24 +1,22 @@
-<div id="page">
     <div id="header">
         {% if not user.is_authenticated %}
         <form method="post" action="/kullanici/giris/">
             <div>
                 <span style="float:left; padding:7px 0px 0px 10px;">
-                    <input type="text" name="username" size="18" value="" maxlength="30" style="width:105px;height:22px;color:#6A91A6;border:none;" />
+                    <input type="text" id="id_username" name="username" size="18" value="" maxlength="20" style="width:105px;height:22px;color:#6A91A6;border:none;" />
                     <input type="password" id="id_password" name="password" size="18" style="width:105px;height:22px;color:#6A91A6;border:none;margin-right: 0;" value="" maxlength="30" />
                 </span>
                 <span style="padding:0px float:right;">
-                    <input type="image" src="/media/dijital/img/forum/login.jpg" alt="Giriş" id="form_submit" style="border: 0; margin: 0;" />
-                    <input type="hidden" name="next" value="{{next}}" />
+                    <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+                    <input type="image" src="/media/dijital/img/forum/login.jpg" alt="Giriş" style="border: 0; margin: 0;" />
                 </span>
                 <span style="padding-left: 0px 0px 10px 10px;"><a href="/kullanici/kayit/">Kayıt ol</a> | <a href="/kullanici/kayip/">Kayıp parola</a></span>
             </div>
         </form>
-        <div>
         {% else %}
+        <div>
             Hoşgeldin <b>{{ user.username }}</b>!<br />
             Profil sayfanıza <a href="/kullanici/duzenle/">buradan</a> ulaşabilir veya <a class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.
-        {% endif %}
         </div>
+        {% endif %}
     </div>
-</div>
