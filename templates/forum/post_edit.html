@@ -4,15 +4,15 @@
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
 {% endblock %}
 {% block content %}
-<div id="forum_address">
-    <div id="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a> &#62; <a href="{{ topic.get_absolute_url }}">{{ topic.title|escape }}</a></div>
+<div class="forum_address">
+    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a> &#62; <a href="{{ topic.get_absolute_url }}">{{ topic.title|escape }}</a></div>
 </div>
 {% if user.is_authenticated %}
 {% if flood %}Flood koruması aktif, lütfen {{ timeout }} saniye bekleyin.{% endif %}
-<form action="" method="POST">
+<form action="" method="post">
 {% for field in form %}
     <dl>
-        <dt><label for="id_{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
+        <dt><label for="{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
         <dd>{{ field }}</dd>
     </dl>
 {% endfor %}
@@ -26,32 +26,29 @@
 
 {% if post.hidden and not perms.forum.can_see_hidden_posts %}
 {% else %}
-<div id="post_base" {% if post.hidden %}style="opacity: 0.5;"{% endif %}>
-    <div id="post_profile">
+<div class="post_base" {% if post.hidden %}style="opacity: 0.5;"{% endif %}>
+    <div class="post_profile">
         <span style="font-weight: bold; font-size: 16px;">{{ post.author }}</span>{% if post.author.is_staff %}<span><br />Forum Yöneticisi{% endif %}</span><br/><br/>
         <img src="{{ post.author.get_profile.avatar.get_file_url }}" alt="avatar" /><br/>
         {% if perms.forum.can_see_post_ip %}({{ post.ip }})<br/>{% endif %}
         Kayıt Tarihi: {{ post.author.date_joined|date:"d-m-Y" }}<br/>
         <a href="/kullanici/profil/{{ post.author }}"><img src="/media/dijital/img/forum/bilgi.jpg" border="0" /></a><br/>
     </div>
-    <div id="post_message">
-        <div id="post_message_top">
-            <div id="post_message_top_icon">
+    <div class="post_message">
+        <div class="post_message_top">
+            <div class="post_message_top_icon">
                 <a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" border="0" /></a>
             </div>
-            <div id="post_message_top_date">
+            <div class="post_message_top_date">
                 {{ post.created|date:"d-m-Y H:i" }}
             </div>
         </div>
-        <div id="post_message_content">
-            <div id="post_message_text">{{ post.text|safe }}</div>
+        <div class="post_message_content">
+            <div class="post_message_text">{{ post.text|safe }}</div>
         </div>
     </div>
 </div>
 {% endif %}
 {% endfor %}
-
-
 {% endblock %}
-
 {% block sidebartop %}{% endblock %}

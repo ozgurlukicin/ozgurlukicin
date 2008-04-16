@@ -11,8 +11,8 @@
 {% endblock %}
 
 {% block content %}
-<div id="forum_address">
-    <div id="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a> &#62; {{ topic.title|escape }}</div>
+<div class="forum_address">
+    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a> &#62; {{ topic.title|escape }}</div>
 </div>
 <br />
 {% for post in post_list %}
@@ -20,57 +20,57 @@
 {% if post.hidden and not perms.forum.can_see_hidden_posts %}
 {% else %}
 
-<div id="post_base" {% if post.hidden %}style="opacity: 0.5"{% endif %}>
-    <div id="post_profile">
+<div class="post_base" {% if post.hidden %}style="opacity: 0.5"{% endif %}>
+    <div class="post_profile">
         <span style="font-weight: bold; font-size: 16px;">{{ post.author }}</span>{% if post.author.is_staff %}<span><br />Forum Yöneticisi{% endif %}</span><br/><br/>
         <img src="{{ post.author.get_profile.avatar.get_file_url }}" alt="avatar" /><br/>
         {% if perms.forum.can_see_post_ip %}({{ post.ip }})<br/>{% endif %}
         Kayıt Tarihi: {{ post.author.date_joined|date:"d-m-Y" }}<br/>
-        <a href="/kullanici/profil/{{ post.author }}"><img src="/media/dijital/img/forum/bilgi.jpg" border="0" /></a><br/>
+        <a href="/kullanici/profil/{{ post.author }}"><img src="/media/dijital/img/forum/bilgi.jpg" alt="bilgi" border="0" /></a><br/>
     </div>
-    <div id="post_message">
-        <div id="post_message_top">
+    <div class="post_message">
+        <div class="post_message_top">
             <a name="post{{ post.id }}" />
-            <div id="post_message_top_icon">
-                <a href="#post{{ post.id }}"><img src="/media/dijital/img/forum/msg_sim.gif" border="0" /></a>
+            <div class="post_message_top_icon">
+                <a href="#post{{ post.id }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="ileti adresi" border="0" /></a>
             </div>
-            <div id="post_message_top_date">
+            <div class="post_message_top_date">
                 {{ post.created|date:"d-m-Y H:i" }}
             </div>
             {% if perms.forum.change_post %}
-            <div id="post_message_top_button">
-                <a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>
+            <div class="post_message_top_button">
+                <a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" alt="düzenle" border="0" /></a>
             </div>
             {% else %}
             {% ifequal post.author.id request.user.id %}
-            <div id="post_message_top_button">
-                <a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" border="0" /></a>
+            <div class="post_message_top_button">
+                <a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" alt="düzenle" border="0" /></a>
             </div>
             {% endifequal %}
             {% endif %}
             {% if perms.forum.can_hide_post and not forloop.first and not post.hidden %}
-            <div id="post_message_top_button">
+            <div class="post_message_top_button">
                 <a href="{{ post.get_hide_url }}">hide</a>
             </div>
             {% endif %}
             {% if perms.forum.can_hide_post and not forloop.first and post.hidden %}
-            <div id="post_message_top_button">
+            <div class="post_message_top_button">
                 <a href="{{ post.get_hide_url }}">unhide</a>
             </div>
             {% endif %}
             {% if perms.forum.delete_post and not forloop.first %}
-            <div id="post_message_top_button">
+            <div class="post_message_top_button">
             <form method="post" action="{{post.get_delete_url}}">
-                <input type="image" src="/media/dijital/img/forum/sil.gif" alt="sil" id="form_submit" style="border: 0; margin: 0;" />
+                <input type="image" src="/media/dijital/img/forum/sil.gif" alt="sil" style="border: 0; margin: 0;" />
             </form>
             </div>
             {% else %}
                 {% ifequal post.author.id request.user.id %}
                     {% ifequal post topic.topic_latest_post %}
                         {% if not forloop.first %}
-                        <div id="post_message_top_button">
+                        <div class="post_message_top_button">
                         <form method="post" action="{{post.get_delete_url}}">
-                            <input type="image" src="/media/dijital/img/forum/sil.gif" alt="sil" id="form_submit" style="border: 0; margin: 0;" />
+                            <input type="image" src="/media/dijital/img/forum/sil.gif" alt="sil" style="border: 0; margin: 0;" />
                         </form>
                         </div>
                         {% endif %}
@@ -78,19 +78,19 @@
                 {% endifequal %}
                 {% endif %}
         </div>
-        <div id="post_message_content">
-            <div id="post_message_text">{% autoescape off %}{{ post.text }}{% endautoescape %}</div>
+        <div class="post_message_content">
+            <div class="post_message_text">{% autoescape off %}{{ post.text }}{% endautoescape %}</div>
             {% if forloop.first %}
-            <div id="post_message_tags">
-                <img src="/media/img/tag.png" />{% for tag in topic.tags.all %}<span class="tag"><a href="/etiket/{{tag.name}}/">{{tag.name}}</a></span>{% endfor %}
+            <div class="post_message_tags">
+                <img src="/media/img/tag.png" alt="etiket" />{% for tag in topic.tags.all %}<span class="tag"><a href="/etiket/{{tag.name}}/">{{tag.name}}</a></span>{% endfor %}
             </div>
             {% endif %}
             {% ifnotequal post.edit_count 0 %}
-            <div id="post_message_bottom">
+            <div class="post_message_bottom">
                 <span style="font-size:x-small; font-style:italic;">Bu ileti {{ post.edit_count }} kez değiştirilmiş olup, son kez {{ post.edited|date:"d-m-Y H:i" }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.</span><br />
             </div>
             {% endifnotequal %}
-            {% if post.author.get_profile.signature %}<div id="post_message_bottom"><hr />{{ post.author.get_profile.signature }}</div>{% endif %}
+            {% if post.author.get_profile.signature %}<div class="post_message_bottom"><hr />{{ post.author.get_profile.signature }}</div>{% endif %}
         </div>
     </div>
 </div>
@@ -99,7 +99,7 @@
 <div class="topic_news_area">
     {% for news in news_list %}
     <div class="topic_news_box">
-        <a href="{{news.get_absolute_url}}"><h2>{{ news.title }}</h2><span>{{ news.sum }}<span></a>
+        <h2><a href="{{news.get_absolute_url}}">{{ news.title }}</a></h2><div>{{ news.sum }}</div>
     </div>
     {% endfor %}
 </div>
@@ -108,38 +108,38 @@
 
 <div id="post_bottom">
     {% if not topic.locked %}
-        <div id="post_bottom_small"><a href="{{ topic.get_reply_url }}"><img src="/media/dijital/img/forum/reply.gif" border="0" /></a></div>
+        <div class="post_bottom_small"><a href="{{ topic.get_reply_url }}"><img src="/media/dijital/img/forum/reply.gif" alt="Yanıtla" border="0" /></a></div>
     {% endif %}
     {% if perms.forum.can_lock_topic and topic.locked %}
-        <div id="post_bottom_big"><a href="{{ topic.get_lock_url }}"><img src="/media/dijital/img/forum/unlock.jpg" border="0" /></a></div>
+        <div class="post_bottom_big"><a href="{{ topic.get_lock_url }}"><img src="/media/dijital/img/forum/unlock.jpg" alt="Kilidi kaldır" border="0" /></a></div>
     {% endif %}
     {% if perms.forum.can_merge_topic %}
-        <div id="post_bottom_big"><a href="{{ topic.get_merge_url }}"><img src="/media/dijital/img/forum/merge.jpg" border="0" /></a></div>
+        <div class="post_bottom_big"><a href="{{ topic.get_merge_url }}"><img src="/media/dijital/img/forum/merge.jpg" alt="Birleştir" border="0" /></a></div>
     {% endif %}
     {% if perms.forum.can_hide_topic and not topic.hidden %}
-        <div id="post_bottom_small"><a href="{{ topic.get_hide_url }}">hide</a></div>
+        <div class="post_bottom_small"><a href="{{ topic.get_hide_url }}">hide</a></div>
     {% endif %}
     {% if perms.forum.can_hide_topic and topic.hidden %}
-        <div id="post_bottom_small"><a href="{{ topic.get_hide_url }}">unhide</a></div>
+        <div class="post_bottom_small"><a href="{{ topic.get_hide_url }}">unhide</a></div>
     {% endif %}
     {% if perms.forum.can_stick_topic and not topic.sticky %}
-        <div id="post_bottom_small"><a href="{{ topic.get_stick_url }}">stick</a></div>
+        <div class="post_bottom_small"><a href="{{ topic.get_stick_url }}">stick</a></div>
     {% endif %}
     {% if perms.forum.can_stick_topic and topic.sticky %}
-        <div id="post_bottom_small"><a href="{{ topic.get_stick_url }}">unstick</a></div>
+        <div class="post_bottom_small"><a href="{{ topic.get_stick_url }}">unstick</a></div>
     {% endif %}
     {% if perms.forum.can_lock_topic and not topic.locked %}
-        <div id="post_bottom_big"><a href="{{ topic.get_lock_url }}" border="0"><img src="/media/dijital/img/forum/lock.jpg" border="0" /></a></div>
+        <div class="post_bottom_big"><a href="{{ topic.get_lock_url }}" border="0"><img src="/media/dijital/img/forum/lock.jpg" alt="Kilitle" border="0px" /></a></div>
     {% endif %}
     {% if perms.forum.change_topic %}
-        <div id="post_bottom_small"><a href="{{ topic.get_edit_url }}">edit_topic</a></div>
+        <div class="post_bottom_small"><a href="{{ topic.get_edit_url }}">edit_topic</a></div>
     {% endif %}
 {% if is_paginated %}
     <div id="post_pagination">{% paginator %}</div>
 {% endif %}
 </div>
-<div id="forum_address">
-    <div id="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a> &#62; {{ topic.title|escape }}</div>
+<div class="forum_address">
+    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a> &#62; {{ topic.title|escape }}</div>
 </div>
 {% endblock %}
 {% block sidebartop %}{% endblock %}
