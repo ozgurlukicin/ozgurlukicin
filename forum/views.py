@@ -8,7 +8,7 @@
 from datetime import datetime
 
 from django.http import HttpResponseRedirect, HttpResponseServerError, HttpResponseForbidden, HttpResponse
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.views.generic.list_detail import object_list
@@ -246,7 +246,7 @@ def edit_topic(request, forum_slug, topic_id):
 
     return render_response(request, 'forum/new_topic.html', locals())
 
-@login_required
+@permission_required('forum.can_merge_topic', login_url="/kullanici/giris/")
 def merge(request, forum_slug, topic_id):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
@@ -255,11 +255,10 @@ def merge(request, forum_slug, topic_id):
         hata="Kilitli konularda bu tür işlemler yapılamaz!"
         return render_response(request, 'forum/merge.html', locals())
 
-    if request.method == 'POST' and request.user.has_perm('forum.can_merge_topic'):
+    if request.method == 'POST':
         form = MergeForm(request.POST.copy())
-        flood,timeout = flood_control(request)
 
-        if form.is_valid() and not flood:
+        if form.is_valid():
             topic2 = form.cleaned_data['topic2']
 
             if int(topic2)==topic.id:
@@ -283,7 +282,7 @@ def merge(request, forum_slug, topic_id):
             return HttpResponseRedirect(forum.get_absolute_url())
 
         else:
-            hata="Forum valid degil veya floood yapıyorsun!"
+            hata="Forum valid degil!"
             return render_response(request, 'forum/merge.html', locals())
 
     else:
