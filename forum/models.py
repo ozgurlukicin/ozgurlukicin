@@ -166,6 +166,9 @@ class Topic(models.Model):
     def get_merge_url(self):
         return '/forum/%s/%s/merge/' % (self.forum.slug, self.id)
 
+    def get_move_url(self):
+        return '/forum/%s/%s/move/' % (self.forum.slug, self.id)
+
     def get_edit_url(self):
         return '/forum/%s/%s/edit/' % (self.forum.slug, self.id)
 
@@ -192,6 +195,7 @@ class Topic(models.Model):
                        ("can_tag_topic", "Can tag topic"),
                        ("can_see_hidden_topics", "Can see hidden topics"),
                        ("can_merge_topic", "Can merge topic"),
+                       ("can_move_topic", "Can move topic"),
                       )
 
     def save(self):

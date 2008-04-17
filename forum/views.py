@@ -273,14 +273,14 @@ def merge(request, forum_slug, topic_id):
                 post.topic = topic2_object
                 post.save()
 
-            #bir de simdi ileti sayisini arttirmak gerekir.
+            #increase count
             topic2_object.posts += posts_tomove.count()
             topic2_object.save()
+            #TODO: increase and decrease topic counts when merged to a different forum
 
             topic.delete()
 
-            return HttpResponseRedirect(forum.get_absolute_url())
-
+            return HttpResponseRedirect(topic2_object.get_absolute_url())
         else:
             hata="Forum valid degil!"
             return render_response(request, 'forum/merge.html', locals())
@@ -289,6 +289,67 @@ def merge(request, forum_slug, topic_id):
         form = MergeForm(auto_id=True)
 
     return render_response(request, 'forum/merge.html', locals())
+
+@permission_required('forum.can_move_topic', login_url="/kullanici/giris/")
+def move(request, forum_slug, topic_id):
+    forum = get_object_or_404(Forum, slug=forum_slug)
+    topic = get_object_or_404(Topic, pk=topic_id)
+
+    if forum.locked or topic.locked:
+        hata="Kilitli konularda bu tür işlemler yapılamaz!"
+        return render_response(request, 'forum/move.html', locals())
+
+    if request.method == 'POST':
+        form = MoveForm(request.POST.copy())
+
+        if form.is_valid():
+            # Here is the moving thing
+            forum2 = form.cleaned_data['forum2']
+
+            if int(forum2) == forum.id:
+                error = "Konu zaten bu forumda olduğu için taşınamaz!"
+                return render_response(request, 'forum/move.html', locals())
+
+            forum2_object=get_object_or_404(Forum, pk=int(forum2))
+            # Change Forum
+            topic.forum = forum2_object
+            # Reduce post count of forum
+            forum.topics -= 1
+            forum.posts -= topic.posts
+            forum2_object.topics += 1
+            forum2_object.posts += topic.posts
+            #TODO: Check if target forum has some topics or not
+            # Change forum's latest post if necessary
+            if forum.forum_latest_post == topic.topic_latest_post:
+                # look for new latest (It shouldn't be hidden)
+                topics = forum.topic_set.all()
+                posts = []
+                for t in topics:
+                    lastpost = t.post_set.filter(hidden=False).order_by("-created")[0]
+                    posts.append((lastpost.created, lastpost.id))
+
+                newlatestpost = posts[0]
+                for post in posts:
+                    if post[0] > newlatestpost[0]:
+                        newlatestpost = post
+                newlatestpost = Post.objects.get(id=newlatestpost[1])
+                # check if this is the latest in new forum
+                if forum2_object.forum_latest_post.created < newlatestpost.created:
+                    forum2_object.forum_latest_post = newlatestpost
+            # save them
+            topic.save()
+            forum.save()
+            forum2_object.save()
+            #TODO: Inform topic author
+
+            return HttpResponseRedirect(topic.get_absolute_url())
+        else:
+            error = "Forum geçerli değil!"
+            return render_response(request, 'forum/move.html', locals())
+    else:
+        #TODO: Leave link in old forum
+        form = MoveForm(auto_id=True)
+        return render_response(request, 'forum/move.html', locals())
 
 @login_required
 def hide(request, forum_slug, topic_id, post_id=False):
