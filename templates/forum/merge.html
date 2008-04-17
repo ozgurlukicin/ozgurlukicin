@@ -1,31 +1,19 @@
-
-
-{% block pagetype %}page-single{% endblock %}
-
-{% block section %}forum{% endblock %}
 {% block section_logo %}<img src="/media/img/forum_header_logo.png">{% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
-{% if flood %}Flood koruması aktif, lütfen {{ timeout }} saniye bekleyin.{% endif %}
 
-<br/>{{ topic.title }} başlıklı konu ile birleştirmek istediğiniz konuyu seçin.<br />
+<br/>{{topic.forum}} &#62; {{ topic.title }} başlıklı konuyu birleştirmek istediğiniz konuyu seçin.<br />
 <form action="" method="post">
 <dl>
-
     <dt>{{ form.topic2.label_tag }}</dt>
     <dd>{{ form.topic2 }}</dd>
     {% if form.topic2.help_text %}<dd>{{ field.topic2.help_text }}</dd>{% endif %}
     {% if form.topic2.errors %}<dd class="myerrors">{{ field.topic2.errors }}</dd>{% endif %}
-
 </dl>
 <input type="submit" value="Merge">
 </form>
-{% else %}
-<p>You must be signed in to merge topics.</p>
-{% endif %}
 
 {% if hata %}
-	<strong>{{hata}}</strong>
+<strong>{{hata}}</strong>
 {% endif %}
 {% endblock %}
