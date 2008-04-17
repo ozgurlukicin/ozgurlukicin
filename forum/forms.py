@@ -42,4 +42,4 @@ class MergeForm(forms.Form):
     def __init__(self,*args,**kwargs):
         """ It is for topic tihng they are dinamyc"""
         super(MergeForm, self).__init__(*args, **kwargs)
-        self.base_fields['topic2'].choices=[(topic.id, topic.title) for topic in Topic.objects.all()]
+        self.fields['topic2'].choices=[(topic.id, "%s>%s" % (topic.forum, topic.title)) for topic in Topic.objects.order_by("forum")]
