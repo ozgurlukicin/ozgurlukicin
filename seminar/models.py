@@ -12,8 +12,8 @@ from oi.settings import CITY_LIST
 class Place(models.Model):
     name = models.CharField('Seminer Yeri', max_length=64, blank=False, unique=True)
     city = models.CharField('Şehir', choices=CITY_LIST, max_length=40)
-    direction = models.TextField('Adres Tarifi', blank=False)
-    phone = models.PhoneNumberField('Telefon')
+    direction = models.TextField('Adres Tarifi', blank=True)
+    phone = models.PhoneNumberField('Telefon', blank=True)
 
     def __str__(self):
         return self.name
