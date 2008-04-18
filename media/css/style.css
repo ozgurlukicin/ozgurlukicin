@@ -443,19 +443,19 @@ img.alignright, img[align="right"] {
 }
 
 /* forms */
-/*input#id_username {
+input#userbox_username {
     padding: 0px;
     padding-left: 18px;
     background: #ffffff url('/media/img/input_username.png') no-repeat;
     vertical-align: middle;
 }
 
-input#id_password {
+input#userbox_password {
     padding: 0px;
     padding-left: 18px;
     background: #ffffff url('/media/img/input_password.png') no-repeat;
     vertical-align: middle;
-}*/
+}
 
 input#form_submit {
     vertical-align: middle;
