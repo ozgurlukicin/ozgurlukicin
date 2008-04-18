@@ -206,14 +206,11 @@ def new_topic(request, forum_slug):
 
     return render_response(request, 'forum/new_topic.html', locals())
 
-@login_required
+@permission_required('forum.change_topic', login_url="/kullanici/giris/")
 def edit_topic(request, forum_slug, topic_id):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
     first_post = topic.post_set.order_by('created')[0]
-
-    if not request.user.has_perm('forum.change_topic'):
-        return HttpResponse('Opps, wrong way :)')
 
     if forum.locked or topic.locked:
         return HttpResponse('Forum or topic is locked')
