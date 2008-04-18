@@ -274,9 +274,18 @@ def merge(request, forum_slug, topic_id):
 
             #increase count
             topic2_object.posts += posts_tomove.count()
-            topic2_object.save()
-            #TODO: increase and decrease topic counts when merged to a different forum
+            #increase and decrease post counts in case of a merge to a different forum
+            forum = topic.forum
+            forum2 = topic2_object.forum
+            forum.posts -= posts_tomove.count()
+            forum.topics -= 1
+            forum2.posts += posts_tomove.count()
 
+            #TODO: Handle changing lastpost of a forum
+            #save and delete
+            forum.save()
+            forum2.save()
+            topic2_object.save()
             topic.delete()
 
             return HttpResponseRedirect(topic2_object.get_absolute_url())
