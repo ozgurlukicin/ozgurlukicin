@@ -222,6 +222,8 @@ def edit_topic(request, forum_slug, topic_id):
         if form.is_valid() and not flood:
             topic.title = form.cleaned_data['title']
             topic.topic_latest_post = first_post
+            #delete tags and add new ones
+            topic.tags.clear()
             for tag in form.cleaned_data['tags']:
                 t=Tag.objects.get(name=tag)
                 topic.tags.add(t)

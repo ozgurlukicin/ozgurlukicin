@@ -29,7 +29,7 @@ class TopicForm(forms.Form):
 
         # we don't want users to choose more than 5 tags
         if len(field_data) > 5:
-            raise forms.ValidationError("En fazla 5 tag seçebilirsiniz. Lütfen açtığınız başlığa uygun tag seçin")
+            raise forms.ValidationError("En fazla 5 etiket seçebilirsiniz. Lütfen açtığınız başlığa uygun etiket seçiniz.")
 
         return field_data
 
