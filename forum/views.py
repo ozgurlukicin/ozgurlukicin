@@ -8,7 +8,7 @@
 from datetime import datetime
 
 from django.http import HttpResponseRedirect, HttpResponseServerError, HttpResponseForbidden, HttpResponse
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.views.generic.list_detail import object_list
@@ -206,14 +206,11 @@ def new_topic(request, forum_slug):
 
     return render_response(request, 'forum/new_topic.html', locals())
 
-@login_required
+@permission_required('forum.change_topic', login_url="/kullanici/giris/")
 def edit_topic(request, forum_slug, topic_id):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
     first_post = topic.post_set.order_by('created')[0]
-
-    if not request.user.has_perm('forum.change_topic'):
-        return HttpResponse('Opps, wrong way :)')
 
     if forum.locked or topic.locked:
         return HttpResponse('Forum or topic is locked')
@@ -225,6 +222,8 @@ def edit_topic(request, forum_slug, topic_id):
         if form.is_valid() and not flood:
             topic.title = form.cleaned_data['title']
             topic.topic_latest_post = first_post
+            #delete tags and add new ones
+            topic.tags.clear()
             for tag in form.cleaned_data['tags']:
                 t=Tag.objects.get(name=tag)
                 topic.tags.add(t)
@@ -246,7 +245,7 @@ def edit_topic(request, forum_slug, topic_id):
 
     return render_response(request, 'forum/new_topic.html', locals())
 
-@login_required
+@permission_required('forum.can_merge_topic', login_url="/kullanici/giris/")
 def merge(request, forum_slug, topic_id):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
@@ -255,11 +254,10 @@ def merge(request, forum_slug, topic_id):
         hata="Kilitli konularda bu tür işlemler yapılamaz!"
         return render_response(request, 'forum/merge.html', locals())
 
-    if request.method == 'POST' and request.user.has_perm('forum.can_merge_topic'):
+    if request.method == 'POST':
         form = MergeForm(request.POST.copy())
-        flood,timeout = flood_control(request)
 
-        if form.is_valid() and not flood:
+        if form.is_valid():
             topic2 = form.cleaned_data['topic2']
 
             if int(topic2)==topic.id:
@@ -274,22 +272,92 @@ def merge(request, forum_slug, topic_id):
                 post.topic = topic2_object
                 post.save()
 
-            #bir de simdi ileti sayisini arttirmak gerekir.
+            #increase count
             topic2_object.posts += posts_tomove.count()
-            topic2_object.save()
+            #increase and decrease post counts in case of a merge to a different forum
+            forum = topic.forum
+            forum2 = topic2_object.forum
+            forum.posts -= posts_tomove.count()
+            forum.topics -= 1
+            forum2.posts += posts_tomove.count()
 
+            #TODO: Handle changing lastpost of a forum
+            #save and delete
+            forum.save()
+            forum2.save()
+            topic2_object.save()
             topic.delete()
 
-            return HttpResponseRedirect(forum.get_absolute_url())
-
+            return HttpResponseRedirect(topic2_object.get_absolute_url())
         else:
-            hata="Forum valid degil veya floood yapıyorsun!"
+            hata="Forum valid degil!"
             return render_response(request, 'forum/merge.html', locals())
 
     else:
         form = MergeForm(auto_id=True)
 
     return render_response(request, 'forum/merge.html', locals())
+
+@permission_required('forum.can_move_topic', login_url="/kullanici/giris/")
+def move(request, forum_slug, topic_id):
+    forum = get_object_or_404(Forum, slug=forum_slug)
+    topic = get_object_or_404(Topic, pk=topic_id)
+
+    if forum.locked or topic.locked:
+        hata="Kilitli konularda bu tür işlemler yapılamaz!"
+        return render_response(request, 'forum/move.html', locals())
+
+    if request.method == 'POST':
+        form = MoveForm(request.POST.copy())
+
+        if form.is_valid():
+            # Here is the moving thing
+            forum2 = form.cleaned_data['forum2']
+
+            if int(forum2) == forum.id:
+                error = "Konu zaten bu forumda olduğu için taşınamaz!"
+                return render_response(request, 'forum/move.html', locals())
+
+            forum2_object=get_object_or_404(Forum, pk=int(forum2))
+            # Change Forum
+            topic.forum = forum2_object
+            # Reduce post count of forum
+            forum.topics -= 1
+            forum.posts -= topic.posts
+            forum2_object.topics += 1
+            forum2_object.posts += topic.posts
+            #TODO: Check if target forum has some topics or not
+            # Change forum's latest post if necessary
+            if forum.forum_latest_post == topic.topic_latest_post:
+                # look for new latest (It shouldn't be hidden)
+                topics = forum.topic_set.all()
+                posts = []
+                for t in topics:
+                    lastpost = t.post_set.filter(hidden=False).order_by("-created")[0]
+                    posts.append((lastpost.created, lastpost.id))
+
+                newlatestpost = posts[0]
+                for post in posts:
+                    if post[0] > newlatestpost[0]:
+                        newlatestpost = post
+                newlatestpost = Post.objects.get(id=newlatestpost[1])
+                # check if this is the latest in new forum
+                if forum2_object.forum_latest_post.created < newlatestpost.created:
+                    forum2_object.forum_latest_post = newlatestpost
+            # save them
+            topic.save()
+            forum.save()
+            forum2_object.save()
+            #TODO: Inform topic author
+
+            return HttpResponseRedirect(topic.get_absolute_url())
+        else:
+            error = "Forum geçerli değil!"
+            return render_response(request, 'forum/move.html', locals())
+    else:
+        #TODO: Leave link in old forum
+        form = MoveForm(auto_id=True)
+        return render_response(request, 'forum/move.html', locals())
 
 @login_required
 def hide(request, forum_slug, topic_id, post_id=False):

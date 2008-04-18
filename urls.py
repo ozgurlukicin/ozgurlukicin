@@ -83,7 +83,7 @@ news_dict = {
              'paginate_by': NEWS_PER_PAGE,
              'template_object_name': 'news',
              'extra_context': {
-                 'seminar': Seminar.objects.filter(status=1).order_by('date'),
+                 'seminar': Seminar.objects.filter(status=1).order_by('-date'),
                  'numberofpetitioners': Petitioner.objects.filter(is_active=True).count(),
                  'petitionpercent': Petitioner.objects.filter(is_active=True).count() / 30,
                  }

@@ -27,7 +27,7 @@
     <div class="sidebar_top">&nbsp;</div>
     <div class="sidebar_middle">
         <h2>Etiketler</h2>
-        {% for tag in flatpage.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
+        <img src="/media/img/tag.png" alt="etiket" />{% for tag in flatpage.tags.all %} <a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% endfor %}
     </div>
     <div class="sidebar_bottom">&nbsp;</div>
 </div>

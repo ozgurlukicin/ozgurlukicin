@@ -53,7 +53,7 @@
             <strong class="gri">{{ sem.date|date:"d F Y" }}</strong><br/>
             <span class="gri">{{ sem.description }}</span><br/>
             <strong>Yer:</strong> <span class="gri">{{ sem.place.name }}</span><br/>
-            <strong>Konuşmacılar:</strong><span class="hri"> {% for att in sem.attender.all %}{{ att.name }} {% endfor %}</span>
+            <strong>Konuşmacılar:</strong><span class="hri"> {% for att in sem.attender.all %}{% if forloop.last %}{{ att.name }}{% else %}{{ att.name }}, {% endif %}{% endfor %}</span>
         </li>
         {% endfor %}
         </ul>

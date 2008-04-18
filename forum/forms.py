@@ -6,7 +6,7 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django import newforms as forms
-from oi.forum.models import Topic
+from oi.forum.models import Topic, Forum
 from oi.st.models import Tag
 
 from oi.st.forms import XssField
@@ -29,7 +29,7 @@ class TopicForm(forms.Form):
 
         # we don't want users to choose more than 5 tags
         if len(field_data) > 5:
-            raise forms.ValidationError("En fazla 5 tag seçebilirsiniz. Lütfen açtığınız başlığa uygun tag seçin")
+            raise forms.ValidationError("En fazla 5 etiket seçebilirsiniz. Lütfen açtığınız başlığa uygun etiket seçiniz.")
 
         return field_data
 
@@ -40,6 +40,14 @@ class MergeForm(forms.Form):
     topic2 = forms.ChoiceField(label='Konu', required=True)
 
     def __init__(self,*args,**kwargs):
-        """ It is for topic tihng they are dinamyc"""
+        """ This is for collecting topics """
         super(MergeForm, self).__init__(*args, **kwargs)
-        self.base_fields['topic2'].choices=[(topic.id, topic.title) for topic in Topic.objects.all()]
+        self.fields['topic2'].choices=[(topic.id, "%s>%s" % (topic.forum, topic.title)) for topic in Topic.objects.order_by("forum")]
+
+class MoveForm(forms.Form):
+    forum2 = forms.ChoiceField(label="Forum", required=True)
+
+    def __init__(self,*args,**kwargs):
+        """ This is for collecting forums """
+        super(MoveForm, self).__init__(*args, **kwargs)
+        self.fields['forum2'].choices=[(forum.id, forum.name) for forum in Forum.objects.order_by("name")]

@@ -114,7 +114,10 @@
         <div class="post_bottom_big"><a href="{{ topic.get_lock_url }}"><img src="/media/dijital/img/forum/unlock.jpg" alt="Kilidi kaldır" border="0" /></a></div>
     {% endif %}
     {% if perms.forum.can_merge_topic %}
-        <div class="post_bottom_big"><a href="{{ topic.get_merge_url }}"><img src="/media/dijital/img/forum/merge.jpg" alt="Birleştir" border="0" /></a></div>
+        <div class="post_bottom_small"><a href="{{ topic.get_merge_url }}">merge</a></div>
+    {% endif %}
+    {% if perms.forum.can_move_topic %}
+        <div class="post_bottom_big"><a href="{{ topic.get_move_url }}"><img src="/media/dijital/img/forum/move.jpg" alt="Başlığı Taşı" border="0" /></a></div>
     {% endif %}
     {% if perms.forum.can_hide_topic and not topic.hidden %}
         <div class="post_bottom_small"><a href="{{ topic.get_hide_url }}">hide</a></div>

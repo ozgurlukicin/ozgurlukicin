@@ -44,8 +44,8 @@
                 <h2>Kullanıcı Kutusu</h2>
                 {% if not user.is_authenticated %}
                     <form method="post" action="/kullanici/giris/">
-                        <input type="text" id="id_username" name="username" size="18" class="vTextField required" value="" maxlength="20" /><br />
-                        <input type="password" id="id_password" name="password" size="18" class="vPasswordField required" value="" maxlength="30" /><br />
+                        <input type="text" id="userbox_username" name="username" size="18" class="vTextField required" value="" maxlength="20" /><br />
+                        <input type="password" id="userbox_password" name="password" size="18" class="vPasswordField required" value="" maxlength="30" /><br />
                         <input type="hidden" name="next" value="{{ request.get_full_path }}" />
                         <input type="submit" value="Giriş" />
                     </form>
