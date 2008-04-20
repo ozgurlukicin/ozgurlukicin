@@ -19,7 +19,7 @@ seminar_dict = {
                }
 
 urlpatterns = patterns('',
-    (r'^$', 'django.views.generic.list_detail.object_list', dict(seminar_dict, page=1)),
+    (r'^liste/$', 'django.views.generic.list_detail.object_list', dict(seminar_dict, page=1)),
     (r'^sayfa/(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', dict(seminar_dict)),
     (r'^konusmaci/(?P<attender>\d+)/$', 'oi.seminar.views.attender'),
     (r'^yer/(?P<place>\d+)/$', 'oi.seminar.views.place'),
