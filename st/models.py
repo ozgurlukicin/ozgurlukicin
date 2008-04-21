@@ -73,6 +73,23 @@ class Contribute(models.Model):
         verbose_name = "Katkı Adı"
         verbose_name_plural = "Katkı Adları"
 
+class OtherFile(models.Model):
+    desc = models.TextField('Açıklama')
+    file = models.FileField(upload_to='dosya/')
+    tags = models.ManyToManyField(Tag)
+
+    def __str__(self):
+        return self.file
+
+    class Admin:
+        list_display = ('file', 'desc')
+        ordering = ['-id']
+        search_fields = ['file', 'desc']
+
+    class Meta:
+        verbose_name = "Dosya"
+        verbose_name_plural = "Dosyalar"
+
 class ScreenShot(models.Model):
     desc = models.TextField('Açıklama')
     file = models.ImageField(upload_to='ekran_goruntusu/')
