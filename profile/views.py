@@ -49,6 +49,7 @@ def user_profile_edit(request):
             u.get_profile().icq = form.cleaned_data['icq']
             u.get_profile().birthday = form.cleaned_data['birthday']
             u.get_profile().show_email = form.cleaned_data['show_email']
+            u.get_profile().show_birthday = form.cleaned_data['show_birthday']
             u.get_profile().latitude = form.cleaned_data['latitude']
             u.get_profile().longitude = form.cleaned_data['longitude']
             u.get_profile().save()
@@ -74,20 +75,23 @@ def user_profile_edit(request):
         get = get.split("-")
 
         birthday = "%s/%s/%s" % (get[2], get[1], get[0])
-        default_data = {'firstname': u.first_name,
-                        'lastname': u.last_name,
-                        'avatar': u.get_profile().avatar.file,
-                        'birthday': birthday,
-                        'jabber': u.get_profile().jabber,
-                        'msn': u.get_profile().msn,
-                        'icq': u.get_profile().icq,
-                        'homepage': u.get_profile().homepage,
-                        'signature': u.get_profile().signature,
-                        'city': u.get_profile().city,
-                        'email': u.email,
-                        'latitude': u.get_profile().latitude,
-                        'longitude': u.get_profile().longitude,
-                        'show_email': u.get_profile().show_email}
+        default_data = {
+                'firstname': u.first_name,
+                'lastname': u.last_name,
+                'avatar': u.get_profile().avatar.file,
+                'birthday': birthday,
+                'jabber': u.get_profile().jabber,
+                'msn': u.get_profile().msn,
+                'icq': u.get_profile().icq,
+                'homepage': u.get_profile().homepage,
+                'signature': u.get_profile().signature,
+                'city': u.get_profile().city,
+                'email': u.email,
+                'latitude': u.get_profile().latitude,
+                'longitude': u.get_profile().longitude,
+                'show_email': u.get_profile().show_email,
+                'show_birthday': u.get_profile().show_birthday,
+                }
 
         form = ProfileEditForm(default_data)
         form.set_user(request.user)

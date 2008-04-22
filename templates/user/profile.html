@@ -58,7 +58,7 @@
             <li>Adı: {{ info.first_name }}</li>
             <li>Soyadı: {{ info.last_name }}</li>
             <li>Şehir: {{ info.get_profile.get_city_display }}</li>
-            <li>Doğum Tarihi: {{ info.get_profile.birthday|date:"d F Y" }}</li>
+            {% if info.get_profile.show_birthday %}<li>Doğum Tarihi: {{ info.get_profile.birthday|date:"d F Y" }}</li>{% endif %}
             <li>Kayıt Tarihi: {{ info.date_joined|date:"d F Y" }}</li>
         </ul>
         <h3>İletişim Bilgileri</h3>

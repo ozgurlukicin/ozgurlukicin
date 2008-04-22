@@ -81,6 +81,7 @@ class Profile(models.Model):
     icq = models.EmailField('ICQ', max_length=50, blank=True)
     city = models.CharField('Şehir', blank=True, choices=CITY_LIST, max_length=40)
     show_email = models.BooleanField('E-posta Göster', default=0)
+    show_birthday = models.BooleanField('Doğum Tarihini Göster', default=0)
     contributes = models.ManyToManyField(Contribute, blank=True, verbose_name='Katkılar')
     contributes_summary = models.TextField('Katkı Açıklaması', blank=True)
     activation_key = models.CharField(max_length=40)
