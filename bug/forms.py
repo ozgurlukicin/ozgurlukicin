@@ -18,6 +18,15 @@ class BugForm(forms.ModelForm):
         model = Bug
         exclude = ("assigned_to", "submitter", "submitted_date", "status")
 
+class FullBugForm(forms.ModelForm):
+    """
+    Full bug form. Composed by some Bug model fields.
+    """
+
+    class Meta:
+        model = Bug
+        exclude = ("submitter", "submitted_date")
+
 class CommentForm(forms.ModelForm):
     """
     Comment form. Composed by some Comment model fields.
