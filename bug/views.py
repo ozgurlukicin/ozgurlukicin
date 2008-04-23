@@ -18,7 +18,7 @@ from oi.bug.forms import BugForm, FullBugForm, CommentForm
 from oi.bug.settings import BUGS_PER_PAGE
 from oi.settings import DEFAULT_FROM_EMAIL
 
-BUG_MAILLIST = User.objects.get(name="akin").email
+BUG_MAILLIST = User.objects.get(username="akin").email
 
 @login_required
 def add_bug(request):
@@ -40,7 +40,7 @@ def add_bug(request):
                     "bugTitle": bug.title,
                     "link": bug.get_absolute_url(),
                     "title": bug.title,
-                    "priority": bug.priority,
+                    "priority": bug.get_priority_display,
                     "submitter": "%s %s <%s>" % (bug.submitter.first_name, bug.submitter.last_name, bug.submitter.email),
                     "assigned_to": "%s %s <%s>" % (bug.assigned_to.first_name, bug.assigned_to.last_name, bug.assigned_to.email),
                     "description": bug.description,
@@ -48,7 +48,7 @@ def add_bug(request):
             email_subject = u"[Hata %(bugId)s] Yeni: %(bugTitle)s"
             email_body = u"""%(link)s
 Başlık: %(title)s
-Öncelik: P%(priority)s
+Öncelik: %(priority)s
 Bildiren: %(submitter)s
 Atanan: %(assigned_to)s
 
@@ -76,6 +76,37 @@ def change_bug(request, id):
             bug.status = form.cleaned_data["status"]
             bug.assigned_to = form.cleaned_data["assigned_to"]
             bug.save()
+            email_dict = {
+                    "bugId": bug.id,
+                    "bugTitle": bug.title,
+                    "link": bug.get_absolute_url(),
+                    "title": bug.title,
+                    "priority": bug.get_priority_display,
+                    "status": bug.get_status_display,
+                    "submitter": "%s %s <%s>" % (bug.submitter.first_name, bug.submitter.last_name, bug.submitter.email),
+                    "assigned_to": "%s %s <%s>" % (bug.assigned_to.first_name, bug.assigned_to.last_name, bug.assigned_to.email),
+                    "description": bug.description,
+                    }
+            email_subject = u"[Hata %(bugId)s] %(bugTitle)s"
+            email_body = u"""%(link)s
+Hatada değişiklik yapıldı
+
+Başlık: %(title)s
+Öncelik: %(priority)s
+Durum: %(status)s
+Bildiren: %(submitter)s
+Atanan: %(assigned_to)s
+
+%(description)s
+"""
+            mail_set = set()
+            mail_set.add(BUG_MAILLIST)
+            mail_set.add(bug.submitter.email)
+            mail_set.add(bug.assigned_to.email)
+            comments = bug.comment_set.all()
+            for comment in comments:
+                mail_set.add(comment.author.email)
+            send_mail(email_subject % email_dict, email_body % email_dict, DEFAULT_FROM_EMAIL, list(mail_set), fail_silently=True)
     return HttpResponseRedirect(bug.get_absolute_url())
 
 def main(request):
@@ -108,6 +139,30 @@ def detail(request, id):
                 text = form.cleaned_data["text"],
                 )
             comment.save()
+            comments = bug.comment_set.all()
+            email_dict = {
+                    "bugId": bug.id,
+                    "bugTitle": bug.title,
+                    "link": bug.get_absolute_url(),
+                    "comment_count": comments.count(),
+                    "author": "%s %s <%s>" % (comment.author.first_name, comment.author.last_name, comment.author.email),
+                    "date": comment.date,
+                    "comment": comment.text,
+                    }
+            email_subject = u"[Hata %(bugId)s] %(bugTitle)s"
+            email_body = u"""%(link)s
+
+-- Yorum #%(comment_count)s yazan %(author)s %(date)s --
+
+%(comment)s
+"""
+            mail_set = set()
+            mail_set.add(BUG_MAILLIST)
+            mail_set.add(bug.submitter.email)
+            mail_set.add(bug.assigned_to.email)
+            for comment in comments:
+                mail_set.add(comment.author.email)
+            send_mail(email_subject % email_dict, email_body % email_dict, DEFAULT_FROM_EMAIL, list(mail_set), fail_silently=True)
     else:
         form = CommentForm()
     return render_response(request, 'bug/bug_detail.html', locals())
