@@ -24,6 +24,8 @@
                 heightLevel = 9;
             }
             map.setCenter(center, heightLevel);
+            map.addControl(new GSmallMapControl());
+            map.addControl(new GMapTypeControl());
 
             var marker = new GMarker(center);
             map.addOverlay(marker);
