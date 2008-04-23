@@ -16,11 +16,11 @@ STATUS_CODES = (
     (3, "Kapalı"),
     )
 PRIORITIES = (
-    (1, "Büyük"),
-    (2, "Engelleyici"),
+    (1, "Engelleyici"),
+    (2, "Büyük"),
     (3, "Normal"),
-    (4, "İyileştirme"),
-    (5, "Küçük"),
+    (4, "Küçük"),
+    (5, "İyileştirme"),
     )
 
 class Bug(models.Model):
