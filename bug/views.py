@@ -6,14 +6,31 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
 from oi.st.wrappers import render_response
+from oi.forum.views import flood_control
 from oi.bug.models import Bug
 from oi.bug.forms import BugForm
 
 @login_required
 def add_bug(request):
-    form = BugForm(auto_id=True)
+    if request.method == "POST":
+        form = BugForm(request.POST.copy())
+        flood, timeout = flood_control(request)
+
+        if form.is_valid() and not flood:
+            bug = Bug(
+                title = form.cleaned_data["title"],
+                submitter = request.user,
+                description = form.cleaned_data["description"],
+                priority = form.cleaned_data["priority"],
+                assigned_to = request.user,
+                )
+            bug.save()
+            return HttpResponseRedirect(bug.get_absolute_url())
+    else:
+        form = BugForm(auto_id=True)
     return render_response(request, 'bug/bug_add.html', locals())
 
 def main(request):
