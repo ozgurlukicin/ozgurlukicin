@@ -24,11 +24,17 @@
 {% block content %}
 <div class="addressbar"><div style="float:left"><a href="/">Ana Sayfa</a> &#62; Hata</div><div style="float:right;padding-right:10px"><a href="/hata/ekle/">Yeni hata bildir</a></div>
 </div>
-<div class="bug_header">Başlık - Gönderen - Durum - Öncelik - Tarih</div>
+<div class="bug_header">
+    <div class="bug_title">Başlık</div>
+    <div class="bug_submitter">Gönderen</div>
+    <div class="bug_status">Durum</div>
+    <div class="bug_priority">Öncelik</div>
+    <div class="bug_submitted_date">Tarih</div>
+</div>
 {% for bug in bugs %}
 <div class="bug_list">
     <div class="bug_info">
-        <div class="bug_title"><a href="{{ bug.get_absolute_url }}">{{ bug.title }}</a></div>
+        <div class="bug_title"><a href="{{ bug.get_absolute_url }}" style="text-decoration:none">#{{ bug.id }} {{ bug.title }}</a></div>
         <div class="bug_submitter">{{ bug.submitter.first_name }} {{ bug.submitter.last_name }}</div>
         <div class="bug_status">{{ bug.get_status_display }}</div>
         <div class="bug_priority">{{ bug.get_priority_display }}</div>

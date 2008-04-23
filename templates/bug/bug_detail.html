@@ -22,6 +22,7 @@
 {% block content %}
 <div class="addressbar"><a href="/">Ana Sayfa</a> &#62; <a href="/hata/">Hata</a> &#62; #{{ bug.id }}</div>
 {% if request.user.is_staff %}
+<div class="bug_detail_content">
 <form action="/hata/degistir/{{ bug.id }}/" method="post">
 <dl>
 {% for field in bugform %}
@@ -33,11 +34,12 @@
 </dl>
 <input type="submit" value="Değiştir">
 </form>
+</div>
 {% else %}
-<div class="bug_title">{{ bug.title }}</div>
-<div class="bug_content">
+<div class="bug_detail_title">{{ bug.title }}</div>
+<div class="bug_detail_content">
     Tarih: {{ bug.submitted_date|date:"d F Y H:i" }}<br />
-    Hatayı Bildiren: <a href="/kullanici/profil/{{ bug.submitter }}/">{{ bug.submitter.first_name }} {{ bug.submitter.last_name }}</a><br />
+    Bildiren: <a href="/kullanici/profil/{{ bug.submitter }}/">{{ bug.submitter.first_name }} {{ bug.submitter.last_name }}</a><br />
     Durum: {{ bug.get_status_display }}<br />
     Öncelik: {{ bug.get_priority_display }}<br />
     Hata Tanımı:<br />
@@ -45,13 +47,13 @@
 </div>
 {% endif %}
 {% for comment in bug.comment_set.all %}
-<hr />
-<div class="bug_comment">
+<div class="bug_detail_comment">
     {{ comment.text }}<br />
     <a href="/kullanici/profil/{{ comment.author }}/">{{ comment.author.first_name }} {{ comment.author.last_name }}</a> - {{ comment.date|date:"d F Y H:i" }}
 </div>
 {% endfor %}
 {% if request.user.is_authenticated %}
+<div class="bug_detail_comment">
 <form action="" method="post">
 <dl>
 {% for field in form %}
@@ -63,5 +65,6 @@
 </dl>
 <input type="submit" value="Yorum Ekle">
 </form>
+</div>
 {% endif %}
 {% endblock %}

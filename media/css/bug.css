@@ -20,4 +20,17 @@ div.bug_info {
     border-bottom: 1px solid #CBD8E0;
     width: 626px;
     padding: 10px 0px 0px 10px;
+    overflow: hidden;
+    clear: left;
+}
+div.bug_title { float: left; width: 40%; }
+div.bug_submitter { float: left; width: 20%; }
+div.bug_status { float: left; width: 10%; }
+div.bug_priority { float: left; width: 10%; }
+div.bug_submitted_date { float: left; width: 20%; }
+div.bug_detail_title, div.bug_detail_content, div.bug_detail_comment {
+    width: 626px;
+    padding: 10px 0px 0px 10px;
+    background-color: white;
+    border-bottom: 1px solid #CBD8E0;
 }
