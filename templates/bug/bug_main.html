@@ -35,7 +35,7 @@
 </div>
 {% for bug in bug_list %}
 <div class="bug_list">
-    <div class="bug_info" style="background-color:{% ifequal bug.status 1 %}#DDFFDD{% else %}{% ifequal bug.status 2 %}#DDDDFF{% else %}#FFAAAA{% endifequal %}{% endifequal %}">
+    <div class="bug_info" style="background-color:{% ifequal bug.status 1 %}#DDFFDD{% else %}{% ifequal bug.status 2 %}#AFF9FF{% else %}#EF95A1{% endifequal %}{% endifequal %}">
         <div class="bug_title"><a href="{{ bug.get_absolute_url }}" style="text-decoration:none">#{{ bug.id }} {{ bug.title|escape }}</a></div>
         <div class="bug_submitter">{{ bug.submitter.first_name|escape }} {{ bug.submitter.last_name|escape }}</div>
         <div class="bug_status">{{ bug.get_status_display }}</div>
