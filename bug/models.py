@@ -35,7 +35,7 @@ class Bug(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return "/bug/%s/" % self.id
+        return "/hata/%s/" % self.id
 
     class Admin:
         list_display = ('status', 'title', 'submitter', 'assigned_to')
