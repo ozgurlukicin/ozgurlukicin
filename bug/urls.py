@@ -9,6 +9,7 @@ from django.conf.urls.defaults import patterns
 
 urlpatterns = patterns('oi.bug.views',
     (r'^ekle/$', 'add_bug'),
+    (r'^degistir/(?P<id>\d+)/$', 'change_bug'),
     (r'^(?P<id>\d+)/$', 'detail'),
     (r'^$', 'main'),
 )

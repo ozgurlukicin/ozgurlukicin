@@ -1,0 +1,40 @@
+div.addressbar {
+    background: url(/media/dijital/img/forum/forum_bar.gif) repeat-y;
+    height: 22px;
+    width: 626px;
+    padding: 10px 0px 0px 10px;
+    font-weight: bold;
+    clear: both;
+}
+div.bug_header {
+    background: url(/media/img/bug_blue_bar.gif) repeat-y;
+    height: 22px;
+    width: 626px;
+    padding: 10px 0px 0px 10px;
+    font-weight: bold;
+    color: white;
+    clear: both;
+    text-align: center;
+}
+div.bug_info {
+    background-color: white;
+    border-bottom: 1px solid #CBD8E0;
+    width: 626px;
+    padding: 10px 0px 0px 10px;
+    overflow: hidden;
+    clear: left;
+}
+div.bug_title { float: left; width: 40%; }
+div.bug_submitter { float: left; width: 20%; }
+div.bug_status { float: left; width: 10%; text-align: center; }
+div.bug_priority { float: left; width: 10%; text-align: center; }
+div.bug_submitted_date { float: left; width: 20%; text-align: center; }
+div.bug_detail_title, div.bug_detail_content, div.bug_detail_comment {
+    width: 626px;
+    padding: 10px 0px 0px 10px;
+    background-color: white;
+    border-bottom: 1px solid #CBD8E0;
+}
+form.bugform input[type=text], form.bugform textarea {
+    width:400px;
+}

@@ -1,17 +1,21 @@
+{% load library %}
 {% extends "base.html" %}
 
-{% block title %}Hata Raporla - {% endblock %}
+{% block title %}Hata Raporları - {% endblock %}
+
+{% block extrahead %}
+    <style type="text/css" media="screen">@import url('/media/css/bug.css');</style>
+{% endblock %}
 
 {% block pagetype %}page{% endblock %}
 
 {% block header_menu %}
-    <!-- Burası header kısmı -->
-	{% include "header.html" %}
+    {% include "header.html" %}
 {% endblock %}
 
 <br/>
 {% block ust_menu %}
-	{% include "ust_menu.html" %}
+    {% include "ust_menu_ayrinti.html" %}
 {% endblock %}
 
 {% block alt_resim %}
@@ -19,13 +23,28 @@
 {% endblock %}
 
 {% block content %}
-{% for bug in bugs %}
-<div class="fs_list {% cycle odd,even %}">
-    <div class="fs_info" style="margin-bottom: 0;">
-        <div class="fs_title"><a href="{{ bug.get_absolute_url }}">{{ bug.title }}</a></div>
-        <div class="fs_desc">{{ bug.description }}</div>
+<div style="height: 30px">&nbsp;</div>
+<div class="addressbar"><div style="float:left"><a href="/">Ana Sayfa</a> &#62; Hata</div><div style="float:right;padding-right:10px"><a href="/hata/ekle/">Yeni hata bildir</a></div>
+</div>
+<div class="bug_header">
+    <div class="bug_title">Başlık</div>
+    <div class="bug_submitter">Gönderen</div>
+    <div class="bug_status">Durum</div>
+    <div class="bug_priority">Öncelik</div>
+    <div class="bug_submitted_date">Tarih</div>
+</div>
+{% for bug in bug_list %}
+<div class="bug_list">
+    <div class="bug_info">
+        <div class="bug_title"><a href="{{ bug.get_absolute_url }}" style="text-decoration:none">#{{ bug.id }} {{ bug.title|escape }}</a></div>
+        <div class="bug_submitter">{{ bug.submitter.first_name|escape }} {{ bug.submitter.last_name|escape }}</div>
+        <div class="bug_status">{{ bug.get_status_display }}</div>
+        <div class="bug_priority">{{ bug.get_priority_display }}</div>
+        <div class="bug_submitted_date">{{ bug.submitted_date|date:"d/m/Y H:i" }}</div>
     </div>
-    <hr class="fs_separator"/>
 </div>
 {% endfor %}
+{% if is_paginated %}
+    <div class="bug_paginator">{% paginator %}</div>
+{% endif %}
 {% endblock %}

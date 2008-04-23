@@ -31,7 +31,7 @@
                     map.closeInfoWindow();
                     });
             GEvent.addListener(marker, "dragend", function() {
-                    marker.openInfoWindowHtml("Koordinatlar:<br />" + marker.getLatLng().lng().toFixed(6) + "<br />" + marker.getLatLng().lat().toFixed(6));
+                    marker.openInfoWindowHtml("Koordinatlar:<br />" + marker.getLatLng().lat().toFixed(6) + "<br />" + marker.getLatLng().lng().toFixed(6));
                     lng.value = marker.getLatLng().lng().toFixed(6);
                     ltd.value = marker.getLatLng().lat().toFixed(6);
                     });

@@ -24,6 +24,8 @@
                 heightLevel = 9;
             }
             map.setCenter(center, heightLevel);
+            map.addControl(new GSmallMapControl());
+            map.addControl(new GMapTypeControl());
 
             var marker = new GMarker(center);
             map.addOverlay(marker);
@@ -48,6 +50,7 @@
 
 {% if info %}
 <div id="user_profile">
+    {% ifequal request.user.id info.id %}<a href="/kullanici/duzenle/">Bilgilerimi Düzenle</a>{% endifequal %}
     <div id="user_profile_left">
         <h3>{{ info }}</h3>
         <img src="{{ info.get_profile.avatar.get_file_url }}" />
@@ -58,7 +61,7 @@
             <li>Adı: {{ info.first_name }}</li>
             <li>Soyadı: {{ info.last_name }}</li>
             <li>Şehir: {{ info.get_profile.get_city_display }}</li>
-            <li>Doğum Tarihi: {{ info.get_profile.birthday|date:"d F Y" }}</li>
+            {% if info.get_profile.show_birthday %}<li>Doğum Tarihi: {{ info.get_profile.birthday|date:"d F Y" }}</li>{% endif %}
             <li>Kayıt Tarihi: {{ info.date_joined|date:"d F Y" }}</li>
         </ul>
         <h3>İletişim Bilgileri</h3>
