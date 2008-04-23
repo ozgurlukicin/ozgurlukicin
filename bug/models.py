@@ -24,7 +24,7 @@ PRIORITIES = (
 
 class Bug(models.Model):
     title = models.CharField(verbose_name="Başlık", max_length=100)
-    submitted_date = models.DateField(verbose_name="Tarih", auto_now_add=True)
+    submitted_date = models.DateTimeField(verbose_name="Tarih", auto_now_add=True)
     submitter = models.ForeignKey(User, verbose_name="Gönderen", related_name="submitter")
     assigned_to = models.ForeignKey(User, verbose_name="Atanan")
     description = models.TextField(verbose_name="Tanım", blank=False)
@@ -46,7 +46,7 @@ class Comment(models.Model):
     bug = models.ForeignKey(Bug, verbose_name="Hata")
     author = models.ForeignKey(User, verbose_name="Yazan")
     text = models.TextField(blank=False, verbose_name="Yorum")
-    date = models.DateField(auto_now_add=True, verbose_name="Tarih")
+    date = models.DateTimeField(auto_now_add=True, verbose_name="Tarih")
 
     def __str__(self):
         return self.text
