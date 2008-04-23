@@ -7,13 +7,22 @@
 
 from django import newforms as forms
 
-from oi.bug.models import Bug
+from oi.bug.models import Bug, Comment
 
 class BugForm(forms.ModelForm):
     """
-    Bug form. Composed by all the Bug model fields.
+    Bug form. Composed by some Bug model fields.
     """
 
     class Meta:
         model = Bug
         exclude = ("assigned_to", "submitter", "submitted_date", "status")
+
+class CommentForm(forms.ModelForm):
+    """
+    Comment form. Composed by some Comment model fields.
+    """
+
+    class Meta:
+        model = Comment
+        exclude = ("bug", "author", "date")

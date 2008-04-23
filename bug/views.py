@@ -10,8 +10,8 @@ from django.http import HttpResponseRedirect
 
 from oi.st.wrappers import render_response
 from oi.forum.views import flood_control
-from oi.bug.models import Bug
-from oi.bug.forms import BugForm
+from oi.bug.models import Bug, Comment
+from oi.bug.forms import BugForm, CommentForm
 
 @login_required
 def add_bug(request):
@@ -39,4 +39,17 @@ def main(request):
 
 def detail(request, id):
     bug = Bug.objects.get(id=id)
+    if request.method == "POST" and request.user.is_authenticated():
+        form = CommentForm(request.POST.copy())
+        flood, timeout = flood_control(request)
+
+        if form.is_valid() and not flood:
+            comment = Comment(
+                bug = bug,
+                author = request.user,
+                text = form.cleaned_data["text"],
+                )
+            comment.save()
+
+    form = CommentForm()
     return render_response(request, 'bug/bug_detail.html', locals())

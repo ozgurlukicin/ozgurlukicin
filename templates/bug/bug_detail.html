@@ -20,4 +20,20 @@
 <div class="page_content">
 {{ bug.description }}
 </div>
+{% for comment in bug.comment_set.all %}
+<div class="comment">{{ comment.text }}</div>
+{% endfor %}
+{% if request.user.is_authenticated %}
+<form action="" method="post">
+<dl>
+{% for field in form %}
+    <dt>{{ field.label_tag }}</dt>
+    <dd>{{ field }}</dd>
+    {% if field.help_text %}<dd>{{ field.help_text }}</dd>{% endif %}
+    {% if field.errors %}<dd class="myerrors" style="font-color: red">{{ field.errors }}</dd>{% endif %}
+{% endfor %}
+</dl>
+<input type="submit" value="Yorum Ekle">
+</form>
+{% endif %}
 {% endblock %}

@@ -43,10 +43,10 @@ class Bug(models.Model):
         search_fields = ('assigned_to', 'submitter', 'title', 'description')
 
 class Comment(models.Model):
-    bug = models.ForeignKey(Bug)
-    author = models.ForeignKey(User)
-    text = models.TextField(blank=False)
-    date = models.DateField(auto_now_add=True)
+    bug = models.ForeignKey(Bug, verbose_name="Hata")
+    author = models.ForeignKey(User, verbose_name="Yazan")
+    text = models.TextField(blank=False, verbose_name="Yorum")
+    date = models.DateField(auto_now_add=True, verbose_name="Tarih")
 
     def __str__(self):
         return self.text
