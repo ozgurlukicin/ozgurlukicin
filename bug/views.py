@@ -9,12 +9,16 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.views.generic.list_detail import object_list
+from django.core.mail import send_mail
 
 from oi.st.wrappers import render_response
 from oi.forum.views import flood_control
 from oi.bug.models import Bug, Comment
 from oi.bug.forms import BugForm, FullBugForm, CommentForm
 from oi.bug.settings import BUGS_PER_PAGE
+from oi.settings import DEFAULT_FROM_EMAIL
+
+BUG_MAILLIST = User.objects.get(name="akin").email
 
 @login_required
 def add_bug(request):
@@ -31,6 +35,30 @@ def add_bug(request):
                 assigned_to = User.objects.get(username="akin"),
                 )
             bug.save()
+            email_dict = {
+                    "bugId": bug.id,
+                    "bugTitle": bug.title,
+                    "link": bug.get_absolute_url(),
+                    "title": bug.title,
+                    "priority": bug.priority,
+                    "submitter": "%s %s <%s>" % (bug.submitter.first_name, bug.submitter.last_name, bug.submitter.email),
+                    "assigned_to": "%s %s <%s>" % (bug.assigned_to.first_name, bug.assigned_to.last_name, bug.assigned_to.email),
+                    "description": bug.description,
+                    }
+            email_subject = u"[Hata %(bugId)s] Yeni: %(bugTitle)s"
+            email_body = u"""%(link)s
+Başlık: %(title)s
+Öncelik: P%(priority)s
+Bildiren: %(submitter)s
+Atanan: %(assigned_to)s
+
+%(description)s
+"""
+            mail_set = set()
+            mail_set.add(BUG_MAILLIST)
+            mail_set.add(bug.submitter.email)
+            mail_set.add(bug.assigned_to.email)
+            send_mail(email_subject % email_dict, email_body % email_dict, DEFAULT_FROM_EMAIL, list(mail_set), fail_silently=True)
             return HttpResponseRedirect(bug.get_absolute_url())
     else:
         form = BugForm(auto_id=True)
