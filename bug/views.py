@@ -23,10 +23,10 @@ def add_bug(request):
         if form.is_valid() and not flood:
             bug = Bug(
                 title = form.cleaned_data["title"],
-                submitter = User.objects.get(name="akin"),
+                submitter = request.user,
                 description = form.cleaned_data["description"],
                 priority = form.cleaned_data["priority"],
-                assigned_to = request.user,
+                assigned_to = User.objects.get(name="akin"),
                 )
             bug.save()
             return HttpResponseRedirect(bug.get_absolute_url())
