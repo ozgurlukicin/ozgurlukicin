@@ -16,6 +16,19 @@
 {% endblock %}
 
 {% block content %}
+{% if request.user.is_staff %}
+<form action="/hata/degistir/{{ bug.id }}/" method="post">
+<dl>
+{% for field in bugform %}
+    <dt>{{ field.label_tag }}</dt>
+    <dd>{{ field }}</dd>
+    {% if field.help_text %}<dd>{{ field.help_text }}</dd>{% endif %}
+    {% if field.errors %}<dd class="myerrors" style="font-color: red">{{ field.errors }}</dd>{% endif %}
+{% endfor %}
+</dl>
+<input type="submit" value="Değiştir">
+</form>
+{% else %}
 <div class="page_title">{{ bug.title }}</div>
 <div class="page_content">
     Tarih: {{ bug.submitted_date|date:"d F Y H:i" }}<br />
@@ -25,6 +38,7 @@
     Hata Tanımı:<br />
     {{ bug.description }}
 </div>
+{% endif %}
 {% for comment in bug.comment_set.all %}
 <hr />
 <div class="comment">

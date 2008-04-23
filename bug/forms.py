@@ -6,6 +6,7 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django import newforms as forms
+from django.contrib.auth.models import User
 
 from oi.bug.models import Bug, Comment
 
@@ -22,6 +23,11 @@ class FullBugForm(forms.ModelForm):
     """
     Full bug form. Composed by some Bug model fields.
     """
+
+    def __init__(self,*args,**kwargs):
+        """ This is for collecting staff """
+        super(FullBugForm, self).__init__(*args, **kwargs)
+        self.fields['assigned_to'].choices=[(user.id, "%s %s" % (user.first_name, user.last_name)) for user in User.objects.filter(is_staff=True).order_by("first_name")]
 
     class Meta:
         model = Bug
