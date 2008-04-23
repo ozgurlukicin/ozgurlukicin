@@ -8,6 +8,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+from oi.settings import WEB_URL
 
 STATUS_CODES = (
     (1, "Yeni"),
@@ -33,6 +34,9 @@ class Bug(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_full_url(self):
+        return "%s%s" % (WEB_URL, self.get_absolute_url())
 
     def get_absolute_url(self):
         return "/hata/%s/" % self.id
