@@ -2,13 +2,17 @@
 
 {% block title %}Hata Raporları - #{{ bug.id }} - {% endblock %}
 
+{% block extrahead %}
+    <style type="text/css" media="screen">@import url('/media/css/bug.css');</style>
+{% endblock %}
+
 {% block header_menu %}
     {% include "header.html" %}
 {% endblock %}
 
 <br/>
 {% block ust_menu %}
-    {% include "ust_menu.html" %}
+    {% include "ust_menu_ayrinti.html" %}
 {% endblock %}
 
 {% block alt_resim %}
@@ -30,8 +34,8 @@
 <input type="submit" value="Değiştir">
 </form>
 {% else %}
-<div class="page_title">{{ bug.title }}</div>
-<div class="page_content">
+<div class="bug_title">{{ bug.title }}</div>
+<div class="bug_content">
     Tarih: {{ bug.submitted_date|date:"d F Y H:i" }}<br />
     Hatayı Bildiren: <a href="/kullanici/profil/{{ bug.submitter }}/">{{ bug.submitter.first_name }} {{ bug.submitter.last_name }}</a><br />
     Durum: {{ bug.get_status_display }}<br />
@@ -42,7 +46,7 @@
 {% endif %}
 {% for comment in bug.comment_set.all %}
 <hr />
-<div class="comment">
+<div class="bug_comment">
     {{ comment.text }}<br />
     <a href="/kullanici/profil/{{ comment.author }}/">{{ comment.author.first_name }} {{ comment.author.last_name }}</a> - {{ comment.date|date:"d F Y H:i" }}
 </div>

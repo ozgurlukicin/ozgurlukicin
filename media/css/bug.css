@@ -1,0 +1,23 @@
+div.addressbar {
+    background: url(/media/dijital/img/forum/forum_bar.gif) repeat-y;
+    height: 22px;
+    width: 626px;
+    padding: 10px 0px 0px 10px;
+    font-weight: bold;
+    clear: both;
+}
+div.bug_header {
+    background: url(/media/dijital/img/forum/mavi_bar.gif) repeat-y;
+    height: 22px;
+    width: 626px;
+    padding: 10px 0px 0px 10px;
+    font-weight: bold;
+    color: white;
+    clear: both;
+}
+div.bug_info {
+    background-color: white;
+    border-bottom: 1px solid #CBD8E0;
+    width: 626px;
+    padding: 10px 0px 0px 10px;
+}
