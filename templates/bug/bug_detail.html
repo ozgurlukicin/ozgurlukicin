@@ -23,7 +23,7 @@
 <div class="addressbar"><a href="/">Ana Sayfa</a> &#62; <a href="/hata/">Hata</a> &#62; #{{ bug.id }}</div>
 {% if request.user.is_staff %}
 <div class="bug_detail_content">
-<form action="/hata/degistir/{{ bug.id }}/" method="post">
+<form action="/hata/degistir/{{ bug.id }}/" method="post" class="bugform">
 <dl>
 {% for field in bugform %}
     <dt>{{ field.label_tag }}</dt>
@@ -54,7 +54,7 @@
 {% endfor %}
 {% if request.user.is_authenticated %}
 <div class="bug_detail_comment">
-<form action="" method="post">
+<form action="" method="post" class="bugform">
 <dl>
 {% for field in form %}
     <dt>{{ field.label_tag }}</dt>

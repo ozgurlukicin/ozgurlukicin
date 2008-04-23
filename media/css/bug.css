@@ -34,3 +34,6 @@ div.bug_detail_title, div.bug_detail_content, div.bug_detail_comment {
     background-color: white;
     border-bottom: 1px solid #CBD8E0;
 }
+form.bugform input[type=text], form.bugform textarea {
+    width:400px;
+}

@@ -21,7 +21,8 @@
 
 {% block content %}
 <div class="addressbar"><a href="/">Ana Sayfa</a> &#62; <a href="/hata/">Hata</a> &#62; Yeni Hata</div>
-<form action="" method="post">
+<div class="bug_detail_content">
+<form action="" method="post" class="bugform">
 <dl>
 {% for field in form %}
     <dt>{{ field.label_tag }}</dt>
@@ -32,5 +33,6 @@
 </dl>
 <input type="submit" value="Hatayı Raporla">
 </form>
+</div>
 
 {% endblock %}
