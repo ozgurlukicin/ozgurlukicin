@@ -39,7 +39,7 @@
         <div class="bug_submitter">{{ bug.submitter.first_name }} {{ bug.submitter.last_name }}</div>
         <div class="bug_status">{{ bug.get_status_display }}</div>
         <div class="bug_priority">{{ bug.get_priority_display }}</div>
-        <div class="bug_submitted_date">{{ bug.submitted_date|date:"d F Y H:i" }}</div>
+        <div class="bug_submitted_date">{{ bug.submitted_date|date:"d/m/Y H:i" }}</div>
     </div>
 </div>
 {% endfor %}
