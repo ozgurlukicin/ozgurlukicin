@@ -6,6 +6,7 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 
 from oi.st.wrappers import render_response
@@ -22,7 +23,7 @@ def add_bug(request):
         if form.is_valid() and not flood:
             bug = Bug(
                 title = form.cleaned_data["title"],
-                submitter = request.user,
+                submitter = User.objects.get(name="akin"),
                 description = form.cleaned_data["description"],
                 priority = form.cleaned_data["priority"],
                 assigned_to = request.user,
