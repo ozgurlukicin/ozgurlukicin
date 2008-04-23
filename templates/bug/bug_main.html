@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Hata Raporla - {% endblock %}
+{% block title %}Hata Raporları - {% endblock %}
 
 {% block pagetype %}page{% endblock %}
 
@@ -20,17 +20,16 @@
 {% block content %}
 <div class="addressbar"><a href="/">Ana Sayfa</a> &#62; Hata</div>
 <a href="/hata/ekle/">Yeni hata bildir</a>
-<div class="bug_header">Başlık - Gönderen - Tarih - Durum - Öncelik</div>
+<div class="bug_header">Başlık - Gönderen - Durum - Öncelik - Tarih</div>
 {% for bug in bugs %}
-<div class="fs_list {% cycle odd,even %}">
-    <div class="fs_info" style="margin-bottom: 0;">
+<div class="bug_list {% cycle odd,even %}">
+    <div class="bug_info">
         <div class="bug_title"><a href="{{ bug.get_absolute_url }}">{{ bug.title }}</a></div>
         <div class="bug_submitter">{{ bug.submitter.first_name }} {{ bug.submitter.last_name }}</div>
         <div class="bug_submitted_date">{{ bug.submitted_date|date:"d F Y H:i" }}</div>
         <div class="bug_status">{{ bug.get_status_display }}</div>
         <div class="bug_priority">{{ bug.get_priority_display }}</div>
     </div>
-    <hr class="fs_separator"/>
 </div>
 {% endfor %}
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ bug.name }} - Hata Raporla - {% endblock %}
+{% block title %}{{ bug.name }}Hata Raporla - {% endblock %}
 
 {% block header_menu %}
     {% include "header.html" %}
@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block content %}
-
+<div class="addressbar"><a href="/">Ana Sayfa</a> &#62; <a href="/hata/">Hata</a> &#62; Yeni Hata</div>
 <form action="" method="post">
 <dl>
 {% for field in form %}
@@ -26,7 +26,7 @@
     {% if field.errors %}<dd class="myerrors" style="font-color: red">{{ field.errors }}</dd>{% endif %}
 {% endfor %}
 </dl>
-<input type="submit" value="Hatayı Bildir">
+<input type="submit" value="Hatayı Raporla">
 </form>
 
 {% endblock %}
