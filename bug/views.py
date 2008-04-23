@@ -8,11 +8,13 @@
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
+from django.views.generic.list_detail import object_list
 
 from oi.st.wrappers import render_response
 from oi.forum.views import flood_control
 from oi.bug.models import Bug, Comment
 from oi.bug.forms import BugForm, FullBugForm, CommentForm
+from oi.bug.settings import BUGS_PER_PAGE
 
 @login_required
 def add_bug(request):
@@ -49,8 +51,13 @@ def change_bug(request, id):
     return HttpResponseRedirect(bug.get_absolute_url())
 
 def main(request):
-    bugs = Bug.objects.all()
-    return render_response(request, 'bug/bug_main.html', locals())
+    bugs = Bug.objects.order_by("status")
+    return object_list(request, bugs,
+            template_name = "bug/bug_main.html",
+            template_object_name = "bug",
+            paginate_by = BUGS_PER_PAGE,
+            allow_empty = True,
+            )
 
 def detail(request, id):
     bug = Bug.objects.get(id=id)

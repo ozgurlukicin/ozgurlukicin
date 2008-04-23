@@ -1,3 +1,4 @@
+{% load library %}
 {% extends "base.html" %}
 
 {% block title %}Hata Raporları - {% endblock %}
@@ -31,7 +32,7 @@
     <div class="bug_priority">Öncelik</div>
     <div class="bug_submitted_date">Tarih</div>
 </div>
-{% for bug in bugs %}
+{% for bug in bug_list %}
 <div class="bug_list">
     <div class="bug_info">
         <div class="bug_title"><a href="{{ bug.get_absolute_url }}" style="text-decoration:none">#{{ bug.id }} {{ bug.title }}</a></div>
@@ -42,4 +43,7 @@
     </div>
 </div>
 {% endfor %}
+{% if is_paginated %}
+    <div class="bug_paginator">{% paginator %}</div>
+{% endif %}
 {% endblock %}
