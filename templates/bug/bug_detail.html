@@ -16,6 +16,7 @@
 {% endblock %}
 
 {% block content %}
+<div class="addressbar"><a href="/">Ana Sayfa</a> &#62; <a href="/hata/">Hata</a> &#62; #{{ bug.id }}</div>
 {% if request.user.is_staff %}
 <form action="/hata/degistir/{{ bug.id }}/" method="post">
 <dl>
