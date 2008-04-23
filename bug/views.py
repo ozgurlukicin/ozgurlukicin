@@ -26,7 +26,7 @@ def add_bug(request):
                 submitter = request.user,
                 description = form.cleaned_data["description"],
                 priority = form.cleaned_data["priority"],
-                assigned_to = User.objects.get(name="akin"),
+                assigned_to = User.objects.get(username="akin"),
                 )
             bug.save()
             return HttpResponseRedirect(bug.get_absolute_url())
