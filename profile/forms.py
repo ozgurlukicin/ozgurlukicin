@@ -91,10 +91,13 @@ class RegisterForm(forms.Form):
 
     def clean_icq(self):
         field_data = self.cleaned_data['icq']
+        if field_data == "":
+            return field_data
         try:
             number = int(field_data)
             if number < 0:
                 raise forms.ValidationError(u"ICQ numarası pozitif bir tamsayı olmalıdır")
+            return field_data
         except ValueError:
             raise forms.ValidationError(u"ICQ numarası sayılardan oluşmalıdır")
 
@@ -124,10 +127,13 @@ class ProfileEditForm(forms.Form):
 
     def clean_icq(self):
         field_data = self.cleaned_data['icq']
+        if field_data == "":
+            return field_data
         try:
             number = int(field_data)
             if number < 0:
                 raise forms.ValidationError(u"ICQ numarası pozitif bir tamsayı olmalıdır")
+            return field_data
         except ValueError:
             raise forms.ValidationError(u"ICQ numarası sayılardan oluşmalıdır")
 
