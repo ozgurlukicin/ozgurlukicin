@@ -103,6 +103,8 @@ def mark_all_as_read(request):
     lastvisit_control(request)
 
     request.session["last_visit"] = datetime.now()
+    request.session["read_topic_dict"] = {}
+    request.session["read_forum_dict"] = {}
     return HttpResponseRedirect(request.GET["next"])
 
 def topic(request, forum_slug, topic_id):
