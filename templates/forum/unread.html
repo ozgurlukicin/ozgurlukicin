@@ -1,0 +1,35 @@
+{% load library %}
+{% extends "forum/forum_base.html" %}
+{% block content %}
+
+<div class="forum_address" >
+    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; Okunmamış Konular ({{ topic_count }})</div>
+</div>
+<div id="forum_header">
+    <div id="topic_icon">&nbsp;</div>
+    <div id="topic_title">Konu</div>
+    <div id="topic_posts">İletiler</div>
+    <div id="topic_views">Görüntüleme</div>
+    <div id="topic_lastpost">Son İleti</div>
+    <div id="topic_rss">Takip Et</div>
+</div>
+<div id="forum_topic">
+    {% for topic in unread_topics %}
+
+    {% if topic.hidden and not perms.forum.can_see_hidden_topics %}
+    {% else %}
+
+    <div class="topics_item" {% if topic.hidden %}style="opacity: 0.5;"{% endif %}>
+        <div class="topics_item_icon"><a href="{{ topic.get_absolute_url }}">{% if topic.locked and not topic.sticky %}<img src="/media/dijital/img/forum/topic_unread_locked.png" border="0" alt="Kilitli Konu" title="Kilitli Konu" />{% endif %}{% if topic.sticky and not topic.locked %}<img src="/media/dijital/img/forum/topic_sticky.png" border="0" alt="Sabit Konu" title="Sabit Konu" />{% endif %}{% if not topic.locked and not topic.sticky %}<img src="/media/dijital/img/forum/topic_unread.png" border="0" alt="Okunmamış Konu" title="Okunmamış Konu" />{% endif %}{% if topic.locked and topic.sticky %}<img src="/media/dijital/img/forum/topic_sticky_locked.png" border="0" alt="Sabit ve Kilitli Konu" title="Sabit ve Kilitli Konu" />{% endif %}</a></div>
+        <div class="topics_item_title"><a href="{{ topic.get_absolute_url }}">{{ topic.title|escape }}</a></div>
+        <div class="topics_item_posts">{{ topic.posts }}</div>
+        <div class="topics_item_views">{{ topic.views }}</div>
+        <div class="topics_item_lastpost">{{ topic.topic_latest_post.edited|date:"d F Y H:i" }}<br />{{ topic.topic_latest_post.author }} <a href="{{ topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" border="0"/></a></div>
+        <div class="topics_item_rss"><a href="/forum/rss/topic/{{ topic.id }}"><img src="/media/img/bt_next.png" style="border:0px;" /></a></div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+<div id="post_bottom">
+</div>
+{% endblock %}
