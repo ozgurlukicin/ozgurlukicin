@@ -10,13 +10,13 @@
                     <input type="hidden" name="next" value="{{ request.get_full_path }}" />
                     <input type="image" src="/media/dijital/img/forum/login.jpg" alt="Giriş" style="border: 0; margin: 0;" />
                 </span>
-                <span style="padding-left: 0px 0px 10px 10px;"><a href="/kullanici/kayit/">Kayıt ol</a> | <a href="/kullanici/kayip/">Kayıp parola</a></span>
+                <span style="padding-left: 0px 0px 10px 10px;"><a href="/kullanici/kayit/" style="text-decoration:none">Kayıt ol</a> | <a href="/kullanici/kayip/" style="text-decoration:none">Kayıp parola</a></span>
             </div>
         </form>
         {% else %}
         <div>
             Hoşgeldin <b>{{ user.username }}</b>!<br />
-            Profil sayfanıza <a href="/kullanici/duzenle/">buradan</a> ulaşabilir veya <a class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.
+            <a href="/kullanici/profil/{{ user.username }}/" style="text-decoration:none">Profil</a> | <a href="/forum/son_iletiler/" style="text-decoration:none">Son İletiler</a> | <a href="/forum/tumunu_okunmus_say/?next={{ request.path }}" style="text-decoration:none">Tümünü Okunmuş Say</a> | <a class="sari" href="/kullanici/cikis/" style="text-decoration:none">Çıkış</a>
         </div>
         {% endif %}
     </div>

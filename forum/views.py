@@ -76,6 +76,45 @@ def forum(request, forum_slug):
                        paginate_by = TOPICS_PER_PAGE,
                        allow_empty = True)
 
+def latest_posts(request):
+    posts = Post.objects.filter(hidden=0).order_by('-edited')[:100]
+    return object_list(request, posts,
+            template_name = 'forum/post_list.html',
+            template_object_name = 'post',
+            paginate_by = ALL_POSTS_PER_PAGE,
+            )
+
+@login_required
+def unread_topics(request):
+    lastvisit_control(request)
+
+    topics = Topic.objects.order_by("-sticky", "-topic_latest_post")
+    unread_topics = []
+    for topic in topics:
+        if topic.topic_latest_post.edited > request.session['last_visit'] and\
+            not topic.id in request.session["read_topic_dict"]:
+            unread_topics.append(topic)
+        elif topic.topic_latest_post.edited < request.session['last_visit'] or\
+            not topic.id in request.session["read_topic_dict"] or\
+            request.session["read_topic_dict"][topic.id] > topic.topic_latest_post.edited:
+            pass
+        else:
+            unread_topics.append(topic)
+        if len(unread_topics) >= TOPICS_PER_PAGE:
+            break
+    topic_count = len(unread_topics)
+
+    return render_response(request, "forum/unread.html", locals())
+
+@login_required
+def mark_all_as_read(request):
+    lastvisit_control(request)
+
+    request.session["last_visit"] = datetime.now()
+    request.session["read_topic_dict"] = {}
+    request.session["read_forum_dict"] = {}
+    return HttpResponseRedirect(request.GET["next"])
+
 def topic(request, forum_slug, topic_id):
     lastvisit_control(request)
 
@@ -221,7 +260,8 @@ def edit_topic(request, forum_slug, topic_id):
 
         if form.is_valid() and not flood:
             topic.title = form.cleaned_data['title']
-            topic.topic_latest_post = first_post
+            #I don't know the purpose of this so commenting out:
+            #topic.topic_latest_post = first_post
             #delete tags and add new ones
             topic.tags.clear()
             for tag in form.cleaned_data['tags']:

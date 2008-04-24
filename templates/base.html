@@ -52,7 +52,8 @@
                     <p><a href="/kullanici/kayit/">Kayıt ol</a> | <a class="sari"  href="/kullanici/kayip/">Kayıp parola</a></p>
                 {% else %}
                     <p>Merhaba <b>{{ user.username }}</b>!
-                    <br />Profil sayfanıza <a href="/kullanici/profil/{{ request.user.username }}/">buradan</a> ulaşabilir veya <a class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.</p>
+                    <br />Profil sayfanıza <a href="/kullanici/profil/{{ request.user.username }}/">buradan</a> ulaşabilir ya da <a 
+class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.</p>
                 {% endif %}
             </div>
             <div class="sidebar_bottom">&nbsp;</div>

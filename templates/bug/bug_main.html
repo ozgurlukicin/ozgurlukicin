@@ -38,7 +38,7 @@
     <div class="bug_info">
         <div class="bug_title"><a href="{{ bug.get_absolute_url }}" style="text-decoration:none">#{{ bug.id }} {{ bug.title|escape }}</a></div>
         <div class="bug_submitter">{{ bug.submitter.first_name|escape }} {{ bug.submitter.last_name|escape }}</div>
-        <div class="bug_status">{{ bug.get_status_display }}</div>
+        <div class="bug_status" style="color:{% ifequal bug.status 1 %}green{% else %}{% ifequal bug.status 2 %}blue{% else %}red{% endifequal %}{% endifequal %}">{{ bug.get_status_display }}</div>
         <div class="bug_priority">{{ bug.get_priority_display }}</div>
         <div class="bug_submitted_date">{{ bug.submitted_date|date:"d/m/Y H:i" }}</div>
     </div>
