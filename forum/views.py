@@ -76,6 +76,14 @@ def forum(request, forum_slug):
                        paginate_by = TOPICS_PER_PAGE,
                        allow_empty = True)
 
+def latest_posts(request):
+    posts = Post.objects.filter(hidden=0).order_by('-edited')[:100]
+    return object_list(request, posts,
+            template_name = 'forum/post_list.html',
+            template_object_name = 'post',
+            paginate_by = ALL_POSTS_PER_PAGE,
+            )
+
 @login_required
 def unread_topics(request):
     lastvisit_control(request)
