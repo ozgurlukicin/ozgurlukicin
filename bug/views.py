@@ -59,7 +59,9 @@ Atanan: %(assigned_to)s
             mail_set.add(BUG_MAILLIST)
             mail_set.add(bug.submitter.email)
             mail_set.add(bug.assigned_to.email)
-            send_mail(email_subject % email_dict, email_body % email_dict, BUG_FROM_EMAIL, list(mail_set), fail_silently=True)
+            # send mails seperately
+            for subscriber in mail_set:
+                send_mail(email_subject % email_dict, email_body % email_dict, BUG_FROM_EMAIL, [subscriber], fail_silently=True)
             return HttpResponseRedirect(bug.get_absolute_url())
     else:
         form = BugForm(auto_id=True)
@@ -110,7 +112,9 @@ Atanan: %(assigned_to)s
             comments = bug.comment_set.all()
             for comment in comments:
                 mail_set.add(comment.author.email)
-            send_mail(email_subject % email_dict, email_body % email_dict, BUG_FROM_EMAIL, list(mail_set), fail_silently=True)
+            # send mails seperately
+            for subscriber in mail_set:
+                send_mail(email_subject % email_dict, email_body % email_dict, BUG_FROM_EMAIL, [subscriber], fail_silently=True)
     return HttpResponseRedirect(bug.get_absolute_url())
 
 def main(request):
@@ -171,7 +175,9 @@ def detail(request, id):
             mail_set.add(bug.assigned_to.email)
             for comment in comments:
                 mail_set.add(comment.author.email)
-            send_mail(email_subject % email_dict, email_body % email_dict, BUG_FROM_EMAIL, list(mail_set), fail_silently=True)
+            # send mails seperately
+            for subscriber in mail_set:
+                send_mail(email_subject % email_dict, email_body % email_dict, BUG_FROM_EMAIL, [subscriber], fail_silently=True)
     else:
         form = CommentForm()
     return render_response(request, 'bug/bug_detail.html', locals())
