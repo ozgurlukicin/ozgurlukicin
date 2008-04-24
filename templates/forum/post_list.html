@@ -10,7 +10,7 @@
 <div id="forum_stats_latest_posts">
 {% for post in post_list %}
 <div class="post_base">
-    <div class="post_message_top"><div class="post_message_top_date"><a href="{{ post.topic.forum.get_absolute_url }}">{{ post.topic.forum }}</a> &#62; <a href="{{ post.topic.get_absolute_url }}">{{ post.topic }}</a></div><div class="post_message_top_date" style="float:right; margin-right:10px;"><a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="iletiye git" border="0px" /></a> <a href="/kullanici/profil/{{ post.author }}" class="profile_link">{{ post.author }}</a> - {{ post.created|date:"d F Y H:i" }}</div></div>
+    <div class="post_message_top"><div class="post_message_top_date"><a href="{{ post.topic.forum.get_absolute_url }}">{{ post.topic.forum }}</a> &#62; <a href="{{ post.topic.get_absolute_url }}">{{ post.topic }}</a></div><div class="post_bottom_small"><a href="{{ post.topic.get_reply_url }}"><img src="/media/dijital/img/forum/reply.gif" alt="Yanıtla" border="0px"></a></div><div class="post_message_top_date" style="float:right; margin-right:10px;"><a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="iletiye git" border="0px" /></a> <a href="/kullanici/profil/{{ post.author }}" class="profile_link">{{ post.author }}</a> - {{ post.created|date:"d F Y H:i" }}</div></div>
     <div style="overflow: auto; padding: 10px;">{{ post.text }}</div>
 </div>
 {% endfor %}
