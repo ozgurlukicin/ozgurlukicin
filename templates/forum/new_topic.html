@@ -7,7 +7,7 @@
 {% block content %}
 {% if user.is_authenticated %}
 <div class="forum_address">
-    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a> &#62; Yeni Konu</div>
+    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; Yeni Konu</div>
 </div>
 {% if form.errors %}
 <font color="red">Başlık açılamadı, lütfen aşağıdaki hataları düzeltin</font><br />

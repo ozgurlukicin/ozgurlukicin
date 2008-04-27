@@ -37,21 +37,21 @@
 </form>
 </div>
 {% else %}
-<div class="bug_detail_title">{{ bug.title|escape }}</div>
+<div class="bug_detail_title">{{ bug.title }}</div>
 <div class="bug_detail_content">
     Tarih: {{ bug.submitted_date|date:"d F Y H:i" }}<br />
-    Bildiren: <a href="/kullanici/profil/{{ bug.submitter }}/">{{ bug.submitter.first_name|escape }} {{ bug.submitter.last_name|escape }}</a><br />
-    Atanan: <a href="/kullanici/profil/{{ bug.assigned_to }}/">{{ bug.assigned_to.first_name|escape }} {{ bug.assigned_to.last_name|escape }}</a><br />
+    Bildiren: <a href="/kullanici/profil/{{ bug.submitter }}/">{{ bug.submitter.first_name }} {{ bug.submitter.last_name }}</a><br />
+    Atanan: <a href="/kullanici/profil/{{ bug.assigned_to }}/">{{ bug.assigned_to.first_name }} {{ bug.assigned_to.last_name }}</a><br />
     Durum: {{ bug.get_status_display }}<br />
     Öncelik: {{ bug.get_priority_display }}<br />
     Hata Tanımı:<br />
-    {{ bug.description|escape }}
+    {{ bug.description }}
 </div>
 {% endif %}
 {% for comment in bug.comment_set.all %}
 <div class="bug_detail_comment">
-    {{ comment.text }}<br />
-    <a href="/kullanici/profil/{{ comment.author }}/">{{ comment.author.first_name|escape }} {{ comment.author.last_name|escape }}</a> - {{ comment.date|date:"d F Y H:i" }}
+    {{ comment.text|safe }}<br />
+    <a href="/kullanici/profil/{{ comment.author }}/">{{ comment.author.first_name }} {{ comment.author.last_name }}</a> - {{ comment.date|date:"d F Y H:i" }}
 </div>
 {% endfor %}
 {% if request.user.is_authenticated %}

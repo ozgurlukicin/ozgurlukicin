@@ -7,6 +7,6 @@
 {% block content %}
 <h1>{{ package.title }}</h1>
 <div class="page_content">
-{{ package.text }}
+{{ package.text|safe }}
 </div>
 {% endblock %}
