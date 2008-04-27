@@ -13,6 +13,8 @@ from django.contrib.auth.models import User
 from oi.middleware import threadlocals
 from oi.st.models import Tag
 
+from oi.settings import FORUM_FROM_EMAIL
+
 class Post(models.Model):
     """
     Post model.
@@ -70,6 +72,10 @@ class Post(models.Model):
 
     def get_delete_confirm_url(self):
         return '/forum/%s/%s/delete/%s/yes/' % (self.topic.forum.slug, self.topic.id, self.id)
+
+    # creates unique message id for each post. This is used by "Message-ID" header.
+    def get_email_id(self):
+        return '<%s.%s@%s>' % (self.id, self.author.username, FORUM_FROM_EMAIL.split('@')[1])
 
     class Admin:
         list_display = ('id', 'topic', 'author', 'created', 'ip')
@@ -180,6 +186,9 @@ class Topic(models.Model):
 
     def get_hide_url(self):
         return '/forum/%s/%s/hide/' % (self.forum.slug, self.id)
+
+    def get_email_id(self):
+        return '<%s.%s@%s>' % (unicode(self.title), self.id, FORUM_FROM_EMAIL.split('@')[1])
 
     class Admin:
         list_display = ('forum', 'title', 'sticky', 'locked', 'hidden')

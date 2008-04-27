@@ -23,6 +23,10 @@ from oi.forum import customgeneric
 from django.core.urlresolvers import reverse
 from oi.st.models import Tag, News
 
+# import our function for sending e-mails and setting
+from oi.st.wrappers import send_mail_with_header
+from oi.settings import FORUM_FROM_EMAIL, FORUM_TO_EMAIL
+
 def main(request):
     lastvisit_control(request)
 
@@ -162,6 +166,14 @@ def reply(request, forum_slug, topic_id, post_id=False):
                        )
             post.save()
 
+            # send e-mail, will check if the user quoted or not and add header according to this
+            send_mail_with_header('Re: %s' % topic.title,
+                                  form.cleaned_date['text'],
+                                  '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
+                                  FORUM_TO_EMAIL,
+                                  headers = {'In-Reply-To': topic.get_email_id()}
+                                  )
+
             return HttpResponseRedirect(post.get_absolute_url())
     else:
         if post_id:
@@ -238,6 +250,14 @@ def new_topic(request, forum_slug):
                         text=form.cleaned_data['text'])
 
             post.save()
+
+            # send e-mail. We really rock, yeah!
+            send_mail_with_header(topic.title,
+                                  post.text,
+                                  '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
+                                  FORUM_TO_EMAIL,
+                                  headers = {'Message-ID': topic.get_email_id()}
+                                  )
 
             return HttpResponseRedirect(post.get_absolute_url())
     else:
