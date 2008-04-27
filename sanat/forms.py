@@ -42,11 +42,9 @@ class ScreenField(forms.Field):
         super(ScreenField,self).clean(value)
 
         if self.required and not value:
-            raise forms.ValidationError(_(u'Bos birakilamaz'))
+            raise forms.ValidationError(u'Bos birakilamaz')
 
         photo_data=value
-
-
 
         content_type = photo_data.get('content-type')
 
@@ -55,12 +53,12 @@ class ScreenField(forms.Field):
             main,sub=content_type.split('/')
 
             if not (main=='image' and sub in ['jpeg','png','gif']):
-                raise forms.ValidationError(_('Sadece JPEG, PNG, GIF'))
+                raise forms.ValidationError('Sadece JPEG, PNG, GIF')
 
         size = len (photo_data['content'])
 
         if size > settings.MAX_PHOTO_UPLOAD_SIZE:
-            raise forms.ValidationError(_('Resim çok büyük max %s byte'%(settings.MAX_PHOTO_UPLOAD_SIZE)))
+            raise forms.ValidationError('Resim çok büyük max %s byte'%(settings.MAX_PHOTO_UPLOAD_SIZE))
 
         #get the width and height
 
@@ -68,10 +66,10 @@ class ScreenField(forms.Field):
         #raise forms.ValidationError(_('Buradayız %s %s'%(width, height)))
 
         if width > settings.MAX_PHOTO_WIDTH:
-            raise forms.ValidationError(_('Genişlik çok büyük max %s byte'%(settings.MAX_PHOTO_WIDTH)))
+            raise forms.ValidationError('Genişlik çok büyük max %s byte'%(settings.MAX_PHOTO_WIDTH))
 
         if height > settings.MAX_PHOTO_WIDTH:
-            raise forms.ValidationError(_('Yükseklik çok büyük max %s byte'%(settings.MAX_PHOTO_HEIGHT)))
+            raise forms.ValidationError('Yükseklik çok büyük max %s byte'%(settings.MAX_PHOTO_HEIGHT))
 
         return value
 
@@ -88,7 +86,7 @@ class FileUploadField(forms.Field):
         super(FileUploadField,self).clean(value)
 
         if self.required and not value:
-            raise forms.ValidationError(_(u'Bos birakilamaz'))
+            raise forms.ValidationError(u'Bos birakilamaz')
 
         file_data=value
 
@@ -125,11 +123,11 @@ class TemaUploadForm(forms.Form):
     description=forms.CharField(label="Açıklama",required=True,max_length=100,widget=forms.Textarea())
 
     #file upload kısımları
-    screen=ScreenField(widget=forms.FileInput(),required=True, label=_("Photo"),
-                                help_text=_("Resim Yükleyiniz (max %s kilobytes) izin verilenler (jpeg,png,gif)"% (settings.MAX_PHOTO_UPLOAD_SIZE)))
+    screen=ScreenField(widget=forms.FileInput(),required=True, label="Photo",
+                                help_text="Resim Yükleyiniz (max %s kilobytes) izin verilenler (jpeg,png,gif)"% (settings.MAX_PHOTO_UPLOAD_SIZE))
 
-    file_up=FileUploadField(widget=forms.FileInput(),required=True, label=("Dosya"),
-                                    help_text=_("Dosya Yükleyiniz (max %s kilobytes) izin verilenler (zip simdlik)"% (settings.MAX_FILE_UPLOAD)))
+    file_up=FileUploadField(widget=forms.FileInput(),required=True, label="Dosya",
+                                    help_text="Dosya Yükleyiniz (max %s kilobytes) izin verilenler (zip simdlik)"% (settings.MAX_FILE_UPLOAD))
 
 
     def __init__(self,*args,**kwargs):
@@ -165,4 +163,3 @@ class TemaUploadForm(forms.Form):
         d.save()
         d.screens.add(s)
         d.file_data.add(a)
-
