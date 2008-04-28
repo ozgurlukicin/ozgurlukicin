@@ -168,7 +168,7 @@ def reply(request, forum_slug, topic_id, post_id=False):
 
             # send e-mail, will check if the user quoted or not and add header according to this
             send_mail_with_header('Re: %s' % topic.title,
-                                  '%s\n\n%s' % (form.cleaned_date['text'], topic.get_absolute_url()),
+                                  '%s\n\n%s' % (form.cleaned_date['text'], post.get_absolute_url()),
                                   '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
                                   FORUM_TO_EMAIL,
                                   headers = {'In-Reply-To': topic.get_email_id()}
@@ -253,7 +253,7 @@ def new_topic(request, forum_slug):
 
             # send e-mail. We really rock, yeah!
             send_mail_with_header(topic.title,
-                                  '%s\n\n%s' % (post.text, post.get_absolute_url()),
+                                  '%s\n\n%s' % (post.text, topic.get_absolute_url()),
                                   '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
                                   FORUM_TO_EMAIL,
                                   headers = {'Message-ID': topic.get_email_id()}
