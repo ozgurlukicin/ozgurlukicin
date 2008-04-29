@@ -37,7 +37,7 @@
           {% for tag in item.qtags %}<a href="{{ site.url }}/tag/{{ tag.name }}">{{ tag.name }}</a> {% endfor %}
       {% endif %}
     </div>
-    <p>{{ item.content }}</p>
+    <p>{{ item.content|safe }}</p>
   </div>
   </div>
 {% endfor %}
