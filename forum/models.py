@@ -188,7 +188,7 @@ class Topic(models.Model):
         return '/forum/%s/%s/hide/' % (self.forum.slug, self.id)
 
     def get_email_id(self):
-        return '<%s@%s>' % self.id, FORUM_FROM_EMAIL.split('@')[1]
+        return '<%s@%s>' % (self.id, FORUM_FROM_EMAIL.split('@')[1])
 
     class Admin:
         list_display = ('forum', 'title', 'sticky', 'locked', 'hidden')
@@ -300,6 +300,9 @@ class AbuseReport(models.Model):
 class WatchList(models.Model):
     user = models.ForeignKey(User, verbose_name='Kullanıcı')
     topic = models.ForeignKey(Topic, verbose_name='Konu')
+
+    def __str__(self):
+        return '%s' % self.topic.title
 
     class Admin:
         pass
