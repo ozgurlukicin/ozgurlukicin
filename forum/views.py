@@ -172,10 +172,7 @@ def reply(request, forum_slug, topic_id, post_id=False):
                                   '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
                                   FORUM_TO_EMAIL,
                                   headers = {'Message-ID': post.get_email_id(),
-                                             'In-Reply-To': topic.get_email_id(),
-                                             'MIME-Version': '1.0',
-                                             'Content-Type': 'text/html; charset="UTF-8"',
-                                             'Content-Transfer-Encoding': '8bit'}
+                                             'In-Reply-To': topic.get_email_id()}
                                   )
 
             return HttpResponseRedirect(post.get_absolute_url())
@@ -255,15 +252,15 @@ def new_topic(request, forum_slug):
 
             post.save()
 
+            # generate post url
+            post_url = WEB_URL + topic.get_absolute_url89
+
             # send e-mail. We really rock, yeah!
             send_mail_with_header('[Ozgurlukicin-forum] %s' % topic.title,
-                                  '%s\n\n%s%s' % (post.text, WEB_URL, topic.get_absolute_url()),
+                                  '%s\n\n<a href="%s">%s</a>' % (post.text, post_url, post_url),
                                   '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
                                   FORUM_TO_EMAIL,
-                                  headers = {'Message-ID': topic.get_email_id(),
-                                             'MIME-Version': '1.0',
-                                             'Content-Type': 'text/html; charset="UTF-8"',
-                                             'Content-Transfer-Encoding': '8bit'}
+                                  headers = {'Message-ID': topic.get_email_id()}
                                   )
 
             return HttpResponseRedirect(post.get_absolute_url())
