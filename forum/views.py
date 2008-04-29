@@ -25,7 +25,7 @@ from oi.st.models import Tag, News
 
 # import our function for sending e-mails and setting
 from oi.st.wrappers import send_mail_with_header
-from oi.settings import FORUM_FROM_EMAIL, FORUM_TO_EMAIL
+from oi.settings import FORUM_FROM_EMAIL, FORUM_TO_EMAIL, WEB_URL
 
 def main(request):
     lastvisit_control(request)
@@ -168,10 +168,13 @@ def reply(request, forum_slug, topic_id, post_id=False):
 
             # send e-mail, will check if the user quoted or not and add header according to this
             send_mail_with_header('[Ozgurlukicin-forum] Re: %s' % topic.title,
-                                  '%s\n\nhttp://www.ozgurlukicin.com%s' % (form.cleaned_data['text'], post.get_absolute_url()),
+                                  '%s\n\n%s%s' % (form.cleaned_data['text'], WEB_URL, post.get_absolute_url()),
                                   '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
                                   FORUM_TO_EMAIL,
-                                  headers = {'In-Reply-To': topic.get_email_id()}
+                                  headers = {'In-Reply-To': topic.get_email_id(),
+                                             'MIME-Version': '1.0',
+                                             'Content-Type': 'text/plain; charset="UTF-8"',
+                                             'Content-Transfer-Encoding': '8bit'}
                                   )
 
             return HttpResponseRedirect(post.get_absolute_url())
@@ -253,10 +256,13 @@ def new_topic(request, forum_slug):
 
             # send e-mail. We really rock, yeah!
             send_mail_with_header('[Ozgurlukicin-forum] %s' % topic.title,
-                                  '%s\n\nhttp://www.ozgurlukicin.com%s' % (post.text, topic.get_absolute_url()),
+                                  '%s\n\n%s%s' % (post.text, WEB_URL, topic.get_absolute_url()),
                                   '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
                                   FORUM_TO_EMAIL,
-                                  headers = {'Message-ID': topic.get_email_id()}
+                                  headers = {'Message-ID': topic.get_email_id(),
+                                             'MIME-Version': '1.0',
+                                             'Content-Type': 'text/plain; charset="UTF-8"',
+                                             'Content-Transfer-Encoding': '8bit'}
                                   )
 
             return HttpResponseRedirect(post.get_absolute_url())
