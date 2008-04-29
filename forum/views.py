@@ -166,9 +166,12 @@ def reply(request, forum_slug, topic_id, post_id=False):
                        )
             post.save()
 
+            # generate post url
+            post_url = WEB_URL + post.get_absolute_url()
+
             # send e-mail, will check if the user quoted or not and add header according to this
             send_mail_with_header('[Ozgurlukicin-forum] Re: %s' % topic.title,
-                                  '%s\n\n%s%s' % (form.cleaned_data['text'], WEB_URL, post.get_absolute_url()),
+                                  '%s\n\n<a href="%s">%s</a>' % (form.cleaned_data['text'], post_url, post_url),
                                   '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
                                   FORUM_TO_EMAIL,
                                   headers = {'Message-ID': post.get_email_id(),
@@ -253,7 +256,7 @@ def new_topic(request, forum_slug):
             post.save()
 
             # generate post url
-            post_url = WEB_URL + topic.get_absolute_url89
+            post_url = WEB_URL + topic.get_absolute_url()
 
             # send e-mail. We really rock, yeah!
             send_mail_with_header('[Ozgurlukicin-forum] %s' % topic.title,
