@@ -171,9 +171,10 @@ def reply(request, forum_slug, topic_id, post_id=False):
                                   '%s\n\n%s%s' % (form.cleaned_data['text'], WEB_URL, post.get_absolute_url()),
                                   '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
                                   FORUM_TO_EMAIL,
-                                  headers = {'In-Reply-To': topic.get_email_id(),
+                                  headers = {'Message-ID': post.get_email_id(),
+                                             'In-Reply-To': topic.get_email_id(),
                                              'MIME-Version': '1.0',
-                                             'Content-Type': 'text/plain; charset="UTF-8"',
+                                             'Content-Type': 'text/html; charset="UTF-8"',
                                              'Content-Transfer-Encoding': '8bit'}
                                   )
 
@@ -261,7 +262,7 @@ def new_topic(request, forum_slug):
                                   FORUM_TO_EMAIL,
                                   headers = {'Message-ID': topic.get_email_id(),
                                              'MIME-Version': '1.0',
-                                             'Content-Type': 'text/plain; charset="UTF-8"',
+                                             'Content-Type': 'text/html; charset="UTF-8"',
                                              'Content-Transfer-Encoding': '8bit'}
                                   )
 
