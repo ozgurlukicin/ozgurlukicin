@@ -15,6 +15,8 @@ from oi.st.models import Tag
 
 from oi.settings import FORUM_FROM_EMAIL
 
+import md5
+
 class Post(models.Model):
     """
     Post model.
