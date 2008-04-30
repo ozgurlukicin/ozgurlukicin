@@ -145,7 +145,7 @@ def topic(request, forum_slug, topic_id):
                        allow_empty = True)
 
 @login_required
-def reply(request, forum_slug, topic_id, post_id=False):
+def reply(request, forum_slug, topic_id, quote_id=False):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
 
@@ -168,6 +168,15 @@ def reply(request, forum_slug, topic_id, post_id=False):
 
             # generate post url
             post_url = WEB_URL + post.get_absolute_url()
+            # generate In-Reply-To header. If we get quote that should be quote's message id
+            print request.POST
+            if request.POST.has_key('quote_id'):
+                quote = get_object_or_404(Post, id=request.POST['quote_id'])
+                in_reply_to = quote.get_email_id()
+            else:
+                in_reply_to = topic.get_email_id()
+
+            print 'In reply to: %s' % in_reply_to
 
             # send e-mail, will check if the user quoted or not and add header according to this
             send_mail_with_header('[Ozgurlukicin-forum] Re: %s' % topic.title,
@@ -175,16 +184,19 @@ def reply(request, forum_slug, topic_id, post_id=False):
                                   '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
                                   FORUM_TO_EMAIL,
                                   headers = {'Message-ID': post.get_email_id(),
-                                             'In-Reply-To': topic.get_email_id()}
+                                             'In-Reply-To': in_reply_to}
                                   )
 
             return HttpResponseRedirect(post.get_absolute_url())
     else:
-        if post_id:
-            post = get_object_or_404(Post, pk=post_id)
+        if quote_id:
+            post = get_object_or_404(Post, pk=quote_id)
 
             if post in topic.post_set.all():
-                form = PostForm(auto_id=True, initial={'text': '[quote|'+post_id+']'+post.text+'[/quote]'})
+                form = PostForm(auto_id=True, initial={'text': '<b>%s</b> kullanıcısından alıntı. Tarih: %s<br /><i>%s</i><br />' % (post.author.username, post.created, post.text)})
+            # if quote doesn't belong to this topic, just redirect to what user gets :)
+            else:
+                return HttpResponseRedirect(post.get_absolute_url())
         else:
             form = PostForm(auto_id=True)
 

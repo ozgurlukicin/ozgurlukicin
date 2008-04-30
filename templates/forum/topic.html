@@ -36,6 +36,9 @@
             <div class="post_message_top_date">
                 {{ post.created|date:"d-m-Y H:i" }}
             </div>
+            <div class="post_message_top_button">
+                <a href="{{ forum.get_absolute_url }}{{ topic.id}}/quote/{{ post.id }}/">Alıntı</a>
+            </div>
             {% if perms.forum.change_post %}
             <div class="post_message_top_button">
                 <a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" alt="düzenle" border="0" /></a>
