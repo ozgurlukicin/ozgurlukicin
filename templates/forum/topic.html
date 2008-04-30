@@ -14,6 +14,7 @@
     <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; {{ topic.title }}</div>
 </div>
 <br />
+
 {% for post in post_list %}
 
 {% if post.hidden and not perms.forum.can_see_hidden_posts %}
@@ -37,8 +38,9 @@
                 {{ post.created|date:"d-m-Y H:i" }}
             </div>
             <div class="post_message_top_button">
-                <a href="{{ forum.get_absolute_url }}{{ topic.id}}/quote/{{ post.id }}/">Alıntı</a>
+                <a href="{{ forum.get_absolute_url }}{{ topic.id }}/quote/{{ post.id }}/">Alıntı</a>
             </div>
+            {% if forloop.first %}<div class="post_message_top_button"><a href="{{ topic.get_follow_url }}">İzle</a></div>{% endif %}
             {% if perms.forum.change_post %}
             <div class="post_message_top_button">
                 <a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" alt="düzenle" border="0" /></a>
@@ -81,7 +83,7 @@
                 {% endif %}
         </div>
         <div class="post_message_content">
-            <div class="post_message_text">{{ post.text|safe }}</div>
+            <div class="post_message_text">{{ post.text|renderquote|safe }}</div>
             {% if forloop.first %}
             <div class="post_message_tags">
                 <img src="/media/img/tag.png" alt="etiket" />{% for tag in topic.tags.all %}<span class="tag"><a href="/etiket/{{tag.name}}/">{{tag.name}}</a></span>{% endfor %}

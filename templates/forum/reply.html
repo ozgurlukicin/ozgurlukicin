@@ -10,7 +10,7 @@
 {% if user.is_authenticated %}
 {% if flood %}Flood koruması aktif, lütfen {{ timeout }} saniye bekleyin.{% endif %}
 <form action="" method="post">
-    {% if quote_id %}<input type="hidden" name="quote_id" value="{{ quote_id }}" />{% endif %}
+    <input type="hidden" name="quote_id" value="{{ quote_id }}" />
 {% for field in form %}
     <dl>
         <dt><label for="{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
