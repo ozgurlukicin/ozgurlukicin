@@ -14,7 +14,7 @@
 {% for field in form %}
     <dl>
         <dt><label for="{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
-        <dd>{{ field }}</dd>
+        <dd>{{ field|safe }}</dd>
     </dl>
 {% endfor %}
 <input type="submit" value="Yanıtla" />

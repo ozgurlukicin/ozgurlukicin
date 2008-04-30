@@ -83,7 +83,7 @@
                 {% endif %}
         </div>
         <div class="post_message_content">
-            <div class="post_message_text">{{ post.text|renderquote|safe }}</div>
+            <div class="post_message_text">{{ post.text|renderbbcode|safe }}</div>
             {% if forloop.first %}
             <div class="post_message_tags">
                 <img src="/media/img/tag.png" alt="etiket" />{% for tag in topic.tags.all %}<span class="tag"><a href="/etiket/{{tag.name}}/">{{tag.name}}</a></span>{% endfor %}

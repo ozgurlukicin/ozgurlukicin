@@ -6,6 +6,8 @@ from django.template import Library
 from django.utils.timesince import timesince
 from oi.settings import MEDIA_ROOT, MEDIA_URL
 
+from oi.forum.postmarkup import render_bbcode
+
 register = Library()
 
 @register.filter
@@ -27,29 +29,8 @@ def thumbnail(file, size='200x200'):
     return miniature_url
 
 @register.filter
-def renderquote(context):
-    def render(text):
-        if text.find("[quote]") > 0 and text.find("[/quote]") > 0:
-            first_find = text.find("[quote]")
-            second_find = text.find("[/quote]")
-
-            # get [quote]user|date|message[/quote]
-            quote_string = text[first_find:second_find+8]
-
-            # clean it, just gets user|date|message
-            clean_string = quote_string[7:-8]
-
-            try:
-                username, date, data = clean_string.split("|")
-                replace_string = '<div class="quote"><b>%s</b> kullanıcısından alıntı. Tarih: %s <p>%s</p></div>' % (username, date, data)
-
-                return text.replace(quote_string, replace_string)
-            except ValueError:
-                return text
-        else:
-            return text
-
-    return render(context)
+def renderbbcode(context):
+    return render_bbcode(context)
 
 @register.inclusion_tag('paginator.html', takes_context=True)
 def paginator(context, adjacent_pages=2):
