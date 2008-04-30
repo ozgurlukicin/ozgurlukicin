@@ -145,6 +145,19 @@ def topic(request, forum_slug, topic_id):
                        allow_empty = True)
 
 @login_required
+def follow(request, forum_slug, topic_id):
+    topic = get_object_or_404(Topic, pk=topic_id)
+
+    # determine if user already added this to prevent double adding.
+    if len(WatchList.objects.filter(topic__id=topic_id).filter(user__username=request.user.username)) > 0:
+        # FIXME: Give proper error.
+        return HttpResponse('Sorry, you are already following this topic')
+    else:
+        watchlist = WatchList(topic=topic, user=request.user)
+        watchlist.save()
+        return HttpResponseRedirect(topic.get_absolute_url())
+
+@login_required
 def reply(request, forum_slug, topic_id, quote_id=False):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
@@ -178,14 +191,16 @@ def reply(request, forum_slug, topic_id, quote_id=False):
 
             print 'In reply to: %s' % in_reply_to
 
-            # send e-mail, will check if the user quoted or not and add header according to this
-            send_mail_with_header('[Ozgurlukicin-forum] Re: %s' % topic.title,
-                                  '%s<br /><br /><a href="%s">%s</a>' % (form.cleaned_data['text'], post_url, post_url),
-                                  '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
-                                  FORUM_TO_EMAIL,
-                                  headers = {'Message-ID': post.get_email_id(),
-                                             'In-Reply-To': in_reply_to}
-                                  )
+            # send email to everyone who follows this topic.
+            watchlists = WatchList.objects.all().filter(topic__id=topic_id)
+            for watchlist in watchlists:
+                send_mail_with_header('[Ozgurlukicin-forum] Re: %s' % topic.title,
+                                      '%s<br /><br /><a href="%s">%s</a>' % (form.cleaned_data['text'], post_url, post_url),
+                                      '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
+                                      watchlist.user.email,
+                                      headers = {'Message-ID': post.get_email_id(),
+                                                 'In-Reply-To': in_reply_to}
+                                      )
 
             return HttpResponseRedirect(post.get_absolute_url())
     else:
@@ -193,7 +208,7 @@ def reply(request, forum_slug, topic_id, quote_id=False):
             post = get_object_or_404(Post, pk=quote_id)
 
             if post in topic.post_set.all():
-                form = PostForm(auto_id=True, initial={'text': '<b>%s</b> kullanıcısından alıntı. Tarih: %s<br /><i>%s</i><br />' % (post.author.username, post.created, post.text)})
+                form = PostForm(auto_id=True, initial={'text': '[quote]%s|%s|%s[/quote]' % (post.author.username, post.created, post.text)})
             # if quote doesn't belong to this topic, just redirect to what user gets :)
             else:
                 return HttpResponseRedirect(post.get_absolute_url())

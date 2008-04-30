@@ -168,6 +168,9 @@ class Topic(models.Model):
         lastpage = ((self.posts - 1) / oi.forum.settings.POSTS_PER_PAGE) + 1
         return '/forum/%s/%s/?page=%s#post%s' % (self.forum.slug, self.id, lastpage, self.topic_latest_post.id)
 
+    def get_follow_url(self):
+        return '/forum/%s/%s/follow' % (self.forum.slug, self.id)
+
     def get_reply_url(self):
         return '/forum/%s/%s/reply/' % (self.forum.slug, self.id)
 

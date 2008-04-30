@@ -310,6 +310,19 @@ border: 1px solid #45586F;
     font-weight: bold;
 }
 
+.quote {
+    border: 1px solid #CCCCCC;
+    padding: 10px;
+    margin-bottom: 8px;
+    background-color: #E1E3FF;
+    color: #51615D;
+}
+
+.quote p {
+    padding-left: 12px;
+    font-style: italic;
+}
+
 .paginator .page a, .paginator .page a:visited, .paginator .curr {
     padding:.25em;
     font-weight: normal;
