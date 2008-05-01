@@ -38,7 +38,7 @@
                 {{ post.created|date:"d-m-Y H:i" }}
             </div>
             <div class="post_message_top_button">
-                <a href="{{ forum.get_absolute_url }}{{ topic.id }}/quote/{{ post.id }}/">Alıntı</a>
+                <a href="{{ post.get_quote_url }}"><img src="/media/dijital/img/forum/quote.gif" alt="alıntıla" border="0" /></a>
             </div>
             {% if forloop.first %}<div class="post_message_top_button"><a href="{{ topic.get_follow_url }}">İzle</a></div>{% endif %}
             {% if perms.forum.change_post %}
