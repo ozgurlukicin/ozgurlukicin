@@ -194,7 +194,7 @@ def reply(request, forum_slug, topic_id, quote_id=False):
                 send_mail_with_header('[Ozgurlukicin-forum] Re: %s' % topic.title,
                                       '%s<br /><br /><a href="%s">%s</a>' % (form.cleaned_data['text'], post_url, post_url),
                                       '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
-                                      watchlist.user.email,
+                                      [watchlist.user.email],
                                       headers = {'Message-ID': post.get_email_id(),
                                                  'In-Reply-To': in_reply_to},
                                       fail_silently = True
