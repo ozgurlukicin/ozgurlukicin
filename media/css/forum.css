@@ -310,16 +310,15 @@ border: 1px solid #45586F;
     font-weight: bold;
 }
 
-blockquote {
+.quote {
     border: 1px solid #CCCCCC;
     padding: 10px;
-    width: 90%;
-    margin-bottom: 2px;
+    margin-bottom: 8px;
     background-color: #E1E3FF;
     color: #51615D;
 }
 
-blockquote em {
+.quote p {
     padding-left: 12px;
     font-style: italic;
 }

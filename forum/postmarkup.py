@@ -293,10 +293,10 @@ class QuoteTag(TagBase):
         TagBase.__init__(self, 'quote')
 
     def open(self, open_pos):
-        return u'<blockquote><em>%s</em><br/>'%(self.params)
+        return u'<div class="quote">%s<p>'%(self.params)
 
     def close(self, close_pos, content):
-        return u"</blockquote>"
+        return u"</p></div>"
 
 
 class SearchTag(TagBase):
