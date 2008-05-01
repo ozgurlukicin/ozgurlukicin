@@ -205,7 +205,7 @@ def reply(request, forum_slug, topic_id, quote_id=False):
             post = get_object_or_404(Post, pk=quote_id)
 
             if post in topic.post_set.all():
-                form = PostForm(auto_id=True, initial={'text': '[quote <b>%s</b> kullanıcısından alıntı...]%s[/quote]' % (post.author, post.text)})
+                form = PostForm(auto_id=True, initial={'text': '[quote <b>%s</b>, %s tarihinde:]%s[/quote]' % (post.author, post.edited.strftime("%d/%m/%Y %H:%M"), post.text)})
             # if quote doesn't belong to this topic, just redirect to what user gets :)
             else:
                 return HttpResponseRedirect(post.get_absolute_url())
