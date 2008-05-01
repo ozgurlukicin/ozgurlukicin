@@ -165,7 +165,7 @@ def reply(request, forum_slug, topic_id, quote_id=False):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
 
-    posts = topic.post_set.all().order_by('-created')[:POSTS_PER_PAGE]
+    posts = topic.post_set.order_by('-created')[:POSTS_PER_PAGE]
 
     if forum.locked or topic.locked:
         return HttpResponse("Forum or topic is locked") #FIXME: Give an error message
@@ -210,7 +210,7 @@ def reply(request, forum_slug, topic_id, quote_id=False):
 </style>"""
 
             # send email to everyone who follows this topic.
-            watchlists = WatchList.objects.all().filter(topic__id=topic_id)
+            watchlists = WatchList.objects.filter(topic__id=topic_id)
             for watchlist in watchlists:
                 send_mail_with_header('[Ozgurlukicin-forum] Re: %s' % topic.title,
                                       '%s\n%s<br /><br /><a href="%s">%s</a>' % (css, render_bbcode(form.cleaned_data['text']), post_url, post_url),
