@@ -182,14 +182,11 @@ def reply(request, forum_slug, topic_id, quote_id=False):
             # generate post url
             post_url = WEB_URL + post.get_absolute_url()
             # generate In-Reply-To header. If we get quote that should be quote's message id
-            print request.POST
             if request.POST.has_key('quote_id'):
                 quote = get_object_or_404(Post, id=request.POST['quote_id'])
                 in_reply_to = quote.get_email_id()
             else:
                 in_reply_to = topic.get_email_id()
-
-            print 'In reply to: %s' % in_reply_to
 
             # send email to everyone who follows this topic.
             watchlists = WatchList.objects.all().filter(topic__id=topic_id)
