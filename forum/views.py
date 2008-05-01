@@ -196,7 +196,8 @@ def reply(request, forum_slug, topic_id, quote_id=False):
                                       '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
                                       watchlist.user.email,
                                       headers = {'Message-ID': post.get_email_id(),
-                                                 'In-Reply-To': in_reply_to}
+                                                 'In-Reply-To': in_reply_to},
+                                      fail_silently = True
                                       )
 
             return HttpResponseRedirect(post.get_absolute_url())
@@ -287,7 +288,8 @@ def new_topic(request, forum_slug):
                                   '%s<br /><br /><a href="%s">%s</a>' % (post.text, post_url, post_url),
                                   '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
                                   FORUM_TO_EMAIL,
-                                  headers = {'Message-ID': topic.get_email_id()}
+                                  headers = {'Message-ID': topic.get_email_id()},
+                                  fail_silently = True
                                   )
 
             return HttpResponseRedirect(post.get_absolute_url())

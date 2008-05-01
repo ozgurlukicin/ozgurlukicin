@@ -12,6 +12,11 @@ a.profile_link {
     text-decoration: none;
     color: #333333;
 }
+
+p {
+    margin: 0px;
+    padding: 0px;
+}
 /*The colors end here */
 
 /* header */
@@ -186,6 +191,7 @@ div.post_message_content {
 }
 div.post_message_text {
     min-height: 160px;
+    padding-bottom: 9px;
     overflow: auto;
 }
 div.post_message_tags {
