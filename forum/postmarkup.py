@@ -35,7 +35,7 @@ def url_tagify(s, tag=u'url'):
     
 
 
-def create(include=None, exclude=None, use_pygments=True):
+def create(include=None, exclude=None, use_pygments=True, *args, **kwargs):
 
     """Create a postmarkup object that coverts bbcode to XML snippets.
 
@@ -49,44 +49,43 @@ def create(include=None, exclude=None, use_pygments=True):
 
     markup = PostMarkup()
 
-    def add_tag(name, tag_class, *args):
+    def add_tag(name, tag_class, *args, **kwargs):
         if include is None or name in include:
             if exclude is not None and name in exclude:
                 return
-            markup.add_tag(name, tag_class, *args)
+            markup.add_tag(name, tag_class, *args, **kwargs)
 
-    add_tag(u'b', SimpleTag, u'b', u'strong')
-    add_tag(u'i', SimpleTag, u'i', u'em')
-    add_tag(u'u', SimpleTag, u'u', u'u')
-    add_tag(u's', SimpleTag, u's', u'strike')
-    add_tag(u'link', LinkTag, u'link')
-    add_tag(u'url', LinkTag, u'url')
-    add_tag(u'quote', QuoteTag)
-    add_tag(u'img', ImgTag, u'img')
+    add_tag(u'b', SimpleTag, u'b', u'strong', *args, **kwargs)
+    add_tag(u'i', SimpleTag, u'i', u'em', *args, **kwargs)
+    add_tag(u'u', SimpleTag, u'u', u'u', *args, **kwargs)
+    add_tag(u's', SimpleTag, u's', u'strike', *args, **kwargs)
+    add_tag(u'link', LinkTag, u'link', *args, **kwargs)
+    add_tag(u'url', LinkTag, u'url', *args, **kwargs)
+    add_tag(u'quote', QuoteTag, *args, **kwargs)
+    add_tag(u'img', ImgTag, u'img', *args, **kwargs)
 
     add_tag(u'wiki', SearchTag, u'wiki',
-            u"http://en.wikipedia.org/wiki/Special:Search?search=%s", u'wikipedia.com')
+            u"http://en.wikipedia.org/wiki/Special:Search?search=%s", u'wikipedia.com', *args, **kwargs)
     add_tag(u'google', SearchTag, u'google',
-            u"http://www.google.com/search?hl=en&q=%s&btnG=Google+Search", u'google.com')
+            u"http://www.google.com/search?hl=en&q=%s&btnG=Google+Search", u'google.com', *args, **kwargs)
     add_tag(u'dictionary', SearchTag, u'dictionary',
-            u"http://dictionary.reference.com/browse/%s", u'dictionary.com')
+            u"http://dictionary.reference.com/browse/%s", u'dictionary.com', *args, **kwargs)
     add_tag(u'dict', SearchTag, u'dict',
-            u"http://dictionary.reference.com/browse/%s", u'dictionary.com')
+            u"http://dictionary.reference.com/browse/%s", u'dictionary.com', *args, **kwargs)
 
-    add_tag(u'list', ListTag)
-    add_tag(u'*', ListItemTag)
+    add_tag(u'list', ListTag, *args, **kwargs)
+    add_tag(u'*', ListItemTag, *args, **kwargs)
 
     if use_pygments:
         assert pygments_available, "Install pygments (http://pygments.org/) or call create with use_pygments=False"
-        add_tag(u'code', PygmentsCodeTag, u'code')
+        add_tag(u'code', PygmentsCodeTag, u'code', *args, **kwargs)
     else:
-        add_tag(u'code', SimpleTag, u'code', u'pre')
+        add_tag(u'code', SimpleTag, u'code', u'pre', *args, **kwargs)
 
     return markup
 
 
-_bbcode_postmarkup = None
-def render_bbcode(bbcode, encoding="ascii"):
+def render_bbcode(bbcode, encoding="ascii", *args, **kwargs):
 
     """Renders a bbcode string in to XHTML. This is a shortcut if you don't
     need to customize any tags.
@@ -98,10 +97,8 @@ def render_bbcode(bbcode, encoding="ascii"):
 
     """
 
-    global _bbcode_postmarkup
-    if _bbcode_postmarkup is None:
-        _bbcode_postmarkup = create(use_pygments=pygments_available)
-    return _bbcode_postmarkup(bbcode, encoding)
+    _bbcode_postmarkup = create(use_pygments=pygments_available, *args, **kwargs)
+    return _bbcode_postmarkup(bbcode, encoding, *args, **kwargs)
 
 
 re_html=re.compile('<.*?>|\&.*?\;')
@@ -134,7 +131,7 @@ class TagBase(object):
     Base class for a Post Markup tag.
     """
 
-    def __init__(self, name):
+    def __init__(self, name, *args, **kwargs):
         self.name = name
         self.params = None
         self.auto_close = False
@@ -142,6 +139,8 @@ class TagBase(object):
         self.open_pos = None
         self.close_pos = None
         self.raw = None
+        self.args = args
+        self.kwargs = kwargs
 
     def open(self, open_pos):
         """Called when the tag is opened. Should return a string or a
@@ -171,7 +170,7 @@ class TagBase(object):
 
 # A proxy object that calls a callback when converted to a string
 class TagStringify(object):
-    def __init__(self, callback, raw):
+    def __init__(self, callback, raw, *args, **kwargs):
         self.callback = callback
         self.raw = raw
     def __unicode__(self):
@@ -184,8 +183,8 @@ class SimpleTag(TagBase):
 
     """Simple substitution tag."""
 
-    def __init__(self, name, substitute):
-        TagBase.__init__(self, name)
+    def __init__(self, name, substitute, *args, **kwargs):
+        TagBase.__init__(self, name, *args, **kwargs)
         self.substitute = substitute
 
     def open(self, open_pos):
@@ -201,8 +200,8 @@ class LinkTag(TagBase):
 
     """Tag that generates a link (</a>)."""
 
-    def __init__(self, name):
-        TagBase.__init__(self, name)
+    def __init__(self, name, *args, **kwargs):
+        TagBase.__init__(self, name, *args, **kwargs)
 
     def open(self, open_pos):
                 
@@ -289,14 +288,21 @@ class QuoteTag(TagBase):
     """
     Generates a blockquote with a message regarding the author of the quote.
     """
-    def __init__(self):
-        TagBase.__init__(self, 'quote')
+    def __init__(self, *args, **kwargs):
+        TagBase.__init__(self, 'quote', *args, **kwargs)
 
     def open(self, open_pos):
-        return u'<div class="quote">%s<p>'%(self.params)
+        # render for email quotation.
+        if self.kwargs.has_key('render_for_email'):
+            return u'%s\n >> ' % (self.params)
+        else:
+            return u'<div class="quote">%s<p>'%(self.params)
 
     def close(self, close_pos, content):
-        return u"</p></div>"
+        if self.kwargs.has_key("render_for_email"):
+            return u"\n"
+        else:
+            return u"</p></div>"
 
 
 class SearchTag(TagBase):
@@ -304,8 +310,8 @@ class SearchTag(TagBase):
     Creates a link to a search term.
     """
 
-    def __init__(self, name, url, label=u""):
-        TagBase.__init__(self, name)
+    def __init__(self, name, url, label=u"", *args, **kwargs):
+        TagBase.__init__(self, name, *args, **kwargs)
         self.url = url
         self.search = u""
         self.label = label or name
@@ -353,8 +359,8 @@ class SearchTag(TagBase):
 
 class ImgTag(TagBase):
 
-    def __init__(self, name):
-        TagBase.__init__(self, name)
+    def __init__(self, name, *args, **kwargs):
+        TagBase.__init__(self, name, *args, **kwargs)
         self.enclosed=True
 
     def open(self, open_pos):
@@ -381,8 +387,8 @@ class ListTag(TagBase):
 
     """Simple substitution tag."""
 
-    def __init__(self):
-        TagBase.__init__(self, "list")
+    def __init__(self, *args, **kwargs):
+        TagBase.__init__(self, "list", *args, **kwargs)
 
     def open(self, open_pos):
         """Called to render the opened tag."""
@@ -408,8 +414,8 @@ class ListItemTag(TagBase):
 
     _open_tag = None
 
-    def __init__(self):
-        TagBase.__init__(self, u"*")
+    def __init__(self, *args, **kwargs):
+        TagBase.__init__(self, u"*", *args, **kwargs)
         self.closed = False
 
     def open(self, open_pos):
@@ -447,8 +453,8 @@ class PygmentsCodeTag(TagBase):
     # Set this to True if you want to display line numbers
     line_numbers = False
 
-    def __init__(self, name):
-        TagBase.__init__(self, name)
+    def __init__(self, name, *args, **kwargs):
+        TagBase.__init__(self, name, *args, **kwargs)
         self.enclosed = True
 
     def open(self, open_pos):
@@ -482,7 +488,7 @@ class PygmentsCodeTag(TagBase):
 # http://effbot.org/zone/python-replace.htm
 class MultiReplace:
 
-    def __init__(self, repl_dict):
+    def __init__(self, repl_dict, *args, **kwargs):
         # "compile" replacement dictionary
 
         # assume char to char mapping
@@ -516,7 +522,7 @@ class MultiReplace:
 
 class StringToken(object):
 
-    def __init__(self, raw):
+    def __init__(self, raw, *args, **kwargs):
         self.raw = raw
 
     def __unicode__(self):
@@ -535,12 +541,12 @@ class PostMarkup(object):
 
 
     @staticmethod
-    def TagFactory(tag_class, *args):
+    def TagFactory(tag_class, *args, **kwargs):
         """
         Returns a callable that returns a new tag instance.
         """
         def make():
-            return tag_class(*args)
+            return tag_class(*args, **kwargs)
 
         return make
 
@@ -635,7 +641,7 @@ class PostMarkup(object):
         return self
 
 
-    def add_tag(self, name, tag_class, *args):
+    def add_tag(self, name, tag_class, *args, **kwargs):
         """Add a tag factory to the markup.
 
         name -- Name of the tag
@@ -643,7 +649,7 @@ class PostMarkup(object):
         args -- Aditional parameters for the tag class
 
         """
-        self.tags[name] = PostMarkup.TagFactory(tag_class, *args)
+        self.tags[name] = PostMarkup.TagFactory(tag_class, *args, **kwargs)
 
 
     def __call__(self, *args, **kwargs):
@@ -653,7 +659,9 @@ class PostMarkup(object):
     def render_to_html(self,
                        post_markup,
                        encoding="ascii",
-                       exclude_tags=None):
+                       exclude_tags=None,
+                       *args,
+                       **kwargs):
         
         """Converts Post Markup to XHTML.
 
