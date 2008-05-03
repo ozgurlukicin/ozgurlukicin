@@ -17,32 +17,32 @@ import Image
 from django.shortcuts import get_object_or_404
 
 vote_choices=(
-				(0,u'Berbat'),
-				(1,u'Kötü'),
-				(2,u'Orta'),
-				(3,u'İyi'),
-				(4,u'Güzel'),
-				(5,u'Süper'),
-				)
-class VoteForm(forms.Form):
-	""" tema vote form validator"""
-	vote= forms.ChoiceField(label="Oy",required=True,choices=vote_choices)
+        (0, '0'),
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+        )
 
+class VoteForm(forms.Form):
+    """tema vote form validator"""
+    vote= forms.ChoiceField(label="Oy", required=True, choices=vote_choices)
 
 class ScreenField(forms.Field):
-    """ That one will validate the screen upload things"""
+    """That one will validate the screen upload things"""
 
     def __init__(self,*args,**kwargs):
-        """ Calling the upper function"""
+        """Calling the upper function"""
         super(ScreenField,self).__init__(*args,**kwargs)
 
     def clean(self,value):
-        """ The validator part"""
+        """The validator part"""
         #bos musun ?
         super(ScreenField,self).clean(value)
 
         if self.required and not value:
-            raise forms.ValidationError(u'Bos birakilamaz')
+            raise forms.ValidationError(u'Boş bırakılamaz')
 
         photo_data=value
 
@@ -53,12 +53,12 @@ class ScreenField(forms.Field):
             main,sub=content_type.split('/')
 
             if not (main=='image' and sub in ['jpeg','png','gif']):
-                raise forms.ValidationError('Sadece JPEG, PNG, GIF')
+                raise forms.ValidationError('Sadece JPEG, PNG, GIF türleri kabul ediliyor')
 
         size = len (photo_data['content'])
 
         if size > settings.MAX_PHOTO_UPLOAD_SIZE:
-            raise forms.ValidationError('Resim çok büyük max %s byte'%(settings.MAX_PHOTO_UPLOAD_SIZE))
+            raise forms.ValidationError('Resim boyutu çok büyük, en fazla %s bayt olabilir'%(settings.MAX_PHOTO_UPLOAD_SIZE))
 
         #get the width and height
 
@@ -66,10 +66,10 @@ class ScreenField(forms.Field):
         #raise forms.ValidationError(_('Buradayız %s %s'%(width, height)))
 
         if width > settings.MAX_PHOTO_WIDTH:
-            raise forms.ValidationError('Genişlik çok büyük max %s byte'%(settings.MAX_PHOTO_WIDTH))
+            raise forms.ValidationError('Genişlik çok büyük, en fazla %s piksel olabilir'%(settings.MAX_PHOTO_WIDTH))
 
         if height > settings.MAX_PHOTO_WIDTH:
-            raise forms.ValidationError('Yükseklik çok büyük max %s byte'%(settings.MAX_PHOTO_HEIGHT))
+            raise forms.ValidationError('Yükseklik çok büyük, en fazla %s piksel olabilir'%(settings.MAX_PHOTO_HEIGHT))
 
         return value
 
@@ -86,7 +86,7 @@ class FileUploadField(forms.Field):
         super(FileUploadField,self).clean(value)
 
         if self.required and not value:
-            raise forms.ValidationError(u'Bos birakilamaz')
+            raise forms.ValidationError(u'Boş bırakılamaz')
 
         file_data=value
 
@@ -94,7 +94,7 @@ class FileUploadField(forms.Field):
 
         if content_type:
             if content_type!='application/zip':
-                msg = 'Simdilik sadece ziplere izin veriyoruz!'
+                msg = 'Şimdilik sadece zip türündeki dosyalara izin veriyoruz!'
                 raise forms.ValidationError(msg)
 
             zip = zipfile.ZipFile(StringIO.StringIO(file_data['content']))
@@ -102,18 +102,19 @@ class FileUploadField(forms.Field):
             zip.close()
             del zip
             if bad_file:
-                msg = '"%s" Zip icinde hata var galiba' % (bad_file,)
+                msg = '"%s" sıkıştırılmış dosya bozuk' % (bad_file,)
                 raise forms.ValidationError(msg)
 
             return file_data
 
         else:
-            raise forms.ValidationError("Bozuk bir dosya mı upload ediyorsunuz ?")
+            raise forms.ValidationError("Gönderdiğiniz dosya bozuk olabilir")
 
 #The file upload thing
 
 class TemaUploadForm(forms.Form):
-    """ That form class will handle all the stuff about uploading
+    """
+    That form class will handle all the stuff about uploading
     file uploading in 0.96 is not good change it later maybe in 1.0....
     """
 
@@ -124,19 +125,18 @@ class TemaUploadForm(forms.Form):
 
     #file upload kısımları
     screen=ScreenField(widget=forms.FileInput(),required=True, label="Photo",
-                                help_text="Resim Yükleyiniz (max %s kilobytes) izin verilenler (jpeg,png,gif)"% (settings.MAX_PHOTO_UPLOAD_SIZE))
+            help_text="Yüklenecek resim (en fazla %s kilobayt), izin verilenler (jpeg,png,gif)"% (settings.MAX_PHOTO_UPLOAD_SIZE))
 
     file_up=FileUploadField(widget=forms.FileInput(),required=True, label="Dosya",
-                                    help_text="Dosya Yükleyiniz (max %s kilobytes) izin verilenler (zip simdlik)"% (settings.MAX_FILE_UPLOAD))
+            help_text="Yüklenecek dosya (en fazla %s kilobayt), izin verilenler (zip)"% (settings.MAX_FILE_UPLOAD))
 
 
     def __init__(self,*args,**kwargs):
-        """ It is for topic tihng they are dinamyc"""
-        self.base_fields['license'].choices=[(int(l.id), l.name) for l in License.objects.all()]
-        self.base_fields['parent_category'].choices=[(int(cat.id), cat.cat_name) for cat in Category.objects.all()]
+        """ Collect licenses and categories"""
+        self.fields['license'].choices=[(int(l.id), l.name) for l in License.objects.all()]
+        self.fields['parent_category'].choices=[(int(cat.id), cat.cat_name) for cat in Category.objects.all()]
 
         super(TemaUploadForm, self).__init__(*args, **kwargs)
-
 
     def save(self):
         """ That part is adding the thning to the system"""
