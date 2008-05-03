@@ -27,7 +27,6 @@ DATABASE_PORT = ''
 # Email
 DEFAULT_FROM_EMAIL = 'noreply@ozgurlukicin.com'
 FORUM_FROM_EMAIL = 'forum@ozgurlukicin.com'
-FORUM_TO_EMAIL = ['turkay.eren@gmail.com'] # should be array
 #EMAIL_USE_TLS = True
 
 # Pagination
