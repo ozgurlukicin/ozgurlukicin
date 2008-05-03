@@ -32,10 +32,6 @@ class VoteForm(forms.Form):
 class ScreenField(forms.Field):
     """That one will validate the screen upload things"""
 
-    def __init__(self,*args,**kwargs):
-        """Calling the upper function"""
-        super(ScreenField,self).__init__(*args,**kwargs)
-
     def clean(self,value):
         """The validator part"""
         #bos musun ?
@@ -126,17 +122,14 @@ class TemaUploadForm(forms.Form):
     #file upload kısımları
     screen=ScreenField(widget=forms.FileInput(),required=True, label="Photo",
             help_text="Yüklenecek resim (en fazla %s kilobayt), izin verilenler (jpeg,png,gif)"% (settings.MAX_PHOTO_UPLOAD_SIZE))
-
     file_up=FileUploadField(widget=forms.FileInput(),required=True, label="Dosya",
             help_text="Yüklenecek dosya (en fazla %s kilobayt), izin verilenler (zip)"% (settings.MAX_FILE_UPLOAD))
 
-
     def __init__(self,*args,**kwargs):
         """ Collect licenses and categories"""
+        super(TemaUploadForm, self).__init__(*args, **kwargs)
         self.fields['license'].choices=[(int(l.id), l.name) for l in License.objects.all()]
         self.fields['parent_category'].choices=[(int(cat.id), cat.cat_name) for cat in Category.objects.all()]
-
-        super(TemaUploadForm, self).__init__(*args, **kwargs)
 
     def save(self):
         """ That part is adding the thning to the system"""
