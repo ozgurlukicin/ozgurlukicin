@@ -73,9 +73,9 @@ or if only a width is requested (to be compatibile with admin interface)::
     #
 
     if ('width' not in kwargs) and ('height' not in kwargs):
-		kwargs['width']=DEFAULT_WIDTH
-		kwargs['height']=DEFAULT_HEIGHT
-		#raise template.TemplateSyntaxError, "thumbnail filter requires arguments (width and/or height)"
+        kwargs['width']=DEFAULT_WIDTH
+        kwargs['height']=DEFAULT_HEIGHT
+        #raise template.TemplateSyntaxError, "thumbnail filter requires arguments (width and/or height)"
 
     ret = make_thumbnail(url, **kwargs)
     if ret is None:

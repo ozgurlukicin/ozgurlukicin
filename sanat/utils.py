@@ -25,28 +25,28 @@ DEFAULT_HEIGHT=100
 DEFAULT_WIDTH=100
 
 def _get_thumbnail_path(path, width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT):
-	""" create thumbnail path from path and required width and/or height.
-	thumbnail file name is constructed like this:
+    """ create thumbnail path from path and required width and/or height.
+    thumbnail file name is constructed like this:
     <basename>_t_[w<width>][_h<height>].<extension>"""
 
-	basedir = os.path.dirname(path) + '/'
-	base, ext = os.path.splitext(os.path.basename(path))
+    basedir = os.path.dirname(path) + '/'
+    base, ext = os.path.splitext(os.path.basename(path))
 
-	# make thumbnail filename
-	th_name = base + '_t'
+    # make thumbnail filename
+    th_name = base + '_t'
 
-	if (width is not None) and (height is not None):
-		th_name += '_w%d_h%d' % (width, height)
+    if (width is not None) and (height is not None):
+        th_name += '_w%d_h%d' % (width, height)
 
-	elif width is not None:
-		th_name += '%d' % width # for compatibility with admin
+    elif width is not None:
+        th_name += '%d' % width # for compatibility with admin
 
-	elif height is not None:
-		th_name += '_h%d' % height
+    elif height is not None:
+        th_name += '_h%d' % height
 
-	th_name += ext
+    th_name += ext
 
-	return urlparse.urljoin(basedir, th_name)
+    return urlparse.urljoin(basedir, th_name)
 #
 
 def _get_path_from_url(url, root=MEDIA_ROOT, url_root=MEDIA_URL):
@@ -71,37 +71,37 @@ def _has_thumbnail(photo_url, width=None, height=None, root=MEDIA_ROOT, url_root
     # one of width/height is required
     #assert (width is not None) or (height is not None)
 
-	#if we just want to get a default one
-	if not width and not height:
-		place=_get_path_from_url(photo_url)
+    #if we just want to get a default one
+    if not width and not height:
+        place=_get_path_from_url(photo_url)
 
-		if place:
-			import fnmatch, os
-    		base, ext = os.path.splitext(os.path.basename(place))
-    		basedir = os.path.dirname(place)
-    		for file in fnmatch.filter(os.listdir(basedir), _THUMBNAIL_GLOB % (base, ext)):
-				#if it comes here it has a thumbnail
-				return True
+        if place:
+            import fnmatch, os
+            base, ext = os.path.splitext(os.path.basename(place))
+            basedir = os.path.dirname(place)
+            for file in fnmatch.filter(os.listdir(basedir), _THUMBNAIL_GLOB % (base, ext)):
+                #if it comes here it has a thumbnail
+                return True
 
 
-		else:
-			return False
+        else:
+            return False
 
-	else:
-		import os
-		return os.path.isfile(_get_path_from_url(_get_thumbnail_path(photo_url, width, height), root, url_root))
+    else:
+        import os
+        return os.path.isfile(_get_path_from_url(_get_thumbnail_path(photo_url, width, height), root, url_root))
 
 def model_has_thumbnail(model):
-	""" To see if given model has a thumbnail"""
-	for obj in model._meta.fields:
-		if isinstance(obj, FileField):
-			x=getattr(obj,'file')
-			if x :
-				x=_get_url_from_path(x)
-				return _has_thumbnail(x)
+    """ To see if given model has a thumbnail"""
+    for obj in model._meta.fields:
+        if isinstance(obj, FileField):
+            x=getattr(obj,'file')
+            if x :
+                x=_get_url_from_path(x)
+                return _has_thumbnail(x)
 
-			else:
-				return False
+            else:
+                return False
 
 
 def make_thumbnail(photo_url, width=DEFAULT_HEIGHT, height=DEFAULT_WIDTH, root=MEDIA_ROOT, url_root=MEDIA_URL):
@@ -161,28 +161,28 @@ def make_thumbnail(photo_url, width=DEFAULT_HEIGHT, height=DEFAULT_WIDTH, root=M
 #
 
 def _remove_thumbnails(photo_url, root=MEDIA_ROOT, url_root=MEDIA_URL):
-	if not photo_url: return # empty url
-	file_name = _get_path_from_url(photo_url, root, url_root)
-	import fnmatch, os
-	base, ext = os.path.splitext(os.path.basename(file_name))
-	basedir = os.path.dirname(file_name)
+    if not photo_url: return # empty url
+    file_name = _get_path_from_url(photo_url, root, url_root)
+    import fnmatch, os
+    base, ext = os.path.splitext(os.path.basename(file_name))
+    basedir = os.path.dirname(file_name)
 
 
-	for file in fnmatch.filter(os.listdir(basedir), _THUMBNAIL_GLOB % (base, ext)):
+    for file in fnmatch.filter(os.listdir(basedir), _THUMBNAIL_GLOB % (base, ext)):
 
-		path = os.path.join(basedir, file)
-		os.remove(path)
-		image_cache.delete(path) # delete from cache
+        path = os.path.join(basedir, file)
+        os.remove(path)
+        image_cache.delete(path) # delete from cache
 
 
 def remove_model_thumbnails(model):
 
-	""" remove all thumbnails for all ImageFields (and subclasses) in the model """
-	for obj in model._meta.fields:
-		#print obj
-		if isinstance(obj, FileField):
-			url = getattr(model,'file')
-			_remove_thumbnails(url)
+    """ remove all thumbnails for all ImageFields (and subclasses) in the model """
+    for obj in model._meta.fields:
+        #print obj
+        if isinstance(obj, FileField):
+            url = getattr(model,'file')
+            _remove_thumbnails(url)
     #
 #
 
