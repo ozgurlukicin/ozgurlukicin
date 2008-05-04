@@ -55,7 +55,7 @@ class MoveForm(forms.Form):
 
 # A form that is used in profile page displaying topics that user is following.
 class TopicWatchForm(forms.Form):
-    topic_watch_list = forms.MultipleChoiceField(label="Takip ettiğim konular", required=False, help_text="CTRL basılı tutarak birden fazla konu seçebilirsiniz")
+    topic_watch_list = forms.MultipleChoiceField(label="Takip edilen konular", required=False, help_text="CTRL basılı tutarak birden fazla konu seçebilirsiniz")
 
     # topic list generator according to user object.
     def __init__(self, userObj, *args, **kwargs):
