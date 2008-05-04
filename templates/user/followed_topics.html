@@ -20,7 +20,7 @@
 <form action="" method="POST">
     <strong>Takip edilen konular: </strong><br /><br />
 {% for watch in watch_list %}
-    <input type="checkbox" name="topic_watch_list" value="{{ watch.topic_id }}" />&nbsp;&nbsp;<a href="{{watch.topic.get_absolute_url }}">{{ watch.topic.title }}</a></input><br />
+    <input type="checkbox" name="topic_watch_list" value="{{ watch.topic_id }}" />&nbsp;&nbsp;<a href="{{watch.topic.get_absolute_url }}" target="_blank">{{ watch.topic.title }}</a></input><br />
 {% endfor %}
 <br />
 <input type="submit" value="İzleme Listesinden Çıkar">
