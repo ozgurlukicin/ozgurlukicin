@@ -25,7 +25,7 @@ from oi.st.models import Tag, News
 
 # import our function for sending e-mails and setting
 from oi.st.wrappers import send_mail_with_header
-from oi.settings import FORUM_FROM_EMAIL, FORUM_TO_EMAIL, WEB_URL
+from oi.settings import FORUM_FROM_EMAIL, WEB_URL
 
 # import bbcode renderer for quotation
 from oi.forum.postmarkup import render_bbcode

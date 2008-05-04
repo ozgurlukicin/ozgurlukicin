@@ -8,7 +8,7 @@
 import sha, datetime, random
 from os import path
 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -17,11 +17,35 @@ from django.shortcuts import get_object_or_404
 
 from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_URL, WEB_URL, PROFILE_EDIT_URL
 
+# Form and Model objects for followed topics
+from oi.forum.models import WatchList
+from oi.forum.forms import TopicWatchForm
+
 from oi.profile.models import Avatar, Profile, LostPassword
 from oi.profile.forms import RegisterForm, ProfileEditForm, LostPasswordForm, ChangePasswordForm, ResetPasswordForm
 from oi.profile.settings import googleMapsApiKey
 from oi.st.wrappers import render_response
 from oi.petition.models import Petitioner
+
+@login_required
+def followed_topics(request):
+    print request
+    if request.method == 'POST':
+        list = request.POST.getlist('topic_watch_list')
+        if list:
+            for id in list:
+                # control if posted topic id belongs to user
+                if not WatchList.objects.filter(topic__id=id).filter(user__username=request.user.username):
+                    return HttpResponse('You idiot! Are you trying to hack us?')
+                else:
+                    WatchList.objects.filter(topic__id=id).filter(user__username=request.user.username).delete()
+        # FIXME: Shouldn't be hardcoded.
+        return HttpResponseRedirect('/kullanici/takip-ettigim-konular/')
+    else:
+        if len(WatchList.objects.filter(user__username=request.user.username)) == 0:
+            return render_response(request, 'user/followed_topics.html', {'no_entry': True})
+        else:
+            return render_response(request, 'user/followed_topics.html', {'form': TopicWatchForm(request.user)})
 
 @login_required
 def user_dashboard(request):
