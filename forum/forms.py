@@ -51,13 +51,3 @@ class MoveForm(forms.Form):
         """ This is for collecting forums """
         super(MoveForm, self).__init__(*args, **kwargs)
         self.fields['forum2'].choices=[(forum.id, forum.name) for forum in Forum.objects.order_by("name")]
-
-
-# A form that is used in profile page displaying topics that user is following.
-class TopicWatchForm(forms.Form):
-    topic_watch_list = forms.MultipleChoiceField(label="Takip edilen konular", required=False, help_text="CTRL basılı tutarak birden fazla konu seçebilirsiniz")
-
-    # topic list generator according to user object.
-    def __init__(self, userObj, *args, **kwargs):
-        super(TopicWatchForm, self).__init__(*args, **kwargs)
-        self.fields['topic_watch_list'].choices = [(watch.topic.id, watch.topic.title) for watch in WatchList.objects.filter(user__username=userObj.username)]

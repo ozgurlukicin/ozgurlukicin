@@ -18,12 +18,10 @@
 Şu anda izlemekte olduğunuz herhangi bir konu bulunmamaktadır. Foruma dönmek için <a href="/forum/">Tıklayın</a>
 {% else %}
 <form action="" method="POST">
-<dl>
-    <dt>{{ form.topic_watch_list.label_tag }}</dt>
-    <dd>{{ form.topic_watch_list }}</dd>
-    {% if form.topic_watch_list.help_text %}<dd>{{ form.topic_watch_list.help_text }}</dd>{% endif %}
-    {% if form.topic_watch_list.errors %}<dd class="myerrors">{{ form.topic_watch_list.errors }}</dd>{% endif %}
-</dl>
+    <strong>Takip edilen konular: </strong><br /><br />
+{% for watch in watch_list %}
+    <input type="checkbox" name="topic_watch_list" value="{{ watch.topic_id }}" />&nbsp;&nbsp;<a href="{{watch.topic.get_absolute_url }}">{{ watch.topic.title }}</a></input><br />
+{% endfor %}
 <br />
 <input type="submit" value="İzleme Listesinden Çıkar">
 </form>

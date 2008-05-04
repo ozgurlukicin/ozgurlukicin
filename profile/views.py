@@ -17,9 +17,8 @@ from django.shortcuts import get_object_or_404
 
 from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_URL, WEB_URL, PROFILE_EDIT_URL
 
-# Form and Model objects for followed topics
+# Model object for followed topics
 from oi.forum.models import WatchList
-from oi.forum.forms import TopicWatchForm
 
 from oi.profile.models import Avatar, Profile, LostPassword
 from oi.profile.forms import RegisterForm, ProfileEditForm, LostPasswordForm, ChangePasswordForm, ResetPasswordForm
@@ -29,7 +28,6 @@ from oi.petition.models import Petitioner
 
 @login_required
 def followed_topics(request):
-    print request
     if request.method == 'POST':
         list = request.POST.getlist('topic_watch_list')
         if list:
@@ -40,12 +38,13 @@ def followed_topics(request):
                 else:
                     WatchList.objects.filter(topic__id=id).filter(user__username=request.user.username).delete()
         # FIXME: Shouldn't be hardcoded.
-        return HttpResponseRedirect('/kullanici/takip-ettigim-konular/')
+        return HttpResponseRedirect('/kullanici/takip-edilen-konular/')
     else:
         if len(WatchList.objects.filter(user__username=request.user.username)) == 0:
             return render_response(request, 'user/followed_topics.html', {'no_entry': True})
         else:
-            return render_response(request, 'user/followed_topics.html', {'form': TopicWatchForm(request.user)})
+            watch_list = WatchList.objects.filter(user__username=request.user.username)
+            return render_response(request, 'user/followed_topics.html', {'watch_list': watch_list})
 
 @login_required
 def user_dashboard(request):
