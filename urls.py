@@ -166,7 +166,7 @@ urlpatterns = patterns('',
     (r'^gezegen/', include('oi.feedjack.urls')),
 
     #Tema
-    (r'^tema/', include('oi.sanat.urls')),
+    (r'^tema/', include('oi.tema.urls')),
 
     #Petition
     (r'^petition/', include('oi.petition.urls')),

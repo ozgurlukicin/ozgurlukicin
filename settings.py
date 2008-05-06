@@ -114,7 +114,7 @@ INSTALLED_APPS = (
     'oi.seminar',
     'oi.profile',
     'oi.forum',
-    'oi.sanat',
+    'oi.tema',
     'oi.comments',
     'oi.petition',
 )

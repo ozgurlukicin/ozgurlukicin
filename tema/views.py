@@ -7,14 +7,14 @@
 
 # Create your views here.
 from django.views.generic.list_detail import object_list
-from sanat_settings import HOME_ITEMS
-from oi.sanat.models import Dosya,Category
+from tema_settings import HOME_ITEMS
+from oi.tema.models import Dosya,Category
 from django.shortcuts import render_to_response,get_object_or_404
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
-from oi.sanat.forms import VoteForm,TemaUploadForm
+from oi.tema.forms import VoteForm,TemaUploadForm
 from django.core.urlresolvers import reverse
 
 try:
@@ -46,7 +46,7 @@ def list_material(request,sort_by="son"):
 
                 'queryset':sorgu,
                 'paginate_by':HOME_ITEMS,
-                'template_name':'sanat/main.html',
+                'template_name':'tema/main.html',
 
                     }
 
@@ -88,7 +88,7 @@ def list_category(request,cat_name):
 
                 'queryset':sorgu,
                 'paginate_by':HOME_ITEMS,
-                'template_name':'sanat/main.html',
+                'template_name':'tema/main.html',
 
                     }
 
@@ -109,7 +109,7 @@ def file_detail(request,file_id):
     if request.user.is_authenticated():
         auth=request.user.username
 
-    return render_to_response('sanat/detail.html', {'dosya':dosya,'auth':auth,'form':VoteForm()})
+    return render_to_response('tema/detail.html', {'dosya':dosya,'auth':auth,'form':VoteForm()})
 
 
 def list_user(request,username):
@@ -128,7 +128,7 @@ def list_user(request,username):
 
                 'queryset':sorgu,
                 'paginate_by':HOME_ITEMS,
-                'template_name':'sanat/main.html',
+                'template_name':'tema/main.html',
 
                     }
 
@@ -156,22 +156,22 @@ def add_file(request):
             #new_data.setlist('parent_category',[int(request.POST['parent_category'].strip())])
 
             form=TemaUploadForm(new_data)
-            #return render_to_response('sanat/upload.html',{'form':form,'extralar':new_data['parent_category'],'secenek':form.base_fields['parent_category'].choices})
+            #return render_to_response('tema/upload.html',{'form':form,'extralar':new_data['parent_category'],'secenek':form.base_fields['parent_category'].choices})
             if form.is_valid():
 
                 #save all the things
                 form.save()
 
                 sort_by="son"
-                #return render_to_response('sanat/upload.html',{'form':form})
-                #return HttpResponseRedirect(reverse(viewname="oi.sanat.views.list_category",args=[sort_by]))
+                #return render_to_response('tema/upload.html',{'form':form})
+                #return HttpResponseRedirect(reverse(viewname="oi.tema.views.list_category",args=[sort_by]))
                 return HttpResponseRedirect("/tema/goster/begenilen/")
         else:
             form=TemaUploadForm()
 
     else:
         form=TemaUploadForm()
-    return render_to_response('sanat/upload.html',{'form':form})
+    return render_to_response('tema/upload.html',{'form':form})
 
 
 
@@ -207,7 +207,7 @@ def vote_it(request):
 
         if request.session.get(d_id):
             #it was voted before #should add a new error arg
-            return render_to_response('sanat/detail.html',{'dosya':dosya,'auth':auth,'form':VoteForm(),'error':u'2 kez oy kullanamzsiniz'})
+            return render_to_response('tema/detail.html',{'dosya':dosya,'auth':auth,'form':VoteForm(),'error':u'2 kez oy kullanamzsiniz'})
 
 
         vf=VoteForm( { 'vote':request.POST['vote'] } )
@@ -231,7 +231,7 @@ def vote_it(request):
 
 
 
-            return render_to_response('sanat/detail.html', {'dosya':dosya,'auth':auth,'form':VoteForm()})
+            return render_to_response('tema/detail.html', {'dosya':dosya,'auth':auth,'form':VoteForm()})
 
     return render_to_response('404.html')
 

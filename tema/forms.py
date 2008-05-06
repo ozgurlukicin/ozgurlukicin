@@ -11,8 +11,8 @@ except ImportError:
 import zipfile
 
 from django import newforms as forms
-import sanat_settings as settings
-from oi.sanat.models import  Dosya,SanatScreen,Category,License,ArsivDosya
+import tema_settings as settings
+from oi.tema.models import  Dosya,SanatScreen,Category,License,ArsivDosya
 import Image
 from django.shortcuts import get_object_or_404
 

@@ -72,7 +72,7 @@
 	<br/>
 	{% if auth %}
 	<div align="center">
-	{% comment_form for sanat.dosya dosya.id %}
+	{% comment_form for tema.dosya dosya.id %}
 
 	</div>
 	{% endif %}
@@ -83,7 +83,7 @@
 
 
 
-		{% get_public_comment_list for sanat.dosya dosya.id as comments %}
+		{% get_public_comment_list for tema.dosya dosya.id as comments %}
 		<br/>
 		<br/><br/>
 		{% if comments %}

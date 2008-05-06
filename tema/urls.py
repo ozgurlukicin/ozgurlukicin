@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import *
-from oi.sanat.feeds import *
+from oi.tema.feeds import *
 
 feed_dict = {
              'rss': Tema_RSS,
@@ -18,7 +18,7 @@ user_feed_dict = {
             }
 
 
-urlpatterns = patterns ('oi.sanat.views',
+urlpatterns = patterns ('oi.tema.views',
         #the first page listing
         (r'^goster/(?P<sort_by>[a-z]+)/$','list_material'),
         (r'^kategori/(?P<cat_name>[a-z]+)/$','list_category'),

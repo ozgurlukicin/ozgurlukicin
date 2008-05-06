@@ -47,11 +47,11 @@
 
 </tbody>
 </table>
-	{% free_comment_form for sanat.dosya dosya.id %}
+	{% free_comment_form for tema.dosya dosya.id %}
 
 
 
-	{% get_free_comment_list for sanat.dosya dosya.id as comment_list %}
+	{% get_free_comment_list for tema.dosya dosya.id as comment_list %}
 
 	{% if comment_list %}
 			<table summary="Submitted table designs" border="1" align="center">

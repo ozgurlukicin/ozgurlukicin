@@ -12,7 +12,7 @@
 
 from django import template
 from django.template import TemplateSyntaxError
-from oi.sanat.utils import make_thumbnail, get_image_size
+from oi.tema.utils import make_thumbnail, get_image_size
 register = template.Library()
 ##################################################
 ## FILTERS ##

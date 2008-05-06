@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from oi.st.models import License
 from django.db.models import signals
 from django.dispatch import dispatcher
-from oi.sanat.signals import rm_thumb,crt_thumb,rmv_files
+from oi.tema.signals import rm_thumb,crt_thumb,rmv_files
 
 from oi.comments.moderation import CommentModerator, moderator
 
