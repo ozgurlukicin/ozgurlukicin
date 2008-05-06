@@ -23,6 +23,13 @@ from oi.forum import customgeneric
 from django.core.urlresolvers import reverse
 from oi.st.models import Tag, News
 
+# import our function for sending e-mails and setting
+from oi.st.wrappers import send_mail_with_header
+from oi.settings import FORUM_FROM_EMAIL, WEB_URL, FORUM_MESSAGE_LIST
+
+# import bbcode renderer for quotation
+from oi.forum.postmarkup import render_bbcode
+
 def main(request):
     lastvisit_control(request)
 
@@ -141,11 +148,24 @@ def topic(request, forum_slug, topic_id):
                        allow_empty = True)
 
 @login_required
-def reply(request, forum_slug, topic_id, post_id=False):
+def follow(request, forum_slug, topic_id):
+    topic = get_object_or_404(Topic, pk=topic_id)
+
+    # determine if user already added this to prevent double adding.
+    if len(WatchList.objects.filter(topic__id=topic_id).filter(user__username=request.user.username)) > 0:
+        # FIXME: Give proper error.
+        return HttpResponse('Sorry, you are already following this topic')
+    else:
+        watchlist = WatchList(topic=topic, user=request.user)
+        watchlist.save()
+        return HttpResponseRedirect(topic.get_absolute_url())
+
+@login_required
+def reply(request, forum_slug, topic_id, quote_id=False):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
 
-    posts = topic.post_set.all().order_by('-created')[:POSTS_PER_PAGE]
+    posts = topic.post_set.order_by('-created')[:POSTS_PER_PAGE]
 
     if forum.locked or topic.locked:
         return HttpResponse("Forum or topic is locked") #FIXME: Give an error message
@@ -162,13 +182,65 @@ def reply(request, forum_slug, topic_id, post_id=False):
                        )
             post.save()
 
+            # generate post url
+            post_url = WEB_URL + post.get_absolute_url()
+            # generate In-Reply-To header. If we get quote that should be quote's message id
+            if request.POST.has_key('quote_id'):
+                quote = get_object_or_404(Post, id=request.POST['quote_id'])
+                in_reply_to = quote.get_email_id()
+            else:
+                in_reply_to = topic.get_email_id()
+
+            # sorry, we have to send <style> to be able to display quotation correctly. Hardcode for now and I know, It's really UGLY!
+            # FIXME: Give postmarkup.py's QuoteTag e-mail rendering support
+
+            css = """<style type="text/css">
+.quote {
+    border: 1px solid #CCCCCC;
+    padding: 10px;
+    margin-bottom: 8px;
+    background-color: #E1E3FF;
+    color: #51615D;
+}
+
+.quote p {
+    padding-left: 12px;
+    font-style: italic;
+}
+</style>"""
+
+            # send email to everyone who follows this topic.
+            watchlists = WatchList.objects.filter(topic__id=topic_id)
+            for watchlist in watchlists:
+                send_mail_with_header('[Ozgurlukicin-forum] Re: %s' % topic.title,
+                                      '%s\n%s<br /><br /><a href="%s">%s</a>' % (css, render_bbcode(form.cleaned_data['text']), post_url, post_url),
+                                      '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
+                                      [watchlist.user.email],
+                                      headers = {'Message-ID': post.get_email_id(),
+                                                 'In-Reply-To': in_reply_to},
+                                      fail_silently = True
+                                      )
+
+            # send mailing list also.
+            send_mail_with_header('Re: %s' % topic.title,
+                                  '%s\n%s<br /><br /><a href="%s">%s</a>' % (css, render_bbcode(form.cleaned_data['text']), 'url', 'url'),
+                                  '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
+                                  [FORUM_MESSAGE_LIST],
+                                  headers = {'Message-ID': post.get_email_id(),
+                                             'In-Reply-To': in_reply_to},
+                                  fail_silently = True
+                                  )
+
             return HttpResponseRedirect(post.get_absolute_url())
     else:
-        if post_id:
-            post = get_object_or_404(Post, pk=post_id)
+        if quote_id:
+            post = get_object_or_404(Post, pk=quote_id)
 
             if post in topic.post_set.all():
-                form = PostForm(auto_id=True, initial={'text': '[quote|'+post_id+']'+post.text+'[/quote]'})
+                form = PostForm(auto_id=True, initial={'text': '[quote <b>%s</b>, %s tarihinde:]%s[/quote]' % (post.author, post.edited.strftime("%d/%m/%Y %H:%M"), post.text)})
+            # if quote doesn't belong to this topic, just redirect to what user gets :)
+            else:
+                return HttpResponseRedirect(post.get_absolute_url())
         else:
             form = PostForm(auto_id=True)
 
@@ -238,6 +310,18 @@ def new_topic(request, forum_slug):
                         text=form.cleaned_data['text'])
 
             post.save()
+
+            # generate post url
+            post_url = WEB_URL + topic.get_absolute_url()
+
+            # send e-mail to mailing list. We really rock, yeah!
+            send_mail_with_header('%s' % topic.title,
+                                  '%s<br /><br /><a href="%s">%s</a>' % (post.text, 'url', 'url'),
+                                  '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
+                                  [FORUM_MESSAGE_LIST],
+                                  headers = {'Message-ID': topic.get_email_id()},
+                                  fail_silently = True
+                                  )
 
             return HttpResponseRedirect(post.get_absolute_url())
     else:

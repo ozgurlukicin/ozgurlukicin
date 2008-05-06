@@ -1,5 +1,5 @@
-{% load library %}
 {% extends "base.html" %}
+{% load library %}
 
 {% block title %}Oyunlar - {% endblock %}
 
@@ -20,7 +20,7 @@
 {% for game in game_list %}
 <div id="game-{{ game.id }}" class="games">
     <div class="games_title transparent_link"><a href="{{ game.get_absolute_url }}">{{ game.title }}</a></div>
-    <div class="games_content grey">{{ game.sum }}
+    <div class="games_content grey">{{ game.sum|safe }}
         <p style="padding-top: 4px;"><img src="/media/img/tag_darkblue.png" style="vertical-align: middle;" /> {% for tag in game.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</p>
     </div>
 </div>

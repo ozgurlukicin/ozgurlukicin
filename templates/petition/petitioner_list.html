@@ -1,5 +1,5 @@
-{% load library %}
 {% extends "base.html" %}
+{% load library %}
 
 {% block title %}OOXML'e Hayır Diyenler - {% endblock %}
 
@@ -20,7 +20,7 @@
     {% endif %}
     {% for petitioner in petitioner_list %}
     <ul class="sidebar_firststeps">
-        <li style="margin-bottom:-10px;">{{ petitioner.firstname|escape }} {{ petitioner.lastname|escape }} - {{ petitioner.get_city_display }} - {{ petitioner.job|escape }} {% if petitioner.homepage|escape %}<a href="{{ petitioner.homepage|escape }}" target="_blank"><img src="/media/dijital/img/forum/msg_sim.gif" border="0px" alt="adrese git" /></a>{% else %}-{% endif %} {{ petitioner.signed|timedelta }}</li>
+        <li style="margin-bottom:-10px;">{{ petitioner.firstname }} {{ petitioner.lastname }} - {{ petitioner.get_city_display }} - {{ petitioner.job }} {% if petitioner.homepage %}<a href="{{ petitioner.homepage }}" target="_blank"><img src="/media/dijital/img/forum/msg_sim.gif" border="0px" alt="adrese git" /></a>{% else %}-{% endif %} {{ petitioner.signed|timedelta }}</li>
     </ul>
     {% endfor %}
     {% if is_paginated %}

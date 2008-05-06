@@ -1,5 +1,5 @@
-{% load library %}
 {% extends "base.html" %}
+{% load library %}
 
 {% block title %}Paketler - {% endblock %}
 
@@ -21,7 +21,7 @@
 {% for package in package_list %}
 <div id="package-{{ package.id }}" class="packages">
     <div class="packages_title transparent_link"><a href="{{ package.get_absolute_url }}">{{ package.title }}</a></div>
-    <div class="packages_content grey">{{ package.sum }}
+    <div class="packages_content grey">{{ package.sum|safe }}
         <p style="padding-top: 4px;"><img src="/media/img/tag.png" style="vertical-align: middle;" /> {% for tag in package.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</p>
     </div>
 </div>

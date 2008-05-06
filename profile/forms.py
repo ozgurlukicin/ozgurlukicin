@@ -39,14 +39,11 @@ class RegisterForm(forms.Form):
     def clean_username(self):
         field_data = self.cleaned_data['username']
 
-        if len(field_data.split(' ')) != 1:
-            raise forms.ValidationError(u"Kullanıcı adında boşluk olmamalıdır")
-
         if len(field_data) < 3:
             raise forms.ValidationError(u"Kullanıcı adı en az 3 karakter olmalıdır")
 
-        if not re.match("[a-zA-Z0-9_.]+$", field_data):
-            raise forms.ValidationError(u"Kullanıcı adı geçersiz. Kullanıcı adı sadece \"a-z A-Z 0-9 _ .\" alabilir.")
+        if not re.match("[a-zA-Z0-9_]+$", field_data):
+            raise forms.ValidationError(u"Kullanıcı adı geçersiz. Kullanıcı adı sadece \"a-z A-Z 0-9 _\" karakterlerinden oluşabilir")
 
         forbidden = ForbiddenUsername.objects.filter(name__iexact=field_data)
         if len(forbidden) > 0:

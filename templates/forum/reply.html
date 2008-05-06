@@ -1,19 +1,21 @@
 {% extends "forum/forum_base.html" %}
+{% load library %}
 {% block extrahead %}
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
 {% endblock %}
 {% block content %}
 <div class="forum_address">
-    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a> &#62; <a href="{{ topic.get_absolute_url }}">{{ topic.title|escape }}</a></div>
+    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; <a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a></div>
 </div>
 {% if user.is_authenticated %}
 {% if flood %}Flood koruması aktif, lütfen {{ timeout }} saniye bekleyin.{% endif %}
 <form action="" method="post">
+{% if quote_id %}<input type="hidden" name="quote_id" value="{{ quote_id }}" />{% endif %}
 {% for field in form %}
     <dl>
         <dt><label for="{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
-        <dd>{{ field }}</dd>
+        <dd>{{ field|safe }}</dd>
     </dl>
 {% endfor %}
 <input type="submit" value="Yanıtla" />
@@ -28,7 +30,7 @@
 {% else %}
 <div class="post_base" {% if post.hidden %}style="opacity: 0.5;"{% endif %}>
     <div class="post_profile">
-        <span style="font-weight: bold; font-size: 16px;">{{ post.author }}</span>{% if post.author.is_staff %}<span><br />Forum Yöneticisi{% endif %}</span><br/><br/>
+        <span style="font-weight: bold; font-size: 14px;">{{ post.author }}</span>{% if post.author.is_staff %}<span><br />Forum Yöneticisi{% endif %}</span><br/><br/>
         <img src="{{ post.author.get_profile.avatar.get_file_url }}" alt="avatar" /><br/>
         {% if perms.forum.can_see_post_ip %}({{ post.ip }})<br/>{% endif %}
         Kayıt Tarihi: {{ post.author.date_joined|date:"d-m-Y" }}<br/>
@@ -44,7 +46,7 @@
             </div>
         </div>
         <div class="post_message_content">
-            <div class="post_message_text">{{ post.text|safe }}</div>
+            <div class="post_message_text">{{ post.text|renderbbcode|safe }}</div>
         </div>
     </div>
 </div>

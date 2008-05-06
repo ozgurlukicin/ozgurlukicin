@@ -11,8 +11,8 @@
 {% block breadcrumbs %}{% if not is_popup %}
 <div class="breadcrumbs">
      <a href="../../../">{% trans "Home" %}</a> &rsaquo;
-     <a href="../">{{ opts.verbose_name_plural|capfirst|escape }}</a> &rsaquo;
-     {% if add %}{% blocktrans with opts.verbose_name|escape|capfirst as name %}Add {{ name }}{% endblocktrans %}{% else %}{{ original|truncatewords:"18"|escape }}{% endif %}
+     <a href="../">{{ opts.verbose_name_plural|capfirst }}</a> &rsaquo;
+     {% if add %}{% blocktrans with opts.verbose_name|capfirst as name %}Add {{ name }}{% endblocktrans %}{% else %}{{ original|truncatewords:"18" }}{% endif %}
 </div>
 {% endif %}{% endblock %}
 {% block content %}<div id="content-main">

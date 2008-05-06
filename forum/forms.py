@@ -6,7 +6,7 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django import newforms as forms
-from oi.forum.models import Topic, Forum
+from oi.forum.models import Topic, Forum, WatchList
 from oi.st.models import Tag
 
 from oi.st.forms import XssField
@@ -20,7 +20,7 @@ class TopicForm(forms.Form):
     tags = forms.MultipleChoiceField(label='Etiket', required=True,help_text="CTRL basılı tutarak birden fazla etiket seçebilirsiniz!(En çok 5)")
 
     def __init__(self,*args,**kwargs):
-        """ It is for topic tihng they are dinamyc"""
+        """ It is for topic thing they are dynamic"""
         super(TopicForm, self).__init__(*args, **kwargs)
         self.fields['tags'].choices=[(tag.name, tag.name) for tag in Tag.objects.all()]
 

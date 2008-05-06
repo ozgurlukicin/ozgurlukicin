@@ -1,5 +1,5 @@
-{% load library %}
 {% extends "base.html" %}
+{% load library %}
 
 {% block title %}Haberler - {% endblock %}
 
@@ -21,7 +21,7 @@
             {% for news in news_list %}
             <div id="news-{{ news.id }}" class="news">
                 <div class="news_title transparent_link"><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></div>
-                <div class="news_content grey">{{ news.sum }}
+                <div class="news_content grey">{{ news.sum|safe }}
                     <p style="padding-top: 4px;"><img src="/media/img/tag.png" style="vertical-align: middle;" /> {% for tag in news.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</p>
                 </div>
             </div>

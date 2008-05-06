@@ -8,7 +8,7 @@
 from django.contrib.syndication.feeds import Feed
 from django.utils.feedgenerator import Atom1Feed
 
-from oi.sanat.models import Dosya,Category
+from oi.tema.models import Dosya,Category
 from oi.settings import SITE_NAME, WEB_URL, SITE_DESC
 
 from django.contrib.syndication.feeds import FeedDoesNotExist
@@ -19,8 +19,8 @@ class Tema_RSS(Feed):
     title = SITE_NAME + "Temalar"
     link = WEB_URL
     description = SITE_DESC + "Pencere dekorasyonları, duvar kağıtları ve daha fazlası."
-    title_template = 'sanat/feed_title.html'
-    description_template = 'sanat/feed_description.html'
+    title_template = 'tema/feed_title.html'
+    description_template = 'tema/feed_description.html'
 
     def items(self):
         return Dosya.objects.filter(state=True).order_by("-update")[:10]
@@ -120,6 +120,3 @@ class User_Tema_Atom(User_Tema_Rss):
     """ Bu da atom kısmı olsun """
     feed_type = Atom1Feed
     subtitle = User_Tema_Rss.description
-
-
-############################################################################

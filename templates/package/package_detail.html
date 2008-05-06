@@ -1,5 +1,5 @@
-{% load library %}
 {% extends "base.html" %}
+{% load library %}
 
 {% block title %}{{ package.title }} - Paketler - {% endblock %}
 
@@ -26,7 +26,7 @@
 {% block content %}
 <div class="packages_title transparent_link">{{ package.title }}</div>
 <div class="page_content grey">
-{{ package.text }}
+{{ package.text|safe }}
 </div>
 
 {% if auth %}

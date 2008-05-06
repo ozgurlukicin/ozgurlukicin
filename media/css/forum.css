@@ -12,6 +12,11 @@ a.profile_link {
     text-decoration: none;
     color: #333333;
 }
+
+p {
+    margin: 0px;
+    padding: 0px;
+}
 /*The colors end here */
 
 /* header */
@@ -186,6 +191,7 @@ div.post_message_content {
 }
 div.post_message_text {
     min-height: 160px;
+    padding-bottom: 9px;
     overflow: auto;
 }
 div.post_message_tags {
@@ -308,6 +314,19 @@ border: 1px solid #45586F;
     padding:.3em;
     font-size: 10px;
     font-weight: bold;
+}
+
+.quote {
+    border: 1px solid #CCCCCC;
+    padding: 10px;
+    margin-bottom: 8px;
+    background-color: #E1E3FF;
+    color: #51615D;
+}
+
+.quote p {
+    padding-left: 12px;
+    font-style: italic;
 }
 
 .paginator .page a, .paginator .page a:visited, .paginator .curr {

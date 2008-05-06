@@ -5,7 +5,7 @@
 {% block content %}
 <h1>{{ fs.title }}</h1>
 <div class="page_content">
-{{ fs.text }}
+{{ fs.text|safe }}
 </div>
 <div style="margin-top: 10px; float: right; font-size: 12px;">{{ fs.update|date:"d" }} {{ fs.update|date:"F" }} {{ fs.update|date:"Y" }} - {{ fs.update|date:"H" }}:{{ fs.update|date:"i" }}</div>
 {% endblock %}

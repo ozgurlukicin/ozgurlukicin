@@ -1,5 +1,5 @@
-{% load library %}
 {% extends "base.html" %}
+{% load library %}
 
 {% block title %}Nasıl - {% endblock %}
 
@@ -20,7 +20,7 @@
 {% for howto in howto_list %}
 <div id="howto-{{ howto.id }}" class="howtos">
     <div class="howtos_title transparent_link"><a href="{{ howto.get_absolute_url }}">{{ howto.title }}</a></div>
-    <div class="howtos_content grey">{{ howto.sum }}
+    <div class="howtos_content grey">{{ howto.sum|safe }}
         <p class="howtos_tags" style="padding-top: 4px;"><img src="/media/img/tag_red.png" style="vertical-align: middle;" /> {% for tag in howto.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</p>
     </div>
 </div>

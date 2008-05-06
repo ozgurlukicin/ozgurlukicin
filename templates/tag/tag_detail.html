@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ tag|escape }} etiketli içerik - {% endblock %}
+{% block title %}{{ tag }} etiketli içerik - {% endblock %}
 
 {% block pagetype %}page{% endblock %}
 
@@ -19,7 +19,7 @@
 <br/>
 
 {% block content %}
-<div class="fs_title transparent_link">{{ tag|escape }} etiketli içerik</div>
+<div class="fs_title transparent_link">{{ tag }} etiketli içerik</div>
 <div class="fs_content">
     {% if news %}
         <div class="purple">

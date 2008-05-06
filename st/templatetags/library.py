@@ -6,6 +6,8 @@ from django.template import Library
 from django.utils.timesince import timesince
 from oi.settings import MEDIA_ROOT, MEDIA_URL
 
+from oi.forum.postmarkup import render_bbcode
+
 register = Library()
 
 @register.filter
@@ -25,6 +27,10 @@ def thumbnail(file, size='200x200'):
         image.thumbnail([x, y]) # generate a 200x200 thumbnail
         image.save(miniature_filename, image.format)
     return miniature_url
+
+@register.filter
+def renderbbcode(context):
+    return render_bbcode(context)
 
 @register.inclusion_tag('paginator.html', takes_context=True)
 def paginator(context, adjacent_pages=2):

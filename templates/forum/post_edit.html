@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
 <div class="forum_address">
-    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a> &#62; <a href="{{ topic.get_absolute_url }}">{{ topic.title|escape }}</a></div>
+    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; <a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a></div>
 </div>
 {% if user.is_authenticated %}
 {% if flood %}Flood koruması aktif, lütfen {{ timeout }} saniye bekleyin.{% endif %}
@@ -28,7 +28,7 @@
 {% else %}
 <div class="post_base" {% if post.hidden %}style="opacity: 0.5;"{% endif %}>
     <div class="post_profile">
-        <span style="font-weight: bold; font-size: 16px;">{{ post.author }}</span>{% if post.author.is_staff %}<span><br />Forum Yöneticisi{% endif %}</span><br/><br/>
+        <span style="font-weight: bold; font-size: 14">{{ post.author }}</span>{% if post.author.is_staff %}<span><br />Forum Yöneticisi{% endif %}</span><br/><br/>
         <img src="{{ post.author.get_profile.avatar.get_file_url }}" alt="avatar" /><br/>
         {% if perms.forum.can_see_post_ip %}({{ post.ip }})<br/>{% endif %}
         Kayıt Tarihi: {{ post.author.date_joined|date:"d-m-Y" }}<br/>

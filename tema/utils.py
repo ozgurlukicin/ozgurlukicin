@@ -1,4 +1,3 @@
-
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
@@ -17,7 +16,7 @@ import shutil, os
 image_cache = get_cache('locmem:///')
 
 #is it alot ?
-_FILE_CACHE_TIMEOUT = 60 * 60 * 60 * 24 # 1 day
+_FILE_CACHE_TIMEOUT = 5184000 # 1 day
 _THUMBNAIL_GLOB = '%s_t*%s'
 
 #some value not important for now
@@ -25,29 +24,30 @@ DEFAULT_HEIGHT=100
 DEFAULT_WIDTH=100
 
 def _get_thumbnail_path(path, width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT):
-	""" create thumbnail path from path and required width and/or height.
-	thumbnail file name is constructed like this:
-    <basename>_t_[w<width>][_h<height>].<extension>"""
+    """
+    create thumbnail path from path and required width and/or height.
+    thumbnail file name is constructed like this:
+    <basename>_t_[w<width>][_h<height>].<extension>
+    """
 
-	basedir = os.path.dirname(path) + '/'
-	base, ext = os.path.splitext(os.path.basename(path))
+    basedir = os.path.dirname(path) + '/'
+    base, ext = os.path.splitext(os.path.basename(path))
 
-	# make thumbnail filename
-	th_name = base + '_t'
+    # make thumbnail filename
+    th_name = base + '_t'
 
-	if (width is not None) and (height is not None):
-		th_name += '_w%d_h%d' % (width, height)
+    if (width is not None) and (height is not None):
+        th_name += '_w%d_h%d' % (width, height)
 
-	elif width is not None:
-		th_name += '%d' % width # for compatibility with admin
+    elif width is not None:
+        th_name += '%d' % width # for compatibility with admin
 
-	elif height is not None:
-		th_name += '_h%d' % height
+    elif height is not None:
+        th_name += '_h%d' % height
 
-	th_name += ext
+    th_name += ext
 
-	return urlparse.urljoin(basedir, th_name)
-#
+    return urlparse.urljoin(basedir, th_name)
 
 def _get_path_from_url(url, root=MEDIA_ROOT, url_root=MEDIA_URL):
     """ make filesystem path from url """
@@ -56,7 +56,6 @@ def _get_path_from_url(url, root=MEDIA_ROOT, url_root=MEDIA_URL):
         url = url[len(url_root):] # strip media root url
 
     return os.path.normpath(os.path.join(root, url))
-#
 
 def _get_url_from_path(path, root=MEDIA_ROOT, url_root=MEDIA_URL):
     """ make url from filesystem path """
@@ -65,43 +64,42 @@ def _get_url_from_path(path, root=MEDIA_ROOT, url_root=MEDIA_URL):
         path = path[len(root):] # strip media root
 
     return urlparse.urljoin(root, path.replace('\\', '/'))
-#
 
 def _has_thumbnail(photo_url, width=None, height=None, root=MEDIA_ROOT, url_root=MEDIA_URL):
     # one of width/height is required
     #assert (width is not None) or (height is not None)
 
-	#if we just want to get a default one
-	if not width and not height:
-		place=_get_path_from_url(photo_url)
+    #if we just want to get a default one
+    if not width and not height:
+        place=_get_path_from_url(photo_url)
 
-		if place:
-			import fnmatch, os
-    		base, ext = os.path.splitext(os.path.basename(place))
-    		basedir = os.path.dirname(place)
-    		for file in fnmatch.filter(os.listdir(basedir), _THUMBNAIL_GLOB % (base, ext)):
-				#if it comes here it has a thumbnail
-				return True
+        if place:
+            import fnmatch, os
+            base, ext = os.path.splitext(os.path.basename(place))
+            basedir = os.path.dirname(place)
+            for file in fnmatch.filter(os.listdir(basedir), _THUMBNAIL_GLOB % (base, ext)):
+                #if it comes here it has a thumbnail
+                return True
 
 
-		else:
-			return False
+        else:
+            return False
 
-	else:
-		import os
-		return os.path.isfile(_get_path_from_url(_get_thumbnail_path(photo_url, width, height), root, url_root))
+    else:
+        import os
+        return os.path.isfile(_get_path_from_url(_get_thumbnail_path(photo_url, width, height), root, url_root))
 
 def model_has_thumbnail(model):
-	""" To see if given model has a thumbnail"""
-	for obj in model._meta.fields:
-		if isinstance(obj, FileField):
-			x=getattr(obj,'file')
-			if x :
-				x=_get_url_from_path(x)
-				return _has_thumbnail(x)
+    """ To see if given model has a thumbnail"""
+    for obj in model._meta.fields:
+        if isinstance(obj, FileField):
+            x=getattr(obj,'file')
+            if x :
+                x=_get_url_from_path(x)
+                return _has_thumbnail(x)
 
-			else:
-				return False
+            else:
+                return False
 
 
 def make_thumbnail(photo_url, width=DEFAULT_HEIGHT, height=DEFAULT_WIDTH, root=MEDIA_ROOT, url_root=MEDIA_URL):
@@ -123,7 +121,6 @@ def make_thumbnail(photo_url, width=DEFAULT_HEIGHT, height=DEFAULT_WIDTH, root=M
             return th_url
 
     # make thumbnail
-
     # get original image size
     orig_w, orig_h = get_image_size(photo_url, root, url_root)
     if (orig_w is None) and (orig_h) is None:
@@ -158,38 +155,32 @@ def make_thumbnail(photo_url, width=DEFAULT_HEIGHT, height=DEFAULT_WIDTH, root=M
         return photo_url
 
     return th_url
-#
 
 def _remove_thumbnails(photo_url, root=MEDIA_ROOT, url_root=MEDIA_URL):
-	if not photo_url: return # empty url
-	file_name = _get_path_from_url(photo_url, root, url_root)
-	import fnmatch, os
-	base, ext = os.path.splitext(os.path.basename(file_name))
-	basedir = os.path.dirname(file_name)
+    if not photo_url: return # empty url
+    file_name = _get_path_from_url(photo_url, root, url_root)
+    import fnmatch, os
+    base, ext = os.path.splitext(os.path.basename(file_name))
+    basedir = os.path.dirname(file_name)
 
+    for file in fnmatch.filter(os.listdir(basedir), _THUMBNAIL_GLOB % (base, ext)):
 
-	for file in fnmatch.filter(os.listdir(basedir), _THUMBNAIL_GLOB % (base, ext)):
-
-		path = os.path.join(basedir, file)
-		os.remove(path)
-		image_cache.delete(path) # delete from cache
-
+        path = os.path.join(basedir, file)
+        os.remove(path)
+        # delete from cache
+        image_cache.delete(path)
 
 def remove_model_thumbnails(model):
-
-	""" remove all thumbnails for all ImageFields (and subclasses) in the model """
-	for obj in model._meta.fields:
-		#print obj
-		if isinstance(obj, FileField):
-			url = getattr(model,'file')
-			_remove_thumbnails(url)
-    #
-#
+    """ remove all thumbnails for all ImageFields (and subclasses) in the model """
+    for obj in model._meta.fields:
+        #print obj
+        if isinstance(obj, FileField):
+            url = getattr(model,'file')
+            _remove_thumbnails(url)
 
 def _make_admin_thumbnail(url):
     """ make thumbnails for admin interface """
     make_thumbnail(url, width=120)
-#
 
 def make_admin_thumbnails(model):
     """ create thumbnails for admin interface for all ImageFields (and subclasses) in the model """
@@ -198,13 +189,11 @@ def make_admin_thumbnails(model):
         if isinstance(obj, FileField):
             url = getattr(model,'file')
             make_thumbnail(url, width=120)
-    #
-#
 
 def _get_thumbnail_url(photo_url, width=DEFAULT_HEIGHT, height=DEFAULT_WIDTH, root=MEDIA_ROOT, url_root=MEDIA_URL):
-    """ return thumbnail URL for requested photo_url and required width and/or height
-
-        if thumbnail file do not exists returns original URL
+    """
+    return thumbnail URL for requested photo_url and required width and/or height
+    if thumbnail file do not exists returns original URL
     """
 
     # one of width/height is required
@@ -214,21 +203,21 @@ def _get_thumbnail_url(photo_url, width=DEFAULT_HEIGHT, height=DEFAULT_WIDTH, ro
         return _get_thumbnail_path(photo_url, width, height)
     else:
         return photo_url
-#
 
 def _set_cached_file(path, value):
-    """ Store file dependent data in cache.
-        Timeout is set to _FILE_CACHE_TIMEOUT (1month).
+    """
+    Store file dependent data in cache.
+    Timeout is set to _FILE_CACHE_TIMEOUT (1month).
     """
 
     mtime = os.path.getmtime(path)
     image_cache.set(path, (mtime, value,), _FILE_CACHE_TIMEOUT)
-#
 
 def _get_cached_file(path, default=None):
-    """ Get file content from cache.
-        If modification time differ return None and delete
-        data from cache.
+    """
+    Get file content from cache.
+    If modification time differ return None and delete
+    data from cache.
     """
 
     cached = image_cache.get(path, default)
@@ -249,9 +238,10 @@ def _get_cached_file(path, default=None):
 #
 
 def get_image_size(photo_url, root=MEDIA_ROOT, url_root=MEDIA_URL):
-    """ returns image size.
+    """
+    returns image size.
 
-        image sizes are cached (using separate locmem:/// cache instance)
+    image sizes are cached (using separate locmem:/// cache instance)
     """
 
     path = os.path.join(root, _get_path_from_url(photo_url, root, url_root))
@@ -265,11 +255,8 @@ def get_image_size(photo_url, root=MEDIA_ROOT, url_root=MEDIA_URL):
             #import sys
             #print >>sys.stderr, '[GET IMAGE SIZE] error %s for file %r' % (err, photo_url)
             return None, None
-        #
         if size is not None:
             _set_cached_file(path, size)
         else:
             return None, None
-    #
     return size
-#

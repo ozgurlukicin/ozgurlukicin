@@ -1,5 +1,5 @@
-{% load library %}
 {% extends "base.html" %}
+{% load library %}
 
 {% block title %}{{ game.title }} - Oyunlar - {% endblock %}
 
@@ -27,7 +27,7 @@
 {% block content %}
 <div class="games_title transparent_link">{{ game.title }}</div>
 <div class="page_content grey">
-{{ game.text }}
+{{ game.text|safe }}
 </div>
 {% if auth %}
     {% if form %}

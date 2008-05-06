@@ -1,5 +1,5 @@
-{% load library %}
 {% extends "base.html" %}
+{% load library %}
 
 {% block title %}İlk Adımlar - {% endblock %}
 
@@ -22,7 +22,7 @@
 {% for fs in fs_list %}
 <div id="fs-{{ fs.id }}" class="fs">
     <div class="fs_title transparent_link"><a href="{{ fs.get_absolute_url }}">{{ fs.title }}</a></div>
-    <div class="fs_content grey">{{ fs.sum }}
+    <div class="fs_content grey">{{ fs.sum|safe }}
         <p class="fs_tags" style="padding-top: 4px;"><img src="/media/img/tag_green.png" style="vertical-align: middle;" /> {% for tag in fs.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</p>
     </div>
 </div>

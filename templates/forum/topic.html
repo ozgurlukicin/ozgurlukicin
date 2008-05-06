@@ -1,20 +1,20 @@
+{% extends "forum/forum_base.html" %}
 {% load library %}
 
-{% extends "forum/forum_base.html" %}
-
 {% block title %}
-{{topic.title|escape}} -
+{{topic.title}} -
 {% endblock %}
 
 {% block extrahead %}
-    <link rel="alternate" type="application/rss+xml" title="{{topic.title|escape}} - Özgürlükİçin Forum" href="/forum/rss/topic/{{ topic.id }}" />
+    <link rel="alternate" type="application/rss+xml" title="{{topic.title}} - Özgürlükİçin Forum" href="/forum/rss/topic/{{ topic.id }}" />
 {% endblock %}
 
 {% block content %}
 <div class="forum_address">
-    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a> &#62; {{ topic.title|escape }}</div>
+    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; {{ topic.title }}</div>
 </div>
 <br />
+
 {% for post in post_list %}
 
 {% if post.hidden and not perms.forum.can_see_hidden_posts %}
@@ -22,7 +22,7 @@
 
 <div class="post_base" {% if post.hidden %}style="opacity: 0.5"{% endif %}>
     <div class="post_profile">
-        <span style="font-weight: bold; font-size: 16px;">{{ post.author }}</span>{% if post.author.is_staff %}<span><br />Forum Yöneticisi{% endif %}</span><br/><br/>
+        <span style="font-weight: bold; font-size: 14px;">{{ post.author }}</span>{% if post.author.is_staff %}<span><br />Forum Yöneticisi{% endif %}</span><br/><br/>
         <img src="{{ post.author.get_profile.avatar.get_file_url }}" alt="avatar" /><br/>
         {% if perms.forum.can_see_post_ip %}({{ post.ip }})<br/>{% endif %}
         Kayıt Tarihi: {{ post.author.date_joined|date:"d-m-Y" }}<br/>
@@ -37,6 +37,14 @@
             <div class="post_message_top_date">
                 {{ post.created|date:"d-m-Y H:i" }}
             </div>
+            <div class="post_message_top_button">
+                <a href="{{ post.get_quote_url }}"><img src="/media/dijital/img/forum/quote.gif" alt="alıntıla" border="0" /></a>
+            </div>
+            {% if forloop.first %}
+            <div class="post_message_top_button">
+                <a href="{{ topic.get_follow_url }}"><img src="/media/dijital/img/forum/watch.gif" alt="izle" border="0" /></a>
+            </div>
+            {% endif %}
             {% if perms.forum.change_post %}
             <div class="post_message_top_button">
                 <a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" alt="düzenle" border="0" /></a>
@@ -79,7 +87,7 @@
                 {% endif %}
         </div>
         <div class="post_message_content">
-            <div class="post_message_text">{% autoescape off %}{{ post.text }}{% endautoescape %}</div>
+            <div class="post_message_text">{{ post.text|renderbbcode|safe }}</div>
             {% if forloop.first %}
             <div class="post_message_tags">
                 <img src="/media/img/tag.png" alt="etiket" />{% for tag in topic.tags.all %}<span class="tag"><a href="/etiket/{{tag.name}}/">{{tag.name}}</a></span>{% endfor %}
@@ -99,7 +107,7 @@
 <div class="topic_news_area">
     {% for news in news_list %}
     <div class="topic_news_box">
-        <h2><a href="{{news.get_absolute_url}}">{{ news.title }}</a></h2><div>{{ news.sum }}</div>
+        <h2><a href="{{news.get_absolute_url}}">{{ news.title }}</a></h2><div>{{ news.sum|safe }}</div>
     </div>
     {% endfor %}
 </div>
@@ -142,7 +150,7 @@
 {% endif %}
 </div>
 <div class="forum_address">
-    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name|escape }}</a> &#62; {{ topic.title|escape }}</div>
+    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; {{ topic.title }}</div>
 </div>
 {% endblock %}
 {% block sidebartop %}{% endblock %}

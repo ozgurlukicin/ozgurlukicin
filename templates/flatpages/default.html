@@ -1,5 +1,5 @@
-{% load library %}
 {% extends "base.html" %}
+{% load library %}
 
 {% block title %}{{ flatpage.title }} - {% endblock %}
 
@@ -17,7 +17,7 @@
 {% block content %}
 <div class="fs_title transparent_link">{{ flatpage.title }}</div>
 <div class="page_content grey">
-{{ flatpage.text }}
+{{ flatpage.text|safe }}
 </div>
 <div class="page_last_update">Son güncelleme: {{ flatpage.update|timedelta }}</div>
 {% endblock %}

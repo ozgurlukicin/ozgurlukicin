@@ -1,5 +1,5 @@
-{% load library %}
 {% extends "base.html" %}
+{% load library %}
 
 {% block title %}{{ news.title }} - Haberler - {% endblock %}
 {% block extrahead %}
@@ -26,7 +26,7 @@
 {% block content %}
 <div class="news_title transparent_link">{{ news.title }}</div>
 <div class="page_content grey">
-{{ news.text }}
+{{ news.text|safe }}
 </div>
 
 {% if auth %}

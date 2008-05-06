@@ -1,5 +1,5 @@
-{% load library %}
 {% extends "base.html" %}
+{% load library %}
 
 {% block title %}{{ howto.title }} - Nasıl - {% endblock %}
 
@@ -26,7 +26,7 @@
 {% block content %}
 <div class="howtos_title transparent_link">{{ howto.title }}</div>
 <div class="page_content grey">
-{{ howto.text }}
+{{ howto.text|safe }}
 </div>
 {% if auth %}
     {% if form %}

@@ -1,5 +1,5 @@
-{% load library %}
 {% extends "base.html" %}
+{% load library %}
 
 {% block title %}{{ fs.title }} - İlk Adımlar - {% endblock %}
 
@@ -24,7 +24,7 @@
 {% block content %}
 <div class="fs_title transparent_link">{{ fs.title }}</div>
 <div class="page_content grey">
-{{ fs.text }}
+{{ fs.text|safe }}
 </div>
 <div class="page_properties"><a href="{{ fs.get_printable_url }}"><img src="/media/img/print.png" /></a></div>
 <div class="page_last_update">Son güncelleme: {{ fs.update|timedelta }}</div>

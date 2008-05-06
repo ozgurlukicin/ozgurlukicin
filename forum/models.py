@@ -13,6 +13,10 @@ from django.contrib.auth.models import User
 from oi.middleware import threadlocals
 from oi.st.models import Tag
 
+from oi.settings import FORUM_FROM_EMAIL
+
+import md5
+
 class Post(models.Model):
     """
     Post model.
@@ -70,6 +74,10 @@ class Post(models.Model):
 
     def get_delete_confirm_url(self):
         return '/forum/%s/%s/delete/%s/yes/' % (self.topic.forum.slug, self.topic.id, self.id)
+
+    # creates unique message id for each post. This is used by "Message-ID" header.
+    def get_email_id(self):
+        return '<%s.%s@%s>' % (self.id, self.author.username, FORUM_FROM_EMAIL.split('@')[1])
 
     class Admin:
         list_display = ('id', 'topic', 'author', 'created', 'ip')
@@ -160,6 +168,9 @@ class Topic(models.Model):
         lastpage = ((self.posts - 1) / oi.forum.settings.POSTS_PER_PAGE) + 1
         return '/forum/%s/%s/?page=%s#post%s' % (self.forum.slug, self.id, lastpage, self.topic_latest_post.id)
 
+    def get_follow_url(self):
+        return '/forum/%s/%s/follow' % (self.forum.slug, self.id)
+
     def get_reply_url(self):
         return '/forum/%s/%s/reply/' % (self.forum.slug, self.id)
 
@@ -180,6 +191,9 @@ class Topic(models.Model):
 
     def get_hide_url(self):
         return '/forum/%s/%s/hide/' % (self.forum.slug, self.id)
+
+    def get_email_id(self):
+        return '<%s.%s@%s>' % (md5.new(self.title).hexdigest(), self.id, FORUM_FROM_EMAIL.split('@')[1])
 
     class Admin:
         list_display = ('forum', 'title', 'sticky', 'locked', 'hidden')
@@ -291,6 +305,9 @@ class AbuseReport(models.Model):
 class WatchList(models.Model):
     user = models.ForeignKey(User, verbose_name='Kullanıcı')
     topic = models.ForeignKey(Topic, verbose_name='Konu')
+
+    def __str__(self):
+        return '%s' % self.topic.title
 
     class Admin:
         pass
