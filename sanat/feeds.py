@@ -120,6 +120,3 @@ class User_Tema_Atom(User_Tema_Rss):
     """ Bu da atom kısmı olsun """
     feed_type = Atom1Feed
     subtitle = User_Tema_Rss.description
-
-
-############################################################################

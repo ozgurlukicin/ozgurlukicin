@@ -5,7 +5,6 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-#Requires..
 from django.db import models
 from django.contrib.auth.models import User
 from oi.st.models import License
@@ -63,14 +62,10 @@ class Category(models.Model):
         verbose_name="Kategori"
         verbose_name_plural="Kategoriler"
 
-
-
-
-
 class SanatScreen(models.Model):
     "It is modified version because we should change the upload directory ???"
 
-    file=models.FileField(upload_to="upload/sanat/images/",blank=True)
+    file=models.FileField(upload_to="upload/tema/images/",blank=True)
 
     class Meta:
         verbose_name="Sanat Görüntü"
@@ -90,7 +85,7 @@ dispatcher.connect(rm_thumb,signal=signals.post_delete, sender=SanatScreen)
 
 class ArsivDosya(models.Model):
     """ The data file that includes the archives for templates and etc"""
-    a_file=models.FileField(upload_to="upload/sanat/dosya/")
+    a_file=models.FileField(upload_to="upload/tema/dosya/")
     #download=models.IntegerField(verbose_name="İndirilme",default=0)
 
     class Admin:
@@ -118,7 +113,6 @@ class Dosya(models.Model):
 
     #added later ...
     enable_comments = models.BooleanField()
-
 
     def __str__(self):
         return self.name
