@@ -11,7 +11,7 @@ except ImportError:
 import zipfile
 
 from django import newforms as forms
-import tema_settings as settings
+import settings
 from oi.tema.models import  Dosya,SanatScreen,Category,License,ArsivDosya
 import Image
 from django.shortcuts import get_object_or_404

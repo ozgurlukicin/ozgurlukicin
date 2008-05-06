@@ -7,7 +7,7 @@
 
 # Create your views here.
 from django.views.generic.list_detail import object_list
-from tema_settings import HOME_ITEMS
+from settings import HOME_ITEMS
 from oi.tema.models import Dosya,Category
 from django.shortcuts import render_to_response,get_object_or_404
 from django.contrib.auth.models import User
@@ -21,7 +21,6 @@ try:
     import cStringIO as StringIO
 except ImportError:
     import StringIO
-#the pil thing
 import Image
 
 def list_material(request,sort_by="son"):
