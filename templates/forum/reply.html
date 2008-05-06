@@ -1,4 +1,5 @@
 {% extends "forum/forum_base.html" %}
+{% load library %}
 {% block extrahead %}
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
@@ -45,7 +46,7 @@
             </div>
         </div>
         <div class="post_message_content">
-            <div class="post_message_text">{{ post.text|safe }}</div>
+            <div class="post_message_text">{{ post.text|renderbbcode|safe }}</div>
         </div>
     </div>
 </div>
