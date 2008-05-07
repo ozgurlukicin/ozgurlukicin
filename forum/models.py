@@ -13,7 +13,7 @@ from django.contrib.auth.models import User
 from oi.middleware import threadlocals
 from oi.st.models import Tag
 
-from oi.settings import FORUM_FROM_EMAIL
+from oi.forum.settings import FORUM_FROM_EMAIL
 
 import md5
 
