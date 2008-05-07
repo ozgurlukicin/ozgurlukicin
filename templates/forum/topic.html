@@ -98,7 +98,7 @@
                 <span style="font-size:x-small; font-style:italic;">Bu ileti {{ post.edit_count }} kez değiştirilmiş olup, son kez {{ post.edited|date:"d-m-Y H:i" }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.</span><br />
             </div>
             {% endifnotequal %}
-            {% if post.author.get_profile.signature %}<div class="post_message_bottom"><hr />{{ post.author.get_profile.signature }}</div>{% endif %}
+            {% if post.author.get_profile.signature %}<div class="post_message_bottom"><hr />{{ post.author.get_profile.signature|safe }}</div>{% endif %}
         </div>
     </div>
 </div>
