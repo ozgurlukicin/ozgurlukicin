@@ -131,19 +131,25 @@ def topic(request, forum_slug, topic_id):
         return HttpResponseRedirect(topic.get_absolute_url())
     posts = topic.post_set.all().order_by('created')
     news_list = News.objects.filter(status=1).order_by('-update')[:3]
+    watching = False
 
     if request.user.is_authenticated():
         request.session["read_topic_dict"][topic.id] = datetime.now()
         request.session["read_forum_dict"][forum.id] = datetime.now()
         request.session.modified = True
 
+        # is the user watching this topic?
+        if len(request.user.watchlist_set.filter(topic=topic_id)) > 0:
+            watching = True
+
     topic.views += 1
     topic.save()
+
     # we love Django, just 1 line and pagination is ready :)
     return object_list(request, posts,
                        template_name = 'forum/topic.html',
                        template_object_name = 'post',
-                       extra_context = {'forum': forum, 'topic': topic, 'news_list':news_list},
+                       extra_context = {'forum': forum, 'topic': topic, 'news_list':news_list, "watching":watching},
                        paginate_by = POSTS_PER_PAGE,
                        allow_empty = True)
 

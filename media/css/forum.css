@@ -250,7 +250,10 @@ div.forum_error {
     font-weight: bold;
     font-size: 14px;
     width: 50%;
-    height: 20px;
+}
+
+div.forum_error a {
+    color: #EDE4E1;
 }
 
 div.topic_news_area {
