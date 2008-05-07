@@ -1,1 +1,2 @@
-{{ obj.text|safe }}
+{% load library %}
+{{ obj.text|renderbbcode|safe }}
