@@ -535,7 +535,7 @@ def _escape(s):
 
 class PostMarkup(object):
 
-    standard_replace = MultiReplace({ u'\n':u'<br/>'})
+    standard_replace = MultiReplace({ u'\n':u''})
 
     TOKEN_TAG, TOKEN_PTAG, TOKEN_TEXT = range(3)
 
