@@ -153,8 +153,8 @@ def follow(request, forum_slug, topic_id):
 
     # determine if user already added this to prevent double adding.
     if len(WatchList.objects.filter(topic__id=topic_id).filter(user__username=request.user.username)) > 0:
-        # FIXME: Give proper error.
-        return HttpResponse('Sorry, you are already following this topic')
+        error = 'Bu başlığı zaten izlemektesiniz.'
+        return render_response(request, 'forum/forum_error.html', {'error': error})
     else:
         watchlist = WatchList(topic=topic, user=request.user)
         watchlist.save()
@@ -222,14 +222,14 @@ def reply(request, forum_slug, topic_id, quote_id=False):
                                       )
 
             # send mailing list also.
-            send_mail_with_header('Re: %s' % topic.title,
-                                  '%s\n%s<br /><br /><a href="%s">%s</a>' % (css, render_bbcode(form.cleaned_data['text']), 'url', 'url'),
-                                  '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
-                                  [FORUM_MESSAGE_LIST],
-                                  headers = {'Message-ID': post.get_email_id(),
-                                             'In-Reply-To': in_reply_to},
-                                  fail_silently = True
-                                  )
+            # send_mail_with_header('Re: %s' % topic.title,
+            #                       '%s\n%s<br /><br /><a href="%s">%s</a>' % (css, render_bbcode(form.cleaned_data['text']), post_url, post_url),
+            #                       '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
+            #                       [FORUM_MESSAGE_LIST],
+            #                       headers = {'Message-ID': post.get_email_id(),
+            #                                  'In-Reply-To': in_reply_to},
+            #                       fail_silently = True
+            #                       )
 
             return HttpResponseRedirect(post.get_absolute_url())
     else:
@@ -315,13 +315,13 @@ def new_topic(request, forum_slug):
             post_url = WEB_URL + topic.get_absolute_url()
 
             # send e-mail to mailing list. We really rock, yeah!
-            send_mail_with_header('%s' % topic.title,
-                                  '%s<br /><br /><a href="%s">%s</a>' % (post.text, 'url', 'url'),
-                                  '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
-                                  [FORUM_MESSAGE_LIST],
-                                  headers = {'Message-ID': topic.get_email_id()},
-                                  fail_silently = True
-                                  )
+            # send_mail_with_header('%s' % topic.title,
+            #                       '%s<br /><br /><a href="%s">%s</a>' % (post.text, post_url, post_url),
+            #                       '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
+            #                       [FORUM_MESSAGE_LIST],
+            #                       headers = {'Message-ID': topic.get_email_id()},
+            #                       fail_silently = True
+            #                       )
 
             return HttpResponseRedirect(post.get_absolute_url())
     else:
