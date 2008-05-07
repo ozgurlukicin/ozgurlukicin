@@ -40,9 +40,9 @@
             <div class="post_message_top_button">
                 <a href="{{ post.get_quote_url }}"><img src="/media/dijital/img/forum/quote.gif" alt="alıntıla" border="0" /></a>
             </div>
-            {% if forloop.first %}
+            {% if request.user.is_authenticated and forloop.first and not watching %}
             <div class="post_message_top_button">
-                <a href="{{ topic.get_follow_url }}"><img src="/media/dijital/img/forum/watch.gif" alt="izle" border="0" /></a>
+                <a href="{{ topic.get_follow_url }}"><img src="/media/dijital/img/forum/watch.gif" alt="izle" title="E-posta ile izle" border="0" /></a>
             </div>
             {% endif %}
             {% if perms.forum.change_post %}
