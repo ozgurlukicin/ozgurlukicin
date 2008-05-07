@@ -153,8 +153,8 @@ def follow(request, forum_slug, topic_id):
 
     # determine if user already added this to prevent double adding.
     if len(WatchList.objects.filter(topic__id=topic_id).filter(user__username=request.user.username)) > 0:
-        # FIXME: Give proper error.
-        return HttpResponse('Sorry, you are already following this topic')
+        error = 'Bu başlığı zaten izlemektesiniz.'
+        return render_response(request, 'forum/forum_error.html', {'error': error})
     else:
         watchlist = WatchList(topic=topic, user=request.user)
         watchlist.save()
