@@ -237,7 +237,7 @@ def reply(request, forum_slug, topic_id, quote_id=False):
                 if user.username == 'Eren':
                     email_list.append(user.email)# send mailing list also.
 
-            send_mail_with_header('Re: %s' % topic.title,
+            send_mail_with_header('[Ozgurlukicin-forum] Re: %s' % topic.title,
                                   '%s\n%s<br /><br /><a href="%s">%s</a>' % (css, render_bbcode(form.cleaned_data['text']), post_url, post_url),
                                   '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
                                   email_list,
@@ -336,7 +336,7 @@ def new_topic(request, forum_slug):
                     email_list.append(user.email)
 
             # send e-mail to mailing list. We really rock, yeah!
-            send_mail_with_header('%s' % topic.title,
+            send_mail_with_header('[Ozgurlukicin-forum] %s' % topic.title,
                                   '%s<br /><br /><a href="%s">%s</a>' % (post.text, post_url, post_url),
                                   '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
                                   email_list,
