@@ -231,15 +231,20 @@ def reply(request, forum_slug, topic_id, quote_id=False):
                                       fail_silently = True
                                       )
 
-            # send mailing list also.
-            # send_mail_with_header('Re: %s' % topic.title,
-            #                       '%s\n%s<br /><br /><a href="%s">%s</a>' % (css, render_bbcode(form.cleaned_data['text']), post_url, post_url),
-            #                       '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
-            #                       [FORUM_MESSAGE_LIST],
-            #                       headers = {'Message-ID': post.get_email_id(),
-            #                                  'In-Reply-To': in_reply_to},
-            #                       fail_silently = True
-            #                       )
+            email_list = []
+            # send emails to me, at least I'm the only one who are willing to follow the forum via email :)
+            for user in User.objects.filter(is_staff=1):
+                if user.username == 'Eren':
+                    email_list.add(user.email)# send mailing list also.
+
+            send_mail_with_header('Re: %s' % topic.title,
+                                  '%s\n%s<br /><br /><a href="%s">%s</a>' % (css, render_bbcode(form.cleaned_data['text']), post_url, post_url),
+                                  '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
+                                  email_list,
+                                  headers = {'Message-ID': post.get_email_id(),
+                                             'In-Reply-To': in_reply_to},
+                                  fail_silently = True
+                                  )
 
             return HttpResponseRedirect(post.get_absolute_url())
     else:
@@ -324,14 +329,20 @@ def new_topic(request, forum_slug):
             # generate post url
             post_url = WEB_URL + topic.get_absolute_url()
 
+            email_list = []
+            # send emails to me, at least I'm the only one who are willing to follow the forum via email :)
+            for user in User.objects.filter(is_staff=1):
+                if user.username == 'Eren':
+                    email_list.add(user.email)
+
             # send e-mail to mailing list. We really rock, yeah!
-            # send_mail_with_header('%s' % topic.title,
-            #                       '%s<br /><br /><a href="%s">%s</a>' % (post.text, post_url, post_url),
-            #                       '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
-            #                       [FORUM_MESSAGE_LIST],
-            #                       headers = {'Message-ID': topic.get_email_id()},
-            #                       fail_silently = True
-            #                       )
+            send_mail_with_header('%s' % topic.title,
+                                  '%s<br /><br /><a href="%s">%s</a>' % (post.text, post_url, post_url),
+                                  '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
+                                  email_list,
+                                  headers = {'Message-ID': topic.get_email_id()},
+                                  fail_silently = True
+                                  )
 
             return HttpResponseRedirect(post.get_absolute_url())
     else:
