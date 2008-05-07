@@ -21,6 +21,7 @@ from oi.forum.models import Category, Forum, Topic, Post, AbuseReport, WatchList
 from oi.forum import customgeneric
 
 from django.core.urlresolvers import reverse
+from django.core.exceptions import ObjectDoesNotExist
 from oi.st.models import Tag, News
 
 # import our function for sending e-mails and setting
@@ -139,8 +140,10 @@ def topic(request, forum_slug, topic_id):
         request.session.modified = True
 
         # is the user watching this topic?
-        if len(request.user.watchlist_set.filter(topic=topic_id)) > 0:
-            watching = True
+        try:
+            watching =  request.user.watchlist_set.get(topic=topic_id)
+        except ObjectDoesNotExist:
+            pass
 
     topic.views += 1
     topic.save()
