@@ -235,7 +235,7 @@ def reply(request, forum_slug, topic_id, quote_id=False):
             # send emails to me, at least I'm the only one who are willing to follow the forum via email :)
             for user in User.objects.filter(is_staff=1):
                 if user.username == 'Eren':
-                    email_list.add(user.email)# send mailing list also.
+                    email_list.append(user.email)# send mailing list also.
 
             send_mail_with_header('Re: %s' % topic.title,
                                   '%s\n%s<br /><br /><a href="%s">%s</a>' % (css, render_bbcode(form.cleaned_data['text']), post_url, post_url),
@@ -333,7 +333,7 @@ def new_topic(request, forum_slug):
             # send emails to me, at least I'm the only one who are willing to follow the forum via email :)
             for user in User.objects.filter(is_staff=1):
                 if user.username == 'Eren':
-                    email_list.add(user.email)
+                    email_list.append(user.email)
 
             # send e-mail to mailing list. We really rock, yeah!
             send_mail_with_header('%s' % topic.title,
