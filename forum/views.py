@@ -141,7 +141,8 @@ def topic(request, forum_slug, topic_id):
 
         # is the user watching this topic?
         try:
-            watching =  request.user.watchlist_set.get(topic=topic_id)
+            request.user.watchlist_set.get(topic__id=topic_id)
+            watching = True
         except ObjectDoesNotExist:
             pass
 
