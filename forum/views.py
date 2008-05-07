@@ -21,11 +21,12 @@ from oi.forum.models import Category, Forum, Topic, Post, AbuseReport, WatchList
 from oi.forum import customgeneric
 
 from django.core.urlresolvers import reverse
+from django.core.exceptions import ObjectDoesNotExist
 from oi.st.models import Tag, News
 
 # import our function for sending e-mails and setting
 from oi.st.wrappers import send_mail_with_header
-from oi.settings import FORUM_FROM_EMAIL, WEB_URL, FORUM_MESSAGE_LIST
+from oi.settings import WEB_URL
 
 # import bbcode renderer for quotation
 from oi.forum.postmarkup import render_bbcode
@@ -131,19 +132,28 @@ def topic(request, forum_slug, topic_id):
         return HttpResponseRedirect(topic.get_absolute_url())
     posts = topic.post_set.all().order_by('created')
     news_list = News.objects.filter(status=1).order_by('-update')[:3]
+    watching = False
 
     if request.user.is_authenticated():
         request.session["read_topic_dict"][topic.id] = datetime.now()
         request.session["read_forum_dict"][forum.id] = datetime.now()
         request.session.modified = True
 
+        # is the user watching this topic?
+        try:
+            request.user.watchlist_set.get(topic__id=topic_id)
+            watching = True
+        except ObjectDoesNotExist:
+            pass
+
     topic.views += 1
     topic.save()
+
     # we love Django, just 1 line and pagination is ready :)
     return object_list(request, posts,
                        template_name = 'forum/topic.html',
                        template_object_name = 'post',
-                       extra_context = {'forum': forum, 'topic': topic, 'news_list':news_list},
+                       extra_context = {'forum': forum, 'topic': topic, 'news_list':news_list, "watching":watching},
                        paginate_by = POSTS_PER_PAGE,
                        allow_empty = True)
 
@@ -221,21 +231,15 @@ def reply(request, forum_slug, topic_id, quote_id=False):
                                       fail_silently = True
                                       )
 
-
-            email_list = []
-            # send emails to me, at least I'm the only one who are willing to follow the forum via email :)
-            for user in User.objects.filter(is_staff=1):
-                if user.username == 'Eren':
-                    email_list.add(user.email)
-
-            send_mail_with_header('Re: %s' % topic.title,
-                                  '%s\n%s<br /><br /><a href="%s">%s</a>' % (css, render_bbcode(form.cleaned_data['text']), post_url, post_url),
-                                  '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
-                                  email_list,
-                                  headers = {'Message-ID': post.get_email_id(),
-                                             'In-Reply-To': in_reply_to},
-                                  fail_silently = True
-                                  )
+            # send mailing list also.
+            # send_mail_with_header('Re: %s' % topic.title,
+            #                       '%s\n%s<br /><br /><a href="%s">%s</a>' % (css, render_bbcode(form.cleaned_data['text']), post_url, post_url),
+            #                       '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
+            #                       [FORUM_MESSAGE_LIST],
+            #                       headers = {'Message-ID': post.get_email_id(),
+            #                                  'In-Reply-To': in_reply_to},
+            #                       fail_silently = True
+            #                       )
 
             return HttpResponseRedirect(post.get_absolute_url())
     else:
@@ -320,19 +324,14 @@ def new_topic(request, forum_slug):
             # generate post url
             post_url = WEB_URL + topic.get_absolute_url()
 
-            email_list = []
-            # send emails to me, at least I'm the only one who are willing to follow the forum via email :)
-            for user in User.objects.filter(is_staff=1):
-                if user.username == 'Eren':
-                    email_list.add(user.email)
-
-            send_mail_with_header('[Ozgurlukicin-forum] %s' % topic.title,
-                                  '%s<br /><br /><a href="%s">%s</a>' % (post.text, post_url, post_url),
-                                  '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
-                                  email_list,
-                                  headers = {'Message-ID': topic.get_email_id()},
-                                  fail_silently = True
-                                  )
+            # send e-mail to mailing list. We really rock, yeah!
+            # send_mail_with_header('%s' % topic.title,
+            #                       '%s<br /><br /><a href="%s">%s</a>' % (post.text, post_url, post_url),
+            #                       '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
+            #                       [FORUM_MESSAGE_LIST],
+            #                       headers = {'Message-ID': topic.get_email_id()},
+            #                       fail_silently = True
+            #                       )
 
             return HttpResponseRedirect(post.get_absolute_url())
     else:

@@ -26,8 +26,6 @@ DATABASE_PORT = ''
 
 # Email
 DEFAULT_FROM_EMAIL = 'noreply@ozgurlukicin.com'
-FORUM_FROM_EMAIL = 'forum@ozgurlukicin.com'
-FORUM_MESSAGE_LIST = 'forum@liste.ozgurlukicin.com'
 #EMAIL_USE_TLS = True
 
 # Pagination
