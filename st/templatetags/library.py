@@ -33,7 +33,7 @@ def renderbbcode(context):
     return render_bbcode(context)
 
 @register.inclusion_tag('paginator.html', takes_context=True)
-def paginator(context, adjacent_pages=2):
+def paginator(context, adjacent_pages=4):
     """
     To be used in conjunction with the object_list generic view.
 
