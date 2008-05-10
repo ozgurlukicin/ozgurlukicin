@@ -443,6 +443,8 @@ img.alignright, img[align="right"] {
 }
 
 /* forms */
+form { clear: both; }
+
 input#userbox_username {
     padding: 0px;
     padding-left: 18px;

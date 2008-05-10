@@ -12,6 +12,9 @@
 {% block content %}
 <div class="forum_address">
     <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; {{ topic.title }}</div>
+    {% if request.user.is_authenticated and not watching %}
+    <div class="post_bottom_small"><a href="{{ topic.get_follow_url }}"><img src="/media/dijital/img/forum/watch.gif" alt="izle" title="E-posta ile izle" border="0" /></a></div>
+    {% endif %}
 </div>
 <br />
 
@@ -40,11 +43,6 @@
             <div class="post_message_top_button">
                 <a href="{{ post.get_quote_url }}"><img src="/media/dijital/img/forum/quote.gif" alt="alıntıla" border="0" /></a>
             </div>
-            {% if request.user.is_authenticated and forloop.first and not watching %}
-            <div class="post_message_top_button">
-                <a href="{{ topic.get_follow_url }}"><img src="/media/dijital/img/forum/watch.gif" alt="izle" title="E-posta ile izle" border="0" /></a>
-            </div>
-            {% endif %}
             {% if perms.forum.change_post %}
             <div class="post_message_top_button">
                 <a href="{{ post.get_edit_url }}"><img src="/media/dijital/img/forum/duzenle.jpg" alt="düzenle" border="0" /></a>
