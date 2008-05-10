@@ -1,0 +1,26 @@
+Index: media/js/tinymce/plugins/advlink/link.htm
+===================================================================
+--- media/js/tinymce/plugins/advlink/link.htm	(revision 1372)
++++ media/js/tinymce/plugins/advlink/link.htm	(working copy)
+@@ -15,9 +15,6 @@
+ 		<div class="tabs">
+ 			<ul>
+ 				<li id="general_tab" class="current"><span><a href="javascript:mcTabs.displayTab('general_tab','general_panel');" onmousedown="return false;">{#advlink_dlg.general_tab}</a></span></li>
+-				<li id="popup_tab"><span><a href="javascript:mcTabs.displayTab('popup_tab','popup_panel');" onmousedown="return false;">{#advlink_dlg.popup_tab}</a></span></li>
+-				<li id="events_tab"><span><a href="javascript:mcTabs.displayTab('events_tab','events_panel');" onmousedown="return false;">{#advlink_dlg.events_tab}</a></span></li>
+-				<li id="advanced_tab"><span><a href="javascript:mcTabs.displayTab('advanced_tab','advanced_panel');" onmousedown="return false;">{#advlink_dlg.advanced_tab}</a></span></li>
+ 			</ul>
+ 		</div>
+ 
+Index: media/js/tinymce/plugins/advimage/image.htm
+===================================================================
+--- media/js/tinymce/plugins/advimage/image.htm	(revision 1372)
++++ media/js/tinymce/plugins/advimage/image.htm	(working copy)
+@@ -17,7 +17,6 @@
+ 			<ul>
+ 				<li id="general_tab" class="current"><span><a href="javascript:mcTabs.displayTab('general_tab','general_panel');" onmousedown="return false;">{#advimage_dlg.tab_general}</a></span></li>
+ 				<li id="appearance_tab"><span><a href="javascript:mcTabs.displayTab('appearance_tab','appearance_panel');" onmousedown="return false;">{#advimage_dlg.tab_appearance}</a></span></li>
+-				<li id="advanced_tab"><span><a href="javascript:mcTabs.displayTab('advanced_tab','advanced_panel');" onmousedown="return false;">{#advimage_dlg.tab_advanced}</a></span></li>
+ 			</ul>
+ 		</div>
+ 
