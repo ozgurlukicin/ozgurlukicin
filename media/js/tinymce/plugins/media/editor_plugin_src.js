@@ -1,5 +1,5 @@
 /**
- * $Id: editor_plugin_src.js 561 2008-01-23 15:18:19Z spocke $
+ * $Id: editor_plugin_src.js 763 2008-04-03 13:25:45Z spocke $
  *
  * @author Moxiecode
  * @copyright Copyright © 2004-2008, Moxiecode Systems AB, All rights reserved.
@@ -47,7 +47,8 @@
 					mceItemRealMedia : 'realmedia'
 				};
 
-				ed.dom.loadCSS(url + "/css/content.css");
+				if (ed.settings.content_css !== false)
+					ed.dom.loadCSS(url + "/css/content.css");
 
 				if (ed.theme.onResolveName) {
 					ed.theme.onResolveName.add(function(th, o) {
@@ -76,7 +77,7 @@
 				var h = o.content;
 
 				h = h.replace(/<script[^>]*>\s*write(Flash|ShockWave|WindowsMedia|QuickTime|RealMedia)\(\{([^\)]*)\}\);\s*<\/script>/gi, function(a, b, c) {
-					var o = eval("({" + c + "})");
+					var o = t._parse(c);
 
 					return '<img class="mceItem' + b + '" title="' + ed.dom.encode(c) + '" src="' + url + '/img/trans.gif" width="' + o.width + '" height="' + o.height + '" />'
 				});
@@ -84,7 +85,7 @@
 				h = h.replace(/<object([^>]*)>/gi, '<span class="mceItemObject" $1>');
 				h = h.replace(/<embed([^>]*)>/gi, '<span class="mceItemEmbed" $1>');
 				h = h.replace(/<\/(object|embed)([^>]*)>/gi, '</span>');
-				h = h.replace(/<param([^>]*)>/gi, function(a, b) {return '<span ' + b.replace(/value=/g, '_value=') + ' class="mceItemParam"></span>'});
+				h = h.replace(/<param([^>]*)>/gi, function(a, b) {return '<span ' + b.replace(/value=/gi, '_value=') + ' class="mceItemParam"></span>'});
 				h = h.replace(/\/ class=\"mceItemParam\"><\/span>/gi, 'class="mceItemParam"></span>');
 
 				o.content = h;
@@ -223,8 +224,13 @@
 				p.src = ed.convertURL(p.src, 'src', n);
 
 			each (p, function(v, k) {
-				if (v && !/^(width|height|codebase|classid)$/.test(k))
+				if (!/^(width|height|codebase|classid)$/.test(k)) {
+					// Use url instead of src in IE for Windows media
+					if (o.type == 'application/x-mplayer2' && k == 'src')
+						k = 'url';
+
 					dom.add(ob, 'span', {mce_name : 'param', name : k, '_value' : v});
+				}
 			});
 
 			dom.add(ob, 'span', tinymce.extend({mce_name : 'embed', type : o.type}, p));
@@ -266,7 +272,37 @@
 						default:
 							dom.replace(t._createImg('mceItemFlash', n), n);
 					}
+					
+					return;
 				}
+
+				// Convert embed into image
+				if (dom.getAttrib(n, 'class') == 'mceItemEmbed') {
+					switch (dom.getAttrib(n, 'type')) {
+						case 'application/x-shockwave-flash':
+							dom.replace(t._createImg('mceItemFlash', n), n);
+							break;
+
+						case 'application/x-director':
+							dom.replace(t._createImg('mceItemShockWave', n), n);
+							break;
+
+						case 'application/x-mplayer2':
+							dom.replace(t._createImg('mceItemWindowsMedia', n), n);
+							break;
+
+						case 'video/quicktime':
+							dom.replace(t._createImg('mceItemQuickTime', n), n);
+							break;
+
+						case 'audio/x-pn-realaudio-plugin':
+							dom.replace(t._createImg('mceItemRealMedia', n), n);
+							break;
+
+						default:
+							dom.replace(t._createImg('mceItemFlash', n), n);
+					}
+				}			
 			});
 		},
 
@@ -282,11 +318,11 @@
 			});
 
 			// Setup base parameters
-			each(['id', 'name', 'width', 'height', 'bgcolor', 'align'], function(n) {
-				var v = dom.getAttrib(n, 'align');
+			each(['id', 'name', 'width', 'height', 'bgcolor', 'align', 'flashvars', 'src', 'wmode'], function(na) {
+				var v = dom.getAttrib(n, na);
 
 				if (v)
-					pa[v] = v;
+					pa[na] = v;
 			});
 
 			// Add optional parameters

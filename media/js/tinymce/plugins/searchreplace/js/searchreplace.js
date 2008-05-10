@@ -7,6 +7,9 @@ var SearchReplaceDialog = {
 		this.switchMode(m);
 
 		f[m + '_panel_searchstring'].value = tinyMCEPopup.getWindowArg("search_string");
+
+		// Focus input field
+		f[m + '_panel_searchstring'].focus();
 	},
 
 	switchMode : function(m) {
@@ -23,7 +26,8 @@ var SearchReplaceDialog = {
 			}
 
 			mcTabs.displayTab(m + '_tab',  m + '_panel');
-			document.getElementById("replace_buttons").style.visibility = (m == "replace") ? "visible" : "hidden";
+			document.getElementById("replaceBtn").style.display = (m == "replace") ? "inline" : "none";
+			document.getElementById("replaceAllBtn").style.display = (m == "replace") ? "inline" : "none";
 			this.lastMode = m;
 		}
 	},
@@ -88,6 +92,10 @@ var SearchReplaceDialog = {
 
 		se.collapse(b);
 		r = se.getRng();
+
+		// Whats the point
+		if (!s)
+			return;
 
 		if (tinymce.isIE) {
 			if (r.findText(s, b ? -1 : 1, fl)) {

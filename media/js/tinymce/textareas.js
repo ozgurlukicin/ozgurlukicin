@@ -19,7 +19,7 @@ tinyMCE.init({
     file_browser_callback : 'oiFileBrowser',
     plugins : "advimage,autosave,searchreplace,table,visualchars,advlink,emotions,media,style,template,xhtmlxtras",
     gecko_spellcheck : true,
-    language : "tr",
+    language : "tr"
 });
 
 function oiFileBrowser (field_name, url, type, win) {

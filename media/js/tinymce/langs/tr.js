@@ -1,154 +1,154 @@
 tinyMCE.addI18n({tr:{
 common:{
-edit_confirm:"WYSIWYG özelliğini bu yazı alanı için kullanmak ister misiniz?",
-apply:"Kabul et",
+edit_confirm:"Bu metin b\u00F6lgesi i\u00E7in WYSIWYG modunu kullanmak istiyor musunuz?",
+apply:"Uygula",
 insert:"Ekle",
-update:"Güncelle",
-cancel:"İptal",
+update:"G\u00FCncelle",
+cancel:"\u0130ptal",
 close:"Kapat",
-browse:"Gözat",
-class_name:"Sınıf",
-not_set:"-- Ayarlama --",
-clipboard_msg:"Kes/Kopyala/Yapıştır özellikleri Mozilla ve Firefox'da çalışmamaktadır.\n Bu konu hakkında daha fazla bilgi almak ister misiniz?",
-clipboard_no_support:"Tarayıcınız tarafından desteklenmiyor, lütfen klavye kısa yollarını kullanın.",
-popup_blocked:"Açılır pencere engelleyiciniz uygulamanın doğru çalışmasını engelliyor. Bu aracı kullanmak için lütfen açılır pencere engelleyicinizi kapatın.",
-invalid_data:"Hata: Geçersiz değerler girildi, Bu değerler kırmızı renkle vurgulanmıştır.",
+browse:"G\u00F6zat",
+class_name:"S\u0131n\u0131f",
+not_set:"-- se\u00E7iniz --",
+clipboard_msg:"Kopyala/Kes/Yap\u0131\u015Ft\u0131r Mozilla ve Firefox'ta kullan\u0131lamaz.\nBu konuda daha fazla bilgi edinmek ister misiniz?",
+clipboard_no_support:"\u015Eimdilik taray\u0131c\u0131n\u0131z taraf\u0131ndan desteklenmemektedir, bunun yerine k\u0131sayol tu\u015Flar\u0131n\u0131 kullan\u0131n\u0131z.",
+popup_blocked:"\u00DCzg\u00FCn\u00FCz, fakat popup-engelleyiciniz uygulama i\u00E7in gerekli bir pencerenin a\u00E7\u0131lmas\u0131na izin vermedi. Bu arac\u0131 tam olarak kullanabilmek i\u00E7in popup engelleyicinizi kapatman\u0131z gerekebilir.",
+invalid_data:"Hata: Ge\u00E7ersiz de\u011Ferler girildi, bunlar k\u0131rm\u0131z\u0131yla i\u015Faretlendi.",
 more_colors:"Daha fazla renk"
 },
 contextmenu:{
 align:"Hizalama",
-left:"Sol",
-center:"Ortalanmış",
-right:"Sağ",
-full:"Tam"
+left:"Sola",
+center:"Ortala",
+right:"Sa\u011Fa",
+full:"\u0130ki yana"
 },
 insertdatetime:{
 date_fmt:"%d-%m-%Y",
 time_fmt:"%H:%M:%S",
-insertdate_desc:"Tarih girin",
-inserttime_desc:"Zaman girin",
-months_long:"Ocak,Şubat,Mart,Nisan,Mayıs,Haziran,Temmuz,Ağustos,Eylül,Ekim,Kasım,Aralık",
-months_short:"Ock,Şbt,Mrt,Nis,May,Haz,Tem,Ağu,Eyl,Ekm,Ksm,Arl",
-day_long:"Pazar,Pazartesi,Salı,Çarşamba,Perşembe,Cuma,Cumartesi,Pazar",
-day_short:"Pzr,Pts,Salı,Çar,Per,Cuma,Cmt,Pzr"
+insertdate_desc:"Tarih ekle",
+inserttime_desc:"Zaman ekle",
+months_long:"Ocak,\u015Eubat,Mart,Nisan,May\u0131s,Haziran,Temmuz,A\u011Fustos,Eyl\u00FCl,Ekim,Kas\u0131m,Aral\u0131k",
+months_short:"Oca,\u015Eub,Mar,Nis,May,Haz,Tem,A\u011Fu,Eyl,Eki,Kas,Ara",
+day_long:"Pazar,Pazartesi,Sal\u0131,\u00C7ar\u015Famba,Per\u015Fembe,Cuma,Cumartesi,Pazar",
+day_short:"Paz,Pzt,Sal,\u00C7r\u015F,Per,Cum,Cts,Paz"
 },
 print:{
-print_desc:"Yazdır"
+print_desc:"Yazd\u0131r"
 },
 preview:{
-preview_desc:"Önizleme"
+preview_desc:"\u00D6nizleme"
 },
 directionality:{
-ltr_desc:"Yön: Soldan sağa",
-rtl_desc:"Yön: Sağdan sola"
+ltr_desc:"Sa\u011Fdan sola y\u00F6nelimli",
+rtl_desc:"Soldan sa\u011Fa y\u00F6nelimli"
 },
 layer:{
 insertlayer_desc:"Yeni katman ekle",
-forward_desc:"İleri taşı",
-backward_desc:"Geri taşı",
-absolute_desc:"Tam yeri ayarla",
+forward_desc:"\u00D6ne al",
+backward_desc:"Arkaya al",
+absolute_desc:"Mutlak konumland\u0131rmay\u0131 a\u00E7/kapa",
 content:"Yeni katman..."
 },
 save:{
 save_desc:"Kaydet",
-cancel_desc:"Tüm değişiklikleri iptal et"
+cancel_desc:"T\u00FCm de\u011Fi\u015Fiklikleri iptal et"
 },
 nonbreaking:{
-nonbreaking_desc:"Satır atlamayan boşluk karakteri ekle"
+nonbreaking_desc:"K\u0131r\u0131l\u0131ms\u0131z bo\u015Fluk karakteri ekle"
 },
 iespell:{
-iespell_desc:"İmla kontrolü yap",
-download:"ieSpell algılanmadı. Yüklemek ister misiniz?"
+iespell_desc:"\u0130mla kontrol\u00FCn\u00FC \u00E7al\u0131\u015Ft\u0131r",
+download:"ieSpell bulunamad\u0131. \u015Eimdi kurmak ister misiniz?"
 },
 advhr:{
-advhr_desc:"Yatay kural"
+advhr_desc:"Yatay \u00E7izgi"
 },
 emotions:{
-emotions_desc:"Gülümsemeler"
+emotions_desc:"\u0130fadeler"
 },
 searchreplace:{
 search_desc:"Bul",
-replace_desc:"Bul/Değiştir"
+replace_desc:"Bul/De\u011Fi\u015Ftir"
 },
 advimage:{
-image_desc:"Resim düzenle/ekle "
+image_desc:"Resim ekle/d\u00FCzenle"
 },
 advlink:{
-link_desc:"Link düzenle/ekle"
+link_desc:"Ba\u011Flant\u0131 ekle/d\u00FCzenle"
 },
 xhtmlxtras:{
-cite_desc:"Citation",
-abbr_desc:"Kısaltma",
-acronym_desc:"Acronym",
+cite_desc:"Kaynak",
+abbr_desc:"K\u0131saltma",
+acronym_desc:"K\u0131sa ad",
 del_desc:"Silme",
 ins_desc:"Ekleme",
-attribs_desc:"Ekle/Değiştir Özellikleri"
+attribs_desc:"Nitelik ekle/d\u00FCzenle"
 },
 style:{
-desc:"CSS Stilini düzenle"
+desc:"CSS Stili D\u00FCzenle"
 },
 paste:{
-paste_text_desc:"Düz metin olarak yapıştır",
-paste_word_desc:"Word dökümanından yapıştır",
-selectall_desc:"Hepsini Seç"
+paste_text_desc:"Sade Metin olarak yap\u0131\u015Ft\u0131r",
+paste_word_desc:"Word'den yap\u0131\u015Ft\u0131r",
+selectall_desc:"T\u00FCm\u00FCn\u00FC Se\u00E7"
 },
 paste_dlg:{
-text_title:"Metni pencereye yapıştırmak için klavyenizde CTRL+V tuş bileşimini kullanın.",
-text_linebreaks:"Satır kesmelerini koru",
-word_title:"Metni pencereye yapıştırmak için klavyenizde CTRL+V tuş bileşimini kullanın."
+text_title:"Pencereye metin yap\u0131\u015Ft\u0131rmak i\u00E7in CTRL+V tu\u015Funu kullan\u0131n\u0131z.",
+text_linebreaks:"Sat\u0131r k\u0131r\u0131l\u0131mlar\u0131n\u0131 koru",
+word_title:"Pencereye metin yap\u0131\u015Ft\u0131rmak i\u00E7in CTRL+V tu\u015Funu kullan\u0131n\u0131z."
 },
 table:{
 desc:"Yeni bir tablo ekler",
-row_before_desc:"Öncesine satır ekle",
-row_after_desc:"Sonrasına satır ekle",
-delete_row_desc:"Satırı kaldır",
-col_before_desc:"Öncesine sütun ekle",
-col_after_desc:"Sonrasına sütun ekle",
-delete_col_desc:"Sütunu sil",
-split_cells_desc:"Birleştirilmiş tablo hücrelerini ayır",
-merge_cells_desc:"Tablo hücelerini birleştir",
-row_desc:"Tablo satır özellikleri",
-cell_desc:"Tablo hücre özellikleri",
-props_desc:"Tablo özellikleri",
-paste_row_before_desc:"Öncesine tablo satırını yapıştır",
-paste_row_after_desc:"Sonrasına tablo satırını yapıştır",
-cut_row_desc:"Tablo satırını kes",
-copy_row_desc:"Tablo satırını kopyala",
+row_before_desc:"\u00DCst\u00FCne bir sat\u0131r ekle",
+row_after_desc:"Alt\u0131na bir sat\u0131r ekle",
+delete_row_desc:"Sat\u0131r\u0131 sil",
+col_before_desc:"Soluna bir kolon ekle",
+col_after_desc:"Sa\u011F\u0131na bir kolon ekle",
+delete_col_desc:"Kolonu sil",
+split_cells_desc:"Birle\u015Fitirilmi\u015F tablo h\u00FCcrelerini ay\u0131r",
+merge_cells_desc:"Tablo h\u00FCcrelerini birle\u015Ftir",
+row_desc:"Tablo sat\u0131r \u00F6zellikleri",
+cell_desc:"Tablo h\u00FCcre \u00F6zellikler",
+props_desc:"Tablo \u00F6zellikleri",
+paste_row_before_desc:"\u00DCst\u00FCne tablo sat\u0131r\u0131n\u0131 yap\u0131\u015Ft\u0131r",
+paste_row_after_desc:"Alt\u0131na tablo sat\u0131r\u0131n\u0131 yap\u0131\u015Ft\u0131r",
+cut_row_desc:"Tablo sat\u0131r\u0131n\u0131 kes",
+copy_row_desc:"Tablo sat\u0131r\u0131n\u0131 kopyala",
 del:"Tabloyu sil",
-row:"Satır",
-col:"Sütun",
-cell:"Hücre"
+row:"Sat\u0131r",
+col:"Kolon",
+cell:"H\u00FCcre"
 },
 autosave:{
-unload_msg:"Eğer bu sayfadan ayrılırsanız yaptığınız tüm değişiklikler kaybolacaktır."
+unload_msg:"Bu sayfadan \u00E7\u0131karsan\u0131z yapt\u0131\u011F\u0131n\u0131z de\u011Fi\u015Fiklikler kaybedilecek."
 },
 fullscreen:{
-desc:"Tam ekran moduna geç"
+desc:"Tam ekran modunu a\u00E7/kapa"
 },
 media:{
-desc:"Medya düzenle / ekle",
-edit:"Gömülmüş medyayı düzenle"
+desc:"T\u00FCmle\u015Fik medya ekle/d\u00FCzenle",
+edit:"T\u00FCmle\u015Fik medya d\u00FCzenle"
 },
 fullpage:{
-desc:"Döküman özellikleri"
+desc:"Belge \u00F6zellikleri"
 },
 template:{
-desc:"Önceden belirlenmiş taslak içeriğini yapıştır"
+desc:"\u00D6ntan\u0131ml\u0131 \u015Fablon i\u00E7eri\u011Fi ekle"
 },
 visualchars:{
-desc:"Görsel denetim karakterleri açık/kapalı."
+desc:"G\u00F6rsel kontrol karakterleri a\u00E7\u0131k/kapal\u0131."
 },
 spellchecker:{
-desc:"İmla kontrolü yap",
-menu:"İmla kontrolü ayarları",
-ignore_word:"Kelimeyi gözardı et",
-ignore_words:"Hepsini gözardı et",
+desc:"\u0130mla kontrol\u00FCn\u00FC a\u00E7/kapa",
+menu:"\u0130mla kontrol ayarlar\u0131",
+ignore_word:"S\u00F6zc\u00FC\u011F\u00FC \u00F6nemseme",
+ignore_words:"Hi\u00E7birini \u00F6nemseme",
 langs:"Diller",
-wait:"Lütfen bekleyin...",
-sug:"Öneriler",
-no_sug:"Öneri yok",
-no_mpell:"Hatalı kelimeye rastlanmadı."
+wait:"L\u00FCtfen bekleyiniz...",
+sug:"\u00D6neriler",
+no_sug:"\u00D6neri yok",
+no_mpell:"Bir imla hatas\u0131 bulunamad\u0131."
 },
 pagebreak:{
-desc:"Sayfa ayracı ekle."
+desc:"Sayfa k\u0131r\u0131l\u0131m\u0131 ekle."
 }}});
