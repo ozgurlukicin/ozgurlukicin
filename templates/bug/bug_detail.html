@@ -50,7 +50,7 @@
 {% endif %}
 {% for comment in bug.comment_set.all %}
 <div class="bug_detail_comment">
-    {{ comment.text|safe }}<br />
+    {{ comment.text|linebreaksbr }}<br />
     <a href="/kullanici/profil/{{ comment.author }}/">{{ comment.author.first_name }} {{ comment.author.last_name }}</a> - {{ comment.date|date:"d F Y H:i" }}
 </div>
 {% endfor %}
