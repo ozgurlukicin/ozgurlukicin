@@ -85,7 +85,7 @@ def forum(request, forum_slug):
                        allow_empty = True)
 
 def latest_posts(request):
-    posts = Post.objects.filter(hidden=0).order_by('-created')[:100]
+    posts = Post.objects.filter(hidden=False).order_by('-created')[:100]
     return object_list(request, posts,
             template_name = 'forum/post_list.html',
             template_object_name = 'post',
