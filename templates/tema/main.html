@@ -30,24 +30,24 @@
 </div>
 <div>
 {% if object_list %}
-    {% for dosya in object_list %}
-    <div><a href="{{dosya.parent_cat.get_absolute_url}}">{{dosya.parent_cat}}</a></div>
-    <div><a href="/tema/feed/kategori/rss/{{dosya.parent_cat.id}}/"> RSS</a></div>
-    <div><a href="/tema/feed/kategori/atom/{{dosya.parent_cat.id}}/">ATOM</a></div>
-    <div><a href="{{dosya.get_absolute_url}}">{{dosya.name}}</a></div>
-    <div><img src="../../../media/{{dosya.screens.all.0}}" alt="ekran görüntüsü" width="100px" /></div>
+    {% for file in object_list %}
+    <div><a href="{{file.parent_cat.get_absolute_url}}">{{file.parent_cat}}</a></div>
+    <div><a href="/tema/feed/kategori/rss/{{file.parent_cat.id}}/"> RSS</a></div>
+    <div><a href="/tema/feed/kategori/atom/{{file.parent_cat.id}}/">ATOM</a></div>
+    <div><a href="{{file.get_absolute_url}}">{{file.name}}</a></div>
+    <div><img src="../../../media/{{file.screens.all.0}}" alt="ekran görüntüsü" width="100px" /></div>
     <div>
-        {% for file in dosya.file_data.all %}
+        {% for file in file.file_data.all %}
         <a href="../../../media/{{file}}">Bağlantı</a>
         {% endfor %}
     </div>
-    <div><a href="/tema/kullanici/{{dosya.user}}/">{{dosya.user}}</a></div>
-    <div><a href="/tema/feed/kullanici/rss/{{dosya.user.id}}/"> RSS</a></div>
-    <div><a href="/tema/feed/kullanici/atom/{{dosya.user.id}}/">ATOM</a></div>
-    <div>{{dosya.licence}}</div>
-    <div>{{dosya.counter}}</div>
-    <div>{{dosya.rate}}</div>
-    <div>{% get_public_comment_count for tema.dosya dosya.id as comment_count %}{{comment_count}}</div>
+    <div><a href="/tema/kullanici/{{file.user}}/">{{file.user}}</a></div>
+    <div><a href="/tema/feed/kullanici/rss/{{file.user.id}}/"> RSS</a></div>
+    <div><a href="/tema/feed/kullanici/atom/{{file.user.id}}/">ATOM</a></div>
+    <div>{{file.licence}}</div>
+    <div>{{file.counter}}</div>
+    <div>{{file.rate}}</div>
+    <div>{% get_public_comment_count for tema.file file.id as comment_count %}{{comment_count}}</div>
     {% endfor %}
 {% endif %}
 {% if has_previous %}

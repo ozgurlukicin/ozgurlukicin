@@ -12,7 +12,7 @@ import zipfile
 
 from django import newforms as forms
 import settings
-from oi.tema.models import  Dosya,SanatScreen,Category,License,ArsivDosya
+from oi.tema.models import  File,Thumbnail,Category,License,ArchiveFile
 import Image
 from django.shortcuts import get_object_or_404
 
@@ -140,19 +140,19 @@ class TemaUploadForm(forms.Form):
         description=self.cleaned_data['description']
         screen=self.cleaned_data['screen']
         user=screen['user']
-        dosya=self.cleaned_data['file_up']
+        file=self.cleaned_data['file_up']
 
-        s=SanatScreen()
+        s=Thumbnail()
         s.save_file_file(screen['filename'],screen['content'])
 
         #buraya arsiv dosyası işlemi gelecek
-        a=ArsivDosya()
-        a.save_a_file_file(dosya['filename'],dosya['content'])
+        a=ArchiveFile()
+        a.save_a_file_file(file['filename'],file['content'])
 
         cat=get_object_or_404(Category, pk=parent_category)
         li=get_object_or_404(License, pk= license)
 
-        d=Dosya(parent_cat=cat,licence=li,user=user,name=name,description=description,enable_comments=True)
+        d=File(parent_cat=cat,licence=li,user=user,name=name,description=description,enable_comments=True)
         d.save()
         d.screens.add(s)
         d.file_data.add(a)

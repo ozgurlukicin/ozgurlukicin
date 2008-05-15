@@ -26,31 +26,31 @@
     <div>Oy kullan</div>
     {% endif %}
 </div>
-{% if dosya %}
+{% if file %}
 <div>
-    <div><a href="{{dosya.parent_cat.get_absolute_url}}">{{dosya.parent_cat}}</a></div>
-    <div>{{dosya.name}}</div>
-    <div>{{dosya.description}}</div>
+    <div><a href="{{file.parent_cat.get_absolute_url}}">{{file.parent_cat}}</a></div>
+    <div>{{file.name}}</div>
+    <div>{{file.description}}</div>
     <div>
-        {% for screen in dosya.screens.all %}
+        {% for screen in file.screens.all %}
         <img src="../../../media/{{screen}}" alt="ekran görüntüsü" width="100"/><br/>
         {% endfor %}
     </div>
 
     <div>
-        {% for file in dosya.file_data.all %}
+        {% for file in file.file_data.all %}
         <a href="../../../media/{{file}}">İndir</a><br/>
         {% endfor %}
     </div>
-    <div>{{dosya.user}}</div>
-    <div>{{dosya.licence}}</div>
-    <div>{{dosya.counter}}</div>
-    <div>{{dosya.rate}}</div>
+    <div>{{file.user}}</div>
+    <div>{{file.licence}}</div>
+    <div>{{file.counter}}</div>
+    <div>{{file.rate}}</div>
     {% if auth %}
     <div>
         <form method="post" action="/tema/oy/">
             {{form.vote.label}}:{{form.vote}}
-            <input type="hidden" name="dosya_id" value="{{ dosya.id }}" />
+            <input type="hidden" name="file_id" value="{{ file.id }}" />
             <button type="submit">Gönder</button>
         </form>
         {% if error %}
@@ -62,12 +62,12 @@
 {% endif %}
 {% if auth %}
 <div>
-{% comment_form for tema.dosya dosya.id %}
+{% comment_form for tema.file file.id %}
 </div>
 {% else %}
     <b>Yorum yapabilmek için giriş yapmanız gerekir!</b>
 {% endif %}
-{% get_public_comment_list for tema.dosya dosya.id as comments %}
+{% get_public_comment_list for tema.file file.id as comments %}
 {% if comments %}
 <div>
     <div>link#</div>
