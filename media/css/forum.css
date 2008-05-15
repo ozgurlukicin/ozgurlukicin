@@ -12,11 +12,6 @@ a.profile_link {
     text-decoration: none;
     color: #333333;
 }
-
-p {
-    margin: 0px;
-    padding: 0px;
-}
 /*The colors end here */
 
 /* header */
@@ -276,6 +271,7 @@ div.topic_news_box:hover {
 div.topic_news_box h2 {
     font-size: 14px;
     font-weight: bold;
+    text-decoration: underline;
 }
 div.topic_news_box a:hover,
 div.topic_news_box a:visited,
