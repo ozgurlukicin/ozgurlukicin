@@ -78,6 +78,7 @@ def forum(request, forum_slug):
                 topic.is_read = True
             else:
                 topic.is_read = False
+    abuse_count = 0
     if request.user.has_perm("forum.can_change_abusereport"):
         abuse_count = AbuseReport.objects.count()
 
@@ -90,6 +91,7 @@ def forum(request, forum_slug):
 
 def latest_posts(request):
     posts = Post.objects.filter(hidden=False).order_by('-created')[:100]
+    abuse_count = 0
     if request.user.has_perm("forum.can_change_abusereport"):
         abuse_count = AbuseReport.objects.count()
 
@@ -160,6 +162,7 @@ def topic(request, forum_slug, topic_id):
     topic.save()
 
     # we love Django, just 1 line and pagination is ready :)
+    abuse_count = 0
     if request.user.has_perm("forum.can_change_abusereport"):
         abuse_count = AbuseReport.objects.count()
 
@@ -314,6 +317,7 @@ def edit_post(request, forum_slug, topic_id, post_id):
         if post in topic.post_set.all():
             form = PostForm(auto_id=True, initial={'text': post.text})
 
+    abuse_count = 0
     if request.user.has_perm("forum.can_change_abusereport"):
         abuse_count = AbuseReport.objects.count()
 
@@ -657,8 +661,7 @@ def report_abuse(request,post_id):
 
 @permission_required('forum.can_change_abusereport', login_url="/kullanici/giris/")
 def list_abuse(request):
-    if request.user.has_perm("forum.can_change_abusereport"):
-        abuse_count = AbuseReport.objects.count()
+    abuse_count = AbuseReport.objects.count()
 
     if request.method == 'POST':
         list = request.POST.getlist('abuse_list')
