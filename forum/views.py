@@ -616,7 +616,7 @@ def report_abuse(request,post_id):
         report.save()
         return render_response(request, 'forum/forum_done.html', {"message":"İleti şikayetiniz ilgililere ulaştırılmıştır. Teşekkür Ederiz."})
 
-@permission_required('forum.can_change_abuse', login_url="/kullanici/giris/")
+@permission_required('forum.can_change_abusereport', login_url="/kullanici/giris/")
 def list_abuse(request):
     if request.method == 'POST':
         list = request.POST.getlist('abuse_list')
