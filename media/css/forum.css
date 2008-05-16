@@ -277,6 +277,7 @@ div.topic_news_box {
     border-style: solid;
     border-color: #D7E1E7;
     padding: 0px 4px;
+    cursor: pointer;
 }
 div.topic_news_box:hover {
     background-color: #D7E1E7;

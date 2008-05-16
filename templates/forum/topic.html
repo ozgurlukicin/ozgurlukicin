@@ -109,7 +109,7 @@
 {% if forloop.first %}
 <div class="topic_news_area">
     {% for news in news_list %}
-    <div class="topic_news_box">
+    <div class="topic_news_box" onclick="location.href='{{news.get_absolute_url}}'">
         <h2><a href="{{news.get_absolute_url}}">{{ news.title }}</a></h2><div>{{ news.sum|safe }}</div>
     </div>
     {% endfor %}
