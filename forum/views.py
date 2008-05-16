@@ -655,7 +655,7 @@ def report_abuse(request,post_id):
 %(topic)s başlıklı konudaki bir ileti %(user)s rumuzlu kullanıcı tarafından şikayet edildi.
 İletiyi görmek için buraya tıklayın: %(link)s
 """
-        email_dict = { "topic":post.topic.title, "user":request.user.username, "link":post.get_absolute_url() }
+        email_dict = { "topic":post.topic.title, "user":request.user.username, "link":WEB_URL + post.get_absolute_url() }
         send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, [ABUSE_MAIL_LIST], fail_silently=True)
         return render_response(request, 'forum/forum_done.html', {"message":"İleti şikayetiniz ilgililere ulaştırılmıştır. Teşekkür Ederiz."})
 
