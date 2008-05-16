@@ -251,6 +251,19 @@ div.forum_error a {
     color: #EDE4E1;
 }
 
+div.forum_done {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding: 6px;;
+    background-color: #D7E1E7;
+    border: 1px solid #6A91A6;
+    font-weight: bold;
+    font-size: 14px;
+    width: 50%;
+}
+
 div.topic_news_area {
     width: 100%;
     overflow: hidden;
