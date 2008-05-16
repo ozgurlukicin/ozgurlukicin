@@ -652,8 +652,7 @@ def report_abuse(request,post_id):
 İletiyi görmek için buraya tıklayın: %(link)s
 """
         email_dict = { "topic":post.topic.title, "user":request.user.username, "link":post.get_absolute_url() }
-        for staff in User.objects.filter(is_staff=True):
-            send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, [staff.email], fail_silently=True)
+        send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, [ABUSE_MAIL_LIST], fail_silently=True)
         return render_response(request, 'forum/forum_done.html', {"message":"İleti şikayetiniz ilgililere ulaştırılmıştır. Teşekkür Ederiz."})
 
 @permission_required('forum.can_change_abusereport', login_url="/kullanici/giris/")
