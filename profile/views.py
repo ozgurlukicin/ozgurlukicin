@@ -34,7 +34,7 @@ def followed_topics(request):
             for id in list:
                 # control if posted topic id belongs to user
                 if not WatchList.objects.filter(topic__id=id).filter(user__username=request.user.username):
-                    return HttpResponse('You idiot! Are you trying to hack us?')
+                    return HttpResponse('Konu bu kullanıcıya ait değil!')
                 else:
                     WatchList.objects.filter(topic__id=id).filter(user__username=request.user.username).delete()
         # FIXME: Shouldn't be hardcoded.
