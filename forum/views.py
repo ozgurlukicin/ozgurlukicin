@@ -622,7 +622,6 @@ def list_abuse(request):
         list = request.POST.getlist('abuse_list')
         for id in list:
             AbuseReport.objects.get(id=id).delete()
-            print "silinen:", id
         return HttpResponseRedirect(request.path)
     else:
         if AbuseReport.objects.count() == 0:
