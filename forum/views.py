@@ -163,8 +163,8 @@ def follow(request, forum_slug, topic_id):
 
     # determine if user already added this to prevent double adding.
     if len(WatchList.objects.filter(topic__id=topic_id).filter(user__username=request.user.username)) > 0:
-        error = 'Bu başlığı zaten izlemektesiniz.'
-        return render_response(request, 'forum/forum_error.html', {'error': error})
+        errorMessage = 'Bu başlığı zaten izlemektesiniz.'
+        return render_response(request, 'forum/forum_error.html', {'message': errorMessage})
     else:
         watchlist = WatchList(topic=topic, user=request.user)
         watchlist.save()
@@ -602,3 +602,31 @@ def delete_post(request,forum_slug,topic_id, post_id):
         post.delete()
 
     return HttpResponseRedirect(topic.get_absolute_url())
+
+@login_required
+def report_abuse(request,post_id):
+    post = get_object_or_404(Post, pk=post_id)
+
+    try:
+        AbuseReport.objects.get(post=post_id)
+        return render_response(request, "forum/forum_error.html", {"message":"Bu ileti daha önce raporlanmış."})
+    except ObjectDoesNotExist:
+        #TODO: take reason from POST
+        report = AbuseReport(post=post, submitter=request.user)
+        report.save()
+        return render_response(request, 'forum/forum_done.html', {"message":"İleti şikayetiniz ilgililere ulaştırılmıştır. Teşekkür Ederiz."})
+
+@permission_required('forum.can_change_abuse', login_url="/kullanici/giris/")
+def list_abuse(request):
+    if request.method == 'POST':
+        list = request.POST.getlist('abuse_list')
+        for id in list:
+            AbuseReport.objects.get(id=id).delete()
+            print "silinen:", id
+        return HttpResponseRedirect(request.path)
+    else:
+        if AbuseReport.objects.count() == 0:
+            return render_response(request, 'forum/abuse_list.html', {'no_entry': True})
+        else:
+            abuse_list = AbuseReport.objects.all()
+            return render_response(request, 'forum/abuse_list.html', {'abuse_list': abuse_list})
