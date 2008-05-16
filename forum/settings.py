@@ -8,7 +8,7 @@
 # e-mail
 FORUM_FROM_EMAIL = 'forum@ozgurlukicin.com'
 FORUM_MESSAGE_LIST = 'forum@liste.ozgurlukicin.com'
-ABUSE_MAIL_LIST = 'abuse@liste.ozgurlukicin.com'
+ABUSE_MAIL_LIST = 'forum-abuse@liste.ozgurlukicin.com'
 
 # paginator
 TOPICS_PER_PAGE = 20
