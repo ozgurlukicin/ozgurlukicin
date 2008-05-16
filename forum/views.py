@@ -22,12 +22,12 @@ from oi.forum import customgeneric
 
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import send_mail
 from oi.st.models import Tag, News
 
 # import our function for sending e-mails and setting
 from oi.st.wrappers import send_mail_with_header
-from oi.settings import WEB_URL
-
+from oi.settings import WEB_URL, DEFAULT_FROM_EMAIL
 # import bbcode renderer for quotation
 from oi.forum.postmarkup import render_bbcode
 
@@ -56,6 +56,8 @@ def main(request):
     usercount = User.objects.count()
     currentdate = datetime.now()
     latest_posts = Post.objects.filter(hidden=False).order_by("-created")[:5]
+    if request.user.has_perm("forum.can_change_abusereport"):
+        abuse_count = AbuseReport.objects.count()
 
     return render_response(request, 'forum/forum_list.html', locals())
 
@@ -76,19 +78,25 @@ def forum(request, forum_slug):
                 topic.is_read = True
             else:
                 topic.is_read = False
+    if request.user.has_perm("forum.can_change_abusereport"):
+        abuse_count = AbuseReport.objects.count()
 
     return customgeneric.object_list(request, topics,
                        template_name = 'forum/forum_detail.html',
                        template_object_name = 'topic',
-                       extra_context = {'forum': forum},
+                       extra_context = {'forum': forum, 'abuse_count': abuse_count},
                        paginate_by = TOPICS_PER_PAGE,
                        allow_empty = True)
 
 def latest_posts(request):
     posts = Post.objects.filter(hidden=False).order_by('-created')[:100]
+    if request.user.has_perm("forum.can_change_abusereport"):
+        abuse_count = AbuseReport.objects.count()
+
     return object_list(request, posts,
             template_name = 'forum/post_list.html',
             template_object_name = 'post',
+            extra_context = {'abuse_count': abuse_count},
             paginate_by = ALL_POSTS_PER_PAGE,
             )
 
@@ -111,6 +119,8 @@ def unread_topics(request):
         if len(unread_topics) >= TOPICS_PER_PAGE:
             break
     topic_count = len(unread_topics)
+    if request.user.has_perm("forum.can_change_abusereport"):
+        abuse_count = AbuseReport.objects.count()
 
     return render_response(request, "forum/unread.html", locals())
 
@@ -150,10 +160,19 @@ def topic(request, forum_slug, topic_id):
     topic.save()
 
     # we love Django, just 1 line and pagination is ready :)
+    if request.user.has_perm("forum.can_change_abusereport"):
+        abuse_count = AbuseReport.objects.count()
+
     return object_list(request, posts,
                        template_name = 'forum/topic.html',
                        template_object_name = 'post',
-                       extra_context = {'forum': forum, 'topic': topic, 'news_list':news_list, "watching":watching},
+                       extra_context = {
+                           'forum': forum,
+                           'topic': topic,
+                           'news_list': news_list,
+                           "watching": watching,
+                           "abuse_count": abuse_count,
+                           },
                        paginate_by = POSTS_PER_PAGE,
                        allow_empty = True)
 
@@ -254,6 +273,9 @@ def reply(request, forum_slug, topic_id, quote_id=False):
         else:
             form = PostForm(auto_id=True)
 
+    if request.user.has_perm("forum.can_change_abusereport"):
+        abuse_count = AbuseReport.objects.count()
+
     return render_response(request, 'forum/reply.html', locals())
 
 @login_required
@@ -291,6 +313,9 @@ def edit_post(request, forum_slug, topic_id, post_id):
     else:
         if post in topic.post_set.all():
             form = PostForm(auto_id=True, initial={'text': post.text})
+
+    if request.user.has_perm("forum.can_change_abusereport"):
+        abuse_count = AbuseReport.objects.count()
 
     return render_response(request, 'forum/post_edit.html', locals())
 
@@ -337,6 +362,9 @@ def new_topic(request, forum_slug):
     else:
         form = TopicForm(auto_id=True)
 
+    if request.user.has_perm("forum.can_change_abusereport"):
+        abuse_count = AbuseReport.objects.count()
+
     return render_response(request, 'forum/new_topic.html', locals())
 
 @permission_required('forum.change_topic', login_url="/kullanici/giris/")
@@ -344,6 +372,9 @@ def edit_topic(request, forum_slug, topic_id):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
     first_post = topic.post_set.order_by('created')[0]
+
+    if request.user.has_perm("forum.can_change_abusereport"):
+        abuse_count = AbuseReport.objects.count()
 
     if forum.locked or topic.locked:
         return HttpResponse('Forum or topic is locked')
@@ -614,10 +645,22 @@ def report_abuse(request,post_id):
         #TODO: take reason from POST
         report = AbuseReport(post=post, submitter=request.user)
         report.save()
+        # now send mail to staff
+        email_subject = "Özgürlükİçin Forum - İleti Şikayeti"
+        email_body ="""
+%(topic)s başlıklı konudaki bir ileti %(user)s rumuzlu kullanıcı tarafından şikayet edildi.
+İletiyi görmek için buraya tıklayın: %(link)s
+"""
+        email_dict = { "topic":post.topic.title, "user":request.user.username, "link":post.get_absolute_url() }
+        for staff in User.objects.filter(is_staff=True):
+            send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, [staff.email], fail_silently=True)
         return render_response(request, 'forum/forum_done.html', {"message":"İleti şikayetiniz ilgililere ulaştırılmıştır. Teşekkür Ederiz."})
 
 @permission_required('forum.can_change_abusereport', login_url="/kullanici/giris/")
 def list_abuse(request):
+    if request.user.has_perm("forum.can_change_abusereport"):
+        abuse_count = AbuseReport.objects.count()
+
     if request.method == 'POST':
         list = request.POST.getlist('abuse_list')
         for id in list:
@@ -628,4 +671,4 @@ def list_abuse(request):
             return render_response(request, 'forum/abuse_list.html', {'no_entry': True})
         else:
             abuse_list = AbuseReport.objects.all()
-            return render_response(request, 'forum/abuse_list.html', {'abuse_list': abuse_list})
+            return render_response(request, 'forum/abuse_list.html', {'abuse_list': abuse_list, "abuse_count":abuse_count})
