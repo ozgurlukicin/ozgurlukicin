@@ -79,12 +79,10 @@ def list_category(request,cat_name):
     sorgu=res[0].file_set.filter(state=True)
 
     params={
-
-                'queryset':sorgu,
-                'paginate_by':HOME_ITEMS,
-                'template_name':'tema/main.html',
-
-                    }
+            'queryset':sorgu,
+            'paginate_by':HOME_ITEMS,
+            'template_name':'tema/main.html',
+            }
 
     return object_list(request,**params)
 
@@ -119,12 +117,10 @@ def list_user(request,username):
     #sorgu=File.objects.filter(user=username,state=True)
 
     params={
-
-                'queryset':sorgu,
-                'paginate_by':HOME_ITEMS,
-                'template_name':'tema/main.html',
-
-                    }
+            'queryset':sorgu,
+            'paginate_by':HOME_ITEMS,
+            'template_name':'tema/main.html',
+            }
 
     return object_list(request,**params)
 
