@@ -12,8 +12,6 @@ from django.db.models import signals
 from django.dispatch import dispatcher
 from oi.tema.signals import rm_thumb,crt_thumb,rmv_files
 
-from oi.comments.moderation import CommentModerator, moderator
-
 
 class Category(models.Model):
     """ The categories of thing that are published they maybe
@@ -108,8 +106,6 @@ class File(models.Model):
     state=models.BooleanField(verbose_name="Yayınla",default=False)
     counter= models.IntegerField(verbose_name="Sayaç",default=0)
     update=models.DateField(auto_now=True,verbose_name="Yayın Tarihi")
-
-    #added later ...
     enable_comments = models.BooleanField()
 
     def __str__(self):
@@ -128,6 +124,6 @@ class File(models.Model):
         verbose_name="Sanat Dosya"
         verbose_name_plural="Sanat Dosyaları"
         permissions = (
-                       ("can_upload_tema", "Can upload tema files"),
-                            )
+                ("can_upload_tema", "Can upload tema files"),
+                )
 dispatcher.connect(rmv_files,signal=signals.pre_delete, sender=File)

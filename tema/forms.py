@@ -120,10 +120,10 @@ class TemaUploadForm(forms.Form):
     description=forms.CharField(label="Açıklama",required=True,max_length=100,widget=forms.Textarea())
 
     #file upload kısımları
-    screen=ScreenField(widget=forms.FileInput(),required=True, label="Photo",
-            help_text="Yüklenecek resim (en fazla %s kilobayt), izin verilenler (jpeg,png,gif)"% (settings.MAX_PHOTO_UPLOAD_SIZE))
+    screen=ScreenField(widget=forms.FileInput(),required=True, label="Ekran Görüntüsü",
+            help_text="En fazla %sKB boyutunda bir jpeg, png veya gif resmi olabilir"% (settings.MAX_PHOTO_UPLOAD_SIZE))
     file_up=FileUploadField(widget=forms.FileInput(),required=True, label="Dosya",
-            help_text="Yüklenecek dosya (en fazla %s kilobayt), izin verilenler (zip)"% (settings.MAX_FILE_UPLOAD))
+            help_text="En fazla %sKB, olabilir zip biçiminde"% (settings.MAX_FILE_UPLOAD))
 
     def __init__(self,*args,**kwargs):
         """ Collect licenses and categories"""

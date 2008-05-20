@@ -16,45 +16,48 @@
 </div>
 <div><a href="/tema/ekle/">Ekle</a></div>
 <div>Dosyalar</div>
-<div>
-    <div>Kategori</div>
-    <div>İsim</div>
-    <div>Thumb</div>
-    <div>Link</div>
-    <div>Gönderen</div>
-    <div>Lisans</div>
-
-    <div>Görülmüş</div>
-    <div>Oy</div>
-    <div>Yorum</div>
+<div class="file_bar">
+    <div class="file_thumb cell">Görüntü</div>
+    <div class="file_category cell">Kategori</div>
+    <div class="file_name cell">İsim</div>
+    <div class="file_link cell">Link</div>
+    <div class="file_sender cell">Gönderen</div>
+    <div class="file_license cell">Lisans</div>
+    <div class="file_downloads cell">İndirme</div>
+    <div class="file_rating cell">Oy</div>
+    <div class="file_comments cell">Yorum</div>
 </div>
-<div>
+<div class="file_line">
 {% if object_list %}
     {% for file in object_list %}
-    <div><a href="{{file.parent_cat.get_absolute_url}}">{{file.parent_cat}}</a></div>
-    <div><a href="/tema/feed/kategori/rss/{{file.parent_cat.id}}/"> RSS</a></div>
-    <div><a href="/tema/feed/kategori/atom/{{file.parent_cat.id}}/">ATOM</a></div>
-    <div><a href="{{file.get_absolute_url}}">{{file.name}}</a></div>
-    <div><img src="../../../media/{{file.screens.all.0}}" alt="ekran görüntüsü" width="100px" /></div>
-    <div>
+    <div class="file_thumb cell"><img src="../../../media/{{file.screens.all.0}}" alt="ekran görüntüsü" width="100px" /></div>
+    <div class="file_category cell">
+        <a href="{{file.parent_cat.get_absolute_url}}">{{file.parent_cat}}</a>
+        <a href="/tema/feed/kategori/rss/{{file.parent_cat.id}}/">RSS</a>
+        <a href="/tema/feed/kategori/atom/{{file.parent_cat.id}}/">ATOM</a>
+    </div>
+    <div class="file_name cell"><a href="{{file.get_absolute_url}}">{{file.name}}</a></div>
+    <div class="file_link cell">
         {% for file in file.file_data.all %}
         <a href="../../../media/{{file}}">Bağlantı</a>
         {% endfor %}
     </div>
-    <div><a href="/tema/kullanici/{{file.user}}/">{{file.user}}</a></div>
-    <div><a href="/tema/feed/kullanici/rss/{{file.user.id}}/"> RSS</a></div>
-    <div><a href="/tema/feed/kullanici/atom/{{file.user.id}}/">ATOM</a></div>
-    <div>{{file.licence}}</div>
-    <div>{{file.counter}}</div>
-    <div>{{file.rate}}</div>
-    <div>{% get_public_comment_count for tema.file file.id as comment_count %}{{comment_count}}</div>
+    <div class="file_sender cell">
+        <a href="/tema/kullanici/{{file.user}}/">{{file.user}}</a>
+        <a href="/tema/feed/kullanici/rss/{{file.user.id}}/">RSS</a>
+        <a href="/tema/feed/kullanici/atom/{{file.user.id}}/">ATOM</a>
+    </div>
+    <div class="file_license cell">{{file.licence}}</div>
+    <div class="file_downloads cell">{{file.counter}}</div>
+    <div class="file_rating cell">{{file.rate}}</div>
+    <div class="file_comments cell">{% get_public_comment_count for tema.file file.id as comment_count %}{{comment_count}}</div>
     {% endfor %}
 {% endif %}
+</div>
 {% if has_previous %}
-    <div><a href="?page={{previous}}">Önceki</a></div>
+<div><a href="?page={{previous}}">Önceki</a></div>
 {% endif %}
 {% if has_next %}
-    <div><a href="?page={{next}}">Sonraki</a></div>
+<div><a href="?page={{next}}">Sonraki</a></div>
 {% endif %}
-</div>
 {% endblock %}
