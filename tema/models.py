@@ -52,7 +52,6 @@ class Category(models.Model):
     #get_possible_parents=staticmethod(get_possible_parents)
 
     class Admin:
-
         list_display = ('cat_name','parent_id','update')
         list_filter = ['update']
         search_fields = ['cat_name']
@@ -75,7 +74,6 @@ class Thumbnail(models.Model):
         return self.file
 
     class Admin:
-
         pass
 
 # when we add or delete a thumb it is needed
@@ -126,22 +124,10 @@ class File(models.Model):
         list_filter=['update']
         ordering=['-update']
 
-
     class Meta:
-
         verbose_name="Sanat Dosya"
         verbose_name_plural="Sanat Dosyaları"
         permissions = (
                        ("can_upload_tema", "Can upload tema files"),
                             )
 dispatcher.connect(rmv_files,signal=signals.pre_delete, sender=File)
-
-#dont forget to disable it before uploading pff
-#class DosyaCommentModerator(CommentModerator):
-#    """ Dosya models class Comment moderation""",
-#    akismet = False
-#    email_notification = False
-#    enable_field = 'enable_comments'
-
-#register it
-#moderator.register(Dosya, DosyaCommentModerator)
