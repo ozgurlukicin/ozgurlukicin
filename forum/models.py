@@ -297,7 +297,7 @@ class Category(models.Model):
 class AbuseReport(models.Model):
     post = models.ForeignKey(Post, verbose_name='İleti')
     submitter = models.ForeignKey(User, verbose_name='Raporlayan kullanıcı')
-    reason = models.CharField(max_length=512, blank=False, verbose_name="Sebep")
+    reason = models.TextField(max_length=512, blank=False, verbose_name="Sebep")
 
     class Admin:
         list_display = ('post', 'submitter')

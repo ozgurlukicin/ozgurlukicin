@@ -52,7 +52,5 @@ class MoveForm(forms.Form):
         super(MoveForm, self).__init__(*args, **kwargs)
         self.fields['forum2'].choices=[(forum.id, forum.name) for forum in Forum.objects.order_by("name")]
 
-class AbuseForm(forms.ModelForm):
-    class Meta:
-        model = AbuseReport
-        exclude = ("post", "submitter")
+class AbuseForm(forms.Form):
+    reason = XssField(label='Şikayet Sebebi', widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), required=True, help_text="(en fazla 512 karakter olabilir)", max_length=512)

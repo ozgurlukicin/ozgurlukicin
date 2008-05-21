@@ -20,7 +20,7 @@ Raporlanmış herhangi bir ileti bulunmamaktadır. Foruma dönmek için <a href=
 <form action="" method="POST">
     <strong>Raporlanmış İletiler: </strong><br /><br />
 {% for abuse in abuse_list %}
-<input type="checkbox" name="abuse_list" value="{{ abuse.id }}" />&nbsp;&nbsp;<a href="{{abuse.post.get_absolute_url }}" target="_blank">{{ abuse.post.topic.title }}</a> | Raporlayan: <a href="{{ abuse.submitter.get_profile.get_absolute_url }}">{{ abuse.submitter }}</a> | Sebep: {{ abuse.reason }}</input><br />
+<input type="checkbox" name="abuse_list" value="{{ abuse.id }}" />&nbsp;&nbsp;<a href="{{abuse.post.get_absolute_url }}" target="_blank">{{ abuse.post.topic.title }}</a> | Raporlayan: <a href="{{ abuse.submitter.get_profile.get_absolute_url }}">{{ abuse.submitter }}</a><br />Sebep:<br />{{ abuse.reason|striptags }}</input><hr />
 {% endfor %}
 <br />
 <input type="submit" value="Şikayet Listesinden Çıkar" />

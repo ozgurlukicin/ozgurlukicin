@@ -1,5 +1,9 @@
 {% extends "forum/forum_base.html" %}
 {% load library %}
+{% block extrahead %}
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
+{% endblock %}
 {% block content %}
 <div class="forum_address">
     <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; İleti Raporla</div>
