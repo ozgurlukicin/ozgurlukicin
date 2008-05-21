@@ -12,11 +12,6 @@ a.profile_link {
     text-decoration: none;
     color: #333333;
 }
-
-p {
-    margin: 0px;
-    padding: 0px;
-}
 /*The colors end here */
 
 /* header */
@@ -253,6 +248,19 @@ div.forum_error {
     height: 20px;
 }
 
+div.forum_done {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding: 6px;;
+    background-color: #D7E1E7;
+    border: 1px solid #6A91A6;
+    font-weight: bold;
+    font-size: 14px;
+    width: 50%;
+}
+
 div.topic_news_area {
     width: 100%;
     overflow: hidden;
@@ -266,6 +274,7 @@ div.topic_news_box {
     border-style: solid;
     border-color: #D7E1E7;
     padding: 0px 4px;
+    cursor: pointer;
 }
 div.topic_news_box:hover {
     background-color: #D7E1E7;
@@ -273,6 +282,7 @@ div.topic_news_box:hover {
 div.topic_news_box h2 {
     font-size: 14px;
     font-weight: bold;
+    text-decoration: underline;
 }
 div.topic_news_box a:hover,
 div.topic_news_box a:visited,

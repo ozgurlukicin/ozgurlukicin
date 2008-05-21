@@ -19,12 +19,12 @@
 
 {% if not user.is_authenticated %}
 
-{% if form.has_errors %}
-<p>Kullanıcı adınız ve parolanız uyuşmuyor, lütfen tekrar deneyin.</p>
-{% endif %}
-
 <div style="text-align: left; padding-left: 50px;">
-    Lütfen giriş yapmak için kullanıcı adınızı ve parolanızı giriniz.<br /><br />
+{% if form.has_errors %}
+    <p>Kullanıcı adınız ve parolanız uyuşmuyor, lütfen tekrar deneyin.</p>
+{% else %}
+    <p>Bu işlemi yapmak için yetkiniz yok. Eğer Özgürlükİçin.com'a üyeyseniz aşağıya kullanıcı adı ve parolanızı girin. Parolanızı bilmiyor ya da unuttuysanız <a href="/kullanici/kayip/">kayıp parola</a> bağlantısını izleyin. Eğer üye değilseniz <a href="/kullanici/kayit/">buradan</a> Özgürlükİçin.com'a üye olabilirsiniz.</p>
+{% endif %}
     <form method="post" action="/kullanici/giris/">
         <table><tbody>
         <tr>

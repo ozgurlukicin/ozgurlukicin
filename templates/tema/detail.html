@@ -1,127 +1,89 @@
-
+{% extends "tema/base.html" %}
 {% load comment_honeypot %}
 {% load comment_utils %}
+{% block header_menu %}
+    {% include "header.html" %}
+{% endblock %}
+{% block ust_menu %}
+    {% include "ust_menu_ayrinti.html" %}
+{% endblock %}
 
 {% block content %}
-		<a href="/tema/goster/son/">Tema Anasayfa</a>
-		<table summary="Submitted table designs" border="1" align="center">
-			<caption>Tema Dosyalar</caption>
-			<thead>
-				<tr>
-					<th scope="col">Kategori</th>
-					<th scope="col">İsim</th>
-					<th scope="col">Açıklama</th>
-					<th scope="col">Thumb</th>
+<a href="/tema/goster/son/">Tema Anasayfa</a>
+<div>
+    <div>Kategori</div>
+    <div>İsim</div>
+    <div>Açıklama</div>
+    <div>Thumb</div>
 
-					<th scope="col">Link</th>
-					<th scope="col">Gönderen</th>
-					<th scope="col">Lisans</th>
+    <div>Link</div>
+    <div>Gönderen</div>
+    <div>Lisans</div>
 
-					<th scope="col">Görülmüş</th>
-					<th scope="col">Oy</th>
-					{% if auth %}
-					<th scope="col">Oy kullan</th>
-					{% endif %}
-				</tr>
-			</thead>
+    <div>Görülmüş</div>
+    <div>Oy</div>
+    {% if auth %}
+    <div>Oy kullan</div>
+    {% endif %}
+</div>
+{% if file %}
+<div>
+    <div><a href="{{file.parent_cat.get_absolute_url}}">{{file.parent_cat}}</a></div>
+    <div>{{file.name}}</div>
+    <div>{{file.description}}</div>
+    <div>
+        {% for screen in file.screens.all %}
+        <img src="../../../media/{{screen}}" alt="ekran görüntüsü" width="100"/><br/>
+        {% endfor %}
+    </div>
 
-			<tbody>
-			{% if dosya %}
-
-					<tr >
-						<th scope="row"><a href="{{dosya.parent_cat.get_absolute_url}}">{{dosya.parent_cat}}</a></th>
-						<td>{{dosya.name}}</td>
-						<td>{{dosya.description}}</td>
-						<td>{% for screen in dosya.screens.all %}
-								<img src="../../../media/{{screen}}" width="100" height="100"/><br/>
-							{% endfor %}
-						</td>
-
-						<td>{% for file in dosya.file_data.all %}
-								<a href="../../../media/{{file}}">İndir</a><br/>
-							{% endfor %}</td>
-
-						<td>{{dosya.user}}</td>
-						<td>{{dosya.licence}}</td>
-						<td>{{dosya.counter}}</td>
-						<td>{{dosya.rate}}</td>
-						{% if auth %}
-						<td>
-							<form method="post" action="/tema/oy/">
-
-								{{form.vote.label}}:{{form.vote}}
-								<input type="hidden" name="dosya_id" value="{{ dosya.id }}" />
-								<button type="submit">Yolla</button>
-
-							</form>
-						{% if error %}
-							<b>{{error}}</b>
-						{% endif %}
-						</td>
-
-						{% endif %}
-					</tr>
-
-			{% endif %}
-
-</tbody>
-</table>
-
-	<br/>
-	<br/>
-	<br/>
-	{% if auth %}
-	<div align="center">
-	{% comment_form for tema.dosya dosya.id %}
-
-	</div>
-	{% endif %}
-
-	{% if not auth %}
-		<b>Yorum yapabilmek için giriş yapmanız gerekir!</b>
-	{% endif %}
-
-
-
-		{% get_public_comment_list for tema.dosya dosya.id as comments %}
-		<br/>
-		<br/><br/>
-		{% if comments %}
-				<table summary="Submitted table designs" border="1" align="center">
-				<caption>Yorumlar</caption>
-				<thead>
-					<tr>
-						<th scope="col">link#</th>
-						<th scope="col">İsim</th>
-						<th scope="col">Yorum</th>
-						<th scope="col">IP</th>
-
-						<th scope="col">Tarih</th>
-
-				</tr>
-
-				</thead>
-
-				<tbody>
-			{% for comment in comments %}
-
-
-					<tr >
-							<th scope="row">{{comment.get_absolute_url}}</a></th>
-							<td>{{comment.person_name}}</td>
-							<td>{{comment.comment}}</td>
-							<td>{{comment.ip_address}}</td>
-							<td>{{comment.submit_date}}</td>
-						</tr>
-			{% endfor %}
-
-
-				</tbody>
-				</table>
-
-
-		{% endif %}
-
-
-
+    <div>
+        {% for file in file.file_data.all %}
+        <a href="../../../media/{{file}}">İndir</a><br/>
+        {% endfor %}
+    </div>
+    <div>{{file.user}}</div>
+    <div>{{file.licence}}</div>
+    <div>{{file.counter}}</div>
+    <div>{{file.rate}}</div>
+    {% if auth %}
+    <div>
+        <form method="post" action="/tema/oy/">
+            {{form.vote.label}}:{{form.vote}}
+            <input type="hidden" name="file_id" value="{{ file.id }}" />
+            <button type="submit">Gönder</button>
+        </form>
+        {% if error %}
+        <div>{{error}}</div>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+{% if auth %}
+<div>
+    {% comment_form for tema.file file.id %}
+</div>
+{% else %}
+    <b>Yorum yapabilmek için giriş yapmanız gerekir!</b>
+{% endif %}
+{% get_public_comment_list for tema.file file.id as comments %}
+{% if comments %}
+<div>
+    <div>link#</div>
+    <div>İsim</div>
+    <div>Yorum</div>
+    <div>IP</div>
+    <div>Tarih</div>
+</div>
+<div>
+{% for comment in comments %}
+    <div>{{comment.get_absolute_url}}</a></div>
+    <div>{{comment.person_name}}</div>
+    <div>{{comment.comment}}</div>
+    <div>{{comment.ip_address}}</div>
+    <div>{{comment.submit_date}}</div>
+</div>
+{% endfor %}
+{% endif %}
 {% endblock %}

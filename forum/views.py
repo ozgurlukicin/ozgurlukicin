@@ -11,6 +11,7 @@ from django.http import HttpResponseRedirect, HttpResponseServerError, HttpRespo
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
+from django.template.defaultfilters import striptags
 from django.views.generic.list_detail import object_list
 
 from oi.forum.settings import *
@@ -22,12 +23,12 @@ from oi.forum import customgeneric
 
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import send_mail
 from oi.st.models import Tag, News
 
 # import our function for sending e-mails and setting
 from oi.st.wrappers import send_mail_with_header
-from oi.settings import WEB_URL
-
+from oi.settings import WEB_URL, DEFAULT_FROM_EMAIL
 # import bbcode renderer for quotation
 from oi.forum.postmarkup import render_bbcode
 
@@ -56,6 +57,8 @@ def main(request):
     usercount = User.objects.count()
     currentdate = datetime.now()
     latest_posts = Post.objects.filter(hidden=False).order_by("-created")[:5]
+    if request.user.has_perm("forum.can_change_abusereport"):
+        abuse_count = AbuseReport.objects.count()
 
     return render_response(request, 'forum/forum_list.html', locals())
 
@@ -76,19 +79,27 @@ def forum(request, forum_slug):
                 topic.is_read = True
             else:
                 topic.is_read = False
+    abuse_count = 0
+    if request.user.has_perm("forum.can_change_abusereport"):
+        abuse_count = AbuseReport.objects.count()
 
     return customgeneric.object_list(request, topics,
                        template_name = 'forum/forum_detail.html',
                        template_object_name = 'topic',
-                       extra_context = {'forum': forum},
+                       extra_context = {'forum': forum, 'abuse_count': abuse_count},
                        paginate_by = TOPICS_PER_PAGE,
                        allow_empty = True)
 
 def latest_posts(request):
     posts = Post.objects.filter(hidden=False).order_by('-created')[:100]
+    abuse_count = 0
+    if request.user.has_perm("forum.can_change_abusereport"):
+        abuse_count = AbuseReport.objects.count()
+
     return object_list(request, posts,
             template_name = 'forum/post_list.html',
             template_object_name = 'post',
+            extra_context = {'abuse_count': abuse_count},
             paginate_by = ALL_POSTS_PER_PAGE,
             )
 
@@ -111,6 +122,8 @@ def unread_topics(request):
         if len(unread_topics) >= TOPICS_PER_PAGE:
             break
     topic_count = len(unread_topics)
+    if request.user.has_perm("forum.can_change_abusereport"):
+        abuse_count = AbuseReport.objects.count()
 
     return render_response(request, "forum/unread.html", locals())
 
@@ -150,10 +163,20 @@ def topic(request, forum_slug, topic_id):
     topic.save()
 
     # we love Django, just 1 line and pagination is ready :)
+    abuse_count = 0
+    if request.user.has_perm("forum.can_change_abusereport"):
+        abuse_count = AbuseReport.objects.count()
+
     return object_list(request, posts,
                        template_name = 'forum/topic.html',
                        template_object_name = 'post',
-                       extra_context = {'forum': forum, 'topic': topic, 'news_list':news_list, "watching":watching},
+                       extra_context = {
+                           'forum': forum,
+                           'topic': topic,
+                           'news_list': news_list,
+                           "watching": watching,
+                           "abuse_count": abuse_count,
+                           },
                        paginate_by = POSTS_PER_PAGE,
                        allow_empty = True)
 
@@ -163,8 +186,8 @@ def follow(request, forum_slug, topic_id):
 
     # determine if user already added this to prevent double adding.
     if len(WatchList.objects.filter(topic__id=topic_id).filter(user__username=request.user.username)) > 0:
-        error = 'Bu başlığı zaten izlemektesiniz.'
-        return render_response(request, 'forum/forum_error.html', {'error': error})
+        errorMessage = 'Bu başlığı zaten izlemektesiniz.'
+        return render_response(request, 'forum/forum_error.html', {'message': errorMessage})
     else:
         watchlist = WatchList(topic=topic, user=request.user)
         watchlist.save()
@@ -259,6 +282,9 @@ def reply(request, forum_slug, topic_id, quote_id=False):
         else:
             form = PostForm(auto_id=True)
 
+    if request.user.has_perm("forum.can_change_abusereport"):
+        abuse_count = AbuseReport.objects.count()
+
     return render_response(request, 'forum/reply.html', locals())
 
 @login_required
@@ -296,6 +322,10 @@ def edit_post(request, forum_slug, topic_id, post_id):
     else:
         if post in topic.post_set.all():
             form = PostForm(auto_id=True, initial={'text': post.text})
+
+    abuse_count = 0
+    if request.user.has_perm("forum.can_change_abusereport"):
+        abuse_count = AbuseReport.objects.count()
 
     return render_response(request, 'forum/post_edit.html', locals())
 
@@ -348,6 +378,9 @@ def new_topic(request, forum_slug):
     else:
         form = TopicForm(auto_id=True)
 
+    if request.user.has_perm("forum.can_change_abusereport"):
+        abuse_count = AbuseReport.objects.count()
+
     return render_response(request, 'forum/new_topic.html', locals())
 
 @permission_required('forum.change_topic', login_url="/kullanici/giris/")
@@ -355,6 +388,9 @@ def edit_topic(request, forum_slug, topic_id):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
     first_post = topic.post_set.order_by('created')[0]
+
+    if request.user.has_perm("forum.can_change_abusereport"):
+        abuse_count = AbuseReport.objects.count()
 
     if forum.locked or topic.locked:
         return HttpResponse('Forum or topic is locked')
@@ -504,14 +540,15 @@ def move(request, forum_slug, topic_id):
         form = MoveForm(auto_id=True)
         return render_response(request, 'forum/move.html', locals())
 
-@login_required
+@permission_required('forum.can_hide_post', login_url="/kullanici/giris/")
 def hide(request, forum_slug, topic_id, post_id=False):
-    forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
 
-    if request.user.has_perm('forum.can_hide_post') and post_id:
+    if post_id:
         post = get_object_or_404(Post, pk=post_id)
 
+        if post.topic.hidden:
+            return render_response(request, "forum/forum_error.html", { "message":"Konu gizli olduğu için mesajı gösteremezsiniz." })
         if post.hidden:
             post.hidden = 0
         else:
@@ -520,53 +557,52 @@ def hide(request, forum_slug, topic_id, post_id=False):
         post.save()
 
         return HttpResponseRedirect(topic.get_absolute_url())
-    elif request.user.has_perm('forum.can_hide_topic') and not post_id:
+    else:
         if topic.hidden:
             topic.hidden = 0
+            # we also want to hide the posts
+            for post in topic.post_set.all():
+                post.hidden = 0
+                post.save()
         else:
             topic.hidden = 1
+            for post in topic.post_set.all():
+                post.hidden = 1
+                post.save()
 
         topic.save()
 
-        return HttpResponseRedirect(forum.get_absolute_url())
-    else:
-        return HttpResponseServerError # FIXME: Given an error message
+        return HttpResponseRedirect(topic.forum.get_absolute_url())
 
-@login_required
+@permission_required('forum.can_stick_topic', login_url="/kullanici/giris/")
 def stick(request, forum_slug, topic_id):
-    forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
 
-    if request.user.has_perm('forum.can_stick_stopic') and not topic.sticky:
-        topic.sticky = 1
-        topic.save()
-
-        return HttpResponseRedirect(forum.get_absolute_url())
-    elif request.user.has_perm('forum.can_stick_topic') and topic.sticky:
+    if topic.sticky:
         topic.sticky = 0
         topic.save()
 
-        return HttpResponseRedirect(forum.get_absolute_url())
+        return HttpResponseRedirect(topic.forum.get_absolute_url())
     else:
-        return HttpResponseServerError # FIXME: Give an error message
-
-@login_required
-def lock(request, forum_slug, topic_id):
-    forum = get_object_or_404(Forum, slug=forum_slug)
-    topic = get_object_or_404(Topic, pk=topic_id)
-
-    if request.user.has_perm('forum.can_lock_topic') and not topic.locked:
-        topic.locked = 1
+        topic.sticky = 1
         topic.save()
 
-        return HttpResponseRedirect(forum.get_absolute_url())
-    elif request.user.has_perm('forum.can_lock_topic') and topic.locked:
+        return HttpResponseRedirect(topic.forum.get_absolute_url())
+
+@permission_required('forum.can_lock_topic', login_url="/kullanici/giris/")
+def lock(request, forum_slug, topic_id):
+    topic = get_object_or_404(Topic, pk=topic_id)
+
+    if topic.locked:
         topic.locked = 0
         topic.save()
 
-        return HttpResponseRedirect(forum.get_absolute_url())
+        return HttpResponseRedirect(topic.forum.get_absolute_url())
     else:
-        return HttpResponseServerError # FIXME: Give an error message
+        topic.locked = 1
+        topic.save()
+
+        return HttpResponseRedirect(topic.forum.get_absolute_url())
 
 def flood_control(request):
     if 'flood_control' in request.session and ((datetime.now() - request.session['flood_control']).seconds < FLOOD_TIMEOUT):
@@ -613,3 +649,63 @@ def delete_post(request,forum_slug,topic_id, post_id):
         post.delete()
 
     return HttpResponseRedirect(topic.get_absolute_url())
+
+@login_required
+def report_abuse(request,post_id):
+    post = get_object_or_404(Post, pk=post_id, hidden=False)
+    if post.topic.locked:
+        return render_response(request, "forum/forum_error.html", {"message":"Bu konu kilitlenmiş olduğu için raporlanamaz."})
+
+    try:
+        AbuseReport.objects.get(post=post_id)
+        return render_response(request, "forum/forum_error.html", {"message":"Bu ileti daha önce raporlanmış."})
+    except ObjectDoesNotExist:
+        if request.method == 'POST':
+            form = AbuseForm(request.POST.copy())
+            if form.is_valid():
+                report = AbuseReport(post=post, submitter=request.user, reason=form.cleaned_data["reason"])
+                report.save()
+                # now send mail to staff
+                email_subject = "Özgürlükİçin Forum - İleti Şikayeti"
+                email_body ="""
+%(topic)s başlıklı konudaki bir ileti şikayet edildi.
+İletiyi forumda görmek için buraya tıklayın: %(link)s
+
+İletinin içeriği buydu (%(sender)s tarafından yazılmış):
+%(message)s
+Şikayet metni buydu (%(reporter)s tarafından şikayet edilmiş):
+%(reason)s
+"""
+                email_dict = {
+                        "topic":post.topic.title,
+                        "reporter":request.user.username,
+                        "link":WEB_URL + post.get_absolute_url(),
+                        "message":striptags(render_bbcode(post.text)),
+                        "reason":striptags(report.reason),
+                        "sender":post.author.username,
+                        }
+                send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, [ABUSE_MAIL_LIST], fail_silently=True)
+                return render_response(request, 'forum/forum_done.html', {
+                    "message": "İleti şikayetiniz ilgililere ulaştırılmıştır. Teşekkür Ederiz.",
+                    "back": post.get_absolute_url()
+                    })
+        else:
+            form = AbuseForm(auto_id=True)
+
+        return render_response(request, "forum/report.html", locals())
+
+@permission_required('forum.can_change_abusereport', login_url="/kullanici/giris/")
+def list_abuse(request):
+    abuse_count = AbuseReport.objects.count()
+
+    if request.method == 'POST':
+        list = request.POST.getlist('abuse_list')
+        for id in list:
+            AbuseReport.objects.get(id=id).delete()
+        return HttpResponseRedirect(request.path)
+    else:
+        if AbuseReport.objects.count() == 0:
+            return render_response(request, 'forum/abuse_list.html', {'no_entry': True})
+        else:
+            abuse_list = AbuseReport.objects.all()
+            return render_response(request, 'forum/abuse_list.html', {'abuse_list': abuse_list, "abuse_count":abuse_count})

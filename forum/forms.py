@@ -6,7 +6,7 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django import newforms as forms
-from oi.forum.models import Topic, Forum, WatchList
+from oi.forum.models import AbuseReport, Topic, Forum, WatchList
 from oi.st.models import Tag
 
 from oi.st.forms import XssField
@@ -51,3 +51,6 @@ class MoveForm(forms.Form):
         """ This is for collecting forums """
         super(MoveForm, self).__init__(*args, **kwargs)
         self.fields['forum2'].choices=[(forum.id, forum.name) for forum in Forum.objects.order_by("name")]
+
+class AbuseForm(forms.Form):
+    reason = XssField(label='Şikayet Sebebi', widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), required=True, help_text="(en fazla 512 karakter olabilir)", max_length=512)

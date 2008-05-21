@@ -90,7 +90,7 @@ class Profile(models.Model):
     latitude = models.DecimalField('Enlem', max_digits=10, decimal_places=6, default=0)
     longitude = models.DecimalField('Boylam', max_digits=10, decimal_places=6, default=0)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.user.username
 
     class Admin:
@@ -106,3 +106,6 @@ class Profile(models.Model):
     class Meta:
         verbose_name = "Kullanıcı Profili"
         verbose_name_plural = "Kullanıcı Profilleri"
+
+    def get_absolute_url(self):
+        return '/kullanici/profil/%s/' % self.user.username

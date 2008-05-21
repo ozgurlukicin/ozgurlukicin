@@ -8,7 +8,7 @@
 from django.contrib.syndication.feeds import Feed
 from django.utils.feedgenerator import Atom1Feed
 
-from oi.tema.models import Dosya,Category
+from oi.tema.models import File,Category
 from oi.settings import SITE_NAME, WEB_URL, SITE_DESC
 
 from django.contrib.syndication.feeds import FeedDoesNotExist
@@ -23,7 +23,7 @@ class Tema_RSS(Feed):
     description_template = 'tema/feed_description.html'
 
     def items(self):
-        return Dosya.objects.filter(state=True).order_by("-update")[:10]
+        return File.objects.filter(state=True).order_by("-update")[:10]
 
 class Tema_Atom(Tema_RSS):
     feed_type = Atom1Feed
@@ -63,7 +63,7 @@ class Category_Tema_Rss(Feed):
 
     def items(self,obj):
         """ Istenilen Konular burada olacak"""
-        return Dosya.objects.filter(parent_cat=obj,state=True).order_by('-update')[:10]
+        return File.objects.filter(parent_cat=obj,state=True).order_by('-update')[:10]
 
     def item_link(self, item):
         """ her biri icin """
@@ -107,7 +107,7 @@ class User_Tema_Rss(Feed):
 
     def items(self,obj):
         """ Istenilen Konular burada olacak"""
-        return Dosya.objects.filter(user=obj,state=True).order_by('-update')[:10]
+        return File.objects.filter(user=obj,state=True).order_by('-update')[:10]
 
     def item_link(self, item):
         """ her biri icin """

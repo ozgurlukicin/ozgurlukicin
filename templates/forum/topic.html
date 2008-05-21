@@ -40,6 +40,10 @@
             <div class="post_message_top_date">
                 {{ post.created|date:"d-m-Y H:i" }}
             </div>
+            {% if request.user.is_authenticated %}
+            <div class="post_message_top_button">
+                <a href="{{ post.get_abuse_report_url }}"><img src="/media/dijital/img/forum/exclamation.gif" alt="raporla" title="Kurallara uymayan iletiyi şikayet et" border="0" /></a>
+            </div>
             <div class="post_message_top_button">
                 <a href="{{ post.get_quote_url }}"><img src="/media/dijital/img/forum/quote.gif" alt="alıntıla" border="0" /></a>
             </div>
@@ -67,7 +71,7 @@
             {% if perms.forum.delete_post and not forloop.first %}
             <div class="post_message_top_button">
             <form method="post" action="{{post.get_delete_url}}">
-                <input type="image" src="/media/dijital/img/forum/sil.gif" alt="sil" style="border: 0; margin: 0;" />
+                <input type="image" src="/media/dijital/img/forum/sil.png" alt="sil" style="border: 0; margin: 0;" />
             </form>
             </div>
             {% else %}
@@ -83,6 +87,7 @@
                     {% endifequal %}
                 {% endifequal %}
                 {% endif %}
+            {% endif %}
         </div>
         <div class="post_message_content">
             <div class="post_message_text">{{ post.text|renderbbcode|safe }}</div>
@@ -104,7 +109,7 @@
 {% if forloop.first %}
 <div class="topic_news_area">
     {% for news in news_list %}
-    <div class="topic_news_box">
+    <div class="topic_news_box" onclick="location.href='{{news.get_absolute_url}}'">
         <h2><a href="{{news.get_absolute_url}}">{{ news.title }}</a></h2><div>{{ news.sum|safe }}</div>
     </div>
     {% endfor %}

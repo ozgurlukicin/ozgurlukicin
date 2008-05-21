@@ -1,59 +1,22 @@
+{% extends "tema/base.html" %}
+{% load thumbman %}
+{% load comment_utils %}
+{% block header_menu %}
+    {% include "header.html" %}
+{% endblock %}
+{% block ust_menu %}
+    {% include "ust_menu_ayrinti.html" %}
+{% endblock %}
+
 {% block content %}
 
- <form action="/tema/ekle/" method="post" enctype="multipart/form-data">
-
-			 <dl>
-
-    			<dt>{{ form.parent_category.label_tag }}</dt>
-    			<dd>{{ form.parent_category }}</dd>
-    			{% if form.parent_category.help_text %}<dd>{{ form.parent_category.help_text }}</dd>{% endif %}
-    			{% if form.parent_category.errors %}<dd class="myerrors">{{ form.parent_category.errors }}</dd>{% endif %}
-
-			</dl>
-			<dl>
-
-    			<dt>{{ form.license.label_tag }}</dt>
-    			<dd>{{ form.license }}</dd>
-    			{% if form.license.help_text %}<dd>{{ form.license.help_text }}</dd>{% endif %}
-    			{% if form.license.errors %}<dd class="myerrors">{{ form.license.errors }}</dd>{% endif %}
-
-			</dl>
-			<dl>
-
-    			<dt>{{ form.name.label_tag }}</dt>
-    			<dd>{{ form.name }}</dd>
-    			{% if form.name.help_text %}<dd>{{ form.name.help_text }}</dd>{% endif %}
-    			{% if form.name.errors %}<dd class="myerrors">{{ form.name.errors }}</dd>{% endif %}
-
-			</dl>
-			<dl>
-
-    			<dt>{{ form.description.label_tag }}</dt>
-    			<dd>{{ form.description }}</dd>
-    			{% if form.description.help_text %}<dd>{{ form.description.help_text }}</dd>{% endif %}
-    			{% if form.description.errors %}<dd class="myerrors">{{ form.description.errors }}</dd>{% endif %}
-
-			</dl>
-			<dl>
-
-    			<dt>{{ form.screen.label_tag }}</dt>
-    			<dd>{{ form.screen }}</dd>
-    			{% if form.screen.help_text %}<dd>{{ form.screen.help_text }}</dd>{% endif %}
-    			{% if form.screen.errors %}<dd class="myerrors">{{ form.screen.errors }}</dd>{% endif %}
-
-			</dl>
-			<dl>
-
-    			<dt>{{ form.file_up.label_tag }}</dt>
-    			<dd>{{ form.file_up }}</dd>
-    			{% if form.file_up.help_text %}<dd>{{ form.topic2.help_text }}</dd>{% endif %}
-    			{% if form.file_up.errors %}<dd class="myerrors">{{ form.topic2.errors }}</dd>{% endif %}
-
-			</dl>
-
-          <input type="submit" value="Yukle" />
-        </form>
-      </p><br />
-      <p>Açıklamalar falan felan işte</p>
-
+<form action="/tema/ekle/" method="post" enctype="multipart/form-data">
+    {% for field in form %}
+        <dl>
+            <dt><label for="{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
+            <dd>{{ field }}</dd>
+        </dl>
+    {% endfor %}
+    <input type="submit" value="Yükle" />
+</form>
 {% endblock %}

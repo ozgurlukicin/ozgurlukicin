@@ -79,6 +79,9 @@ class Post(models.Model):
     def get_email_id(self):
         return '<%s.%s@%s>' % (self.id, self.author.username, FORUM_FROM_EMAIL.split('@')[1])
 
+    def get_abuse_report_url(self):
+        return "/forum/raporla/%s/" % self.id
+
     class Admin:
         list_display = ('id', 'topic', 'author', 'created', 'ip')
 
@@ -294,6 +297,7 @@ class Category(models.Model):
 class AbuseReport(models.Model):
     post = models.ForeignKey(Post, verbose_name='İleti')
     submitter = models.ForeignKey(User, verbose_name='Raporlayan kullanıcı')
+    reason = models.TextField(max_length=512, blank=False, verbose_name="Sebep")
 
     class Admin:
         list_display = ('post', 'submitter')

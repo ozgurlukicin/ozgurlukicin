@@ -12,8 +12,6 @@ from django.db.models import signals
 from django.dispatch import dispatcher
 from oi.tema.signals import rm_thumb,crt_thumb,rmv_files
 
-from oi.comments.moderation import CommentModerator, moderator
-
 
 class Category(models.Model):
     """ The categories of thing that are published they maybe
@@ -52,7 +50,6 @@ class Category(models.Model):
     #get_possible_parents=staticmethod(get_possible_parents)
 
     class Admin:
-
         list_display = ('cat_name','parent_id','update')
         list_filter = ['update']
         search_fields = ['cat_name']
@@ -62,7 +59,7 @@ class Category(models.Model):
         verbose_name="Kategori"
         verbose_name_plural="Kategoriler"
 
-class SanatScreen(models.Model):
+class Thumbnail(models.Model):
     "It is modified version because we should change the upload directory ???"
 
     file=models.FileField(upload_to="upload/tema/images/",blank=True)
@@ -75,15 +72,14 @@ class SanatScreen(models.Model):
         return self.file
 
     class Admin:
-
         pass
 
 # when we add or delete a thumb it is needed
-dispatcher.connect(crt_thumb,signal=signals.post_save, sender=SanatScreen)
-dispatcher.connect(rm_thumb,signal=signals.post_delete, sender=SanatScreen)
+dispatcher.connect(crt_thumb,signal=signals.post_save, sender=Thumbnail)
+dispatcher.connect(rm_thumb,signal=signals.post_delete, sender=Thumbnail)
 
 
-class ArsivDosya(models.Model):
+class ArchiveFile(models.Model):
     """ The data file that includes the archives for templates and etc"""
     a_file=models.FileField(upload_to="upload/tema/dosya/")
     #download=models.IntegerField(verbose_name="İndirilme",default=0)
@@ -94,15 +90,15 @@ class ArsivDosya(models.Model):
     def __str__(self):
         return self.a_file
 
-class Dosya(models.Model):
+class File(models.Model):
     """ The catual file that will be downloaded and shown"""
 
     parent_cat=models.ForeignKey(Category,verbose_name="Kategori")
     licence=models.ForeignKey(License,verbose_name="Lisans")
     user=models.ForeignKey(User,verbose_name="Gönderen")
 
-    screens=models.ManyToManyField(SanatScreen,verbose_name="Görüntüler",blank=True)
-    file_data=models.ManyToManyField(ArsivDosya,verbose_name="İçerik Dosyası",blank=True)
+    screens=models.ManyToManyField(Thumbnail,related_name="screen",verbose_name="Görüntüler",blank=True)
+    file_data=models.ManyToManyField(ArchiveFile,verbose_name="İçerik Dosyası",blank=True)
 
     name=models.CharField(max_length=100,unique=True,verbose_name="Dosya ismi")
     description=models.TextField(verbose_name="Açıklama")
@@ -110,8 +106,6 @@ class Dosya(models.Model):
     state=models.BooleanField(verbose_name="Yayınla",default=False)
     counter= models.IntegerField(verbose_name="Sayaç",default=0)
     update=models.DateField(auto_now=True,verbose_name="Yayın Tarihi")
-
-    #added later ...
     enable_comments = models.BooleanField()
 
     def __str__(self):
@@ -126,22 +120,10 @@ class Dosya(models.Model):
         list_filter=['update']
         ordering=['-update']
 
-
     class Meta:
-
         verbose_name="Sanat Dosya"
         verbose_name_plural="Sanat Dosyaları"
         permissions = (
-                       ("can_upload_tema", "Can upload tema files"),
-                            )
-dispatcher.connect(rmv_files,signal=signals.pre_delete, sender=Dosya)
-
-#dont forget to disable it before uploading pff
-#class DosyaCommentModerator(CommentModerator):
-#    """ Dosya models class Comment moderation""",
-#    akismet = False
-#    email_notification = False
-#    enable_field = 'enable_comments'
-
-#register it
-#moderator.register(Dosya, DosyaCommentModerator)
+                ("can_upload_tema", "Can upload tema files"),
+                )
+dispatcher.connect(rmv_files,signal=signals.pre_delete, sender=File)

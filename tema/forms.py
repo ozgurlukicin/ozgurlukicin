@@ -12,7 +12,7 @@ import zipfile
 
 from django import newforms as forms
 import settings
-from oi.tema.models import  Dosya,SanatScreen,Category,License,ArsivDosya
+from oi.tema.models import  File,Thumbnail,Category,License,ArchiveFile
 import Image
 from django.shortcuts import get_object_or_404
 
@@ -120,10 +120,10 @@ class TemaUploadForm(forms.Form):
     description=forms.CharField(label="Açıklama",required=True,max_length=100,widget=forms.Textarea())
 
     #file upload kısımları
-    screen=ScreenField(widget=forms.FileInput(),required=True, label="Photo",
-            help_text="Yüklenecek resim (en fazla %s kilobayt), izin verilenler (jpeg,png,gif)"% (settings.MAX_PHOTO_UPLOAD_SIZE))
+    screen=ScreenField(widget=forms.FileInput(),required=True, label="Ekran Görüntüsü",
+            help_text="En fazla %sKB boyutunda bir jpeg, png veya gif resmi olabilir"% (settings.MAX_PHOTO_UPLOAD_SIZE))
     file_up=FileUploadField(widget=forms.FileInput(),required=True, label="Dosya",
-            help_text="Yüklenecek dosya (en fazla %s kilobayt), izin verilenler (zip)"% (settings.MAX_FILE_UPLOAD))
+            help_text="En fazla %sKB, olabilir zip biçiminde"% (settings.MAX_FILE_UPLOAD))
 
     def __init__(self,*args,**kwargs):
         """ Collect licenses and categories"""
@@ -140,19 +140,19 @@ class TemaUploadForm(forms.Form):
         description=self.cleaned_data['description']
         screen=self.cleaned_data['screen']
         user=screen['user']
-        dosya=self.cleaned_data['file_up']
+        file=self.cleaned_data['file_up']
 
-        s=SanatScreen()
+        s=Thumbnail()
         s.save_file_file(screen['filename'],screen['content'])
 
         #buraya arsiv dosyası işlemi gelecek
-        a=ArsivDosya()
-        a.save_a_file_file(dosya['filename'],dosya['content'])
+        a=ArchiveFile()
+        a.save_a_file_file(file['filename'],file['content'])
 
         cat=get_object_or_404(Category, pk=parent_category)
         li=get_object_or_404(License, pk= license)
 
-        d=Dosya(parent_cat=cat,licence=li,user=user,name=name,description=description,enable_comments=True)
+        d=File(parent_cat=cat,licence=li,user=user,name=name,description=description,enable_comments=True)
         d.save()
         d.screens.add(s)
         d.file_data.add(a)

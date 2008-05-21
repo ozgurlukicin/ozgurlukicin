@@ -1,0 +1,43 @@
+{% extends "forum/forum_base.html" %}
+{% load library %}
+{% block extrahead %}
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
+{% endblock %}
+{% block content %}
+<div class="forum_address">
+    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; İleti Raporla</div>
+</div>
+<form action="" method="post">
+{% for field in form %}
+    <dl>
+        <dt><label for="{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
+        <dd>{{ field|safe }}</dd>
+    </dl>
+{% endfor %}
+<input type="submit" value="Raporla" />
+</form>
+<div class="post_base" {% if post.hidden %}style="opacity: 0.5;"{% endif %}>
+    <div class="post_profile">
+        <span style="font-weight: bold; font-size: 14px;">{{ post.author }}</span>{% if post.author.is_staff %}<span><br />Forum Yöneticisi{% endif %}</span><br/><br/>
+        <img src="{{ post.author.get_profile.avatar.get_file_url }}" alt="avatar" /><br/>
+        {% if perms.forum.can_see_post_ip %}({{ post.ip }})<br/>{% endif %}
+        Kayıt Tarihi: {{ post.author.date_joined|date:"d-m-Y" }}<br/>
+        <a href="/kullanici/profil/{{ post.author }}"><img src="/media/dijital/img/forum/bilgi.jpg" alt="bilgi" border="0" /></a><br/>
+    </div>
+    <div class="post_message">
+        <div class="post_message_top">
+            <div class="post_message_top_icon">
+                <a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="ileti adresi" border="0" /></a>
+            </div>
+            <div class="post_message_top_date">
+                {{ post.created|date:"d-m-Y H:i" }}
+            </div>
+        </div>
+        <div class="post_message_content">
+            <div class="post_message_text">{{ post.text|renderbbcode|safe }}</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block sidebartop %}{% endblock %}

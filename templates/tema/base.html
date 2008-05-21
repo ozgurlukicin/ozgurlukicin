@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{% block title %}{% endblock %}Tema - Özgürlük için...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="imagetoolbar" content="no" />
+<link rel="shortcut icon" href="/media/img/fav.png" />
+<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Anasayfa" href="/rss" />
+<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Haberler" href="/rss/haber" />
+<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Nasıl" href="/rss/nasil" />
+<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - İlk Adımlar" href="/rss/ia" />
+<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Paketler" href="/rss/paket" />
+<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Oyunlar" href="/rss/oyun" />
+<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Gezegen" href="/rss/gezegen/" />
+
+<style type="text/css" media="screen">@import url('/media/css/tema.css');</style>
+<style type="text/css" media="screen">@import url('/media/dijital/css/ozgurlukicin.css');</style>
+
+<script type="text/javascript" src="/media/dijital/js/base.js"></script>
+<!--[if lt IE 7.]>
+<script defer type="text/javascript" src="/media/js/pngfix.js"></script>
+<![endif]-->
+{% block extrahead %}{% endblock %}
+</head>
+<body{% block extrabody %}{% endblock %}>
+{% block header_menu %}
+{% endblock %}
+
+{% block ust_menu %}
+{% endblock %}
+
+<div id="{% block pagetype %}page{% endblock %}">
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <div id="sidebar">
+        {% block sidebartop %}
+        <div class="sidebar_box">
+            <div class="sidebar_top">&nbsp;</div>
+            <div class="sidebar_middle">
+                <h2>Kullanıcı Kutusu</h2>
+                {% if not user.is_authenticated %}
+                    <form method="post" action="/kullanici/giris/">
+                        <input type="text" id="userbox_username" name="username" size="18" class="vTextField required" value="" maxlength="20" /><br />
+                        <input type="password" id="userbox_password" name="password" size="18" class="vPasswordField required" value="" maxlength="30" /><br />
+                        <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+                        <input type="submit" value="Giriş" />
+                    </form>
+                    <p><a href="/kullanici/kayit/">Kayıt ol</a> | <a class="sari"  href="/kullanici/kayip/">Kayıp parola</a></p>
+                {% else %}
+                    <p>Merhaba <b>{{ user.username }}</b>!
+                    <br />Profil sayfanıza <a href="/kullanici/profil/{{ request.user.username }}/">buradan</a> ulaşabilir ya da <a 
+class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.</p>
+                {% endif %}
+            </div>
+            <div class="sidebar_bottom">&nbsp;</div>
+        </div>
+        <div class="sidebar_box">
+            <div class="sidebar_top">&nbsp;</div>
+            <div class="sidebar_middle">
+                <h2>Ara</h2>
+                <form method="post" action="/arama/">
+                    <input type="text" name="term" size="20" /><br />
+                    <input type="submit" value="Bul" />
+                </form>
+            </div>
+            <div class="sidebar_bottom">&nbsp;</div>
+        </div>
+
+        <div class="sidebar_box">
+            <div class="sidebar_top">&nbsp;</div>
+            <div class="sidebar_middle">
+                <h2>Özgürlükİçin OOXML'e Karşı</h2>
+                <a href="/ooxml/"><img src="/media/ooxml/ooxmlekarsi.png" alt="Özgürlükİçin OOXML'e karşı" /></a>
+                <p><a href="/ooxml/">"Özgürlükİçin OOXML'e Hayır!"</a> diyoruz. <a href="/ooxml_banner/">Banner ve düğmelerimizi</a> kullanarak kampanyamıza katkıda bulunabilir ve manifestomuzu destekleyerek siz de OOXML'e hayır diyebilirsiniz.</p>
+                <div id="ooxmlbar" style="width:210px;height:20px;border:1px #6992A6 solid;"><div id="ooxmlbar_completed" style="background-color:#51798E;height:100%;float:left;width:{{ petitionpercent }}%;">&nbsp;</div></div>
+                <p style="font-weight:bold;">Destekleyenler: {{ numberofpetitioners }} / 3000</p>
+            </div>
+            <div class="sidebar_bottom">&nbsp;</div>
+        </div>
+
+        <div class="sidebar_box">
+            <div class="sidebar_top">&nbsp;</div>
+            <div class="sidebar_middle">
+                <h2>Özgürlükiçin'i destekleyin</h2>
+                <a href="/banner/"><img src="/media/img/pardus_ozgurluk.png" alt="Özgürlükİçin Pardus" /></a>
+                <p>Pardus'un tanıtımına katkıda bulunmak isteyenler için Özgürlükiçin düğmeleri yayınlandı. Sitenizde, blogunuzda yayınlamak için siz de <a href="/banner/">hazır kodlarımızdan</a> yararlanabilirsiniz.</p>
+            </div>
+            <div class="sidebar_bottom">&nbsp;</div>
+        </div>
+        {% block alt_resim %}
+        {% endblock %}
+
+        {% endblock %}
+        {% block sidebar %}
+        {% endblock %}
+        {% block sidebarbottom %}
+        {% endblock %}
+    </div>
+    <div id="footer">
+        {% block footer %}
+        {% endblock %}
+    </div>
+    {% include "footer.html" %}
+</div>
+</body>
+</html>
