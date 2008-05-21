@@ -656,10 +656,22 @@ def report_abuse(request,post_id):
                 # now send mail to staff
                 email_subject = "Özgürlükİçin Forum - İleti Şikayeti"
                 email_body ="""
-%(topic)s başlıklı konudaki bir ileti %(user)s rumuzlu kullanıcı tarafından şikayet edildi.
-İletiyi görmek için buraya tıklayın: %(link)s
+%(topic)s başlıklı konudaki bir ileti şikayet edildi.
+İletiyi forumda görmek için buraya tıklayın: %(link)s
+
+İletinin içeriği buydu (%(sender)s tarafından yazılmış):
+%(message)s
+Şikayet metni buydu (%(reporter)s tarafından şikayet edilmiş):
+%(reason)s
 """
-                email_dict = { "topic":post.topic.title, "user":request.user.username, "link":WEB_URL + post.get_absolute_url() }
+                email_dict = {
+                        "topic":post.topic.title,
+                        "reporter":request.user.username,
+                        "link":WEB_URL + post.get_absolute_url(),
+                        "message":post.text,
+                        "reason":report.reason,
+                        "sender":post.author.username,
+                        }
                 send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, [ABUSE_MAIL_LIST], fail_silently=True)
                 return render_response(request, 'forum/forum_done.html', {
                     "message": "İleti şikayetiniz ilgililere ulaştırılmıştır. Teşekkür Ederiz.",
