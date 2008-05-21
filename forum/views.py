@@ -661,7 +661,10 @@ def report_abuse(request,post_id):
 """
                 email_dict = { "topic":post.topic.title, "user":request.user.username, "link":WEB_URL + post.get_absolute_url() }
                 send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, [ABUSE_MAIL_LIST], fail_silently=True)
-                return render_response(request, 'forum/forum_done.html', {"message":"İleti şikayetiniz ilgililere ulaştırılmıştır. Teşekkür Ederiz."})
+                return render_response(request, 'forum/forum_done.html', {
+                    "message": "İleti şikayetiniz ilgililere ulaştırılmıştır. Teşekkür Ederiz.",
+                    "back": post.get_absolute_url()
+                    })
         else:
             form = AbuseForm(auto_id=True)
 
