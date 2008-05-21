@@ -528,14 +528,15 @@ def move(request, forum_slug, topic_id):
         form = MoveForm(auto_id=True)
         return render_response(request, 'forum/move.html', locals())
 
-@login_required
+@permission_required('forum.can_hide_post', login_url="/kullanici/giris/")
 def hide(request, forum_slug, topic_id, post_id=False):
-    forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
 
-    if request.user.has_perm('forum.can_hide_post') and post_id:
+    if post_id:
         post = get_object_or_404(Post, pk=post_id)
 
+        if post.topic.hidden:
+            return render_response(request, "forum/forum_error.html", { "message":"Konu gizli olduğu için mesajı gösteremezsiniz." })
         if post.hidden:
             post.hidden = 0
         else:
@@ -544,53 +545,52 @@ def hide(request, forum_slug, topic_id, post_id=False):
         post.save()
 
         return HttpResponseRedirect(topic.get_absolute_url())
-    elif request.user.has_perm('forum.can_hide_topic') and not post_id:
+    else:
         if topic.hidden:
             topic.hidden = 0
+            # we also want to hide the posts
+            for post in topic.post_set.all():
+                post.hidden = 0
+                post.save()
         else:
             topic.hidden = 1
+            for post in topic.post_set.all():
+                post.hidden = 1
+                post.save()
 
         topic.save()
 
-        return HttpResponseRedirect(forum.get_absolute_url())
-    else:
-        return HttpResponseServerError # FIXME: Given an error message
+        return HttpResponseRedirect(topic.forum.get_absolute_url())
 
-@login_required
+@permission_required('forum.can_stick_topic', login_url="/kullanici/giris/")
 def stick(request, forum_slug, topic_id):
-    forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
 
-    if request.user.has_perm('forum.can_stick_stopic') and not topic.sticky:
-        topic.sticky = 1
-        topic.save()
-
-        return HttpResponseRedirect(forum.get_absolute_url())
-    elif request.user.has_perm('forum.can_stick_topic') and topic.sticky:
+    if topic.sticky:
         topic.sticky = 0
         topic.save()
 
-        return HttpResponseRedirect(forum.get_absolute_url())
+        return HttpResponseRedirect(topic.forum.get_absolute_url())
     else:
-        return HttpResponseServerError # FIXME: Give an error message
-
-@login_required
-def lock(request, forum_slug, topic_id):
-    forum = get_object_or_404(Forum, slug=forum_slug)
-    topic = get_object_or_404(Topic, pk=topic_id)
-
-    if request.user.has_perm('forum.can_lock_topic') and not topic.locked:
-        topic.locked = 1
+        topic.sticky = 1
         topic.save()
 
-        return HttpResponseRedirect(forum.get_absolute_url())
-    elif request.user.has_perm('forum.can_lock_topic') and topic.locked:
+        return HttpResponseRedirect(topic.forum.get_absolute_url())
+
+@permission_required('forum.can_lock_topic', login_url="/kullanici/giris/")
+def lock(request, forum_slug, topic_id):
+    topic = get_object_or_404(Topic, pk=topic_id)
+
+    if topic.locked:
         topic.locked = 0
         topic.save()
 
-        return HttpResponseRedirect(forum.get_absolute_url())
+        return HttpResponseRedirect(topic.forum.get_absolute_url())
     else:
-        return HttpResponseServerError # FIXME: Give an error message
+        topic.locked = 1
+        topic.save()
+
+        return HttpResponseRedirect(topic.forum.get_absolute_url())
 
 def flood_control(request):
     if 'flood_control' in request.session and ((datetime.now() - request.session['flood_control']).seconds < FLOOD_TIMEOUT):
