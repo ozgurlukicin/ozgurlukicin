@@ -177,14 +177,14 @@ def user_register(request):
                     'user': user.username,
                     'link': 'http://www.ozgurlukicin.com/kullanici/onay/%s/%s' % (form.cleaned_data['username'], activation_key)}
 
-            email_subject = u"Ozgurlukicin.com Kullanıcı Hesabı, %(user)s"
+            email_subject = u"Özgurlükİçin.com Kullanıcı Hesabı, %(user)s"
             email_body = u"""Merhaba!
-%(date)s %(hour)s tarihinde %(ip_addr)s ip adresli bilgisayardan yaptiginiz Ozgurlukicin.com kullanici hesabinizi onaylamak icin lutfen asagidaki baglantiyi 48 saat icerisinde ziyaret ediniz.
+%(date)s %(hour)s tarihinde %(ip_addr)s IP adresli bilgisayardan yaptığınız Özgurlukİçin.com kullanıcı hesabınızı onaylamak için lutfen asağıdaki bağlantıyı 48 saat içerisinde ziyaret ediniz.
 
 %(link)s
 
-Tesekkurler,
-Ozgurlukicin.com"""
+Teşekkürler,
+Özgurlukİçin.com"""
 
             email_to = form.cleaned_data['email']
 
