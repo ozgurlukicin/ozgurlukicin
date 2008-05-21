@@ -11,6 +11,7 @@ from django.http import HttpResponseRedirect, HttpResponseServerError, HttpRespo
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
+from django.template.defaultfilters import striptags
 from django.views.generic.list_detail import object_list
 
 from oi.forum.settings import *
@@ -668,7 +669,7 @@ def report_abuse(request,post_id):
                         "topic":post.topic.title,
                         "reporter":request.user.username,
                         "link":WEB_URL + post.get_absolute_url(),
-                        "message":post.text,
+                        "message":striptags(render_bbcode(post.text)),
                         "reason":report.reason,
                         "sender":post.author.username,
                         }
