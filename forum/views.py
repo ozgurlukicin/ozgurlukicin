@@ -640,24 +640,32 @@ def delete_post(request,forum_slug,topic_id, post_id):
 
 @login_required
 def report_abuse(request,post_id):
-    post = get_object_or_404(Post, pk=post_id)
+    post = get_object_or_404(Post, pk=post_id, hidden=False)
+    if post.topic.locked:
+        return render_response(request, "forum/forum_error.html", {"message":"Bu konu kilitlenmiş olduğu için raporlanamaz."})
 
     try:
         AbuseReport.objects.get(post=post_id)
         return render_response(request, "forum/forum_error.html", {"message":"Bu ileti daha önce raporlanmış."})
     except ObjectDoesNotExist:
-        #TODO: take reason from POST
-        report = AbuseReport(post=post, submitter=request.user)
-        report.save()
-        # now send mail to staff
-        email_subject = "Özgürlükİçin Forum - İleti Şikayeti"
-        email_body ="""
+        if request.method == 'POST':
+            form = AbuseForm(request.POST.copy())
+            if form.is_valid():
+                report = AbuseReport(post=post, submitter=request.user, reason=form.cleaned_data["reason"])
+                report.save()
+                # now send mail to staff
+                email_subject = "Özgürlükİçin Forum - İleti Şikayeti"
+                email_body ="""
 %(topic)s başlıklı konudaki bir ileti %(user)s rumuzlu kullanıcı tarafından şikayet edildi.
 İletiyi görmek için buraya tıklayın: %(link)s
 """
-        email_dict = { "topic":post.topic.title, "user":request.user.username, "link":WEB_URL + post.get_absolute_url() }
-        send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, [ABUSE_MAIL_LIST], fail_silently=True)
-        return render_response(request, 'forum/forum_done.html', {"message":"İleti şikayetiniz ilgililere ulaştırılmıştır. Teşekkür Ederiz."})
+                email_dict = { "topic":post.topic.title, "user":request.user.username, "link":WEB_URL + post.get_absolute_url() }
+                send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, [ABUSE_MAIL_LIST], fail_silently=True)
+                return render_response(request, 'forum/forum_done.html', {"message":"İleti şikayetiniz ilgililere ulaştırılmıştır. Teşekkür Ederiz."})
+        else:
+            form = AbuseForm(auto_id=True)
+
+        return render_response(request, "forum/report.html", locals())
 
 @permission_required('forum.can_change_abusereport', login_url="/kullanici/giris/")
 def list_abuse(request):
