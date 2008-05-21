@@ -670,7 +670,7 @@ def report_abuse(request,post_id):
                         "reporter":request.user.username,
                         "link":WEB_URL + post.get_absolute_url(),
                         "message":striptags(render_bbcode(post.text)),
-                        "reason":report.reason,
+                        "reason":striptags(report.reason),
                         "sender":post.author.username,
                         }
                 send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, [ABUSE_MAIL_LIST], fail_silently=True)
