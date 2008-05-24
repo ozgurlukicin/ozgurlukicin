@@ -15,7 +15,7 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
 
-from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_URL, WEB_URL, PROFILE_EDIT_URL
+from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_URL, WEB_URL, PROFILE_EDIT_URL, WEB_URL
 
 # Model object for followed topics
 from oi.forum.models import WatchList
@@ -175,16 +175,16 @@ def user_register(request):
                     'hour': hour,
                     'ip_addr': request.META['REMOTE_ADDR'],
                     'user': user.username,
-                    'link': 'http://www.ozgurlukicin.com/kullanici/onay/%s/%s' % (form.cleaned_data['username'], activation_key)}
+                    'link': '%s/kullanici/onay/%s/%s' % (WEB_URL, form.cleaned_data['username'], activation_key)}
 
-            email_subject = u"Ozgurlukicin.com Kullanıcı Hesabı, %(user)s"
+            email_subject = u"Özgurlükİçin.com Kullanıcı Hesabı, %(user)s"
             email_body = u"""Merhaba!
-%(date)s %(hour)s tarihinde %(ip_addr)s ip adresli bilgisayardan yaptiginiz Ozgurlukicin.com kullanici hesabinizi onaylamak icin lutfen asagidaki baglantiyi 48 saat icerisinde ziyaret ediniz.
+%(date)s %(hour)s tarihinde %(ip_addr)s IP adresli bilgisayardan yaptığınız Özgurlukİçin.com kullanıcı hesabınızı onaylamak için lutfen asağıdaki bağlantıyı 48 saat içerisinde ziyaret ediniz.
 
 %(link)s
 
-Tesekkurler,
-Ozgurlukicin.com"""
+Teşekkürler,
+Özgurlukİçin.com"""
 
             email_to = form.cleaned_data['email']
 

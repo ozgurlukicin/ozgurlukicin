@@ -282,7 +282,6 @@ div.topic_news_box:hover {
 div.topic_news_box h2 {
     font-size: 14px;
     font-weight: bold;
-    text-decoration: underline;
 }
 div.topic_news_box a:hover,
 div.topic_news_box a:visited,

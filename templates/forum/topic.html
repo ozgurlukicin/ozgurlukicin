@@ -40,7 +40,7 @@
             <div class="post_message_top_date">
                 {{ post.created|date:"d-m-Y H:i" }}
             </div>
-            {% if request.user.is_authenticated %}
+            {% if request.user.is_authenticated and not topic.locked %}
             <div class="post_message_top_button">
                 <a href="{{ post.get_abuse_report_url }}"><img src="/media/dijital/img/forum/exclamation.gif" alt="raporla" title="Kurallara uymayan iletiyi şikayet et" border="0" /></a>
             </div>

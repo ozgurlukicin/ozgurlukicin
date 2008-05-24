@@ -195,13 +195,12 @@ def follow(request, forum_slug, topic_id):
 
 @login_required
 def reply(request, forum_slug, topic_id, quote_id=False):
-    forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
 
     posts = topic.post_set.order_by('-created')[:POSTS_PER_PAGE]
 
-    if forum.locked or topic.locked:
-        return HttpResponse("Forum or topic is locked") #FIXME: Give an error message
+    if topic.forum.locked or topic.locked:
+        return render_response(request, "forum/forum_error.html", {"message": "forum ya da başlık kilitli"})
 
     if request.method == 'POST':
         form = PostForm(request.POST.copy())
