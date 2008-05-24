@@ -177,7 +177,7 @@ def user_register(request):
                     'user': user.username,
                     'link': '%s/kullanici/onay/%s/%s' % (WEB_URL, form.cleaned_data['username'], activation_key)}
 
-            email_subject = u"Özgurlükİçin.com Kullanıcı Hesabı, %(user)s"
+            email_subject = u"Özgürlükİçin.com Kullanıcı Hesabı, %(user)s"
             email_body = u"""Merhaba!
 %(date)s %(hour)s tarihinde %(ip_addr)s IP adresli bilgisayardan yaptığınız Özgurlukİçin.com kullanıcı hesabınızı onaylamak için lutfen asağıdaki bağlantıyı 48 saat içerisinde ziyaret ediniz.
 
@@ -242,9 +242,9 @@ def lost_password(request):
                          'user': form.cleaned_data['username'],
                          'link': 'http://www.ozgurlukicin.com/kullanici/kayip/degistir/%s' % key}
 
-           email_subject = u"Ozgurlukicin.com Kullanıcı Parolası"
+           email_subject = u"Özgürlükİçin.com Kullanıcı Parolası"
            email_body = u"""Merhaba!
-%(date)s %(hour)s tarihinde %(ip)s ip adresli bilgisayardan kullanici parola sifirlama istegi gonderildi. Lutfen parolanizi degistirmek icin asagidaki baglantiyi 24 saat icerisinde ziyaret edin.
+%(date)s %(hour)s tarihinde %(ip)s IP adresli bilgisayardan kullanıcı parola sıfırlama isteği gönderildi. Lütfen parolanızı değiştirmek için aşağıdaki bağlantıyı 24 saat içerisinde ziyaret edin.
 
 %(link)s"""
            email_to = form.cleaned_data['email']
