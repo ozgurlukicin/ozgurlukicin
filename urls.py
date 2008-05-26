@@ -11,7 +11,6 @@ from django.contrib.comments.models import FreeComment
 from oi.settings import WEB_URL, DOCUMENT_ROOT, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, NEWS_PER_PAGE, TAG_PER_PAGE, HOWTO_PER_PAGE
 from oi.st.models import Package, Game, FS, News, Tag, HowTo
 from oi.seminar.models import Seminar
-from oi.petition.models import Petitioner
 from oi.st.feeds import *
 
 rss_dict = {
@@ -37,10 +36,6 @@ package_dict = {
                 'template_name': 'package/package_main.html',
                 'paginate_by': PACKAGE_PER_PAGE,
                 'template_object_name': 'package',
-                'extra_context': {
-                    'numberofpetitioners': Petitioner.objects.filter(is_active=True).count(),
-                    'petitionpercent': Petitioner.objects.filter(is_active=True).count() / 30,
-                    },
                }
 
 game_dict = {
@@ -48,10 +43,6 @@ game_dict = {
              'template_name': 'game/game_main.html',
              'paginate_by': GAME_PER_PAGE,
              'template_object_name': 'game',
-             'extra_context': {
-                 'numberofpetitioners': Petitioner.objects.filter(is_active=True).count(),
-                 'petitionpercent': Petitioner.objects.filter(is_active=True).count() / 30,
-                 },
             }
 
 fs_dict = {
@@ -59,10 +50,6 @@ fs_dict = {
            'template_name': 'fs/fs_main.html',
            'paginate_by': FS_PER_PAGE,
            'template_object_name': 'fs',
-           'extra_context': {
-               'numberofpetitioners': Petitioner.objects.filter(is_active=True).count(),
-               'petitionpercent': Petitioner.objects.filter(is_active=True).count() / 30,
-               },
           }
 
 howto_dict = {
@@ -72,8 +59,6 @@ howto_dict = {
               'template_object_name': 'howto',
               'extra_context': {
                   'firststep': FS.objects.filter(status=1).order_by('order')[:10],
-                  'numberofpetitioners': Petitioner.objects.filter(is_active=True).count(),
-                  'petitionpercent': Petitioner.objects.filter(is_active=True).count() / 30,
                   },
              }
 
@@ -84,8 +69,6 @@ news_dict = {
              'template_object_name': 'news',
              'extra_context': {
                  'seminar': Seminar.objects.filter(status=1).order_by('-date'),
-                 'numberofpetitioners': Petitioner.objects.filter(is_active=True).count(),
-                 'petitionpercent': Petitioner.objects.filter(is_active=True).count() / 30,
                  }
             }
 

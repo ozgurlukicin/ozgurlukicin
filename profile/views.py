@@ -24,7 +24,6 @@ from oi.profile.models import Avatar, Profile, LostPassword
 from oi.profile.forms import RegisterForm, ProfileEditForm, LostPasswordForm, ChangePasswordForm, ResetPasswordForm
 from oi.profile.settings import googleMapsApiKey
 from oi.st.wrappers import render_response
-from oi.petition.models import Petitioner
 
 @login_required
 def followed_topics(request):
@@ -52,8 +51,6 @@ def user_dashboard(request):
 
 @login_required
 def user_profile_edit(request):
-    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
-    petitionpercent = numberofpetitioners / 30
     u = request.user
     if request.method == 'POST':
         form = ProfileEditForm(request.POST)
@@ -81,16 +78,12 @@ def user_profile_edit(request):
             return render_response(request, 'user/profile_edit.html', {
                 "profile_updated": True,
                 "apikey": googleMapsApiKey,
-                "numberofpetitioners": numberofpetitioners,
-                "petitionpercent": petitionpercent,
                 'form': form,
                 })
         else:
             return render_response(request, 'user/profile_edit.html', {
                 "form": form,
                 "apikey": googleMapsApiKey,
-                "numberofpetitioners": numberofpetitioners,
-                "petitionpercent": petitionpercent,
                 })
     else:
         # convert returned value "day/month/year"
@@ -122,15 +115,11 @@ def user_profile_edit(request):
         return render_response(request, 'user/profile_edit.html', {
             "form": form,
             "apikey": googleMapsApiKey,
-            "numberofpetitioners": numberofpetitioners,
-            "petitionpercent": petitionpercent,
             })
 
 @login_required
 def user_profile(request, name):
     info = get_object_or_404(User, username=name)
-    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
-    petitionpercent = numberofpetitioners / 30
     apikey = googleMapsApiKey
     if not info.is_active:
         del info
@@ -260,8 +249,6 @@ def lost_password(request):
 @login_required
 def change_password(request):
     u = request.user
-    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
-    petitionpercent = numberofpetitioners / 30
     password_changed = False
 
     if request.method == 'POST':
@@ -277,8 +264,6 @@ def change_password(request):
 
     return render_response(request, 'user/password.html', {
         "form": form,
-        "numberofpetitioners": numberofpetitioners,
-        "petitionpercent": petitionpercent,
         "password_changed": password_changed,
         })
 

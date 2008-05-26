@@ -22,7 +22,6 @@ from oi.flatpages.models import FlatPage
 #for comments
 from django.contrib.auth.decorators import login_required
 from oi.forum.models import Forum,Topic,Post
-from oi.petition.models import Petitioner
 from oi.forum.views import flood_control
 from django.http import HttpResponseRedirect
 
@@ -34,14 +33,10 @@ def home(request):
     packages = Package.objects.filter(status=1).order_by('-update')[:PACKAGES_IN_HOMEPAGE]
     games = Game.objects.filter(status=1).order_by('-update')[:GAMES_IN_HOMEPAGE]
     howtos = HowTo.objects.filter(status=1).order_by('-update')[:HOWTOS_IN_HOMEPAGE]
-    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
-    petitionpercent = numberofpetitioners / 30
     return render_response(request, 'home.html', locals())
 
 def fs_detail(request, slug):
     fs = get_object_or_404(FS, slug=slug)
-    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
-    petitionpercent = numberofpetitioners / 30
     return render_response(request, 'fs/fs_detail.html', locals())
 
 def fs_printable(request, slug):
@@ -62,8 +57,6 @@ def howto_detail(request, slug):
         comment_url = topic.get_latest_post_url()
     except:
         pass
-    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
-    petitionpercent = numberofpetitioners / 30
     return render_response(request, 'howto/howto_detail.html', locals())
 
 def howto_printable(request, slug):
@@ -105,8 +98,6 @@ def news_detail(request, slug):
         comment_url = topic.get_latest_post_url()
     except:
         pass
-    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
-    petitionpercent = numberofpetitioners / 30
     return render_response(request, 'news/news_detail.html', locals())
 
 def news_printable(request, slug):
@@ -148,22 +139,16 @@ def tag_detail(request, tag):
 
     except Tag.DoesNotExist:
         raise Http404
-    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
-    petitionpercent = numberofpetitioners / 30
     return render_response(request, 'tag/tag_detail.html', locals())
 
 def download(request):
     version = PardusVersion.objects.filter(status=1).order_by('-number')[:1][0]
     install_mirrors = PardusMirror.objects.filter(status=1, type=1).order_by('order')
     live_mirrors = PardusMirror.objects.filter(status=1, type=2).order_by('order')
-    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
-    petitionpercent = numberofpetitioners / 30
     return render_response(request, 'download/download.html', locals())
 
 def download_detail_releasenotes(request, version):
     releasenote = get_object_or_404(PardusVersion, number=version).releasenote
-    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
-    petitionpercent = numberofpetitioners / 30
     return render_response(request, 'download/download_relnotes.html', locals())
 
 def videobox(request, video):
@@ -200,8 +185,6 @@ def search(request):
     else:
         pass
 
-    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
-    petitionpercent = numberofpetitioners / 30
     return render_response(request, 'search.html', locals())
 
 @login_required
