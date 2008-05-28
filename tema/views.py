@@ -17,7 +17,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 
-def list_items(request, sort_by):
+def themeitem_list(request, sort_by):
     "List approved theme items"
 
     if sort_by == "begenilen":
@@ -30,7 +30,7 @@ def list_items(request, sort_by):
     params={
             "queryset": themeItems,
             "paginate_by": THEME_ITEM_PER_PAGE,
-            "template_name": "tema/main.html",
+            "template_name": "tema/themeitem_list.html",
             }
     return object_list(request, **params)
 
@@ -39,19 +39,19 @@ def list_category(request, category):
     "List theme items by category"
 
     category = get_object_or_404(Category, slug=category)
-    themeItems = Category.themeitem_set.filter(approved=True)
+    themeItems = category.themeitem_set.filter(approved=True)
 
     params={
             'queryset': themeItems,
             'paginate_by': THEME_ITEM_PER_PAGE,
-            'template_name': 'tema/main.html',
+            'template_name': 'tema/themeitem_list.html',
             }
     return object_list(request,**params)
 
 
 def themeitem_detail(request, item_id):
-    theme_item = get_object_or_404(ThemeItem, pk=item_id)
-    if not theme_item.approved and not request.user == theme_item.author:
+    object = get_object_or_404(ThemeItem, pk=item_id)
+    if not object.approved and not request.user == object.author:
         return render_to_response("404.html")
 
     return render_to_response('tema/themeitem_detail.html', locals())
@@ -65,7 +65,7 @@ def list_user(request, username):
     params={
             'queryset': themeItems,
             'paginate_by': THEME_ITEM_PER_PAGE,
-            'template_name': 'tema/main.html',
+            'template_name': 'tema/themeitem_list.html',
             }
 
     return object_list(request, **params)
@@ -77,20 +77,20 @@ def vote(request, item_id, rating):
     Vote a theme item.
     If user has already voted, then existing vote should be changed
     """
-    theme_item = get_object_or_404(ThemeItem, pk=item_id)
+    themeitem = get_object_or_404(ThemeItem, pk=item_id)
 
     try:
-        vote = Vote.objects.get(theme_item=item_id, user=request.user.id)
+        vote = Vote.objects.get(themeitem=item_id, user=request.user.id)
         #TODO:vote.setRating(rating)
     except ObjectDoesNotExist:
-        vote = Vote(theme_item=item, user=request.user)
+        vote = Vote(themeitem=item, user=request.user)
         #TODO:vote.setRating(rating)
         vote.save()
 
     return item_detail(request, item_id)
 
 @login_required
-def add_theme_item(request):
+def themeitem_create(request):
     if request.method == "POST":
         form = ThemeItemForm(request.POST.copy())
         flood, timeout = flood_control(request)

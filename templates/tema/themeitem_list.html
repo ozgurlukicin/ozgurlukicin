@@ -11,27 +11,11 @@
     <a href="/tema/goster/son/">En son eklenen</a>
     <a href="/tema/goster/indirilen/">En çok ziyaret Edilen</a>
     <a href="/tema/goster/begenilen/">En çok oy alan</a>
+    <a href="/tema/ekle/">Ekle</a>
 </div>
-<div><a href="/tema/ekle/">Ekle</a></div>
-<div>Dosyalar</div>
-<div class="file_bar">
-    <div class="file_thumb cell">Görüntü</div>
-    <div class="file_category cell">Kategori</div>
-    <div class="file_name cell">İsim</div>
-    <div class="file_link cell">Link</div>
-    <div class="file_sender cell">Gönderen</div>
-    <div class="file_license cell">Lisans</div>
-    <div class="file_downloads cell">İndirme</div>
-    <div class="file_rating cell">Oy</div>
-</div>
-<div class="file_line">
+<div class="item">
 {% for item in object_list %}
     <div class="file_thumb cell"><img src="{{item.get_screenshot_set.all.0.thumbnail }}" alt="ekran görüntüsü" width="100px" /></div>
-    <div class="file_category cell">
-        <a href="{{item.category.get_absolute_url}}">{{item.category}}</a>
-        <a href="/tema/feed/kategori/rss/{{item.category.id}}/">RSS</a>
-        <a href="/tema/feed/kategori/atom/{{item.category.id}}/">ATOM</a>
-    </div>
     <div class="file_name cell"><a href="{{item.get_absolute_url}}">{{item.name}}</a></div>
     <div class="file_sender cell">
         <a href="/tema/kullanici/{{item.author}}/">{{item.author}}</a>

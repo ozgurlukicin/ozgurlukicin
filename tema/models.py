@@ -73,7 +73,7 @@ class ThemeItem(models.Model):
         verbose_name_plural="Sanat Birimleri"
 
     def get_absolute_url(self):
-        return "/tema/%s/" % (self.id)
+        return "/tema/dosya/%s/" % (self.id)
 
 class File(models.Model):
     "File for download"
