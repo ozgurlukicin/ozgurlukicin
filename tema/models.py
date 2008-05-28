@@ -10,21 +10,21 @@ from django.contrib.auth.models import User
 from oi.st.models import License
 
 class Category(models.Model):
-    "Each theme item belong to a Category"
+    "Each theme item belongs to a Category"
 
-    cat_name=models.CharField(max_length=100,verbose_name="Kategori adı",unique=True)
-    slug=models.SlugField(verbose_name="SEF Başlık",prepopulate_from=("cat_name",))
+    name=models.CharField(max_length=100, verbose_name="Kategori adı",unique=True)
+    slug=models.SlugField(verbose_name="SEF Başlık",prepopulate_from=("name",))
 
     def __unicode__(self):
-        return self.cat_name
+        return self.name
 
     def get_absolute_url(self):
         return "/tema/kategori/%s/" % (self.slug)
 
     class Admin:
-        list_display = ('cat_name',)
-        search_fields = ['cat_name']
-        ordering=["cat_name"]
+        list_display = ('name',)
+        search_fields = ['name']
+        ordering=["name"]
 
     class Meta:
         verbose_name="Kategori"
@@ -38,9 +38,9 @@ class ThemeItem(models.Model):
     author = models.ForeignKey(User)
     license = models.ForeignKey(License, verbose_name="Lisans")
     description = models.TextField(blank=False, verbose_name="Tanım", help_text="Ekleyeceğiniz dosyalar hakkındaki açıklamalarınızı bu bölümde belirtebilirsiniz.")
-    changelog = models.TextField(blank=False, verbose_name="Değişiklik Listesi", help_text="Eklediğiniz içeriğin değişikliklerini sürüm numarası ve sürümdeki değişikliklerin listesi şeklinde belirtebilirsiniz.")
+    changelog = models.TextField(blank=True, verbose_name="Değişiklik Listesi", help_text="Eklediğiniz içeriğin değişikliklerini sürüm numarası ve sürümdeki değişikliklerin listesi şeklinde belirtebilirsiniz.")
     rating = models.IntegerField(default=50, verbose_name="Puan")
-    download_count = models.IntegerField(verbose_name="İndirilme Sayısı")
+    download_count = models.IntegerField(default=0, verbose_name="İndirilme Sayısı")
     submit_date = models.DateTimeField(auto_now_add=True, verbose_name="Oluşturulma Tarihi")
     edit_date = models.DateTimeField(auto_now_add=True, verbose_name="Düzenlenme Tarihi")
     comment_enabled = models.BooleanField(default=True,verbose_name="Yoruma Açık", help_text="Diğer üyelerin bu içeriğe yorum yapıp yapamayacağını buradan belirtebilirsiniz.")
@@ -84,6 +84,10 @@ class File(models.Model):
     class Admin:
         pass
 
+    class Meta:
+        verbose_name = "Dosya"
+        verbose_name_plural = "Dosyalar"
+
     def __unicode__(self):
         return self.file
 
@@ -100,6 +104,10 @@ class ScreenShot(models.Model):
     class Admin:
         pass
 
+    class Meta:
+        verbose_name = "Ekran Görüntüsü"
+        verbose_name_plural = "Ekran Görüntüleri"
+
 class Vote(models.Model):
     "Vote of a user"
 
@@ -109,6 +117,10 @@ class Vote(models.Model):
 
     class Admin:
         pass
+
+    class Meta:
+        verbose_name = "Oy"
+        verbose_name_plural = "Oylar"
 
 
 class Comment(models.Model):
@@ -128,3 +140,7 @@ class Comment(models.Model):
 
     class Admin:
         pass
+
+    class Meta:
+        verbose_name = "Yorum"
+        verbose_name_plural = "Yorumlar"
