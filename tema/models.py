@@ -33,7 +33,7 @@ class Category(models.Model):
 class ThemeItem(models.Model):
     "A theme item mainly consists of screenshots and files to download"
 
-    name = models.CharField(max_length=100, unique=True, verbose_name="İsim", help_text="Buraya, ekleyeceğiniz içeriğin ismini yazın.")
+    name = models.CharField(max_length=100, unique=True, verbose_name="Başlık", help_text="Buraya, ekleyeceğiniz içeriğin ismini yazın.")
     category = models.ForeignKey(Category, verbose_name="Kategori")
     author = models.ForeignKey(User)
     license = models.ForeignKey(License, verbose_name="Lisans")
@@ -78,8 +78,9 @@ class ThemeItem(models.Model):
 class File(models.Model):
     "File for download"
 
-    theme_item=models.ForeignKey(ThemeItem)
-    file=models.FileField(upload_to="upload/tema/dosya/")
+    theme_item = models.ForeignKey(ThemeItem)
+    title = models.CharField(max_length=100, verbose_name="Başlık", help_text="Buraya, dosyanın kullanıcılara görünecek adını yazın.")
+    file = models.FileField(upload_to="upload/tema/dosya/")
 
     class Admin:
         pass

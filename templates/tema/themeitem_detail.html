@@ -7,39 +7,24 @@
 {% endblock %}
 
 {% block content %}
-<a href="/tema/goster/son/">Tema Anasayfa</a>
-<div>
-    <div>Kategori</div>
-    <div>İsim</div>
-    <div>Açıklama</div>
-    <div>Thumb</div>
-
-    <div>Link</div>
-    <div>Gönderen</div>
-    <div>Lisans</div>
-
-    <div>Görülmüş</div>
-    <div>Oy</div>
-    <div>Oy kullan</div>
-</div>
-<div>
-    <div><a href="{{object.category.get_absolute_url}}">{{object.category}}</a></div>
-    <div>{{object.name}}</div>
-    <div>{{object.description}}</div>
-    <div>
+<div class="themeitem">
+    <div class="themeitem_title">{{ object.name }}</div>
+    <div class="themeitem_screenshots">
         {% for screenshot in object.screenshot_set.all %}
-        <img src="{{screenshot.get_absolute_url}}" alt="ekran görüntüsü" width="100"/><br/>
+        <a href="{{ sceenshot.image }}"><img src="{{ screenshot.thumbnail }}" alt="ekran görüntüsü" width="100"/></a>
         {% endfor %}
     </div>
-
-    <div>
+    <div class="themeitem_category"><a href="{{ object.category.get_absolute_url }}">{{ object.category }}</a></div>
+    <div class="themeitem_submit_date">{{ object.submit_date }}</div>
+    <div class="themeitem_download_count">{{ object.download_count }}</div>
+    <div class="themeitem_rating">{{ object.rating }}</div>
+    <div class="themeitem_author"><a href="/tema/kullanici/{{ object.author }}/">{{ object.author }}</a></div>
+    <div class="themeitem_description">Tanım:<br />{{ object.description|linebreaksbr }}</div>
+    <div class="themeitem_license">Lisans: {{ object.license }}</div>
+    <div class="themeitem_downloads">
         {% for file in object.file_set.all %}
-        <a href="{{file.get_absolute_url}}">İndir</a><br/>
+        <a href="{{ file.get_absolute_url }}">{{ file.title }}</a><br/>
         {% endfor %}
     </div>
-    <div>{{object.user}}</div>
-    <div>{{object.licence}}</div>
-    <div>{{object.download_count}}</div>
-    <div>{{object.rating}}</div>
 </div>
 {% endblock %}

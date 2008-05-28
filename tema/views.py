@@ -5,16 +5,17 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
+from oi.forum.views import flood_control
+from oi.st.wrappers import render_response
 from oi.tema.models import Category, ThemeItem, File, ScreenShot, Vote, Comment
 from oi.tema.forms import ThemeItemForm
 from oi.tema.settings import THEME_ITEM_PER_PAGE
-from oi.forum.views import flood_control
 
 from django.views.generic.list_detail import object_list
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 
 def themeitem_list(request, sort_by):
@@ -52,9 +53,9 @@ def list_category(request, category):
 def themeitem_detail(request, item_id):
     object = get_object_or_404(ThemeItem, pk=item_id)
     if not object.approved and not request.user == object.author:
-        return render_to_response("404.html")
+        return render_response(request, "404.html")
 
-    return render_to_response('tema/themeitem_detail.html', locals())
+    return render_response(request, 'tema/themeitem_detail.html', locals())
 
 
 def list_user(request, username):
@@ -89,6 +90,7 @@ def vote(request, item_id, rating):
 
     return item_detail(request, item_id)
 
+
 @login_required
 def themeitem_create(request):
     if request.method == "POST":
@@ -110,4 +112,4 @@ def themeitem_create(request):
             return themeitem_detail(request, item.id)
     else:
         form = ThemeItemForm()
-    return render_to_response("tema/themeitem_create.html", locals())
+    return render_response(request, "tema/themeitem_create.html", locals())
