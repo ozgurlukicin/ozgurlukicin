@@ -31,7 +31,6 @@ def themeitem_list(request, sort_by):
     params={
             "queryset": themeItems,
             "paginate_by": THEME_ITEM_PER_PAGE,
-            "template_name": "tema/themeitem_list.html",
             }
     return object_list(request, **params)
 
@@ -45,7 +44,6 @@ def list_category(request, category):
     params={
             'queryset': themeItems,
             'paginate_by': THEME_ITEM_PER_PAGE,
-            'template_name': 'tema/themeitem_list.html',
             }
     return object_list(request,**params)
 
@@ -66,7 +64,6 @@ def list_user(request, username):
     params={
             'queryset': themeItems,
             'paginate_by': THEME_ITEM_PER_PAGE,
-            'template_name': 'tema/themeitem_list.html',
             }
 
     return object_list(request, **params)
