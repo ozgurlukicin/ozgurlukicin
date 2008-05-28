@@ -1,0 +1,23 @@
+{% extends "tema/base.html" %}
+{% block header_menu %}
+    {% include "header.html" %}
+{% endblock %}
+{% block ust_menu %}
+    {% include "ust_menu_ayrinti.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="itemlist">
+{% for item in object_list %}
+    <div class="itemlist_listitem">
+        <div class="listitem_screenshot">{% if item.screenshot_set.count %}<img src="{{ item.screenshot_set.all.0.thumbnail }}" alt="ekran görüntüsü" width="100px" />{% endif %}</div>
+        <div class="listitem_name"><a href="{{ item.get_absolute_url }}">{{ item.name }}</a></div>
+        <div class="listitem_category"><a href="{{ item.category.get_absolute_url }}">{{ item.category }}</a></div>
+        {% if item.comment_set.count %}<div class="listitem_comment">{{ item.comment_set.count }} yorum</div>{% endif %}
+        <div class="listitem_rating">{{ item.rating }}</div>
+        <div class="listitem_submit_date">{{ item.submit_date|date:"d F Y" }}</div>
+        <div class="listitem_more"><a href="{{ item.get_absolute_url }}">daha fazla</a></div>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}

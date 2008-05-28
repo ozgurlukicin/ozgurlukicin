@@ -18,12 +18,12 @@ user_feed_dict = {
 
 urlpatterns = patterns ('oi.tema.views',
         #the first page listing
-        (r'^goster/(?P<sort_by>[a-z]+)/$','list_material'),
-        (r'^kategori/(?P<cat_name>[a-z-]+)/$','list_category'),
-        (r'^dosya/(?P<file_id>[0-9]+)/$','file_detail'),
+        (r'^goster/(?P<sort_by>(son|begenilen|indirilen))/$','themeitem_list'),
+        (r'^kategori/(?P<category>[a-z-]+)/$','list_category'),
+        (r'^dosya/(?P<item_id>[0-9]+)/$','themeitem_detail'),
         (r'^kullanici/(?P<username>[a-z]+)/$','list_user'),
-        (r'^oy/$','vote_it'),
-        (r'^ekle/$','add_file'),
+        (r'^oyla/(?P<item_id>[0-9]+)/(?P<rating>[0-4])/$','vote'),
+        (r'^ekle/$','themeitem_create'),
 )
 
 urlpatterns+=patterns('',

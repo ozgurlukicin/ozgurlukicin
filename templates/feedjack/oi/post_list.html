@@ -23,7 +23,7 @@
 
   <div class="post">
   {% if item.title %}
-  <div class="planet_title"><a href="{{ item.link }}">{{ item.title }}</a></div>
+  <div class="planet_title"><a href="{{ item.link }}">{{ item.title|safe }}</a></div>
   {% else %}
   <div class="planet_title siyah"><a href="{{ item.link }}">{{ item.subscriber.name }}</a></div>
   {% endif %}

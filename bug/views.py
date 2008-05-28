@@ -16,7 +16,6 @@ from oi.forum.views import flood_control
 from oi.bug.models import Bug, Comment
 from oi.bug.forms import BugForm, FullBugForm, CommentForm
 from oi.bug.settings import BUGS_PER_PAGE
-from oi.petition.models import Petitioner
 
 BUG_MAILLIST = User.objects.get(username="akin").email
 BUG_FROM_EMAIL = "hata@ozgurlukicin.com"
@@ -66,8 +65,6 @@ Atanan: %(assigned_to)s
     else:
         form = BugForm(auto_id=True)
 
-    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
-    petitionpercent = numberofpetitioners / 30
     return render_response(request, 'bug/bug_add.html', locals())
 
 @permission_required('bug.change_bug', login_url="/kullanici/giris/")
@@ -119,20 +116,15 @@ Atanan: %(assigned_to)s
 
 def main(request):
     bugs = Bug.objects.order_by("status")
-    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
-    petitionpercent = numberofpetitioners / 30
     return object_list(request, bugs,
             template_name = "bug/bug_main.html",
             template_object_name = "bug",
-            extra_context = {"numberofpetitioners": numberofpetitioners, "petitionpercent": petitionpercent},
             paginate_by = BUGS_PER_PAGE,
             allow_empty = True,
             )
 
 def detail(request, id):
     bug = Bug.objects.get(id=id)
-    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
-    petitionpercent = numberofpetitioners / 30
     default_data = {
             "title": bug.title,
             "assigned_to": bug.assigned_to.id,

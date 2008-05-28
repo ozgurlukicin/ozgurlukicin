@@ -1,5 +1,4 @@
 from oi.flatpages.models import FlatPage
-from oi.petition.models import Petitioner
 from django.template import loader, RequestContext
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
@@ -32,7 +31,5 @@ def flatpage(request, url):
         t = loader.get_template(DEFAULT_TEMPLATE)
     c = RequestContext(request, {
         'flatpage': f,
-        'numberofpetitioners': Petitioner.objects.filter(is_active=True).count(),
-        'petitionpercent': Petitioner.objects.filter(is_active=True).count() / 30,
     })
     return HttpResponse(t.render(c))

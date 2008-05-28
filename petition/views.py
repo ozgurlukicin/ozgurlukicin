@@ -17,9 +17,6 @@ from oi.settings import DEFAULT_FROM_EMAIL
 from oi.petition.settings import PETITIONERS_PER_PAGE
 
 def petition_sign(request):
-    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
-    petitionpercent = numberofpetitioners / 30
-
     if request.method == 'POST':
         form = PetitionForm(request.POST)
         if form.is_valid():
@@ -73,8 +70,6 @@ Ozgurlukicin.com"""
         return render_response(request, 'petition/sign.html', locals())
 
 def petitioner_confirm(request, pid, key):
-    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
-    petitionpercent = numberofpetitioners / 30
     petitioner = Petitioner.objects.get(id=pid)
     if petitioner.is_active:
         already_active = True
@@ -93,8 +88,6 @@ def petitioner_confirm(request, pid, key):
         return render_response(request, 'petition/sign_done.html', locals())
 
 def petitioner_list(request):
-    numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
-    petitionpercent = numberofpetitioners / 30
     petitioners = Petitioner.objects.filter(is_active=True).order_by("-signed")
 
     return object_list(
@@ -103,8 +96,4 @@ def petitioner_list(request):
             template_object_name = "petitioner",
             paginate_by = PETITIONERS_PER_PAGE,
             allow_empty = True,
-            extra_context = {
-                'numberofpetitioners': numberofpetitioners,
-                'petitionpercent': petitionpercent,
-                },
             )

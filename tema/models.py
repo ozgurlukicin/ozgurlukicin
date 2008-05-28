@@ -8,122 +8,140 @@
 from django.db import models
 from django.contrib.auth.models import User
 from oi.st.models import License
-from django.db.models import signals
-from django.dispatch import dispatcher
-from oi.tema.signals import rm_thumb,crt_thumb,rmv_files
-
 
 class Category(models.Model):
-    """ The categories of thing that are published they maybe
-    neseted in each other a tree hieararchy.."""
+    "Each theme item belongs to a Category"
 
-    #100 is enough for now
-    cat_name=models.CharField(max_length=100,verbose_name="Kategori adı",unique=True)
-    #if they are nested it is needed
-    slug=models.SlugField(verbose_name="SEF Başlık",prepopulate_from=("cat_name",))
-    parent_id=models.IntegerField(verbose_name="Ebeveyn Kategori",default=0)
-    update=models.DateField(auto_now=True,verbose_name="Yayın Tarihi")
+    name=models.CharField(max_length=100, verbose_name="Kategori adı",unique=True)
+    slug=models.SlugField(verbose_name="SEF Başlık",prepopulate_from=("name",))
 
-    def __str__(self):
-        return self.cat_name
+    def __unicode__(self):
+        return self.name
 
     def get_absolute_url(self):
-        return "/tema/kategori/%s/"%(self.slug)
-
-    def get_parent_choice(self):
-        """Get the current parent category of the model"""
-        return self.parent_id
-
-    def get_possible_parents(self,cls):
-        """ To have the choices in admin.."""
-        temp=[(0,"Kendisi")]
-
-        choices=cls.objects.all()
-
-        if choices:
-            for i in choices:
-                temp.append((i.id,i.cat_name))
-
-        #getting the final value
-        return tuple(choices)
-
-    #get_possible_parents=staticmethod(get_possible_parents)
+        return "/tema/kategori/%s/" % (self.slug)
 
     class Admin:
-        list_display = ('cat_name','parent_id','update')
-        list_filter = ['update']
-        search_fields = ['cat_name']
-        ordering=["-id"]
+        list_display = ('name',)
+        search_fields = ['name']
+        ordering=["name"]
 
     class Meta:
         verbose_name="Kategori"
         verbose_name_plural="Kategoriler"
 
-class Thumbnail(models.Model):
-    "It is modified version because we should change the upload directory ???"
+class ThemeItem(models.Model):
+    "A theme item mainly consists of screenshots and files to download"
 
-    file=models.FileField(upload_to="upload/tema/images/",blank=True)
+    name = models.CharField(max_length=100, unique=True, verbose_name="Başlık", help_text="Buraya, ekleyeceğiniz içeriğin ismini yazın.")
+    category = models.ForeignKey(Category, verbose_name="Kategori")
+    author = models.ForeignKey(User)
+    license = models.ForeignKey(License, verbose_name="Lisans")
+    description = models.TextField(blank=False, verbose_name="Tanım", help_text="Ekleyeceğiniz dosyalar hakkındaki açıklamalarınızı bu bölümde belirtebilirsiniz.")
+    changelog = models.TextField(blank=True, verbose_name="Değişiklik Listesi", help_text="Eklediğiniz içeriğin değişikliklerini sürüm numarası ve sürümdeki değişikliklerin listesi şeklinde belirtebilirsiniz.")
+    rating = models.IntegerField(default=50, verbose_name="Puan")
+    download_count = models.IntegerField(default=0, verbose_name="İndirilme Sayısı")
+    submit_date = models.DateTimeField(auto_now_add=True, verbose_name="Oluşturulma Tarihi")
+    edit_date = models.DateTimeField(auto_now_add=True, verbose_name="Düzenlenme Tarihi")
+    comment_enabled = models.BooleanField(default=True,verbose_name="Yoruma Açık", help_text="Diğer üyelerin bu içeriğe yorum yapıp yapamayacağını buradan belirtebilirsiniz.")
+    approved = models.BooleanField(default=True, verbose_name="Kabul Edilmiş")
 
     class Meta:
-        verbose_name="Sanat Görüntü"
-        verbose_name_plural="Sanat Görüntü"
+        verbose_name="Sanat Birimi"
+        verbose_name_plural="Sanat Birimleri"
 
-    def __str__(self):
-        return self.file
-
-    class Admin:
-        pass
-
-# when we add or delete a thumb it is needed
-dispatcher.connect(crt_thumb,signal=signals.post_save, sender=Thumbnail)
-dispatcher.connect(rm_thumb,signal=signals.post_delete, sender=Thumbnail)
-
-
-class ArchiveFile(models.Model):
-    """ The data file that includes the archives for templates and etc"""
-    a_file=models.FileField(upload_to="upload/tema/dosya/")
-    #download=models.IntegerField(verbose_name="İndirilme",default=0)
-
-    class Admin:
-        pass
-
-    def __str__(self):
-        return self.a_file
-
-class File(models.Model):
-    """ The catual file that will be downloaded and shown"""
-
-    parent_cat=models.ForeignKey(Category,verbose_name="Kategori")
-    licence=models.ForeignKey(License,verbose_name="Lisans")
-    user=models.ForeignKey(User,verbose_name="Gönderen")
-
-    screens=models.ManyToManyField(Thumbnail,related_name="screen",verbose_name="Görüntüler",blank=True)
-    file_data=models.ManyToManyField(ArchiveFile,verbose_name="İçerik Dosyası",blank=True)
-
-    name=models.CharField(max_length=100,unique=True,verbose_name="Dosya ismi")
-    description=models.TextField(verbose_name="Açıklama")
-    rate=models.DecimalField(verbose_name="Puan",default=0, max_digits=2, decimal_places=1)
-    state=models.BooleanField(verbose_name="Yayınla",default=False)
-    counter= models.IntegerField(verbose_name="Sayaç",default=0)
-    update=models.DateField(auto_now=True,verbose_name="Yayın Tarihi")
-    enable_comments = models.BooleanField()
-
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
-    def get_absolute_url(self):
-        return "/tema/dosya/%s/"%(self.id)
-
     class Admin:
-        list_display=('name','rate','state','counter','update','parent_cat')
-        search_fields=['name','parent_cat']
-        list_filter=['update']
-        ordering=['-update']
+        fields = (
+                (None, {
+                    "fields": ("name", "category", "description", "changelog", "approved")
+                    }),
+                ("Diğer", {
+                    "classes": "collapse",
+                    "fields": ("author", "license", "rating", "download_count", "submit_date", "edit_date", "comment_enabled")
+                    })
+                )
+        list_display = ("name", "license", "category", "approved")
+        list_display_links = ("name",)
+        list_filter = ("approved", "comment_enabled")
+        search_fields = ["name", "description", "changelog"]
 
     class Meta:
-        verbose_name="Sanat Dosya"
-        verbose_name_plural="Sanat Dosyaları"
-        permissions = (
-                ("can_upload_tema", "Can upload tema files"),
-                )
-dispatcher.connect(rmv_files,signal=signals.pre_delete, sender=File)
+        verbose_name="Sanat Birimi"
+        verbose_name_plural="Sanat Birimleri"
+
+    def get_absolute_url(self):
+        return "/tema/dosya/%s/" % (self.id)
+
+class File(models.Model):
+    "File for download"
+
+    theme_item = models.ForeignKey(ThemeItem)
+    title = models.CharField(max_length=100, verbose_name="Başlık", help_text="Buraya, dosyanın kullanıcılara görünecek adını yazın.")
+    file = models.FileField(upload_to="upload/tema/dosya/")
+
+    class Admin:
+        pass
+
+    class Meta:
+        verbose_name = "Dosya"
+        verbose_name_plural = "Dosyalar"
+
+    def __unicode__(self):
+        return self.file
+
+class ScreenShot(models.Model):
+    "Screenshot of a theme item"
+
+    theme_item = models.ForeignKey(ThemeItem)
+    image = models.ImageField(upload_to="upload/tema/goruntu/", verbose_name="Görüntü")
+    thumbnail = models.ImageField(upload_to="upload/tema/goruntu/kucuk/", verbose_name="Küçük Resim")
+
+    def __unicode__(self):
+        return self.image
+
+    class Admin:
+        pass
+
+    class Meta:
+        verbose_name = "Ekran Görüntüsü"
+        verbose_name_plural = "Ekran Görüntüleri"
+
+class Vote(models.Model):
+    "Vote of a user"
+
+    theme_item = models.ForeignKey(ThemeItem)
+    user = models.ForeignKey(User)
+    rating = models.IntegerField(default=50, verbose_name="Puan")
+
+    class Admin:
+        pass
+
+    class Meta:
+        verbose_name = "Oy"
+        verbose_name_plural = "Oylar"
+
+
+class Comment(models.Model):
+    "Comment on a theme item from a user"
+
+    parent = models.ForeignKey("self", related_name="child")
+    theme_item = models.ForeignKey(ThemeItem)
+    author = models.ForeignKey(User, related_name="tema_comment")
+    text = models.TextField(verbose_name="İleti")
+    submit_date = models.DateTimeField(verbose_name="Oluşturulma Tarihi")
+    edit_date = models.DateTimeField(verbose_name="Düzenlenme Tarihi")
+    edit_count = models.IntegerField(default=0, verbose_name="Güncellenme sayısı")
+    last_edited_by = models.ForeignKey(User, blank=True, null=True, related_name="tema_comment_edit", verbose_name="Yazar")
+    ip = models.IPAddressField(blank=True, verbose_name="IP adresi")
+    order = models.IntegerField(default=0, verbose_name="Görüntülenme Sırası")
+    level = models.IntegerField(default=0, verbose_name="Görüntülenme Seviyesi")
+
+    class Admin:
+        pass
+
+    class Meta:
+        verbose_name = "Yorum"
+        verbose_name_plural = "Yorumlar"
