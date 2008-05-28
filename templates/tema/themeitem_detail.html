@@ -17,7 +17,7 @@
     <div class="themeitem_category"><a href="{{ object.category.get_absolute_url }}">{{ object.category }}</a></div>
     <div class="themeitem_submit_date">{{ object.submit_date }}</div>
     <div class="themeitem_download_count">{{ object.download_count }}</div>
-    <div class="themeitem_rating">{{ object.rating }}</div>
+    <div class="themeitem_rating">{{ object.rating }} <a href="/tema/oyla/{{ object.id }}/0/">0</a> <a href="/tema/oyla/{{ object.id }}/1/">1</a> <a href="/tema/oyla/{{ object.id }}/2/">2</a> <a href="/tema/oyla/{{ object.id }}/3/">3</a> <a href="/tema/oyla/{{ object.id }}/4/">4</a></div>
     <div class="themeitem_author"><a href="/tema/kullanici/{{ object.author }}/">{{ object.author }}</a></div>
     <div class="themeitem_description">Tanım:<br />{{ object.description|linebreaksbr }}</div>
     <div class="themeitem_license">Lisans: {{ object.license }}</div>

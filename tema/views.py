@@ -79,16 +79,26 @@ def vote(request, item_id, rating):
     If user has already voted, then existing vote should be changed
     """
     themeitem = get_object_or_404(ThemeItem, pk=item_id)
+    rating = int(rating) * 25
 
     try:
-        vote = Vote.objects.get(themeitem=item_id, user=request.user.id)
-        #TODO:vote.setRating(rating)
-    except ObjectDoesNotExist:
-        vote = Vote(themeitem=item, user=request.user)
-        #TODO:vote.setRating(rating)
+        vote = Vote.objects.get(theme_item=themeitem, user=request.user.id)
+        vote.rating = rating
         vote.save()
 
-    return item_detail(request, item_id)
+    except ObjectDoesNotExist:
+        vote = Vote(theme_item=themeitem, user=request.user)
+        vote.save()
+
+    # Update rating of the item. This can be faster but this way is more convenient
+    voteCount = Vote.objects.filter(theme_item=themeitem).count()
+    rating = 0
+    for vote in Vote.objects.filter(theme_item=themeitem):
+        rating += vote.rating
+    themeitem.rating = rating / voteCount
+    themeitem.save()
+
+    return themeitem_detail(request, item_id)
 
 
 @login_required
