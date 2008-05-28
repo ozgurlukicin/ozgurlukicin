@@ -7,6 +7,8 @@
 
 from django import newforms as forms
 
+from oi.tema.models import ThemeItem
+
 vote_choices=(
         (0, '0'),
         (1, '1'),
@@ -15,3 +17,8 @@ vote_choices=(
         (4, '4'),
         (5, '5'),
         )
+
+class ThemeItemForm(forms.ModelForm):
+    class Meta:
+        model = ThemeItem
+        exclude = ("author", "rating", "download_count", "submit_date", "edit_date", "approved")

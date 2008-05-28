@@ -23,7 +23,7 @@ urlpatterns = patterns ('oi.tema.views',
         (r'^dosya/(?P<item_id>[0-9]+)/$','item_detail'),
         (r'^kullanici/(?P<username>[a-z]+)/$','list_user'),
         (r'^oyla/(?P<item_id>[0-9]+)/(?P<rating>[0-4])/$','vote'),
-        #(r'^ekle/$','add_file'),
+        (r'^ekle/$','add_theme_item'),
 )
 
 urlpatterns+=patterns('',

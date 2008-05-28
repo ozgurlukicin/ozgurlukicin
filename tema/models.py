@@ -33,17 +33,17 @@ class Category(models.Model):
 class ThemeItem(models.Model):
     "A theme item mainly consists of screenshots and files to download"
 
-    name = models.CharField(max_length=100, unique=True, verbose_name="İsim")
-    category = models.ForeignKey(Category)
+    name = models.CharField(max_length=100, unique=True, verbose_name="İsim", help_text="Buraya, ekleyeceğiniz içeriğin ismini yazın.")
+    category = models.ForeignKey(Category, verbose_name="Kategori")
     author = models.ForeignKey(User)
-    license = models.ForeignKey(License)
-    description = models.TextField(blank=False, verbose_name="Tanım")
-    changelog = models.TextField(blank=False, verbose_name="Tanım")
+    license = models.ForeignKey(License, verbose_name="Lisans")
+    description = models.TextField(blank=False, verbose_name="Tanım", help_text="Ekleyeceğiniz dosyalar hakkındaki açıklamalarınızı bu bölümde belirtebilirsiniz.")
+    changelog = models.TextField(blank=False, verbose_name="Değişiklik Listesi", help_text="Eklediğiniz içeriğin değişikliklerini sürüm numarası ve sürümdeki değişikliklerin listesi şeklinde belirtebilirsiniz.")
     rating = models.IntegerField(default=50, verbose_name="Puan")
     download_count = models.IntegerField(verbose_name="İndirilme Sayısı")
     submit_date = models.DateTimeField(auto_now_add=True, verbose_name="Oluşturulma Tarihi")
     edit_date = models.DateTimeField(auto_now_add=True, verbose_name="Düzenlenme Tarihi")
-    comment_enabled = models.BooleanField(default=True,verbose_name="Yoruma Açık")
+    comment_enabled = models.BooleanField(default=True,verbose_name="Yoruma Açık", help_text="Diğer üyelerin bu içeriğe yorum yapıp yapamayacağını buradan belirtebilirsiniz.")
     approved = models.BooleanField(default=True, verbose_name="Kabul Edilmiş")
 
     class Meta:

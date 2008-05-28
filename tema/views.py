@@ -6,14 +6,14 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from oi.tema.models import Category, ThemeItem, File, ScreenShot, Vote, Comment
-#from oi.tema.forms import *
+from oi.tema.forms import ThemeItemForm
 from oi.tema.settings import THEME_ITEM_PER_PAGE
 
 from django.views.generic.list_detail import object_list
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 
 def list_items(request, sort_by):
@@ -88,3 +88,8 @@ def vote(request, item_id, rating):
         vote.save()
 
     return item_detail(request, item_id)
+
+@login_required
+def add_theme_item(request):
+    form = ThemeItemForm()
+    return render_to_response("tema/add.html", locals())
