@@ -1,0 +1,20 @@
+{% extends "tema/base.html" %}
+{% block header_menu %}
+    {% include "header.html" %}
+{% endblock %}
+{% block ust_menu %}
+    {% include "ust_menu_ayrinti.html" %}
+{% endblock %}
+
+{% block content %}
+
+<form action="{{ object.get_change_url }}" method="post">
+    {% for field in form %}
+        <dl>
+            <dt><label for="{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
+            <dd>{{ field }}</dd>
+        </dl>
+    {% endfor %}
+    <div style="clear:both"><input type="submit" value="Değişiklikleri Kaydet" /></div>
+</form>
+{% endblock %}

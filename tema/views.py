@@ -39,9 +39,9 @@ def themeitem_list(request, parentcategory, subcategory, order_by):
     if order_by == "tarih":
         themeItems = themeItems.order_by("-edit_date")
     elif order_by == "indirilme":
-        themeItems = themeItems.order_by("-rating")
-    elif order_by == "puan":
         themeItems = themeItems.order_by("-download_count")
+    elif order_by == "puan":
+        themeItems = themeItems.order_by("-rating")
     else:# order_by == "alfabe"
         themeItems = themeItems.order_by("name")
 
@@ -58,10 +58,13 @@ def themeitem_list(request, parentcategory, subcategory, order_by):
     return object_list(request, **params)
 
 
-def themeitem_detail(request, item_id):
+def themeitem_detail(request, parentcategory, subcategory, item_id):
     object = get_object_or_404(ThemeItem, pk=item_id)
     if not object.approved and not request.user == object.author:
         return render_response(request, "404.html")
+
+    if request.user == object.author or request.user.has_perm("can_change_themeitem"):
+        button_change = True
 
     return render_response(request, 'tema/themeitem_detail.html', locals())
 
@@ -126,7 +129,44 @@ def themeitem_create(request):
                     )
             object.parentcategory = object.category.parent
             object.save()
+            #TODO: Send e-mail to admins
             return HttpResponseRedirect(object.get_absolute_url())
     else:
         form = ThemeItemForm()
     return render_response(request, "tema/themeitem_create.html", locals())
+
+@login_required
+def themeitem_change(request, parentcategory, subcategory, item_id):
+    object = get_object_or_404(ThemeItem, pk=item_id)
+    if request.user == object.author or request.user.has_perm("can_change_themeitem"):
+        if request.method == "POST":
+            form = ThemeItemForm(request.POST.copy())
+            flood, timeout = flood_control(request)
+            if flood:
+                render_response(request, "tema/message.html", {"type": "error", "message": "Lütfen %s saniye sonra tekrar deneyiniz." % timeout })
+
+            if form.is_valid():
+                object.name = form.cleaned_data["name"]
+                object.category = form.cleaned_data["category"]
+                object.license = form.cleaned_data["license"]
+                object.description = form.cleaned_data["description"]
+                object.changelog = form.cleaned_data["changelog"]
+                object.comment_enabled = form.cleaned_data["comment_enabled"]
+                object.parentcategory = object.category.parent
+                object.save()
+                return HttpResponseRedirect(object.get_absolute_url())
+            else:
+                return render_response(request, "tema/themeitem_change.html", locals())
+        else:
+            default_data = {
+                    "name": object.name,
+                    "category": object.category.id,
+                    "license": object.license.id,
+                    "description": object.description,
+                    "changelog": object.changelog,
+                    "comment_enabled": object.comment_enabled,
+                    }
+            form = ThemeItemForm(initial=default_data)
+        return render_response(request, "tema/themeitem_change.html", locals())
+    else:
+        return render_response(request, "tema/message.html", {"type": "error", "message": "Bu işlemi yapmak için yetkiniz yok."})

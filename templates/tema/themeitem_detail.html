@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block content %}
+{% if button_change %}<a href="{{ object.get_change_url }}">Düzenle</a>{% endif %}
 <div class="themeitem">
     <div class="themeitem_title">{{ object.name }}</div>
     <div class="themeitem_screenshots">

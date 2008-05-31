@@ -69,6 +69,7 @@ class ThemeItem(models.Model):
     submit_date = models.DateTimeField(auto_now_add=True, verbose_name="Oluşturulma Tarihi")
     edit_date = models.DateTimeField(auto_now_add=True, verbose_name="Düzenlenme Tarihi")
     comment_enabled = models.BooleanField(default=True,verbose_name="Yoruma Açık", help_text="Diğer üyelerin bu içeriğe yorum yapıp yapamayacağını buradan belirtebilirsiniz.")
+    #TODO: change this to False before we're on air
     approved = models.BooleanField(default=True, verbose_name="Kabul Edilmiş")
 
     class Meta:
@@ -98,7 +99,11 @@ class ThemeItem(models.Model):
         verbose_name_plural="Sanat Birimleri"
 
     def get_absolute_url(self):
-        return "/tema/dosya/%s/" % (self.id)
+        return "/tema/goster/%s/%s/%s/" % (self.parentcategory.slug, self.category.slug, self.id)
+
+    def get_change_url(self):
+        return "/tema/duzenle/%s/%s/%s/" % (self.parentcategory.slug, self.category.slug, self.id)
+
 
 class File(models.Model):
     "File for download"
