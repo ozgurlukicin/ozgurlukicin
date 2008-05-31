@@ -104,7 +104,7 @@ def vote(request, item_id, rating):
     themeitem.rating = rating / voteCount
     themeitem.save()
 
-    return themeitem_detail(request, item_id)
+    return HttpResponseRedirect(themeitem.get_absolute_url())
 
 
 @login_required
@@ -114,7 +114,7 @@ def themeitem_create(request):
         flood, timeout = flood_control(request)
 
         if form.is_valid() and not flood:
-            item = ThemeItem(
+            object = ThemeItem(
                     name = form.cleaned_data["name"],
                     category = form.cleaned_data["category"],
                     license = form.cleaned_data["license"],
@@ -124,9 +124,9 @@ def themeitem_create(request):
 
                     author = request.user,
                     )
-            item.parentcategory = item.category.parent
-            item.save()
-            return themeitem_detail(request, item.id)
+            object.parentcategory = object.category.parent
+            object.save()
+            return HttpResponseRedirect(object.get_absolute_url())
     else:
         form = ThemeItemForm()
     return render_response(request, "tema/themeitem_create.html", locals())
