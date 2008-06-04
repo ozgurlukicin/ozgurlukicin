@@ -4,39 +4,24 @@
 {% endblock %}
 {% block ust_menu %}
     {% include "ust_menu_ayrinti.html" %}
+
 {% endblock %}
 
 {% block content %}
-<div class="tema_order_by">
-    <a href="/tema/listele/{{ parentcategory }}/{{ subcategory }}/tarih/">En yeniler</a>
-    <a href="/tema/listele/{{ parentcategory }}/{{ subcategory }}/indirilme/">En çok indirilenler</a>
-    <a href="/tema/listele/{{ parentcategory }}/{{ subcategory }}/puan/">En yüksek puanlılar</a>
-    <a href="/tema/listele/{{ parentcategory }}/{{ subcategory }}/alfabe/">Alfabe sırası</a>
-    <a href="/tema/ekle/">Ekle</a>
-</div>
-
-<div class="tema_order_by">
-    <h3><a href="/tema/listele/tum-kategoriler/tumu/{{ order_by }}/">Tümü</a></h3>
-    {% for category in categories %}
-    <h3><a href="/tema/listele/{{ category.slug }}/tumu/{{ order_by }}/">{{ category.name }}</a></h3>
-    <ul>
-    {% for sub_category in category.subcategory_set.all %}
-    <li><a href="/tema/listele/{{ category.slug }}/{{ sub_category.slug }}/{{ order_by }}/">{{ sub_category.name }}</a></li>
-    {% endfor %}
-    </ul>
-    {% endfor %}
-</div>
-
 <div class="itemlist">
 {% for item in object_list %}
     <div class="itemlist_listitem">
-        <div class="listitem_screenshot">{% if item.screenshot_set.count %}<img src="{{ item.screenshot_set.all.0.thumbnail }}" alt="ekran görüntüsü" width="100px" />{% endif %}</div>
-        <div class="listitem_name"><a href="{{ item.get_absolute_url }}">{{ item.name }}</a></div>
-        <div class="listitem_category"><a href="/tema/listele/{{ item.parentcategory.slug }}/tumu/{{ order_by }}/">{{ item.parentcategory }}</a></div>
-        {% if item.comment_set.count %}<div class="listitem_comment">{{ item.comment_set.count }} yorum</div>{% endif %}
-        <div class="listitem_rating">{{ item.rating }}</div>
-        <div class="listitem_submit_date">{{ item.submit_date|date:"d F Y" }}</div>
+        <div class="listitem_firstcolumn">
+            <div class="listitem_screenshot">{% if item.screenshot_set.count %}<img src="{{ item.screenshot_set.all.0.thumbnail }}" alt="ekran görüntüsü" width="100px" />{% endif %}</div>
+            <div class="listitem_name"><a href="{{ item.get_absolute_url }}">{{ item.name }}</a></div>
+            <div class="listitem_category"><a href="/tema/listele/{{ item.parentcategory.slug }}/tumu/{{ order_by }}/">{{ item.parentcategory }}</a></div>
+        </div>
+        <div class="listitem_secondcolumn">
+            {% if item.comment_set.count %}<div class="listitem_comment">{{ item.comment_set.count }} yorum</div>{% endif %}
+            <div class="listitem_rating"><span class="listitem_label">Puan:</a></span> <span class="listitem_text">%{{ item.rating }}</span><div class="listitem_ratingbar"><div class="listitem_ratingbar_inside" style="width: {{ item.rating }}%"></div></div></div>
+        <div class="listitem_edit_date"><span class="listitem_label">Tarih:</a></span><span class="listitem_text"> {{ item.edit_date|date:"d F Y" }}</span></div>
         <div class="listitem_more"><a href="{{ item.get_absolute_url }}">daha fazla</a></div>
+        </div>
     </div>
 {% endfor %}
 </div>

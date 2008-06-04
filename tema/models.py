@@ -47,7 +47,7 @@ class SubCategory(models.Model):
     class Admin:
         list_display = ("name", "parent")
         search_fields = ["name", "parent"]
-        ordering=["parent"]
+        ordering=["name"]
 
     class Meta:
         verbose_name="Alt Kategori"
