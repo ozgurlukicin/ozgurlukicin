@@ -47,8 +47,6 @@ def open_forum_topic(sender, instance, signal, *args, **kwargs):
                                   title=instance.title #or any
                                  )
             topic.save()
-            for tag in instance.tags.all():
-                topic.tags.add(tag)
 
             post = Post(topic=topic,
                                 author=user[0],
