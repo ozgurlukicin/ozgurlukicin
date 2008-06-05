@@ -46,9 +46,9 @@ def open_forum_topic(sender, instance, signal, *args, **kwargs):
             topic = Topic(forum=forum[0],
                                   title=instance.title #or any
                                  )
+            topic.save()
             for tag in instance.tags.all():
                 topic.tags.add(tag)
-            topic.save()
 
             post = Post(topic=topic,
                                 author=user[0],
@@ -67,9 +67,9 @@ def open_forum_topic(sender, instance, signal, *args, **kwargs):
                     topic = Topic(forum=forum[0],
                                   title=instance.title #news title
                                  )
+                    topic.save()
                     for tag in instance.tags.all():
                         topic.tags.add(tag)
-                    topic.save()
 
                     post = Post(topic=topic,
                                 author=user[0],
