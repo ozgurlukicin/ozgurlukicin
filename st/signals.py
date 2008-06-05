@@ -53,6 +53,8 @@ def open_forum_topic(sender, instance, signal, *args, **kwargs):
                                 text=instance.text
                                )
             post.save()
+            topic.topic_latest_post = post
+            topic.save()
 
         else:
             return
