@@ -265,7 +265,7 @@ class HowTo(models.Model):
         verbose_name = "Nasıl"
         verbose_name_plural = "Nasıl Belgeleri"
 
-dispatcher.connect(open_forum_topic,signal=signals.post_save, sender=HowTo)
+dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=HowTo)
 
 class Game(models.Model):
     ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'))
@@ -318,7 +318,7 @@ class Game(models.Model):
         verbose_name = "Oyun"
         verbose_name_plural = "Oyunlar"
 
-dispatcher.connect(open_forum_topic,signal=signals.post_save, sender=Game)
+dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=Game)
 
 class News(models.Model):
     title = models.CharField('Başlık', max_length=32, blank=False)
@@ -355,7 +355,7 @@ class News(models.Model):
         verbose_name = "Haber"
         verbose_name_plural = "Haberler"
 
-dispatcher.connect(open_forum_topic,signal=signals.post_save, sender=News)
+dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=News)
 
 class Package(models.Model):
     ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'))
@@ -402,7 +402,7 @@ class Package(models.Model):
         verbose_name = "Paket"
         verbose_name_plural = "Paketler"
 
-dispatcher.connect(open_forum_topic,signal=signals.post_save, sender=Package)
+dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=Package)
 
 class PardusVersion(models.Model):
     number = models.CharField('Sürüm numarası', max_length = 16, blank = False, unique = True)
