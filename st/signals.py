@@ -53,6 +53,8 @@ def open_forum_topic(sender, instance, signal, *args, **kwargs):
                                 text=instance.text
                                )
             post.save()
+            topic.topic_latest_post = post
+            topic.save()
 
         else:
             return
@@ -66,6 +68,8 @@ def open_forum_topic(sender, instance, signal, *args, **kwargs):
                                   title=instance.title #news title
                                  )
                     topic.save()
+                    for tag in instance.tags.all():
+                        topic.tags.add(tag)
 
                     post = Post(topic=topic,
                                 author=user[0],

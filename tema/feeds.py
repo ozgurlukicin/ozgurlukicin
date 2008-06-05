@@ -8,7 +8,7 @@
 from django.contrib.syndication.feeds import Feed
 from django.utils.feedgenerator import Atom1Feed
 
-from oi.tema.models import ThemeItem, Category
+from oi.tema.models import ThemeItem, ParentCategory
 from oi.settings import SITE_NAME, WEB_URL, SITE_DESC
 
 from django.contrib.syndication.feeds import FeedDoesNotExist
@@ -42,7 +42,7 @@ class Category_Tema_Rss(Feed):
         if not len(bits)==1:
             raise ObjectDoesNotExist
 
-        return Category.objects.get(id=bits[0])
+        return ParentCategory.objects.get(id=bits[0])
 
     def title(self,obj):
         return SITE_NAME + " Tema Kategori : %s" % obj.category

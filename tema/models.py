@@ -9,17 +9,17 @@ from django.db import models
 from django.contrib.auth.models import User
 from oi.st.models import License
 
-class Category(models.Model):
-    "Each theme item belongs to a Category"
+class ParentCategory(models.Model):
+    "Each theme item belongs to a ParentCategory and a SubCategory"
 
-    name=models.CharField(max_length=100, verbose_name="Kategori adı",unique=True)
-    slug=models.SlugField(verbose_name="SEF Başlık",prepopulate_from=("name",))
+    name = models.CharField(max_length=100, verbose_name="Kategori adı", unique=True)
+    slug = models.SlugField(verbose_name="SEF Başlık", prepopulate_from=("name",), unique=True)
 
     def __unicode__(self):
         return self.name
 
     def get_absolute_url(self):
-        return "/tema/kategori/%s/" % (self.slug)
+        return "/tema/listele/%s/tumu/tarih/" % (self.slug)
 
     class Admin:
         list_display = ('name',)
@@ -30,11 +30,36 @@ class Category(models.Model):
         verbose_name="Kategori"
         verbose_name_plural="Kategoriler"
 
+
+class SubCategory(models.Model):
+    "Each theme item belongs to a ParentCategory and a SubCategory"
+
+    parent = models.ForeignKey(ParentCategory)
+    name = models.CharField(max_length=100, verbose_name="Kategori adı")
+    slug = models.SlugField(verbose_name="SEF Başlık", prepopulate_from=("name",), unique=True)
+
+    def __unicode__(self):
+        return u"%s > %s" % (self.parent.name, self.name)
+
+    def get_absolute_url(self):
+        return "/tema/listele/%s/%s/tarih/" % (self.parent.slug, self.slug)
+
+    class Admin:
+        list_display = ("name", "parent")
+        search_fields = ["name", "parent"]
+        ordering=["name"]
+
+    class Meta:
+        verbose_name="Alt Kategori"
+        verbose_name_plural="Alt Kategoriler"
+
+
 class ThemeItem(models.Model):
     "A theme item mainly consists of screenshots and files to download"
 
     name = models.CharField(max_length=100, unique=True, verbose_name="Başlık", help_text="Buraya, ekleyeceğiniz içeriğin ismini yazın.")
-    category = models.ForeignKey(Category, verbose_name="Kategori")
+    parentcategory = models.ForeignKey(ParentCategory, verbose_name="Üst Kategori")
+    category = models.ForeignKey(SubCategory, verbose_name="Kategori")
     author = models.ForeignKey(User)
     license = models.ForeignKey(License, verbose_name="Lisans")
     description = models.TextField(blank=False, verbose_name="Tanım", help_text="Ekleyeceğiniz dosyalar hakkındaki açıklamalarınızı bu bölümde belirtebilirsiniz.")
@@ -44,6 +69,7 @@ class ThemeItem(models.Model):
     submit_date = models.DateTimeField(auto_now_add=True, verbose_name="Oluşturulma Tarihi")
     edit_date = models.DateTimeField(auto_now_add=True, verbose_name="Düzenlenme Tarihi")
     comment_enabled = models.BooleanField(default=True,verbose_name="Yoruma Açık", help_text="Diğer üyelerin bu içeriğe yorum yapıp yapamayacağını buradan belirtebilirsiniz.")
+    #TODO: change this to False before we're on air
     approved = models.BooleanField(default=True, verbose_name="Kabul Edilmiş")
 
     class Meta:
@@ -60,7 +86,7 @@ class ThemeItem(models.Model):
                     }),
                 ("Diğer", {
                     "classes": "collapse",
-                    "fields": ("author", "license", "rating", "download_count", "submit_date", "edit_date", "comment_enabled")
+                    "fields": ("author", "license", "rating", "download_count", "submit_date", "edit_date", "comment_enabled", "parentcategory")
                     })
                 )
         list_display = ("name", "license", "category", "approved")
@@ -73,7 +99,11 @@ class ThemeItem(models.Model):
         verbose_name_plural="Sanat Birimleri"
 
     def get_absolute_url(self):
-        return "/tema/dosya/%s/" % (self.id)
+        return "/tema/goster/%s/%s/%s/" % (self.parentcategory.slug, self.category.slug, self.id)
+
+    def get_change_url(self):
+        return "/tema/duzenle/%s/%s/%s/" % (self.parentcategory.slug, self.category.slug, self.id)
+
 
 class File(models.Model):
     "File for download"

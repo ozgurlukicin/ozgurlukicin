@@ -34,11 +34,11 @@
         <form method="post" action="/oyun/yorum/{{game.slug}}/">
             {{form}}
             <br />
-            <span style="float:right;margin-right:10px"><a href="{{comment_url}}">Yorumlar ({{ comment_count }})</a> <a href="{{comment_url}}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a></span>
             <input type="submit" value="Gönder">
         </form>
     {% endif %}
 {% endif %}
+<div style="float:right;margin-right:10px"><a href="{{comment_url}}">Yorumlar ({{ comment_count }})</a> <a href="{{comment_url}}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a></div>
 <div class="page_properties"><a href="{{ game.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
 <div class="page_last_update">Son güncelleme: {{ game.update|timedelta }}</div>
 

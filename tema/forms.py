@@ -21,4 +21,4 @@ vote_choices=(
 class ThemeItemForm(forms.ModelForm):
     class Meta:
         model = ThemeItem
-        exclude = ("author", "rating", "download_count", "submit_date", "edit_date", "approved")
+        exclude = ("parentcategory", "author", "rating", "download_count", "submit_date", "edit_date", "approved")

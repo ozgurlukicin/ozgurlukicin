@@ -1,5 +1,4 @@
 {% load petition %}
-{% load theme %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -30,22 +29,35 @@
 
 {% block ust_menu %}
 {% endblock %}
-
 <div id="{% block pagetype %}page{% endblock %}">
     <div id="content">
-        <div class="tema_header">
-            <a href="/tema/goster/son/">En son eklenen</a>
-            <a href="/tema/goster/indirilen/">En çok indirilen</a>
-            <a href="/tema/goster/begenilen/">En çok oy alan</a>
+        {% block tema_menu %}
+        <div class="tema_order_by">
+            <a href="/tema/listele/{{ parentcategory|default_if_none:"tum-kategoriler" }}/{{ subcategory|default_if_none:"tumu" }}/tarih/">En yeniler</a>
+            <a href="/tema/listele/{{ parentcategory|default_if_none:"tum-kategoriler" }}/{{ subcategory|default_if_none:"tumu" }}/indirilme/">En çok indirilenler</a>
+            <a href="/tema/listele/{{ parentcategory|default_if_none:"tum-kategoriler" }}/{{ subcategory|default_if_none:"tumu" }}/puan/">En yüksek puanlılar</a>
+            <a href="/tema/listele/{{ parentcategory|default_if_none:"tum-kategoriler" }}/{{ subcategory|default_if_none:"tumu" }}/alfabe/">Alfabe sırası</a>
             <a href="/tema/ekle/">Ekle</a>
         </div>
+
+        <div class="tema_order_by">
+            <h3><a href="/tema/listele/tum-kategoriler/tumu/{{ order_by|default:"tarih" }}/">Tümü</a></h3>
+            {% for category in categories %}
+            <h3><a href="/tema/listele/{{ category.slug|default_if_none:"tum-kategoriler" }}/tumu/{{ order_by|default_if_none:"tarih" }}/">{{ category.name }}</a></h3>
+            <ul>
+            {% for sub_category in category.subcategory_set.all %}
+            <li><a href="/tema/listele/{{ category.slug|default_if_none:"tum-kategoriler" }}/{{ sub_category.slug|default_if_none:"tumu" }}/{{ order_by|default_if_none:"tarih" }}/">{{ sub_category.name }}</a></li>
+            {% endfor %}
+            </ul>
+            {% endfor %}
+        </div>
+        {% endblock %}
         {% block content %}
         {% endblock %}
     </div>
 
     <div id="sidebar">
         {% block sidebartop %}
-        {% category_box %}
         <div class="sidebar_box">
             <div class="sidebar_top">&nbsp;</div>
             <div class="sidebar_middle">
