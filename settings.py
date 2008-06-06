@@ -17,6 +17,7 @@ TESTING = True
 TEMPLATE_DEBUG = DEBUG
 WEB_URL = 'http://django'
 DOCUMENT_ROOT = '/home/ahmet/public_html/oi'
+
 DATABASE_ENGINE = 'mysql'
 DATABASE_NAME = 'oi'
 DATABASE_USER = 'root'
