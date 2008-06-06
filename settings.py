@@ -12,8 +12,6 @@ MANAGERS = ADMINS
 SITE_NAME = 'Özgürlük için...'
 SITE_DESC = 'Pardus için bir numaralı bilgi kaynağı'
 
-#testing commit access
-
 DEBUG = True
 TESTING = True
 TEMPLATE_DEBUG = DEBUG
