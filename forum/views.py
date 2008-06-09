@@ -46,13 +46,16 @@ def main(request):
 
             # read/unread stuff
             if request.user.is_authenticated():
-                if forum.id in request.session["read_forum_dict"] and\
-                        forum.forum_latest_post.edited < request.session["read_forum_dict"][forum.id]:
+                try:
+                    if forum.id in request.session["read_forum_dict"] and\
+                            forum.forum_latest_post.edited < request.session["read_forum_dict"][forum.id]:
+                        forum.is_read = True
+                    elif not forum.forum_latest_post or request.session["last_visit"] > forum.forum_latest_post.edited:
+                        forum.is_read = True
+                    else:
+                        forum.is_read = False
+                except AttributeError, ObjectDoesNotExist:
                     forum.is_read = True
-                elif not forum.forum_latest_post or request.session["last_visit"] > forum.forum_latest_post.edited:
-                    forum.is_read = True
-                else:
-                    forum.is_read = False
 
     usercount = User.objects.count()
     currentdate = datetime.now()
@@ -342,9 +345,9 @@ def new_topic(request, forum_slug):
         if form.is_valid() and not flood:
             topic = Topic(forum=forum,
                           title=form.cleaned_data['title'])
-        #tags
             topic.save()
 
+            # add tags
             for tag in form.cleaned_data['tags']:
                 t=Tag.objects.get(name=tag)
                 topic.tags.add(t)
@@ -506,24 +509,27 @@ def move(request, forum_slug, topic_id):
             forum.posts -= topic.posts
             forum2_object.topics += 1
             forum2_object.posts += topic.posts
-            #TODO: Check if target forum has some topics or not
-            # Change forum's latest post if necessary
+            # Change source forum's latest post if necessary
             if forum.forum_latest_post == topic.topic_latest_post:
-                # look for new latest (It shouldn't be hidden)
-                topics = forum.topic_set.all()
-                posts = []
-                for t in topics:
-                    lastpost = t.post_set.filter(hidden=False).order_by("-created")[0]
-                    posts.append((lastpost.created, lastpost.id))
+                # if there's no message left in source forum, clear it
+                if forum.topics < 1:
+                    forum.forum_latest_post = None
+                else:
+                    # look for new latest (It shouldn't be hidden)
+                    topics = forum.topic_set.all()
+                    newlatestpost = topics[0].topic_latest_post
+                    for t in topics:
+                        latestpost = t.topic_latest_post
+                        if latestpost.edited > newlatestpost.edited:
+                            newlatestpost = latestpost
+                    forum.forum_latest_post = newlatestpost
 
-                newlatestpost = posts[0]
-                for post in posts:
-                    if post[0] > newlatestpost[0]:
-                        newlatestpost = post
-                newlatestpost = Post.objects.get(id=newlatestpost[1])
                 # check if this is the latest in new forum
-                if forum2_object.forum_latest_post.created < newlatestpost.created:
-                    forum2_object.forum_latest_post = newlatestpost
+                if forum2_object.topics > 1:
+                    if forum2_object.forum_latest_post.edited < topic.topic_latest_post.edited:
+                        forum2_object.forum_latest_post =  topic.topic_latest_post
+                else:
+                    forum2_object.forum_latest_post = topic.topic_latest_post
             # save them
             topic.save()
             forum.save()
@@ -535,7 +541,6 @@ def move(request, forum_slug, topic_id):
             error = "Forum geçerli değil!"
             return render_response(request, 'forum/move.html', locals())
     else:
-        #TODO: Leave link in old forum
         form = MoveForm(auto_id=True)
         return render_response(request, 'forum/move.html', locals())
 
