@@ -25,6 +25,7 @@ from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail
 from oi.st.models import Tag, News
+from oi.poll.models import Poll, PollOption
 
 # import our function for sending e-mails and setting
 from oi.st.wrappers import send_mail_with_header
@@ -702,3 +703,52 @@ def list_abuse(request):
         else:
             abuse_list = AbuseReport.objects.all()
             return render_response(request, 'forum/abuse_list.html', {'abuse_list': abuse_list, "abuse_count":abuse_count})
+
+@permission_required('forum.can_create_poll', login_url="/kullanici/giris/")
+def create_poll(request, forum_slug, topic_id):
+    topic = get_object_or_404(Topic, pk=topic_id)
+    forum = topic.forum
+    if forum.slug != forum_slug:
+        return HttpResponseRedirect(topic.get_absolute_url())
+
+    # Check locks
+    if forum.locked or topic.locked:
+        return HttpResponse('Forum or topic is locked')
+
+    # Check if it already has a poll
+    try:
+        topic.poll
+        return HttpResponse('Bu konuya zaten anket eklenmiş')
+    except: #DoesNotExist
+        pass
+
+    if request.method == 'POST':
+        form = PollForm(request.POST.copy())
+        if form.is_valid():
+            # create the poll
+            poll = Poll(
+                    question = form.cleaned_data["question"],
+                    allow_changing_vote = form.cleaned_data["allow_changing_vote"],
+                    date_limit = form.cleaned_data["date_limit"],
+                    end_date = form.cleaned_data["end_date"],
+                    )
+            poll.save()
+
+            # create poll options
+            for i in range(1, 9):
+                if form.cleaned_data["option%d" % i]:
+                    option = PollOption(
+                            poll = poll,
+                            text = form.cleaned_data["option%d" % i],
+                            )
+                    option.save()
+
+            # now add it to topic
+            topic.poll = poll
+            topic.save()
+
+            return HttpResponseRedirect(topic.get_absolute_url())
+    else:
+        form = PollForm()
+
+    return render_response(request, "forum/create_poll.html", locals())

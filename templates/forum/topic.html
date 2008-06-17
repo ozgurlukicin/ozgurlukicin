@@ -15,8 +15,19 @@
     {% if request.user.is_authenticated and not watching %}
     <div class="post_bottom_small"><a href="{{ topic.get_follow_url }}"><img src="/media/dijital/img/forum/watch.gif" alt="izle" title="E-posta ile izle" border="0" /></a></div>
     {% endif %}
+    {% if perms.forum.can_create_poll and not topic.poll %}
+    <div class="post_bottom_small"><a href="{{ topic.get_create_poll_url }}">add_poll</a></div>
+    {% endif %}
 </div>
 <br />
+
+{% if topic.poll %}
+{{ topic.poll.question }}<br />
+{% for option in topic.poll.polloption_set.all %}
+{{ option.text }}<br />
+{% endfor %}
+{% if perms.forum.can_change_poll %}change - delete{% endif %}
+{% endif %}
 
 {% for post in post_list %}
 
