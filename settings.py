@@ -117,6 +117,7 @@ INSTALLED_APPS = (
     'oi.tema',
     'oi.comments',
     'oi.petition',
+    'oi.poll',
 )
 
 CITY_LIST = (
