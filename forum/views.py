@@ -808,11 +808,16 @@ def change_poll(request, forum_slug, topic_id):
 
             return HttpResponseRedirect(topic.get_absolute_url())
     else:
+        # convert returned value "day/month/year"
+        get = str(poll.end_date)
+        get = get.split("-")
+
+        end_date = "%s/%s/%s" % (get[2], get[1], get[0])
         initial = {
                 "question": poll.question,
                 "allow_changing_vote": poll.allow_changing_vote,
                 "date_limit": poll.date_limit,
-                "end_date": poll.end_date,
+                "end_date": end_date,
                 }
 
         # add options to initial data
@@ -826,6 +831,7 @@ def change_poll(request, forum_slug, topic_id):
 
 @login_required
 def vote_poll(request,forum_slug,topic_id,option_id):
+    #TODO: voting deadline must be checked here and when showing the poll
     topic = get_object_or_404(Topic, pk=topic_id)
     option = get_object_or_404(PollOption, pk=option_id)
     forum = topic.forum
@@ -874,4 +880,26 @@ def vote_poll(request,forum_slug,topic_id,option_id):
         option.vote_count += 1
         option.save()
 
+    return HttpResponseRedirect(topic.get_absolute_url())
+
+@permission_required("forum.can_change_poll", login_url="/kullanici/giris/")
+def delete_poll(request, forum_slug, topic_id):
+    topic = get_object_or_404(Topic, pk=topic_id)
+    forum = topic.forum
+    if forum.slug != forum_slug:
+        return HttpResponseRedirect(topic.get_absolute_url())
+
+    # check poll
+    try:
+        poll = topic.poll
+    except: #DoesNotExist
+        return HttpResponseRedirect(topic.get_absolute_url())
+
+    # check locks
+    if forum.locked or topic.locked:
+        return HttpResponse('Forum or topic is locked')
+
+    topic.poll=None
+    topic.save()
+    poll.delete()
     return HttpResponseRedirect(topic.get_absolute_url())

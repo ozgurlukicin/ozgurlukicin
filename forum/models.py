@@ -203,6 +203,9 @@ class Topic(models.Model):
     def get_change_poll_url(self):
         return '/forum/%s/%s/poll/change/' % (self.forum.slug, self.id)
 
+    def get_delete_poll_url(self):
+        return '/forum/%s/%s/poll/delete/' % (self.forum.slug, self.id)
+
     def get_email_id(self):
         return '<%s.%s@%s>' % (md5.new(self.title).hexdigest(), self.id, FORUM_FROM_EMAIL.split('@')[1])
 

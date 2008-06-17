@@ -59,6 +59,7 @@ class AbuseForm(forms.Form):
     reason = XssField(label='Şikayet Sebebi', widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), required=True, help_text="(en fazla 512 karakter olabilir)", max_length=512)
 
 class PollForm(forms.ModelForm):
+    end_date = forms.DateField(label="Bitiş Tarihi", input_formats=("%d/%m/%Y",), help_text="Oylamanın ne zaman biteceğini belirleyin. 30/8/2008 gibi.")
     option0 = forms.CharField(label='1. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
     option1 = forms.CharField(label='2. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
     option2 = forms.CharField(label='3. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
