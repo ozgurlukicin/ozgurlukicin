@@ -809,10 +809,13 @@ def change_poll(request, forum_slug, topic_id):
             return HttpResponseRedirect(topic.get_absolute_url())
     else:
         # convert returned value "day/month/year"
-        get = str(poll.end_date)
-        get = get.split("-")
+        if poll.end_date:
+            get = str(poll.end_date)
+            get = get.split("-")
 
-        end_date = "%s/%s/%s" % (get[2], get[1], get[0])
+            end_date = "%s/%s/%s" % (get[2], get[1], get[0])
+        else:
+            end_date=None
         initial = {
                 "question": poll.question,
                 "allow_changing_vote": poll.allow_changing_vote,
