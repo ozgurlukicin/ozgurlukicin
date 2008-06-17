@@ -25,6 +25,7 @@ class PollVote(models.Model):
         verbose_name = "Anket Oyu"
         verbose_name_plural = "Anket Oyları"
 
+
 class PollOption(models.Model):
     poll = models.ForeignKey("Poll", verbose_name="Anket")
     text = models.CharField("Yazı", max_length=128)
@@ -45,11 +46,12 @@ class PollOption(models.Model):
         verbose_name = "Anket Seçeneği"
         verbose_name_plural = "Anket Seçenekleri"
 
+
 class Poll(models.Model):
-    question = models.CharField("Soru", max_length=128)
-    allow_revoting = models.BooleanField("Oy Değiştirme")
-    start_date = models.DateTimeField("Başlangıç Tarihi", auto_now_add=True)
-    end_date = models.DateTimeField("Bitiş Tarihi")
+    question = models.CharField("Soru", max_length=128, help_text="Buraya anketin sorusunu yazın.")
+    allow_changing_vote = models.BooleanField("Oy Değiştirmek İzinli", help_text="Kullanılan oyların sonradan değiştirilebilmesini istiyorsanız bunu işaretleyin.")
+    date_limit = models.BooleanField("Süreli", help_text="Oylamada süre sınırı olmasını istiyorsanız bunu işaretleyin.")
+    end_date = models.DateTimeField("Bitiş Tarihi", help_text="Oylamanın ne zaman biteceğini belirleyin. 30/8/2008 gibi.")
 
     def __unicode__(self):
         if len(self.question) > 32:
@@ -58,8 +60,7 @@ class Poll(models.Model):
             return self.question
 
     class Admin:
-        list_display = ("question", "allow_revoting", "start_date", "end_date")
-        ordering = ["-start_date"]
+        list_display = ("question", "allow_changing_vote", "date_limit", "end_date")
         search_fields = ["question"]
 
     class Meta:
