@@ -709,7 +709,7 @@ def create_poll(request, forum_slug, topic_id):
     topic = get_object_or_404(Topic, pk=topic_id)
     forum = topic.forum
     if forum.slug != forum_slug:
-        return HttpResponseRedirect(topic.get_absolute_url())
+        return HttpResponseRedirect(topic.get_create_poll_url())
 
     # Check locks
     if forum.locked or topic.locked:
@@ -735,7 +735,7 @@ def create_poll(request, forum_slug, topic_id):
             poll.save()
 
             # create poll options
-            for i in range(1, 9):
+            for i in range(8):
                 if form.cleaned_data["option%d" % i]:
                     option = PollOption(
                             poll = poll,
@@ -752,3 +752,74 @@ def create_poll(request, forum_slug, topic_id):
         form = PollForm()
 
     return render_response(request, "forum/create_poll.html", locals())
+
+@permission_required("forum.can_change_poll", login_url="/kullanici/giris/")
+def change_poll(request, forum_slug, topic_id):
+    topic = get_object_or_404(Topic, pk=topic_id)
+    forum = topic.forum
+    if forum.slug != forum_slug:
+        return HttpResponseRedirect(topic.get_change_poll_url())
+
+    # check poll
+    try:
+        poll = topic.poll
+    except: #DoesNotExist
+        return HttpResponseRedirect(topic.get_create_poll_url())
+
+    # Check locks
+    if forum.locked or topic.locked:
+        return HttpResponse('Forum or topic is locked')
+
+    if request.method == 'POST':
+        form = PollForm(request.POST.copy())
+        if form.is_valid():
+            # change the poll
+            poll.question = form.cleaned_data["question"]
+            poll.allow_changing_vote = form.cleaned_data["allow_changing_vote"]
+            poll.date_limit = form.cleaned_data["date_limit"]
+            poll.end_date = form.cleaned_data["end_date"]
+            poll.save()
+
+            # change options, this is tricky
+            options = poll.polloption_set.all()
+            j = options.count()
+
+            # existing options may be deleted or changed, so let's do it
+            tobedeleted = []
+            for i in range(j):
+                if form.cleaned_data["option%d" % i]:
+                    option = options[i]
+                    option.text = form.cleaned_data["option%d" % i]
+                    option.save()
+                else:
+                    tobedeleted.append(options[i])
+            # now delete them
+            for option in tobedeleted:
+                option.delete()
+
+            # create non-existing options
+            for i in range(j, 8):
+                if form.cleaned_data["option%d" % i]:
+                    option = PollOption(
+                            poll = poll,
+                            text = form.cleaned_data["option%d" % i],
+                            )
+                    option.save()
+
+            return HttpResponseRedirect(topic.get_absolute_url())
+    else:
+        initial = {
+                "question": poll.question,
+                "allow_changing_vote": poll.allow_changing_vote,
+                "date_limit": poll.date_limit,
+                "end_date": poll.end_date,
+                }
+
+        # add options to initial data
+        i = 0
+        for option in poll.polloption_set.all():
+            initial["option%d" % i] = option.text
+            i += 1
+        form = PollForm(initial=initial)
+
+    return render_response(request, "forum/change_poll.html", locals())
