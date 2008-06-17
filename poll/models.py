@@ -9,6 +9,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class PollVote(models.Model):
+    poll = models.ForeignKey("Poll", verbose_name="Anket")
     option = models.ForeignKey("PollOption", verbose_name="Seçenek")
     voter = models.ForeignKey(User)
     voter_ip = models.IPAddressField(blank=True, verbose_name="IP Adresi")
@@ -49,9 +50,9 @@ class PollOption(models.Model):
 
 class Poll(models.Model):
     question = models.CharField("Soru", max_length=128, help_text="Buraya anketin sorusunu yazın.")
-    allow_changing_vote = models.BooleanField("Oy Değiştirmek İzinli", help_text="Kullanılan oyların sonradan değiştirilebilmesini istiyorsanız bunu işaretleyin.")
+    allow_changing_vote = models.BooleanField("Oy Değiştirmek İzinli", default=True, help_text="Kullanılan oyların sonradan değiştirilebilmesini istiyorsanız bunu işaretleyin.")
     date_limit = models.BooleanField("Süreli", help_text="Oylamada süre sınırı olmasını istiyorsanız bunu işaretleyin.")
-    end_date = models.DateTimeField("Bitiş Tarihi", help_text="Oylamanın ne zaman biteceğini belirleyin. 30/8/2008 gibi.")
+    end_date = models.DateTimeField("Bitiş Tarihi", blank=True, help_text="Oylamanın ne zaman biteceğini belirleyin. 30/8/2008 gibi.")
 
     def __unicode__(self):
         if len(self.question) > 32:
