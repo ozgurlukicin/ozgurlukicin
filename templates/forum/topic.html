@@ -22,11 +22,15 @@
 <br />
 
 {% if topic.poll %}
+<div class="poll">
 {{ topic.poll.question }}<br />
+<ul>
 {% for option in topic.poll.polloption_set.all %}
-{{ option.text }}<br />
+<li><a href="{{ forum.get_absolute_url }}{{ topic.id }}/poll/vote/{{ option.id }}/" title="oy ver">{{ option.text }} ({{ option.vote_count }})</a></li>
 {% endfor %}
+</ul>
 {% if perms.forum.can_change_poll %}<a href="{{ topic.get_change_poll_url }}">change</a> - delete{% endif %}
+</div>
 {% endif %}
 
 {% for post in post_list %}

@@ -25,7 +25,7 @@ from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail
 from oi.st.models import Tag, News
-from oi.poll.models import Poll, PollOption
+from oi.poll.models import Poll, PollOption, PollVote
 
 # import our function for sending e-mails and setting
 from oi.st.wrappers import send_mail_with_header
@@ -711,11 +711,11 @@ def create_poll(request, forum_slug, topic_id):
     if forum.slug != forum_slug:
         return HttpResponseRedirect(topic.get_create_poll_url())
 
-    # Check locks
+    # check locks
     if forum.locked or topic.locked:
         return HttpResponse('Forum or topic is locked')
 
-    # Check if it already has a poll
+    # check if it already has a poll
     try:
         topic.poll
         return HttpResponse('Bu konuya zaten anket eklenmiş')
@@ -766,7 +766,7 @@ def change_poll(request, forum_slug, topic_id):
     except: #DoesNotExist
         return HttpResponseRedirect(topic.get_create_poll_url())
 
-    # Check locks
+    # check locks
     if forum.locked or topic.locked:
         return HttpResponse('Forum or topic is locked')
 
@@ -823,3 +823,55 @@ def change_poll(request, forum_slug, topic_id):
         form = PollForm(initial=initial)
 
     return render_response(request, "forum/change_poll.html", locals())
+
+@login_required
+def vote_poll(request,forum_slug,topic_id,option_id):
+    topic = get_object_or_404(Topic, pk=topic_id)
+    option = get_object_or_404(PollOption, pk=option_id)
+    forum = topic.forum
+    if forum.slug != forum_slug:
+        return HttpResponseRedirect(topic.get_absolute_url())
+
+    # check poll
+    try:
+        poll = topic.poll
+    except: #DoesNotExist
+        return HttpResponseRedirect(topic.get_absolute_url())
+
+    # check if this option belongs to the poll
+    if option.poll != poll:
+        return HttpResponseRedirect(topic.get_absolute_url())
+
+    # check locks
+    if forum.locked or topic.locked:
+        return HttpResponse("Forum ya da başlık kilitli")
+
+    # create or change vote
+    try:
+        vote = PollVote.objects.get(poll=poll, voter=request.user)
+        if poll.allow_changing_vote:
+            vote.option.vote_count -= 1
+            vote.option.save()
+            vote.delete()
+            vote = PollVote(
+                    poll=poll,
+                    option=option,
+                    voter=request.user,
+                    voter_ip=request.META.get('REMOTE_ADDR', None),
+                    )
+            vote.save()
+            option.vote_count += 1
+            option.save()
+        #TODO: else: say that no changes allowed
+    except ObjectDoesNotExist:
+        vote = PollVote(
+                poll=poll,
+                option=option,
+                voter=request.user,
+                voter_ip=request.META.get('REMOTE_ADDR', None),
+                )
+        vote.save()
+        option.vote_count += 1
+        option.save()
+
+    return HttpResponseRedirect(topic.get_absolute_url())
