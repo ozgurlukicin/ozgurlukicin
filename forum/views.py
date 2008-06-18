@@ -173,13 +173,15 @@ def topic(request, forum_slug, topic_id):
 
     # polloptions if topic has a poll
     poll_options = None
-    if topic.poll != None:
+    try:
         poll_options = topic.poll.polloption_set.all()
         total_vote_count = topic.poll.pollvote_set.count() * 1.0
         for option in poll_options:
             option.percent = int(option.vote_count / total_vote_count * 100)
             if option.percent < 80:
                 option.percent_out = True
+    except: #DoesNotExist
+        pass
 
     return object_list(request, posts,
                        template_name = 'forum/topic.html',
