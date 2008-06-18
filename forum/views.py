@@ -177,7 +177,10 @@ def topic(request, forum_slug, topic_id):
         poll_options = topic.poll.polloption_set.all()
         total_vote_count = topic.poll.pollvote_set.count() * 1.0
         for option in poll_options:
-            option.percent = int(option.vote_count / total_vote_count * 100)
+            if total_vote_count < 1:
+                option.percent = 0
+            else:
+                option.percent = int(option.vote_count / total_vote_count * 100)
             if option.percent < 80:
                 option.percent_out = True
     except: #DoesNotExist
