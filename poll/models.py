@@ -15,7 +15,7 @@ class PollVote(models.Model):
     voter_ip = models.IPAddressField(blank=True, verbose_name="IP Adresi")
 
     def __unicode__(self):
-        return option
+        return self.option.__unicode__()
 
     class Admin:
         list_display = ("option", "voter", "voter_ip")
