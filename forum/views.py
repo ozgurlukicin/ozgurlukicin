@@ -171,11 +171,13 @@ def topic(request, forum_slug, topic_id):
     if request.user.has_perm("forum.can_change_abusereport"):
         abuse_count = AbuseReport.objects.count()
 
-    # polloptions if topic has a poll
-    poll_options = None
+    # create polloption percents and poll_enabled information if topic has a poll
+    poll_options = poll_enabled = False
     try:
-        poll_options = topic.poll.polloption_set.all()
-        total_vote_count = topic.poll.pollvote_set.count() * 1.0
+        # calculate percents
+        poll = topic.poll
+        poll_options = poll.polloption_set.all()
+        total_vote_count = poll.pollvote_set.count() * 1.0
         for option in poll_options:
             if total_vote_count < 1:
                 option.percent = 0
@@ -183,6 +185,8 @@ def topic(request, forum_slug, topic_id):
                 option.percent = int(option.vote_count / total_vote_count * 100)
             if option.percent < 80:
                 option.percent_out = True
+        # now let's see if we'll enable voting for this user
+        poll_enabled = request.user.is_authenticated() and poll.date_limit and poll.end_date > datetime.now()
     except: #DoesNotExist
         pass
 
@@ -196,6 +200,7 @@ def topic(request, forum_slug, topic_id):
                            "watching": watching,
                            "abuse_count": abuse_count,
                            "poll_options": poll_options,
+                           "poll_enabled": poll_enabled,
                            },
                        paginate_by = POSTS_PER_PAGE,
                        allow_empty = True)
@@ -745,6 +750,7 @@ def create_poll(request, forum_slug, topic_id):
             poll = Poll(
                     question = form.cleaned_data["question"],
                     allow_changing_vote = form.cleaned_data["allow_changing_vote"],
+                    allow_multiple_choices = form.cleaned_data["allow_multiple_choices"],
                     date_limit = form.cleaned_data["date_limit"],
                     end_date = form.cleaned_data["end_date"],
                     )
@@ -789,9 +795,15 @@ def change_poll(request, forum_slug, topic_id):
     if request.method == 'POST':
         form = PollForm(request.POST.copy())
         if form.is_valid():
+            # we must delete existing votes in this case
+            #FIXME: Doesn't work because form.cleaned_data["allow_changing_vote"] always return True
+            print poll.allow_multiple_choices, form.cleaned_data["allow_changing_vote"], poll.allow_multiple_choices and not form.cleaned_data["allow_changing_vote"]
+            if poll.allow_multiple_choices and not form.cleaned_data["allow_changing_vote"]:
+                poll.pollvote_set.delete()
             # change the poll
             poll.question = form.cleaned_data["question"]
             poll.allow_changing_vote = form.cleaned_data["allow_changing_vote"]
+            poll.allow_multiple_choices = form.cleaned_data["allow_multiple_choices"]
             poll.date_limit = form.cleaned_data["date_limit"]
             poll.end_date = form.cleaned_data["end_date"]
             poll.save()
@@ -826,15 +838,13 @@ def change_poll(request, forum_slug, topic_id):
     else:
         # convert returned value "day/month/year"
         if poll.end_date:
-            get = str(poll.end_date)
-            get = get.split("-")
-
-            end_date = "%s/%s/%s" % (get[2], get[1], get[0])
+            end_date = poll.end_date.strftime("%d/%m/%Y")
         else:
-            end_date=None
+            end_date = None
         initial = {
                 "question": poll.question,
                 "allow_changing_vote": poll.allow_changing_vote,
+                "allow_multiple_choices": poll.allow_multiple_choices,
                 "date_limit": poll.date_limit,
                 "end_date": end_date,
                 }
@@ -869,15 +879,21 @@ def vote_poll(request,forum_slug,topic_id,option_id):
 
     # check locks
     if forum.locked or topic.locked:
-        return HttpResponse("Forum ya da başlık kilitli")
+        return HttpResponse("Forum ya da başlık kilitlidir.")
 
-    # create or change vote
-    try:
-        vote = PollVote.objects.get(poll=poll, voter=request.user)
-        if poll.allow_changing_vote:
-            vote.option.vote_count = vote.option.pollvote_set.count() - 1
-            vote.option.save()
-            vote.delete()
+    # check date
+    if poll.date_limit and datetime.now() > poll.end_date:
+        return HttpResponse("Oylama süresi dolmuştur.")
+
+    if poll.allow_multiple_choices:
+        # select/unselect option
+        try:
+            vote = PollVote.objects.get(option=option, voter=request.user)
+            if poll.allow_changing_vote:
+                vote.option.vote_count = vote.option.pollvote_set.count() - 1
+                vote.option.save()
+                vote.delete()
+        except ObjectDoesNotExist:
             vote = PollVote(
                     poll=poll,
                     option=option,
@@ -887,17 +903,33 @@ def vote_poll(request,forum_slug,topic_id,option_id):
             vote.save()
             option.vote_count = option.pollvote_set.count()
             option.save()
-        #TODO: else: say that no changes allowed
-    except ObjectDoesNotExist:
-        vote = PollVote(
-                poll=poll,
-                option=option,
-                voter=request.user,
-                voter_ip=request.META.get('REMOTE_ADDR', None),
-                )
-        vote.save()
-        option.vote_count += 1
-        option.save()
+    else:
+        # create or change vote
+        try:
+            vote = PollVote.objects.get(poll=poll, voter=request.user)
+            if poll.allow_changing_vote:
+                vote.option.vote_count = vote.option.pollvote_set.count() - 1
+                vote.option.save()
+                vote.delete()
+                vote = PollVote(
+                        poll=poll,
+                        option=option,
+                        voter=request.user,
+                        voter_ip=request.META.get('REMOTE_ADDR', None),
+                        )
+                vote.save()
+                option.vote_count = option.pollvote_set.count()
+                option.save()
+        except ObjectDoesNotExist:
+            vote = PollVote(
+                    poll=poll,
+                    option=option,
+                    voter=request.user,
+                    voter_ip=request.META.get('REMOTE_ADDR', None),
+                    )
+            vote.save()
+            option.vote_count = option.pollvote_set.count()
+            option.save()
 
     return HttpResponseRedirect(topic.get_absolute_url())
 
