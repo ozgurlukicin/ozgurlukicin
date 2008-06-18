@@ -25,8 +25,8 @@
 <div class="poll">
 {{ topic.poll.question }}<br />
 <ul>
-{% for option in topic.poll.polloption_set.all %}
-<li><a href="{{ forum.get_absolute_url }}{{ topic.id }}/poll/vote/{{ option.id }}/" title="oy ver">{{ option.text }} ({{ option.vote_count }})</a></li>
+{% for option in poll_options %}
+<li><a href="{{ forum.get_absolute_url }}{{ topic.id }}/poll/vote/{{ option.id }}/" title="oy vermek için tıklayın">{{ option.text }}</a><br /><div class="topic_poll"><div style="width:{{ option.percent }}%;background-color:#51798E;">{% if option.percent_out %}&nbsp;</div><span>%{{ option.percent }} ({{ option.vote_count }} oy)</span>{% else %}<span style="float:right;color:white;">%{{ option.percent }} ({{ option.vote_count }} oy)</span></div>{% endif %}</div></li>
 {% endfor %}
 </ul>
 {% if perms.forum.can_change_poll %}<a href="{{ topic.get_change_poll_url }}">change</a> - <a href="{{ topic.get_delete_poll_url }}">delete</a>{% endif %}

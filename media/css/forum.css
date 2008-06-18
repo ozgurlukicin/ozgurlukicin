@@ -458,3 +458,12 @@ border: 1px solid #45586F;
     width: 31%;
     padding: 10px;
 }
+div.topic_poll {
+    height: 16px;
+    width: 400px;
+    border: 1px solid #6992A6;
+}
+div.topic_poll div {
+    float: left;
+    height: 100%;
+}

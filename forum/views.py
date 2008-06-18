@@ -166,10 +166,20 @@ def topic(request, forum_slug, topic_id):
     topic.views += 1
     topic.save()
 
-    # we love Django, just 1 line and pagination is ready :)
+    # abuse reports for admins
     abuse_count = 0
     if request.user.has_perm("forum.can_change_abusereport"):
         abuse_count = AbuseReport.objects.count()
+
+    # polloptions if topic has a poll
+    poll_options = None
+    if topic.poll != None:
+        poll_options = topic.poll.polloption_set.all()
+        total_vote_count = topic.poll.pollvote_set.count() * 1.0
+        for option in poll_options:
+            option.percent = int(option.vote_count / total_vote_count * 100)
+            if option.percent < 80:
+                option.percent_out = True
 
     return object_list(request, posts,
                        template_name = 'forum/topic.html',
@@ -180,6 +190,7 @@ def topic(request, forum_slug, topic_id):
                            'news_list': news_list,
                            "watching": watching,
                            "abuse_count": abuse_count,
+                           "poll_options": poll_options,
                            },
                        paginate_by = POSTS_PER_PAGE,
                        allow_empty = True)
@@ -859,7 +870,7 @@ def vote_poll(request,forum_slug,topic_id,option_id):
     try:
         vote = PollVote.objects.get(poll=poll, voter=request.user)
         if poll.allow_changing_vote:
-            vote.option.vote_count -= 1
+            vote.option.vote_count = vote.option.pollvote_set.count() - 1
             vote.option.save()
             vote.delete()
             vote = PollVote(
@@ -869,7 +880,7 @@ def vote_poll(request,forum_slug,topic_id,option_id):
                     voter_ip=request.META.get('REMOTE_ADDR', None),
                     )
             vote.save()
-            option.vote_count += 1
+            option.vote_count = option.pollvote_set.count()
             option.save()
         #TODO: else: say that no changes allowed
     except ObjectDoesNotExist:
