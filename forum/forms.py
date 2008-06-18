@@ -76,7 +76,7 @@ class PollForm(forms.ModelForm):
         field_data = self.cleaned_data['end_date']
 
         # it must be bigger than today
-        if field_data != None and field_data <= date.today():
+        if field_data != None and self.cleaned_data["date_limit"] and field_data <= date.today():
             raise forms.ValidationError("Oylama bitiş tarihi bugünden küçük olamaz.")
 
         return field_data
