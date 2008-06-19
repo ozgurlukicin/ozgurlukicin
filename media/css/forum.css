@@ -481,6 +481,7 @@ div.poll a:hover {
     text-decoration: underline;
 }
 div.poll_option {
+    width: 100%;
     overflow: hidden;
     margin-bottom: 5px;
 }
