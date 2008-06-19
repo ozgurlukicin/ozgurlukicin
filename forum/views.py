@@ -795,15 +795,9 @@ def change_poll(request, forum_slug, topic_id):
     if request.method == 'POST':
         form = PollForm(request.POST.copy())
         if form.is_valid():
-            # we must delete existing votes in this case
-            #FIXME: Doesn't work because form.cleaned_data["allow_changing_vote"] always return True
-            print poll.allow_multiple_choices, form.cleaned_data["allow_changing_vote"], poll.allow_multiple_choices and not form.cleaned_data["allow_changing_vote"]
-            if poll.allow_multiple_choices and not form.cleaned_data["allow_changing_vote"]:
-                poll.pollvote_set.delete()
             # change the poll
             poll.question = form.cleaned_data["question"]
             poll.allow_changing_vote = form.cleaned_data["allow_changing_vote"]
-            poll.allow_multiple_choices = form.cleaned_data["allow_multiple_choices"]
             poll.date_limit = form.cleaned_data["date_limit"]
             poll.end_date = form.cleaned_data["end_date"]
             poll.save()

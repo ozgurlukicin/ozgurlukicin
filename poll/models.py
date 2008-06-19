@@ -51,7 +51,7 @@ class PollOption(models.Model):
 class Poll(models.Model):
     question = models.CharField("Soru", max_length=128, help_text="Buraya anketin sorusunu yazın.")
     allow_changing_vote = models.BooleanField("Oy Değiştirmek İzinli", default=False, blank=True, help_text="Kullanılan oyların sonradan değiştirilebilmesini istiyorsanız bunu işaretleyin.")
-    allow_multiple_choices = models.BooleanField("Çok Seçmeli Oylama", default=False, blank=True, help_text="Bir kişinin birden fazla seçenekte oy kullanabilmesini isiyorsanız bunu seçin. Uyarı: Eğer seçiliyse ve sonradan kaldırılırsa o ana kadar verilen bütün oylar silinecektir.")
+    allow_multiple_choices = models.BooleanField("Çok Seçmeli Oylama", default=False, blank=True, help_text="Bir kişinin birden fazla seçenekte oy kullanabilmesini isiyorsanız bunu seçin. Uyarı: Bu ayarı sonradan değiştiremezsiniz.")
     date_limit = models.BooleanField("Süreli", help_text="Oylamada süre sınırı olmasını istiyorsanız bunu işaretleyin.")
     end_date = models.DateTimeField("Bitiş Tarihi", blank=True, null=True, help_text="Oylamanın ne zaman biteceğini belirleyin. 30/8/2008 gibi.")
 
