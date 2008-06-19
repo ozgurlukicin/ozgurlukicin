@@ -186,7 +186,11 @@ def topic(request, forum_slug, topic_id):
             if option.percent < 80:
                 option.percent_out = True
         # now let's see if we'll enable voting for this user
-        poll_enabled = request.user.is_authenticated() and poll.date_limit and poll.end_date > datetime.now()
+        if request.user.is_authenticated():
+            if poll.date_limit:
+                poll_enabled = poll.end_date > datetime.now()
+            else:
+                poll_enabled = True
     except: #DoesNotExist
         pass
 
