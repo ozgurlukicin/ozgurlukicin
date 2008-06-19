@@ -866,7 +866,6 @@ def change_poll(request, forum_slug, topic_id):
 
 @login_required
 def vote_poll(request,forum_slug,topic_id,option_id):
-    #TODO: voting deadline must be checked here and when showing the poll
     topic = get_object_or_404(Topic, pk=topic_id)
     option = get_object_or_404(PollOption, pk=option_id)
     forum = topic.forum
