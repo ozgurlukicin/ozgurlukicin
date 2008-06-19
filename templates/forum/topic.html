@@ -23,11 +23,9 @@
 
 {% if topic.poll %}
 <div class="poll">
-    <h2>Anket</h2>
     <div class="poll_question">
-        <p>{{ topic.poll.question }}</p>
-        {% if topic.poll.date_limit %}<p>Oylama bitiş tarihi: {{ topic.poll.end_date|date:"j F Y l" }}</p>{% endif %}
-        {% if perms.forum.can_change_poll %}<p><a href="{{ topic.get_change_poll_url }}">change</a> - <a href="{{ topic.get_delete_poll_url }}">delete</a></p>{% endif %}
+    <div class="poll_header">Anket</div>
+        <h3>{{ topic.poll.question }}</h3>
     </div>
     <div class="poll_options">
     {% for option in poll_options %}
@@ -40,6 +38,8 @@
         </div>
     {% endfor %}
         {% if poll_enabled %}<div class="poll_help">Oylamaya katılmak için şıklardan birini tıklayın.</div>{% endif %}
+        {% if topic.poll.date_limit %}<div class="poll_help">Oylama bitiş tarihi: {{ topic.poll.end_date|date:"j F Y l" }}</div>{% endif %}
+        {% if perms.forum.can_change_poll %}<div><a href="{{ topic.get_change_poll_url }}">change</a> - <a href="{{ topic.get_delete_poll_url }}">delete</a></div>{% endif %}
     </div>
 </div>
 {% endif %}

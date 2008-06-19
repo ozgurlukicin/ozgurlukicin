@@ -506,3 +506,13 @@ div.poll_option_bar {
 div.poll_help {
     font-style: italic;
 }
+div.poll_header {
+    font-size: 18px;
+    font-weight: bold;
+    background-image: url(/media/dijital/img/forum/stats.gif);
+    background-position: left center;
+    background-repeat: no-repeat;
+    padding-left: 45px;
+    margin-left: 5px;
+    height: 31px;
+}
