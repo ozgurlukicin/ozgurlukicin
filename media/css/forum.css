@@ -458,12 +458,30 @@ border: 1px solid #45586F;
     width: 31%;
     padding: 10px;
 }
-div.topic_poll {
+div.poll_bar {
     height: 16px;
-    width: 400px;
+    width: 80%;
     border: 1px solid #6992A6;
 }
-div.topic_poll div {
+div.poll_bar div {
     float: left;
     height: 100%;
+}
+div.poll {
+    width: 100%;
+    overflow: hidden;
+}
+div.poll a {
+    text-decoration: none;
+}
+div.poll a:hover {
+    text-decoration: underline;
+}
+div.poll_question {
+    padding-left: 10px;
+}
+div.poll_option {
+    padding-left: 10px;
+    border-top: 1px solid #CBD8E0;
+    margin-bottom: 3px;
 }
