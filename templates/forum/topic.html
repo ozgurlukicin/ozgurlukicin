@@ -23,19 +23,23 @@
 
 {% if topic.poll %}
 <div class="poll">
+    <h2>Anket</h2>
     <div class="poll_question">
-        <h3>Anket: {{ topic.poll.question }}</h3>
-        {% if topic.poll.date_limit %}<br />Oylama bitiş tarihi: {{ topic.poll.end_date|date:"j F Y l" }}{% endif %}
-        {% if perms.forum.can_change_poll %}<a href="{{ topic.get_change_poll_url }}">change</a> - <a href="{{ topic.get_delete_poll_url }}">delete</a>{% endif %}
+        <p>{{ topic.poll.question }}</p>
+        {% if topic.poll.date_limit %}<p>Oylama bitiş tarihi: {{ topic.poll.end_date|date:"j F Y l" }}</p>{% endif %}
+        {% if perms.forum.can_change_poll %}<p><a href="{{ topic.get_change_poll_url }}">change</a> - <a href="{{ topic.get_delete_poll_url }}">delete</a></p>{% endif %}
     </div>
     <div class="poll_options">
     {% for option in poll_options %}
     <div class="poll_option">
-        {% if poll_enabled %}<a href="{{ forum.get_absolute_url }}{{ topic.id }}/poll/vote/{{ option.id }}/" title="oy vermek için tıklayın">{{ option.text }}</a>{% else %}{{ option.text }}{% endif %}<br />
-        <div class="poll_bar">
-            <div style="width:{{ option.percent }}%;background-color:#51798E;">{% if option.percent_out %}&nbsp;</div><span>%{{ option.percent }} ({{ option.vote_count }} oy)</span>{% else %}<span style="float:right;color:white;">%{{ option.percent }} ({{ option.vote_count }} oy)</span></div>{% endif %}</div>
+        <div class="poll_option_text">{% if poll_enabled %}<a href="{{ forum.get_absolute_url }}{{ topic.id }}/poll/vote/{{ option.id }}/" title="oy vermek için tıklayın">{{ option.text }}</a>{% else %}{{ option.text }}{% endif %}</div>
+        <div class="poll_option_bar">
+            <div class="poll_bar">
+                <div style="width:{{ option.percent }}%;background-color:#51798E;">{% if option.percent_out %}&nbsp;</div><span>%{{ option.percent }} ({{ option.vote_count }} oy)</span>{% else %}<span style="float:right;color:white;">%{{ option.percent }} ({{ option.vote_count }} oy)</span></div>{% endif %}</div>
+            </div>
         </div>
     {% endfor %}
+        {% if poll_enabled %}<div class="poll_help">Oylamaya katılmak için şıklardan birini tıklayın.</div>{% endif %}
     </div>
 </div>
 {% endif %}

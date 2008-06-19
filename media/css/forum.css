@@ -474,14 +474,35 @@ div.poll {
 div.poll a {
     text-decoration: none;
 }
+div.poll h2 {
+    margin-left: 10px;
+}
 div.poll a:hover {
     text-decoration: underline;
 }
+div.poll_option {
+    overflow: hidden;
+    margin-bottom: 5px;
+}
 div.poll_question {
     padding-left: 10px;
+    float: left;
+    width: 10%;
 }
-div.poll_option {
-    padding-left: 10px;
-    border-top: 1px solid #CBD8E0;
-    margin-bottom: 3px;
+div.poll_options {
+    width: 80%;
+    float: right;
+}
+div.poll_option_text {
+    float: left;
+    overflow: hidden;
+    width: 20%;
+}
+div.poll_option_bar {
+    float: right;
+    overflow: hidden;
+    width: 80%;
+}
+div.poll_help {
+    font-style: italic;
 }

@@ -191,6 +191,14 @@ def topic(request, forum_slug, topic_id):
                 poll_enabled = poll.end_date > datetime.now()
             else:
                 poll_enabled = True
+            try:
+                PollVote.objects.get(poll=poll, voter=request.user)
+                # user has voted before, let's see if we'll still enable the poll
+                if poll_enabled:
+                    if not poll.allow_changing_vote:
+                        poll_enabled = False
+            except ObjectDoesNotExist:
+                pass
     except: #DoesNotExist
         pass
 
