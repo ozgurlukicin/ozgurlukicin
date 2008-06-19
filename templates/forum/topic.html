@@ -24,8 +24,8 @@
 {% if topic.poll %}
 <div class="poll">
     <div class="poll_question">
-    <div class="poll_header">Anket</div>
-        <h3>{{ topic.poll.question }}</h3>
+        <div class="poll_header">Anket</div>
+        <p>{{ topic.poll.question }}</p>
     </div>
     <div class="poll_options">
     {% for option in poll_options %}

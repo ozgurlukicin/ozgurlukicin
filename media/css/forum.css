@@ -489,6 +489,10 @@ div.poll_question {
     float: left;
     width: 10%;
 }
+div.poll_question p {
+    font-size: 12px;
+    font-weight: bold;
+}
 div.poll_options {
     width: 80%;
     float: right;
