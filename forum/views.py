@@ -22,7 +22,7 @@ from oi.forum.models import Category, Forum, Topic, Post, AbuseReport, WatchList
 from oi.forum import customgeneric
 
 from django.core.urlresolvers import reverse
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.core.mail import send_mail
 from oi.st.models import Tag, News
 from oi.poll.models import Poll, PollOption, PollVote
@@ -937,6 +937,9 @@ def vote_poll(request,forum_slug,topic_id,option_id):
             vote.save()
             option.vote_count = option.pollvote_set.count()
             option.save()
+        except MultipleObjectsReturned:
+            # This is not supposed to happen, but let's take cover
+            PollVote.objects.filter(poll=poll, voter=request.user)[0].delete()
 
     return HttpResponseRedirect(topic.get_absolute_url())
 
