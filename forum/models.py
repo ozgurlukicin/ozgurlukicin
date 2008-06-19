@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 
 from oi.middleware import threadlocals
 from oi.st.models import Tag
+from oi.poll.models import Poll
 
 from oi.forum.settings import FORUM_FROM_EMAIL
 
@@ -159,6 +160,7 @@ class Topic(models.Model):
     views = models.IntegerField(default=0, verbose_name='Görüntülenme sayısı')
     topic_latest_post = models.ForeignKey(Post, blank=True, null=True, related_name='topic_latest_post', verbose_name='Son ileti')
     tags = models.ManyToManyField(Tag, verbose_name='Etiketler')
+    poll = models.ForeignKey(Poll, blank=True, verbose_name="Anket")
 
     def __str__(self):
         return self.title
@@ -195,6 +197,15 @@ class Topic(models.Model):
     def get_hide_url(self):
         return '/forum/%s/%s/hide/' % (self.forum.slug, self.id)
 
+    def get_create_poll_url(self):
+        return '/forum/%s/%s/poll/create/' % (self.forum.slug, self.id)
+
+    def get_change_poll_url(self):
+        return '/forum/%s/%s/poll/change/' % (self.forum.slug, self.id)
+
+    def get_delete_poll_url(self):
+        return '/forum/%s/%s/poll/delete/' % (self.forum.slug, self.id)
+
     def get_email_id(self):
         return '<%s.%s@%s>' % (md5.new(self.title).hexdigest(), self.id, FORUM_FROM_EMAIL.split('@')[1])
 
@@ -213,6 +224,8 @@ class Topic(models.Model):
                        ("can_see_hidden_topics", "Can see hidden topics"),
                        ("can_merge_topic", "Can merge topic"),
                        ("can_move_topic", "Can move topic"),
+                       ("can_create_poll", "Can create poll"),
+                       ("can_change_poll", "Can change poll"),
                       )
 
     def save(self):

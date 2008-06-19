@@ -225,7 +225,7 @@ div.post_bottom_right {
     text-align: right;
     padding: 4px 10px 0px 0px;
 }
-#post_pagination {
+div.post_pagination {
     float:left;
     padding: 8px 0px 0px 10px;
 }
@@ -454,4 +454,67 @@ border: 1px solid #45586F;
     float: left;
     width: 31%;
     padding: 10px;
+}
+div.poll_bar {
+    height: 16px;
+    width: 80%;
+    border: 1px solid #6992A6;
+}
+div.poll_bar div {
+    float: left;
+    height: 100%;
+}
+div.poll {
+    width: 100%;
+    overflow: hidden;
+}
+div.poll a {
+    text-decoration: none;
+}
+div.poll h2 {
+    margin-left: 10px;
+}
+div.poll a:hover {
+    text-decoration: underline;
+}
+div.poll_option {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+div.poll_question {
+    padding-left: 10px;
+    float: left;
+    width: 10%;
+}
+div.poll_question p {
+    font-size: 12px;
+    font-weight: bold;
+}
+div.poll_options {
+    width: 80%;
+    float: right;
+}
+div.poll_option_text {
+    float: left;
+    overflow: hidden;
+    width: 20%;
+}
+div.poll_option_bar {
+    float: right;
+    overflow: hidden;
+    width: 80%;
+}
+div.poll_help {
+    font-style: italic;
+}
+div.poll_header {
+    font-size: 18px;
+    font-weight: bold;
+    background-image: url(/media/dijital/img/forum/stats.gif);
+    background-position: left center;
+    background-repeat: no-repeat;
+    padding-left: 45px;
+    margin-left: 5px;
+    height: 31px;
 }

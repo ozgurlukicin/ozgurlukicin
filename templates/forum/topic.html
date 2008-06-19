@@ -15,8 +15,34 @@
     {% if request.user.is_authenticated and not watching %}
     <div class="post_bottom_small"><a href="{{ topic.get_follow_url }}"><img src="/media/dijital/img/forum/watch.gif" alt="izle" title="E-posta ile izle" border="0" /></a></div>
     {% endif %}
+    {% if perms.forum.can_create_poll and not topic.poll %}
+    <div class="post_bottom_small"><a href="{{ topic.get_create_poll_url }}">add_poll</a></div>
+    {% endif %}
 </div>
 <br />
+
+{% if topic.poll %}
+<div class="poll">
+    <div class="poll_question">
+        <div class="poll_header">Anket</div>
+        <p>{{ topic.poll.question }}</p>
+    </div>
+    <div class="poll_options">
+    {% for option in poll_options %}
+    <div class="poll_option">
+        <div class="poll_option_text">{% if poll_enabled %}<a href="{{ forum.get_absolute_url }}{{ topic.id }}/poll/vote/{{ option.id }}/" title="oy vermek için tıklayın">{{ option.text }}</a>{% else %}{{ option.text }}{% endif %}</div>
+        <div class="poll_option_bar">
+            <div class="poll_bar">
+                <div style="width:{{ option.percent }}%;background-color:#51798E;">{% if option.percent_out %}&nbsp;</div><span>%{{ option.percent }} ({{ option.vote_count }} oy)</span>{% else %}<span style="float:right;color:white;">%{{ option.percent }} ({{ option.vote_count }} oy)</span></div>{% endif %}</div>
+            </div>
+        </div>
+    {% endfor %}
+        {% if poll_enabled %}<div class="poll_help">Oylamaya katılmak için şıklardan birini tıklayın.</div>{% endif %}
+        {% if topic.poll.date_limit %}<div class="poll_help">Oylama bitiş tarihi: {{ topic.poll.end_date|date:"j F Y l" }}</div>{% endif %}
+        {% if perms.forum.can_change_poll %}<div><a href="{{ topic.get_change_poll_url }}">change</a> - <a href="{{ topic.get_delete_poll_url }}">delete</a></div>{% endif %}
+    </div>
+</div>
+{% endif %}
 
 {% for post in post_list %}
 
@@ -149,7 +175,7 @@
         <div class="post_bottom_small"><a href="{{ topic.get_edit_url }}">edit_topic</a></div>
     {% endif %}
 {% if is_paginated %}
-    <div id="post_pagination">{% paginator %}</div>
+    <div class="post_pagination">{% paginator %}</div>
 {% endif %}
 </div>
 <div class="forum_address">

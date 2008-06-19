@@ -5,9 +5,12 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
+from datetime import date
+
 from django import newforms as forms
 from oi.forum.models import AbuseReport, Topic, Forum, WatchList
 from oi.st.models import Tag
+from oi.poll.models import Poll
 
 from oi.st.forms import XssField
 
@@ -54,3 +57,26 @@ class MoveForm(forms.Form):
 
 class AbuseForm(forms.Form):
     reason = XssField(label='Şikayet Sebebi', widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), required=True, help_text="(en fazla 512 karakter olabilir)", max_length=512)
+
+class PollForm(forms.ModelForm):
+    end_date = forms.DateField(label="Bitiş Tarihi", required=False, input_formats=("%d/%m/%Y",), help_text="Oylamanın ne zaman biteceğini belirleyin. 30/8/2008 gibi.")
+    option0 = forms.CharField(label='1. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
+    option1 = forms.CharField(label='2. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
+    option2 = forms.CharField(label='3. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
+    option3 = forms.CharField(label='4. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
+    option4 = forms.CharField(label='5. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
+    option5 = forms.CharField(label='6. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
+    option6 = forms.CharField(label='7. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
+    option7 = forms.CharField(label='8. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
+
+    class Meta:
+        model = Poll
+
+    def clean_end_date(self):
+        field_data = self.cleaned_data['end_date']
+
+        # it must be filled if date_limit is on
+        if self.cleaned_data["date_limit"] and field_data == None:
+            raise forms.ValidationError("Oylama bitiş tarihini belirlemelisiniz.")
+
+        return field_data

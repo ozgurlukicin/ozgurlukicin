@@ -22,9 +22,10 @@ from oi.forum.models import Category, Forum, Topic, Post, AbuseReport, WatchList
 from oi.forum import customgeneric
 
 from django.core.urlresolvers import reverse
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.core.mail import send_mail
 from oi.st.models import Tag, News
+from oi.poll.models import Poll, PollOption, PollVote
 
 # import our function for sending e-mails and setting
 from oi.st.wrappers import send_mail_with_header
@@ -165,10 +166,43 @@ def topic(request, forum_slug, topic_id):
     topic.views += 1
     topic.save()
 
-    # we love Django, just 1 line and pagination is ready :)
+    # abuse reports for admins
     abuse_count = 0
     if request.user.has_perm("forum.can_change_abusereport"):
         abuse_count = AbuseReport.objects.count()
+
+    # create polloption percents and poll_enabled information if topic has a poll
+    poll_options = poll_enabled = False
+    try:
+        # calculate percents
+        poll = topic.poll
+        poll_options = poll.polloption_set.all()
+        total_vote_count = poll.pollvote_set.count() * 1.0
+        for option in poll_options:
+            if len(option.text) > 16:
+                option.text = option.text[:16] + "..."
+            if total_vote_count < 1:
+                option.percent = 0
+            else:
+                option.percent = int(option.vote_count / total_vote_count * 100)
+            if option.percent < 80:
+                option.percent_out = True
+        # now let's see if we'll enable voting for this user
+        if request.user.is_authenticated():
+            if poll.date_limit:
+                poll_enabled = poll.end_date > datetime.now()
+            else:
+                poll_enabled = True
+            try:
+                PollVote.objects.get(poll=poll, voter=request.user)
+                # user has voted before, let's see if we'll still enable the poll
+                if poll_enabled:
+                    if not poll.allow_changing_vote:
+                        poll_enabled = False
+            except ObjectDoesNotExist:
+                pass
+    except: #DoesNotExist
+        pass
 
     return object_list(request, posts,
                        template_name = 'forum/topic.html',
@@ -179,6 +213,8 @@ def topic(request, forum_slug, topic_id):
                            'news_list': news_list,
                            "watching": watching,
                            "abuse_count": abuse_count,
+                           "poll_options": poll_options,
+                           "poll_enabled": poll_enabled,
                            },
                        paginate_by = POSTS_PER_PAGE,
                        allow_empty = True)
@@ -713,3 +749,229 @@ def list_abuse(request):
         else:
             abuse_list = AbuseReport.objects.all()
             return render_response(request, 'forum/abuse_list.html', {'abuse_list': abuse_list, "abuse_count":abuse_count})
+
+@permission_required('forum.can_create_poll', login_url="/kullanici/giris/")
+def create_poll(request, forum_slug, topic_id):
+    topic = get_object_or_404(Topic, pk=topic_id)
+    forum = topic.forum
+    if forum.slug != forum_slug:
+        return HttpResponseRedirect(topic.get_create_poll_url())
+
+    # check locks
+    if forum.locked or topic.locked:
+        return HttpResponse('Forum or topic is locked')
+
+    # check if it already has a poll
+    try:
+        topic.poll
+        return HttpResponse('Bu konuya zaten anket eklenmiş')
+    except: #DoesNotExist
+        pass
+
+    if request.method == 'POST':
+        form = PollForm(request.POST.copy())
+        if form.is_valid():
+            # create the poll
+            poll = Poll(
+                    question = form.cleaned_data["question"],
+                    allow_changing_vote = form.cleaned_data["allow_changing_vote"],
+                    allow_multiple_choices = form.cleaned_data["allow_multiple_choices"],
+                    date_limit = form.cleaned_data["date_limit"],
+                    end_date = form.cleaned_data["end_date"],
+                    )
+            poll.save()
+
+            # create poll options
+            for i in range(8):
+                if form.cleaned_data["option%d" % i]:
+                    option = PollOption(
+                            poll = poll,
+                            text = form.cleaned_data["option%d" % i],
+                            )
+                    option.save()
+
+            # now add it to topic
+            topic.poll = poll
+            topic.save()
+
+            return HttpResponseRedirect(topic.get_absolute_url())
+    else:
+        form = PollForm()
+
+    return render_response(request, "forum/create_poll.html", locals())
+
+@permission_required("forum.can_change_poll", login_url="/kullanici/giris/")
+def change_poll(request, forum_slug, topic_id):
+    topic = get_object_or_404(Topic, pk=topic_id)
+    forum = topic.forum
+    if forum.slug != forum_slug:
+        return HttpResponseRedirect(topic.get_change_poll_url())
+
+    # check poll
+    try:
+        poll = topic.poll
+    except: #DoesNotExist
+        return HttpResponseRedirect(topic.get_create_poll_url())
+
+    # check locks
+    if forum.locked or topic.locked:
+        return HttpResponse('Forum or topic is locked')
+
+    if request.method == 'POST':
+        form = PollForm(request.POST.copy())
+        if form.is_valid():
+            # change the poll
+            poll.question = form.cleaned_data["question"]
+            poll.allow_changing_vote = form.cleaned_data["allow_changing_vote"]
+            poll.date_limit = form.cleaned_data["date_limit"]
+            poll.end_date = form.cleaned_data["end_date"]
+            poll.save()
+
+            # change options, this is tricky
+            options = poll.polloption_set.all()
+            j = options.count()
+
+            # existing options may be deleted or changed, so let's do it
+            tobedeleted = []
+            for i in range(j):
+                if form.cleaned_data["option%d" % i]:
+                    option = options[i]
+                    option.text = form.cleaned_data["option%d" % i]
+                    option.save()
+                else:
+                    tobedeleted.append(options[i])
+            # now delete them
+            for option in tobedeleted:
+                option.delete()
+
+            # create non-existing options
+            for i in range(j, 8):
+                if form.cleaned_data["option%d" % i]:
+                    option = PollOption(
+                            poll = poll,
+                            text = form.cleaned_data["option%d" % i],
+                            )
+                    option.save()
+
+            return HttpResponseRedirect(topic.get_absolute_url())
+    else:
+        # convert returned value "day/month/year"
+        if poll.end_date:
+            end_date = poll.end_date.strftime("%d/%m/%Y")
+        else:
+            end_date = None
+        initial = {
+                "question": poll.question,
+                "allow_changing_vote": poll.allow_changing_vote,
+                "allow_multiple_choices": poll.allow_multiple_choices,
+                "date_limit": poll.date_limit,
+                "end_date": end_date,
+                }
+
+        # add options to initial data
+        i = 0
+        for option in poll.polloption_set.all():
+            initial["option%d" % i] = option.text
+            i += 1
+        form = PollForm(initial=initial)
+
+    return render_response(request, "forum/change_poll.html", locals())
+
+@login_required
+def vote_poll(request,forum_slug,topic_id,option_id):
+    topic = get_object_or_404(Topic, pk=topic_id)
+    option = get_object_or_404(PollOption, pk=option_id)
+    forum = topic.forum
+    if forum.slug != forum_slug:
+        return HttpResponseRedirect(topic.get_absolute_url())
+
+    # check poll
+    try:
+        poll = topic.poll
+    except: #DoesNotExist
+        return HttpResponseRedirect(topic.get_absolute_url())
+
+    # check if this option belongs to the poll
+    if option.poll != poll:
+        return HttpResponseRedirect(topic.get_absolute_url())
+
+    # check locks
+    if forum.locked or topic.locked:
+        return HttpResponse("Forum ya da başlık kilitlidir.")
+
+    # check date
+    if poll.date_limit and datetime.now() > poll.end_date:
+        return HttpResponse("Oylama süresi dolmuştur.")
+
+    if poll.allow_multiple_choices:
+        # select/unselect option
+        try:
+            vote = PollVote.objects.get(option=option, voter=request.user)
+            if poll.allow_changing_vote:
+                vote.option.vote_count = vote.option.pollvote_set.count() - 1
+                vote.option.save()
+                vote.delete()
+        except ObjectDoesNotExist:
+            vote = PollVote(
+                    poll=poll,
+                    option=option,
+                    voter=request.user,
+                    voter_ip=request.META.get('REMOTE_ADDR', None),
+                    )
+            vote.save()
+            option.vote_count = option.pollvote_set.count()
+            option.save()
+    else:
+        # create or change vote
+        try:
+            vote = PollVote.objects.get(poll=poll, voter=request.user)
+            if poll.allow_changing_vote:
+                vote.option.vote_count = vote.option.pollvote_set.count() - 1
+                vote.option.save()
+                vote.delete()
+                vote = PollVote(
+                        poll=poll,
+                        option=option,
+                        voter=request.user,
+                        voter_ip=request.META.get('REMOTE_ADDR', None),
+                        )
+                vote.save()
+                option.vote_count = option.pollvote_set.count()
+                option.save()
+        except ObjectDoesNotExist:
+            vote = PollVote(
+                    poll=poll,
+                    option=option,
+                    voter=request.user,
+                    voter_ip=request.META.get('REMOTE_ADDR', None),
+                    )
+            vote.save()
+            option.vote_count = option.pollvote_set.count()
+            option.save()
+        except MultipleObjectsReturned:
+            # This is not supposed to happen, but let's take cover
+            PollVote.objects.filter(poll=poll, voter=request.user)[0].delete()
+
+    return HttpResponseRedirect(topic.get_absolute_url())
+
+@permission_required("forum.can_change_poll", login_url="/kullanici/giris/")
+def delete_poll(request, forum_slug, topic_id):
+    topic = get_object_or_404(Topic, pk=topic_id)
+    forum = topic.forum
+    if forum.slug != forum_slug:
+        return HttpResponseRedirect(topic.get_absolute_url())
+
+    # check poll
+    try:
+        poll = topic.poll
+    except: #DoesNotExist
+        return HttpResponseRedirect(topic.get_absolute_url())
+
+    # check locks
+    if forum.locked or topic.locked:
+        return HttpResponse('Forum or topic is locked')
+
+    topic.poll=None
+    topic.save()
+    poll.delete()
+    return HttpResponseRedirect(topic.get_absolute_url())
