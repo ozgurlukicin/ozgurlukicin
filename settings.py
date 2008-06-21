@@ -91,6 +91,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.doc.XViewMiddleware',
     'oi.flatpages.middleware.FlatpageFallbackMiddleware',
     'oi.middleware.threadlocals.ThreadLocals',
+    'oi.middleware.debug.DebugFooter',
 )
 
 ROOT_URLCONF = 'oi.urls'
