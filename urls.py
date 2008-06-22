@@ -32,43 +32,43 @@ atom_dict = {
             }
 
 package_dict = {
-                'queryset': Package.objects.filter(status=1).order_by('title'),
+                'queryset': Package.objects.filter(status=True).order_by('title'),
                 'template_name': 'package/package_main.html',
                 'paginate_by': PACKAGE_PER_PAGE,
                 'template_object_name': 'package',
                }
 
 game_dict = {
-             'queryset': Game.objects.filter(status=1).order_by('title'),
+             'queryset': Game.objects.filter(status=True).order_by('title'),
              'template_name': 'game/game_main.html',
              'paginate_by': GAME_PER_PAGE,
              'template_object_name': 'game',
             }
 
 fs_dict = {
-           'queryset': FS.objects.filter(status=1).order_by('order'),
+           'queryset': FS.objects.filter(status=True).order_by('order'),
            'template_name': 'fs/fs_main.html',
            'paginate_by': FS_PER_PAGE,
            'template_object_name': 'fs',
           }
 
 howto_dict = {
-              'queryset': HowTo.objects.filter(status=1).order_by('title'),
+              'queryset': HowTo.objects.filter(status=True).order_by('title'),
               'template_name': 'howto/howto_main.html',
               'paginate_by': HOWTO_PER_PAGE,
               'template_object_name': 'howto',
               'extra_context': {
-                  'firststep': FS.objects.filter(status=1).order_by('order')[:10],
+                  'firststep': FS.objects.filter(status=True).order_by('order')[:10],
                   },
              }
 
 news_dict = {
-             'queryset': News.objects.filter(status=1).order_by('-update'),
+             'queryset': News.objects.filter(status=True).order_by('-update'),
              'template_name': 'news/news_main.html',
              'paginate_by': NEWS_PER_PAGE,
              'template_object_name': 'news',
              'extra_context': {
-                 'seminar': Seminar.objects.filter(status=1).order_by('-date'),
+                 'seminar': Seminar.objects.filter(status=True).order_by('-date'),
                  }
             }
 

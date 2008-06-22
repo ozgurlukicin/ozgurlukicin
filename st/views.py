@@ -29,10 +29,10 @@ def robots(request):
     return render_response(request, 'robots.txt')
 
 def home(request):
-    news = News.objects.filter(status=1).order_by('-update')[:NEWS_IN_HOMEPAGE]
-    packages = Package.objects.filter(status=1).order_by('-update')[:PACKAGES_IN_HOMEPAGE]
-    games = Game.objects.filter(status=1).order_by('-update')[:GAMES_IN_HOMEPAGE]
-    howtos = HowTo.objects.filter(status=1).order_by('-update')[:HOWTOS_IN_HOMEPAGE]
+    news = News.objects.filter(status=True).order_by('-update')[:NEWS_IN_HOMEPAGE]
+    packages = Package.objects.filter(status=True).order_by('-update')[:PACKAGES_IN_HOMEPAGE]
+    games = Game.objects.filter(status=True).order_by('-update')[:GAMES_IN_HOMEPAGE]
+    howtos = HowTo.objects.filter(status=True).order_by('-update')[:HOWTOS_IN_HOMEPAGE]
     return render_response(request, 'home.html', locals())
 
 def fs_detail(request, slug):
