@@ -20,7 +20,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="fs_title transparent_link">Pardus {% if version.number %}{{ version.number }} ({{ version.codename }}) {% endif %}indir</div>
+<div class="fs_title transparent_link">Pardus {% if version.number %}{{ version.number }} {#({{ version.codename }})#} {% endif %}indir</div>
 <div class="page_content grey">
 <h2>Kurulan CD</h2>
     <p>md5: <strong>{{ version.install_md5sum }}</strong><br />
@@ -41,9 +41,9 @@
 
         <p>Ayrıca {{ version.number }} {{ version.codename }} Kurulan CD'sini <a href="{{ version.install_torrent }}">torrent</a> adresini kullanarak P2P araçları ile de indirebilirsiniz. Pardus ile birlikte gelen KTorrent ile ilgili yazımızı okumak için <a href="/paket/ktorrent/">tıklayın</a>.</p>
 
+    <!--{#
         <p>Pardus'un eski sürümlerini kullanan kullanıcılar güncelleme yaparak {{ version.number }} {{ version.codename }} kullanmaya başlayabilirler, ayrıca kurulum yapmaları gerekmez.</p>
     </div>
-
 <h3>Çalışan CD</h3>
     <p>md5: <strong>{{ version.live_md5sum }}</strong><br />
     sha1sum: <strong>{{ version.live_sha1sum }}</strong></p>
@@ -62,6 +62,7 @@
         {% endif %}
 
         <p>Ayrıca {{ version.number }} {{ version.codename }} Çalışan CD'sini <a href="{{ version.live_torrent }}">torrent</a> adresini kullanarak P2P araçları ile de indirebilirsiniz.</p>
+#}-->
     </div>
 </div>
 {% endblock %}
