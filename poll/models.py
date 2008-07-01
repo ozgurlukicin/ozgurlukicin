@@ -54,6 +54,7 @@ class Poll(models.Model):
     allow_multiple_choices = models.BooleanField("Çok Seçmeli Oylama", default=False, blank=True, help_text="Bir kişinin birden fazla seçenekte oy kullanabilmesini isiyorsanız bunu seçin. Uyarı: Bu ayarı sonradan değiştiremezsiniz.")
     date_limit = models.BooleanField("Süreli", help_text="Oylamada süre sınırı olmasını istiyorsanız bunu işaretleyin.")
     end_date = models.DateTimeField("Bitiş Tarihi", blank=True, null=True, help_text="Oylamanın ne zaman biteceğini belirleyin. 30/8/2008 gibi.")
+    created = models.DateTimeField(blank=True, null=True, auto_now_add=True, verbose_name='Oluşturulma tarihi')
 
     def __unicode__(self):
         if len(self.question) > 32:
@@ -62,7 +63,7 @@ class Poll(models.Model):
             return self.question
 
     class Admin:
-        list_display = ("question", "allow_changing_vote", "date_limit", "end_date")
+        list_display = ("question", "allow_changing_vote", "date_limit", "end_date", "created")
         search_fields = ["question"]
 
     class Meta:

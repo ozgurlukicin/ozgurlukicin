@@ -48,6 +48,16 @@
     </div>
 {% endfor %}
 </div>
+<div class="category_title">Son Anketler</div>
+<div id="forum_stats_latest_polls">
+    {% for topic in latest_topics_with_polls %}
+    <div class="forum_stats_latest_post">
+        <div class="forum_stats_latest_post_topic">[ <a href="{{ topic.forum.get_absolute_url }}">{{ topic.forum }}</a> ]</div>
+        <div class="forum_stats_latest_post_summary"><a href="{{ topic.get_absolute_url }}">{{ topic }}</a> <a href="{{ topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="iletiye git" border="0px" /></a> <a href="/kullanici/profil/{{ topic.topic_latest_post.author }}" class="profile_link">{{ topic.topic_latest_post.author }}</a></div>
+        <div class="forum_stats_latest_post_date">{{ topic.poll.created|date:"d F Y H:i" }}</div>
+    </div>
+    {% endfor %}
+</div>
 <div class="category_title">İstatistikler</div>
 <div id="forum_stats">
     <div id="forum_stats_left">
