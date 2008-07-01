@@ -58,6 +58,12 @@ def main(request):
                 except AttributeError, ObjectDoesNotExist:
                     forum.is_read = True
 
+    # latest topics with polls
+    latest_topics_with_polls = []
+    for poll in Poll.objects.order_by("-created")[:5]:
+        if poll.topic_set.count() >= 1:
+            latest_topics_with_polls.append(poll.topic_set.all()[0])
+
     usercount = User.objects.count()
     currentdate = datetime.now()
     latest_posts = Post.objects.filter(hidden=False).order_by("-created")[:5]
