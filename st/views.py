@@ -208,6 +208,10 @@ def comment_news(request,slug):
                 tags = news.tags.all()
                 return render_response(request,'news/news_detail.html',{'news':news,'tags':tags,'form':form,'auth':True})
 
+            if t[0].locked:
+                errorMessage = 'Konu kilitli olduğu için yorum gönderemezsiniz.'
+                return render_response(request, 'forum/forum_error.html', {'message': errorMessage})
+
             post = Post(topic=t[0],
                         author=request.user,
                         text=form.cleaned_data['yorum'])
@@ -250,6 +254,10 @@ def comment_howto(request,slug):
                 tags = howto.tags.all()
                 return render_response(request,'howto/howto_detail.html',{'howto':howto,'tags':tags,'form':form,'auth':True})
 
+            if t[0].locked:
+                errorMessage = 'Konu kilitli olduğu için yorum gönderemezsiniz.'
+                return render_response(request, 'forum/forum_error.html', {'message': errorMessage})
+
             post = Post(topic=t[0],
                         author=request.user,
                         text=form.cleaned_data['yorum'])
@@ -290,6 +298,10 @@ def comment_game(request,slug):
             if not t:
                 tags = game.tags.all()
                 return render_response(request,'game/game_detail.html',{'game':game,'tags':tags,'form':form,'auth':True})
+
+            if t[0].locked:
+                errorMessage = 'Konu kilitli olduğu için yorum gönderemezsiniz.'
+                return render_response(request, 'forum/forum_error.html', {'message': errorMessage})
 
             post = Post(topic=t[0],
                         author=request.user,
@@ -332,6 +344,10 @@ def comment_package(request,slug):
                 tags = package.tags.all()
                 return render_response(request,'package/package_detail.html',{'package':package,'tags':tags,'form':form,'auth':True})
 
+            if t[0].locked:
+                errorMessage = 'Konu kilitli olduğu için yorum gönderemezsiniz.'
+                return render_response(request, 'forum/forum_error.html', {'message': errorMessage})
+
             post = Post(topic=t[0],
                         author=request.user,
                         text=form.cleaned_data['yorum'])
@@ -351,4 +367,3 @@ def comment_package(request,slug):
     return render_response(request,'package/package_detail.html',{'package':package,'tags':tags,'form':form,'auth':True})
 
     #do something here
-
