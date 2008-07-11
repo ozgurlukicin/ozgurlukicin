@@ -34,6 +34,5 @@ class Bill(models.Model):
     company_adress = models.TextField('Şirket Adresi', blank=True)
     # user's title in company
     employee_title = models.CharField('Ünvan', max_lenght=20, blank=True, help_text='Şirket içerisindeki ünvanınız.')
-    # FIXME: Is taxnumber always 10 character?
-    tax_number = models.IntegerField('Vergi numarası', max_lenght=10, blank=True)
+    tax_number = models.IntegerField('Vergi numarası', max_lenght=15, blank=True)
     tax_department = models.CharField('Vergi dairesi adı', max_lenght=200, blank=True, help_text='İstanbul Bakırköy Vergi Dairesi gibi.')
