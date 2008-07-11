@@ -151,6 +151,9 @@ urlpatterns = patterns('',
     #Tema
     (r'^tema/', include('oi.tema.urls')),
 
+    # Shop
+    (r'^shop/', include('oi.shop.urls')),
+
     #Petition
     (r'^petition/', include('oi.petition.urls')),
     (r'^ooxml/', 'oi.petition.views.petition_sign'),
