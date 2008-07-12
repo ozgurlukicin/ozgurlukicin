@@ -11,22 +11,34 @@ from django.contrib.auth.models import User
 
 class ShopProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
-    # max_lenght 18 because we want users to write "+90 0212 123 45 67"
-    phone = models.CharField('Telefon', max_lenght=18, help_text='Telefon numarası. +90 <alan kodu> <numara> şeklinde belirtin. Örneğin; +90 0212 123 45 67')
-    cellphone = models.CharField('Cep Telefonu', max_lenght=18, blank=True, help_text='Cep telefonu. +90 <operator> <numara> şeklinde belirtin. Örneğin; +90 512 345 67 89. (zorunlu değil)')
+    # max_length 18 because we want users to write "+90 0212 123 45 67"
+    phone = models.CharField('Telefon', max_length=18, help_text='Telefon numarası. +90 <alan kodu> <numara> şeklinde belirtin. Örneğin; +90 0212 123 45 67')
+    cellphone = models.CharField('Cep Telefonu', max_length=18, blank=True, help_text='Cep telefonu. +90 <operator> <numara> şeklinde belirtin. Örneğin; +90 512 345 67 89. (zorunlu değil)')
     adress = models.TextField('Adres', help_text='İkamet ettiğiniz yer')
-    second_adress = models.TextField('İkinci Adres', help_text='Size ulaşabileceğimiz 2. bir adres (zorunlu değil')
-    postcode = models.IntegerField('Posta Kodu', max_lenght=7)
+    second_adress = models.TextField('İkinci Adres', blank=True, help_text='Size ulaşabileceğimiz 2. bir adres (zorunlu değil')
+    postcode = models.IntegerField('Posta Kodu', max_length=7)
 
-    bill = models.ForeignKey(Bill)
+    bill = models.ForeignKey('Bill')
 
     def __unicode__(self):
         return u'%s' % self.user.username
 
+    def have_company_information(self):
+        """ Checks if the user has company information """
+        if self.bill.company_name and self.bill.tax_number:
+            return True
+        else:
+            return False
+
+    #FIXME: Add some useful methods for getting user's ordered products
+
     class Meta:
         verbose_name = 'Alışveriş Profili'
         verbose_name_plural = 'Alışveriş Profilleri'
-        ordering = ('user, 
+        ordering = ('user',)
+
+    class Admin:
+        list_display = ('user', 'phone', 'adress',)
 
 # Bill Class
 
@@ -41,11 +53,17 @@ class Bill(models.Model):
     company_name = models.CharField('Şirket Adı', max_length=200, blank=True)
     company_adress = models.TextField('Şirket Adresi', blank=True)
     # user's title in company
-    employee_title = models.CharField('Ünvan', max_lenght=20, blank=True, help_text='Şirket içerisindeki ünvanınız.')
-    tax_number = models.IntegerField('Vergi numarası', max_lenght=15, blank=True)
-    tax_department = models.CharField('Vergi dairesi adı', max_lenght=200, blank=True, help_text='İstanbul Bakırköy Vergi Dairesi gibi.')
+    employee_title = models.CharField('Ünvan', max_length=20, blank=True, help_text='Şirket içerisindeki ünvanınız.')
+    tax_number = models.IntegerField('Vergi numarası', max_length=15, blank=True, default=0)
+    tax_department = models.CharField('Vergi dairesi adı', max_length=200, blank=True, help_text='İstanbul Bakırköy Vergi Dairesi gibi.')
 
     def __unicode__(self):
         if self.adress:
             return u'%s' % self.adress
 
+    class Meta:
+        verbose_name = 'Fatura Bilgisi'
+        verbose_name_plural = 'Fatura Bilgileri'
+
+    class Admin:
+        list_display = ('adress',)
