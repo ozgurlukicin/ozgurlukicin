@@ -23,13 +23,6 @@ class ShopProfile(models.Model):
     def __unicode__(self):
         return u'%s' % self.user.username
 
-    def have_company_information(self):
-        """ Checks if the user has company information """
-        if self.bill.company_name and self.bill.tax_number:
-            return True
-        else:
-            return False
-
     #FIXME: Add some useful methods for getting user's ordered products
 
     class Meta:
@@ -60,6 +53,13 @@ class Bill(models.Model):
     def __unicode__(self):
         if self.adress:
             return u'%s' % self.adress
+
+    def have_company_information(self):
+        """ Checks if the user has company information """
+        if self.bill.company_name and self.bill.tax_number:
+            return True
+        else:
+            return False
 
     class Meta:
         verbose_name = 'Fatura Bilgisi'
