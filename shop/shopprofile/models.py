@@ -18,7 +18,7 @@ class ShopProfile(models.Model):
     second_adress = models.TextField('İkinci Adres', blank=True, help_text='Size ulaşabileceğimiz 2. bir adres (zorunlu değil')
     postcode = models.IntegerField('Posta Kodu', max_length=7)
 
-    bill = models.ForeignKey('Bill')
+    bill = models.OneToOneField('Bill')
 
     def __unicode__(self):
         return u'%s' % self.user.username
@@ -71,7 +71,6 @@ class Bill(models.Model):
 
     def shop_profile(self):
         qs = ShopProfile.objects.filter(bill=self)
-        print "BILL:", qs
         if qs.count() >= 1:
             return qs[0]
         else:
