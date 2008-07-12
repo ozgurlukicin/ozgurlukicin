@@ -66,4 +66,14 @@ class Bill(models.Model):
         verbose_name_plural = 'Fatura Bilgileri'
 
     class Admin:
-        list_display = ('adress',)
+        list_display = ('shop_profile', 'adress', 'company_name', 'tax_number',)
+        search_fields = ['adress']
+
+    def shop_profile(self):
+        qs = ShopProfile.objects.filter(bill=self)
+        print "BILL:", qs
+        if qs.count() >= 1:
+            return qs[0]
+        else:
+            return None
+    shop_profile.short_description = 'Profil'
