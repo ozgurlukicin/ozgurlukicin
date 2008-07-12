@@ -95,7 +95,7 @@ class Profile(models.Model):
 
     class Admin:
         fields = (
-            ('Üyelik Bilgileri', {'fields': ('user', 'avatar', 'homepage', 'msn', 'city', 'birthday', 'contributes', 'contributes_summary', 'show_email', 'latitude', 'longitude',)}),
+            ('Üyelik Bilgileri', {'fields': ('user', 'avatar', 'homepage', 'msn', 'jabber', 'icq', 'city', 'birthday', 'contributes', 'contributes_summary', 'show_email', 'latitude', 'longitude',)}),
             ('Diğer', {'fields': ('activation_key', 'key_expires', 'signature'), 'classes': 'collapse',}),
         )
 
