@@ -23,6 +23,9 @@ class ShopProfile(models.Model):
     def __unicode__(self):
         return u'%s' % self.user.username
 
+    def get_absolute_url(self):
+        return '/dukkan/profil/%s/' % self.user.username
+
     #FIXME: Add some useful methods for getting user's ordered products
 
     class Meta:
