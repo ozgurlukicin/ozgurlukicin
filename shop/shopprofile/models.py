@@ -10,7 +10,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class ShopProfile(models.Model):
-    user = models.ForeignKey(User, unique=True)
+    user = models.OneToOneField(User, unique=True)
     # max_length 18 because we want users to write "+90 0212 123 45 67"
     phone = models.CharField('Telefon', max_length=18, help_text='Telefon numarası. +90 <alan kodu> <numara> şeklinde belirtin. Örneğin; +90 0212 123 45 67')
     cellphone = models.CharField('Cep Telefonu', max_length=18, blank=True, help_text='Cep telefonu. +90 <operator> <numara> şeklinde belirtin. Örneğin; +90 512 345 67 89. (zorunlu değil)')
@@ -56,7 +56,7 @@ class Bill(models.Model):
 
     def have_company_information(self):
         """ Checks if the user has company information """
-        if self.bill.company_name and self.bill.tax_number:
+        if self.company_name and self.tax_number:
             return True
         else:
             return False
