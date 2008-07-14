@@ -14,9 +14,8 @@ class ShopProfile(models.Model):
     # max_length 18 because we want users to write "+90 0212 123 45 67"
     phone = models.CharField('Telefon', max_length=18, help_text='Telefon numarası. +90 <alan kodu> <numara> şeklinde belirtin. Örneğin; +90 0212 123 45 67')
     cellphone = models.CharField('Cep Telefonu', max_length=18, blank=True, help_text='Cep telefonu. +90 <operator> <numara> şeklinde belirtin. Örneğin; +90 512 345 67 89. (zorunlu değil)')
-    adress = models.TextField('Adres', help_text='İkamet ettiğiniz yer')
+    adress = models.TextField('Adres', help_text='İkamet ettiğiniz yer (posta kodu ile birlikte)')
     second_adress = models.TextField('İkinci Adres', blank=True, help_text='Size ulaşabileceğimiz 2. bir adres (zorunlu değil')
-    postcode = models.IntegerField('Posta Kodu', max_length=7)
 
     bill = models.OneToOneField('Bill')
 
@@ -43,11 +42,11 @@ class Bill(models.Model):
     # If we require all fields, then user wanting to select only invidual bill type won't be able to select it. Additionally, user can select both bill type.
 
     # Invidual bill type fields
-    adress = models.TextField('Ürünlerin gönderileceği adres', blank=True)
+    adress = models.TextField('Ürünlerin gönderileceği adres.', blank=True, help_text="Lütfen posta kodunu da belirtin.")
 
     # Bill type for companies
     company_name = models.CharField('Şirket Adı', max_length=200, blank=True)
-    company_adress = models.TextField('Şirket Adresi', blank=True)
+    company_adress = models.TextField('Şirket Adresi', blank=True, help_text="Lütfen posta kodunu da belirtin."
     # user's title in company
     employee_title = models.CharField('Ünvan', max_length=20, blank=True, help_text='Şirket içerisindeki ünvanınız.')
     tax_number = models.IntegerField('Vergi numarası', max_length=15, blank=True, default=0)
