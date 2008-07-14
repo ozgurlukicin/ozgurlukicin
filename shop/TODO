@@ -10,6 +10,8 @@ Legend:
 
 [*] Category
     - Image with thumbnail support for each category
+    - Show how many products a category have in the category tree. E.g: T-shirts (14)
+
 
 [*] User
     - Don't forget to control user's bill information as bill class doesn't have any check.

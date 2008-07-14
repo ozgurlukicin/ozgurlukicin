@@ -17,7 +17,7 @@ class Category(models.Model):
     description = models.TextField("Kategori açıklaması")
 
     def get_absolute_url(self):
-        return u'/dukkan/category/%s/' % self.slug
+        return u'/dukkan/kategori/%s/' % self.slug
 
     def have_child(self):
         if self.child.count() > 0:
