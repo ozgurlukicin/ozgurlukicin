@@ -10,7 +10,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class ShopProfile(models.Model):
-    user = models.OneToOneField(User, unique=True)
+    user = models.ForeignKey(User)
     # max_length 18 because we want users to write "+90 0212 123 45 67"
     phone = models.CharField('Telefon', max_length=18, help_text='Telefon numarası. +90 <alan kodu> <numara> şeklinde belirtin. Örneğin; +90 0212 123 45 67')
     cellphone = models.CharField('Cep Telefonu', max_length=18, blank=True, help_text='Cep telefonu. +90 <operator> <numara> şeklinde belirtin. Örneğin; +90 512 345 67 89. (zorunlu değil)')
