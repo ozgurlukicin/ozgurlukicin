@@ -9,7 +9,7 @@ Legend:
 + Completed
 
 [*] Category
-    - Image with thumbnail support for each category
+    / Image with thumbnail support for each category
     - Show how many products a category have in the category tree. E.g: T-shirts (14)
 
 
@@ -23,4 +23,4 @@ Legend:
             only adress form will be displayed. But when the user selects company bill, another form will be displayed.
             Additionally, user can have both bill type
 
-    - Add "mycart" to left
+    - Add "mycart" to right

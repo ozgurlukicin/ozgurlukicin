@@ -8,6 +8,30 @@
 from django.db import models
 from django.core import validators
 
+class CategoryImages(models.Model):
+    """ This class has no Meta and Admin class because it's edited inline on related object's page """
+    category = models.ForeignKey("Category", blank=True, null=True, edit_inline=models.TABULAR, num_in_admin=2, max_num_in_admin=2, related_name="images")
+    picture = models.ImageField(verbose_name="Kategori Resmi", upload_to="upload/image/")
+    keep = models.BooleanField(default=True, editable=False, core=True)
+    # we use remove since we don't have admin interface for editing CategoryImage.
+    # It's edited inline on the related model page, when remove is checked, we will just delete the entry.
+    remove = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return u'"%s" kategori resmi' % self.category.name
+
+    def save(self):
+        # Picture value is always set. When you add new Category without images,
+        # it just saves as blank. So prevent adding useless images.
+
+        # new entry.
+        if not self.id and not self.picture:
+            return
+        if self.remove:
+            self.delete()
+        else:
+            super(CategoryImages, self).save()
+
 class Category(models.Model):
     """ Base category model for all products """
     name = models.CharField("İsim", max_length=200, core=True)
