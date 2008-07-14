@@ -16,6 +16,9 @@ class Category(models.Model):
     parent = models.ForeignKey("self", blank=True, null=True, related_name="child")
     description = models.TextField("Kategori açıklaması")
 
+    def get_absolute_url(self):
+        return u'/dukkan/category/%s/' % self.slug
+
     def have_child(self):
         if self.child.count() > 0:
             return True
