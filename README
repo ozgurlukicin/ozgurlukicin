@@ -2,6 +2,7 @@ Requires:
  Django environment (Python, Web Server (Apache recommended), mod_python (if Apache preferred), Django*)
  Python Imaging Library (PIL)
  BeautifulSoup
+ ElementTree
  DBMS (MySQL recommended)
 
 Note About Django SVN:
