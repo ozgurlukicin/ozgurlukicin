@@ -10,7 +10,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class ShopProfile(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, unique=True)
     # max_length 18 because we want users to write "+90 0212 123 45 67"
     phone = models.CharField('Telefon', max_length=18, help_text='Telefon numarası. +90 <alan kodu> <numara> şeklinde belirtin. Örneğin; +90 0212 123 45 67')
     cellphone = models.CharField('Cep Telefonu', max_length=18, blank=True, help_text='Cep telefonu. +90 <operator> <numara> şeklinde belirtin. Örneğin; +90 512 345 67 89. (zorunlu değil)')
@@ -46,7 +46,7 @@ class Bill(models.Model):
 
     # Bill type for companies
     company_name = models.CharField('Şirket Adı', max_length=200, blank=True)
-    company_adress = models.TextField('Şirket Adresi', blank=True, help_text="Lütfen posta kodunu da belirtin."
+    company_adress = models.TextField('Şirket Adresi', blank=True, help_text="Lütfen posta kodunu da belirtin.")
     # user's title in company
     employee_title = models.CharField('Ünvan', max_length=20, blank=True, help_text='Şirket içerisindeki ünvanınız.')
     tax_number = models.IntegerField('Vergi numarası', max_length=15, blank=True, default=0)
