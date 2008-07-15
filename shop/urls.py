@@ -12,4 +12,6 @@ urlpatterns = patterns('oi.shop',
         (r'^$', 'main.views.home'),
         # Profile
         (r'^profil/$', include('shopprofile.urls')),
+        # Category
+        (r'^kategori/(?P<slug>.*)/$', 'product.views.get_category_products'),
         )
