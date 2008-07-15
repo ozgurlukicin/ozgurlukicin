@@ -126,3 +126,88 @@ class Category(models.Model):
     class Admin:
         search_fields = ["name", "slug"]
         list_display = ("name", "_parents_repr",)
+
+########################################
+#                                      #
+# Tax Model that all products can have #
+#                                      #
+########################################
+
+class Tax(models.Model):
+    # FIXME: Maybe inline edited?
+    title = models.CharField("Vergi İsmi", max_length=100)
+    percentage = models.DecimalField("Vergi Oranı", max_digits=3, decimal_places=2, help_text="3.21 gibi")
+
+    def __unicode__(self):
+        return u'%s:%s' % (self.title, self.percentage)
+
+    class Meta:
+        verbose_name = "Vergi"
+        verbose_name_plural = "Vergiler"
+
+        ordering = ['title']
+
+    class Admin:
+        list_display = ("title", "percentage",)
+        search_fields = ['title']
+
+############################################################
+#                                                          #
+# Main product class, it can have a child product model    #
+# It's use-case is T-shirt. A t-shirt can have X/XL/M type #
+#                                                          #
+############################################################
+
+class Product(models.Model):
+    # core True because we will use ProductImage as inline-edited object
+    name = models.CharField("İsim", max_length=200, core=True)
+    slug = models.SlugField("SEF Başlık", prepopulate_from=("name",), help_text="Adres kısmında kullanılan ad, isim kısmından otomatik olarak üretilmektedir")
+
+    stock = models.IntegerField("Ürün Stoğu", blank=True)
+    price = models.DecimalField("Ürünün fiyatı", blank=True, max_digits=5, decimal_places=2, help_text="15.67 gibi. YTL Cinsinden")
+
+    parent = models.ForeignKey('self', blank=True, null=True, related_name='child')
+    category = models.ForeignKey('Category')
+    tax = models.ForeignKey('Tax')
+
+    # FIXME: add stock, price etc...
+
+    # God damn it, these functions are the same with Category
+    # It's a code repeat. Grr..
+
+    def get_separator(self):
+        return ' :: '
+
+    def _recurse_for_parents(self, cat_obj):
+        p_list = []
+        if cat_obj.parent_id:
+            p = cat_obj.parent
+            p_list.append(p)
+            if p != self:
+                more = self._recurse_for_parents(p)
+                p_list.extend(more)
+        if cat_obj == self and p_list:
+            p_list.reverse()
+        return p_list
+
+    # For displaying object's parents on admin page correctly
+    def _parents_repr(self):
+        name_list = [cat.name for cat in self._recurse_for_parents(self)]
+        return self.get_separator().join(name_list)
+    _parents_repr.short_description = "Category parents"
+
+    def __unicode__(self):
+        name_list = [cat.name for cat in self._recurse_for_parents(self)]
+        name_list.append(self.name)
+        return self.get_separator().join(name_list)
+
+    class Meta:
+        verbose_name = "Ürün"
+        verbose_name_plural = "Ürünler"
+
+        ordering = ["name", "price"]
+
+    class Admin:
+        search_fields = ["name"]
+
+        list_display = ("name", "stock", "_parents_repr")
