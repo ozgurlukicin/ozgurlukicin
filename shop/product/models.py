@@ -151,6 +151,37 @@ class Tax(models.Model):
         list_display = ("title", "percentage",)
         search_fields = ['title']
 
+######################################################
+#                                                    #
+# Image class for all Products.                      #
+# There is a code repeat but I can't think better :P #
+#                                                    #
+######################################################
+
+class ProductImages(models.Model):
+    """ This class has no Meta and Admin class because it's edited inline on related object's page """
+    product = models.ForeignKey("Product", blank=True, null=True, edit_inline=models.TABULAR, num_in_admin=3, max_num_in_admin=3, related_name="images")
+    picture = models.ImageField(verbose_name="Ürün Resmi", upload_to="upload/image/")
+    keep = models.BooleanField(default=True, editable=False, core=True)
+    # we use remove since we don't have admin interface for editing CategoryImage.
+    # It's edited inline on the related model page, when remove is checked, we will just delete the entry.
+    remove = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return u'"%s" ürün resmi' % self.product.name
+
+    def save(self):
+        # Picture value is always set. When you add new Category without images,
+        # it just saves as blank. So prevent adding useless images.
+
+        # new entry.
+        if not self.id and not self.picture:
+            return
+        if self.remove:
+            self.delete()
+        else:
+            super(CategoryImages, self).save()
+
 ############################################################
 #                                                          #
 # Main product class, it can have a child product model    #

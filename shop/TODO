@@ -8,14 +8,18 @@ Legend:
 / In progress
 + Completed
 
+
+- Specific thumbnail field for image adding. (ImageWithThumbnail)
+
 [*] Category
-    / Image with thumbnail support for each category
-    - Show how many products a category have in the category tree. E.g: T-shirts (14)
+    + Image for each category
+    + Show how many products a category have in the category tree. E.g: T-shirts (14)
+    - Product listing for each category
 
 
 [*] Product
-    - Create Product class, damn?!
-    - Make sure that product can have more than 1 picture. Also, these should be with thumbnail support
+    + Create Product class, damn?!
+    + Make sure that product can have more than 1 picture.
 
 [*] User
     - Don't forget to control user's bill information as bill class doesn't have any check.
