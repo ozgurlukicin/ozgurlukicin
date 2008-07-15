@@ -36,7 +36,7 @@ class FlatPage(models.Model):
         search_fields = ['title', 'text', 'tags']
         js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
 
-    def __str__(self):
+    def __unicode__(self):
         return "%s -- %s" % (self.url, self.title)
 
     def get_absolute_url(self):

@@ -32,7 +32,7 @@ class Bug(models.Model):
     status = models.IntegerField(verbose_name="Durum", default=1, choices=STATUS_CODES)
     priority = models.IntegerField(verbose_name="Öncelik", default=3, choices=PRIORITIES)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
     def get_full_url(self):
@@ -52,7 +52,7 @@ class Comment(models.Model):
     text = models.TextField(blank=False, verbose_name="Yorum")
     date = models.DateTimeField(auto_now_add=True, verbose_name="Tarih")
 
-    def __str__(self):
+    def __unicode__(self):
         return self.text
 
     class Admin:

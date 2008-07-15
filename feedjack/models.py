@@ -27,7 +27,7 @@ class Link(models.Model):
     class Admin:
         pass
 
-    def __str__(self):
+    def __unicode__(self):
         return '%s (%s)' % (self.name, self.link)
 
 
@@ -66,7 +66,7 @@ class Site(models.Model):
         verbose_name_plural = 'sites'
         ordering = ('name',)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
     def save(self):
@@ -121,7 +121,7 @@ class Feed(models.Model):
         verbose_name_plural = 'feeds'
         ordering = ('name', 'feed_url',)
 
-    def __str__(self):
+    def __unicode__(self):
         return '%s (%s)' % (self.name, self.feed_url)
 
     def save(self):
@@ -135,7 +135,7 @@ class Tag(models.Model):
         verbose_name_plural = 'tags'
         ordering = ('name',)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
     def save(self):
@@ -165,7 +165,7 @@ class Post(models.Model):
         ordering = ('-date_modified',)
         unique_together = (('feed', 'guid'),)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
     def save(self):
@@ -197,7 +197,7 @@ class Subscriber(models.Model):
         ordering = ('site', 'name', 'feed')
         unique_together = (('site', 'feed'),)
 
-    def __str__(self):
+    def __unicode__(self):
         return '%s in %s' % (self.feed, self.site)
 
     def get_cloud(self):

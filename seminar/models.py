@@ -15,7 +15,7 @@ class Place(models.Model):
     direction = models.TextField('Adres Tarifi', blank=True)
     phone = models.PhoneNumberField('Telefon', blank=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
     class Admin:
@@ -31,7 +31,7 @@ class Place(models.Model):
 class Attender(models.Model):
     name = models.CharField('Konuşmacı', max_length=64, blank=False, unique=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
     class Admin:
@@ -51,7 +51,7 @@ class Seminar(models.Model):
     date = models.DateField('Tarih', blank=False)
     status = models.BooleanField('Aktif')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.description
 
     class Admin:

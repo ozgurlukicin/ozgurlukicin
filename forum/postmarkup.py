@@ -803,10 +803,10 @@ class TagStringify(object):
         self.callback = callback
         self.raw = raw
         r[b]=3
-    def __str__(self):
+    def __unicode__(self):
         return self.callback()
     def __repr__(self):
-        return self.__str__()
+        return self.__unicode__()
 [/code]""")
 
 

@@ -15,13 +15,13 @@ SITE_DESC = 'Pardus için bir numaralı bilgi kaynağı'
 DEBUG = True
 TESTING = True
 TEMPLATE_DEBUG = DEBUG
-WEB_URL = 'http://django'
-DOCUMENT_ROOT = '/home/ahmet/public_html/oi'
+WEB_URL = 'http://localhost:8000'
+DOCUMENT_ROOT = '/home/eren/sourcebox/oi/trunk'
 
 DATABASE_ENGINE = 'mysql'
 DATABASE_NAME = 'oi'
 DATABASE_USER = 'root'
-DATABASE_PASSWORD = 'root'
+DATABASE_PASSWORD = ''
 DATABASE_HOST = 'localhost'
 DATABASE_PORT = ''
 
@@ -98,6 +98,7 @@ ROOT_URLCONF = 'oi.urls'
 
 TEMPLATE_DIRS = (
     '%s/templates' % DOCUMENT_ROOT,
+    '%s/shop/templates' % DOCUMENT_ROOT,
 )
 
 INSTALLED_APPS = (
@@ -119,6 +120,9 @@ INSTALLED_APPS = (
     'oi.comments',
     'oi.petition',
     'oi.poll',
+    # shop apps
+    'oi.shop.shopprofile',
+    'oi.shop.product',
 )
 
 CITY_LIST = (

@@ -72,7 +72,7 @@ class HTMLParseError(Exception):
         self.lineno = position[0]
         self.offset = position[1]
 
-    def __str__(self):
+    def __unicode__(self):
         result = self.msg
         if self.lineno is not None:
             result = result + ", at line %d" % self.lineno

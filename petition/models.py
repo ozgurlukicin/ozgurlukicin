@@ -22,7 +22,7 @@ class Petitioner(models.Model):
     is_active = models.BooleanField("Etkin")
     inform = models.BooleanField("Haberdar Et")
 
-    def __str__(self):
+    def __unicode__(self):
         return "%s %s" % (self.firstname, self.lastname)
 
     class Admin:

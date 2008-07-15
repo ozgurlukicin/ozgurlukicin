@@ -23,7 +23,7 @@ from oi.st.signals import open_forum_topic, remove_video_thumbnail_on_delete
 class Tag(models.Model):
     name = models.CharField('Etiket', max_length=32, blank=False, unique=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
     def get_absolute_url(self):
@@ -42,7 +42,7 @@ class Tag(models.Model):
 class Wiki(models.Model):
     name = models.CharField('Madde adı', max_length=128, blank=False, unique=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
     def get_absolute_url(self):
@@ -61,7 +61,7 @@ class Wiki(models.Model):
 class Contribute(models.Model):
     name = models.CharField('Tanım', max_length=64, blank=False, unique=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
     class Admin:
@@ -78,7 +78,7 @@ class OtherFile(models.Model):
     file = models.FileField(upload_to='dosya/')
     tags = models.ManyToManyField(Tag)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.file
 
     class Admin:
@@ -95,7 +95,7 @@ class ScreenShot(models.Model):
     file = models.ImageField(upload_to='ekran_goruntusu/')
     tags = models.ManyToManyField(Tag)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.file
 
     def get_thumbnail_url(file, size='230x230'):
@@ -128,7 +128,7 @@ class Video(models.Model):
     file = models.FileField(upload_to='upload/video/')
     tags = models.ManyToManyField(Tag)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.desc
 
     def get_thumbnail_url(self):
@@ -181,7 +181,7 @@ class License(models.Model):
     name = models.CharField(max_length=16, blank=False, unique=True)
     url = models.URLField()
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
     class Admin:
@@ -203,7 +203,7 @@ class FS(models.Model):
     order = models.PositiveIntegerField(unique=True, verbose_name='Sıralama')
     status = models.BooleanField('Aktif')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
     def get_absolute_url(self):
@@ -240,7 +240,7 @@ class HowTo(models.Model):
     author = models.CharField('Yazar', max_length=32)
     status = models.BooleanField('Aktif')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
     def get_absolute_url(self):
@@ -292,7 +292,7 @@ class Game(models.Model):
     author = models.CharField('Yazar', max_length=32)
     status = models.BooleanField('Aktif')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
     def get_absolute_url(self):
@@ -330,7 +330,7 @@ class News(models.Model):
     author = models.CharField('Yazar', max_length=32)
     status = models.BooleanField('Aktif')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
     def get_absolute_url(self):
@@ -378,7 +378,7 @@ class Package(models.Model):
     author = models.CharField('Yazar', max_length=32)
     status = models.BooleanField('Aktif')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
     def get_absolute_url(self):
@@ -416,7 +416,7 @@ class PardusVersion(models.Model):
     live_torrent = models.CharField('Çalışan Torrent', max_length = 128)
     status = models.BooleanField('Aktif')
 
-    def __str__(self):
+    def __unicode__(self):
         return "Pardus %s" % self.number
 
     def get_absolute_url(self):
@@ -441,7 +441,7 @@ class PardusMirror(models.Model):
     order = models.PositiveIntegerField(verbose_name='Sıralama')
     status = models.BooleanField('Aktif')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
     class Admin:

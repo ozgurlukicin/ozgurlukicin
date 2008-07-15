@@ -22,7 +22,7 @@ class Post(models.Model):
     """
     Post model.
 
-    __str__: id of post
+    __unicode__: id of post
     get_absolute_url: absolute url of post
     save(): saves post and updates Topic and Forum objects
     """
@@ -36,7 +36,7 @@ class Post(models.Model):
     last_edited_by = models.ForeignKey(User, blank=True, null=True, related_name='last edited by', verbose_name='Yazar')
     ip = models.IPAddressField(blank=True, verbose_name='IP adresi')
 
-    def __str__(self):
+    def __unicode__(self):
         return "%s" % self.id
 
     def get_absolute_url(self):
@@ -162,7 +162,7 @@ class Topic(models.Model):
     tags = models.ManyToManyField(Tag, verbose_name='Etiketler')
     poll = models.ForeignKey(Poll, blank=True, verbose_name="Anket")
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
     def get_absolute_url(self):
@@ -265,7 +265,7 @@ class Forum(models.Model):
         lastpage = ((latest_topic.posts - 1) / oi.forum.settings.POSTS_PER_PAGE) + 1
         return '/forum/%s/%s/?page=%s#post%s' % (self.slug, latest_topic.id, lastpage, self.forum_latest_post.id)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
     class Admin:
@@ -287,7 +287,7 @@ class Category(models.Model):
     hidden = models.BooleanField(blank=True, null=True, verbose_name='Gizli')
     order = models.PositiveIntegerField(unique=True, verbose_name='Sıralama')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
     def get_absolute_url(self):
@@ -323,7 +323,7 @@ class WatchList(models.Model):
     user = models.ForeignKey(User, verbose_name='Kullanıcı')
     topic = models.ForeignKey(Topic, verbose_name='Konu')
 
-    def __str__(self):
+    def __unicode__(self):
         return '%s' % self.topic.title
 
     class Admin:

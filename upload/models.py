@@ -10,7 +10,7 @@ from django.db import models
 class Image(models.Model):
     file = models.FileField(upload_to='upload/image/')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.file
 
     class Admin:

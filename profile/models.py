@@ -18,7 +18,7 @@ from oi.st.models import Contribute
 class ForbiddenUsername(models.Model):
     name = models.CharField("Kullanıcı adı", max_length=30)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
     class Admin:
@@ -34,7 +34,7 @@ class Avatar(models.Model):
     name = models.CharField("Açıklama", max_length=32, unique=True)
     file = models.ImageField(upload_to="avatar/")
 
-    def __str__(self):
+    def __unicode__(self):
         return self.file
 
     class Admin:
@@ -51,7 +51,7 @@ class LostPassword(models.Model):
     key = models.CharField('Anahtar', max_length=40, unique=True)
     key_expires = models.DateTimeField('Zaman Aşımı')
 
-    def __str__(self):
+    def __unicode__(self):
         return "%s" % self.key
 
     def is_expired(self):
