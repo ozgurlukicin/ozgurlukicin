@@ -8,7 +8,7 @@
 from django.shortcuts import get_object_or_404
 
 from oi.st.wrappers import render_response
-from oi.shop.product.models import Category
+from oi.shop.product.models import Category, Product
 
 # temp
 from django.http import HttpResponse
@@ -24,3 +24,13 @@ def get_category_products(request, slug):
     products = category.product_set.all()
 
     return render_response(request, "category/category_list.html", {"products": products})
+
+def get_product(request, category_slug, product_slug):
+    # filter by product and category slug together
+    # becuase a product can have the same name but can be in different categories.
+
+    product = get_object_or_404(Product, product__slug__iexact=product_slug)
+
+    print product
+
+    return HttpResponse(request, product)

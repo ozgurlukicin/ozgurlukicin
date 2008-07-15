@@ -21,6 +21,8 @@ Legend:
     + Create Product class, damn?!
     + Make sure that product can have more than 1 picture.
 
+    - Calculate total price, considering tax
+
 [*] User
     - Don't forget to control user's bill information as bill class doesn't have any check.
     - Add javascript. It will be used to print out different bill form. E.g: When the user checks invidual bill,
