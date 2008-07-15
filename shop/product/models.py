@@ -43,18 +43,6 @@ class Category(models.Model):
     def get_absolute_url(self):
         return u'/dukkan/kategori/%s/' % self.slug
 
-    def have_child(self):
-        if self.child.count() > 0:
-            return True
-        else:
-            return False
-
-    def have_parent(self):
-        if not self.parent_id:
-            return False
-        else:
-            return True
-
     def get_separator(self):
         return ' :: '
 
@@ -139,7 +127,7 @@ class Tax(models.Model):
     percentage = models.DecimalField("Vergi Oranı", max_digits=3, decimal_places=2, help_text="3.21 gibi")
 
     def __unicode__(self):
-        return u'%s:%s' % (self.title, self.percentage)
+        return u'%s: %%%s' % (self.title, self.percentage)
 
     class Meta:
         verbose_name = "Vergi"
@@ -194,14 +182,41 @@ class Product(models.Model):
     name = models.CharField("İsim", max_length=200, core=True)
     slug = models.SlugField("SEF Başlık", prepopulate_from=("name",), help_text="Adres kısmında kullanılan ad, isim kısmından otomatik olarak üretilmektedir")
 
-    stock = models.IntegerField("Ürün Stoğu", blank=True)
-    price = models.DecimalField("Ürünün fiyatı", blank=True, max_digits=5, decimal_places=2, help_text="15.67 gibi. YTL Cinsinden")
+    stock = models.IntegerField("Ürün Stoğu", default=0)
+    price = models.DecimalField("Ürünün fiyatı", default=0, max_digits=5, decimal_places=2, help_text="Ürünün vergisiz fiyatı. Vergi aşağıda seçtiğinize bağlı olarak otomatik bir şekilde bu fiyatın üzerine eklenmektedir. 15.67 gibi YTL cinsinden belirtin.")
+
+    active = models.BooleanField("Aktif", default=False)
 
     parent = models.ForeignKey('self', blank=True, null=True, related_name='child')
-    category = models.ForeignKey('Category')
-    tax = models.ForeignKey('Tax')
+    category = models.ForeignKey('Category', blank=True, null=True)
+    tax = models.ForeignKey('Tax', blank=True, null=True)
 
-    # FIXME: add stock, price etc...
+    def get_absolute_url(self):
+        return u'/dukkan/urun/%s/%s/' % (self.category.slug, self.slug)
+
+    def get_active_products(self):
+        return self.objects.filter(active=True)
+
+    def is_in_stock(self):
+        if self.stock > 0:
+            return True
+        else:
+            return False
+
+    # We use them on template
+    # If a product have childs (t-shirt, for example), then the page acts differently
+
+    def have_child(self):
+        if self.child.count() > 0:
+            return True
+        else:
+            return False
+
+    def have_parent(self):
+        if not self.parent_id:
+            return False
+        else:
+            return True
 
     # God damn it, these functions are the same with Category
     # It's a code repeat. Grr..
@@ -239,6 +254,13 @@ class Product(models.Model):
         ordering = ["name", "price"]
 
     class Admin:
+        fields = (
+            ("Ürün Bilgileri", {"fields": ("name", "slug", "stock", "price")}),
+            ("Kategori/Resim/Vergi", {"fields": ("parent", "category", "tax")}),
+            (None, {"fields": ("active",)})
+            )
+
         search_fields = ["name"]
 
         list_display = ("name", "stock", "_parents_repr")
+
