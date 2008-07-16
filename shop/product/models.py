@@ -43,6 +43,9 @@ class Category(models.Model):
     def get_absolute_url(self):
         return u'/dukkan/kategori/%s/' % self.slug
 
+    def get_active_products(self):
+        return self.product_set.filter(active=True)
+
     def get_separator(self):
         return ' :: '
 
@@ -194,9 +197,6 @@ class Product(models.Model):
     def get_absolute_url(self):
         return u'/dukkan/urun/%s/%s/' % (self.category.slug, self.slug)
 
-    def get_active_products(self):
-        return self.objects.filter(active=True)
-
     def is_in_stock(self):
         if self.stock > 0:
             return True
@@ -262,5 +262,5 @@ class Product(models.Model):
 
         search_fields = ["name"]
 
-        list_display = ("name", "stock", "_parents_repr")
+        list_display = ("name", "stock", "_parents_repr", "category", "active")
 

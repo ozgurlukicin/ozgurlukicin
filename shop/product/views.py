@@ -21,7 +21,7 @@ from django.http import HttpResponse
 
 def get_category_products(request, slug):
     category = get_object_or_404(Category, slug=slug)
-    products = category.product_set.all()
+    products = category.get_active_products()
 
     return render_response(request, "category/category_list.html", {"products": products})
 

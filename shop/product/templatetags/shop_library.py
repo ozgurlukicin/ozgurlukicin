@@ -21,7 +21,7 @@ def recurse_for_children(current_node, parent_node, active_cat, show_empty=True)
         if current_node == active_cat:
             attrs["class"] = "current"
         link = SubElement(temp_parent, 'a', attrs)
-        link.text = "%s (%s)" % (current_node.name, current_node.product_set.count())
+        link.text = "%s (%s)" % (current_node.name, current_node.get_active_products().count())
 
         if child_count > 0:
             new_parent = SubElement(temp_parent, 'ul')

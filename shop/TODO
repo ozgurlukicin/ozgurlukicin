@@ -22,6 +22,7 @@ Legend:
     + Make sure that product can have more than 1 picture.
 
     - Calculate total price, considering tax
+    - On product info page, product's all childs are shown regardless of their active/deactive status. Fix this
 
 [*] User
     - Don't forget to control user's bill information as bill class doesn't have any check.
