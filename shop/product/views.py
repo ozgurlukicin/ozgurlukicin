@@ -29,8 +29,6 @@ def get_product(request, category_slug, product_slug):
     # filter by product and category slug together
     # becuase a product can have the same name but can be in different categories.
 
-    product = get_object_or_404(Product, product__slug__iexact=product_slug)
+    product = get_object_or_404(Product, slug__exact=product_slug, category__slug__exact=category_slug)
 
-    print product
-
-    return HttpResponse(request, product)
+    return render_response(request, "product/product_info.html", {"product": product})

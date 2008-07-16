@@ -1,0 +1,27 @@
+{% extends "shop_base.html" %}
+
+{% block title %}Ürün - {{ product.name }} {% endblock %}
+
+{% block header_menu %}
+    {% include "header.html" %}
+{% endblock %}
+
+{% block ust_menu %}
+    {% include "shop_ust_menu.html" %}
+{% endblock %}
+
+{% block content %}
+
+    Ürün ismi: {{ product.name }} <br /><br />
+
+    {% if product.have_child %}
+        {% for child in product.child.all %}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ürün İsmi: {{ child.name }} <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ürün Fiyatı: {{ child.price }} <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ürün Stoğu: {{ child.stock }} <br /><br />
+        {% endfor %}
+    {% else %}
+            Ürün Fiyatı: {{ child.price }} <br />
+            Ürün Stoğu: {{ child.name }} <br />
+    {% endif %}
+{% endblock %}
