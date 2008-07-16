@@ -15,10 +15,7 @@ register = Library()
 def recurse_for_children(current_node, parent_node, active_cat, show_empty=True):
     child_count = current_node.child.count()
 
-    # FIXME: update this code when product model has been added
-    # if show_empty or child_count > 0 or current_node.product_set.count() > 0:
-
-    if show_empty or child_count > 0:
+    if show_empty or child_count > 0 or current_node.product_set.count() > 0:
         temp_parent = SubElement(parent_node, 'li')
         attrs = {'href': current_node.get_absolute_url()}
         if current_node == active_cat:
