@@ -14,7 +14,7 @@ Legend:
 [*] Category
     + Image for each category
     + Show how many products a category have in the category tree. E.g: T-shirts (14)
-    - Product listing for each category
+    + Product listing for each category
 
 
 [*] Product

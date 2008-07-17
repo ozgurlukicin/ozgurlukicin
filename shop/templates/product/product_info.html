@@ -16,9 +16,11 @@
 
     {% if product.have_child %}
         {% for child in product.child.all %}
+            {% if child.is_active %}
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ürün İsmi: {{ child.name }} <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ürün Fiyatı: {{ child.price }} <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ürün Stoğu: {{ child.stock }} <br /><br />
+            {% endif %}
         {% endfor %}
     {% else %}
             Ürün Fiyatı: {{ child.price }} <br />

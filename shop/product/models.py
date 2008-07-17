@@ -197,6 +197,12 @@ class Product(models.Model):
     def get_absolute_url(self):
         return u'/dukkan/urun/%s/%s/' % (self.category.slug, self.slug)
 
+    # used in template's {% if %} statement.
+    # it checks whether the product is active and shows if it's active
+
+    def is_active(self):
+        return self.active
+
     def is_in_stock(self):
         if self.stock > 0:
             return True
@@ -204,7 +210,7 @@ class Product(models.Model):
             return False
 
     # We use them on template
-    # If a product have childs (t-shirt, for example), then the page acts differently
+    # If a product have childs (t-shirt, for example), then the page lists these products
 
     def have_child(self):
         if self.child.count() > 0:
@@ -261,6 +267,6 @@ class Product(models.Model):
             )
 
         search_fields = ["name"]
+        list_filter = ["active"]
 
         list_display = ("name", "stock", "_parents_repr", "category", "active")
-
