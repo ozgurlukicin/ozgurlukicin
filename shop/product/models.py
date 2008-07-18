@@ -197,6 +197,9 @@ class Product(models.Model):
     def get_absolute_url(self):
         return u'/dukkan/urun/%s/%s/' % (self.category.slug, self.slug)
 
+    def price_with_tax(self):
+        return (self.price + (self.price * self.tax.percentage)/100).normalize()
+
     # used in template's {% if %} statement.
     # it checks whether the product is active and shows if it's active
 
