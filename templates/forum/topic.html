@@ -16,7 +16,7 @@
     <div class="post_bottom_small"><a href="{{ topic.get_follow_url }}"><img src="/media/dijital/img/forum/watch.gif" alt="izle" title="E-posta ile izle" border="0" /></a></div>
     {% endif %}
     {% if perms.forum.can_create_poll and not topic.poll %}
-    <div class="post_bottom_small"><a href="{{ topic.get_create_poll_url }}">add_poll</a></div>
+    <div class="post_bottom_small"><a href="{{ topic.get_create_poll_url }}"><img src="/media/dijital/img/forum/add_poll.png" alt="anket ekle" border="0" /></a></div>
     {% endif %}
 </div>
 <br />
@@ -86,12 +86,12 @@
             {% endif %}
             {% if perms.forum.can_hide_post and not forloop.first and not post.hidden %}
             <div class="post_message_top_button">
-                <a href="{{ post.get_hide_url }}">hide</a>
+                <a href="{{ post.get_hide_url }}"><img src="/media/dijital/img/forum/hide.png" alt="gizle" border="0" /></a>
             </div>
             {% endif %}
             {% if perms.forum.can_hide_post and not forloop.first and post.hidden %}
             <div class="post_message_top_button">
-                <a href="{{ post.get_hide_url }}">unhide</a>
+                <a href="{{ post.get_hide_url }}"><img src="/media/dijital/img/forum/unhide.png" alt="göster" border="0" /></a>
             </div>
             {% endif %}
             {% if perms.forum.delete_post and not forloop.first %}
@@ -148,28 +148,28 @@
         <div class="post_bottom_small"><a href="{{ topic.get_reply_url }}"><img src="/media/dijital/img/forum/reply.gif" alt="Yanıtla" border="0" /></a></div>
     {% endif %}
     {% if perms.forum.can_lock_topic and topic.locked %}
-        <div class="post_bottom_big"><a href="{{ topic.get_lock_url }}"><img src="/media/dijital/img/forum/unlock.jpg" alt="Kilidi kaldır" border="0" /></a></div>
+        <div class="post_bottom_big"><a href="{{ topic.get_lock_url }}"><img src="/media/dijital/img/forum/unlock_topic.png" alt="Kilidi kaldır" border="0" /></a></div>
     {% endif %}
     {% if perms.forum.can_merge_topic %}
-        <div class="post_bottom_small"><a href="{{ topic.get_merge_url }}">merge</a></div>
+    <div class="post_bottom_big"><a href="{{ topic.get_merge_url }}"><img src="/media/dijital/img/forum/merge_topic.png" alt="Başlığı Birleştir" border="0" /></a></div>
     {% endif %}
     {% if perms.forum.can_move_topic %}
-        <div class="post_bottom_big"><a href="{{ topic.get_move_url }}"><img src="/media/dijital/img/forum/move.jpg" alt="Başlığı Taşı" border="0" /></a></div>
+        <div class="post_bottom_big"><a href="{{ topic.get_move_url }}"><img src="/media/dijital/img/forum/move_topic.png" alt="Başlığı Taşı" border="0" /></a></div>
     {% endif %}
     {% if perms.forum.can_hide_topic and not topic.hidden %}
-        <div class="post_bottom_small"><a href="{{ topic.get_hide_url }}">hide</a></div>
+        <div class="post_bottom_small"><a href="{{ topic.get_hide_url }}"><img src="/media/dijital/img/forum/hide.png" alt="Başlığı Gizle" border="0" /></a></div>
     {% endif %}
     {% if perms.forum.can_hide_topic and topic.hidden %}
-        <div class="post_bottom_small"><a href="{{ topic.get_hide_url }}">unhide</a></div>
+        <div class="post_bottom_small"><a href="{{ topic.get_hide_url }}"><img src="/media/dijital/img/forum/unhide.png" alt="Başlığı Göster" border="0" /></a></div>
     {% endif %}
     {% if perms.forum.can_stick_topic and not topic.sticky %}
-        <div class="post_bottom_small"><a href="{{ topic.get_stick_url }}">stick</a></div>
+        <div class="post_bottom_big"><a href="{{ topic.get_stick_url }}">stick</a></div>
     {% endif %}
     {% if perms.forum.can_stick_topic and topic.sticky %}
-        <div class="post_bottom_small"><a href="{{ topic.get_stick_url }}">unstick</a></div>
+    <div class="post_bottom_big"><a href="{{ topic.get_stick_url }}"><img src="/media/dijital/img/forum/unstick_topic.png" alt="Sabitliği Kaldır" border="0" /></a></div>
     {% endif %}
     {% if perms.forum.can_lock_topic and not topic.locked %}
-        <div class="post_bottom_big"><a href="{{ topic.get_lock_url }}" border="0"><img src="/media/dijital/img/forum/lock.jpg" alt="Kilitle" border="0px" /></a></div>
+        <div class="post_bottom_big"><a href="{{ topic.get_lock_url }}" border="0"><img src="/media/dijital/img/forum/lock_topic.png" alt="Kilitle" border="0px" /></a></div>
     {% endif %}
     {% if perms.forum.change_topic %}
         <div class="post_bottom_small"><a href="{{ topic.get_edit_url }}">edit_topic</a></div>
