@@ -11,5 +11,20 @@
 {% endblock %}
 
 {% block content %}
-    Kullanıcı Adı: {{ profile.user.username }}
+    Kullanıcı Adı: {{ profile.user.username }} <br />
+    Normal Telefon: {{ profile.phone }} <br />
+    Cep Telefonu: {{ profile.cellphone }} <br />
+    Adres: {{ profile.adress }} <br />
+
+    <br />
+    Fatura Bilgileri: <br />
+    <br />
+    &nbsp;&nbsp;&nbsp;- Ürünün gönderileceği adres: {{ profile.bill.adress }} <br />
+
+    &nbsp;&nbsp;&nbsp;- Kurumsal Hesap?: {{ profile.bill.have_company_information }} <br />
+    {% if profile.bill.have_company_information %}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Şirket Adı: {{ profile.bill.company_name }} <br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Şirket Adresi: {{ profile.bill.company_adress }} <br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Kişinin şirketteki ünvanı: {{ profile.bill.employee_title }} <br />
+    {% endif %}
 {% endblock %}
