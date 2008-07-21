@@ -15,6 +15,8 @@ from oi.middleware import threadlocals
 from oi.settings import CITY_LIST
 from oi.st.models import Contribute
 
+from oi.shop.shopprofile.models import ShopProfile
+
 class ForbiddenUsername(models.Model):
     name = models.CharField("Kullanıcı adı", max_length=30)
 
@@ -89,6 +91,13 @@ class Profile(models.Model):
     signature = models.TextField('İmza', blank=True, max_length=512)
     latitude = models.DecimalField('Enlem', max_digits=10, decimal_places=6, default=0)
     longitude = models.DecimalField('Boylam', max_digits=10, decimal_places=6, default=0)
+
+    def have_shopprofile(self):
+        # helper method for checking if the user has created shop profile
+        if ShopProfile.objects.filter(user=self.user).count() > 0:
+            return True
+        else:
+            return False
 
     def __unicode__(self):
         return self.user.username
