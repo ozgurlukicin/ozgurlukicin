@@ -207,25 +207,16 @@ class Product(models.Model):
         return self.active
 
     def is_in_stock(self):
-        if self.stock > 0:
-            return True
-        else:
-            return False
+        return (self.stock > 0)
 
     # We use them on template
     # If a product have childs (t-shirt, for example), then the page lists these products
 
     def have_child(self):
-        if self.child.count() > 0:
-            return True
-        else:
-            return False
+        return (self.child.count() > 0)
 
     def have_parent(self):
-        if not self.parent_id:
-            return False
-        else:
-            return True
+        return (self.parent.count() > 0)
 
     # God damn it, these functions are the same with Category
     # It's a code repeat. Grr..
