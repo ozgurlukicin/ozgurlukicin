@@ -7,13 +7,17 @@
 
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
 from oi.st.wrappers import render_response
 
 from oi.shop.shopprofile.models import ShopProfile
 
-@login_required
-def main(request):
-    profile = get_object_or_404(ShopProfile, user=request.user)
+def add_product_to_cart(request):
+    # process POST
+    from django.http import HttpResponse
 
-    return render_response(request, "shopprofile/shopprofile_main.html", locals())
+    if request.method == "POST":
+        return HttpResponse("Product ID: %s<br />Quantity: %s" % (request.POST.get("product_id"), request.POST.get("quantity")))
+    else:
+        return HttpResponseRedirect("/dukkan/")

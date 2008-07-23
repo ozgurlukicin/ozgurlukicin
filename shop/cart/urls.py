@@ -9,5 +9,5 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('oi.shop',
         (r'^$', 'cart.views.main'),
-        (r'^ekle/$', 'cart.views.add_product'),
+        (r'^ekle/$', 'cart.views.add_product_to_cart'),
         )

@@ -20,7 +20,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ürün Fiyatı: {{ child.price }} +KDV ({{ child.price_with_tax }})<br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ürün Stoğu: {{ child.stock }} <br />
             {% if user.is_authenticated %}
-            <form method="POST" action="/dukkan/sepet/ekle/"><input type="text" name="quantity" value="1" /><input type="submit" value="Ekle"></form>
+            <form method="POST" action="/dukkan/sepet/ekle/"><input type="hidden" name="product_id" value="{{ child.pk }}"><input type="text" name="quantity" value="1" /><input type="submit" value="Ekle"></form>
             {% endif %}
             <br />
             {% endif %}
