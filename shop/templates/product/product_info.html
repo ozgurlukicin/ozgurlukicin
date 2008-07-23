@@ -11,7 +11,6 @@
 {% endblock %}
 
 {% block content %}
-
     Ürün ismi: {{ product.name }} <br /><br />
 
     {% if product.have_child %}
@@ -19,7 +18,11 @@
             {% if child.is_active %}
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ürün İsmi: {{ child.name }} <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ürün Fiyatı: {{ child.price }} +KDV ({{ child.price_with_tax }})<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ürün Stoğu: {{ child.stock }} <br /><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ürün Stoğu: {{ child.stock }} <br />
+            {% if user.is_authenticated %}
+            <form method="POST" action="/dukkan/sepet/ekle/"><input type="text" name="quantity" value="1" /><input type="submit" value="Ekle"></form>
+            {% endif %}
+            <br />
             {% endif %}
         {% endfor %}
     {% else %}

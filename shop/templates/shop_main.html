@@ -9,3 +9,16 @@
 {% block ust_menu %}
     {% include "shop_ust_menu.html" %}
 {% endblock %}
+
+{% block content %}
+    {% if not user.is_authenticated %}
+        Giriş yapmamışsınız. <a href="/kullanici/giris/">Buraya</a> tıklayarak giriş yapabilir ve ürün siparişi verebilirsiniz. <br />
+    {% else %}
+
+    {% if not user.get_profile.have_shopprofile %}
+        Herhangi bir alışveriş profiline sahip değilsiniz! <a href="/dukkan/profil/olustur/">Buraya</a> tıklayarak oluşturabilir ve ürün siparişi vermeye başlayabilirsiniz.
+    {% endif %}
+
+    {% endif %}
+
+{% endblock %}
