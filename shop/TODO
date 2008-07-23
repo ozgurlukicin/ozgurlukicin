@@ -21,7 +21,7 @@ Legend:
     + Create Product class, damn?!
     + Make sure that product can have more than 1 picture.
 
-    - Calculate total price, considering tax
+    + Calculate total price, considering tax
     - On product info page, product's all childs are shown regardless of their active/deactive status. Fix this
 
 [*] User
