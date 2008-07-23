@@ -14,6 +14,8 @@ urlpatterns = patterns('oi.shop',
         (r'^profil/$', include('oi.shop.shopprofile.urls')),
         # Category
         (r'^kategori/(?P<slug>.*)/$', 'product.views.get_category_products'),
+        # Shopping Cart
+        (r'^sepet/$', include('oi.shop.cart.urls')),
         # Product
         (r'^urun/(?P<category_slug>.*)/(?P<product_slug>.*)/$', 'product.views.get_product'),
         )
