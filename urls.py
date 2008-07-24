@@ -128,6 +128,7 @@ urlpatterns = patterns('',
 
     #Search
     (r'^arama/$', 'oi.st.views.search'),
+    (r'^gelismisarama/$', 'oi.st.views.advanced_search'),
 
     #Download
     (r'^indir/$', 'oi.st.views.download'),
