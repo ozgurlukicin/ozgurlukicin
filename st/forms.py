@@ -1,9 +1,28 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#
+# Copyright 2007, 2008 Artistanbul
+# Licensed under the GNU General Public License, version 3.
+# See the file http://www.gnu.org/copyleft/gpl.txt.
+
 from BeautifulSoup import BeautifulSoup, Comment
 from django import newforms as forms
 import re
 
 class SearchForm(forms.Form):
     term = forms.CharField(label='Anahtar kelime', required=True, widget=forms.TextInput(attrs={'size': '40',}))
+
+class AdvancedSearchForm(forms.Form):
+    term = forms.CharField(label='Anahtar kelime', required=True, min_length=3, widget=forms.TextInput(attrs={'size': '40',}))
+    search_in = forms.ChoiceField(label="Aranacak Bölümler", widget=forms.RadioSelect, choices=(
+        (0, "Forum"),
+        (1, "Diğer Bölümler"),
+        (2, "Tümü"),
+        ))
+    depth = forms.ChoiceField(label="Arama Derinliği", widget=forms.RadioSelect, choices=(
+        (0, "Sadece Başlıklarda Ara"),
+        (1, "Başlıklarda ve İçerikte Ara"),
+        ))
 
 class XssField(forms.CharField):
     """ That one will validate the screen upload things"""

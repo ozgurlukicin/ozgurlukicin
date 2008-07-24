@@ -1,26 +1,38 @@
 {% extends "base.html" %}
-
 {% block header_menu %}
     {% include "header.html" %}
 {% endblock %}
-<br/>
 {% block ust_menu %}
     {% include "ust_menu_ayrinti.html" %}
 {% endblock %}
-<br/>
 
 {% block content %}
-<div class="center">
+<div class="center" style="text-align: left; padding-left: 50px;">
     <form method="post" action="">
-    Anahtar kelime: <input type="text" name="term">
+        <style type="text/css">ul{overflow:hidden;padding:0;list-style-type:none;}</style>
+        {% for field in form %}
+        <dl>
+            <dt><label for="id_{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
+            <dd>{{ field }}</dd>
+        </dl>
+        {% endfor %}
     <input type="submit" value="Sonuçları göster" />
-    <a href="/gelismisarama/">Gelişmiş Arama</a>
     </form>
 </div>
 {% if searched %}
-<div class="fs_title transparent_link">{{ term }} kelimesini içeren sayfalar</div>
+<div class="fs_title transparent_link">{{ term }} kelimesini içeren sayfa{% if tags or topics or posts or news or packages or games or fs or howto or flatpages %}lar{% else %} bulunamadı.{% endif %}</div>
 {% ifnotequal total 0 %}
 <div class="fs_content">
+    {% if tags %}
+        <div class="purple">
+            <h2><span>Etiketler ({{ tags.count }} adet)</span></h2>
+            <ul style="padding-left: 16px;" class="grey">
+            {% for obj in tags %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.name }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
     {% if news %}
         <div class="purple">
             <h2><span>Haberler ({{ news.count }} adet)</span></h2>
@@ -76,13 +88,19 @@
         </div>
     {% endif %}
 
-	{% if topic %}
+	{% if topics or posts %}
         <div class="darkblue">
-            <h2><span>Forum ({{ topic.count }} adet)</span></h2>
+            <h2><span>Forum ({% if posts %}{{ posts.count }}{% else %}{{ topics.count }}{% endif %} adet)</span></h2>
             <ul style="padding-left: 16px;" class="grey">
-            {% for obj in topic %}
+            {% if posts %}
+            {% for obj in posts %}
+                <li><a href="{{ obj.topic.get_absolute_url }}">{{ obj.topic.title }}</a></li>
+            {% endfor %}
+            {% else %}
+            {% for obj in topics %}
                 <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></li>
             {% endfor %}
+            {% endif %}
             </ul>
         </div>
     {% endif %}
