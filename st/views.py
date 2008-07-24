@@ -10,10 +10,11 @@ from os import path
 
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 from oi.settings import WEB_URL, NEWS_IN_HOMEPAGE, PACKAGES_IN_HOMEPAGE, GAMES_IN_HOMEPAGE, FS_IN_HOMEPAGE, HOWTOS_IN_HOMEPAGE
 
-from oi.st.forms import SearchForm,CommentForm
+from oi.st.forms import SearchForm,CommentForm,AdvancedSearchForm
 
 from oi.st.models import *
 from oi.st.wrappers import render_response
@@ -156,6 +157,41 @@ def videobox(request, video):
     web_url = WEB_URL
     return render_response(request, 'videobox.html', locals())
 
+def advanced_search(request):
+    if request.method == 'POST':
+        form = AdvancedSearchForm(request.POST.copy())
+        if form.is_valid():
+            term = form.cleaned_data['term']
+            search_in = int(form.cleaned_data['search_in'])
+            depth = int(form.cleaned_data['depth'])
+
+            tags = Tag.objects.filter(name__icontains=term)
+
+            if depth == 0:
+                if search_in != 1:
+                    topics = Topic.objects.filter(title__icontains=term)[:50]
+                if search_in != 0:
+                    news = News.objects.filter(title__icontains=term).order_by('-update')
+                    packages = Package.objects.filter(title__icontains=term).order_by('-update')
+                    games = Game.objects.filter(title__icontains=term).order_by('-update')
+                    fs = FS.objects.filter(title__icontains=term).order_by('-update')
+                    howto = HowTo.objects.filter(title__icontains=term).order_by('-update')
+                    flatpages = FlatPage.objects.filter(title__icontains=term)
+            else:
+                if search_in != 1:
+                    posts = Post.objects.filter(text__icontains=term).order_by("-created")[:50]
+                if search_in != 0:
+                    news = News.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).order_by('-update')
+                    packages = Package.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).order_by('-update')
+                    games = Game.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).order_by('-update')
+                    fs = FS.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).order_by('-update')
+                    howto = HowTo.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).order_by('-update')
+                    flatpages = FlatPage.objects.filter(Q(title__icontains=term)|Q(text__icontains=term))
+            searched = True
+    else:
+        form = AdvancedSearchForm()
+    return render_response(request, 'advancedsearch.html', locals())
+
 def search(request):
     if request.method == 'POST':
         form = SearchForm(request.POST.copy())
@@ -181,9 +217,6 @@ def search(request):
             total += howto.count()
             total += flatpages.count()
             total += topic.count()
-
-    else:
-        pass
 
     return render_response(request, 'search.html', locals())
 
