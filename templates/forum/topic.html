@@ -13,7 +13,7 @@
 <div class="forum_address">
     <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; {{ topic.title }}</div>
     {% if request.user.is_authenticated and not watching %}
-    <div class="post_bottom_small"><a href="{{ topic.get_follow_url }}"><img src="/media/dijital/img/forum/watch.gif" alt="izle" title="E-posta ile izle" border="0" /></a></div>
+    <div class="post_bottom_small"><a href="{{ topic.get_follow_url }}"><img src="/media/dijital/img/forum/watch.png" alt="izle" title="E-posta ile izle" border="0" /></a></div>
     {% endif %}
     {% if perms.forum.can_create_poll and not topic.poll %}
     <div class="post_bottom_small"><a href="{{ topic.get_create_poll_url }}"><img src="/media/dijital/img/forum/add_poll.png" alt="anket ekle" border="0" /></a></div>
@@ -163,7 +163,7 @@
         <div class="post_bottom_small"><a href="{{ topic.get_hide_url }}"><img src="/media/dijital/img/forum/unhide.png" alt="Başlığı Göster" border="0" /></a></div>
     {% endif %}
     {% if perms.forum.can_stick_topic and not topic.sticky %}
-        <div class="post_bottom_big"><a href="{{ topic.get_stick_url }}">stick</a></div>
+        <div class="post_bottom_big"><a href="{{ topic.get_stick_url }}"><img src="/media/dijital/img/forum/topic_stick.png" alt="Sabitle" border="0" /></a></div>
     {% endif %}
     {% if perms.forum.can_stick_topic and topic.sticky %}
     <div class="post_bottom_big"><a href="{{ topic.get_stick_url }}"><img src="/media/dijital/img/forum/unstick_topic.png" alt="Sabitliği Kaldır" border="0" /></a></div>
@@ -172,7 +172,7 @@
         <div class="post_bottom_big"><a href="{{ topic.get_lock_url }}" border="0"><img src="/media/dijital/img/forum/lock_topic.png" alt="Kilitle" border="0px" /></a></div>
     {% endif %}
     {% if perms.forum.change_topic %}
-        <div class="post_bottom_small"><a href="{{ topic.get_edit_url }}">edit_topic</a></div>
+        <div class="post_bottom_big"><a href="{{ topic.get_edit_url }}"><img src="/media/dijital/img/forum/topic_edit.png" alt="Düzenle" border="0px" /></a></div>
     {% endif %}
 {% if is_paginated %}
     <div class="post_pagination">{% paginator %}</div>
