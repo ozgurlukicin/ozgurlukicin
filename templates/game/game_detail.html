@@ -110,7 +110,9 @@
     <div class="sidebar_top">&nbsp;</div>
     <div class="sidebar_middle">
         <h2>İlgili Videolar</h2>
-        {% for video in game.videos.all %}<img src="{{ video.get_thumbnail_url }}" alt="video" title="{{ video.desc }} "style="width:200px;cursor:pointer" onclick="make_video(this, '{{ web_url }}', '{{ web_url }}/media/{{ video.file }}')" /></a>{% endfor %}</a>
+        {% for video in game.videos.all %}
+        <div><img src="{{ video.get_thumbnail_url }}" alt="video" title="{{ video.desc }} "style="width:200px;cursor:pointer" onclick="make_video(this, '{{ web_url }}', '{{ web_url }}/media/{{ video.file }}')" /></div>
+        {% endfor %}
     </div>
     <div class="sidebar_bottom">&nbsp;</div>
 </div>
