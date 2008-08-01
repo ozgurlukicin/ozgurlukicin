@@ -1,0 +1,17 @@
+{% extends "idea_list.html" %}
+
+{% block title %}{{ idea.title }} - Yeni Fikirler - {% endblock %}
+
+{% block idea %}
+<h3>{{ idea.title }}</h3>
+{{ idea.description }}
+
+
+{% if form %}
+<form method="post" action="#">
+  {{ form }}
+  <br />
+  <input type="submit" value="GönderBakim" />
+</form>
+{% endif %}
+{% endblock %}
