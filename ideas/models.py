@@ -74,8 +74,8 @@ class Related(models.Model):
         pass
 
     class Meta:
-        verbose_name = "İlgili fikir"
-        verbose_name_plural = "İlgili fikirler"
+        verbose_name = "Fikir şununla ilgili"
+        verbose_name_plural = "Fikir şununla ilgili"
 
 
 class Idea(models.Model):
@@ -83,14 +83,12 @@ class Idea(models.Model):
     submitted_date = models.DateTimeField("Tarih", auto_now_add=True)
     submitter = models.ForeignKey(User, verbose_name="Gönderen")
     description = models.TextField("Açıklama", help_text="Fikrinizi açıklayan bir yazı yazın.")
-#FIXME
     status = models.ForeignKey(Status,verbose_name="Durum")
     category = models.ForeignKey(Category, null=True, verbose_name="Kategori")
     related_to = models.ForeignKey(Related, null=True, verbose_name="Şununla ilgili")
     tags = models.ManyToManyField(Tag, verbose_name="Etiketler")
     vote_count = models.IntegerField("Oy Sayısı", default=0)
-    # ?
-    duplicates = models.ForeignKey("self", verbose_name="Fikir Tekrarı", blank=True)
+    duplicate = models.ForeignKey("self", blank=True, null=True, verbose_name="Fikir Tekrarı")
     forum_url = models.URLField("İlgili forum bağlantısı", help_text="Varsa ilgili Özgürlük İçin Forumundaki konu adresini yazın.", blank=True)
     bug_url = models.CharField("Hata numarası", help_text="Varsa ilgili hata numaralarını virgülle ayırarak giriniz.", max_length=64, blank=True)
     file = models.FileField(upload_to="upload/ideas/dosya/", blank=True)
@@ -101,7 +99,8 @@ class Idea(models.Model):
         return self.title
 
     class Admin:
-        list_filter = ('status','is_hidden')
+        list_display = ('title', 'submitter', 'submitted_date', 'category', 'related_to')
+        list_filter = ('status', 'is_hidden', "category", "related_to")
 
     class Meta:
         verbose_name = "Yeni Fikir"
