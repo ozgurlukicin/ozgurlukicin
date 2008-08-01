@@ -105,7 +105,7 @@
     <div class="sidebar_top">&nbsp;</div>
     <div class="sidebar_middle">
         <h2>İlgili Videolar</h2>
-        {% for video in package.videos.all %}<a href="/video/{{ video.get_video_name }}" rel="lightbox[video_{{ package.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}</a>
+        {% for video in package.videos.all %}<a href="/video/{{ video.get_video_name }}" rel="lightbox[video_{{ package.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" alt="video" style="width:200px" /></a>{% endfor %}</a>
     </div>
     <div class="sidebar_bottom">&nbsp;</div>
 </div>
