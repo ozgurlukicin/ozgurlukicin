@@ -18,7 +18,7 @@
 <ul>
 {% for i in ideas %}
     <li><h3><a href="/yenifikir/ayrinti/{{ i.slug }}" title"{{ i.title }}">{{ i.title }}</a></h3>
-      {{ i.submitted_date }} tarihinde {{ i.submitter  }} tarafından gönderildi.
+      {{ i.submitter }} tarafından {{ i.submitted_date }} tarihinde <a href="kategori/{{ i.category }}" title="{{ i.category }}">{{ i.category }}</a> kategorisine <a href="ilgili/{{ i.related_to }}" title="{{ i.related_to }}">{{ i.related_to }}</a> ile ilgili olarak gönderildi.
       <br /><br />
       {{ i.description }}
     </li>

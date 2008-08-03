@@ -1,11 +1,20 @@
 {% extends "idea_list.html" %}
 
-{% block title %}{{ idea.title }} - Yeni Fikirler - {% endblock %}
+{% block title %}{{ i.title }} - Yeni Fikirler - {% endblock %}
 
 {% block idea %}
-<h3>{{ idea.title }}</h3>
-{{ idea.description }}
-
+<h3>{{ i.title }}</h3>
+<p>
+    {{ i.submitter }} tarafından {{ i.submitted_date }} tarihinde {{ i.category }} kategorisine {{ i.related_to }} ile ilgili olarak gönderildi.
+</p>
+<p>
+      {{ i.description }}
+</p>
+<p>Etiketler : 
+{% for tag in i.tags.all %}
+<a href="" title="{{ tag.name }}">{{ tag.name }}</a>,
+{% endfor %}
+</p>
 
 {% if form %}
 <form method="post" action="#">

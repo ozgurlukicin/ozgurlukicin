@@ -12,10 +12,13 @@ def list(request):
     return render_response(request, "idea_list.html", locals())
 
 def detail(request, slug):
-    idea = get_object_or_404(Idea, slug=slug)
+    i = get_object_or_404(Idea, slug=slug)
     form = CommentForm()
 
     if request.user.is_authenticated():
         auth = True
 
     return render_response(request, "idea_detail.html", locals())
+
+
+
