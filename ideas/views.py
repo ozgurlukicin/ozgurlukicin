@@ -12,7 +12,7 @@ def list(request):
     return render_response(request, "idea_list.html", locals())
 
 def detail(request, slug):
-    i = get_object_or_404(Idea, slug=slug)
+    idea = get_object_or_404(Idea, slug=slug)
     form = CommentForm()
 
     if request.user.is_authenticated():

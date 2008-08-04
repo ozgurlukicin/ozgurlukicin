@@ -1,17 +1,14 @@
 {% extends "idea_list.html" %}
 
-{% block title %}{{ i.title }} - Yeni Fikirler - {% endblock %}
+{% block title %}{{ idea.title }} - Yeni Fikirler - {% endblock %}
 
 {% block idea %}
-<h3>{{ i.title }}</h3>
-<p>
-    {{ i.submitter }} tarafından {{ i.submitted_date }} tarihinde {{ i.category }} kategorisine {{ i.related_to }} ile ilgili olarak gönderildi.
+<h3>{{ idea.title }}</h3>
+<p>{{ idea.submitter }} tarafından {{ idea.submitted_date }} tarihinde <a href="kategori/{{ idea.category }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine <a href="ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak gönderildi.
 </p>
-<p>
-      {{ i.description }}
-</p>
+<p>{{ idea.description }}</p>
 <p>Etiketler : 
-{% for tag in i.tags.all %}
+{% for tag in idea.tags.all %}
 <a href="" title="{{ tag.name }}">{{ tag.name }}</a>,
 {% endfor %}
 </p>
@@ -20,7 +17,7 @@
 <form method="post" action="#">
   {{ form }}
   <br />
-  <input type="submit" value="GönderBakim" />
+  <input type="submit" value="Gönder" />
 </form>
 {% endif %}
 {% endblock %}

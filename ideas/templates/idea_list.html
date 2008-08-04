@@ -16,11 +16,11 @@
 {% block content %}
  {% block idea %}
 <ul>
-{% for i in ideas %}
-    <li><h3><a href="/yenifikir/ayrinti/{{ i.slug }}" title"{{ i.title }}">{{ i.title }}</a></h3>
-      {{ i.submitter }} tarafından {{ i.submitted_date }} tarihinde <a href="kategori/{{ i.category }}" title="{{ i.category }}">{{ i.category }}</a> kategorisine <a href="ilgili/{{ i.related_to }}" title="{{ i.related_to }}">{{ i.related_to }}</a> ile ilgili olarak gönderildi.
+{% for idea in ideas %}
+<li><h3><a href="/yenifikir/ayrinti/{{ idea.slug }}" title"{{ idea.title }}">{{ idea.title }}</a></h3>
+      {{ idea.submitter }} tarafından {{ idea.submitted_date }} tarihinde <a href="kategori/{{ idea.category }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine <a href="ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak gönderildi.
       <br /><br />
-      {{ i.description }}
+      {{ idea.description }}
     </li>
 {% endfor %}
 </ul>
