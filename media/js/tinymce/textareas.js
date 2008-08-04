@@ -14,7 +14,7 @@ tinyMCE.init({
     convert_urls : false,
     width : "800",
     height : "300",
-    extended_valid_elements : "a[name|href|target|title],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|name|sytle],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
+    extended_valid_elements : "a[name|href|target|title],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|name|style],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
     advimage_update_dimensions_onchange: true,
     file_browser_callback : 'oiFileBrowser',
     plugins : "advimage,autosave,searchreplace,table,visualchars,advlink,emotions,media,style,template,xhtmlxtras",
