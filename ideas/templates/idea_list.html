@@ -15,10 +15,13 @@
 
 {% block content %}
  {% block idea %}
+{% if filter_slug %}
+<h2>{{ filter_slug }} ile ilgili fikirler</h2>
+{% endif %}
 <ul>
 {% for idea in ideas %}
-<li><h3><a href="/yenifikir/ayrinti/{{ idea.slug }}" title"{{ idea.title }}">{{ idea.title }}</a></h3>
-      {{ idea.submitter }} tarafından {{ idea.submitted_date }} tarihinde <a href="kategori/{{ idea.category }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine <a href="ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak gönderildi.
+<li><h3><a href="{{idea.get_absolute_url}}/ayrinti/{{ idea.slug }}" title"{{ idea.title }}">{{ idea.title }}</a></h3>
+      {{ idea.submitter }} tarafından {{ idea.submitted_date }} tarihinde <a href="{{ idea.get_absolute_url }}/kategori/{{ idea.category }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine <a href="{{ idea.get_absolute_url }}/ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak gönderildi.
       <br /><br />
       {{ idea.description }}
     </li>

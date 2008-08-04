@@ -95,6 +95,9 @@ class Idea(models.Model):
     slug = models.SlugField("SEF", prepopulate_from=('title',))
     is_hidden = models.BooleanField("Gizli", blank=True, null=True, default=0)
 
+    def get_absolute_url(self):
+        return "/yenifikir"
+
     def __unicode__(self):
         return self.title
 
