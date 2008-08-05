@@ -6,11 +6,7 @@
 {% block extrahead %}
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
-<script type="text/javascript" src="/media/js/scriptaculous.js?load=effects,builder"></script>
-<script type="text/javascript" src="/media/js/lightbox.js"></script>
-
-<link rel="stylesheet" href="/media/css/lightbox.css" type="text/css" media="screen" />
-
+<script type="text/javascript" src="/media/js/video.js"></script>
 {% endblock %}
 
 {% block pagetype %}page{% endblock %}
@@ -75,7 +71,9 @@
     <div class="sidebar_top">&nbsp;</div>
     <div class="sidebar_middle">
         <h2>İlgili Videolar</h2>
-        {% for video in howto.videos.all %}<a href="/video/{{ video.get_video_name }}" rel="lightbox[video_{{ howto.title }}]" title="{{ video.desc }}"><img src="{{ video.get_thumbnail_url }}" /></a>{% endfor %}
+        {% for video in howto.videos.all %}
+        <div><img src="{{ video.get_thumbnail_url }}" alt="video" title="{{ video.desc }} "style="width:200px;cursor:pointer" onclick="make_video(this, '{{ web_url }}', '{{ web_url }}/media/{{ video.file }}')" /></div>
+        {% endfor %}
     </div>
     <div class="sidebar_bottom">&nbsp;</div>
 </div>

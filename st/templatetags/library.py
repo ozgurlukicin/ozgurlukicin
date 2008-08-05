@@ -19,10 +19,13 @@ def thumbnail(file, size='200x200'):
     miniature = basename + '_' + size + '.' +  format
     miniature_filename = os.path.join(MEDIA_ROOT, miniature)
     miniature_url = os.path.join(MEDIA_URL, miniature)
+    filename = os.path.join(MEDIA_ROOT, file)
+    # if image has been modified, remove old thumbnail
+    if os.path.exists(miniature_filename) and os.path.getmtime(filename)>os.path.getmtime(miniature_filename):
+        os.unlink(miniature_filename)
     # if the image wasn't already resized, resize it
     if not os.path.exists(miniature_filename):
         print '>>> debug: resizing the image to the format %s!' % size
-        filename = os.path.join(MEDIA_ROOT, file)
         image = Image.open(filename)
         image.thumbnail([x, y]) # generate a 200x200 thumbnail
         image.save(miniature_filename, image.format)
