@@ -7,7 +7,7 @@
 
 from datetime import datetime
 
-from django.http import HttpResponseRedirect, HttpResponseServerError, HttpResponseForbidden, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
@@ -209,6 +209,12 @@ def topic(request, forum_slug, topic_id):
                 pass
     except: #DoesNotExist
         pass
+
+    # If the topic is hidden and user doesn't have permission to see it, return 404.
+    # If it isn't controlled, user knowing Topic URL can see it :)
+
+    if topic.hidden and not request.user.has_perm("forum.can_see_hidden_topics"):
+        return render_response(request, "404.html")
 
     return object_list(request, posts,
                        template_name = 'forum/topic.html',
