@@ -6,6 +6,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from oi.st.models import Tag
 
+
 class StatusCategory(models.Model):
     name = models.CharField("İsim", max_length=128)
 
@@ -90,13 +91,10 @@ class Idea(models.Model):
     vote_count = models.IntegerField("Oy Sayısı", default=0)
     duplicate = models.ForeignKey("self", blank=True, null=True, verbose_name="Fikir Tekrarı")
     forum_url = models.URLField("İlgili forum bağlantısı", help_text="Varsa ilgili Özgürlük İçin Forumundaki konu adresini yazın.", blank=True)
-    bug_url = models.CharField("Hata numarası", help_text="Varsa ilgili hata numaralarını virgülle ayırarak giriniz.", max_length=64, blank=True)
+    bug_numbers = models.CharField("Hata numaraları", help_text="Varsa ilgili hata numaralarını virgülle ayırarak giriniz.", max_length=64, blank=True)
     file = models.FileField(upload_to="upload/ideas/dosya/", blank=True)
     slug = models.SlugField("SEF", prepopulate_from=('title',))
-    is_hidden = models.BooleanField("Gizli", blank=True, null=True, default=0)
-
-    def get_absolute_url(self):
-        return "/yenifikir"
+    is_hidden = models.BooleanField("Gizli", default=False)
 
     def __unicode__(self):
         return self.title
@@ -109,17 +107,18 @@ class Idea(models.Model):
         verbose_name = "Yeni Fikir"
         verbose_name_plural = "Yeni Fikirler"
 
-
 class Comment(models.Model):
     idea = models.ForeignKey(Idea, verbose_name="İlgili fikir")
     author = models.ForeignKey(User, verbose_name="Yazan",related_name="comments_author")
     text = models.TextField("Yorum")
     submited = models.DateTimeField("Tarih", auto_now_add=True)
-    is_hidden = models.BooleanField("Gizli")
-    ip = models.IPAddressField("IP Adresi",blank=True)
+    is_hidden = models.BooleanField("Gizli", default=False)
+    ip = models.IPAddressField("IP Adresi",blank=True, null=True)
+
+
 
     def __unicode__(self):
-        return self.idea
+        return self.text
 
     class Admin:
         pass

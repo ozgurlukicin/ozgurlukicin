@@ -14,17 +14,30 @@
 {% endblock %}
 
 {% block content %}
+<div>
+<li><a href="{{ absolute_url }}" title="Yeni Fikirler">Yeni Fikirler Anasayfa</a></li>
+<li><a href="{{ absolute_url }}/ekle">Yeni Fikri Ekle</a></li>
+<li><a href="{{ absolute_url }}/ekleyen/{{ user.username  }}">Eklediğim Fikirler</a></li>
+<li>Kategoriler
+  <ul>
+    {% for category in categories %}
+    <li><a href="{{ absolute_url }}/kategori/{{ category.name }}" title="{{ category.name }}">{{ category.name }}</a></li>
+    {% endfor %}
+  </ul>
+  </li>
+</ul>
+</div>
  {% block idea %}
 {% if filter_slug %}
 <h2>{{ filter_slug }} ile ilgili fikirler</h2>
 {% endif %}
 <ul>
 {% for idea in ideas %}
-<li><h3><a href="{{idea.get_absolute_url}}/ayrinti/{{ idea.slug }}" title"{{ idea.title }}">{{ idea.title }}</a></h3>
-      {{ idea.submitter }} tarafından {{ idea.submitted_date }} tarihinde <a href="{{ idea.get_absolute_url }}/kategori/{{ idea.category }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine <a href="{{ idea.get_absolute_url }}/ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak gönderildi.
-      <br /><br />
-      {{ idea.description }}
-    </li>
+<li><h3><a href="{{ absolute_url}}/ayrinti/{{ idea.slug }}" title"{{ idea.title }}">{{ idea.title }}</a></h3>
+      <p><strong>{{ idea.status }}</strong> | {{ idea.submitter }} tarafından {{ idea.submitted_date }} tarihinde <a href="{{ absolute_url }}/kategori/{{ idea.category }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine <a href="{{ absolute_url }}/ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak gönderildi.</p>
+      <p>{{ idea.description }}</p>
+      <p><a href="" title="Yorumlar">Yorumlar ()</a></p>
+     </li>
 {% endfor %}
 </ul>
  {% endblock %}
