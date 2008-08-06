@@ -4,9 +4,10 @@
 {% block title %}{{ howto.title }} - Nasıl - {% endblock %}
 
 {% block extrahead %}
-<script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
-<script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
-<script type="text/javascript" src="/media/js/video.js"></script>
+{% if auth %}
+    <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
+    <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
+{% endif %}
 {% endblock %}
 
 {% block pagetype %}page{% endblock %}
@@ -72,7 +73,7 @@
     <div class="sidebar_middle">
         <h2>İlgili Videolar</h2>
         {% for video in howto.videos.all %}
-        <div><img src="{{ video.get_thumbnail_url }}" alt="video" title="{{ video.desc }} "style="width:200px;cursor:pointer" onclick="make_video(this, '{{ web_url }}', '{{ web_url }}/media/{{ video.file }}')" /></div>
+        {% include "video.html" %}
         {% endfor %}
     </div>
     <div class="sidebar_bottom">&nbsp;</div>
