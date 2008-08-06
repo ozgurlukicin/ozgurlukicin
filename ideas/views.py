@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from oi.ideas.forms import *
 from oi.st.wrappers import render_response
-from oi.ideas.models import Idea, Category, Related, Comment
+from oi.ideas.models import Idea, Category, Related, Comment, Status
 from django.contrib.auth.models import User
 
 
@@ -40,8 +40,7 @@ def detail(request, slug):
                 idea=idea,
                 text=text,
                 author = request.user,
-                ip=ip,
-                is_hidden='0'
+                ip=ip
                 )
             comment.save()
 #            HttpResponseRedirect("%s/%s", (absolute_url, slug))
@@ -58,6 +57,15 @@ def add(request):
     if request.method == 'POST':
         form = NewIdeaForm(request.POST.copy())
         if form.is_valid():
-            newidea = Idea()
-    new_idea_form = NewIdeaForm()
+            status = Status.objects.all()[1]
+            newidea = Idea(request.POST, submitter=request.user, status=status)
+            newidea.save()
+            idea_added = True
+    else:
+        new_idea_form = NewIdeaForm()
     return render_response(request, "idea_add_form.html", locals())
+
+
+
+
+

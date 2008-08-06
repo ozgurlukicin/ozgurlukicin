@@ -4,7 +4,7 @@
 
 {% block idea %}
 <h3>{{ idea.title }}</h3>
-<p><a href="/kullanici/profil/{{ idea.submitter }}/" title="{{ idea.submitter }} kullanıcısının profiline git">{{ idea.submitter }}</a> tarafından {{ idea.submitted_date }} tarihinde <a href="{{ absolute_url }}/kategori/{{ idea.category }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine <a href="{{ absolute_url }}/ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak gönderildi.
+<p><a href="{{ idea.submitter.get_profile.get_absolute_url }}" title="{{ idea.submitter }} kullanıcısının profiline git">{{ idea.submitter }}</a> tarafından {{ idea.submitted_date }} tarihinde <a href="{{ absolute_url }}/kategori/{{ idea.category }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine <a href="{{ absolute_url }}/ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak gönderildi.
 </p>
 <p>{{ idea.description }}</p>
 <p>Etiketler :
@@ -14,7 +14,8 @@
 </p>
 <h4>Yorumlar</h4>
      {% for comment in comments %}
-      <p>#{{ forloop.counter }}. {{ comment.text }} | Yazan : <a href="/kullanici/profil/{{ comment.author }}/" title"{{ comment.author }} kullanıcısının profiline git">{{ comment.author }}</a> Tarih: {{ comment.submited }}</p>
+      <p>#{{ forloop.counter }}. {{ comment.text }} | 
+Yazan : <a href="{{ comment.author.get_profile.get_absolute_url }}" title"{{ comment.author }} kullanıcısının profiline git">{{ comment.author }}</a> Tarih: {{ comment.submited }}</p>
       {% endfor %}
 {% if auth %}
 {% if form %}

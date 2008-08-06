@@ -1,0 +1,17 @@
+{% extends "idea_list.html" %}
+
+{% block title %}Yeni Fikir Ekle - {% endblock %}
+
+{% block idea %}
+{% if idea_added %}
+ Yeni fikir eklendi !
+{% endif %}
+<form method="POST" action="">
+<table>
+{{ new_idea_form }}
+</table>
+<input type="submit" name="gonder" value="Gönder" />
+
+</form>
+
+{% endblock %}
