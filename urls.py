@@ -159,6 +159,9 @@ urlpatterns = patterns('',
     (r'^petition/', include('oi.petition.urls')),
     (r'^ooxml/', 'oi.petition.views.petition_sign'),
 
+    #Ideas
+    (r'^yenifikir/', include('oi.ideas.urls')),
+
     #Django
     (r'^$', 'oi.st.views.home'),
     (r'^admin/upload/image/add/$', 'oi.upload.views.image_upload'),

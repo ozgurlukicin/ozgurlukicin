@@ -123,6 +123,7 @@ INSTALLED_APPS = (
     # shop apps
     'oi.shop.shopprofile',
     'oi.shop.product',
+    'oi.ideas',
 )
 
 CITY_LIST = (
