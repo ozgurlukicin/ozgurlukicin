@@ -41,13 +41,13 @@ Kategoriler
 <ul>
 {% for idea in ideas %}
 <li>
-  <h1>{{ idea.vote_count }} <a href="oyla/{{ idea.id }}/1">(+)</a> <a href="oyla/{{ idea.id }}/-1">(-)</a></h1>
+  <h1>{{ idea.vote_count }} <a href="/yenifikir/oyla/{{ idea.id }}/1">(+)</a> <a href="/yenifikir/oyla/{{ idea.id }}/-1">(-)</a></h1>
   <h3><a href="{{ idea.get_absolute_url }}" title"{{ idea.title }}">{{ idea.title }}</a></h3>
       <p>
 	<strong>{{ idea.status }}</strong>
 	<br />{{ idea.submitter }} tarafından {{ idea.submitted_date }} tarihinde
-	<a href="yenifikir/kategori/{{ idea.category }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine
-	<a href="yenifikir/ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak gönderildi.
+	<a href="/yenifikir/kategori/{{ idea.category }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine
+	<a href="/yenifikir/ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak gönderildi.
       </p>
       <p>{{ idea.description }}</p>
       <p><a href="" title="Yorumlar">Yorumlar ()</a></p>
