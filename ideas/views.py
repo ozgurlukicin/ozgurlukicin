@@ -34,7 +34,6 @@ def list(request, field="", filter_slug=""):
         ideas = ideas.filter()
     else:
         ideas = ideas.filter(submitted_date__gt=datetime.datetime.now()-datetime.timedelta(1))
-
     categories = Category.objects.all()
     absolute_url = "/yenifikir"
     return render_response(request, "idea_list.html", locals())

@@ -100,7 +100,7 @@ class Idea(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return "/yenifikir/"
+        return "/yenifikir/ayrinti/%s" % self.slug
 
     class Admin:
         list_display = ('title', 'submitter', 'submitted_date', 'category', 'related_to')
