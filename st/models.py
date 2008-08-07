@@ -7,7 +7,7 @@
 
 import re, Image
 from os import path, stat, remove
-from commands import getoutput
+import subprocess
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -19,6 +19,8 @@ from oi.settings import CITY_LIST, MEDIA_ROOT, MEDIA_URL
 from django.db.models import signals
 from django.dispatch import dispatcher
 from oi.st.signals import open_forum_topic, remove_video_thumbnail_on_delete
+
+FFMPEG_COMMAND = "ffmpeg"
 
 class Tag(models.Model):
     name = models.CharField('Etiket', max_length=32, blank=False, unique=True)
@@ -149,22 +151,18 @@ class Video(models.Model):
         flvfilename = "%s.flv" % filename
         thumbnailfilename = "%s%s.png" % (MEDIA_ROOT, filename)
         targetfile = "%s%s" % (MEDIA_ROOT, flvfilename)
-        # FIXME: What if there is a filename containing "Foo File & rm -f *.flv" ?!?
-        ffmpeg = "ffmpeg -i %s -acodec mp3 -ar 22050 -ab 32 -f flv -s 320x240 %s" % (sourcefile,  targetfile)
-        grabimage = "ffmpeg -y -i %s -vframes 1 -ss 00:00:02 -an -vcodec png -f rawvideo -s 220x176 %s " % (sourcefile, thumbnailfilename)
-        flvtool = "flvtool2 -U %s" % targetfile
+        ffmpeg = (FFMPEG_COMMAND, "-i", sourcefile, "-ar", "22050", "-ab", "32768", "-f", "flv", "-s", "320x240", targetfile)
+        grabimage = (FFMPEG_COMMAND, "-y", "-i", sourcefile, "-vframes", "1", "-ss", "00:00:02", "-an", "-vcodec", "png", "-f", "rawvideo", "-s", "220x176", thumbnailfilename)
 
-        ffmpegresult = getoutput(ffmpeg)
+        if not sourcefile == targetfile:
+            ffmpegresult = subprocess.call(ffmpeg)
+            grab = subprocess.call(grabimage)
+            remove(sourcefile)
 
         s = stat(targetfile)
         fsize = s.st_size
         if (fsize == 0):
             remove(targetfile)
-
-        flvresult = getoutput(flvtool)
-        grab = getoutput(grabimage)
-
-        remove(sourcefile)
 
         return "%s" % flvfilename
 
