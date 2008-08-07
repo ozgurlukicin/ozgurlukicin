@@ -7,6 +7,7 @@ from oi.ideas.forms import *
 from oi.st.wrappers import render_response
 from oi.ideas.models import Idea, Category, Related, Comment, Status
 from django.contrib.auth.models import User
+import datetime
 
 
 def list(request, field="", filter_slug=""):
@@ -22,6 +23,17 @@ def list(request, field="", filter_slug=""):
     elif field == 'ekleyen':
         submitter_id = get_object_or_404(User, username = filter_slug)
         ideas = ideas.filter(submitter = submitter_id)
+    elif field == 'populer':
+        if filter_slug == 'buhafta':
+            ideas = ideas.filter(submitted_date__gt=datetime.datetime.now()-datetime.timedelta(7))
+        elif filter_slug == 'buay':
+            ideas = ideas.filter(submitted_date__gt=datetime.datetime.now()-datetime.timedelta(30))
+        elif filter_slug == 'tumzamanlar':
+            ideas = ideas
+    elif field == 'son' and filter_slug =='yorumlar':
+        ideas = ideas.filter()
+    else:
+        ideas = ideas.filter(submitted_date__gt=datetime.datetime.now()-datetime.timedelta(1))
 
     categories = Category.objects.all()
     absolute_url = "/yenifikir"
@@ -57,15 +69,23 @@ def add(request):
     if request.method == 'POST':
         form = NewIdeaForm(request.POST.copy())
         if form.is_valid():
-            status = Status.objects.all()[1]
-            newidea = Idea(request.POST, submitter=request.user, status=status)
+            newidea = Idea(
+                title=form.cleaned_data['title'],
+                description=form.cleaned_data['description'],
+                submitter=request.user,
+                category = form.cleaned_data['category'],
+                related_to = form.cleaned_data['related_to'],
+                forum_url = form.cleaned_data['forum_url'],
+                bug_numbers = form.cleaned_data['bug_numbers'],
+                status=Status.objects.all()[0])
             newidea.save()
             idea_added = True
     else:
         new_idea_form = NewIdeaForm()
     return render_response(request, "idea_add_form.html", locals())
 
-
-
-
-
+def vote_idea(request):
+#    idea = get_object_or_404(Idea, pk=idea_id)
+    idea = Idea.objects.get(pk=idea_id)
+    idea.idea_count += 1
+    idea.save()

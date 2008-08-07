@@ -99,6 +99,9 @@ class Idea(models.Model):
     def __unicode__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return "/yenifikir/"
+
     class Admin:
         list_display = ('title', 'submitter', 'submitted_date', 'category', 'related_to')
         list_filter = ('status', 'is_hidden', "category", "related_to")
@@ -114,8 +117,6 @@ class Comment(models.Model):
     submited = models.DateTimeField("Tarih", auto_now_add=True)
     is_hidden = models.BooleanField("Gizli", default=False)
     ip = models.IPAddressField("IP Adresi",blank=True, null=True)
-
-
 
     def __unicode__(self):
         return self.text

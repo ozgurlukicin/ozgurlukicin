@@ -15,17 +15,22 @@
 
 {% block content %}
 <div>
-<li><a href="{{ absolute_url }}" title="Yeni Fikirler">Yeni Fikirler Anasayfa</a></li>
-<li><a href="{{ absolute_url }}/ekle">Yeni Fikri Ekle</a></li>
-<li><a href="{{ absolute_url }}/ekleyen/{{ user.username  }}">Eklediğim Fikirler</a></li>
-<li>Kategoriler
-  <ul>
-    {% for category in categories %}
-    <li><a href="{{ absolute_url }}/kategori/{{ category.name }}" title="{{ category.name }}">{{ category.name }}</a></li>
-    {% endfor %}
-  </ul>
-  </li>
-</ul>
+    <li><a href="{{ absolute_url }}" title="Yeni Fikirler">Yeni Fikirler Anasayfa</a></li>
+    <li><a href="{{ absolute_url }}/ekle">Yeni Fikri Ekle</a></li>
+    <li><a href="{{ absolute_url }}/ekleyen/{{ user.username  }}">Eklediğim Fikirler</a></li>
+    <li>
+Kategoriler
+    <ul>
+        {% for category in categories %}
+        <li><a href="{{ absolute_url }}/kategori/{{ category.name }}" title="{{ category.name }}">{{ category.name }}</a></li>
+        {% endfor %}
+    </ul>
+    </li>
+    <li><a href="">Bugünkü popüler fikirler{% url brainstorm %}</a></li>
+    <li><a href="{{ ideas.get_absolute_url  }}populer/buhafta" title="">Bu haftaki popüler fikirler</a></li>
+    <li><a href="{% url uliste %}populer/buay" title="">Bu ayki popüler fikirler</a></li>
+    <li><a href="{% url uliste %}populer/tumzamanlar" title="">Tüm zamanların popüler fikirleri</a></li>
+    </ul>
 </div>
  {% block idea %}
 {% if filter_slug %}
@@ -33,7 +38,9 @@
 {% endif %}
 <ul>
 {% for idea in ideas %}
-<li><h3><a href="{{ absolute_url}}/ayrinti/{{ idea.slug }}" title"{{ idea.title }}">{{ idea.title }}</a></h3>
+<li>
+  <h1>{{ idea.vote_count }} <a href="oyla/{{ idea.id }}/1">(+)</a> <a href="oyla/{{ idea.id }}/-1">(-)</a></h1>
+  <h3><a href="{{ absolute_url}}/ayrinti/{{ idea.slug }}" title"{{ idea.title }}">{{ idea.title }}</a></h3>
       <p><strong>{{ idea.status }}</strong> | {{ idea.submitter }} tarafından {{ idea.submitted_date }} tarihinde <a href="{{ absolute_url }}/kategori/{{ idea.category }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine <a href="{{ absolute_url }}/ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak gönderildi.</p>
       <p>{{ idea.description }}</p>
       <p><a href="" title="Yorumlar">Yorumlar ()</a></p>
