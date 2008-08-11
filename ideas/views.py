@@ -61,7 +61,7 @@ def detail(request, idea_id):
                 ip=ip
                 )
             comment.save()
-            HttpResponseRedirect(idea.get_absolute_url())
+            return HttpResponseRedirect(idea.get_absolute_url())
     comments = Comment.objects.filter(is_hidden=False, idea=idea)
     form = CommentForm()
     if Favorite.objects.filter(user=request.user, idea=idea):
