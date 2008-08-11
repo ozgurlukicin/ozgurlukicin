@@ -93,14 +93,13 @@ class Idea(models.Model):
     forum_url = models.URLField("İlgili forum bağlantısı", help_text="Varsa ilgili Özgürlük İçin Forumundaki konu adresini yazın.", blank=True)
     bug_numbers = models.CharField("Hata numaraları", help_text="Varsa ilgili hata numaralarını virgülle ayırarak giriniz.", max_length=64, blank=True)
     file = models.FileField(upload_to="upload/ideas/dosya/", blank=True)
-    slug = models.SlugField("SEF", prepopulate_from=('title',))
     is_hidden = models.BooleanField("Gizli", default=False)
 
     def __unicode__(self):
         return self.title
 
     def get_absolute_url(self):
-        return "/yenifikir/ayrinti/%s" % self.slug
+        return "/yenifikir/ayrinti/%s" % self.id
 
     class Admin:
         list_display = ('title', 'submitter', 'submitted_date', 'category', 'related_to')
@@ -127,3 +126,16 @@ class Comment(models.Model):
     class Meta:
         verbose_name="Yorum"
         verbose_name_plural ="Yorumlar"
+
+class Vote(models.Model):
+    idea = models.ForeignKey(Idea, verbose_name="Oy Verilen Fikir", related_name="vote_idea")
+    user = models.ForeignKey(User, verbose_name="Oy Veren", related_name="vote_author")
+    vote = models.BooleanField("Verilen Oy", default=False)
+
+    class Admin:
+        pass
+
+    class Meta:
+        verbose_name = "Verilen Oy"
+        verbose_name = "Verilan Oylar"
+

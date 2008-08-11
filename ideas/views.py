@@ -5,13 +5,14 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from oi.ideas.forms import *
 from oi.st.wrappers import render_response
-from oi.ideas.models import Idea, Category, Related, Comment, Status
+from oi.ideas.models import Idea, Category, Related, Comment, Status, Tag, Vote
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 import datetime
 
 
 def list(request, field="", filter_slug=""):
-    ideas = Idea.objects.filter(is_hidden=False).order_by("vote_count")
+    ideas = Idea.objects.filter(is_hidden=False).order_by("-vote_count")
     if field == 'kategori':
         category_id = get_object_or_404(Category, slug = filter_slug)
         ideas = ideas.filter(category=category_id)
@@ -38,11 +39,10 @@ def list(request, field="", filter_slug=""):
     absolute_url = "/yenifikir"
     return render_response(request, "idea_list.html", locals())
 
-def detail(request, slug):
+def detail(request, idea_id):
     absolute_url = "/yenifikir"
-    idea = get_object_or_404(Idea, slug=slug)
+    idea = get_object_or_404(Idea, pk=idea_id)
     if request.method == 'POST':
-        idea = get_object_or_404(Idea, slug=slug)
         form = CommentForm(request.POST.copy())
         if form.is_valid():
             text = form.cleaned_data['text']
@@ -54,8 +54,7 @@ def detail(request, slug):
                 ip=ip
                 )
             comment.save()
-#            HttpResponseRedirect("%s/%s", (absolute_url, slug))
-
+            HttpResponseRedirect(idea.get_absolute_url())
     comments = Comment.objects.filter(is_hidden=False, idea=idea)
     form = CommentForm()
 
@@ -78,13 +77,30 @@ def add(request):
                 bug_numbers = form.cleaned_data['bug_numbers'],
                 status=Status.objects.all()[0])
             newidea.save()
+            for tag in form.cleaned_data['tags']:
+                tag=Tag.objects.get(name=tag)
+                newidea.tags.add(tag)
+
             idea_added = True
     else:
         new_idea_form = NewIdeaForm()
     return render_response(request, "idea_add_form.html", locals())
 
-def vote_idea(request):
+
+def vote_idea(request, idea_id, vote):
 #    idea = get_object_or_404(Idea, pk=idea_id)
     idea = Idea.objects.get(pk=idea_id)
-    idea.idea_count += 1
-    idea.save()
+    try:
+        vote = Vote.objects.get(user=request.user.id, idea=idea)
+        already_voted = True
+        return render_response(request, "idea_detail.html", locals())
+    except ObjectDoesNotExist:
+        if vote=='1':
+            idea.vote_count += 1
+        else:
+            idea.vote_count -= 1
+        idea.save()
+        voted = Vote(idea = idea, user=request.user, vote=vote)
+        voted.save()
+
+        return render_response(request, "idea_detail.html", locals())
