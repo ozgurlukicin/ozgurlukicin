@@ -143,6 +143,9 @@ class Favorite(models.Model):
     user = models.ForeignKey(User, verbose_name = "Favorileyen", related_name="fav_author", blank=False)
     idea = models.ForeignKey(Idea, verbose_name = "Favori Fikirler", related_name="fav_idea", blank=False)
 
+    def __unicode__(self):
+        return self.idea
+
     class Admin:
         pass
 

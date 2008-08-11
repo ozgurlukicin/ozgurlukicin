@@ -36,9 +36,6 @@ Kategoriler
 </div>
 <div>
  {% block idea %}
-{% if filter_slug %}
-<h2>{{ filter_slug }} ile ilgili fikirler</h2>
-{% endif %}
 <ul>
 {% for idea in ideas %}
 <li>

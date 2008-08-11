@@ -34,7 +34,12 @@ def list(request, field="", filter_slug=""):
     elif field == 'son' and filter_slug =='yorumlar':
         ideas = ideas.filter()
     elif field == 'favori' and filter_slug == 'fikirler':
-        ideas = ideas.filter()
+        favorites = Favorite.objects.filter(user=request.user.id)
+        ideas = []
+        i = 0
+        for idea_id in favorites:
+            ideas.append(favorites[i].idea)
+            i += 1
     else:
         ideas = ideas.filter(submitted_date__gt=datetime.datetime.now()-datetime.timedelta(1))
     categories = Category.objects.all()
