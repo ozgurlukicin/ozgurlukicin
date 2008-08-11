@@ -138,7 +138,7 @@ def unread_topics(request):
     return render_response(request, "forum/unread.html", locals())
 
 @login_required
-def mark_all_as_read(reqpuest):
+def mark_all_as_read(request):
     lastvisit_control(request)
 
     request.session["last_visit"] = datetime.now()
