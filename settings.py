@@ -16,7 +16,7 @@ DEBUG = True
 TESTING = True
 TEMPLATE_DEBUG = DEBUG
 WEB_URL = 'http://localhost:8000'
-DOCUMENT_ROOT = '/home/eren/sourcebox/oi/trunk'
+DOCUMENT_ROOT = '/home/nexus/oi-svn/oi/oi'
 
 DATABASE_ENGINE = 'mysql'
 DATABASE_NAME = 'oi'
@@ -102,6 +102,7 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'oi.ideas',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

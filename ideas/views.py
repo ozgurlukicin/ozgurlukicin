@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from oi.ideas.forms import *
 from oi.st.wrappers import render_response
-from oi.ideas.models import Idea, Category, Related, Comment, Status, Tag, Vote
+from oi.ideas.models import Idea, Category, Related, Comment, Status, Tag, Vote, Favorite
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 import datetime
@@ -33,6 +33,8 @@ def list(request, field="", filter_slug=""):
             ideas = ideas
     elif field == 'son' and filter_slug =='yorumlar':
         ideas = ideas.filter()
+    elif field == 'favori' and filter_slug == 'fikirler':
+        ideas = ideas.filter()
     else:
         ideas = ideas.filter(submitted_date__gt=datetime.datetime.now()-datetime.timedelta(1))
     categories = Category.objects.all()
@@ -57,6 +59,8 @@ def detail(request, idea_id):
             HttpResponseRedirect(idea.get_absolute_url())
     comments = Comment.objects.filter(is_hidden=False, idea=idea)
     form = CommentForm()
+    if Favorite.objects.filter(user=request.user, idea=idea):
+        favorited = True
 
     if request.user.is_authenticated():
         auth = True
@@ -93,7 +97,6 @@ def vote_idea(request, idea_id, vote):
     try:
         vote = Vote.objects.get(user=request.user.id, idea=idea)
         already_voted = True
-        return render_response(request, "idea_detail.html", locals())
     except ObjectDoesNotExist:
         if vote=='1':
             idea.vote_count += 1
@@ -103,4 +106,22 @@ def vote_idea(request, idea_id, vote):
         voted = Vote(idea = idea, user=request.user, vote=vote)
         voted.save()
 
-        return render_response(request, "idea_detail.html", locals())
+    return render_response(request, "idea_detail.html", locals())
+
+def add_favorite(request, idea_id):
+    idea = Idea.objects.get(pk=idea_id)
+    try:
+        favorite = Favorite.objects.get(user=request.user, idea=idea)
+        favorited = True
+    except ObjectDoesNotExist:
+        favorite = Favorite(user=request.user, idea=idea)
+        favorite.save()
+    return HttpResponseRedirect(idea.get_absolute_url())
+
+
+def del_favorite(request, idea_id):
+    idea = Idea.objects.get(pk=idea_id)
+    favorite = Favorite.objects.get(user=request.user, idea=idea_id)
+    favorite.delete()
+#    return render_response(request, "idea_detail.html", locals())
+    return HttpResponseRedirect(idea.get_absolute_url())

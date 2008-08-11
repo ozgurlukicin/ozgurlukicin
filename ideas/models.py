@@ -128,9 +128,9 @@ class Comment(models.Model):
         verbose_name_plural ="Yorumlar"
 
 class Vote(models.Model):
-    idea = models.ForeignKey(Idea, verbose_name="Oy Verilen Fikir", related_name="vote_idea")
-    user = models.ForeignKey(User, verbose_name="Oy Veren", related_name="vote_author")
-    vote = models.BooleanField("Verilen Oy", default=False)
+    idea = models.ForeignKey(Idea, verbose_name="Oy Verilen Fikir", related_name="vote_idea", blank=False, null=False)
+    user = models.ForeignKey(User, verbose_name="Oy Veren", related_name="vote_author", blank=False, null=False)
+    vote = models.BooleanField("Verilen Oy", blank=False)
 
     class Admin:
         pass
@@ -139,3 +139,13 @@ class Vote(models.Model):
         verbose_name = "Verilen Oy"
         verbose_name = "Verilan Oylar"
 
+class Favorite(models.Model):
+    user = models.ForeignKey(User, verbose_name = "Favorileyen", related_name="fav_author", blank=False)
+    idea = models.ForeignKey(Idea, verbose_name = "Favori Fikirler", related_name="fav_idea", blank=False)
+
+    class Admin:
+        pass
+
+    class Meta:
+        verbose_name = "Favori"
+        verbose_name = "Favoriler"
