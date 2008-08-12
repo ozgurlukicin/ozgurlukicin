@@ -69,6 +69,11 @@ def detail(request, idea_id):
         favorited = True
     except ObjectDoesNotExist:
         favorited = False
+    try:
+        v = Vote.objects.get(user=request.user, idea=idea)
+        voted = True
+    except ObjectDoesNotExist:
+        voted = False
 
     if request.user.is_authenticated():
         auth = True
@@ -100,7 +105,6 @@ def add(request):
 
 
 def vote_idea(request, idea_id, vote):
-#    idea = get_object_or_404(Idea, pk=idea_id)
     idea = Idea.objects.get(pk=idea_id)
     try:
         vote = Vote.objects.get(user=request.user.id, idea=idea)
@@ -113,7 +117,21 @@ def vote_idea(request, idea_id, vote):
         idea.save()
         voted = Vote(idea = idea, user=request.user, vote=vote)
         voted.save()
-    return render_response(request, "idea_detail.html", locals())
+    return HttpResponse(str(idea.vote_count))
+
+def delete_vote(request, idea_id):
+    idea = Idea.objects.get(pk=idea_id)
+    try:
+        vote = Vote.objects.get(user=request.user, idea=idea_id)
+        if vote.vote == 1:
+            idea.vote_count -= 1
+        elif vote.vote == 0:
+            idea.vote_count += 1
+        vote.delete()
+        idea.save()
+        return HttpResponse(str(idea.vote_count))
+    except ObjectDoesNotExist:
+        return HttpResponse(str(idea.vote_count))
 
 def add_favorite(request, idea_id):
     idea = Idea.objects.get(pk=idea_id)

@@ -21,6 +21,22 @@ function favori(id, proc) {
         }
      });
 }
+function oyla(id, oy) {
+   $.get("/yenifikir/oyla/" + id + "/" + oy + "/",
+     function(data) {
+          $('#oyla').hide()
+          $('#oyiptal').fadeIn("slow")
+          $('#vote').html(data);
+     });
+}
+function oyiptal(id) {
+   $.get("/yenifikir/oyiptal/" + id,
+     function(data) {
+          $('#oyiptal').hide()
+          $('#oyla').fadeIn("slow")
+          $('#vote').html(data);
+     });
+}
 </script>
 {% endblock %}
 {% block header_menu %}

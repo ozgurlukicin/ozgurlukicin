@@ -8,4 +8,5 @@ urlpatterns = patterns('oi.ideas.views',
                        (r'^ayrinti/(?P<idea_id>.*)/favori/ekle$', 'add_favorite'),
                        (r'^ayrinti/(?P<idea_id>.*)/favori/cikar$', 'del_favorite'),
                        (r'^listele/(?P<field>.*)/(?P<filter_slug>.*)/$', 'list'),
+                       (r'^oyiptal/(?P<idea_id>.*)/$', 'delete_vote'),
 )

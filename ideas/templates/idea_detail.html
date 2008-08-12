@@ -7,13 +7,20 @@
 Zaten oy verdiniz.
 {% endif %}
 
-<h1>{{ idea.vote_count }} <a href="/yenifikir/oyla/{{ idea.id }}/1">(+)</a> <a href="/yenifikir/oyla/{{ idea.id }}/0">(-)</a></h1> 
+<h1 id='vote'>{{ idea.vote_count }}</h1>
+<h1 id='oyla' {% if voted %}style="display:none;"{% endif %}>
+<a href="/yenifikir/oyla/{{ idea.id }}/1" onclick="oyla({{ idea.id }}, '1'); return false;">(+)</a>
+<a href="/yenifikir/oyla/{{ idea.id }}/0" onclick="oyla({{ idea.id }}, '0'); return false;">(-)</a>
+</h1>
+<h1 id='oyiptal' {% if not voted %}style="display:none;"{% endif %}>
+<a href="/yenifikir/oyiptal/{{ idea.id }}" onclick="oyiptal({{ idea.id }}); return false;">iptal</a>
+</h1>
 
 <h2 id="favoricikar" {% if not favorited %}style="display:none;"{% endif %}>
-<a href="javascript:;" onclick="javascript:favori({{ idea.id  }}, 'cikar');">favorilerimden çıkar</a>
+<a href="/yenifikir/ayrinti/1/favori/cikar" onclick="favori({{ idea.id  }}, 'cikar');return false;">favorilerimden çıkar</a>
 </h2>
 <h2 id="favoriekle" {% if favorited %}style="display:none;" {% endif %}>
-<a href="javascript:;" onclick="javascript:favori({{ idea.id }}, 'ekle');">favorile</a>
+<a href="/yenifikir/ayrinti/1/favori/ekle" onclick="favori({{ idea.id }}, 'ekle'); return false;">favorile</a>
 </h2>
 
 <h3>#{{idea.id}} {{ idea.title }}</h3>
