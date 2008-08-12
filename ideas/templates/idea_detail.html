@@ -9,12 +9,12 @@ Zaten oy verdiniz.
 
 <h1>{{ idea.vote_count }} <a href="/yenifikir/oyla/{{ idea.id }}/1">(+)</a> <a href="/yenifikir/oyla/{{ idea.id }}/0">(-)</a></h1> 
 
-{% if favorited %}
-<h2><a href="{{ idea.get_absolute_url }}/favori/cikar">favorilerimden çıkar</a></h3>
-{% else %}
-<h2><a href="{{ idea.get_absolute_url }}/favori/ekle">favorile</a></h3>
-{% endif %}
-
+<h2 id="favoricikar" {% if not favorited %}style="display:none;"{% endif %}>
+<a href="javascript:;" onclick="javascript:favori({{ idea.id  }}, 'cikar');">favorilerimden çıkar</a>
+</h2>
+<h2 id="favoriekle" {% if favorited %}style="display:none;" {% endif %}>
+<a href="javascript:;" onclick="javascript:favori({{ idea.id }}, 'ekle');">favorile</a>
+</h2>
 
 <h3>#{{idea.id}} {{ idea.title }}</h3>
 

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from oi.ideas.forms import *
 from oi.st.wrappers import render_response
 from oi.ideas.models import Idea, Category, Related, Comment, Status, Tag, Vote, Favorite
@@ -12,7 +12,7 @@ import datetime
 
 
 def list(request, field="", filter_slug=""):
-    ideas = Idea.objects.filter(is_hidden=False).order_by("-vote_count")
+    ideas = Idea.objects.filter(is_hidden=False).order_by("-vote_count", "-id")
     if field == 'kategori':
         category_id = get_object_or_404(Category, slug = filter_slug)
         ideas = ideas.filter(category=category_id)
@@ -64,8 +64,11 @@ def detail(request, idea_id):
             return HttpResponseRedirect(idea.get_absolute_url())
     comments = Comment.objects.filter(is_hidden=False, idea=idea)
     form = CommentForm()
-    if Favorite.objects.filter(user=request.user, idea=idea):
+    try:
+        f = Favorite.objects.get(user=request.user, idea=idea)
         favorited = True
+    except ObjectDoesNotExist:
+        favorited = False
 
     if request.user.is_authenticated():
         auth = True
@@ -110,7 +113,6 @@ def vote_idea(request, idea_id, vote):
         idea.save()
         voted = Vote(idea = idea, user=request.user, vote=vote)
         voted.save()
-
     return render_response(request, "idea_detail.html", locals())
 
 def add_favorite(request, idea_id):
@@ -121,12 +123,10 @@ def add_favorite(request, idea_id):
     except ObjectDoesNotExist:
         favorite = Favorite(user=request.user, idea=idea)
         favorite.save()
-    return HttpResponseRedirect(idea.get_absolute_url())
-
+    return HttpResponse("OK")
 
 def del_favorite(request, idea_id):
     idea = Idea.objects.get(pk=idea_id)
     favorite = Favorite.objects.get(user=request.user, idea=idea_id)
     favorite.delete()
-#    return render_response(request, "idea_detail.html", locals())
-    return HttpResponseRedirect(idea.get_absolute_url())
+    return HttpResponse("OK")

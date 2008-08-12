@@ -4,7 +4,25 @@
 {% block title %}Yeni Fikirler - {% endblock %}
 "
 {% block pagetype %}page{% endblock %}
-
+{% block extrahead %}
+<script type="text/javascript" src="/media/js/jquery-1.2.6.min.js"></script>
+<script type="text/javascript">
+function favori(id, proc) {
+   $.get("/yenifikir/ayrinti/"+id+"/favori/"+proc,
+    function(data) {
+        if (data == 'OK') {
+          if (proc == 'ekle') {
+            $('#favoriekle').hide();
+            $('#favoricikar').show();
+          } else {
+            $('#favoricikar').hide();
+            $('#favoriekle').show();
+          }
+        }
+     });
+}
+</script>
+{% endblock %}
 {% block header_menu %}
     {% include "header.html" %}
 {% endblock %}
