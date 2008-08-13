@@ -90,6 +90,7 @@ class Idea(models.Model):
     tags = models.ManyToManyField(Tag, verbose_name="Etiketler")
     vote_count = models.IntegerField("Oy Sayısı", default=0)
     duplicate = models.ForeignKey("self", blank=True, null=True, verbose_name="Fikir Tekrarı")
+    is_duplicate = models.BooleanField("Fikir Tekrarı", default=False)
     forum_url = models.URLField("İlgili forum bağlantısı", help_text="Varsa ilgili Özgürlük İçin Forumundaki konu adresini yazın.", blank=True)
     bug_numbers = models.CharField("Hata numaraları", help_text="Varsa ilgili hata numaralarını virgülle ayırarak giriniz.", max_length=64, blank=True)
     file = models.FileField(upload_to="upload/ideas/dosya/", blank=True)
@@ -102,8 +103,8 @@ class Idea(models.Model):
         return "/yenifikir/ayrinti/%s" % self.id
 
     class Admin:
-        list_display = ('title', 'submitter', 'submitted_date', 'category', 'related_to')
-        list_filter = ('status', 'is_hidden', "category", "related_to")
+        list_display = ('title', 'submitter', 'submitted_date', 'category', 'related_to', 'is_hidden', 'is_duplicate', 'duplicate')
+        list_filter = ('status', 'is_hidden', 'is_duplicate',  'category', 'related_to')
 
     class Meta:
         verbose_name = "Yeni Fikir"

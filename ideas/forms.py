@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from django import newforms as forms
-from oi.ideas.models import Idea, RelatedCategory
+from oi.ideas.models import Idea, RelatedCategory, Status
 from oi.st.forms import XssField
 
 class CommentForm(forms.Form):
@@ -11,9 +11,14 @@ class CommentForm(forms.Form):
 class NewIdeaForm(forms.ModelForm):
     class Meta:
         model = Idea
-        exclude = ("submitter", "status","vote_count", "duplicate", "is_hidden")
+        exclude = ("submitter", "status", "vote_count", "duplicate", "is_hidden", "is_duplicate")
 
 #    def __init__(self,*args,**kwargs):
 #        super(NewIdeaForm, self).__init__(*args, **kwargs)
 #        related_categories = RelatedCategory.objects.all()
 #        self.fields['related_to'].choices=[for cat ]
+
+class StatusForm(forms.ModelForm):
+    class Meta:
+        model = Status
+        exclude = ("name")

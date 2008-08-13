@@ -78,6 +78,8 @@ def detail(request, idea_id):
     if request.user.is_authenticated():
         auth = True
     commentform = CommentForm()
+    statusform = StatusForm()
+    duplicates = Idea.objects.filter(duplicate=idea)
     return render_response(request, "idea_detail.html", locals())
 
 def add(request):
@@ -147,4 +149,15 @@ def del_favorite(request, idea_id):
     idea = Idea.objects.get(pk=idea_id)
     favorite = Favorite.objects.get(user=request.user, idea=idea_id)
     favorite.delete()
+    return HttpResponse("OK")
+
+def duplicate(request, idea_id, duplicate_id):
+    idea = Idea.objects.get(pk=idea_id)
+    idea_duplicate = Idea.objects.get(pk=duplicate_id)
+    idea_duplicate.vote_count += idea.vote_count
+    idea_duplicate.is_duplicate = True
+    idea_duplicate.save()
+    idea.duplicate = idea_duplicate
+    idea.is_hidden = True
+    idea.save()
     return HttpResponse("OK")

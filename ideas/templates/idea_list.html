@@ -13,10 +13,10 @@ function favori(id, proc) {
         if (data == 'OK') {
           if (proc == 'ekle') {
             $('#favoriekle').hide();
-            $('#favoricikar').show();
+            $('#favoricikar').fadeIn();
           } else {
             $('#favoricikar').hide();
-            $('#favoriekle').show();
+            $('#favoriekle').fadeIn();
           }
         }
      });
@@ -35,6 +35,13 @@ function oyiptal(id) {
           $('#oyiptal').hide()
           $('#oyla').fadeIn("slow")
           $('#vote').html(data);
+     });
+}
+function duplicate() {
+   $("dup_submit").attr("disabled","disabled");
+   $.get("/yenifikir/tekrar/"+ $("#idea_id").val() +"/"+ $("#duplicate_id").val() +"/",
+     function(data) {
+          $("#duplicate_form_info").html("Tekrar bildiriminiz alındı, teşekkürler.")
      });
 }
 </script>
