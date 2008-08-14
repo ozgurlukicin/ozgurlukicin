@@ -12,11 +12,11 @@ function favori(id, proc) {
     function(data) {
         if (data == 'OK') {
           if (proc == 'ekle') {
-            $('#favoriekle').hide();
-            $('#favoricikar').fadeIn();
+            $('#favoriekle' + id).hide();
+            $('#favoricikar' + id).fadeIn();
           } else {
-            $('#favoricikar').hide();
-            $('#favoriekle').fadeIn();
+            $('#favoricikar' + id).hide();
+            $('#favoriekle' + id).fadeIn();
           }
         }
      });
@@ -24,17 +24,17 @@ function favori(id, proc) {
 function oyla(id, oy) {
    $.get("/yenifikir/oyla/" + id + "/" + oy + "/",
      function(data) {
-          $('#oyla').hide()
-          $('#oyiptal').fadeIn("slow")
-          $('#vote').html(data);
+          $('#oyla' + id).hide()
+          $('#oyiptal' + id).fadeIn("slow")
+          $('#vote' + id).html(data);
      });
 }
 function oyiptal(id) {
    $.get("/yenifikir/oyiptal/" + id,
      function(data) {
-          $('#oyiptal').hide()
-          $('#oyla').fadeIn("slow")
-          $('#vote').html(data);
+          $('#oyiptal' + id).hide()
+          $('#oyla' + id).fadeIn("slow")
+          $('#vote' + id).html(data);
      });
 }
 function duplicate() {
@@ -51,7 +51,7 @@ function duplicate() {
 {% endblock %}
 <br />
 {% block ust_menu %}
-    {% include "ust_menu.html" %}
+    {% include "ust_menu_ayrinti.html" %}
 {% endblock %}
 
 {% block content %}
@@ -80,15 +80,34 @@ Kategoriler
 <ul>
 {% for idea in ideas %}
 <li>
-  <h1>{{ idea.vote_count }} <a href="/yenifikir/oyla/{{ idea.id }}/1">(+)</a> <a href="/yenifikir/oyla/{{ idea.id }}/0">(-)</a></h1>
-  <h3><a href="{{ idea.get_absolute_url }}" title"{{ idea.title }}">{{ idea.title }}</a></h3>
-      <p>
-	<strong>{{ idea.status }}</strong>
-	<br />{{ idea.submitter }} tarafından {{ idea.submitted_date }} tarihinde
-	<a href="/yenifikir/listele/kategori/{{ idea.category }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine
-	<a href="/yenifikir/listele/ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak gönderildi.
-      </p>
-      <p>{{ idea.description }}</p>
+
+
+<h1 id='vote{{ idea.id }}'>{{ idea.vote_count }}</h1>
+<h1 id='oyla{{ idea.id }}' {% if voted %}style="display:none;"{% endif %}>
+<a href="/yenifikir/oyla/{{ idea.id }}/1" onclick="oyla({{ idea.id }}, '1'); return false;">(+)</a>
+<a href="/yenifikir/oyla/{{ idea.id }}/0" onclick="oyla({{ idea.id }}, '0'); return false;">(-)</a>
+</h1>
+<h1 id='oyiptal{{ idea.id }}' {% if not voted %}style="display:none;"{% endif %}>
+<a href="/yenifikir/oyiptal/{{ idea.id }}" onclick="oyiptal({{ idea.id }}); return false;">oy iptal</a>
+ </h1>
+
+<h2 id='favoricikar{{ idea.id }}' {% if not favorited %}style="display:none;"{% endif %}>
+<a href="/yenifikir/ayrinti/1/favori/cikar" onclick="favori({{ idea.id  }}, 'cikar');return false;">favorilerimden çıkar</a>
+</h2>
+<h2 id='favoriekle{{ idea.id }}' {% if favorited %}style="display:none;" {% endif %}>
+<a href="/yenifikir/ayrinti/1/favori/ekle" onclick="favori({{ idea.id }}, 'ekle'); return false;">favorile</a>
+</h2>
+
+<h3><a href="/yenifikir/ayrinti/{{ idea.id }}"> {{ idea.title }}</a></h3>
+
+<p>
+<a href="{{ idea.submitter.get_profile.get_absolute_url }}" title="{{ idea.submitter }} kullanıcısının profiline git">{{ idea.submitter }}</a>
+tarafından {{ idea.submitted_date }} tarihinde
+<a href="/yenifikir/listele/kategori/{{ idea.category }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine
+<a href="/yenifikir/listele/ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak gönderildi.
+</p>
+<p>{{ idea.description }}</p>
+
       <p><a href="" title="Yorumlar">Yorumlar ()</a></p>
      </li>
 {% endfor %}

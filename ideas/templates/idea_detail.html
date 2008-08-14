@@ -7,19 +7,25 @@
 Zaten oy verdiniz.
 {% endif %}
 
-<h1 id='vote'>{{ idea.vote_count }}</h1>
-<h1 id='oyla' {% if voted %}style="display:none;"{% endif %}>
+{% if duplicate_of %}
+<hr />
+<h3>Bu fikir <a href="/yenifikir/ayrinti/{{ duplicate_of.id }}">#{{ duplicate_of.id }}</a> numaralı hatanın aynısı</h3>
+<hr />
+{% endif %}
+
+<h1 id='vote{{ idea.id }}'>{{ idea.vote_count }}</h1>
+<h1 id='oyla{{ idea.id }}' {% if voted %}style="display:none;"{% endif %}>
 <a href="/yenifikir/oyla/{{ idea.id }}/1" onclick="oyla({{ idea.id }}, '1'); return false;">(+)</a>
 <a href="/yenifikir/oyla/{{ idea.id }}/0" onclick="oyla({{ idea.id }}, '0'); return false;">(-)</a>
 </h1>
-<h1 id='oyiptal' {% if not voted %}style="display:none;"{% endif %}>
+<h1 id='oyiptal{{ idea.id }}' {% if not voted %}style="display:none;"{% endif %}>
 <a href="/yenifikir/oyiptal/{{ idea.id }}" onclick="oyiptal({{ idea.id }}); return false;">oy iptal</a>
-</h1>
+ </h1>
 
-<h2 id="favoricikar" {% if not favorited %}style="display:none;"{% endif %}>
+<h2 id="favoricikar{{ idea.id }}" {% if not favorited %}style="display:none;"{% endif %}>
 <a href="/yenifikir/ayrinti/1/favori/cikar" onclick="favori({{ idea.id  }}, 'cikar');return false;">favorilerimden çıkar</a>
 </h2>
-<h2 id="favoriekle" {% if favorited %}style="display:none;" {% endif %}>
+<h2 id="favoriekle{{ idea.id }}" {% if favorited %}style="display:none;" {% endif %}>
 <a href="/yenifikir/ayrinti/1/favori/ekle" onclick="favori({{ idea.id }}, 'ekle'); return false;">favorile</a>
 </h2>
 
@@ -49,8 +55,7 @@ tarafından {{ idea.submitted_date }} tarihinde
 <form id="tekrarform" style="display:none;" method="post" action="javascript:;">
 <p>Bu fikrin aynısını daha önce görmüşmüydünüz ? O zaman fikir tekrarını bildirerek bize yardımcı olun! </p>
 Fikir numarası :<input type="text" name="duplicate_id" id="duplicate_id" size="4" />
-<input type="hidden" name="idea_id" value="{{ idea.id }}" id="idea_id" />
-<input type="submit" value="Bildir" onclick="duplicate()" id="dup_submit" /><br />
+<input type="submit" value="Bildir" onclick="duplicate({{ idea.id }})" id="dup_submit" /><br />
 <span id="duplicate_form_info"></span>
 </form>
 
@@ -58,7 +63,7 @@ Fikir numarası :<input type="text" name="duplicate_id" id="duplicate_id" size="
 Fikir durumunu değiştir:
 <form method="POST">
 {{ statusform }}
-<input type="submit" value="Değiştir" />
+<input type="submit" value="Değiştir" onclick="changeStatus({{ idea.id }})" />
 </form>
 
 <hr />

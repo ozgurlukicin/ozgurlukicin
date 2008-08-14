@@ -80,6 +80,7 @@ def detail(request, idea_id):
     commentform = CommentForm()
     statusform = StatusForm()
     duplicates = Idea.objects.filter(duplicate=idea)
+    duplicate_of = idea.duplicate
     return render_response(request, "idea_detail.html", locals())
 
 def add(request):
@@ -158,6 +159,5 @@ def duplicate(request, idea_id, duplicate_id):
     idea_duplicate.is_duplicate = True
     idea_duplicate.save()
     idea.duplicate = idea_duplicate
-    idea.is_hidden = True
     idea.save()
     return HttpResponse("OK")
