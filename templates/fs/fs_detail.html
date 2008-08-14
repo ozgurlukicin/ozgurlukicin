@@ -3,10 +3,6 @@
 
 {% block title %}{{ fs.title }} - İlk Adımlar - {% endblock %}
 
-{% block extrahead %}
-<script type="text/javascript" src="/media/js/video.js"></script>
-{% endblock %}
-
 {% block pagetype %}page{% endblock %}
 
 {% block section %}fs{% endblock %}
@@ -52,7 +48,7 @@
     <div class="sidebar_middle">
         <h2>İlgili Videolar</h2>
         {% for video in fs.videos.all %}
-        <div><img src="{{ video.get_thumbnail_url }}" alt="video" title="{{ video.desc }} "style="width:200px;cursor:pointer" onclick="make_video(this, '{{ web_url }}', '{{ web_url }}/media/{{ video.file }}')" /></div>
+        {% include "video.html" %}
         {% endfor %}
     </div>
     <div class="sidebar_bottom">&nbsp;</div>
