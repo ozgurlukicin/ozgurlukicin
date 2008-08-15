@@ -37,9 +37,9 @@ function oyiptal(id) {
           $('#vote' + id).html(data);
      });
 }
-function duplicate() {
+function duplicate(idea_id) {
    $("dup_submit").attr("disabled","disabled");
-   $.get("/yenifikir/tekrar/"+ $("#idea_id").val() +"/"+ $("#duplicate_id").val() +"/",
+   $.get("/yenifikir/tekrar/"+ idea_id +"/"+ $("#duplicate_id").val() +"/",
      function(data) {
           $("#duplicate_form_info").html("Tekrar bildiriminiz alındı, teşekkürler.")
      });
@@ -101,6 +101,7 @@ Kategoriler
 <h3><a href="/yenifikir/ayrinti/{{ idea.id }}"> {{ idea.title }}</a></h3>
 
 <p>
+{{ idea.status }} | 
 <a href="{{ idea.submitter.get_profile.get_absolute_url }}" title="{{ idea.submitter }} kullanıcısının profiline git">{{ idea.submitter }}</a>
 tarafından {{ idea.submitted_date }} tarihinde
 <a href="/yenifikir/listele/kategori/{{ idea.category }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine
