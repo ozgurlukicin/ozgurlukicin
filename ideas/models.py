@@ -24,7 +24,6 @@ class Status(models.Model):
     category = models.ForeignKey(StatusCategory, verbose_name = "Durum Kategori")
     name = models.CharField("İsim", max_length = 128)
 
-
     def __unicode__(self):
         return self.name
 
@@ -66,7 +65,6 @@ class RelatedCategory(models.Model):
 class Related(models.Model):
     category = models.ForeignKey(RelatedCategory, verbose_name = "Kategori")
     name = models.CharField("İsim", max_length=150)
-#    slug = models.SlugField(prepopulate_from('name',))
 
     def __unicode__(self):
         return self.name
@@ -92,7 +90,7 @@ class Idea(models.Model):
     duplicate = models.ForeignKey("self", blank=True, null=True, verbose_name="Fikir Tekrarı")
     is_duplicate = models.BooleanField("Fikir Tekrarı", default=False)
     forum_url = models.URLField("İlgili forum bağlantısı", help_text="Varsa ilgili Özgürlük İçin Forumundaki konu adresini yazın.", blank=True)
-    bug_numbers = models.CharField("Hata numaraları", help_text="Varsa ilgili hata numaralarını virgülle ayırarak giriniz.", max_length=64, blank=True)
+    bug_numbers = models.CharField("Hata numaraları", help_text="Varsa ilgili hata numaralarını virgülle ayırarak giriniz.", max_length=63, blank=True)
     file = models.FileField(upload_to="upload/ideas/dosya/", blank=True)
     is_hidden = models.BooleanField("Gizli", default=False)
 

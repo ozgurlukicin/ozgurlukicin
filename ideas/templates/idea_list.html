@@ -8,41 +8,47 @@
 <script type="text/javascript" src="/media/js/jquery-1.2.6.min.js"></script>
 <script type="text/javascript">
 function favori(id, proc) {
-   $.get("/yenifikir/ayrinti/"+id+"/favori/"+proc,
-    function(data) {
-        if (data == 'OK') {
-          if (proc == 'ekle') {
-            $('#favoriekle' + id).hide();
-            $('#favoricikar' + id).fadeIn();
-          } else {
-            $('#favoricikar' + id).hide();
-            $('#favoriekle' + id).fadeIn();
-          }
-        }
-     });
+    $.get("/yenifikir/ayrinti/"+id+"/favori/"+proc,
+        function(data) {
+            if (data == 'OK') {
+                if (proc == 'ekle') {
+                    $('#favoriekle' + id).hide();
+                    $('#favoricikar' + id).fadeIn();
+                } else {
+                    $('#favoricikar' + id).hide();
+                    $('#favoriekle' + id).fadeIn();
+                }
+            }
+        });
 }
 function oyla(id, oy) {
-   $.get("/yenifikir/oyla/" + id + "/" + oy + "/",
-     function(data) {
-          $('#oyla' + id).hide()
-          $('#oyiptal' + id).fadeIn("slow")
-          $('#vote' + id).html(data);
-     });
+    $.get("/yenifikir/oyla/" + id + "/" + oy + "/",
+        function(data) {
+            $('#oyla' + id).hide()
+            $('#oyiptal' + id).fadeIn("slow")
+            $('#vote' + id).html(data);
+        });
 }
 function oyiptal(id) {
-   $.get("/yenifikir/oyiptal/" + id,
-     function(data) {
-          $('#oyiptal' + id).hide()
-          $('#oyla' + id).fadeIn("slow")
-          $('#vote' + id).html(data);
-     });
+    $.get("/yenifikir/oyiptal/" + id,
+        function(data) {
+            $('#oyiptal' + id).hide()
+            $('#oyla' + id).fadeIn("slow")
+            $('#vote' + id).html(data);
+        });
 }
 function duplicate(idea_id) {
-   $("dup_submit").attr("disabled","disabled");
-   $.get("/yenifikir/tekrar/"+ idea_id +"/"+ $("#duplicate_id").val() +"/",
-     function(data) {
-          $("#duplicate_form_info").html("Tekrar bildiriminiz alındı, teşekkürler.")
-     });
+    $("dup_submit").attr("disabled","disabled");
+    $.get("/yenifikir/tekrar/"+ idea_id +"/"+ $("#duplicate_id").val() +"/",
+        function(data) {
+            $("#duplicate_form_info").html("Tekrar bildiriminiz alındı, teşekkürler.")
+        });
+}
+function changeStatus(idea_id) {
+    $.get("/yenifikir/durumdegistir/" + idea_id + "/" + $("#id_status").val()  + "/",
+        function(data) {
+            $("#status_form_info").html("Fikir durumu değiştirildi.")
+        });
 }
 </script>
 {% endblock %}
@@ -83,25 +89,25 @@ Kategoriler
 
 
 <h1 id='vote{{ idea.id }}'>{{ idea.vote_count }}</h1>
-<h1 id='oyla{{ idea.id }}' {% if voted %}style="display:none;"{% endif %}>
+<h1 id='oyla{{ idea.id }}' {% if idea.is_voted %}style="display:none;"{% endif %}>
 <a href="/yenifikir/oyla/{{ idea.id }}/1" onclick="oyla({{ idea.id }}, '1'); return false;">(+)</a>
 <a href="/yenifikir/oyla/{{ idea.id }}/0" onclick="oyla({{ idea.id }}, '0'); return false;">(-)</a>
 </h1>
-<h1 id='oyiptal{{ idea.id }}' {% if not voted %}style="display:none;"{% endif %}>
+<h1 id='oyiptal{{ idea.id }}' {% if not idea.is_voted %}style="display:none;"{% endif %}>
 <a href="/yenifikir/oyiptal/{{ idea.id }}" onclick="oyiptal({{ idea.id }}); return false;">oy iptal</a>
  </h1>
 
-<h2 id='favoricikar{{ idea.id }}' {% if not favorited %}style="display:none;"{% endif %}>
+<h2 id='favoricikar{{ idea.id }}' {% if not idea.is_favorited %}style="display:none;"{% endif %}>
 <a href="/yenifikir/ayrinti/1/favori/cikar" onclick="favori({{ idea.id  }}, 'cikar');return false;">favorilerimden çıkar</a>
 </h2>
-<h2 id='favoriekle{{ idea.id }}' {% if favorited %}style="display:none;" {% endif %}>
+<h2 id='favoriekle{{ idea.id }}' {% if idea.is_favorited %}style="display:none;" {% endif %}>
 <a href="/yenifikir/ayrinti/1/favori/ekle" onclick="favori({{ idea.id }}, 'ekle'); return false;">favorile</a>
 </h2>
 
-<h3><a href="/yenifikir/ayrinti/{{ idea.id }}"> {{ idea.title }}</a></h3>
+<h1><a href="/yenifikir/ayrinti/{{ idea.id }}"> {{ idea.title }}</a></h1>
 
 <p>
-{{ idea.status }} | 
+{{ idea.status }} |
 <a href="{{ idea.submitter.get_profile.get_absolute_url }}" title="{{ idea.submitter }} kullanıcısının profiline git">{{ idea.submitter }}</a>
 tarafından {{ idea.submitted_date }} tarihinde
 <a href="/yenifikir/listele/kategori/{{ idea.category }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine

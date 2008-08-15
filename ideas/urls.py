@@ -10,4 +10,5 @@ urlpatterns = patterns('oi.ideas.views',
                        (r'^listele/(?P<field>.*)/(?P<filter_slug>.*)/$', 'list'),
                        (r'^oyiptal/(?P<idea_id>.*)/$', 'delete_vote'),
                        (r'^tekrar/(?P<idea_id>.*)/(?P<duplicate_id>.*)/$', 'duplicate'),
+                       (r'^durumdegistir/((?P<idea_id>.*))/(?P<new_status>.*)/$', 'change_status'),
 )

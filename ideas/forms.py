@@ -17,8 +17,3 @@ class NewIdeaForm(forms.ModelForm):
 #        super(NewIdeaForm, self).__init__(*args, **kwargs)
 #        related_categories = RelatedCategory.objects.all()
 #        self.fields['related_to'].choices=[for cat ]
-
-class StatusForm(forms.ModelForm):
-    class Meta:
-        model = Status
-        exclude = ("name")

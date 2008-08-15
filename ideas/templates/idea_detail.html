@@ -14,24 +14,25 @@ Zaten oy verdiniz.
 {% endif %}
 
 <h1 id='vote{{ idea.id }}'>{{ idea.vote_count }}</h1>
-<h1 id='oyla{{ idea.id }}' {% if voted %}style="display:none;"{% endif %}>
+<h1 id='oyla{{ idea.id }}' {% if idea.is_voted %}style="display:none;"{% endif %}>
 <a href="/yenifikir/oyla/{{ idea.id }}/1" onclick="oyla({{ idea.id }}, '1'); return false;">(+)</a>
 <a href="/yenifikir/oyla/{{ idea.id }}/0" onclick="oyla({{ idea.id }}, '0'); return false;">(-)</a>
 </h1>
-<h1 id='oyiptal{{ idea.id }}' {% if not voted %}style="display:none;"{% endif %}>
+<h1 id='oyiptal{{ idea.id }}' {% if not idea.is_voted %}style="display:none;"{% endif %}>
 <a href="/yenifikir/oyiptal/{{ idea.id }}" onclick="oyiptal({{ idea.id }}); return false;">oy iptal</a>
  </h1>
 
-<h2 id="favoricikar{{ idea.id }}" {% if not favorited %}style="display:none;"{% endif %}>
+<h2 id="favoricikar{{ idea.id }}" {% if not idea.is_favorited %}style="display:none;"{% endif %}>
 <a href="/yenifikir/ayrinti/1/favori/cikar" onclick="favori({{ idea.id  }}, 'cikar');return false;">favorilerimden çıkar</a>
 </h2>
-<h2 id="favoriekle{{ idea.id }}" {% if favorited %}style="display:none;" {% endif %}>
+<h2 id="favoriekle{{ idea.id }}" {% if idea.is_favorited %}style="display:none;" {% endif %}>
 <a href="/yenifikir/ayrinti/1/favori/ekle" onclick="favori({{ idea.id }}, 'ekle'); return false;">favorile</a>
 </h2>
 
 <h3>#{{idea.id}} {{ idea.title }}</h3>
 
 <p>
+{{ idea.status }} | 
 <a href="{{ idea.submitter.get_profile.get_absolute_url }}" title="{{ idea.submitter }} kullanıcısının profiline git">{{ idea.submitter }}</a>
 tarafından {{ idea.submitted_date }} tarihinde
 <a href="/yenifikir/listele/kategori/{{ idea.category }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine
@@ -61,9 +62,15 @@ Fikir numarası :<input type="text" name="duplicate_id" id="duplicate_id" size="
 
 <hr />
 Fikir durumunu değiştir:
-<form method="POST">
-{{ statusform }}
-<input type="submit" value="Değiştir" onclick="changeStatus({{ idea.id }})" />
+<form method="POST" action="javascript:;">
+    <select name="id_status" id="id_status">
+    <option value="">---------</option>
+    {% for status in statusform %}
+    <option value="{{ status.id }}">{{ status.name }}</option>
+    {% endfor %}
+    </select>
+    <input type="submit" value="Değiştir" onclick="changeStatus({{ idea.id }})" />
+    <span id="status_form_info"></span>
 </form>
 
 <hr />

@@ -41,9 +41,21 @@ def list(request, field="", filter_slug=""):
             ideas.append(favorites[i].idea)
             i += 1
     else:
-        ideas = ideas.filter(submitted_date__gt=datetime.datetime.now()-datetime.timedelta(1))
+        ideas = ideas.filter()
     categories = Category.objects.all()
-    absolute_url = "/yenifikir"
+    if request.user.is_authenticated():
+            for idea in ideas:
+                try:
+                    f = Favorite.objects.get(user=request.user.id, idea=idea.id)
+                    idea.is_favorited = True
+                except ObjectDoesNotExist:
+                    idea.is_favorited = False
+                try:
+                    v = Vote.objects.get(user=request.user.id, idea=idea.id)
+                    idea.is_voted = True
+                except ObjectDoesNotExist:
+                    idea.is_voted = False
+
     return render_response(request, "idea_list.html", locals())
 
 def detail(request, idea_id):
@@ -66,19 +78,19 @@ def detail(request, idea_id):
     form = CommentForm()
     try:
         f = Favorite.objects.get(user=request.user, idea=idea)
-        favorited = True
+        idea.is_favorited = True
     except ObjectDoesNotExist:
-        favorited = False
+        idea.is_favorited = False
     try:
         v = Vote.objects.get(user=request.user, idea=idea)
-        voted = True
+        idea.is_voted = True
     except ObjectDoesNotExist:
-        voted = False
+        idea.is_voted = False
 
     if request.user.is_authenticated():
         auth = True
     commentform = CommentForm()
-    statusform = StatusForm()
+    statusform = Status.objects.all()
     duplicates = Idea.objects.filter(duplicate=idea)
     duplicate_of = idea.duplicate
     return render_response(request, "idea_detail.html", locals())
@@ -159,5 +171,11 @@ def duplicate(request, idea_id, duplicate_id):
     idea_duplicate.is_duplicate = True
     idea_duplicate.save()
     idea.duplicate = idea_duplicate
+    idea.save()
+    return HttpResponse("OK")
+
+def change_status(request, idea_id, new_status):
+    idea = Idea.objects.get(pk=idea_id)
+    idea.status_id = new_status
     idea.save()
     return HttpResponse("OK")
