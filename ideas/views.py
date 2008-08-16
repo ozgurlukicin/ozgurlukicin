@@ -25,7 +25,9 @@ def list(request, field="", filter_slug=""):
         submitter_id = get_object_or_404(User, username = filter_slug)
         ideas = ideas.filter(submitter = submitter_id)
     elif field == 'populer':
-        if filter_slug == 'buhafta':
+        if filter_slug == 'bugun':
+            ideas = ideas.filter(submitted_date__gt=datetime.datetime.now()-datetime.timedelta(1))
+        elif filter_slug == 'buhafta':
             ideas = ideas.filter(submitted_date__gt=datetime.datetime.now()-datetime.timedelta(7))
         elif filter_slug == 'buay':
             ideas = ideas.filter(submitted_date__gt=datetime.datetime.now()-datetime.timedelta(30))
@@ -97,8 +99,9 @@ def detail(request, idea_id):
 
 def add(request):
     if request.method == 'POST':
-        form = NewIdeaForm(request.POST.copy())
+        form = NewIdeaForm(request.POST, request.FILES)
         if form.is_valid():
+#            handle_uploaded_file(request.FILES['file'])
             newidea = Idea(
                 title=form.cleaned_data['title'],
                 description=form.cleaned_data['description'],
@@ -107,7 +110,8 @@ def add(request):
                 related_to = form.cleaned_data['related_to'],
                 forum_url = form.cleaned_data['forum_url'],
                 bug_numbers = form.cleaned_data['bug_numbers'],
-                status=Status.objects.all()[0])
+                status=Status.objects.all()[0]
+                )
             newidea.save()
             for tag in form.cleaned_data['tags']:
                 tag=Tag.objects.get(name=tag)
