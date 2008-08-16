@@ -83,19 +83,19 @@ def detail(request, idea_id):
             return HttpResponseRedirect(idea.get_absolute_url())
     comments = Comment.objects.filter(is_hidden=False, idea=idea)
     form = CommentForm()
-    try:
-        f = Favorite.objects.get(user=request.user, idea=idea)
-        idea.is_favorited = True
-    except ObjectDoesNotExist:
-        idea.is_favorited = False
-    try:
-        v = Vote.objects.get(user=request.user, idea=idea)
-        idea.is_voted = True
-    except ObjectDoesNotExist:
-        idea.is_voted = False
 
     if request.user.is_authenticated():
         auth = True
+        try:
+            f = Favorite.objects.get(user=request.user, idea=idea)
+            idea.is_favorited = True
+        except ObjectDoesNotExist:
+            idea.is_favorited = False
+        try:
+            v = Vote.objects.get(user=request.user, idea=idea)
+            idea.is_voted = True
+        except ObjectDoesNotExist:
+            idea.is_voted = False
     commentform = CommentForm()
     statusform = Status.objects.all()
     duplicates = Idea.objects.filter(duplicate=idea)

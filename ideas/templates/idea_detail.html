@@ -15,8 +15,20 @@ Zaten oy verdiniz.
 
 <h1 id='vote{{ idea.id }}'>{{ idea.vote_count }}</h1>
 <h1 id='oyla{{ idea.id }}' {% if idea.is_voted %}style="display:none;"{% endif %}>
-<a href="/yenifikir/oyla/{{ idea.id }}/1" onclick="oyla({{ idea.id }}, '1'); return false;">(+)</a>
-<a href="/yenifikir/oyla/{{ idea.id }}/0" onclick="oyla({{ idea.id }}, '0'); return false;">(-)</a>
+<a href=
+{% if user.is_authenticated %}
+"/yenifikir/oyla/{{ idea.id }}/1" onclick="oyla({{ idea.id }}, '1'); return false;"
+{% else %}
+"/yenifikir/giris/yap"
+{% endif %}
+>(+)</a>
+<a href=
+{% if user.is_authenticated %}
+"/yenifikir/oyla/{{ idea.id }}/0" onclick="oyla({{ idea.id }}, '0'); return false;"
+{% else %}
+"/yenifikir/giris/yap"
+{% endif %}
+>(-)</a>
 </h1>
 <h1 id='oyiptal{{ idea.id }}' {% if not idea.is_voted %}style="display:none;"{% endif %}>
 <a href="/yenifikir/oyiptal/{{ idea.id }}" onclick="oyiptal({{ idea.id }}); return false;">oy iptal</a>
@@ -26,7 +38,13 @@ Zaten oy verdiniz.
 <a href="/yenifikir/ayrinti/1/favori/cikar" onclick="favori({{ idea.id  }}, 'cikar');return false;">favorilerimden çıkar</a>
 </h2>
 <h2 id="favoriekle{{ idea.id }}" {% if idea.is_favorited %}style="display:none;" {% endif %}>
-<a href="/yenifikir/ayrinti/1/favori/ekle" onclick="favori({{ idea.id }}, 'ekle'); return false;">favorile</a>
+<a href=
+{% if user.is_authenticated %}
+"/yenifikir/ayrinti/1/favori/ekle" onclick="favori({{ idea.id }}, 'ekle'); return false;"
+{% else %}
+"/yenifikir/giris/yap"
+{% endif %}
+>favorile</a>
 </h2>
 
 <h3>#{{idea.id}} {{ idea.title }}</h3>
@@ -90,5 +108,8 @@ Yazan : <a href="{{ comment.author.get_profile.get_absolute_url }}" title"{{ com
   <input type="submit" value="Gönder" />
 </form>
 {% endif %}
+{% else %}
+Yorum yapmak için giriş yapmanız gerekiyor.
 {% endif %}
+
 {% endblock %}
