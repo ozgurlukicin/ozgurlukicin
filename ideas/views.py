@@ -121,10 +121,12 @@ def add(request):
             for tag in form.cleaned_data['tags']:
                 tag=Tag.objects.get(name=tag)
                 newidea.tags.add(tag)
-
             idea_added = True
+
+
+            return HttpResponseRedirect(newidea.get_absolute_url())
     else:
-        new_idea_form = NewIdeaForm()
+        form = NewIdeaForm(auto_id=True)
 
     return render_response(request, "idea_add_form.html", locals())
 

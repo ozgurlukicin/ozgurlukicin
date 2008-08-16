@@ -8,19 +8,18 @@
  Yeni fikir eklendi !
 {% endif %}
 {% if form.errors %}
-HATA VAR !
+<p><font color="red">Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin.</font></p>
 {% endif %}
 <form method="POST" action="">
-
 <dl>
-{% for field in new_idea_form %}
+{% for field in form %}
     <dt>{{ field.label_tag }}</dt>
     <dd>{{ field }}</dd>
     {% if field.help_text %}<dd>{{ field.help_text }}</dd>{% endif %}
-    {% if field.errors %}<dd class="myerrors" style="font-color: red;">{{ field.errors }}</dd>{% endif %}
+    {% if field.errors %}<dd>{{ field.errors }}</dd>{% endif %}
 {% endfor %}
 </dl>
-<input type="submit" name="gonder" value="Gönder" />
+<input type="submit" value="Gönder" />
 </form>
 {% else %}
 <p>Yeni fikir eklemek için oturum açmanız gerekiyor.</p>
