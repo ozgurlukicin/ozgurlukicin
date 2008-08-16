@@ -112,7 +112,7 @@ class Comment(models.Model):
     idea = models.ForeignKey(Idea, verbose_name="İlgili fikir")
     author = models.ForeignKey(User, verbose_name="Yazan",related_name="comments_author")
     text = models.TextField("Yorum")
-    submited = models.DateTimeField("Tarih", auto_now_add=True)
+    submitted_date = models.DateTimeField("Tarih", auto_now_add=True)
     is_hidden = models.BooleanField("Gizli", default=False)
     ip = models.IPAddressField("IP Adresi",blank=True, null=True)
 

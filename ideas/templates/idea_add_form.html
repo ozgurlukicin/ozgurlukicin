@@ -3,18 +3,26 @@
 {% block title %}Yeni Fikir Ekle - {% endblock %}
 
 {% block idea %}
+{% if user.is_authenticated %}
 {% if idea_added %}
  Yeni fikir eklendi !
 {% endif %}
-<script type="text/javascript" src="/media/js/urlify.js"></script>
+{% if form.errors %}
+HATA VAR !
+{% endif %}
 <form method="POST" action="">
-<table>
-{{ new_idea_form }}
-</table>
-<input type="submit" name="gonder" value="Gönder" />
-<script type="text/javascript">
-        document.getElementById("id_slug").onchange = function() { this._changed = true; };document.getElementById("id_title").onkeyup = function() { var e = document.getElementById("id_slug"); if(!e._changed) { e.value = URLify(document.getElementById("id_title").value, 50);} };
-</script>
-</form>
 
+<dl>
+{% for field in new_idea_form %}
+    <dt>{{ field.label_tag }}</dt>
+    <dd>{{ field }}</dd>
+    {% if field.help_text %}<dd>{{ field.help_text }}</dd>{% endif %}
+    {% if field.errors %}<dd class="myerrors" style="font-color: red;">{{ field.errors }}</dd>{% endif %}
+{% endfor %}
+</dl>
+<input type="submit" name="gonder" value="Gönder" />
+</form>
+{% else %}
+<p>Yeni fikir eklemek için oturum açmanız gerekiyor.</p>
+{% endif %}
 {% endblock %}

@@ -13,6 +13,7 @@ import datetime
 
 def list(request, field="", filter_slug=""):
     ideas = Idea.objects.filter(is_hidden=False).order_by("-vote_count", "-id")
+#    ideas = Idea.objects.filter(is_hidden=False)
     if field == 'kategori':
         category_id = get_object_or_404(Category, slug = filter_slug)
         ideas = ideas.filter(category=category_id)
@@ -33,8 +34,12 @@ def list(request, field="", filter_slug=""):
             ideas = ideas.filter(submitted_date__gt=datetime.datetime.now()-datetime.timedelta(30))
         elif filter_slug == 'tumzamanlar':
             ideas = ideas
-    elif field == 'son' and filter_slug =='yorumlar':
-        ideas = ideas.filter()
+    elif field == 'son':
+        if filter_slug =='yorumlar':
+            comments = Comment.object.order_by("submitted_date")
+            ideas = Idea.objects.all()
+        elif filter_slug == 'eklenen':
+            ideas = ideas.order_by("-submitted_date")
     elif field == 'favori' and filter_slug == 'fikirler':
         favorites = Favorite.objects.filter(user=request.user.id)
         ideas = []
@@ -120,6 +125,7 @@ def add(request):
             idea_added = True
     else:
         new_idea_form = NewIdeaForm()
+
     return render_response(request, "idea_add_form.html", locals())
 
 
@@ -169,14 +175,17 @@ def del_favorite(request, idea_id):
     return HttpResponse("OK")
 
 def duplicate(request, idea_id, duplicate_id):
-    idea = Idea.objects.get(pk=idea_id)
-    idea_duplicate = Idea.objects.get(pk=duplicate_id)
-    idea_duplicate.vote_count += idea.vote_count
-    idea_duplicate.is_duplicate = True
-    idea_duplicate.save()
-    idea.duplicate = idea_duplicate
-    idea.save()
-    return HttpResponse("OK")
+    try:
+        idea = Idea.objects.get(pk=idea_id)
+        idea_duplicate = Idea.objects.get(pk=duplicate_id)
+        idea_duplicate.vote_count += idea.vote_count
+        idea_duplicate.is_duplicate = True
+        idea_duplicate.save()
+        idea.duplicate = idea_duplicate
+        idea.save()
+        return HttpResponse("OK")
+    except ObjectDoesNotExist:
+        return HttpResponse("YOK")
 
 def change_status(request, idea_id, new_status):
     idea = Idea.objects.get(pk=idea_id)
