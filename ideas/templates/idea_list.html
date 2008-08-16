@@ -69,8 +69,10 @@ function changeStatus(idea_id) {
 <div style="float:left; margin:5px; padding:5px; border:1px #ccc solid; background:#f7f7f7;">
     <li><a href="/yenifikir" title="Yeni Fikirler">Yeni Fikirler Anasayfa</a></li>
     <li><a href="/yenifikir/ekle">Yeni Fikri Ekle</a></li>
-    <li><a href="/yenifikir/listele/ekleyen/{{ user.username  }}">Eklediğim Fikirler</a></li>
+{% if user.is_authenticated %}
+    <li><a href="/yenifikir/listele/ekleyen/{{ user.username }}">Eklediğim Fikirler</a></li>
     <li><a href="/yenifikir/listele/favori/fikirler">Favorilerim</a></li>
+{% endif %}
     <li>
 Kategoriler
     <ul>
@@ -79,7 +81,7 @@ Kategoriler
         {% endfor %}
     </ul>
     </li>
-    <li><a href="/yenifikir/listele/populer/bugun">Bugünki popüler fikirler</a></li>
+    <li><a href="/yenifikir/listele/populer/bugun">Bugünkü popüler fikirler</a></li>
     <li><a href="/yenifikir/listele/populer/buhafta" title="">Bu haftaki popüler fikirler</a></li>
     <li><a href="/yenifikir/listele/populer/buay" title="">Bu ayki popüler fikirler</a></li>
     <li><a href="/yenifikir/listele/populer/tumzamanlar" title="">Tüm zamanların popüler fikirleri</a></li>

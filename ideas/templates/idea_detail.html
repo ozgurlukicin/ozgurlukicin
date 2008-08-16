@@ -78,7 +78,7 @@ Fikir durumunu değiştir:
 <h4>Yorumlar</h4>
      {% for comment in comments %}
       <p>#{{ forloop.counter }}. {{ comment.text }} |
-Yazan : <a href="{{ comment.author.get_profile.get_absolute_url }}" title"{{ comment.author }} kullanıcısının profiline git">{{ comment.author }}</a> Tarih: {{ comment.submited }}
+Yazan : <a href="{{ comment.author.get_profile.get_absolute_url }}" title"{{ comment.author }} kullanıcısının profiline git">{{ comment.author }}</a> Tarih: {{ comment.submitted_date }}
 	<a href="javascript:;" onclick="javascript:document.getElementById('id_text').value='({{ comment.author }} kişisine yanıt)'">Yanıtla</a>
       </p>
       {% endfor %}
