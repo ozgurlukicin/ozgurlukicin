@@ -102,6 +102,7 @@ def detail(request, idea_id):
     statusform = Status.objects.all()
     duplicates = Idea.objects.filter(duplicate=idea)
     duplicate_of = idea.duplicate
+    bugs = idea.bug_numbers.replace(" ","").split(",")
     return render_response(request, "idea_detail.html", locals())
 
 def add(request):

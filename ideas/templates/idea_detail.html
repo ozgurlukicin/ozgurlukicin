@@ -62,6 +62,19 @@ tarafından {{ idea.submitted_date }} tarihinde
         <img src="/media/img/tag.png" style="vertical-align: middle;" /> <a href="/yenifikir/listele/etiket/{{ tag.name }}" title="{{ tag.name }}">{{ tag.name }}</a>
 {% endfor %}
 </p>
+<p>
+  <h3>Hata kayıtları</h3>
+  <br />
+  {% for bug in bugs %}
+  <a href="http://bugs.pardus.org.tr/show_bug.cgi?id={{ bug }}">{{ bug }}</a>
+  {% endfor %}
+</p>
+<p>
+  <h3>İlgili Forum Bağlantısı</h3>
+  <br />
+  <a href="{{ idea.forum_url }}">{{ idea.forum_url }}</a>
+</p>
+
 <hr />
 <h2>Fikir Tekrarı</h2>
 <ul>
