@@ -93,6 +93,7 @@ class Idea(models.Model):
     bug_numbers = models.CharField("Hata numaraları", help_text="Varsa ilgili hata numaralarını virgülle ayırarak giriniz.", max_length=63, blank=True)
     file = models.FileField(upload_to="upload/ideas/dosya/", blank=True)
     is_hidden = models.BooleanField("Gizli", default=False)
+    comment_count = models.IntegerField("Yorum Sayısı", default=0)
 
     def __unicode__(self):
         return self.title

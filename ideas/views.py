@@ -80,6 +80,8 @@ def detail(request, idea_id):
                 ip=ip
                 )
             comment.save()
+            idea.comment_count += 1
+            idea.save()
             return HttpResponseRedirect(idea.get_absolute_url())
     comments = Comment.objects.filter(is_hidden=False, idea=idea)
     form = CommentForm()

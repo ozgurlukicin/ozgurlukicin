@@ -140,7 +140,7 @@ tarafından {{ idea.submitted_date }} tarihinde
 </p>
 <p>{{ idea.description }}</p>
 
-      <p><a href="" title="Yorumlar">Yorumlar ()</a></p>
+      <p><a href="{{ idea.get_absolute_url }}" title="Yorumlar">Yorumlar ({{ idea.comment_count }})</a></p>
      </li>
 {% endfor %}
 </ul>
