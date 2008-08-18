@@ -127,7 +127,7 @@ class Category(models.Model):
 class Tax(models.Model):
     # FIXME: Maybe inline edited?
     title = models.CharField("Vergi İsmi", max_length=100)
-    percentage = models.DecimalField("Vergi Oranı", max_digits=3, decimal_places=2, help_text="3.21 gibi")
+    percentage = models.DecimalField("Vergi Oranı", max_digits=5, decimal_places=2, help_text="3.21 gibi")
 
     def __unicode__(self):
         return u'%s: %%%s' % (self.title, self.percentage)
@@ -171,7 +171,7 @@ class ProductImages(models.Model):
         if self.remove:
             self.delete()
         else:
-            super(CategoryImages, self).save()
+            super(ProductImages, self).save()
 
 ############################################################
 #                                                          #
