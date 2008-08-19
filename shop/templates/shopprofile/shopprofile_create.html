@@ -1,0 +1,24 @@
+{% extends "shop_base.html" %}
+
+{% block title %}Dükkan - Profil Oluştur{% endblock %}
+
+{% block header_menu %}
+    {% include "header.html" %}
+{% endblock %}
+
+{% block ust_menu %}
+    {% include "shop_ust_menu.html" %}
+{% endblock %}
+
+{% block content %}
+<form method="post" action="">
+    {% for field in form %}
+        <dl>
+            <dt><label for="id_{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
+            <dt>{{ field }}</dt>
+        </dl>
+    {% endfor %}
+    <div style="clear:left; text-align:center; padding-top:5px;"><input type="submit" value="Profili Oluştur" /></div>
+</form>
+
+{% endblock %}

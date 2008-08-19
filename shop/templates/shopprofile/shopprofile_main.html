@@ -13,12 +13,12 @@
 {% block content %}
     Normal Telefon: {{ profile.phone }} <br />
     Cep Telefonu: {{ profile.cellphone }} <br />
-    Adres: {{ profile.adress }} <br />
+    Adres: {{ profile.address }} <br />
 
     <br />
     Fatura Bilgileri: <br />
     <br />
-    &nbsp;&nbsp;&nbsp;- Ürünün gönderileceği adres: {{ profile.bill.adress }} <br />
+    &nbsp;&nbsp;&nbsp;- Ürünün gönderileceği adres: {{ profile.bill.address }} <br />
 
     &nbsp;&nbsp;&nbsp;- Kurumsal Hesap?: {{ profile.bill.have_company_information }} <br />
     {% if profile.bill.have_company_information %}

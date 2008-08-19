@@ -5,18 +5,29 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
+from django.core.validators import ValidationError
 from django.db import models
 
 from django.contrib.auth.models import User
 
+#FIXME: Check this later
+class TurkishPhoneNumberField(models.IntegerField):
+    def get_internal_type(self):
+        return "TurkishPhoneNumberField"
+
+    def validate(self, field_data, all_data):
+        phone_re = re.compile(r'^\d{10}$')
+        if not phone_re.search(field_data):
+            raise ValidationError, u"Telefon numarası <alan kodu><numara> şeklindeolmalıdır. Ör: 2121234567"
+
 class ShopProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
-    phone = models.CharField('Telefon', max_length=10, help_text='Telefon numarası. <alan kodu><numara> şeklinde belirtin. Örneğin; 2121234567')
-    cellphone = models.CharField('Cep Telefonu', max_length=10, blank=True, help_text='Cep telefonu. <alan kodu><numara> şeklinde belirtin. Örneğin; 5123456789. (zorunlu değil)')
-    adress = models.TextField('Adres', help_text='İkamet ettiğiniz yer (posta kodu ile birlikte)')
-    second_adress = models.TextField('İkinci Adres', blank=True, help_text='Size ulaşabileceğimiz 2. bir adres (zorunlu değil')
+    phone = TurkishPhoneNumberField('Telefon', max_length=10, help_text='Telefon numarası. <alan kodu><numara> şeklinde belirtin. Örneğin; 2121234567')
+    cellphone = TurkishPhoneNumberField('Cep Telefonu', max_length=10, blank=True, null=True, help_text='Cep telefonu. <alan kodu><numara> şeklinde belirtin. Örneğin; 5123456789. (zorunlu değil)')
+    address = models.TextField('Adres', help_text='İkamet ettiğiniz yer (posta kodu ile birlikte)')
+    second_address = models.TextField('İkinci Adres', blank=True, help_text='Size ulaşabileceğimiz 2. bir adres (zorunlu değil')
 
-    bill = models.OneToOneField('Bill')
+    bill = models.OneToOneField('Bill', null=True)
 
     def __unicode__(self):
         return u'%s' % self.user.username
@@ -32,7 +43,7 @@ class ShopProfile(models.Model):
         ordering = ('user',)
 
     class Admin:
-        list_display = ('user', 'phone', 'adress',)
+        list_display = ('user', 'phone', 'address',)
 
 # Bill Class
 
@@ -41,19 +52,19 @@ class Bill(models.Model):
     # If we require all fields, then user wanting to select only invidual bill type won't be able to select it. Additionally, user can select both bill type.
 
     # Invidual bill type fields
-    adress = models.TextField('Ürünlerin gönderileceği adres.', blank=True, help_text="Lütfen posta kodunu da belirtin.")
+    address = models.TextField('Ürünlerin gönderileceği adres.', blank=True, help_text="Lütfen posta kodunu da belirtin.")
 
     # Bill type for companies
     company_name = models.CharField('Şirket Adı', max_length=200, blank=True)
-    company_adress = models.TextField('Şirket Adresi', blank=True, help_text="Lütfen posta kodunu da belirtin.")
+    company_address = models.TextField('Şirket Adresi', blank=True, help_text="Lütfen posta kodunu da belirtin.")
     # user's title in company
     employee_title = models.CharField('Ünvan', max_length=20, blank=True, help_text='Şirket içerisindeki ünvanınız.')
     tax_number = models.IntegerField('Vergi numarası', max_length=15, blank=True, default=0)
     tax_department = models.CharField('Vergi dairesi adı', max_length=200, blank=True, help_text='İstanbul Bakırköy Vergi Dairesi gibi.')
 
     def __unicode__(self):
-        if self.adress:
-            return u'%s' % self.adress
+        if self.address:
+            return u'%s' % self.address
 
     def have_company_information(self):
         """ Checks if the user has company information """
@@ -67,8 +78,8 @@ class Bill(models.Model):
         verbose_name_plural = 'Fatura Bilgileri'
 
     class Admin:
-        list_display = ('shop_profile', 'adress', 'company_name', 'tax_number',)
-        search_fields = ['adress']
+        list_display = ('shop_profile', 'address', 'company_name', 'tax_number',)
+        search_fields = ['address']
 
     def shop_profile(self):
         qs = ShopProfile.objects.filter(bill=self)

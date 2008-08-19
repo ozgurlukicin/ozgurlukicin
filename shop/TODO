@@ -27,7 +27,7 @@ Legend:
 [*] User
     - Don't forget to control user's bill information as bill class doesn't have any check.
     - Add javascript. It will be used to print out different bill form. E.g: When the user checks invidual bill,
-            only adress form will be displayed. But when the user selects company bill, another form will be displayed.
+            only address form will be displayed. But when the user selects company bill, another form will be displayed.
             Additionally, user can have both bill type
 
     - Add "mycart" to right
