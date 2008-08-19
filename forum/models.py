@@ -160,7 +160,7 @@ class Topic(models.Model):
     views = models.IntegerField(default=0, verbose_name='Görüntülenme sayısı')
     topic_latest_post = models.ForeignKey(Post, blank=True, null=True, related_name='topic_latest_post', verbose_name='Son ileti')
     tags = models.ManyToManyField(Tag, verbose_name='Etiketler')
-    poll = models.ForeignKey(Poll, blank=True, verbose_name="Anket")
+    poll = models.ForeignKey(Poll, blank=True, null=True, verbose_name="Anket")
 
     def __unicode__(self):
         return self.title
