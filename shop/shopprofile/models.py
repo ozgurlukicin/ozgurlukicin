@@ -11,9 +11,8 @@ from django.contrib.auth.models import User
 
 class ShopProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
-    # max_length 18 because we want users to write "+90 0212 123 45 67"
-    phone = models.CharField('Telefon', max_length=18, help_text='Telefon numarası. +90 <alan kodu> <numara> şeklinde belirtin. Örneğin; +90 0212 123 45 67')
-    cellphone = models.CharField('Cep Telefonu', max_length=18, blank=True, help_text='Cep telefonu. +90 <operator> <numara> şeklinde belirtin. Örneğin; +90 512 345 67 89. (zorunlu değil)')
+    phone = models.CharField('Telefon', max_length=10, help_text='Telefon numarası. <alan kodu><numara> şeklinde belirtin. Örneğin; 2121234567')
+    cellphone = models.CharField('Cep Telefonu', max_length=10, blank=True, help_text='Cep telefonu. <alan kodu><numara> şeklinde belirtin. Örneğin; 5123456789. (zorunlu değil)')
     adress = models.TextField('Adres', help_text='İkamet ettiğiniz yer (posta kodu ile birlikte)')
     second_adress = models.TextField('İkinci Adres', blank=True, help_text='Size ulaşabileceğimiz 2. bir adres (zorunlu değil')
 
