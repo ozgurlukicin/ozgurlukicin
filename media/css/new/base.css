@@ -1,0 +1,47 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+img {
+    border: 0px;
+}
+body {
+    background-color: #EAEAEA;
+}
+div#header {
+    height: 72px;
+}
+div#page {
+    margin-left: auto;
+    margin-right: auto;
+    width: 983px;
+    background-color: white;
+    overflow: hidden;
+}
+div#menu {
+    width: 963px;
+    position: relative;
+    top: 10px;
+    left: 10px;
+}
+div#content {
+    width: 639px;
+    margin-top: 10px;
+    margin-left: 10px;
+    float: left;
+}
+div#sidebar {
+    width: 320px;
+    float: left;
+    margin-left: 4px;
+    margin-top: 15px;
+}
+div#sidebar h2 {
+    font-size: 14px;
+    font-weight: bold;
+    font-family: serif, "Georgia";
+}
+div.rightcolumn {
+    border-left: 1px #EAEAEA solid;
+    padding-left: 4px;
+}
