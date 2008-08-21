@@ -30,6 +30,7 @@
             {% block leftcolumn_top %}
             {% endblock %}
             <div class="sidebarcolumn leftcolumn">
+                <h2>Beyin Fırtınası</h2>
                 <div class="leftcolumn_content">
                     <p class="title">Change color of files in small nautilus when cutting.</p>
                     <p>Change color of files in small nautilus when cutting. Change coChangChange color oChange</p>
@@ -50,8 +51,8 @@
         <div class="sidebarcolumn rightcolumn">
             {% block rightcolumn_top %}
             {% endblock %}
+            <h2>Kullanıcı Kutusu</h2>
             <div class="rightcolumn_content">
-                <h2>Kullanıcı Kutusu</h2>
                 {% if not user.is_authenticated %}
                     <form method="post" action="/kullanici/giris/">
                         <input type="text" id="userbox_username" name="username" size="18" value="" maxlength="20" /><br />
@@ -66,13 +67,16 @@
 class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.</p>
                 {% endif %}
             </div>
+            <h2>Ara</h2>
             <div class="rightcolumn_content">
-                <h2>Ara</h2>
                 <form method="post" action="/arama/">
                     <input type="text" name="term" size="20" /><br />
                     <input type="submit" value="Bul" /><br />
                     <a href="/gelismisarama/">Gelişmiş Arama</a>
                 </form>
+            </div>
+            <div class="rightcolumn_content">
+                <a href="/dukkan/"><img src="/media/img/new/tshirt.png" alt="t-shirt"></a>
             </div>
             {% block rightcolumn_bottom %}
             {% endblock %}

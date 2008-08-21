@@ -5,9 +5,6 @@
 img {
     border: 0px;
 }
-h2 {
-    color: #009FE0;
-}
 body {
     background-color: #EAEAEA;
 }
@@ -72,10 +69,12 @@ div.rightcolumn_content {
     border-bottom: 1px #F2F2F2 solid;
     margin-bottom: 15px;
 }
-div.rightcolumn_content h2 {
+div.sidebarcolumn h2 {
     font-family: "Georgia", serif;
     font-size: 12px;
     color: #999999;
+    margin-left: 4px;
+    margin-bottom: 10px;
 }
 div.rightcolumn_content input[type="text"], div.rightcolumn_content input[type="password"] {
     padding-top: 6px;
@@ -85,7 +84,7 @@ div.rightcolumn_content input[type="text"], div.rightcolumn_content input[type="
     width: 142px;
     height: 16px;
     border: 1px #F2F2F2 solid;
-    margin-top: 5px;
+    margin-bottom: 5px;
     background-image: url(/media/img/new/textinput_bg.png);
 }
 div#sidebar_bottom {
