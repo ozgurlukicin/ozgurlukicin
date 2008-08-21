@@ -1,6 +1,19 @@
 div.summary_container {
+    width: 639px;
+    height: 200px;
+    overflow: hidden;
+    font-size: 11px;
+    color: #C9C9C9;
 }
 div.summary_container div.leftcolumn {
+    width: 153px;
+    overflow: hidden;
+    float: left;
+}
+div.summary_container div.rightcolumn {
+    width: 153px;
+    overflow: hidden;
+    float: left;
 }
 div.summary_container div.leftcolumn img {
     width: 153px;
