@@ -25,10 +25,29 @@
         {% block content %}
         {% endblock %}
     </div>
-
     <div id="sidebar">
+        {% block leftcolumn %}
+            {% block leftcolumn_top %}
+            {% endblock %}
+            <div class="sidebarcolumn leftcolumn">
+                <div class="leftcolumn_content">
+                    <h2>Fikir</h2>
+                    <p>Açıklama açıklama açıklama açıklama açıklama açıklama açıklama açıklama açıklama</p>
+                </div>
+                <div class="leftcolumn_content">
+                    <h2>Fikir</h2>
+                    <p>Açıklama açıklama açıklama açıklama açıklama açıklama açıklama açıklama açıklama</p>
+                </div>
+                <div class="leftcolumn_content">
+                    <h2>Fikir</h2>
+                    <p>Açıklama açıklama açıklama açıklama açıklama açıklama açıklama açıklama açıklama</p>
+                </div>
+            </div>
+            {% block leftcolumn_bottom %}
+            {% endblock %}
+        {% endblock %}
         {% block rightcolumn %}
-        <div class="rightcolumn">
+        <div class="sidebarcolumn rightcolumn">
             {% block rightcolumn_top %}
             {% endblock %}
             <div class="rightcolumn_content">
@@ -47,7 +66,7 @@
 class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.</p>
                 {% endif %}
             </div>
-            <div class="leftcolumn_content">
+            <div class="rightcolumn_content">
                 <h2>Ara</h2>
                 <form method="post" action="/arama/">
                     <input type="text" name="term" size="20" /><br />
@@ -59,22 +78,18 @@ class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabil
             {% endblock %}
         </div>
         {% endblock %}
-        {% block leftcolumn %}
-        <div class="leftcolumn">
-        </div>
-        {% endblock %}
         {% block sidebar_bottom %}
-        <div class="sidebar_bottom">
-            {% block leftcolumn_top %}
+        <div id="sidebar_bottom">
+            {% block sidebar_bottom_top %}
             {% endblock %}
-            <div class="leftcolumn_content">
+            <div class="sidebar_bottom_content">
                 <h2>Özgürlükiçin E-Dergisi</h2>
                 <a href="/e-dergi/"><img src="/media/img/oi-edergi-4-kapak.jpg" alt="e-dergi" /></a>
                 Özgürlükiçin'in şimdi bir de e-dergisi var! Okumak için <a href="/e-dergi/">buraya</a> tıklayın.
             </div>
-            {% block leftcolumn_bottom %}
-            {% endblock %}
             {% petition_box %}
+            {% block sidebar_bottom_bottom %}
+            {% endblock %}
         </div>
         {% endblock %}
     </div>

@@ -28,22 +28,31 @@ div#content {
     width: 639px;
     margin-top: 10px;
     margin-left: 10px;
+    margin-right: 4px;
     float: left;
 }
 div#sidebar {
     width: 320px;
     float: left;
-    margin-left: 4px;
-    margin-top: 15px;
+    margin-top: 10px;
+    overflow: hidden;
 }
-div#sidebar h2 {
-    font-size: 14px;
-    font-weight: bold;
-    font-family: serif, "Georgia";
+div#sidebar div { overflow: hidden; }
+div.sidebarcolumn {
+    float: left;
+    border-left: 1px #EAEAEA solid;
+    width: 157px;
+}
+div.leftcolumn {
 }
 div.rightcolumn {
-    border-left: 1px #EAEAEA solid;
-    padding-left: 4px;
+    margin-left: 4px;
+}
+div.leftcolumn_content { margin-left: 4px; }
+div.rightcolumn_content { margin-left: 4px; }
+div#sidebar_bottom {
+    clear: both;
+    margin-left: 4px;
 }
 div#footer {
     width: 963px;
