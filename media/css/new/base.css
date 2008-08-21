@@ -51,7 +51,20 @@ div.leftcolumn {
 div.rightcolumn {
     margin-left: 4px;
 }
-div.leftcolumn_content { margin-left: 4px; }
+div.leftcolumn_content {
+    width: 152px;
+    margin-left: 4px;
+    padding-bottom: 10px;
+    border-bottom: 1px #F2F2F2 solid;
+    margin-bottom: 15px;
+}
+div.leftcolumn_content p {
+    font-size: 11px;
+    color: #C9C9C9;
+}
+div.leftcolumn_content p.title {
+    color: #009FE0;
+}
 div.rightcolumn_content { margin-left: 4px; }
 div#sidebar_bottom {
     clear: both;
