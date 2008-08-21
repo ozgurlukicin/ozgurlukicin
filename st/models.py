@@ -19,6 +19,7 @@ from oi.settings import CITY_LIST, MEDIA_ROOT, MEDIA_URL
 from django.db.models import signals
 from django.dispatch import dispatcher
 from oi.st.signals import open_forum_topic, remove_video_thumbnail_on_delete
+from oi.upload.models import Image as Img
 
 FFMPEG_COMMAND = "ffmpeg"
 
@@ -192,6 +193,7 @@ class License(models.Model):
 class FS(models.Model):
     title = models.CharField('Başlık', max_length=32, blank=False)
     slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
+    image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
     tags = models.ManyToManyField(Tag, blank=False)
@@ -212,7 +214,7 @@ class FS(models.Model):
 
     class Admin:
         fields = (
-            ('Genel', {'fields': ('author', 'title','sum','text','videos','tags','order','update','status',)}),
+            ('Genel', {'fields': ('author', 'title','image','sum','text','videos','tags','order','update','status',)}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
 
@@ -230,6 +232,7 @@ class HowTo(models.Model):
     title = models.CharField('Başlık', max_length=32, blank=False)
     slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
     sum = models.TextField('Özet', blank=False)
+    image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
     text = models.TextField('Metin', blank=False)
     tags = models.ManyToManyField(Tag, blank=False)
     wiki = models.ManyToManyField(Wiki, blank=True)
@@ -249,7 +252,7 @@ class HowTo(models.Model):
 
     class Admin:
         fields = (
-            ('Genel', {'fields': ('author', 'title','sum','text','videos','tags','wiki','update','status',)}),
+            ('Genel', {'fields': ('author', 'title', 'image', 'sum','text','videos','tags','wiki','update','status',)}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
 
@@ -270,6 +273,7 @@ class Game(models.Model):
 
     title = models.CharField('Başlık', max_length=32, blank=False)
     slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
+    image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
     license = models.ManyToManyField(License)
@@ -301,7 +305,7 @@ class Game(models.Model):
 
     class Admin:
         fields = (
-            ('Genel', {'fields': ('author', 'title', 'sum', 'text', 'videos', 'tags', 'wiki', 'update', 'status')}),
+            ('Genel', {'fields': ('author', 'title', 'image', 'sum', 'text', 'videos', 'tags', 'wiki', 'update', 'status')}),
             ('Oyun bilgileri', {'fields': ('url', 'path', 'learning_time', 'license', 'installed_size', 'download_size')}),
             ('Değerlendirme', {'fields': ('gameplay', 'graphics', 'sound', 'scenario', 'atmosphere')}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
@@ -321,6 +325,7 @@ dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=Game)
 class News(models.Model):
     title = models.CharField('Başlık', max_length=32, blank=False)
     slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
+    image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
     tags = models.ManyToManyField(Tag, blank=False)
@@ -339,7 +344,7 @@ class News(models.Model):
 
     class Admin:
         fields = (
-            ('Genel', {'fields': ('author', 'title', 'sum', 'text', 'tags', 'update', 'status')}),
+            ('Genel', {'fields': ('author', 'title', 'image', 'sum', 'text', 'tags', 'update', 'status')}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
 
@@ -360,6 +365,7 @@ class Package(models.Model):
 
     title = models.CharField('Başlık', max_length=32, blank=False, help_text='Paket ismi')
     slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
+    image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Açıklama', blank=False)
     license = models.ManyToManyField(License)
@@ -387,7 +393,7 @@ class Package(models.Model):
 
     class Admin:
         fields = (
-            ('Genel', {'fields': ('author', 'title','sum','text', 'license','installed_size','download_size','url','point','path','ss','tags','wiki','videos','update','status')}),
+            ('Genel', {'fields': ('author', 'title', 'image', 'sum','text', 'license','installed_size','download_size','url','point','path','ss','tags','wiki','videos','update','status')}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
         )
         list_display = ('title', 'author', 'status', 'update')

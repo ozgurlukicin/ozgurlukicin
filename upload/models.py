@@ -13,5 +13,9 @@ class Image(models.Model):
     def __unicode__(self):
         return self.file
 
+    def get_alt_string(self):
+        "returns file name without extension"
+        return ".".join(self.file.rsplit(".")[:-1])[self.file.rfind("/")+1:]
+
     class Admin:
         pass

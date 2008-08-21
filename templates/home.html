@@ -1,54 +1,55 @@
 {% extends "base.html" %}
-
-{% block header_menu %}
-    {% include "header.html" %}
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/object_lists.css');</style>
 {% endblock %}
-
-<br/>
-{% block ust_menu %}
-    {% include "ust_menu.html" %}
-{% endblock %}
-
-{% block alt_resim %}
-
-{% endblock %}
-
-<br/>
 {% block content %}
-    <div id="news_container">
-        {% for new in news %}
-        <div id="news-{{ new.id }}" class="main_news {% cycle alignleft,alignright %}">
-            <div class="news_title_mini transparent_link"><span>Haber:</span> <a href="{{ new.get_absolute_url }}">{{ new.title }}</a></div>
-            <div class="news_content_mini grey">{{ new.sum|safe }}</div>
+    <div class="news_container">
+        <div class="leftcolumn">
+            <img src="{{ news.image.get_file_url }}" alt="{{ news.image.get_alt_string }}" /><br />
         </div>
-        {% endfor %}
+        <div class="rightcolumn">
+            {{ news.title }}
+            {{ news.sum }}
+            {{ news.update|date:"d M Y" }}
+        </div>
     </div>
-    <br />
-    <div id="howto_container">
+    <div class="summary_container">
         {% for howto in howtos %}
-        <div id="howto-{{ howto.id }}" class="main_howtos {% cycle alignleft,alignright %}">
-            <div class="howtos_title_mini transparent_link"><span>Nasıl:</span> <a href="{{ howto.get_absolute_url }}">{{ howto.title }}</a></div>
-            <div class="howtos_content_mini grey">{{ howto.sum|safe }}</div>
+        <div class="leftcolumn">
+            <img src="{{ howto.image.get_file_url }}" alt="{{ howto.image.get_alt_string }}" /><br />
+            {{ howto.update|date:"d M Y" }}
+        </div>
+        <div class="rightcolumn">
+            <span>Nasıl</span>
+            <p class="title"><a href="{{ howto.get_absolute_url }}">{{ howto.title }}</a></p>
+            <p>{{ howto.sum|safe }}</p>
         </div>
         {% endfor %}
     </div>
-    <br />
-    <div id="packages_container">
+    <div class="summary_container">
         {% for package in packages %}
-        <div id="package-{{ package.id }}" class="main_packages {% cycle alignleft,alignright %}">
-            <div class="packages_title_mini transparent_link"><span>Paket: </span><a href="{{ package.get_absolute_url }}">{{ package.title }}</a></div>
-            <div class="packages_content_mini grey">{{ package.sum|safe }}</div>
+        <div class="leftcolumn">
+            <img src="{{ package.image.get_file_url }}" alt="{{ package.image.get_alt_string }}" /><br />
+            {{ package.update|date:"d M Y" }}
+        </div>
+        <div class="rightcolumn">
+            <span>Paket</span>
+            <p class="title"><a href="{{ package.get_absolute_url }}">{{ package.title }}</a></p>
+            <p>{{ package.sum|safe }}</p>
         </div>
         {% endfor %}
     </div>
-    <br />
-    <div id="games_container">
+    <div class="summary_container">
         {% for game in games %}
-        <div id="game-{{ game.id }}" class="main_games {% cycle alignleft,alignright %}">
-            <div class="games_title_mini transparent_link"><span>Oyun:</span> <a href="{{ game.get_absolute_url }}">{{ game.title }}</a></div>
-            <div class="games_content_mini grey">{{ game.sum|safe }}</div>
+        <div class="leftcolumn">
+            <img src="{{ game.image.get_file_url }}" alt="{{ game.image.get_alt_string }}" /><br />
+            {{ game.update|date:"d M Y" }}
+        </div>
+        <div class="rightcolumn">
+            <span>Oyun</span>
+            <p class="title"><a href="{{ game.get_absolute_url }}">{{ game.title }}</a></p>
+            <p>{{ game.sum|safe }}</p>
         </div>
         {% endfor %}
     </div>
-    <br />
 {% endblock %}
