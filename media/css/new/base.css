@@ -45,3 +45,10 @@ div.rightcolumn {
     border-left: 1px #EAEAEA solid;
     padding-left: 4px;
 }
+div#footer {
+    width: 963px;
+    height: 87px;
+    clear: both;
+    margin-left: 10px;
+    margin-bottom: 8px;
+}
