@@ -65,7 +65,32 @@ div.leftcolumn_content p {
 div.leftcolumn_content p.title {
     color: #009FE0;
 }
-div.rightcolumn_content { margin-left: 4px; }
+div.rightcolumn_content {
+    width: 152px;
+    margin-left: 4px;
+    padding-bottom: 10px;
+    border-bottom: 1px #F2F2F2 solid;
+    margin-bottom: 15px;
+}
+div.rightcolumn_content h2 {
+    font-family: "Georgia", serif;
+    font-size: 12px;
+    color: #999999;
+}
+div.rightcolumn_content input[type="text"], div.rightcolumn_content input[type="password"] {
+    padding-top: 6px;
+    padding-left: 8px;
+    font-size: 11px;
+    color: #CCCCCC;
+    width: 153px;
+    height: 18px;
+    border: 0px;
+    margin-top: 5px;
+    background-image: url(/media/img/new/textinput_bg.png);
+}
+div.rightcolumn_content input[type="submit"] {
+    
+}
 div#sidebar_bottom {
     clear: both;
     margin-left: 4px;
