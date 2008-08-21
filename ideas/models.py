@@ -5,6 +5,7 @@ import re
 from django.db import models
 from django.contrib.auth.models import User
 from oi.st.models import Tag
+from oi.forum.models import Topic
 
 
 class StatusCategory(models.Model):
@@ -93,7 +94,7 @@ class Idea(models.Model):
     bug_numbers = models.CharField("Hata numaraları", help_text="Varsa ilgili hata numaralarını virgülle ayırarak giriniz.", max_length=63, blank=True)
     file = models.FileField(upload_to="upload/ideas/dosya/", blank=True)
     is_hidden = models.BooleanField("Gizli", default=False)
-    comment_count = models.IntegerField("Yorum Sayısı", default=0)
+    topic = models.ForeignKey(Topic, verbose_name="Fikrin Forumdaki Konusu")
 
     def __unicode__(self):
         return self.title
@@ -109,24 +110,6 @@ class Idea(models.Model):
         verbose_name = "Yeni Fikir"
         verbose_name_plural = "Yeni Fikirler"
 
-class Comment(models.Model):
-    idea = models.ForeignKey(Idea, verbose_name="İlgili fikir")
-    author = models.ForeignKey(User, verbose_name="Yazan",related_name="comments_author")
-    text = models.TextField("Yorum")
-    submitted_date = models.DateTimeField("Tarih", auto_now_add=True)
-    is_hidden = models.BooleanField("Gizli", default=False)
-    ip = models.IPAddressField("IP Adresi",blank=True, null=True)
-
-    def __unicode__(self):
-        return self.text
-
-    class Admin:
-        pass
-
-    class Meta:
-        verbose_name="Yorum"
-        verbose_name_plural ="Yorumlar"
-
 class Vote(models.Model):
     idea = models.ForeignKey(Idea, verbose_name="Oy Verilen Fikir", related_name="vote_idea", blank=False, null=False)
     user = models.ForeignKey(User, verbose_name="Oy Veren", related_name="vote_author", blank=False, null=False)
@@ -137,7 +120,7 @@ class Vote(models.Model):
 
     class Meta:
         verbose_name = "Verilen Oy"
-        verbose_name = "Verilan Oylar"
+        verbose_name_plural = "Verilen Oylar"
 
 class Favorite(models.Model):
     user = models.ForeignKey(User, verbose_name = "Favorileyen", related_name="fav_author", blank=False)
@@ -151,4 +134,4 @@ class Favorite(models.Model):
 
     class Meta:
         verbose_name = "Favori"
-        verbose_name = "Favoriler"
+        verbose_name_plural = "Favoriler"
