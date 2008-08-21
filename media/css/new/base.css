@@ -5,6 +5,9 @@
 img {
     border: 0px;
 }
+h2 {
+    color: #009FE0;
+}
 body {
     background-color: #EAEAEA;
 }
@@ -57,7 +60,9 @@ div#sidebar_bottom {
 div#footer {
     width: 963px;
     height: 87px;
-    clear: both;
+    float: left;
+    overflow: hidden;
+    margin-top: 10px;
     margin-left: 10px;
     margin-bottom: 8px;
 }
