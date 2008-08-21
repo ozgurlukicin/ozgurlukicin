@@ -43,12 +43,10 @@
                     <p><a href="/kullanici/kayit/">Kayıt ol</a> | <a class="sari"  href="/kullanici/kayip/">Kayıp parola</a></p>
                 {% else %}
                     <p>Merhaba <b>{{ user.username }}</b>!
-                    <br />Profil sayfanıza <a href="/kullanici/profil/{{ request.user.username }}/">buradan</a> ulaşabilir ya da <a 
+                    <br />Profil sayfanıza <a href="{{ request.user.get_profile.get_absolute_url }}">buradan</a> ulaşabilir ya da <a 
 class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.</p>
                 {% endif %}
             </div>
-        </div>
-        <div class="leftcolumn">
             <div class="leftcolumn_content">
                 <h2>Ara</h2>
                 <form method="post" action="/arama/">
@@ -57,30 +55,27 @@ class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabil
                     <a href="/gelismisarama/">Gelişmiş Arama</a>
                 </form>
             </div>
-            <div class="sidebar_bottom">&nbsp;</div>
+            {% block rightcolumn_bottom %}
+            {% endblock %}
         </div>
-
-        <div class="sidebar_box">
-            <div class="sidebar_top">&nbsp;</div>
-            <div class="sidebar_middle">
+        {% endblock %}
+        {% block leftcolumn %}
+        <div class="leftcolumn">
+        </div>
+        {% endblock %}
+        {% block sidebar_bottom %}
+        <div class="sidebar_bottom">
+            {% block leftcolumn_top %}
+            {% endblock %}
+            <div class="leftcolumn_content">
                 <h2>Özgürlükiçin E-Dergisi</h2>
                 <a href="/e-dergi/"><img src="/media/img/oi-edergi-4-kapak.jpg" alt="e-dergi" /></a>
                 Özgürlükiçin'in şimdi bir de e-dergisi var! Okumak için <a href="/e-dergi/">buraya</a> tıklayın.
             </div>
-            <div class="sidebar_bottom">&nbsp;</div>
+            {% block leftcolumn_bottom %}
+            {% endblock %}
+            {% petition_box %}
         </div>
-        {% petition_box %}
-        {% block alt_resim %}
-        {% endblock %}
-
-        {% endblock %}
-        {% block sidebar %}
-        {% endblock %}
-        {% block sidebarbottom %}
-        {% endblock %}
-    </div>
-    <div id="footer">
-        {% block footer %}
         {% endblock %}
     </div>
     {% include "footer.html" %}
