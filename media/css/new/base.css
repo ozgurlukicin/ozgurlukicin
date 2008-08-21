@@ -95,6 +95,23 @@ div.rightcolumn_content input[type="text"], div.rightcolumn_content input[type="
     margin-bottom: 5px;
     background-image: url(/media/img/new/textinput_bg.png);
 }
+div.rightcolumn_content input[type="image"] { float: left; }
+div.rightcolumn_content span.loginlinks {
+    float: right;
+}
+div.rightcolumn_content span.loginlinks a {
+    color: #C9C9C9;
+    text-decoration: none;
+    font-size: 9px;
+}
+div.rightcolumn_content p {
+    font-size: 11px;
+    color: #C9C9C9;
+}
+div.rightcolumn_content p a {
+    color: #009FE0;
+    text-decoration: none;
+}
 div#sidebar_bottom {
     clear: both;
     margin-left: 4px;

@@ -58,12 +58,12 @@
                         <input type="text" id="userbox_username" name="username" size="18" value="" maxlength="20" /><br />
                         <input type="password" id="userbox_password" name="password" size="18" value="" maxlength="30" /><br />
                         <input type="hidden" name="next" value="{{ request.get_full_path }}" />
-                        <input type="submit" value="Giriş" />
+                        <input type="image" src="/media/img/new/button_login.png" value="Giriş" />
                     </form>
-                    <p><a href="/kullanici/kayit/">Kayıt ol</a> | <a class="sari"  href="/kullanici/kayip/">Kayıp parola</a></p>
+                    <span class="loginlinks"><a href="/kullanici/kayit/">Kayıt ol</a><br /><a class="sari"  href="/kullanici/kayip/">Kayıp parola</a></span>
                 {% else %}
-                    <p>Merhaba <b>{{ user.username }}</b>!
-                    <br />Profil sayfanıza <a href="{{ request.user.get_profile.get_absolute_url }}">buradan</a> ulaşabilir ya da <a 
+                    <p>Merhaba {{ user.username }}!</p>
+                    <p>Profil sayfanıza <a href="{{ request.user.get_profile.get_absolute_url }}">buradan</a> ulaşabilir ya da <a 
 class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.</p>
                 {% endif %}
             </div>
@@ -71,8 +71,8 @@ class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabil
             <div class="rightcolumn_content">
                 <form method="post" action="/arama/">
                     <input type="text" name="term" size="20" /><br />
-                    <input type="submit" value="Bul" /><br />
-                    <a href="/gelismisarama/">Gelişmiş Arama</a>
+                    <input type="image" src="/media/img/new/button_search.png" value="Ara" />
+                    <span class="loginlinks"><a href="/gelismisarama/">Gelişmiş<br />Arama</a></span>
                 </form>
             </div>
             <div class="rightcolumn_content">
