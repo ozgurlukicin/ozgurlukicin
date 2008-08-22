@@ -33,14 +33,15 @@ div#menu {
     left: 10px;
 }
 div#content {
-    width: 639px;
+    width: 644px;
     margin-top: 10px;
     margin-left: 10px;
     margin-right: 4px;
+    border-right: 1px #EAEAEA solid;
     float: left;
 }
 div#sidebar {
-    width: 320px;
+    width: 314px;
     float: left;
     margin-top: 10px;
     overflow: hidden;
@@ -48,17 +49,14 @@ div#sidebar {
 div#sidebar div { overflow: hidden; }
 div.sidebarcolumn {
     float: left;
-    border-left: 1px #EAEAEA solid;
-    width: 157px;
-}
-div.leftcolumn {
+    width: 153px;
 }
 div.rightcolumn {
+    border-left: 1px #EAEAEA solid;
     margin-left: 4px;
 }
 div.leftcolumn_content {
-    width: 152px;
-    margin-left: 4px;
+    width: 100%;
     padding-bottom: 10px;
     border-bottom: 1px #F2F2F2 solid;
     margin-bottom: 15px;
@@ -71,7 +69,7 @@ div.leftcolumn_content p.title {
     color: #009FE0;
 }
 div.rightcolumn_content {
-    width: 152px;
+    width: 156px;
     margin-left: 4px;
     padding-bottom: 10px;
     border-bottom: 1px #F2F2F2 solid;
@@ -81,7 +79,6 @@ div.sidebarcolumn h2 {
     font-family: "Georgia", serif;
     font-size: 12px;
     color: #999999;
-    margin-left: 4px;
     margin-bottom: 10px;
 }
 div.rightcolumn_content input[type="text"], div.rightcolumn_content input[type="password"] {
@@ -114,7 +111,6 @@ div.rightcolumn_content p a {
 }
 div#sidebar_bottom {
     clear: both;
-    margin-left: 4px;
 }
 div#footer {
     width: 963px;
