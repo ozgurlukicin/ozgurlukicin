@@ -22,7 +22,7 @@
         <div class="column">
             <span>Nasıl</span>
             <div class="title"><a href="{{ howto.get_absolute_url }}">{{ howto.title }}</a></div>
-            <div class="summary">{{ howto.sum|safe }}</div>
+            <div class="summary">{{ howto.sum|safe|truncatewords_html:23 }}</div>
         </div>
         {% if forloop.first %}<div class="columnspacer"></div>{% endif %}
         {% endfor %}
@@ -36,7 +36,7 @@
         <div class="column">
             <span>Paket</span>
             <div class="title"><a href="{{ package.get_absolute_url }}">{{ package.title }}</a></div>
-            <div class="summary">{{ package.sum|safe }}</div>
+            <div class="summary">{{ package.sum|safe|truncatewords_html:23 }}</div>
         </div>
         {% if forloop.first %}<div class="columnspacer"></div>{% endif %}
         {% endfor %}
@@ -50,7 +50,7 @@
         <div class="column">
             <span>Oyun</span>
             <div class="title"><a href="{{ game.get_absolute_url }}">{{ game.title }}</a></div>
-            <div class="summary">{{ game.sum|safe }}</div>
+            <div class="summary">{{ game.sum|safe|truncatewords_html:23 }}</div>
         </div>
         {% if forloop.first %}<div class="columnspacer"></div>{% endif %}
         {% endfor %}
