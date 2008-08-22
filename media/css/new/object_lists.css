@@ -1,20 +1,33 @@
 div.summary_container {
     width: 639px;
     height: 200px;
-    overflow: hidden;
     font-size: 11px;
     color: #C9C9C9;
+    overflow: hidden;
+    clear: both;
 }
-div.summary_container div.leftcolumn {
+div.summary_container div.column {
     width: 153px;
+    height: 100%;
     overflow: hidden;
     float: left;
 }
-div.summary_container div.rightcolumn {
-    width: 153px;
-    overflow: hidden;
-    float: left;
+div.summary_container div.first {
+    margin-right: 9px;
 }
-div.summary_container div.leftcolumn img {
+div.summary_container div.column img {
     width: 153px;
+}
+div.summary_container div.column div.title { height: 61px; }
+div.summary_container div.column div.title a {
+    font-size: 17px;
+    color: #009FE9;
+    text-decoration: none;
+}
+div.summary_container div.columnspacer {
+    width: 4px;
+    height: 200px;
+    border-left: 1px #EAEAEA solid;
+    float: left;
+    margin-left: 4px;
 }

@@ -4,10 +4,10 @@
 {% endblock %}
 {% block content %}
     <div class="news_container">
-        <div class="leftcolumn">
+        <div class="column">
             <img src="{{ news.image.get_file_url }}" alt="{{ news.image.get_alt_string }}" /><br />
         </div>
-        <div class="rightcolumn">
+        <div class="column">
             {{ news.title }}
             {{ news.sum }}
             {{ news.update|date:"d M Y" }}
@@ -15,41 +15,44 @@
     </div>
     <div class="summary_container">
         {% for howto in howtos %}
-        <div class="leftcolumn">
+        <div class="column first">
             <img src="{{ howto.image.get_file_url }}" alt="{{ howto.image.get_alt_string }}" /><br />
             {{ howto.update|date:"d M Y" }}
         </div>
-        <div class="rightcolumn">
+        <div class="column">
             <span>Nasıl</span>
-            <p class="title"><a href="{{ howto.get_absolute_url }}">{{ howto.title }}</a></p>
-            <p>{{ howto.sum|safe }}</p>
+            <div class="title"><a href="{{ howto.get_absolute_url }}">{{ howto.title }}</a></div>
+            <div class="summary">{{ howto.sum|safe }}</div>
         </div>
+        {% if forloop.first %}<div class="columnspacer"></div>{% endif %}
         {% endfor %}
     </div>
     <div class="summary_container">
         {% for package in packages %}
-        <div class="leftcolumn">
+        <div class="column first">
             <img src="{{ package.image.get_file_url }}" alt="{{ package.image.get_alt_string }}" /><br />
             {{ package.update|date:"d M Y" }}
         </div>
-        <div class="rightcolumn">
+        <div class="column">
             <span>Paket</span>
-            <p class="title"><a href="{{ package.get_absolute_url }}">{{ package.title }}</a></p>
-            <p>{{ package.sum|safe }}</p>
+            <div class="title"><a href="{{ package.get_absolute_url }}">{{ package.title }}</a></div>
+            <div class="summary">{{ package.sum|safe }}</div>
         </div>
+        {% if forloop.first %}<div class="columnspacer"></div>{% endif %}
         {% endfor %}
     </div>
     <div class="summary_container">
         {% for game in games %}
-        <div class="leftcolumn">
+        <div class="column first">
             <img src="{{ game.image.get_file_url }}" alt="{{ game.image.get_alt_string }}" /><br />
             {{ game.update|date:"d M Y" }}
         </div>
-        <div class="rightcolumn">
+        <div class="column">
             <span>Oyun</span>
-            <p class="title"><a href="{{ game.get_absolute_url }}">{{ game.title }}</a></p>
-            <p>{{ game.sum|safe }}</p>
+            <div class="title"><a href="{{ game.get_absolute_url }}">{{ game.title }}</a></div>
+            <div class="summary">{{ game.sum|safe }}</div>
         </div>
+        {% if forloop.first %}<div class="columnspacer"></div>{% endif %}
         {% endfor %}
     </div>
 {% endblock %}
