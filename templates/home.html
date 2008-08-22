@@ -26,8 +26,6 @@
         </div>
         {% if forloop.first %}<div class="columnspacer"></div>{% endif %}
         {% endfor %}
-    </div>
-    <div class="summary_container">
         {% for package in packages %}
         <div class="column first">
             <img src="{{ package.image.get_file_url }}" alt="{{ package.image.get_alt_string }}" /><br />
@@ -40,8 +38,6 @@
         </div>
         {% if forloop.first %}<div class="columnspacer"></div>{% endif %}
         {% endfor %}
-    </div>
-    <div class="summary_container">
         {% for game in games %}
         <div class="column first">
             <img src="{{ game.image.get_file_url }}" alt="{{ game.image.get_alt_string }}" /><br />
