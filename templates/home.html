@@ -1,18 +1,43 @@
 {% extends "base.html" %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/object_lists.css');</style>
+<script type="text/javascript" src="/media/js/jquery-1.2.6.min.js"></script>
+<script type="text/javascript">
+    function next_news() {
+        $("#prev").show();
+        $(".active").hide();
+        $(".active").next().addClass("active");
+        $(".active:first").removeClass("active");
+        $(".active").fadeIn();
+        $("#news_count").html(parseInt($("#news_count").html()) + 1);
+        if ($("#news_count").html() == '5') $("#next").hide();
+    }
+    function prev_news() {
+        $("#next").show();
+        $(".active").hide();
+        $(".active").prev().addClass("active");
+        $(".active:last").removeClass("active");
+        $(".active").fadeIn();
+        $("#news_count").html(parseInt($("#news_count").html()) - 1);
+        if ($("#news_count").html() == '1') $("#prev").hide();
+    }
+
+</script>
+
 {% endblock %}
 {% block content %}
-    <div class="news_container">
+    <a href="#" onclick="prev_news()" id="prev" style="display: none;">önceki</a> <a href="#" onclick="next_news()" id="next">sonraki</a> <span id="news_count">1</span> / 5
+    {% for news in news  %}
+    <div class="news_container{% if forloop.first %} active"{% else %}" style="display: none;"{% endif %}>
         <div class="column">
-            <img src="{{ news.image.get_file_url }}" alt="{{ news.image.get_alt_string }}" /><br />
-        </div>
-        <div class="column">
-            {{ news.title }}
-            {{ news.sum }}
-            {{ news.update|date:"d M Y" }}
+            <img src="{{ news.image.get_file_url }}" alt="{{ news.image.get_alt_string }}" />
+            <span>Haberler</span>
+            <div class="title"><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></div>
+            <div class="summary"{{ news.sum|safe|truncatewords_html:23 }}</div>
+            <p><br />{{ news.update|date:"d M Y" }} // <strong>{{ comment_count }}</strong> Yorum</p>
         </div>
     </div>
+    {% endfor %}
     <div class="summary_container">
         {% for howto in howtos %}
         <div class="column first">

@@ -30,3 +30,30 @@ div.summary_container div.columnspacer {
     float: left;
     margin-left: 4px;
 }
+div.news_container {
+    margin-bottom: 5px;
+    width: 639px;
+    font-size: 11px;
+    color: #C9C9C9;
+    overflow: hidden;
+    clear: both;
+}
+div.news_container img {
+    min-width: 312px;
+    float: left;
+    margin-right: 15px;
+}
+div.news_container div.column {
+    float: left;
+}
+div.news_container div.column div.title {
+    margin-bottom: 25px;
+}
+div.news_container div.column div.title a {
+    font-size: 20px;
+    color: #009FE9;
+    text-decoration: none;
+}
+.hidden {
+    display:none;
+}
