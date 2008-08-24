@@ -48,16 +48,11 @@ div#sidebar {
 }
 div.sidebar_content {
     width: 100%;
-    padding-bottom: 10px;
-    border-bottom: 1px #F2F2F2 solid;
-    margin-bottom: 15px;
-}
-div.sidebar_content {
-    width: 156px;
     margin-left: 4px;
     padding-bottom: 10px;
     border-bottom: 1px #F2F2F2 solid;
     margin-bottom: 15px;
+    overflow: hidden;
 }
 div.sidebar_content h2 {
     font-family: "Georgia", serif;
