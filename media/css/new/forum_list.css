@@ -1,0 +1,39 @@
+div.topbar {
+    width: 800px;
+    font-size: 11px;
+    color: #666666;
+    overflow: hidden;
+}
+div.topbar a {
+    color: #666666;
+    text-decoration: none;
+}
+div.topbar a.bold {
+    font-weight: bold;
+}
+div.topbar div.navigation {
+    float: left;
+}
+div.topbar div.notice {
+    float: right;
+}
+div.headerbar {
+    width: 800px;
+    height: 43px;
+    margin-top: 13px;
+    overflow: hidden;
+    background: url(/media/img/new/forum_headerbar_bg.png) repeat-x;
+}
+div.headerbar div {
+    float: left;
+    margin-left: 4px;
+    margin-top: 15px;
+    font-size: 11px;
+    font-family: "Arial";
+    color: white;
+}
+div.headerbar div.icon { width: 49px; }
+div.headerbar div.title { width: 481px; }
+div.headerbar div.topics { width: 50px; }
+div.headerbar div.posts { width: 49px; }
+div.headerbar div.lastpost { width: 153px; margin-left: 0px; }
