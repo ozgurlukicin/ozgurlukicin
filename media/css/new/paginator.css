@@ -14,25 +14,25 @@ div.paginator_description {
     margin-right: 4px;
     padding-bottom: 3px;
 }
-div.paginator_description span.bold {
+div.paginator_description div.bold {
     font-weight: bold;
 }
-div.paginator span {
+div.paginator div {
     width: 17px;
-    height: 26px;
+    height: 19px;
     margin-right: 2px;
     padding-top: 7px;
     font-size: 11px;
     background-image: url(/media/img/new/paginator_button.png);
-    display: inline-table;
     text-align: center;
+    float: left;
 }
-div.paginator span a,
-div.paginator span a:visited {
+div.paginator div a,
+div.paginator div a:visited {
     color: #999999;
     text-decoration: none;
 }
-div.paginator span.curr {
+div.paginator div.curr {
     width: 25px;
     color: white;
     font-weight: bold;
