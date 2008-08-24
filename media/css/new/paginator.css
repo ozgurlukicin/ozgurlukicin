@@ -1,0 +1,40 @@
+div.paginator_block {
+    width: 100%;
+    overflow: hidden;
+    color: #999999;
+}
+div.paginator {
+    float: left;
+}
+div.paginator_description {
+    float: right;
+    width: 153px;
+    border-bottom: 3px #219CDE solid;
+    font-size: 10px;
+    margin-right: 4px;
+    padding-bottom: 3px;
+}
+div.paginator_description span.bold {
+    font-weight: bold;
+}
+div.paginator span {
+    width: 17px;
+    height: 26px;
+    margin-right: 2px;
+    padding-top: 7px;
+    font-size: 11px;
+    background-image: url(/media/img/new/paginator_button.png);
+    display: inline-table;
+    text-align: center;
+}
+div.paginator span a,
+div.paginator span a:visited {
+    color: #999999;
+    text-decoration: none;
+}
+div.paginator span.curr {
+    width: 25px;
+    color: white;
+    font-weight: bold;
+    background-image: url(/media/img/new/paginator_current.png);
+}
