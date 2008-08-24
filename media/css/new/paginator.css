@@ -1,4 +1,5 @@
 div.paginator_block {
+    margin-top: 30px;
     width: 100%;
     overflow: hidden;
     color: #999999;
@@ -14,7 +15,7 @@ div.paginator_description {
     margin-right: 4px;
     padding-bottom: 3px;
 }
-div.paginator_description div.bold {
+div.paginator_description span.bold {
     font-weight: bold;
 }
 div.paginator div {
