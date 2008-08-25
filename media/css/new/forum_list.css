@@ -1,5 +1,5 @@
 div.topbar {
-    width: 800px;
+    width: 801px;
     font-size: 11px;
     color: #666666;
     overflow: hidden;
@@ -18,22 +18,81 @@ div.topbar div.notice {
     float: right;
 }
 div.headerbar {
-    width: 800px;
+    width: 801px;
     height: 43px;
     margin-top: 13px;
+    font-size: 11px;
     overflow: hidden;
     background: url(/media/img/new/forum_headerbar_bg.png) repeat-x;
 }
 div.headerbar div {
     float: left;
-    margin-left: 4px;
-    margin-top: 15px;
-    font-size: 11px;
+    height: 42px;
+    line-height: 42px;
     font-family: "Arial";
     color: white;
 }
-div.headerbar div.icon { width: 49px; }
-div.headerbar div.title { width: 481px; }
-div.headerbar div.topics { width: 50px; }
-div.headerbar div.posts { width: 49px; }
-div.headerbar div.lastpost { width: 153px; margin-left: 0px; }
+.headerbar .icon { width: 54px; }
+.headerbar .title, .forum_list .item .title { width: 477px; }
+.headerbar .topics { width: 45px; }
+.headerbar .posts { width: 45px; }
+.headerbar .lastpost, .forum_list .item .lastpost { width: 153px; }
+.headerbar .spacer {
+    width: 9px;
+    background: url(/media/img/new/forum_headerbar_spacer.png) no-repeat center center;
+}
+.forum_list .spacer {
+    width: 9px;
+    background: url(/media/img/new/forum_list_spacer.png) no-repeat bottom center;
+}
+
+div.category div.titlebar {
+    height: 39px;
+    width: 801px;
+    background: url(/media/img/new/forum_category_bg.png) repeat-x;
+}
+div.category h2 {
+    font-size: 12px;
+    font-style: "Arial";
+    font-weight: bold;
+    color: #999999;
+    margin-top: 17px;
+    margin-left: 9px;
+    float: left;
+}
+div.forum_list {
+    color: #999999;
+    width: 801px;
+    margin-top: 1px;
+    border-top: 1px #F2F2F2 solid;
+    font-size: 11px;
+}
+div.forum_list div.item {
+    border-bottom: 1px #F2F2F2 solid;
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+}
+div.forum_list div.item div {
+    float: left;
+    height: 100%;
+}
+.forum_list .item .icon {
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 35px;
+}
+.forum_list .item .title, .forum_list .item .lastpost {
+    margin-top: 12px;
+    line-height: 15px;
+}
+.forum_list .item .topics, .forum_list .item .posts {
+    margin-left: 5px;
+    line-height: 50px;
+    width: 40px;
+}
+.forum_list a {
+    color: #666666;
+    font-weight: bold;
+    text-decoration: none;
+}

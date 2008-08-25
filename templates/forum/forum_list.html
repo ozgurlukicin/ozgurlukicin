@@ -11,24 +11,31 @@
 <div class="headerbar">
     <div class="icon">&nbsp;</div>
     <div class="title">Forum</div>
+    <div class="spacer">&nbsp;</div>
     <div class="topics">Konular</div>
+    <div class="spacer">&nbsp;</div>
     <div class="posts">İletiler</div>
+    <div class="spacer">&nbsp;</div>
     <div class="lastpost">Son İleti</div>
 </div>
 {% for category, forum_list in categories %}
 {% if category.hidden and not perms.forum.can_see_hidden_categories %}
 {% else %}
 <div class="category" {% if category.hidden %}style="opacity: 0.5;"{% endif %}>
-    <div class="title">{{ category.name }}</div>
+    <div class="titlebar"><h2>{{ category.name }}</h2></div>
     <div class="forum_list">
         {% for forum in forum_list %}
         {% if forum.hidden and not perms.forum.can_see_hidden_forums %}
         {% else %}
-        <div class="forum_list_item" {% if forum.hidden %}style="opacity: 0.5;"{% endif %}>
+        <div class="item" {% if forum.hidden %}style="opacity: 0.5;"{% endif %}>
             <div class="icon"><a href="{{ forum.get_absolute_url }}"><img{% if forum.is_read %} src="/media/dijital/img/forum/topic.png" alt="Okunmuş forum" title="Okunmuş forum"{% else %} src="/media/dijital/img/forum/topic_unread.png" alt="Okunmamış forum" title="Okunmamış forum"{% endif %} /></a></div>
+            <div class="spacer">&nbsp;</div>
             <div class="title"><a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a><br />{{ forum.description }}</div>
+            <div class="spacer">&nbsp;</div>
             <div class="topics">{{ forum.topics }}</div>
+            <div class="spacer">&nbsp;</div>
             <div class="posts">{{ forum.posts }}</div>
+            <div class="spacer">&nbsp;</div>
             <div class="lastpost">{% if forum.forum_latest_post %}{{ forum.forum_latest_post.edited|date:"d F Y H:i" }}<br /><a href="{{ forum.forum_latest_post.author.get_profile.get_absolute_url }}">{{ forum.forum_latest_post.author }}</a> <a href="{{ forum.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="iletiye git" /></a>{% else %}Henüz ileti yok{% endif %}</div>
         </div>
         {% endif %}
