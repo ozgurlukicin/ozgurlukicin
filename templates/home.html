@@ -23,17 +23,16 @@
     }
 
 </script>
-
 {% endblock %}
 {% block content %}
     <a href="#" onclick="prev_news()" id="prev" style="display: none;">önceki</a> <a href="#" onclick="next_news()" id="next">sonraki</a> <span id="news_count">1</span> / 5
-    {% for news in news  %}
+    {% for news in news %}
     <div class="news_container{% if forloop.first %} active"{% else %}" style="display: none;"{% endif %}>
         <div class="column">
             <img src="{{ news.image.get_file_url }}" alt="{{ news.image.get_alt_string }}" />
             <span>Haberler</span>
             <div class="title"><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></div>
-            <div class="summary"{{ news.sum|safe|truncatewords_html:23 }}</div>
+            <div class="summary">{{ news.sum|safe|truncatewords_html:23 }}</div>
             <p><br />{{ news.update|date:"d M Y" }} // <strong>{{ comment_count }}</strong> Yorum</p>
         </div>
     </div>
