@@ -47,9 +47,11 @@
     border-left: 1px #EAEAEA solid;
     font-size: 11px;
     font-family: "Arial";
-    line-height: 15px;
     color: #999999;
     overflow: auto;
+}
+.post_message_content {
+    line-height: 15px;
 }
 hr {
     border: 0px;
@@ -67,4 +69,21 @@ p {
     display: block;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+.post_message_top {
+    margin-top: 12px;
+    overflow: hidden;
+}
+.post_message_top_icon {
+    margin-left: 8px;
+    margin-top: 1px;
+    float: left;
+}
+.post_message_top_date {
+    margin-left: 13px;
+    float: left;
+}
+.post_message_top_button {
+    float: right;
+    margin-left: 5px;
 }
