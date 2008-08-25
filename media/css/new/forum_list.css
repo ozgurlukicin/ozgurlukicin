@@ -1,22 +1,3 @@
-div.topbar {
-    width: 801px;
-    font-size: 11px;
-    color: #666666;
-    overflow: hidden;
-}
-div.topbar a {
-    color: #666666;
-    text-decoration: none;
-}
-div.topbar a.bold {
-    font-weight: bold;
-}
-div.topbar div.navigation {
-    float: left;
-}
-div.topbar div.notice {
-    float: right;
-}
 div.headerbar {
     width: 801px;
     height: 43px;
@@ -44,21 +25,6 @@ div.headerbar div {
 .forum_list .spacer {
     width: 9px;
     background: url(/media/img/new/forum_list_spacer.png) no-repeat bottom center;
-}
-
-div.category div.titlebar {
-    height: 39px;
-    width: 801px;
-    background: url(/media/img/new/forum_category_bg.png) repeat-x;
-}
-div.category h2 {
-    font-size: 12px;
-    font-style: "Arial";
-    font-weight: bold;
-    color: #999999;
-    margin-top: 17px;
-    margin-left: 9px;
-    float: left;
 }
 div.forum_list {
     color: #999999;
