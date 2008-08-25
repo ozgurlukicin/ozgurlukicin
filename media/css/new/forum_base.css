@@ -60,7 +60,7 @@ div.sidebar_content h2 {
     color: #999999;
     margin-bottom: 10px;
 }
-div.sidebar_content input[type="text"], div.rightcolumn_content input[type="password"] {
+div.sidebar_content input[type="text"], div.sidebar_content input[type="password"] {
     padding-top: 6px;
     padding-left: 8px;
     font-size: 11px;
