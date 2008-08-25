@@ -1,0 +1,49 @@
+.post_base {
+    border-top: 1px #EAEAEA solid;
+    margin-top: 1px;
+    padding-top: 3px;
+    overflow: hidden;
+}
+.post_profile {
+    width: 159px;
+    margin-left: 6px;
+    margin-top: 13px;
+    color: #C9C9C9;
+    font-size: 11px;
+    font-family: "Georgia";
+    float: left;
+}
+.post_profile .author {
+    font-size: 14px;
+    font-family: "Tahoma";
+    font-weight: bold;
+    color: #2B8DD4;
+}
+.post_profile .author_description {
+    margin-top: 4px;
+    font-size: 9px;
+}
+.post_profile .avatar {
+    width: 137px;
+    height: 137px;
+    margin-top: 7px;
+    border: 1px #F7F7F7 solid;
+}
+.post_profile .avatar img {
+    margin-top: 18px;
+    margin-left: 18px;
+}
+.post_profile .ip {
+    margin-top: 18px;
+}
+.post_profile .register_date {
+    margin-bottom: 16px;
+}
+.post_message {
+    float: left;
+    width: 627px;
+    padding-left: 8px;
+    padding-top: 14px;
+    border-left: 1px #EAEAEA solid;
+    overflow: auto;
+}
