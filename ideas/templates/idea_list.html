@@ -32,7 +32,7 @@
         <span class="idea_status">&nbsp;{{ idea.status }}&nbsp;</span>
         </div>
         <p>{{ idea.description }}</p>
-        <div class="idea_comments"><img src="/media/img/new/icon_comment.png" /> <a href="{{ idea.get_absolute_url }}" title="Yorumlar">Yorumlar ({{ idea.comment_count }})</a></div>
+        <div class="idea_comments"><img src="/media/img/new/icon_comment.png" /> <a href="{{ idea.get_absolute_url }}" title="Yorumlar">{{ idea.comment_count }} tane yorum yapıldı.</a></div>
     </div>
     <div style="clear:both"></div>
 </div>
