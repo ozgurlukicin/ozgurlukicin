@@ -32,7 +32,16 @@
         <span class="idea_status">&nbsp;{{ idea.status }}&nbsp;</span>
         </div>
         <div class="idea_content">{{ idea.description|safe }}</div>
-        <div class="idea_comments"><img src="/media/img/new/icon_comment.png" /> <a href="{{ idea.comment_url }}" title="Yorumlar">{{ idea.comment_count }} tane yorum yapıldı.</a></div>
+        <div class="idea_comments">
+            <img src="/media/img/new/icon_comment.png" />
+            <a href="{{ idea.comment_url }}" title="Yorumlar">
+            {% if idea.comment_count  %}
+                {{ idea.comment_count }} tane yorum yapıldı.
+            {% else %}
+                İlk yorumu yapan siz olun !
+            {% endif %}
+            </a>
+</div>
     </div>
     <div style="clear:both"></div>
 </div>

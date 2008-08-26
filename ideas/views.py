@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from oi.ideas.forms import *
@@ -162,7 +163,7 @@ def add(request):
 
     return render_response(request, "idea_add_form.html", locals())
 
-
+@login_required
 def vote_idea(request, idea_id, vote):
     idea = Idea.objects.get(pk=idea_id)
     try:
@@ -176,7 +177,7 @@ def vote_idea(request, idea_id, vote):
         idea.save()
         voted = Vote(idea = idea, user=request.user, vote=vote)
         voted.save()
-    return HttpResponse(str(idea.vote_count))
+    return HttpResponse("OK%s" % str(idea.vote_count))
 
 def delete_vote(request, idea_id):
     idea = Idea.objects.get(pk=idea_id)

@@ -18,7 +18,12 @@ function oyla(id, vote) {
         function(data) {
             $('#oyla' + id).hide()
             $('#oyiptal' + id).fadeIn("slow")
-            $('#vote' + id).html(data);
+            if (data.substr(0,2)=='OK') {
+                data = str.replace(/OK/, "")
+                $('#vote' + id).html(data);
+            } else {
+                document.location = '/kullanici/giris/';
+            }
         });
 
 }
