@@ -36,7 +36,7 @@ div.forum_list {
 div.forum_list div.item {
     border-bottom: 1px #F2F2F2 solid;
     width: 100%;
-    height: 50px;
+    height: 60px;
     overflow: hidden;
 }
 div.forum_list div.item div {
@@ -54,7 +54,7 @@ div.forum_list div.item div {
 }
 .forum_list .item .topics, .forum_list .item .posts {
     margin-left: 5px;
-    line-height: 50px;
+    line-height: 60px;
     width: 40px;
 }
 .forum_list a {
