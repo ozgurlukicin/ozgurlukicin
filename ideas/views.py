@@ -4,8 +4,9 @@
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from oi.ideas.forms import *
+from oi.forum.models import Post, Topic
 from oi.st.wrappers import render_response
-from oi.ideas.models import Idea, Category, Related, Comment, Status, Tag, Vote, Favorite
+from oi.ideas.models import Idea, Category, Related, Status, Tag, Vote, Favorite
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 import datetime
@@ -13,7 +14,6 @@ import datetime
 
 def list(request, field="", filter_slug=""):
     ideas = Idea.objects.filter(is_hidden=False).order_by("-vote_count", "-id")
-#    ideas = Idea.objects.filter(is_hidden=False)
     if field == 'kategori':
         category_id = get_object_or_404(Category, slug = filter_slug)
         ideas = ideas.filter(category=category_id)
@@ -36,7 +36,6 @@ def list(request, field="", filter_slug=""):
             ideas = ideas
     elif field == 'son':
         if filter_slug =='yorumlar':
-            comments = Comment.object.order_by("submitted_date")
             ideas = Idea.objects.all()
         elif filter_slug == 'eklenen':
             ideas = ideas.order_by("-submitted_date")
@@ -68,23 +67,6 @@ def list(request, field="", filter_slug=""):
 def detail(request, idea_id):
     absolute_url = "/yenifikir"
     idea = get_object_or_404(Idea, pk=idea_id)
-    if request.method == 'POST':
-        form = CommentForm(request.POST.copy())
-        if form.is_valid():
-            text = form.cleaned_data['text']
-            ip = request.META['REMOTE_ADDR']
-            comment = Comment(
-                idea=idea,
-                text=text,
-                author = request.user,
-                ip=ip
-                )
-            comment.save()
-            idea.comment_count += 1
-            idea.save()
-            return HttpResponseRedirect(idea.get_absolute_url())
-    comments = Comment.objects.filter(is_hidden=False, idea=idea)
-    form = CommentForm()
 
     if request.user.is_authenticated():
         auth = True
@@ -98,7 +80,7 @@ def detail(request, idea_id):
             idea.is_voted = True
         except ObjectDoesNotExist:
             idea.is_voted = False
-    commentform = CommentForm()
+
     statusform = Status.objects.all()
     duplicates = Idea.objects.filter(duplicate=idea)
     duplicate_of = idea.duplicate
@@ -109,7 +91,6 @@ def add(request):
     if request.method == 'POST':
         form = NewIdeaForm(request.POST, request.FILES)
         if form.is_valid():
-#            handle_uploaded_file(request.FILES['file'])
             newidea = Idea(
                 title=form.cleaned_data['title'],
                 description=form.cleaned_data['description'],
@@ -120,13 +101,44 @@ def add(request):
                 bug_numbers = form.cleaned_data['bug_numbers'],
                 status=Status.objects.all()[0]
                 )
-            newidea.save()
+
+            topic = Topic(forum_id=1,
+                          title=form.cleaned_data['title'])
+            topic.save()
+
             for tag in form.cleaned_data['tags']:
-                tag=Tag.objects.get(name=tag)
+                t = Tag.objects.get(name=tag)
+                topic.tags.add(t)
+
+            newidea = Idea(title = form.cleaned_data['title'],
+                           description = form.cleaned_data['description'],
+                           submitter = request.user,
+                           category = form.cleaned_data['category'],
+                           related_to = form.cleaned_data['related_to'],
+                           forum_url = form.cleaned_data['forum_url'],
+                           bug_numbers = form.cleaned_data['bug_numbers'],
+                           status = Status.objects.all()[0],
+                           topic = topic)
+            newidea.save()
+
+            for tag in form.cleaned_data['tags']:
+                tag = Tag.objects.get(name=tag)
                 newidea.tags.add(tag)
-            idea_added = True
 
+            post_text = "<p>#" + str(newidea.id) + " "
+            post_text += "<a href=" + newidea.get_absolute_url() + ">" + newidea.title + "</a></p>"
+            post_text += "<p>" + newidea.description + "</p>"
+            if form.cleaned_data['forum_url']:
+                post_text += "<p>İlgili Forum Linki<br /><a href='" + newidea.forum_url + "'>" + newidea.forum_url + "</a></p>"
+            if newidea.bug_numbers:
+                post_text += "<p>İlgili hatalar<br />"
+                for bug in newidea.bug_numbers.replace(" ", "").split(","):
+                    post_text += "<a href='http://bugs.pardus.org.tr/show_bug.cgi?id=" + bug + "'>" + bug + "</a> "
 
+            post = Post(topic=topic,
+                        author=request.user,
+                        text=post_text)
+            post.save()
             return HttpResponseRedirect(newidea.get_absolute_url())
     else:
         form = NewIdeaForm(auto_id=True)

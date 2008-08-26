@@ -106,23 +106,7 @@ Fikir durumunu değiştir:
 
 <hr />
 
-<h4>Yorumlar</h4>
-     {% for comment in comments %}
-      <p>#{{ forloop.counter }}. {{ comment.text }} |
-Yazan : <a href="{{ comment.author.get_profile.get_absolute_url }}" title"{{ comment.author }} kullanıcısının profiline git">{{ comment.author }}</a> Tarih: {{ comment.submitted_date }}
-	<a href="javascript:;" onclick="javascript:document.getElementById('id_text').value='({{ comment.author }} kişisine yanıt)'">Yanıtla</a>
-      </p>
-      {% endfor %}
-{% if auth %}
-{% if commentform %}
-<h4>Siz de yorum yapın</h4>
-<form method="post" action="">
-{{ commentform }}
-  <input type="submit" value="Gönder" />
-</form>
-{% endif %}
-{% else %}
-Yorum yapmak için giriş yapmanız gerekiyor.
-{% endif %}
+<a href="{{ idea.topic.get_absolute_url }}">Yorumlar</a>
+
 
 {% endblock %}

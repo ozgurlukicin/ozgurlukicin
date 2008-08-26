@@ -10,7 +10,7 @@
 {% if form.errors %}
 <p><font color="red">Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin.</font></p>
 {% endif %}
-<form method="POST" action="">
+<form method="POST" action="" enctype="multipart/form-data">
 <dl>
 {% for field in form %}
     <dt>{{ field.label_tag }}</dt>

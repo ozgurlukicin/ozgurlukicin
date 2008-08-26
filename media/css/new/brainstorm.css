@@ -1,0 +1,76 @@
+#idea_topbar {
+    background: #219cde;
+    height: 40px;
+    line-height: 40px;
+    text-indent: 10px;
+    color: #fff;
+}
+#idea_topbar #idea_list_title {
+    float: left;
+}
+#idea_topbar #idea_submit {
+    float: right;
+    margin: 7px 10px 0 0;
+}
+.idea_container {
+    margin-top:30px;
+    padding:3px;
+}
+.idea_left {
+    float: left;
+    width: 60px;
+}
+.idea_left .idea_vote {
+    background: url('/media/img/new/ideas_vote_back.png') no-repeat;
+    width: 54px;
+    height: 18px;
+    text-align: center;
+    color: #fff;
+    line-height: 18px;
+    font-weight: 600;
+}
+.idea_right {
+    width: 720px;
+    float: left;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f2f2f2;
+}
+.idea_right h1 a {
+    font-size: 16px;
+    color: #009FE9;
+    text-decoration: none;
+}
+.idea_right p {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    color: #666;
+}
+.idea_right .idea_info {
+    font-size: 8px;
+    margin-top: 5px;
+    color: #999;
+}
+.idea_right .idea_info a {
+    color: #009FE9;
+    text-decoration: none;
+}
+.idea_right .idea_comments img {
+    float:left;
+    margin-right:5px;
+}
+.idea_right .idea_comments a {
+    color: #999;
+    text-decoration: none;
+}
+.idea_right .idea_info .idea_status {
+    background: #f7901e;
+    color: #fff;
+    margin: 3px;
+}
+.rightcolumn a {
+    color: #7E7E7E;
+    text-decoration: none;
+}
+.rightcolumn ul {
+    list-style-image: url('media/img/new/ideas_list_style.png')
+}

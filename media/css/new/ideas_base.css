@@ -1,0 +1,99 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+img {
+    border: 0px;
+}
+body {
+    background-color: #EAEAEA;
+}
+div#header {
+    width: 983px;
+    height: 72px;
+    margin-left: auto;
+    margin-right: auto;
+}
+div#header img {
+    position: relative;
+    top: 35px;
+    left: 14px;
+}
+div#page {
+    margin-left: auto;
+    margin-right: auto;
+    width: 983px;
+    background-color: white;
+    overflow: hidden;
+}
+div#menu {
+    width: 963px;
+    position: relative;
+    top: 10px;
+    left: 10px;
+}
+div#content {
+    width: 804px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 4px;
+    border-right: 1px #EAEAEA solid;
+    float: left;
+}
+div#sidebar {
+    width: 153px;
+    float: left;
+    margin-top: 10px;
+    overflow: hidden;
+}
+div.sidebar_content {
+    width: 100%;
+    margin-left: 4px;
+    padding-bottom: 10px;
+    border-bottom: 1px #F2F2F2 solid;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+div.sidebar_content h2 {
+    font-family: "Georgia", serif;
+    font-size: 12px;
+    color: #999999;
+    margin-bottom: 10px;
+}
+div.sidebar_content input[type="text"], div.sidebar_content input[type="password"] {
+    padding-top: 6px;
+    padding-left: 8px;
+    font-size: 11px;
+    color: #CCCCCC;
+    width: 142px;
+    height: 16px;
+    border: 1px #F2F2F2 solid;
+    margin-bottom: 5px;
+    background-image: url(/media/img/new/textinput_bg.png);
+}
+div.sidebar_content input[type="image"] { float: left; }
+div.sidebar_content span.loginlinks {
+    float: right;
+}
+div.sidebar_content span.loginlinks a {
+    color: #C9C9C9;
+    text-decoration: none;
+    font-size: 9px;
+}
+div.sidebar_content p {
+    font-size: 11px;
+    color: #C9C9C9;
+}
+div.sidebar_content p a {
+    color: #009FE0;
+    text-decoration: none;
+}
+div#footer {
+    width: 963px;
+    height: 87px;
+    float: left;
+    overflow: hidden;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 8px;
+}
