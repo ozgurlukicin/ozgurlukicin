@@ -15,13 +15,11 @@
     <div class="icon">&nbsp;</div>
     <div class="title">Konu</div>
     <div class="spacer">&nbsp;</div>
-    <div class="posts">İletiler</div>
+    <div class="topics">İletiler</div>
     <div class="spacer">&nbsp;</div>
-    <div class="views">Görüntüleme</div>
+    <div class="posts">Gösterim</div>
     <div class="spacer">&nbsp;</div>
     <div class="lastpost">Son İleti</div>
-    <div class="spacer">&nbsp;</div>
-    <div class="rss">Takip Et</div>
 </div>
 <div class="category">
     <div class="titlebar"><h2>{{ forum }}</h2></div>
@@ -33,11 +31,15 @@
 
         <div class="item" {% if topic.hidden %}style="opacity: 0.5;"{% endif %}>
             <div class="icon"><a href="{{ topic.get_absolute_url }}">{% if topic.locked and not topic.sticky %}<img src="/media/dijital/img/forum/topic{% if not topic.is_read %}_unread{% endif %}_locked.png" border="0" alt="Kilitli Konu" title="Kilitli Konu" />{% endif %}{% if topic.sticky and not topic.locked %}<img src="/media/dijital/img/forum/topic_sticky.png" border="0" alt="Sabit Konu" title="Sabit Konu" />{% endif %}{% if not topic.locked and not topic.sticky %}<img src="/media/dijital/img/forum/topic{% if not topic.is_read %}_unread{% endif %}.png" border="0" {% if topic.is_read %}alt="Okunmuş Konu" title="Okunmuş Konu"{% else %}alt="Okunmamış Konu" title="Okunmamış Konu"{% endif %} />{% endif %}{% if topic.locked and topic.sticky %}<img src="/media/dijital/img/forum/topic_sticky_locked.png" border="0" alt="Sabit ve Kilitli Konu" title="Sabit ve Kilitli Konu" />{% endif %}</a></div>
+            <div class="spacer">&nbsp;</div>
             <div class="title"><a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a></div>
-            <div class="posts">{{ topic.posts }}</div>
-            <div class="views">{{ topic.views }}</div>
+            <div class="spacer">&nbsp;</div>
+            <div class="topics">{{ topic.posts }}</div>
+            <div class="spacer">&nbsp;</div>
+            <div class="posts">{{ topic.views }}</div>
+            <div class="spacer">&nbsp;</div>
             <div class="lastpost">{{ topic.topic_latest_post.edited|date:"d F Y H:i" }}<br /><a href="/kullanici/profil/{{ topic.topic_latest_post.author }}" class="profile_link">{{ topic.topic_latest_post.author }}</a> <a href="{{ topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="iletiye git" border="0"/></a></div>
-            <div class="rss"><a href="/forum/rss/topic/{{ topic.id }}"><img src="/media/img/bt_next.png" alt="RSS" style="border:0px;" /></a></div>
+            <!--<div class="rss"><a href="/forum/rss/topic/{{ topic.id }}"><img src="/media/img/bt_next.png" alt="RSS" style="border:0px;" /></a></div>-->
         </div>
         {% endif %}
         {% endfor %}
