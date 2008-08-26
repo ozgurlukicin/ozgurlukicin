@@ -1,29 +1,18 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2007 Artistanbul
+# Copyright 2008 Artistanbul
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-from django.core.validators import ValidationError
 from django.db import models
 
 from django.contrib.auth.models import User
 
-#FIXME: Check this later
-class TurkishPhoneNumberField(models.IntegerField):
-    def get_internal_type(self):
-        return "TurkishPhoneNumberField"
-
-    def validate(self, field_data, all_data):
-        phone_re = re.compile(r'^\d{10}$')
-        if not phone_re.search(field_data):
-            raise ValidationError, u"Telefon numarası <alan kodu><numara> şeklindeolmalıdır. Ör: 2121234567"
-
 class ShopProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
-    phone = TurkishPhoneNumberField('Telefon', max_length=10, help_text='Telefon numarası. <alan kodu><numara> şeklinde belirtin. Örneğin; 2121234567')
-    cellphone = TurkishPhoneNumberField('Cep Telefonu', max_length=10, blank=True, null=True, help_text='Cep telefonu. <alan kodu><numara> şeklinde belirtin. Örneğin; 5123456789. (zorunlu değil)')
+    phone = models.CharField('Telefon', max_length=10, help_text='Telefon numarası. <alan kodu><numara> şeklinde belirtin. Örneğin; 2121234567')
+    cellphone = models.CharField('Cep Telefonu', max_length=10, blank=True, null=True, help_text='Cep telefonu. <alan kodu><numara> şeklinde belirtin. Örneğin; 5123456789. (zorunlu değil)')
     address = models.TextField('Adres', help_text='İkamet ettiğiniz yer (posta kodu ile birlikte)')
     second_address = models.TextField('İkinci Adres', blank=True, help_text='Size ulaşabileceğimiz 2. bir adres (zorunlu değil)')
 

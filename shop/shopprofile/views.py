@@ -7,6 +7,7 @@
 
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 
 from oi.st.wrappers import render_response
 from oi.shop.shopprofile.models import ShopProfile
