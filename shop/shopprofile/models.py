@@ -25,7 +25,7 @@ class ShopProfile(models.Model):
     phone = TurkishPhoneNumberField('Telefon', max_length=10, help_text='Telefon numarası. <alan kodu><numara> şeklinde belirtin. Örneğin; 2121234567')
     cellphone = TurkishPhoneNumberField('Cep Telefonu', max_length=10, blank=True, null=True, help_text='Cep telefonu. <alan kodu><numara> şeklinde belirtin. Örneğin; 5123456789. (zorunlu değil)')
     address = models.TextField('Adres', help_text='İkamet ettiğiniz yer (posta kodu ile birlikte)')
-    second_address = models.TextField('İkinci Adres', blank=True, help_text='Size ulaşabileceğimiz 2. bir adres (zorunlu değil')
+    second_address = models.TextField('İkinci Adres', blank=True, help_text='Size ulaşabileceğimiz 2. bir adres (zorunlu değil)')
 
     bill = models.OneToOneField('Bill', null=True)
 
