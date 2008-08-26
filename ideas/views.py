@@ -4,7 +4,7 @@
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from oi.ideas.forms import *
-from oi.forum.models import Post, Topic
+from oi.forum.models import Post, Topic, Forum
 from oi.st.wrappers import render_response
 from oi.ideas.models import Idea, Category, Related, Status, Tag, Vote, Favorite
 from django.contrib.auth.models import User
@@ -101,9 +101,10 @@ def add(request):
                 bug_numbers = form.cleaned_data['bug_numbers'],
                 status=Status.objects.all()[0]
                 )
-
-            topic = Topic(forum_id=1,
-                          title=form.cleaned_data['title'])
+            forum = Forum.objects.get(name="Yeni Fikirler")
+            topic = Topic(forum=forum,
+                          title=form.cleaned_data['title'],
+                          )
             topic.save()
 
             for tag in form.cleaned_data['tags']:
@@ -139,6 +140,10 @@ def add(request):
                         author=request.user,
                         text=post_text)
             post.save()
+            topic.topic_latest_post = post
+            topic.save()
+            topic.forum.forum_latest_post = post
+            topic.forum.save()
             return HttpResponseRedirect(newidea.get_absolute_url())
     else:
         form = NewIdeaForm(auto_id=True)
