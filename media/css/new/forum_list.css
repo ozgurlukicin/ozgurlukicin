@@ -15,8 +15,14 @@ div.headerbar div {
 }
 .headerbar .icon { width: 54px; }
 .headerbar .title, .forum_list .item .title { width: 477px; }
-.headerbar .topics { width: 45px; }
-.headerbar .posts { width: 45px; }
+.headerbar .topics { 
+    width: 45px;
+    text-align: center;
+}
+.headerbar .posts { 
+    width: 45px;
+    text-align: center;
+}
 .headerbar .lastpost, .forum_list .item .lastpost { width: 153px; }
 .headerbar .spacer {
     width: 9px;
@@ -56,6 +62,7 @@ div.forum_list div.item div {
     margin-left: 5px;
     line-height: 60px;
     width: 40px;
+    text-align: center;
 }
 .forum_list a {
     color: #666666;
