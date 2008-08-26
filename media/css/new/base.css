@@ -111,6 +111,33 @@ div.rightcolumn_content p a {
 div#sidebar_bottom {
     clear: both;
 }
+div.sidebar_bottom_content {
+    color: #999999;
+    font-size: 11px;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px #F2F2F2 solid;
+    margin-bottom: 15px;
+}
+div.sidebar_bottom_content a {
+    color: #999999;
+    font-weight: bold;
+    text-decoration: none;
+}
+div.sidebar_bottom_content img {
+    margin-bottom: 10px;
+}
+div#ooxmlbar {
+    margin: 10px;
+    width:300px;
+    height:18px;
+    background-color: #E8E8E8;
+}
+div#ooxmlbar_completed {
+    background: url(/media/img/new/bar_full_bg.png) repeat-x;
+    height: 100%;
+    float: left;
+}
 div#footer {
     width: 963px;
     height: 87px;

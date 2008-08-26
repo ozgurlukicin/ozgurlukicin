@@ -22,8 +22,8 @@ class PetitionBox(template.Node):
         <div class="sidebar_bottom_content">
             <a href="/ooxml/"><img src="/media/ooxml/ooxmlekarsi.png" alt="Özgürlükİçin OOXML'e karşı" /></a>
             <p><a href="/ooxml/">"Özgürlükİçin OOXML'e Hayır!"</a> diyoruz. <a href="/ooxml_banner/">Banner ve düğmelerimizi</a> kullanarak kampanyamıza katkıda bulunabilir ve manifestomuzu destekleyerek siz de OOXML'e hayır diyebilirsiniz.</p>
-            <div id="ooxmlbar" style="width:210px;height:20px;border:1px #6992A6 solid;"><div id="ooxmlbar_completed" style="background-color:#51798E;height:100%%;float:left;width:%(petitionpercent)s%%;">&nbsp;</div></div>
-            <p style="font-weight:bold;">Destekleyenler: %(numberofpetitioners)s / 3000</p>
+            <div id="ooxmlbar"><div id="ooxmlbar_completed" style="width:%(petitionpercent)s%%;">&nbsp;</div></div>
+            <p style="color:#C9C9C9;">Destekleyenler: %(numberofpetitioners)s / 3000</p>
         </div>
 """ % self.formatdict
 
