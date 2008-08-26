@@ -18,9 +18,9 @@
 
 <div class="idea_container">
     <div class="idea_left">
-        <a href="#" title="" onclick="oyla({{ idea.id }}, '1'); return false;"><img src="/media/img/new/ideas_vote_up.png" /></a>
+        <span id="vote{{ idea.id }}_1"><a href="javascript:;" title="" onclick="oyla({{ idea.id }}, '1'); return false;"><img src="/media/img/new/ideas_vote_1.png" /></a></span>
         <div class="idea_vote" id="vote{{ idea.id }}">{{ idea.vote_count }}</div>
-        <a href="#" title="" onclick="oyla({{ idea.id }}, '0'); return false;"><img src="/media/img/new/ideas_vote_down.png" /></a>
+        <span id="vote{{ idea.id }}_0"><a href="javascript:;" title="" onclick="oyla({{ idea.id }}, '0'); return false;"><img src="/media/img/new/ideas_vote_0.png" /></a></span>
     </div>
     <div class="idea_right">
         <h1><a href="/yenifikir/ayrinti/{{ idea.id }}"> {{ idea.title }}</a></h1>
@@ -31,8 +31,8 @@
         <a href="/yenifikir/listele/ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak gönderildi. 
         <span class="idea_status">&nbsp;{{ idea.status }}&nbsp;</span>
         </div>
-        <p>{{ idea.description }}</p>
-        <div class="idea_comments"><img src="/media/img/new/icon_comment.png" /> <a href="{{ idea.get_absolute_url }}" title="Yorumlar">{{ idea.comment_count }} tane yorum yapıldı.</a></div>
+        <div class="idea_content">{{ idea.description|safe }}</div>
+        <div class="idea_comments"><img src="/media/img/new/icon_comment.png" /> <a href="{{ idea.comment_url }}" title="Yorumlar">{{ idea.comment_count }} tane yorum yapıldı.</a></div>
     </div>
     <div style="clear:both"></div>
 </div>

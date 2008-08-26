@@ -57,6 +57,7 @@ tarafından {{ idea.submitted_date }} tarihinde
 <a href="/yenifikir/listele/ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak gönderildi.
 </p>
 <p>{{ idea.description }}</p>
+<!-- extras -->
 <p>Etiketler :
 {% for tag in idea.tags.all %}
         <img src="/media/img/tag.png" style="vertical-align: middle;" /> <a href="/yenifikir/listele/etiket/{{ tag.name }}" title="{{ tag.name }}">{{ tag.name }}</a>

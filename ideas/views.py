@@ -61,7 +61,12 @@ def list(request, field="", filter_slug=""):
                     idea.is_voted = True
                 except ObjectDoesNotExist:
                     idea.is_voted = False
-
+                try:
+                    topic = Topic.objects.filter(title=idea.title)[0]
+                    idea.comment_count = topic.posts
+                    idea.comment_url = topic.get_latest_post_url()
+                except:
+                    idea.comment_count = 0
     return render_response(request, "idea_list.html", locals())
 
 def detail(request, idea_id):
@@ -81,6 +86,13 @@ def detail(request, idea_id):
         except ObjectDoesNotExist:
             idea.is_voted = False
 
+    try:
+        topic = Topic.objects.filter(title=idea.title)[0]
+        idea.comments_count = topic.posts - 1
+        idea.comments_url = topic.get_latest_post_url()
+    except:
+        idea.comments_count = 0
+    idea.save()
     statusform = Status.objects.all()
     duplicates = Idea.objects.filter(duplicate=idea)
     duplicate_of = idea.duplicate
