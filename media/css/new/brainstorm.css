@@ -26,6 +26,7 @@
     height: 18px;
     text-align: center;
     color: #fff;
+    font-size: 12px;
     line-height: 18px;
     font-weight: 600;
 }
@@ -36,23 +37,32 @@
     border-bottom: 1px solid #f2f2f2;
 }
 .idea_right h1 a {
-    font-size: 16px;
+    font-size: 17px;
     color: #009FE9;
     text-decoration: none;
 }
-.idea_right p {
+.idea_right .idea_content {
+    font-size: 11px;
+    line-height: 15px;
     margin-top: 20px;
     margin-bottom: 30px;
     color: #666;
 }
+.idea_right .idea_content p {
+    margin-bottom: 20px;
+    display: block;
+}
 .idea_right .idea_info {
-    font-size: 8px;
+    font-size: 11px;
     margin-top: 5px;
     color: #999;
 }
 .idea_right .idea_info a {
     color: #009FE9;
     text-decoration: none;
+}
+.idea_right .idea_comments {
+    font-size: 11px;
 }
 .idea_right .idea_comments img {
     float:left;

@@ -12,13 +12,15 @@ function favori(id, proc) {
             }
         });
 }
-function oyla(id, oy) {
-    $.get("/yenifikir/oyla/" + id + "/" + oy + "/",
+function oyla(id, vote) {
+    $("#vote" + id + "_" + vote).html("<img src='/media/img/new/ideas_voted_"+vote+".png' />");
+    $.get("/yenifikir/oyla/" + id + "/" + vote + "/",
         function(data) {
             $('#oyla' + id).hide()
             $('#oyiptal' + id).fadeIn("slow")
             $('#vote' + id).html(data);
         });
+
 }
 function oyiptal(id) {
     $.get("/yenifikir/oyiptal/" + id,
