@@ -109,4 +109,9 @@
     background: #F3F3F3;
     border: 1px #ccc solid;
     padding: 20px;
+    font-size: 11px;
+}
+.idea_detail_box a {
+    color: 666;
+    text-decoration: none;
 }

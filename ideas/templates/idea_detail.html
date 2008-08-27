@@ -71,9 +71,27 @@ Zaten oy verdiniz.
 <div class="h3">Bu fikrin aynısı olarak işaretlenen fikirler</div>
 <ul class='idea_detail_box'>
 {% for duplicate in duplicates %}
-<li><a href="/yenifikir/ayrinti/{{ duplicate.id }}">#{{ duplicate.id }} {{ duplicate.title }}</a> ({{ duplicate.vote_count }} oy)</li>
+<li><a href="/yenifikir/ayrinti/{{ duplicate.id }}"><strong>#{{ duplicate.id }}</strong> {{ duplicate.title }}</a> ({{ duplicate.vote_count }} oy)</li>
 {% endfor %}
 </ul>
+    </div>
+    <div style="clear:both"></div>
+</div>
+
+
+<h2 id="favoricikar{{ idea.id }}" {% if not idea.is_favorited %}style="display:none;"{% endif %}>
+<a href="/yenifikir/ayrinti/1/favori/cikar" onclick="favori({{ idea.id  }}, 'cikar');return false;">favorilerimden çıkar</a>
+</h2>
+<h2 id="favoriekle{{ idea.id }}" {% if idea.is_favorited %}style="display:none;" {% endif %}>
+<a href=
+{% if user.is_authenticated %}
+"/yenifikir/ayrinti/1/favori/ekle" onclick="favori({{ idea.id }}, 'ekle'); return false;"
+{% else %}
+"/yenifikir/giris/yap"
+{% endif %}
+>favorile</a>
+</h2>
+
 
 <p><a href="javascript:;" onclick="$('#tekrarform').toggle(); return false;">Bu fikir başka bir fikrin tekrarı</a></p>
 <form id="tekrarform" style="display:none;" method="post" action="javascript:;">
@@ -96,22 +114,8 @@ Fikir durumunu değiştir:
     <span id="status_form_info"></span>
 </form>
 
-    </div>
-    <div style="clear:both"></div>
-</div>
 
 
-<h2 id="favoricikar{{ idea.id }}" {% if not idea.is_favorited %}style="display:none;"{% endif %}>
-<a href="/yenifikir/ayrinti/1/favori/cikar" onclick="favori({{ idea.id  }}, 'cikar');return false;">favorilerimden çıkar</a>
-</h2>
-<h2 id="favoriekle{{ idea.id }}" {% if idea.is_favorited %}style="display:none;" {% endif %}>
-<a href=
-{% if user.is_authenticated %}
-"/yenifikir/ayrinti/1/favori/ekle" onclick="favori({{ idea.id }}, 'ekle'); return false;"
-{% else %}
-"/yenifikir/giris/yap"
-{% endif %}
->favorile</a>
-</h2>
+
 
 {% endblock %}
