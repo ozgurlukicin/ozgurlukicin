@@ -15,7 +15,6 @@
 </div>
 {% block idea %}
 {% for idea in ideas %}
-
 <div class="idea_container">
     <div class="idea_left">
         <div id="vote{{ idea.id }}_1">
@@ -55,7 +54,8 @@
                 İlk yorum yapan siz olun !
             {% endif %}
             </a>
-</div>
+        {% block idea_detail %}{% endblock %}
+        </div>
     </div>
     <div style="clear:both"></div>
 </div>
