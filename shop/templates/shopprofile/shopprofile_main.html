@@ -1,15 +1,5 @@
 {% extends "shop_base.html" %}
-
 {% block title %}Dükkan - Profil{% endblock %}
-
-{% block header_menu %}
-    {% include "header.html" %}
-{% endblock %}
-
-{% block ust_menu %}
-    {% include "shop_ust_menu.html" %}
-{% endblock %}
-
 {% block content %}
     Normal Telefon: {{ profile.phone }} <br />
     Cep Telefonu: {{ profile.cellphone }} <br />

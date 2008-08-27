@@ -1,20 +1,9 @@
 {% extends "shop_base.html" %}
-
 {% block title %}Dükkan - Kategoriler{% endblock %}
-
-{% block header_menu %}
-    {% include "header.html" %}
-{% endblock %}
-
-{% block ust_menu %}
-    {% include "shop_ust_menu.html" %}
-{% endblock %}
-
 {% block content %}
     {% if not products %}
         Üzgünüm, bu kategoride herhangi bir ürün bulunmamaktadır.
     {% endif %}
-
     {% for product in products %}
     - <a href="{{ product.get_absolute_url }}">{{ product.name }}</a> {% if product.have_child %}({{ product.child.count }} çeşit){% endif %} <br />
     {% endfor %}
