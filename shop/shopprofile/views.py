@@ -7,7 +7,7 @@
 
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
 from oi.st.wrappers import render_response
 from oi.shop.shopprofile.models import ShopProfile
@@ -34,7 +34,7 @@ def create_shopprofile(request):
                     second_address = form.cleaned_data["second_address"],
                     )
             shop_profile.save()
-            main(request)
+            HttpResponseRedirect("/dukkan/profil/")
     else:
         form = ShopProfileForm()
     return render_response(request, "shopprofile/shopprofile_create.html", {"form":form})
