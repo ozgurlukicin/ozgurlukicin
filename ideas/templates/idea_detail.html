@@ -1,5 +1,3 @@
-#ifndef IDEAS/TEMPLATES/IDEA_DETAIL_HTML
-#define IDEAS/TEMPLATES/IDEA_DETAIL_HTML
 {% extends "idea_list.html" %}
 
 {% block idea %}
@@ -52,49 +50,28 @@ Zaten oy verdiniz.
                 İlk yorum yapan siz olun !
             {% endif %}
             </a>
-        {% block idea_detail %}{% endblock %}
-        </div>
-    </div>
-    <div style="clear:both"></div>
-</div>
-
-
-<h2 id="favoricikar{{ idea.id }}" {% if not idea.is_favorited %}style="display:none;"{% endif %}>
-<a href="/yenifikir/ayrinti/1/favori/cikar" onclick="favori({{ idea.id  }}, 'cikar');return false;">favorilerimden çıkar</a>
-</h2>
-<h2 id="favoriekle{{ idea.id }}" {% if idea.is_favorited %}style="display:none;" {% endif %}>
-<a href=
-{% if user.is_authenticated %}
-"/yenifikir/ayrinti/1/favori/ekle" onclick="favori({{ idea.id }}, 'ekle'); return false;"
-{% else %}
-"/yenifikir/giris/yap"
-{% endif %}
->favorile</a>
-</h2>
-
-<p>Etiketler :
+            {% block idea_detail %}{% endblock %}
+        </div> 
+        <div class="tags"><span class="h3">Etiketler :</span>
 {% for tag in idea.tags.all %}
-        <img src="/media/img/tag.png" style="vertical-align: middle;" /> <a href="/yenifikir/listele/etiket/{{ tag.name }}" title="{{ tag.name }}">{{ tag.name }}</a>
+        <a href="/yenifikir/listele/etiket/{{ tag.name }}" title="{{ tag.name }}">{{ tag.name }}</a>
 {% endfor %}
-</p>
-<p>
-  <h3>Hata kayıtları</h3>
-  <br />
+</div>
+    <div class="h3">Hata kayıtları</div>
+      <br />
   {% for bug in bugs %}
   <a href="http://bugs.pardus.org.tr/show_bug.cgi?id={{ bug }}">{{ bug }}</a>
   {% endfor %}
-</p>
-<p>
-  <h3>İlgili Forum Bağlantısı</h3>
+
+<div class="h3">İlgili Forum Bağlantısı</div>
   <br />
   <a href="{{ idea.forum_url }}">{{ idea.forum_url }}</a>
-</p>
 
-<hr />
-<h2>Fikir Tekrarı</h2>
-<ul>
+
+<div class="h3">Bu fikrin aynısı olarak işaretlenen fikirler</div>
+<ul class='idea_detail_box'>
 {% for duplicate in duplicates %}
-<li><a href="/yenifikir/ayrinti/{{ duplicate.id }}">{{ duplicate.title }}</a> ({{ duplicate.vote_count }} oy)</li>
+<li><a href="/yenifikir/ayrinti/{{ duplicate.id }}">#{{ duplicate.id }} {{ duplicate.title }}</a> ({{ duplicate.vote_count }} oy)</li>
 {% endfor %}
 </ul>
 
@@ -119,8 +96,22 @@ Fikir durumunu değiştir:
     <span id="status_form_info"></span>
 </form>
 
-<hr />
+    </div>
+    <div style="clear:both"></div>
+</div>
 
-<a href="{{ idea.topic.get_absolute_url }}">Yorumlar</a>
+
+<h2 id="favoricikar{{ idea.id }}" {% if not idea.is_favorited %}style="display:none;"{% endif %}>
+<a href="/yenifikir/ayrinti/1/favori/cikar" onclick="favori({{ idea.id  }}, 'cikar');return false;">favorilerimden çıkar</a>
+</h2>
+<h2 id="favoriekle{{ idea.id }}" {% if idea.is_favorited %}style="display:none;" {% endif %}>
+<a href=
+{% if user.is_authenticated %}
+"/yenifikir/ayrinti/1/favori/ekle" onclick="favori({{ idea.id }}, 'ekle'); return false;"
+{% else %}
+"/yenifikir/giris/yap"
+{% endif %}
+>favorile</a>
+</h2>
 
 {% endblock %}

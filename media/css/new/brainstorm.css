@@ -34,12 +34,18 @@
     width: 720px;
     float: left;
     padding-bottom: 10px;
-    border-bottom: 1px solid #f2f2f2;
+    border-bottom: 1px solid #EAEAEA;
 }
 .idea_right h1 a {
     font-size: 17px;
     color: #009FE9;
     text-decoration: none;
+}
+.idea_right .h3 {
+    font-size: 12px;
+    color: #999;
+    font-weight: 600;
+    margin: 20px 0 20px 0;
 }
 .idea_right .idea_content {
     font-size: 11px;
@@ -63,6 +69,7 @@
 }
 .idea_right .idea_comments {
     font-size: 11px;
+    margin-bottom: 15px;
 }
 .idea_right .idea_comments img {
     float:left;
@@ -90,6 +97,16 @@
     margin-left: 15px;
 }
 .brainmenu ul li {
-    margin:3px;
-    padding:0;
+    margin: 3px;
+    padding: 0;
+}
+.tags a {
+    color: #009fe0;
+    text-decoration: none;
+    font-size: 11px;
+}
+.idea_detail_box {
+    background: #F3F3F3;
+    border: 1px #ccc solid;
+    padding: 20px;
 }
