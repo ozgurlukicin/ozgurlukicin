@@ -36,7 +36,8 @@
     padding-bottom: 10px;
     border-bottom: 1px solid #EAEAEA;
 }
-.idea_right h1 a {
+.idea_right .h1 a {
+    float: left;
     font-size: 17px;
     color: #009FE9;
     text-decoration: none;
@@ -60,6 +61,7 @@
 }
 .idea_right .idea_info {
     font-size: 11px;
+    clear: both;
     margin-top: 5px;
     color: #999;
 }
@@ -79,10 +81,13 @@
     color: #999;
     text-decoration: none;
 }
-.idea_right .idea_info .idea_status {
+.idea_right .idea_status {
+    float: left;
+    font-size: 11px;
     background: #f7901e;
     color: #fff;
-    margin: 3px;
+    margin: 4px;
+    margin-left: 10px;
 }
 .brainmenu {
     font-size: 11px;
