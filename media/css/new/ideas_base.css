@@ -14,7 +14,6 @@ div#sidebar {
 }
 div.sidebar_content {
     width: 100%;
-    margin-left: 4px;
     padding-bottom: 10px;
     border-bottom: 1px #F2F2F2 solid;
     margin-bottom: 15px;
