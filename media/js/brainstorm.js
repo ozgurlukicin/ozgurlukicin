@@ -19,6 +19,7 @@ function oyla(id, vote) {
             if (data.substr(0,2) == "OK") {
                 data = data.replace(/OK/, "")
                 $('#vote' + id).html(data);
+                $("#img_" + id + "_" + vote).parent().attr("onclick", 'oyiptal(id, vote);')
                 $("#img_" + id + "_" + vote).attr("src", "/media/img/new/ideas_voted_" + vote + ".png");
             } else {
                 document.location = '/kullanici/giris/';
