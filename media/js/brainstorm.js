@@ -13,26 +13,33 @@ function favori(id, proc) {
         });
 }
 function oyla(id, vote) {
-    $("#vote" + id + "_" + vote).html("<img src='/media/img/new/ideas_voted_"+vote+".png' />");
-    $.get("/yenifikir/oyla/" + id + "/" + vote + "/",
+    v = $("#vote" + id + "_" + vote);
+    v.html("<img src='/media/img/new/ideas_voted_"+vote+".png' />");
+      $.get("/yenifikir/oyla/" + id + "/" + vote + "/",
         function(data) {
+            alert('girdi');
             $('#oyla' + id).hide()
-            $('#oyiptal' + id).fadeIn("slow")
             if (data.substr(0,2)=='OK') {
                 data = str.replace(/OK/, "")
                 $('#vote' + id).html(data);
+                alert(data);
+                if (vote==0) { vote=1; } else { vote=0; }
+                v = $("#vote" + id + "_" + vote);
+                v.html(v.html().replace(/'f'/, "'t'"))
             } else {
                 document.location = '/kullanici/giris/';
             }
         });
-
 }
-function oyiptal(id) {
+function oyiptal(id, vote) {
     $.get("/yenifikir/oyiptal/" + id,
         function(data) {
-            $('#oyiptal' + id).hide()
-            $('#oyla' + id).fadeIn("slow")
             $('#vote' + id).html(data);
+            alert('iptal OK');
+            oyla(id, vote);
+            if (vote==0) { vote=1; } else { vote=0; }
+            v = $("#vote" + id + "_" + vote);
+            v.html("<img src='/media/img/new/ideas_vote_"+ vote +".png' />");
         });
 }
 function duplicate(idea_id) {

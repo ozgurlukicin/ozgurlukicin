@@ -18,18 +18,32 @@
 
 <div class="idea_container">
     <div class="idea_left">
-        <span id="vote{{ idea.id }}_1"><a href="javascript:;" title="" onclick="oyla({{ idea.id }}, '1'); return false;"><img src="/media/img/new/ideas_vote_1.png" /></a></span>
-        <div class="idea_vote" id="vote{{ idea.id }}">{{ idea.vote_count }}</div>
-        <span id="vote{{ idea.id }}_0"><a href="javascript:;" title="" onclick="oyla({{ idea.id }}, '0'); return false;"><img src="/media/img/new/ideas_vote_0.png" /></a></span>
+        <div id="vote{{ idea.id }}_1">
+            {% ifequal idea.user_vote 1 %}
+            <img src="/media/img/new/ideas_voted_1.png" />
+            {% else %}
+            <a href="javascript:;" title="" onclick="{% ifequal idea.user_vote 0 %}oyiptal({{ idea.id }}, '1'){% else %}oyla({{ idea.id }}, '1'){% endifequal %}; return false;"><img src="/media/img/new/ideas_vote{% ifequal idea.user_vote 1 %}d{% endifequal %}_1.png" /></a>
+            {% endifequal %}
+        </div>
+        <div class="idea_vote" id="vote{{ idea.id }}">
+            {{ idea.vote_count }}
+        </div>
+        <div id="vote{{ idea.id }}_0">
+            {% ifequal idea.user_vote 0 %}
+            <img src="/media/img/new/ideas_voted_0.png" />
+            {% else %}
+            <a href="javascript:;" title="" onclick="{% ifequal idea.user_vote 1 %}oyiptal({{ idea.id }}, '0'){% else %}oyla({{ idea.id }}, '0'){% endifequal %}; return false;"><img src="/media/img/new/ideas_vote_0.png" /></a>
+            {% endifequal %}
+        </div>
     </div>
     <div class="idea_right">
         <h1><a href="/yenifikir/ayrinti/{{ idea.id }}"> {{ idea.title }}</a></h1>
         <div class="idea_info">
-        <a href="{{ idea.submitter.get_profile.get_absolute_url }}" title="{{ idea.submitter }} kullanıcısının profiline git">{{ idea.submitter }}</a>
+            <a href="{{ idea.submitter.get_profile.get_absolute_url }}" title="{{ idea.submitter }} kullanıcısının profiline git">{{ idea.submitter }}</a>
         tarafından {{ idea.submitted_date }} tarihinde
-        <a href="/yenifikir/listele/kategori/{{ idea.category }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine
-        <a href="/yenifikir/listele/ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak gönderildi. 
-        <span class="idea_status">&nbsp;{{ idea.status }}&nbsp;</span>
+            <a href="/yenifikir/listele/kategori/{{ idea.category }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine
+            <a href="/yenifikir/listele/ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak gönderildi. 
+            <span class="idea_status">&nbsp;{{ idea.status }}&nbsp;</span>
         </div>
         <div class="idea_content">{{ idea.description|safe }}</div>
         <div class="idea_comments">

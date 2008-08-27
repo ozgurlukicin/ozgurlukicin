@@ -26,6 +26,7 @@
         {% block content %}
         {% endblock %}
     </div>
+    {% block sidebar %}
     <div id="sidebar">
         {% block leftcolumn %}
             {% block leftcolumn_top %}
@@ -97,6 +98,7 @@ class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabil
         </div>
         {% endblock %}
     </div>
+    {% endblock %}
     {% include "footer.html" %}
 </div>
 </body>
