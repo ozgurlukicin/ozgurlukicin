@@ -28,9 +28,15 @@ div#page {
 }
 div#menu {
     width: 963px;
+    height: 96px;
     position: relative;
     top: 10px;
     left: 10px;
+    background: url(/media/img/new/menu/bg.png) repeat-x;
+}
+div#menu img {
+    display: block;
+    float: left;
 }
 
 div#footer {
