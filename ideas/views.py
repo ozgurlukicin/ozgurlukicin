@@ -41,12 +41,15 @@ def list(request, field="", filter_slug=""):
         elif filter_slug == 'eklenen':
             ideas = ideas.order_by("-submitted_date")
     elif field == 'favori' and filter_slug == 'fikirler':
-        favorites = Favorite.objects.filter(user=request.user.id)
-        ideas = []
-        i = 0
-        for idea_id in favorites:
-            ideas.append(favorites[i].idea)
-            i += 1
+        try:
+            favorites = Favorite.objects.filter(user=request.user.id)
+            ideas = []
+            i = 0
+            for idea_id in favorites:
+                ideas.append(favorites[i].idea)
+                i += 1
+        except ObjectDoesNotExist:
+            pass
     else:
         ideas = ideas.filter()
     categories = Category.objects.all()
