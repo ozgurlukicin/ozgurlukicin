@@ -24,7 +24,7 @@ div.rightcolumn {
 div.leftcolumn_content {
     width: 100%;
     padding-bottom: 10px;
-    border-bottom: 1px #F2F2F2 solid;
+    border-bottom: 1px #EAEAEA solid;
     margin-bottom: 15px;
 }
 div.leftcolumn_content p {
@@ -37,7 +37,7 @@ div.leftcolumn_content p.title {
 div.rightcolumn_content {
     margin-left: 4px;
     padding-bottom: 10px;
-    border-bottom: 1px #F2F2F2 solid;
+    border-bottom: 1px #EAEAEA solid;
     margin-bottom: 15px;
 }
 div.sidebarcolumn h2 {
@@ -53,7 +53,7 @@ div.rightcolumn_content input[type="text"], div.rightcolumn_content input[type="
     color: #CCCCCC;
     width: 142px;
     height: 16px;
-    border: 1px #F2F2F2 solid;
+    border: 1px #EAEAEA solid;
     margin-bottom: 5px;
     background-image: url(/media/img/new/textinput_bg.png);
 }
@@ -82,7 +82,7 @@ div.sidebar_bottom_content {
     font-size: 11px;
     text-align: center;
     padding-bottom: 10px;
-    border-bottom: 1px #F2F2F2 solid;
+    border-bottom: 1px #EAEAEA solid;
     margin-bottom: 15px;
 }
 div.sidebar_bottom_content a {
