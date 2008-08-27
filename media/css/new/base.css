@@ -141,9 +141,53 @@ div#ooxmlbar_completed {
 div#footer {
     width: 963px;
     height: 87px;
+    background: url(/media/img/new/footer_bg.png) repeat-x;
     float: left;
     overflow: hidden;
     margin-top: 10px;
     margin-left: 10px;
     margin-bottom: 8px;
+    color: white;
+    font-size: 11px;
+    font-family: "Arial";
+}
+div#footer a {
+    color: white;
+    text-decoration: none;
+}
+.footer_left {
+    width: 629px;
+    height: 63px;
+    margin-top: 12px;
+    margin-left: 14px;
+    border-right: 1px #54A6DC solid;
+    float: left;
+}
+.footer_left div { float: left; }
+.footer_left .slash {
+    margin-left: 50px;
+}
+.footer_left .links {
+    margin-top: 2px;
+    margin-left: 20px;
+}
+.footer_left .about {
+    margin-top: 20px;
+    opacity: 0.7;
+    clear: left;
+}
+.footer_right {
+    margin-top: 12px;
+    width: 305px;
+    height: 63px;
+    overflow: hidden;
+    float: left;
+    line-height: 16px;
+}
+.footer_right div {
+    float: left;
+}
+.footer_right .column {
+    width: 107px;
+    text-align: right;
 }
