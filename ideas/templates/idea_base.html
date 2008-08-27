@@ -37,6 +37,32 @@
 class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.</p>
             {% endif %}
         </div>
+        {% block extrasidemenu %}
+<div class="brainmenu">
+    <ul>
+    <li><a href="/yenifikir" title="Yeni Fikirler">Yeni Fikirler Anasayfa</a></li>
+    <li><a href="/yenifikir/ekle">Yeni Fikri Ekle</a></li>
+{% if user.is_authenticated %}
+    <li><a href="/yenifikir/listele/ekleyen/{{ user.username }}">Eklediğim Fikirler</a></li>
+    <li><a href="/yenifikir/listele/favori/fikirler">Favorilerim</a></li>
+{% endif %}
+    <li><a href="/yenifikir/listele/populer/bugun">Bugünkü popüler fikirler</a></li>
+    <li><a href="/yenifikir/listele/populer/buhafta" title="">Bu haftaki popüler fikirler</a></li>
+    <li><a href="/yenifikir/listele/populer/buay" title="">Bu ayki popüler fikirler</a></li>
+    <li><a href="/yenifikir/listele/populer/tumzamanlar" title="">Tüm zamanların popüler fikirleri</a></li>
+    <li><a href="/yenifikir/listele/son/eklenen" title="">Son eklenenler</a></li>
+</ul>
+<br />
+Kategoriler
+    <ul>
+        {% for category in categories %}
+        <li><a href="/yenifikir/listele/kategori/{{ category.name }}" title="{{ category.name }}">{{ category.name }}</a></li>
+        {% endfor %}
+    </ul>
+ 
+</div>
+
+        {% endblock %}
         <div class="sidebar_content">
             <h2>Ara</h2>
             <form method="post" action="/arama/">

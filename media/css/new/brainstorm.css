@@ -77,10 +77,19 @@
     color: #fff;
     margin: 3px;
 }
-.rightcolumn a {
+.brainmenu {
+    font-size: 11px;
+    margin-bottom: 30px;
+}
+.brainmenu a {
     color: #7E7E7E;
     text-decoration: none;
 }
-.rightcolumn ul {
-    list-style-image: url('media/img/new/ideas_list_style.png')
+.brainmenu ul {
+    list-style-image: url('/media/img/new/ideas_list_style.png');
+    margin-left: 15px;
+}
+.brainmenu ul li {
+    margin:3px;
+    padding:0;
 }

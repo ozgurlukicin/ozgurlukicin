@@ -38,7 +38,7 @@
             {% if idea.comment_count  %}
                 {{ idea.comment_count }} tane yorum yapıldı.
             {% else %}
-                İlk yorumu yapan siz olun !
+                İlk yorum yapan siz olun !
             {% endif %}
             </a>
 </div>
@@ -47,33 +47,4 @@
 </div>
 {% endfor %}
 {% endblock %}
-{% endblock %}
-{% block rightcolumn %}
-
-<div class="sidebarcolumn rightcolumn">
-    <ul>
-    <li><a href="/yenifikir" title="Yeni Fikirler">Yeni Fikirler Anasayfa</a></li>
-    <li><a href="/yenifikir/ekle">Yeni Fikri Ekle</a></li>
-{% if user.is_authenticated %}
-    <li><a href="/yenifikir/listele/ekleyen/{{ user.username }}">Eklediğim Fikirler</a></li>
-    <li><a href="/yenifikir/listele/favori/fikirler">Favorilerim</a></li>
-{% endif %}
-    <li><a href="/yenifikir/listele/populer/bugun">Bugünkü popüler fikirler</a></li>
-    <li><a href="/yenifikir/listele/populer/buhafta" title="">Bu haftaki popüler fikirler</a></li>
-    <li><a href="/yenifikir/listele/populer/buay" title="">Bu ayki popüler fikirler</a></li>
-    <li><a href="/yenifikir/listele/populer/tumzamanlar" title="">Tüm zamanların popüler fikirleri</a></li>
-    <li><a href="/yenifikir/listele/son/eklenen" title="">Son eklenenler</a></li>
-</ul>
-<br /><br />
-Kategoriler
-    <ul>
-        {% for category in categories %}
-        <li><a href="/yenifikir/listele/kategori/{{ category.name }}" title="{{ category.name }}">{{ category.name }}</a></li>
-        {% endfor %}
-    </ul>
- 
-</div>
-
-
-
 {% endblock %}
