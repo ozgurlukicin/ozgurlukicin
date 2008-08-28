@@ -13,7 +13,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from oi.st.wrappers import render_response
 
 from oi.shop.shopprofile.models import ShopProfile
-from oi.shop.cart.models import Cart
+from oi.shop.cart.models import Cart, CartItem
 from oi.shop.product.models import Product
 
 def get_cart_for_user(user):
