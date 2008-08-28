@@ -16,6 +16,10 @@
             {% endif %}
         {% endfor %}
     {% else %}
+            Ürün Tanımı: {{ product.description }}<br />
+            {% for image in product.images.all %}
+            Ürün Foto: <img src="{{ image.get_picture_url }}" alt="product" /><br />
+            {% endfor %}
             Ürün Fiyatı: {{ product.price }} +KDV ({{ product.price_with_tax }})<br />
             Ürün Stoğu: {{ product.stock }} <br />
     {% endif %}
