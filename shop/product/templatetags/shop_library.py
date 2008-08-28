@@ -8,7 +8,7 @@
 from elementtree.ElementTree import Element, SubElement, tostring
 from django.template import Library
 
-from oi.shop.product.models import Category
+from oi.shop.product.models import Category, Product
 
 register = Library()
 
@@ -29,6 +29,7 @@ def recurse_for_children(current_node, parent_node, active_cat, show_empty=True)
             for child in children:
                 recurse_for_children(child, new_parent, active_cat)
 
+@register.simple_tag
 def category_tree(id=None):
     """
     Creates an unnumbered list of the categories.  For example:
@@ -53,4 +54,11 @@ def category_tree(id=None):
         recurse_for_children(cats, root, active_cat)
     return tostring(root, 'utf-8')
 
-register.simple_tag(category_tree)
+@register.simple_tag
+def active_products():
+    "returns list of all active products for showing in right column"
+    products = ""
+    product_list = Product.objects.filter(active=True)
+    for product in product_list:
+        products += '<div class="shop_item">» <a href="%s">%s</a></div>\n' % (product.get_absolute_url, product)
+    return products

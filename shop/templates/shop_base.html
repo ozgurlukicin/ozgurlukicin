@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load shop_library %}
 {% block title %}E-Mağaza - {% endblock %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
@@ -8,9 +9,7 @@
 <div class="sidebarcolumn leftcolumn">
     <div class="leftcolumn_content">
         <div class="shop_category">Ürünler</div>
-        {% for product in products %}
-        <div class="shop_item">» <a href="{{ product.get_absolute_url }}">{{ product }}</a></div>
-        {% endfor %}
+        {% active_products %}
     </div>
 </div>
 {% endblock %}
