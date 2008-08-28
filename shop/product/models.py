@@ -184,6 +184,7 @@ class Product(models.Model):
     # core True because we will use ProductImage as inline-edited object
     name = models.CharField("İsim", max_length=200, core=True)
     slug = models.SlugField("SEF Başlık", prepopulate_from=("name",), help_text="Adres kısmında kullanılan ad, isim kısmından otomatik olarak üretilmektedir")
+    description = models.TextField("Ürün açıklaması")
 
     stock = models.IntegerField("Ürün Stoğu", default=0)
     price = models.DecimalField("Ürünün fiyatı", default=0, max_digits=5, decimal_places=2, help_text="Ürünün vergisiz fiyatı. Vergi aşağıda seçtiğinize bağlı olarak otomatik bir şekilde bu fiyatın üzerine eklenmektedir. 15.67 gibi YTL cinsinden belirtin.")
@@ -255,7 +256,7 @@ class Product(models.Model):
 
     class Admin:
         fields = (
-            ("Ürün Bilgileri", {"fields": ("name", "slug", "stock", "price")}),
+            ("Ürün Bilgileri", {"fields": ("name", "slug", "description", "stock", "price")}),
             ("Kategori/Resim/Vergi", {"fields": ("parent", "category", "tax")}),
             (None, {"fields": ("active",)})
             )
