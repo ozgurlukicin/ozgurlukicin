@@ -56,5 +56,5 @@ def get_cart(request):
     cart = get_cart_for_user(request.user)
     cart_html = ''
     for item in cart.items.all():
-        cart_html += '<div class="item"><div class="count">%d</div>' % item.count + '<div class="product">%s</div></div>' % item
+        cart_html += '<div class="item"><div class="count">%d</div>' % item.quantity + '<div class="product">%s</div></div>' % item
     return HttpResponse(cart_html)
