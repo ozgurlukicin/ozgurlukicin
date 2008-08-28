@@ -16,7 +16,7 @@ class ShopProfile(models.Model):
     address = models.TextField('Adres', help_text='İkamet ettiğiniz yer (posta kodu ile birlikte)')
     second_address = models.TextField('İkinci Adres', blank=True, help_text='Size ulaşabileceğimiz 2. bir adres (zorunlu değil)')
 
-    bill = models.OneToOneField('Bill', null=True)
+    bill = models.ForeignKey('Bill', null=True)
 
     def __unicode__(self):
         return u'%s' % self.user.username

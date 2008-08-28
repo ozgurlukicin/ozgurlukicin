@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2007 Artistanbul
+# Copyright 2008 Artistanbul
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
@@ -11,7 +11,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 from oi.st.wrappers import render_response
 from oi.shop.shopprofile.models import ShopProfile
-from oi.shop.shopprofile.forms import ShopProfileForm
+from oi.shop.shopprofile.forms import ShopProfileForm, PersonalBillForm, CorporateBillForm
 
 @login_required
 def main(request):
@@ -38,3 +38,13 @@ def create_shopprofile(request):
     else:
         form = ShopProfileForm()
     return render_response(request, "shopprofile/shopprofile_create.html", {"form":form})
+
+@login_required
+def create_personal_bill(request):
+    form = PersonalBillForm()
+    return render_response(request, "shopprofile/bill_create.html", {"form":form})
+
+@login_required
+def create_corporate_bill(request):
+    form = CorporateBillForm()
+    return render_response(request, "shopprofile/bill_create.html", {"form":form})

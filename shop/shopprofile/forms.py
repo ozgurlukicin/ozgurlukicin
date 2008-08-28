@@ -9,7 +9,7 @@ import re
 
 from django import newforms as forms
 
-from oi.shop.shopprofile.models import ShopProfile
+from oi.shop.shopprofile.models import ShopProfile, Bill
 
 def phoneValidator(field_data):
     if field_data == "":
@@ -28,3 +28,13 @@ class ShopProfileForm(forms.ModelForm):
 
     def clean_cellphone(self):
         return phoneValidator(self.cleaned_data["cellphone"])
+
+class PersonalBillForm(forms.ModelForm):
+    class Meta:
+        model = Bill
+        exclude = ("company_name", "company_address", "employee_title", "tax_number", "tax_department")
+
+class CorporateBillForm(forms.ModelForm):
+    class Meta:
+        model = Bill
+        exclude = ("address")
