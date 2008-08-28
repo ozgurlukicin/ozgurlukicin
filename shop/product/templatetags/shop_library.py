@@ -60,5 +60,5 @@ def active_products():
     products = ""
     product_list = Product.objects.filter(active=True)
     for product in product_list:
-        products += '<div class="shop_item">» <a href="%s">%s</a></div>\n' % (product.get_absolute_url, product)
+        products += '<div class="shop_item">» <a href="%s">%s</a></div>\n' % (product.get_absolute_url(), product)
     return products
