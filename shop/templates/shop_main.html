@@ -3,11 +3,23 @@
     {% if not user.is_authenticated %}
         Giriş yapmamışsınız. <a href="/kullanici/giris/">Buraya</a> tıklayarak giriş yapabilir ve ürün siparişi verebilirsiniz. <br />
     {% else %}
-
-    {% if not user.get_profile.have_shopprofile %}
-        Herhangi bir alışveriş profiline sahip değilsiniz! <a href="/dukkan/profil/olustur/">Buraya</a> tıklayarak oluşturabilir ve ürün siparişi vermeye başlayabilirsiniz.
+        {% if not user.get_profile.have_shopprofile %}
+            Herhangi bir alışveriş profiline sahip değilsiniz! <a href="/dukkan/profil/olustur/">Buraya</a> tıklayarak oluşturabilir ve ürün siparişi vermeye başlayabilirsiniz.
+        {% endif %}
     {% endif %}
-
-    {% endif %}
-
+    <div id="product_list">
+    {% for product in products %}
+        {% if not product.parent %}
+        <div class="product">
+            <div class="photo"><img src="{{ product.images.all.0.get_picture_url }}" alt="{{ product }}" /></div>
+            <div class="title">{{ product }}</div>
+            <div class="description">{{ product.description }}</div>
+            <div class="buttons">
+                <div class="button">Satın Al</div>
+                <div class="button"><a href="{{ product.get_absolute_url }}">Detay</a></div>
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+    </div>
 {% endblock %}
