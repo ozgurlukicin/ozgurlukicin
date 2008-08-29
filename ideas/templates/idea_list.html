@@ -19,12 +19,12 @@
     <div class="idea_left">
         <div id="vote{{ idea.id }}_1">
             {% ifequal idea.user_vote 1 %}
-            <a href="javascript:;" title="" onclick="oyiptal({{ idea.id }}, '1'); return false;"><img src="/media/img/new/ideas_voted_1.png" id="img_{{ idea.id }}_1" /></a>
+            <a href="javascript:;" title="" onclick="oyiptal({{ idea.id }}, '1'); return false;"><img alt="oylama" src="/media/img/new/ideas_voted_1.png" id="img_{{ idea.id }}_1" /></a>
             {% else %}
             {% ifequal idea.user_vote 0 %} 
-            <img src="/media/img/new/ideas_vote{% ifequal idea.user_vote 1 %}d{% endifequal %}_1.png" id="img_{{ idea.id }}_1" />
+            <img alt="oylama" src="/media/img/new/ideas_vote{% ifequal idea.user_vote 1 %}d{% endifequal %}_1.png" id="img_{{ idea.id }}_1" />
             {% else %}
-            <a href="javascript:;" onclick="oyla({{ idea.id }}, 1);return false;"><img src="/media/img/new/ideas_vote_1.png" id="img_{{ idea.id }}_1"/></a>
+            <a href="javascript:;" onclick="oyla({{ idea.id }}, 1);return false;"><img alt="oylama" src="/media/img/new/ideas_vote_1.png" id="img_{{ idea.id }}_1"/></a>
             {% endifequal %}
             {% endifequal %}
         </div>
@@ -33,12 +33,12 @@
         </div>
         <div id="vote{{ idea.id }}_0">
             {% ifequal idea.user_vote 0 %}
-            <a href="javascript:;" title="" onclick="oyiptal({{ idea.id }}, '0'); return false;"><img src="/media/img/new/ideas_voted_0.png" id="img_{{ idea.id }}_0"/></a>
+            <a href="javascript:;" title="" onclick="oyiptal({{ idea.id }}, '0'); return false;"><img alt="oylama" src="/media/img/new/ideas_voted_0.png" id="img_{{ idea.id }}_0"/></a>
             {% else %}
             {% ifequal idea.user_vote 1 %}
-            <img src="/media/img/new/ideas_vote_0.png" id="img_{{ idea.id }}_0"/>
+            <img alt="oylama" src="/media/img/new/ideas_vote_0.png" id="img_{{ idea.id }}_0"/>
             {% else %} 
-            <a href="javascript:;" onclick="oyla({{ idea.id }}, 0);return false;"><img src="/media/img/new/ideas_vote_0.png" id="img_{{ idea.id }}_0"/></a>
+            <a href="javascript:;" onclick="oyla({{ idea.id }}, 0);return false;"><img alt="oylama" src="/media/img/new/ideas_vote_0.png" id="img_{{ idea.id }}_0"/></a>
             {% endifequal %}
             {% endifequal %}
         </div>
@@ -54,7 +54,7 @@
         </div>
         <div class="idea_content">{{ idea.description|safe }}</div>
         <div class="idea_comments">
-            <img src="/media/img/new/icon_comment.png" />
+            <img alt="Yorum Yap" src="/media/img/new/icon_comment.png" />
             <a href="{{ idea.comment_url }}" title="Yorumlar">
             {% if idea.comment_count  %}
                 {{ idea.comment_count }} tane yorum yapıldı.
