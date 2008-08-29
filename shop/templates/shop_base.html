@@ -7,6 +7,12 @@
 {% endblock %}
 {% block leftcolumn %}
 <div class="sidebarcolumn leftcolumn">
+    {% if user.is_authenticated %}
+    <div class="leftcolumn_content">
+        <div class="shop_category">Sepet</div>
+        {% get_cart user %}
+    </div>
+    {% endif %}
     <div class="leftcolumn_content">
         <div class="shop_category">Ürünler</div>
         {% category_tree %}

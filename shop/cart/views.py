@@ -44,7 +44,7 @@ def add_product_to_cart(request):
 def remove_item_from_cart(request):
     if request.method == "POST":
         cart = get_cart_for_user(request.user)
-        item = CartItem.objects.get(id=request.POST.get("quantity"),cart=cart)
+        item = CartItem.objects.get(id=request.POST.get("item_id"),cart=cart)
         cart.items.remove(item)
         item.delete()
         return HttpResponse("OK")
@@ -56,5 +56,5 @@ def get_cart(request):
     cart = get_cart_for_user(request.user)
     cart_html = ''
     for item in cart.items.all():
-        cart_html += '<div class="item"><div class="count">%d</div>' % item.quantity + '<div class="product">%s</div></div>' % (item.product,)
+        cart_html += '<div class="item"><div class="count">%d</div>' % item.quantity + '<div class="product">%s</div><div class="remove_form" ><form action="/dukkan/sepet/cikar/" method="POST"><input type="hidden" name="item_id" value="%s" /><input type="submit" /></form></div></div>' % (item.product, item.id)
     return HttpResponse(cart_html)
