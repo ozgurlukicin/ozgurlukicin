@@ -1,20 +1,9 @@
 {% extends "base.html" %}
-
 {% block title %}Pardus Dünyası - {% endblock %}
-
-{% block pagetype %}page{% endblock %}
-
-{% block section %}planet{% endblock %}
-
-{% block header_menu %}
-    {% include "header.html" %}
-{% endblock %}
-<br/>
-{% block ust_menu %}
-    {% include "ust_menu_ayrinti.html" %}
-{% endblock %}
-<br/>
-
+{% block extrahead %}
+    <style type="text/css" media="screen">@import url('/media/css/new/planet.css');</style>
+    <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+{% endblock %}}
 {% block content %}
 {% for item in object_list %}
   {% ifchanged %}
@@ -42,8 +31,6 @@
   </div>
 {% endfor %}
 {% endblock %}
-
-{% block sidebartop %}{%endblock%}
 
 {% block sidebar %}
 <div class="sidebar_box">
