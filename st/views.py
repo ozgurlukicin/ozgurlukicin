@@ -23,6 +23,7 @@ from oi.flatpages.models import FlatPage
 #for comments
 from django.contrib.auth.decorators import login_required
 from oi.forum.models import Forum,Topic,Post
+from oi.ideas.models import Idea
 from oi.forum.views import flood_control
 from django.http import HttpResponseRedirect
 
@@ -34,6 +35,7 @@ def home(request):
     packages = Package.objects.filter(status=True).order_by('-update')[:PACKAGES_IN_HOMEPAGE]
     games = Game.objects.filter(status=True).order_by('-update')[:GAMES_IN_HOMEPAGE]
     howtos = HowTo.objects.filter(status=True).order_by('-update')[:HOWTOS_IN_HOMEPAGE]
+    ideas = Idea.objects.all().order_by('-id')[:3]
     return render_response(request, 'home.html', locals())
 
 def fs_detail(request, slug):

@@ -24,13 +24,11 @@
             {% ifequal idea.user_vote 0 %} 
             <img alt="oylama" src="/media/img/new/ideas_vote{% ifequal idea.user_vote 1 %}d{% endifequal %}_1.png" id="img_{{ idea.id }}_1" />
             {% else %}
-            <a href="javascript:;" onclick="oyla({{ idea.id }}, 1);return false;"><img alt="oylama" src="/media/img/new/ideas_vote_1.png" id="img_{{ idea.id }}_1"/></a>
+            <a href="javascript:;" onclick="oyla({{ idea.id }}, 1);return false;"><img alt="oylama" src="/media/img/new/ideas_vote_1.png" id="img_{{ idea.id }}_1" /></a>
             {% endifequal %}
             {% endifequal %}
         </div>
-        <div class="idea_vote" id="vote{{ idea.id }}">
-            {{ idea.vote_count }}
-        </div>
+        <div class="idea_vote" id="vote{{ idea.id }}">{{ idea.vote_count }}</div>
         <div id="vote{{ idea.id }}_0">
             {% ifequal idea.user_vote 0 %}
             <a href="javascript:;" title="" onclick="oyiptal({{ idea.id }}, '0'); return false;"><img alt="oylama" src="/media/img/new/ideas_voted_0.png" id="img_{{ idea.id }}_0"/></a>

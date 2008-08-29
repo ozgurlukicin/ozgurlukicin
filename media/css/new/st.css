@@ -24,15 +24,15 @@ div.rightcolumn {
 div.leftcolumn_content {
     width: 100%;
     padding-bottom: 10px;
-    border-bottom: 1px #EAEAEA solid;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 div.leftcolumn_content p {
     font-size: 11px;
     color: #C9C9C9;
 }
-div.leftcolumn_content p.title {
+div.leftcolumn_content p.title a {
     color: #009FE0;
+    text-decoration: none;
 }
 div.rightcolumn_content {
     margin-left: 4px;

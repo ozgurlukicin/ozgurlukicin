@@ -31,19 +31,13 @@
             {% block leftcolumn_top %}
             {% endblock %}
             <div class="sidebarcolumn leftcolumn">
+                <h2>Beyin Fırtınası</h2>
+                {% for idea in ideas %}
                 <div class="leftcolumn_content">
-                    <h2>Beyin Fırtınası</h2>
-                    <p class="title">Change color of files in small nautilus when cutting.</p>
-                    <p>Change color of files in small nautilus when cutting. Change coChangChange color oChange</p>
+                    <p class="title"><a href="/yenifikir/ayrinti/{{ idea.id }}" title="{{ idea.title }}">{{ idea.title }}</a></p>
+                    <p>{{ idea.description|safe|truncatewords:22 }}</p>
                 </div>
-                <div class="leftcolumn_content">
-                    <p class="title">When I change file permissions they should be saved.</p>
-                    <p>When I change file permissions they should be saved...</p>
-                </div>
-                <div class="leftcolumn_content">
-                    <p class="title">Keep longer-term Add/remove and Synaptic in a popup screen interface statistics in network tools.</p>
-                    <p>Keep longer-term Add/remove and Synaptic in a popup screen interface statistics in network tools...</p>
-                </div>
+                {% endfor %}
             </div>
             {% block leftcolumn_bottom %}
             {% endblock %}
