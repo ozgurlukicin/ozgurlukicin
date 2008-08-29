@@ -42,11 +42,12 @@
     color: #009FE9;
     text-decoration: none;
 }
-.idea_right .h3 {
+.idea_right .h3, .idea_right .h3 a {
     font-size: 12px;
     color: #999;
     font-weight: 600;
     margin: 20px 0 20px 0;
+    text-decoration: none;
 }
 .idea_right .idea_content {
     font-size: 11px;

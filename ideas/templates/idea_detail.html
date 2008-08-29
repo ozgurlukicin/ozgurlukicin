@@ -1,9 +1,6 @@
 {% extends "idea_list.html" %}
 
 {% block idea %}
-{% if already_voted %}
-Zaten oy verdiniz.
-{% endif %}
 
 {% if duplicate_of %}
 <hr />
@@ -30,6 +27,12 @@ Zaten oy verdiniz.
             <a href="javascript:;" title="" onclick="{% ifequal idea.user_vote 1 %}oyiptal({{ idea.id }}, '0'){% else %}oyla({{ idea.id }}, '0'){% endifequal %}; return false;"><img src="/media/img/new/ideas_vote_0.png" /></a>
             {% endifequal %}
         </div>
+        <div id="favoricikar{{ idea.id }}" {% if not idea.is_favorited %}style="display:none;"{% endif %}>
+            <a href="/yenifikir/ayrinti/1/favori/cikar" onclick="favori({{ idea.id  }}, 'cikar');return false;"><img src="/media/img/new/ideas_favorited.png" alt="Fikir favorilerinize eklenmiş" /></a>
+        </div>
+        <div id="favoriekle{{ idea.id }}" {% if idea.is_favorited %}style="display:none;" {% endif %}>
+            <a href={% if user.is_authenticated %}"/yenifikir/ayrinti/1/favori/ekle" onclick="favori({{ idea.id }}, 'ekle'); return false;"{% else %}"/yenifikir/giris/yap"{% endif %}><img src="/media/img/new/ideas_favorite.png" alt="Favorilere ekle" /></a>
+        </div>
     </div>
     <div class="idea_right">
         <div class="h1"><a href="/yenifikir/ayrinti/{{ idea.id }}">{{ idea.title }}</a></div>
@@ -51,71 +54,62 @@ Zaten oy verdiniz.
             {% endif %}
             </a>
             {% block idea_detail %}{% endblock %}
-        </div> 
+        </div>
+
         <div class="tags"><span class="h3">Etiketler :</span>
-{% for tag in idea.tags.all %}
-        <a href="/yenifikir/listele/etiket/{{ tag.name }}" title="{{ tag.name }}">{{ tag.name }}</a>
-{% endfor %}
-</div>
-    <div class="h3">Hata kayıtları</div>
-      <br />
-  {% for bug in bugs %}
-  <a href="http://bugs.pardus.org.tr/show_bug.cgi?id={{ bug }}">{{ bug }}</a>
-  {% endfor %}
+        {% for tag in idea.tags.all %}
+            <a href="/yenifikir/listele/etiket/{{ tag.name }}" title="{{ tag.name }}">{{ tag.name }}</a>
+        {% endfor %}
+        </div>
 
-<div class="h3">İlgili Forum Bağlantısı</div>
-  <br />
-  <a href="{{ idea.forum_url }}">{{ idea.forum_url }}</a>
+    {% if bugs %}
+        <div class="h3">Hata kayıtları</div>
+        <div class='idea_detail_box'>
+        {% for bug in bugs %}
+        <a href="http://bugs.pardus.org.tr/show_bug.cgi?id={{ bug }}">#{{ bug }}</a> numaralı hata bu fikir ile ilgili<br />
+        {% endfor %}
+        </div>
+    {% endif %}
 
-
-<div class="h3">Bu fikrin aynısı olarak işaretlenen fikirler</div>
-<ul class='idea_detail_box'>
-{% for duplicate in duplicates %}
-<li><a href="/yenifikir/ayrinti/{{ duplicate.id }}"><strong>#{{ duplicate.id }}</strong> {{ duplicate.title }}</a> ({{ duplicate.vote_count }} oy)</li>
-{% endfor %}
-</ul>
+    {% if idea.forum_url %}
+        <div class="h3">İlgili Forum Bağlantısı</div>
+        <ul class='idea_detail_box'>
+            <li><a href="{{ idea.forum_url }}">{{ idea.forum_url }}</a></li>
+        </ul>
+    {% endif %}
+    {% if duplicates %}
+        <div class="h3">Bu fikrin aynısı olarak işaretlenen fikirler</div>
+        <ul class='idea_detail_box'>
+        {% for duplicate in duplicates %}
+            <li><a href="/yenifikir/ayrinti/{{ duplicate.id }}"><strong>#{{ duplicate.id }}</strong> {{ duplicate.title }}</a> ({{ duplicate.vote_count }} oy)</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    <div class="h3"><a href="javascript:;" onclick="$('#tekrarform').toggle(); return false;">Fikir Tekrarı Bildir</a></div>
+    <div class="idea_detail_box" style="display: none;" id="tekrarform"> 
+        <form  method="post" action="javascript:;">
+        <p>Bu fikrin aynısını daha önce görmüşmüydünüz ? O zaman fikir tekrarını bildirerek bize yardımcı olun! </p>
+        Fikir numarası :<input type="text" name="duplicate_id" id="duplicate_id" size="4" />
+        <input type="submit" value="Bildir" onclick="duplicate({{ idea.id }})" id="dup_submit" /><br />
+        <span id="duplicate_form_info"></span>
+        </form>
     </div>
-    <div style="clear:both"></div>
+    <div class="h3"><a href="javascript:;" onclick="$('#changeStatusForm').toggle();">Fikir durumunu değiştir</a></div>
+    <div class="idea_detail_box" style="display: none;" id="changeStatusForm">
+    <form method="POST" action="javascript:;">
+        <select name="id_status" id="id_status">
+            <option value="">---------</option>
+            {% for status in statusform %}
+                <option value="{{ status.id }}">{{ status.name }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Değiştir" onclick="changeStatus({{ idea.id }})" />
+        <span id="status_form_info"></span>
+    </form>
+    </div>
+
 </div>
-
-
-<h2 id="favoricikar{{ idea.id }}" {% if not idea.is_favorited %}style="display:none;"{% endif %}>
-<a href="/yenifikir/ayrinti/1/favori/cikar" onclick="favori({{ idea.id  }}, 'cikar');return false;">favorilerimden çıkar</a>
-</h2>
-<h2 id="favoriekle{{ idea.id }}" {% if idea.is_favorited %}style="display:none;" {% endif %}>
-<a href=
-{% if user.is_authenticated %}
-"/yenifikir/ayrinti/1/favori/ekle" onclick="favori({{ idea.id }}, 'ekle'); return false;"
-{% else %}
-"/yenifikir/giris/yap"
-{% endif %}
->favorile</a>
-</h2>
-
-
-<p><a href="javascript:;" onclick="$('#tekrarform').toggle(); return false;">Bu fikir başka bir fikrin tekrarı</a></p>
-<form id="tekrarform" style="display:none;" method="post" action="javascript:;">
-<p>Bu fikrin aynısını daha önce görmüşmüydünüz ? O zaman fikir tekrarını bildirerek bize yardımcı olun! </p>
-Fikir numarası :<input type="text" name="duplicate_id" id="duplicate_id" size="4" />
-<input type="submit" value="Bildir" onclick="duplicate({{ idea.id }})" id="dup_submit" /><br />
-<span id="duplicate_form_info"></span>
-</form>
-
-<hr />
-Fikir durumunu değiştir:
-<form method="POST" action="javascript:;">
-    <select name="id_status" id="id_status">
-    <option value="">---------</option>
-    {% for status in statusform %}
-    <option value="{{ status.id }}">{{ status.name }}</option>
-    {% endfor %}
-    </select>
-    <input type="submit" value="Değiştir" onclick="changeStatus({{ idea.id }})" />
-    <span id="status_form_info"></span>
-</form>
-
-
-
-
+<div style="clear:both"></div>
+</div>
 
 {% endblock %}
