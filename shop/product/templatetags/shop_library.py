@@ -60,5 +60,5 @@ def get_cart(user):
     cart = get_cart_for_user(user)
     cart_html = ''
     for item in cart.items.all():
-        cart_html += '<div class="item"><div class="count">%d</div>' % item.quantity + '<div class="product">%s</div><div class="remove_form" ><form action="/dukkan/sepet/cikar/" method="POST"><input type="hidden" name="item_id" value="%s" /><input type="submit" value="Sepetten Çıkar" /></form></div></div>' % (item.product, item.id)
+        cart_html += '<div class="item%d"><div class="count">%d</div>' % (item.id, item.quantity) + '<div class="product">%s</div><div class="remove_form" ><form action="/dukkan/sepet/cikar/" method="POST"><input type="hidden" name="item_id" value="%s" /><input type="submit" value="Sepetten Çıkar" /></form></div></div>' % (item.product, item.id)
     return cart_html
