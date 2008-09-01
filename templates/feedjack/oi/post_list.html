@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Pardus Dünyası - {% endblock %}
 {% block extrahead %}
-    <style type="text/css" media="screen">@import url('/media/css/new/planet.css');</style>
     <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+    <style type="text/css" media="screen">@import url('/media/css/new/planet.css');</style>
 {% endblock %}}
 {% block content %}
 {% for item in object_list %}
@@ -32,67 +32,40 @@
 {% endfor %}
 {% endblock %}
 
-{% block sidebar %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>Kurallar</h2>
-        <a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a>
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
-
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>Yazarlar</h2>
+{% block leftcolumn %}
+<div class="sidebarcolumn leftcolumn">
+    <h2>Yazarlar</h2>
+    <div class="leftcolumn_content">
         <ul class="sidebar_subscribers">
         {% for feed in subscribers %}
-            <li><a href="{{ feed.feed.feed_url }}"><a href="{{ site.url }}/user/{{ feed.feed.id }}">{{ feed.name }}</a></li>
+        <li><span class="bullet">»</span> <a href="{{ feed.feed.feed_url }}"><a href="{{ site.url }}/user/{{ feed.feed.id }}">{{ feed.name }}</a></li>
         {% endfor %}
         </ul>
     </div>
-    <div class="sidebar_bottom">&nbsp;</div>
 </div>
-
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>Son güncelleme</h2>
-        {{ last_modified }}
+{% endblock %}
+{% block rightcolumn_bottom %}
+    <div class="rightcolumn_content">
+        <h2>Kurallar</h2>
+        <ul>
+            <li><span class="bullet">»</span> <a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a></li>
+        </ul>
     </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
-
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
+    <div class="rightcolumn_content">
         <h2>Feed</h2>
         <a href="/rss/gezegen/" title="RSS 2.0 feed"><img src="/media/dijital/img/bt_rss.jpg"/></a>
         <a href="/atom/gezegen/" title="Atom 1.0 feed"><img src="/media/img/atom.png"/></a>
     </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
-
 {% if site.links %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
+    <div class="rightcolumn_content">
         <h2>Diğer gezegenler&nbsp;&nbsp;&nbsp;<img src="/media/dijital/img/diger_gez.png" /></h2>
-        <ul class="sidebar_planets">
-            {% for link in site.links.all %}<li><a href="{{ link.link }}">{{ link.name }}</a></li>{% endfor %}
+        <ul>
+            {% for link in site.links.all %}<li><span class="bullet">»</span> <a href="{{ link.link }}">{{ link.name }}</a></li>{% endfor %}
         </ul>
     </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
 {% endif %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>Özgürlükiçin E-Dergisi</h2>
-        <a href="/e-dergi/"><img src="/media/img/oi-edergi-4-kapak.jpg" alt="e-dergi" /></a>
-        Özgürlükiçin'in şimdi bir de e-dergisi var! Okumak için <a href="/e-dergi/">buraya</a> tıklayın.
+    <div class="rightcolumn_content">
+        <h2>Son güncelleme</h2>
+        <p>{{ last_modified }}</p>
     </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
 {% endblock %}
