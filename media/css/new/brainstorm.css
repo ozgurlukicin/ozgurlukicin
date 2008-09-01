@@ -121,3 +121,6 @@
     color: #666;
     text-decoration: none;
 }
+.cursor_default {
+    cursor: default;
+}
