@@ -7,7 +7,7 @@
 {% block content %}
 {% for item in object_list %}
   {% ifchanged %}
-  <div class="planet_date siyah">{{ item.date_modified|date:"j F" }}</div>
+  <div class="planet_date"><div class="day">{{ item.date_modified|date:"j" }}</div><div class="month">{{ item.date_modified|date:"M" }}</div></div>
   {% endifchanged %}
 
   <div class="post">

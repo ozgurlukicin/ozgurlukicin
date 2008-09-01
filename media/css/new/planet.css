@@ -12,3 +12,20 @@ span.bullet {
     font-size: 9px;
     font-family: "Arial";
 }
+.planet_date {
+    float: right;
+    width: 45px;
+    height: 45px;
+    background-color: #009FE0;
+    text-align: center;
+    font-weight: bold;
+    margin-right: 4px;
+}
+.planet_date .day {
+    color: white;
+    font-size: 23px;
+}
+.planet_date .month {
+    color: #AAD1EE;
+    font-size: 15px;
+}
