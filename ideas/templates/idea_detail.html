@@ -1,3 +1,5 @@
+#ifndef IDEAS/TEMPLATES/IDEA_DETAIL_HTML
+#define IDEAS/TEMPLATES/IDEA_DETAIL_HTML
 {% extends "idea_list.html" %}
 
 {% block idea %}
@@ -17,7 +19,7 @@
         {% endfor %}
         </div>
 
-    {% if bugs %}
+        {% if idea.bug_numbers %}
         <div class="h3">Hata kayıtları</div>
         <div class='idea_detail_box'>
         {% for bug in bugs %}
@@ -67,3 +69,4 @@
 </div>
 
 {% endblock %}
+#endif // IDEAS/TEMPLATES/IDEA_DETAIL_HTML

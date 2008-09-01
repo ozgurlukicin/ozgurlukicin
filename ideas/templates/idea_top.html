@@ -6,6 +6,12 @@
         <div id="vote{{ idea.id }}_0">
             <input id="img_{{ idea.id }}_0" type="image" src="/media/img/new/ideas_vote{% ifequal idea.user_vote 0 %}d{% endifequal %}_0.png" onclick="oyla({{ idea.id }}, 0);" {% ifequal idea.user_vote 0 %}class="voted"{% else %}{% ifequal idea.user_vote 1 %}class="cursor_default" disabled="disabled"{% endifequal %}{% endifequal %} />
         </div>
+        <div id="favoricikar{{ idea.id }}" {% if not idea.is_favorited %}style="display:none;"{% endif %}>
+            <a href="/yenifikir/ayrinti/1/favori/cikar" onclick="favori({{ idea.id  }}, 'cikar');return false;"><img src="/media/img/new/ideas_favorited.png" alt="Fikir favorilerinize eklenmiş" /></a>
+        </div>
+        <div id="favoriekle{{ idea.id }}" {% if idea.is_favorited %}style="display:none;" {% endif %}>
+            <a href={% if user.is_authenticated %}"/yenifikir/ayrinti/1/favori/ekle" onclick="favori({{ idea.id }}, 'ekle'); return false;"{% else %}"/yenifikir/giris/yap"{% endif %}><img src="/media/img/new/ideas_favorite.png" alt="Favorilere ekle" /></a>
+        </div>
     </div>
     <div class="idea_right">
         <div class="h1"><a href="/yenifikir/ayrinti/{{ idea.id }}">{{ idea.title }}</a></div>
