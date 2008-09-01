@@ -49,6 +49,10 @@ span.bullet {
     color: #999999;
     font-size: 11px;
 }
+.post .content p {
+    display: block;
+    margin-bottom: 16px;
+}
 .content .author {
     float: left;
     width: 80px;
