@@ -1,12 +1,10 @@
-#ifndef IDEAS/TEMPLATES/IDEA_DETAIL_HTML
-#define IDEAS/TEMPLATES/IDEA_DETAIL_HTML
 {% extends "idea_list.html" %}
 
 {% block idea %}
 
 {% if duplicate_of %}
 <hr />
-<h3>Bu fikir <a href="/yenifikir/ayrinti/{{ duplicate_of.id }}">#{{ duplicate_of.id }}</a> numaralı hatanın aynısı</h3>
+<h3>Bu fikir <a href="{{ duplicate_of.get_absolute_url }}">#{{ duplicate_of.id }}</a> numaralı hatanın aynısı</h3>
 <hr />
 {% endif %}
 
@@ -38,7 +36,7 @@
         <div class="h3">Bu fikrin aynısı olarak işaretlenen fikirler</div>
         <ul class='idea_detail_box'>
         {% for duplicate in duplicates %}
-            <li><a href="/yenifikir/ayrinti/{{ duplicate.id }}"><strong>#{{ duplicate.id }}</strong> {{ duplicate.title }}</a> ({{ duplicate.vote_count }} oy)</li>
+            <li><a href="{{ duplicate.get_absolute_url }}"><strong>#{{ duplicate.id }}</strong> {{ duplicate.title }}</a> ({{ duplicate.vote_count }} oy)</li>
         {% endfor %}
         </ul>
     {% endif %}
@@ -69,4 +67,3 @@
 </div>
 
 {% endblock %}
-#endif // IDEAS/TEMPLATES/IDEA_DETAIL_HTML

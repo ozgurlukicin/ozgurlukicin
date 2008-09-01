@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="idea_right">
-        <div class="h1"><a href="/yenifikir/ayrinti/{{ idea.id }}">{{ idea.title }}</a></div>
+        <div class="h1"><a href="{{ idea.get_absolute_url }}">{{ idea.title }}</a></div>
         <span class="idea_status">&nbsp;{{ idea.status }}&nbsp;</span>
         <div class="idea_info">
             <a href="{{ idea.submitter.get_profile.get_absolute_url }}" title="{{ idea.submitter }} kullanıcısının profiline git">{{ idea.submitter }}</a>
