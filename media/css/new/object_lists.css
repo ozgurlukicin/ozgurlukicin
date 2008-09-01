@@ -17,7 +17,7 @@ div.summary_container div.first {
 div.summary_container div.column img {
     max-width: 153px;
 }
-div.summary_container div.column div.title { height: 61px; }
+div.summary_container div.column div.title { margin-bottom: 5px; }
 div.summary_container div.column div.title a {
     font-size: 17px;
     color: #009FE9;
