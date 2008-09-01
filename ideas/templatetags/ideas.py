@@ -6,6 +6,8 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.template import Library
+from django.template.defaultfilters import truncatewords_html
+
 from oi.ideas.models import Idea
 from oi.ideas.settings import IDEAS_IN_HOMEPAGE
 
@@ -17,4 +19,4 @@ def idea_list():
     html = ''
     for idea in ideas:
         html += '<div class="leftcolumn_content"><p class="title"><a href="%s">%s</a></p><p>%s</p></div>' % (idea.get_absolute_url(), idea.title, idea.description)
-    return html
+    return truncatewords_html(html, 22)
