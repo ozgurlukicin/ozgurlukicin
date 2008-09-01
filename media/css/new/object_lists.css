@@ -15,7 +15,7 @@ div.summary_container div.first {
     margin-right: 9px;
 }
 div.summary_container div.column img {
-    width: 153px;
+    max-width: 153px;
 }
 div.summary_container div.column div.title { height: 61px; }
 div.summary_container div.column div.title a {
