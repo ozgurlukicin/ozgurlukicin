@@ -1,4 +1,5 @@
 {% load petition %}
+{% load ideas %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -33,10 +34,7 @@
             <div class="sidebarcolumn leftcolumn">
                 <h2>Beyin Fırtınası</h2>
                 {% for idea in ideas %}
-                <div class="leftcolumn_content">
-                    <p class="title"><a href="/yenifikir/ayrinti/{{ idea.id }}" title="{{ idea.title }}">{{ idea.title }}</a></p>
-                    <p>{{ idea.description|safe|truncatewords:22 }}</p>
-                </div>
+                {% idea_list %}
                 {% endfor %}
             </div>
             {% block leftcolumn_bottom %}
