@@ -6,29 +6,24 @@
 {% endblock %}}
 {% block content %}
 {% for item in object_list %}
-  {% ifchanged %}
-  <div class="planet_date"><div class="day">{{ item.date_modified|date:"j" }}</div><div class="month">{{ item.date_modified|date:"M" }}</div></div>
-  {% endifchanged %}
-
-  <div class="post">
-  {% if item.title %}
-  <div class="planet_title"><a href="{{ item.link }}">{{ item.title|safe }}</a></div>
-  {% else %}
-  <div class="planet_title siyah"><a href="{{ item.link }}">{{ item.subscriber.name }}</a></div>
-  {% endif %}
-  <div class="planet_content grey">
-    <div class="planet_author">
-        <img src="/media/hackergotchi/{{ item.subscriber.shortname }}.png" border="0" alt="{{ item.subscriber.name }}" />
-        <div style="margin-top: 6px;"><a href="{{ item.feed.link }}">{{ item.subscriber.name }}</a></div>
+<div class="post">
+    {% ifchanged %}
+    <div class="date"><div class="day">{{ item.date_modified|date:"j" }}</div><div class="month">{{ item.date_modified|date:"M" }}</div></div>
+    {% endifchanged %}
+    <div class="title"><a href="{{ item.link }}">{% if item.title %}{{ item.title|safe }}{% else %}{{ item.subscriber.name }}{% endif %}</a></div>
+    <div class="tags">
+        {% if item.qtags %}<img src="/media/img/new/tag.png" alt="etiket" />
+        {% for tag in item.qtags %}<a href="{{ site.url }}/tag/{{ tag.name }}">{{ tag.name }}</a> {% endfor %}
+        {% endif %}
     </div>
-    <div class="planet_meta">
-      {% if item.qtags %}<img src="/media/img/tag.png" border="0" style="vertical-align: middle;" />
-          {% for tag in item.qtags %}<a href="{{ site.url }}/tag/{{ tag.name }}">{{ tag.name }}</a> {% endfor %}
-      {% endif %}
+    <div class="content">
+        <div class="author">
+            <div class="avatar"><img src="/media/hackergotchi/{{ item.subscriber.shortname }}.png" alt="{{ item.subscriber.name }}" /></div>
+            <div class="name"><a href="{{ item.feed.link }}">{{ item.subscriber.name }}</a></div>
+        </div>
+        {{ item.content|safe }}
     </div>
-    <p>{{ item.content|safe }}</p>
-  </div>
-  </div>
+</div>
 {% endfor %}
 {% endblock %}
 
