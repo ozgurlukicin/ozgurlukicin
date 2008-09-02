@@ -18,29 +18,39 @@ def list(request, field="", filter_slug=""):
     if field == 'kategori':
         category_id = get_object_or_404(Category, slug = filter_slug)
         ideas = ideas.filter(category=category_id)
+        page_title = "%s kategorisindeki fikirler" % filter_slug
     elif field == 'etiket':
         ideas = ideas.filter(tags__name__exact=filter_slug)
+        page_title = "%s etiketli fikirler" % filter_slug
     elif field == 'ilgili':
         related_id = get_object_or_404(Related, name  = filter_slug)
         ideas = ideas.filter(related_to=related_id)
+        page_title = "%s ile ilgili fikirler" % filter_slug
     elif field == 'ekleyen':
         submitter_id = get_object_or_404(User, username = filter_slug)
         ideas = ideas.filter(submitter = submitter_id)
+        page_title = "%s tarafından eklenen fikirler" % filter_slug
     elif field == 'populer':
         if filter_slug == 'bugun':
             ideas = ideas.filter(submitted_date__gt=datetime.datetime.now()-datetime.timedelta(1))
+            page_title = "Bugünkü popüler fikirler"
         elif filter_slug == 'buhafta':
             ideas = ideas.filter(submitted_date__gt=datetime.datetime.now()-datetime.timedelta(7))
+            page_title = "Bu haftaki popüler fikirler"
         elif filter_slug == 'buay':
             ideas = ideas.filter(submitted_date__gt=datetime.datetime.now()-datetime.timedelta(30))
+            page_title = "Bu ayki popüler fikirler"
         elif filter_slug == 'tumzamanlar':
             ideas = ideas
+            page_title = "Tüm zamanların popüler fikirleri"
     elif field == 'son':
         if filter_slug =='yorumlar':
             ideas = Idea.objects.all()
         elif filter_slug == 'eklenen':
             ideas = ideas.order_by("-submitted_date")
+            page_title = "Son eklenen fikirler"
     elif field == 'favori' and filter_slug == 'fikirler':
+        page_title = "Favori fikirleriniz"
         try:
             favorites = Favorite.objects.filter(user=request.user.id)
             ideas = []
@@ -66,7 +76,7 @@ def list(request, field="", filter_slug=""):
                 except ObjectDoesNotExist:
                     pass
                 try:
-                    topic = Topic.objects.filter(title=idea.title)[0]
+                    topic = Topic.objects.filter(title=idea.title)
                     idea.comment_count = topic.posts
                     idea.comment_url = topic.get_latest_post_url()
                 except:
@@ -95,12 +105,13 @@ def detail(request, idea_id):
         idea.comments_count = topic.posts - 1
         idea.comments_url = topic.get_latest_post_url()
     except:
-        idea.comments_count = 0
+        pass
     idea.save()
     statusform = Status.objects.all()
     duplicates = Idea.objects.filter(duplicate=idea)
     duplicate_of = idea.duplicate
     bugs = idea.bug_numbers.replace(" ","").split(",")
+    page_title = "Fikir detayları"
     return render_response(request, "idea_detail.html", locals())
 
 def add(request):
@@ -164,6 +175,7 @@ def add(request):
     else:
         form = NewIdeaForm(auto_id=True)
 
+    page_title = "Yeni Fikir Ekle"
     return render_response(request, "idea_add_form.html", locals())
 
 @login_required
