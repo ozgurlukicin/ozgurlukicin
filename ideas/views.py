@@ -76,8 +76,8 @@ def list(request, field="", filter_slug=""):
                 except ObjectDoesNotExist:
                     pass
                 try:
-                    topic = Topic.objects.filter(title=idea.title)
-                    idea.comment_count = topic.posts
+                    topic = Topic.objects.filter(title=idea.title)[0]
+                    idea.comment_count = topic.posts - 1
                     idea.comment_url = topic.get_latest_post_url()
                 except:
                     idea.comment_count = 0
@@ -168,8 +168,11 @@ def add(request):
                         text=post_text)
             post.save()
             topic.topic_latest_post = post
+            topic.posts = 1
             topic.save()
             topic.forum.forum_latest_post = post
+            topic.forum.topics += 1
+            topic.forum.posts += 1
             topic.forum.save()
             return HttpResponseRedirect(newidea.get_absolute_url())
     else:
@@ -194,6 +197,7 @@ def vote_idea(request, idea_id, vote):
         voted.save()
     return HttpResponse("OK%s" % str(idea.vote_count))
 
+@login_required
 def delete_vote(request, idea_id):
     idea = Idea.objects.get(pk=idea_id)
     try:
@@ -208,6 +212,7 @@ def delete_vote(request, idea_id):
     except ObjectDoesNotExist:
         return HttpResponse(str(idea.vote_count))
 
+@login_required
 def add_favorite(request, idea_id):
     idea = Idea.objects.get(pk=idea_id)
     try:
@@ -218,6 +223,7 @@ def add_favorite(request, idea_id):
         favorite.save()
     return HttpResponse("OK")
 
+@login_required
 def del_favorite(request, idea_id):
     idea = Idea.objects.get(pk=idea_id)
     favorite = Favorite.objects.get(user=request.user, idea=idea_id)
