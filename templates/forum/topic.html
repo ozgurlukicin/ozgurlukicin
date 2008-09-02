@@ -145,7 +145,7 @@
         <div><a href="{{ topic.get_reply_url }}"><img src="/media/img/new/forum/button_reply.png" alt="Yanıtla" /></a></div>
     {% endif %}
     {% if perms.forum.can_lock_topic and topic.locked %}
-        <div><a href="{{ topic.get_lock_url }}"><img src="/media/img/forum/new/button_unlock_topic.png" alt="Kilidi kaldır" /></a></div>
+        <div><a href="{{ topic.get_lock_url }}"><img src="/media/img/new/forum/button_unlock_topic.png" alt="Kilidi kaldır" /></a></div>
     {% endif %}
     {% if perms.forum.can_merge_topic %}
     <div><a href="{{ topic.get_merge_url }}"><img src="/media/img/new/forum/button_merge_topic.png" alt="Başlığı Birleştir" /></a></div>
