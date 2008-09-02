@@ -209,6 +209,21 @@ class Topic(models.Model):
     def get_email_id(self):
         return '<%s.%s@%s>' % (md5.new(self.title).hexdigest(), self.id, FORUM_FROM_EMAIL.split('@')[1])
 
+    # <a title="...."> for tooltip. Just get a short context of first post on the topic.
+    def get_tooltip_context(self):
+        from django.utils.html import strip_tags
+
+        post = Post.objects.filter(topic=self)
+        # we should get the last element of an array
+        # negative indexing is not supported so we just get it through "post.count()-1"
+        context = strip_tags(post[post.count()-1].text)
+
+        if len(context) > 160:
+            # if it has more than 160 chars, append "..." to the end
+            return context[:160] + '...'
+        else:
+            return context
+
     class Admin:
         list_display = ('forum', 'title', 'sticky', 'locked', 'hidden')
 

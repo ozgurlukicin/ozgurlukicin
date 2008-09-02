@@ -9,4 +9,12 @@ $(function(){
             showURL: false,
             fade: 350
         });
+    // Tooltip for forum
+        $(".topic_title a").tooltip({
+            delay: 0,
+            track: true,
+            showURL: false,
+            extraClass: "pretty",
+            fade: 400
+        });
     });

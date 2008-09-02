@@ -1,7 +1,7 @@
 #tooltip {
     position: absolute;
     z-index: 3000;
-    border: 1px solid #2394D5;
+    border: 1px solid #D3D3D3;
     background-color: #DFDFDF;
     padding: 5px;
     opacity: 0.65;
@@ -12,6 +12,26 @@
 #tooltip h3, #tooltip div { 
     margin: 0;
     font-size: 8px;
+    color: #225476;
+    text-decoration: none;
+}
+
+#tooltip.pretty {
+    font-family: Georgia, Arial, Tahoma;
+    border: 1 px solid #D3D3D3;
+    width: 320px;
+    padding: 5px;
+    height: 45px;
+    opacity: 0.65;
+}
+
+#tooltip.pretty div {
+    text-align: left
+}
+
+#tooltip.pretty h3 {
+    margin: 0;
+    font-size: 10px;
     color: #225476;
     text-decoration: none;
 }
