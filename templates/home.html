@@ -7,9 +7,9 @@
 <script type="text/javascript" src="/media/js/home.js"></script>
 {% endblock %}
 {% block content %}
-    <a href="#" onclick="prev_news()" id="prev">önceki</a> <a href="#" onclick="next_news()" id="next">sonraki</a> <span id="news_count">1</span> / 5
+    <a href="javascript:;" onclick="change_news(-1)" id="prev">önceki</a> <a href="javascript:;" onclick="change_news(1)" id="next">sonraki</a> <span id="news_count">1</span> / 5
     {% for news in news %}
-    <div class="news_container{% if forloop.first %} active"{% else %}" style="display: none;"{% endif %}>
+    <div id="news_{{ forloop.counter }}" class="news_container{% if forloop.first %} active"{% else %}" style="display: none;"{% endif %}>
         <div class="column">
             <img src="{{ news.image.get_file_url }}" alt="{{ news.image.get_alt_string }}" />
             <span>Haberler</span>
