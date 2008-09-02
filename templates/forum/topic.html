@@ -140,40 +140,39 @@
 </div>
 {% endif %}
 {% endfor %}
-
 <div id="post_bottom">
     {% if not topic.locked %}
-        <div class="post_bottom_small"><a href="{{ topic.get_reply_url }}"><img src="/media/img/new/forum/button_reply.png" alt="Yanıtla" /></a></div>
+        <div><a href="{{ topic.get_reply_url }}"><img src="/media/img/new/forum/button_reply.png" alt="Yanıtla" /></a></div>
     {% endif %}
     {% if perms.forum.can_lock_topic and topic.locked %}
-        <div class="post_bottom_big"><a href="{{ topic.get_lock_url }}"><img src="/media/img/forum/new/button_unlock_topic.png" alt="Kilidi kaldır" /></a></div>
+        <div><a href="{{ topic.get_lock_url }}"><img src="/media/img/forum/new/button_unlock_topic.png" alt="Kilidi kaldır" /></a></div>
     {% endif %}
     {% if perms.forum.can_merge_topic %}
-    <div class="post_bottom_big"><a href="{{ topic.get_merge_url }}"><img src="/media/img/new/forum/button_merge_topic.png" alt="Başlığı Birleştir" /></a></div>
+    <div><a href="{{ topic.get_merge_url }}"><img src="/media/img/new/forum/button_merge_topic.png" alt="Başlığı Birleştir" /></a></div>
     {% endif %}
     {% if perms.forum.can_move_topic %}
-        <div class="post_bottom_big"><a href="{{ topic.get_move_url }}"><img src="/media/img/new/forum/button_move_topic.png" alt="Başlığı Taşı" /></a></div>
+        <div><a href="{{ topic.get_move_url }}"><img src="/media/img/new/forum/button_move_topic.png" alt="Başlığı Taşı" /></a></div>
     {% endif %}
     {% if perms.forum.can_hide_topic and not topic.hidden %}
-        <div class="post_bottom_small"><a href="{{ topic.get_hide_url }}"><img src="/media/img/new/forum/button_hide_topic.png" alt="Başlığı Gizle" /></a></div>
+        <div><a href="{{ topic.get_hide_url }}"><img src="/media/img/new/forum/button_hide_topic.png" alt="Başlığı Gizle" /></a></div>
     {% endif %}
     {% if perms.forum.can_hide_topic and topic.hidden %}
-        <div class="post_bottom_small"><a href="{{ topic.get_hide_url }}"><img src="/media/img/new/forum/button_show_topic.png" alt="Başlığı Göster" /></a></div>
+        <div><a href="{{ topic.get_hide_url }}"><img src="/media/img/new/forum/button_show_topic.png" alt="Başlığı Göster" /></a></div>
     {% endif %}
     {% if perms.forum.can_stick_topic and not topic.sticky %}
-        <div class="post_bottom_big"><a href="{{ topic.get_stick_url }}"><img src="/media/img/new/forum/button_stick_topic.png" alt="Sabitle" /></a></div>
+        <div><a href="{{ topic.get_stick_url }}"><img src="/media/img/new/forum/button_stick_topic.png" alt="Sabitle" /></a></div>
     {% endif %}
     {% if perms.forum.can_stick_topic and topic.sticky %}
-    <div class="post_bottom_big"><a href="{{ topic.get_stick_url }}"><img src="/media/img/new/forum/button_unstick_topic.png" alt="Sabitliği Kaldır" /></a></div>
+    <div><a href="{{ topic.get_stick_url }}"><img src="/media/img/new/forum/button_unstick_topic.png" alt="Sabitliği Kaldır" /></a></div>
     {% endif %}
     {% if perms.forum.can_lock_topic and not topic.locked %}
-        <div class="post_bottom_big"><a href="{{ topic.get_lock_url }}" img src="/media/img/new/forum/button_lock_topic.png" alt="Başlığı Kilitle" /></a></div>
+        <div><a href="{{ topic.get_lock_url }}" img src="/media/img/new/forum/button_lock_topic.png" alt="Başlığı Kilitle" /></a></div>
     {% endif %}
     {% if perms.forum.change_topic %}
-        <div class="post_bottom_big"><a href="{{ topic.get_edit_url }}"><img src="/media/img/new/forum/button_edit_topic.png" alt="Başlığı Düzenle" /></a></div>
+        <div><a href="{{ topic.get_edit_url }}"><img src="/media/img/new/forum/button_edit_topic.png" alt="Başlığı Düzenle" /></a></div>
     {% endif %}
-    {% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div></div>{% endif %}
 </div>
+    {% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div></div>{% endif %}
 <div class="topbar">
     <div class="navigation"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; <a href="{{ topic.get_absolute_url }}" class="bold">{{ topic.title }}</a></div>
 </div>

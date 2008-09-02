@@ -126,3 +126,10 @@ div.topic_news_box a {
     color: #2B8DD4;
     text-decoration: none;
 }
+#post_bottom {
+    margin: 10px 4px 10px 0px;
+}
+#post_bottom div {
+    float: right;
+    margin-left: 4px;
+}
