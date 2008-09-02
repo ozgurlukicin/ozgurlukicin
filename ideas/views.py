@@ -118,6 +118,7 @@ def detail(request, idea_id):
     duplicates = Idea.objects.filter(duplicate=idea)
     duplicate_of = idea.duplicate
     bugs = idea.bug_numbers.replace(" ","").split(",")
+    categories = Category.objects.all()
     page_title = "Fikir detayları"
     return render_response(request, "idea_detail.html", locals())
 
@@ -186,6 +187,7 @@ def add(request):
         form = NewIdeaForm(auto_id=True)
 
     page_title = "Yeni Fikir Ekle"
+    categories = Category.objects.all()
     return render_response(request, "idea_add_form.html", locals())
 
 @login_required
