@@ -50,6 +50,7 @@
         <h2><a href="/forum/son-iletiler/">Son İletiler</a></h2>
         <h2>Son Anketler</h2>
     </div>
+    <div class="latest">
     <div class="latest_container rightborder">
     {% for post in latest_posts %}
         <div class="post">
@@ -70,8 +71,9 @@
         </div>
         {% endfor %}
     </div>
+    </div>
+    <div class="titlebar"><h2>İstatistikler</h2></div>
 </div>
-<div class="category_title">İstatistikler</div>
 <div id="forum_stats">
     <div id="forum_stats_left">
         Tarih: {{ currentdate|date:"d F Y H:i" }}<br />

@@ -17,6 +17,9 @@
     border-right: 1px #F2F2F2 solid;
     margin-right: 4px;
 }
+.latest {
+    overflow: hidden;
+}
 .latest_container {
     font-size: 11px;
     color: #666666;
