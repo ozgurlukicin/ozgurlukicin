@@ -213,10 +213,10 @@ class Topic(models.Model):
     def get_tooltip_context(self):
         from django.utils.html import strip_tags
 
-        post = Post.objects.filter(topic=self)
+        posts = Post.objects.filter(topic=self)
         # we should get the last element of an array
         # negative indexing is not supported so we just get it through "post.count()-1"
-        context = strip_tags(post[post.count()-1].text)
+        context = strip_tags(posts[posts.count()-1].text)
 
         if len(context) > 160:
             # if it has more than 160 chars, append "..." to the end
