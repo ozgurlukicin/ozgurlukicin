@@ -102,6 +102,13 @@ def detail(request, idea_id):
 
     try:
         topic = Topic.objects.filter(title=idea.title)[0]
+        idea.comment_count = topic.posts - 1
+        idea.comment_url = topic.get_latest_post_url()
+    except:
+        idea.comment_count = 0
+
+    try:
+        topic = Topic.objects.filter(title=idea.title)[0]
         idea.comments_count = topic.posts - 1
         idea.comments_url = topic.get_latest_post_url()
     except:
