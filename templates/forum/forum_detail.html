@@ -5,6 +5,7 @@
     {% if not topic.hidden %}<link rel="alternate" type="application/rss+xml" title="{{topic.title}} - Özgürlükİçin Forum" href="/forum/rss/topic/{{ topic.id }}" />{% endif %}
     {% endfor %}
     <style type="text/css" media="screen">@import url('/media/css/new/forum_list.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/forum_paginator.css');</style>
 {% endblock %}
 {% block content %}
 <div class="topbar" >
@@ -49,8 +50,6 @@
     </div>
 </div>
 <div id="post_bottom">
-{% if is_paginated %}
-    <div class="post_pagination">{% paginator %}</div>
-{% endif %}
+{% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div></div>{% endif %}
 </div>
 {% endblock %}
