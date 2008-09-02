@@ -11,7 +11,7 @@
 <div class="topbar">
     <div class="navigation"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; <a href="{{ topic.get_absolute_url }}" class="bold">{{ topic.title }}</a></div>
     {% if request.user.is_authenticated and not watching %}
-    <div class="notice"><a href="{{ topic.get_follow_url }}"><img src="/media/dijital/img/new/forum/button_follow.png" alt="izle" title="E-posta ile izle" /></a></div>
+    <div class="notice"><a href="{{ topic.get_follow_url }}"><img src="/media/img/new/forum/button_follow.png" alt="izle" title="E-posta ile izle" /></a></div>
     {% endif %}
     {% if perms.forum.can_create_poll and not topic.poll %}
     <div class="notice"><a href="{{ topic.get_create_poll_url }}"><img src="/media/dijital/img/new/forum/button_add_poll.png" alt="anket ekle" /></a></div>
