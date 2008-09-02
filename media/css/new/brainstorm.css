@@ -30,6 +30,11 @@
     line-height: 18px;
     font-weight: 600;
 }
+.idea_left .favorite {
+    text-align: center;
+    margin-top: 10px;
+    margin-right: 7px;
+}
 .idea_right {
     width: 720px;
     float: left;
