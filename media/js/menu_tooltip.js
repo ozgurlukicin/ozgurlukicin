@@ -15,6 +15,6 @@ $(function(){
             track: true,
             showURL: false,
             extraClass: "pretty",
-            fade: 400
+            fade: 330
         });
     });

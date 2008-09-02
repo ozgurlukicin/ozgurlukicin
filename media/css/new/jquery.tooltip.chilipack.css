@@ -21,12 +21,14 @@
     border: 1 px solid #D3D3D3;
     width: 320px;
     padding: 5px;
-    height: 45px;
-    opacity: 0.80;
+    height: 40px;
+    opacity: 0.88;
 }
 
 #tooltip.pretty div {
     text-align: left
+    width: 320px;
+    height: 40px;
 }
 
 #tooltip.pretty h3 {
