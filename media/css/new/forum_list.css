@@ -15,11 +15,8 @@ div.headerbar div {
 }
 .headerbar .icon { width: 54px; }
 .headerbar .title, .forum_list .item .title { width: 477px; }
-.headerbar .topics { 
-    width: 45px;
-    text-align: center;
-}
-.headerbar .posts { 
+.headerbar .topic_title, .forum_list .item .topic_title { width: 423px; }
+.headerbar .topics, .headerbar .posts, .headerbar .follow {
     width: 45px;
     text-align: center;
 }
@@ -63,6 +60,11 @@ div.forum_list div.item div {
     line-height: 60px;
     width: 40px;
     text-align: center;
+}
+.forum_list .item .follow {
+    margin-left: 5px;
+    margin-top: 17px;
+    width: 40px;
 }
 .forum_list a {
     color: #666666;
