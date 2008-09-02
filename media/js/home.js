@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(function() {
             setInterval(function () {
                 change_news(1)
             }, 10000)
