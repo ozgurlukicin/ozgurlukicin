@@ -51,7 +51,7 @@ div.forum_list div.item div {
     margin-left: 10px;
     width: 35px;
 }
-.forum_list .item .title, .forum_list .item .lastpost {
+.forum_list .item .title, .forum_list .item .lastpost, .forum_list .item .topic_title {
     margin-top: 12px;
     line-height: 15px;
 }
