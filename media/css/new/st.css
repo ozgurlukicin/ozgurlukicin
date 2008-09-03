@@ -28,6 +28,7 @@ div.leftcolumn_content {
 }
 div.leftcolumn_content p {
     font-size: 11px;
+    margin-bottom: 15px;
 }
 div.leftcolumn_content p.title a {
     color: #009FE0;

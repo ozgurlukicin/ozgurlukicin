@@ -7,67 +7,47 @@
 {% if auth %}
     <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
     <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
-<style type="text/css" media="screen">@import url('/media/css/new/object_lists.css');</style>
-<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
-<style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
+    <style type="text/css" media="screen">@import url('/media/css/new/object_lists.css');</style>
+    <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+    <style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
 {% endif %}
 {% endblock %}
 
-{% block pagetype %}page{% endblock %}
-
-{% block section %}game{% endblock %}
-
-{% block header_menu %}
-    {% include "header.html" %}
-{% endblock %}
-<br/>
-{% block ust_menu %}
-    {% include "ust_menu_ayrinti.html" %}
-{% endblock %}
-<br/>
-
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 {% block content %}
-<div class="games_title transparent_link">{{ game.title }}</div>
-<div class="page_content grey">
-{{ game.text|safe }}
+<div class="page_title">{{ game.title }}</div>
+<div class="page_content">
+    {{ game.text|safe }}
 </div>
+<div style="clear:both;"></div>
+<div style="float:right;margin-right:10px"><a href="{{comment_url}}">Yorumlar ({{ comment_count }})</a> <a href="{{comment_url}}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a></div>
 {% if auth %}
     {% if form %}
+    <p>
         <form method="post" action="/oyun/yorum/{{game.slug}}/">
             {{form}}
             <br />
             <input type="submit" value="Gönder">
         </form>
+    </p>
     {% endif %}
 {% endif %}
-<div style="float:right;margin-right:10px"><a href="{{comment_url}}">Yorumlar ({{ comment_count }})</a> <a href="{{comment_url}}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a></div>
-<div class="page_properties"><a href="{{ game.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
+<div class="page_printable"><a href="{{ game.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
 <div class="page_last_update">Son güncelleme: {{ game.update|timedelta }}</div>
-
-
 {% endblock %}
 
-{% block sidebartop %}{% endblock %}
+{% block leftcolumn %}
 
-
-{% block sidebar %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle" style="text-align:left;">
-        <h2>Bilgiler</h2>
+<div class="sidebarcolumn leftcolumn">
+    <h2>Bilgiler</h2>
+    <p>
         <strong><span>Lisans:</span></strong> {% for license in game.license.all %}<a href="{{ license.url }}"><span class="gri" >{{ license.name }}</span></a> {% endfor %}<br />
         <strong><span>Paket boyutu:</span></strong> <span class="gri" >{{ game.download_size|filesizeformat }}</span><br />
         <strong><span>Kurulu boyutu:</span></strong><span class="gri" > {{ game.installed_size|filesizeformat }}</span><br />
-        <a href="{{ game.url }}"><strong>Web sitesi</strong></a><br />
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
+        <a href="{{ game.url }}"><strong>Web sitesi ></strong></a><br />
+    </p>
 
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle" style="text-align:left;">
-        <h2>Değerlendirme</h2>
+    <h2>Değerlendirme</h2>
+    <p>
         <strong><span>Öğrenme süresi:</span></strong><span class="gri" > {{ game.learning_time }}</span><br />
         <strong><span>Oynanabilirlik:</span></strong><span class="gri" > {{ game.gameplay }}</span><br />
         <strong><span>Grafik:</span></strong><span class="gri" > {{ game.graphics }}</span><br />
@@ -75,68 +55,34 @@
         <strong><span>Senaryo:</span></strong><span class="gri" > {{ game.scenario }}</span><br />
         <strong><span>Atmosfer:</span></strong><span class="gri" > {{ game.atmosphere }}</span><br />
         <div class="game_average_point">{{ game.avg }}</div>
+    </p>
         <br />
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
-
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
         <h2>Menüdeki yeri</h2>
-        <span class="gri" >{{ game.path }}</span>
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
+        <p>{{ game.path }}</p>
 
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
         <h2>Etiketler</h2>
-        <img src="/media/img/tag.png" style="vertical-align: middle;" /> {% for tag in game.tags.all %}<a href="{{ tag.get_absolute_url }}"><span class="gri" >{{ tag.name }}</span></a> {% endfor %}
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
+        <p><img src="/media/img/tag.png" style="vertical-align: middle;" /> {% for tag in game.tags.all %}<a href="{{ tag.get_absolute_url }}"><span class="gri" >{{ tag.name }}</span></a> {% endfor %}</p>
 
 {% if game.wiki.all %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
         <h2>İlgili wiki sayfaları</h2>
+        <p>
         {% for wiki in game.wiki.all %}<a href="{{ wiki.get_absolute_url }}"><span class="gri" >{{ wiki.name }}</span></a><br />{% endfor %}
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
 {% endif %}
-
+        </p>
 {% if game.videos.all %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
         <h2>İlgili Videolar</h2>
+        <p>
         {% for video in game.videos.all %}
         {% include "video.html" %}
         {% endfor %}
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
+        </p>
 {% endif %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
         <h2>Yazar</h2>
-        <span class="gri" >{{ game.author }}</span>
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
+        <p>{{ game.author }}</p>
+
         <h2>Katkıda bulunun</h2>
         <p>Oyunlar bölümüne katkıda bulunmak istiyorsanız <a
             href="/katki/oyun/">buraya</a> tıklayarak size kılavuzluk edecek
         sayfaya gidebilirsiniz.</p>
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
 </div>
 {% endblock %}
