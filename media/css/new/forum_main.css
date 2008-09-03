@@ -46,10 +46,10 @@
 }
 .post .forum, .post .date {
     margin-top: 10px;
+    color: #999999;
 }
 .post .forum { margin-left: 10px; }
-.post .forum a { color: #666666; }
-.post .date a { color: #999999; }
+.post .forum a { color: #999999; }
 .post .date {
     float: right;
     margin-right: 4px;
