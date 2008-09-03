@@ -115,6 +115,9 @@ class Vote(models.Model):
     user = models.ForeignKey(User, verbose_name="Oy Veren", related_name="vote_author", blank=False, null=False)
     vote = models.BooleanField("Verilen Oy", blank=False)
 
+    def __unicode__(self):
+        return self.idea
+
     class Admin:
         pass
 
