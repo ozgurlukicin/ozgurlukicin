@@ -23,7 +23,6 @@
         {% for howto in howtos %}
         <div class="column first">
             <img src="{{ howto.image.get_file_url }}" alt="{{ howto.image.get_alt_string }}" /><br />
-            {{ howto.update|date:"d M Y" }}
         </div>
         <div class="column">
             <span>Nasıl</span>
@@ -35,7 +34,6 @@
         {% for package in packages %}
         <div class="column first">
             <img src="{{ package.image.get_file_url }}" alt="{{ package.image.get_alt_string }}" /><br />
-            {{ package.update|date:"d M Y" }}
         </div>
         <div class="column">
             <span>Paket</span>
@@ -47,7 +45,6 @@
         {% for game in games %}
         <div class="column first">
             <img src="{{ game.image.get_file_url }}" alt="{{ game.image.get_alt_string }}" /><br />
-            {{ game.update|date:"d M Y" }}
         </div>
         <div class="column">
             <span>Oyun</span>

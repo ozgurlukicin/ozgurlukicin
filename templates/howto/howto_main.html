@@ -11,7 +11,6 @@
 {% for howto in howto_list %}
     <div class="column first">
          <img src="{{ howto.image.get_file_url }}" alt="{{ howto.image.get_alt_string }}" /><br />
-            {{ howto.update|date:"d M Y" }}
     </div>
     <div class="column">
         <div class="title"><a href="{{ howto.get_absolute_url }}">{{ howto.title }}</a></div>
