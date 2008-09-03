@@ -11,9 +11,9 @@
 <div class="page_title">{{ fs.title }}</div>
 <div class="page_content">
     {{ fs.text|safe }}
-    <div style="float: left;"><a href="{{ fs.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
-    <div style="float: right;">Son güncelleme: {{ fs.update|timedelta }}</div>
 </div>
+<div class="page_printable"><a href="{{ fs.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
+<div class="page_last_update">Son güncelleme: {{ fs.update|timedelta }}</div>
 {% endblock %}
 
 {% block leftcolumn %}
@@ -24,7 +24,7 @@
     <br />
     <h2>Etiketler</h2>
     <p>
-        <img src="/media/img/tag.png" style="vertical-align: middle;" /> {% for tag in fs.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
+        <img src="/media/img/new/tag.png" style="vertical-align: middle;" /> {% for tag in fs.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
     </p>
     <br />
 {% if fs.videos.all %}

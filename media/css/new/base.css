@@ -50,12 +50,11 @@ div#footer {
     margin-top: 10px;
     margin-left: 10px;
     margin-bottom: 8px;
-    color: white;
     font-size: 11px;
     font-family: "Arial";
 }
 div#footer a {
-    color: white;
+    color: #fff;
     text-decoration: none;
 }
 .footer_left {
@@ -71,10 +70,12 @@ div#footer a {
     margin-left: 50px;
 }
 .footer_left .links {
+    color: #fff;
     margin-top: 2px;
     margin-left: 20px;
 }
 .footer_left .about {
+    color: #fff;
     margin-top: 20px;
     opacity: 0.7;
     clear: left;
@@ -102,9 +103,14 @@ div#footer a {
 }
 #content .page_content {
     margin-right: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
-
+#content .page_content h3 {
+    font-size: 14px;
+    color: #009FE9;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
 #content .page_content p {
     margin-bottom: 15px;
 }
@@ -114,4 +120,15 @@ div#footer a {
 }
 #content .page_content li {
     margin-bottom: 2px;
+}
+#content .page_content img {
+    margin: 5px;
+}
+#content .page_printable {
+    float: left;
+    margin: 5px;
+}
+#content .page_last_update {
+    float: right;
+    margin: 5px;
 }

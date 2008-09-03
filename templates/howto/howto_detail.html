@@ -12,10 +12,12 @@
 {% endblock %}
 
 {% block content %}
-<div class="howtos_title transparent_link">{{ howto.title }}</div>
-<div class="page_content grey">
+<div class="page_title">{{ howto.title }}</div>
+<div class="page_content">
 {{ howto.text|safe }}
 </div>
+<div style="float:right; margin-right:10px"><a href="{{comment_url}}">Yorumlar ({{ comment_count }})</a> <a href="{{comment_url}}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a></div>
+<p>
 {% if auth %}
     {% if form %}
         <form method="post" action="/nasil/yorum/{{howto.slug}}/">
@@ -25,64 +27,37 @@
         </form>
     {% endif %}
 {% endif %}
-
-<div style="float:right;margin-right:10px"><a href="{{comment_url}}">Yorumlar ({{ comment_count }})</a> <a href="{{comment_url}}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a></div>
-<div class="page_properties"><a href="{{ howto.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
+</p>
+<div class="page_printable"><a href="{{ howto.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
 <div class="page_last_update">Son güncelleme: {{ howto.update|timedelta }}</div>
 
 {% endblock %}
 
-{% block sidebar %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>Etiketler</h2>
-        <img src="/media/img/tag.png" style="vertical-align: middle;" /> {% for tag in howto.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
-
+{% block leftcolumn %}
+<div class="sidebarcolumn leftcolumn">
+    <h2>Etiketler</h2>
+    <p><img src="/media/img/new/tag.png" style="vertical-align: middle;" /> {% for tag in howto.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
+    </p>
+    <br />
 {% if howto.wiki.all %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>İlgili wiki sayfaları</h2>
-        <ul class="sidebar_firststeps">
-            {% for wiki in howto.wiki.all %}<li><a href="{{ wiki.get_absolute_url }}">{{ wiki.name }}</a></li>{% endfor %}
-        </ul>
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
+    <h2>İlgili wiki sayfaları</h2>
+    <ul class="sidebar_firststeps">
+        {% for wiki in howto.wiki.all %}<li><a href="{{ wiki.get_absolute_url }}">{{ wiki.name }}</a></li>{% endfor %}
+    </ul>
 {% endif %}
 
 {% if howto.videos.all %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>İlgili Videolar</h2>
-        {% for video in howto.videos.all %}
+    <h2>İlgili Videolar</h2>
+    <p>
+    {% for video in howto.videos.all %}
         {% include "video.html" %}
-        {% endfor %}
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
+    {% endfor %}
+    </p>
 {% endif %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>Yazar</h2>
-        {{ howto.author }}
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>Katkıda bulunun</h2>
-        <p>Nasıl bölümüne katkıda bulunmak istiyorsanız <a
-            href="/katki/nasil/">buraya</a> tıklayarak size kılavuzluk edecek
-        sayfaya gidebilirsiniz.</p>
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
+    <h2>Yazar</h2>
+    <p>{{ howto.author }}</p>
+    <br />
+    <h2>Katkıda bulunun</h2>
+    <p>Nasıl bölümüne katkıda bulunmak istiyorsanız <a href="/katki/nasil/">buraya</a> tıklayarak size kılavuzluk edecek sayfaya gidebilirsiniz.</p>
 </div>
 {% endblock %}
