@@ -40,9 +40,10 @@ class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabil
         </div>
         {% block extrasidemenu %}
 <div class="brainmenu">
+    <h2>Yeni Fikirler</h2>
     <ul>
     <li><a href="/yenifikir" title="Yeni Fikirler">Yeni Fikirler Anasayfa</a></li>
-    <li><a href="/yenifikir/ekle">Yeni Fikri Ekle</a></li>
+    <li><a href="/yenifikir/ekle">Fikir Ekle</a></li>
 {% if user.is_authenticated %}
     <li><a href="/yenifikir/listele/ekleyen/{{ user.username }}">Eklediğim Fikirler</a></li>
     <li><a href="/yenifikir/listele/favori/fikirler">Favorilerim</a></li>
@@ -54,15 +55,13 @@ class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabil
     <li><a href="/yenifikir/listele/son/eklenen" title="">Son eklenenler</a></li>
 </ul>
 <br />
-Kategoriler
+    <h2>Kategoriler</h2>
     <ul>
         {% for category in categories %}
         <li><a href="/yenifikir/listele/kategori/{{ category.name }}" title="{{ category.name }}">{{ category.name }}</a></li>
         {% endfor %}
     </ul>
- 
 </div>
-
         {% endblock %}
         <div class="sidebar_content">
             <h2>Ara</h2>

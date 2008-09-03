@@ -11,7 +11,6 @@ div#sidebar {
     float: left;
     margin-top: 10px;
     overflow: hidden;
-    color: #666666;
 }
 div#sidebar div { overflow: hidden; }
 div.sidebarcolumn {
@@ -43,7 +42,6 @@ div.rightcolumn_content {
 div.sidebarcolumn h2 {
     font-family: "Georgia", serif;
     font-size: 12px;
-    color: #666666;
     margin-bottom: 10px;
 }
 div.rightcolumn_content input[type="text"], div.rightcolumn_content input[type="password"] {
@@ -62,7 +60,6 @@ div.rightcolumn_content span.loginlinks {
     float: right;
 }
 div.rightcolumn_content span.loginlinks a {
-    color: #666666;
     text-decoration: none;
     font-size: 9px;
 }
@@ -77,7 +74,6 @@ div#sidebar_bottom {
     clear: both;
 }
 div.sidebar_bottom_content {
-    color: #666666;
     font-size: 11px;
     text-align: center;
     padding-bottom: 10px;
@@ -85,7 +81,6 @@ div.sidebar_bottom_content {
     margin-bottom: 15px;
 }
 div.sidebar_bottom_content a {
-    color: #666666;
     font-weight: bold;
     text-decoration: none;
 }

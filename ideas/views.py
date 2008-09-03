@@ -61,7 +61,7 @@ def list(request, field="", filter_slug=""):
         except ObjectDoesNotExist:
             pass
     else:
-        ideas = ideas.filter()
+        page_title = "Bugünün popüler fikirleri"
     categories = Category.objects.all()
     if request.user.is_authenticated():
             for idea in ideas:

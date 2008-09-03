@@ -47,7 +47,6 @@
     border-left: 1px #EAEAEA solid;
     font-size: 11px;
     font-family: "Arial";
-    color: #666666;
     overflow: auto;
 }
 .post_message_content {
@@ -95,7 +94,6 @@ p {
     margin-left: 10px;
     overflow: hidden;
     font-size: 11px;
-    color: #666666;
 }
 .topic_news_area img {
     width: 90px;
