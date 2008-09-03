@@ -62,6 +62,9 @@
         <span id="status_form_info"></span>
     </form>
     </div>
+    {% ifequal idea.submitter request.user %}
+    <div class="h3"><a href="/yenifikir/duzenle/{{ idea.id }}/">Fikri düzenle</a></div>
+    {% endifequal %}
 </div>
 <div style="clear:both"></div>
 </div>

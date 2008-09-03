@@ -3,6 +3,7 @@ from django.conf.urls.defaults import *
 urlpatterns = patterns('oi.ideas.views',
                        (r'^$', 'list'),
                        (r'^ekle/$', 'add'),
+                       (r'^duzenle/(?P<idea_id>.*)/$', 'edit_idea'),
                        (r'^oyla/(?P<idea_id>.*)/(?P<vote>[0,1])/$', 'vote_idea'),
                        (r'^ayrinti/(?P<idea_id>.*)/$', 'detail'),
                        (r'^ayrinti/(?P<idea_id>.*)/favori/ekle$', 'add_favorite'),

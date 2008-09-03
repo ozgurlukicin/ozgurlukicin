@@ -122,6 +122,7 @@ def detail(request, idea_id):
     page_title = "Fikir detayları"
     return render_response(request, "idea_detail.html", locals())
 
+@login_required
 def add(request):
     if request.method == 'POST':
         form = NewIdeaForm(request.POST, request.FILES)
@@ -189,6 +190,23 @@ def add(request):
     page_title = "Yeni Fikir Ekle"
     categories = Category.objects.all()
     return render_response(request, "idea_add_form.html", locals())
+
+@login_required
+def edit_idea(request, idea_id):
+    idea = Idea.objects.get(pk=idea_id)
+    if request.user == idea.submitter:
+        form_data = {
+            'title': idea.title,
+            'description': idea.description,
+            'category': idea.category_id,
+            'related_to': idea.related_to_id,
+            'forum_url': idea.forum_url,
+            'bug_numbers': idea.bug_numbers,
+            }
+        form = NewIdeaForm(form_data)
+        return render_response(request, "idea_add_form.html", locals())
+    else:
+        pass
 
 @login_required
 def vote_idea(request, idea_id, vote):
