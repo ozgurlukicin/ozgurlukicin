@@ -11,6 +11,7 @@ div#sidebar {
     float: left;
     margin-top: 10px;
     overflow: hidden;
+    color: #666666;
 }
 div#sidebar div { overflow: hidden; }
 div.sidebarcolumn {
@@ -28,7 +29,6 @@ div.leftcolumn_content {
 }
 div.leftcolumn_content p {
     font-size: 11px;
-    color: #999999;
 }
 div.leftcolumn_content p.title a {
     color: #009FE0;
@@ -62,13 +62,12 @@ div.rightcolumn_content span.loginlinks {
     float: right;
 }
 div.rightcolumn_content span.loginlinks a {
-    color: #999999;
+    color: #666666;
     text-decoration: none;
     font-size: 9px;
 }
 div.rightcolumn_content p {
     font-size: 11px;
-    color: #999999;
 }
 div.rightcolumn_content p a {
     color: #009FE0;

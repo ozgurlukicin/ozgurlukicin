@@ -23,7 +23,7 @@ class PetitionBox(template.Node):
             <a href="/ooxml/"><img src="/media/ooxml/ooxmlekarsi.png" alt="Özgürlükİçin OOXML'e karşı" /></a>
             <p><a href="/ooxml/">"Özgürlükİçin OOXML'e Hayır!"</a> diyoruz. <a href="/ooxml_banner/">Banner ve düğmelerimizi</a> kullanarak kampanyamıza katkıda bulunabilir ve manifestomuzu destekleyerek siz de OOXML'e hayır diyebilirsiniz.</p>
             <div id="ooxmlbar"><div id="ooxmlbar_completed" style="width:%(petitionpercent)s%%;">&nbsp;</div></div>
-            <p style="color:#C9C9C9;">Destekleyenler: %(numberofpetitioners)s / 3000</p>
+            <p>Destekleyenler: %(numberofpetitioners)s / 3000</p>
         </div>
 """ % self.formatdict
 

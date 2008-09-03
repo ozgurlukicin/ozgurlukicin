@@ -13,12 +13,12 @@ div#sidebar {
     overflow: hidden;
 }
 div.sidebar_content {
-    width: 100%;
     margin-left: 4px;
     padding-bottom: 10px;
     border-bottom: 1px #EAEAEA solid;
     margin-bottom: 15px;
     overflow: hidden;
+    color: #666666;
 }
 div.sidebar_content h2 {
     font-family: "Georgia", serif;
@@ -42,13 +42,12 @@ div.sidebar_content span.loginlinks {
     float: right;
 }
 div.sidebar_content span.loginlinks a {
-    color: #999999;
+    color: #666666;
     text-decoration: none;
     font-size: 9px;
 }
 div.sidebar_content p {
     font-size: 11px;
-    color: #999999;
 }
 div.sidebar_content p a {
     color: #009FE0;
