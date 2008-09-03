@@ -94,3 +94,24 @@ div#footer a {
     width: 107px;
     text-align: right;
 }
+
+#content .page_title {
+    font-size: 18px;
+    color: #009FE9;
+    margin-bottom: 10px;
+}
+#content .page_content {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+#content .page_content p {
+    margin-bottom: 15px;
+}
+#content .page_content ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+#content .page_content li {
+    margin-bottom: 2px;
+}
