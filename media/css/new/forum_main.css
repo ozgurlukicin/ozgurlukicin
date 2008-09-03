@@ -19,6 +19,7 @@
 }
 .latest {
     overflow: hidden;
+    margin-bottom: 1px;
 }
 .latest_container {
     font-size: 11px;
@@ -56,5 +57,23 @@
 }
 .post .topic {
     height: 15px;
+    overflow: hidden;
+}
+.stats {
+    overflow: hidden;
+    margin: 10px 0px;
+}
+.stats div { float: left; }
+.stats .image {
+    width: 35px;
+    margin: 5px 0px 0px 15px;
+}
+.stats .text .labels, .stats .text .spacers { font-weight: bold; }
+.stats .text .spacers { margin: 0px 4px; }
+.stats .left { width: 360px; }
+.icons_help { margin: 10px 0px 0px 20px; }
+.icons_help div {
+    width: 260px;
+    float: left;
     overflow: hidden;
 }
