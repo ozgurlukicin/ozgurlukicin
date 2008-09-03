@@ -92,6 +92,7 @@ p {
 }
 .topic_news_area {
     margin-left: 10px;
+    margin-top: 10px;
     overflow: hidden;
     font-size: 11px;
 }
@@ -126,6 +127,7 @@ div.topic_news_box a {
 }
 #post_bottom {
     margin: 10px 4px 10px 0px;
+    overflow: hidden;
 }
 #post_bottom div {
     float: right;
