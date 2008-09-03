@@ -11,25 +11,13 @@
 {% endif %}
 {% endblock %}
 
-{% block pagetype %}page{% endblock %}
-
-{% block section %}package{% endblock %}
-
-{% block header_menu %}
-    {% include "header.html" %}
-{% endblock %}
-<br/>
-{% block ust_menu %}
-    {% include "ust_menu_ayrinti.html" %}
-{% endblock %}
-<br/>
-
 {% block content %}
-<div class="packages_title transparent_link">{{ package.title }}</div>
-<div class="page_content grey">
+<div class="page_title">{{ package.title }}</div>
+<div class="page_content">
 {{ package.text|safe }}
 </div>
 
+<div class="page_comments"><a href="{{comment_url}}">Yorumlar ({{ comment_count }})</a> <a href="{{comment_url}}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a></div>
 {% if auth %}
     {% if form %}
         <form method="post" action="/paket/yorum/{{package.slug}}/">
@@ -39,103 +27,55 @@
         </form>
     {% endif %}
 {% endif %}
-<div style="float:right;margin-right:10px"><a href="{{comment_url}}">Yorumlar ({{ comment_count }})</a> <a href="{{comment_url}}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a></div>
-<div class="page_properties"><a href="{{ package.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
+<div class="page_printable"><a href="{{ package.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
 <div class="page_last_update">Son güncelleme: {{ package.update|timedelta }}</div>
 
 
 {% endblock %}
 
-{% block sidebartop %}{% endblock %}
-
-{% block sidebar %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle" style="text-align:left;">
-        <h2>Ayrıntılar</h2>
+{% block leftcolumn %}
+<div class="sidebarcolumn leftcolumn">
+    <h2>Ayrıntılar</h2>
+    <p>
         <strong><span>Lisans:</span></strong> {% for license in package.license.all %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}<br />
         <strong><span>Paket boyutu:</span></strong> {{ package.download_size|filesizeformat }}<br />
         <strong><span>Kurulu boyutu:</span></strong> {{ package.installed_size|filesizeformat }}<br />
         <a href="{{ package.url }}"><strong><span>Web sitesi</span></strong></a>
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
-
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>Editör notu</h2>
+    </p>
+    <h2>Editör notu</h2>
+    <p>
         <div class="rating_bar"><img src="/media/img/rating_{{ package.point }}.png" border="0" height="39px" width="200px" /></div>
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
+    </p>
 
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>Menüdeki yeri</h2>
-        {{ package.path }}
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>Etiketler</h2>
-        <img src="/media/img/tag.png" style="vertical-align: middle;" /> {% for tag in package.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
-{% if package.wiki.all %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
+    <h2>Menüdeki yeri</h2>
+    <p>{{ package.path }}</p>
+    <h2>Etiketler</h2>
+    <p>
+            <img src="/media/img/new/tag.png" style="vertical-align: middle;" /> {% for tag in package.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
+    </p>
+    {% if package.wiki.all %}
         <h2>İlgili wiki sayfaları</h2>
+        <p>
         {% for wiki in package.wiki.all %}<a href="{{ wiki.get_absolute_url }}">{{ wiki.name }}</a><br />{% endfor %}
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
-{% endif %}
+        </p>
+    {% endif %}
 
 {% if package.videos.all %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
         <h2>İlgili Videolar</h2>
         {% for video in package.videos.all %}
         {% include "video.html" %}
         {% endfor %}
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
 {% endif %}
 
 {% if package.ss.all %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
         <h2>Ekran görüntüleri</h2>
         {% for ss in package.ss.all %}<a href="{{ ss.get_file_url }}" title="{{ ss.desc }}"><img src="{{ ss.file|thumbnail:"200x200" }}" /></a>{% endfor %}</a>
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
 {% endif %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
         <h2>Yazar</h2>
         {{ package.author }}
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
         <h2>Katkıda bulunun</h2>
         <p>Paketler bölümüne katkıda bulunmak istiyorsanız <a
             href="/katki/paket/">buraya</a> tıklayarak size kılavuzluk edecek
         sayfaya gidebilirsiniz.</p>
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
 </div>
 {% endblock %}
