@@ -28,7 +28,7 @@
         {% for forum in forum_list %}
         {% if forum.hidden and not perms.forum.can_see_hidden_forums %}
         {% else %}
-        <div class="item" {% if forum.hidden %}style="opacity: 0.5;"{% endif %}>
+        <div class="item forum_item" {% if forum.hidden %}style="opacity: 0.5;"{% endif %}>
             <div class="icon"><a href="{{ forum.get_absolute_url }}"><img{% if forum.is_read %} src="/media/dijital/img/forum/topic.png" alt="Okunmuş forum" title="Okunmuş forum"{% else %} src="/media/dijital/img/forum/topic_unread.png" alt="Okunmamış forum" title="Okunmamış forum"{% endif %} /></a></div>
             <div class="spacer">&nbsp;</div>
             <div class="title"><a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a><br />{{ forum.description }}</div>

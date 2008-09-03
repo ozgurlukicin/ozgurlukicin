@@ -27,7 +27,6 @@ div.headerbar div {
 }
 .forum_list .spacer {
     width: 9px;
-    background: url(/media/img/new/forum_list_spacer.png) no-repeat bottom center;
 }
 div.forum_list {
     color: #666666;
@@ -39,8 +38,13 @@ div.forum_list {
 div.forum_list div.item {
     border-bottom: 1px #EAEAEA solid;
     width: 100%;
-    height: 60px;
     overflow: hidden;
+}
+.forum_list .forum_item {
+    background: url(/media/img/new/forum/forumlist_item_bg.png) no-repeat bottom left;
+}
+.forum_list .topic_item {
+    background: url(/media/img/new/forum/topiclist_item_bg.png) no-repeat bottom left;
 }
 div.forum_list div.item div {
     float: left;
@@ -52,12 +56,13 @@ div.forum_list div.item div {
     width: 35px;
 }
 .forum_list .item .title, .forum_list .item .lastpost, .forum_list .item .topic_title {
-    margin-top: 12px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     line-height: 15px;
 }
 .forum_list .item .topics, .forum_list .item .posts {
+    margin-top: 20px;
     margin-left: 5px;
-    line-height: 60px;
     width: 40px;
     text-align: center;
 }
