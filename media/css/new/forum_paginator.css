@@ -1,7 +1,7 @@
 div.paginator_block {
     margin-top: 30px;
     overflow: hidden;
-    color: #999999;
+    color: #666666;
     width: 800px;
     height: 39px;
     background: url(/media/img/new/forum/paginator_bg.png) repeat-x;
@@ -22,7 +22,7 @@ div.paginator div {
 }
 div.paginator div a,
 div.paginator div a:visited {
-    color: #999999;
+    color: #666666;
     text-decoration: none;
 }
 div.paginator div.curr {

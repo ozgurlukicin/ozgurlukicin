@@ -8,7 +8,7 @@
     width: 159px;
     margin-left: 6px;
     margin-top: 13px;
-    color: #C9C9C9;
+    color: #999999;
     font-size: 11px;
     font-family: "Georgia";
     float: left;
@@ -47,7 +47,7 @@
     border-left: 1px #EAEAEA solid;
     font-size: 11px;
     font-family: "Arial";
-    color: #999999;
+    color: #666666;
     overflow: auto;
 }
 .post_message_content {
@@ -95,7 +95,7 @@ p {
     margin-left: 10px;
     overflow: hidden;
     font-size: 11px;
-    color: #999999;
+    color: #666666;
 }
 .topic_news_area img {
     width: 90px;
@@ -108,7 +108,7 @@ div.topic_news_box {
     float: left;
     width: 245px;
     height: 150px;
-    border: 1px #999999 solid;
+    border: 1px #666666 solid;
     padding: 4px;
     margin-right: 5px;
     cursor: pointer;

@@ -1,7 +1,7 @@
 div.summary_container {
     width: 639px;
     font-size: 11px;
-    color: #C9C9C9;
+    color: #999999;
     overflow: hidden;
     clear: both;
 }
@@ -34,7 +34,7 @@ div.news_container {
     margin-bottom: 5px;
     width: 639px;
     font-size: 11px;
-    color: #C9C9C9;
+    color: #999999;
     overflow: hidden;
     clear: both;
 }

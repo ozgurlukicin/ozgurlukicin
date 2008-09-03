@@ -5,7 +5,7 @@
     float: left;
 }
 .titlebar h2 a {
-    color: #999999;
+    color: #666666;
     text-decoration: none;
 }
 .category .latest_container {
@@ -49,8 +49,8 @@
     margin-top: 10px;
 }
 .post .forum { margin-left: 10px; }
-.post .forum a { color: #999999; }
-.post .date a { color: #C9C9C9; }
+.post .forum a { color: #666666; }
+.post .date a { color: #999999; }
 .post .date {
     float: right;
     margin-right: 4px;

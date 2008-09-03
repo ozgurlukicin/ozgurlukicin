@@ -2,7 +2,7 @@ div.paginator_block {
     margin-top: 30px;
     width: 100%;
     overflow: hidden;
-    color: #999999;
+    color: #666666;
 }
 div.paginator {
     float: left;
@@ -30,7 +30,7 @@ div.paginator div {
 }
 div.paginator div a,
 div.paginator div a:visited {
-    color: #999999;
+    color: #666666;
     text-decoration: none;
 }
 div.paginator div.curr {
