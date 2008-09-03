@@ -60,13 +60,6 @@
         </p>
     {% endif %}
 
-{% if package.videos.all %}
-        <h2>İlgili Videolar</h2>
-        {% for video in package.videos.all %}
-        {% include "video.html" %}
-        {% endfor %}
-{% endif %}
-
 {% if package.ss.all %}
         <h2>Ekran görüntüleri</h2>
         {% for ss in package.ss.all %}<a href="{{ ss.get_file_url }}" title="{{ ss.desc }}"><img src="{{ ss.file|thumbnail:"200x200" }}" /></a>{% endfor %}</a>
@@ -78,4 +71,14 @@
             href="/katki/paket/">buraya</a> tıklayarak size kılavuzluk edecek
         sayfaya gidebilirsiniz.</p>
 </div>
+{% endblock %}
+{% block sidebar_bottom_top %}
+{% if package.videos.all %}
+        <h2>İlgili Videolar</h2>
+        {% for video in package.videos.all %}
+        <div style="margin: 0px 0px 10px 10px;">
+        {% include "video.html" %}
+        </div>
+        {% endfor %}
+{% endif %}
 {% endblock %}
