@@ -104,12 +104,17 @@ div#footer a {
 #content .page_content {
     margin-right: 10px;
     margin-bottom: 30px;
+    clear:both;
+}
+#content .page_content h4 {
+    font-size: 12px;
+    color: #009FE9;
+    margin: 5px 0 10px 0;
 }
 #content .page_content h3 {
     font-size: 14px;
     color: #009FE9;
-    margin-bottom: 10px;
-    margin-top: 5px;
+    margin: 5px 0 10px 0;
 }
 #content .page_content p {
     margin-bottom: 15px;
@@ -124,6 +129,9 @@ div#footer a {
 #content .page_content img {
     margin: 5px;
 }
+#content .page_content form {
+    margin-top: 15px;
+}
 #content .page_printable {
     float: left;
     margin: 5px;
@@ -131,4 +139,9 @@ div#footer a {
 #content .page_last_update {
     float: right;
     margin: 5px;
+}
+#content .page_comments {
+    float: right;
+    margin: 0 15px 15px 15px;
+    clear: both;
 }
