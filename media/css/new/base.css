@@ -27,6 +27,7 @@ div#page {
     width: 983px;
     background-color: white;
     overflow: hidden;
+    padding-bottom: 8px;
 }
 div#menu {
     width: 963px;
@@ -48,7 +49,6 @@ div#footer {
     overflow: hidden;
     margin-top: 10px;
     margin-left: 10px;
-    margin-bottom: 8px;
     font-size: 11px;
     font-family: "Arial";
 }
