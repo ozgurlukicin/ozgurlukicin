@@ -90,6 +90,13 @@ p {
     float: right;
     margin-left: 5px;
 }
+div.post_message_tags {
+    padding-left: 9px;
+    overflow: hidden;
+}
+.tag {
+    padding-left: 5px;
+}
 .topic_news_area {
     margin-left: 10px;
     margin-top: 10px;
