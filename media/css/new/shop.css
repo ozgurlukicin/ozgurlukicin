@@ -1,3 +1,17 @@
+#shop_intro {
+    width: 640px;
+    height: 270px;
+    background: url(/media/img/new/pardus_tshirts.png) no-repeat top center;
+}
+#shop_intro div {
+    width: 273px;
+    margin-left: 15px;
+}
+#shop_intro .title {
+    font-weight: bold;
+    padding-top: 130px;
+    padding-bottom: 10px;
+}
 .leftcolumn {
     padding-top: 12px;
     background-color: #EDEDED;
