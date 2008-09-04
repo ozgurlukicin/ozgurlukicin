@@ -10,7 +10,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ürün Fiyatı: {{ child.price }} +KDV ({{ child.price_with_tax }})<br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ürün Stoğu: {{ child.stock }} <br />
             {% if user.is_authenticated %}
-            <form method="POST" action="javascript:;"><input type="hidden" name="product_id" id="product_id" value="{{ child.pk }}"><input type="text" name="quantity" id="quantity" value="1" /><input type="submit" value="Ekle" onclick="addCart();"></form>
+            <form method="POST" action="javascript:;"><input type="text" name="quantity" id="quantity" value="1" /><input type="submit" value="Ekle" onclick="addCart({{ child.pk }});"></form>
             {% endif %}
             <br />
             {% endif %}
