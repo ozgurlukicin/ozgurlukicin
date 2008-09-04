@@ -31,9 +31,8 @@ div#page {
 div#menu {
     width: 963px;
     height: 98px;
-    position: relative;
-    top: 10px;
-    left: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
     background: url(/media/img/new/menu/bg.png) repeat-x;
 }
 div#menu img {
