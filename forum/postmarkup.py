@@ -55,26 +55,26 @@ def create(include=None, exclude=None, use_pygments=True, *args, **kwargs):
                 return
             markup.add_tag(name, tag_class, *args, **kwargs)
 
-    add_tag(u'b', SimpleTag, u'b', u'strong', *args, **kwargs)
-    add_tag(u'i', SimpleTag, u'i', u'em', *args, **kwargs)
-    add_tag(u'u', SimpleTag, u'u', u'u', *args, **kwargs)
-    add_tag(u's', SimpleTag, u's', u'strike', *args, **kwargs)
-    add_tag(u'link', LinkTag, u'link', *args, **kwargs)
-    add_tag(u'url', LinkTag, u'url', *args, **kwargs)
+    #add_tag(u'b', SimpleTag, u'b', u'strong', *args, **kwargs)
+    #add_tag(u'i', SimpleTag, u'i', u'em', *args, **kwargs)
+    #add_tag(u'u', SimpleTag, u'u', u'u', *args, **kwargs)
+    #add_tag(u's', SimpleTag, u's', u'strike', *args, **kwargs)
+    #add_tag(u'link', LinkTag, u'link', *args, **kwargs)
+    #add_tag(u'url', LinkTag, u'url', *args, **kwargs)
     add_tag(u'quote', QuoteTag, *args, **kwargs)
-    add_tag(u'img', ImgTag, u'img', *args, **kwargs)
+    #add_tag(u'img', ImgTag, u'img', *args, **kwargs)
 
-    add_tag(u'wiki', SearchTag, u'wiki',
-            u"http://en.wikipedia.org/wiki/Special:Search?search=%s", u'wikipedia.com', *args, **kwargs)
-    add_tag(u'google', SearchTag, u'google',
-            u"http://www.google.com/search?hl=en&q=%s&btnG=Google+Search", u'google.com', *args, **kwargs)
-    add_tag(u'dictionary', SearchTag, u'dictionary',
-            u"http://dictionary.reference.com/browse/%s", u'dictionary.com', *args, **kwargs)
-    add_tag(u'dict', SearchTag, u'dict',
-            u"http://dictionary.reference.com/browse/%s", u'dictionary.com', *args, **kwargs)
+    #add_tag(u'wiki', SearchTag, u'wiki',
+    #        u"http://en.wikipedia.org/wiki/Special:Search?search=%s", u'wikipedia.com', *args, **kwargs)
+    #add_tag(u'google', SearchTag, u'google',
+    #        u"http://www.google.com/search?hl=en&q=%s&btnG=Google+Search", u'google.com', *args, **kwargs)
+    #add_tag(u'dictionary', SearchTag, u'dictionary',
+    #        u"http://dictionary.reference.com/browse/%s", u'dictionary.com', *args, **kwargs)
+    #add_tag(u'dict', SearchTag, u'dict',
+    #        u"http://dictionary.reference.com/browse/%s", u'dictionary.com', *args, **kwargs)
 
-    add_tag(u'list', ListTag, *args, **kwargs)
-    add_tag(u'*', ListItemTag, *args, **kwargs)
+    #add_tag(u'list', ListTag, *args, **kwargs)
+    #add_tag(u'*', ListItemTag, *args, **kwargs)
 
     if use_pygments:
         assert pygments_available, "Install pygments (http://pygments.org/) or call create with use_pygments=False"
