@@ -95,10 +95,10 @@ def detail(request, idea_id):
         except ObjectDoesNotExist:
             idea.is_favorited = False
         try:
-            v = Vote.objects.get(user=request.user, idea=idea)
-            idea.is_voted = True
+            v = Vote.objects.get(user=request.user.id, idea=idea.id)
+            idea.user_vote = v.vote
         except ObjectDoesNotExist:
-            idea.is_voted = False
+            pass
 
     try:
         topic = Topic.objects.filter(title=idea.title)[0]
