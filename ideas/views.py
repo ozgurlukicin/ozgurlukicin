@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from oi.ideas.forms import *
@@ -188,10 +188,10 @@ def add(request):
     categories = Category.objects.all()
     return render_response(request, "idea_add_form.html", locals())
 
-@login_required
+@permission_required('ideas.change_idea', login_url="/kullanici/giris/")
 def edit_idea(request, idea_id):
     idea = Idea.objects.get(pk=idea_id)
-    if request.user == idea.submitter:
+    if 1 == 1:
         if request.method == 'POST':
             form = NewIdeaForm(request.POST)
             if form.is_valid():
@@ -275,6 +275,7 @@ def del_favorite(request, idea_id):
     favorite.delete()
     return HttpResponse("OK")
 
+@permission_required('ideas.change_idea', login_url="/kullanici/giris/")
 def duplicate(request, idea_id, duplicate_id):
     try:
         idea = Idea.objects.get(pk=idea_id)
@@ -288,6 +289,7 @@ def duplicate(request, idea_id, duplicate_id):
     except ObjectDoesNotExist:
         return HttpResponse("YOK")
 
+@permission_required('ideas.change_idea', login_url="/kullanici/giris/")
 def change_status(request, idea_id, new_status):
     idea = Idea.objects.get(pk=idea_id)
     idea.status_id = new_status

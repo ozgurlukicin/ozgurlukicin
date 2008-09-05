@@ -39,7 +39,9 @@
             <li><a href="{{ duplicate.get_absolute_url }}"><strong>#{{ duplicate.id }}</strong> {{ duplicate.title }}</a> ({{ duplicate.vote_count }} oy)</li>
         {% endfor %}
         </ul>
-    {% endif %}
+        {% endif %}
+
+{% if perms.ideas.change_idea %}
     <div class="h3"><a href="javascript:;" onclick="$('#tekrarform').toggle(); return false;">Fikir Tekrarı Bildir</a></div>
     <div class="idea_detail_box" style="display: none;" id="tekrarform"> 
         <form  method="post" action="javascript:;">
@@ -62,9 +64,8 @@
         <span id="status_form_info"></span>
     </form>
     </div>
-    {% ifequal idea.submitter request.user %}
     <div class="h3"><a href="/yenifikir/duzenle/{{ idea.id }}/">Fikri düzenle</a></div>
-    {% endifequal %}
+    {% endif %}
 </div>
 <div style="clear:both"></div>
 </div>
