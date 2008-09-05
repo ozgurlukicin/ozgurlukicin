@@ -143,10 +143,6 @@ def add(request):
                           )
             topic.save()
 
-            for tag in form.cleaned_data['tags']:
-                t = Tag.objects.get(name=tag)
-                topic.tags.add(t)
-
             newidea = Idea(title = form.cleaned_data['title'],
                            description = form.cleaned_data['description'],
                            submitter = request.user,
@@ -161,6 +157,7 @@ def add(request):
             for tag in form.cleaned_data['tags']:
                 tag = Tag.objects.get(name=tag)
                 newidea.tags.add(tag)
+                topic.tags.add(tag)
 
             post_text = "<p>#" + str(newidea.id) + " "
             post_text += "<a href=" + newidea.get_absolute_url() + ">" + newidea.title + "</a></p>"
