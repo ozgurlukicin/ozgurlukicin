@@ -1,5 +1,5 @@
 function addCart(product_id) {
-    $.post("/dukkan/sepet/ekle/", { product_id: product_id, quantity: $('#quantity').val(), csrfmiddlewaretoken: $('#csrfmiddlewaretoken').val() },
+    $.post("/dukkan/sepet/ekle/", { product_id: product_id, quantity: $('#quantity_' + product_id).val(), csrfmiddlewaretoken: $('#csrfmiddlewaretoken').val() },
             function(data){
                 if (data=='OK') {
                     $.get('/dukkan/sepet/', function(data) { $('#cart').html(data); } );
