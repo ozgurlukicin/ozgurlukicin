@@ -12,9 +12,6 @@
 {% endblock %}
 {% block idea %}
 {% if user.is_authenticated %}
-{% if idea_added %}
- Yeni fikir eklendi !
-{% endif %}
 {% if form.errors %}
 <p><font color="red">Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin.</font></p>
 {% endif %}

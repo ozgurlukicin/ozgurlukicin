@@ -195,17 +195,38 @@ def add(request):
 def edit_idea(request, idea_id):
     idea = Idea.objects.get(pk=idea_id)
     if request.user == idea.submitter:
-        form_data = {
-            'title': idea.title,
-            'description': idea.description,
-            'category': idea.category_id,
-            'related_to': idea.related_to_id,
-            'forum_url': idea.forum_url,
-            'bug_numbers': idea.bug_numbers,
-            }
-        form = NewIdeaForm(form_data)
-        return render_response(request, "idea_add_form.html", locals())
+        if request.method == 'POST':
+            form = NewIdeaForm(request.POST)
+            if form.is_valid():
+                idea.tags.clear()
+                for tag in form.cleaned_data['tags']:
+                    t = Tag.objects.get(name=tag)
+                    idea.tags.add(t)
+
+                idea.title = form.cleaned_data['title']
+                idea.description = form.cleaned_data['description']
+                idea.category = form.cleaned_data['category']
+                idea.related_to = form.cleaned_data['related_to']
+                idea.forum_url = form.cleaned_data['forum_url']
+                idea.bug_numbers = form.cleaned_data['bug_numbers']
+                idea.save()
+                return HttpResponseRedirect(newidea.get_absolute_url())
+            else:
+                return render_response(request, "idea_add_form.html", locals())
+        else:
+            form_data = {
+                'title': idea.title,
+                'description': idea.description,
+                'category': idea.category_id,
+                'related_to': idea.related_to_id,
+                'forum_url': idea.forum_url,
+                'bug_numbers': idea.bug_numbers,
+                'tags': [tag.id for tag in idea.tags.all()],
+                }
+            form = NewIdeaForm(form_data)
+            return render_response(request, "idea_add_form.html", locals())
     else:
+        """ idea isn't yours error """
         pass
 
 @login_required
