@@ -207,7 +207,7 @@ def edit_idea(request, idea_id):
                 idea.forum_url = form.cleaned_data['forum_url']
                 idea.bug_numbers = form.cleaned_data['bug_numbers']
                 idea.save()
-                return HttpResponseRedirect(newidea.get_absolute_url())
+                return HttpResponseRedirect(idea.get_absolute_url())
             else:
                 return render_response(request, "idea_add_form.html", locals())
         else:
