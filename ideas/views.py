@@ -85,8 +85,7 @@ def list(request, field="", filter_slug=""):
 
 def detail(request, idea_id):
     absolute_url = "/yenifikir"
-    idea = get_object_or_404(Idea, pk=idea_id)
-
+    idea = get_object_or_404(Idea, pk=idea_id, is_hidden=False)
     if request.user.is_authenticated():
         auth = True
         try:
@@ -231,7 +230,7 @@ def delete_idea(request, idea_id):
     idea = Idea.objects.get(pk=idea_id)
     idea.is_hidden = True
     idea.save()
-    return HttpResponseRedirect(idea.get_absolute_url())
+    return HttpResponseRedirect("/yenifikir/")
 
 @login_required
 def vote_idea(request, idea_id, vote):
