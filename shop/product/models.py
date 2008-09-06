@@ -7,12 +7,13 @@
 
 from django.db import models
 from django.core import validators
+from django.contrib import admin
 
 class CategoryImages(models.Model):
     """ This class has no Meta and Admin class because it's edited inline on related object's page """
-    category = models.ForeignKey("Category", blank=True, null=True, edit_inline=models.TABULAR, num_in_admin=2, max_num_in_admin=2, related_name="images")
+    category = models.ForeignKey("Category", blank=True, null=True, related_name="images")
     picture = models.ImageField(verbose_name="Kategori Resmi", upload_to="upload/image/")
-    keep = models.BooleanField(default=True, editable=False, core=True)
+    keep = models.BooleanField(default=True, editable=False)
     # we use remove since we don't have admin interface for editing CategoryImage.
     # It's edited inline on the related model page, when remove is checked, we will just delete the entry.
     remove = models.BooleanField(default=False)
@@ -32,10 +33,14 @@ class CategoryImages(models.Model):
         else:
             super(CategoryImages, self).save()
 
+class CategoryImagesInline(admin.TabularInline):
+    model = CategoryImages
+    max_num = 2
+
 class Category(models.Model):
     """ Base category model for all products """
-    name = models.CharField("İsim", max_length=200, core=True)
-    slug = models.SlugField("SEF Başlık", help_text="Adres kısmında kullanılan ad, isim kısmından otomatik olarak üretilmektedir", prepopulate_from=("name",))
+    name = models.CharField("İsim", max_length=200)
+    slug = models.SlugField("SEF Başlık", help_text="Adres kısmında kullanılan ad, isim kısmından otomatik olarak üretilmektedir")
     # Category can have category inside it, we will get them recursively.
     parent = models.ForeignKey("self", blank=True, null=True, related_name="child")
     description = models.TextField("Kategori açıklaması")
@@ -117,6 +122,8 @@ class Category(models.Model):
     class Admin:
         search_fields = ["name", "slug"]
         list_display = ("name", "_parents_repr",)
+        prepopulate_fields = {"slug":("name",)}
+        inlines = [CategoryImagesInline]
 
 ########################################
 #                                      #
@@ -151,9 +158,9 @@ class Tax(models.Model):
 
 class ProductImages(models.Model):
     """ This class has no Meta and Admin class because it's edited inline on related object's page """
-    product = models.ForeignKey("Product", blank=True, null=True, edit_inline=models.TABULAR, num_in_admin=3, max_num_in_admin=3, related_name="images")
+    product = models.ForeignKey("Product", blank=True, null=True, related_name="images")
     picture = models.ImageField(verbose_name="Ürün Resmi", upload_to="upload/image/")
-    keep = models.BooleanField(default=True, editable=False, core=True)
+    keep = models.BooleanField(default=True, editable=False)
     # we use remove since we don't have admin interface for editing CategoryImage.
     # It's edited inline on the related model page, when remove is checked, we will just delete the entry.
     remove = models.BooleanField(default=False)
@@ -173,6 +180,10 @@ class ProductImages(models.Model):
         else:
             super(ProductImages, self).save()
 
+class ProductImagesInline(admin.TabularInline):
+    model = ProductImages
+    max_num = 3
+
 ############################################################
 #                                                          #
 # Main product class, it can have a child product model    #
@@ -181,9 +192,8 @@ class ProductImages(models.Model):
 ############################################################
 
 class Product(models.Model):
-    # core True because we will use ProductImage as inline-edited object
-    name = models.CharField("İsim", max_length=200, core=True)
-    slug = models.SlugField("SEF Başlık", prepopulate_from=("name",), help_text="Adres kısmında kullanılan ad, isim kısmından otomatik olarak üretilmektedir")
+    name = models.CharField("İsim", max_length=200)
+    slug = models.SlugField("SEF Başlık", help_text="Adres kısmında kullanılan ad, isim kısmından otomatik olarak üretilmektedir")
     description = models.TextField("Ürün açıklaması")
 
     stock = models.IntegerField("Ürün Stoğu", default=0)
@@ -265,3 +275,5 @@ class Product(models.Model):
         list_filter = ["active"]
 
         list_display = ("name", "stock", "_parents_repr", "category", "active")
+        prepopulate_fields = {"slug":("name",)}
+        inlines = [ProductImagesInline]

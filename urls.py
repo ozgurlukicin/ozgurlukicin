@@ -6,7 +6,6 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.conf.urls.defaults import *
-from django.contrib.comments.models import FreeComment
 
 from oi.settings import WEB_URL, DOCUMENT_ROOT, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, NEWS_PER_PAGE, TAG_PER_PAGE, HOWTO_PER_PAGE
 from oi.st.models import Package, Game, FS, News, Tag, HowTo

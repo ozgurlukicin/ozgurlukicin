@@ -38,13 +38,13 @@ class Status(models.Model):
 
 class Category(models.Model):
     name = models.CharField("İsim", max_length=150)
-    slug = models.SlugField("SEF isim", prepopulate_from=('name',))
+    slug = models.SlugField("SEF isim")
 
     def __unicode__(self):
         return self.name
 
     class Admin:
-        pass
+        prepopulated_fields = {'slug': ("name",)}
 
     class Meta:
         verbose_name = "Kategori"

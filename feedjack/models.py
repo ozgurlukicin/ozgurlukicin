@@ -52,7 +52,7 @@ class Site(models.Model):
     cache_duration = models.IntegerField('cache duration', default=60*60*24, \
       help_text='Duration in seconds of the cached pages and data.')
 
-    links = models.ManyToManyField(Link, verbose_name='links', filter_interface=models.VERTICAL, \
+    links = models.ManyToManyField(Link, verbose_name='links', \
       null=True, blank=True)
     template = models.CharField('template', max_length=100, null=True, blank=True, \
       help_text='This template must be a directory in your feedjack ' \
@@ -60,6 +60,7 @@ class Site(models.Model):
 
     class Admin:
         list_display = ('url', 'name')
+        filter_vertical = ('links',)
 
     class Meta:
         verbose_name = 'site'
@@ -151,13 +152,14 @@ class Post(models.Model):
     author = models.CharField('author', max_length=50, blank=True)
     author_email = models.EmailField('author email', blank=True)
     comments = models.URLField('comments', blank=True)
-    tags = models.ManyToManyField(Tag, verbose_name='tags', filter_interface=models.VERTICAL)
+    tags = models.ManyToManyField(Tag, verbose_name='tags')
     date_created = models.DateField('date created', auto_now_add=True)
 
     class Admin:
         list_display = ('title', 'link', 'author', 'date_modified')
         search_fields = ['link', 'title']
         date_hierarchy = 'date_modified'
+        filter_vertical = ('tags',)
 
     class Meta:
         verbose_name = 'post'

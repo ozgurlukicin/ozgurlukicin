@@ -261,7 +261,7 @@ class Topic(models.Model):
 class Forum(models.Model):
     category = models.ForeignKey('Category', null=True, verbose_name='Kategori')
     name = models.CharField(max_length=100, verbose_name='İsim')
-    slug = models.SlugField(prepopulate_from=('name',), verbose_name='SEF isim')
+    slug = models.SlugField(verbose_name='SEF isim')
     description = models.TextField(verbose_name='Açıklama')
     hidden = models.BooleanField(blank=True, null=True, default=0, verbose_name='Gizli')
     locked = models.BooleanField(blank=True, null=True, default=0, verbose_name='Kapalı')
@@ -285,6 +285,7 @@ class Forum(models.Model):
 
     class Admin:
         list_display = ('category', 'name')
+        prepopulated_fields = {'slug': ("name",)}
 
     class Meta:
         ordering = ('order',)

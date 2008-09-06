@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import time
-from django.dispatch import dispatcher
-from django.core.signals import request_started
 from django.test.signals import template_rendered
 from django.conf import settings
 from django.db import connection
@@ -97,9 +95,7 @@ class DebugFooter:
         self.templates_used = []
         self.contexts_used = []
         self.sql_offset_start = len(connection.queries)
-        dispatcher.connect(
-            self._storeRenderedTemplates, signal=template_rendered
-        )
+        template_rendered.connect(self._storeRenderedTemplates)
 
     def process_response(self, request, response):
         # Only include debug info for text/html pages not accessed via Ajax
@@ -141,7 +137,7 @@ class DebugFooter:
         #import pdb; pdb.set_trace()
         return response
 
-    def _storeRenderedTemplates(self, signal, sender, template, context):
+    def _storeRenderedTemplates(self, signal, sender, template, context, **kwargs):
         self.templates_used.append(template)
         self.contexts_used.append(context)
 

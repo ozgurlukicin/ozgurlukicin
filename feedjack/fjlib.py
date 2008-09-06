@@ -8,7 +8,7 @@ fjlib.py
 
 from django.conf import settings
 from django.db import connection
-from django.core.paginator import ObjectPaginator, InvalidPage
+from django.core.paginator import Paginator, InvalidPage
 from django.db import backend
 from django.http import Http404
 
@@ -161,7 +161,7 @@ def get_paginator(site, sfeeds_ids, page=0, tag=None, user=None):
     else:
         localposts = localposts.order_by('-date_modified')
 
-    paginator = ObjectPaginator(localposts.select_related(), \
+    paginator = Paginator(localposts.select_related(), \
       site.posts_per_page)
     try:
         object_list = paginator.get_page(page)

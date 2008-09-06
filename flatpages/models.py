@@ -5,14 +5,13 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-from django.core import validators
 from django.db import models
 from django.contrib.auth.models import User
 from oi.st.models import Tag
 from oi.middleware import threadlocals
 
 class FlatPage(models.Model):
-    url = models.CharField('URL', max_length=100, validator_list=[validators.isAlphaNumericURL])
+    url = models.URLField('URL', max_length=100)
     title = models.CharField('Başlık', max_length=200)
     text = models.TextField('Metin')
     author = models.ForeignKey(User, blank=True, editable=False)

@@ -17,7 +17,6 @@ from oi.settings import CITY_LIST, MEDIA_ROOT, MEDIA_URL
 
 # the signal stuff
 from django.db.models import signals
-from django.dispatch import dispatcher
 from oi.st.signals import open_forum_topic, remove_video_thumbnail_on_delete
 from oi.upload.models import Image as Img
 
@@ -174,7 +173,7 @@ class Video(models.Model):
     def get_video_name(self):
         return path.splitext(self.file)[0].split('/')[2]
 
-dispatcher.connect(remove_video_thumbnail_on_delete, signal=signals.pre_delete, sender=Video)
+signals.pre_delete.connect(remove_video_thumbnail_on_delete, sender=Video)
 
 class License(models.Model):
     name = models.CharField(max_length=16, blank=False, unique=True)
@@ -192,7 +191,7 @@ class License(models.Model):
 
 class FS(models.Model):
     title = models.CharField('Başlık', max_length=32, blank=False)
-    slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
+    slug = models.SlugField('SEF Başlık')
     image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
@@ -223,6 +222,7 @@ class FS(models.Model):
         ordering = ['order']
         search_fields = ['title', 'text', 'tags']
         js = ("js/admin/sef.js", "js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
+        prepopulated_fields = {'slug': ("title",)}
 
     class Meta:
         verbose_name = "İlk Adım"
@@ -230,7 +230,7 @@ class FS(models.Model):
 
 class HowTo(models.Model):
     title = models.CharField('Başlık', max_length=32, blank=False)
-    slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
+    slug = models.SlugField('SEF Başlık')
     sum = models.TextField('Özet', blank=False)
     image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
     text = models.TextField('Metin', blank=False)
@@ -261,18 +261,19 @@ class HowTo(models.Model):
         ordering = ['-update']
         search_fields = ['title', 'text', 'tags']
         js = ("js/admin/sef.js", "js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
+        prepopulated_fields = {'slug': ("title",)}
 
     class Meta:
         verbose_name = "Nasıl"
         verbose_name_plural = "Nasıl Belgeleri"
 
-dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=HowTo)
+signals.pre_save.connect(open_forum_topic, sender=HowTo)
 
 class Game(models.Model):
     ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'))
 
     title = models.CharField('Başlık', max_length=32, blank=False)
-    slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
+    slug = models.SlugField('SEF Başlık')
     image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
@@ -315,16 +316,17 @@ class Game(models.Model):
         ordering = ['-id']
         search_fields = ['title', 'sum', 'text', 'tags']
         js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
+        prepopulated_fields = {'slug': ("title",)}
 
     class Meta:
         verbose_name = "Oyun"
         verbose_name_plural = "Oyunlar"
 
-dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=Game)
+signals.pre_save.connect(open_forum_topic, sender=Game)
 
 class News(models.Model):
     title = models.CharField('Başlık', max_length=32, blank=False)
-    slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
+    slug = models.SlugField('SEF Başlık')
     image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
@@ -353,18 +355,19 @@ class News(models.Model):
         ordering = ['-update']
         search_fields = ['title', 'author', 'text']
         js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js")
+        prepopulated_fields = {'slug': ("title",)}
 
     class Meta:
         verbose_name = "Haber"
         verbose_name_plural = "Haberler"
 
-dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=News)
+signals.pre_save.connect(open_forum_topic, sender=News)
 
 class Package(models.Model):
     ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'))
 
     title = models.CharField('Başlık', max_length=32, blank=False, help_text='Paket ismi')
-    slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
+    slug = models.SlugField('SEF Başlık')
     image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Açıklama', blank=False)
@@ -401,12 +404,13 @@ class Package(models.Model):
         ordering = ['-id']
         search_fields = ['title', 'sum', 'text']
         js = ("js/admin/package_sef.js", "js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
+        prepopulated_fields = {'slug': ("title",)}
 
     class Meta:
         verbose_name = "Paket"
         verbose_name_plural = "Paketler"
 
-dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=Package)
+signals.pre_save.connect(open_forum_topic, sender=Package)
 
 class PardusVersion(models.Model):
     number = models.CharField('Sürüm numarası', max_length = 16, blank = False, unique = True)
