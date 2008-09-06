@@ -16,7 +16,7 @@ DEBUG = True
 TESTING = True
 TEMPLATE_DEBUG = DEBUG
 WEB_URL = 'http://localhost:8000'
-DOCUMENT_ROOT = '/home/nexus/oi-svn/newoi/oi'
+DOCUMENT_ROOT = '/home/user'
 
 DATABASE_ENGINE = 'mysql'
 DATABASE_NAME = 'oi'
