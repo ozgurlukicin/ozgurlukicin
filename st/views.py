@@ -67,7 +67,11 @@ def howto_printable(request, slug):
 def game_detail(request, slug):
     game = get_object_or_404(Game, slug=slug)
     game.avg = ((game.gameplay + game.graphics + game.sound + game.scenario + game.atmosphere)/5.0)
-
+    game.gameplay_range = range(1, game.gameplay)
+    game.graphics_range = range(1, game.graphics)
+    game.sound_range = range(1, game.sound)
+    game.scenario_range = range(1, game.scenario)
+    game.atmosphere_range = range(1, game.atmosphere)
     form=CommentForm()
 
     if request.user.is_authenticated():
@@ -113,7 +117,7 @@ def pkg_detail(request, slug):
 
     if request.user.is_authenticated():
         auth=True
-
+    package.point = range(1, package.point)
     # we need to handle page titles that changed after creating
     try:
         topic = Topic.objects.filter(title=package.title)[0]
