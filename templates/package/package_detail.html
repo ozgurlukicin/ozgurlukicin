@@ -4,6 +4,7 @@
 {% block title %}{{ package.title }} - Paketler - {% endblock %}
 
 {% block extrahead %}
+    <style type="text/css" media="screen">@import url('/media/css/new/game.css');</style>
     <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 {% if auth %}
     <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
@@ -36,22 +37,30 @@
 {% block leftcolumn %}
 <div class="sidebarcolumn leftcolumn">
     <h2>Ayrıntılar</h2>
-    <p>
-        <strong><span>Lisans:</span></strong> {% for license in package.license.all %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}<br />
-        <strong><span>Paket boyutu:</span></strong> {{ package.download_size|filesizeformat }}<br />
-        <strong><span>Kurulu boyutu:</span></strong> {{ package.installed_size|filesizeformat }}<br />
-        <a href="{{ package.url }}"><strong><span>Web sitesi</span></strong></a>
-    </p>
+    <table>
+        <tr>
+            <td>Lisans</td><td>: {% for license in package.license.all %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}</td>
+        </tr>
+        <tr>
+            <td>Paket boyutu</td><td>: {{ package.download_size|filesizeformat }}</td>
+        </tr>
+        <tr>
+            <td>Kurulu boyutu:</td><td>: {{ package.installed_size|filesizeformat }}</td>
+        </tr>
+        <tr>
+            <td colspan="2"><br /><a href="{{ package.url }}">Paketin Web sitesi ></a></td>
+        </tr>
+    </table>
     <h2>Editör notu</h2>
     <p>
-        <div class="rating_bar"><img src="/media/img/rating_{{ package.point }}.png" border="0" height="39px" width="200px" /></div>
+    <div class="rating_bar">{% for i in package.point %}<img src="/media/img/new/package_rating.gif" border="0" />{% endfor %}</div>
     </p>
 
     <h2>Menüdeki yeri</h2>
     <p>{{ package.path }}</p>
     <h2>Etiketler</h2>
     <p>
-            <img src="/media/img/new/tag.png" style="vertical-align: middle;" /> {% for tag in package.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
+    <img src="/media/img/new/tag.png" style="vertical-align: middle;" /> {% for tag in package.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if not forloop.last%},{% endif %} {% endfor %}
     </p>
     {% if package.wiki.all %}
         <h2>İlgili wiki sayfaları</h2>
@@ -65,7 +74,7 @@
         {% for ss in package.ss.all %}<a href="{{ ss.get_file_url }}" title="{{ ss.desc }}"><img src="{{ ss.file|thumbnail:"200x200" }}" /></a>{% endfor %}</a>
 {% endif %}
         <h2>Yazar</h2>
-        {{ package.author }}
+        <p>{{ package.author }}</p>
         <h2>Katkıda bulunun</h2>
         <p>Paketler bölümüne katkıda bulunmak istiyorsanız <a
             href="/katki/paket/">buraya</a> tıklayarak size kılavuzluk edecek
