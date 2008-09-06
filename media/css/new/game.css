@@ -1,0 +1,49 @@
+.leftcolumn {
+    background: #e7e7e7;
+    margin: 0 0 10px 0;
+}
+.game_average_point {
+    margin: 10px;
+    background: url('/media/img/new/game_rating.png') no-repeat;
+    text-align: center;
+    line-height: 114px;
+    height: 114px;
+    width: 114px;
+    font-size: 50px;
+    color: #FFF;
+}
+.leftcolumn a {
+    text-decoration: none;
+    font-size: 11px;
+}
+.leftcolumn h2 {
+    font-weight: bold;
+    margin: 20px 0 0 7px;
+}
+.leftcolumn p, .leftcolumn table {
+    margin: 2px 0 2px 7px;
+}
+.leftcolumn p, .leftcolumn td, .leftcolumn span {
+    font-size: 11px;
+}
+.leftcolumn .minibox {
+    margin: 1px;
+    float: left;
+    height: 10px;
+    width: 13px;
+    background: #219ADE;
+}
+.leftcolumn .minibox_container {
+    background: #fff;
+    width: 135px;
+    margin-left: 8px;
+}
+.leftcolumn span {
+    float: left;
+    margin: 10px 0 2px 7px;
+}
+.leftcolumn .rating {
+    float: right;
+    margin-right: 10px;
+    font-weight: bold;
+}
