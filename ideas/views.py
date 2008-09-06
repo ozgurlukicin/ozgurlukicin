@@ -226,6 +226,13 @@ def edit_idea(request, idea_id):
         """ idea isn't yours error """
         pass
 
+@permission_required('ideas.can_change_idea', login_url="/kullanici/giris/")
+def delete_idea(request, idea_id):
+    idea = Idea.objects.get(pk=idea_id)
+    idea.is_hidden = True
+    idea.save()
+    return HttpResponseRedirect(idea.get_absolute_url())
+
 @login_required
 def vote_idea(request, idea_id, vote):
     idea = Idea.objects.get(pk=idea_id)

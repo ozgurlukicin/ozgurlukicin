@@ -41,8 +41,13 @@
         </ul>
         {% endif %}
 
-{% if perms.ideas.change_idea %}
-    <div class="h3"><a href="javascript:;" onclick="$('#tekrarform').toggle(); return false;">Fikir Tekrarı Bildir</a></div>
+    {% if perms.ideas.change_idea %}
+        <br />
+    <span class="h3"><a href="/yenifikir/duzenle/{{ idea.id }}/">Fikri düzenle</a></span> _
+    <span class="h3"><a href="javascript:;" onclick="$('#tekrarform').toggle(); return false;">Fikir tekrarı bildir</a></span> _
+    <span class="h3"><a href="javascript:;" onclick="$('#changeStatusForm').toggle();">Fikir durumunu değiştir</a></span> _
+    <span class="h3"><a href="/yenifikir/sil/{{ idea.id }}/">Fikri sil</a></span>
+
     <div class="idea_detail_box" style="display: none;" id="tekrarform"> 
         <form  method="post" action="javascript:;">
         <p>Bu fikrin aynısını daha önce görmüşmüydünüz ? O zaman fikir tekrarını bildirerek bize yardımcı olun! </p>
@@ -51,7 +56,6 @@
         <span id="duplicate_form_info"></span>
         </form>
     </div>
-    <div class="h3"><a href="javascript:;" onclick="$('#changeStatusForm').toggle();">Fikir durumunu değiştir</a></div>
     <div class="idea_detail_box" style="display: none;" id="changeStatusForm">
     <form method="POST" action="javascript:;">
         <select name="id_status" id="id_status">
@@ -64,7 +68,6 @@
         <span id="status_form_info"></span>
     </form>
     </div>
-    <div class="h3"><a href="/yenifikir/duzenle/{{ idea.id }}/">Fikri düzenle</a></div>
     {% endif %}
 </div>
 <div style="clear:both"></div>
