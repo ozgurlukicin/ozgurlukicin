@@ -61,11 +61,12 @@ def get_extra_content(site, sfeeds_ids, ctx):
     ctx['site'] = site
     ctx['media_url'] = '%simg/feedjack/%s' % (settings.MEDIA_URL, site.template)
 
-def get_posts_tags(object_list, sfeeds_obj, user_id, tag_name):
+def get_posts_tags(page, sfeeds_obj, user_id, tag_name):
     """ Adds a qtags property in every post object in a page.
 
     Use "qtags" instead of "tags" in templates to avoid innecesary DB hits.
     """
+    object_list = page.object_list
     tagd = {}
     user_obj = None
     tag_obj = None
@@ -164,7 +165,7 @@ def get_paginator(site, sfeeds_ids, page=0, tag=None, user=None):
     paginator = Paginator(localposts.select_related(), \
       site.posts_per_page)
     try:
-        object_list = paginator.get_page(page)
+        object_list = paginator.page(page)
     except InvalidPage:
         if page == 0:
             object_list = []
@@ -176,7 +177,7 @@ def page_context(request, site, tag=None, user_id=None, sfeeds=None):
     """ Returns the context dictionary for a page view.
     """
     sfeeds_obj, sfeeds_ids = sfeeds
-    page = int(request.GET.get('page', 0))
+    page = int(request.GET.get('page', 1))
     paginator, object_list = get_paginator(site, sfeeds_ids, \
       page=page, tag=tag, user=user_id)
     if object_list:
@@ -188,17 +189,17 @@ def page_context(request, site, tag=None, user_id=None, sfeeds=None):
           user_id, tag)
     else:
         user_obj, tag_obj = None, None
+    page_obj = paginator.page(page)
     ctx = {
-        'object_list': object_list,
-        'is_paginated': paginator.pages > 1,
+        'object_list': page_obj.object_list,
+        'is_paginated': paginator.num_pages > 1,
         'results_per_page': site.posts_per_page,
-        'has_next': paginator.has_next_page(page),
-        'has_previous': paginator.has_previous_page(page),
+        'has_next': page_obj.has_next(),
+        'has_previous': page_obj.has_previous(),
         'page': page + 1,
         'next': page + 1,
         'previous': page - 1,
-        'pages': paginator.pages,
-        'hits' : paginator.hits,
+        'pages': paginator.num_pages,
     }
     get_extra_content(site, sfeeds_ids, ctx)
     from oi.feedjack import fjcloud
