@@ -6,6 +6,7 @@
 
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/profile.css');</style>
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={{ apikey }}" type="text/javascript"></script>
     <script type="text/javascript">
     //<![CDATA[
@@ -36,43 +37,57 @@
     </script>
 {% endblock %}
 
-{% block header_menu %}
-    {% include "header.html" %}
-{% endblock %}
-<br/>
-{% block ust_menu %}
-    {% include "ust_menu_ayrinti.html" %}
-{% endblock %}
-
-<br/>
-
-
 {% block content %}
 
 {% if info %}
 <div id="user_profile">
-    {% ifequal request.user.id info.id %}<a href="/kullanici/duzenle/">Bilgilerimi Düzenle</a>{% endifequal %}
     <div id="user_profile_left">
         <h3>{{ info }}</h3>
-        <img src="{{ info.get_profile.avatar.get_file_url }}" />
+        <div class="img_container">
+            <img src="{{ info.get_profile.avatar.get_file_url }}" alt="Avatar" />
+        </div>
+ {% ifequal request.user.id info.id %}<a href="/kullanici/duzenle/">Bilgilerimi Düzenle</a>{% endifequal %}
     </div>
     <div id="user_profile_right">
-        <h3>Kişisel Bilgiler</h3>
-        <ul>
-            <li>Adı: {{ info.first_name }}</li>
-            <li>Soyadı: {{ info.last_name }}</li>
-            <li>Şehir: {{ info.get_profile.get_city_display }}</li>
-            {% if info.get_profile.show_birthday %}<li>Doğum Tarihi: {{ info.get_profile.birthday|date:"d F Y" }}</li>{% endif %}
-            <li>Kayıt Tarihi: {{ info.date_joined|date:"d F Y" }}</li>
-        </ul>
-        <h3>İletişim Bilgileri</h3>
-        <ul>
-            {% if info.get_profile.show_email %}<li>E-posta: <a href="mailto:{{ info.email }}">{{ info.email }}</a></li>{% endif %}
-            <li>Web: <a href="{{ info.get_profile.homepage }}" target="_blank">{{ info.get_profile.homepage }}</a></li>
-            <li>Jabber: {{ info.get_profile.jabber }}</li>
-            <li>MSN: {{ info.get_profile.msn }}</li>
-            <li>ICQ: {{ info.get_profile.icq }}</li>
-        </ul>
+        <table>
+            <tr>
+                <td colspan="3"><h3>Kişisel Bilgiler</h3></td>
+            </tr>
+            <tr>
+                <td>Adı</td><td> : </td><td> {{ info.first_name }}</td>
+            </tr>
+            <tr>
+                <td>Soyadı</td><td> : </td><td> {{ info.last_name }}</td>
+            </tr>
+            <tr>
+                <td>Şehir</td><td> : </td><td> {{ info.get_profile.get_city_display }}</td>
+            </tr>
+            {% if info.get_profile.show_birthday %}
+            <tr>
+                <td>Doğum Tarihi</td><td> : </td><td>{{ info.get_profile.birthday|date:"d F Y" }}</td></tr>{% endif %}
+            <tr>
+                <td>Kayıt Tarihi</td><td> : </td><td> {{ info.date_joined|date:"d F Y" }}</td>
+            </tr>
+            <tr>
+                <td colspan="3"><h3>İletişim Bilgileri</h3></td>
+            </tr>
+            {% if info.get_profile.show_email %}
+            <tr>
+                <td>E-posta</td><td> : </td><td> <a href="mailto:{{ info.email }}">{{ info.email }}</a></td>
+            </tr>{% endif %}
+            <tr>
+                <td>Web</td><td> : </td><td> <a href="{{ info.get_profile.homepage }}" target="_blank">{{ info.get_profile.homepage }}</a></td>
+            </tr>
+            <tr>
+                <td>Jabber</td><td> : </td><td> {{ info.get_profile.jabber }}</td>
+            </tr>
+            <tr>
+                <td>MSN</td><td> : </td><td>{{ info.get_profile.msn }}</td>
+            </tr>
+            <tr>
+                <td>ICQ</td><td> : </td><td>{{ info.get_profile.icq }}</td>
+            </tr>
+        </table>
     </div>
 </div>
 <div id="id_map" class="googlemap"></div>
