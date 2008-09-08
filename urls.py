@@ -11,6 +11,9 @@ from oi.settings import WEB_URL, DOCUMENT_ROOT, PACKAGE_PER_PAGE, GAME_PER_PAGE,
 from oi.st.models import Package, Game, FS, News, Tag, HowTo
 from oi.seminar.models import Seminar
 from oi.st.feeds import *
+from django.contrib import admin
+
+admin.autodiscover()
 
 rss_dict = {
             '': Main_RSS,
@@ -167,7 +170,7 @@ urlpatterns = patterns('',
     #Django
     (r'^$', 'oi.st.views.home'),
     (r'^admin/upload/image/add/$', 'oi.upload.views.image_upload'),
-    (r'^admin/', include('django.contrib.admin.urls')),
+    (r'^admin/(.*)', admin.site.root),
     (r'^media/(.*)$', 'django.views.static.serve', {'document_root': '%s/media' % DOCUMENT_ROOT, 'show_indexes': True}),
 
     #Feeds
