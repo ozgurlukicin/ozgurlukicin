@@ -66,7 +66,7 @@ class OtherFile(models.Model):
     tags = models.ManyToManyField(Tag)
 
     def __unicode__(self):
-        return self.file
+        return unicode(self.file)
 
     class Meta:
         verbose_name = "Dosya"
@@ -78,7 +78,7 @@ class ScreenShot(models.Model):
     tags = models.ManyToManyField(Tag)
 
     def __unicode__(self):
-        return self.file
+        return unicode(self.file)
 
     def get_thumbnail_url(file, size='230x230'):
         thumb = 'thumb_' + file

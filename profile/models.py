@@ -37,7 +37,7 @@ class Avatar(models.Model):
     file = models.ImageField(upload_to="avatar/")
 
     def __unicode__(self):
-        return self.file
+        return unicode(self.file)
 
     class Admin:
         list_display = ("name", "file")
