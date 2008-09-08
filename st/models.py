@@ -31,11 +31,6 @@ class Tag(models.Model):
     def get_absolute_url(self):
         return "/etiket/%s/" % self.name
 
-    class Admin:
-        list_display = ('name', 'id')
-        ordering = ['-name']
-        search_fields = ['name']
-
     class Meta:
         ordering = ['name']
         verbose_name = "Etiket"
@@ -50,11 +45,6 @@ class Wiki(models.Model):
     def get_absolute_url(self):
         return "http://tr.pardus-wiki.org/%s" % self.name
 
-    class Admin:
-        list_display = ('name', 'id')
-        ordering = ['-name']
-        search_fields = ['name']
-
     class Meta:
         ordering = ['name']
         verbose_name = "Wiki sayfası"
@@ -65,11 +55,6 @@ class Contribute(models.Model):
 
     def __unicode__(self):
         return self.name
-
-    class Admin:
-        list_display = ('name', 'id')
-        ordering = ['-name']
-        search_fields = ['name']
 
     class Meta:
         verbose_name = "Katkı Adı"
@@ -82,11 +67,6 @@ class OtherFile(models.Model):
 
     def __unicode__(self):
         return self.file
-
-    class Admin:
-        list_display = ('file', 'desc')
-        ordering = ['-id']
-        search_fields = ['file', 'desc']
 
     class Meta:
         verbose_name = "Dosya"
@@ -116,11 +96,6 @@ class ScreenShot(models.Model):
 
         return thumb_url
 
-    class Admin:
-        list_display = ('file', 'desc')
-        ordering = ['-id']
-        search_fields = ['file', 'desc']
-
     class Meta:
         verbose_name = "Ekran Görüntüsü"
         verbose_name_plural = "Ekran Görüntüleri"
@@ -135,11 +110,6 @@ class Video(models.Model):
 
     def get_thumbnail_url(self):
         return "%s%s.png" % (MEDIA_URL, path.splitext(self.file)[0])
-
-    class Admin:
-        list_display = ('file', 'desc')
-        ordering = ['-id']
-        search_fields = ['file', 'desc']
 
     class Meta:
         verbose_name = "Video"
