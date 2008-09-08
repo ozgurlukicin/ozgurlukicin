@@ -6,7 +6,7 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.db import models
-from django import newforms as forms
+from django import forms
 
 from oi.settings import CITY_LIST
 

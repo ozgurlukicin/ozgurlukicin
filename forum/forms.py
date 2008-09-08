@@ -7,7 +7,7 @@
 
 from datetime import date
 
-from django import newforms as forms
+from django import forms
 from oi.forum.models import AbuseReport, Topic, Forum, WatchList
 from oi.st.models import Tag
 from oi.poll.models import Poll

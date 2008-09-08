@@ -7,7 +7,7 @@
 
 import re
 
-from django import newforms as forms
+from django import forms
 
 from oi.shop.shopprofile.models import ShopProfile, Bill
 
