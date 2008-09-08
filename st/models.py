@@ -204,19 +204,6 @@ class HowTo(models.Model):
     def get_printable_url(self):
         return "/nasil/%s/yazdir/" % self.slug
 
-    class Admin:
-        fields = (
-            ('Genel', {'fields': ('author', 'title', 'image', 'sum','text','videos','tags','wiki','update','status',)}),
-            ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
-        )
-
-        list_display = ('title', 'author', 'status', 'update')
-        list_filter = ['update']
-        ordering = ['-update']
-        search_fields = ['title', 'text', 'tags']
-        js = ("js/admin/sef.js", "js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
-        prepopulated_fields = {'slug': ("title",)}
-
     class Meta:
         verbose_name = "Nasıl"
         verbose_name_plural = "Nasıl Belgeleri"
@@ -258,20 +245,6 @@ class Game(models.Model):
     def get_printable_url(self):
         return "/oyun/%s/yazdir/" % self.slug
 
-    class Admin:
-        fields = (
-            ('Genel', {'fields': ('author', 'title', 'image', 'sum', 'text', 'videos', 'tags', 'wiki', 'update', 'status')}),
-            ('Oyun bilgileri', {'fields': ('url', 'path', 'learning_time', 'license', 'installed_size', 'download_size')}),
-            ('Değerlendirme', {'fields': ('gameplay', 'graphics', 'sound', 'scenario', 'atmosphere')}),
-            ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
-        )
-        list_display = ('title', 'author', 'status', 'update')
-        list_filter = ['update']
-        ordering = ['-id']
-        search_fields = ['title', 'sum', 'text', 'tags']
-        js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
-        prepopulated_fields = {'slug': ("title",)}
-
     class Meta:
         verbose_name = "Oyun"
         verbose_name_plural = "Oyunlar"
@@ -297,19 +270,6 @@ class News(models.Model):
 
     def get_printable_url(self):
         return "/haber/%s/yazdir/" % self.slug
-
-    class Admin:
-        fields = (
-            ('Genel', {'fields': ('author', 'title', 'image', 'sum', 'text', 'tags', 'update', 'status')}),
-            ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
-        )
-
-        list_display = ('title', 'author', 'update','status')
-        list_filter = ['update']
-        ordering = ['-update']
-        search_fields = ['title', 'author', 'text']
-        js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js")
-        prepopulated_fields = {'slug': ("title",)}
 
     class Meta:
         verbose_name = "Haber"
@@ -347,18 +307,6 @@ class Package(models.Model):
 
     def get_printable_url(self):
         return "/paket/%s/yazdir/" % self.slug
-
-    class Admin:
-        fields = (
-            ('Genel', {'fields': ('author', 'title', 'image', 'sum','text', 'license','installed_size','download_size','url','point','path','ss','tags','wiki','videos','update','status')}),
-            ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
-        )
-        list_display = ('title', 'author', 'status', 'update')
-        list_filter = ['license']
-        ordering = ['-id']
-        search_fields = ['title', 'sum', 'text']
-        js = ("js/admin/package_sef.js", "js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
-        prepopulated_fields = {'slug': ("title",)}
 
     class Meta:
         verbose_name = "Paket"
