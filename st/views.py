@@ -16,7 +16,7 @@ from oi.settings import WEB_URL, NEWS_IN_HOMEPAGE, PACKAGES_IN_HOMEPAGE, GAMES_I
 
 from oi.st.forms import SearchForm,CommentForm,AdvancedSearchForm
 
-from oi.st.models import *
+from oi.st.models import News, Package, Game, HowTo, FS, Tag, PardusVersion, PardusMirror
 from oi.st.wrappers import render_response
 from oi.flatpages.models import FlatPage
 
