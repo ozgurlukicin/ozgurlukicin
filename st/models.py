@@ -152,9 +152,6 @@ class License(models.Model):
     def __unicode__(self):
         return self.name
 
-    class Admin:
-        list_display = ('id', 'name')
-
     class Meta:
         verbose_name = "Lisans"
         verbose_name_plural = "Lisanslar"
@@ -180,19 +177,6 @@ class FS(models.Model):
 
     def get_printable_url(self):
         return "/ia/%s/yazdir/" % self.slug
-
-    class Admin:
-        fields = (
-            ('Genel', {'fields': ('author', 'title','image','sum','text','videos','tags','order','update','status',)}),
-            ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
-        )
-
-        list_display = ('title', 'author', 'status', 'update')
-        list_filter = ['update']
-        ordering = ['order']
-        search_fields = ['title', 'text', 'tags']
-        js = ("js/admin/sef.js", "js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
-        prepopulated_fields = {'slug': ("title",)}
 
     class Meta:
         verbose_name = "İlk Adım"
