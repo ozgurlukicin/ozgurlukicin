@@ -85,10 +85,6 @@ urlpatterns = patterns('',
 
     (r'^robots.txt$', 'oi.st.views.robots'),
 
-    #comments
-    (r'^comments/post/$', 'oi.comments.views.post_comment'),
-    (r'^comments/posted/$', 'oi.comments.views.comment_was_posted'),
-
     #News
     #(r'^haber/yorum/(?P<id>\d+)/$', 'oi.st.views.comment_news'),
     (r'^haber/yorum/(?P<slug>.*)/$', 'oi.st.views.comment_news'),

@@ -118,7 +118,6 @@ INSTALLED_APPS = (
     'oi.profile',
     'oi.forum',
     'oi.tema',
-    'oi.comments',
     'oi.petition',
     'oi.poll',
     # shop apps
