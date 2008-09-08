@@ -6,8 +6,8 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.db import models
-from django.core import validators
 from django.contrib import admin
+from django.core.exceptions import ValidationError
 
 class CategoryImages(models.Model):
     """ This class has no Meta and Admin class because it's edited inline on related object's page """
@@ -81,11 +81,11 @@ class Category(models.Model):
     def save(self):
         if self.id:
             if self.parent and self.parent_id == self.id:
-                raise validators.ValidationError("Bir kategoriyi kendisi içerisine yerleştiremezsiniz!")
+                raise ValidationError("Bir kategoriyi kendisi içerisine yerleştiremezsiniz!")
 
             for p in self._recurse_for_parents(self):
                 if self.id == p.id:
-                    raise validators.ValidationError("Bir kategoriyi kendisi içerisine yerleştiremezsiniz!")
+                    raise ValidationError("Bir kategoriyi kendisi içerisine yerleştiremezsiniz!")
 
         super(Category, self).save()
 
