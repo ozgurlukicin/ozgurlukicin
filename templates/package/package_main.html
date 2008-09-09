@@ -10,7 +10,7 @@
 <div class="summary_container">
 {% for package in package_list %}
     <div class="column first">
-         <img src="{{ package.image.get_file_url }}" alt="{{ package.image.get_alt_string }}" /><br />
+         <img src="{{ package.image.file.path }}" alt="{{ package.image.get_alt_string }}" /><br />
     </div>
     <div class="column">
         <div class="title"><a href="{{ package.get_absolute_url }}">{{ package.title }}</a></div>

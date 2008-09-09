@@ -9,7 +9,7 @@
     {% for news in news %}
     <div id="news_{{ forloop.counter }}" class="news_container{% if forloop.first %} active"{% else %}" style="display: none;"{% endif %}>
         <div class="column">
-            <img src="{{ news.image.get_file_url }}" alt="{{ news.image.get_alt_string }}" />
+            <img src="{{ news.image.file.path }}" alt="{{ news.image.get_alt_string }}" />
             <span>Haberler</span>
             <div class="title"><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></div>
             <div class="summary">{{ news.sum|safe|truncatewords_html:23 }}</div>
@@ -22,7 +22,7 @@
    <div class="summary_container">
         {% for howto in howtos %}
         <div class="column first">
-            <img src="{{ howto.image.get_file_url }}" alt="{{ howto.image.get_alt_string }}" /><br />
+            <img src="{{ howto.image.file.path }}" alt="{{ howto.image.get_alt_string }}" /><br />
         </div>
         <div class="column">
             <span>Nasıl</span>
@@ -33,7 +33,7 @@
         {% endfor %}
         {% for package in packages %}
         <div class="column first">
-            <img src="{{ package.image.get_file_url }}" alt="{{ package.image.get_alt_string }}" /><br />
+            <img src="{{ package.image.file.path }}" alt="{{ package.image.get_alt_string }}" /><br />
         </div>
         <div class="column">
             <span>Paket</span>
@@ -44,7 +44,7 @@
         {% endfor %}
         {% for game in games %}
         <div class="column first">
-            <img src="{{ game.image.get_file_url }}" alt="{{ game.image.get_alt_string }}" /><br />
+            <img src="{{ game.image.file.path }}" alt="{{ game.image.get_alt_string }}" /><br />
         </div>
         <div class="column">
             <span>Oyun</span>

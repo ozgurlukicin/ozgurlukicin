@@ -15,4 +15,4 @@ class Image(models.Model):
 
     def get_alt_string(self):
         "returns file name without extension"
-        return ".".join(self.file.rsplit(".")[:-1])[self.file.rfind("/")+1:]
+        return ".".join(self.file.path.rsplit(".")[:-1])[self.file.path.rfind("/")+1:]

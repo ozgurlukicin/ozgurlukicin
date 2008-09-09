@@ -10,7 +10,7 @@
 <div class="summary_container">
 {% for news in news_list %}
     <div class="column first">
-         <img src="{{ news.image.get_file_url }}" alt="{{ news.image.get_alt_string }}" /><br />
+         <img src="{{ news.image.file.path }}" alt="{{ news.image.get_alt_string }}" /><br />
             {{ news.update|date:"d M Y" }}
     </div>
     <div class="column">

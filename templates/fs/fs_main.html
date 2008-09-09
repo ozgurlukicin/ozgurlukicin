@@ -10,7 +10,7 @@
 <div class="summary_container">
 {% for fs in fs_list %}
     <div class="column first">
-         <img src="{{ fs.image.get_file_url }}" alt="{{ fs.image.get_alt_string }}" /><br />
+         <img src="{{ fs.image.file.path }}" alt="{{ fs.image.get_alt_string }}" /><br />
     </div>
     <div class="column">
         <div class="title"><a href="{{ fs.get_absolute_url }}">{{ fs.title }}</a></div>

@@ -50,7 +50,7 @@
     <div class="post_profile">
         <div class="author">{{ post.author }}</div>
         {% if post.author.is_staff %}<div class="author_description">Forum Yöneticisi</div>{% endif %}
-        <div class="avatar"><img src="{{ post.author.get_profile.avatar.get_file_url }}" alt="avatar" /></div>
+        <div class="avatar"><img src="{{ post.author.get_profile.avatar.file.path }}" alt="avatar" /></div>
         {% if perms.forum.can_see_post_ip %}<div class="ip">({{ post.ip }})</div>{% endif %}
         <div class="register_date">Kayıt Tarihi:<br />{{ post.author.date_joined|date:"d-m-Y" }}</div>
         <div class="button"><a href="/kullanici/profil/{{ post.author }}"><img src="/media/img/new/button_info.png" alt="bilgi" /></a></div>
@@ -134,7 +134,7 @@
 <div class="topic_news_area">
     {% for news in news_list %}
     <div class="topic_news_box" onclick="location.href='{{news.get_absolute_url}}'">
-        <h2><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></h2><div><img src="{{ news.image.get_file_url }}" alt="{{ news.image.get_alt_string }}" /></div><div>{{ news.sum|safe }}</div>
+        <h2><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></h2><div><img src="{{ news.image.file.path }}" alt="{{ news.image.get_alt_string }}" /></div><div>{{ news.sum|safe }}</div>
     </div>
     {% endfor %}
 </div>

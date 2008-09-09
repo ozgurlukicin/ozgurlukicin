@@ -44,7 +44,7 @@
     <div id="user_profile_left">
         <h3>{{ info }}</h3>
         <div class="img_container">
-            <img src="{{ info.get_profile.avatar.get_file_url }}" alt="Avatar" />
+            <img src="{{ info.get_profile.avatar.file.path }}" alt="Avatar" />
         </div>
  {% ifequal request.user.id info.id %}<a href="/kullanici/duzenle/">Bilgilerimi Düzenle</a>{% endifequal %}
     </div>
