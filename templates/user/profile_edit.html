@@ -76,7 +76,7 @@
         {% ifequal field.name "avatar" %}
         <div style="float:right;margin-right:40px;text-align:right;">
             <label>{{ field.label }}</label><br />{% if field.errors %}<br /><span class="error">{{ field.errors }}</span><br />{% endif %}
-            {{ field }}<br /><img name="avatarImage" src="{{user.get_profile.avatar.file.path}}" alt="avatar" />
+            {{ field }}<br /><img name="avatarImage" src="{{user.get_profile.avatar.file.url}}" alt="avatar" />
         </div>
         {% else %}
         <dl>

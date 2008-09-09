@@ -10,7 +10,7 @@
 <div class="summary_container">
 {% for game in game_list %}
     <div class="column first">
-         <img src="{{ game.image.file.path }}" alt="{{ game.image.get_alt_string }}" /><br />
+         <img src="{{ game.image.file.url }}" alt="{{ game.image.get_alt_string }}" /><br />
     </div>
     <div class="column">
         <div class="title"><a href="{{ game.get_absolute_url }}">{{ game.title }}</a></div>
