@@ -23,4 +23,4 @@ class FlatPageAdmin(admin.ModelAdmin):
     class Media:
         js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
 
-admin.site.register(FlatPageAdmin, FlatPage)
+admin.site.register(FlatPage, FlatPageAdmin)
