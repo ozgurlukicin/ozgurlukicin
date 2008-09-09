@@ -15,6 +15,7 @@ from oi.st.wrappers import render_response
 from oi.shop.shopprofile.models import ShopProfile
 from oi.shop.cart.models import Cart, CartItem
 from oi.shop.product.models import Product
+from oi.shop.cart.forms import BuyForm
 
 def get_cart_for_user(user):
     try:
@@ -58,3 +59,8 @@ def get_cart(request):
     for item in cart.items.all():
         cart_html += '<div class="item%d"><div class="count">%d</div>' % (item.id, item.quantity) + '<div class="product">%s</div><div class="remove_form" ><form action="javascript:;" method="POST"><input type="submit" onclick="remove(%s)" value="Sepetten Çıkar" /></form></div></div>' % (item.product, item.id)
     return HttpResponse(cart_html)
+
+@login_required
+def buy(request):
+    form = BuyForm()
+    return render_response(request, "cart/buy.html", {"form": form})
