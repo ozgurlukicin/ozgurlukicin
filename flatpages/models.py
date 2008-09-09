@@ -23,18 +23,6 @@ class FlatPage(models.Model):
         verbose_name = 'Statik sayfa'
         verbose_name_plural = 'Statik sayfalar'
 
-    class Admin:
-        fields = (
-            ('Genel', {'fields': ('url', 'title', 'text', 'tags', 'update')}),
-            ('Diğer', {'classes': 'collapse', 'fields': ('template_name',)}),
-        )
-
-        list_display = ('id', 'url', 'title', 'update')
-        list_filter = ['update']
-        ordering = ['-update']
-        search_fields = ['title', 'text', 'tags']
-        js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
-
     def __unicode__(self):
         return "%s -- %s" % (self.url, self.title)
 
