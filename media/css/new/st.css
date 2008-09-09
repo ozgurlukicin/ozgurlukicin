@@ -27,7 +27,6 @@ div.leftcolumn_content {
     margin-bottom: 10px;
 }
 div.leftcolumn_content p {
-    font-size: 11px;
     margin-bottom: 15px;
 }
 div.leftcolumn_content p.title a {
@@ -63,9 +62,6 @@ div.rightcolumn_content span.loginlinks {
 div.rightcolumn_content span.loginlinks a {
     text-decoration: none;
     font-size: 9px;
-}
-div.rightcolumn_content p {
-    font-size: 11px;
 }
 div.rightcolumn_content p a {
     color: #009FE0;
