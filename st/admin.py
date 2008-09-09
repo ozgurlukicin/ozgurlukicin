@@ -7,7 +7,7 @@
 
 from django.contrib import admin
 
-from oi.st.models import Tag, Wiki, Contribute, OtherFile, ScreenShot, Video, License, FS, HowTo, Game, News, Package
+from oi.st.models import Tag, Wiki, Contribute, OtherFile, ScreenShot, Video, License, FS, HowTo, Game, News, Package, PardusVersion, PardusMirror
 
 class StSimpleAdmin(admin.ModelAdmin):
     list_display = ('name', 'id')
@@ -61,6 +61,17 @@ class PackageAdmin(ArticleAdmin):
         ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
     )
 
+class PardusVersionAdmin(admin.ModelAdmin):
+    list_display = ('number', 'codename', 'status')
+    ordering = ['-number']
+    search_fields = ['codename']
+    js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
+
+class PardusMirrorAdmin(admin.ModelAdmin):
+    list_display = ('name', 'url', 'status')
+    ordering = ['-name']
+    search_fields = ['name']
+
 admin.site.register(Tag, StSimpleAdmin)
 admin.site.register(Wiki, StSimpleAdmin)
 admin.site.register(Contribute, StSimpleAdmin)
@@ -73,3 +84,5 @@ admin.site.register(HowTo, HowToAdmin)
 admin.site.register(Game, GameAdmin)
 admin.site.register(News, NewsAdmin)
 admin.site.register(Package, PackageAdmin)
+admin.site.register(PardusVersion, PardusVersionAdmin)
+admin.site.register(PardusMirror, PardusMirrorAdmin)

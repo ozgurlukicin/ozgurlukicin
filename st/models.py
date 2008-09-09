@@ -332,12 +332,6 @@ class PardusVersion(models.Model):
     def get_absolute_url(self):
         return "/indir/%s/" % self.number
 
-    class Admin:
-        list_display = ('number', 'codename', 'status')
-        ordering = ['-number']
-        search_fields = ['codename']
-        js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
-
     class Meta:
         verbose_name = "Pardus Sürümü"
         verbose_name_plural = "Pardus Sürümleri"
@@ -353,11 +347,6 @@ class PardusMirror(models.Model):
 
     def __unicode__(self):
         return self.name
-
-    class Admin:
-        list_display = ('name', 'url', 'status')
-        ordering = ['-name']
-        search_fields = ['name']
 
     class Meta:
         unique_together = (('type', 'order'),('type', 'name'),)
