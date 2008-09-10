@@ -32,7 +32,7 @@ class Petitioner(models.Model):
 
 class PetitionerAdmin(admin.ModelAdmin):
     list_display = ("firstname", "lastname", "job", "city", "email", "homepage", "signed", "is_active", "inform")
-    ordering = ("-signed")
+    ordering = ("-signed",)
     search_fields = ("firstname", "lastname", "job")
 
 admin.site.register(Petitioner, PetitionerAdmin)
