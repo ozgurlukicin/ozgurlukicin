@@ -268,7 +268,7 @@ def page_context(request, site, tag=None, user_id=None, sfeeds=None):
         'hits' : paginator.hits,
     }
     get_extra_content(site, sfeeds_ids, ctx)
-    from feedjack import fjcloud
+    from oi.feedjack import fjcloud
     ctx['tagcloud'] = fjcloud.getcloud(site, user_id)
     ctx['user_id'] = user_id
     ctx['user'] = user_obj
