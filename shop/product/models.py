@@ -33,10 +33,6 @@ class CategoryImages(models.Model):
         else:
             super(CategoryImages, self).save()
 
-class CategoryImagesInline(admin.TabularInline):
-    model = CategoryImages
-    max_num = 2
-
 class Category(models.Model):
     """ Base category model for all products """
     name = models.CharField("İsim", max_length=200)
@@ -119,12 +115,6 @@ class Category(models.Model):
         verbose_name = "Kategori"
         verbose_name_plural = "Kategoriler"
 
-    class Admin:
-        search_fields = ["name", "slug"]
-        list_display = ("name", "_parents_repr",)
-        prepopulate_fields = {"slug":("name",)}
-        inlines = [CategoryImagesInline]
-
 ########################################
 #                                      #
 # Tax Model that all products can have #
@@ -142,12 +132,6 @@ class Tax(models.Model):
     class Meta:
         verbose_name = "Vergi"
         verbose_name_plural = "Vergiler"
-
-        ordering = ['title']
-
-    class Admin:
-        list_display = ("title", "percentage",)
-        search_fields = ['title']
 
 ######################################################
 #                                                    #
@@ -179,10 +163,6 @@ class ProductImages(models.Model):
             self.delete()
         else:
             super(ProductImages, self).save()
-
-class ProductImagesInline(admin.TabularInline):
-    model = ProductImages
-    max_num = 3
 
 ############################################################
 #                                                          #
@@ -261,19 +241,3 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Ürün"
         verbose_name_plural = "Ürünler"
-
-        ordering = ["name", "price"]
-
-    class Admin:
-        fields = (
-            ("Ürün Bilgileri", {"fields": ("name", "slug", "description", "stock", "price")}),
-            ("Kategori/Resim/Vergi", {"fields": ("parent", "category", "tax")}),
-            (None, {"fields": ("active",)})
-            )
-
-        search_fields = ["name"]
-        list_filter = ["active"]
-
-        list_display = ("name", "stock", "_parents_repr", "category", "active")
-        prepopulate_fields = {"slug":("name",)}
-        inlines = [ProductImagesInline]
