@@ -8,7 +8,7 @@ admin.py
 
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _ 
-from feedjack import models
+from oi.feedjack import models
 
 
 class LinkAdmin(admin.ModelAdmin):
