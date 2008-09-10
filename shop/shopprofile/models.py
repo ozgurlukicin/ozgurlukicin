@@ -31,9 +31,6 @@ class ShopProfile(models.Model):
         verbose_name_plural = 'Alışveriş Profilleri'
         ordering = ('user',)
 
-    class Admin:
-        list_display = ('user', 'phone', 'address',)
-
 # Bill Class
 
 class Bill(models.Model):
@@ -65,10 +62,6 @@ class Bill(models.Model):
     class Meta:
         verbose_name = 'Fatura Bilgisi'
         verbose_name_plural = 'Fatura Bilgileri'
-
-    class Admin:
-        list_display = ('shop_profile', 'address', 'company_name', 'tax_number',)
-        search_fields = ['address']
 
     def shop_profile(self):
         qs = ShopProfile.objects.filter(bill=self)
