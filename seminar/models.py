@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2007 Artistanbul
+# Copyright 2007, 2008 Artistanbul
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
@@ -19,11 +19,6 @@ class Place(models.Model):
     def __unicode__(self):
         return self.name
 
-    class Admin:
-        list_display = ('name',)
-        ordering = ['-name']
-        search_fields = ['name', 'direction']
-
     class Meta:
         ordering = ['name']
         verbose_name = "Seminer Yeri"
@@ -34,11 +29,6 @@ class Attender(models.Model):
 
     def __unicode__(self):
         return self.name
-
-    class Admin:
-        list_display = ('name',)
-        ordering = ['-name']
-        search_fields = ['name']
 
     class Meta:
         ordering = ['name']
@@ -54,11 +44,6 @@ class Seminar(models.Model):
 
     def __unicode__(self):
         return self.description
-
-    class Admin:
-        list_display = ('description', 'date')
-        ordering = ['-date']
-        search_fields = ['description']
 
     class Meta:
         verbose_name = "Seminer"
