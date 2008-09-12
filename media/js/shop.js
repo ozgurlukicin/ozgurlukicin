@@ -3,7 +3,6 @@ function toggleBuyPopup() {
     var height = document.body.clientHeight;
     var width = document.body.clientWidth;
     $("#buymessage").css("left", width/2-152).css("top", height/2-112).toggle("slow");
-    $("#buy").css("width", width).css("height", height).toggle();
 }
 function addToCart() {
     $.post("/dukkan/sepet/ekle/", { product_id: current_product, quantity: $('#quantity').val(), csrfmiddlewaretoken: $('#csrfmiddlewaretoken').val() },
