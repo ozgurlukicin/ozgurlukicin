@@ -67,5 +67,10 @@ def get_cart(request):
 
 @login_required
 def buy(request):
-    form = BuyForm()
+    user = request.user
+    form = BuyForm({
+        "name": user.first_name,
+        "lastname": user.last_name,
+        "email": user.email,
+        })
     return render_response(request, "cart/buy.html", {"form": form})
