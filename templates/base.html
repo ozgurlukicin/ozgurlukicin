@@ -21,6 +21,7 @@
 {% block extrahead %}{% endblock %}
 </head>
 <body{% block extrabody %}{% endblock %}>
+{% block afterbody %}{% endblock %}
 {% include "header.html" %}
 <div id="{% block pagetype %}page{% endblock %}">
     {% include "menu.html" %}

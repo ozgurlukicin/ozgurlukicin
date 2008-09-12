@@ -1,4 +1,12 @@
 {% extends "shop_base.html" %}
 {% block content %}
-{{ form }}
+<form method="POST" action="http://www.tish-o.com.tr/tubitak_gobuy.asp">
+    {% for field in form %}
+    <dl>
+        <dt><label for="id_{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
+        <dd>{{ field }}</dd>
+    </dl>
+    {% endfor %}
+    <input type="submit" />
+</form>
 {% endblock %}
