@@ -52,13 +52,18 @@ def remove_item_from_cart(request):
     else:
         return HttpResponseRedirect("/dukkan/")
 
+def get_cart_html(cart):
+    cart_html = ''
+    for item in cart.items.all():
+        cart_html += '<div class="item%d"><div class="count">%d</div><div class="product">%s</div><div class="remove_form" ><form action="javascript:;" method="POST"><input type="submit" onclick="remove(%s)" value="Sepetten Çıkar" /></form></div></div>' % (item.id, item.quantity, item.product, item.id)
+    if cart.items.count():
+        cart_html += '<div><a href="/dukkan/sepet/satinal/">Sepettekileri Satın Al</a></div>'
+    return cart_html
+
 @login_required
 def get_cart(request):
     cart = get_cart_for_user(request.user)
-    cart_html = ''
-    for item in cart.items.all():
-        cart_html += '<div class="item%d"><div class="count">%d</div>' % (item.id, item.quantity) + '<div class="product">%s</div><div class="remove_form" ><form action="javascript:;" method="POST"><input type="submit" onclick="remove(%s)" value="Sepetten Çıkar" /></form></div></div>' % (item.product, item.id)
-    return HttpResponse(cart_html)
+    return HttpResponse(get_cart_html(cart))
 
 @login_required
 def buy(request):

@@ -9,7 +9,7 @@ from elementtree.ElementTree import Element, SubElement, tostring
 from django.template import Library
 
 from oi.shop.product.models import Category, Product
-from oi.shop.cart.views import get_cart_for_user
+from oi.shop.cart.views import get_cart_for_user, get_cart_html
 
 register = Library()
 
@@ -58,7 +58,4 @@ def category_tree(id=None):
 @register.simple_tag
 def get_cart(user):
     cart = get_cart_for_user(user)
-    cart_html = ''
-    for item in cart.items.all():
-        cart_html += '<div class="item%d"><div class="count">%d</div>' % (item.id, item.quantity) + '<div class="product">%s</div><div class="remove_form" ><form action="javascript:;" method="POST"><input type="submit" onclick="remove(%s)" value="Sepetten Çıkar" /></form></div></div>' % (item.product, item.id)
-    return cart_html
+    return get_cart_html(cart)
