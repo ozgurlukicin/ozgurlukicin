@@ -5,11 +5,11 @@
     {% for product in products %}
         {% if not product.parent %}
         <div class="product">
-            <div class="photo"><img src="{{ product.images.all.0.picture.url }}" alt="{{ product }}" /></div>
-            <div class="title">{{ product }}</div>
-            <div class="description">{{ product.description }}</div>
+            <div class="photo rightborder"><img src="{{ product.images.all.0.picture.url }}" alt="{{ product }}" /></div>
+            <div class="title rightborder">{{ product }}</div>
+            <div class="description rightborder">{{ product.description }}</div>
             <div class="buttons">
-                <div class="button"><a href="{{ product.get_absolute_url }}">Satın Al</a></div>
+                <div class="button"><a href="{{ product.get_absolute_url }}"><img src="/media/img/new/shop/button_buy.png" alt="Satın Al" /></a></div>
             </div>
         </div>
         {% endif %}

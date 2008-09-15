@@ -52,3 +52,9 @@
     color:white;
     margin:10px;
 }
+#product_list .product {
+    float: left;
+}
+#product_list .rightborder {
+    border-right: 1px #EAEAEA solid;
+}
