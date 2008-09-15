@@ -30,11 +30,11 @@ class ProductImagesInline(admin.TabularInline):
 
 class ProductAdmin(admin.ModelAdmin):
     fieldsets = (
-        ("Ürün Bilgileri", {"fields": ("name", "slug", "description", "stock", "price")}),
+        ("Ürün Bilgileri", {"fields": ("serial", "name", "slug", "description", "stock", "price")}),
         ("Kategori/Resim/Vergi", {"fields": ("parent", "category", "tax")}),
         (None, {"fields": ("active",)})
         )
-    search_fields = ["name"]
+    search_fields = ["serial", "name"]
     list_filter = ["active"]
     list_display = ("name", "stock", "_parents_repr", "category", "active")
     prepopulate_fields = {"slug":("name",)}

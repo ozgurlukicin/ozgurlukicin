@@ -172,6 +172,7 @@ class ProductImages(models.Model):
 ############################################################
 
 class Product(models.Model):
+    serial = models.CharField("Seri No", help_text="Ürünün seri numarası", max_digits=20)
     name = models.CharField("İsim", max_length=200)
     slug = models.SlugField("SEF Başlık", help_text="Adres kısmında kullanılan ad, isim kısmından otomatik olarak üretilmektedir")
     description = models.TextField("Ürün açıklaması")
