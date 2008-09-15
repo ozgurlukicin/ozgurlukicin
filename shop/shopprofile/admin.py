@@ -7,14 +7,10 @@
 
 from django.contrib import admin
 
-from oi.shop.shopprofile.models import ShopProfile, Bill
+from oi.shop.shopprofile.models import ShopProfile
 
 class ShopProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'phone', 'address',)
-
-class BillAdmin(admin.ModelAdmin):
-    list_display = ('shop_profile', 'address', 'company_name', 'tax_number',)
     search_fields = ['address']
 
 admin.site.register(ShopProfile, ShopProfileAdmin)
-admin.site.register(Bill, BillAdmin)

@@ -68,9 +68,11 @@ def get_cart(request):
 @login_required
 def buy(request):
     user = request.user
+    shopProfile = get_object_or_404(ShopProfile, user=user)
     form = BuyForm({
         "name": user.first_name,
         "lastname": user.last_name,
         "email": user.email,
+        "country": "Türkiye",
         })
     return render_response(request, "cart/buy.html", {"form": form})

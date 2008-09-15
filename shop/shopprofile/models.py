@@ -6,17 +6,27 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.db import models
-
 from django.contrib.auth.models import User
+
+from oi.settings import CITY_LIST
 
 class ShopProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
+    tcno = models.IntegerField("TC kimlik no", max_length=12, help_text="TC Kimlik numaranız.")
     phone = models.CharField('Telefon', max_length=10, help_text='Telefon numarası. <alan kodu><numara> şeklinde belirtin. Örneğin; 2121234567')
     cellphone = models.CharField('Cep Telefonu', max_length=10, blank=True, null=True, help_text='Cep telefonu. <alan kodu><numara> şeklinde belirtin. Örneğin; 5123456789. (zorunlu değil)')
-    address = models.TextField('Adres', help_text='İkamet ettiğiniz yer (posta kodu ile birlikte)')
-    second_address = models.TextField('İkinci Adres', blank=True, help_text='Size ulaşabileceğimiz 2. bir adres (zorunlu değil)')
-
-    bill = models.ForeignKey('Bill', null=True)
+    address = models.TextField('Adres', help_text='Ürünlerin gönderileceği adres')
+    postcode = models.IntegerField("Posta Kodu", blank=True, help_text="5 rakamdan oluşan posta kodunuzu girin. (zorunlu değil)")
+    town = models.CharField("İlçe", max_length=20)
+    city = models.CharField('Şehir', choices=CITY_LIST, max_length=20)
+    billing_firstname = models.CharField("Fatura adı", max_length=20, help_text="Fatura için adınız")
+    billing_lastname = models.CharField("Fatura soyadı", max_length=20, help_text="Fatura için soyadınız")
+    billing_address = models.CharField('Fatura Adresi', max_length=200, blank=True)
+    billing_postcode = models.IntegerField("Posta Kodu", blank=True, max_length=5, help_text="5 rakamdan oluşan posta kodunuzu girin. (zorunlu değil)")
+    billing_town = models.CharField("İlçe", max_length=50)
+    billing_city = models.CharField('Şehir', choices=CITY_LIST, max_length=50)
+    billing_office = models.CharField("Vergi Dairesi", max_length=50, blank=True, help_text="Zorunlu değil")
+    billing_no = models.IntegerField("Vergi No", max_length=20, blank=True, help_text="Zorunlu değil")
 
     def __unicode__(self):
         return u'%s' % self.user.username
@@ -30,43 +40,3 @@ class ShopProfile(models.Model):
         verbose_name = 'Alışveriş Profili'
         verbose_name_plural = 'Alışveriş Profilleri'
         ordering = ('user',)
-
-# Bill Class
-
-class Bill(models.Model):
-    # We don't require filling all fields here, we will control it in the view as user can have 2 bill type.
-    # If we require all fields, then user wanting to select only invidual bill type won't be able to select it. Additionally, user can select both bill type.
-
-    # Invidual bill type fields
-    address = models.TextField('Ürünlerin gönderileceği adres.', blank=True, help_text="Lütfen posta kodunu da belirtin.")
-
-    # Bill type for companies
-    company_name = models.CharField('Şirket Adı', max_length=200, blank=True)
-    company_address = models.TextField('Şirket Adresi', blank=True, help_text="Lütfen posta kodunu da belirtin.")
-    # user's title in company
-    employee_title = models.CharField('Ünvan', max_length=20, blank=True, help_text='Şirket içerisindeki ünvanınız.')
-    tax_number = models.IntegerField('Vergi numarası', max_length=15, blank=True, default=0)
-    tax_department = models.CharField('Vergi dairesi adı', max_length=200, blank=True, help_text='İstanbul Bakırköy Vergi Dairesi gibi.')
-
-    def __unicode__(self):
-        if self.address:
-            return u'%s' % self.address
-
-    def have_company_information(self):
-        """ Checks if the user has company information """
-        if self.company_name and self.tax_number:
-            return True
-        else:
-            return False
-
-    class Meta:
-        verbose_name = 'Fatura Bilgisi'
-        verbose_name_plural = 'Fatura Bilgileri'
-
-    def shop_profile(self):
-        qs = ShopProfile.objects.filter(bill=self)
-        if qs.count() >= 1:
-            return qs[0]
-        else:
-            return None
-    shop_profile.short_description = 'Profil'
