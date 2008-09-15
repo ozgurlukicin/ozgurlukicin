@@ -9,14 +9,20 @@
 {% endblock %}
 {% block leftcolumn %}
 <div class="sidebarcolumn leftcolumn">
-    {% if user.is_authenticated %}
     <div class="leftcolumn_content">
         <div class="shop_category">Sepet</div>
+        {% if user.is_authenticated %}
+        {% if user.get_profile.have_shopprofile %}
         <div id="cart">
             {% get_cart user %}
         </div>
+        {% else %}
+        <p>Sepeti kullanabilmek için öncelikle bir alışveriş profili oluşturmalısınız. <a href="/dukkan/profil/olustur/">Buraya</a> tıklayarak profilinizi oluşturabilir ve ürün siparişi vermeye başlayabilirsiniz.</p>
+        {% endif %}
+        {% else %}
+        <p>Sepeti kullanabilmek için sağdaki kullanıcı kutusundan giriş yapmalısınız.</p>
+        {% endif %}
     </div>
-    {% endif %}
     <div class="leftcolumn_content">
         <div class="shop_category">Ürünler</div>
         {% category_tree %}
