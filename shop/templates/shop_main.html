@@ -5,7 +5,7 @@
     {% for product in products %}
         {% if not product.parent %}
         <div class="product">
-            <div class="photo"><img src="{{ product.images.all.0.get_picture_url }}" alt="{{ product }}" /></div>
+            <div class="photo"><img src="{{ product.images.all.0.picture.url }}" alt="{{ product }}" /></div>
             <div class="title">{{ product }}</div>
             <div class="description">{{ product.description }}</div>
             <div class="buttons">
