@@ -19,7 +19,7 @@ class BuyForm(forms.Form):
     email = forms.EmailField(label="E-posta", max_length=50)
     telephone = forms.CharField(label="Telefon", max_length=12, min_length=12)
     telephonegsm = forms.CharField(label="Cep Telefonu", max_length=12, min_length=12, required=False)
-    adress = forms.CharField(label="Adres", max_length=200)
+    address = forms.CharField(label="Adres", max_length=200)
     postcode = forms.IntegerField(label="Posta Kodu", min_value=10000, max_value=99999, required=False)
     ilce = forms.CharField(label="İlçe", max_length=50)
     city = forms.CharField(label="Şehir", max_length=50)

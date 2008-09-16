@@ -92,6 +92,7 @@ def buy(request):
         "taxcountry": "Türkiye",
         "taxvergidairesi": shopProfile.billing_office,
         "taxvergino": shopProfile.billing_no,
+        "tckimlikno": shopProfile.tcno,
         }
     form = BuyForm(initial=initial)
     return render_response(request, "cart/buy.html", {"form": form, "cartItems": cart.items.all()})
