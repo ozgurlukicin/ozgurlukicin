@@ -117,7 +117,6 @@ def pkg_detail(request, slug):
 
     if request.user.is_authenticated():
         auth=True
-    package.point = range(1, package.point)
     # we need to handle page titles that changed after creating
     try:
         topic = Topic.objects.filter(title=package.title)[0]
