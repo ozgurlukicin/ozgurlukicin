@@ -49,13 +49,3 @@ def create_shopprofile(request):
     else:
         form = ShopProfileForm()
     return render_response(request, "shopprofile/shopprofile_create.html", {"form":form})
-
-@login_required
-def create_personal_bill(request):
-    form = PersonalBillForm()
-    return render_response(request, "shopprofile/bill_create.html", {"form":form})
-
-@login_required
-def create_corporate_bill(request):
-    form = CorporateBillForm()
-    return render_response(request, "shopprofile/bill_create.html", {"form":form})

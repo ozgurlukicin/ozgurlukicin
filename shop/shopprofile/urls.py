@@ -10,6 +10,5 @@ from django.conf.urls.defaults import *
 urlpatterns = patterns('oi.shop',
         (r'^$', 'shopprofile.views.main'),
         (r'^olustur/$', 'shopprofile.views.create_shopprofile'),
-        (r'^olustur/kisisel_fatura/$', 'shopprofile.views.create_personal_bill'),
-        (r'^olustur/kurumsal_fatura/$', 'shopprofile.views.create_corporate_bill'),
+        #(r'^degistir/$', 'shopprofile.views.change_shopprofile'),
         )
