@@ -7,6 +7,13 @@
         <dd>{{ field }}</dd>
     </dl>
     {% endfor %}
+    {% for item in cartItems %}
+    <input type="hidden" name="price_{{ forloop.counter }}" value="{{ item.product.price }}"/>
+    <input type="hidden" name="count_{{ forloop.counter }}" value="{{ item.quantity }}"/>
+    <input type="hidden" name="productname_{{ forloop.counter }}" value="{{ item.product.name }}"/>
+    <input type="hidden" name="strorder_tubitak_{{ forloop.counter }}" value="{{ item.product.description }}"/>
+    <input type="hidden" name="productid_{{ forloop.counter }}" value="{{ item.product.serial }}"/>
+    {% endfor %}
     <input type="submit" />
 </form>
 {% endblock %}

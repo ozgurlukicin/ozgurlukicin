@@ -8,11 +8,11 @@
 from django import forms
 
 class BuyForm(forms.Form):
-    price_1 = forms.IntegerField(label="Fiyat", min_value=0)
-    count_1 = forms.IntegerField(label="Adet", min_value=0)
-    productname_1 = forms.CharField(label="Ürün Adı", max_length=50)
-    strorder_tubitak_1 = forms.CharField(label="Ürün Detayları")
-    productid_1 = forms.CharField(label="Ürün Tanım No", max_length=20)
+#   price_1 = forms.IntegerField(label="Fiyat", min_value=0)
+#   count_1 = forms.IntegerField(label="Adet", min_value=0)
+#   productname_1 = forms.CharField(label="Ürün Adı", max_length=50)
+#   strorder_tubitak_1 = forms.CharField(label="Ürün Detayları")
+#   productid_1 = forms.CharField(label="Ürün Tanım No", max_length=20)
     productcount = forms.IntegerField(label="Sepetteki Ürün Sayısı", min_value=0)
     name = forms.CharField(label="İsim", max_length=50)
     lastname = forms.CharField(label="Soyisim", max_length=50)

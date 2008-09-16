@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
+from django import forms
 
 from oi.st.wrappers import render_response
 
@@ -69,10 +70,28 @@ def get_cart(request):
 def buy(request):
     user = request.user
     shopProfile = get_object_or_404(ShopProfile, user=user)
-    form = BuyForm({
+    cart = get_object_or_404(Cart, user=user)
+    initial = {
+        "productcount": cart.items.count(),
         "name": user.first_name,
         "lastname": user.last_name,
         "email": user.email,
+        "telephone": shopProfile.phone,
+        "telephonegsm": shopProfile.cellphone,
+        "address": shopProfile.address,
+        "postcode": shopProfile.postcode,
+        "ilce": shopProfile.town,
+        "city": shopProfile.get_city_display(),
         "country": "Türkiye",
-        })
-    return render_response(request, "cart/buy.html", {"form": form})
+        "taxname": shopProfile.billing_firstname,
+        "taxlastname": shopProfile.billing_lastname,
+        "taxadress": shopProfile.billing_address,
+        "taxpostcode": shopProfile.billing_postcode,
+        "taxilce": shopProfile.billing_town,
+        "taxcity": shopProfile.get_billing_city_display(),
+        "taxcountry": "Türkiye",
+        "taxvergidairesi": shopProfile.billing_office,
+        "taxvergino": shopProfile.billing_no,
+        }
+    form = BuyForm(initial=initial)
+    return render_response(request, "cart/buy.html", {"form": form, "cartItems": cart.items.all()})
