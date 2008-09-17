@@ -16,7 +16,6 @@ from oi.settings import MEDIA_URL, MEDIA_ROOT
 
 @login_required
 def image_upload(request):
-
     if request.user.is_staff:
         manipulator = Image.AddManipulator()
         form = forms.FormWrapper(manipulator,{},{})
