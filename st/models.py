@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2007 Artistanbul
+# Copyright 2007, 2008 Artistanbul
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
@@ -14,27 +14,16 @@ from django.contrib.auth.models import User
 
 from oi.middleware import threadlocals
 from oi.settings import CITY_LIST, MEDIA_ROOT, MEDIA_URL
+from oi.forum.models import Topic
+from oi.forum.tools import create_forum_topic
 
 # the signal stuff
 from django.db.models import signals
-from oi.st.signals import open_forum_topic, remove_video_thumbnail_on_delete
+from oi.st.tags import Tag
+from oi.st.signals import remove_video_thumbnail_on_delete
 from oi.upload.models import Image as Img
 
 FFMPEG_COMMAND = "ffmpeg"
-
-class Tag(models.Model):
-    name = models.CharField('Etiket', max_length=32, blank=False, unique=True)
-
-    def __unicode__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return "/etiket/%s/" % self.name
-
-    class Meta:
-        ordering = ['name']
-        verbose_name = "Etiket"
-        verbose_name_plural = "Etiketler"
 
 class Wiki(models.Model):
     name = models.CharField('Madde adı', max_length=128, blank=False, unique=True)
@@ -194,6 +183,7 @@ class HowTo(models.Model):
     update = models.DateTimeField('Son Güncelleme', blank=False)
     author = models.CharField('Yazar', max_length=32)
     status = models.BooleanField('Aktif')
+    topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
 
     def __unicode__(self):
         return self.title
@@ -204,11 +194,13 @@ class HowTo(models.Model):
     def get_printable_url(self):
         return "/nasil/%s/yazdir/" % self.slug
 
+    def save(self):
+        create_forum_topic(self, "Nasıl")
+        super(HowTo, self).save()
+
     class Meta:
         verbose_name = "Nasıl"
         verbose_name_plural = "Nasıl Belgeleri"
-
-signals.pre_save.connect(open_forum_topic, sender=HowTo)
 
 class Game(models.Model):
     ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'))
@@ -235,6 +227,7 @@ class Game(models.Model):
     update = models.DateTimeField('Son Güncelleme', blank=False)
     author = models.CharField('Yazar', max_length=32)
     status = models.BooleanField('Aktif')
+    topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
 
     def __unicode__(self):
         return self.title
@@ -245,11 +238,13 @@ class Game(models.Model):
     def get_printable_url(self):
         return "/oyun/%s/yazdir/" % self.slug
 
+    def save(self):
+        create_forum_topic(self, "Oyunlar")
+        super(Game, self).save()
+
     class Meta:
         verbose_name = "Oyun"
         verbose_name_plural = "Oyunlar"
-
-signals.pre_save.connect(open_forum_topic, sender=Game)
 
 class News(models.Model):
     title = models.CharField('Başlık', max_length=32, blank=False)
@@ -261,6 +256,7 @@ class News(models.Model):
     update = models.DateTimeField('Tarih', blank=False)
     author = models.CharField('Yazar', max_length=32)
     status = models.BooleanField('Aktif')
+    topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
 
     def __unicode__(self):
         return self.title
@@ -271,11 +267,13 @@ class News(models.Model):
     def get_printable_url(self):
         return "/haber/%s/yazdir/" % self.slug
 
+    def save(self):
+        create_forum_topic(self, "Haberler")
+        super(News, self).save()
+
     class Meta:
         verbose_name = "Haber"
         verbose_name_plural = "Haberler"
-
-signals.pre_save.connect(open_forum_topic, sender=News)
 
 class Package(models.Model):
     ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'))
@@ -298,6 +296,7 @@ class Package(models.Model):
     update = models.DateTimeField('Son Güncelleme', blank=False)
     author = models.CharField('Yazar', max_length=32)
     status = models.BooleanField('Aktif')
+    topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
 
     def __unicode__(self):
         return self.title
@@ -308,11 +307,13 @@ class Package(models.Model):
     def get_printable_url(self):
         return "/paket/%s/yazdir/" % self.slug
 
+    def save(self):
+        create_forum_topic(self, "Paketler")
+        super(Package, self).save()
+
     class Meta:
         verbose_name = "Paket"
         verbose_name_plural = "Paketler"
-
-signals.pre_save.connect(open_forum_topic, sender=Package)
 
 class PardusVersion(models.Model):
     number = models.CharField('Sürüm numarası', max_length = 16, blank = False, unique = True)

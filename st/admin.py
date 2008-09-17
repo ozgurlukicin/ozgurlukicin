@@ -7,7 +7,8 @@
 
 from django.contrib import admin
 
-from oi.st.models import Tag, Wiki, Contribute, OtherFile, ScreenShot, Video, License, FS, HowTo, Game, News, Package, PardusVersion, PardusMirror
+from oi.st.models import Wiki, Contribute, OtherFile, ScreenShot, Video, License, FS, HowTo, Game, News, Package, PardusVersion, PardusMirror
+from oi.st.tags import Tag
 
 class StSimpleAdmin(admin.ModelAdmin):
     list_display = ('name', 'id')

@@ -8,7 +8,8 @@
 from django.conf.urls.defaults import *
 
 from oi.settings import WEB_URL, DOCUMENT_ROOT, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, NEWS_PER_PAGE, TAG_PER_PAGE, HOWTO_PER_PAGE
-from oi.st.models import Package, Game, FS, News, Tag, HowTo
+from oi.st.models import Package, Game, FS, News, HowTo
+from oi.st.tags import Tag
 from oi.seminar.models import Seminar
 from oi.st.feeds import *
 from django.contrib import admin

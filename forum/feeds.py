@@ -13,7 +13,7 @@ from oi.settings import SITE_NAME, WEB_URL, SITE_DESC
 from django.contrib.syndication.feeds import FeedDoesNotExist
 from django.core.exceptions import ObjectDoesNotExist
 from oi.forum.models import Topic,Post
-from oi.st.models import Tag
+from oi.st.tags import Tag
 
 
 class RSS(Feed):

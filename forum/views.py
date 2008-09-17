@@ -24,7 +24,8 @@ from oi.forum import customgeneric
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.core.mail import send_mail
-from oi.st.models import Tag, News
+from oi.st.tags import Tag
+from oi.st.models import News
 from oi.poll.models import Poll, PollOption, PollVote
 
 # import our function for sending e-mails and setting

@@ -4,7 +4,7 @@
 import re
 from django.db import models
 from django.contrib.auth.models import User
-from oi.st.models import Tag
+from oi.st.tags import Tag
 from oi.forum.models import Topic
 
 

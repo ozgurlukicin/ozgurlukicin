@@ -11,7 +11,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from oi.middleware import threadlocals
-from oi.st.models import Tag
+from oi.st.tags import Tag
 from oi.poll.models import Poll
 
 from oi.forum.settings import FORUM_FROM_EMAIL
