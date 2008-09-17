@@ -92,6 +92,7 @@ MIDDLEWARE_CLASSES = (
     'oi.flatpages.middleware.FlatpageFallbackMiddleware',
     'oi.middleware.threadlocals.ThreadLocals',
     'oi.middleware.debug.DebugFooter',
+    'oi.middleware.ban.BanWare',
 )
 
 ROOT_URLCONF = 'oi.urls'
