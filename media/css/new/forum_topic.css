@@ -140,3 +140,41 @@ div.topic_news_box a {
     float: right;
     margin-left: 4px;
 }
+.poll { overflow: hidden; }
+.poll_header { overflow: hidden; }
+.poll_header div { float: left; }
+.poll_title {
+    font-size: 10px;
+    width: 152px;
+    border-bottom: 1px #999 solid;
+    margin-top: 20px;
+}
+.poll_question {
+    font-size: 16px;
+    color: #2B8DD4;
+    font-weight: bold;
+    margin: 10px;
+    width: 630px;
+}
+.poll_option {
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+.poll_option div { float: left; }
+.poll_option_text {
+    font-size: 11px;
+    width: 152px;
+}
+.poll_bar {
+    width: 530px;
+    height: 18px;
+    background-color: #E8E8E8;
+    margin-right: 10px;
+}
+.poll_bar div {
+    background: url(/media/img/new/bar_full_bg.png) repeat-x;
+    height: 100%;
+    float: left;
+}
+.poll_buttons { float: right; }
+.poll_buttons a { margin: 4px; }
