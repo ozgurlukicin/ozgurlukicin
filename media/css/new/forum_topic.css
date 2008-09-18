@@ -65,18 +65,13 @@ hr {
     margin-top: 17px;
     margin-bottom: 17px;
 }
-li {
-    margin-left: 20px;
-}
+li { margin-left: 20px; }
 p {
     display: block;
     padding-top: 10px;
     padding-bottom: 10px;
 }
-.post_message_top {
-    margin-top: 12px;
-    overflow: hidden;
-}
+.post_message_top { overflow: hidden; }
 .post_message_top_icon {
     margin-left: 8px;
     margin-top: 1px;
