@@ -192,8 +192,6 @@ def topic(request, forum_slug, topic_id):
                 option.percent = 0
             else:
                 option.percent = int(option.vote_count / total_vote_count * 100)
-            if option.percent < 80:
-                option.percent_out = True
         # now let's see if we'll enable voting for this user
         if request.user.is_authenticated():
             if poll.date_limit:
