@@ -149,3 +149,8 @@ div#footer a {
     margin: 0 15px 15px 15px;
     clear: both;
 }
+input[type="text"], input[type="password"], textarea {
+    background: url(/media/img/new/textinput_bg.png) repeat-x;
+    border: 1px #EAEAEA solid;
+    color: #CCCCCC;
+}

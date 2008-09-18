@@ -44,15 +44,11 @@ div.sidebarcolumn h2 {
     font-size: 12px;
 }
 div.rightcolumn_content input[type="text"], div.rightcolumn_content input[type="password"] {
-    padding-top: 6px;
+    padding-top: 5px;
     padding-left: 8px;
-    font-size: 11px;
-    color: #CCCCCC;
     width: 139px;
     height: 16px;
-    border: 1px #EAEAEA solid;
     margin-bottom: 5px;
-    background-image: url(/media/img/new/textinput_bg.png);
 }
 div.rightcolumn_content input[type="image"] { float: left; }
 div.rightcolumn_content span.loginlinks {
