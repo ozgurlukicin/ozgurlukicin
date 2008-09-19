@@ -87,6 +87,7 @@ div#footer a {
     margin-top: 20px;
     opacity: 0.7;
     clear: left;
+    width: 600px;
 }
 .footer_right {
     margin-top: 12px;
