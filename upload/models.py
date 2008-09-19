@@ -6,6 +6,10 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.db import models
+from django import forms
+
+class ImageUploadForm(forms.Form):
+    file = forms.ImageField()
 
 class Image(models.Model):
     file = models.ImageField(upload_to='upload/image/')
