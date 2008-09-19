@@ -32,7 +32,10 @@ div.summary_container div.columnspacer {
 .column .info div { font-size: 11px; }
 .column .info .date, .column .info .slash { float: left; }
 .column .info .comments { float: right; }
-.column .info .comments a { text-decoration: none; }
+.column .info .comments a {
+    text-decoration: none;
+    color: #666666;
+}
 div.news_container {
     margin-bottom: 5px;
     width: 639px;
