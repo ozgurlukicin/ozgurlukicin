@@ -36,12 +36,17 @@
                     <input type="hidden" name="next" value="{{ request.get_full_path }}" />
                     <input type="image" src="/media/img/new/button_login.png" value="Giriş" />
                 </form>
-                <span class="loginlinks"><a href="/kullanici/kayit/">Kayıt ol</a><br /><a class="sari"  href="/kullanici/kayip/">Kayıp parola</a></span>
+                <span class="loginlinks"><a href="/kullanici/kayit/">Kayıt ol</a><br /><a href="/kullanici/kayip/">Kayıp parola</a></span>
             {% else %}
                 <p>Merhaba {{ user.username }}!</p>
-                <p>Profil sayfanıza <a href="{{ request.user.get_profile.get_absolute_url }}">buradan</a> ulaşabilir ya da <a 
-class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.</p>
-            {% endif %}
+                <ul>
+                    <li><a href="/kullanici/profil/{{ user.username }}/">Profil</a></li>
+                    <li><a href="/kullanici/takip-edilen-konular/">Takip Edilen Konular</a></li>
+                    <li><a href="/forum/son-iletiler/">Son İletiler</a><li>
+                    <li><a href="/forum/tumunu-okunmus-say/?next={{ request.path }}">Tümünü Okunmuş Say</a></li>
+                    <li>{% if perms.forum.can_change_abusereport %}<a href="/forum/raporlanmis-iletiler/">Şikayet Edilmiş İletiler ({{abuse_count}})</a> {% endif %}</li>
+                    <li><a href="/kullanici/cikis/">Çıkış</a></li>
+                </ul>
         </div>
         <div class="sidebar_content">
             <h2>Ara</h2>
