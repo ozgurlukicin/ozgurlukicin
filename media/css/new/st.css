@@ -13,6 +13,7 @@ div#sidebar {
     overflow: hidden;
 }
 div#sidebar div { overflow: hidden; }
+div#sidebar div a { color: #009FE0; }
 div.sidebarcolumn {
     float: left;
     width: 153px;

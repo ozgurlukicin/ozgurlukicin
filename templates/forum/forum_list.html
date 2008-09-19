@@ -54,20 +54,22 @@
     <div class="latest_container rightborder">
     {% for post in latest_posts %}
         <div class="post">
-            <div class="topic"><a href="{{ post.get_absolute_url }}">{{ post.topic }}</a></div>
-            <div class="post"><a href="{{ post.author.get_profile.get_absolute_url }}" class="profile_link">{{ post.author }}</a> <a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="iletiye git" /></a></div>
-            <div class="date">{{ post.created|date:"d F Y H:i" }}</div>
-            <div class="forum"><a href="{{ post.topic.forum.get_absolute_url }}">{{ post.topic.forum }}</a></div>
+            <div class="topic">[<a href="{{ post.topic.forum.get_absolute_url }}">{{ post.topic.forum }}</a>] <strong><a href="{{ post.get_absolute_url }}">{{ post.topic }}</a></strong></div>
+            <div class="post">
+                <span class="date">{{ post.created|date:"d F Y H:i" }}</span>
+                <span class="profile_link"><a href="{{ post.author.get_profile.get_absolute_url }}">{{ post.author }}</a> <a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="iletiye git" /></a></span>
+            </div>
         </div>
     {% endfor %}
     </div>
     <div class="latest_container">
         {% for topic in latest_topics_with_polls %}
         <div class="post">
-            <div class="topic"><a href="{{ topic.get_absolute_url }}">{{ topic }}</a></div>
-            <div class="post"><a href="{{ topic.topic_latest_post.author.get_profile.get_absolute_url }}" class="profile_link">{{ topic.topic_latest_post.author }}</a> <a href="{{ topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="iletiye git" /></a></div>
-            <div class="date">{{ topic.poll.created|date:"d F Y H:i" }}</div>
-            <div class="forum"><a href="{{ topic.forum.get_absolute_url }}">{{ topic.forum }}</a></div>
+            <div class="topic">[<a href="{{ topic.forum.get_absolute_url }}">{{ topic.forum }}</a>] <strong><a href="{{ topic.get_absolute_url }}">{{ topic }}</a></strong></div>
+            <div class="post">
+                <span class="date">{{ topic.poll.created|date:"d F Y H:i" }}</span>
+                <span class="profile_link"><a href="{{ topic.topic_latest_post.author.get_profile.get_absolute_url }}">{{ topic.topic_latest_post.author }}</a> <a href="{{ topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="iletiye git" /></a></span>
+            </div>
         </div>
         {% endfor %}
     </div>

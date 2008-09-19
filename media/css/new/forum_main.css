@@ -1,3 +1,5 @@
+#ifndef MEDIA/CSS/NEW/FORUM_MAIN.CSS
+#define MEDIA/CSS/NEW/FORUM_MAIN.CSS
 .titlebar h2 {
     margin-left: 4px;
     margin-top: 7px;
@@ -35,27 +37,27 @@
     color: #666666;
     text-decoration: none;
 }
-.post a.profile_link {
-    font-weight: bold;
-}
-.post .topic {
-    margin-top: 12px;
+.post .profile_link {
+    float: right;
 }
 .post .topic, .post .post {
-    margin-left: 10px;
+    margin-left: 5px;
     line-height: 15px;
 }
-.post .forum, .post .date {
-    margin-top: 10px;
+.post .forum {
+    margin-top: 5px;
     color: #999999;
 }
-.post .forum { margin-left: 10px; }
+.post .forum { margin-left: 5px; }
 .post .forum a { color: #999999; }
 .post .date {
-    float: right;
-    margin-right: 4px;
+    float: left;
+    color: #999;
+    margin-bottom: 5px;
 }
 .post .topic {
+    margin-top: 5px;
+    margin-bottom: 3px;
     height: 15px;
     overflow: hidden;
 }
@@ -77,3 +79,4 @@
     float: left;
     overflow: hidden;
 }
+#endif // MEDIA/CSS/NEW/FORUM_MAIN.CSS
