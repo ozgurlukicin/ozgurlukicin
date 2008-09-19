@@ -47,7 +47,8 @@
                     <li>{% if perms.forum.can_change_abusereport %}<a href="/forum/raporlanmis-iletiler/">Şikayet Edilmiş İletiler ({{abuse_count}})</a> {% endif %}</li>
                     <li><a href="/kullanici/cikis/">Çıkış</a></li>
                 </ul>
-        </div>
+            {% endif %}
+            </div>
         <div class="sidebar_content">
             <h2>Ara</h2>
             <form method="post" action="/arama/">
