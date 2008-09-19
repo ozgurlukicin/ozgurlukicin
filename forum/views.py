@@ -77,7 +77,7 @@ def forum(request, forum_slug):
     lastvisit_control(request)
 
     forum = get_object_or_404(Forum, slug=forum_slug)
-    topics = forum.topic_set.all().order_by('-sticky', '-topic_latest_post')
+    topics = forum.topic_set.all().order_by('-sticky', 'topic_latest_post')
 
     if request.user.is_authenticated():
         for topic in topics:
