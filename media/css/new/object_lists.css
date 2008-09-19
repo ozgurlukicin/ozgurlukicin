@@ -29,6 +29,9 @@ div.summary_container div.columnspacer {
     float: left;
     margin-left: 4px;
 }
+.column .info div { font-size: 11px; }
+.column .info .date, .column .info .slash { float: left; }
+.column .info .comments { float: right; }
 div.news_container {
     margin-bottom: 5px;
     width: 639px;

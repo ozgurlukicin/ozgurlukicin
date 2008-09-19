@@ -13,7 +13,7 @@
             <span>Haberler</span>
             <div class="title"><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></div>
             <div class="summary">{{ news.sum|safe|truncatewords_html:23 }}</div>
-            <p><br />{{ news.update|date:"d M Y" }} // <strong>{{ comment_count }}</strong> Yorum</p>
+            <p>{{ news.update|date:"d M Y" }} // <strong>{{ news.topic.posts|add:"-1" }}</strong> Yorum</p>
         </div>
     </div>
     {% endfor %}
@@ -23,6 +23,8 @@
         {% for howto in howtos %}
         <div class="column first">
             <img src="{{ howto.image.file.url }}" alt="{{ howto.image.get_alt_string }}" /><br />
+            <img src="/media/img/new/image_bottom.png" alt="gölge" />
+            <div class="info"><div class="date"><span class="bold">{{ howto.update|date:"d M" }}</span> {{ howto.update|date:"Y" }}</div><div class="slash"><img src="/media/img/new/slash_bold.png" alt="/" /></div><div class="comments"><span class="bold">{{ howto.topic.posts|add:"-1" }}</span> Yorum</div></div>
         </div>
         <div class="column">
             <span>Nasıl</span>
@@ -34,6 +36,8 @@
         {% for package in packages %}
         <div class="column first">
             <img src="{{ package.image.file.url }}" alt="{{ package.image.get_alt_string }}" /><br />
+            <img src="/media/img/new/image_bottom.png" alt="gölge" />
+            <div class="info"><div class="date"><span class="bold">{{ package.update|date:"d M" }}</span> {{ package.update|date:"Y" }}</div><div class="slash"><img src="/media/img/new/slash_bold.png" alt="/" /></div><div class="comments"><span class="bold">{{ package.topic.posts|add:"-1" }}</span> Yorum</div></div>
         </div>
         <div class="column">
             <span>Paket</span>
@@ -45,6 +49,8 @@
         {% for game in games %}
         <div class="column first">
             <img src="{{ game.image.file.url }}" alt="{{ game.image.get_alt_string }}" /><br />
+            <img src="/media/img/new/image_bottom.png" alt="gölge" />
+            <div class="info"><div class="date"><span class="bold">{{ game.update|date:"d M" }}</span> {{ game.update|date:"Y" }}</div><div class="slash"><img src="/media/img/new/slash_bold.png" alt="/" /></div><div class="comments"><span class="bold">{{ game.topic.posts|add:"-1" }}</span> Yorum</div></div>
         </div>
         <div class="column">
             <span>Oyun</span>

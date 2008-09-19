@@ -167,3 +167,6 @@ span.bullet {
     font-size: 9px;
     font-family: "Arial";
 }
+span.bold {
+    font-weight: bold;
+}

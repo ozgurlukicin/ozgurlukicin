@@ -14,9 +14,6 @@ div.paginator_description {
     margin-right: 4px;
     padding-bottom: 3px;
 }
-div.paginator_description span.bold {
-    font-weight: bold;
-}
 div.paginator div {
     width: 17px;
     height: 19px;
