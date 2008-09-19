@@ -46,48 +46,47 @@
         <div class="img_container">
             <img src="{{ info.get_profile.avatar.file.url }}" alt="Avatar" />
         </div>
- {% ifequal request.user.id info.id %}<a href="/kullanici/duzenle/">Bilgilerimi Düzenle</a>{% endifequal %}
+        {% ifequal request.user.id info.id %}<a href="/kullanici/duzenle/"><img src="/media/img/new/profile_edit.png" alt="Bilgilerimi Düzenle"></a>{% endifequal %}
     </div>
     <div id="user_profile_right">
-        <table>
-            <tr>
-                <td colspan="3"><h3>Kişisel Bilgiler</h3></td>
-            </tr>
-            <tr>
-                <td>Adı</td><td> : </td><td> {{ info.first_name }}</td>
-            </tr>
-            <tr>
-                <td>Soyadı</td><td> : </td><td> {{ info.last_name }}</td>
-            </tr>
-            <tr>
-                <td>Şehir</td><td> : </td><td> {{ info.get_profile.get_city_display }}</td>
-            </tr>
+            <h3>Kişisel Bilgiler</h3>
+            <div class="profile_info">
+                <div class="profile_titles">Adı</div><div class="profile_value">: {{ info.first_name }}</div>
+            </div>
+            <div class="profile_info">
+                <div class="profile_titles">Soyadı </div><div class="profile_value">: {{ info.last_name }}</div>
+            </div>
+            <div class="profile_info">
+                <div class="profile_titles">Şehir </div><div class="profile_value">: {{ info.get_profile.get_city_display }}</div>
+            </div>
             {% if info.get_profile.show_birthday %}
-            <tr>
-                <td>Doğum Tarihi</td><td> : </td><td>{{ info.get_profile.birthday|date:"d F Y" }}</td></tr>{% endif %}
-            <tr>
-                <td>Kayıt Tarihi</td><td> : </td><td> {{ info.date_joined|date:"d F Y" }}</td>
-            </tr>
-            <tr>
-                <td colspan="3"><h3>İletişim Bilgileri</h3></td>
-            </tr>
+            <div class="profile_info">
+                <div class="profile_titles">Doğum Tarihi </div><div class="profile_value">: {{ info.get_profile.birthday|date:"d F Y" }}</div>
+            </div>
+            {% endif %}
+            <div class="profile_info">
+                <div class="profile_titles">Kayıt Tarihi </div><div class="profile_value">: {{ info.date_joined|date:"d F Y" }}</div>
+            </div>
+
+            <h3>İletişim Bilgileri</h3>
+
             {% if info.get_profile.show_email %}
-            <tr>
-                <td>E-posta</td><td> : </td><td> <a href="mailto:{{ info.email }}">{{ info.email }}</a></td>
-            </tr>{% endif %}
-            <tr>
-                <td>Web</td><td> : </td><td> <a href="{{ info.get_profile.homepage }}" target="_blank">{{ info.get_profile.homepage }}</a></td>
-            </tr>
-            <tr>
-                <td>Jabber</td><td> : </td><td> {{ info.get_profile.jabber }}</td>
-            </tr>
-            <tr>
-                <td>MSN</td><td> : </td><td>{{ info.get_profile.msn }}</td>
-            </tr>
-            <tr>
-                <td>ICQ</td><td> : </td><td>{{ info.get_profile.icq }}</td>
-            </tr>
-        </table>
+            <div class="profile_info">
+                <div class="profile_titles">E-posta </div><div class="profile_value">: <a href="mailto:{{ info.email }}">{{ info.email }}</a></div>
+            </div>
+            {% endif %}
+            <div class="profile_info">
+                <div class="profile_titles">Web </div><div class="profile_value">: <a href="{{ info.get_profile.homepage }}" target="_blank">{{ info.get_profile.homepage }}</a></div>
+            </div>
+            <div class="profile_info">
+                <div class="profile_titles">Jabber </div><div class="profile_value">: {{ info.get_profile.jabber }}</div>
+            </div>
+            <div class="profile_info">
+                <div class="profile_titles">MSN </div><div class="profile_value">: {{ info.get_profile.msn }}</div>
+            </div>
+            <div class="profile_info">
+                <div class="profile_titles">ICQ </div><div class="profile_value">: {{ info.get_profile.icq }}</div>
+            </div>
     </div>
 </div>
 <div id="id_map" class="googlemap"></div>
