@@ -10,7 +10,9 @@
 <div class="summary_container">
 {% for package in package_list %}
     <div class="column first">
-         <img src="{{ package.image.file.url }}" alt="{{ package.image.get_alt_string }}" /><br />
+        <img src="{{ package.image.file.url }}" alt="{{ package.image.get_alt_string }}" /><br />
+        <img src="/media/img/new/image_bottom.png" alt="gölge" />
+        <div class="info"><div class="date"><span class="bold">{{ package.update|date:"d M" }}</span> {{ package.update|date:"Y" }}</div><div class="slash"><img src="/media/img/new/slash_bold.png" alt="/" /></div><div class="comments"><a href="{{ package.topic.get_latest_post_url }}"><span class="bold">{{ package.topic.posts|add:"-1" }}</span> Yorum</a></div></div>
     </div>
     <div class="column">
         <div class="title"><a href="{{ package.get_absolute_url }}">{{ package.title }}</a></div>

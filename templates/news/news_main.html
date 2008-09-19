@@ -10,8 +10,9 @@
 <div class="summary_container">
 {% for news in news_list %}
     <div class="column first">
-         <img src="{{ news.image.file.url }}" alt="{{ news.image.get_alt_string }}" /><br />
-            {{ news.update|date:"d M Y" }}
+        <img src="{{ news.image.file.url }}" alt="{{ news.image.get_alt_string }}" /><br />
+        <img src="/media/img/new/image_bottom.png" alt="gölge" />
+        <div class="info"><div class="date"><span class="bold">{{ news.update|date:"d M" }}</span> {{ news.update|date:"Y" }}</div><div class="slash"><img src="/media/img/new/slash_bold.png" alt="/" /></div><div class="comments"><a href="{{ news.topic.get_latest_post_url }}"><span class="bold">{{ news.topic.posts|add:"-1" }}</span> Yorum</a></div></div>
     </div>
     <div class="column">
         <div class="title"><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></div>
