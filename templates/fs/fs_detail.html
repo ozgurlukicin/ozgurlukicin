@@ -18,24 +18,29 @@
 
 {% block leftcolumn %}
 <div class="sidebarcolumn leftcolumn">
-    <h2>Katkıda bulunun</h2>
-    <p>İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a href="/katki/ilk_adimlar/">buraya</a> tıklayarak size kılavuzluk edecek sayfaya gidebilirsiniz.</p>
-    <br />
-    <h2>Etiketler</h2>
-    <p>
-    <img src="/media/img/new/tag.png" style="vertical-align: middle;" /> {% for tag in fs.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if forloop.last %}{% else %},{% endif %} {% endfor %}
-    </p>
-    <br />
-{% if fs.videos.all %}
-    <h2>İlgili Videolar</h2>
-    <p>
-        {% for video in fs.videos.all %}
-        {% include "video.html" %}
-        {% endfor %}
-{% endif %}
-    </p>
-    <br />
-    <h2>Yazar</h2>
-    <p>{{ fs.author }}</p>
+    <div class="leftcolumn_content">
+        <h2>Katkıda bulunun</h2>
+        <p>İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a href="/katki/ilk_adimlar/">buraya</a> tıklayarak size kılavuzluk edecek sayfaya gidebilirsiniz.</p>
+    </div>
+    <div class="leftcolumn_content">
+        <h2>Etiketler</h2>
+        <p>
+        <img src="/media/img/new/tag.png" style="vertical-align: middle;" /> {% for tag in fs.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if forloop.last %}{% else %},{% endif %} {% endfor %}
+        </p>
+    </div>
+    {% if fs.videos.all %}
+    <div class="leftcolumn_content">
+        <h2>İlgili Videolar</h2>
+        <p>
+            {% for video in fs.videos.all %}
+            {% include "video.html" %}
+            {% endfor %}
+        </p>
+    </div>
+    {% endif %}
+    <div class="leftcolumn_content">
+        <h2>Yazar</h2>
+        <p>{{ fs.author }}</p>
+    </div>
 </div>
 {% endblock %}

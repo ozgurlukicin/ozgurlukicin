@@ -35,29 +35,37 @@
 
 {% block leftcolumn %}
 <div class="sidebarcolumn leftcolumn">
-    <h2>Etiketler</h2>
-    <p><img src="/media/img/new/tag.png" style="vertical-align: middle;" /> {% for tag in howto.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if forloop.last %}{% else %},{% endif %} {% endfor %}
-    </p>
-    <br />
-{% if howto.wiki.all %}
-    <h2>İlgili wiki sayfaları</h2>
-    <ul class="sidebar_firststeps">
-        {% for wiki in howto.wiki.all %}<li><a href="{{ wiki.get_absolute_url }}">{{ wiki.name }}</a></li>{% endfor %}
-    </ul>
-{% endif %}
+    <div class="leftcolumn_content">
+        <h2>Etiketler</h2>
+        <p><img src="/media/img/new/tag.png" style="vertical-align: middle;" /> {% for tag in howto.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if forloop.last %}{% else %},{% endif %} {% endfor %}
+        </p>
+    </div>
+    {% if howto.wiki.all %}
+    <div class="leftcolumn_content">
+        <h2>İlgili wiki sayfaları</h2>
+        <ul class="sidebar_firststeps">
+            {% for wiki in howto.wiki.all %}<li><a href="{{ wiki.get_absolute_url }}">{{ wiki.name }}</a></li>{% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% if howto.videos.all %}
+    <div class="leftcolumn_content">
+        <h2>İlgili Videolar</h2>
+        <p>
+        {% for video in howto.videos.all %}
+            {% include "video.html" %}
+        {% endfor %}
+        </p>
+    </div>
+    {% endif %}
+    <div class="leftcolumn_content">
+        <h2>Yazar</h2>
+        <p>{{ howto.author }}</p>
+    </div>
 
-{% if howto.videos.all %}
-    <h2>İlgili Videolar</h2>
-    <p>
-    {% for video in howto.videos.all %}
-        {% include "video.html" %}
-    {% endfor %}
-    </p>
-{% endif %}
-    <h2>Yazar</h2>
-    <p>{{ howto.author }}</p>
-    <br />
-    <h2>Katkıda bulunun</h2>
-    <p>Nasıl bölümüne katkıda bulunmak istiyorsanız <a href="/katki/nasil/">buraya</a> tıklayarak size kılavuzluk edecek sayfaya gidebilirsiniz.</p>
+    <div class="leftcolumn_content">
+        <h2>Katkıda bulunun</h2>
+        <p>Nasıl bölümüne katkıda bulunmak istiyorsanız <a href="/katki/nasil/">buraya</a> tıklayarak size kılavuzluk edecek sayfaya gidebilirsiniz.</p>
+    </div>
 </div>
 {% endblock %}

@@ -27,8 +27,8 @@ div.rightcolumn {
 }
 div.leftcolumn_content {
     width: 100%;
-    padding-bottom: 10px;
     margin-bottom: 10px;
+    border-bottom: 1px #EAEAEA solid;
 }
 div.leftcolumn_content p {
     margin-bottom: 15px;
