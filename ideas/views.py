@@ -10,6 +10,7 @@ from oi.st.wrappers import render_response
 from oi.ideas.models import Idea, Category, Related, Status, Tag, Vote, Favorite
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from oi.settings import MEDIA_ROOT
 import datetime
 
 
@@ -126,6 +127,12 @@ def add(request):
     if request.method == 'POST':
         form = NewIdeaForm(request.POST, request.FILES)
         if form.is_valid():
+            f = request.FILES['file']
+            dest = open('%s/upload/ideas/%s' % (MEDIA_ROOT, f.name), 'wb+')
+            for chunk in f.chunks():
+                dest.write(chunk)
+            dest.close()
+
             newidea = Idea(
                 title=form.cleaned_data['title'],
                 description=form.cleaned_data['description'],
@@ -134,7 +141,7 @@ def add(request):
                 related_to = form.cleaned_data['related_to'],
                 forum_url = form.cleaned_data['forum_url'],
                 bug_numbers = form.cleaned_data['bug_numbers'],
-                status=Status.objects.all()[0]
+                status=Status.objects.all()[0],
                 )
             forum = Forum.objects.get(name="Yeni Fikirler")
             topic = Topic(forum=forum,
