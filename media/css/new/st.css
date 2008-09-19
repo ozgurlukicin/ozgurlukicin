@@ -46,6 +46,7 @@ div.rightcolumn_content {
 div.sidebarcolumn h2 {
     font-family: "Georgia", serif;
     font-size: 12px;
+    margin-bottom: 12px;
 }
 div.rightcolumn_content input[type="text"], div.rightcolumn_content input[type="password"] {
     padding-top: 5px;
