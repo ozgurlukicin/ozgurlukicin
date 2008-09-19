@@ -16,7 +16,7 @@ DEBUG = True
 TESTING = True
 TEMPLATE_DEBUG = DEBUG
 WEB_URL = 'http://localhost:8000'
-DOCUMENT_ROOT = '/home/user'
+DOCUMENT_ROOT = '/home/akin/oi'
 
 DATABASE_ENGINE = 'mysql'
 DATABASE_NAME = 'oi'
