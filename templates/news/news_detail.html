@@ -4,8 +4,10 @@
 {% block title %}{{ news.title }} - Haberler - {% endblock %}
 {% block extrahead %}
 <style media="screen" type="text/css">@import url('/media/css/new/st.css');</style>
-<script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
-<script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
+{% if user.is_authenticated %}
+    <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
+    <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
+{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -15,16 +17,16 @@
 </div>
 <div style="clear: both;"></div>
 <div class="page_comments">
-    <a href="{{comment_url}}">Yorumlar ({{ comment_count }})</a> <a href="{{comment_url}}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a>
+    <a href="{{ news.topic.get_latest_post_url }}">Yorumlar ({{ news.topic.posts|add:"-1" }})</a> <a href="{{ news.topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a>
 </div>
 
-{% if auth %}
+{% if user.is_authenticated %}
     {% if form %}
     <p>
-        <form method="post" action="/haber/yorum/{{news.slug}}/">
+        <form method="post" action="{{ news.topic.get_reply_url }}">
             {{form}}
             <br/>
-            <input type="submit" value="Gönder">
+            <input type="submit" value="Gönder" />
         </form>
     </p>
     {% endif %}

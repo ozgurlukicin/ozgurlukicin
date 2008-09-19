@@ -6,7 +6,7 @@
 {% block extrahead %}
     <style type="text/css" media="screen">@import url('/media/css/new/game.css');</style>
     <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
-{% if auth %}
+{% if user.is_authenticated %}
     <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
     <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
 {% endif %}
@@ -18,13 +18,13 @@
 {{ package.text|safe }}
 </div>
 
-<div class="page_comments"><a href="{{comment_url}}">Yorumlar ({{ comment_count }})</a> <a href="{{comment_url}}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a></div>
-{% if auth %}
+<div class="page_comments"><a href="{{ package.topic.get_latest_post_url }}">Yorumlar ({{ package.topic.posts|add:"-1" }})</a> <a href="{{ package.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a></div>
+{% if user.is_authenticated %}
     {% if form %}
-        <form method="post" action="/paket/yorum/{{package.slug}}/">
-            {{form}}
+        <form method="post" action="{{ package.topic.get_reply_url }}">
+            {{ form }}
             <br/>
-            <input type="submit" value="Gönder">
+            <input type="submit" value="Gönder" />
         </form>
     {% endif %}
 {% endif %}

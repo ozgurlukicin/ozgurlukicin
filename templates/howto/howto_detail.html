@@ -5,7 +5,7 @@
 
 {% block extrahead %}
     <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
-{% if auth %}
+{% if user.is_authenticated %}
     <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
     <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
 {% endif %}
@@ -16,14 +16,14 @@
 <div class="page_content">
 {{ howto.text|safe }}
 </div>
-<div style="float:right; margin-right:10px"><a href="{{comment_url}}">Yorumlar ({{ comment_count }})</a> <a href="{{comment_url}}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a></div>
+<div style="float:right; margin-right:10px"><a href="{{ howto.topic.get_latest_post_url }}">Yorumlar ({{ howto.topic.posts|add:"-1" }})</a> <a href="{{ howto.topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a></div>
 <p>
-{% if auth %}
+{% if user.is_authenticated %}
     {% if form %}
-        <form method="post" action="/nasil/yorum/{{howto.slug}}/">
-            {{form}}
+        <form method="post" action="{{ howto.topic.get_reply_url }}">
+            {{ form }}
             <br />
-            <input type="submit" value="Gönder">
+            <input type="submit" value="Gönder" />
         </form>
     {% endif %}
 {% endif %}
