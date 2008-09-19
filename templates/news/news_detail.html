@@ -3,6 +3,7 @@
 
 {% block title %}{{ news.title }} - Haberler - {% endblock %}
 {% block extrahead %}
+<style media="screen" type="text/css">@import url('/media/css/new/article.css');</style>
 <style media="screen" type="text/css">@import url('/media/css/new/st.css');</style>
 {% if user.is_authenticated %}
     <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
