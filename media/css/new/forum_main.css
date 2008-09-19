@@ -1,5 +1,3 @@
-#ifndef MEDIA/CSS/NEW/FORUM_MAIN.CSS
-#define MEDIA/CSS/NEW/FORUM_MAIN.CSS
 .titlebar h2 {
     margin-left: 4px;
     margin-top: 7px;
@@ -28,7 +26,7 @@
     overflow: hidden;
 }
 .latest_container .post {
-    border-bottom: 1px #F2F2F2 solid;
+    border-bottom: 1px #EAEAEA solid;
     overflow: hidden;
     margin-right: 4px;
 }
@@ -79,4 +77,3 @@
     float: left;
     overflow: hidden;
 }
-#endif // MEDIA/CSS/NEW/FORUM_MAIN.CSS
