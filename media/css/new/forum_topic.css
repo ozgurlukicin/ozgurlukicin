@@ -174,10 +174,10 @@ div.topic_news_box a {
 .poll_buttons { float: right; }
 .poll_buttons a { margin: 4px; }
 .quote {
-    border: 1px solid #CCCCCC;
+    border: 1px solid #666666;
     padding: 10px;
     margin-bottom: 8px;
-    background-color: #E1E3FF;
+    background-color: #EAEAEA;
     color: #51615D;
         }
 
