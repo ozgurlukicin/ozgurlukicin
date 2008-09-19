@@ -12,5 +12,10 @@
 <div class="page_content">
 {{ flatpage.text|safe }}
 </div>
-<div class="page_last_update">Son güncelleme: {{ flatpage.update|timedelta }}</div>
+{% endblock %}
+{% block leftcolumn_bottom %}
+    <div class="leftcolumn_content">
+        <h2>Etiketler</h2>
+        <img src="/media/img/new/tag.png" alt="etiket" />{% for tag in flatpage.tags.all %} <a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
+    </div>
 {% endblock %}
