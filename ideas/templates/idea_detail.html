@@ -3,9 +3,7 @@
 {% block idea %}
 
 {% if duplicate_of %}
-<hr />
 <h3>Bu fikir <a href="{{ duplicate_of.get_absolute_url }}">#{{ duplicate_of.id }}</a> numaralı hatanın aynısı</h3>
-<hr />
 {% endif %}
 
 <div class="idea_container">

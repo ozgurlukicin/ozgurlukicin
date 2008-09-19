@@ -13,6 +13,10 @@
     float: right;
     margin: 7px 10px 0 0;
 }
+#idea_topbar h3 {
+    background:#ccc;
+    margin: 30px;
+}
 .idea_container {
     margin-top:30px;
     padding:3px;
