@@ -17,19 +17,15 @@ from oi.settings import MEDIA_URL, MEDIA_ROOT
 @login_required
 def image_upload(request):
     if request.user.is_staff:
-        manipulator = Image.AddManipulator()
-        form = forms.FormWrapper(manipulator,{},{})
+        if request.method == 'POST':
+            form = forms.FormWrapper(request.POST, request.FILES)
+            if form.is_valid():
+                f = request.FILES['file_file']
+                dest = open('%s/upload/image/%s' % (MEDIA_ROOT, f.name()))
+                for chunk in f.chunks():
+                    dest.write(chunk)
+                dest.close()
 
-        if request.POST or request.FILES:
-            new_data = request.POST.copy()
-            new_data.update(request.FILES)
-
-            errors  = manipulator.get_validation_errors(new_data)
-            print(errors)
-
-            if not errors:
-                if not path.exists(MEDIA_ROOT + "upload/image/" + new_data['file_file']['filename']):
-                    manipulator.save(new_data)
                 return render_to_response('file_upload/file_upload_success.html', {'filename': new_data['file_file']['filename']})
             else:
                 return render_to_response('file_upload/file_upload.html', {'form': form, 'errors': errors})

@@ -155,8 +155,38 @@ div#footer a {
     clear: both;
 }
 input[type="text"], input[type="password"], textarea {
-    background: url(/media/img/new/textinput_bg.png) repeat-x;
+    background: url(/media/img/new/textinput_bg.png) #fff repeat-x;
     border: 1px #EAEAEA solid;
+    padding: 3px;
+}
+.error, ul.errorlist li {
+    color: #ff3300;
+    list-style-type:none;
+}
+form {
+    background: #E7F7FF;
+}
+form .field_container {
+    vertical-align: middle;
+    margin-bottom: 5px;
+    clear: both;
+}
+form .field_container .field_label {
+    float: left;
+    width: 25%;
+    vertical-align: middle;
+    margin: 10px 0 0 10px;
+}
+form .field_field {
+    float: left;
+    margin: 5px 0 5px 10px;
+}
+form .field_container .help_text {
+    float: left;
+    color: #888;
+    font-size:11px;
+    margin-left: 5px;
+    margin: 10px 0 0 5px;
 }
 #sidebar li {
     line-height: 17px;
