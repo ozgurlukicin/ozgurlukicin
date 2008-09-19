@@ -109,13 +109,13 @@ div.topic_news_box {
     float: left;
     width: 245px;
     height: 150px;
-    border: 1px #666666 solid;
+    border: 1px #EAEAEA solid;
     padding: 4px;
     margin-right: 5px;
     cursor: pointer;
 }
 div.topic_news_box:hover {
-    background-color: #D7E1E7;
+    background-color: #EAEAEA;
 }
 div.topic_news_box h2 {
     font-size: 14px;
