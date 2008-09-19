@@ -35,14 +35,16 @@
     </div>
     <div id="sidebar">
         {% block leftcolumn %}
+        <div class="sidebarcolumn leftcolumn">
             {% block leftcolumn_top %}
             {% endblock %}
-            <div class="sidebarcolumn leftcolumn">
+            <div class="leftcolumn_content">
                 <h2>Beyin Fırtınası</h2>
                 {% idea_list %}
             </div>
             {% block leftcolumn_bottom %}
             {% endblock %}
+        </div>
         {% endblock %}
         {% block rightcolumn %}
         <div class="sidebarcolumn rightcolumn">
