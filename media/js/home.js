@@ -1,5 +1,6 @@
+var intval=""
 $(function() {
-            setInterval(function () {
+            intval = setInterval(function () {
                 change_news(1)
             }, 10000)
         });
