@@ -4,6 +4,10 @@
     font-size: 12px;
     color: #666;
 }
+a, a:visited, a:active {
+text-decoration: none;
+color: #009FE0;
+}
 img {
     border: 0px;
 }
