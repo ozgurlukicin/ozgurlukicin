@@ -127,13 +127,6 @@ def add(request):
     if request.method == 'POST':
         form = NewIdeaForm(request.POST, request.FILES)
         if form.is_valid():
-            if request.FILES['file']:
-                f = request.FILES['file']
-                file_path = '%s/upload/ideas/%s' % (MEDIA_ROOT, f.name)
-                dest = open(file_path, 'wb+')
-                for chunk in f.chunks():
-                    dest.write(chunk)
-                dest.close()
 
             newidea = Idea(
                 title=form.cleaned_data['title'],
@@ -143,7 +136,7 @@ def add(request):
                 related_to = form.cleaned_data['related_to'],
                 forum_url = form.cleaned_data['forum_url'],
                 bug_numbers = form.cleaned_data['bug_numbers'],
-                status = Status.objects.all()[0],
+                status = Status.objects.all()[0]
                 )
             forum = Forum.objects.get(name="Yeni Fikirler")
             topic = Topic(forum=forum,
