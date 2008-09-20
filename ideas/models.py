@@ -77,7 +77,7 @@ class Idea(models.Model):
     is_duplicate = models.BooleanField("Fikir Tekrarı", default=False)
     forum_url = models.URLField("İlgili forum bağlantısı", help_text="Varsa ilgili Özgürlük İçin Forumundaki konu adresini yazın.", blank=True)
     bug_numbers = models.CharField("Hata numaraları", help_text="Varsa ilgili hata numaralarını virgülle ayırarak giriniz.", max_length=63, blank=True)
-    file = models.FileField(upload_to="upload/ideas/dosya/", blank=True)
+    file = models.FileField(upload_to="upload/ideas/dosya/", blank=True, verbose_name='Dosya')
     is_hidden = models.BooleanField("Gizli", default=False)
     topic = models.ForeignKey(Topic, verbose_name="Fikrin Forumdaki Konusu")
 
