@@ -1,32 +1,29 @@
 {% extends "shop_base.html" %}
-
 {% block title %}Ürün - {{ product.name }} {% endblock %}
-
-{% block header_menu %}
-    {% include "header.html" %}
-{% endblock %}
-
-{% block ust_menu %}
-    {% include "shop_ust_menu.html" %}
-{% endblock %}
-
 {% block content %}
     Ürün ismi: {{ product.name }} <br /><br />
-
+    Ürün Tanımı: {{ product.description }}<br />
+    Ürün Fiyatı: {{ product.price }} +KDV ({{ product.price_with_tax }})<br />
+    Ürün Stoğu: {{ product.stock }} <br />
     {% if product.have_child %}
         {% for child in product.child.all %}
             {% if child.is_active %}
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ürün İsmi: {{ child.name }} <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ürün Fiyatı: {{ child.price }} +KDV ({{ child.price_with_tax }})<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ürün Stoğu: {{ child.stock }} <br />
             {% if user.is_authenticated %}
-            <form method="POST" action="/dukkan/sepet/ekle/"><input type="hidden" name="product_id" value="{{ child.pk }}"><input type="text" name="quantity" value="1" /><input type="submit" value="Ekle"></form>
+            <a href="#" onclick="buyDialog({{ child.pk }})">{{ child.name }}</a>
             {% endif %}
-            <br />
             {% endif %}
         {% endfor %}
-    {% else %}
-            Ürün Fiyatı: {{ product.price }} +KDV ({{ product.price_with_tax }})<br />
-            Ürün Stoğu: {{ product.stock }} <br />
     {% endif %}
+    {% for image in product.images.all %}
+        Ürün Foto: <img src="{{ image.get_picture_url }}" alt="{{ product }}" /><br />
+    {% endfor %}
+{% endblock %}
+{% block afterbody %}
+<div id="buymessage">
+    <p>Kaç tane alacaksınız?</p>
+    <input type="text" id="quantity" name="quantity" value="1" />
+    <a href="#" onclick="toggleBuyPopup()">Vazgeç</a>
+    <a href="#" onclick="addToCart()">Sepete Ekle</a>
+    <a href="#" onclick="addToCart()">Hemen Al</a>
+</div>
 {% endblock %}

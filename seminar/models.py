@@ -1,11 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2007 Artistanbul
+# Copyright 2007, 2008 Artistanbul
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.db import models
+from django.contrib.localflavor.us.models import PhoneNumberField
 
 from oi.settings import CITY_LIST
 
@@ -13,15 +14,10 @@ class Place(models.Model):
     name = models.CharField('Seminer Yeri', max_length=64, blank=False, unique=True)
     city = models.CharField('Şehir', choices=CITY_LIST, max_length=40)
     direction = models.TextField('Adres Tarifi', blank=True)
-    phone = models.PhoneNumberField('Telefon', blank=True)
+    phone = PhoneNumberField('Telefon', blank=True)
 
     def __unicode__(self):
         return self.name
-
-    class Admin:
-        list_display = ('name',)
-        ordering = ['-name']
-        search_fields = ['name', 'direction']
 
     class Meta:
         ordering = ['name']
@@ -33,11 +29,6 @@ class Attender(models.Model):
 
     def __unicode__(self):
         return self.name
-
-    class Admin:
-        list_display = ('name',)
-        ordering = ['-name']
-        search_fields = ['name']
 
     class Meta:
         ordering = ['name']
@@ -53,11 +44,6 @@ class Seminar(models.Model):
 
     def __unicode__(self):
         return self.description
-
-    class Admin:
-        list_display = ('description', 'date')
-        ordering = ['-date']
-        search_fields = ['description']
 
     class Meta:
         verbose_name = "Seminer"

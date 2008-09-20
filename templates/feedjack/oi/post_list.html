@@ -1,111 +1,66 @@
 {% extends "base.html" %}
-
 {% block title %}Pardus Dünyası - {% endblock %}
-
-{% block pagetype %}page{% endblock %}
-
-{% block section %}planet{% endblock %}
-
-{% block header_menu %}
-    {% include "header.html" %}
-{% endblock %}
-<br/>
-{% block ust_menu %}
-    {% include "ust_menu_ayrinti.html" %}
-{% endblock %}
-<br/>
-
+{% block extrahead %}
+    <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+    <style type="text/css" media="screen">@import url('/media/css/new/planet.css');</style>
+{% endblock %}}
 {% block content %}
 {% for item in object_list %}
-  {% ifchanged %}
-  <div class="planet_date siyah">{{ item.date_modified|date:"j F" }}</div>
-  {% endifchanged %}
-
-  <div class="post">
-  {% if item.title %}
-  <div class="planet_title"><a href="{{ item.link }}">{{ item.title|safe }}</a></div>
-  {% else %}
-  <div class="planet_title siyah"><a href="{{ item.link }}">{{ item.subscriber.name }}</a></div>
-  {% endif %}
-  <div class="planet_content grey">
-    <div class="planet_author">
-        <img src="/media/hackergotchi/{{ item.subscriber.shortname }}.png" border="0" alt="{{ item.subscriber.name }}" />
-        <div style="margin-top: 6px;"><a href="{{ item.feed.link }}">{{ item.subscriber.name }}</a></div>
+<div class="post">
+    {% ifchanged %}
+    <div class="date"><div class="day">{{ item.date_modified|date:"j" }}</div><div class="month">{{ item.date_modified|date:"M" }}</div></div>
+    {% endifchanged %}
+    <div class="title"><a href="{{ item.link }}">{% if item.title %}{{ item.title|safe }}{% else %}{{ item.subscriber.name }}{% endif %}</a></div>
+    <div class="tags">
+        {% if item.qtags %}<img src="/media/img/new/tag.png" alt="etiket" />
+        {% for tag in item.qtags %}<a href="{{ site.url }}/tag/{{ tag.name }}">{{ tag.name }}</a> {% endfor %}
+        {% endif %}
     </div>
-    <div class="planet_meta">
-      {% if item.qtags %}<img src="/media/img/tag.png" border="0" style="vertical-align: middle;" />
-          {% for tag in item.qtags %}<a href="{{ site.url }}/tag/{{ tag.name }}">{{ tag.name }}</a> {% endfor %}
-      {% endif %}
+    <div class="content">
+        <div class="author">
+            <div class="avatar"><img src="/media/hackergotchi/{{ item.subscriber.shortname }}.png" alt="{{ item.subscriber.name }}" /></div>
+            <div class="name"><a href="{{ item.feed.link }}">{{ item.subscriber.name }}</a></div>
+        </div>
+        {{ item.content|safe }}
     </div>
-    <p>{{ item.content|safe }}</p>
-  </div>
-  </div>
+</div>
 {% endfor %}
 {% endblock %}
 
-{% block sidebartop %}{%endblock%}
-
-{% block sidebar %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>Kurallar</h2>
-        <a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a>
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
-
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>Yazarlar</h2>
+{% block leftcolumn %}
+<div class="sidebarcolumn leftcolumn">
+    <h2>Yazarlar</h2>
+    <div class="leftcolumn_content">
         <ul class="sidebar_subscribers">
         {% for feed in subscribers %}
-            <li><a href="{{ feed.feed.feed_url }}"><a href="{{ site.url }}/user/{{ feed.feed.id }}">{{ feed.name }}</a></li>
+        <li><span class="bullet">»</span> <a href="{{ feed.feed.feed_url }}"><a href="{{ site.url }}/user/{{ feed.feed.id }}">{{ feed.name }}</a></li>
         {% endfor %}
         </ul>
     </div>
-    <div class="sidebar_bottom">&nbsp;</div>
 </div>
-
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>Son güncelleme</h2>
-        {{ last_modified }}
+{% endblock %}
+{% block rightcolumn_bottom %}
+    <div class="rightcolumn_content">
+        <h2>Kurallar</h2>
+        <ul>
+            <li><span class="bullet">»</span> <a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a></li>
+        </ul>
     </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
-
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
+    <div class="rightcolumn_content">
         <h2>Feed</h2>
         <a href="/rss/gezegen/" title="RSS 2.0 feed"><img src="/media/dijital/img/bt_rss.jpg"/></a>
         <a href="/atom/gezegen/" title="Atom 1.0 feed"><img src="/media/img/atom.png"/></a>
     </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
-
 {% if site.links %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>Diğer gezegenler&nbsp;&nbsp;&nbsp;<img src="/media/dijital/img/diger_gez.png" /></h2>
-        <ul class="sidebar_planets">
-            {% for link in site.links.all %}<li><a href="{{ link.link }}">{{ link.name }}</a></li>{% endfor %}
+    <div class="rightcolumn_content">
+        <h2>Diğer gezegenler</h2>
+        <ul>
+            {% for link in site.links.all %}<li><span class="bullet">»</span> <a href="{{ link.link }}">{{ link.name }}</a></li>{% endfor %}
         </ul>
     </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
 {% endif %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>Özgürlükiçin E-Dergisi</h2>
-        <a href="/e-dergi/"><img src="/media/img/oi-edergi-4-kapak.jpg" alt="e-dergi" /></a>
-        Özgürlükiçin'in şimdi bir de e-dergisi var! Okumak için <a href="/e-dergi/">buraya</a> tıklayın.
+    <div class="rightcolumn_content">
+        <h2>Son güncelleme</h2>
+        <p>{{ last_modified }}</p>
     </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
 {% endblock %}

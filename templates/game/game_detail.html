@@ -4,136 +4,110 @@
 {% block title %}{{ game.title }} - Oyunlar - {% endblock %}
 
 {% block extrahead %}
-{% if auth %}
+<style type="text/css" media="screen">@import url('/media/css/new/article.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+{% if user.is_authenticated %}
     <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
     <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
 {% endif %}
 {% endblock %}
 
-{% block pagetype %}page{% endblock %}
-
-{% block section %}game{% endblock %}
-
-{% block header_menu %}
-    {% include "header.html" %}
-{% endblock %}
-<br/>
-{% block ust_menu %}
-    {% include "ust_menu_ayrinti.html" %}
-{% endblock %}
-<br/>
-
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 {% block content %}
-<div class="games_title transparent_link">{{ game.title }}</div>
-<div class="page_content grey">
-{{ game.text|safe }}
+<div class="page_title">{{ game.title }}</div>
+<div class="page_content">
+    {{ game.text|safe }}
 </div>
-{% if auth %}
+<div style="clear:both;"></div>
+<div style="float:right;margin-right:10px"><a href="{{ game.topic.get_latest_post_url }}">{{ game.topic.posts|add:"-1" }} yorum</a> <a href="{{ game.topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a></div>
+{% if user.is_authenticated %}
     {% if form %}
-        <form method="post" action="/oyun/yorum/{{game.slug}}/">
+    <p>
+        <form method="post" action="{{ game.topic.get_reply_url }}">
             {{form}}
             <br />
-            <input type="submit" value="Gönder">
+            <input type="submit" value="Gönder" />
         </form>
+    </p>
     {% endif %}
 {% endif %}
-<div style="float:right;margin-right:10px"><a href="{{comment_url}}">Yorumlar ({{ comment_count }})</a> <a href="{{comment_url}}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a></div>
-<div class="page_properties"><a href="{{ game.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
+<div class="page_printable"><a href="{{ game.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
 <div class="page_last_update">Son güncelleme: {{ game.update|timedelta }}</div>
-
-
 {% endblock %}
 
-{% block sidebartop %}{% endblock %}
+{% block leftcolumn %}
 
+<div class="sidebarcolumn leftcolumn">
+    <h2>Bilgiler</h2>
+    <p>
+        <table>
+            <tr>
+                <td>Lisans</td><td>:{% for license in game.license.all %}<a href="{{ license.url }}">{{ license.name }}</a>{% endfor %}</td>
+            </tr>
+            <tr>
+                <td>Paket boyutu</td><td>:{{ game.download_size|filesizeformat }}</td>
+            </tr>
+            <tr>
+                <td>Kurulu boyutu</td><td>:{{ game.installed_size|filesizeformat }}</td>
+            </tr>
+            <tr>
+                <td colspan="3"><br /><a href="{{ game.url }}">Oyunun Web Sitesi</a></td>
+            </tr>
+        </table>
+    </p>
 
-{% block sidebar %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle" style="text-align:left;">
-        <h2>Bilgiler</h2>
-        <strong><span>Lisans:</span></strong> {% for license in game.license.all %}<a href="{{ license.url }}"><span class="gri" >{{ license.name }}</span></a> {% endfor %}<br />
-        <strong><span>Paket boyutu:</span></strong> <span class="gri" >{{ game.download_size|filesizeformat }}</span><br />
-        <strong><span>Kurulu boyutu:</span></strong><span class="gri" > {{ game.installed_size|filesizeformat }}</span><br />
-        <a href="{{ game.url }}"><strong>Web sitesi</strong></a><br />
+    <h2>Değerlendirme</h2>
+    <p>Öğrenme süresi: {{ game.learning_time }}</p>
+    <span>Oynanabilirlik</span><span class="rating">{{ game.gameplay }}/10</span>
+    <div class="minibox_container">
+        {% for i in game.gameplay_range %}<span class="minibox">&nbsp;</span>{% endfor %}
     </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
 
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle" style="text-align:left;">
-        <h2>Değerlendirme</h2>
-        <strong><span>Öğrenme süresi:</span></strong><span class="gri" > {{ game.learning_time }}</span><br />
-        <strong><span>Oynanabilirlik:</span></strong><span class="gri" > {{ game.gameplay }}</span><br />
-        <strong><span>Grafik:</span></strong><span class="gri" > {{ game.graphics }}</span><br />
-        <strong><span>Ses:</span></strong><span class="gri" > {{ game.sound }}</span><br />
-        <strong><span>Senaryo:</span></strong><span class="gri" > {{ game.scenario }}</span><br />
-        <strong><span>Atmosfer:</span></strong><span class="gri" > {{ game.atmosphere }}</span><br />
-        <div class="game_average_point">{{ game.avg }}</div>
-        <br />
+    <span>Grafik</span><span class="rating">{{ game.graphics }}/10</span>
+    <div class="minibox_container">
+        {% for i in game.graphics_range %}<span class="minibox">&nbsp;</span>{% endfor %}
     </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
+    <span>Ses</span><span class="rating">{{ game.sound }}/10</span>
+    <div class="minibox_container">
+        {% for i in game.sound_range %}<span class="minibox">&nbsp;</span>{% endfor %}
+    </div>
+    <span>Senaryo</span><span class="rating">{{ game.scenario }}/10</span>
+    <div class="minibox_container">
+        {% for i in game.scenario_range %}<span class="minibox">&nbsp;</span>{% endfor %}
+    </div>
+    <span>Atmosfer</span><span class="rating">{{ game.atmosphere }}/10</span>
+    <div class="minibox_container">
+        {% for i in game.atmosphere_range %}<span class="minibox">&nbsp;</span>{% endfor %}
+    </div>
+    <div class="game_average_point">{{ game.avg }}</div>
 
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>Menüdeki yeri</h2>
-        <span class="gri" >{{ game.path }}</span>
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
+    <h2>Menüdeki yeri</h2>
+    <p>{{ game.path }}</p>
 
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>Etiketler</h2>
-        <img src="/media/img/tag.png" style="vertical-align: middle;" /> {% for tag in game.tags.all %}<a href="{{ tag.get_absolute_url }}"><span class="gri" >{{ tag.name }}</span></a> {% endfor %}
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
+    <h2>Etiketler</h2>
+    <p><img src="/media/img/new/tag.png" style="vertical-align: middle;" /> {% for tag in game.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if not forloop.last %},{% endif %} {% endfor %}</p>
 
-{% if game.wiki.all %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>İlgili wiki sayfaları</h2>
-        {% for wiki in game.wiki.all %}<a href="{{ wiki.get_absolute_url }}"><span class="gri" >{{ wiki.name }}</span></a><br />{% endfor %}
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
+    {% if game.wiki.all %}
+    <h2>İlgili wiki sayfaları</h2>
+    <p>
+        {% for wiki in game.wiki.all %}<a href="{{ wiki.get_absolute_url }}">{{ wiki.name }}</a><br />{% endfor %}
 {% endif %}
+    </p>
 
-{% if game.videos.all %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>İlgili Videolar</h2>
+    {% if game.videos.all %}
+    <h2>İlgili Videolar</h2>
+    <p>
         {% for video in game.videos.all %}
         {% include "video.html" %}
         {% endfor %}
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
-{% endif %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>Yazar</h2>
-        <span class="gri" >{{ game.author }}</span>
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
-</div>
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>Katkıda bulunun</h2>
-        <p>Oyunlar bölümüne katkıda bulunmak istiyorsanız <a
+    </p>
+    {% endif %}
+
+    <h2>Yazar</h2>
+    <p>{{ game.author }}</p>
+
+    <h2>Katkıda bulunun</h2>
+    <p>Oyunlar bölümüne katkıda bulunmak istiyorsanız <a
             href="/katki/oyun/">buraya</a> tıklayarak size kılavuzluk edecek
         sayfaya gidebilirsiniz.</p>
-    </div>
-    <div class="sidebar_bottom">&nbsp;</div>
 </div>
 {% endblock %}

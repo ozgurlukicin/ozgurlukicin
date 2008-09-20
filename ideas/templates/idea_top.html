@@ -1,0 +1,37 @@
+    <div class="idea_left">
+        <div id="vote{{ idea.id }}_1"> 
+            <input id="img_{{ idea.id }}_1" value="Bu fikri sevdim" type="image" src="/media/img/new/ideas_vote{% ifequal idea.user_vote 1 %}d{% endifequal %}_1.png" onclick="oyla({{ idea.id }}, 1);" {% ifequal idea.user_vote 1 %}class="voted"{% else %}{% ifequal idea.user_vote 0 %}class="cursor_default" disabled="disabled"{% endifequal %}{% endifequal %} />
+        </div>
+        <div class="idea_vote" id="vote{{ idea.id }}">{{ idea.vote_count }}</div>
+        <div id="vote{{ idea.id }}_0">
+            <input id="img_{{ idea.id }}_0" tvalue="Bu fikri sevmedim" type="image" src="/media/img/new/ideas_vote{% ifequal idea.user_vote 0 %}d{% endifequal %}_0.png" onclick="oyla({{ idea.id }}, 0);" {% ifequal idea.user_vote 0 %}class="voted"{% else %}{% ifequal idea.user_vote 1 %}class="cursor_default" disabled="disabled"{% endifequal %}{% endifequal %} />
+        </div>
+    </div>
+    <div class="idea_right">
+        <div class="h1"><a href="{{ idea.get_absolute_url }}">{{ idea.title }}</a></div>
+        <span class="idea_status">&nbsp;{{ idea.status }}&nbsp;</span>
+        <div class="idea_info">
+            <span id="favoricikar{{ idea.id }}" class="favorite" {% if not idea.is_favorited %}style="display:none;"{% endif %}>
+                <a href="/yenifikir/ayrinti/1/favori/cikar" onclick="favori({{ idea.id  }}, 'cikar');return false;" title="Favorilerimden çıkar"><img src="/media/img/new/ideas_favorited.png" alt="Fikir favorilerinize eklenmiş" /></a>
+            </span>
+            <span id="favoriekle{{ idea.id }}" class="favorite" {% if idea.is_favorited %}style="display:none;" {% endif %}>
+                <a href={% if user.is_authenticated %}"/yenifikir/ayrinti/1/favori/ekle" onclick="favori({{ idea.id }}, 'ekle'); return false;"{% else %}"/kullanici/giris/"{% endif %} title="Favorilerime ekle"><img src="/media/img/new/ideas_favorite.png" alt="Favorilere ekle" /></a>
+            </span> 
+            <a href="{{ idea.submitter.get_profile.get_absolute_url }}" title="{{ idea.submitter }} kullanıcısının profiline git">{{ idea.submitter }}</a>
+        tarafından {{ idea.submitted_date|date:"j M Y" }} tarihinde
+            <a href="{{ idea.category.get_absolute_url }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine
+            <a href="/yenifikir/listele/ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak gönderildi. 
+        </div>
+        <div class="idea_content">{{ idea.description|safe }}</div>
+        <div class="idea_comments">
+            <img alt="Yorum Yap" src="/media/img/new/icon_comment.png" />
+            <a href="{{ idea.comment_url }}" title="Yorumlar">
+            {% if idea.comment_count  %}
+                {{ idea.comment_count }} tane yorum yapıldı.
+            {% else %}
+                İlk yorum yapan siz olun !
+            {% endif %}
+            </a>
+        {% block idea_detail %}{% endblock %}
+        </div>
+

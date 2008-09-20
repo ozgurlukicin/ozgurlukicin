@@ -6,7 +6,7 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from BeautifulSoup import BeautifulSoup, Comment
-from django import newforms as forms
+from django import forms
 import re
 
 class SearchForm(forms.Form):

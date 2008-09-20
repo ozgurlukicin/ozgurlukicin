@@ -6,7 +6,8 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.db import models
-from django import newforms as forms
+from django import forms
+from django.contrib import admin
 
 from oi.settings import CITY_LIST
 
@@ -25,14 +26,16 @@ class Petitioner(models.Model):
     def __unicode__(self):
         return "%s %s" % (self.firstname, self.lastname)
 
-    class Admin:
-        list_display = ("firstname", "lastname", "job", "city", "email", "homepage", "signed", "is_active", "inform")
-        ordering = ["-signed"]
-        search_fields = ["firstname", "lastname", "job"]
-
     class Meta:
         verbose_name = "İmzalayan"
         verbose_name_plural = "İmzalayanlar"
+
+class PetitionerAdmin(admin.ModelAdmin):
+    list_display = ("firstname", "lastname", "job", "city", "email", "homepage", "signed", "is_active", "inform")
+    ordering = ("-signed",)
+    search_fields = ("firstname", "lastname", "job")
+
+admin.site.register(Petitioner, PetitionerAdmin)
 
 class PetitionForm(forms.Form):
     firstname = forms.CharField(label="Ad:", max_length=30)

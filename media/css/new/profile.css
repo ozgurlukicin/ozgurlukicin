@@ -1,0 +1,33 @@
+#user_profile_left {
+    float: left;
+    margin-left: 10px;
+}
+#user_profile_left h3 {
+    color: #009FE9;
+    font-size:16px;
+    margin-bottom: 10px;
+}
+#user_profile_left img {
+    margin:30px;
+}
+#user_profile_left .img_container {
+    border: 1px #ccc solid;
+    margin-bottom: 10px;
+}
+#user_profile_right {
+    float: left;
+    width: 300px;
+    margin-left: 20px;
+}
+#user_profile_right .profile_info {
+    clear: both;
+    width: 100%;
+    margin-top:5px;
+}
+#user_profile_right h3 {
+    margin-top: 30px;
+}
+#user_profile_right .profile_titles {
+    float: left;
+    width: 25%;
+}

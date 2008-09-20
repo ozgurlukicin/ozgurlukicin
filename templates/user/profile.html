@@ -5,6 +5,8 @@
 {% block extrabody %} onload="load()" onunload="GUnload()"{% endblock %}
 
 {% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/profile.css');</style>
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={{ apikey }}" type="text/javascript"></script>
     <script type="text/javascript">
     //<![CDATA[
@@ -35,43 +37,56 @@
     </script>
 {% endblock %}
 
-{% block header_menu %}
-    {% include "header.html" %}
-{% endblock %}
-<br/>
-{% block ust_menu %}
-    {% include "ust_menu_ayrinti.html" %}
-{% endblock %}
-
-<br/>
-
-
 {% block content %}
 
 {% if info %}
 <div id="user_profile">
-    {% ifequal request.user.id info.id %}<a href="/kullanici/duzenle/">Bilgilerimi Düzenle</a>{% endifequal %}
     <div id="user_profile_left">
         <h3>{{ info }}</h3>
-        <img src="{{ info.get_profile.avatar.get_file_url }}" />
+        <div class="img_container">
+            <img src="{{ info.get_profile.avatar.file.url }}" alt="Avatar" />
+        </div>
+        {% ifequal request.user.id info.id %}<a href="/kullanici/duzenle/"><img src="/media/img/new/profile_edit.png" alt="Bilgilerimi Düzenle"></a>{% endifequal %}
     </div>
     <div id="user_profile_right">
-        <h3>Kişisel Bilgiler</h3>
-        <ul>
-            <li>Adı: {{ info.first_name }}</li>
-            <li>Soyadı: {{ info.last_name }}</li>
-            <li>Şehir: {{ info.get_profile.get_city_display }}</li>
-            {% if info.get_profile.show_birthday %}<li>Doğum Tarihi: {{ info.get_profile.birthday|date:"d F Y" }}</li>{% endif %}
-            <li>Kayıt Tarihi: {{ info.date_joined|date:"d F Y" }}</li>
-        </ul>
-        <h3>İletişim Bilgileri</h3>
-        <ul>
-            {% if info.get_profile.show_email %}<li>E-posta: <a href="mailto:{{ info.email }}">{{ info.email }}</a></li>{% endif %}
-            <li>Web: <a href="{{ info.get_profile.homepage }}" target="_blank">{{ info.get_profile.homepage }}</a></li>
-            <li>Jabber: {{ info.get_profile.jabber }}</li>
-            <li>MSN: {{ info.get_profile.msn }}</li>
-            <li>ICQ: {{ info.get_profile.icq }}</li>
-        </ul>
+            <h3>Kişisel Bilgiler</h3>
+            <div class="profile_info">
+                <div class="profile_titles">Adı</div><div class="profile_value">: {{ info.first_name }}</div>
+            </div>
+            <div class="profile_info">
+                <div class="profile_titles">Soyadı </div><div class="profile_value">: {{ info.last_name }}</div>
+            </div>
+            <div class="profile_info">
+                <div class="profile_titles">Şehir </div><div class="profile_value">: {{ info.get_profile.get_city_display }}</div>
+            </div>
+            {% if info.get_profile.show_birthday %}
+            <div class="profile_info">
+                <div class="profile_titles">Doğum Tarihi </div><div class="profile_value">: {{ info.get_profile.birthday|date:"d F Y" }}</div>
+            </div>
+            {% endif %}
+            <div class="profile_info">
+                <div class="profile_titles">Kayıt Tarihi </div><div class="profile_value">: {{ info.date_joined|date:"d F Y" }}</div>
+            </div>
+
+            <h3>İletişim Bilgileri</h3>
+
+            {% if info.get_profile.show_email %}
+            <div class="profile_info">
+                <div class="profile_titles">E-posta </div><div class="profile_value">: <a href="mailto:{{ info.email }}">{{ info.email }}</a></div>
+            </div>
+            {% endif %}
+            <div class="profile_info">
+                <div class="profile_titles">Web </div><div class="profile_value">: <a href="{{ info.get_profile.homepage }}" target="_blank">{{ info.get_profile.homepage }}</a></div>
+            </div>
+            <div class="profile_info">
+                <div class="profile_titles">Jabber </div><div class="profile_value">: {{ info.get_profile.jabber }}</div>
+            </div>
+            <div class="profile_info">
+                <div class="profile_titles">MSN </div><div class="profile_value">: {{ info.get_profile.msn }}</div>
+            </div>
+            <div class="profile_info">
+                <div class="profile_titles">ICQ </div><div class="profile_value">: {{ info.get_profile.icq }}</div>
+            </div>
     </div>
 </div>
 <div id="id_map" class="googlemap"></div>

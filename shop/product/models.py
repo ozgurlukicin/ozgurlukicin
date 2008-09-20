@@ -6,13 +6,14 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.db import models
-from django.core import validators
+from django.contrib import admin
+from django.core.exceptions import ValidationError
 
 class CategoryImages(models.Model):
     """ This class has no Meta and Admin class because it's edited inline on related object's page """
-    category = models.ForeignKey("Category", blank=True, null=True, edit_inline=models.TABULAR, num_in_admin=2, max_num_in_admin=2, related_name="images")
+    category = models.ForeignKey("Category", blank=True, null=True, related_name="images")
     picture = models.ImageField(verbose_name="Kategori Resmi", upload_to="upload/image/")
-    keep = models.BooleanField(default=True, editable=False, core=True)
+    keep = models.BooleanField(default=True, editable=False)
     # we use remove since we don't have admin interface for editing CategoryImage.
     # It's edited inline on the related model page, when remove is checked, we will just delete the entry.
     remove = models.BooleanField(default=False)
@@ -34,8 +35,8 @@ class CategoryImages(models.Model):
 
 class Category(models.Model):
     """ Base category model for all products """
-    name = models.CharField("İsim", max_length=200, core=True)
-    slug = models.SlugField("SEF Başlık", help_text="Adres kısmında kullanılan ad, isim kısmından otomatik olarak üretilmektedir", prepopulate_from=("name",))
+    name = models.CharField("İsim", max_length=200)
+    slug = models.SlugField("SEF Başlık", help_text="Adres kısmında kullanılan ad, isim kısmından otomatik olarak üretilmektedir")
     # Category can have category inside it, we will get them recursively.
     parent = models.ForeignKey("self", blank=True, null=True, related_name="child")
     description = models.TextField("Kategori açıklaması")
@@ -76,11 +77,11 @@ class Category(models.Model):
     def save(self):
         if self.id:
             if self.parent and self.parent_id == self.id:
-                raise validators.ValidationError("Bir kategoriyi kendisi içerisine yerleştiremezsiniz!")
+                raise ValidationError("Bir kategoriyi kendisi içerisine yerleştiremezsiniz!")
 
             for p in self._recurse_for_parents(self):
                 if self.id == p.id:
-                    raise validators.ValidationError("Bir kategoriyi kendisi içerisine yerleştiremezsiniz!")
+                    raise ValidationError("Bir kategoriyi kendisi içerisine yerleştiremezsiniz!")
 
         super(Category, self).save()
 
@@ -114,10 +115,6 @@ class Category(models.Model):
         verbose_name = "Kategori"
         verbose_name_plural = "Kategoriler"
 
-    class Admin:
-        search_fields = ["name", "slug"]
-        list_display = ("name", "_parents_repr",)
-
 ########################################
 #                                      #
 # Tax Model that all products can have #
@@ -136,12 +133,6 @@ class Tax(models.Model):
         verbose_name = "Vergi"
         verbose_name_plural = "Vergiler"
 
-        ordering = ['title']
-
-    class Admin:
-        list_display = ("title", "percentage",)
-        search_fields = ['title']
-
 ######################################################
 #                                                    #
 # Image class for all Products.                      #
@@ -151,9 +142,9 @@ class Tax(models.Model):
 
 class ProductImages(models.Model):
     """ This class has no Meta and Admin class because it's edited inline on related object's page """
-    product = models.ForeignKey("Product", blank=True, null=True, edit_inline=models.TABULAR, num_in_admin=3, max_num_in_admin=3, related_name="images")
+    product = models.ForeignKey("Product", blank=True, null=True, related_name="images")
     picture = models.ImageField(verbose_name="Ürün Resmi", upload_to="upload/image/")
-    keep = models.BooleanField(default=True, editable=False, core=True)
+    keep = models.BooleanField(default=True, editable=False)
     # we use remove since we don't have admin interface for editing CategoryImage.
     # It's edited inline on the related model page, when remove is checked, we will just delete the entry.
     remove = models.BooleanField(default=False)
@@ -181,9 +172,10 @@ class ProductImages(models.Model):
 ############################################################
 
 class Product(models.Model):
-    # core True because we will use ProductImage as inline-edited object
-    name = models.CharField("İsim", max_length=200, core=True)
-    slug = models.SlugField("SEF Başlık", prepopulate_from=("name",), help_text="Adres kısmında kullanılan ad, isim kısmından otomatik olarak üretilmektedir")
+    serial = models.CharField("Seri No", help_text="Ürünün seri numarası", max_length=20)
+    name = models.CharField("İsim", max_length=200)
+    slug = models.SlugField("SEF Başlık", help_text="Adres kısmında kullanılan ad, isim kısmından otomatik olarak üretilmektedir")
+    description = models.TextField("Ürün açıklaması")
 
     stock = models.IntegerField("Ürün Stoğu", default=0)
     price = models.DecimalField("Ürünün fiyatı", default=0, max_digits=5, decimal_places=2, help_text="Ürünün vergisiz fiyatı. Vergi aşağıda seçtiğinize bağlı olarak otomatik bir şekilde bu fiyatın üzerine eklenmektedir. 15.67 gibi YTL cinsinden belirtin.")
@@ -250,17 +242,3 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Ürün"
         verbose_name_plural = "Ürünler"
-
-        ordering = ["name", "price"]
-
-    class Admin:
-        fields = (
-            ("Ürün Bilgileri", {"fields": ("name", "slug", "stock", "price")}),
-            ("Kategori/Resim/Vergi", {"fields": ("parent", "category", "tax")}),
-            (None, {"fields": ("active",)})
-            )
-
-        search_fields = ["name"]
-        list_filter = ["active"]
-
-        list_display = ("name", "stock", "_parents_repr", "category", "active")

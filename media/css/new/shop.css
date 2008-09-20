@@ -1,0 +1,56 @@
+#shop_intro {
+    width: 640px;
+    height: 270px;
+    background: url(/media/img/new/pardus_tshirts.png) no-repeat top center;
+}
+#shop_intro div {
+    width: 273px;
+    margin-left: 15px;
+}
+#shop_intro .title {
+    font-weight: bold;
+    padding-top: 130px;
+    padding-bottom: 10px;
+}
+.leftcolumn {
+    padding-top: 12px;
+    background-color: #EDEDED;
+}
+.leftcolumn div {
+    margin-left: 8px;
+}
+.leftcolumn_content .shop_category {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.leftcolumn_content a {
+    text-decoration: none;
+    color: #666666;
+}
+#buy {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 9;
+    background-color: gray;
+    opacity: 0.7;
+    display: none;
+}
+#buymessage {
+    position: absolute;
+    width: 305px;
+    height: 125px;
+    background-color: #2b8ed4;
+    z-index: 10;
+    display: none;
+}
+#buymessage p {
+    color:white;
+    margin:10px;
+}
+#product_list .product {
+    float: left;
+}
+#product_list .rightborder {
+    border-right: 1px #EAEAEA solid;
+}

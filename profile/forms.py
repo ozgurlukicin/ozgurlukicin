@@ -9,14 +9,14 @@ import re, random, datetime, sha
 
 from django.db import models
 from django.contrib.auth.models import User
-from django import newforms as forms
+from django import forms
 from django.core.exceptions import ObjectDoesNotExist
 
 from oi.middleware import threadlocals
 from oi.settings import CITY_LIST
 from oi.st.models import Contribute
 from oi.st.forms import XssField
-from oi.profile.models import *
+from oi.profile.models import ForbiddenUsername, Avatar, LostPassword, Profile
 
 class RegisterForm(forms.Form):
     username = forms.CharField(label='Kullanıcı Adı', max_length=20, help_text='En az 3, en fazla 20 karakter')

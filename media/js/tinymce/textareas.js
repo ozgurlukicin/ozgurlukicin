@@ -24,7 +24,7 @@ tinyMCE.init({
 
 function oiFileBrowser (field_name, url, type, win) {
     tinyMCE.activeEditor.windowManager.open({
-        file : "/admin/upload/image/add/",
+        file : "/admin/upload/image/tinymce/",
         title : "File Browser",
         width : 300,
         height : 100,

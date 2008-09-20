@@ -1,24 +1,18 @@
 {% extends "shop_base.html" %}
-
-{% block title %}Dükkan{% endblock %}
-
-{% block header_menu %}
-    {% include "header.html" %}
-{% endblock %}
-
-{% block ust_menu %}
-    {% include "shop_ust_menu.html" %}
-{% endblock %}
-
 {% block content %}
-    {% if not user.is_authenticated %}
-        Giriş yapmamışsınız. <a href="/kullanici/giris/">Buraya</a> tıklayarak giriş yapabilir ve ürün siparişi verebilirsiniz. <br />
-    {% else %}
-
-    {% if not user.get_profile.have_shopprofile %}
-        Herhangi bir alışveriş profiline sahip değilsiniz! <a href="/dukkan/profil/olustur/">Buraya</a> tıklayarak oluşturabilir ve ürün siparişi vermeye başlayabilirsiniz.
-    {% endif %}
-
-    {% endif %}
-
+    <div id="shop_intro"><div class="title">Pardus 2008 t-shirtleri hazır</div><div class="text">T-shirtleri e-dükkânımızdan seçip satın alabilirsiniz.</div></div>
+    <div id="product_list">
+    {% for product in products %}
+        {% if not product.parent %}
+        <div class="product{% ifequal forloop.counter 4 %}{% else %} rightborder{% endifequal %}">
+            <div class="photo"><img src="{{ product.images.all.0.picture.url }}" alt="{{ product }}" /></div>
+            <div class="title">{{ product }}</div>
+            <div class="description">{{ product.description }}</div>
+            <div class="buttons">
+                <div class="button"><a href="{{ product.get_absolute_url }}"><img src="/media/img/new/shop/button_buy.png" alt="Satın Al" /></a></div>
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+    </div>
 {% endblock %}

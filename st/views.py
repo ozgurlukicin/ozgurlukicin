@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2007 Artistanbul
+# Copyright 2007, 2008 Artistanbul
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
@@ -14,9 +14,10 @@ from django.db.models import Q
 
 from oi.settings import WEB_URL, NEWS_IN_HOMEPAGE, PACKAGES_IN_HOMEPAGE, GAMES_IN_HOMEPAGE, FS_IN_HOMEPAGE, HOWTOS_IN_HOMEPAGE
 
-from oi.st.forms import SearchForm,CommentForm,AdvancedSearchForm
+from oi.st.forms import SearchForm,AdvancedSearchForm
 
-from oi.st.models import *
+from oi.st.models import News, Package, Game, HowTo, FS, PardusVersion, PardusMirror
+from oi.st.tags import Tag
 from oi.st.wrappers import render_response
 from oi.flatpages.models import FlatPage
 
@@ -24,6 +25,7 @@ from oi.flatpages.models import FlatPage
 from django.contrib.auth.decorators import login_required
 from oi.forum.models import Forum,Topic,Post
 from oi.forum.views import flood_control
+from oi.forum.forms import PostForm
 from django.http import HttpResponseRedirect
 
 def robots(request):
@@ -46,18 +48,7 @@ def fs_printable(request, slug):
 
 def howto_detail(request, slug):
     howto = get_object_or_404(HowTo, slug=slug)
-
-    form=CommentForm()
-
-    if request.user.is_authenticated():
-        auth=True
-
-    try:
-        topic = Topic.objects.filter(title=howto.title)[0]
-        comment_count = topic.posts - 1
-        comment_url = topic.get_latest_post_url()
-    except:
-        pass
+    form=PostForm()
     return render_response(request, 'howto/howto_detail.html', locals())
 
 def howto_printable(request, slug):
@@ -67,19 +58,12 @@ def howto_printable(request, slug):
 def game_detail(request, slug):
     game = get_object_or_404(Game, slug=slug)
     game.avg = ((game.gameplay + game.graphics + game.sound + game.scenario + game.atmosphere)/5.0)
-
-    form=CommentForm()
-
-    if request.user.is_authenticated():
-        auth=True
-
-    try:
-        topic = Topic.objects.filter(title=game.title)[0]
-        comment_count = topic.posts - 1
-        comment_url = topic.get_latest_post_url()
-    except:
-        pass
-
+    game.gameplay_range = range(1, game.gameplay)
+    game.graphics_range = range(1, game.graphics)
+    game.sound_range = range(1, game.sound)
+    game.scenario_range = range(1, game.scenario)
+    game.atmosphere_range = range(1, game.atmosphere)
+    form=PostForm()
     return render_response(request, 'game/game_detail.html', locals())
 
 def game_printable(request, slug):
@@ -88,40 +72,16 @@ def game_printable(request, slug):
 
 def news_detail(request, slug):
     news = get_object_or_404(News, slug=slug)
-    form=CommentForm()
-
-    if request.user.is_authenticated():
-        auth=True
-
-    try:
-        topic = Topic.objects.filter(title=news.title)[0]
-        comment_count = topic.posts - 1
-        comment_url = topic.get_latest_post_url()
-    except:
-        pass
+    form=PostForm()
     return render_response(request, 'news/news_detail.html', locals())
 
 def news_printable(request, slug):
     news = get_object_or_404(News, slug=slug)
-
     return render_response(request, 'news/news_printable.html', locals())
 
 def pkg_detail(request, slug):
     package = get_object_or_404(Package, slug=slug)
-
-    form=CommentForm()
-
-    if request.user.is_authenticated():
-        auth=True
-
-    # we need to handle page titles that changed after creating
-    try:
-        topic = Topic.objects.filter(title=package.title)[0]
-        comment_count = topic.posts - 1
-        comment_url = topic.get_latest_post_url()
-    except:
-        pass
-
+    form=PostForm()
     return render_response(request, 'package/package_detail.html', locals())
 
 def pkg_printable(request, slug):
@@ -219,184 +179,3 @@ def search(request):
             total += topic.count()
 
     return render_response(request, 'search.html', locals())
-
-@login_required
-def comment_news(request,slug):
-    """ When someone comments it is adde to forum (check for flooding also !)...
-    validate the html tags all for now...(may change!)
-    """
-    news = get_object_or_404(News, slug=slug)
-    #news = News.objects.filter(id=id)
-
-    if request.method== 'POST':
-        new_data = request.POST.copy()
-        form=CommentForm(new_data)
-
-        #flood control
-        flood,timeout = flood_control(request)
-
-        if form.is_valid() and not flood:
-            t=Topic.objects.filter(title=news.title)
-            if not t:
-                tags = news.tags.all()
-                return render_response(request,'news/news_detail.html',{'news':news,'tags':tags,'form':form,'auth':True})
-
-            if t[0].locked:
-                errorMessage = 'Konu kilitli olduğu için yorum gönderemezsiniz.'
-                return render_response(request, 'forum/forum_error.html', {'message': errorMessage})
-
-            post = Post(topic=t[0],
-                        author=request.user,
-                        text=form.cleaned_data['yorum'])
-            try:
-                post.save()
-            except Exception:
-                render_to_response('db_error.html')
-
-            return HttpResponseRedirect(post.get_absolute_url())
-        else:
-            #hata mesaji gonder
-            tags = news.tags.all()
-            return render_response(request,'news/news_detail.html',{'news':news,'tags':tags,'form':form,'auth':True})
-
-    form = CommentForm()
-    tags = news.tags.all()
-    return render_response(request,'news/news_detail.html',{'news':news,'tags':tags,'form':form,'auth':True})
-
-    #do something here
-
-
-@login_required
-def comment_howto(request,slug):
-    """ When someone comments it is adde to forum (check for flooding also !)...
-    validate the html tags all for now...(may change!)
-    """
-    howto = get_object_or_404(HowTo, slug=slug)
-    #news = News.objects.filter(id=id)
-
-    if request.method== 'POST':
-        new_data = request.POST.copy()
-        form=CommentForm(new_data)
-
-        #flood control
-        flood,timeout = flood_control(request)
-
-        if form.is_valid() and not flood:
-            t=Topic.objects.filter(title=howto.title)
-            if not t:
-                tags = howto.tags.all()
-                return render_response(request,'howto/howto_detail.html',{'howto':howto,'tags':tags,'form':form,'auth':True})
-
-            if t[0].locked:
-                errorMessage = 'Konu kilitli olduğu için yorum gönderemezsiniz.'
-                return render_response(request, 'forum/forum_error.html', {'message': errorMessage})
-
-            post = Post(topic=t[0],
-                        author=request.user,
-                        text=form.cleaned_data['yorum'])
-            try:
-                post.save()
-            except Exception:
-                render_to_response('db_error.html')
-
-            return HttpResponseRedirect(post.get_absolute_url())
-        else:
-            #hata mesaji gonder
-            tags = howto.tags.all()
-            return render_response(request,'howto/howto_detail.html',{'howto':howto,'tags':tags,'form':form,'auth':True})
-
-    form=CommentForm()
-    tags = howto.tags.all()
-    return render_response(request,'howto/howto_detail.html',{'howto':howto,'tags':tags,'form':form,'auth':True})
-
-    #do something here
-
-@login_required
-def comment_game(request,slug):
-    """ When someone comments it is adde to forum (check for flooding also !)...
-    validate the html tags all for now...(may change!)
-    """
-    game = get_object_or_404(Game, slug=slug)
-    #news = News.objects.filter(id=id)
-
-    if request.method== 'POST':
-        new_data = request.POST.copy()
-        form=CommentForm(new_data)
-
-        #flood control
-        flood,timeout = flood_control(request)
-
-        if form.is_valid() and not flood:
-            t=Topic.objects.filter(title=game.title)
-            if not t:
-                tags = game.tags.all()
-                return render_response(request,'game/game_detail.html',{'game':game,'tags':tags,'form':form,'auth':True})
-
-            if t[0].locked:
-                errorMessage = 'Konu kilitli olduğu için yorum gönderemezsiniz.'
-                return render_response(request, 'forum/forum_error.html', {'message': errorMessage})
-
-            post = Post(topic=t[0],
-                        author=request.user,
-                        text=form.cleaned_data['yorum'])
-            try:
-                post.save()
-            except Exception:
-                render_to_response('db_error.html')
-
-            return HttpResponseRedirect(post.get_absolute_url())
-        else:
-            #hata mesaji gonder
-            tags = game.tags.all()
-            return render_response(request,'game/game_detail.html',{'game':game,'tags':tags,'form':form,'auth':True})
-
-    form=CommentForm()
-    tags = game.tags.all()
-    return render_response(request,'game/game_detail.html',{'game':game,'tags':tags,'form':form,'auth':True})
-
-    #do something here
-
-@login_required
-def comment_package(request,slug):
-    """ When someone comments it is adde to forum (check for flooding also !)...
-    validate the html tags all for now...(may change!)
-    """
-    package = get_object_or_404(Package, slug=slug)
-    #news = News.objects.filter(id=id)
-
-    if request.method== 'POST':
-        new_data = request.POST.copy()
-        form=CommentForm(new_data)
-
-        #flood control
-        flood,timeout = flood_control(request)
-
-        if form.is_valid() and not flood:
-            t=Topic.objects.filter(title=package.title)
-            if not t:
-                tags = package.tags.all()
-                return render_response(request,'package/package_detail.html',{'package':package,'tags':tags,'form':form,'auth':True})
-
-            if t[0].locked:
-                errorMessage = 'Konu kilitli olduğu için yorum gönderemezsiniz.'
-                return render_response(request, 'forum/forum_error.html', {'message': errorMessage})
-
-            post = Post(topic=t[0],
-                        author=request.user,
-                        text=form.cleaned_data['yorum'])
-            try:
-                post.save()
-            except Exception:
-                render_to_response('db_error.html')
-
-            return HttpResponseRedirect(post.get_absolute_url())
-        else:
-            #hata mesaji gonder
-            tags = package.tags.all()
-            return render_response(request,'package/package_detail.html',{'package':package,'tags':tags,'form':form,'auth':True})
-
-    form=CommentForm()
-    tags = package.tags.all()
-    return render_response(request,'package/package_detail.html',{'package':package,'tags':tags,'form':form,'auth':True})
-
-    #do something here

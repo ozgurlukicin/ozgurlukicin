@@ -13,7 +13,7 @@ class ParentCategory(models.Model):
     "Each theme item belongs to a ParentCategory and a SubCategory"
 
     name = models.CharField(max_length=100, verbose_name="Kategori adı", unique=True)
-    slug = models.SlugField(verbose_name="SEF Başlık", prepopulate_from=("name",), unique=True)
+    slug = models.SlugField(verbose_name="SEF Başlık", unique=True)
 
     def __unicode__(self):
         return self.name
@@ -25,6 +25,7 @@ class ParentCategory(models.Model):
         list_display = ('name',)
         search_fields = ['name']
         ordering=["name"]
+        prepopulated_fields = {'slug': ('name',)}
 
     class Meta:
         verbose_name="Kategori"
@@ -36,7 +37,7 @@ class SubCategory(models.Model):
 
     parent = models.ForeignKey(ParentCategory)
     name = models.CharField(max_length=100, verbose_name="Kategori adı")
-    slug = models.SlugField(verbose_name="SEF Başlık", prepopulate_from=("name",), unique=True)
+    slug = models.SlugField(verbose_name="SEF Başlık", unique=True)
 
     def __unicode__(self):
         return u"%s > %s" % (self.parent.name, self.name)
@@ -48,6 +49,7 @@ class SubCategory(models.Model):
         list_display = ("name", "parent")
         search_fields = ["name", "parent"]
         ordering=["name"]
+        prepopulated_fields = {'slug': ("name",)}
 
     class Meta:
         verbose_name="Alt Kategori"

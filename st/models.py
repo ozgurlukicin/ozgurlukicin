@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2007 Artistanbul
+# Copyright 2007, 2008 Artistanbul
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
@@ -14,32 +14,16 @@ from django.contrib.auth.models import User
 
 from oi.middleware import threadlocals
 from oi.settings import CITY_LIST, MEDIA_ROOT, MEDIA_URL
+from oi.forum.models import Topic
+from oi.forum.tools import create_forum_topic
 
 # the signal stuff
 from django.db.models import signals
-from django.dispatch import dispatcher
-from oi.st.signals import open_forum_topic, remove_video_thumbnail_on_delete
+from oi.st.tags import Tag
+from oi.st.signals import remove_video_thumbnail_on_delete
+from oi.upload.models import Image as Img
 
 FFMPEG_COMMAND = "ffmpeg"
-
-class Tag(models.Model):
-    name = models.CharField('Etiket', max_length=32, blank=False, unique=True)
-
-    def __unicode__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return "/etiket/%s/" % self.name
-
-    class Admin:
-        list_display = ('name', 'id')
-        ordering = ['-name']
-        search_fields = ['name']
-
-    class Meta:
-        ordering = ['name']
-        verbose_name = "Etiket"
-        verbose_name_plural = "Etiketler"
 
 class Wiki(models.Model):
     name = models.CharField('Madde adı', max_length=128, blank=False, unique=True)
@@ -49,11 +33,6 @@ class Wiki(models.Model):
 
     def get_absolute_url(self):
         return "http://tr.pardus-wiki.org/%s" % self.name
-
-    class Admin:
-        list_display = ('name', 'id')
-        ordering = ['-name']
-        search_fields = ['name']
 
     class Meta:
         ordering = ['name']
@@ -66,11 +45,6 @@ class Contribute(models.Model):
     def __unicode__(self):
         return self.name
 
-    class Admin:
-        list_display = ('name', 'id')
-        ordering = ['-name']
-        search_fields = ['name']
-
     class Meta:
         verbose_name = "Katkı Adı"
         verbose_name_plural = "Katkı Adları"
@@ -81,12 +55,7 @@ class OtherFile(models.Model):
     tags = models.ManyToManyField(Tag)
 
     def __unicode__(self):
-        return self.file
-
-    class Admin:
-        list_display = ('file', 'desc')
-        ordering = ['-id']
-        search_fields = ['file', 'desc']
+        return unicode(self.file)
 
     class Meta:
         verbose_name = "Dosya"
@@ -98,7 +67,7 @@ class ScreenShot(models.Model):
     tags = models.ManyToManyField(Tag)
 
     def __unicode__(self):
-        return self.file
+        return unicode(self.file)
 
     def get_thumbnail_url(file, size='230x230'):
         thumb = 'thumb_' + file
@@ -116,11 +85,6 @@ class ScreenShot(models.Model):
 
         return thumb_url
 
-    class Admin:
-        list_display = ('file', 'desc')
-        ordering = ['-id']
-        search_fields = ['file', 'desc']
-
     class Meta:
         verbose_name = "Ekran Görüntüsü"
         verbose_name_plural = "Ekran Görüntüleri"
@@ -135,11 +99,6 @@ class Video(models.Model):
 
     def get_thumbnail_url(self):
         return "%s%s.png" % (MEDIA_URL, path.splitext(self.file)[0])
-
-    class Admin:
-        list_display = ('file', 'desc')
-        ordering = ['-id']
-        search_fields = ['file', 'desc']
 
     class Meta:
         verbose_name = "Video"
@@ -173,7 +132,7 @@ class Video(models.Model):
     def get_video_name(self):
         return path.splitext(self.file)[0].split('/')[2]
 
-dispatcher.connect(remove_video_thumbnail_on_delete, signal=signals.pre_delete, sender=Video)
+signals.pre_delete.connect(remove_video_thumbnail_on_delete, sender=Video)
 
 class License(models.Model):
     name = models.CharField(max_length=16, blank=False, unique=True)
@@ -182,16 +141,14 @@ class License(models.Model):
     def __unicode__(self):
         return self.name
 
-    class Admin:
-        list_display = ('id', 'name')
-
     class Meta:
         verbose_name = "Lisans"
         verbose_name_plural = "Lisanslar"
 
 class FS(models.Model):
     title = models.CharField('Başlık', max_length=32, blank=False)
-    slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
+    slug = models.SlugField('SEF Başlık')
+    image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
     tags = models.ManyToManyField(Tag, blank=False)
@@ -210,26 +167,15 @@ class FS(models.Model):
     def get_printable_url(self):
         return "/ia/%s/yazdir/" % self.slug
 
-    class Admin:
-        fields = (
-            ('Genel', {'fields': ('author', 'title','sum','text','videos','tags','order','update','status',)}),
-            ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
-        )
-
-        list_display = ('title', 'author', 'status', 'update')
-        list_filter = ['update']
-        ordering = ['order']
-        search_fields = ['title', 'text', 'tags']
-        js = ("js/admin/sef.js", "js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
-
     class Meta:
         verbose_name = "İlk Adım"
         verbose_name_plural = "İlk Adımlar"
 
 class HowTo(models.Model):
     title = models.CharField('Başlık', max_length=32, blank=False)
-    slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
+    slug = models.SlugField('SEF Başlık')
     sum = models.TextField('Özet', blank=False)
+    image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
     text = models.TextField('Metin', blank=False)
     tags = models.ManyToManyField(Tag, blank=False)
     wiki = models.ManyToManyField(Wiki, blank=True)
@@ -237,6 +183,7 @@ class HowTo(models.Model):
     update = models.DateTimeField('Son Güncelleme', blank=False)
     author = models.CharField('Yazar', max_length=32)
     status = models.BooleanField('Aktif')
+    topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
 
     def __unicode__(self):
         return self.title
@@ -247,29 +194,20 @@ class HowTo(models.Model):
     def get_printable_url(self):
         return "/nasil/%s/yazdir/" % self.slug
 
-    class Admin:
-        fields = (
-            ('Genel', {'fields': ('author', 'title','sum','text','videos','tags','wiki','update','status',)}),
-            ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
-        )
-
-        list_display = ('title', 'author', 'status', 'update')
-        list_filter = ['update']
-        ordering = ['-update']
-        search_fields = ['title', 'text', 'tags']
-        js = ("js/admin/sef.js", "js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
+    def save(self):
+        create_forum_topic(self, "Nasıl")
+        super(HowTo, self).save()
 
     class Meta:
         verbose_name = "Nasıl"
         verbose_name_plural = "Nasıl Belgeleri"
 
-dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=HowTo)
-
 class Game(models.Model):
     ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'))
 
     title = models.CharField('Başlık', max_length=32, blank=False)
-    slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
+    slug = models.SlugField('SEF Başlık')
+    image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
     license = models.ManyToManyField(License)
@@ -289,6 +227,7 @@ class Game(models.Model):
     update = models.DateTimeField('Son Güncelleme', blank=False)
     author = models.CharField('Yazar', max_length=32)
     status = models.BooleanField('Aktif')
+    topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
 
     def __unicode__(self):
         return self.title
@@ -299,34 +238,25 @@ class Game(models.Model):
     def get_printable_url(self):
         return "/oyun/%s/yazdir/" % self.slug
 
-    class Admin:
-        fields = (
-            ('Genel', {'fields': ('author', 'title', 'sum', 'text', 'videos', 'tags', 'wiki', 'update', 'status')}),
-            ('Oyun bilgileri', {'fields': ('url', 'path', 'learning_time', 'license', 'installed_size', 'download_size')}),
-            ('Değerlendirme', {'fields': ('gameplay', 'graphics', 'sound', 'scenario', 'atmosphere')}),
-            ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
-        )
-        list_display = ('title', 'author', 'status', 'update')
-        list_filter = ['update']
-        ordering = ['-id']
-        search_fields = ['title', 'sum', 'text', 'tags']
-        js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
+    def save(self):
+        create_forum_topic(self, "Oyunlar")
+        super(Game, self).save()
 
     class Meta:
         verbose_name = "Oyun"
         verbose_name_plural = "Oyunlar"
 
-dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=Game)
-
 class News(models.Model):
     title = models.CharField('Başlık', max_length=32, blank=False)
-    slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
+    slug = models.SlugField('SEF Başlık')
+    image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
     tags = models.ManyToManyField(Tag, blank=False)
     update = models.DateTimeField('Tarih', blank=False)
     author = models.CharField('Yazar', max_length=32)
     status = models.BooleanField('Aktif')
+    topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
 
     def __unicode__(self):
         return self.title
@@ -337,29 +267,20 @@ class News(models.Model):
     def get_printable_url(self):
         return "/haber/%s/yazdir/" % self.slug
 
-    class Admin:
-        fields = (
-            ('Genel', {'fields': ('author', 'title', 'sum', 'text', 'tags', 'update', 'status')}),
-            ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
-        )
-
-        list_display = ('title', 'author', 'update','status')
-        list_filter = ['update']
-        ordering = ['-update']
-        search_fields = ['title', 'author', 'text']
-        js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js")
+    def save(self):
+        create_forum_topic(self, "Haberler")
+        super(News, self).save()
 
     class Meta:
         verbose_name = "Haber"
         verbose_name_plural = "Haberler"
 
-dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=News)
-
 class Package(models.Model):
     ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'))
 
     title = models.CharField('Başlık', max_length=32, blank=False, help_text='Paket ismi')
-    slug = models.SlugField('SEF Başlık', prepopulate_from=("title",))
+    slug = models.SlugField('SEF Başlık')
+    image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Açıklama', blank=False)
     license = models.ManyToManyField(License)
@@ -375,6 +296,7 @@ class Package(models.Model):
     update = models.DateTimeField('Son Güncelleme', blank=False)
     author = models.CharField('Yazar', max_length=32)
     status = models.BooleanField('Aktif')
+    topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
 
     def __unicode__(self):
         return self.title
@@ -385,22 +307,13 @@ class Package(models.Model):
     def get_printable_url(self):
         return "/paket/%s/yazdir/" % self.slug
 
-    class Admin:
-        fields = (
-            ('Genel', {'fields': ('author', 'title','sum','text', 'license','installed_size','download_size','url','point','path','ss','tags','wiki','videos','update','status')}),
-            ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
-        )
-        list_display = ('title', 'author', 'status', 'update')
-        list_filter = ['license']
-        ordering = ['-id']
-        search_fields = ['title', 'sum', 'text']
-        js = ("js/admin/package_sef.js", "js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
+    def save(self):
+        create_forum_topic(self, "Paketler")
+        super(Package, self).save()
 
     class Meta:
         verbose_name = "Paket"
         verbose_name_plural = "Paketler"
-
-dispatcher.connect(open_forum_topic,signal=signals.pre_save, sender=Package)
 
 class PardusVersion(models.Model):
     number = models.CharField('Sürüm numarası', max_length = 16, blank = False, unique = True)
@@ -420,12 +333,6 @@ class PardusVersion(models.Model):
     def get_absolute_url(self):
         return "/indir/%s/" % self.number
 
-    class Admin:
-        list_display = ('number', 'codename', 'status')
-        ordering = ['-number']
-        search_fields = ['codename']
-        js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
-
     class Meta:
         verbose_name = "Pardus Sürümü"
         verbose_name_plural = "Pardus Sürümleri"
@@ -441,11 +348,6 @@ class PardusMirror(models.Model):
 
     def __unicode__(self):
         return self.name
-
-    class Admin:
-        list_display = ('name', 'url', 'status')
-        ordering = ['-name']
-        search_fields = ['name']
 
     class Meta:
         unique_together = (('type', 'order'),('type', 'name'),)

@@ -1,0 +1,139 @@
+#idea_topbar {
+    background: #219cde;
+    height: 40px;
+    line-height: 40px;
+    text-indent: 10px;
+}
+#idea_topbar #idea_list_title {
+    float: left;
+    font-size: 12px;
+    color: #fff;
+}
+#idea_topbar #idea_submit {
+    float: right;
+    margin: 7px 10px 0 0;
+}
+#idea_topbar h3 {
+    background:#ccc;
+    margin: 30px;
+}
+.idea_container {
+    margin-top:30px;
+    padding:3px;
+}
+.idea_left {
+    float: left;
+    width: 60px;
+}
+.idea_left .idea_vote {
+    background: url('/media/img/new/ideas_vote_back.png') no-repeat;
+    width: 54px;
+    height: 18px;
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 600;
+}
+.idea_left .favorite {
+    text-align: center;
+    margin-top: 10px;
+    margin-right: 7px;
+}
+.idea_right {
+    width: 720px;
+    float: left;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #EAEAEA;
+}
+.idea_right .h1 a {
+    float: left;
+    font-size: 17px;
+    color: #009FE9;
+    text-decoration: none;
+}
+.idea_right .h3, .idea_right .h3 a {
+    font-size: 12px;
+    color: #999;
+    font-weight: 600;
+    margin: 20px 0 20px 0;
+    text-decoration: none;
+}
+.idea_right .idea_content {
+    font-size: 11px;
+    line-height: 15px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.idea_right .idea_content p {
+    margin-bottom: 20px;
+    display: block;
+}
+.idea_right .idea_info {
+    font-size: 11px;
+    clear: both;
+    margin-top: 5px;
+    color: #999;
+}
+.idea_right .idea_info a {
+    color: #009FE9;
+    text-decoration: none;
+}
+.idea_right .idea_comments {
+    font-size: 11px;
+    margin-bottom: 15px;
+}
+.idea_right .idea_comments img {
+    float:left;
+    margin-right:5px;
+}
+.idea_right .idea_comments a {
+    color: #999;
+    text-decoration: none;
+}
+.idea_right .idea_status {
+    float: left;
+    font-size: 11px;
+    background: #f7901e;
+    color: #fff;
+    margin: 4px;
+    margin-left: 10px;
+}
+.brainmenu {
+    font-size: 11px;
+    margin-bottom: 30px;
+}
+.brainmenu a {
+    color: #777;
+    text-decoration: none;
+}
+.brainmenu ul {
+    list-style-image: url('/media/img/new/ideas_list_style.png');
+    margin-left: 15px;
+}
+.brainmenu ul li {
+    margin: 3px;
+    padding: 0;
+}
+.brainmenu h2 {
+    font-weight: bold;
+    font-size: 12px;
+}
+.tags a {
+    color: #009fe0;
+    text-decoration: none;
+    font-size: 11px;
+}
+.idea_detail_box {
+    background: #F3F3F3;
+    border: 1px #ccc solid;
+    padding: 20px;
+    font-size: 11px;
+}
+.idea_detail_box a {
+    color: #666;
+    text-decoration: none;
+}
+.cursor_default {
+    cursor: default;
+}

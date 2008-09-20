@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Yeni Fikirler - {% block title %}{% endblock %}Özgürlük için...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="imagetoolbar" content="no" />
+<link rel="shortcut icon" href="/media/img/fav.png" />
+<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Yeni Fikirler" href="/yenifikir/rss/" />
+
+<style type="text/css" media="screen">@import url('/media/css/new/base.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/ideas_base.css');</style>
+{% block extrahead %}{% endblock %}
+</head>
+<body{% block extrabody %}{% endblock %}>
+{% include "header.html" %}
+<div id="{% block pagetype %}page{% endblock %}">
+    {% include "menu.html" %}
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <div id="sidebar">
+        {% block sidebar_top %}
+        {% endblock %}
+        <div class="sidebar_content">
+            <h2>Kullanıcı Kutusu</h2>
+            {% if not user.is_authenticated %}
+                <form method="post" action="/kullanici/giris/">
+                    <input type="text" id="userbox_username" name="username" size="18" value="" maxlength="20" /><br />
+                    <input type="password" id="userbox_password" name="password" size="18" value="" maxlength="30" /><br />
+                    <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+                    <input type="image" src="/media/img/new/button_login.png" value="Giriş" />
+                </form>
+                <span class="loginlinks"><a href="/kullanici/kayit/">Kayıt ol</a><br /><a class="sari"  href="/kullanici/kayip/">Kayıp parola</a></span>
+            {% else %}
+                <p>Merhaba {{ user.username }}!</p>
+                <p>Profil sayfanıza <a href="{{ request.user.get_profile.get_absolute_url }}">buradan</a> ulaşabilir ya da <a 
+class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.</p>
+            {% endif %}
+        </div>
+        {% block extrasidemenu %}
+<div class="brainmenu">
+    <h2>Yeni Fikirler</h2>
+    <ul>
+    <li><a href="/yenifikir" title="Yeni Fikirler">Yeni Fikirler Anasayfa</a></li>
+    <li><a href="/yenifikir/ekle">Fikir Ekle</a></li>
+{% if user.is_authenticated %}
+    <li><a href="/yenifikir/listele/ekleyen/{{ user.username }}">Eklediğim Fikirler</a></li>
+    <li><a href="/yenifikir/listele/favori/fikirler">Favorilerim</a></li>
+{% endif %}
+    <li><a href="/yenifikir/listele/populer/bugun">Bugünkü popüler fikirler</a></li>
+    <li><a href="/yenifikir/listele/populer/buhafta" title="">Bu haftaki popüler fikirler</a></li>
+    <li><a href="/yenifikir/listele/populer/buay" title="">Bu ayki popüler fikirler</a></li>
+    <li><a href="/yenifikir/listele/populer/tumzamanlar" title="">Tüm zamanların popüler fikirleri</a></li>
+    <li><a href="/yenifikir/listele/son/eklenen" title="">Son eklenenler</a></li>
+</ul>
+<br />
+    <h2>Kategoriler</h2>
+    <ul>
+        {% for category in categories %}
+        <li><a href="{{ category.get_absolute_url }}" title="{{ category.name }}">{{ category.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+        {% endblock %}
+        <div class="sidebar_content">
+            <h2>Ara</h2>
+            <form method="post" action="/arama/">
+                <input type="text" name="term" size="20" /><br />
+                <input type="image" src="/media/img/new/button_search.png" value="Ara" />
+                <span class="loginlinks"><a href="/gelismisarama/">Gelişmiş<br />Arama</a></span>
+            </form>
+        </div>
+        <div class="sidebar_content">
+            <a href="/dukkan/"><img src="/media/img/new/tshirt.png" alt="t-shirt" /></a>
+        </div>
+        {% block sidebar_bottom %}
+        {% endblock %}
+    </div>
+    {% include "footer.html" %}
+</div>
+</body>
+</html>

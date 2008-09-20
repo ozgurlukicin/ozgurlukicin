@@ -1,151 +1,26 @@
-{% extends "base.html" %}
+{% extends "idea_base.html" %}
 {% load library %}
 
 {% block title %}Yeni Fikirler - {% endblock %}
-"
-{% block pagetype %}page{% endblock %}
+
 {% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/brainstorm.css');</style>
 <script type="text/javascript" src="/media/js/jquery-1.2.6.min.js"></script>
-<script type="text/javascript">
-function favori(id, proc) {
-    $.get("/yenifikir/ayrinti/"+id+"/favori/"+proc,
-        function(data) {
-            if (data == 'OK') {
-                if (proc == 'ekle') {
-                    $('#favoriekle' + id).hide();
-                    $('#favoricikar' + id).fadeIn();
-                } else {
-                    $('#favoricikar' + id).hide();
-                    $('#favoriekle' + id).fadeIn();
-                }
-            }
-        });
-}
-function oyla(id, oy) {
-    $.get("/yenifikir/oyla/" + id + "/" + oy + "/",
-        function(data) {
-            $('#oyla' + id).hide()
-            $('#oyiptal' + id).fadeIn("slow")
-            $('#vote' + id).html(data);
-        });
-}
-function oyiptal(id) {
-    $.get("/yenifikir/oyiptal/" + id,
-        function(data) {
-            $('#oyiptal' + id).hide()
-            $('#oyla' + id).fadeIn("slow")
-            $('#vote' + id).html(data);
-        });
-}
-function duplicate(idea_id) {
-    $("dup_submit").attr("disabled","disabled");
-    $.get("/yenifikir/tekrar/"+ idea_id +"/"+ $("#duplicate_id").val() +"/",
-        function(data) {
-            if (data == 'OK') {
-                $("#duplicate_form_info").html("Tekrar bildiriminiz alındı, teşekkürler.");
-            } else if (data == 'YOK') {
-                $("#duplicate_form_info").html("Böyle bir fikir bulunamadı.");
-            }
-        });
-}
-function changeStatus(idea_id) {
-    $.get("/yenifikir/durumdegistir/" + idea_id + "/" + $("#id_status").val()  + "/",
-        function(data) {
-            $("#status_form_info").html("Fikir durumu değiştirildi.")
-        });
-}
-</script>
-{% endblock %}
-{% block header_menu %}
-    {% include "header.html" %}
-{% endblock %}
-<br />
-{% block ust_menu %}
-    {% include "ust_menu_ayrinti.html" %}
+<script type="text/javascript" src="/media/js/brainstorm.js"></script>
 {% endblock %}
 
 {% block content %}
-
-<div style="float:left; margin:5px; padding:5px; border:1px #ccc solid; background:#f7f7f7;">
-    <li><a href="/yenifikir" title="Yeni Fikirler">Yeni Fikirler Anasayfa</a></li>
-    <li><a href="/yenifikir/ekle">Yeni Fikri Ekle</a></li>
-{% if user.is_authenticated %}
-    <li><a href="/yenifikir/listele/ekleyen/{{ user.username }}">Eklediğim Fikirler</a></li>
-    <li><a href="/yenifikir/listele/favori/fikirler">Favorilerim</a></li>
-{% endif %}
-    <li>
-Kategoriler
-    <ul>
-        {% for category in categories %}
-        <li><a href="/yenifikir/listele/kategori/{{ category.name }}" title="{{ category.name }}">{{ category.name }}</a></li>
-        {% endfor %}
-    </ul>
-    </li>
-    <li><a href="/yenifikir/listele/populer/bugun">Bugünkü popüler fikirler</a></li>
-    <li><a href="/yenifikir/listele/populer/buhafta" title="">Bu haftaki popüler fikirler</a></li>
-    <li><a href="/yenifikir/listele/populer/buay" title="">Bu ayki popüler fikirler</a></li>
-    <li><a href="/yenifikir/listele/populer/tumzamanlar" title="">Tüm zamanların popüler fikirleri</a></li>
-    <li><a href="/yenifikir/listele/son/eklenen" title="">Son eklenenler</a></li>
-    </ul>
+<div id="idea_topbar"><span id="idea_list_title">{{ page_title }}</span>
+    <span id="idea_submit"><a href="/yenifikir/ekle/" title="Yeni Fikir Ekle"><img src="/media/img/new/ideas_submit.png" alt="submit idea" /></a></span>
 </div>
-<div>
- {% block idea %}
-<ul>
+{% block idea %}
 {% for idea in ideas %}
-<li>
+<div class="idea_container">
+    {% include "idea_top.html" %}
+    </div><!-- for /idea_right -->
 
-
-<h1 id='vote{{ idea.id }}'>{{ idea.vote_count }}</h1>
-<h1 id='oyla{{ idea.id }}' {% if idea.is_voted %}style="display:none;"{% endif %}>
-<a href=
-{% if user.is_authenticated %}
-"/yenifikir/oyla/{{ idea.id }}/1" onclick="oyla({{ idea.id }}, '1'); return false;"
-{% else %}
-"/yenifikir/giris/yap"
-{% endif %}
->(+)</a>
-<a href=
-{% if user.is_authenticated %}
-"/yenifikir/oyla/{{ idea.id }}/0" onclick="oyla({{ idea.id }}, '0'); return false;"
-{% else %}
-"/yenifikir/giris/yap"
-{% endif %}
->(-)</a>
-</h1>
-<h1 id='oyiptal{{ idea.id }}' {% if not idea.is_voted %}style="display:none;"{% endif %}>
-<a href="/yenifikir/oyiptal/{{ idea.id }}" onclick="oyiptal({{ idea.id }}); return false;">oy iptal</a>
- </h1>
-
-<h2 id='favoricikar{{ idea.id }}' {% if not idea.is_favorited %}style="display:none;"{% endif %}>
-<a href="/yenifikir/ayrinti/1/favori/cikar" onclick="favori({{ idea.id  }}, 'cikar');return false;">favorilerimden çıkar</a>
-</h2>
-<h2 id='favoriekle{{ idea.id }}' {% if idea.is_favorited %}style="display:none;" {% endif %}>
-<a href=
-{% if user.is_authenticated %}
-"/yenifikir/ayrinti/1/favori/ekle" onclick="favori({{ idea.id }}, 'ekle'); return false;"
-{% else %}
-"/yenifikir/giris/yap"
-{% endif %}
->favorile</a>
-</h2>
-
-<h1><a href="/yenifikir/ayrinti/{{ idea.id }}"> {{ idea.title }}</a></h1>
-
-<p>
-{{ idea.status }} |
-<a href="{{ idea.submitter.get_profile.get_absolute_url }}" title="{{ idea.submitter }} kullanıcısının profiline git">{{ idea.submitter }}</a>
-tarafından {{ idea.submitted_date }} tarihinde
-<a href="/yenifikir/listele/kategori/{{ idea.category }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine
-<a href="/yenifikir/listele/ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak gönderildi.
-</p>
-<p>{{ idea.description }}</p>
-
-      <p><a href="{{ idea.get_absolute_url }}" title="Yorumlar">Yorumlar ({{ idea.comment_count }})</a></p>
-     </li>
-{% endfor %}
-</ul>
- {% endblock %}
+    <div style="clear:both"></div>
 </div>
-
-
+{% endfor %}
+{% endblock %}
 {% endblock %}

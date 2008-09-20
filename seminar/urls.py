@@ -23,12 +23,4 @@ urlpatterns = patterns('',
     (r'^sayfa/(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', dict(seminar_dict)),
     (r'^konusmaci/(?P<attender>\d+)/$', 'oi.seminar.views.attender'),
     (r'^yer/(?P<place>\d+)/$', 'oi.seminar.views.place'),
-
-    (r'^feed/rss/$', 'oi.seminar.views.rss'),
-    (r'^feed/atom/$', 'oi.seminar.views.atom'),
-    (r'^feed/$', 'oi.seminar.views.rss'),
-
-    (r'^feed/city/(?P<city>\d+)/atom/$', 'oi.seminar.views.atom'),
-    (r'^feed/city/(?P<city>\d+)/rss/$', 'oi.seminar.views.rss'),
-    (r'^feed/city/(?P<city>\d+)/$', 'oi.seminar.views.rss'),
 )

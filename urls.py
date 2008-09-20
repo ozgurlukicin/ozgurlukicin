@@ -6,12 +6,15 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.conf.urls.defaults import *
-from django.contrib.comments.models import FreeComment
 
 from oi.settings import WEB_URL, DOCUMENT_ROOT, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, NEWS_PER_PAGE, TAG_PER_PAGE, HOWTO_PER_PAGE
-from oi.st.models import Package, Game, FS, News, Tag, HowTo
+from oi.st.models import Package, Game, FS, News, HowTo
+from oi.st.tags import Tag
 from oi.seminar.models import Seminar
 from oi.st.feeds import *
+from django.contrib import admin
+
+admin.autodiscover()
 
 rss_dict = {
             '': Main_RSS,
@@ -83,19 +86,12 @@ urlpatterns = patterns('',
 
     (r'^robots.txt$', 'oi.st.views.robots'),
 
-    #comments
-    (r'^comments/post/$', 'oi.comments.views.post_comment'),
-    (r'^comments/posted/$', 'oi.comments.views.comment_was_posted'),
-
     #News
-    #(r'^haber/yorum/(?P<id>\d+)/$', 'oi.st.views.comment_news'),
-    (r'^haber/yorum/(?P<slug>.*)/$', 'oi.st.views.comment_news'),
     (r'^haber/$', 'django.views.generic.list_detail.object_list', dict(news_dict)),
     (r'^haber/(?P<slug>.*)/yazdir/$', 'oi.st.views.news_printable'),
     (r'^haber/(?P<slug>.*)/$', 'oi.st.views.news_detail'),
 
     #Packages
-    (r'^paket/yorum/(?P<slug>.*)/$', 'oi.st.views.comment_package'),
     (r'^paket/$', 'django.views.generic.list_detail.object_list', dict(package_dict)),
     (r'^paket/(?P<slug>.*)/yazdir/$', 'oi.st.views.pkg_printable'),
     (r'^paket/(?P<slug>.*)/$', 'oi.st.views.pkg_detail'),
@@ -111,13 +107,11 @@ urlpatterns = patterns('',
     (r'^ia/(?P<slug>.*)/$', 'oi.st.views.fs_detail'),
 
     #How to
-    (r'^nasil/yorum/(?P<slug>.*)/$', 'oi.st.views.comment_howto'),
     (r'^nasil/$', 'django.views.generic.list_detail.object_list', dict(howto_dict)),
     (r'^nasil/(?P<slug>.*)/yazdir/$', 'oi.st.views.howto_printable'),
     (r'^nasil/(?P<slug>.*)/$', 'oi.st.views.howto_detail'),
 
     #Games
-    (r'^oyun/yorum/(?P<slug>.*)/$', 'oi.st.views.comment_game'),
     (r'^oyun/$', 'django.views.generic.list_detail.object_list', dict(game_dict)),
     (r'^oyun/(?P<slug>.*)/yazdir/$', 'oi.st.views.game_printable'),
     (r'^oyun/(?P<slug>.*)/$', 'oi.st.views.game_detail'),
@@ -156,7 +150,7 @@ urlpatterns = patterns('',
     (r'^yenifikir/', include('oi.ideas.urls')),
 
     # Shop
-    (r'^dukkan/', include('oi.shop.urls')),
+    # (r'^dukkan/', include('oi.shop.urls')),
 
     #Petition
     (r'^petition/', include('oi.petition.urls')),
@@ -167,8 +161,8 @@ urlpatterns = patterns('',
 
     #Django
     (r'^$', 'oi.st.views.home'),
-    (r'^admin/upload/image/add/$', 'oi.upload.views.image_upload'),
-    (r'^admin/', include('django.contrib.admin.urls')),
+    (r'^admin/upload/image/tinymce/$', 'oi.upload.views.image_upload'),
+    (r'^admin/(.*)', admin.site.root),
     (r'^media/(.*)$', 'django.views.static.serve', {'document_root': '%s/media' % DOCUMENT_ROOT, 'show_indexes': True}),
 
     #Feeds

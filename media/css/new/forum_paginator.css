@@ -1,0 +1,33 @@
+div.paginator_block {
+    margin-top: 30px;
+    overflow: hidden;
+    color: #666666;
+    width: 800px;
+    height: 39px;
+    background: url(/media/img/new/forum/paginator_bg.png) repeat-x;
+}
+div.paginator {
+    float: left;
+    margin-top: 7px;
+    margin-left: 20px;
+}
+div.paginator div {
+    width: 17px;
+    height: 19px;
+    margin-right: 2px;
+    padding-top: 7px;
+    font-size: 11px;
+    text-align: center;
+    float: left;
+}
+div.paginator div a,
+div.paginator div a:visited {
+    color: #666666;
+    text-decoration: none;
+}
+div.paginator div.curr {
+    width: 25px;
+    color: white;
+    font-weight: bold;
+    background-image: url(/media/img/new/paginator_current.png);
+}

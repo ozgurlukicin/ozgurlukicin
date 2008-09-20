@@ -6,12 +6,17 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.db import models
+from django import forms
+
+class ImageUploadForm(forms.Form):
+    file = forms.ImageField()
 
 class Image(models.Model):
-    file = models.FileField(upload_to='upload/image/')
+    file = models.ImageField(upload_to='upload/image/')
 
     def __unicode__(self):
-        return self.file
+        return unicode(self.file)
 
-    class Admin:
-        pass
+    def get_alt_string(self):
+        "returns file name without extension"
+        return ".".join(self.file.path.rsplit(".")[:-1])[self.file.path.rfind("/")+1:]

@@ -1,0 +1,186 @@
+.post_base {
+    border-top: 1px #EAEAEA solid;
+    margin-top: 1px;
+    padding-top: 3px;
+    overflow: hidden;
+}
+.post_profile {
+    width: 159px;
+    margin-left: 6px;
+    margin-top: 13px;
+    color: #999999;
+    font-size: 11px;
+    font-family: "Georgia";
+    float: left;
+}
+.post_profile .author {
+    font-size: 14px;
+    font-family: "Tahoma";
+    font-weight: bold;
+    color: #2B8DD4;
+}
+.post_profile .author_description {
+    margin-top: 4px;
+    font-size: 9px;
+}
+.post_profile .avatar {
+    width: 137px;
+    height: 137px;
+    margin-top: 7px;
+    border: 1px #F7F7F7 solid;
+}
+.post_profile .avatar img {
+    margin-top: 18px;
+    margin-left: 18px;
+}
+.post_profile .ip {
+    margin-top: 18px;
+}
+.post_profile .register_date {
+    margin-bottom: 16px;
+}
+.post_message {
+    float: left;
+    width: 627px;
+    padding-left: 8px;
+    padding-top: 14px;
+    border-left: 1px #EAEAEA solid;
+    font-size: 11px;
+    font-family: "Arial";
+    overflow: auto;
+}
+.post_message_content {
+    line-height: 15px;
+    margin-top: 5px;
+}
+.post_message_text {
+    min-height: 250px;
+}
+hr {
+    border: 0px;
+    background-color: #EAEAEA;
+    color: #EAEAEA;
+    height: 1px;
+    width: 196px;
+    margin-top: 17px;
+    margin-bottom: 17px;
+}
+li { margin-left: 20px; }
+p {
+    display: block;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.post_message_top { overflow: hidden; }
+.post_message_top_icon {
+    margin-left: 8px;
+    margin-top: 1px;
+    float: left;
+}
+.post_message_top_date {
+    margin-left: 13px;
+    float: left;
+}
+.post_message_top_button {
+    float: right;
+    margin-left: 5px;
+}
+div.post_message_tags {
+    padding-left: 9px;
+    overflow: hidden;
+}
+.tag {
+    padding-left: 5px;
+}
+.topic_news_area {
+    margin-left: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+    font-size: 11px;
+}
+.topic_news_area img {
+    width: 90px;
+    max-height: 130px;
+    float: left;
+    margin-right: 4px;
+    margin-top: 4px;
+}
+div.topic_news_box {
+    float: left;
+    width: 245px;
+    height: 150px;
+    border: 1px #EAEAEA solid;
+    padding: 4px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+div.topic_news_box:hover {
+    background-color: #EAEAEA;
+}
+div.topic_news_box h2 {
+    font-size: 14px;
+    font-weight: bold;
+}
+div.topic_news_box a:hover,
+div.topic_news_box a:visited,
+div.topic_news_box a {
+    color: #2B8DD4;
+    text-decoration: none;
+}
+#post_bottom {
+    margin: 10px 4px 10px 0px;
+    overflow: hidden;
+}
+#post_bottom div {
+    float: right;
+    margin-left: 4px;
+}
+.poll { overflow: hidden; }
+.poll_header { overflow: hidden; }
+.poll_header div { float: left; }
+.poll_title {
+    font-size: 10px;
+    width: 152px;
+    border-bottom: 1px #999 solid;
+    margin-top: 20px;
+}
+.poll_question {
+    font-size: 16px;
+    color: #2B8DD4;
+    font-weight: bold;
+    margin: 10px;
+    width: 630px;
+}
+.poll_option {
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+.poll_option div { float: left; }
+.poll_option_text {
+    font-size: 11px;
+    width: 152px;
+}
+.poll_bar {
+    width: 530px;
+    height: 18px;
+    background-color: #E8E8E8;
+    margin-right: 10px;
+}
+.poll_bar div {
+    background: url(/media/img/new/bar_full_bg.png) repeat-x;
+    height: 100%;
+    float: left;
+}
+.poll_buttons { float: right; }
+.poll_buttons a { margin: 4px; }
+.quote {
+    border: 1px solid #999;
+    padding: 10px;
+    margin-bottom: 8px;
+    background-color: #EAEAEA;
+    color: #51615D;
+}
+.quote p {
+    padding: 0px;
+    font-style: italic;
+}

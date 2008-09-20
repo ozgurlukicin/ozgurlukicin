@@ -11,7 +11,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from oi.middleware import threadlocals
-from oi.st.models import Tag
+from oi.st.tags import Tag
 from oi.poll.models import Poll
 
 from oi.forum.settings import FORUM_FROM_EMAIL
@@ -209,6 +209,21 @@ class Topic(models.Model):
     def get_email_id(self):
         return '<%s.%s@%s>' % (md5.new(self.title).hexdigest(), self.id, FORUM_FROM_EMAIL.split('@')[1])
 
+    # <a title="...."> for tooltip. Just get a short context of first post on the topic.
+    def get_tooltip_context(self):
+        from django.utils.html import strip_tags
+
+        posts = Post.objects.filter(topic=self)
+        # we should get the last element of an array
+        # negative indexing is not supported so we just get it through "post.count()-1"
+        context = strip_tags(posts[posts.count()-1].text)
+
+        if len(context) > 160:
+            # if it has more than 160 chars, append "..." to the end
+            return context[:160] + '...'
+        else:
+            return context
+
     class Admin:
         list_display = ('forum', 'title', 'sticky', 'locked', 'hidden')
 
@@ -246,7 +261,7 @@ class Topic(models.Model):
 class Forum(models.Model):
     category = models.ForeignKey('Category', null=True, verbose_name='Kategori')
     name = models.CharField(max_length=100, verbose_name='İsim')
-    slug = models.SlugField(prepopulate_from=('name',), verbose_name='SEF isim')
+    slug = models.SlugField(verbose_name='SEF isim')
     description = models.TextField(verbose_name='Açıklama')
     hidden = models.BooleanField(blank=True, null=True, default=0, verbose_name='Gizli')
     locked = models.BooleanField(blank=True, null=True, default=0, verbose_name='Kapalı')
@@ -267,9 +282,6 @@ class Forum(models.Model):
 
     def __unicode__(self):
         return self.name
-
-    class Admin:
-        list_display = ('category', 'name')
 
     class Meta:
         ordering = ('order',)
@@ -292,11 +304,6 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return '/forum/'
-
-    class Admin:
-        list_display = ('id', 'name')
-        ordering = ['-name']
-        search_fields = ['name']
 
     class Meta:
         ordering = ['name']

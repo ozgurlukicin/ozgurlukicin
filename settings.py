@@ -40,7 +40,7 @@ TAG_PER_PAGE = 10
 SEMINAR_PER_PAGE = 10
 
 # News in homepage
-NEWS_IN_HOMEPAGE = 2
+NEWS_IN_HOMEPAGE = 5
 PACKAGES_IN_HOMEPAGE = 2
 GAMES_IN_HOMEPAGE = 2
 FS_IN_HOMEPAGE = 2
@@ -92,6 +92,7 @@ MIDDLEWARE_CLASSES = (
     'oi.flatpages.middleware.FlatpageFallbackMiddleware',
     'oi.middleware.threadlocals.ThreadLocals',
     'oi.middleware.debug.DebugFooter',
+    'oi.middleware.ban.BanWare',
 )
 
 ROOT_URLCONF = 'oi.urls'
@@ -118,12 +119,12 @@ INSTALLED_APPS = (
     'oi.profile',
     'oi.forum',
     'oi.tema',
-    'oi.comments',
     'oi.petition',
     'oi.poll',
     # shop apps
     'oi.shop.shopprofile',
     'oi.shop.product',
+    'oi.shop.cart',
     'oi.ideas',
 )
 

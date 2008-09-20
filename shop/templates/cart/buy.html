@@ -1,0 +1,19 @@
+{% extends "shop_base.html" %}
+{% block content %}
+<form method="POST" action="https://www.tish-o.com.tr/tubitak_gobuy.asp">
+    {% for field in form %}
+    <dl>
+        <dt><label for="id_{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
+        <dd>{{ field }}</dd>
+    </dl>
+    {% endfor %}
+    {% for item in cartItems %}
+    <input type="hidden" name="price_{{ forloop.counter }}" value="{{ item.product.price }}"/>
+    <input type="hidden" name="count_{{ forloop.counter }}" value="{{ item.quantity }}"/>
+    <input type="hidden" name="productname_{{ forloop.counter }}" value="{{ item.product.name }}"/>
+    <input type="hidden" name="strorder_tubitak_{{ forloop.counter }}" value="{{ item.product.description }}"/>
+    <input type="hidden" name="productid_{{ forloop.counter }}" value="{{ item.product.serial }}"/>
+    {% endfor %}
+    <input type="submit" />
+</form>
+{% endblock %}

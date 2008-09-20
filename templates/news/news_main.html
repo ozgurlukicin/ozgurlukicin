@@ -1,34 +1,28 @@
 {% extends "base.html" %}
 {% load library %}
-
 {% block title %}Haberler - {% endblock %}
-
-{% block pagetype %}page{% endblock %}
-
-{% block section %}news{% endblock %}
-
-{% block header_menu %}
-    {% include "header.html" %}
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/object_lists.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
 {% endblock %}
-<br/>
-{% block ust_menu %}
-    {% include "ust_menu_ayrinti.html" %}
-{% endblock %}
-<br/>
-
 {% block content %}
-        <div id="news_container">
-            {% for news in news_list %}
-            <div id="news-{{ news.id }}" class="news">
-                <div class="news_title transparent_link"><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></div>
-                <div class="news_content grey">{{ news.sum|safe }}
-                    <p style="padding-top: 4px;"><img src="/media/img/tag.png" style="vertical-align: middle;" /> {% for tag in news.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</p>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
+<div class="summary_container">
+{% for news in news_list %}
+    <div class="column first">
+        <img src="{{ news.image.file.url }}" alt="{{ news.image.get_alt_string }}" /><br />
+        <img src="/media/img/new/image_bottom.png" alt="gölge" />
+        <div class="info"><span class="bold">{{ news.update|date:"d M" }}</span> {{ news.update|date:"Y" }} <span class="bold">/</span> <a href="{{ news.topic.get_latest_post_url }}"><span class="bold">{{ news.topic.posts|add:"-1" }}</span> Yorum</a></div>
+    </div>
+    <div class="column">
+        <div class="title"><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></div>
+        <div class="summary">{{ news.sum|safe|truncatewords_html:23 }}</div>
+    </div>
+    <div class="{% cycle columnspacer, %}"></div>
+{% endfor %}
+</div>
 
-{% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div><div class="paginator_description">{{ pages }} sayfada toplam {{ hits }} haber bulunmaktadır.</div></div>{% endif %}
+{% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div><div class="paginator_description"><span class="bold">{{ pages }}</span> sayfada toplam <span class="bold">{{ hits }}</span> haber bulunmaktadır.</div></div>{% endif %}
 {% endblock %}
 
 {% block sidebar %}

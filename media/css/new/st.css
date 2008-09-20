@@ -1,0 +1,97 @@
+div#content {
+    width: 644px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 4px;
+    border-right: 1px #EAEAEA solid;
+    float: left;
+}
+div#sidebar {
+    width: 314px;
+    float: left;
+    margin-top: 10px;
+    overflow: hidden;
+}
+div#sidebar div { overflow: hidden; }
+div#sidebar div a { 
+    color: #009FE0;
+    text-decoration: none;
+}
+div.sidebarcolumn {
+    float: left;
+    width: 153px;
+}
+div.rightcolumn {
+    border-left: 1px #EAEAEA solid;
+    margin-left: 4px;
+}
+div.leftcolumn_content {
+    width: 100%;
+    margin-bottom: 10px;
+    border-bottom: 1px #EAEAEA solid;
+}
+div.leftcolumn_content p {
+    margin-bottom: 15px;
+}
+div.leftcolumn_content p.title a {
+    color: #009FE0;
+    text-decoration: none;
+}
+div.rightcolumn_content {
+    margin-left: 4px;
+    padding-bottom: 10px;
+    border-bottom: 1px #EAEAEA solid;
+    margin-bottom: 15px;
+}
+div.sidebarcolumn h2 {
+    font-family: "Georgia", serif;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+div.rightcolumn_content input[type="text"], div.rightcolumn_content input[type="password"] {
+    padding-top: 5px;
+    padding-left: 8px;
+    width: 139px;
+    height: 16px;
+    margin-bottom: 5px;
+}
+div.rightcolumn_content input[type="image"] { float: left; }
+div.rightcolumn_content span.loginlinks {
+    float: right;
+}
+div.rightcolumn_content span.loginlinks a {
+    text-decoration: none;
+    font-size: 9px;
+}
+div.rightcolumn_content p a {
+    color: #009FE0;
+    text-decoration: none;
+}
+div#sidebar_bottom {
+    clear: both;
+}
+div.sidebar_bottom_content {
+    font-size: 11px;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px #EAEAEA solid;
+    margin-bottom: 15px;
+}
+div.sidebar_bottom_content a {
+    font-weight: bold;
+    text-decoration: none;
+}
+div.sidebar_bottom_content img {
+    margin-bottom: 10px;
+}
+div#ooxmlbar {
+    margin: 10px;
+    width:300px;
+    height:18px;
+    background-color: #E8E8E8;
+}
+div#ooxmlbar_completed {
+    background: url(/media/img/new/bar_full_bg.png) repeat-x;
+    height: 100%;
+    float: left;
+}

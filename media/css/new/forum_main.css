@@ -1,0 +1,79 @@
+.titlebar h2 {
+    margin-left: 4px;
+    margin-top: 7px;
+    width: 380px;
+    float: left;
+}
+.titlebar h2 a {
+    color: #666666;
+    text-decoration: none;
+}
+.category .latest_container {
+    float: left;
+    width: 395px;
+    overflow: hidden;
+}
+.category .rightborder {
+    border-right: 1px #F2F2F2 solid;
+    margin-right: 4px;
+}
+.latest {
+    overflow: hidden;
+    margin-bottom: 1px;
+}
+.latest_container {
+    font-size: 11px;
+    overflow: hidden;
+}
+.latest_container .post {
+    border-bottom: 1px #EAEAEA solid;
+    overflow: hidden;
+    margin-right: 4px;
+}
+.latest_container .post .post { border: none; }
+.latest_container .post a {
+    color: #666666;
+    text-decoration: none;
+}
+.post .profile_link {
+    float: right;
+}
+.post .topic, .post .post {
+    margin-left: 5px;
+    line-height: 15px;
+}
+.post .forum {
+    margin-top: 5px;
+    color: #999999;
+}
+.post .forum { margin-left: 5px; }
+.post .forum a { color: #999999; }
+.post .date {
+    float: left;
+    color: #999;
+    margin-bottom: 5px;
+}
+.post .topic {
+    margin-top: 5px;
+    margin-bottom: 3px;
+    height: 15px;
+    overflow: hidden;
+}
+.stats {
+    overflow: hidden;
+    margin: 10px 0px;
+}
+.stats div { float: left; }
+.stats .image {
+    width: 35px;
+    margin: 5px 0px 0px 15px;
+}
+.stats .text .labels, .stats .text .spacers { font-weight: bold; }
+.stats .text .spacers { margin: 0px 4px; }
+.stats .left { width: 360px; }
+.icons_help { margin: 10px 0px 0px 20px; }
+.icons_help div {
+    width: 260px;
+    float: left;
+    overflow: hidden;
+}

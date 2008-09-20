@@ -24,7 +24,8 @@ from oi.forum import customgeneric
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.core.mail import send_mail
-from oi.st.models import Tag, News
+from oi.st.tags import Tag
+from oi.st.models import News
 from oi.poll.models import Poll, PollOption, PollVote
 
 # import our function for sending e-mails and setting
@@ -76,7 +77,7 @@ def forum(request, forum_slug):
     lastvisit_control(request)
 
     forum = get_object_or_404(Forum, slug=forum_slug)
-    topics = forum.topic_set.all().order_by('-sticky', '-topic_latest_post')
+    topics = forum.topic_set.all().order_by('-sticky', 'topic_latest_post')
 
     if request.user.is_authenticated():
         for topic in topics:
@@ -191,8 +192,6 @@ def topic(request, forum_slug, topic_id):
                 option.percent = 0
             else:
                 option.percent = int(option.vote_count / total_vote_count * 100)
-            if option.percent < 80:
-                option.percent_out = True
         # now let's see if we'll enable voting for this user
         if request.user.is_authenticated():
             if poll.date_limit:

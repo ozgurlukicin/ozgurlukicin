@@ -3,32 +3,54 @@
 
 {% block title %}{{ flatpage.title }} - {% endblock %}
 
-{% block pagetype %}page{% endblock %}
-
-{% block header_menu %}
-    {% include "header.html" %}
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 {% endblock %}
-<br/>
-{% block ust_menu %}
-    {% include "ust_menu_ayrinti.html" %}
-{% endblock %}
-<br/>
 
 {% block content %}
-<div class="fs_title transparent_link">{{ flatpage.title }}</div>
-<div class="page_content grey">
+<div class="page_title">{{ flatpage.title }}</div>
+<div class="page_content">
 {{ flatpage.text|safe }}
 </div>
-<div class="page_last_update">Son güncelleme: {{ flatpage.update|timedelta }}</div>
 {% endblock %}
-
-{% block sidebar %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>Etiketler</h2>
-        <img src="/media/img/tag.png" alt="etiket" />{% for tag in flatpage.tags.all %} <a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% endfor %}
+{% block leftcolumn %}
+<div class="sidebarcolumn leftcolumn">
+    <div class="leftcolumn_content">
+        <h2>İlgili sayfalar</h2>
+        <ul>
+            {% ifnotequal flatpage.url "/hakkinda/icerik-politikasi/" %}<li>
+            <span class="bullet">»</span>
+            <a href="/hakkinda/icerik-politikasi/">İçerik Politikası</a>
+            </li>{% endifnotequal %}
+            {% ifnotequal flatpage.url "/hakkinda/gizlilik-politikasi/" %}<li>
+            <span class="bullet">»</span>
+            <a href="/hakkinda/gizlilik-politikasi/">Gizlilik Politikası</a>
+            </li>{% endifnotequal %}
+            {% ifnotequal flatpage.url "/hakkinda/gezegen-kurallari/" %}<li>
+            <span class="bullet">»</span>
+            <a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a>
+            </li>{% endifnotequal %}
+            {% ifnotequal flatpage.url "/e-dergi/" %}<li>
+            <span class="bullet">»</span>
+            <a href="/e-dergi/">E-Dergi</a>
+            </li>{% endifnotequal %}
+            {% ifnotequal flatpage.url "/hakkinda/" %}<li>
+            <span class="bullet">»</span>
+            <a href="/hakkinda/">Hakkında</a>
+            </li>{% endifnotequal %}
+            {% ifnotequal flatpage.url "/bize_ulasmak_icin/" %}<li>
+            <span class="bullet">»</span>
+            <a href="/bize_ulasmak_icin/">Bize Ulaşın</a>
+            </li>{% endifnotequal %}
+            {% ifnotequal flatpage.url "/seminer/" %}<li>
+            <span class="bullet">»</span>
+            <a href="/seminer/">Seminer</a>
+            </li>{% endifnotequal %}
+        </ul>
     </div>
-    <div class="sidebar_bottom">&nbsp;</div>
+    <div class="leftcolumn_content">
+        <h2>Etiketler</h2>
+        <img src="/media/img/new/tag.png" alt="etiket" />{% for tag in flatpage.tags.all %} <a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
+    </div>
 </div>
 {% endblock %}

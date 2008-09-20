@@ -5,8 +5,8 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-from oi.st.models import *
-from oi.forum.models import *
+from oi.st.models import HowTo, News, Game, Package
+from oi.forum.models import Forum, Topic
 from django.contrib.auth.models import User
 
 def the_filler(instance,u):

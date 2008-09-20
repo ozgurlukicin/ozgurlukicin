@@ -3,6 +3,7 @@
 {% block title %}Profil Düzenle -  {% endblock %}
 
 {% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={{ apikey }}" type="text/javascript"></script>
     <script type="text/javascript">
     //<![CDATA[
@@ -55,16 +56,16 @@
 <br/>
 
 {% block content %}
-<br />
 {% if form.errors %}
 <span class="error">Profil güncellenemedi, lütfen aşağıdaki hataları düzeltin</span>
+<br />
 {% endif %}
 
 {% if profile_updated %}
 <span style="color:green;">Profiliniz başarıyla güncellendi</span>
+<br />
 {% endif %}
 
-<br />
 <script language="JavaScript">
     function updateAvatar(obj) {
         document.avatarImage.src = "/media/" + obj[obj.selectedIndex].value;
@@ -72,17 +73,22 @@
 </script>
 <form id="profileEditForm" method="post" action=".">
     {% for field in form %}
-        {% ifequal field.name "avatar" %}
-        <div style="float:right;margin-right:40px;text-align:right;">
-            <label>{{ field.label }}</label><br />{% if field.errors %}<br /><span class="error">{{ field.errors }}</span><br />{% endif %}
-            {{ field }}<br /><img name="avatarImage" src="{{user.get_profile.avatar.get_file_url}}" alt="avatar" />
+    <div class="field_container">
+        <div class="field_label">
+            <label for="id_{{ field.name }}">{{ field.label }}</label>
         </div>
-        {% else %}
-        <dl>
-            <dt><label for="id_{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
-            <dt>{{ field }}</dt>
-        </dl>
-        {% endifequal %}
+        <div class="field_field">
+            {{ field }}
+            {% if field.errors %}
+                <br /><span class="error">{{ field.errors }}</span>
+            {% endif %}
+            {% ifequal field.name "avatar" %}
+                <br /><img name="avatarImage" src="{{user.get_profile.avatar.file.url}}" alt="avatar" />
+            {% endifequal %}
+        </div>
+        <div class="help_text">{% if field.help_text %}{{ field.help_text }}{% endif %}</div>
+        <div style="clear:both;"></div>
+    </div>
     {% endfor %}
     <dl><dt><label for="id_map">Harita</label><dt><div id="id_map" class="googlemap"></div></dt></dl>
     <div style="clear:left; text-align:center; padding-top:5px;"><input type="submit" value="Düzenle" /></div>

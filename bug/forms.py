@@ -5,7 +5,7 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-from django import newforms as forms
+from django import forms
 from django.contrib.auth.models import User
 
 from oi.bug.models import Bug, Comment
