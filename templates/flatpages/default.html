@@ -13,41 +13,6 @@
 {{ flatpage.text|safe }}
 </div>
 {% endblock %}
-{% block leftcolumn_top %}
-    <div class="leftcolumn_content">
-        <h2>İlgili sayfalar</h2>
-        <ul>
-            {% ifnotequal flatpage.url "/hakkinda/icerik-politikasi/" %}<li>
-            <span class="bullet">»</span>
-            <a href="/hakkinda/icerik-politikasi/">İçerik Politikası</a>
-            </li>{% endifnotequal %}
-            {% ifnotequal flatpage.url "/hakkinda/gizlilik-politikasi/" %}<li>
-            <span class="bullet">»</span>
-            <a href="/hakkinda/gizlilik-politikasi/">Gizlilik Politikası</a>
-            </li>{% endifnotequal %}
-            {% ifnotequal flatpage.url "/hakkinda/gezegen-kurallari/" %}<li>
-            <span class="bullet">»</span>
-            <a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a>
-            </li>{% endifnotequal %}
-            {% ifnotequal flatpage.url "/e-dergi/" %}<li>
-            <span class="bullet">»</span>
-            <a href="/e-dergi/">E-Dergi</a>
-            </li>{% endifnotequal %}
-            {% ifnotequal flatpage.url "/hakkinda/" %}<li>
-            <span class="bullet">»</span>
-            <a href="/hakkinda/">Hakkında</a>
-            </li>{% endifnotequal %}
-            {% ifnotequal flatpage.url "/bize_ulasmak_icin/" %}<li>
-            <span class="bullet">»</span>
-            <a href="/bize_ulasmak_icin/">Bize Ulaşın</a>
-            </li>{% endifnotequal %}
-            {% ifnotequal flatpage.url "/seminer/" %}<li>
-            <span class="bullet">»</span>
-            <a href="/seminer/">Seminer</a>
-            </li>{% endifnotequal %}
-        </ul>
-    </div>
-{% endblock %}
 {% block leftcolumn_bottom %}
     <div class="leftcolumn_content">
         <h2>Etiketler</h2>
