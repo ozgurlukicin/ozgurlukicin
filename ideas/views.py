@@ -127,12 +127,13 @@ def add(request):
     if request.method == 'POST':
         form = NewIdeaForm(request.POST, request.FILES)
         if form.is_valid():
-            f = request.FILES['file']
-            file_path = '%s/upload/ideas/%s' % (MEDIA_ROOT, f.name)
-            dest = open(file_path, 'wb+')
-            for chunk in f.chunks():
-                dest.write(chunk)
-            dest.close()
+            if request.FILES['file']:
+                f = request.FILES['file']
+                file_path = '%s/upload/ideas/%s' % (MEDIA_ROOT, f.name)
+                dest = open(file_path, 'wb+')
+                for chunk in f.chunks():
+                    dest.write(chunk)
+                dest.close()
 
             newidea = Idea(
                 title=form.cleaned_data['title'],
