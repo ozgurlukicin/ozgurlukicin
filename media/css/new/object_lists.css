@@ -44,12 +44,12 @@ div.news_container {
     clear: both;
 }
 div.news_container img {
-    min-width: 312px;
     float: left;
     margin-right: 15px;
 }
 div.news_container div.column {
     float: left;
+    width: 640px;
 }
 div.news_container div.column div.title {
     margin-bottom: 25px;
@@ -58,6 +58,16 @@ div.news_container div.column div.title a {
     font-size: 20px;
     color: #009FE9;
     text-decoration: none;
+}
+div.news_container div.column div.left_column {
+    float: left;
+    height:200px;
+    width: 310px;
+}
+div.news_container div.column div.right_column {
+    float: left;
+    height:200px;
+    width: 330px;
 }
 .hidden {
     display:none;
