@@ -26,6 +26,7 @@ if USE_PYGMENTS:
 HEIGHT = '240px' # or '100%' if full height is wished
 
 TEMPLATE = """
+{% if user.is_staff %}
 <div id="debug" style="clear:both;">
 <a href="#debugbox"
     onclick="this.style.display = 'none';   
@@ -72,6 +73,7 @@ TEMPLATE = """
 </div>
 </div>
 </body>
+{% endif %}
 """
 
 # Monkeypatch instrumented test renderer from django.test.utils - we could use
