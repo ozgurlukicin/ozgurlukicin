@@ -31,8 +31,8 @@ div.summary_container div.columnspacer {
 }
 .column .info {
     text-align: left;
-    width: 175px;
-    /* overflow: hidden; */
+    width: 180px;
+    overflow: hidden;
 }
 .column .info { float: left; text-align: left; }
 .column .info a {
