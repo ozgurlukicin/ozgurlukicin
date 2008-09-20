@@ -35,7 +35,7 @@ div.summary_container div.columnspacer {
     overflow: hidden;
 }
 .column .info div { font-size: 11px; }
-.column .info .bold .date, .column .info .slash .comments { float: left; }
+.column .info .bold, .column .info .date, .column .info .comments { float: left; }
 .column .info .comments a {
     text-decoration: none;
     color: #666666;
