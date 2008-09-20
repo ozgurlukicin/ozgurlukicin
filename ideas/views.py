@@ -143,7 +143,6 @@ def add(request):
                 forum_url = form.cleaned_data['forum_url'],
                 bug_numbers = form.cleaned_data['bug_numbers'],
                 status = Status.objects.all()[0],
-                file = f,
                 )
             forum = Forum.objects.get(name="Yeni Fikirler")
             topic = Topic(forum=forum,
