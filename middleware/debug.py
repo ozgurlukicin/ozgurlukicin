@@ -26,7 +26,6 @@ if USE_PYGMENTS:
 HEIGHT = '240px' # or '100%' if full height is wished
 
 TEMPLATE = """
-{% if user.is_staff %}
 <div id="debug" style="clear:both;">
 <a href="#debugbox"
     onclick="this.style.display = 'none';   
@@ -73,7 +72,6 @@ TEMPLATE = """
 </div>
 </div>
 </body>
-{% endif %}
 """
 
 # Monkeypatch instrumented test renderer from django.test.utils - we could use
@@ -100,6 +98,9 @@ class DebugFooter:
         template_rendered.connect(self._storeRenderedTemplates)
 
     def process_response(self, request, response):
+        if not request.user.is_staff():
+            return
+
         # Only include debug info for text/html pages not accessed via Ajax
         if 'text/html' not in response['Content-Type']:
             return response
