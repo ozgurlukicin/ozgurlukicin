@@ -14,9 +14,6 @@ class StatusCategory(models.Model):
     def __unicode__(self):
         return self.name
 
-    class Admin:
-        pass
-
     class Meta:
         verbose_name = "Durum Kategorisi"
         verbose_name_plural = "Durum Kategorileri"
@@ -27,9 +24,6 @@ class Status(models.Model):
 
     def __unicode__(self):
         return self.name
-
-    class Admin:
-        pass
 
     class Meta:
         verbose_name = "Durum"
@@ -43,9 +37,6 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
 
-    class Admin:
-        prepopulated_fields = {'slug': ("name",)}
-
     class Meta:
         verbose_name = "Kategori"
         verbose_name_plural = "Kategoriler"
@@ -55,9 +46,6 @@ class RelatedCategory(models.Model):
 
     def __unicode__(self):
         return self.name
-
-    class Admin:
-        pass
 
     class Meta:
         verbose_name = "İlgili Kategorisi"
@@ -69,9 +57,6 @@ class Related(models.Model):
 
     def __unicode__(self):
         return self.name
-
-    class Admin:
-        pass
 
     class Meta:
         verbose_name = "Fikir şununla ilgili"
@@ -102,10 +87,6 @@ class Idea(models.Model):
     def get_absolute_url(self):
         return "/yenifikir/ayrinti/%s/" % self.id
 
-    class Admin:
-        list_display = ('title', 'submitter', 'submitted_date', 'category', 'related_to', 'is_hidden', 'is_duplicate', 'duplicate')
-        list_filter = ('status', 'is_hidden', 'is_duplicate',  'category', 'related_to')
-
     class Meta:
         verbose_name = "Yeni Fikir"
         verbose_name_plural = "Yeni Fikirler"
@@ -118,9 +99,6 @@ class Vote(models.Model):
     def __unicode__(self):
         return self.idea
 
-    class Admin:
-        pass
-
     class Meta:
         verbose_name = "Verilen Oy"
         verbose_name_plural = "Verilen Oylar"
@@ -131,9 +109,6 @@ class Favorite(models.Model):
 
     def __unicode__(self):
         return self.idea
-
-    class Admin:
-        pass
 
     class Meta:
         verbose_name = "Favori"
