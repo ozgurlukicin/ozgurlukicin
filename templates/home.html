@@ -9,7 +9,7 @@
     <div id="news_{{ forloop.counter }}" class="news_container{% if forloop.first %} active"{% else %}" style="display: none;"{% endif %}>
         <div class="column">
             <div class="left_column" style="vertical-align: middle;">
-                <img src="{{ news.image.file.url }}" alt="{{ news.image.get_alt_string }}" />
+                <img src="{{ news.image.file.url }}" alt="{{ news.image.get_alt_string }}" /><br />
             </div>
             <div class="right_column">
                 <span>Haberler</span>
@@ -21,8 +21,10 @@
         </div>
     </div>
     {% endfor %}
-    <a href="javascript:;" onclick="change_news(-1); clearInterval(intval);"><img id="img_news_prev" src="/media/img/new/news_previous.png" alt="Önceki haber" /></a><a href="javascript:;" onclick="change_news(1); clearInterval(intval);"><img id="img_news_next" src="/media/img/new/news_next.png" alt="Sonraki haber" /></a>
-    <span id="news_count">1</span> / 5
+    <span id='button_news_changer'>
+        <a href="javascript:;" onclick="change_news(-1); clearInterval(intval);"><img id="img_news_prev" src="/media/img/new/news_previous.png" alt="Önceki haber" /></a><a href="javascript:;" onclick="change_news(1); clearInterval(intval);"><img id="img_news_next" src="/media/img/new/news_next.png" alt="Sonraki haber" /></a>
+    </span>
+    <span style='font-size:11px;'><span id="news_count">1</span> / 5</span>
    <div class="summary_container">
         {% for howto in howtos %}
         <div class="column first">

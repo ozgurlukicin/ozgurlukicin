@@ -74,6 +74,11 @@ div.news_container div.column div.right_column {
     height:200px;
     width: 330px;
 }
+#button_news_changer {
+    position: relative; 
+    left: 230px; 
+    top:-15px
+}
 .hidden {
     display:none;
 }
