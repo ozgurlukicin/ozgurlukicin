@@ -8,7 +8,7 @@
     {% for news in news %}
     <div id="news_{{ forloop.counter }}" class="news_container{% if forloop.first %} active"{% else %}" style="display: none;"{% endif %}>
         <div class="column">
-            <div class="left_column">
+            <div class="left_column" align="center">
                 <img src="{{ news.image.file.url }}" alt="{{ news.image.get_alt_string }}" />
             </div>
             <div class="right_column">
