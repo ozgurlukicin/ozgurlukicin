@@ -35,7 +35,7 @@ div.summary_container div.columnspacer {
     overflow: hidden;
 }
 .column .info { float: left; text-align: left; }
-.column .info .comments a {
+.column .info a {
     text-decoration: none;
     color: #666666;
 }
