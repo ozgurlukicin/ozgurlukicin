@@ -7,6 +7,7 @@ div.summary_container {
 div.summary_container div.column {
     width: 153px;
     height: 200px;
+    overflow: hidden;
     float: left;
 }
 div.summary_container div.first {
@@ -30,10 +31,12 @@ div.summary_container div.columnspacer {
 }
 .column .info {
     text-align: left;
-    width: 180px;
+    width: 153px;
+    overflow: hidden;
 }
-.column .info { float: left; text-align: left; }
-.column .info a {
+.column .info div { font-size: 11px; }
+.column .info .bold .date, .column .info .slash .comments { float: left; }
+.column .info .comments a {
     text-decoration: none;
     color: #666666;
 }
@@ -72,10 +75,24 @@ div.news_container div.column div.right_column {
     width: 330px;
 }
 #button_news_changer {
-    position: relative; 
-    left: 230px; 
-    top:-15px
+    float: left;
+    position: relative;
+    top: -15px;
+    margin-left: 170px;
 }
+
+#counter {
+    float: left;
+    font-size:11px;
+    width: 61px;
+    height: 29px;
+    text-align: center;
+    line-height:25px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    background: url('/media/img/new/news_numbers_bg.png') no-repeat;
+}
+
 .hidden {
     display:none;
 }
