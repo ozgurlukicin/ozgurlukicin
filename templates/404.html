@@ -1,23 +1,15 @@
 {% extends "base.html" %}
-
 {% block title %}Sayfa Bulunamadı - {% endblock %}
-
-{% block header_menu %}
-    {% include "header.html" %}
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 {% endblock %}
-<br/>
-{% block ust_menu %}
-    {% include "ust_menu_ayrinti.html" %}
-{% endblock %}
-
 {% block content %}
-
-<br />
-
-<h2>Ulaşmaya çalıştığınız sayfa bulunamadı...</h2>
+<div class="page_title">Ulaşmaya çalıştığınız sayfa bulunamadı...</div>
+<div class="page_content">
 <ul>
     <li>Anasayfa'ya gitmek için <a href="/">tıklayın</a></li>
     <li>Özgürlükİçin e-dergiye gitmek için <a href="/e-dergi/">tıklayın</a></li>
     <li>Özgürlükİçin forumlarına gitmek için <a href="/forum/">tıklayın</a></li>
 </ul>
+</div>
 {% endblock %}
