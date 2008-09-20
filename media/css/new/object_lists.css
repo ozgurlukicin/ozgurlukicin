@@ -29,8 +29,9 @@ div.summary_container div.columnspacer {
     float: left;
     margin-left: 4px;
 }
-.column .info { 
-    width: 183px;
+.column .info {
+    text-align: left;
+    width: 163px;
     overflow: hidden;
 }
 .column .info div { font-size: 11px; }
