@@ -11,19 +11,19 @@ from oi.ideas.models import StatusCategory, Status, Category, RelatedCategory, R
 from oi.st.tags import Tag
 
 class StatusCategoryAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name')
 
 class StatusAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name')
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ("name",)}
 
-class RelatedCategoryAdmin(admin.ModelAdmin):
-    pass
+claspass
+    list_display = ('name')
 
 class RelatedAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name')
 
 class IdeaAdmin(admin.ModelAdmin):
     list_display = ('title', 'submitter', 'submitted_date', 'category', 'related_to', 'is_hidden', 'is_duplicate', 'duplicate')
