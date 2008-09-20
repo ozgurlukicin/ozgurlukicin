@@ -18,7 +18,5 @@
 </div>
 {% endfor %}
 </div>
-<div id="post_bottom">
-{% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div></div>{% endif %}
-</div>
+    {% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div></div>{% endif %}
 {% endblock %}
