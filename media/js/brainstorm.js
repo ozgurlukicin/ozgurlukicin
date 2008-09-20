@@ -23,6 +23,7 @@ function oyla(id, vote) {
             $('#img_' + id + '_' + vote).attr("disabled","");
         } else {
             img.addClass("voted");
+            $('#img_' + id + '_' + vote).attr("disabled","disabled");
             $.get("/yenifikir/oyla/" + id + "/" + vote + "/",
                 function(data) {
                     $('#oyla' + id).hide()
