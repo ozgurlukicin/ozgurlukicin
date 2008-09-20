@@ -11,29 +11,29 @@ from oi.ideas.models import StatusCategory, Status, Category, RelatedCategory, R
 from oi.st.tags import Tag
 
 class StatusCategoryAdmin(admin.ModelAdmin):
-    list_display = ('name')
+    list_display = ('name',)
 
 class StatusAdmin(admin.ModelAdmin):
-    list_display = ('name')
+    list_display = ('name',)
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ("name",)}
 
 class RelatedCategoryAdmin(admin.ModelAdmin):
-    list_display = ('name')
+    list_display = ('name',)
 
 class RelatedAdmin(admin.ModelAdmin):
-    list_display = ('name')
+    list_display = ('name',)
 
 class IdeaAdmin(admin.ModelAdmin):
     list_display = ('title', 'submitter', 'submitted_date', 'category', 'related_to', 'is_hidden', 'is_duplicate', 'duplicate')
     list_filter = ('status', 'is_hidden', 'is_duplicate',  'category', 'related_to')
 
 class VoteAdmin(admin.ModelAdmin):
-    list_display = ('name')
+    list_display = ('name',)
 
 class FavoriteAdmin(admin.ModelAdmin):
-    list_display = ('name')
+    list_display = ('name',)
 
 admin.site.register(StatusCategory, StatusCategoryAdmin)
 admin.site.register(Status, StatusAdmin)
