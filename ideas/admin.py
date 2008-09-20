@@ -32,9 +32,6 @@ class IdeaAdmin(admin.ModelAdmin):
 class VoteAdmin(admin.ModelAdmin):
     list_display = ('vote',)
 
-class FavoriteAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-
 admin.site.register(StatusCategory, StatusCategoryAdmin)
 admin.site.register(Status, StatusAdmin)
 admin.site.register(Category, CategoryAdmin)
@@ -42,4 +39,3 @@ admin.site.register(RelatedCategory, RelatedCategoryAdmin)
 admin.site.register(Related, RelatedAdmin)
 admin.site.register(Idea, IdeaAdmin)
 admin.site.register(Vote, VoteAdmin)
-admin.site.register(Favorite, FavoriteAdmin)
