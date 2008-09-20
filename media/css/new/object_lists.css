@@ -34,8 +34,7 @@ div.summary_container div.columnspacer {
     width: 175px;
     overflow: hidden;
 }
-.column .info div { font-size: 11px; }
-.column .info .bold, .column .info .date, .column .info .comments { float: left; }
+.column .info { float: left; text-align: left; }
 .column .info .comments a {
     text-decoration: none;
     color: #666666;
