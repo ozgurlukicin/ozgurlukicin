@@ -8,14 +8,14 @@
     {% for news in news %}
     <div id="news_{{ forloop.counter }}" class="news_container{% if forloop.first %} active"{% else %}" style="display: none;"{% endif %}>
         <div class="column">
-            <div class="left_column" style="vertical-align: middle;">
+            <div class="left_column">
                 <img src="{{ news.image.file.url }}" alt="{{ news.image.get_alt_string }}" /><br />
             </div>
             <div class="right_column">
                 <span>Haberler</span>
                 <div class="title"><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></div>
                 <div class="summary">{{ news.sum|safe }}</div>
-                <div class="info"><div class="date"><span class="bold">{{ news.update|date:"d M" }}</span> {{ news.update|date:"Y" }}</div><div class="slash"><img src="/media/img/new/slash_bold.png" alt="/" /></div><div class="comments"><a href="{{ news.topic.get_latest_post_url }}"><span class="bold">{{ news.topic.posts|add:"-1" }}</span> Yorum</a></div></div>
+                <div class="info"><div class="date"><span class="bold">{{ news.update|date:"d M" }}</span> {{ news.update|date:"Y" }}</div>/<div class="comments"><a href="{{ news.topic.get_latest_post_url }}"><span class="bold">{{ news.topic.posts|add:"-1" }}</span> Yorum</a></div></div>
             </div>
             <div style="clear:both;"></div>
         </div>
