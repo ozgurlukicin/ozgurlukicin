@@ -69,9 +69,6 @@ div.news_container div.column div.left_column {
     height:200px;
     width: 310px;
 }
-div.news_container div.column div.left_column img {
-    vertical-align: middle;
-}
 div.news_container div.column div.right_column {
     float: left;
     height:200px;
