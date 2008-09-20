@@ -99,7 +99,7 @@ class DebugFooter:
 
     def process_response(self, request, response):
         if not request.user.is_staff:
-            return
+            return response
 
         # Only include debug info for text/html pages not accessed via Ajax
         if 'text/html' not in response['Content-Type']:
