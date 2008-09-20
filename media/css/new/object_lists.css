@@ -70,7 +70,8 @@ div.news_container div.column div.left_column {
 div.news_container div.column div.right_column {
     float: left;
     height:200px;
-    width: 330px;
+    width: 320px;
+    margin-left:10px;
 }
 #button_news_changer {
     float: left;
