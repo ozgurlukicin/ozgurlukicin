@@ -194,11 +194,6 @@ form .field_container .help_text {
     line-height: 17px;
     margin-left: 8px;
 }
-#sidebar li a {
-    color: #7E7E7E;
-    font-size: 11px;
-    text-decoration: none;
-}
 span.bullet {
     color: #CCCCCC;
     font-size: 9px;

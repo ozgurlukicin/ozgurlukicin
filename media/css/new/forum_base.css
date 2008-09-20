@@ -40,13 +40,7 @@ div.sidebar_content span.loginlinks {
     float: right;
 }
 div.sidebar_content span.loginlinks a {
-    color: #666666;
-    text-decoration: none;
     font-size: 9px;
-}
-div.sidebar_content p a {
-    color: #009FE0;
-    text-decoration: none;
 }
 div.category div.titlebar {
     height: 39px;
