@@ -34,4 +34,5 @@
 #id_map {
     width: 447px;
     height: 300px;
+    overflow: hidden;
 }
