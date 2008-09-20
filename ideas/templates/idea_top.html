@@ -15,7 +15,7 @@
                 <a href="/yenifikir/ayrinti/1/favori/cikar" onclick="favori({{ idea.id  }}, 'cikar');return false;" title="Favorilerimden çıkar"><img src="/media/img/new/ideas_favorited.png" alt="Fikir favorilerinize eklenmiş" /></a>
             </span>
             <span id="favoriekle{{ idea.id }}" class="favorite" {% if idea.is_favorited %}style="display:none;" {% endif %}>
-                <a href={% if user.is_authenticated %}"/yenifikir/ayrinti/1/favori/ekle" onclick="favori({{ idea.id }}, 'ekle'); return false;"{% else %}"/yenifikir/giris/yap"{% endif %} title="Favorilerime ekle"><img src="/media/img/new/ideas_favorite.png" alt="Favorilere ekle" /></a>
+                <a href={% if user.is_authenticated %}"/yenifikir/ayrinti/1/favori/ekle" onclick="favori({{ idea.id }}, 'ekle'); return false;"{% else %}"/kullanici/giris/"{% endif %} title="Favorilerime ekle"><img src="/media/img/new/ideas_favorite.png" alt="Favorilere ekle" /></a>
             </span> 
             <a href="{{ idea.submitter.get_profile.get_absolute_url }}" title="{{ idea.submitter }} kullanıcısının profiline git">{{ idea.submitter }}</a>
         tarafından {{ idea.submitted_date|date:"j M Y" }} tarihinde
