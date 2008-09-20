@@ -1,0 +1,24 @@
+.post_list {
+    margin-top: 10px;
+    width: 800px;
+}
+.post .top {
+    height: 26px;
+    overflow: hidden;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px #EAEAEA solid;
+}
+.post .top div {
+    float: right;
+    margin-top: 7px;
+}
+.post .top .address { float: left }
+.post .top .button {
+    margin-top: 2px;
+    margin-left: 5px;
+}
+.post .message {
+    padding: 10px;
+    overflow: auto;
+}

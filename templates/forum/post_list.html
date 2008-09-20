@@ -2,21 +2,23 @@
 {% load library %}
 {% block extrahead %}
     <link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Forum" href="/forum/rss/post/" />
+    <style type="text/css" media="screen">@import url('/media/css/new/forum_topic.css');</style>
+    <style type="text/css" media="screen">@import url('/media/css/new/forum_post_list.css');</style>
+    <style type="text/css" media="screen">@import url('/media/css/new/forum_paginator.css');</style>
 {% endblock %}
 {% block content %}
-<div class="forum_address" style="border-bottom: 5px solid #6A91A6">
-    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; Son İletiler</div>
+<div class="topbar">
+    <div class="navigation"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="/forum/son-iletiler/">Son İletiler</a></div>
 </div>
-<div id="forum_stats_latest_posts">
+<div class="post_list">
 {% for post in post_list %}
-<div class="post_base">
-    <div class="post_message_top"><div class="post_message_top_date"><a href="{{ post.topic.forum.get_absolute_url }}">{{ post.topic.forum }}</a> &#62; <a href="{{ post.topic.get_absolute_url }}">{{ post.topic }}</a></div><div class="post_bottom_small"><a href="{{ post.topic.get_reply_url }}"><img src="/media/dijital/img/forum/reply.gif" alt="Yanıtla" border="0px"></a></div><div class="post_message_top_date" style="float:right; margin-right:10px;"><a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="iletiye git" border="0px" /></a> <a href="/kullanici/profil/{{ post.author }}" class="profile_link">{{ post.author }}</a> - {{ post.created|date:"d F Y H:i" }}</div></div>
-    <div style="overflow: auto; padding: 10px;">{{ post.text|renderbbcode|safe }}</div>
+<div class="post">
+    <div class="top"><div class="address"><a href="{{ post.topic.forum.get_absolute_url }}">{{ post.topic.forum }}</a> &#62; <a href="{{ post.topic.get_absolute_url }}">{{ post.topic }}</a></div><div class="button"><a href="{{ post.topic.get_reply_url }}"><img src="/media/img/new/forum/button_reply.png" alt="Yanıtla"></a></div><div class="author"><a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="iletiye git" /></a> <a href="{{ post.author.get_profile.get_absolute_url }}">{{ post.author }}</a> - {{ post.created|date:"d F Y H:i" }}</div></div>
+    <div class="message">{{ post.text|renderbbcode|safe }}</div>
 </div>
 {% endfor %}
+</div>
 <div id="post_bottom">
-{% if is_paginated %}
-    <div class="post_pagination">{% paginator %}</div>
-{% endif %}
+{% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div></div>{% endif %}
 </div>
 {% endblock %}
