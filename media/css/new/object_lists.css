@@ -7,7 +7,6 @@ div.summary_container {
 div.summary_container div.column {
     width: 153px;
     height: 200px;
-    overflow: hidden;
     float: left;
 }
 div.summary_container div.first {
@@ -31,12 +30,10 @@ div.summary_container div.columnspacer {
 }
 .column .info {
     text-align: left;
-    width: 153px;
-    overflow: hidden;
+    width: 180px;
+    float: left;
 }
-.column .info div { font-size: 11px; }
-.column .info .bold .date, .column .info .slash .comments { float: left; }
-.column .info .comments a {
+.column .info a {
     text-decoration: none;
     color: #666666;
 }
