@@ -283,10 +283,6 @@ class Forum(models.Model):
     def __unicode__(self):
         return self.name
 
-    class Admin:
-        list_display = ('category', 'name')
-        prepopulated_fields = {'slug': ("name",)}
-
     class Meta:
         ordering = ('order',)
         unique_together = (('category', 'order'),)
@@ -308,11 +304,6 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return '/forum/'
-
-    class Admin:
-        list_display = ('id', 'name')
-        ordering = ['-name']
-        search_fields = ['name']
 
     class Meta:
         ordering = ['name']
