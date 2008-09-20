@@ -41,6 +41,9 @@ class Category(models.Model):
         verbose_name = "Kategori"
         verbose_name_plural = "Kategoriler"
 
+    def get_absolute_url(self):
+        return "/yenifikir/listele/kategori/%s/" % self.slug
+
 class RelatedCategory(models.Model):
     name = models.CharField("İsim", max_length=150)
 

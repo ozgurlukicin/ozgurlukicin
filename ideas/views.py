@@ -63,7 +63,7 @@ def list(request, field="", filter_slug=""):
             pass
     else:
         page_title = "Bugünün popüler fikirleri"
-    categories = Category.objects.all()
+    categories = Category.objects.order_by('name')
     if request.user.is_authenticated():
             for idea in ideas:
                 try:
