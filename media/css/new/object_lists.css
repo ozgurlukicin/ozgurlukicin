@@ -80,10 +80,12 @@ div.news_container div.column div.right_column {
     top: -15px;
     margin-left: 170px;
 }
+#news_count {
+    font-weight: bold;
+}
 
 #counter {
     float: left;
-    font-size:11px;
     width: 61px;
     height: 29px;
     text-align: center;
