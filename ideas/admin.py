@@ -30,7 +30,7 @@ class IdeaAdmin(admin.ModelAdmin):
     list_filter = ('status', 'is_hidden', 'is_duplicate',  'category', 'related_to')
 
 class VoteAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ('vote',)
 
 class FavoriteAdmin(admin.ModelAdmin):
     list_display = ('name',)
