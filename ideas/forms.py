@@ -11,7 +11,7 @@ class CommentForm(forms.Form):
 class NewIdeaForm(forms.ModelForm):
     class Meta:
         model = Idea
-        exclude = ("submitter", "status", "vote_count", "duplicate", "is_hidden", "is_duplicate", "comment_count", "topic")
+        exclude = ('file',"submitter", "status", "vote_count", "duplicate", "is_hidden", "is_duplicate", "comment_count", "topic")
 
 #    def __init__(self,*args,**kwargs):
 #        super(NewIdeaForm, self).__init__(*args, **kwargs)
