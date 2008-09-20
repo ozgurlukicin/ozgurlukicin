@@ -61,9 +61,10 @@ div.news_container div.column div.title a {
     text-decoration: none;
 }
 div.news_container div.column div.left_column {
-    float: left;
-    text-align: center;
+    margin: 0 auto;
     height:200px;
+    vertical-align:middle;
+    float: left;
     width: 310px;
 }
 div.news_container div.column div.right_column {
