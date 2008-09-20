@@ -188,6 +188,8 @@ form .field_container .help_text {
     margin-left: 5px;
     margin: 10px 0 0 5px;
 }
+#sidebar form { background: none }
+#sidebar input[type="text"], #sidebar input[type="password"] { width: 135px }
 #sidebar li {
     line-height: 17px;
     margin-left: 8px;
