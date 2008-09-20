@@ -19,7 +19,7 @@ class StatusAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ("name",)}
 
-claspass
+class RelatedCategoryAdmin(admin.ModelAdmin):
     list_display = ('name')
 
 class RelatedAdmin(admin.ModelAdmin):
@@ -30,10 +30,10 @@ class IdeaAdmin(admin.ModelAdmin):
     list_filter = ('status', 'is_hidden', 'is_duplicate',  'category', 'related_to')
 
 class VoteAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name')
 
 class FavoriteAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name')
 
 admin.site.register(StatusCategory, StatusCategoryAdmin)
 admin.site.register(Status, StatusAdmin)
