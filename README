@@ -5,14 +5,8 @@ Requires:
  ElementTree
  DBMS (MySQL recommended)
 
-Note About Django SVN:
-* We're using r7046 of Django, so use: svn co http://code.djangoproject.com/svn/django/trunk -r7046
-* You need to edit /usr/lib/python2.4/site-packages/django/contrib/auth/views.py in order to make login work properly:
-* move the line "request.session.set_test_cookie()" just after "redirect_to = request.REQUEST.get(redirect_field_name, '')"
-
 Note About TinyMCE:
-* We're using a patch to hide unneeded tabs in advimage and advlink plugins. It can be found under patches.
-* (useful when updating TinyMCE)
+* We're using a patch to hide unneeded tabs in advimage and advlink plugins. It can be found under patches directory.
 
 Setup:
  1. edit settings.py

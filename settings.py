@@ -16,12 +16,12 @@ DEBUG = True
 TESTING = True
 TEMPLATE_DEBUG = DEBUG
 WEB_URL = 'http://localhost:8000'
-DOCUMENT_ROOT = '/home/user'
+DOCUMENT_ROOT = '/home/ahmet/svn/oi/oi'
 
 DATABASE_ENGINE = 'mysql'
 DATABASE_NAME = 'oi'
 DATABASE_USER = 'root'
-DATABASE_PASSWORD = ''
+DATABASE_PASSWORD = 'root'
 DATABASE_HOST = 'localhost'
 DATABASE_PORT = ''
 
@@ -86,7 +86,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.csrf.middleware.CsrfMiddleware',
+    #'django.contrib.csrf.middleware.CsrfMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'oi.flatpages.middleware.FlatpageFallbackMiddleware',
