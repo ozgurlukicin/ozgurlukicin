@@ -103,7 +103,6 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
-    'oi.ideas',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
