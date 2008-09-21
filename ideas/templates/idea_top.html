@@ -1,10 +1,10 @@
     <div class="idea_left">
         <div id="vote{{ idea.id }}_1"> 
-            <input id="img_{{ idea.id }}_1" value="Bu fikri sevdim" type="image" src="/media/img/new/ideas_vote{% ifequal idea.user_vote 1 %}d{% endifequal %}_1.png" onclick="oyla({{ idea.id }}, 1);" {% ifequal idea.user_vote 1 %}class="voted"{% else %}{% ifequal idea.user_vote 0 %}class="cursor_default" disabled="disabled"{% endifequal %}{% endifequal %} />
+            <input id="img_{{ idea.id }}_1" value="Bu fikri sevdim" type="image" src="/media/img/new/ideas_vote{% ifequal idea.user_vote 1 %}d{% endifequal %}_1.png" onclick="oyla({{ idea.id }}, 1);" />
         </div>
         <div class="idea_vote" id="vote{{ idea.id }}">{{ idea.vote_count }}</div>
         <div id="vote{{ idea.id }}_0">
-            <input id="img_{{ idea.id }}_0" tvalue="Bu fikri sevmedim" type="image" src="/media/img/new/ideas_vote{% ifequal idea.user_vote 0 %}d{% endifequal %}_0.png" onclick="oyla({{ idea.id }}, 0);" {% ifequal idea.user_vote 0 %}class="voted"{% else %}{% ifequal idea.user_vote 1 %}class="cursor_default" disabled="disabled"{% endifequal %}{% endifequal %} />
+            <input id="img_{{ idea.id }}_0" tvalue="Bu fikri sevmedim" type="image" src="/media/img/new/ideas_vote{% ifnotequal idea.user_vote 1 %}d{% endifnotequal %}_0.png" onclick="oyla({{ idea.id }}, 0);" />
         </div>
     </div>
     <div class="idea_right">

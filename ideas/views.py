@@ -238,35 +238,32 @@ def delete_idea(request, idea_id):
     return HttpResponseRedirect("/yenifikir/")
 
 @login_required
-def vote_idea(request, idea_id, vote):
-    idea = Idea.objects.get(pk=idea_id)
-    try:
-        vote = Vote.objects.get(user=request.user.id, idea=idea)
-        already_voted = True
-    except ObjectDoesNotExist:
-        if vote=='1':
-            idea.vote_count += 1
-        else:
-            idea.vote_count -= 1
-        idea.save()
-        voted = Vote(idea = idea, user=request.user, vote=vote)
-        voted.save()
-    return HttpResponse("OK%s" % str(idea.vote_count))
+def vote(request):
+    idea = request.POST.get('idea', False)
+    vote = int(request.POST.get('vote', False))
 
-@login_required
-def delete_vote(request, idea_id):
-    idea = Idea.objects.get(pk=idea_id)
-    try:
-        vote = Vote.objects.get(user=request.user, idea=idea_id)
-        if vote.vote == 1:
-            idea.vote_count -= 1
-        elif vote.vote == 0:
+    idea = get_object_or_404(Idea, pk=idea)
+    evote = Vote.objects.filter(user=request.user, idea=idea)
+
+    if evote.count() != 0:
+        evote = evote[0]
+        if vote != evote.vote:
+            if vote == 1:
+                idea.vote_count += 2
+            elif vote == -1:
+                idea.vote_count -= 2
+            idea.save()
+            evote.vote = vote
+            evote.save()
+    else:
+        if vote == 1:
             idea.vote_count += 1
-        vote.delete()
+        elif vote == -1:
+            idea.vote_count -= 1
         idea.save()
-        return HttpResponse(str(idea.vote_count))
-    except ObjectDoesNotExist:
-        return HttpResponse(str(idea.vote_count))
+        evote = Vote.objects.create(user=request.user, idea=idea, vote=vote)
+        evote.save()
+    return HttpResponse("OK%s" % str(idea.vote_count))
 
 @login_required
 def add_favorite(request, idea_id):

@@ -97,12 +97,13 @@ class Idea(models.Model):
 class Vote(models.Model):
     idea = models.ForeignKey(Idea, verbose_name="Oy Verilen Fikir", related_name="vote_idea", blank=False, null=False)
     user = models.ForeignKey(User, verbose_name="Oy Veren", related_name="vote_author", blank=False, null=False)
-    vote = models.BooleanField("Verilen Oy", blank=False)
+    vote = models.IntegerField("Verilen Oy", blank=False)
 
     def __unicode__(self):
         return self.idea
 
     class Meta:
+        unique_together = ("idea", "user")
         verbose_name = "Verilen Oy"
         verbose_name_plural = "Verilen Oylar"
 
