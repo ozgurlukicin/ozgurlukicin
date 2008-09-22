@@ -57,4 +57,5 @@ def create_forum_topic(article, forum_name):
         post = topic.post_set.order_by("created")[0]
         post.text = article.text
         post.hidden = not article.status
+        post.created = post.edited = article.update
         post.save()
