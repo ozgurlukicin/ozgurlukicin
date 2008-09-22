@@ -25,9 +25,9 @@
         <div class="idea_content">{{ idea.description|safe }}</div>
         <div class="idea_comments">
             <img alt="Yorum Yap" src="/media/img/new/icon_comment.png" />
-            <a href="{{ idea.comment_url }}" title="Yorumlar">
-            {% if idea.comment_count  %}
-                {{ idea.comment_count }} tane yorum yapıldı.
+            <a href="{{ idea.topic.get_latest_post_url }}" title="Yorumlar">
+            {% if idea.topic.posts|add:"-1"  %}
+                {{ idea.topic.posts|add:"-1"  }} tane yorum yapıldı.
             {% else %}
                 İlk yorum yapan siz olun !
             {% endif %}

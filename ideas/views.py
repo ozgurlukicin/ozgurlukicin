@@ -91,7 +91,6 @@ def detail(request, idea_id):
     if request.user.is_authenticated():
         if request.user.id == idea.submitter_id or request.user.is_staff:
             user_can_change_idea = True
-        auth = True
         try:
             f = Favorite.objects.get(user=request.user, idea=idea)
             idea.is_favorited = True
@@ -103,19 +102,6 @@ def detail(request, idea_id):
         except ObjectDoesNotExist:
             pass
 
-    try:
-        topic = Topic.objects.filter(title=idea.title)[0]
-        idea.comment_count = topic.posts - 1
-        idea.comment_url = topic.get_latest_post_url()
-    except:
-        idea.comment_count = 0
-
-    try:
-        topic = Topic.objects.filter(title=idea.title)[0]
-        idea.comments_count = topic.posts - 1
-        idea.comments_url = topic.get_latest_post_url()
-    except:
-        pass
     idea.save()
     statusform = Status.objects.all()
     duplicates = Idea.objects.filter(duplicate=idea)
