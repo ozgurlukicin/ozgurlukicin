@@ -25,15 +25,10 @@ div.sidebar_content h2 {
     margin-bottom: 10px;
 }
 div.sidebar_content input[type="text"], div.sidebar_content input[type="password"] {
-    padding-top: 6px;
+    padding-top: 5px;
     padding-left: 8px;
-    font-size: 11px;
-    color: #CCCCCC;
-    width: 142px;
     height: 16px;
-    border: 1px #F2F2F2 solid;
     margin-bottom: 5px;
-    background-image: url(/media/img/new/textinput_bg.png);
 }
 div.sidebar_content input[type="image"] { float: left; }
 div.sidebar_content span.loginlinks {

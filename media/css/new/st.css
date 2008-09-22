@@ -51,7 +51,6 @@ div.sidebarcolumn h2 {
 div.rightcolumn_content input[type="text"], div.rightcolumn_content input[type="password"] {
     padding-top: 5px;
     padding-left: 8px;
-    width: 139px;
     height: 16px;
     margin-bottom: 5px;
 }
