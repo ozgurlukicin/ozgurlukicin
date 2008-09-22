@@ -116,17 +116,6 @@ def add(request):
     if request.method == 'POST':
         form = NewIdeaForm(request.POST, request.FILES)
         if form.is_valid():
-
-            newidea = Idea(
-                title=form.cleaned_data['title'],
-                description=form.cleaned_data['description'],
-                submitter=request.user,
-                category = form.cleaned_data['category'],
-                related_to = form.cleaned_data['related_to'],
-                forum_url = form.cleaned_data['forum_url'],
-                bug_numbers = form.cleaned_data['bug_numbers'],
-                status = Status.objects.all()[0]
-                )
             forum = Forum.objects.get(name="Yeni Fikirler")
             topic = Topic(forum=forum,
                           title=form.cleaned_data['title'],
