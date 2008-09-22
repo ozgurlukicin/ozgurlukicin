@@ -1,15 +1,15 @@
 {% extends "base.html" %}
-
 {% block title %}Sayfa Bulunamadı - {% endblock %}
-
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+{% endblock %}
 {% block content %}
-
-<h2>Page unavailable</h2>
-
-<p>We're sorry, but the requested page is currently unavailable.</p>
-
-<p>We're messing around with things internally, and the server had a bit of a hiccup.</p>
-
-<p>Please try again later.</p>
-
+<div class="page_title">Sayfa gösterilemiyor...</div>
+<div class="page_content">
+<ul>
+    <li>Anasayfa'ya gitmek için <a href="/">tıklayın</a></li>
+    <li>Özgürlükİçin e-dergiye gitmek için <a href="/e-dergi/">tıklayın</a></li>
+    <li>Özgürlükİçin forumlarına gitmek için <a href="/forum/">tıklayın</a></li>
+</ul>
+</div>
 {% endblock %}
