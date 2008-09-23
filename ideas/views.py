@@ -4,7 +4,7 @@
 from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
-from forum.customgeneric import object_list
+from oi.forum.customgeneric import object_list
 from oi.ideas.forms import *
 from oi.forum.models import Post, Topic, Forum
 from oi.st.wrappers import render_response
