@@ -49,14 +49,15 @@ class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabil
     <li><a href="/yenifikir" title="Yeni Fikirler">Yeni Fikirler Anasayfa</a></li>
     <li><a href="/yenifikir/ekle">Fikir Ekle</a></li>
 {% if user.is_authenticated %}
-    <li><a href="/yenifikir/listele/ekleyen/{{ user.username }}">Eklediğim Fikirler</a></li>
-    <li><a href="/yenifikir/listele/favori/fikirler">Favorilerim</a></li>
+    <li><a href="/yenifikir/listele/ekleyen/{{ user.username }}/">Eklediğim Fikirler</a></li>
+    <li><a href="/yenifikir/listele/favori/fikirler/">Favorilerim</a></li>
 {% endif %}
-    <li><a href="/yenifikir/listele/populer/bugun">Bugünkü popüler fikirler</a></li>
-    <li><a href="/yenifikir/listele/populer/buhafta" title="">Bu haftaki popüler fikirler</a></li>
-    <li><a href="/yenifikir/listele/populer/buay" title="">Bu ayki popüler fikirler</a></li>
-    <li><a href="/yenifikir/listele/populer/tumzamanlar" title="">Tüm zamanların popüler fikirleri</a></li>
-    <li><a href="/yenifikir/listele/son/eklenen" title="">Son eklenenler</a></li>
+    <li><a href="/yenifikir/listele/populer/bugun/">Bugünkü popüler fikirler</a></li>
+    <li><a href="/yenifikir/listele/populer/buhafta/" title="">Bu haftaki popüler fikirler</a></li>
+    <li><a href="/yenifikir/listele/populer/buay/" title="">Bu ayki popüler fikirler</a></li>
+    <li><a href="/yenifikir/listele/populer/tumzamanlar/" title="">Tüm zamanların popüler fikirleri</a></li>
+    <li><a href="/yenifikir/listele/son/yorumlar/" title="">Son tartışılanlar</a></li>
+    <li><a href="/yenifikir/listele/son/eklenen/" title="">Son eklenenler</a></li>
 </ul>
 <br />
     <h2>Kategoriler</h2>

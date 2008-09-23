@@ -46,6 +46,9 @@ def list(request, field="", filter_slug=""):
         elif filter_slug == 'tumzamanlar':
             page_title = "Tüm zamanların popüler fikirleri"
     elif field == 'son':
+        if filter_slug == 'yorumlar':
+            ideas = ideas.order_by("topic__topic_latest_post")
+            page_title = "En son yorum alan iletiler"
         if filter_slug == 'eklenen':
             ideas = ideas.order_by("-submitted_date")
             page_title = "Son eklenen fikirler"
