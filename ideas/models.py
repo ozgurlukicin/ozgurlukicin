@@ -73,7 +73,7 @@ class Idea(models.Model):
     description = models.TextField("Açıklama", help_text="Fikrinizi açıklayan bir yazı yazın.")
     status = models.ForeignKey(Status,verbose_name="Durum")
     category = models.ForeignKey(Category, null=True, verbose_name="Kategori")
-    related_to = models.ForeignKey(Related, blank=True, null=True, verbose_name="Şu paketle ilgili")
+    related_to = models.ForeignKey(Related, blank=True, null=True, verbose_name="Şu paketle ilgili", help_text="Bu alanı boş bırakabilirsiniz.")
     tags = models.ManyToManyField(Tag, verbose_name="Etiketler")
     vote_count = models.IntegerField("Oy Sayısı", default=0)
     duplicate = models.ForeignKey("self", blank=True, null=True, verbose_name="Fikir Tekrarı")
