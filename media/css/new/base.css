@@ -24,11 +24,11 @@ div#header #logo {
     position: relative;
     top: 35px;
     left: 14px;
+    float: left;
 }
 div#header #header_img {
     position: relative;
-    top: -43px;
-    left: 620px;
+    left: 307px;
 }
 div#page {
     margin-left: auto;
