@@ -11,7 +11,7 @@ from oi.st.tags import Tag
 from oi.middleware import threadlocals
 
 class FlatPage(models.Model):
-    url = models.URLField('URL', max_length=100)
+    url = models.CharField('URL', max_length=100)
     title = models.CharField('Başlık', max_length=200)
     text = models.TextField('Metin')
     author = models.ForeignKey(User, blank=True, editable=False)
