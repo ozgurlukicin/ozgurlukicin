@@ -4,6 +4,7 @@
 from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
+from forum.customgeneric import object_list
 from oi.ideas.forms import *
 from oi.forum.models import Post, Topic, Forum
 from oi.st.wrappers import render_response
@@ -11,6 +12,7 @@ from oi.ideas.models import Idea, Category, Related, Status, Tag, Vote, Favorite
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from oi.settings import MEDIA_ROOT
+from oi.ideas.settings import IDEAS_PER_PAGE
 import datetime
 
 
@@ -24,12 +26,12 @@ def list(request, field="", filter_slug=""):
         ideas = ideas.filter(tags__name__exact=filter_slug)
         page_title = "%s etiketli fikirler" % filter_slug
     elif field == 'ilgili':
-        related_id = get_object_or_404(Related, name  = filter_slug)
+        related_id = get_object_or_404(Related, name=filter_slug)
         ideas = ideas.filter(related_to=related_id)
         page_title = "%s ile ilgili fikirler" % filter_slug
     elif field == 'ekleyen':
-        submitter_id = get_object_or_404(User, username = filter_slug)
-        ideas = ideas.filter(submitter = submitter_id)
+        submitter_id = get_object_or_404(User, username=filter_slug)
+        ideas = ideas.filter(submitter=submitter_id)
         page_title = "%s tarafından eklenen fikirler" % filter_slug
     elif field == 'populer':
         if filter_slug == 'bugun':
@@ -42,12 +44,9 @@ def list(request, field="", filter_slug=""):
             ideas = ideas.filter(submitted_date__gt=datetime.datetime.now()-datetime.timedelta(30))
             page_title = "Bu ayki popüler fikirler"
         elif filter_slug == 'tumzamanlar':
-            ideas = ideas
             page_title = "Tüm zamanların popüler fikirleri"
     elif field == 'son':
-        if filter_slug =='yorumlar':
-            ideas = Idea.objects.all()
-        elif filter_slug == 'eklenen':
+        if filter_slug == 'eklenen':
             ideas = ideas.order_by("-submitted_date")
             page_title = "Son eklenen fikirler"
     elif field == 'favori' and filter_slug == 'fikirler':
@@ -65,24 +64,28 @@ def list(request, field="", filter_slug=""):
         page_title = "Bugünün popüler fikirleri"
     categories = Category.objects.order_by('name')
     if request.user.is_authenticated():
-            for idea in ideas:
-                try:
-                    f = Favorite.objects.get(user=request.user.id, idea=idea.id)
-                    idea.is_favorited = True
-                except ObjectDoesNotExist:
-                    idea.is_favorited = False
-                try:
-                    v = Vote.objects.get(user=request.user.id, idea=idea.id)
-                    idea.user_vote = v.vote
-                except ObjectDoesNotExist:
-                    pass
-                try:
-                    topic = Topic.objects.filter(title=idea.title)[0]
-                    idea.comment_count = topic.posts - 1
-                    idea.comment_url = topic.get_latest_post_url()
-                except:
-                    idea.comment_count = 0
-    return render_response(request, "idea_list.html", locals())
+        for idea in ideas:
+            try:
+                f = Favorite.objects.get(user=request.user.id, idea=idea.id)
+                idea.is_favorited = True
+            except ObjectDoesNotExist:
+                idea.is_favorited = False
+            try:
+                v = Vote.objects.get(user=request.user.id, idea=idea.id)
+                idea.user_vote = v.vote
+            except ObjectDoesNotExist:
+                pass
+            try:
+                topic = Topic.objects.filter(title=idea.title)[0]
+                idea.comment_count = topic.posts - 1
+                idea.comment_url = topic.get_latest_post_url()
+            except:
+                idea.comment_count = 0
+    return object_list(request, ideas,
+            paginate_by=IDEAS_PER_PAGE,
+            template_name="idea_list.html",
+            extra_context={"page_title":page_title},
+            )
 
 def detail(request, idea_id):
     absolute_url = "/yenifikir"

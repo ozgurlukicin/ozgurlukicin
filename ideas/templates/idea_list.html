@@ -6,6 +6,7 @@
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/brainstorm.css');</style>
 <script type="text/javascript" src="/media/js/brainstorm.js"></script>
+<style type="text/css" media="screen">@import url('/media/css/new/forum_paginator.css');</style>
 {% endblock %}
 
 {% block content %}
@@ -13,7 +14,7 @@
     <span id="idea_submit"><a href="/yenifikir/ekle/" title="Yeni Fikir Ekle"><img src="/media/img/new/ideas_submit.png" alt="submit idea" /></a></span>
 </div>
 {% block idea %}
-{% for idea in ideas %}
+{% for idea in object_list %}
 <div class="idea_container">
     {% include "idea_top.html" %}
     </div><!-- for /idea_right -->
@@ -22,4 +23,5 @@
 </div>
 {% endfor %}
 {% endblock %}
+{% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div></div>{% endif %}
 {% endblock %}
