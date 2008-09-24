@@ -25,25 +25,22 @@
 {% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div><div class="paginator_description"><span class="bold">{{ pages }}</span> sayfada toplam <span class="bold">{{ hits }}</span> haber bulunmaktadır.</div></div>{% endif %}
 {% endblock %}
 
-{% block sidebar %}
+{% block leftcolumn %}
 {% if seminar %}
-<div class="sidebar_box">
-    <div class="sidebar_top">&nbsp;</div>
-    <div class="sidebar_middle">
-        <h2>Pardus Etkinlikleri</h2>
-        <ul class="sidebar_seminar">
+<div class="sidebarcolumn leftcolumn">
+    <div class="leftcolumn_content">
+    <h2>Pardus Etkinlikleri</h2>
+    <ul>
         {% for sem in seminar %}
-        <li>
-            <div style="padding-bottom: 4px;{% if not forloop.first %} padding-top: 4px; border-top: 1px solid;{% endif %}">
-            <strong class="gri">{{ sem.date|date:"d F Y" }}</strong><br/>
-            <span class="gri">{{ sem.description }}</span><br/>
-            <strong>Yer:</strong> <span class="gri">{{ sem.place.name }}</span><br/>
-            <strong>Konuşmacılar:</strong><span class="hri"> {% for att in sem.attender.all %}{% if forloop.last %}{{ att.name }}{% else %}{{ att.name }}, {% endif %}{% endfor %}</span>
+        <li{% if not forloop.last %} style="border-bottom:1px solid #EAEAEA;padding-bottom:5px;margin-bottom:5px;"{% endif %}>
+            <div><span class="bold">{{ sem.date|date:"d F Y" }}</span></div>
+            <div>{{ sem.description }}</div>
+            <div><span class="bold">Yer:</span> {{ sem.place.name }}</div>
+            <div><span class="bold">Konuşmacılar:</span> {% for att in sem.attender.all %}{% if forloop.last %}{{ att.name }}{% else %}{{ att.name }}, {% endif %}{% endfor %}</div>
         </li>
         {% endfor %}
-        </ul>
+    </ul>
     </div>
-    <div class="sidebar_bottom">&nbsp;</div>
 </div>
 {% endif %}
 {% endblock %}
