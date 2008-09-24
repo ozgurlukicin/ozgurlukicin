@@ -69,7 +69,7 @@
 
 {% if package.ss.all %}
         <h2>Ekran görüntüleri</h2>
-        {% for ss in package.ss.all %}<a href="{{ ss.file.url }}" title="{{ ss.desc }}"><img src="{{ ss.file.name|thumbnail:"190x190" }}" /></a>{% endfor %}</a>
+        {% for ss in package.ss.all %}<a href="{{ ss.file.url }}" title="{{ ss.desc }}"><img src="{{ ss.file.name|thumbnail:"144x200" }}" style="margin-left:4px" /></a>{% endfor %}</a>
 {% endif %}
 
         <h2>Yazar</h2>
