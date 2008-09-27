@@ -28,19 +28,19 @@
 }
 .leftcolumn .minibox_container {
     background: #fff;
-    width: 145px;
+    width: 141px;
     height: 11px;
-    margin-left: 2px;
+    margin-left: 5px;
 }
 .leftcolumn .minibox {
     margin: 1px;
     float: left;
     height: 9px;
-    width: 9px;
+    width: 12px;
     overflow: hidden;
 }
-.minibox_container .full { background: #219ADE }
-.minibox_container .empty { background: #CCCCCC }
+.minibox_container .full { background-color: #219ADE }
+.minibox_container .empty { background-color: #FFF }
 .leftcolumn span {
     float: left;
     margin: 10px 0 2px 7px;
