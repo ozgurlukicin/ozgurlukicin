@@ -26,18 +26,21 @@
 .leftcolumn p, .leftcolumn td, .leftcolumn span {
     font-size: 11px;
 }
+.leftcolumn .minibox_container {
+    background: #fff;
+    width: 145px;
+    height: 11px;
+    margin-left: 2px;
+}
 .leftcolumn .minibox {
     margin: 1px;
     float: left;
-    height: 10px;
-    width: 13px;
-    background: #219ADE;
+    height: 9px;
+    width: 9px;
+    overflow: hidden;
 }
-.leftcolumn .minibox_container {
-    background: #fff;
-    width: 135px;
-    margin-left: 8px;
-}
+.minibox_container .full { background: #219ADE }
+.minibox_container .empty { background: #CCCCCC }
 .leftcolumn span {
     float: left;
     margin: 10px 0 2px 7px;

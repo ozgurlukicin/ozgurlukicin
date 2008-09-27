@@ -59,24 +59,29 @@
     <p>Öğrenme süresi: {{ game.learning_time }}</p>
     <span>Oynanabilirlik</span><span class="rating">{{ game.gameplay }}/10</span>
     <div class="minibox_container">
-        {% for i in game.gameplay_range %}<span class="minibox">&nbsp;</span>{% endfor %}
+        {% for i in game.gameplay_range %}<span class="minibox full">&nbsp;</span>{% endfor %}
+        {% for i in game.gameplay_range_empty %}<span class="minibox empty">&nbsp;</span>{% endfor %}
     </div>
 
     <span>Grafik</span><span class="rating">{{ game.graphics }}/10</span>
     <div class="minibox_container">
-        {% for i in game.graphics_range %}<span class="minibox">&nbsp;</span>{% endfor %}
+        {% for i in game.graphics_range %}<span class="minibox full">&nbsp;</span>{% endfor %}
+        {% for i in game.graphics_range_empty %}<span class="minibox empty">&nbsp;</span>{% endfor %}
     </div>
     <span>Ses</span><span class="rating">{{ game.sound }}/10</span>
     <div class="minibox_container">
-        {% for i in game.sound_range %}<span class="minibox">&nbsp;</span>{% endfor %}
+        {% for i in game.sound_range %}<span class="minibox full">&nbsp;</span>{% endfor %}
+        {% for i in game.sound_range_empty %}<span class="minibox empty">&nbsp;</span>{% endfor %}
     </div>
     <span>Senaryo</span><span class="rating">{{ game.scenario }}/10</span>
     <div class="minibox_container">
-        {% for i in game.scenario_range %}<span class="minibox">&nbsp;</span>{% endfor %}
+        {% for i in game.scenario_range %}<span class="minibox full">&nbsp;</span>{% endfor %}
+        {% for i in game.scenario_range_empty %}<span class="minibox empty">&nbsp;</span>{% endfor %}
     </div>
     <span>Atmosfer</span><span class="rating">{{ game.atmosphere }}/10</span>
     <div class="minibox_container">
-        {% for i in game.atmosphere_range %}<span class="minibox">&nbsp;</span>{% endfor %}
+        {% for i in game.atmosphere_range %}<span class="minibox full">&nbsp;</span>{% endfor %}
+        {% for i in game.atmosphere_range_empty %}<span class="minibox empty">&nbsp;</span>{% endfor %}
     </div>
     <div class="game_average_point">{{ game.avg }}</div>
 
