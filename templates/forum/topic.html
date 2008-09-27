@@ -19,7 +19,10 @@
     {% endif %}
 </div>
 <div class="category">
-    <div class="titlebar"><h2>{{ topic }}</h2></div>
+    <div class="titlebar">
+        <h2>{{ topic }}</h2>
+        {% if is_paginated %}<div class"paginator_pages">{% paginator %}</div>{% endif %}
+    </div>
 </div>
 {% if topic.poll %}
 <div class="poll">

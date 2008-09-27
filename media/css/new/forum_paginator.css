@@ -7,9 +7,10 @@ div.paginator_block {
     background: url(/media/img/new/forum/paginator_bg.png) repeat-x;
 }
 div.paginator {
-    float: left;
+    float: right;
     margin-top: 7px;
     margin-left: 20px;
+    margin-right: 20px;
 }
 div.paginator div {
     width: 17px;
