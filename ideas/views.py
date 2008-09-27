@@ -65,6 +65,7 @@ def list(request, field="", filter_slug=""):
             pass
     else:
         page_title = "Bugünün popüler fikirleri"
+        ideas = ideas.filter(submitted_date__gt=datetime.datetime.now()-datetime.timedelta(1))
     categories = Category.objects.order_by('name')
     if request.user.is_authenticated():
         for idea in ideas:
