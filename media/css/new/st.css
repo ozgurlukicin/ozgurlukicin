@@ -6,6 +6,12 @@ div#content {
     border-right: 1px #EAEAEA solid;
     float: left;
 }
+
+div#content form {
+    padding-left: 10px;
+    border-left: 1px solid #EAEAEA;
+}
+
 div#sidebar {
     width: 314px;
     float: left;
