@@ -8,8 +8,8 @@
 from django.conf.urls.defaults import *
 from oi.ideas.feeds import RSS, Atom
 
-rss_dict = { "feed": RSS }
-atom_dict = { "feed": Atom }
+rss_dict = { "ideafeed": RSS }
+atom_dict = { "ideafeed": Atom }
 
 urlpatterns = patterns('oi.ideas.views',
         (r'^$', 'list'),
