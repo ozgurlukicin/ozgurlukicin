@@ -29,8 +29,14 @@ class RSS(Feed):
             post.title = post.topic.title
         return objects
 
+    def item_pubdate(self, item):
+        return item.edited
+
     def item_author_name(self, item):
         return item.author
+
+    def item_categories(self, item):
+        return [tag.name for tag in item.topic.tags.all()]
 
 class Atom(RSS):
     feed_type = Atom1Feed
