@@ -39,10 +39,12 @@
         </ul>
         {% endif %}
 
-    {% if user_can_change_idea  %}
         <br />
-    <span class="h3"><a href="/yenifikir/duzenle/{{ idea.id }}/">Fikri düzenle</a></span> _
-    <span class="h3"><a href="javascript:;" onclick="$('#tekrarform').toggle(); return false;">Fikir tekrarı bildir</a></span> _
+    {% if user_can_change_idea  %}
+    <span class="h3"><a href="/yenifikir/duzenle/{{ idea.id }}/">Fikri düzenle</a></span>
+    {% endif %}
+    {% if perms.ideas.can_change_idea %}
+     _<span class="h3"><a href="javascript:;" onclick="$('#tekrarform').toggle(); return false;">Fikir tekrarı bildir</a></span> _
     <span class="h3"><a href="javascript:;" onclick="$('#changeStatusForm').toggle();">Fikir durumunu değiştir</a></span> _
     <span class="h3"><a href="/yenifikir/sil/{{ idea.id }}/">Fikri sil</a></span>
 

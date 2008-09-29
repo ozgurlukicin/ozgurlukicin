@@ -174,10 +174,10 @@ def add(request):
     categories = Category.objects.all()
     return render_response(request, "idea_add_form.html", locals())
 
-@permission_required('ideas.can_change_idea', login_url="/kullanici/giris/")
+@login_required
 def edit_idea(request, idea_id):
     idea = Idea.objects.get(pk=idea_id)
-    if 1 == 1:
+    if request.user == idea.submitter or request.user.has_perm("ideas.can_change_idea"):
         if request.method == 'POST':
             form = NewIdeaForm(request.POST)
             if form.is_valid():
@@ -210,7 +210,7 @@ def edit_idea(request, idea_id):
             return render_response(request, "idea_add_form.html", locals())
     else:
         """ idea isn't yours error """
-        pass
+        return HttpResponseRedirect(idea.get_absolute_url())
 
 @permission_required('ideas.can_change_idea', login_url="/kullanici/giris/")
 def delete_idea(request, idea_id):
