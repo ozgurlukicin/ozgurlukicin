@@ -23,7 +23,7 @@ class PetitionBox(template.Node):
             <a href="/ooxml/"><img src="/media/ooxml/ooxmlekarsi.png" alt="Özgürlükİçin OOXML'e karşı" /></a>
             <p><a href="/ooxml/">"Özgürlükİçin OOXML'e Hayır!"</a> diyoruz. <a href="/ooxml_banner/">Banner ve düğmelerimizi</a> kullanarak kampanyamıza katkıda bulunabilir ve manifestomuzu destekleyerek siz de OOXML'e hayır diyebilirsiniz.</p>
             <div id="ooxmlbar"><div id="ooxmlbar_completed" style="width:%(petitionpercent)s%%;">&nbsp;</div></div>
-            <p>Destekleyenler: %(numberofpetitioners)s / 3000</p>
+            <p>Destekleyenler: %(numberofpetitioners)s / 4000</p>
         </div>
 """ % self.formatdict
 
@@ -31,7 +31,7 @@ class PetitionBox(template.Node):
 def petition_box(parser, token):
     """ returns a petition box for oi sidebar """
     numberofpetitioners = Petitioner.objects.filter(is_active=True).count()
-    petitionpercent = numberofpetitioners / 30
+    petitionpercent = numberofpetitioners / 40
     if petitionpercent > 100:
         petitionpercent = 100
     return PetitionBox(petitionpercent, numberofpetitioners)
