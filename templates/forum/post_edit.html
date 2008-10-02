@@ -1,25 +1,28 @@
 {% extends "forum/forum_base.html" %}
+{% load library %}
 {% block extrahead %}
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
+<style type="text/css" media="screen">@import url('/media/css/new/forum_topic.css');</style>
 {% endblock %}
 {% block content %}
-<div class="forum_address">
-    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; <a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a></div>
+<div class="topbar">
+    <div class="navigation"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ topic.forum.get_absolute_url }}">{{ topic.forum.name }}</a> &#62; <a href="{{ topic.get_absolute_url }}" class="bold">{{ topic.title }}</a></div>
 </div>
 {% if user.is_authenticated %}
 {% if flood %}Flood koruması aktif, lütfen {{ timeout }} saniye bekleyin.{% endif %}
 <form action="" method="post">
+{% if quote_id %}<input type="hidden" name="quote_id" value="{{ quote_id }}" />{% endif %}
 {% for field in form %}
     <dl>
         <dt><label for="{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
-        <dd>{{ field }}</dd>
+        <dd>{{ field|safe }}</dd>
     </dl>
 {% endfor %}
 <input type="submit" value="Kaydet" />
 </form>
 {% else %}
-<p>Düzenlemek için giriş yapmalısınız.</p>
+<p>Yanıt göndermek için giriş yapmalısınız.</p>
 {% endif %}
 
 {% for post in posts %}
@@ -28,23 +31,24 @@
 {% else %}
 <div class="post_base" {% if post.hidden %}style="opacity: 0.5;"{% endif %}>
     <div class="post_profile">
-        <span style="font-weight: bold; font-size: 14">{{ post.author }}</span>{% if post.author.is_staff %}<span><br />Forum Yöneticisi{% endif %}</span><br/><br/>
-        <img src="{{ post.author.get_profile.avatar.file.url }}" alt="avatar" /><br/>
-        {% if perms.forum.can_see_post_ip %}({{ post.ip }})<br/>{% endif %}
-        Kayıt Tarihi: {{ post.author.date_joined|date:"d-m-Y" }}<br/>
-        <a href="/kullanici/profil/{{ post.author }}"><img src="/media/dijital/img/forum/bilgi.jpg" border="0" /></a><br/>
+        <div class="author">{{ post.author }}</div>
+        {% if post.author.is_staff %}<div class="author_description">Forum Yöneticisi</div>{% endif %}
+        <div class="avatar"><img src="{{ post.author.get_profile.avatar.file.url }}" alt="avatar" /></div>
+        {% if perms.forum.can_see_post_ip %}<div class="ip">({{ post.ip }})</div>{% endif %}
+        <div class="register_date">Kayıt Tarihi:<br />{{ post.author.date_joined|date:"d-m-Y" }}</div>
+        <div class="button"><a href="/kullanici/profil/{{ post.author }}"><img src="/media/img/new/button_info.png" alt="bilgi" /></a></div>
     </div>
     <div class="post_message">
         <div class="post_message_top">
             <div class="post_message_top_icon">
-                <a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" border="0" /></a>
+                <a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="ileti adresi" /></a>
             </div>
             <div class="post_message_top_date">
                 {{ post.created|date:"d-m-Y H:i" }}
             </div>
         </div>
         <div class="post_message_content">
-            <div class="post_message_text">{{ post.text|safe }}</div>
+            <div class="post_message_text">{{ post.text|renderbbcode|safe }}</div>
         </div>
     </div>
 </div>
