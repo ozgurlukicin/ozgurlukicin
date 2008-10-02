@@ -762,11 +762,8 @@ def create_poll(request, forum_slug, topic_id):
         return HttpResponse('Forum or topic is locked')
 
     # check if it already has a poll
-    try:
-        topic.poll
+    if topic.poll:
         return HttpResponse('Bu konuya zaten anket eklenmiş')
-    except: #DoesNotExist
-        pass
 
     if request.method == 'POST':
         form = PollForm(request.POST.copy())
