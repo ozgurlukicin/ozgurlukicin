@@ -1,0 +1,47 @@
+div#content {
+    width: 804px;
+}
+div.headerbar {
+    width: 800px;
+    height: 43px;
+    margin-top: 13px;
+    font-size: 11px;
+    overflow: hidden;
+    background: url(/media/img/new/forum_headerbar_bg.png) repeat-x;
+}
+div.bug {
+    width: 800px;
+    overflow: hidden;
+    border-bottom: 1px #EAEAEA solid;
+    background: url(/media/img/new/bug_item_bg.png) no-repeat bottom left;
+}
+div.bug_list {clear:both}
+div.headerbar div {
+    float: left;
+    height: 42px;
+    line-height: 42px;
+    font-family: "Arial";
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+div.bug_list div {
+    float: left;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    overflow: hidden;
+}
+.headerbar .title, .bug .title {
+    width:364px;
+    text-align: left;
+    margin-left:4px;
+}
+.submitter {width:153px}
+.status {width:45px}
+.priority {width:99px}
+.submitted_date {width:99px}
+.spacer {width:9px}
+.headerbar .spacer {
+    background: url(/media/img/new/forum_headerbar_spacer.png) no-repeat center center;
+}
