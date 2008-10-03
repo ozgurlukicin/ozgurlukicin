@@ -1,29 +1,12 @@
-{% extends "base.html" %}
-
+{% extends "bug/bug_main.html" %}
 {% block title %}{{ bug.name }}Hata Raporla - {% endblock %}
-
 {% block extrahead %}
-    <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
-    <style type="text/css" media="screen">@import url('/media/css/bug.css');</style>
+    <style type="text/css" media="screen">@import url('/media/css/new/bug.css');</style>
 {% endblock %}
-
-{% block header_menu %}
-    {% include "header.html" %}
-{% endblock %}
-
-<br/>
-{% block ust_menu %}
-    {% include "ust_menu_ayrinti.html" %}
-{% endblock %}
-
-{% block alt_resim %}
-    <div class="sidebar sidebar_alt_img">&nbsp;</div>
-{% endblock %}
-
 {% block content %}
-<div style="height: 30px">&nbsp;</div>
-<div class="addressbar"><a href="/">Ana Sayfa</a> &#62; <a href="/hata/">Hata</a> &#62; Yeni Hata</div>
-<div class="bug_detail_content">
+<div class="topbar">
+    <div class="navigation"><a href="/">Ana Sayfa</a> &#62; <a href="/hata/">Hata</a> &#62; <a href="/hata/ekle/" class="bold">Yeni Hata</a></div>
+</div>
 <form action="" method="post" class="bugform">
 <dl>
 {% for field in form %}
@@ -33,8 +16,6 @@
     {% if field.errors %}<dd class="myerrors" style="font-color: red">{{ field.errors }}</dd>{% endif %}
 {% endfor %}
 </dl>
-<input type="submit" value="Hatayı Raporla">
+<input type="submit" value="Hatayı Raporla" />
 </form>
-</div>
-
 {% endblock %}
