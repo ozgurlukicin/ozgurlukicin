@@ -45,3 +45,41 @@ div.bug_list div {
 .headerbar .spacer {
     background: url(/media/img/new/forum_headerbar_spacer.png) no-repeat center center;
 }
+.bug_content {overflow:hidden}
+.bug_description {
+    width: 573px;
+    margin-top: 25px;
+    margin-left: 12px;
+    float: left;
+}
+.bug_details {
+    float: right;
+    width: 206px;
+    padding-top: 18px;
+    padding-left: 4px;
+    border-left: 1px #EAEAEA solid;
+    margin-top: 7px;
+    margin-right: 4px;
+}
+.comment_list {
+    width: 692px;
+    margin-left: 54px;
+    overflow: hidden;
+}
+.comment_list .header {
+    margin: 18px 0px 8px 18px;
+    font-weight: bold;
+}
+.comment_title {
+    background-color: #FFF3C6;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 9px;
+}
+.comment_title a {
+    color: #F7901E;
+    font-weight: bold;
+}
+.comment .text {
+    margin: 4px;
+}
