@@ -128,8 +128,8 @@ div#footer a {
 #content .page_content p {
     margin-bottom: 15px;
 }
-#content .page_content ul {
-    margin-left: 20px;
+#content .page_content ul, #content .page_content ol {
+    margin-left: 30px;
     margin-bottom: 15px;
 }
 #content .page_content li {
