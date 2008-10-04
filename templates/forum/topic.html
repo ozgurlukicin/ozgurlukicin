@@ -171,7 +171,7 @@
     <div><a href="{{ topic.get_stick_url }}"><img src="/media/img/new/forum/button_unstick_topic.png" alt="Sabitliği Kaldır" /></a></div>
     {% endif %}
     {% if perms.forum.can_lock_topic and not topic.locked %}
-        <div><a href="{{ topic.get_lock_url }}" img src="/media/img/new/forum/button_lock_topic.png" alt="Başlığı Kilitle" /></a></div>
+    <div><a href="{{ topic.get_lock_url }}"><img src="/media/img/new/forum/button_lock_topic.png" alt="Başlığı Kilitle" /></a></div>
     {% endif %}
     {% if perms.forum.change_topic %}
         <div><a href="{{ topic.get_edit_url }}"><img src="/media/img/new/forum/button_edit_topic.png" alt="Başlığı Düzenle" /></a></div>
