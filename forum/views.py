@@ -67,7 +67,7 @@ def main(request):
 
     usercount = User.objects.count()
     currentdate = datetime.now()
-    latest_posts = Post.objects.filter(hidden=False).order_by("-created")[:5]
+    latest_posts = Topic.objects.filter(topic_latest_post__hidden=False).order_by("topic_latest_post").distinct()[:5]
     if request.user.has_perm("forum.can_change_abusereport"):
         abuse_count = AbuseReport.objects.count()
 
