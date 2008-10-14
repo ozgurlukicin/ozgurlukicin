@@ -86,12 +86,12 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.csrf.middleware.CsrfMiddleware',
+#    'django.contrib.csrf.middleware.CsrfMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'oi.flatpages.middleware.FlatpageFallbackMiddleware',
     'oi.middleware.threadlocals.ThreadLocals',
-    'oi.middleware.debug.DebugFooter',
+#    'oi.middleware.debug.DebugFooter',
     'oi.middleware.ban.BanWare',
 )
 
@@ -125,6 +125,7 @@ INSTALLED_APPS = (
     'oi.shop.product',
     'oi.shop.cart',
     'oi.ideas',
+    'oi.ezine',
 )
 
 CITY_LIST = (
