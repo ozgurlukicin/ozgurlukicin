@@ -33,7 +33,7 @@
     <ul>
         {% for sem in seminar %}
         <li{% if not forloop.last %} style="border-bottom:1px solid #EAEAEA;padding-bottom:5px;margin-bottom:5px;"{% endif %}>
-            <div><span class="bold">{{ sem.date|date:"d F Y" }}</span></div>
+            <div><span class="bold">{{ sem.start_date|date:"d F Y" }}</span></div>
             <div>{{ sem.description }}</div>
             <div><span class="bold">Yer:</span> {{ sem.place.name }}</div>
             <div><span class="bold">Konuşmacılar:</span> {% for att in sem.attender.all %}{% if forloop.last %}{{ att.name }}{% else %}{{ att.name }}, {% endif %}{% endfor %}</div>
