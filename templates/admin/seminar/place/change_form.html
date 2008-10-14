@@ -82,7 +82,7 @@ function load() {
 {% for fieldset in adminform %}
   {% include "admin/includes/fieldset.html" %}
 {% endfor %}
-<div id="id_map" class="googlemap"></div>
+<div id="id_map" style="width:100%;height:500px"></div>
 {% block after_field_sets %}{% endblock %}
 
 {% for inline_admin_formset in inline_admin_formsets %}
