@@ -10,9 +10,13 @@ from django.contrib import admin
 from oi.seminar.models import Place, Attender, Seminar
 
 class PlaceAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    fieldsets = (
+        ("Genel", {"fields": ("name", "description", "phone")}),
+        ("Koordinatlar", {"fields": ("latitude", "longitude"), "classes": ("collapse",)}),
+    )
+    list_display = ("name", "phone")
     ordering = ['-name']
-    search_fields = ['name', 'direction']
+    search_fields = ['name']
 
 class AttenderAdmin(admin.ModelAdmin):
     list_display = ('name',)
@@ -20,8 +24,8 @@ class AttenderAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 class SeminarAdmin(admin.ModelAdmin):
-    list_display = ('description', 'date')
-    ordering = ['-date']
+    list_display = ('description', 'start_date', "end_date")
+    ordering = ['-start_date']
     search_fields = ['description']
 
 admin.site.register(Place, PlaceAdmin)

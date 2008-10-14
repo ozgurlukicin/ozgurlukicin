@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={{ apikey }}" type="text/javascript"></script>
+        <script type="text/javascript">
+        //<![CDATA[
+        function load() {
+            if (GBrowserIsCompatible()) {
+                var map = new GMap2(document.getElementById("id_map"));
+                map.enableScrollWheelZoom();
+
+                // initialize user location
+                var center = new GLatLng(39, 35);
+                var heightLevel = 5;
+                var lng = {{ object.longitude }};
+                var ltd = {{ object.latitude }};
+
+                if ((lng != 0) || (ltd != 0)) {
+                    center = new GLatLng(ltd, lng);
+                    heightLevel = 9;
+                }
+                map.setCenter(center, heightLevel);
+                map.addControl(new GSmallMapControl());
+                map.addControl(new GMapTypeControl());
+
+                var marker = new GMarker(center);
+                map.addOverlay(marker);
+            }
+        }
+        //]]>
+        </script>
+    </head>
+    <body onload="load()" onunload="GUnload()">
+        <div id="id_map" class="googlemap"></div>
+    </body>
+</html>

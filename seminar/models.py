@@ -6,15 +6,14 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.db import models
-from django.contrib.localflavor.us.models import PhoneNumberField
-
-from oi.settings import CITY_LIST
+from django.contrib.auth.models import User
 
 class Place(models.Model):
     name = models.CharField('Seminer Yeri', max_length=64, blank=False, unique=True)
-    city = models.CharField('Şehir', choices=CITY_LIST, max_length=40)
-    direction = models.TextField('Adres Tarifi', blank=True)
-    phone = PhoneNumberField('Telefon', blank=True)
+    description = models.TextField("Yer Tanımı", max_length=512, blank=True)
+    phone = models.CharField("Telefon", max_length=16, blank=True)
+    latitude = models.DecimalField('Enlem', max_digits=10, decimal_places=6, default=0, help_text="40.903823 gibi")
+    longitude = models.DecimalField('Boylam', max_digits=10, decimal_places=6, default=0, help_text="29.226723 gibi")
 
     def __unicode__(self):
         return self.name
@@ -25,7 +24,8 @@ class Place(models.Model):
         verbose_name_plural = "Seminer Yerleri"
 
 class Attender(models.Model):
-    name = models.CharField('Konuşmacı', max_length=64, blank=False, unique=True)
+    name = models.CharField('Gerçek Adı', max_length=64, blank=False, unique=True)
+    user = models.ForeignKey(User, verbose_name="Öİ Kullanıcı Adı", blank=True, null=True, help_text="Zorunlu değil")
 
     def __unicode__(self):
         return self.name
@@ -37,9 +37,10 @@ class Attender(models.Model):
 
 class Seminar(models.Model):
     description = models.CharField('Seminer tanımı', max_length = 64, blank = False, unique = True)
-    place = models.ForeignKey(Place)
-    attender = models.ManyToManyField(Attender)
-    date = models.DateField('Tarih', blank=False)
+    place = models.ForeignKey(Place, verbose_name="Yer")
+    attender = models.ManyToManyField(Attender, verbose_name="Katılımcılar")
+    start_date = models.DateTimeField('Başlangıç', blank=False)
+    end_date = models.DateTimeField('Bitiş', blank=True, null=True, help_text="zorunlu değil")
     status = models.BooleanField('Aktif')
 
     def __unicode__(self):
