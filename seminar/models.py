@@ -18,6 +18,9 @@ class Place(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return "/seminer/%d/" % self.id
+
     class Meta:
         ordering = ['name']
         verbose_name = "Seminer Yeri"
