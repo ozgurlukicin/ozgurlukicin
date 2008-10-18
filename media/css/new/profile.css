@@ -31,7 +31,14 @@
     float: left;
     width: 25%;
 }
+#profile_bio {
+    overflow: hidden;
+    clear: both;
+    margin-top: 3px;
+    line-height: 22px;
+}
 #id_map {
+    margin-top: 8px;
     width: 447px;
     height: 300px;
     overflow: hidden;
