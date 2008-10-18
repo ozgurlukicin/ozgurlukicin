@@ -1,5 +1,10 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
     <head>
+        <title>Özgürlük için...</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="imagetoolbar" content="no" />
+        <link rel="shortcut icon" href="/media/img/fav.png" />
         <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={{ apikey }}" type="text/javascript"></script>
         <script type="text/javascript">
         //<![CDATA[
@@ -10,7 +15,7 @@
 
                 // initialize user location
                 var center = new GLatLng(39, 35);
-                var heightLevel = 5;
+                var heightLevel = 13;
                 var lng = {{ object.place.longitude }};
                 var ltd = {{ object.place.latitude }};
 
@@ -30,6 +35,7 @@
         </script>
     </head>
     <body onload="load()" onunload="GUnload()">
+        <div style="width:500px;padding:50px">{{ object.place.description }} - TEL: {{ object.place.phone }}</div>
         <div id="id_map" style="width:600px;height:400px"></div>
     </body>
 </html>
