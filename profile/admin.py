@@ -28,7 +28,7 @@ class LostPasswordAdmin(admin.ModelAdmin):
 
 class ProfileAdmin(admin.ModelAdmin):
     fieldsets = (
-        ('Üyelik Bilgileri', {'fields': ('user', 'avatar', 'homepage', 'msn', 'jabber', 'icq', 'city', 'birthday', 'contributes', 'contributes_summary', 'show_email', 'latitude', 'longitude',)}),
+        ('Üyelik Bilgileri', {'fields': ('user', 'title', 'avatar', 'homepage', 'msn', 'jabber', 'icq', 'city', 'birthday', 'contributes', 'contributes_summary', 'bio', 'show_email', 'latitude', 'longitude',)}),
         ('Diğer', {'fields': ('activation_key', 'key_expires', 'signature'), 'classes': 'collapse',}),
     )
 

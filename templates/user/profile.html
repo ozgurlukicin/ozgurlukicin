@@ -38,8 +38,6 @@
 {% endblock %}
 
 {% block content %}
-
-{% if info %}
 <div id="user_profile">
     <div id="user_profile_left">
         <h3>{{ info }}</h3>
@@ -87,11 +85,12 @@
             <div class="profile_info">
                 <div class="profile_titles">ICQ </div><div class="profile_value">: {{ info.get_profile.icq }}</div>
             </div>
+
+            {% if info.get_profile.bio %}
+            <h3>Hakkında</h3>
+            <div id="profile_bio">{{ info.get_profile.bio|linebreaksbr }}</div>
+            {% endif %}
             <div id="id_map" class="googlemap"></div>
     </div>
 </div>
-{% else %}
-Böyle bir kullanıcı yok! <br />
-{% endif %}
-
 {% endblock %}

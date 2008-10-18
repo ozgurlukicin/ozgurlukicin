@@ -58,6 +58,7 @@ class LostPassword(models.Model):
 
 class Profile(models.Model):
     user = models.ForeignKey(User, unique=True)
+    title = models.CharField("Ünvan", max_length=32, blank=True, help_text="'Forum Yöneticisi' gibi")
     avatar = models.ForeignKey(Avatar, verbose_name="Avatar")
     birthday = models.DateField(blank=True)
     homepage = models.URLField('Ana Sayfa', blank=True, verify_exists=False, unique=False)
@@ -69,6 +70,7 @@ class Profile(models.Model):
     show_birthday = models.BooleanField('Doğum Tarihini Göster', default=0)
     contributes = models.ManyToManyField(Contribute, blank=True, verbose_name='Katkılar')
     contributes_summary = models.TextField('Katkı Açıklaması', blank=True)
+    bio = models.TextField("Kendinizi Tanıtın", blank=True)
     activation_key = models.CharField(max_length=40)
     key_expires = models.DateTimeField()
     signature = models.TextField('İmza', blank=True, max_length=512)

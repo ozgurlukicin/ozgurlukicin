@@ -111,6 +111,7 @@ class ProfileEditForm(forms.Form):
     icq = forms.CharField(label='ICQ', max_length=15, required=False)
     show_email = forms.BooleanField(label='E-posta Adresini Göster', required=False, help_text='Profil sayfasında diğerleri e-posta adresinizi görsün mü?')
     show_birthday = forms.BooleanField(label='Doğum Tarihini Göster', required=False, help_text='Profil sayfasında diğerleri doğum tarihinizi görebilsin mi?')
+    bio = XssField(label="Kendinizi Tanıtın", required=False, help_text="Burada kısaca kendinizi tanıtabilirsiniz. Yazdıklarınız profilinizde görünecektir.", max_length=512, widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}))
     signature = XssField(label='İmza', widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), required=False, help_text='Forumdaki her iletinizin altında görünecek imzanız (html tagları kullanabilirsiniz, en fazla 512 karakter olabilir)', max_length=512)
     latitude = forms.DecimalField(label='Enlem', max_digits=10, decimal_places=6)
     longitude = forms.DecimalField(label='Boylam', max_digits=10, decimal_places=6)

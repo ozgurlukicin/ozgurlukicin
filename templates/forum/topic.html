@@ -54,7 +54,7 @@
 <div class="post_base" {% if post.hidden %}style="opacity: 0.5"{% endif %}>
     <div class="post_profile">
         <div class="author">{{ post.author }}</div>
-        {% if post.author.is_staff %}<div class="author_description">Forum Yöneticisi</div>{% endif %}
+        <div class="author_description">{{ post.author.get_profile.title }}</div>
         <div class="avatar"><img src="{{ post.author.get_profile.avatar.file.url }}" alt="avatar" /></div>
         {% if perms.forum.can_see_post_ip %}<div class="ip">({{ post.ip }})</div>{% endif %}
         <div class="register_date">Kayıt Tarihi:<br />{{ post.author.date_joined|date:"d-m-Y" }}</div>

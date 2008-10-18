@@ -62,6 +62,7 @@ def user_profile_edit(request):
             u.email = form.cleaned_data['email']
             u.get_profile().homepage = form.cleaned_data['homepage']
             u.get_profile().signature = form.cleaned_data['signature']
+            u.get_profile().bio = form.cleaned_data['bio']
             u.get_profile().avatar = Avatar.objects.get(file=form.cleaned_data['avatar'])
             u.get_profile().city = form.cleaned_data['city']
             u.get_profile().jabber = form.cleaned_data['jabber']
@@ -101,6 +102,7 @@ def user_profile_edit(request):
                 'icq': u.get_profile().icq,
                 'homepage': u.get_profile().homepage,
                 'signature': u.get_profile().signature,
+                'bio': u.get_profile().bio,
                 'city': u.get_profile().city,
                 'email': u.email,
                 'latitude': u.get_profile().latitude,
