@@ -34,7 +34,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
     list_display = ('user', 'city',)
     ordering = ['-user']
-    search_fields = ['user']
+    search_fields = ['user__username']
 
 admin.site.register(ForbiddenUsername, ForbiddenUsernameAdmin)
 admin.site.register(Avatar, AvatarAdmin)
