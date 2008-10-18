@@ -34,6 +34,7 @@
 #profile_bio {
     overflow: hidden;
     clear: both;
+    width: 447px;
     margin-top: 3px;
     line-height: 22px;
 }
