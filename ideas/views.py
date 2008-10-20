@@ -67,7 +67,7 @@ def list(request, field="", filter_slug=""):
         page_title = "Son iki günün popüler fikirleri"
         ideas = ideas.filter(submitted_date__gt=datetime.datetime.now()-datetime.timedelta(2))
         if ideas.count() < 5:
-            ideas = Idea.objects.order_by("-submitted_date")[:5]
+            ideas = Idea.objects.filter(is_hidden=False).order_by("-submitted_date")[:5]
             page_title = "Son beş fikir"
     categories = Category.objects.order_by('name')
     if request.user.is_authenticated():
