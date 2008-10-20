@@ -99,7 +99,7 @@ def detail(request, idea_id):
     idea = get_object_or_404(Idea, pk=idea_id, is_hidden=False)
     user_can_change_idea = False
     if request.user.is_authenticated():
-        if request.user.id == idea.submitter_id or request.user.is_staff:
+        if request.user.id == idea.submitter_id or request.user.has_perm("ideas.can_change_idea"):
             user_can_change_idea = True
         try:
             f = Favorite.objects.get(user=request.user, idea=idea)
