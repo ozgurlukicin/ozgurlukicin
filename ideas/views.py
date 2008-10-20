@@ -99,7 +99,7 @@ def detail(request, idea_id):
     idea = get_object_or_404(Idea, pk=idea_id, is_hidden=False)
     user_can_change_idea = False
     if request.user.is_authenticated():
-        if request.user.id == idea.submitter_id or request.user.has_perm("ideas.can_change_idea"):
+        if request.user.id == idea.submitter_id or request.user.has_perm("ideas.change_idea"):
             user_can_change_idea = True
         try:
             f = Favorite.objects.get(user=request.user, idea=idea)
@@ -180,7 +180,7 @@ def add(request):
 @login_required
 def edit_idea(request, idea_id):
     idea = Idea.objects.get(pk=idea_id)
-    if request.user == idea.submitter or request.user.has_perm("ideas.can_change_idea"):
+    if request.user == idea.submitter or request.user.has_perm("ideas.change_idea"):
         if request.method == 'POST':
             form = NewIdeaForm(request.POST)
             if form.is_valid():
@@ -215,7 +215,7 @@ def edit_idea(request, idea_id):
         """ idea isn't yours error """
         return HttpResponseRedirect(idea.get_absolute_url())
 
-@permission_required('ideas.can_change_idea', login_url="/kullanici/giris/")
+@permission_required('ideas.change_idea', login_url="/kullanici/giris/")
 def delete_idea(request, idea_id):
     idea = Idea.objects.get(pk=idea_id)
     idea.is_hidden = True
@@ -268,7 +268,7 @@ def del_favorite(request, idea_id):
     favorite.delete()
     return HttpResponse("OK")
 
-@permission_required('ideas.can_change_idea', login_url="/kullanici/giris/")
+@permission_required('ideas.change_idea', login_url="/kullanici/giris/")
 def duplicate(request, idea_id, duplicate_id):
     try:
         idea = Idea.objects.get(pk=idea_id)
@@ -282,7 +282,7 @@ def duplicate(request, idea_id, duplicate_id):
     except ObjectDoesNotExist:
         return HttpResponse("YOK")
 
-@permission_required('ideas.can_change_idea', login_url="/kullanici/giris/")
+@permission_required('ideas.change_idea', login_url="/kullanici/giris/")
 def change_status(request, idea_id, new_status):
     idea = Idea.objects.get(pk=idea_id)
     idea.status_id = new_status
