@@ -24,7 +24,7 @@
 </div>
 {% else %}
 <div class="bug_content">
-    <div class="bug_description">{{ bug.description }}</div>
+    <div class="bug_description">{{ bug.description|linebreaksbr }}</div>
     <div class="bug_details">
         <span class="bold">Tarih:</span> {{ bug.submitted_date|date:"d F Y H:i" }}<br />
         <span class="bold">Bildiren:</span> <a href="/kullanici/profil/{{ bug.submitter }}/">{{ bug.submitter.first_name }} {{ bug.submitter.last_name }}</a><br />
