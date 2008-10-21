@@ -118,7 +118,7 @@ def detail(request, idea_id):
     duplicate_of = idea.duplicate
     bugs = idea.bug_numbers.replace(" ","").split(",")
     categories = Category.objects.order_by('name')
-    page_title = "Fikir detayları"
+    page_title = "%d numaralı fikrin detayları" % idea.id
     return render_response(request, "idea_detail.html", locals())
 
 @login_required
