@@ -53,6 +53,7 @@
     line-height: 15px;
     margin-top: 5px;
 }
+.post_message_content img { max-width:623px }
 .post_message_text {
     min-height: 250px;
 }
