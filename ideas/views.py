@@ -52,6 +52,11 @@ def list(request, field="", filter_slug=""):
         if filter_slug == 'eklenen':
             ideas = ideas.order_by("-submitted_date")
             page_title = "Son eklenen fikirler"
+    elif field == 'durum':
+        if filter_slug == "cozuldu":
+            s = Status.objects.get(name="Çözüldü")
+            ideas = ideas.filter(status=s)
+            page_title = "Çözüme kavuşmuş fikirler"
     elif field == 'favori' and filter_slug == 'fikirler':
         page_title = "Favori fikirleriniz"
         try:
