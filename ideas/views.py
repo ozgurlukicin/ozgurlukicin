@@ -21,7 +21,7 @@ def list(request, field="", filter_slug=""):
     if field == 'kategori':
         category_id = get_object_or_404(Category, slug = filter_slug)
         ideas = ideas.filter(category=category_id)
-        page_title = "%s kategorisindeki fikirler" % filter_slug
+        page_title = "%s kategorisindeki fikirler" % category_id
     elif field == 'etiket':
         ideas = ideas.filter(tags__name__exact=filter_slug)
         page_title = "%s etiketli fikirler" % filter_slug

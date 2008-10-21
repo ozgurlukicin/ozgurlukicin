@@ -8,7 +8,7 @@
 from django.template import Library
 from django.template.defaultfilters import truncatewords_html
 
-from oi.ideas.models import Idea
+from oi.ideas.models import Idea, Category
 from oi.ideas.settings import IDEAS_IN_HOMEPAGE
 
 register = Library()
@@ -20,4 +20,16 @@ def idea_list():
     for idea in ideas:
         description = truncatewords_html(idea.description, 12)
         html += '<div class="leftcolumn_content"><p class="title"><a href="%s">%s</a></p>%s</div>' % (idea.get_absolute_url(), idea.title, description)
+    return html
+
+@register.simple_tag
+def category_list():
+    categories = Category.objects.all()
+    html = ""
+    for category in categories:
+        html += "<li><a href=\"%s\" title=\"%s\">%s</a></li>" % (
+                category.get_absolute_url(),
+                category.name,
+                category.name,
+                )
     return html
