@@ -18,7 +18,7 @@ def idea_list():
     ideas = Idea.objects.filter(is_hidden=False).order_by('-id')[:IDEAS_IN_HOMEPAGE]
     html = ''
     for idea in ideas:
-        description = truncatewords_html(idea.description, 12)
+        description = truncatewords_html(idea.description, 20)
         html += '<div class="leftcolumn_content"><p class="title"><a href="%s">%s</a></p>%s</div>' % (idea.get_absolute_url(), idea.title, description)
     return html
 
