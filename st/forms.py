@@ -43,6 +43,8 @@ class XssField(forms.CharField):
                 tag.hidden = True
             elif tag.name == "a":
                 tag["target"] = "_blank"
+            elif tag.name == "img":
+                tag["style"] = "max-width:623px"
             tag.attrs = [(attr, val) for attr, val in tag.attrs if attr in validAttrs]
         return soup.renderContents().decode('utf8')
 
