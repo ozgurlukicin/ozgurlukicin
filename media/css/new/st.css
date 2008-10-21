@@ -35,6 +35,7 @@ div.leftcolumn_content {
     width: 100%;
     margin-bottom: 10px;
     border-bottom: 1px #EAEAEA solid;
+    background-color: #E7E7E7;
 }
 div.leftcolumn_content p {
     margin-bottom: 15px;
