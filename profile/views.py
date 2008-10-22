@@ -170,12 +170,12 @@ def user_register(request):
 
             email_subject = u"Özgürlükİçin.com Kullanıcı Hesabı, %(user)s"
             email_body = u"""Merhaba!
-%(date)s %(hour)s tarihinde %(ip_addr)s IP adresli bilgisayardan yaptığınız Özgurlukİçin.com kullanıcı hesabınızı onaylamak için lutfen asağıdaki bağlantıyı 48 saat içerisinde ziyaret ediniz.
+%(date)s %(hour)s tarihinde %(ip_addr)s IP adresli bilgisayardan yaptığınız Özgurlukİçin kullanıcı hesabınızı onaylamak için lutfen asağıdaki bağlantıyı 48 saat içerisinde ziyaret ediniz.
 
 %(link)s
 
 Teşekkürler,
-Özgurlukİçin.com"""
+Özgurlukİçin"""
 
             email_to = form.cleaned_data['email']
 
