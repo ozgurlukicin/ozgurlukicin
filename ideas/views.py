@@ -201,6 +201,29 @@ def edit_idea(request, idea_id):
                 idea.forum_url = form.cleaned_data['forum_url']
                 idea.bug_numbers = form.cleaned_data['bug_numbers']
                 idea.save()
+
+                #update topic
+                topic = idea.topic
+                topic.tags.clear()
+                for tag in idea.tags.all():
+                    topic.tags.add(tag)
+
+                topic.title = idea.title
+                topic.save()
+
+                post = topic.post_set.order_by("created")[0]
+                post_text = "<p>#" + str(idea.id) + " "
+                post_text += "<a href=" + idea.get_absolute_url() + ">" + idea.title + "</a></p>"
+                post_text += "<p>" + idea.description + "</p>"
+                if form.cleaned_data['forum_url']:
+                    post_text += "<p>İlgili Forum Linki<br /><a href='" + idea.forum_url + "'>" + idea.forum_url + "</a></p>"
+                if idea.bug_numbers:
+                    post_text += "<p>İlgili hatalar<br />"
+                    for bug in idea.bug_numbers.replace(" ", "").split(","):
+                        post_text += "<a href='http://bugs.pardus.org.tr/show_bug.cgi?id=" + bug + "'>" + bug + "</a> "
+
+                post.text = post_text
+                post.save()
                 return HttpResponseRedirect(idea.get_absolute_url())
             else:
                 return render_response(request, "idea_add_form.html", locals())
