@@ -1,22 +1,15 @@
 {% extends "base.html" %}
-{% load library %}
 {% block title %}E-Dergi -  {% endblock %}
-
-{% block pagetype %}page{% endblock %}
-
-{% block header_menu %}
-    {% include "header.html" %}
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/object_lists.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/ezine.css');</style>
 {% endblock %}
-<br />
-{% block ust_menu %}
-    {% include "ust_menu_ayrinti.html" %}
-{% endblock %}
-<br />
 {% block content %}
 
 {% for ezine in ezines %}
-<div style="margin:5px; padding:5px;">
-    <img src="/media/{{ ezine.image }}/" alt="{{ ezine.title }} resim" align="left"/ ><br />
+<div id="ezine">
+    <img id="img" src="/media/{{ ezine.image }}/" alt="{{ ezine.title }} resim" /><br />
     <h2>
         {% if not id %}
         <a href="{{ ezine.id }}/" title="{{ ezine.title }}">{{ ezine.title }}</a>
@@ -30,13 +23,13 @@
     <sub><img src="http://www.ozgurlukicin.com/media/upload/image/pdf.png" almt="pdf" /></sub>
     <a href="/media/{{ ezine.download_96dpi }}">96dpi ({{ ezine.size_96dpi }} MB)</a>
     {% ifequal forloop.counter 1 %}
-        <p style="clear:both"><h3>İçindekiler</h3>
-        {{ ezine.description|safe }}</p>
+        <div class="content"><h3>İçindekiler</h3>
+            {{ ezine.description|safe }}
+        </div>
     {% endifequal %}
     <div style="clear:both"></div>
     <hr />
 </div>
 {% endfor %}
-
 
 {% endblock %}

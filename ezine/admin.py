@@ -11,7 +11,9 @@ from oi.ezine.models import Ezine
 from oi.st.tags import Tag
 
 class EzineAdmin(admin.ModelAdmin):
-    list_display = ('title','description')
-    js = ("js/tinymce/tiny_mce.js","js/tinymce/textareas.js",)
+    list_display = ('title',)
+
+    class Media:
+        js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
 
 admin.site.register(Ezine, EzineAdmin)
