@@ -13,7 +13,12 @@
     float: right;
     margin-top: 7px;
 }
-.post .top .address { float: left }
+.post .top .address {
+    float: left
+    max-width: 420px;
+    height: 16px;
+    overflow: hidden;
+}
 .post .top .button {
     margin-top: 2px;
     margin-left: 5px;
