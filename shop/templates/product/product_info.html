@@ -1,22 +1,32 @@
 {% extends "shop_base.html" %}
 {% block title %}Ürün - {{ product.name }} {% endblock %}
 {% block content %}
-    Ürün ismi: {{ product.name }} <br /><br />
-    Ürün Tanımı: {{ product.description }}<br />
-    Ürün Fiyatı: {{ product.price }} +KDV ({{ product.price_with_tax }})<br />
-    Ürün Stoğu: {{ product.stock }} <br />
-    {% if product.have_child %}
-        {% for child in product.child.all %}
-            {% if child.is_active %}
-            {% if user.is_authenticated %}
-            <a href="#" onclick="buyDialog({{ child.pk }})">{{ child.name }}</a>
-            {% endif %}
-            {% endif %}
+    <div class="product_big_image"><img id="big_image" src="{{ product.images.all.0.picture.url }}" alt="{{ product }}" /></div>
+    <div class="product_info">
+        <div class="price"><span style="font-size:10px;float:left;margin-top:45px;">SATIN AL</span><span style="font-size:20px;float:right;margin-top:35px;">{{ product.price}} YTL</span></div>
+        <div class="description">
+        Ürün ismi: {{ product.name }} <br /><br />
+        Ürün Tanımı: {{ product.description }}<br />
+        Ürün Stoğu: {{ product.stock }} <br />
+        </div>
+        {% if product.have_child %}
+        <div class="buttons">
+            {% for child in product.child.all %}
+                {% if child.is_active %}
+                {% if user.is_authenticated %}
+                <div class="button"><a href="#" onclick="buyDialog({{ child.pk }})">{{ child.name }}</a></div>
+                {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="product_little_images">
+        {% for image in product.images.all %}
+        <div class="product_little_image"><a href="#" onclick="swapImage(this)"><img src="{{ image.picture.url }}" alt="{{ product }}" /></div>
         {% endfor %}
-    {% endif %}
-    {% for image in product.images.all %}
-        Ürün Foto: <img src="{{ image.get_picture_url }}" alt="{{ product }}" /><br />
-    {% endfor %}
+        </div>
+    </div>
 {% endblock %}
 {% block afterbody %}
 <div id="buymessage">

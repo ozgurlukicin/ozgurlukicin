@@ -25,3 +25,6 @@ function buyDialog(product_id) {
     current_product = product_id;
     toggleBuyPopup();
 }
+function swapImage(img) {
+    document.big_image.src = img.childNodes[0].src;
+}

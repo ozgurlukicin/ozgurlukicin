@@ -150,7 +150,7 @@ urlpatterns = patterns('',
     (r'^yenifikir/', include('oi.ideas.urls')),
 
     # Shop
-    # (r'^dukkan/', include('oi.shop.urls')),
+    (r'^dukkan/', include('oi.shop.urls')),
 
     #Petition
     (r'^petition/', include('oi.petition.urls')),
