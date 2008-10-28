@@ -5,9 +5,8 @@
     <div class="product_info">
         <div class="price"><span style="font-size:10px;float:left;margin-top:45px;">SATIN AL</span><span style="font-size:20px;float:right;margin-top:35px;">{{ product.price}} YTL</span></div>
         <div class="description">
-        Ürün ismi: {{ product.name }} <br /><br />
-        Ürün Tanımı: {{ product.description }}<br />
-        Ürün Stoğu: {{ product.stock }} <br />
+        <h2>{{ product.name }}</h2>
+        <span>{{ product.description }}</span>
         </div>
         {% if product.have_child %}
         <div class="buttons">

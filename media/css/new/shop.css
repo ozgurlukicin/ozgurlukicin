@@ -114,3 +114,7 @@
 .product_info .button a {
     color: #999;
 }
+.product_info .description h2 {
+    font-size: 15px;
+    font-weight: bold;
+}
