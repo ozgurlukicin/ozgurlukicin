@@ -1,7 +1,7 @@
 {% extends "shop_base.html" %}
 {% block title %}Ürün - {{ product.name }} {% endblock %}
 {% block content %}
-    <div class="product_big_image"><img id="big_image" src="{{ product.images.all.0.picture.url }}" alt="{{ product }}" /></div>
+    <div class="product_big_image"><img id="big_image" name="big_image" src="{{ product.images.all.0.picture.url }}" alt="{{ product }}" /></div>
     <div class="product_info">
         <div class="price"><span style="font-size:10px;float:left;margin-top:45px;">SATIN AL</span><span style="font-size:20px;float:right;margin-top:35px;">{{ product.price}} YTL</span></div>
         <div class="description">
