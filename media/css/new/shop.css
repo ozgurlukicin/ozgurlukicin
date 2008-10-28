@@ -46,10 +46,18 @@
 }
 #buymessage p {
     color:white;
+}
+#buymessage .buttons {
+    overflow: hidden;
+}
+#buymessage p, #buymessage input, #buymessage .buttons {
     margin:10px;
 }
-#product_list .product {
+#product_list .product_item {
     float: left;
+}
+.product_item .photo img {
+    width: 140px;
 }
 #product_list .rightborder {
     border-right: 1px #EAEAEA solid;
@@ -100,7 +108,7 @@
     height: 30px;
     float: left;
 }
-.product_info .button {
+.buttons .button {
     float: left;
     margin: 3px;
     height: 22px;
@@ -110,11 +118,20 @@
     padding-left: 4px;
     padding-right: 4px;
     background-image: url(/media/img/new/forum_category_bg.png);
+    background-color: white;
 }
-.product_info .button a {
+.buttons .button a {
     color: #999;
 }
 .product_info .description h2 {
     font-size: 15px;
     font-weight: bold;
+}
+.product {
+    float: left;
+    text-align: center;
+    width: 200px;
+}
+.product img {
+    width: 140px;
 }

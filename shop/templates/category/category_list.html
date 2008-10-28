@@ -2,9 +2,12 @@
 {% block title %}Dükkan - Kategoriler{% endblock %}
 {% block content %}
     {% if not products %}
-        Üzgünüm, bu kategoride herhangi bir ürün bulunmamaktadır.
+        Bu kategoride herhangi bir ürün bulunmamaktadır.
     {% endif %}
     {% for product in products %}
-    - <a href="{{ product.get_absolute_url }}">{{ product.name }}</a> {% if product.have_child %}({{ product.child.count }} çeşit){% endif %} <br />
+    <div class="product">
+        <a href="{{ product.get_absolute_url }}"><img src="{{ product.images.all.0.picture.url }}" /></a><br />
+        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+    </div>
     {% endfor %}
 {% endblock %}

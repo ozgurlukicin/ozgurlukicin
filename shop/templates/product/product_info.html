@@ -31,8 +31,10 @@
 <div id="buymessage">
     <p>Kaç tane alacaksınız?</p>
     <input type="text" id="quantity" name="quantity" value="1" />
-    <a href="#" onclick="toggleBuyPopup()">Vazgeç</a>
-    <a href="#" onclick="addToCart()">Sepete Ekle</a>
-    <a href="#" onclick="addToCart()">Hemen Al</a>
+    <div class="buttons">
+        <div class="button"><a href="#" onclick="toggleBuyPopup()">Vazgeç</a></div>
+        <div class="button"><a href="#" onclick="addToCart()">Sepete Ekle</a></div>
+        <!--div class="button"><a href="#" onclick="addToCart()">Hemen Al</a></div-->
+    </div>
 </div>
 {% endblock %}
