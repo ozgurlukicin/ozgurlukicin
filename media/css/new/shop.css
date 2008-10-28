@@ -65,7 +65,6 @@
 .product_info {
     height: 271px;
     margin: 4px;
-    padding: 4px;
 }
 .product_info .price {
     float: left;
@@ -92,7 +91,7 @@
 .product_little_images {
     float: left;
     overflow: hidden;
-    margin-top: 138px;
+    margin-top: 142px;
 }
 .product_little_image {
     float: left;
