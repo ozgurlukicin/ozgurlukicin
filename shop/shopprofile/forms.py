@@ -20,6 +20,8 @@ def phoneValidator(field_data):
     return field_data
 
 class ShopProfileForm(forms.ModelForm):
+    address = forms.CharField(label='Adres', widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), max_length=300)
+    billing_address = forms.CharField(label='Fatura Adresi', widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), max_length=300)
     class Meta:
         model = ShopProfile
         exclude = ("user",)
