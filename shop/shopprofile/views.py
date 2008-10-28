@@ -49,3 +49,7 @@ def create_shopprofile(request):
     else:
         form = ShopProfileForm()
     return render_response(request, "shopprofile/shopprofile_create.html", {"form":form})
+
+@login_required
+def create_shopprofile(request):
+    return render_response(request, "shopprofile/shopprofile_change.html", {"form":form})
