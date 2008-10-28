@@ -22,7 +22,7 @@
 
         <div class="product_little_images">
         {% for image in product.images.all %}
-        <div class="product_little_image"><a href="#" onclick="swapImage(this)"><img src="{{ image.picture.url }}" alt="{{ product }}" /></div>
+        <div class="product_little_image"><a href="#" onclick="swapImage(this)"><img src="{{ image.picture.url }}" alt="{{ product }}" /></a></div>
         {% endfor %}
         </div>
     </div>
