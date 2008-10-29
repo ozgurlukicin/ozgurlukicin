@@ -76,13 +76,13 @@
 }
 .product_info .price {
     float: left;
-    width: 153px;
+    width: 183px;
     height: 60px;
     overflow: hidden;
     border-bottom: 1px #EAEAEA solid;
 }
 .product_info .description {
-    width: 175px;
+    width: 145px;
     height: 194px;
     float: right;
     border-left: 1px #EAEAEA solid;
@@ -113,7 +113,7 @@
     max-height: 42px;
 }
 .product_info .buttons {
-    width: 153px;
+    width: 183px;
     height: 153px;
     float: left;
 }
