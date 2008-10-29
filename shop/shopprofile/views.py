@@ -86,7 +86,7 @@ def create_shopprofile(request):
                     billing_no = form.cleaned_data["billing_no"],
                     )
             shopProfile.save()
-            return render_response(request, "shopprofile/shopprofile_main.html", {"profile":shopProfile})
+            return render_response(request, "shopprofile/shopprofile_main.html", {"profile_updated":True,"form":form})
     else:
         form = ShopProfileForm()
     return render_response(request, "shopprofile/shopprofile_create.html", {"form":form})
