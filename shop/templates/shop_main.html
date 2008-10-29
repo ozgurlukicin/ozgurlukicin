@@ -4,7 +4,7 @@
     <div id="product_list">
     {% for product in products %}
         {% if not product.parent %}
-        <div class="product_item{% ifequal forloop.counter 4 %}{% else %} rightborder{% endifequal %}">
+        <div class="product_item rightborder">
             <div class="photo"><a href="{{ product.get_absolute_url }}"><img src="{{ product.images.all.0.picture.url }}" alt="{{ product }}" /></a></div>
             <div class="title">{{ product }}</div>
             <div class="button"><a href="{{ product.get_absolute_url }}"><img src="/media/img/new/shop/button_buy.png" alt="Satın Al" /></a></div>
