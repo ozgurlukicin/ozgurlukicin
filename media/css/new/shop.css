@@ -55,9 +55,17 @@
 }
 #product_list .product_item {
     float: left;
+    text-align: center;
+    width: 210px;
+    margin-bottom: 10px;
 }
 .product_item .photo img {
     width: 140px;
+}
+.product_item .title {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 10px;
 }
 #product_list .rightborder {
     border-right: 1px #EAEAEA solid;
