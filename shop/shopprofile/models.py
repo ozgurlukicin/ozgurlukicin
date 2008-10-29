@@ -20,7 +20,7 @@ class ShopProfile(models.Model):
     town = models.CharField("İlçe", max_length=20)
     city = models.CharField('Şehir', choices=CITY_LIST, max_length=20)
     billing_firstname = models.CharField("Fatura kesilecek kişi", max_length=200, help_text="Gerçek isim ya da tüzel kişi")
-    billing_lastname = models.CharField("Fatura Soyadı", max_length=200, help_text="Fatura için soyadınız (tüzel kişiyse boş bırakınız)")
+    billing_lastname = models.CharField("Fatura Soyadı", blank=True, max_length=200, help_text="Fatura için soyadınız (tüzel kişiyse boş bırakınız)")
     billing_address = models.TextField('Fatura Adresi', max_length=300, help_text="Fatura için adres")
     billing_postcode = models.IntegerField("Posta Kodu", null=True, blank=True, help_text="5 rakamdan oluşan posta kodunuzu girin. (zorunlu değil)")
     billing_town = models.CharField("İlçe", max_length=50)
