@@ -56,9 +56,9 @@ def remove_item_from_cart(request):
 def get_cart_html(cart):
     cart_html = ''
     for item in cart.items.all():
-        cart_html += '<div class="item%d"><div class="count">%d</div><div class="product">%s</div><div class="remove_form" ><form action="javascript:;" method="POST"><input type="submit" onclick="remove(%s)" value="Sepetten Çıkar" /></form></div></div>' % (item.id, item.quantity, item.product, item.id)
+        cart_html += '<div class="cart_item"><div class="count">%d</div><div class="cart_item_info"><div class="cart_product">%s</div><div class="type">%s</div><div class="remove_button"><a href="#" onclick="remove(%s)"><img src="/media/img/new/button_remove_cart_item.png" alt="Sepetten Çıkar" /></a></div></div></div>' % (item.quantity, item.product.parent.name, item.product.name, item.id)
     if cart.items.count():
-        cart_html += '<div><a href="/dukkan/sepet/satinal/">Sepettekileri Satın Al</a></div>'
+        cart_html += '<div class="buy_cart"><a href="/dukkan/sepet/satinal/"><img src="/media/img/new/shop/button_buy.png" alt="Sepettekileri Satın Al" /></a></div>'
     return cart_html
 
 @login_required
