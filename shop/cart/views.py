@@ -29,18 +29,19 @@ def get_cart_for_user(user):
 @login_required
 def add_product_to_cart(request):
     if request.method == "POST":
-        #FIXME: check quantity, it can't be lower than 1
         cart = get_cart_for_user(request.user)
         product = Product.objects.get(id=request.POST.get("product_id"))
         item = CartItem(
                 quantity=request.POST.get("quantity"),
                 product=product,
                 )
+        if int(item.quantity) < 1:
+            return HttpResponse("NACK")
         item.save()
         cart.items.add(item)
         return HttpResponse("OK")
     else:
-        return HttpResponseRedirect("/dukkan/")
+        return HttpResponse("NACK")
 
 @login_required
 def remove_item_from_cart(request):
