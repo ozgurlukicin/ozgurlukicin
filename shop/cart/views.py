@@ -19,6 +19,7 @@ from oi.shop.product.models import Product
 from oi.shop.cart.forms import BuyForm
 
 def get_cart_for_user(user):
+    get_object_or_404(ShopProfile, user=user)
     try:
         cart = Cart.objects.get(user=user)
     except ObjectDoesNotExist:
