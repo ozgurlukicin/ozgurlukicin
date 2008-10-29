@@ -14,6 +14,7 @@
         {% if user.get_profile.have_shopprofile %}
         <div id="cart">
             {% get_cart user %}
+            <a href="/dukkan/profil/">Alışveriş Profili</a>
         </div>
         {% else %}
         <p>Sepeti kullanabilmek için öncelikle bir alışveriş profili oluşturmalısınız. <a href="/dukkan/profil/olustur/" style="color: #009FE0">Buraya</a> tıklayarak profilinizi oluşturabilir ve ürün siparişi vermeye başlayabilirsiniz.</p>

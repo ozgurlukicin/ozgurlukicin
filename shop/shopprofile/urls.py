@@ -8,7 +8,7 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('oi.shop',
-        (r'^$', 'shopprofile.views.main'),
+        (r'^$', 'shopprofile.views.change_shopprofile'),
         (r'^olustur/$', 'shopprofile.views.create_shopprofile'),
         (r'^degistir/$', 'shopprofile.views.change_shopprofile'),
         )

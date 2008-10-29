@@ -1,20 +1,28 @@
 {% extends "shop_base.html" %}
 {% block title %}Dükkan - Profil{% endblock %}
 {% block content %}
-    Normal Telefon: {{ profile.phone }} <br />
-    {% if profile.cellphone %}Cep Telefonu: {{ profile.cellphone }} <br />{% endif %}
-    Adres: {{ profile.address }} <br />
-    {% if profile.cellphone %}İkinci Adres: {{ profile.address }} <br />{% endif %}
-
-    <br />
-    Fatura Bilgileri: <br />
-    <br />
-    &nbsp;&nbsp;&nbsp;- Ürünün gönderileceği adres: {{ profile.bill.address }} <br />
-
-    &nbsp;&nbsp;&nbsp;- Kurumsal Hesap: {{ profile.bill.have_company_information }} <br />
-    {% if profile.bill.have_company_information %}
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Şirket Adı: {{ profile.bill.company_name }} <br />
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Şirket Adresi: {{ profile.bill.company_adress }} <br />
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Kişinin şirketteki ünvanı: {{ profile.bill.employee_title }} <br />
-    {% endif %}
+{% if form.errors %}
+<span class="error">Profil güncellenemedi, lütfen aşağıdaki hataları düzeltin</span>
+<br />
+{% endif %}
+{% if profile_updated %}
+<span style="color:green;">Profiliniz başarıyla güncellendi</span>
+<br />
+{% endif %}
+<form method="post" action="">
+    {% for field in form %}
+    <div class="field_container">
+        <div class="field_label">{{ field.label_tag }}</div>
+        <div class="field_field">
+            {{ field }}
+            {% if field.errors %}{{ field.errors }}{% endif %}
+        </div>
+        <div class="help_text">
+            {% if field.help_text %}{{ field.help_text }}{% endif %}
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    {% endfor %}
+    <div style="clear:left; text-align:center; padding-top:5px;"><input type="submit" value="Profili Düzenle" /></div>
+</form>
 {% endblock %}
