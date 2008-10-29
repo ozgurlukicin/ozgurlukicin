@@ -151,6 +151,10 @@
     padding-bottom: 8px;
     margin-top: 10px;
 }
+.cart_item .cart_item_info {
+    width: 105px;
+    float: right;
+}
 .cart_item .count {
     width: 30px;
     font-size: 20px;
