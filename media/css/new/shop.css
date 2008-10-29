@@ -75,9 +75,12 @@
     border-bottom: 1px #EAEAEA solid;
 }
 .product_info .description {
-    width: 200px;
-    height: 280px;
+    width: 175px;
+    height: 200px;
     float: right;
+    border-left: 1px #EAEAEA solid;
+    margin-top: 35px;
+    padding-left: 16px;
 }
 .product_big_image {
     float: left;
@@ -126,6 +129,7 @@
 .product_info .description h2 {
     font-size: 15px;
     font-weight: bold;
+    margin-bottom: 10px;
 }
 .product {
     float: left;
