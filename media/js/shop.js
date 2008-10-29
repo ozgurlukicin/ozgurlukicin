@@ -8,7 +8,8 @@ function addToCart() {
     $.post("/dukkan/sepet/ekle/", { product_id: current_product, quantity: $('#quantity').val(), csrfmiddlewaretoken: $('#csrfmiddlewaretoken').val() },
             function(data) {
                 if (data=='OK') {
-                    $.get('/dukkan/sepet/', function(data) { $('#cart').html(data); } );
+                    /* ie wants different urls */
+                    $.get('/dukkan/sepet/?' + Math.round(Math.random() * 99999999), function(data) { $('#cart').html(data); } );
                 }
             });
     toggleBuyPopup();
@@ -17,7 +18,7 @@ function remove(item_id) {
     $.post("/dukkan/sepet/cikar/", { csrfmiddlewaretoken: $('#csrfmiddlewaretoken').val(), item_id: item_id },
             function(data) {
                 if (data=='OK') {
-                    $.get('/dukkan/sepet/', function(data) { $('#cart').html(data); } );
+                    $.get('/dukkan/sepet/?' + Math.round(Math.random() * 99999999), function(data) { $('#cart').html(data); } );
                 }
             });
 }
