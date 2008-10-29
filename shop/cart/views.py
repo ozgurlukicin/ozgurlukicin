@@ -56,11 +56,91 @@ def remove_item_from_cart(request):
         return HttpResponseRedirect("/dukkan/")
 
 def get_cart_html(cart):
-    cart_html = ''
+    cart_html = '<form method="POST" action="https://www.tish-o.com.tr/tubitak_gobuy.asp">'
+    counter = 0
     for item in cart.items.all():
-        cart_html += '<div class="cart_item"><div class="count">%d</div><div class="cart_item_info"><div class="cart_product">%s</div><div class="type">%s</div><div class="remove_button"><a href="#" onclick="remove(%s)"><img src="/media/img/new/button_remove_cart_item.png" alt="Sepetten Çıkar" /></a></div></div></div>' % (item.quantity, item.product.parent.name, item.product.name, item.id)
-    if cart.items.count():
-        cart_html += '<div class="buy_cart"><a href="/dukkan/sepet/satinal/"><img src="/media/img/new/shop/button_buy.png" alt="Sepettekileri Satın Al" /></a></div>'
+        counter += 1
+        dict = {
+                    "counter": counter,
+                    "quantity": item.quantity,
+                    "type": item.product.name,
+                    "id": item.id,
+                    "description": item.product.description,
+                    "serial": item.product.serial,
+                }
+        if item.product.parent:
+            dict["price"] = item.product.parent.price
+            dict["name"] = item.product.parent.name
+        else:
+            dict["price"] = item.product.price
+            dict["name"] = item.product.name
+        cart_html += """
+<div class="cart_item">
+    <div class="count">%(quantity)s</div>
+    <div class="cart_item_info">
+        <div class="cart_product">%(name)s</div>
+        <div class="type">%(type)s</div>
+        <div class="remove_button">
+            <a href="#" onclick="remove(%(id)s)"><img src="/media/img/new/button_remove_cart_item.png" alt="Sepetten Çıkar" /></a>
+        </div>
+    </div>
+    <input type="hidden" name="price_%(counter)s" value="%(price)s" />
+    <input type="hidden" name="count_%(counter)s" value="%(quantity)s" />
+    <input type="hidden" name="productname_%(counter)s" value="%(name)s" />
+    <input type="hidden" name="strorder_tubitak_%(counter)s" value="%(description)s" />
+    <input type="hidden" name="product_id_%(counter)s" value="%(serial)s" />
+</div>
+        """ % dict
+    if counter > 0:
+        user = cart.user
+        shopProfile = get_object_or_404(ShopProfile, user=user)
+        dict = {
+            "productcount": counter,
+            "name": user.first_name,
+            "lastname": user.last_name,
+            "email": user.email,
+            "telephone": shopProfile.phone,
+            "telephonegsm": shopProfile.cellphone,
+            "address": shopProfile.address,
+            "postcode": shopProfile.postcode,
+            "ilce": shopProfile.town,
+            "city": shopProfile.get_city_display(),
+            "country": "Türkiye",
+            "taxname": shopProfile.billing_firstname,
+            "taxlastname": shopProfile.billing_lastname,
+            "taxadress": shopProfile.billing_address,
+            "taxpostcode": shopProfile.billing_postcode,
+            "taxilce": shopProfile.billing_town,
+            "taxcity": shopProfile.get_billing_city_display(),
+            "taxcountry": "Türkiye",
+            "taxvergidairesi": shopProfile.billing_office,
+            "taxvergino": shopProfile.billing_no,
+            "tckimlikno": shopProfile.tcno,
+        }
+        cart_html += """
+<input type="hidden" name="productcount" value="%(productcount)s" />
+<input type="hidden" name="name" value="%(name)s" />
+<input type="hidden" name="lastname" value="%(lastname)s" />
+<input type="hidden" name="email" value="%(email)s" />
+<input type="hidden" name="telephone" value="%(telephone)s" />
+<input type="hidden" name="telephonegsm" value="%(telephonegsm)s" />
+<input type="hidden" name="address" value="%(address)s" />
+<input type="hidden" name="postcode" value="%(postcode)s" />
+<input type="hidden" name="ilce" value="%(ilce)s" />
+<input type="hidden" name="city" value="%(city)s" />
+<input type="hidden" name="country" value="%(country)s" />
+<input type="hidden" name="taxname" value="%(taxname)s" />
+<input type="hidden" name="taxadress" value="%(taxadress)s" />
+<input type="hidden" name="taxpostcode" value="%(taxpostcode)s" />
+<input type="hidden" name="taxilce" value="%(taxilce)s" />
+<input type="hidden" name="taxcity" value="%(taxcity)s" />
+<input type="hidden" name="taxcountry" value="%(taxcountry)s" />
+<input type="hidden" name="taxvergidairesi" value="%(taxvergidairesi)s" />
+<input type="hidden" name="taxvergino" value="%(taxvergino)s" />
+<input type="hidden" name="tckimlikno" value="%(tckimlikno)s" />
+""" % dict
+        cart_html += '<div class="buy_cart"><input type="image" value="Satın Al" src="/media/img/new/shop/button_buy.png" /></div>'
+    cart_html += '</form>'
     return cart_html
 
 @login_required
