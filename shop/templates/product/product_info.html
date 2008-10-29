@@ -9,6 +9,7 @@
         <h2>{{ product.name }}</h2>
         <span>{{ product.description|safe }}</span>
         </div>
+        <div class="kdv">KDV dahil</div>
         {% if product.have_child %}
         <div class="buttons">
             {% for child in product.child.all %}
