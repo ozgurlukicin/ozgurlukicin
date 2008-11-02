@@ -21,7 +21,10 @@ def recurse_for_children(current_node, parent_node, active_cat, show_empty=True)
         attrs = {'href': current_node.get_absolute_url()}
         if current_node == active_cat:
             attrs["class"] = "current"
-        link = SubElement(temp_parent, 'a', attrs)
+        if current_node.parent:
+             link = SubElement(temp_parent, 'a', attrs)
+        else:
+             link = SubElement(temp_parent, 'p', {})
         link.text = current_node.name
 
         if child_count > 0:
