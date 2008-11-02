@@ -4,10 +4,12 @@
     {% if not products %}
         Bu kategoride herhangi bir ürün bulunmamaktadır.
     {% endif %}
+    <div id="product_list">
     {% for product in products %}
-    <div class="product">
-        <a href="{{ product.get_absolute_url }}"><img src="{{ product.images.all.0.picture.url }}" /></a><br />
-        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+    <div class="product_item rightborder">
+        <div class="photo"><a href="{{ product.get_absolute_url }}"><img src="{{ product.images.all.0.picture.url }}" /></a></div>
+        <div class="button"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></div>
     </div>
     {% endfor %}
+    </div>
 {% endblock %}
