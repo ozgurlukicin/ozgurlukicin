@@ -19,7 +19,7 @@ def idea_list():
     html = ''
     for idea in ideas:
         description = truncatewords_html(idea.description, 20)
-        html += '<div class="leftcolumn_content"><p class="title"><a href="%s">%s</a></p>%s</div>' % (idea.get_absolute_url(), idea.title, description)
+        html += '<div class="idea"><p class="title"><a href="%s">%s</a></p><p class="description">%s</p></div>' % (idea.get_absolute_url(), idea.title, description)
     return html
 
 @register.simple_tag

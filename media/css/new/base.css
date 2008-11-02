@@ -203,3 +203,6 @@ span.bullet {
 span.bold {
     font-weight: bold;
 }
+.brainstorm { background-color: #E7E7E7 }
+.brainstorm p, .brainstorm h2 { margin: 4px }
+.brainstorm .idea { margin-bottom: 4px }
