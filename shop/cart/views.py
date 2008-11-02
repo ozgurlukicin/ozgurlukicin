@@ -117,6 +117,10 @@ def get_cart_html(cart):
             "taxvergino": shopProfile.billing_no,
             "tckimlikno": shopProfile.tcno,
         }
+        if not shopProfile.postcode: dict["postcode"] = ""
+        if not shopProfile.billing_postcode: dict["taxpostcode"] = ""
+        if not shopProfile.billing_office: dict["taxvergidairesi"] = ""
+        if not shopProfile.billing_no: dict["taxvergino"] = ""
         cart_html += """
 <input type="hidden" name="productcount" value="%(productcount)s" />
 <input type="hidden" name="name" value="%(name)s" />
