@@ -68,3 +68,15 @@ div.topbar div.navigation {
 div.topbar div.notice {
     float: right;
 }
+
+span.tagMatches {
+    margin-left: 10px;
+}
+
+span.tagMatches span {
+    padding: 2px;
+    margin-right: 4px;
+    background-color: #2A8ED5;
+    color: #fff;
+    cursor: pointer;
+}

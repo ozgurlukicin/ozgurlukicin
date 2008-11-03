@@ -390,7 +390,7 @@ def new_topic(request, forum_slug):
             topic.save()
 
             # add tags
-            for tag in form.cleaned_data['tags']:
+            for tag in form.cleaned_data['tags'].split():
                 t=Tag.objects.get(name=tag)
                 topic.tags.add(t)
 
@@ -415,6 +415,7 @@ def new_topic(request, forum_slug):
             return HttpResponseRedirect(post.get_absolute_url())
     else:
         form = TopicForm(auto_id=True)
+        tags = Tag.objects.all()
 
     if request.user.has_perm("forum.can_change_abusereport"):
         abuse_count = AbuseReport.objects.count()
