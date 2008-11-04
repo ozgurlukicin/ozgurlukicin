@@ -7,7 +7,7 @@
 
 from django.contrib import admin
 
-from oi.forum.models import Forum, Category
+from oi.forum.models import Forum, Category, Topic, Post
 
 class ForumAdmin(admin.ModelAdmin):
     list_display = ('category', 'name')
@@ -19,5 +19,18 @@ class CategoryAdmin(admin.ModelAdmin):
     ordering = ['-name']
     search_fields = ['name']
 
+
+class TopicAdmin(admin.ModelAdmin):
+    list_display = ("forum", "title")
+    ordering = ["-title"]
+    search_fields = ["title"]
+
+class PostAdmin(admin.ModelAdmin):
+    list_display = ("id", "topic", "author")
+    ordering = ["-id"]
+    search_fields = ["text"]
+
 admin.site.register(Forum, ForumAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Topic, TopicAdmin)
+admin.site.register(Post, PostAdmin)
