@@ -71,7 +71,7 @@ news_dict = {
              'paginate_by': NEWS_PER_PAGE,
              'template_object_name': 'news',
              'extra_context': {
-                 'seminar': Seminar.objects.filter(status=True).order_by('-start_date'),
+                 'seminar': Seminar.objects.filter(status=True).order_by('start_date'),
                  }
             }
 
