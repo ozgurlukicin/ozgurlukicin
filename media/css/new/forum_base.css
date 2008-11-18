@@ -63,6 +63,7 @@ div.topbar a.bold {
     font-weight: bold;
 }
 div.topbar div.navigation {
+    width: 620px;
     float: left;
 }
 div.topbar div.notice {
