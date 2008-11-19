@@ -4,6 +4,23 @@
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 <script type="text/javascript" src="/media/js/home.js"></script>
 {% endblock %}
+{% block leftcolumn %}
+    <div class="sidebarcolumn leftcolumn">
+    <div class="leftcolumn_content">
+    <h2>Pardus Etkinlikleri</h2>
+    <ul>
+        {% for sem in seminar %}
+        <li{% if not forloop.last %} style="border-bottom:1px solid #EAEAEA;padding-bottom:5px;margin-bottom:5px;"{% endif %}>
+        <div><span class="bold">{{ sem.start_date|date:"d F Y H.i" }}{% if sem.end_date %} - {{ sem.end_date|date:"d F Y H.i" }}{% endif %}</span></div>
+            <div>{{ sem.description }}</div>
+            <div><span class="bold">Yer:</span> <a href="{{ sem.get_absolute_url }}" target="_blank">{{ sem.place.name }}</a></div>
+            <div><span class="bold">Konuşmacılar:</span> {% for att in sem.attender.all %}{% if forloop.last %}{% if att.user %}<a href="{{ att.user.get_profile.get_absolute_url }}">{% endif %}{{ att.name }}{% if att.user %}</a>{% endif %}{% else %}{% if att.user %}<a href="{{ att.user.get_profile.get_absolute_url }}">{% endif %}{{ att.name }}{% if att.user %}</a>{% endif %}, {% endif %}{% endfor %}</div>
+        </li>
+        {% endfor %}
+    </ul>
+    </div>
+    </div>
+{% endblock %}
 {% block content %}
     {% for news in news %}
     <div id="news_{{ forloop.counter }}" class="news_container{% if forloop.first %} active"{% else %}" style="display: none;"{% endif %}>
