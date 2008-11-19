@@ -58,7 +58,7 @@ PROFILE_EDIT_URL = '/kullanici/duzenle/'
 # Feedjack Settings for resizing images
 FEEDJACK_RESIZE_IMAGE = True
 FEEDJACK_MAX_IMAGE_Y = False
-FEEDJACK_MAX_IMAGE_X = 550
+FEEDJACK_MAX_IMAGE_X = 610
 FEEDJACK_UPLOAD_DIR = "%s/media/feedjack" % DOCUMENT_ROOT
 FEEDJACK_UPLOAD_URL = "%s/media/feedjack" % WEB_URL
 
