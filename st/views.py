@@ -20,6 +20,7 @@ from oi.st.models import News, Package, Game, HowTo, FS, PardusVersion, PardusMi
 from oi.st.tags import Tag
 from oi.st.wrappers import render_response
 from oi.flatpages.models import FlatPage
+from oi.seminar.models import Seminar
 
 #for comments
 from django.contrib.auth.decorators import login_required
@@ -36,6 +37,7 @@ def home(request):
     packages = Package.objects.filter(status=True).order_by('-update')[:PACKAGES_IN_HOMEPAGE]
     games = Game.objects.filter(status=True).order_by('-update')[:GAMES_IN_HOMEPAGE]
     howtos = HowTo.objects.filter(status=True).order_by('-update')[:HOWTOS_IN_HOMEPAGE]
+    seminar = Seminar.objects.filter(status=True).order_by('start_date')
     return render_response(request, 'home.html', locals())
 
 def fs_detail(request, slug):
