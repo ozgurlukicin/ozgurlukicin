@@ -22,7 +22,7 @@
             <a href="{{ idea.category.get_absolute_url }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine
             {% if idea.related_to %}<a href="/yenifikir/listele/ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak{% endif %} gönderildi. 
         </div>
-        <div class="idea_content">{{ idea.description|safe }}</div>
+        <div class="idea_content">{{ idea.description|linebreaksbr }}</div>
         <div class="idea_comments">
             <img alt="Yorum Yap" src="/media/img/new/icon_comment.png" />
             <a href="{{ idea.topic.get_latest_post_url }}" title="Yorumlar">
