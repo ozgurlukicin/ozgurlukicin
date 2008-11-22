@@ -57,7 +57,7 @@
 .post_message_text {
     min-height: 250px;
 }
-hr {
+.post_message_content hr {
     border: 0px;
     background-color: #EAEAEA;
     color: #EAEAEA;
@@ -66,8 +66,8 @@ hr {
     margin-top: 17px;
     margin-bottom: 17px;
 }
-li { margin-left: 20px; }
-p {
+.post_message_content li { margin-left: 20px; }
+.post_message_content p {
     display: block;
     padding-top: 10px;
     padding-bottom: 10px;
