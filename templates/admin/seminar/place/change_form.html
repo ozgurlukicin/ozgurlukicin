@@ -19,7 +19,7 @@ function load() {
 
         if ((lng.value != 0) || (ltd.value != 0)) {
             center = new GLatLng(ltd.value, lng.value);
-            heightLevel = 13;
+            heightLevel = 9;
         }
         map.setCenter(center, heightLevel);
         map.addControl(new GSmallMapControl());

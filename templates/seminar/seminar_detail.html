@@ -15,13 +15,13 @@
 
                 // initialize user location
                 var center = new GLatLng(39, 35);
-                var heightLevel = 7;
+                var heightLevel = 9;
                 var lng = {{ object.place.longitude }};
                 var ltd = {{ object.place.latitude }};
 
                 if ((lng != 0) || (ltd != 0)) {
                     center = new GLatLng(ltd, lng);
-                    heightLevel = 9;
+                    heightLevel = 13;
                 }
                 map.setCenter(center, heightLevel);
                 map.addControl(new GSmallMapControl());
