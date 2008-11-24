@@ -13,13 +13,13 @@ function load() {
 
         // initialize user location
         var center = new GLatLng(39, 35);
-        var heightLevel = 5;
+        var heightLevel = 9;
         var lng = document.getElementById("id_longitude");
         var ltd = document.getElementById("id_latitude");
 
         if ((lng.value != 0) || (ltd.value != 0)) {
             center = new GLatLng(ltd.value, lng.value);
-            heightLevel = 9;
+            heightLevel = 13;
         }
         map.setCenter(center, heightLevel);
         map.addControl(new GSmallMapControl());
