@@ -11,6 +11,7 @@ div.summary_container div.column {
 }
 div.summary_container div.first {
     margin-right: 9px;
+    display: inline;
 }
 div.summary_container div.column img {
     max-width: 153px;
@@ -47,6 +48,7 @@ div.news_container {
 div.news_container img {
     float: left;
     margin-right: 15px;
+    display: inline;
 }
 div.news_container div.column {
     float: left;
