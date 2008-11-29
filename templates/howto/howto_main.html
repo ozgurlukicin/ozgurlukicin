@@ -10,7 +10,7 @@
 <div class="summary_container">
 {% for howto in howto_list %}
     <div class="column first">
-         <img src="{{ howto.image.file.name|thumbnail:"153x200" }}" alt="{{ howto.image.get_alt_string }}" /><br />
+         <img src="{{ howto.image.file.name|thumbnail:"150x200" }}" alt="{{ howto.image.get_alt_string }}" /><br />
         <img src="/media/img/new/image_bottom.png" alt="gölge" />
         <div class="info"><span class="bold">{{ howto.update|date:"d M" }}</span> {{ howto.update|date:"Y" }} <span class="bold">/</span> <a href="{{ howto.topic.get_latest_post_url }}"><span class="bold">{{ howto.topic.posts|add:"-1" }}</span> Yorum</a></div>
     </div>
