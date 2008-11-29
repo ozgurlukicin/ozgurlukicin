@@ -10,7 +10,8 @@ div.summary_container div.column {
     float: left;
 }
 div.summary_container div.first {
-    margin-right: 9px;
+    margin-right: 9px !important;
+    margin-right: 4px; /*ie6*/
     display: inline;
 }
 div.summary_container div.column img {
