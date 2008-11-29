@@ -61,6 +61,7 @@ div#footer {
     margin-left: 10px;
     font-size: 11px;
     font-family: "Arial";
+    display: inline;
 }
 div#footer a {
     color: #fff;
