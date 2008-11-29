@@ -10,7 +10,7 @@ color: #009FE0;
 }
 img {
     border: 0px;
-    behavior: url(/media/css/iepngfix.htc);
+    behavior: url(/media/css/new/iepngfix.htc);
 }
 body {
     background-color: #EAEAEA;
