@@ -36,7 +36,7 @@ class Attender(models.Model):
         verbose_name_plural = "Konuşmacılar"
 
 class Seminar(models.Model):
-    description = models.CharField('Seminer tanımı', max_length = 64, blank = False, unique = True)
+    description = models.CharField('Seminer tanımı', max_length = 64, blank = False)
     place = models.ForeignKey(Place, verbose_name="Yer")
     attender = models.ManyToManyField(Attender, verbose_name="Katılımcılar")
     start_date = models.DateTimeField('Başlangıç', blank=False)
