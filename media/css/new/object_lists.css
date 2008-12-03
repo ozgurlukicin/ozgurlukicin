@@ -7,6 +7,7 @@ div.summary_container {
 div.summary_container div.column {
     width: 153px;
     height: 200px;
+    overflow: hidden;
     float: left;
 }
 div.summary_container div.first {
