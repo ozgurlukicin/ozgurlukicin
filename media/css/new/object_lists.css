@@ -14,7 +14,7 @@ div.summary_container div.first {
     display: inline;
 }
 div.summary_container div.column img {
-    max-width: 153px;
+    width: 150px;
 }
 div.summary_container div.column div.title { margin-bottom: 5px; }
 div.summary_container div.column div.title a {
