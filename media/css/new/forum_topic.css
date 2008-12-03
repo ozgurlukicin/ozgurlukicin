@@ -3,6 +3,7 @@
     margin-top: 1px;
     padding-top: 3px;
     overflow: hidden;
+    clear: left;
 }
 .post_profile {
     width: 159px;
@@ -12,6 +13,7 @@
     font-size: 11px;
     font-family: "Georgia";
     float: left;
+    display: inline;
 }
 .post_profile .author {
     font-size: 14px;
@@ -98,6 +100,7 @@ div.post_message_tags {
     margin-top: 10px;
     overflow: hidden;
     font-size: 11px;
+    clear: left;
 }
 .topic_news_area img {
     width: 90px;

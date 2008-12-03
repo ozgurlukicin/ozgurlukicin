@@ -53,6 +53,7 @@ div.forum_list div.item div {
 .forum_list .item .icon {
     margin-top: 10px;
     margin-left: 10px;
+    display: inline;
     width: 35px;
 }
 .forum_list .item .title, .forum_list .item .lastpost, .forum_list .item .topic_title {

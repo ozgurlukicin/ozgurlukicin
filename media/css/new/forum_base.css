@@ -5,6 +5,7 @@ div#content {
     margin-right: 4px;
     border-right: 1px #EAEAEA solid;
     float: left;
+    display: inline;
 }
 div#sidebar {
     width: 153px;
