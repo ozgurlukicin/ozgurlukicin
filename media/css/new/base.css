@@ -16,20 +16,24 @@ body {
     background-color: #EAEAEA;
 }
 div#header {
-    width: 983px;
+    width: 993px;
     height: 72px;
     margin-left: auto;
     margin-right: auto;
 }
 div#header #logo {
     position: relative;
+    z-index: 1;
     top: 35px;
-    left: 14px;
-    float: left;
+    left: 19px;
+    margin-bottom: -7px;
 }
 div#header #header_img {
     position: relative;
-    left: 307px;
+    z-index: 1;
+    top: -35px;
+    margin-bottom: -235px;
+    float: right;
 }
 div#page {
     margin-left: auto;
