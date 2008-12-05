@@ -26,6 +26,7 @@ div#header #logo {
     z-index: 1;
     top: 35px;
     left: 19px;
+    width: 313px;
     margin-bottom: -7px;
 }
 div#header #header_img {
