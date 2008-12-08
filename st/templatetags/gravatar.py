@@ -25,7 +25,7 @@ GRAVATAR_DEFAULT_IMAGE_HASH = "e2deb22899972ac721b862f9c8e73ef1"
 
 # the path cache files are stored.
 CACHE_PATH = "%s/tmp" % settings.DOCUMENT_ROOT
-# cache suffix, for look&feel thingy :) I don't the way when only hashes are listen when I look at tmp dir :P
+# cache suffix, for look&feel thingy :) I don't the way when only hashes are listed when I look at tmp dir :P
 CACHE_SUFFIX = "gravatar"
 # Our cache is valid for 1.5 hours
 CACHE_TIMEOUT = 5400
