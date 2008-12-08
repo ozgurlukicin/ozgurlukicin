@@ -80,7 +80,7 @@ class Gravatar:
         # have we checked the image for user already?
         if not self.is_cached():
             try:
-                connection = urlopen(self.gravatar_image_url, timeout=GRAVATAR_SERVER_TIMEOUT)
+                connection = urlopen(gravatar_image_url, timeout=GRAVATAR_SERVER_TIMEOUT)
                 image = connection.read()
                 connection.close()
 
