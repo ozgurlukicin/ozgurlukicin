@@ -42,7 +42,6 @@ class Gravatar:
     """
     def __init__(self):
         self.userObject = None
-        self.image_size = None
         # holds user's email hash as md5, used by cache mechanism
         self.email_hash = None
         self.cache_file = None
@@ -76,10 +75,8 @@ class Gravatar:
         else:
             return False
 
-    # It's like a constructor. We will mainly fill "userObject" and "image_size" variables for the use of CACHE functions
+    # It's like a constructor.
     def get_gravatar_image(self, userObject, image_size=100):
-        self.userObject = userObject
-        self.image_size = image_size
         self.email_hash = md5.md5(userObject.email).hexdigest()
         self.cache_file = "%s/%s-%s" % (CACHE_PATH, CACHE_SUFFIX, self.email_hash)
         self.gravatar_image_url = "%s/%s?s=%s" % (GRAVATAR_URL, self.email_hash, image_size)
@@ -94,14 +91,14 @@ class Gravatar:
                 # if it's default image, write 0 to cache file
                 if md5.md5(image).hexdigest() == GRAVATAR_DEFAULT_IMAGE_HASH:
                     self.create_cache("0")
-                    return self.userObject.get_profile().avatar.file.url
+                    return userObject.get_profile().avatar.file.url
                 else:
                     self.create_cache("1")
                     return self.gravatar_image_url
             except URLGrabError:
                 # gravatar connection error
                 self.create_cache("0")
-                return self.userObject.get_profile().avatar.file.url
+                return userObject.get_profile().avatar.file.url
         else:
             # if our cache is expired, delete the file and recall this function.
             if self.is_cache_expired():
@@ -113,7 +110,7 @@ class Gravatar:
             if self.has_gravatar_account():
                 return self.gravatar_image_url
             else:
-                return self.userObject.get_profile().avatar.file.url
+                return userObject.get_profile().avatar.file.url
 
 gravatar = Gravatar()
 register = Library()
