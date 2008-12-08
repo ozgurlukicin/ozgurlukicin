@@ -4,6 +4,7 @@ Requires:
  BeautifulSoup
  ElementTree
  DBMS (MySQL recommended)
+ Urlgrabber (For gravatar support)
 
 Note About TinyMCE:
 * We're using a patch to hide unneeded tabs in advimage and advlink plugins. It can be found under patches directory.
