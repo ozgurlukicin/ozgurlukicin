@@ -41,11 +41,7 @@ class Gravatar:
     # 6- Finally, check the file's creation date. If 1 hour lasted, delete it. This means our cache machanism last for 1 hour :)
     """
     def __init__(self):
-        self.userObject = None
-        # holds user's email hash as md5, used by cache mechanism
-        self.email_hash = None
         self.cache_file = None
-        self.gravatar_image_url = None
 
     # creates cache and writes the data in it.
     def create_cache(self, data):
@@ -77,9 +73,9 @@ class Gravatar:
 
     # It's like a constructor.
     def get_gravatar_image(self, userObject, image_size=100):
-        self.email_hash = md5.md5(userObject.email).hexdigest()
-        self.cache_file = "%s/%s-%s" % (CACHE_PATH, CACHE_SUFFIX, self.email_hash)
-        self.gravatar_image_url = "%s/%s?s=%s" % (GRAVATAR_URL, self.email_hash, image_size)
+        email_hash = md5.md5(userObject.email).hexdigest()
+        self.cache_file = "%s/%s-%s" % (CACHE_PATH, CACHE_SUFFIX, email_hash)
+        gravatar_image_url = "%s/%s?s=%s" % (GRAVATAR_URL, email_hash, image_size)
 
         # have we checked the image for user already?
         if not self.is_cached():
@@ -94,7 +90,7 @@ class Gravatar:
                     return userObject.get_profile().avatar.file.url
                 else:
                     self.create_cache("1")
-                    return self.gravatar_image_url
+                    return gravatar_image_url
             except URLGrabError:
                 # gravatar connection error
                 self.create_cache("0")
@@ -108,7 +104,7 @@ class Gravatar:
             # if it's cached and the user has gravatar account, return gravatar URL.
             # if not, you know what to do :)
             if self.has_gravatar_account():
-                return self.gravatar_image_url
+                return gravatar_image_url
             else:
                 return userObject.get_profile().avatar.file.url
 
