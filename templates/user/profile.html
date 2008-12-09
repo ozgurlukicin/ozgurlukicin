@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load gravatar %}
 
 {% block title %}Kullanıcı profili: {{ info }} - {% endblock %}
 
@@ -42,7 +43,7 @@
     <div id="user_profile_left">
         <h3>{{ info }}</h3>
         <div class="img_container">
-            <img src="{{ info.get_profile.avatar.file.url }}" alt="Avatar" />
+            <img src="{% get_gravatar_image info 100 %}" alt="Avatar" />
         </div>
         {% ifequal request.user.id info.id %}<a href="/kullanici/duzenle/"><img src="/media/img/new/profile_edit.png" alt="Bilgilerimi Düzenle"></a>{% endifequal %}
     </div>
