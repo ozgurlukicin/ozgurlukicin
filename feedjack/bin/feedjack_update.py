@@ -148,7 +148,6 @@ def get_entry_data(entry, feed, options):
                 if im.size[0] != resize_x or im.size[1] != resize_y:
                     res = im.resize((resize_x, resize_y), Image.ANTIALIAS)
                     res.save("%s/%s" % (settings.FEEDJACK_UPLOAD_DIR, image_name))
-                    os.unlink(tmp)
 
                     # generate a site url that will be showed in feedjack index and replace it with original
                     resized_image_url = "%s/%s" % (settings.FEEDJACK_UPLOAD_URL, image_name)
@@ -169,6 +168,10 @@ def get_entry_data(entry, feed, options):
                     if options.verbose:
                         print '  RESIZE: Skipped, there is no change\n'
 
+                try:
+                    os.unlink(tmp)
+                except:
+                    pass
             # endpatch
 
     if entry.has_key('modified_parsed'):
