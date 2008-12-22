@@ -10,6 +10,6 @@ from django.contrib import admin
 from oi.upload.models import Image
 
 class ImageAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ['file']
 
 admin.site.register(Image, ImageAdmin)
