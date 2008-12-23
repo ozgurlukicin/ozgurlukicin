@@ -14,11 +14,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
+from django.views.generic.list_detail import object_list
 
 from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_URL, WEB_URL, PROFILE_EDIT_URL, WEB_URL
 
 # Model object for followed topics
-from oi.forum.models import WatchList
+from oi.forum.models import WatchList, AbuseReport, Post
+from oi.forum.settings import ALL_POSTS_PER_PAGE
 
 from oi.profile.models import Avatar, Profile, LostPassword
 from oi.profile.forms import RegisterForm, ProfileEditForm, LostPasswordForm, ChangePasswordForm, ResetPasswordForm
@@ -44,6 +46,21 @@ def followed_topics(request):
         else:
             watch_list = WatchList.objects.filter(user__username=request.user.username)
             return render_response(request, 'user/followed_topics.html', {'watch_list': watch_list})
+
+@login_required
+def posts_for_user(request, name):
+    user = get_object_or_404(User, username=name)
+    posts = Post.objects.filter(hidden=False, author=user).order_by('-created')
+    abuse_count = 0
+    if request.user.has_perm("forum.can_change_abusereport"):
+        abuse_count = AbuseReport.objects.count()
+
+    return object_list(request, posts,
+            template_name = 'forum/post_list_for_user.html',
+            template_object_name = 'post',
+            extra_context = {'abuse_count': abuse_count, 'author': user},
+            paginate_by = ALL_POSTS_PER_PAGE,
+            )
 
 @login_required
 def user_dashboard(request):

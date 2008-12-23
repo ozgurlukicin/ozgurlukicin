@@ -8,7 +8,7 @@
 {% endblock %}
 {% block content %}
 <div class="topbar">
-    <div class="navigation"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="/forum/son-iletiler/">Son İletiler</a></div>
+    <div class="navigation"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; {% block post_owner %}<a href="/forum/son-iletiler/">Son İletiler</a>{% endblock %}</div>
 </div>
 <div class="post_list">
 {% for post in post_list %}
