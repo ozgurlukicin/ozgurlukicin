@@ -7,8 +7,13 @@
     font-size:16px;
     margin-bottom: 10px;
 }
-#user_profile_left img {
+.img_container img {
+    margin: 30px;
+}
+#user_profile_left a {
     margin:30px;
+    text-align: center;
+    display: block;
 }
 #user_profile_left .img_container {
     border: 1px #ccc solid;

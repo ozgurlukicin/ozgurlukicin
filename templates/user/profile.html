@@ -46,6 +46,9 @@
             <img src="{% get_gravatar_image info 100 %}" alt="Avatar" />
         </div>
         {% ifequal request.user.id info.id %}<a href="/kullanici/duzenle/"><img src="/media/img/new/profile_edit.png" alt="Bilgilerimi Düzenle"></a>{% endifequal %}
+        <div class="profile_info">
+            <a href="/kullanici/iletiler/{{ info }}/">Forumdaki İletileri</a>
+        </div>
     </div>
     <div id="user_profile_right">
             <h3>Kişisel Bilgiler</h3>
@@ -85,9 +88,6 @@
             </div>
             <div class="profile_info">
                 <div class="profile_titles">ICQ </div><div class="profile_value">: {{ info.get_profile.icq }}</div>
-            </div>
-            <div class="profile_info">
-                <a href="/kullanici/iletiler/{{ info }}/">Forumda gönderdiği iletiler</a>
             </div>
 
             {% if info.get_profile.bio %}
