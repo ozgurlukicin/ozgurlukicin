@@ -70,7 +70,7 @@
 }
 .stats .text .labels, .stats .text .spacers { font-weight: bold; }
 .stats .text .spacers { margin: 0px 4px; }
-.stats .text .values { width: 220px; }
+.stats .userlist { clear: left }
 .stats .left { width: 360px; }
 .icons_help { margin: 10px 0px 0px 20px; }
 .icons_help div {

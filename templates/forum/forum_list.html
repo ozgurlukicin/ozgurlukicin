@@ -83,10 +83,11 @@
             <div class="values">{{ currentdate|date:"d F Y H:i" }}<br />{{ usercount }}<br />{{ posts }}</div>
         </div>
         <div class="text right">
-            <div class="labels">Toplam Kategori Sayısı<br />Toplam Başlık Sayısı<br />Bugün Doğanlar</div>
-            <div class="spacers">:<br />:<br />:</div>
-            <div class="values">{{ forums }}<br />{{ topics }}<br />{% if not births %}Yok{% else %}{% for profile in births %}<a href="{{ profile.get_absolute_url }}">{{ profile.user }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}</div>
+            <div class="labels">Toplam Kategori Sayısı<br />Toplam Başlık Sayısı</div>
+            <div class="spacers">:<br />:</div>
+            <div class="values">{{ forums }}<br />{{ topics }}</div>
         </div>
+        <div class="userlist"><span class="bold">Bugün Doğan Üyelerimiz :</span> {% if not births %}Yok{% else %}{% for profile in births %}<a href="{{ profile.get_absolute_url }}">{{ profile.user }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}</div>
     </div>
     <div class="titlebar"><h2>Forumdaki simgelerin anlamları</h2></div>
     <div class="icons_help">
