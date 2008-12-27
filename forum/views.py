@@ -33,6 +33,7 @@ from oi.st.wrappers import send_mail_with_header
 from oi.settings import WEB_URL, DEFAULT_FROM_EMAIL
 # import bbcode renderer for quotation
 from oi.forum.postmarkup import render_bbcode
+from oi.profile.models import Profile
 
 def main(request):
     lastvisit_control(request)
@@ -70,6 +71,8 @@ def main(request):
     latest_posts = Topic.objects.filter(topic_latest_post__hidden=False).order_by("topic_latest_post").distinct()[:5]
     if request.user.has_perm("forum.can_change_abusereport"):
         abuse_count = AbuseReport.objects.count()
+
+    births = Profile.objects.filter(show_birthday=True, user__is_active=True, birthday__month=currentdate.month, birthday__day=currentdate.day)
 
     return render_response(request, 'forum/forum_list.html', locals())
 
