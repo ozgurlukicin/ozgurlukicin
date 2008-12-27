@@ -28,6 +28,7 @@ urlpatterns = patterns('',
 
     #(r'^okunmamis_konular/$', 'oi.forum.views.unread_topics'),
     (r'^son-iletiler/$', 'oi.forum.views.latest_posts'),
+    (r'^son-guncellenen-konular/$', 'oi.forum.views.latest_topics'),
     (r'^tumunu-okunmus-say/$', 'oi.forum.views.mark_all_as_read'),
     (r'^raporla/(?P<post_id>\d+)/$', 'oi.forum.views.report_abuse'),
     (r'^raporlanmis-iletiler/$', 'oi.forum.views.list_abuse'),

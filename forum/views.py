@@ -114,6 +114,37 @@ def latest_posts(request):
             paginate_by = ALL_POSTS_PER_PAGE,
             )
 
+def latest_topics(request):
+    lastvisit_control(request)
+    topics = Topic.objects.filter(topic_latest_post__hidden=False).order_by("topic_latest_post").distinct()[:100]
+
+    if request.user.is_authenticated():
+        for topic in topics:
+            if topic.topic_latest_post.edited > request.session['last_visit'] and\
+                    not topic.id in request.session["read_topic_dict"]:
+                topic.is_read = False
+            elif topic.topic_latest_post.edited < request.session['last_visit'] or\
+                    not topic.id in request.session["read_topic_dict"] or\
+                    request.session["read_topic_dict"][topic.id] > topic.topic_latest_post.edited:
+                topic.is_read = True
+            else:
+                topic.is_read = False
+    abuse_count = 0
+    if request.user.has_perm("forum.can_change_abusereport"):
+        abuse_count = AbuseReport.objects.count()
+
+    forum = Forum(
+            name = "Son Güncellenen Konular",
+            slug = "son-guncellenen-konular",
+            )
+
+    return customgeneric.object_list(request, topics,
+                       template_name = 'forum/forum_detail.html',
+                       template_object_name = 'topic',
+                       extra_context = {'forum': forum, 'abuse_count': abuse_count},
+                       paginate_by = TOPICS_PER_PAGE,
+                       allow_empty = True)
+
 @login_required
 def unread_topics(request):
     lastvisit_control(request)
