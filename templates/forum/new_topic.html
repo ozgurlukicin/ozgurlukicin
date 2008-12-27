@@ -7,7 +7,7 @@
 {% block content %}
 {% if user.is_authenticated %}
 <div class="forum_address">
-    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; Yeni Konu</div>
+    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; Yeni Başlık</div>
 </div>
 {% if form.errors %}
 <font color="red">Başlık açılamadı, lütfen aşağıdaki hataları düzeltin</font><br />
@@ -23,7 +23,7 @@
     {% if field.errors %}<dd class="myerrors" style="font-color: red">{{ field.errors }}</dd>{% endif %}
 {% endfor %}
 </dl>
-<input type="submit" value="Konu Aç">
+<input type="submit" value="Başlık Aç">
 </form>
 {% else %}
 <p>Başlık açmak için oturum açmanız gerekiyor.</p>

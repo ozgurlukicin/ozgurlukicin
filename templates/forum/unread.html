@@ -3,11 +3,11 @@
 {% block content %}
 
 <div class="forum_address" >
-    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; Okunmamış Konular ({{ topic_count }})</div>
+    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; Okunmamış Başlıklar ({{ topic_count }})</div>
 </div>
 <div id="forum_header">
     <div id="topic_icon">&nbsp;</div>
-    <div id="topic_title">Konu</div>
+    <div id="topic_title">Başlık</div>
     <div id="topic_posts">İletiler</div>
     <div id="topic_views">Görüntüleme</div>
     <div id="topic_lastpost">Son İleti</div>
@@ -20,7 +20,7 @@
     {% else %}
 
     <div class="topics_item" {% if topic.hidden %}style="opacity: 0.5;"{% endif %}>
-        <div class="topics_item_icon"><a href="{{ topic.get_absolute_url }}">{% if topic.locked and not topic.sticky %}<img src="/media/dijital/img/forum/topic_unread_locked.png" border="0" alt="Kilitli Konu" title="Kilitli Konu" />{% endif %}{% if topic.sticky and not topic.locked %}<img src="/media/dijital/img/forum/topic_sticky.png" border="0" alt="Sabit Konu" title="Sabit Konu" />{% endif %}{% if not topic.locked and not topic.sticky %}<img src="/media/dijital/img/forum/topic_unread.png" border="0" alt="Okunmamış Konu" title="Okunmamış Konu" />{% endif %}{% if topic.locked and topic.sticky %}<img src="/media/dijital/img/forum/topic_sticky_locked.png" border="0" alt="Sabit ve Kilitli Konu" title="Sabit ve Kilitli Konu" />{% endif %}</a></div>
+        <div class="topics_item_icon"><a href="{{ topic.get_absolute_url }}">{% if topic.locked and not topic.sticky %}<img src="/media/dijital/img/forum/topic_unread_locked.png" border="0" alt="Kilitli Başlık" title="Kilitli Başlık" />{% endif %}{% if topic.sticky and not topic.locked %}<img src="/media/dijital/img/forum/topic_sticky.png" border="0" alt="Sabit Başlık" title="Sabit Başlık" />{% endif %}{% if not topic.locked and not topic.sticky %}<img src="/media/dijital/img/forum/topic_unread.png" border="0" alt="Okunmamış Başlık" title="Okunmamış Başlık" />{% endif %}{% if topic.locked and topic.sticky %}<img src="/media/dijital/img/forum/topic_sticky_locked.png" border="0" alt="Sabit ve Kilitli Başlık" title="Sabit ve Kilitli Başlık" />{% endif %}</a></div>
         <div class="topics_item_title"><a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a></div>
         <div class="topics_item_posts">{{ topic.posts }}</div>
         <div class="topics_item_views">{{ topic.views }}</div>

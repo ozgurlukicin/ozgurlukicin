@@ -13,7 +13,7 @@
     <div class="icon">&nbsp;</div>
     <div class="title">Forum</div>
     <div class="spacer">&nbsp;</div>
-    <div class="topics">Konular</div>
+    <div class="topics">Başlıklar</div>
     <div class="spacer">&nbsp;</div>
     <div class="posts">İletiler</div>
     <div class="spacer">&nbsp;</div>
@@ -83,7 +83,7 @@
             <div class="values">{{ currentdate|date:"d F Y H:i" }}<br />{{ usercount }}<br />{{ posts }}</div>
         </div>
         <div class="text right">
-            <div class="labels">Toplam Kategori Sayısı<br />Toplam Konu Sayısı<br />Bugün Doğanlar</div>
+            <div class="labels">Toplam Kategori Sayısı<br />Toplam Başlık Sayısı<br />Bugün Doğanlar</div>
             <div class="spacers">:<br />:<br />:</div>
             <div class="values">{{ forums }}<br />{{ topics }}<br />{% if not births %}Yok{% else %}{% for profile in births %}<a href="{{ profile.get_absolute_url }}">{{ profile.user }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}</div>
         </div>
@@ -91,17 +91,17 @@
     <div class="titlebar"><h2>Forumdaki simgelerin anlamları</h2></div>
     <div class="icons_help">
         <div>
-            <img src="/media/dijital/img/forum/topic.png" alt="Okunmuş Konu" title="Okunmuş Konu" /> Okunmuş forum ya da konu<br />
-            <img src="/media/dijital/img/forum/topic_unread.png" alt="Okunmamış Konu" title="Okunmamış Konu" /> Yeni ileti var<br />
+            <img src="/media/dijital/img/forum/topic.png" alt="Okunmuş Başlık" title="Okunmuş Başlık" /> Okunmuş forum ya da konu<br />
+            <img src="/media/dijital/img/forum/topic_unread.png" alt="Okunmamış Başlık" title="Okunmamış Başlık" /> Yeni ileti var<br />
         </div>
         <div>
-            <img src="/media/dijital/img/forum/topic_locked.png" alt="Kilitli Konu" title="Kilitli Konu" /> Kilitli (yeni iletilere kapalı)<br />
-            <img src="/media/dijital/img/forum/topic_unread_locked.png" alt="Kilitli ve Okunmamış Konu" title="Kilitli ve Okunmamış Konu" 
+            <img src="/media/dijital/img/forum/topic_locked.png" alt="Kilitli Başlık" title="Kilitli Başlık" /> Kilitli (yeni iletilere kapalı)<br />
+            <img src="/media/dijital/img/forum/topic_unread_locked.png" alt="Kilitli ve Okunmamış Başlık" title="Kilitli ve Okunmamış Başlık" 
     /> Kilitli ve okunmamış ileti var<br />
         </div>
         <div>
-            <img src="/media/dijital/img/forum/topic_sticky.png" alt="Sabit Konu" title="Sabit Konu" /> Sabit (her zaman üstte kalır)<br />
-            <img src="/media/dijital/img/forum/topic_sticky_locked.png" alt="Kilitli ve Sabit Konu" title="Kilitli ve Sabit Konu" /> Kilitli ve sabit<br />
+            <img src="/media/dijital/img/forum/topic_sticky.png" alt="Sabit Başlık" title="Sabit Başlık" /> Sabit (her zaman üstte kalır)<br />
+            <img src="/media/dijital/img/forum/topic_sticky_locked.png" alt="Kilitli ve Sabit Başlık" title="Kilitli ve Sabit Başlık" /> Kilitli ve sabit<br />
         </div>
     </div>
 </div>
