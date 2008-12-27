@@ -1,5 +1,6 @@
 {% extends "forum/forum_base.html" %}
 {% load library %}
+{% load gravatar %}
 {% block extrahead %}
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
@@ -20,7 +21,7 @@
 <div class="post_base" {% if post.hidden %}style="opacity: 0.5;"{% endif %}>
     <div class="post_profile">
         <span style="font-weight: bold; font-size: 14px;">{{ post.author }}</span>{% if post.author.is_staff %}<span><br />Forum Yöneticisi{% endif %}</span><br/><br/>
-        <img src="{{ post.author.get_profile.avatar.file.url }}" alt="avatar" /><br/>
+        <div class="avatar"><img src="{% avatar_url post.author.email 100 "g" post.author.get_profile.avatar.file.url %}" alt="avatar" width="100" height="100"></div>
         {% if perms.forum.can_see_post_ip %}({{ post.ip }})<br/>{% endif %}
         Kayıt Tarihi: {{ post.author.date_joined|date:"d-m-Y" }}<br/>
         <a href="/kullanici/profil/{{ post.author }}"><img src="/media/dijital/img/forum/bilgi.jpg" alt="bilgi" border="0" /></a><br/>
