@@ -27,3 +27,9 @@
     padding: 10px;
     overflow: auto;
 }
+.post .message li {
+    margin-left: 20px;
+}
+.post .message img {
+    max-width: 760px;
+}
