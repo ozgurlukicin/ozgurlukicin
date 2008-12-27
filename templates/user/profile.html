@@ -47,7 +47,7 @@
         </div>
         {% ifequal request.user.id info.id %}<a href="/kullanici/duzenle/"><img src="/media/img/new/profile_edit.png" alt="Bilgilerimi Düzenle"></a>{% endifequal %}
         <div class="profile_info">
-            <a href="/kullanici/iletiler/{{ info }}/">Forumdaki İletileri</a>
+            {% if has_sent_messages %}<a href="/kullanici/iletiler/{{ info }}/">Forumdaki İletileri</a>{% else %}<a>Forumda İletisi Yoktur</a>{% endif %}
         </div>
     </div>
     <div id="user_profile_right">

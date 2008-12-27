@@ -139,6 +139,7 @@ def user_profile_edit(request):
 @login_required
 def user_profile(request, name):
     info = get_object_or_404(User, username=name)
+    has_sent_messages = info.post_set.filter(hidden=False).count() > 0
     apikey = googleMapsApiKey
     if not info.is_active:
         del info
