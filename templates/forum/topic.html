@@ -56,8 +56,7 @@
     <div class="post_profile">
         <div class="author">{{ post.author }}</div>
         <div class="author_description">{{ post.author.get_profile.title }}</div>
-        <!-- gets gravatar image if user has gravatar image for his email, else it returns the avatar chosen inside website -->
-        <div class="avatar"><img src="{% get_gravatar_image post.author 100 %}" alt="avatar" width="100" height="100"></div>
+        <div class="avatar"><img src="{% avatar_url post.author.email 100 "g" post.author.get_profile.avatar.file.url %}" alt="avatar" width="100" height="100"></div>
         {% if perms.forum.can_see_post_ip %}<div class="ip">({{ post.ip }})</div>{% endif %}
         <div class="register_date">Kayıt Tarihi:<br />{{ post.author.date_joined|date:"d-m-Y" }}</div>
         <div class="button"><a href="/kullanici/profil/{{ post.author }}"><img src="/media/img/new/button_info.png" alt="bilgi" /></a></div>
