@@ -70,7 +70,8 @@
                 <br /><span class="error">{{ field.errors }}</span>
             {% endif %}
             {% ifequal field.name "avatar" %}
-                <br /><img name="avatarImage" src="{{user.get_profile.avatar.file.url}}" alt="avatar" />
+            <br /><img name="avatarImage" src="{{user.get_profile.avatar.file.url}}" alt="avatar" />
+            <br />E-posta adresinize kayıtlı bir gravatarınız varsa bunun yerine kullanılacaktır. Gravatar hakkında bilgi için <a href="/haber/profillerinizi-senlendirin/">buraya</a> tıklayın.
             {% endifequal %}
         </div>
         <div class="help_text">{% if field.help_text %}{{ field.help_text }}{% endif %}</div>
