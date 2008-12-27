@@ -2,15 +2,6 @@
 {% block extrahead %}
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
-<script language="javascript" type="text/javascript" src="/media/js/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="/media/js/tag_suggest.js"></script>
-<script language="javascript" type="text/javascript">
-$(function () {
-    $('#tags').tagSuggest({
-        tags: [{% for tag in tags %}"{{tag}}",{% endfor %}]
-    });
-});
-</script>
 {% endblock %}
 
 {% block content %}

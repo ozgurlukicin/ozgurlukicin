@@ -6,7 +6,6 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from datetime import date
-from string import split
 
 from django import forms
 from oi.forum.models import AbuseReport, Topic, Forum, WatchList
@@ -21,11 +20,21 @@ from oi.st.forms import XssField
 class TopicForm(forms.Form):
     title = forms.CharField(label='Başlık', required=True, max_length=100, widget=forms.TextInput(attrs={'size': '40',}))
     text = XssField(label='İleti', required=True, widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
-    tags = forms.CharField(label='Etiket', required=True, widget=forms.TextInput(attrs={'size': '60',}))
+    tags = forms.MultipleChoiceField(label='Etiket', required=True,help_text="CTRL basılı tutarak birden fazla etiket seçebilirsiniz!(En çok 5)")
 
     def __init__(self,*args,**kwargs):
         """ It is for topic thing they are dynamic"""
         super(TopicForm, self).__init__(*args, **kwargs)
+        self.fields['tags'].choices=[(tag.name, tag.name) for tag in Tag.objects.all()]
+
+    def clean_tags(self):
+        field_data = self.cleaned_data['tags']
+
+        # we don't want users to choose more than 5 tags
+        if len(field_data) > 5:
+            raise forms.ValidationError("En fazla 5 etiket seçebilirsiniz. Lütfen açtığınız başlığa uygun etiket seçiniz.")
+
+        return field_data
 
 class PostForm(forms.Form):
     text = XssField(label='İleti', required=True, widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
