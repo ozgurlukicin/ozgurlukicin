@@ -159,6 +159,9 @@ urlpatterns = patterns('',
     #Ideas
     (r'^yenifikir/', include('oi.ideas.urls')),
 
+    #Webalizer
+    url(r'^admin/webalizer/', include('webalizer.urls')),
+
     #Django
     (r'^$', 'oi.st.views.home'),
     (r'^admin/upload/image/tinymce/$', 'oi.upload.views.image_upload'),
