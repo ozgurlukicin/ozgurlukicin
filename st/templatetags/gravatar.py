@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from hashlib import md5
+from md5 import md5
 
 from django import template
 from django.template import Library
