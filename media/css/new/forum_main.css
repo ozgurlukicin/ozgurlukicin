@@ -70,7 +70,10 @@
 }
 .stats .text .labels, .stats .text .spacers { font-weight: bold; }
 .stats .text .spacers { margin: 0px 4px; }
-.stats .userlist { clear: left }
+.stats .userlist {
+    clear: left;
+    margin: 1px 0 0 50px;
+}
 .stats .left { width: 360px; }
 .icons_help { margin: 10px 0px 0px 20px; }
 .icons_help div {
