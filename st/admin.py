@@ -24,7 +24,7 @@ class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'status', 'update')
     list_filter = ('update',)
     ordering = ('-id',)
-    search_fields = ('title', 'text', 'tags')
+    search_fields = ('title', 'text', 'tags__name')
     prepopulated_fields = {'slug': ("title",)}
 
     class Media:
