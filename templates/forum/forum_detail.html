@@ -10,7 +10,7 @@
 {% block content %}
 <div class="topbar">
     <div class="navigation"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}" class="bold">{{ forum.name }}</a></div>
-    {% ifnotequal forum.slug "son-guncellenen-konular" %}<div class="notice"><a href="/forum/{{ forum.slug }}/new/"><img src="/media/img/new/forum/button_new_topic.png" alt="Yeni Başlık" /></a></div>{% endifnotequal %}
+    {% ifnotequal forum.slug "guncellenen-konular" %}<div class="notice"><a href="/forum/{{ forum.slug }}/new/"><img src="/media/img/new/forum/button_new_topic.png" alt="Yeni Başlık" /></a></div>{% endifnotequal %}
 </div>
 <div class="headerbar">
     <div class="icon">&nbsp;</div>

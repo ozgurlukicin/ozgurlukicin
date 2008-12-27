@@ -134,8 +134,8 @@ def latest_topics(request):
         abuse_count = AbuseReport.objects.count()
 
     forum = Forum(
-            name = "Son Güncellenen Konular",
-            slug = "son-guncellenen-konular",
+            name = "Güncellenen Konular",
+            slug = "guncellenen-konular",
             )
 
     return customgeneric.object_list(request, topics,
