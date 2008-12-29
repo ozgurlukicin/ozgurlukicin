@@ -5,6 +5,7 @@ Legend
 +: done
 *: not done
 /: second review
+-: needs to be removed
 
 These are templates to be marked
 --------------------------------
@@ -123,7 +124,7 @@ These are templates to be marked
 *   |   |-- themeitem_detail.html
 *   |   |-- themeitem_list.html
 *   |   `-- upload.html
-*   |-- test.html
+-   |-- test.html
 *   |-- user
 *   |   |-- change_password.html
 *   |   |-- change_password_done.html
@@ -138,9 +139,9 @@ These are templates to be marked
 *   |   |-- profile.html
 *   |   |-- profile_edit.html
 *   |   |-- register.html
-*   |   |-- register_done.html
-*   |   `-- user_list.html
-*   |-- ust_menu.html
-*   |-- ust_menu_ayrinti.html
-*   |-- video.html
-*   `-- videobox.html
++   |   |-- register_done.html
+-   |   `-- user_list.html
+-   |-- ust_menu.html
+-   |-- ust_menu_ayrinti.html
++   |-- video.html
++   `-- videobox.html
