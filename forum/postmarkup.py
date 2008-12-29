@@ -1,4 +1,4 @@
-# -*- coding: latin-1 -*-
+# -*- coding: UTF-8 -*-
 
 """
 Post Markup
