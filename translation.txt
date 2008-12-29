@@ -11,13 +11,13 @@ These are templates to be marked
 
 *   |-- 404.html
 *   |-- 500.html
-*   |-- admin
++   |-- admin
 +   |   |-- base.html
 +   |   `-- seminar
 +   |       `-- place
 +   |           `-- change_form.html
 *   |-- advancedsearch.html
-*   |-- base.html
++   |-- base.html
 *   |-- bug
 *   |   |-- bug_add.html
 *   |   |-- bug_detail.html
@@ -48,7 +48,7 @@ These are templates to be marked
 *   |   `-- file_upload_success.html
 *   |-- flatpages
 *   |   `-- default.html
-*   |-- footer.html
++   |-- footer.html
 *   |-- forum
 *   |   |-- abuse_list.html
 *   |   |-- change_poll.html
