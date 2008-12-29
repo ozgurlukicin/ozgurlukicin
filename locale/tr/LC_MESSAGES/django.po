@@ -1,19 +1,21 @@
+# translation of django.po to
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Uğur Çetin <ugur.jnmbk@gmail.com>, 2008.
+# Akın Ömeroğlu <akin@omeroglu.net>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-12-29 16:21+0200\n"
-"PO-Revision-Date: 2008-12-29 16:21+0200\n"
-"Last-Translator: Uğur Çetin <ugur.jnmbk@gmail.com>\n"
-"Language-Team: Turkish <kde-i18n-doc@lists.kde.org>\n"
+"PO-Revision-Date: 2008-12-29 16:37+0200\n"
+"Last-Translator: Akın Ömeroğlu <akin@omeroglu.net>\n"
+"Language-Team:  <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 0.3\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: feedjack/admin.py:31
@@ -28,7 +30,7 @@ msgstr ""
 #: templates/base.html.py:14 templates/base.html:15 templates/base.html.py:16
 #: templates/base.html:17 templates/base.html.py:18
 msgid "Özgürlükİçin RSS"
-msgstr ""
+msgstr "Özgürlükİçin RSS"
 
 #: templates/base.html:11
 #, fuzzy
@@ -37,47 +39,47 @@ msgstr "Anasayfa"
 
 #: templates/base.html:12 templates/home.html:33
 msgid "News"
-msgstr ""
+msgstr "Haberler"
 
 #: templates/base.html:13 templates/home.html:54
 msgid "Howto"
-msgstr ""
+msgstr "Nasıl"
 
 #: templates/base.html:14
 msgid "First Steps"
-msgstr ""
+msgstr "İlk Adımlar"
 
 #: templates/base.html:15
 msgid "Packages"
-msgstr ""
+msgstr "Paketler"
 
 #: templates/base.html:16
 msgid "Games"
-msgstr ""
+msgstr "Oyunlar"
 
 #: templates/base.html:17
 msgid "Planet"
-msgstr ""
+msgstr "Gezegen"
 
 #: templates/base.html:18
 msgid "Forum"
-msgstr ""
+msgstr "Forum"
 
 #: templates/base.html:43
 msgid "Brainstorm"
-msgstr ""
+msgstr "Beyin"
 
 #: templates/base.html:55
 msgid "User Box"
-msgstr ""
+msgstr "Kullanıcı Kutusu"
 
 #: templates/base.html:61
 msgid "Login"
-msgstr ""
+msgstr "Giriş"
 
 #: templates/base.html:63
 msgid "Register"
-msgstr ""
+msgstr "Kayıt Ol"
 
 #: templates/base.html:63
 #, fuzzy
@@ -99,35 +101,35 @@ msgstr ""
 
 #: templates/base.html:70 templates/base.html.py:73
 msgid "Search"
-msgstr ""
+msgstr "Arama"
 
 #: templates/base.html:74
 msgid "Advanced<br />Search"
-msgstr ""
+msgstr "Gelişmiş<br />Arama"
 
 #: templates/home.html:11
 msgid "Pardus Events"
-msgstr ""
+msgstr "Pardus Etkinlikleri"
 
 #: templates/home.html:17
 msgid "Place:"
-msgstr ""
+msgstr "Yer:"
 
 #: templates/home.html:18
 msgid "Speakers:"
-msgstr ""
+msgstr "Konuşmacılar:"
 
 #: templates/home.html:44
 msgid "Previous"
-msgstr ""
+msgstr "Önceki"
 
 #: templates/home.html:44
 msgid "Next"
-msgstr ""
+msgstr "Sonraki"
 
 #: templates/home.html:80
 msgid "Game"
-msgstr ""
+msgstr "Oyun"
 
 #: templates/admin/base.html:25
 msgid "Welcome,"
