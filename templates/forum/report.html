@@ -4,10 +4,11 @@
 {% block extrahead %}
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
+<style type="text/css" media="screen">@import url('/media/css/new/forum_topic.css');</style>
 {% endblock %}
 {% block content %}
-<div class="forum_address">
-    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; İleti Raporla</div>
+<div class="topbar">
+    <div class="navigation"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <span class="bold">İleti Raporla</span></div>
 </div>
 <form action="" method="post">
 {% for field in form %}
@@ -18,18 +19,19 @@
 {% endfor %}
 <input type="submit" value="Raporla" />
 </form>
-<div class="post_base" {% if post.hidden %}style="opacity: 0.5;"{% endif %}>
+<div class="post_base">
     <div class="post_profile">
-        <span style="font-weight: bold; font-size: 14px;">{{ post.author }}</span>{% if post.author.is_staff %}<span><br />Forum Yöneticisi{% endif %}</span><br/><br/>
+        <div class="author">{{ post.author }}</div>
+        {% if post.author.is_staff %}<div class="author_description">Forum Yöneticisi</div>{% endif %}
         <div class="avatar"><img src="{% avatar_url post.author.email 100 "g" post.author.get_profile.avatar.file.url %}" alt="avatar" width="100" height="100"></div>
-        {% if perms.forum.can_see_post_ip %}({{ post.ip }})<br/>{% endif %}
-        Kayıt Tarihi: {{ post.author.date_joined|date:"d-m-Y" }}<br/>
-        <a href="/kullanici/profil/{{ post.author }}"><img src="/media/dijital/img/forum/bilgi.jpg" alt="bilgi" border="0" /></a><br/>
+        {% if perms.forum.can_see_post_ip %}<div class="ip">({{ post.ip }})</div>{% endif %}
+        <div class="register_date">Kayıt Tarihi:<br />{{ post.author.date_joined|date:"d-m-Y" }}</div>
+        <div class="button"><a href="/kullanici/profil/{{ post.author }}"><img src="/media/img/new/button_info.png" alt="bilgi" /></a></div>
     </div>
     <div class="post_message">
         <div class="post_message_top">
             <div class="post_message_top_icon">
-                <a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="ileti adresi" border="0" /></a>
+                <a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="ileti adresi" /></a>
             </div>
             <div class="post_message_top_date">
                 {{ post.created|date:"d-m-Y H:i" }}
