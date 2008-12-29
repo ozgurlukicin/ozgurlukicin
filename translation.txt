@@ -1,0 +1,146 @@
+Translatable string marking status
+
+Legend
+------
++: done
+*: not done
+/: second review
+
+These are templates to be marked
+--------------------------------
+
+*   |-- 404.html
+*   |-- 500.html
+*   |-- admin
++   |   |-- base.html
++   |   `-- seminar
++   |       `-- place
++   |           `-- change_form.html
+*   |-- advancedsearch.html
+*   |-- base.html
+*   |-- bug
+*   |   |-- bug_add.html
+*   |   |-- bug_detail.html
+*   |   `-- bug_main.html
+*   |-- comments
+*   |   |-- comment_display.html
+*   |   |-- comment_form.html
+*   |   |-- comment_form_fields.html
+*   |   |-- comment_preview.html
+*   |   `-- trackback_display.html
+*   |-- db_error.html
+*   |-- delete.html
+*   |-- download
+*   |   |-- download.html
+*   |   `-- download_relnotes.html
+*   |-- feedjack
+*   |   |-- default
+*   |   |   `-- post_list.html
+*   |   |-- foaf.xml
+*   |   |-- oi
+*   |   |   `-- post_list.html
+*   |   `-- opml.xml
+*   |-- feeds
+*   |   |-- feed_description.html
+*   |   `-- feed_title.html
+*   |-- file_upload
+*   |   |-- file_upload.html
+*   |   `-- file_upload_success.html
+*   |-- flatpages
+*   |   `-- default.html
+*   |-- footer.html
+*   |-- forum
+*   |   |-- abuse_list.html
+*   |   |-- change_poll.html
+*   |   |-- create_poll.html
+*   |   |-- feed_description.html
+*   |   |-- feed_title.html
+*   |   |-- forum_base.html
+*   |   |-- forum_detail.html
+*   |   |-- forum_done.html
+*   |   |-- forum_error.html
+*   |   |-- forum_footer.html
+*   |   |-- forum_header.html
+*   |   |-- forum_list.html
+*   |   |-- merge.html
+*   |   |-- move.html
+*   |   |-- new_topic.html
+*   |   |-- post_edit.html
+*   |   |-- post_list.html
+*   |   |-- post_list_for_user.html
+*   |   |-- reply.html
+*   |   |-- report.html
+*   |   |-- top_menu.html
+*   |   |-- topic.html
+*   |   `-- unread.html
+*   |-- fs
+*   |   |-- fs_detail.html
+*   |   |-- fs_main.html
+*   |   `-- fs_printable.html
+*   |-- game
+*   |   |-- game_detail.html
+*   |   |-- game_main.html
+*   |   `-- game_printable.html
+*   |-- header.html
++   |-- home.html
+*   |-- howto
+*   |   |-- howto_detail.html
+*   |   |-- howto_main.html
+*   |   `-- howto_printable.html
+*   |-- menu.html
+*   |-- news
+*   |   |-- news_detail.html
+*   |   |-- news_main.html
+*   |   `-- news_printable.html
+*   |-- package
+*   |   |-- package_detail.html
+*   |   |-- package_main.html
+*   |   `-- package_printable.html
+*   |-- paginator.html
+*   |-- petition
+*   |   |-- petitioner_list.html
+*   |   |-- sign.html
+*   |   `-- sign_done.html
+*   |-- printable.html
+*   |-- robots.txt
+*   |-- search.html
+*   |-- seminar
+*   |   |-- attender.html
+*   |   |-- place.html
+*   |   |-- seminar.html
+*   |   `-- seminar_detail.html
+*   |-- tag
+*   |   `-- tag_detail.html
+*   |-- tema
++   |   |-- base.html
+*   |   |-- eski_detail.html
+*   |   |-- feed_description.html
+*   |   |-- feed_title.html
+*   |   |-- kategori.html
+*   |   |-- message.html
+*   |   |-- themeitem_change.html
+*   |   |-- themeitem_create.html
+*   |   |-- themeitem_detail.html
+*   |   |-- themeitem_list.html
+*   |   `-- upload.html
+*   |-- test.html
+*   |-- user
+*   |   |-- change_password.html
+*   |   |-- change_password_done.html
+*   |   |-- confirm.html
+*   |   |-- dashboard.html
+*   |   |-- followed_topics.html
+*   |   |-- login.html
+*   |   |-- logout.html
+*   |   |-- lostpassword.html
+*   |   |-- lostpassword_done.html
+*   |   |-- password.html
+*   |   |-- profile.html
+*   |   |-- profile_edit.html
+*   |   |-- register.html
+*   |   |-- register_done.html
+*   |   `-- user_list.html
+*   |-- ust_menu.html
+*   |-- ust_menu_ayrinti.html
+*   |-- video.html
+*   `-- videobox.html
