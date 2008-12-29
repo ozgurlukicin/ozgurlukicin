@@ -28,7 +28,7 @@ These are templates to be marked
 *   |   |-- comment_form_fields.html
 *   |   |-- comment_preview.html
 *   |   `-- trackback_display.html
-*   |-- db_error.html
++   |-- db_error.html
 *   |-- delete.html
 *   |-- download
 *   |   |-- download.html
