@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-29 16:21+0200\n"
+"POT-Creation-Date: 2008-12-29 18:16+0200\n"
 "PO-Revision-Date: 2008-12-29 16:37+0200\n"
 "Last-Translator: Akın Ömeroğlu <akin@omeroglu.net>\n"
 "Language-Team:  <tr@li.org>\n"
@@ -32,12 +32,12 @@ msgstr ""
 msgid "Özgürlükİçin RSS"
 msgstr "Özgürlükİçin RSS"
 
-#: templates/base.html:11
+#: templates/base.html:11 templates/user/register_done.html:9
 #, fuzzy
 msgid "Homepage"
 msgstr "Anasayfa"
 
-#: templates/base.html:12 templates/home.html:33
+#: templates/base.html:12 templates/footer.html:14 templates/home.html:33
 msgid "News"
 msgstr "Haberler"
 
@@ -45,27 +45,27 @@ msgstr "Haberler"
 msgid "Howto"
 msgstr "Nasıl"
 
-#: templates/base.html:14
+#: templates/base.html:14 templates/footer.html:13
 msgid "First Steps"
 msgstr "İlk Adımlar"
 
-#: templates/base.html:15
+#: templates/base.html:15 templates/footer.html:13
 msgid "Packages"
 msgstr "Paketler"
 
-#: templates/base.html:16
+#: templates/base.html:16 templates/footer.html:13
 msgid "Games"
 msgstr "Oyunlar"
 
-#: templates/base.html:17
+#: templates/base.html:17 templates/footer.html:14
 msgid "Planet"
 msgstr "Gezegen"
 
-#: templates/base.html:18
+#: templates/base.html:18 templates/footer.html:15
 msgid "Forum"
 msgstr "Forum"
 
-#: templates/base.html:43
+#: templates/base.html:43 templates/footer.html:14
 msgid "Brainstorm"
 msgstr "Beyin"
 
@@ -107,6 +107,41 @@ msgstr "Arama"
 msgid "Advanced<br />Search"
 msgstr "Gelişmiş<br />Arama"
 
+#: templates/db_error.html:2
+msgid "Database Error"
+msgstr ""
+
+#: templates/db_error.html:8
+msgid "There is an error in our database"
+msgstr ""
+
+#: templates/footer.html:6
+msgid "About"
+msgstr ""
+
+#: templates/footer.html:7
+msgid "Follow"
+msgstr ""
+
+#: templates/footer.html:7
+msgid "Report Bug"
+msgstr ""
+
+#: templates/footer.html:10
+msgid ""
+"Pardus<a href=\"http://www.pardus.org.tr\" title=\"Pardus\"></a> logo is a "
+"registered trademark of <a href=\"http://uekae.tubitak.gov.tr\" title="
+"\"TÜBİTAK/UEKAE\">TÜBİTAK/UEKAE</a>."
+msgstr ""
+
+#: templates/footer.html:13
+msgid "Nasıl"
+msgstr ""
+
+#: templates/footer.html:14
+msgid "Themes"
+msgstr ""
+
 #: templates/home.html:11
 msgid "Pardus Events"
 msgstr "Pardus Etkinlikleri"
@@ -118,6 +153,13 @@ msgstr "Yer:"
 #: templates/home.html:18
 msgid "Speakers:"
 msgstr "Konuşmacılar:"
+
+#: templates/home.html:36 templates/home.html.py:51 templates/home.html:64
+#: templates/home.html.py:77
+#, python-format
+msgid "<span class=\"bold\">%(number_of_comments)s</span> Comment"
+msgid_plural "<span class=\"bold\">%(number_of_comments)s</span> Comments"
+msgstr[0] ""
 
 #: templates/home.html:44
 msgid "Previous"
@@ -240,7 +282,57 @@ msgstr ""
 msgid "Greetings"
 msgstr ""
 
+#: templates/user/profile_edit.html:2
+msgid "Edit Profile"
+msgstr ""
+
+#: templates/user/profile_edit.html:47
+msgid "Profile couldn't be updated, please fix the errors below"
+msgstr ""
+
+#: templates/user/profile_edit.html:52
+msgid "Your profile is updated successfully"
+msgstr ""
+
+#: templates/user/profile_edit.html:80
+msgid "Map"
+msgstr ""
+
+#: templates/user/profile_edit.html:81
+msgid "Edit"
+msgstr ""
+
+#: templates/user/profile_edit.html:82
+#, fuzzy
+msgid "Change Password"
+msgstr "Parola değiştir"
+
+#: templates/user/register.html:3
+#, fuzzy
+msgid "Registration"
+msgstr "Kayıt Ol"
+
+#: templates/user/register.html:10
+msgid ""
+"Your registration couldn't be completed, please fill the from completely"
+msgstr ""
+
+#: templates/user/register.html:13
+msgid ""
+"You are already logged in, click <a href=\"/\">here</a> to visit mainpage"
+msgstr ""
+
+#: templates/user/register_done.html:3
+msgid "Registration Done"
+msgstr ""
+
+#: templates/user/register_done.html:8
+#, python-format
+msgid ""
+"%(user)s</b>, you have successfully registered! Please\n"
+"activate your account by clicking the link sent to your e-mail address."
+msgstr ""
+
 #: webalizer/templates/webalizer/index.html:7
 msgid "settings.WEBALIZER_DIR is not configured"
 msgstr ""
-
