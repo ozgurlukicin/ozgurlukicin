@@ -1,30 +1,16 @@
 {% extends "base.html" %}
-
-{% block title %}Kayıt - {% endblock %}
-
+{% load i18n %}
+{% block title %}{% trans "Registration" %} - {% endblock %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 {% endblock %}
-
-{% block header_menu %}
-    {% include "header.html" %}
-{% endblock %}
-<br/>
-{% block ust_menu %}
-    {% include "ust_menu_ayrinti.html" %}
-{% endblock %}
-
-<br/>
-
 {% block content %}
 <div style="text-align: left">
     {% if form.errors %}
-    <font color="red">Üyelik işleminiz tamamlanamadı, lütfen formu eksiksiz doldurunuz<br /></font>
+    <font color="red">{% trans "Your registration couldn't be completed, please fill the from completely" %}<br /></font>
     {% endif %}
-
     {% if user.is_authenticated %}
-    <br />
-    Zaten giriş yapmışsınız, ana sayfaya gitmek için <a href="/">tıklayın</a>
+    {% trans 'You are already logged in, click <a href="/">here</a> to visit mainpage' %}
     {% else %}
     <form method="post" action=".">
         {% for field in form %}
@@ -34,8 +20,7 @@
         </dl>
         {% endfor %}
     <br />
-    <a href="/hakkinda/icerik-politikasi/" target="_blank">Özgürlükİçin İçerik Politikası</a> 'nı okudum ve<br /><br />
-    <center> <input type="button" value="Kabul Etmiyorum" onclick="javascript:window.location.href='/'" /> &nbsp; <input type="submit" value="Kabul Ediyorum" /> </center>
+    {% transblock %}I have read <a href="/hakkinda/icerik-politikasi/" target="_blank">Özgürlükİçin Content Policy</a> and<br /><br /><center> <input type="button" value="I Accept" onclick="javascript:window.location.href='/'" /> &nbsp; <input type="submit" value="I Decline" /></center>{% endtransblock %}
     </form>
     {% endif %}
 </div>

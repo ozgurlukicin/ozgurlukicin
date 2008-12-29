@@ -138,7 +138,7 @@ These are templates to be marked
 *   |   |-- password.html
 *   |   |-- profile.html
 *   |   |-- profile_edit.html
-*   |   |-- register.html
++   |   |-- register.html
 +   |   |-- register_done.html
 -   |   `-- user_list.html
 -   |-- ust_menu.html
