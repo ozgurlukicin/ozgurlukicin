@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-29 14:35+0200\n"
-"PO-Revision-Date: 2008-12-29 14:39+0200\n"
+"POT-Creation-Date: 2008-12-29 16:21+0200\n"
+"PO-Revision-Date: 2008-12-29 16:21+0200\n"
 "Last-Translator: Uğur Çetin <ugur.jnmbk@gmail.com>\n"
 "Language-Team: Turkish <kde-i18n-doc@lists.kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,115 @@ msgstr ""
 
 #: feedjack/admin.py:31
 msgid "Fields updated automatically by Feedjack"
+msgstr ""
+
+#: templates/base.html:7
+msgid "Özgürlük için..."
+msgstr ""
+
+#: templates/base.html:11 templates/base.html.py:12 templates/base.html:13
+#: templates/base.html.py:14 templates/base.html:15 templates/base.html.py:16
+#: templates/base.html:17 templates/base.html.py:18
+msgid "Özgürlükİçin RSS"
+msgstr ""
+
+#: templates/base.html:11
+#, fuzzy
+msgid "Homepage"
+msgstr "Anasayfa"
+
+#: templates/base.html:12 templates/home.html:33
+msgid "News"
+msgstr ""
+
+#: templates/base.html:13 templates/home.html:54
+msgid "Howto"
+msgstr ""
+
+#: templates/base.html:14
+msgid "First Steps"
+msgstr ""
+
+#: templates/base.html:15
+msgid "Packages"
+msgstr ""
+
+#: templates/base.html:16
+msgid "Games"
+msgstr ""
+
+#: templates/base.html:17
+msgid "Planet"
+msgstr ""
+
+#: templates/base.html:18
+msgid "Forum"
+msgstr ""
+
+#: templates/base.html:43
+msgid "Brainstorm"
+msgstr ""
+
+#: templates/base.html:55
+msgid "User Box"
+msgstr ""
+
+#: templates/base.html:61
+msgid "Login"
+msgstr ""
+
+#: templates/base.html:63
+msgid "Register"
+msgstr ""
+
+#: templates/base.html:63
+#, fuzzy
+msgid "Lost password"
+msgstr "Parola değiştir"
+
+#: templates/base.html:65
+#, python-format
+msgid "Hello %(username)s!"
+msgstr "Merhaba %(username)s!"
+
+#: templates/base.html:66
+#, python-format
+msgid ""
+"You can display your profile page by clicking <a href=\"%(profile_url)s"
+"\">here</a> or you can logout by clicking <a class=\"sari\" href=\"/"
+"kullanici/cikis/\">here</a>."
+msgstr ""
+
+#: templates/base.html:70 templates/base.html.py:73
+msgid "Search"
+msgstr ""
+
+#: templates/base.html:74
+msgid "Advanced<br />Search"
+msgstr ""
+
+#: templates/home.html:11
+msgid "Pardus Events"
+msgstr ""
+
+#: templates/home.html:17
+msgid "Place:"
+msgstr ""
+
+#: templates/home.html:18
+msgid "Speakers:"
+msgstr ""
+
+#: templates/home.html:44
+msgid "Previous"
+msgstr ""
+
+#: templates/home.html:44
+msgid "Next"
+msgstr ""
+
+#: templates/home.html:80
+msgid "Game"
 msgstr ""
 
 #: templates/admin/base.html:25
