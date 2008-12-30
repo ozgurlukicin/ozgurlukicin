@@ -126,8 +126,8 @@ These are templates to be marked
 *   |   `-- upload.html
 -   |-- test.html
 *   |-- user
-*   |   |-- change_password.html
-*   |   |-- change_password_done.html
++   |   |-- change_password.html
++   |   |-- change_password_done.html
 +   |   |-- confirm.html
 +   |   |-- dashboard.html
 +   |   |-- followed_topics.html
