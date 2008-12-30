@@ -110,8 +110,8 @@ These are templates to be marked
 *   |   |-- place.html
 *   |   |-- seminar.html
 *   |   `-- seminar_detail.html
-*   |-- tag
-*   |   `-- tag_detail.html
++   |-- tag
++   |   `-- tag_detail.html
 -   |-- tema
 -   |   |-- base.html
 -   |   |-- eski_detail.html
