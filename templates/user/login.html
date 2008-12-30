@@ -1,49 +1,33 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 {% endblock %}
-{% block title %}Kullanıcı Girişi - {% endblock %}
-
-{% block header_menu %}
-    {% include "header.html" %}
-{% endblock %}
-<br/>
-{% block ust_menu %}
-    {% include "ust_menu_ayrinti.html" %}
-{% endblock %}
-
-<br/>
-
-
+{% block title %}{% trans "User Login" %} - {% endblock %}
 {% block content %}
-
-<br />
-
 {% if not user.is_authenticated %}
-
 <div style="text-align: left; padding-left: 50px;">
 {% if form.has_errors %}
-    <p>Kullanıcı adınız ve parolanız uyuşmuyor, lütfen tekrar deneyin.</p>
+    <p>{% trans "Username or password doesn't match, please try again." %}</p>
 {% else %}
-    <p>Bu işlemi yapmak için yetkiniz yok. Eğer Özgürlükİçin.com'a üyeyseniz aşağıya kullanıcı adı ve parolanızı girin. Parolanızı bilmiyor ya da unuttuysanız <a href="/kullanici/kayip/">kayıp parola</a> bağlantısını izleyin. Eğer üye değilseniz <a href="/kullanici/kayit/">buradan</a> Özgürlükİçin.com'a üye olabilirsiniz.</p>
+    <p>{% blocktrans %}You don't have enough permissions to access this page. If you are already registered, enter your username and password below. If you have forgotton your password click <a href="/kullanici/kayip/">here</a>. If you're not registered click <a href="/kullanici/kayit/">here</a> to register.{% endblocktrans %}</p>
 {% endif %}
     <form method="post" action="/kullanici/giris/">
         <table><tbody>
         <tr>
-            <td width="30%"><label for="id_username">Kullanıcı adı</label></td>
+            <td width="30%"><label for="id_username">{% trans "Username" %}</label></td>
             <td>{{ form.username }}</td>
         </tr>
         <tr>
-            <td width="30%"><label for="id_password">Parola</label></td>
+            <td width="30%"><label for="id_password">{% trans "Password" %}</label></td>
             <td>{{ form.password }}</td>
         </tr>
         </tbody></table>
         <input type="hidden" name="next" value="{{ next }}" />
-        <input type="submit" value="Giriş" />
+        <input type="submit" value="{% trans "Login" %}" />
     </form>
 </div>
 {% else %}
-Zaten giriş yapmışsınız. Çıkış yapmak için <a href="/kullanici/cikis/">tıklayın</a> <br />
+{% blocktrans %}You're already logged in. Click <a href="/kullanici/cikis/">here</a> to logout{% endblocktrans %} <br />
 {% endif %}
-
 {% endblock %}

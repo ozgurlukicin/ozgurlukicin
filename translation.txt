@@ -131,8 +131,8 @@ These are templates to be marked
 *   |   |-- confirm.html
 *   |   |-- dashboard.html
 *   |   |-- followed_topics.html
-*   |   |-- login.html
-*   |   |-- logout.html
++   |   |-- login.html
++   |   |-- logout.html
 +   |   |-- lostpassword.html
 +   |   |-- lostpassword_done.html
 +   |   |-- password.html
