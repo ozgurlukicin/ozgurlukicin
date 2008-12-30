@@ -129,7 +129,7 @@ These are templates to be marked
 *   |   |-- change_password.html
 *   |   |-- change_password_done.html
 *   |   |-- confirm.html
-*   |   |-- dashboard.html
++   |   |-- dashboard.html
 +   |   |-- followed_topics.html
 +   |   |-- login.html
 +   |   |-- logout.html
