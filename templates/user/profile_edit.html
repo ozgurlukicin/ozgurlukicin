@@ -71,7 +71,7 @@
             {% endif %}
             {% ifequal field.name "avatar" %}
             <br /><img name="avatarImage" src="{{user.get_profile.avatar.file.url}}" alt="avatar" />
-            <br />{% blocktrans %}If you have a gravatar associated with your e-mail address, it will be displayed instead of this. For more information about gravatar click <a href="http://www.gravatar.com" target="blank">here</a>.{% endblocktrans %}
+            <br />{% blocktrans %}If you have a gravatar associated with your e-mail address, it will be displayed instead of this. For more information about gravatar click <a href="http://www.gravatar.com" target="_blank">here</a>.{% endblocktrans %}
             {% endifequal %}
         </div>
         <div class="help_text">{% if field.help_text %}{{ field.help_text }}{% endif %}</div>
