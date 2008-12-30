@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% load gravatar %}
+{% load i18n %}
 
-{% block title %}Kullanıcı profili: {{ info }} - {% endblock %}
+{% block title %}{% trans "User Profile" %}: {{ info }} - {% endblock %}
 
 {% block extrabody %} onload="load()" onunload="GUnload()"{% endblock %}
 
@@ -43,55 +44,55 @@
     <div id="user_profile_left">
         <h3>{{ info }}</h3>
         <div class="img_container">
-            <img src="{% avatar_url info.email 100 "g" info.get_profile.avatar.file.url %}" alt="Avatar" />
+            <img src="{% avatar_url info.email 100 "g" info.get_profile.avatar.file.url %}" alt="{% trans "Avatar" %}" />
         </div>
-        {% ifequal request.user.id info.id %}<a href="/kullanici/duzenle/"><img src="/media/img/new/profile_edit.png" alt="Bilgilerimi Düzenle"></a>{% endifequal %}
+        {% ifequal request.user.id info.id %}<a href="/kullanici/duzenle/"><img src="/media/img/new/profile_edit.png" alt="{% trans "Edit my profile" %}"></a>{% endifequal %}
         <div class="profile_info">
-            {% if has_sent_messages %}<a href="/kullanici/iletiler/{{ info }}/">Forumdaki İletileri</a>{% else %}<a>Forumda İletisi Yok</a>{% endif %}
+            {% if has_sent_messages %}<a href="/kullanici/iletiler/{{ info }}/">{% trans "Posts in Forum" %}</a>{% else %}<a>{% trans "No Posts in Forum" %}</a>{% endif %}
         </div>
     </div>
     <div id="user_profile_right">
             <h3>Kişisel Bilgiler</h3>
             <div class="profile_info">
-                <div class="profile_titles">Adı</div><div class="profile_value">: {{ info.first_name }}</div>
+                <div class="profile_titles">{% trans "Name" %}</div><div class="profile_value">: {{ info.first_name }}</div>
             </div>
             <div class="profile_info">
-                <div class="profile_titles">Soyadı </div><div class="profile_value">: {{ info.last_name }}</div>
+                <div class="profile_titles">{% trans "Surname" %} </div><div class="profile_value">: {{ info.last_name }}</div>
             </div>
             <div class="profile_info">
-                <div class="profile_titles">Şehir </div><div class="profile_value">: {{ info.get_profile.get_city_display }}</div>
+                <div class="profile_titles">{% trans "City" %} </div><div class="profile_value">: {{ info.get_profile.get_city_display }}</div>
             </div>
             {% if info.get_profile.show_birthday %}
             <div class="profile_info">
-                <div class="profile_titles">Doğum Tarihi </div><div class="profile_value">: {{ info.get_profile.birthday|date:"d F Y" }}</div>
+                <div class="profile_titles">{% trans "Birth Date" %} </div><div class="profile_value">: {{ info.get_profile.birthday|date:"d F Y" }}</div>
             </div>
             {% endif %}
             <div class="profile_info">
-                <div class="profile_titles">Kayıt Tarihi </div><div class="profile_value">: {{ info.date_joined|date:"d F Y" }}</div>
+                <div class="profile_titles">{% trans "Registration Date" %} </div><div class="profile_value">: {{ info.date_joined|date:"d F Y" }}</div>
             </div>
 
-            <h3>İletişim Bilgileri</h3>
+            <h3>{% trans "Contact Information" %}</h3>
 
             {% if info.get_profile.show_email %}
             <div class="profile_info">
-                <div class="profile_titles">E-posta </div><div class="profile_value">: <a href="mailto:{{ info.email }}">{{ info.email }}</a></div>
+                <div class="profile_titles">{% trans "E-mail" %} </div><div class="profile_value">: <a href="mailto:{{ info.email }}">{{ info.email }}</a></div>
             </div>
             {% endif %}
             <div class="profile_info">
-                <div class="profile_titles">Web </div><div class="profile_value">: <a href="{{ info.get_profile.homepage }}" target="_blank">{{ info.get_profile.homepage }}</a></div>
+                <div class="profile_titles">{% trans "Web Site" %} </div><div class="profile_value">: <a href="{{ info.get_profile.homepage }}" target="_blank">{{ info.get_profile.homepage }}</a></div>
             </div>
             <div class="profile_info">
-                <div class="profile_titles">Jabber </div><div class="profile_value">: {{ info.get_profile.jabber }}</div>
+                <div class="profile_titles">{% trans "Jabber" %} </div><div class="profile_value">: {{ info.get_profile.jabber }}</div>
             </div>
             <div class="profile_info">
-                <div class="profile_titles">MSN </div><div class="profile_value">: {{ info.get_profile.msn }}</div>
+                <div class="profile_titles">{% trans "MSN" %} </div><div class="profile_value">: {{ info.get_profile.msn }}</div>
             </div>
             <div class="profile_info">
-                <div class="profile_titles">ICQ </div><div class="profile_value">: {{ info.get_profile.icq }}</div>
+                <div class="profile_titles">{% trans "ICQ" %} </div><div class="profile_value">: {{ info.get_profile.icq }}</div>
             </div>
 
             {% if info.get_profile.bio %}
-            <h3>Hakkında</h3>
+            <h3>{% trans "About" %}</h3>
             <div id="profile_bio">{{ info.get_profile.bio|linebreaksbr }}</div>
             {% endif %}
             <div id="id_map" class="googlemap"></div>

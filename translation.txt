@@ -136,7 +136,7 @@ These are templates to be marked
 *   |   |-- lostpassword.html
 *   |   |-- lostpassword_done.html
 *   |   |-- password.html
-*   |   |-- profile.html
++   |   |-- profile.html
 +   |   |-- profile_edit.html
 +   |   |-- register.html
 +   |   |-- register_done.html
