@@ -57,6 +57,10 @@ def list(request, field="", filter_slug=""):
             s = Status.objects.get(name="Çözüldü")
             ideas = ideas.filter(status=s)
             page_title = "Çözüme kavuşmuş fikirler"
+        if filter_slug == "gonullu_araniyor":
+            s = Status.objects.get(name="Gönüllü Aranıyor")
+            ideas = ideas.filter(status=s)
+            page_title = "Gönüllü arayan fikirler"
     elif field == 'favori' and filter_slug == 'fikirler':
         page_title = "Favori fikirleriniz"
         try:
