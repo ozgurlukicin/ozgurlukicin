@@ -106,7 +106,6 @@ These are templates to be marked
 *   |-- robots.txt
 *   |-- search.html
 *   |-- seminar
-*   |   |-- attender.html
 *   |   |-- place.html
 *   |   |-- seminar.html
 *   |   `-- seminar_detail.html

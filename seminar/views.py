@@ -10,8 +10,5 @@ from django.shortcuts import get_object_or_404
 from oi.seminar.models import Place, Attender, Seminar
 from oi.st.wrappers import render_response
 
-def attender(request, slug):
-    return render_response(request, 'seminar/attender.html', locals())
-
 def place(request, slug):
     return render_response(request, 'seminar/place.html', locals())
