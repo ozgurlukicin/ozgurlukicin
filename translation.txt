@@ -133,8 +133,8 @@ These are templates to be marked
 *   |   |-- followed_topics.html
 *   |   |-- login.html
 *   |   |-- logout.html
-*   |   |-- lostpassword.html
-*   |   |-- lostpassword_done.html
++   |   |-- lostpassword.html
++   |   |-- lostpassword_done.html
 +   |   |-- password.html
 +   |   |-- profile.html
 +   |   |-- profile_edit.html
