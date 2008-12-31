@@ -102,8 +102,8 @@ These are templates to be marked
 *   |   |-- petitioner_list.html
 *   |   |-- sign.html
 *   |   `-- sign_done.html
-*   |-- printable.html
-*   |-- robots.txt
++   |-- printable.html
++   |-- robots.txt
 +   |-- search.html
 +   |-- seminar
 +   |   `-- seminar_detail.html
