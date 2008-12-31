@@ -97,11 +97,11 @@ These are templates to be marked
 *   |   |-- package_detail.html
 *   |   |-- package_main.html
 *   |   `-- package_printable.html
-*   |-- paginator.html
-*   |-- petition
-*   |   |-- petitioner_list.html
-*   |   |-- sign.html
-*   |   `-- sign_done.html
++   |-- paginator.html
+-   |-- petition
+-   |   |-- petitioner_list.html
+-   |   |-- sign.html
+-   |   `-- sign_done.html
 +   |-- printable.html
 +   |-- robots.txt
 +   |-- search.html
