@@ -105,10 +105,8 @@ These are templates to be marked
 *   |-- printable.html
 *   |-- robots.txt
 *   |-- search.html
-*   |-- seminar
-*   |   |-- place.html
-*   |   |-- seminar.html
-*   |   `-- seminar_detail.html
++   |-- seminar
++   |   `-- seminar_detail.html
 +   |-- tag
 +   |   `-- tag_detail.html
 -   |-- tema
