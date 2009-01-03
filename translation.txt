@@ -90,10 +90,10 @@ These are templates to be marked
 *   |   `-- howto_printable.html
 *   |-- menu.html
 *   |-- news
-*   |   |-- news_detail.html
++   |   |-- news_detail.html
 *   |   |-- news_main.html
 *   |   `-- news_printable.html
-*   |-- package
++   |-- package
 +   |   |-- package_detail.html
 +   |   |-- package_main.html
 +   |   `-- package_printable.html

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load library %}
-
-{% block title %}{{ news.title }} - Haberler - {% endblock %}
+{% load i18n %}
+{% block title %}{{ news.title }} - {% trans "News" %} - {% endblock %}
 {% block extrahead %}
 <style media="screen" type="text/css">@import url('/media/css/new/article.css');</style>
 <style media="screen" type="text/css">@import url('/media/css/new/st.css');</style>
@@ -18,7 +18,7 @@
 </div>
 <div style="clear: both;"></div>
 <div class="page_comments">
-    <a href="{{ news.topic.get_latest_post_url }}">{{ news.topic.posts|add:"-1" }} yorum</a> <a href="{{ news.topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a>
+    <a href="{{ news.topic.get_latest_post_url }}">{% blocktrans count news.topic.posts|add:"-1" as number_of_comments %}{{ number_of_comments }} comment{% plural %}{{ number_of_comments }} comments{% endblocktrans %}</a> <a href="{{ package.topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a> <a href="{{ news.topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a>
 </div>
 
 {% if user.is_authenticated %}
@@ -27,23 +27,23 @@
         <form method="post" action="{{ news.topic.get_reply_url }}">
             {{form}}
             <br/>
-            <input type="submit" value="Gönder" />
+            <input type="submit" value="{% trans "Send" %}" />
         </form>
     </p>
     {% endif %}
 {% endif %}
 <div class="page_printable"><a href="{{ news.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
-<div class="page_last_update">Son güncelleme: {{ news.update|timedelta }}</div>
+<div class="page_last_update">{% trans "Last update:" %} {{ news.update|timedelta }}</div>
 
 {% endblock %}
 
 {% block leftcolumn %}
 <div class="sidebarcolumn leftcolumn">
-    <h2>Etiketler</h2>
+    <h2>{% trans "Tags" %}</h2>
     <p><img src="/media/img/new/tag.png" style="vertical-align: middle;" /> {% for tag in news.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if forloop.last %}{% else %}, {% endif %}{% endfor %}
     </p>
     <br />
-    <h2>Yazar</h2>
+    <h2>{% trans "Author" %}</h2>
     <p>{{ news.author }}</p>
 </div>
 {% endblock %}
