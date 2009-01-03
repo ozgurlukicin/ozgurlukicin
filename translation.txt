@@ -91,7 +91,7 @@ These are templates to be marked
 *   |-- menu.html
 *   |-- news
 +   |   |-- news_detail.html
-*   |   |-- news_main.html
++   |   |-- news_main.html
 *   |   `-- news_printable.html
 +   |-- package
 +   |   |-- package_detail.html
