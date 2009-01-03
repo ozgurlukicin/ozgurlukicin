@@ -19,7 +19,7 @@
 {{ package.text|safe }}
 </div>
 
-<div class="page_comments"><a href="{{ package.topic.get_latest_post_url }}">{% blocktrans count package.topic.posts|add:"-1" as number_of_comments %}{{ number_of_comments }} comment{% plural %}{{ number_of_comments }} comments{% endblocktrans %}</a> <a href="{{ package.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a></div>
+<div class="page_comments"><a href="{{ package.topic.get_latest_post_url }}">{% blocktrans count package.topic.posts|add:"-1" as number_of_comments %}{{ number_of_comments }} comment{% plural %}{{ number_of_comments }} comments{% endblocktrans %}</a> <a href="{{ package.topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a></div>
 {% if user.is_authenticated %}
     {% if form %}
         <form method="post" action="{{ package.topic.get_reply_url }}">

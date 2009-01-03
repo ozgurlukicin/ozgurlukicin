@@ -95,7 +95,7 @@ These are templates to be marked
 *   |   `-- news_printable.html
 *   |-- package
 +   |   |-- package_detail.html
-*   |   |-- package_main.html
++   |   |-- package_main.html
 *   |   `-- package_printable.html
 +   |-- paginator.html
 -   |-- petition
