@@ -18,7 +18,7 @@
 </div>
 <div style="clear: both;"></div>
 <div class="page_comments">
-    <a href="{{ news.topic.get_latest_post_url }}">{% blocktrans count news.topic.posts|add:"-1" as number_of_comments %}{{ number_of_comments }} comment{% plural %}{{ number_of_comments }} comments{% endblocktrans %}</a> <a href="{{ package.topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a> <a href="{{ news.topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a>
+    <a href="{{ news.topic.get_latest_post_url }}">{% blocktrans count news.topic.posts|add:"-1" as number_of_comments %}{{ number_of_comments }} comment{% plural %}{{ number_of_comments }} comments{% endblocktrans %}</a> <a href="{{ news.topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a>
 </div>
 
 {% if user.is_authenticated %}
