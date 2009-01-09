@@ -45,6 +45,6 @@
     <br />
     <h2>Yazar</h2>
     <p>{{ news.author }}</p>
-    <a href="http://delicious.com/save" onclick='window.open("http://delicious.com/save?v=5&amp;noui&amp;jump=close&amp;url={{ request.build_absolute_uri }}&title={{ news.title }}&tags={% for tag in news.tags.all %}{{ tag }}{% if not forloop.last %} {% endif %}{% endfor %}", "delicious","toolbar=no,width=550,height=550"); return false;'><img src="/media/img/new/servicelinks/delicious.png" alt="del.icio.us" /></a>
+    <a href="http://delicious.com/save" onclick='window.open("http://delicious.com/save?v=5&amp;noui&amp;jump=close&amp;url={{ request.build_absolute_uri }}&title={{ news.title }}&tags={% for tag in news.tags.all %}{{ tag.name }}{% if not forloop.last %} {% endif %}{% endfor %}", "delicious","toolbar=no,width=550,height=550"); return false;'><img src="/media/img/new/servicelinks/delicious.png" alt="del.icio.us" /></a>
 </div>
 {% endblock %}
