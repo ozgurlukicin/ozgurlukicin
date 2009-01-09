@@ -1,7 +1,7 @@
 from oi.flatpages.models import FlatPage
 from django.template import loader, RequestContext
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 
 DEFAULT_TEMPLATE = 'flatpages/default.html'
@@ -19,6 +19,8 @@ def flatpage(request, url):
     """
     if not url.startswith('/'):
         url = "/" + url
+    if not url.endswith('/'):
+        return HttpResponseRedirect(url + "/")
     f = get_object_or_404(FlatPage, url__exact=url)
     # If registration is required for accessing this page, and the user isn't
     # logged in, redirect to the login page.
