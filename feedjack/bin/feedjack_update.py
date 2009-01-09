@@ -133,16 +133,17 @@ def get_entry_data(entry, feed, options):
                 file.close()
 
                 im = Image.open(tmp, 'r')
+                # we'll do it respecting aspect ratio
+                resize_x = im.size[0]
+                resize_y = im.size[1]
 
-                if settings.FEEDJACK_MAX_IMAGE_X and im.size[0] > settings.FEEDJACK_MAX_IMAGE_X:
+                if settings.FEEDJACK_MAX_IMAGE_X and resize_x > settings.FEEDJACK_MAX_IMAGE_X:
+                    resize_y = int(settings.FEEDJACK_MAX_IMAGE_X * 1.0 / resize_x * resize_y)
                     resize_x = settings.FEEDJACK_MAX_IMAGE_X
-                else:
-                    resize_x = im.size[0]
 
-                if settings.FEEDJACK_MAX_IMAGE_Y and im.size[1] > settings.FEEDJACK_MAX_IMAGE_Y:
+                if settings.FEEDJACK_MAX_IMAGE_Y and resize_y > settings.FEEDJACK_MAX_IMAGE_Y:
+                    resize_x = int(settings.FEEDJACK_MAX_IMAGE_Y * 1.0 / resize_y * resize_x)
                     resize_y = settings.FEEDJACK_MAX_IMAGE_Y
-                else:
-                    resize_y = im.size[1]
 
                 # if there is a change on images, continue the process
                 if im.size[0] != resize_x or im.size[1] != resize_y:
