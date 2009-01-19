@@ -1,7 +1,6 @@
 {% extends "printable.html" %}
-
-{% block title %}{{ howto.title }} - Nasıl - {% endblock %}
-
+{% load i18n %}
+{% block title %}{{ howto.title }} - {% trans "Howto" %} - {% endblock %}
 {% block content %}
 <h1>{{ howto.title }}</h1>
 <div class="page_content">

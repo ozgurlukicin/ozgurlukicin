@@ -84,10 +84,10 @@ These are templates to be marked
 *   |   `-- game_printable.html
 *   |-- header.html
 +   |-- home.html
-*   |-- howto
++   |-- howto
 +   |   |-- howto_detail.html
-*   |   |-- howto_main.html
-*   |   `-- howto_printable.html
++   |   |-- howto_main.html
++   |   `-- howto_printable.html
 +   |-- menu.html
 +   |-- news
 +   |   |-- news_detail.html
