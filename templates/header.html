@@ -1,9 +1,10 @@
+{% load i18n %}
 <div id="header">
     <div id="logo">
-        <a href="/" title="Özgürlük İçin Anasayfa"><img src="/media/img/new/ozgurlukicin.png" alt="Özgürlük İçin" /></a>
+        <a href="/" title="{% trans "Homepage" %}"><img src="/media/img/new/ozgurlukicin.png" alt="{% trans "Homepage" %}" /></a>
     </div>
-    <img src="/media/img/new/download_pardus.png" alt="Pardus 2008 indir" id="header_img" usemap="#downloadmap" />
+    <img src="/media/img/new/download_pardus.png" alt="{% trans "Download Pardus 2008" %}" id="header_img" usemap="#downloadmap" />
     <map id="downloadmap" name="downloadmap">
-        <area shape="poly" href="/indir/" alt="Pardus 2008 indir" coords="8,0,80,136,80,137,128,139,253,190,367,154,368,147,339,134,314,130,314,91,245,91,245,123,232,121,236,96,236,86,236,82,243,70,235,60,222,65,205,62,189,65,177,61,168,70,176,84,174,115,102,118,26,0" />
+        <area shape="poly" href="/indir/" alt="{% trans "Download Pardus 2008" %}" coords="8,0,80,136,80,137,128,139,253,190,367,154,368,147,339,134,314,130,314,91,245,91,245,123,232,121,236,96,236,86,236,82,243,70,235,60,222,65,205,62,189,65,177,61,168,70,176,84,174,115,102,118,26,0" />
     </map>
 </div>
