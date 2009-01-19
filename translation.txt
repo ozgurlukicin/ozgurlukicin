@@ -88,7 +88,7 @@ These are templates to be marked
 *   |   |-- howto_detail.html
 *   |   |-- howto_main.html
 *   |   `-- howto_printable.html
-*   |-- menu.html
++   |-- menu.html
 +   |-- news
 +   |   |-- news_detail.html
 +   |   |-- news_main.html
