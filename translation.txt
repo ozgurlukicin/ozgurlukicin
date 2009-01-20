@@ -75,7 +75,7 @@ These are templates to be marked
 *   |   |-- topic.html
 *   |   `-- unread.html
 *   |-- fs
-*   |   |-- fs_detail.html
++   |   |-- fs_detail.html
 *   |   |-- fs_main.html
 *   |   `-- fs_printable.html
 +   |-- game
