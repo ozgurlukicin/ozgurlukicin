@@ -1,6 +1,6 @@
 {% extends "printable.html" %}
-
-{% block title %}{{ game.title }} - Oyunlar - {% endblock %}
+{% load i18n %}
+{% block title %}{{ game.title }} - {% trans "Games" %} - {% endblock %}
 
 {% block content %}
 <h1>{{ game.title }}</h1>
