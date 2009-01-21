@@ -1,2 +1,3 @@
 {% extends "forum/post_list.html" %}
-{% block post_owner %}<a href="{{ author.get_profile.get_absolute_url }}">{{ author }} tarafından gönderilen iletiler</a>{% endblock %}
+{% load i18n %}
+{% block post_owner %}<a href="{{ author.get_profile.get_absolute_url }}">{% blocktrans %}Posts sent by {{ author }}{% endblocktrans %}</a>{% endblock %}

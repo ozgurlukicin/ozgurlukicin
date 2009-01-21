@@ -68,7 +68,7 @@ These are templates to be marked
 *   |   |-- new_topic.html
 *   |   |-- post_edit.html
 +   |   |-- post_list.html
-*   |   |-- post_list_for_user.html
++   |   |-- post_list_for_user.html
 +   |   |-- reply.html
 +   |   |-- report.html
 +   |   |-- topic.html
