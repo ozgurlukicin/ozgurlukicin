@@ -70,7 +70,7 @@ These are templates to be marked
 +   |   |-- post_list.html
 *   |   |-- post_list_for_user.html
 *   |   |-- reply.html
-*   |   |-- report.html
++   |   |-- report.html
 +   |   |-- topic.html
 +   |   `-- unread.html
 +   |-- fs
