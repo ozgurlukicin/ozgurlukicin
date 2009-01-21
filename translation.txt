@@ -67,14 +67,14 @@ These are templates to be marked
 *   |   |-- move.html
 *   |   |-- new_topic.html
 *   |   |-- post_edit.html
-*   |   |-- post_list.html
++   |   |-- post_list.html
 *   |   |-- post_list_for_user.html
 *   |   |-- reply.html
 *   |   |-- report.html
 *   |   |-- top_menu.html
 *   |   |-- topic.html
 *   |   `-- unread.html
-*   |-- fs
++   |-- fs
 +   |   |-- fs_detail.html
 +   |   |-- fs_main.html
 +   |   `-- fs_printable.html
