@@ -61,7 +61,6 @@ These are templates to be marked
 *   |   |-- forum_done.html
 *   |   |-- forum_error.html
 *   |   |-- forum_footer.html
-*   |   |-- forum_header.html
 +   |   |-- forum_list.html
 -   |   |-- merge.html
 -   |   |-- move.html
