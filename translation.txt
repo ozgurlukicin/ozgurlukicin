@@ -73,7 +73,7 @@ These are templates to be marked
 *   |   |-- report.html
 *   |   |-- top_menu.html
 *   |   |-- topic.html
-*   |   `-- unread.html
++   |   `-- unread.html
 +   |-- fs
 +   |   |-- fs_detail.html
 +   |   |-- fs_main.html
