@@ -56,7 +56,7 @@ These are templates to be marked
 *   |   |-- create_poll.html
 *   |   |-- feed_description.html
 *   |   |-- feed_title.html
-*   |   |-- forum_base.html
++   |   |-- forum_base.html
 +   |   |-- forum_detail.html
 *   |   |-- forum_done.html
 *   |   |-- forum_error.html
