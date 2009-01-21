@@ -65,7 +65,7 @@ These are templates to be marked
 *   |   |-- forum_list.html
 *   |   |-- merge.html
 *   |   |-- move.html
-*   |   |-- new_topic.html
++   |   |-- new_topic.html
 +   |   |-- post_edit.html
 +   |   |-- post_list.html
 +   |   |-- post_list_for_user.html
