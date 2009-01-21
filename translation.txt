@@ -57,7 +57,7 @@ These are templates to be marked
 *   |   |-- feed_description.html
 *   |   |-- feed_title.html
 *   |   |-- forum_base.html
-*   |   |-- forum_detail.html
++   |   |-- forum_detail.html
 *   |   |-- forum_done.html
 *   |   |-- forum_error.html
 +   |   |-- forum_list.html
