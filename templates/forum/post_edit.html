@@ -1,5 +1,5 @@
 {% extends "forum/forum_base.html" %}
-{% load library %}
+{% load library i18n %}
 {% load gravatar %}
 {% block extrahead %}
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
@@ -8,10 +8,9 @@
 {% endblock %}
 {% block content %}
 <div class="topbar">
-    <div class="navigation"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ topic.forum.get_absolute_url }}">{{ topic.forum.name }}</a> &#62; <a href="{{ topic.get_absolute_url }}" class="bold">{{ topic.title }}</a></div>
+    <div class="navigation"><a href="/">{% trans "Mainpage" %}</a> &#62; <a href="/forum/">{% trans "Forum" %}</a> &#62; <a href="{{ topic.forum.get_absolute_url }}">{{ topic.forum.name }}</a> &#62; <a href="{{ topic.get_absolute_url }}" class="bold">{{ topic.title }}</a></div>
 </div>
-{% if user.is_authenticated %}
-{% if flood %}Flood koruması aktif, lütfen {{ timeout }} saniye bekleyin.{% endif %}
+{% if flood %}{% blocktrans %}Flood protection, please wait for {{ timeout }} seconds.{% endblocktrans %}{% endif %}
 <form action="" method="post">
 {% if quote_id %}<input type="hidden" name="quote_id" value="{{ quote_id }}" />{% endif %}
 {% for field in form %}
@@ -20,11 +19,8 @@
         <dd>{{ field|safe }}</dd>
     </dl>
 {% endfor %}
-<input type="submit" value="Kaydet" />
+<input type="submit" value="{% trans "Save" %}" />
 </form>
-{% else %}
-<p>Yanıt göndermek için giriş yapmalısınız.</p>
-{% endif %}
 
 {% for post in posts %}
 
@@ -33,16 +29,16 @@
 <div class="post_base" {% if post.hidden %}style="opacity: 0.5;"{% endif %}>
     <div class="post_profile">
         <div class="author">{{ post.author }}</div>
-        {% if post.author.is_staff %}<div class="author_description">Forum Yöneticisi</div>{% endif %}
-        <div class="avatar"><img src="{% avatar_url post.author.email 100 "g" post.author.get_profile.avatar.file.url %}" alt="avatar" width="100" height="100"></div>
+        <div class="author_description">{{ post.author.get_profile.title }}</div>
+        <div class="avatar"><img src="{% avatar_url post.author.email 100 "g" post.author.get_profile.avatar.file.url %}" alt="{% trans "avatar" %}" width="100" height="100"></div>
         {% if perms.forum.can_see_post_ip %}<div class="ip">({{ post.ip }})</div>{% endif %}
-        <div class="register_date">Kayıt Tarihi:<br />{{ post.author.date_joined|date:"d-m-Y" }}</div>
-        <div class="button"><a href="/kullanici/profil/{{ post.author }}"><img src="/media/img/new/button_info.png" alt="bilgi" /></a></div>
+        <div class="register_date">{% trans "Register Date:" %}<br />{{ post.author.date_joined|date:"d-m-Y" }}</div>
+        <div class="button"><a href="{{ post.author.get_profile.get_absolute_url }}"><img src="/media/img/new/button_info.png" alt="{% trans "info" %}" /></a></div>
     </div>
     <div class="post_message">
         <div class="post_message_top">
             <div class="post_message_top_icon">
-                <a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="ileti adresi" /></a>
+                <a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="{% trans "post address" %}" /></a>
             </div>
             <div class="post_message_top_date">
                 {{ post.created|date:"d-m-Y H:i" }}

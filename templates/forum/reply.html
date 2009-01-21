@@ -10,7 +10,6 @@
 <div class="topbar">
     <div class="navigation"><a href="/">{% trans "Mainpage" %}</a> &#62; <a href="/forum/">{% trans "Forum" %}</a> &#62; <a href="{{ topic.forum.get_absolute_url }}">{{ topic.forum.name }}</a> &#62; <a href="{{ topic.get_absolute_url }}" class="bold">{{ topic.title }}</a></div>
 </div>
-{% if user.is_authenticated %}
 {% if flood %}{% blocktrans %}Flood protection, please wait for {{ timeout }} seconds.{% endblocktrans %}{% endif %}
 <form action="" method="post">
 {% if quote_id %}<input type="hidden" name="quote_id" value="{{ quote_id }}" />{% endif %}
@@ -22,9 +21,6 @@
 {% endfor %}
 <input type="submit" value="{% trans "Reply" %}" />
 </form>
-{% else %}
-<p>Yanıt göndermek için giriş yapmalısınız.</p>
-{% endif %}
 
 {% for post in posts %}
 
