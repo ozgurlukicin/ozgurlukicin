@@ -51,7 +51,7 @@ These are templates to be marked
 *   |   `-- default.html
 +   |-- footer.html
 *   |-- forum
-*   |   |-- abuse_list.html
++   |   |-- abuse_list.html
 +   |   |-- change_poll.html
 +   |   |-- create_poll.html
 +   |   |-- feed_description.html

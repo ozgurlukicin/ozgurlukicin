@@ -1,17 +1,17 @@
 {% extends "forum/forum_base.html" %}
-
-{% block title %}Raporlanmış İletiler - {% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Reported Posts" %} - {% endblock %}
 {% block content %}
 {% if no_entry %}
-Raporlanmış herhangi bir ileti bulunmamaktadır. Foruma dönmek için <a href="/forum/">Tıklayın</a>
+{% blocktrans %}There's no reported post. Click <a href="/forum/">here</a> to go to forum{% endblocktrans %}
 {% else %}
 <form action="" method="POST">
-    <strong>Raporlanmış İletiler: </strong><br /><br />
+    <strong>{% trans "Reported Posts:" %} </strong><br /><br />
 {% for abuse in abuse_list %}
-<input type="checkbox" name="abuse_list" value="{{ abuse.id }}" />&nbsp;&nbsp;<a href="{{abuse.post.get_absolute_url }}" target="_blank">{{ abuse.post.topic.title }}</a> | Raporlayan: <a href="{{ abuse.submitter.get_profile.get_absolute_url }}">{{ abuse.submitter }}</a><br />Sebep:<br />{{ abuse.reason|striptags }}</input><hr />
+<input type="checkbox" name="abuse_list" value="{{ abuse.id }}" />&nbsp;&nbsp;<a href="{{abuse.post.get_absolute_url }}" target="_blank">{{ abuse.post.topic.title }}</a> | {% trans "Reporter:" %} <a href="{{ abuse.submitter.get_profile.get_absolute_url }}">{{ abuse.submitter }}</a><br />{% trans "Reason:" %}<br />{{ abuse.reason|striptags }}</input><hr />
 {% endfor %}
 <br />
-<input type="submit" value="Şikayet Listesinden Çıkar" />
+<input type="submit" value="{% trans "Remove from Abuse List" %}" />
 </form>
 
 {% endif %}
