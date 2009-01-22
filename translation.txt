@@ -165,10 +165,10 @@ These are python files to be marked
 +   |   |-- feeds.py
 +   |   |-- forms.py
 +   |   |-- models.py
-*   |   |-- settings.py
-*   |   |-- tools.py
-*   |   |-- urls.py
-*   |   |-- util.py
++   |   |-- settings.py
++   |   |-- tools.py
++   |   |-- urls.py
+-   |   |-- util.py // WHAT IS THIS?
 *   |   `-- views.py
 *   |-- ideas
 *   |   |-- __init__.py
