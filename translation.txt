@@ -17,7 +17,7 @@ These are templates to be marked
 +   |   `-- seminar
 +   |       `-- place
 +   |           `-- change_form.html
-*   |-- advancedsearch.html
++   |-- advancedsearch.html
 +   |-- base.html
 +   |-- bug
 +   |   |-- bug_add.html
