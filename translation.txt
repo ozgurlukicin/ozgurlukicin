@@ -34,19 +34,19 @@ These are templates to be marked
 *   |-- download
 *   |   |-- download.html
 *   |   `-- download_relnotes.html
-*   |-- feedjack
-*   |   |-- default
-*   |   |   `-- post_list.html
-*   |   |-- foaf.xml
-*   |   |-- oi
-*   |   |   `-- post_list.html
-*   |   `-- opml.xml
-*   |-- feeds
-*   |   |-- feed_description.html
-*   |   `-- feed_title.html
-*   |-- file_upload
-*   |   |-- file_upload.html
-*   |   `-- file_upload_success.html
++   |-- feedjack
+-   |   |-- default
+-   |   |   `-- post_list.html
+-   |   |-- foaf.xml
++   |   |-- oi
++   |   |   `-- post_list.html
+-   |   `-- opml.xml
++   |-- feeds
++   |   |-- feed_description.html
++   |   `-- feed_title.html
+-   |-- file_upload
+-   |   |-- file_upload.html
+-   |   `-- file_upload_success.html
 +   |-- flatpages
 +   |   `-- default.html
 +   |-- footer.html

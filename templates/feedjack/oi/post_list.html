@@ -1,9 +1,10 @@
 {% extends "base.html" %}
-{% block title %}Pardus Dünyası - {% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Planet Pardus" %} - {% endblock %}
 {% block extrahead %}
     <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
     <style type="text/css" media="screen">@import url('/media/css/new/planet.css');</style>
-{% endblock %}}
+{% endblock %}
 {% block content %}
 {% for item in object_list %}
 <div class="post">
@@ -12,7 +13,7 @@
     {% endifchanged %}
     <div class="title"><a href="{{ item.link }}">{% if item.title %}{{ item.title|safe }}{% else %}{{ item.subscriber.name }}{% endif %}</a></div>
     <div class="tags">
-        {% if item.qtags %}<img src="/media/img/new/tag.png" alt="etiket" />
+        {% if item.qtags %}<img src="/media/img/new/tag.png" alt="{% trans "tag" %}" />
         {% for tag in item.qtags %}<a href="{{ site.url }}/tag/{{ tag.name }}">{{ tag.name }}</a> {% endfor %}
         {% endif %}
     </div>
@@ -41,26 +42,26 @@
 {% endblock %}
 {% block rightcolumn_bottom %}
     <div class="rightcolumn_content">
-        <h2>Kurallar</h2>
+        <h2>{% trans "Rules" %}</h2>
         <ul>
-            <li><span class="bullet">»</span> <a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a></li>
+            <li><span class="bullet">»</span> <a href="/hakkinda/gezegen-kurallari/">{% trans "Planet Rules" %}</a></li>
         </ul>
     </div>
     <div class="rightcolumn_content">
-        <h2>Feed</h2>
+        <h2>{% trans "Feeds" %}</h2>
         <a href="/rss/gezegen/" title="RSS 2.0 feed"><img src="/media/dijital/img/bt_rss.jpg"/></a>
         <a href="/atom/gezegen/" title="Atom 1.0 feed"><img src="/media/img/atom.png"/></a>
     </div>
 {% if site.links %}
     <div class="rightcolumn_content">
-        <h2>Diğer gezegenler</h2>
+        <h2>{% trans "Other Planets" %}</h2>
         <ul>
             {% for link in site.links.all %}<li><span class="bullet">»</span> <a href="{{ link.link }}">{{ link.name }}</a></li>{% endfor %}
         </ul>
     </div>
 {% endif %}
     <div class="rightcolumn_content">
-        <h2>Son güncelleme</h2>
+        <h2>{% trans "Last Modified" %}</h2>
         <p>{{ last_modified }}</p>
     </div>
 {% endblock %}
