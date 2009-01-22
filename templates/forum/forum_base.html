@@ -48,7 +48,7 @@
                     <li><a href="/forum/guncellenen-basliklar/">{% trans "Updated Topics" %}</a><li>
                     <li><a href="/forum/son-iletiler/">{% trans "Latest Posts" %}</a><li>
                     <li><a href="/forum/tumunu-okunmus-say/?next={{ request.path }}">{% trans "Mark All as Read" %}</a></li>
-                    <li>{% if perms.forum.can_change_abusereport %}<a href="/forum/raporlanmis-iletiler/">{% blocktrans %}Abuse Reports ({{abuse_count}}){% endblocktrans %}</a> {% endif %}</li>
+                    <li>{% if perms.forum.can_change_abusereport and abuse_count %}<a href="/forum/raporlanmis-iletiler/">{% blocktrans %}Abuse Reports ({{abuse_count}}){% endblocktrans %}</a> {% endif %}</li>
                     <li><a href="/kullanici/cikis/">{% trans "Logout" %}</a></li>
                 </ul>
             {% endif %}

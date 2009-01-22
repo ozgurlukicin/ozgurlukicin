@@ -143,13 +143,13 @@ These are templates to be marked
 These are python files to be marked
 -----------------------------------
 
-*   |-- __init__.py
++   |-- __init__.py
 *   |-- bug
-*   |   |-- __init__.py
-*   |   |-- forms.py
-*   |   |-- models.py
-*   |   |-- settings.py
-*   |   |-- urls.py
++   |   |-- __init__.py
++   |   |-- forms.py
++   |   |-- models.py
++   |   |-- settings.py
++   |   |-- urls.py
 *   |   `-- views.py
 *   |-- context_processors.py
 *   |-- flatpages
