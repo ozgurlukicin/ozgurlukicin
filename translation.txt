@@ -47,8 +47,8 @@ These are templates to be marked
 *   |-- file_upload
 *   |   |-- file_upload.html
 *   |   `-- file_upload_success.html
-*   |-- flatpages
-*   |   `-- default.html
++   |-- flatpages
++   |   `-- default.html
 +   |-- footer.html
 *   |-- forum
 +   |   |-- abuse_list.html
