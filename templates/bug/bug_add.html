@@ -1,11 +1,12 @@
 {% extends "bug/bug_main.html" %}
-{% block title %}{{ bug.name }}Hata Raporla - {% endblock %}
+{% load i18n %}
+{% block title %}{{ bug.name }}{% trans "Report Bug" %} - {% endblock %}
 {% block extrahead %}
     <style type="text/css" media="screen">@import url('/media/css/new/bug.css');</style>
 {% endblock %}
 {% block content %}
 <div class="topbar">
-    <div class="navigation"><a href="/">Ana Sayfa</a> &#62; <a href="/hata/">Hata</a> &#62; <a href="/hata/ekle/" class="bold">Yeni Hata</a></div>
+    <div class="navigation"><a href="/">{% trans "Mainpage" %}</a> &#62; <a href="/hata/">{% trans "Bug" %}</a> &#62; <a href="/hata/ekle/" class="bold">{% trans "New Bug" %}</a></div>
 </div>
 <form action="" method="post" class="bugform">
 <dl>
@@ -16,6 +17,6 @@
     {% if field.errors %}<dd class="myerrors" style="font-color: red">{{ field.errors }}</dd>{% endif %}
 {% endfor %}
 </dl>
-<input type="submit" value="Hatayı Raporla" />
+<input type="submit" value="{% trans "Report Bug" %}" />
 </form>
 {% endblock %}

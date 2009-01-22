@@ -19,10 +19,10 @@ These are templates to be marked
 +   |           `-- change_form.html
 *   |-- advancedsearch.html
 +   |-- base.html
-*   |-- bug
-*   |   |-- bug_add.html
-*   |   |-- bug_detail.html
-*   |   `-- bug_main.html
++   |-- bug
++   |   |-- bug_add.html
++   |   |-- bug_detail.html
++   |   `-- bug_main.html
 *   |-- comments
 *   |   |-- comment_display.html
 *   |   |-- comment_form.html

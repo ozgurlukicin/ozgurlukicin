@@ -1,24 +1,24 @@
 {% extends "forum/forum_base.html" %}
-{% load library %}
-{% block title %}Hata Raporları - {% endblock %}
+{% load library i18n %}
+{% block title %}{% trans "Bug Reports" %} - {% endblock %}
 {% block extrahead %}
     <style type="text/css" media="screen">@import url('/media/css/new/bug.css');</style>
     <style type="text/css" media="screen">@import url('/media/css/new/forum_paginator.css');</style>
 {% endblock %}
 {% block content %}
 <div class="topbar">
-    <div class="navigation"><a href="/">Ana Sayfa</a> &#62; <a href="/hata/" class="bold">Hata</a></div><div class="notice"><a href="/hata/ekle/"><img src="/media/img/new/button_report_bug.png" alt="Yeni Hata Bildir" /></a></div>
+    <div class="navigation"><a href="/">{% trans "Mainpage" %}</a> &#62; <a href="/hata/" class="bold">{% trans "Bug" %}</a></div><div class="notice"><a href="/hata/ekle/"><img src="/media/img/new/button_report_bug.png" alt="{% trans "Report New Bug" %}" /></a></div>
 </div>
 <div class="headerbar">
-    <div class="title">Başlık</div>
+    <div class="title">{% trans "Title" %}</div>
     <div class="spacer">&nbsp;</div>
-    <div class="submitter">Gönderen</div>
+    <div class="submitter">{% trans "Submitter" %}</div>
     <div class="spacer">&nbsp;</div>
-    <div class="status">Durum</div>
+    <div class="status">{% trans "Status" %}</div>
     <div class="spacer">&nbsp;</div>
-    <div class="priority">Öncelik</div>
+    <div class="priority">{% trans "Priority" %}</div>
     <div class="spacer">&nbsp;</div>
-    <div class="submitted_date">Tarih</div>
+    <div class="submitted_date">{% trans "Date" %}</div>
 </div>
 <div class="bug_list">
     {% for bug in bug_list %}
