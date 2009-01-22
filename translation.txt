@@ -31,9 +31,9 @@ These are templates to be marked
 *   |   `-- trackback_display.html
 +   |-- db_error.html
 *   |-- delete.html
-*   |-- download
-*   |   |-- download.html
-*   |   `-- download_relnotes.html
+-   |-- download
+-   |   |-- download.html
+-   |   `-- download_relnotes.html
 +   |-- feedjack
 -   |   |-- default
 -   |   |   `-- post_list.html
@@ -139,3 +139,146 @@ These are templates to be marked
 -   |-- ust_menu_ayrinti.html
 +   |-- video.html
 +   `-- videobox.html
+
+These are python files to be marked
+-----------------------------------
+
+*   |-- __init__.py
+*   |-- bug
+*   |   |-- __init__.py
+*   |   |-- forms.py
+*   |   |-- models.py
+*   |   |-- settings.py
+*   |   |-- urls.py
+*   |   `-- views.py
+*   |-- context_processors.py
+*   |-- flatpages
+*   |   |-- __init__.py
+*   |   |-- admin.py
+*   |   |-- middleware.py
+*   |   |-- models.py
+*   |   |-- urls.py
+*   |   `-- views.py
+*   |-- forum
+*   |   |-- __init__.py
+*   |   |-- admin.py
+*   |   |-- feeds.py
+*   |   |-- forms.py
+*   |   |-- models.py
+*   |   |-- settings.py
+*   |   |-- tools.py
+*   |   |-- urls.py
+*   |   |-- util.py
+*   |   `-- views.py
+*   |-- ideas
+*   |   |-- __init__.py
+*   |   |-- admin.py
+*   |   |-- feeds.py
+*   |   |-- forms.py
+*   |   |-- models.py
+*   |   |-- settings.py
+*   |   |-- templatetags
+*   |   |   |-- __init__.py
+*   |   |   `-- ideas.py
+*   |   |-- urls.py
+*   |   `-- views.py
+*   |-- middleware
+*   |   |-- __init__.py
+*   |   |-- ban.py
+*   |   |-- debug.py
+*   |   `-- threadlocals.py
+*   |-- petition
+*   |   |-- __init__.py
+*   |   |-- models.py
+*   |   |-- settings.py
+*   |   |-- templatetags
+*   |   |   |-- __init__.py
+*   |   |   `-- petition.py
+*   |   |-- urls.py
+*   |   `-- views.py
+*   |-- poll
+*   |   |-- __init__.py
+*   |   `-- models.py
+*   |-- profile
+*   |   |-- __init__.py
+*   |   |-- admin.py
+*   |   |-- forms.py
+*   |   |-- models.py
+*   |   |-- settings.py
+*   |   |-- sql
+*   |   |-- urls.py
+*   |   `-- views.py
+*   |-- seminar
+*   |   |-- __init__.py
+*   |   |-- admin.py
+*   |   |-- models.py
+*   |   |-- urls.py
+*   |   `-- views.py
+*   |-- settings.py
+*   |-- shop
+*   |   |-- __init__.py
+*   |   |-- cart
+*   |   |   |-- __init__.py
+*   |   |   |-- forms.py
+*   |   |   |-- models.py
+*   |   |   |-- urls.py
+*   |   |   `-- views.py
+*   |   |-- main
+*   |   |   |-- __init__.py
+*   |   |   `-- views.py
+*   |   |-- product
+*   |   |   |-- __init__.py
+*   |   |   |-- admin.py
+*   |   |   |-- models.py
+*   |   |   |-- templatetags
+*   |   |   |   |-- __init__.py
+*   |   |   |   `-- shop_library.py
+*   |   |   `-- views.py
+*   |   |-- shopprofile
+*   |   |   |-- __init__.py
+*   |   |   |-- admin.py
+*   |   |   |-- forms.py
+*   |   |   |-- models.py
+*   |   |   |-- urls.py
+*   |   |   `-- views.py
+*   |   |-- templates
+*   |   |   |-- cart
+*   |   |   |-- category
+*   |   |   |-- product
+*   |   |   `-- shopprofile
+*   |   `-- urls.py
+*   |-- st
+*   |   |-- __init__.py
+*   |   |-- admin.py
+*   |   |-- feeds.py
+*   |   |-- forms.py
+*   |   |-- models.py
+*   |   |-- signals.py
+*   |   |-- tags.py
+*   |   |-- templatetags
+*   |   |   |-- __init__.py
+*   |   |   |-- gravatar.py
+*   |   |   `-- library.py
+*   |   |-- views.py
+*   |   `-- wrappers.py
+*   |-- tema
+*   |   |-- __init__.py
+*   |   |-- feeds.py
+*   |   |-- forms.py
+*   |   |-- models.py
+*   |   |-- settings.py
+*   |   |-- signals.py
+*   |   |-- urls.py
+*   |   |-- utils.py
+*   |   `-- views.py
+*   |-- upload
+*   |   |-- __init__.py
+*   |   |-- admin.py
+*   |   |-- models.py
+*   |   `-- views.py
+*   |-- urls.py
+*   |-- util
+*   |   |-- __init__.py
+*   |   |-- feedparser.py
+*   |   |-- fetch.py
+*   |   `-- forum_filler.py
