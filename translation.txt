@@ -152,7 +152,7 @@ These are python files to be marked
 +   |   |-- urls.py
 *   |   `-- views.py
 +   |-- context_processors.py
-*   |-- flatpages
++   |-- flatpages
 +   |   |-- __init__.py
 +   |   |-- admin.py
 +   |   |-- middleware.py
@@ -160,10 +160,10 @@ These are python files to be marked
 +   |   |-- urls.py
 +   |   `-- views.py
 *   |-- forum
-*   |   |-- __init__.py
-*   |   |-- admin.py
-*   |   |-- feeds.py
-*   |   |-- forms.py
++   |   |-- __init__.py
++   |   |-- admin.py
++   |   |-- feeds.py
++   |   |-- forms.py
 *   |   |-- models.py
 *   |   |-- settings.py
 *   |   |-- tools.py
