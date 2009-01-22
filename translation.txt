@@ -164,7 +164,7 @@ These are python files to be marked
 +   |   |-- admin.py
 +   |   |-- feeds.py
 +   |   |-- forms.py
-*   |   |-- models.py
++   |   |-- models.py
 *   |   |-- settings.py
 *   |   |-- tools.py
 *   |   |-- urls.py
