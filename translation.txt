@@ -54,12 +54,12 @@ These are templates to be marked
 *   |   |-- abuse_list.html
 *   |   |-- change_poll.html
 *   |   |-- create_poll.html
-*   |   |-- feed_description.html
-*   |   |-- feed_title.html
++   |   |-- feed_description.html
++   |   |-- feed_title.html
 +   |   |-- forum_base.html
 +   |   |-- forum_detail.html
-*   |   |-- forum_done.html
-*   |   |-- forum_error.html
++   |   |-- forum_done.html
++   |   |-- forum_error.html
 +   |   |-- forum_list.html
 -   |   |-- merge.html
 -   |   |-- move.html
