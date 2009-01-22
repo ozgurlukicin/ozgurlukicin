@@ -151,14 +151,14 @@ These are python files to be marked
 +   |   |-- settings.py
 +   |   |-- urls.py
 *   |   `-- views.py
-*   |-- context_processors.py
++   |-- context_processors.py
 *   |-- flatpages
-*   |   |-- __init__.py
-*   |   |-- admin.py
-*   |   |-- middleware.py
-*   |   |-- models.py
-*   |   |-- urls.py
-*   |   `-- views.py
++   |   |-- __init__.py
++   |   |-- admin.py
++   |   |-- middleware.py
++   |   |-- models.py
++   |   |-- urls.py
++   |   `-- views.py
 *   |-- forum
 *   |   |-- __init__.py
 *   |   |-- admin.py
