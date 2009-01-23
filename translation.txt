@@ -169,7 +169,7 @@ These are python files to be marked
 +   |   |-- tools.py
 +   |   |-- urls.py
 -   |   |-- util.py // WHAT IS THIS?
-*   |   `-- views.py
++   |   `-- views.py // mail things should be template based
 *   |-- ideas
 *   |   |-- __init__.py
 *   |   |-- admin.py

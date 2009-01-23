@@ -34,6 +34,7 @@ from oi.settings import WEB_URL, DEFAULT_FROM_EMAIL
 # import bbcode renderer for quotation
 from oi.forum.postmarkup import render_bbcode
 from oi.profile.models import Profile
+from django.utils.translation import ugettext as _
 
 def main(request):
     lastvisit_control(request)
@@ -137,7 +138,7 @@ def latest_topics(request):
         abuse_count = AbuseReport.objects.count()
 
     forum = Forum(
-            name = "Güncellenen Başlıklar",
+            name = _("Updated Topics"),
             slug = "guncellenen-basliklar",
             )
 
@@ -270,7 +271,7 @@ def follow(request, forum_slug, topic_id):
 
     # determine if user already added this to prevent double adding.
     if len(WatchList.objects.filter(topic__id=topic_id).filter(user__username=request.user.username)) > 0:
-        errorMessage = 'Bu başlığı zaten izlemektesiniz.'
+        errorMessage = _("You are already following this topic.")
         return render_response(request, 'forum/forum_error.html', {'message': errorMessage})
     else:
         watchlist = WatchList(topic=topic, user=request.user)
@@ -378,11 +379,11 @@ def edit_post(request, forum_slug, topic_id, post_id):
         post_user=user.post_set.filter(id=post_id)
 
         if not post_user:
-            return HttpResponse("That is a Wrong way my friend :) ")
+            return HttpResponse(_("This is not your post."))
 
     if forum.locked or topic.locked:
         # FIXME: Give an error message
-        return HttpResponse("Forum or topic is locked")
+        return HttpResponse(_("Forum or topic is locked"))
 
     if request.method == 'POST':
         form = PostForm(request.POST.copy())
@@ -412,7 +413,7 @@ def new_topic(request, forum_slug):
     forum = get_object_or_404(Forum, slug=forum_slug)
 
     if forum.locked:
-        return HttpResponse('Forum is locked')
+        return HttpResponse(_("Forum is locked"))
 
     if request.method == 'POST':
         form = TopicForm(request.POST.copy())
@@ -465,7 +466,7 @@ def edit_topic(request, forum_slug, topic_id):
         abuse_count = AbuseReport.objects.count()
 
     if forum.locked or topic.locked:
-        return HttpResponse('Forum or topic is locked')
+        return HttpResponse("Forum or topic is locked")
 
     if request.method == 'POST':
         form = TopicForm(request.POST.copy())
@@ -504,7 +505,7 @@ def merge(request, forum_slug, topic_id):
     topic = get_object_or_404(Topic, pk=topic_id)
 
     if forum.locked or topic.locked:
-        hata="Kilitli konularda bu tür işlemler yapılamaz!"
+        hata=_("Forum or topic is locked")
         return render_response(request, 'forum/merge.html', locals())
 
     if request.method == 'POST':
@@ -514,7 +515,7 @@ def merge(request, forum_slug, topic_id):
             topic2 = form.cleaned_data['topic2']
 
             if int(topic2)==topic.id:
-                hata="Aynı konuyu mu merge edeceksiniz !"
+                hata = _("You can't merge the same topic")
                 return render_response(request, 'forum/merge.html', locals())
 
 
@@ -543,7 +544,7 @@ def merge(request, forum_slug, topic_id):
 
             return HttpResponseRedirect(topic2_object.get_absolute_url())
         else:
-            hata="Forum valid degil!"
+            hata = _("Invalid forum")
             return render_response(request, 'forum/merge.html', locals())
 
     else:
@@ -557,7 +558,7 @@ def move(request, forum_slug, topic_id):
     topic = get_object_or_404(Topic, pk=topic_id)
 
     if forum.locked or topic.locked:
-        hata="Kilitli konularda bu tür işlemler yapılamaz!"
+        hata = _("Forum or topic is locked")
         return render_response(request, 'forum/move.html', locals())
 
     if request.method == 'POST':
@@ -568,7 +569,7 @@ def move(request, forum_slug, topic_id):
             forum2 = form.cleaned_data['forum2']
 
             if int(forum2) == forum.id:
-                error = "Konu zaten bu forumda olduğu için taşınamaz!"
+                error = _("Topic is already in this forum")
                 return render_response(request, 'forum/move.html', locals())
 
             forum2_object=get_object_or_404(Forum, pk=int(forum2))
@@ -608,7 +609,7 @@ def move(request, forum_slug, topic_id):
 
             return HttpResponseRedirect(topic.get_absolute_url())
         else:
-            error = "Forum geçerli değil!"
+            error = _("Invalid forum")
             return render_response(request, 'forum/move.html', locals())
     else:
         form = MoveForm(auto_id=True)
@@ -714,10 +715,10 @@ def delete_post(request,forum_slug,topic_id, post_id):
         post_user=user.post_set.filter(id=post_id)
 
         if not post_user:
-            return HttpResponse("That is a Wrong way my friend :) ")
+            return HttpResponse(_("This is not your post"))
 
     if forum.locked or topic.locked:
-        return HttpResponse("Forum or topic is locked")
+        return HttpResponse(_("Forum or topic is locked"))
 
     if request.method == 'POST':
         post.delete()
@@ -728,11 +729,13 @@ def delete_post(request,forum_slug,topic_id, post_id):
 def report_abuse(request,post_id):
     post = get_object_or_404(Post, pk=post_id, hidden=False)
     if post.topic.locked:
-        return render_response(request, "forum/forum_error.html", {"message":"Bu konu kilitlenmiş olduğu için raporlanamaz."})
+        return render_response(request, "forum/forum_error.html",
+                {"message":_("This topic is locked and cannot be reported.")})
 
     try:
         AbuseReport.objects.get(post=post_id)
-        return render_response(request, "forum/forum_error.html", {"message":"Bu ileti daha önce raporlanmış."})
+        return render_response(request, "forum/forum_error.html",
+                {"message":_("This post was reported before.")})
     except ObjectDoesNotExist:
         if request.method == 'POST':
             form = AbuseForm(request.POST.copy())
@@ -760,7 +763,7 @@ def report_abuse(request,post_id):
                         }
                 send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, [ABUSE_MAIL_LIST], fail_silently=True)
                 return render_response(request, 'forum/forum_done.html', {
-                    "message": "İleti şikayetiniz ilgililere ulaştırılmıştır. Teşekkür Ederiz.",
+                    "message": _("Your report was sent to our admins. Thanks."),
                     "back": post.get_absolute_url()
                     })
         else:
@@ -793,11 +796,11 @@ def create_poll(request, forum_slug, topic_id):
 
     # check locks
     if forum.locked or topic.locked:
-        return HttpResponse('Forum or topic is locked')
+        return HttpResponse(_("Forum or topic is locked"))
 
     # check if it already has a poll
     if topic.poll:
-        return HttpResponse('Bu konuya zaten anket eklenmiş')
+        return HttpResponse(_("There's already a poll in this topic"))
 
     if request.method == 'POST':
         form = PollForm(request.POST.copy())
@@ -846,7 +849,7 @@ def change_poll(request, forum_slug, topic_id):
 
     # check locks
     if forum.locked or topic.locked:
-        return HttpResponse('Forum or topic is locked')
+        return HttpResponse(_("Forum or topic is locked"))
 
     if request.method == 'POST':
         form = PollForm(request.POST.copy())
@@ -928,11 +931,11 @@ def vote_poll(request,forum_slug,topic_id,option_id):
 
     # check locks
     if forum.locked or topic.locked:
-        return HttpResponse("Forum ya da başlık kilitlidir.")
+        return HttpResponse(_("Forum or topic is locked"))
 
     # check date
     if poll.date_limit and datetime.now() > poll.end_date:
-        return HttpResponse("Oylama süresi dolmuştur.")
+        return HttpResponse(_("Voting has ended"))
 
     if poll.allow_multiple_choices:
         # select/unselect option
@@ -1000,7 +1003,7 @@ def delete_poll(request, forum_slug, topic_id):
 
     # check locks
     if forum.locked or topic.locked:
-        return HttpResponse('Forum or topic is locked')
+        return HttpResponse(_("Forum or topic is locked"))
 
     topic.poll=None
     topic.save()
