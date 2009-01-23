@@ -14,6 +14,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from oi.settings import MEDIA_ROOT
 from oi.ideas.settings import IDEAS_PER_PAGE
 import datetime
+from django.utils.translation import ugettext as _
 
 
 def list(request, field="", filter_slug=""):
