@@ -4,9 +4,10 @@
 from django import forms
 from oi.ideas.models import Idea, RelatedCategory, Status
 from oi.st.forms import XssField
+from django.utils.translation import ugettext as _
 
 class CommentForm(forms.Form):
-    text = forms.CharField(label="Yorumunuz", required=True, widget=forms.Textarea(attrs={ 'cols':'83%', 'rows':'7'}))
+    text = forms.CharField(label=_("Comment"), required=True, widget=forms.Textarea(attrs={ 'cols':'83%', 'rows':'7'}))
 
 class NewIdeaForm(forms.ModelForm):
     class Meta:
