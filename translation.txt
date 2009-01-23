@@ -170,18 +170,18 @@ These are python files to be marked
 +   |   |-- urls.py
 -   |   |-- util.py // WHAT IS THIS?
 +   |   `-- views.py // mail things should be template based
-*   |-- ideas
++   |-- ideas
 +   |   |-- __init__.py
 +   |   |-- admin.py
 +   |   |-- feeds.py
 +   |   |-- forms.py
 +   |   |-- models.py
 +   |   |-- settings.py
-*   |   |-- templatetags
-*   |   |   |-- __init__.py
-*   |   |   `-- ideas.py
-*   |   |-- urls.py
-*   |   `-- views.py
++   |   |-- templatetags
++   |   |   |-- __init__.py
++   |   |   `-- ideas.py
++   |   |-- urls.py
++   |   `-- views.py // This may cause some problems since forum name and some categories are hardcoded
 *   |-- middleware
 *   |   |-- __init__.py
 *   |   |-- ban.py
