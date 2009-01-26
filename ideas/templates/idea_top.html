@@ -1,10 +1,11 @@
+{% load i18n %}
     <div class="idea_left">
         <div id="vote{{ idea.id }}_1"> 
-            <input id="img_{{ idea.id }}_1" value="Bu fikri sevdim" type="image" src="/media/img/new/ideas_vote{% ifequal idea.user_vote 1 %}d{% endifequal %}_1.png" onclick="oyla({{ idea.id }}, 1);" />
+            <input id="img_{{ idea.id }}_1" value="{% trans "I liked this idea" %}" type="image" src="/media/img/new/ideas_vote{% ifequal idea.user_vote 1 %}d{% endifequal %}_1.png" onclick="oyla({{ idea.id }}, 1);" />
         </div>
         <div class="idea_vote" id="vote{{ idea.id }}">{{ idea.vote_count }}</div>
         <div id="vote{{ idea.id }}_0">
-            <input id="img_{{ idea.id }}_0" tvalue="Bu fikri sevmedim" type="image" src="/media/img/new/ideas_vote{% ifequal idea.user_vote -1 %}d{% endifequal %}_0.png" onclick="oyla({{ idea.id }}, 0);" />
+            <input id="img_{{ idea.id }}_0" tvalue="{% trans "I didn't like this idea" %}" type="image" src="/media/img/new/ideas_vote{% ifequal idea.user_vote -1 %}d{% endifequal %}_0.png" onclick="oyla({{ idea.id }}, 0);" />
         </div>
     </div>
     <div class="idea_right">
@@ -12,26 +13,22 @@
         <span class="idea_status">&nbsp;{{ idea.status }}&nbsp;</span>
         <div class="idea_info">
             <span id="favoricikar{{ idea.id }}" class="favorite" {% if not idea.is_favorited %}style="display:none;"{% endif %}>
-                <a href="/yenifikir/ayrinti/1/favori/cikar" onclick="favori({{ idea.id  }}, 'cikar');return false;" title="Favorilerimden çıkar"><img src="/media/img/new/ideas_favorited.png" alt="Fikir favorilerinize eklenmiş" /></a>
+                <a href="/yenifikir/ayrinti/1/favori/cikar" onclick="favori({{ idea.id  }}, 'cikar');return false;" title="{% trans "Remove from my favourites" %}"><img src="/media/img/new/ideas_favorited.png" alt="{% trans "Idea is in your favourites" %}" /></a>
             </span>
             <span id="favoriekle{{ idea.id }}" class="favorite" {% if idea.is_favorited %}style="display:none;" {% endif %}>
-                <a href={% if user.is_authenticated %}"/yenifikir/ayrinti/1/favori/ekle" onclick="favori({{ idea.id }}, 'ekle'); return false;"{% else %}"/kullanici/giris/"{% endif %} title="Favorilerime ekle"><img src="/media/img/new/ideas_favorite.png" alt="Favorilere ekle" /></a>
-            </span> 
-            <a href="{{ idea.submitter.get_profile.get_absolute_url }}" title="{{ idea.submitter }} kullanıcısının profiline git">{{ idea.submitter }}</a>
-        tarafından {{ idea.submitted_date|date:"j M Y" }} tarihinde
-            <a href="{{ idea.category.get_absolute_url }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine
-            {% if idea.related_to %}<a href="/yenifikir/listele/ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak{% endif %} gönderildi. 
+                <a href={% if user.is_authenticated %}"/yenifikir/ayrinti/1/favori/ekle" onclick="favori({{ idea.id }}, 'ekle'); return false;"{% else %}"/kullanici/giris/"{% endif %} title="{% trans "Add to my favourites" %}"><img src="/media/img/new/ideas_favorite.png" alt="{% trans "Add to my favourites" %}" /></a>
+            </span>
+            {% if idea.related_to %}{% blocktrans with idea.submitter.get_profile.get_absolute_url as profile_url and idea.submitter as submitter and idea.submitted_date|date:"j M Y" as submitted_date and idea.category.get_absolute_url as category_url and idea.category as category and idea.related_to as related_to %}Was submitted by <a href="{{ profile_url }}" title="Go to profile">{{ submitter }}</a> at {{ submitted_date }} in <a href="{{ category_url }}" title="{{ category }}">{{ category }}</a> category and it's related to <a href="/yenifikir/listele/ilgili/{{ related_to }}" title="{{ related_to }}">{{ related_to }}</a>.{% endblocktrans %}{% else %}{% blocktrans with idea.submitter.get_profile.get_absolute_url as profile_url and idea.submitter as submitter and idea.submitted_date|date:"j M Y" as submitted_date and idea.category.get_absolute_url as category_url and idea.category as category %}Was submitted by <a href="{{ profile_url }}" title="Go to profile">{{ submitter }}</a> at {{ submitted_date }} in <a href="{{ category_url }}" title="{{ category }}">{{ category }}</a> category.{% endblocktrans %}{% endif %}
         </div>
         <div class="idea_content">{{ idea.description|linebreaksbr }}</div>
         <div class="idea_comments">
             <img alt="Yorum Yap" src="/media/img/new/icon_comment.png" />
             <a href="{{ idea.topic.get_latest_post_url }}" title="Yorumlar">
             {% if idea.topic.posts|add:"-1"  %}
-                {{ idea.topic.posts|add:"-1"  }} tane yorum yapıldı.
+            {% blocktrans count idea.topic.posts|add:"-1" as comment_count %}There is {{ comment_count }} comment.{% plural %}There are {{ comment_count }} comments.{% endblocktrans %}
             {% else %}
-                İlk yorum yapan siz olun !
+                {% trans "Be the first one to comment!" %}
             {% endif %}
             </a>
         {% block idea_detail %}{% endblock %}
         </div>
-

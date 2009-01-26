@@ -183,7 +183,7 @@ def add(request):
     else:
         form = NewIdeaForm(auto_id=True)
 
-    page_title = _("Add New Idea")
+    page_title = _("Submit New Idea")
     categories = Category.objects.all()
     return render_response(request, "idea_add_form.html", locals())
 
