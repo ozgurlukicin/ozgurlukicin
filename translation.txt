@@ -139,6 +139,16 @@ These are templates to be marked
 -   |-- ust_menu_ayrinti.html
 +   |-- video.html
 +   `-- videobox.html
++   ideas
++   |-- templates
++   |   |-- feeds
++   |   |   |-- ideafeed_description.html
++   |   |   `-- ideafeed_title.html
++   |   |-- idea_add_form.html
++   |   |-- idea_base.html
++   |   |-- idea_detail.html
++   |   |-- idea_list.html
++   |   `-- idea_top.html
 
 These are python files to be marked
 -----------------------------------
@@ -204,10 +214,10 @@ These are python files to be marked
 +   |   |-- admin.py
 +   |   |-- forms.py // has lots of code repeat (especially in password checking)
 +   |   |-- models.py // has too many imports
-*   |   |-- settings.py
-*   |   |-- sql
-*   |   |-- urls.py
-*   |   `-- views.py
++   |   |-- settings.py
++   |   |-- sql
++   |   |-- urls.py
++   |   `-- views.py // has e-mails
 *   |-- seminar
 *   |   |-- __init__.py
 *   |   |-- admin.py
