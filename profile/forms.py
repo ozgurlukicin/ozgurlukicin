@@ -33,7 +33,7 @@ class RegisterForm(forms.Form):
     jabber = forms.EmailField(label='Jabber', max_length=50, required=False, help_text=_("Not required"))
     icq = forms.CharField(label='ICQ', max_length=15, required=False, help_text=_("Not required"))
     contributes = forms.ModelMultipleChoiceField(label=_("Contributions"), queryset=Contribute.objects.all(), required=False, help_text=_("How can you contribute our community? (you may select more than one choice with holding down ctrl key, not required)"))
-    contributes_summary = forms.CharField(label=_("Comment"), widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), required=False, help_text=_("Make comments about your contribution (not required)")
+    contributes_summary = forms.CharField(label=_("Contribution comment"), widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), required=False, help_text=_("Make comments about your contribution (not required)")
     show_email = forms.BooleanField(label=_("Show my e-mail address"), required=False, help_text=_("Do you want other members to see your e-mail address in your profile page?"))
     show_birthday = forms.BooleanField(label=_("Show birth date"), required=False, help_text=_("Do you want other members to see your birth date in your profile page?"))
 
@@ -113,7 +113,7 @@ class ProfileEditForm(forms.Form):
     show_email = forms.BooleanField(label=_("Show e-mail address"), required=False, help_text=_("Do you want other members to see your e-mail address in your profile page?"))
     show_birthday = forms.BooleanField(label=_("Show birth date"), required=False, help_text=_("Do you want other members to see your birth date in your profile page?"))
     bio = XssField(label=_("Introduce yourself"), required=False, help_text=_("Here, you can introduce yourself briefly. This will be shown in your profile page."), max_length=2048, widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}))
-    signature = XssField(label=_("Sign"), widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), required=False, help_text=_("This will be shown under your posts in forum pages (512 characters max.)"), max_length=512)
+    signature = XssField(label=_("Signature"), widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), required=False, help_text=_("This will be shown under your posts in forum pages (512 characters max.)"), max_length=512)
     latitude = forms.DecimalField(label=_("Latitude"), max_digits=10, decimal_places=6)
     longitude = forms.DecimalField(label=_("Longitude"), max_digits=10, decimal_places=6)
 

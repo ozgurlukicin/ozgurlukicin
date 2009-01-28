@@ -203,7 +203,7 @@ These are python files to be marked
 +   |   |-- __init__.py
 +   |   |-- admin.py
 +   |   |-- forms.py // has lots of code repeat (especially in password checking)
-*   |   |-- models.py
++   |   |-- models.py // has too many imports
 *   |   |-- settings.py
 *   |   |-- sql
 *   |   |-- urls.py

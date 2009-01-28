@@ -16,32 +16,33 @@ from oi.settings import CITY_LIST
 from oi.st.models import Contribute
 
 from oi.shop.shopprofile.models import ShopProfile
+from django.utils.translation import ugettext as _
 
 class ForbiddenUsername(models.Model):
-    name = models.CharField("Kullanıcı adı", max_length=30)
+    name = models.CharField(_("Username"), max_length=30)
 
     def __unicode__(self):
         return self.name
 
     class Meta:
-        verbose_name = "Yasaklanan Kullanıcı Adı"
-        verbose_name_plural = "Yasaklanan Kullanıcı Adları"
+        verbose_name = _("Forbidden Username")
+        verbose_name_plural = _("Forbidden Usernames")
 
 class Avatar(models.Model):
-    name = models.CharField("Açıklama", max_length=32, unique=True)
+    name = models.CharField(_("Name"), max_length=32, unique=True)
     file = models.ImageField(upload_to="avatar/")
 
     def __unicode__(self):
         return unicode(self.file)
 
     class Meta:
-        verbose_name = "Avatar"
-        verbose_name_plural = "Avatarlar"
+        verbose_name = _("Avatar")
+        verbose_name_plural = _("Avatars")
 
 class LostPassword(models.Model):
-    user = models.ForeignKey(User, verbose_name='Kullanıcı')
-    key = models.CharField('Anahtar', max_length=40, unique=True)
-    key_expires = models.DateTimeField('Zaman Aşımı')
+    user = models.ForeignKey(User, verbose_name=_("User"))
+    key = models.CharField(_("Key"), max_length=40, unique=True)
+    key_expires = models.DateTimeField(_("Timeout"))
 
     def __unicode__(self):
         return "%s" % self.key
@@ -53,29 +54,29 @@ class LostPassword(models.Model):
             return False
 
     class Meta:
-        verbose_name = "Kayıp Parola"
-        verbose_name_plural = "Kayıp Parolalar"
+        verbose_name = _("Lost Password")
+        verbose_name_plural = _("Lost Passwords")
 
 class Profile(models.Model):
     user = models.ForeignKey(User, unique=True)
-    title = models.CharField("Ünvan", max_length=32, blank=True, help_text="'Forum Yöneticisi' gibi")
-    avatar = models.ForeignKey(Avatar, verbose_name="Avatar")
+    title = models.CharField(_("Title"), max_length=32, blank=True, help_text=_("example: 'Forum Moderator'"))
+    avatar = models.ForeignKey(Avatar, verbose_name=_("Avatar"))
     birthday = models.DateField(blank=True)
-    homepage = models.URLField('Ana Sayfa', blank=True, verify_exists=False, unique=False)
+    homepage = models.URLField(_("Web Page"), blank=True, verify_exists=False, unique=False)
     msn = models.EmailField('MSN', max_length=50, blank=True)
     jabber = models.EmailField('Jabber', max_length=50, blank=True)
     icq = models.CharField('ICQ', max_length=15, blank=True)
-    city = models.CharField('Şehir', blank=True, choices=CITY_LIST, max_length=40)
-    show_email = models.BooleanField('E-posta Göster', default=0)
-    show_birthday = models.BooleanField('Doğum Tarihini Göster', default=0)
-    contributes = models.ManyToManyField(Contribute, blank=True, verbose_name='Katkılar')
-    contributes_summary = models.TextField('Katkı Açıklaması', blank=True)
-    bio = models.TextField("Kendinizi Tanıtın", blank=True)
+    city = models.CharField(_("City"), blank=True, choices=CITY_LIST, max_length=40)
+    show_email = models.BooleanField(_("Show e-mail address"), default=False)
+    show_birthday = models.BooleanField(_("Show birth date"), default=False)
+    contributes = models.ManyToManyField(Contribute, blank=True, verbose_name=_("Contributions"))
+    contributes_summary = models.TextField(_("Contribution Comment"), blank=True)
+    bio = models.TextField(_("Introduce yourself"), blank=True)
     activation_key = models.CharField(max_length=40)
     key_expires = models.DateTimeField()
-    signature = models.TextField('İmza', blank=True, max_length=512)
-    latitude = models.DecimalField('Enlem', max_digits=10, decimal_places=6, default=0)
-    longitude = models.DecimalField('Boylam', max_digits=10, decimal_places=6, default=0)
+    signature = models.TextField(_("Signature"), blank=True, max_length=512)
+    latitude = models.DecimalField(_("Latitude"), max_digits=10, decimal_places=6, default=0)
+    longitude = models.DecimalField(_("Longitude"), max_digits=10, decimal_places=6, default=0)
 
     def have_shopprofile(self):
         # helper method for checking if the user has created shop profile
@@ -88,8 +89,8 @@ class Profile(models.Model):
         return self.user.username
 
     class Meta:
-        verbose_name = "Kullanıcı Profili"
-        verbose_name_plural = "Kullanıcı Profilleri"
+        verbose_name = _("User Profile")
+        verbose_name_plural = _("User Profiles")
 
     def get_absolute_url(self):
         return '/kullanici/profil/%s/' % self.user.username
