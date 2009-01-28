@@ -182,11 +182,11 @@ These are python files to be marked
 +   |   |   `-- ideas.py
 +   |   |-- urls.py
 +   |   `-- views.py // This may cause some problems since forum name and some categories are hardcoded
-*   |-- middleware
-*   |   |-- __init__.py
-*   |   |-- ban.py
-*   |   |-- debug.py
-*   |   `-- threadlocals.py
++   |-- middleware
++   |   |-- __init__.py
++   |   |-- ban.py
++   |   |-- debug.py
++   |   `-- threadlocals.py
 *   |-- petition
 *   |   |-- __init__.py
 *   |   |-- models.py
@@ -200,9 +200,9 @@ These are python files to be marked
 *   |   |-- __init__.py
 *   |   `-- models.py
 *   |-- profile
-*   |   |-- __init__.py
-*   |   |-- admin.py
-*   |   |-- forms.py
++   |   |-- __init__.py
++   |   |-- admin.py
++   |   |-- forms.py // has lots of code repeat (especially in password checking)
 *   |   |-- models.py
 *   |   |-- settings.py
 *   |   |-- sql
