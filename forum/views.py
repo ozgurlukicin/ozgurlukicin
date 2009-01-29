@@ -308,29 +308,17 @@ def reply(request, forum_slug, topic_id, quote_id=False):
             else:
                 in_reply_to = topic.get_email_id()
 
-            # sorry, we have to send <style> to be able to display quotation correctly. Hardcode for now and I know, It's really UGLY!
-            # FIXME: Give postmarkup.py's QuoteTag e-mail rendering support
-
-            css = """<style type="text/css">
-.quote {
-    border: 1px solid #CCCCCC;
-    padding: 10px;
-    margin-bottom: 8px;
-    background-color: #E1E3FF;
-    color: #51615D;
-}
-
-.quote p {
-    padding-left: 12px;
-    font-style: italic;
-}
-</style>"""
-
-            # send email to everyone who follows this topic.
+            email_dict = {
+                    "WEB_URL": WEB_URL,
+                    "post": post,
+                    "SITE_NAME": SITE_NAME,
+                    "topic": post.topic.title,
+                    }
+            email_body = loader.get_template("mails/post.html").render(Context(email_dict))
+            email_title = _("[%(SITE_NAME)s-forum] Re: %(topic)s") % email_dict
             watchlists = WatchList.objects.filter(topic__id=topic_id)
             for watchlist in watchlists:
-                send_mail_with_header('[Ozgurlukicin-forum] Re: %s' % topic.title,
-                                      '%s\n%s<br /><br /><a href="%s">%s</a>' % (css, render_bbcode(form.cleaned_data['text']), post_url, post_url),
+                send_mail_with_header(email_title, email_body, post_url, post_url),
                                       '%s <%s>' % (request.user.username, FORUM_FROM_EMAIL),
                                       [watchlist.user.email],
                                       headers = {'Message-ID': post.get_email_id(),

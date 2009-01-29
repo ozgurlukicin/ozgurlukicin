@@ -179,7 +179,7 @@ These are python files to be marked
 +   |   |-- tools.py
 +   |   |-- urls.py
 -   |   |-- util.py // WHAT IS THIS?
-+   |   `-- views.py // mail things should be template based
++   |   `-- views.py // mail things should be tested carefully
 +   |-- ideas
 +   |   |-- __init__.py
 +   |   |-- admin.py
@@ -217,7 +217,7 @@ These are python files to be marked
 +   |   |-- settings.py
 +   |   |-- sql
 +   |   |-- urls.py
-+   |   `-- views.py // has e-mails
++   |   `-- views.py
 *   |-- seminar
 *   |   |-- __init__.py
 *   |   |-- admin.py
