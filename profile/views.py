@@ -182,7 +182,7 @@ def user_register(request):
             email_dict = {
                     'SITE_NAME': SITE_NAME,
                     'date': datetime.datetime.now(),
-                    'ip_addr': request.META['REMOTE_ADDR'],
+                    'ip': request.META['REMOTE_ADDR'],
                     'user': user.username,
                     'link': '%s/kullanici/onay/%s/%s' % (WEB_URL, form.cleaned_data['username'], activation_key),
                     }
@@ -223,35 +223,35 @@ def user_confirm(request, name, key):
 
 def lost_password(request):
     if request.method == 'POST':
-       form = LostPasswordForm(request.POST)
-       if form.is_valid():
-           # generate new key and e-mail it to user
-           salt = sha.new(str(random.random())).hexdigest()[8:]
-           key = sha.new(salt).hexdigest()
+        form = LostPasswordForm(request.POST)
+        if form.is_valid():
+            # generate new key and e-mail it to user
+            salt = sha.new(str(random.random())).hexdigest()[8:]
+            key = sha.new(salt).hexdigest()
 
-           u = User.objects.get(username=form.cleaned_data['username'])
-           lostpwd = LostPassword(user=u)
-           lostpwd.key = key
-           lostpwd.key_expires = datetime.datetime.today() + datetime.timedelta(1)
-           lostpwd.save()
+            u = User.objects.get(username=form.cleaned_data['username'])
+            lostpwd = LostPassword(user=u)
+            lostpwd.key = key
+            lostpwd.key_expires = datetime.datetime.today() + datetime.timedelta(1)
+            lostpwd.save()
 
-           # mail it
-           email_dict = {
-                   "SITE_NAME": SITE_NAME,
-                   'date': datetime.datetime.now(),
-                   'ip': request.META['REMOTE_ADDR'],
-                   'user': form.cleaned_data['username'],
-                   'link': 'http://www.ozgurlukicin.com/kullanici/kayip/degistir/%s' % key,
-                   }
+            # mail it
+            email_dict = {
+                    "SITE_NAME": SITE_NAME,
+                    'date': datetime.datetime.now(),
+                    'ip': request.META['REMOTE_ADDR'],
+                    'user': form.cleaned_data['username'],
+                    'link': 'http://www.ozgurlukicin.com/kullanici/kayip/degistir/%s' % key,
+                    }
 
-           email_subject = _("%(SITE_NAME)s User Password") % SITE_NAME
-           email_body = loader.get_template("mails/password.html").render(Context(email_dict))
-           email_to = form.cleaned_data['email']
+            email_subject = _("%(SITE_NAME)s User Password") % SITE_NAME
+            email_body = loader.get_template("mails/password.html").render(Context(email_dict))
+            email_to = form.cleaned_data['email']
 
-           send_mail(email_subject, email_body, DEFAULT_FROM_EMAIL, [email_to], fail_silently=True)
-           return render_response(request, 'user/lostpassword_done.html')
-       else:
-           return render_response(request, 'user/lostpassword.html', {'form': form})
+            send_mail(email_subject, email_body, DEFAULT_FROM_EMAIL, [email_to], fail_silently=True)
+            return render_response(request, 'user/lostpassword_done.html')
+        else:
+            return render_response(request, 'user/lostpassword.html', {'form': form})
     else:
         form = LostPasswordForm()
         return render_response(request, 'user/lostpassword.html', {'form': form})
