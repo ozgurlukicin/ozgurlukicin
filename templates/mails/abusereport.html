@@ -1,0 +1,11 @@
+{% load i18n %}
+{% blocktrans %}
+A post in "{{ post.topic }}" has been reported. Visit this link to see the post:
+{{ WEB_URL }}{{ post.get_absolute_url }}
+
+Post was containing this message(written by {{ post.author }}):
+{{ post.text }}
+
+Report message was containing this message(written by {{ report.submitter }}):
+{{ report.reason }}
+{% endblocktrans %}

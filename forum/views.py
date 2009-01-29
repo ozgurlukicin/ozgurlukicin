@@ -30,7 +30,7 @@ from oi.poll.models import Poll, PollOption, PollVote
 
 # import our function for sending e-mails and setting
 from oi.st.wrappers import send_mail_with_header
-from oi.settings import WEB_URL, DEFAULT_FROM_EMAIL
+from oi.settings import WEB_URL, DEFAULT_FROM_EMAIL, SITE_NAME
 # import bbcode renderer for quotation
 from oi.forum.postmarkup import render_bbcode
 from oi.profile.models import Profile
@@ -743,25 +743,14 @@ def report_abuse(request,post_id):
                 report = AbuseReport(post=post, submitter=request.user, reason=form.cleaned_data["reason"])
                 report.save()
                 # now send mail to staff
-                email_subject = "Özgürlükİçin Forum - İleti Şikayeti"
-                email_body ="""
-%(topic)s başlıklı konudaki bir ileti şikayet edildi.
-İletiyi forumda görmek için buraya tıklayın: %(link)s
-
-İletinin içeriği buydu (%(sender)s tarafından yazılmış):
-%(message)s
-Şikayet metni buydu (%(reporter)s tarafından şikayet edilmiş):
-%(reason)s
-"""
+                email_subject = _("%(SITE_NAME)s Forum - Abuse Report") % SITE_NAME
                 email_dict = {
-                        "topic":post.topic.title,
-                        "reporter":request.user.username,
-                        "link":WEB_URL + post.get_absolute_url(),
-                        "message":striptags(render_bbcode(post.text)),
-                        "reason":striptags(report.reason),
-                        "sender":post.author.username,
+                        "post": post,
+                        "report": report,
+                        "WEB_URL": WEB_URL,
                         }
-                send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, [ABUSE_MAIL_LIST], fail_silently=True)
+                email_body = loader.get_template("mails/abusereport.html").render(Context(email_dict))
+                send_mail(email_subject, email_body, DEFAULT_FROM_EMAIL, [ABUSE_MAIL_LIST], fail_silently=True)
                 return render_response(request, 'forum/forum_done.html', {
                     "message": _("Your report was sent to our admins. Thanks."),
                     "back": post.get_absolute_url()
