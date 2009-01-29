@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-22 13:38+0200\n"
+"POT-Creation-Date: 2009-01-29 13:42+0200\n"
 "PO-Revision-Date: 2008-12-29 16:37+0200\n"
 "Last-Translator: Akın Ömeroğlu <akin@omeroglu.net>\n"
 "Language-Team:  <tr@li.org>\n"
@@ -18,13 +18,1179 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: bug/models.py:15
+#, fuzzy
+msgid "New"
+msgstr "Haberler"
+
+#: bug/models.py:16
+msgid "Assigned"
+msgstr ""
+
+#: bug/models.py:17
+msgid "Closed"
+msgstr ""
+
+#: bug/models.py:20
+msgid "Preventive"
+msgstr ""
+
+#: bug/models.py:21
+msgid "Important"
+msgstr ""
+
+#: bug/models.py:22
+msgid "Normal"
+msgstr ""
+
+#: bug/models.py:23
+msgid "Unimportant"
+msgstr ""
+
+#: bug/models.py:24
+msgid "Improvement"
+msgstr ""
+
+#: bug/models.py:28 flatpages/models.py:16 forum/forms.py:22
+#: ideas/models.py:71 profile/models.py:62 templates/bug/bug_main.html:13
+msgid "Title"
+msgstr ""
+
+#: bug/models.py:29 bug/models.py:54 flatpages/models.py:20 ideas/models.py:72
+#: templates/bug/bug_main.html:21 templates/forum/forum_list.html:81
+msgid "Date"
+msgstr ""
+
+#: bug/models.py:30
+#, fuzzy
+msgid "Sender"
+msgstr "Arama"
+
+#: bug/models.py:31
+msgid "Assignee"
+msgstr ""
+
+#: bug/models.py:32 forum/models.py:266 ideas/models.py:74
+#, fuzzy
+msgid "Description"
+msgstr "Kayıt Ol"
+
+#: bug/models.py:33 ideas/models.py:30 ideas/models.py:75
+#: templates/bug/bug_main.html:17
+msgid "Status"
+msgstr ""
+
+#: bug/models.py:34 templates/bug/bug_main.html:19
+msgid "Priority"
+msgstr ""
+
+#: bug/models.py:51 templates/bug/bug_add.html:9
+#: templates/bug/bug_detail.html:9 templates/bug/bug_main.html:10
+msgid "Bug"
+msgstr ""
+
+#: bug/models.py:52 forum/models.py:31 templates/fs/fs_detail.html:42
+#: templates/game/game_detail.html:109 templates/howto/howto_detail.html:62
+#: templates/news/news_detail.html:46 templates/package/package_detail.html:73
+msgid "Author"
+msgstr ""
+
+#: bug/models.py:53 ideas/forms.py:10
+msgid "Comment"
+msgstr ""
+
 #: feedjack/admin.py:31
 msgid "Fields updated automatically by Feedjack"
 msgstr ""
 
-#: templates/base.html:7 templates/printable.html:5
-#: templates/seminar/seminar_detail.html:5
+#: flatpages/models.py:15
+msgid "URL"
+msgstr ""
+
+#: flatpages/models.py:17
+#, fuzzy
+msgid "Text"
+msgstr "Sonraki"
+
+#: flatpages/models.py:21
+msgid "Template name"
+msgstr ""
+
+#: flatpages/models.py:24
+msgid "Static page"
+msgstr ""
+
+#: flatpages/models.py:25
+#, fuzzy
+msgid "Static pages"
+msgstr "Paketler"
+
+#: forum/forms.py:23 forum/forms.py:41 forum/models.py:32 forum/models.py:92
+#: forum/models.py:319
+msgid "Post"
+msgstr ""
+
+#: forum/forms.py:24 forum/models.py:163 ideas/models.py:78
+#: ideas/templates/idea_detail.html:12 templates/flatpages/default.html:52
+#: templates/fs/fs_detail.html:26 templates/game/game_detail.html:90
+#: templates/howto/howto_detail.html:39 templates/news/news_detail.html:42
+#: templates/package/package_detail.html:57
+msgid "Tags"
+msgstr ""
+
+#: forum/forms.py:24
+msgid ""
+"You may select multiple tags with pressing and holding CTRL key (max. 5)"
+msgstr ""
+
+#: forum/forms.py:36
+msgid "You may select a maximum of 5 tags. Please select less tags."
+msgstr ""
+
+#: forum/forms.py:44 forum/models.py:30 forum/models.py:156
+#: forum/models.py:233 forum/models.py:332
+#: templates/forum/forum_detail.html:17 templates/forum/unread.html:10
+msgid "Topic"
+msgstr ""
+
+#: forum/forms.py:52 forum/models.py:155 forum/models.py:290
+#: templates/base.html:20 templates/footer.html:15 templates/menu.html:22
+#: templates/search.html:75 templates/forum/change_poll.html:5
+#: templates/forum/create_poll.html:5 templates/forum/forum_base.html:11
+#: templates/forum/forum_detail.html:12 templates/forum/forum_list.html:9
+#: templates/forum/forum_list.html.py:14 templates/forum/new_topic.html:10
+#: templates/forum/post_edit.html:11 templates/forum/post_list.html:11
+#: templates/forum/reply.html:11 templates/forum/report.html:11
+#: templates/forum/topic.html:8 templates/forum/topic.html.py:14
+#: templates/forum/topic.html:183 templates/forum/unread.html:6
+#: templates/tag/tag_detail.html:70
+msgid "Forum"
+msgstr "Forum"
+
+#: forum/forms.py:60
+msgid "Reason of Complaint"
+msgstr ""
+
+#: forum/forms.py:60
+msgid "(512 characters max.)"
+msgstr ""
+
+#: forum/forms.py:63
+msgid "End Date"
+msgstr ""
+
+#: forum/forms.py:63
+msgid "Specify when voting will end. like 30/8/2008."
+msgstr ""
+
+#: forum/forms.py:64
+msgid "1st Choice"
+msgstr ""
+
+#: forum/forms.py:65
+msgid "2nd Choice"
+msgstr ""
+
+#: forum/forms.py:66
+msgid "3rd Choice"
+msgstr ""
+
+#: forum/forms.py:67
+msgid "4th Choice"
+msgstr ""
+
+#: forum/forms.py:68
+msgid "5th Choice"
+msgstr ""
+
+#: forum/forms.py:69
+msgid "6th Choice"
+msgstr ""
+
+#: forum/forms.py:70
+msgid "7th Choice"
+msgstr ""
+
+#: forum/forms.py:71
+msgid "8th Choice"
+msgstr ""
+
+#: forum/forms.py:82
+msgid "You have to specify ending date for voting."
+msgstr ""
+
+#: forum/models.py:33 forum/models.py:159 forum/models.py:267
+#: forum/models.py:300 ideas/models.py:85
+msgid "Hidden"
+msgstr ""
+
+#: forum/models.py:34
+msgid "Create date"
+msgstr ""
+
+#: forum/models.py:35
+msgid "Update date"
+msgstr ""
+
+#: forum/models.py:36
+msgid "Number of updates"
+msgstr ""
+
+#: forum/models.py:37
+msgid "Last Editor"
+msgstr ""
+
+#: forum/models.py:38
+msgid "IP address"
+msgstr ""
+
+#: forum/models.py:93 templates/forum/forum_detail.html:19
+#: templates/forum/forum_list.html:18 templates/forum/unread.html:11
+msgid "Posts"
+msgstr ""
+
+#: forum/models.py:95
+msgid "Can see author ip"
+msgstr ""
+
+#: forum/models.py:96
+msgid "Can hide"
+msgstr ""
+
+#: forum/models.py:97
+msgid "Can see hidden posts"
+msgstr ""
+
+#: forum/models.py:157
+msgid "Sticy"
+msgstr ""
+
+#: forum/models.py:158 forum/models.py:268
+msgid "Locked"
+msgstr ""
+
+#: forum/models.py:160 forum/models.py:270
+msgid "Number of posts"
+msgstr ""
+
+#: forum/models.py:161
+msgid "Number of views"
+msgstr ""
+
+#: forum/models.py:162
+msgid "Latest posts"
+msgstr ""
+
+#: forum/models.py:164 templates/forum/topic.html:31
+msgid "Poll"
+msgstr ""
+
+#: forum/models.py:234 templates/forum/forum_list.html:16
+msgid "Topics"
+msgstr ""
+
+#: forum/models.py:236
+msgid "Can hide topic"
+msgstr ""
+
+#: forum/models.py:237
+msgid "Can stick topic"
+msgstr ""
+
+#: forum/models.py:238
+msgid "Can lock topic"
+msgstr ""
+
+#: forum/models.py:239
+msgid "Can tag topic"
+msgstr ""
+
+#: forum/models.py:240
+msgid "Can see hidden topics"
+msgstr ""
+
+#: forum/models.py:241
+msgid "Can merge topic"
+msgstr ""
+
+#: forum/models.py:242
+msgid "Can move topic"
+msgstr ""
+
+#: forum/models.py:243
+#, fuzzy
+msgid "Can create poll"
+msgstr "Parola değiştir"
+
+#: forum/models.py:244
+#, fuzzy
+msgid "Can change poll"
+msgstr "Parola değiştir"
+
+#: forum/models.py:263 forum/models.py:311 ideas/models.py:42
+#: ideas/models.py:59 ideas/models.py:76
+msgid "Category"
+msgstr ""
+
+#: forum/models.py:264 ideas/models.py:13 ideas/models.py:24
+#: ideas/models.py:35 ideas/models.py:49 ideas/models.py:60
+#: profile/forms.py:24 profile/forms.py:104 profile/models.py:32
+#: templates/user/profile.html:57
+#, fuzzy
+msgid "Name"
+msgstr "Oyun"
+
+#: forum/models.py:265 ideas/models.py:36
+msgid "SEF name"
+msgstr ""
+
+#: forum/models.py:269
+msgid "Number of topics"
+msgstr ""
+
+#: forum/models.py:271 templates/forum/forum_detail.html:23
+#: templates/forum/forum_list.html:20 templates/forum/unread.html:13
+msgid "Latest Post"
+msgstr ""
+
+#: forum/models.py:272 forum/models.py:301
+msgid "Ordering"
+msgstr ""
+
+#: forum/models.py:291
+#, fuzzy
+msgid "Forums"
+msgstr "Forum"
+
+#: forum/models.py:293
+msgid "Can hide forum"
+msgstr ""
+
+#: forum/models.py:294
+msgid "Can lock forum"
+msgstr ""
+
+#: forum/models.py:295
+msgid "Can see hidden forums"
+msgstr ""
+
+#: forum/models.py:299
+msgid "Kategory name"
+msgstr ""
+
+#: forum/models.py:312 ideas/models.py:43 ideas/templates/idea_base.html:67
+msgid "Categories"
+msgstr ""
+
+#: forum/models.py:314
+msgid "Can hide category"
+msgstr ""
+
+#: forum/models.py:315
+msgid "Can see hidden categories"
+msgstr ""
+
+#: forum/models.py:320
+#, fuzzy
+msgid "Reporter"
+msgstr "Kayıt Ol"
+
+#: forum/models.py:321
+msgid "Reason"
+msgstr ""
+
+#: forum/models.py:327
+msgid "Abuse Report"
+msgstr ""
+
+#: forum/models.py:328
+msgid "Abuse Reports"
+msgstr ""
+
+#: forum/models.py:331 ideas/models.py:112 profile/models.py:43
+#, fuzzy
+msgid "User"
+msgstr "Kullanıcı Kutusu"
+
+#: forum/models.py:341
+msgid "Watchlist"
+msgstr ""
+
+#: forum/models.py:342
+msgid "Watchlists"
+msgstr ""
+
+#: forum/views.py:141 templates/forum/forum_base.html:48
+msgid "Updated Topics"
+msgstr ""
+
+#: forum/views.py:274
+msgid "You are already following this topic."
+msgstr ""
+
+#: forum/views.py:382
+msgid "This is not your post."
+msgstr ""
+
+#: forum/views.py:386 forum/views.py:508 forum/views.py:561 forum/views.py:721
+#: forum/views.py:799 forum/views.py:852 forum/views.py:934
+#: forum/views.py:1006
+msgid "Forum or topic is locked"
+msgstr ""
+
+#: forum/views.py:416
+msgid "Forum is locked"
+msgstr ""
+
+#: forum/views.py:518
+msgid "You can't merge the same topic"
+msgstr ""
+
+#: forum/views.py:547 forum/views.py:612
+msgid "Invalid forum"
+msgstr ""
+
+#: forum/views.py:572
+msgid "Topic is already in this forum"
+msgstr ""
+
+#: forum/views.py:718
+msgid "This is not your post"
+msgstr ""
+
+#: forum/views.py:733
+msgid "This topic is locked and cannot be reported."
+msgstr ""
+
+#: forum/views.py:738
+msgid "This post was reported before."
+msgstr ""
+
+#: forum/views.py:766
+msgid "Your report was sent to our admins. Thanks."
+msgstr ""
+
+#: forum/views.py:803
+msgid "There's already a poll in this topic"
+msgstr ""
+
+#: forum/views.py:938
+msgid "Voting has ended"
+msgstr ""
+
+#: ideas/feeds.py:18 ideas/templates/idea_base.html:5 templates/base.html:45
+#: templates/footer.html:14 templates/menu.html:14
+msgid "Brainstorm"
+msgstr "Beyin"
+
+#: ideas/models.py:19
+msgid "Status Category"
+msgstr ""
+
+#: ideas/models.py:20
+msgid "Status Categories"
+msgstr ""
+
+#: ideas/models.py:31
+msgid "Statuses"
+msgstr ""
+
+#: ideas/models.py:55
+msgid "Related Category"
+msgstr ""
+
+#: ideas/models.py:56
+msgid "Related Categories"
+msgstr ""
+
+#: ideas/models.py:66
+msgid "Related"
+msgstr ""
+
+#: ideas/models.py:67
+msgid "Relateds"
+msgstr ""
+
+#: ideas/models.py:71
+msgid "Idea title"
+msgstr ""
+
+#: ideas/models.py:73 templates/bug/bug_main.html:15
+msgid "Submitter"
+msgstr ""
+
+#: ideas/models.py:74
+msgid "Explain your idea here."
+msgstr ""
+
+#: ideas/models.py:77
+msgid "Related to this"
+msgstr ""
+
+#: ideas/models.py:77
+msgid "You may leave this field blank."
+msgstr ""
+
+#: ideas/models.py:79
+msgid "Vote count"
+msgstr ""
+
+#: ideas/models.py:80
+msgid "Duplicate"
+msgstr ""
+
+#: ideas/models.py:81
+msgid "Is duplicate"
+msgstr ""
+
+#: ideas/models.py:82
+msgid "Related forum address"
+msgstr ""
+
+#: ideas/models.py:82
+msgid "Write related forum address if it exists."
+msgstr ""
+
+#: ideas/models.py:83
+msgid "Bug Numbers"
+msgstr ""
+
+#: ideas/models.py:83
+msgid ""
+"Enter related bug numbers seperated my commasi if exists. Example: 123, 562"
+msgstr ""
+
+#: ideas/models.py:84
+msgid "File"
+msgstr ""
+
+#: ideas/models.py:86
+msgid "Forum topic for this idea"
+msgstr ""
+
+#: ideas/models.py:95
+msgid "New Idea"
+msgstr ""
+
+#: ideas/models.py:96 ideas/views.py:139 ideas/templates/idea_base.html:11
+#: ideas/templates/idea_base.html.py:49 ideas/templates/idea_base.html:51
+#, fuzzy
+msgid "New Ideas"
+msgstr "Haberler"
+
+#: ideas/models.py:99
+msgid "Voted idea"
+msgstr ""
+
+#: ideas/models.py:100
+msgid "Voter"
+msgstr ""
+
+#: ideas/models.py:101 ideas/models.py:108
+msgid "Vote"
+msgstr ""
+
+#: ideas/models.py:109
+#, fuzzy
+msgid "Votes"
+msgstr "Haberler"
+
+#: ideas/models.py:113 ideas/models.py:119
+msgid "Favourite"
+msgstr ""
+
+#: ideas/models.py:120
+msgid "Favourites"
+msgstr ""
+
+#: ideas/views.py:25
+#, python-format
+msgid "ideas in %s category"
+msgstr ""
+
+#: ideas/views.py:28
+#, python-format
+msgid "ideas tagged %s"
+msgstr ""
+
+#: ideas/views.py:32
+#, python-format
+msgid "ideas related to %s"
+msgstr ""
+
+#: ideas/views.py:36
+#, python-format
+msgid "ideas added by %s"
+msgstr ""
+
+#: ideas/views.py:40 ideas/templates/idea_base.html:57
+msgid "Today's popular ideas"
+msgstr ""
+
+#: ideas/views.py:43 ideas/templates/idea_base.html:58
+msgid "This week's popular ideas"
+msgstr ""
+
+#: ideas/views.py:46 ideas/templates/idea_base.html:59
+msgid "This month's popular ideas"
+msgstr ""
+
+#: ideas/views.py:48 ideas/templates/idea_base.html:60
+msgid "Alltime popular ideas"
+msgstr ""
+
+#: ideas/views.py:52 ideas/templates/idea_base.html:61
+msgid "Recently commented ideas"
+msgstr ""
+
+#: ideas/views.py:55 ideas/templates/idea_base.html:62
+msgid "Latest Ideas"
+msgstr ""
+
+#: ideas/views.py:58
+msgid "Resolved"
+msgstr ""
+
+#: ideas/views.py:60 ideas/templates/idea_base.html:64
+msgid "Resolved ideas"
+msgstr ""
+
+#: ideas/views.py:62 ideas/views.py:64 ideas/templates/idea_base.html:63
+msgid "Looking for Volunteers"
+msgstr ""
+
+#: ideas/views.py:66
+msgid "Favourite ideas"
+msgstr ""
+
+#: ideas/views.py:77
+msgid "Popular ideas of last two days"
+msgstr ""
+
+#: ideas/views.py:81
+msgid "Last five ideas"
+msgstr ""
+
+#: ideas/views.py:131
+#, python-format
+msgid "Details of idea number %d"
+msgstr ""
+
+#: ideas/views.py:165 ideas/templates/idea_detail.html:28
+msgid "Related Forum Link"
+msgstr ""
+
+#: ideas/views.py:167 ideas/views.py:226
+msgid "Related bugs"
+msgstr ""
+
+#: ideas/views.py:186 ideas/templates/idea_add_form.html:3
+msgid "Submit New Idea"
+msgstr ""
+
+#: ideas/templates/idea_add_form.html:11
+#, fuzzy
+msgid "Idea couldn't be submitted, please fix the errors below."
+msgstr "Lütfen aşağıdaki hatayı düzeltin."
+
+#: ideas/templates/idea_add_form.html:27 templates/game/game_detail.html:27
+#: templates/howto/howto_detail.html:26
+msgid "Submit"
+msgstr ""
+
+#: ideas/templates/idea_base.html:5 templates/base.html:7
+#: templates/printable.html:5 templates/seminar/seminar_detail.html:5
 msgid "Özgürlük için..."
+msgstr ""
+
+#: ideas/templates/idea_base.html:39 templates/base.html:63
+#: templates/forum/forum_base.html:40 templates/user/login.html:27
+msgid "Login"
+msgstr "Giriş"
+
+#: ideas/templates/idea_base.html:41 templates/base.html:65
+#: templates/forum/forum_base.html:42
+msgid "Register"
+msgstr "Kayıt Ol"
+
+#: ideas/templates/idea_base.html:41 profile/models.py:57
+#: templates/user/lostpassword.html:3 templates/user/lostpassword_done.html:3
+#, fuzzy
+msgid "Lost Password"
+msgstr "Parola değiştir"
+
+#: ideas/templates/idea_base.html:43 templates/base.html:67
+#: templates/forum/forum_base.html:44
+#, python-format
+msgid "Hello %(username)s!"
+msgstr "Merhaba %(username)s!"
+
+#: ideas/templates/idea_base.html:44 templates/base.html:68
+#, python-format
+msgid ""
+"You can display your profile page by clicking <a href=\"%(profile_url)s"
+"\">here</a> or you can logout by clicking <a class=\"sari\" href=\"/"
+"kullanici/cikis/\">here</a>."
+msgstr ""
+
+#: ideas/templates/idea_base.html:51
+msgid "New Ideas Mainpage"
+msgstr ""
+
+#: ideas/templates/idea_base.html:52
+msgid "Submit Idea"
+msgstr ""
+
+#: ideas/templates/idea_base.html:54
+msgid "My Ideas"
+msgstr ""
+
+#: ideas/templates/idea_base.html:55
+msgid "Favuorite Ideas"
+msgstr ""
+
+#: ideas/templates/idea_base.html:74 templates/base.html:72
+#: templates/base.html.py:75 templates/forum/forum_base.html:57
+#: templates/forum/forum_base.html.py:60
+msgid "Search"
+msgstr "Arama"
+
+#: ideas/templates/idea_base.html:78 templates/base.html:76
+#: templates/forum/forum_base.html:61
+msgid "Advanced<br />Search"
+msgstr "Gelişmiş<br />Arama"
+
+#: ideas/templates/idea_detail.html:19
+msgid "Bug reports"
+msgstr ""
+
+#: ideas/templates/idea_detail.html:22
+#, python-format
+msgid ""
+"Bug <a href=\"http://bugs.pardus.org.tr/show_bug.cgi?id=%(bug)s\">#%(bug)s</"
+"a> is related with this idea"
+msgstr ""
+
+#: ideas/templates/idea_detail.html:34
+msgid "Ideas that were marked as duplicate of this idea"
+msgstr ""
+
+#: ideas/templates/idea_detail.html:37 templates/forum/topic.html:42
+#, python-format
+msgid "(%(vote_count)s vote)"
+msgid_plural "(%(vote_count)s votes)"
+msgstr[0] ""
+
+#: ideas/templates/idea_detail.html:44
+msgid "Edit idea"
+msgstr ""
+
+#: ideas/templates/idea_detail.html:47
+msgid "Report duplicate idea"
+msgstr ""
+
+#: ideas/templates/idea_detail.html:48
+#, fuzzy
+msgid "Change idea status"
+msgstr "Parola değiştir"
+
+#: ideas/templates/idea_detail.html:49
+msgid "Delete idea"
+msgstr ""
+
+#: ideas/templates/idea_detail.html:53
+msgid "Did you see a duplicate of this idea? Then, help us by reporting it!"
+msgstr ""
+
+#: ideas/templates/idea_detail.html:54
+msgid "Idea number"
+msgstr ""
+
+#: ideas/templates/idea_detail.html:55 templates/forum/report.html:20
+msgid "Report"
+msgstr ""
+
+#: ideas/templates/idea_detail.html:67 templates/bug/bug_detail.html:23
+#, fuzzy
+msgid "Change"
+msgstr "Parola değiştir"
+
+#: ideas/templates/idea_list.html:12
+msgid "Submit new idea"
+msgstr ""
+
+#: ideas/templates/idea_top.html:4
+msgid "I liked this idea"
+msgstr ""
+
+#: ideas/templates/idea_top.html:8
+msgid "I didn't like this idea"
+msgstr ""
+
+#: ideas/templates/idea_top.html:16
+msgid "Remove from my favourites"
+msgstr ""
+
+#: ideas/templates/idea_top.html:16
+msgid "Idea is in your favourites"
+msgstr ""
+
+#: ideas/templates/idea_top.html:19
+msgid "Add to my favourites"
+msgstr ""
+
+#: ideas/templates/idea_top.html:21
+#, python-format
+msgid ""
+"Was submitted by <a href=\"%(profile_url)s\" title=\"Go to profile\">%"
+"(submitter)s</a> at %(submitted_date)s in <a href=\"%(category_url)s\" title="
+"\"%(category)s\">%(category)s</a> category and it's related to <a href=\"/"
+"yenifikir/listele/ilgili/%(related_to)s\" title=\"%(related_to)s\">%"
+"(related_to)s</a>."
+msgstr ""
+
+#: ideas/templates/idea_top.html:21
+#, python-format
+msgid ""
+"Was submitted by <a href=\"%(profile_url)s\" title=\"Go to profile\">%"
+"(submitter)s</a> at %(submitted_date)s in <a href=\"%(category_url)s\" title="
+"\"%(category)s\">%(category)s</a> category."
+msgstr ""
+
+#: ideas/templates/idea_top.html:28
+#, python-format
+msgid "There is %(comment_count)s comment."
+msgid_plural "There are %(comment_count)s comments."
+msgstr[0] ""
+
+#: ideas/templates/idea_top.html:30
+msgid "Be the first one to comment!"
+msgstr ""
+
+#: profile/forms.py:23 profile/forms.py:155 profile/models.py:22
+#: templates/user/login.html:18
+msgid "Username"
+msgstr ""
+
+#: profile/forms.py:23
+msgid "Minimum 3, maximum 20 characters"
+msgstr ""
+
+#: profile/forms.py:25 profile/forms.py:105 templates/user/profile.html:60
+msgid "Surname"
+msgstr ""
+
+#: profile/forms.py:26 profile/forms.py:106 templates/user/profile.html:67
+msgid "Birth Date"
+msgstr ""
+
+#: profile/forms.py:26
+msgid "like 23/4/1985"
+msgstr ""
+
+#: profile/forms.py:27 profile/forms.py:107 profile/forms.py:156
+#: templates/user/profile.html:78
+msgid "E-mail"
+msgstr ""
+
+#: profile/forms.py:28 profile/forms.py:195 profile/forms.py:263
+#: templates/user/login.html:22
+#, fuzzy
+msgid "Password"
+msgstr "Parola değiştir"
+
+#: profile/forms.py:29
+#, fuzzy
+msgid "Password (again)"
+msgstr "Parola değiştir"
+
+#: profile/forms.py:29
+msgid "Minimum 5 characters"
+msgstr ""
+
+#: profile/forms.py:30 profile/forms.py:108 profile/models.py:69
+#: templates/user/profile.html:63
+msgid "City"
+msgstr ""
+
+#: profile/forms.py:31 profile/forms.py:109 profile/models.py:65
+#, fuzzy
+msgid "Web Page"
+msgstr "Sonraki"
+
+#: profile/forms.py:31 profile/forms.py:32 profile/forms.py:33
+#: profile/forms.py:34
+msgid "Not required"
+msgstr ""
+
+#: profile/forms.py:35 profile/models.py:72
+msgid "Contributions"
+msgstr ""
+
+#: profile/forms.py:35
+msgid ""
+"How can you contribute our community? (you may select more than one choice "
+"with holding down ctrl key, not required)"
+msgstr ""
+
+#: profile/forms.py:36
+msgid "Contribution comment"
+msgstr ""
+
+#: profile/forms.py:36
+msgid "Make comments about your contribution (not required)"
+msgstr ""
+
+#: profile/forms.py:37
+msgid "Show my e-mail address"
+msgstr ""
+
+#: profile/forms.py:37 profile/forms.py:113
+msgid ""
+"Do you want other members to see your e-mail address in your profile page?"
+msgstr ""
+
+#: profile/forms.py:38 profile/forms.py:114 profile/models.py:71
+msgid "Show birth date"
+msgstr ""
+
+#: profile/forms.py:38 profile/forms.py:114
+msgid "Do you want other members to see your birth date in your profile page?"
+msgstr ""
+
+#: profile/forms.py:44
+msgid "Username must be at least 3 characters long"
+msgstr ""
+
+#: profile/forms.py:47
+msgid ""
+"Invalid username. Username can only contain \"a-z A-Z 0-9 _\" characters"
+msgstr ""
+
+#: profile/forms.py:51
+msgid "This username is forbidden"
+msgstr ""
+
+#: profile/forms.py:55
+msgid "This username is in use"
+msgstr ""
+
+#: profile/forms.py:67 profile/forms.py:148
+msgid "This e-mail address is in use"
+msgstr ""
+
+#: profile/forms.py:80 profile/forms.py:205 profile/forms.py:219
+#: profile/forms.py:241
+msgid "Password may not contain space character"
+msgstr ""
+
+#: profile/forms.py:83 profile/forms.py:211 profile/forms.py:225
+#: profile/forms.py:247
+#, fuzzy
+msgid "Password must be at least 5 characters long"
+msgstr "Lütfen aşağıdaki hatayı düzeltin."
+
+#: profile/forms.py:86 profile/forms.py:250 profile/forms.py:275
+msgid "Passwords don't match"
+msgstr ""
+
+#: profile/forms.py:97 profile/forms.py:134
+msgid "ICQ number must be a positive integer"
+msgstr ""
+
+#: profile/forms.py:100 profile/forms.py:137
+msgid "ICQ number can only contain numbers"
+msgstr ""
+
+#: profile/forms.py:103 profile/models.py:39 profile/models.py:63
+#: templates/user/profile.html:47
+msgid "Avatar"
+msgstr ""
+
+#: profile/forms.py:113 profile/models.py:70
+msgid "Show e-mail address"
+msgstr ""
+
+#: profile/forms.py:115 profile/models.py:74
+msgid "Introduce yourself"
+msgstr ""
+
+#: profile/forms.py:115
+msgid ""
+"Here, you can introduce yourself briefly. This will be shown in your profile "
+"page."
+msgstr ""
+
+#: profile/forms.py:116 profile/models.py:77
+#, fuzzy
+msgid "Signature"
+msgstr "Arama"
+
+#: profile/forms.py:116
+msgid ""
+"This will be shown under your posts in forum pages (512 characters max.)"
+msgstr ""
+
+#: profile/forms.py:117 profile/models.py:78
+msgid "Latitude"
+msgstr ""
+
+#: profile/forms.py:118 profile/models.py:79
+msgid "Longitude"
+msgstr ""
+
+#: profile/forms.py:167
+msgid "This username is not registered"
+msgstr ""
+
+#: profile/forms.py:171
+msgid "This username has already requested a new password"
+msgstr ""
+
+#: profile/forms.py:187
+msgid "This e-mail address is not registered"
+msgstr ""
+
+#: profile/forms.py:194
+#, fuzzy
+msgid "Old password"
+msgstr "Parola değiştir"
+
+#: profile/forms.py:196 profile/forms.py:264
+#, fuzzy
+msgid "Password (Again)"
+msgstr "Parola değiştir"
+
+#: profile/forms.py:208 profile/forms.py:222 profile/forms.py:244
+msgid "Password must contain less than 32 characters"
+msgstr ""
+
+#: profile/forms.py:254
+msgid "Old password is wrong"
+msgstr ""
+
+#: profile/forms.py:258
+msgid "Fill all of the fields to change password"
+msgstr ""
+
+#: profile/models.py:28
+msgid "Forbidden Username"
+msgstr ""
+
+#: profile/models.py:29
+msgid "Forbidden Usernames"
+msgstr ""
+
+#: profile/models.py:40
+msgid "Avatars"
+msgstr ""
+
+#: profile/models.py:44
+msgid "Key"
+msgstr ""
+
+#: profile/models.py:45
+msgid "Timeout"
+msgstr ""
+
+#: profile/models.py:58
+#, fuzzy
+msgid "Lost Passwords"
+msgstr "Parola değiştir"
+
+#: profile/models.py:62
+msgid "example: 'Forum Moderator'"
+msgstr ""
+
+#: profile/models.py:73
+msgid "Contribution Comment"
+msgstr ""
+
+#: profile/models.py:92 templates/user/profile.html:5
+#, fuzzy
+msgid "User Profile"
+msgstr "Kullanıcı Kutusu"
+
+#: profile/models.py:93
+#, fuzzy
+msgid "User Profiles"
+msgstr "Kullanıcı Kutusu"
+
+#: profile/views.py:40
+msgid "Topic does not belong to this user!"
+msgstr ""
+
+#: profile/views.py:190
+#, python-format
+msgid "%(SITE_NAME)s User Account, %(user)s"
+msgstr ""
+
+#: profile/views.py:247
+#, python-format
+msgid "%(SITE_NAME)s User Password"
+msgstr ""
+
+#: templates/advancedsearch.html:3 templates/search.html:11
+#, fuzzy
+msgid "Advanced Search"
+msgstr "Gelişmiş<br />Arama"
+
+#: templates/advancedsearch.html:17 templates/search.html:10
+msgid "Show results"
+msgstr ""
+
+#: templates/advancedsearch.html:21
+#, python-format
+msgid "Pages containing %(term)s"
+msgstr ""
+
+#: templates/advancedsearch.html:21
+#, python-format
+msgid "No pages found containing %(term)s"
+msgstr ""
+
+#: templates/advancedsearch.html:26
+#, python-format
+msgid "Tags (%(count)s)"
+msgstr ""
+
+#: templates/advancedsearch.html:36
+#, python-format
+msgid "News (%(count)s)"
+msgstr ""
+
+#: templates/advancedsearch.html:47
+#, python-format
+msgid "Howto (%(count)s)"
+msgstr ""
+
+#: templates/advancedsearch.html:58
+#, python-format
+msgid "Package (%(count)s)"
+msgstr ""
+
+#: templates/advancedsearch.html:69
+#, fuzzy, python-format
+msgid "First Steps (%(count)s)"
+msgstr "İlk Adımlar"
+
+#: templates/advancedsearch.html:80
+#, python-format
+msgid "Games (%(count)s)"
+msgstr ""
+
+#: templates/advancedsearch.html:91
+#, python-format
+msgid "Forum (%(count)s)"
+msgstr ""
+
+#: templates/advancedsearch.html:109
+#, python-format
+msgid "Flatpages (%(count)s)"
+msgstr ""
+
+#: templates/advancedsearch.html:120 templates/search.html:98
+msgid "No content found."
 msgstr ""
 
 #: templates/base.html:13 templates/base.html.py:14 templates/base.html:15
@@ -77,62 +1243,14 @@ msgstr "Oyunlar"
 msgid "Planet"
 msgstr "Gezegen"
 
-#: templates/base.html:20 templates/footer.html:15 templates/menu.html:22
-#: templates/search.html:75 templates/forum/change_poll.html:5
-#: templates/forum/create_poll.html:5 templates/forum/forum_base.html:11
-#: templates/forum/forum_detail.html:12 templates/forum/forum_list.html:9
-#: templates/forum/forum_list.html.py:14 templates/forum/new_topic.html:10
-#: templates/forum/post_edit.html:11 templates/forum/post_list.html:11
-#: templates/forum/reply.html:11 templates/forum/report.html:11
-#: templates/forum/topic.html:8 templates/forum/topic.html.py:14
-#: templates/forum/topic.html:183 templates/forum/unread.html:6
-#: templates/tag/tag_detail.html:70
-msgid "Forum"
-msgstr "Forum"
-
-#: templates/base.html:45 templates/footer.html:14 templates/menu.html:14
-msgid "Brainstorm"
-msgstr "Beyin"
-
 #: templates/base.html:57
 msgid "User Box"
 msgstr "Kullanıcı Kutusu"
-
-#: templates/base.html:63 templates/forum/forum_base.html:40
-#: templates/user/login.html:27
-msgid "Login"
-msgstr "Giriş"
-
-#: templates/base.html:65 templates/forum/forum_base.html:42
-msgid "Register"
-msgstr "Kayıt Ol"
 
 #: templates/base.html:65 templates/forum/forum_base.html:42
 #, fuzzy
 msgid "Lost password"
 msgstr "Parola değiştir"
-
-#: templates/base.html:67 templates/forum/forum_base.html:44
-#, python-format
-msgid "Hello %(username)s!"
-msgstr "Merhaba %(username)s!"
-
-#: templates/base.html:68
-#, python-format
-msgid ""
-"You can display your profile page by clicking <a href=\"%(profile_url)s"
-"\">here</a> or you can logout by clicking <a class=\"sari\" href=\"/"
-"kullanici/cikis/\">here</a>."
-msgstr ""
-
-#: templates/base.html:72 templates/base.html.py:75
-#: templates/forum/forum_base.html:57 templates/forum/forum_base.html.py:60
-msgid "Search"
-msgstr "Arama"
-
-#: templates/base.html:76 templates/forum/forum_base.html:61
-msgid "Advanced<br />Search"
-msgstr "Gelişmiş<br />Arama"
 
 #: templates/db_error.html:2
 msgid "Database Error"
@@ -152,7 +1270,8 @@ msgstr ""
 msgid "Follow"
 msgstr ""
 
-#: templates/footer.html:7
+#: templates/footer.html:7 templates/bug/bug_add.html:3
+#: templates/bug/bug_add.html.py:20
 msgid "Report Bug"
 msgstr ""
 
@@ -286,15 +1405,6 @@ msgstr ""
 msgid "Keyword:"
 msgstr ""
 
-#: templates/search.html:10
-msgid "Show results"
-msgstr ""
-
-#: templates/search.html:11
-#, fuzzy
-msgid "Advanced Search"
-msgstr "Gelişmiş<br />Arama"
-
 #: templates/search.html:15
 #, python-format
 msgid "Pages containing %(term)s keyword"
@@ -319,10 +1429,6 @@ msgstr[0] ""
 
 #: templates/search.html:87 templates/tag/tag_detail.html:82
 msgid "Flatpages"
-msgstr ""
-
-#: templates/search.html:98
-msgid "No content found."
 msgstr ""
 
 #: templates/admin/base.html:25
@@ -362,6 +1468,29 @@ msgstr "Sitede görüntüle"
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
 msgstr[0] "Lütfen aşağıdaki hatayı düzeltin."
+
+#: templates/bug/bug_add.html:9 templates/bug/bug_detail.html:9
+#: templates/bug/bug_main.html:10 templates/forum/change_poll.html:5
+#: templates/forum/create_poll.html:5 templates/forum/forum_detail.html:12
+#: templates/forum/forum_list.html:9 templates/forum/new_topic.html:10
+#: templates/forum/post_edit.html:11 templates/forum/post_list.html:11
+#: templates/forum/reply.html:11 templates/forum/report.html:11
+#: templates/forum/topic.html:14 templates/forum/topic.html.py:183
+#: templates/forum/unread.html:6
+msgid "Mainpage"
+msgstr ""
+
+#: templates/bug/bug_add.html:9
+msgid "New Bug"
+msgstr ""
+
+#: templates/bug/bug_detail.html:3 templates/bug/bug_main.html:3
+msgid "Bug Reports"
+msgstr ""
+
+#: templates/bug/bug_main.html:10
+msgid "Report New Bug"
+msgstr ""
 
 #: templates/feedjack/default/post_list.html:28
 msgid ""
@@ -491,12 +1620,6 @@ msgstr ""
 msgid "Seminar"
 msgstr "Arama"
 
-#: templates/flatpages/default.html:52 templates/fs/fs_detail.html:26
-#: templates/game/game_detail.html:90 templates/howto/howto_detail.html:39
-#: templates/news/news_detail.html:42 templates/package/package_detail.html:57
-msgid "Tags"
-msgstr ""
-
 #: templates/forum/abuse_list.html:3
 msgid "Reported Posts"
 msgstr ""
@@ -520,15 +1643,6 @@ msgstr ""
 
 #: templates/forum/abuse_list.html:14
 msgid "Remove from Abuse List"
-msgstr ""
-
-#: templates/forum/change_poll.html:5 templates/forum/create_poll.html:5
-#: templates/forum/forum_detail.html:12 templates/forum/forum_list.html:9
-#: templates/forum/new_topic.html:10 templates/forum/post_edit.html:11
-#: templates/forum/post_list.html:11 templates/forum/reply.html:11
-#: templates/forum/report.html:11 templates/forum/topic.html:14
-#: templates/forum/topic.html.py:183 templates/forum/unread.html:6
-msgid "Mainpage"
 msgstr ""
 
 #: templates/forum/change_poll.html:5 templates/forum/change_poll.html:20
@@ -570,10 +1684,6 @@ msgstr ""
 msgid "Followed Topics"
 msgstr ""
 
-#: templates/forum/forum_base.html:48
-msgid "Updated Topics"
-msgstr ""
-
 #: templates/forum/forum_base.html:49 templates/forum/forum_list.html:50
 #: templates/forum/post_list.html:11
 msgid "Latest Posts"
@@ -597,24 +1707,10 @@ msgstr "Çık"
 msgid "New Topic"
 msgstr ""
 
-#: templates/forum/forum_detail.html:17 templates/forum/unread.html:10
-msgid "Topic"
-msgstr ""
-
-#: templates/forum/forum_detail.html:19 templates/forum/forum_list.html:18
-#: templates/forum/unread.html:11
-msgid "Posts"
-msgstr ""
-
 #: templates/forum/forum_detail.html:21 templates/forum/unread.html:12
 #, fuzzy
 msgid "Views"
 msgstr "Haberler"
-
-#: templates/forum/forum_detail.html:23 templates/forum/forum_list.html:20
-#: templates/forum/unread.html:13
-msgid "Latest Post"
-msgstr ""
 
 #: templates/forum/forum_detail.html:36 templates/forum/forum_list.html:99
 #: templates/forum/unread.html:23
@@ -661,10 +1757,6 @@ msgid ""
 "class=\"bold\">Content Policy</a> article."
 msgstr ""
 
-#: templates/forum/forum_list.html:16
-msgid "Topics"
-msgstr ""
-
 #: templates/forum/forum_list.html:32
 msgid "Read forum"
 msgstr ""
@@ -679,10 +1771,6 @@ msgstr ""
 
 #: templates/forum/forum_list.html:77
 msgid "Statistics"
-msgstr ""
-
-#: templates/forum/forum_list.html:81
-msgid "Date"
 msgstr ""
 
 #: templates/forum/forum_list.html:81
@@ -803,10 +1891,6 @@ msgstr ""
 msgid "Report Abuse"
 msgstr ""
 
-#: templates/forum/report.html:20
-msgid "Report"
-msgstr ""
-
 #: templates/forum/topic.html:16
 msgid "follow"
 msgstr ""
@@ -819,10 +1903,6 @@ msgstr ""
 msgid "add poll"
 msgstr ""
 
-#: templates/forum/topic.html:31
-msgid "Poll"
-msgstr ""
-
 #: templates/forum/topic.html:37
 msgid "click here to vote"
 msgstr ""
@@ -830,12 +1910,6 @@ msgstr ""
 #: templates/forum/topic.html:42
 msgid "%(percent)s%"
 msgstr ""
-
-#: templates/forum/topic.html:42
-#, python-format
-msgid "(%(vote_count)s vote)"
-msgid_plural "(%(vote_count)s votes)"
-msgstr[0] ""
 
 #: templates/forum/topic.html:46
 msgid "Click on an option to vote for it."
@@ -962,12 +2036,6 @@ msgstr ""
 msgid "Related Videos"
 msgstr ""
 
-#: templates/fs/fs_detail.html:42 templates/game/game_detail.html:109
-#: templates/howto/howto_detail.html:62 templates/news/news_detail.html:46
-#: templates/package/package_detail.html:73
-msgid "Author"
-msgstr ""
-
 #: templates/fs/fs_main.html:25
 #, python-format
 msgid ""
@@ -987,10 +2055,6 @@ msgstr ""
 msgid "%(number_of_comments)s comment"
 msgid_plural "%(number_of_comments)s comments"
 msgstr[0] ""
-
-#: templates/game/game_detail.html:27 templates/howto/howto_detail.html:26
-msgid "Submit"
-msgstr ""
 
 #: templates/game/game_detail.html:32 templates/howto/howto_detail.html:31
 #: templates/package/package_detail.html:32
@@ -1105,6 +2169,34 @@ msgstr ""
 msgid ""
 "There's a total of <span class=\"bold\">%(hits)s</span> howto articles in "
 "<span class=\"bold\">%(pages)s</span> pages."
+msgstr ""
+
+#: templates/mails/password.html:2
+#, python-format
+msgid ""
+"Greetings!\n"
+"Someone sent a password reset request for your account at %(date)s from %(ip)"
+"s. To change your password, please visit this link during the next 24 "
+"hours.\n"
+"\n"
+"%(link)s\n"
+"\n"
+"Thanks,\n"
+"%(SITE_NAME)s"
+msgstr ""
+
+#: templates/mails/register.html:2
+#, python-format
+msgid ""
+"Greetings!\n"
+"You have created a new user account in %(SITE_NAME)s at %(date)s from %(ip)"
+"s. To acknowledge this account please visit this link during the next 48 "
+"hours.\n"
+"\n"
+"%(link)s\n"
+"\n"
+"Thanks,\n"
+"%(SITE_NAME)s"
 msgstr ""
 
 #: templates/news/news_detail.html:30 templates/package/package_detail.html:28
@@ -1296,15 +2388,6 @@ msgid ""
 "registered click <a href=\"/kullanici/kayit/\">here</a> to register."
 msgstr ""
 
-#: templates/user/login.html:18
-msgid "Username"
-msgstr ""
-
-#: templates/user/login.html:22
-#, fuzzy
-msgid "Password"
-msgstr "Parola değiştir"
-
 #: templates/user/login.html:31
 msgid ""
 "You're already logged in. Click <a href=\"/kullanici/cikis/\">here</a> to "
@@ -1322,11 +2405,6 @@ msgid ""
 "You haven't logged in yet, click <a href=\"/kullanici/giris/\">here</a> to "
 "login."
 msgstr ""
-
-#: templates/user/lostpassword.html:3 templates/user/lostpassword_done.html:3
-#, fuzzy
-msgid "Lost Password"
-msgstr "Parola değiştir"
 
 #: templates/user/lostpassword.html:16
 msgid ""
@@ -1363,15 +2441,6 @@ msgstr ""
 msgid "Return to profile page"
 msgstr ""
 
-#: templates/user/profile.html:5
-#, fuzzy
-msgid "User Profile"
-msgstr "Kullanıcı Kutusu"
-
-#: templates/user/profile.html:47
-msgid "Avatar"
-msgstr ""
-
 #: templates/user/profile.html:49
 msgid "Edit my profile"
 msgstr ""
@@ -1384,23 +2453,6 @@ msgstr ""
 msgid "No Posts in Forum"
 msgstr ""
 
-#: templates/user/profile.html:57
-#, fuzzy
-msgid "Name"
-msgstr "Oyun"
-
-#: templates/user/profile.html:60
-msgid "Surname"
-msgstr ""
-
-#: templates/user/profile.html:63
-msgid "City"
-msgstr ""
-
-#: templates/user/profile.html:67
-msgid "Birth Date"
-msgstr ""
-
 #: templates/user/profile.html:71
 #, fuzzy
 msgid "Registration Date"
@@ -1408,10 +2460,6 @@ msgstr "Kayıt Ol"
 
 #: templates/user/profile.html:74
 msgid "Contact Information"
-msgstr ""
-
-#: templates/user/profile.html:78
-msgid "E-mail"
 msgstr ""
 
 #: templates/user/profile.html:82
@@ -1470,6 +2518,14 @@ msgstr ""
 #: templates/user/register.html:13
 msgid ""
 "You are already logged in, click <a href=\"/\">here</a> to visit mainpage"
+msgstr ""
+
+#: templates/user/register.html:23
+msgid ""
+"I have read <a href=\"/hakkinda/icerik-politikasi/\" target=\"_blank"
+"\">Özgürlükİçin Content Policy</a> and<br /><br /><center> <input type="
+"\"submit\" value=\"I Accept\" /> &nbsp; <input type=\"button\" value=\"I "
+"Decline\" onclick=\"javascript:window.location.href='/'\" /></center>"
 msgstr ""
 
 #: templates/user/register_done.html:3
