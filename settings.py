@@ -70,6 +70,7 @@ MEDIA_ROOT = '%s/media/' % DOCUMENT_ROOT
 MEDIA_URL = '%s/media/' % WEB_URL
 ADMIN_MEDIA_PREFIX = '%s/media/' % WEB_URL
 WEBALIZER_DIR = ''
+FORCE_SCRIPT_NAME = ''
 
 SECRET_KEY = 'n9-*x3!&!(x*z_!13)cyxil4fh+ov_+3!y($&4t7iit=)d)=93'
 
