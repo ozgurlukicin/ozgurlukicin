@@ -8,7 +8,7 @@
 {% for item in object_list %}
 <div class="post">
     {% ifchanged %}
-    <div class="date"><div class="day">{{ item.date_modified|date:"j" }}</div><div class="month">{{ item.date_modified|date:"M" }}</div></div>
+    <div class="date"><div class="day">{{ item.date_modified|date:"j" }}</div><div class="month">{{ item.date_modified|date:"F"|slice:":3" }}</div></div>
     {% endifchanged %}
     <div class="title"><a href="{{ item.link }}">{% if item.title %}{{ item.title|safe }}{% else %}{{ item.subscriber.name }}{% endif %}</a></div>
     <div class="tags">
