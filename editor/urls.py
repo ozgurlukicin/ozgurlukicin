@@ -8,7 +8,7 @@
 from django.conf.urls.defaults import patterns
 
 urlpatterns = patterns("",
-    (r"^$", "oi.editor.list_articles"),
-    (r"^haber/ekle/$", "oi.editor.create_contributednews"),
-    (r"^haber/duzenle/$", "oi.editor.change_contributednews"),
+    (r"^$", "oi.editor.views.list_articles"),
+    (r"^haber/ekle/$", "oi.editor.views.create_contributednews"),
+    (r"^haber/duzenle/(?P<news_id>\d+)/$", "oi.editor.views.change_contributednews"),
 )

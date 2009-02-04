@@ -8,7 +8,7 @@
 from django import forms
 from oi.st.models import News
 
-class ContributesNewsForm(forms.ModelForm):
+class ContributedNewsForm(forms.ModelForm):
     class Meta:
         model = News
         exclude = ("update", "status", "topic")

@@ -16,3 +16,6 @@ class ContributedNews(models.Model):
 
     def __unicode__(self):
         return self.news.title
+
+    def get_change_url(self):
+        return "/editor/haber/duzenle/%d/" % self.id
