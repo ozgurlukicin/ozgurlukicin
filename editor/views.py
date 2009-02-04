@@ -78,7 +78,7 @@ def change_contributednews(request, news_id):
 
             return HttpResponseRedirect(news.get_absolute_url())
         else:
-            return render_response(request, "editor/create.html", locals())
+            return render_response(request, "editor/change.html", locals())
     else:
         news = contributedNews.news
         dict = {
@@ -91,7 +91,7 @@ def change_contributednews(request, news_id):
                 "author": news.author,
                 }
         form = ContributedNewsForm(initial=dict)
-        return render_response(request, "editor/create.html", locals())
+        return render_response(request, "editor/change.html", locals())
 
 @permission_required('editor.change_contributednews', login_url="/kullanici/giris/")
 def list_articles(request):
