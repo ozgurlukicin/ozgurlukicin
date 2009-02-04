@@ -53,6 +53,10 @@ def list(request, field="", filter_slug=""):
             ideas = ideas.order_by("-submitted_date")
             page_title = "Son eklenen fikirler"
     elif field == 'durum':
+        if filter_slug == "cozum-surecinde":
+            s = Status.objects.get(name="Çözüm Sürecinde")
+            ideas = ideas.filter(status=s)
+            page_title = "Çözüme kavuşmuş fikirler"
         if filter_slug == "cozuldu":
             s = Status.objects.get(name="Çözüldü")
             ideas = ideas.filter(status=s)

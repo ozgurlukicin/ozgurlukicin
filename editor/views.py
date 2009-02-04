@@ -9,15 +9,17 @@ import datetime
 
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect, HttpResponse
 
 from oi.editor.forms import ContributedNewsForm
 from oi.editor.models import ContributedNews
 from oi.st.wrappers import render_response
 from oi.st.models import News
+from oi.st.tags import Tag
 
 @permission_required('editor.change_contributednews', login_url="/kullanici/giris/")
 def create_contributednews(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = ContributedNewsForm(request.POST.copy())
         if form.is_valid():
             news = News(
@@ -26,12 +28,17 @@ def create_contributednews(request):
                     image = form.cleaned_data["image"],
                     sum = form.cleaned_data["sum"],
                     text = form.cleaned_data["text"],
-                    tags = form.cleaned_data["tags"],
                     update = datetime.datetime.now(),
                     author = form.cleaned_data["author"],
                     status = False,
                     )
             news.save()
+
+            # add tags
+            for tag in form.cleaned_data["tags"]:
+                t=Tag.objects.get(name=tag)
+                news.tags.add(t)
+
             contributedNews = ContributedNews(
                     news = news,
                     contributor = request.user,
@@ -52,7 +59,7 @@ def change_contributednews(request, news_id):
     if contributedNews.news.status:
         return HttpResponse("Yayına alınmış haberi düzenleyemezsiniz!")
 
-    if request.method == 'POST':
+    if request.method == "POST":
         form = ContributedNewsForm(request.POST.copy())
         if form.is_valid():
             news = contributedNews.news
@@ -61,15 +68,29 @@ def change_contributednews(request, news_id):
             news.image = form.cleaned_data["image"]
             news.sum = form.cleaned_data["sum"]
             news.text = form.cleaned_data["text"]
-            news.tags = form.cleaned_data["tags"]
             news.update = datetime.datetime.now()
             news.author = form.cleaned_data["author"]
+            news.tags.clear()
+            for tag in form.cleaned_data["tags"]:
+                t=Tag.objects.get(name=tag)
+                news.tags.add(t)
             news.save()
+
             return HttpResponseRedirect(news.get_absolute_url())
         else:
             return render_response(request, "editor/create.html", locals())
     else:
-        form = ContributedNewsForm(initial=dict(contributedNews))
+        news = contributedNews.news
+        dict = {
+                "title": news.title,
+                "slug": news.slug,
+                "image": news.image,
+                "sum": news.sum,
+                "text": news.text,
+                "tags": [tag.id for tag in news.tags.all()],
+                "author": news.author,
+                }
+        form = ContributedNewsForm(initial=dict)
         return render_response(request, "editor/create.html", locals())
 
 @permission_required('editor.change_contributednews', login_url="/kullanici/giris/")

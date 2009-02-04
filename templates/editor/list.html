@@ -1,4 +1,7 @@
-{% extends "base.html" %}
+{% extends "editor/base.html" %}
 {% block content %}
-{{ news }}
+<a href="/editor/haber/ekle/">Yeni Haber Ekle</a>
+{% for news in news %}
+<a href="{{ news.get_change_url }}">{{ news.news.title }}</a>
+{% endfor %}
 {% endblock %}

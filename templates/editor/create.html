@@ -1,7 +1,23 @@
-{% extends "base.html" %}
+{% extends "editor/base.html" %}
+{% block extrahead %}
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
+{% endblock %}
 {% block content %}
 <form method="post" action="">
-    {{ form }}
+    {% for field in form %}
+    <div class="field_container">
+        <div class="field_label">{{ field.label_tag }}</div>
+        <div class="field_field">
+            {{ field }}
+            {% if field.errors %}{{ field.errors }}{% endif %}
+        </div>
+        <div class="help_text">
+            {% if field.help_text %}{{ field.help_text }}{% endif %}
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    {% endfor %}
     <input type="submit" value="Gönder" />
 </form>
 {% endblock %}
