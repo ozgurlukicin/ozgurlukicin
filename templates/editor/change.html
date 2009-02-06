@@ -1,26 +1,30 @@
 {% extends "editor/base.html" %}
 {% block extrahead %}
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
-<script language="javascript" type="text/javascript" src="/media/js/tinymce/textareas.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
 <script type="text/javascript" src="/media/js/editor.js"></script>
 {% endblock %}
 {% block content %}
 <form method="post" action="">
+    {% for field in form %}
+    {% ifequal forloop.counter 3 %}
     <div class="field_container">
-        <div class="field_label">Arama</div>
+        <div class="field_label">Görselleri Filtrele</div>
         <div class="field_field">
-            <input id="filter" type="text" value="" onkeydown="filter_images()" />
+            <input id="filter" type="text" value="" />
         </div>
         <div class="help_text">
+            Burayı kullanarak görsellerde arama yapabilirsiniz.
         </div>
         <div style="clear:both;"></div>
     </div>
-    {% for field in form %}
+    {% endifequal %}
     <div class="field_container">
         <div class="field_label">{{ field.label_tag }}</div>
         <div class="field_field">
             {{ field }}
             {% if field.errors %}{{ field.errors }}{% endif %}
+            {% ifequal forloop.counter 3 %}<br /><img src="/media/avatar/pard07.png" id="image_thumb" alt="görsel" />{% endifequal %}
         </div>
         <div class="help_text">
             {% if field.help_text %}{{ field.help_text }}{% endif %}
