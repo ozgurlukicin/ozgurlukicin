@@ -32,7 +32,7 @@
                 <span>Haberler</span>
                 <div class="title"><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></div>
                 <div class="summary">{{ news.sum|safe }}<br /></div>
-                <div class="info"><span class="bold">{{ news.update|date:"d M" }}</span> {{ news.update|date:"Y" }} <span class="bold">/</span> <a href="{{ news.topic.get_latest_post_url }}"><span class="bold">{{ news.topic.posts|add:"-1" }}</span> Yorum</a></div>
+                <div class="info"><span class="bold">{{ news.update|date:"d" }} {{ news.update|date:"F"|slice:":3" }}</span> {{ news.update|date:"Y" }} <span class="bold">/</span> <a href="{{ news.topic.get_latest_post_url }}"><span class="bold">{{ news.topic.posts|add:"-1" }}</span> Yorum</a></div>
             </div>
             <div style="clear:both;"></div>
         </div>
@@ -47,7 +47,7 @@
         <div class="column first">
             <img src="{{ howto.image.file.url }}" alt="{{ howto.image.get_alt_string }}" /><br />
             <img src="/media/img/new/image_bottom.png" alt="gölge" />
-            <div class="info"><span class="bold">{{ howto.update|date:"d M" }}</span> {{ howto.update|date:"Y" }} <span class="bold">/</span> <a href="{{ howto.topic.get_latest_post_url }}"><span class="bold">{{ howto.topic.posts|add:"-1" }}</span> Yorum</a></div>
+            <div class="info"><span class="bold">{{ howto.update|date:"d" }} {{ howto.update|date:"F"|slice:":3" }}</span> {{ howto.update|date:"Y" }} <span class="bold">/</span> <a href="{{ howto.topic.get_latest_post_url }}"><span class="bold">{{ howto.topic.posts|add:"-1" }}</span> Yorum</a></div>
         </div>
         <div class="column">
             <span>Nasıl</span>
@@ -60,7 +60,7 @@
         <div class="column first">
             <img src="{{ package.image.file.url }}" alt="{{ package.image.get_alt_string }}" /><br />
             <img src="/media/img/new/image_bottom.png" alt="gölge" />
-            <div class="info"><span class="bold">{{ package.update|date:"d M" }}</span> {{ package.update|date:"Y" }} <span class="bold">/</span> <a href="{{ package.topic.get_latest_post_url }}"><span class="bold">{{ package.topic.posts|add:"-1" }}</span> Yorum</a></div>
+            <div class="info"><span class="bold">{{ package.update|date:"d" }} {{ package.update|date:"F"|slice:":3" }}</span> {{ package.update|date:"Y" }} <span class="bold">/</span> <a href="{{ package.topic.get_latest_post_url }}"><span class="bold">{{ package.topic.posts|add:"-1" }}</span> Yorum</a></div>
         </div>
         <div class="column">
             <span>Paket</span>
@@ -73,7 +73,7 @@
         <div class="column first">
             <img src="{{ game.image.file.url }}" alt="{{ game.image.get_alt_string }}" /><br />
             <img src="/media/img/new/image_bottom.png" alt="gölge" />
-            <div class="info"><span class="bold">{{ game.update|date:"d M" }}</span> {{ game.update|date:"Y" }} <span class="bold">/</span> <a href="{{ game.topic.get_latest_post_url }}"><span class="bold">{{ game.topic.posts|add:"-1" }}</span> Yorum</a></div>
+            <div class="info"><span class="bold">{{ game.update|date:"d" }} {{ game.update|date:"F"|slice:":3" }}</span> {{ game.update|date:"Y" }} <span class="bold">/</span> <a href="{{ game.topic.get_latest_post_url }}"><span class="bold">{{ game.topic.posts|add:"-1" }}</span> Yorum</a></div>
         </div>
         <div class="column">
             <span>Oyun</span>

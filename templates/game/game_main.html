@@ -12,7 +12,7 @@
     <div class="column first">
         <img src="{{ game.image.file.url }}" alt="{{ game.image.get_alt_string }}" /><br />
         <img src="/media/img/new/image_bottom.png" alt="gölge" />
-        <div class="info"><span class="bold">{{ game.update|date:"d M" }}</span> {{ game.update|date:"Y" }} <span class="bold">/</span> <a href="{{ game.topic.get_latest_post_url }}"><span class="bold">{{ game.topic.posts|add:"-1" }}</span> Yorum</a></div>
+        <div class="info"><span class="bold">{{ game.update|date:"d" }} {{ game.update|date:"F"|slice:":3" }}</span> {{ game.update|date:"Y" }} <span class="bold">/</span> <a href="{{ game.topic.get_latest_post_url }}"><span class="bold">{{ game.topic.posts|add:"-1" }}</span> Yorum</a></div>
     </div>
     <div class="column">
         <div class="title"><a href="{{ game.get_absolute_url }}">{{ game.title }}</a></div>
