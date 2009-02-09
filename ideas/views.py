@@ -152,7 +152,7 @@ def add(request):
                            related_to = form.cleaned_data['related_to'],
                            forum_url = form.cleaned_data['forum_url'],
                            bug_numbers = form.cleaned_data['bug_numbers'],
-                           status = Status.objects.all()[0],
+                           status = Status.objects.get(name="Yeni Fikir"),
                            topic = topic)
             newidea.save()
 
