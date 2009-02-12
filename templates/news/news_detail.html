@@ -6,7 +6,7 @@
 <style media="screen" type="text/css">@import url('/media/css/new/article.css');</style>
 <style media="screen" type="text/css">@import url('/media/css/new/st.css');</style>
 <!--facebook-->
-<meta name="title" content="{{ news.title }}" />
+<meta name="title" content="{{ news.title|safe }}" />
 <meta name="description" content="{{ news.sum|safe|striptags }}" />
 <link rel="image_src" href="{{ news.image.file.url }}" />
 <!--end facebook-->
