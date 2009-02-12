@@ -5,6 +5,11 @@
 {% block extrahead %}
 <style media="screen" type="text/css">@import url('/media/css/new/article.css');</style>
 <style media="screen" type="text/css">@import url('/media/css/new/st.css');</style>
+<!--facebook-->
+<meta name="title" content="{{ news.title }}" />
+<meta name="description" content="{{ news.sum|safe|striptags }}" />
+<link rel="image_src" href="{{ news.image.file.url }}" />
+<!--end facebook-->
 {% if user.is_authenticated %}
     <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
     <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
@@ -48,10 +53,10 @@
     <h2>Paylaş</h2>
     <p>
     <a href="http://delicious.com/save" title="del.icio.us'a ekle" onclick='window.open("http://delicious.com/save?v=5&amp;noui&amp;jump=close&amp;url="+encodeURIComponent("{{ request.build_absolute_uri }}")+"&title="+encodeURIComponent("{{ news.title }}"), "delicious","toolbar=no,width=550,height=550"); return false;'><img src="/media/img/new/servicelinks/delicious.png" alt="del.icio.us'a ekle" /></a>
-    <a href="http://facebook.com/sharer.php" title="facebook'a ekle" onclick='window.open("http://facebook.com/sharer.php?u="+encodeURIComponent("{{ request.build_absolute_uri }}")+"&t="+encodeURIComponent("{{ news.title }}"), "facebook","toolbar=no,width=550,height=550"); return false;'><img src="/media/img/new/servicelinks/facebook.png" alt="facebook'a ekle" /></a>
+    <a href="http://facebook.com/sharer.php" title="facebook'a ekle" onclick='window.open("http://facebook.com/sharer.php?u="+encodeURIComponent("{{ request.build_absolute_uri }}"), "facebook","toolbar=no,width=550,height=550"); return false;'><img src="/media/img/new/servicelinks/facebook.png" alt="facebook'a ekle" /></a>
     <a href="http://twitter.com/home" title="twitter'a ekle" onclick='window.open("http://twitter.com/home?status="+encodeURIComponent("{{ news.title }}")+": "+encodeURIComponent("{{ request.build_absolute_uri }}"), "twitter","toolbar=no,width=800,height=550"); return false;'><img src="/media/img/new/servicelinks/twitter.png" alt="twitter'a ekle" /></a>
     <a href="http://www.stumbleupon.com/" title="stumbleupon'a ekle" onclick='window.open("http://www.stumbleupon.com/submit?url="+encodeURIComponent("{{ request.build_absolute_uri }}"), "stumbleupon","toolbar=no,width=800,height=550"); return false;'><img src="/media/img/new/servicelinks/stumbleupon.png" alt="stumbleupon'a ekle" /></a>
-    <a href="http://www.google.com/bookmarks/" title="google bookmarks'a ekle" onclick='window.open("http://www.google.com/bookmarks/mark?op=add&hl=tr&bkmk="+encodeURIComponent("{{ request.build_absolute_uri }}")+"&title="+encodeURIComponent("{{ news.title }}")+"&annotation="+encodeURIComponent("{{ news.sum }}")+"&labels="+encodeURIComponent("{% for tag in news.tags.all %}{{ tag.name }}{% if not forloop.last %},{% endif %}{% endfor %}"), "google bookmarks","toolbar=no,width=800,height=550"); return false;'><img src="/media/img/new/servicelinks/googlebookmarks.png" alt="google bookmarks'a ekle" /></a>
+    <a href="http://www.google.com/bookmarks/" title="google bookmarks'a ekle" onclick='window.open("http://www.google.com/bookmarks/mark?op=add&hl=tr&bkmk="+encodeURIComponent("{{ request.build_absolute_uri }}")+"&title="+encodeURIComponent("{{ news.title }}")+"&annotation="+encodeURIComponent("{{ news.sum|safe|striptags }}")+"&labels="+encodeURIComponent("{% for tag in news.tags.all %}{{ tag.name }}{% if not forloop.last %},{% endif %}{% endfor %}"), "google bookmarks","toolbar=no,width=800,height=550"); return false;'><img src="/media/img/new/servicelinks/googlebookmarks.png" alt="google bookmarks'a ekle" /></a>
     <a href="http://technorati.com/" title="technorati'ye ekle" onclick='window.open("http://technorati.com/faves?sub=addfavbtn&add="+encodeURIComponent("{{ request.build_absolute_uri }}"), "technorati","toolbar=no,width=1000,height=550"); return false;'><img src="/media/img/new/servicelinks/technorati.png" alt="technorati'ye ekle" /></a>
     </p>
 </div>
