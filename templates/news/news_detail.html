@@ -9,6 +9,7 @@
 <meta name="title" content="{{ news.title|safe }}" />
 <meta name="description" content="{{ news.sum|safe|striptags }}" />
 <link rel="image_src" href="{{ news.image.file.url }}" />
+<meta name="medium" content="news" />
 <!--end facebook-->
 {% if user.is_authenticated %}
     <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
