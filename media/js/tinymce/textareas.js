@@ -1,7 +1,7 @@
 tinyMCE.init({
     mode : "textareas",
     theme : "advanced",
-    theme_advanced_buttons1 : "undo,redo,charmap,search,replace,|,link,unlink,image,emotions,|,code",
+    theme_advanced_buttons1 : "undo,redo,charmap,search,replace,|,link,unlink,image,emotions,|,code,fullscreen",
     theme_advanced_buttons2 : "formatselect,fontsizeselect,bold,italic,underline,strikethrough,sub,sup,|,justifyleft,justifycenter,justifyright,justifyfull,outdent,indent,|,bullist,numlist,|,forecolor,backcolor,removeformat",
     theme_advanced_buttons3 : "",
     theme_advanced_toolbar_location : "top",
@@ -18,7 +18,7 @@ tinyMCE.init({
     extended_valid_elements : "a[name|href|target|title],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|name|style],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
     advimage_update_dimensions_onchange: true,
     file_browser_callback : 'oiFileBrowser',
-    plugins : "advimage,autosave,searchreplace,table,visualchars,advlink,emotions,media,style,template,xhtmlxtras",
+    plugins : "advimage,autosave,searchreplace,table,visualchars,advlink,emotions,media,style,template,xhtmlxtras,fullscreen",
     gecko_spellcheck : true,
     language : "tr"
 });
