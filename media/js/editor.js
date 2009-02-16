@@ -3,6 +3,11 @@ $(document).ready(function() {
     $("#id_image").attr("onkeyup", "update_image(this)");
     $("#filter").attr("onchange", "filter_images()");
     $("#filter").attr("onkeyup", "filter_images()");
+    document.getElementById("id_slug").onchange = function() { this._changed = true; };
+    document.getElementById("id_title").onkeyup = function() {
+        var e = document.getElementById("id_slug");
+        if (!e._changed) { e.value = URLify(document.getElementById("id_title").value, 50); }
+    }
 });
 function filter_images() {
     if ($("#filter").val().length > 2) {
