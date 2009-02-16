@@ -19,7 +19,7 @@ from oi.st.models import News
 from oi.st.tags import Tag
 from oi.editor.settings import ARTICLE_PER_PAGE
 
-@permission_required('editor.change_contributednews', login_url="/kullanici/giris/")
+@permission_required('editor.add_contributednews', login_url="/kullanici/giris/")
 def create_contributednews(request):
     if request.method == "POST":
         form = ContributedNewsForm(request.POST.copy())
@@ -53,7 +53,7 @@ def create_contributednews(request):
         form = ContributedNewsForm()
         return render_response(request, "editor/create.html", locals())
 
-@permission_required('editor.create_contributednews', login_url="/kullanici/giris/")
+@permission_required('editor.change_contributednews', login_url="/kullanici/giris/")
 def change_contributednews(request, news_id):
     contributedNews = get_object_or_404(ContributedNews, id=news_id)
     if not contributedNews.contributor == request.user:
