@@ -8,6 +8,7 @@
 import datetime
 
 from django.contrib.auth.decorators import permission_required
+from django.views.generic.list_detail import object_list
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 
@@ -16,6 +17,7 @@ from oi.editor.models import ContributedNews
 from oi.st.wrappers import render_response
 from oi.st.models import News
 from oi.st.tags import Tag
+from oi.editor.settings import ARTICLE_PER_PAGE
 
 @permission_required('editor.change_contributednews', login_url="/kullanici/giris/")
 def create_contributednews(request):
@@ -44,7 +46,7 @@ def create_contributednews(request):
                     contributor = request.user,
                     )
             contributedNews.save()
-            return HttpResponseRedirect(news.get_absolute_url())
+            return HttpResponseRedirect("/editor/")
         else:
             return render_response(request, "editor/create.html", locals())
     else:
@@ -96,5 +98,10 @@ def change_contributednews(request, news_id):
 @permission_required('editor.change_contributednews', login_url="/kullanici/giris/")
 def list_articles(request):
     "List the news contributed by this user"
-    news = ContributedNews.objects.filter(contributor=request.user, news__status=False)
-    return render_response(request, "editor/list.html", {"news":news})
+    news = ContributedNews.objects.filter(contributor=request.user, news__status=False).order_by("-news__update")
+    return object_list(request, news,
+            template_name = "editor/list.html",
+            template_object_name = "news",
+            paginate_by = ARTICLE_PER_PAGE,
+            allow_empty = True,
+            )

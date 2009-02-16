@@ -1,7 +1,33 @@
 {% extends "editor/base.html" %}
+{% load library %}
+{% block extrahead %}
+    <style type="text/css" media="screen">@import url('/media/css/new/forum_list.css');</style>
+    <style type="text/css" media="screen">@import url('/media/css/new/forum_paginator.css');</style>
+    <style type="text/css" media="screen">@import url('/media/css/new/editor.css');</style>
+{% endblock %}
 {% block content %}
 <a href="/editor/haber/ekle/">Yeni Haber Ekle</a>
-{% for news in news %}
-<a href="{{ news.get_change_url }}">{{ news.news.title }}</a>
+<div class="headerbar">
+    <div class="title"><span style="margin-left:10px;color:#FFF">Haber</span></div>
+    <div class="spacer">&nbsp;</div>
+    <div class="edit">Düzenle</div>
+    <div class="spacer">&nbsp;</div>
+    <div class="date">Tarih</div>
+</div>
+<div class="category">
+<div class="forum_list">
+{% for news in news_list %}
+<div class="item forum_item">
+    <div class="title"><div style="margin-left:10px"><a href="{{ news.news.get_absolute_url }}">{{ news.news.title }}</a><br />{{ news.news.sum|safe }}</div></div>
+    <div class="spacer">&nbsp;</div>
+    <div class="edit"><a href="{{ news.get_change_url }}">Düzenle</a></div>
+    <div class="spacer">&nbsp;</div>
+    <div class="date">{{ news.news.update|date:"d F Y H:i" }}</div>
+</div>
 {% endfor %}
+</div>
+</div>
+<div id="post_bottom">
+{% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div></div>{% endif %}
+</div>
 {% endblock %}
