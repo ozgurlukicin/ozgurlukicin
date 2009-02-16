@@ -13,7 +13,7 @@ from django.shortcuts import render_to_response
 from oi.upload.models import Image, ImageUploadForm
 from oi.settings import MEDIA_URL, MEDIA_ROOT
 
-@permission_required('editor.create_contributednews', login_url="/kullanici/giris/")
+@permission_required('upload.create_image', login_url="/kullanici/giris/")
 def image_upload(request):
     if request.method == 'POST':
         form = ImageUploadForm(request.POST, request.FILES)
