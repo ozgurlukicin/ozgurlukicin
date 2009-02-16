@@ -1,10 +1,12 @@
 function URLify(s, num_chars) {
+    /*
     removelist = ["a", "an", "as", "at", "before", "but", "by", "for", "from",
                   "is", "in", "into", "like", "of", "off", "on", "onto", "per",
                   "since", "than", "the", "this", "that", "to", "up", "via",
                   "with"];
     r = new RegExp('\\b(' + removelist.join('|') + ')\\b', 'gi');
     s = s.replace(r, '');
+    */
     s = s.replace(/ş/g, "s");
     s = s.replace(/ı/g, "i");
     s = s.replace(/ç/g, "c");
