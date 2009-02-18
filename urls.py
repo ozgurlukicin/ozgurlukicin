@@ -143,6 +143,9 @@ urlpatterns = patterns('',
     #Planet
     (r'^gezegen/', include('oi.feedjack.urls')),
 
+    #Editor
+    (r'^editor/', include('oi.editor.urls')),
+
     #Tema
     (r'^tema/', include('oi.tema.urls')),
 

@@ -54,6 +54,10 @@ def list(request, field="", filter_slug=""):
             ideas = ideas.order_by("-submitted_date")
             page_title = _("Latest Ideas")
     elif field == 'durum':
+        if filter_slug == "cozum-surecinde":
+            s = Status.objects.get(name="Çözüm Sürecinde")
+            ideas = ideas.filter(status=s)
+            page_title = "Çözüme kavuşmuş fikirler"
         if filter_slug == "cozuldu":
             s = Status.objects.get(name=_("Resolved"))
             ideas = ideas.filter(status=s)
@@ -149,7 +153,7 @@ def add(request):
                            related_to = form.cleaned_data['related_to'],
                            forum_url = form.cleaned_data['forum_url'],
                            bug_numbers = form.cleaned_data['bug_numbers'],
-                           status = Status.objects.all()[0],
+                           status = Status.objects.get(name="Yeni Fikir"),
                            topic = topic)
             newidea.save()
 

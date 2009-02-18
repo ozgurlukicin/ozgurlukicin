@@ -13,8 +13,7 @@
     <div class="column first">
          <img src="{{ howto.image.file.url }}" alt="{{ howto.image.get_alt_string }}" /><br />
         <img src="/media/img/new/image_bottom.png" alt="gölge" />
-        <div class="info"><span class="bold">{{ howto.update|date:"d M" }}</span> {{ howto.update|date:"Y" }} <span class="bold">/</span> <a href="{{ howto.topic.get_latest_post_url }}">{% blocktrans count howto.topic.posts|add:"-1" as number_of_comments %}<span class="bold">{{ number_of_comments }}</span> comment{% plural %}<span class="bold">{{ number_of_comments }}</span> comments{% endblocktrans %}</a></div>
-    </div>
+        <div class="info"><span class="bold">{{ howto.update|date:"d" }} {{ howto.update|date:"F"|slice:":3" }}</span> {{ howto.update|date:"Y" }} <span class="bold">/</span> <a href="{{ howto.topic.get_latest_post_url }}">{% blocktrans count howto.topic.posts|add:"-1" as number_of_comments %}<span class="bold">{{ number_of_comments }}</span> comment{% plural %}<span class="bold">{{ number_of_comments }}</span> comments{% endblocktrans %}</a></div>
     <div class="column">
         <div class="title"><a href="{{ howto.get_absolute_url }}">{{ howto.title }}</a></div>
         <div class="summary">{{ howto.sum|safe|truncatewords_html:23 }}</div>

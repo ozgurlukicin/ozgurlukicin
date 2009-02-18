@@ -12,7 +12,7 @@ class ImageUploadForm(forms.Form):
     file = forms.ImageField()
 
 class Image(models.Model):
-    file = models.ImageField(upload_to='upload/image/')
+    file = models.ImageField("Görsel", upload_to='upload/image/')
 
     def __unicode__(self):
         return unicode(self.file)
@@ -20,3 +20,7 @@ class Image(models.Model):
     def get_alt_string(self):
         "returns file name without extension"
         return ".".join(self.file.path.rsplit(".")[:-1])[self.file.path.rfind("/")+1:]
+
+    class Meta:
+        verbose_name = "Görsel"
+        verbose_name_plural = "Görseller"

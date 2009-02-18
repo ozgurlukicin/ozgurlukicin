@@ -137,3 +137,6 @@
 .cursor_default {
     cursor: default;
 }
+textarea#description {
+    width: 500px;
+}

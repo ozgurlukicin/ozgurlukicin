@@ -248,8 +248,8 @@ class Game(models.Model):
 
 class News(models.Model):
     title = models.CharField('Başlık', max_length=32, blank=False)
-    slug = models.SlugField('SEF Başlık')
-    image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
+    slug = models.SlugField('SEF Başlık', help_text="Haberin bağlantısını oluşturacak başlık (haber başlığıyla aynı olmalı fakat sadece küçük harf ve - içermelidir)")
+    image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True, help_text="Görselin 310x205 boyutlarında olmasına dikkat edin!")
     sum = models.TextField('Özet', blank=False)
     text = models.TextField('Metin', blank=False)
     tags = models.ManyToManyField(Tag, blank=False)
