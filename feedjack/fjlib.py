@@ -271,7 +271,7 @@ def page_context(request, site, tag=None, user_id=None, sfeeds=None):
     from oi.feedjack import fjcloud
     ctx['tagcloud'] = fjcloud.getcloud(site, user_id)
     ctx['user_id'] = user_id
-    ctx['user'] = user_obj
+    ctx['feedUser'] = user_obj
     ctx['tag'] = tag_obj
     ctx['subscribers'] = sfeeds_obj
     return ctx

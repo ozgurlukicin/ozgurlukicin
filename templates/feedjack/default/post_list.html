@@ -42,8 +42,8 @@
 {% if has_next %}
 <li><a href="?page={{ next }}">&gt;&gt;</a></li>
 {% endif %}
-{% if user %}
-<li class="username"><a href="{{ user.feed.link }}">{{ user.name }}</a>{% trans "talks about" %} »</li>
+{% if feedUser %}
+<li class="username"><a href="{{ feedUser.feed.link }}">{{ feedUser.name }}</a>{% trans "talks about" %} »</li>
 {% endif %}
 {% if tag %}
 <li class="tagname">{{ tag.name }}</li>
@@ -60,7 +60,7 @@
       <a href="{{ site.url }}/foaf/" title="FOAF"><img src="{{ media_url }}/img/button-foaf.png"/></a>
     </div>
 
-{% if user %}
+{% if feedUser %}
 <div id="usertags">
     <ul>
     {% for tag in tagcloud %}
@@ -149,7 +149,7 @@
 
 <h4>
 {% if user_id %}
-  {% blocktrans with user.name as person %}What {{ person }} talks about{% endblocktrans %}
+  {% blocktrans with feedUser.name as person %}What {{ person }} talks about{% endblocktrans %}
 {% else %}
   {% blocktrans %}What people talk about{% endblocktrans %}
 {% endif %}
@@ -215,8 +215,8 @@ title="{{ feed.feed.title }}">{{ feed.name }}</a></li>
 {% if has_next %}
 <li><a href="?page={{ next }}">&gt;&gt;</a></li>
 {% endif %}
-{% if user %}
-<li class="username"><a href="{{ user.feed.link }}">{{ user.name }}</a></li>
+{% if feedUser %}
+<li class="username"><a href="{{ feedUser.feed.link }}">{{ feedUser.name }}</a></li>
 {% endif %}
 {% if tag %}
 <li class="tagname">{{ tag.name }}</li>

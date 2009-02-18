@@ -10,7 +10,7 @@
 {% block content %}
 <div class="topbar">
     <div class="navigation"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}" class="bold">{{ forum.name }}</a></div>
-    {% ifnotequal forum.slug "guncellenen-konular" %}<div class="notice"><a href="/forum/{{ forum.slug }}/new/"><img src="/media/img/new/forum/button_new_topic.png" alt="Yeni Başlık" /></a></div>{% endifnotequal %}
+    {% ifnotequal forum.slug "guncellenen-basliklar" %}<div class="notice"><a href="/forum/{{ forum.slug }}/new/"><img src="/media/img/new/forum/button_new_topic.png" alt="Yeni Başlık" /></a></div>{% endifnotequal %}
 </div>
 <div class="headerbar">
     <div class="icon">&nbsp;</div>
@@ -35,7 +35,7 @@
         <div class="item topic_item" {% if topic.hidden %}style="opacity: 0.5;"{% endif %}>
             <div class="icon"><a href="{{ topic.get_absolute_url }}">{% if topic.locked and not topic.sticky %}<img src="/media/dijital/img/forum/topic{% if not topic.is_read %}_unread{% endif %}_locked.png" border="0" alt="Kilitli Başlık" title="Kilitli Başlık" />{% endif %}{% if topic.sticky and not topic.locked %}<img src="/media/dijital/img/forum/topic_sticky.png" border="0" alt="Sabit Başlık" title="Sabit Başlık" />{% endif %}{% if not topic.locked and not topic.sticky %}<img src="/media/dijital/img/forum/topic{% if not topic.is_read %}_unread{% endif %}.png" border="0" {% if topic.is_read %}alt="Okunmuş Başlık" title="Okunmuş Başlık"{% else %}alt="Okunmamış Başlık" title="Okunmamış Başlık"{% endif %} />{% endif %}{% if topic.locked and topic.sticky %}<img src="/media/dijital/img/forum/topic_sticky_locked.png" border="0" alt="Sabit ve Kilitli Başlık" title="Sabit ve Kilitli Başlık" />{% endif %}</a></div>
             <div class="spacer">&nbsp;</div>
-            <div class="topic_title"><a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a></div>
+            <div class="topic_title"><a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a>{% ifequal forum.slug "guncellenen-basliklar" %}<br />Forum: {{ topic.forum }}{% endifequal %}</div>
             <div class="spacer">&nbsp;</div>
             <div class="topics">{{ topic.posts }}</div>
             <div class="spacer">&nbsp;</div>
