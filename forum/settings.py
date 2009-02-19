@@ -11,6 +11,8 @@ FORUM_MESSAGE_LIST = 'forum@liste.ozgurlukicin.com'
 ABUSE_MAIL_LIST = 'forum-abuse@liste.ozgurlukicin.com'
 
 # paginator
+NUMBER_OF_LATEST_POSTS = 200
+NUMBER_OF_LATEST_TOPICS = 100
 TOPICS_PER_PAGE = 20
 POSTS_PER_PAGE = 15
 ALL_POSTS_PER_PAGE = 10
