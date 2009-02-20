@@ -156,6 +156,7 @@ def user_register(request):
             user.save()
 
             # create a key
+            random.seed()
             salt = sha.new(str(random.random())).hexdigest()[:5]
             activation_key = sha.new(salt+form.cleaned_data['username']).hexdigest() # yes, i'm paranoiac
             key_expires = datetime.datetime.today() + datetime.timedelta(2)
@@ -232,6 +233,7 @@ def lost_password(request):
        form = LostPasswordForm(request.POST)
        if form.is_valid():
            # generate new key and e-mail it to user
+           random.seed()
            salt = sha.new(str(random.random())).hexdigest()[8:]
            key = sha.new(salt).hexdigest()
 
