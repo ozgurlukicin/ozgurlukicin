@@ -28,10 +28,7 @@
     {% else %}
     <form method="post" action=".">
         {% for field in form %}
-        <dl>
-            <dt><label for="id_{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
-            <dd>{{ field }}</dd>
-        </dl>
+            {% include "formfields.html" %}
         {% endfor %}
     <br />
     <a href="/hakkinda/icerik-politikasi/" target="_blank">Özgürlükİçin İçerik Politikası</a> 'nı okudum ve<br /><br />
