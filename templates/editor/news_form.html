@@ -1,0 +1,39 @@
+{% for field in form %}
+{% ifnotequal forloop.counter 2 %}
+{% ifequal forloop.counter 3 %}
+<div class="field_container">
+    <div class="field_label">Görselleri Filtrele</div>
+    <div class="field_field">
+        <input id="filter" type="text" value="" />
+    </div>
+    <div class="help_text">
+        Burayı kullanarak görsellerde arama yapabilirsiniz.
+    </div>
+    <div style="clear:both;"></div>
+</div>
+{% endifequal %}
+<div class="field_container">
+    <div class="field_label">{{ field.label_tag }}</div>
+    <div class="field_field">
+        {{ field }}
+        {% if field.errors %}{{ field.errors }}{% endif %}
+        {% ifequal forloop.counter 3 %}<a href="/admin/upload/image/add/" class="add-another" id="add_id_image" onclick="return showAddAnotherPopup(this);"><img src="/media/img/admin/icon_addlink.gif" width="10" height="10" alt="Ekle"/></a><br /><br /><img src="/media/avatar/pard07.png" id="image_thumb" alt="görsel" />{% endifequal %}
+    </div>
+    <div class="help_text">
+        {% if field.help_text %}{{ field.help_text }}{% endif %}
+    </div>
+    <div style="clear:both;"></div>
+</div>
+{% endifnotequal %}
+{% endfor %}
+<div class="field_container">
+    <div class="field_label">{{ form.slug.label_tag }}</div>
+    <div class="field_field">
+        {{ form.slug }}
+        {% if form.slug.errors %}{{ form.slug.errors }}{% endif %}
+    </div>
+    <div class="help_text">
+        {% if form.slug.help_text %}{{ form.slug.help_text }}{% endif %}
+    </div>
+    <div style="clear:both;"></div>
+</div>
