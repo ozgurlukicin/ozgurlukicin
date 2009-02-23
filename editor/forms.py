@@ -10,7 +10,7 @@ from oi.st.models import News
 from oi.st.forms import XssField
 
 class ContributedNewsForm(forms.ModelForm):
-    sum = XssField(label="Özet", required=True, widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
+    sum = XssField(label="Özet", required=True, widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}), help_text="Açılış görseli haber özetine otomatik eklenecektir. Bu nedenle özetin içine görsel eklemeyin.")
     text = XssField(label="Metin", required=True, widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
     class Meta:
         model = News
