@@ -91,7 +91,7 @@ class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabil
                 <a href="/e-dergi/"><img src="/media/img/oi-edergi-10-kapak.png" alt="e-dergi" /></a>
                 <p>Özgürlükiçin'in şimdi bir de e-dergisi var! Okumak için <a href="/e-dergi/">buraya</a> tıklayın.</p>
             </div>
-            {% petition_box %}
+            {% block petition %}{% petition_box %}{% endblock %}
             {% block sidebar_bottom_bottom %}
             {% endblock %}
         </div>
