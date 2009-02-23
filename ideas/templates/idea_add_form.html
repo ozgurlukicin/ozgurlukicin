@@ -12,18 +12,8 @@
 <p><font color="red">Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin.</font></p>
 {% endif %}
 <form method="POST" action="" enctype="multipart/form-data">
-    {% for field in form %}
-    <div class="field_container">
-        <div class="field_label">{{ field.label_tag }}</div>
-        <div class="field_field">
-            {{ field }}
-            {% if field.errors %}{{ field.errors }}{% endif %}
-        </div>
-        <div class="help_text">
-            {% if field.help_text %}{{ field.help_text }}{% endif %}
-        </div>
-        <div style="clear:both;"></div>
-    </div>
+{% for field in form %}
+    {% include "formfields.html" %}
 {% endfor %}
 <input type="submit" value="Gönder" />
 </form>

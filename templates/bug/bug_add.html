@@ -8,14 +8,9 @@
     <div class="navigation"><a href="/">Ana Sayfa</a> &#62; <a href="/hata/">Hata</a> &#62; <a href="/hata/ekle/" class="bold">Yeni Hata</a></div>
 </div>
 <form action="" method="post" class="bugform">
-<dl>
 {% for field in form %}
-    <dt>{{ field.label_tag }}</dt>
-    <dd>{{ field }}</dd>
-    {% if field.help_text %}<dd>{{ field.help_text }}</dd>{% endif %}
-    {% if field.errors %}<dd class="myerrors" style="font-color: red">{{ field.errors }}</dd>{% endif %}
+    {% include "formfields.html" %}
 {% endfor %}
-</dl>
 <input type="submit" value="Hatayı Raporla" />
 </form>
 {% endblock %}

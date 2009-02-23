@@ -13,10 +13,7 @@
 <form action="/hata/degistir/{{ bug.id }}/" method="post" class="bugform">
 <dl>
 {% for field in bugform %}
-    <dt>{{ field.label_tag }}</dt>
-    <dd>{{ field }}</dd>
-    {% if field.help_text %}<dd>{{ field.help_text }}</dd>{% endif %}
-    {% if field.errors %}<dd class="myerrors" style="font-color: red">{{ field.errors }}</dd>{% endif %}
+    {% include "formfields.html" %}
 {% endfor %}
 </dl>
 <input type="submit" value="Değiştir" />
@@ -50,14 +47,9 @@
 {% if request.user.is_authenticated %}
 <div class="bug_detail_comment">
 <form action="" method="post" class="bugform">
-<dl>
 {% for field in form %}
-    <dt>{{ field.label_tag }}</dt>
-    <dd>{{ field }}</dd>
-    {% if field.help_text %}<dd>{{ field.help_text }}</dd>{% endif %}
-    {% if field.errors %}<dd class="myerrors" style="font-color: red">{{ field.errors }}</dd>{% endif %}
+    {% include "formfields.html" %}
 {% endfor %}
-</dl>
 <input type="submit" value="Yorum Ekle" />
 </form>
 </div>
