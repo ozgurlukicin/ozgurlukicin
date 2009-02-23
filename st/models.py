@@ -249,10 +249,10 @@ class Game(models.Model):
 class News(models.Model):
     title = models.CharField('Başlık', max_length=32, blank=False)
     slug = models.SlugField('SEF Başlık', help_text="Haberin bağlantısını oluşturacak başlık (haber başlığıyla aynı olmalı fakat sadece küçük harf ve - içermelidir)")
-    image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True, help_text="Görselin 310x205 boyutlarında olmasına dikkat edin!")
-    sum = models.TextField('Özet', blank=False)
+    image = models.ForeignKey(Img, verbose_name="Açılış Görseli", blank=True, null=True, help_text="Görselin 310x205 boyutlarında olmasına dikkat edin! Yeni görsel eklemek için + düğmesine tıklayın.")
+    sum = models.TextField('Özet', blank=False, help_text="Açılış görseli haber özetine otomatik eklenecektir.")
     text = models.TextField('Metin', blank=False)
-    tags = models.ManyToManyField(Tag, blank=False)
+    tags = models.ManyToManyField(Tag, verbose_name="Etiketler", blank=False)
     update = models.DateTimeField('Tarih', blank=False)
     author = models.CharField('Yazar', max_length=32)
     status = models.BooleanField('Aktif')
