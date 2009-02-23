@@ -248,7 +248,7 @@ class Game(models.Model):
 
 class News(models.Model):
     title = models.CharField('Başlık', max_length=32, blank=False)
-    slug = models.SlugField('SEF Başlık', help_text="Haberin bağlantısını oluşturacak başlık (haber başlığıyla aynı olmalı fakat sadece küçük harf ve - içermelidir)")
+    slug = models.SlugField('SEF Başlık', help_text="Haberin bağlantısını oluşturacak başlık (haber başlığıyla aynı olmalı fakat sadece küçük harf ve - içermelidir)", unique=True)
     image = models.ForeignKey(Img, verbose_name="Açılış Görseli", blank=True, null=True, help_text="Görselin 310x205 boyutlarında olmasına dikkat edin! Yeni görsel eklemek için + düğmesine tıklayın.")
     sum = models.TextField('Özet', blank=False, help_text="Açılış görseli haber özetine otomatik eklenecektir.")
     text = models.TextField('Metin', blank=False)
