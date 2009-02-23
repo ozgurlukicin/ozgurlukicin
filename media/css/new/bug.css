@@ -83,3 +83,6 @@ div.bug_list div {
 .comment .text {
     margin: 4px;
 }
+form.bugform input[type=text], form.bugform textarea {
+    width:500px;
+}
