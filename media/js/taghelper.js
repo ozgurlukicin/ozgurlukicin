@@ -3,7 +3,7 @@ function removeTag(tag, removeButton) {
         if (option.innerHTML == tag)
             return option.selected = false;
     });
-    $(removeButton).parent().remove();
+    $(removeButton).parent().fadeOut("fast", function(){ $(this).remove() });
 }
 function updateSelectedList() {
     var selected = "";
@@ -15,6 +15,7 @@ function updateSelectedList() {
     $("#id_tags").before("<div id=\"selectedItems\">"+selected+"</div>");
 }
 $(document).ready(function() {
+    $("#tags").attr("id", "id_tags");
     $("#id_tags").change(updateSelectedList);
     $("#id_tags").before("<input id=\"tagfilter\" class=\"vTextField\" type=\"text\" />");
     updateSelectedList();
@@ -28,12 +29,6 @@ $(document).ready(function() {
             }
             options[i].selected = true;
             updateSelectedList();
-            /*var length = $("#selectedItems > .item").length;
-            if (length > 5) {
-                $("#id_tags > option:contains('" + $("#tagfilter").val() + "')")[0].selected = false;
-                updateSelectedList();
-                $("#selectedItems").append("<p class=\"error\">En fazla 5 tane etiket seçebilirsiniz!</p>");
-            }*/
         },
         minchar:2
         });
