@@ -1,21 +1,21 @@
-function removeTag(tag) {
-    $("#id_tags > option:selected:contains("+tag+")")[0].selected=false;
-    $("#selectedItems > .item:contains("+tag+")").remove();
+function removeTag(tag, removeButton) {
+    $("#id_tags > option:selected").each(function (index, option){
+        if (option.innerHTML == tag)
+            return option.selected = false;
+    });
+    $(removeButton).parent().remove();
 }
 function updateSelectedList() {
-    var ob = $("#id_tags")[0];
     var selected = "";
+    $("#id_tags > option:selected").each(function(index, option) {
+        var tag = option.innerHTML;
+        selected = selected + "<div class=\"item\"><span class=\"tagName\">"+tag+"</span><span class=\"removeButton\" onclick=\"removeTag('"+tag+"', this)\">x</span></div>";
+    });
     $("#selectedItems").remove();
-    for (var i = 0; i < ob.options.length; i++)
-        if (ob.options[i].selected) {
-            var tag = ob.options[i].innerHTML;
-            selected = selected + "<div class=\"item\"><span class=\"tagName\">"+tag+"</span><span class=\"removeButton\" onclick=\"removeTag('"+tag+"')\">x</span></div>";
-        }
     $("#id_tags").before("<div id=\"selectedItems\">"+selected+"</div>");
 }
 $(document).ready(function() {
-    $("#id_tags").attr("onkeyup", "updateSelectedList()");
-    $("#id_tags").attr("onchange", "updateSelectedList()");
+    $("#id_tags").change(updateSelectedList);
     $("#id_tags").before("<input id=\"tagfilter\" class=\"vTextField\" type=\"text\" />");
     updateSelectedList();
     $("#tagfilter").autocomplete({
