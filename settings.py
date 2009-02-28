@@ -110,6 +110,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.sites',
     'django.contrib.humanize',
+    'django.contrib.sitemaps',
     'oi.flatpages',
     'oi.st',
     'oi.upload',

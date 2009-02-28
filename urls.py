@@ -13,6 +13,7 @@ from oi.st.tags import Tag
 from oi.seminar.models import Seminar
 from oi.st.feeds import *
 from django.contrib import admin
+from oi.st.sitemaps import NewsSitemap
 
 admin.autodiscover()
 
@@ -82,9 +83,14 @@ tag_dict = {
             'template_object_name': 'tag'
            }
 
+sitemaps = {
+        'news': NewsSitemap,
+        }
+
 urlpatterns = patterns('',
 
     (r'^robots.txt$', 'oi.st.views.robots'),
+    (r'^sitemap.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 
     #News
     (r'^haber/$', 'django.views.generic.list_detail.object_list', dict(news_dict)),
@@ -173,12 +179,12 @@ urlpatterns = patterns('',
 
     #Feeds
     (r'^rss/gezegen/$', 'oi.feedjack.views.rssfeed'),
-    (r'^rss/gezegen/kullanici/(?P<user>\d+)/etiket/(?P<tag>.*)/$', 'oi.feedjack.views.rssfeed'),
-    (r'^rss/gezegen/kullanici/(?P<user>\d+)/$', 'oi.feedjack.views.rssfeed'),
+    (r'^rss/gezegen/kullanici/(?P<feedUser>\d+)/etiket/(?P<tag>.*)/$', 'oi.feedjack.views.rssfeed'),
+    (r'^rss/gezegen/kullanici/(?P<feedUser>\d+)/$', 'oi.feedjack.views.rssfeed'),
     (r'^rss/gezegen/etiket/(?P<tag>.*)/$', 'oi.feedjack.views.rssfeed'),
     (r'^atom/gezegen/$', 'oi.feedjack.views.atomfeed'),
-    (r'^atom/gezegen/kullanici/(?P<user>\d+)/etiket/(?P<tag>.*)/$', 'oi.feedjack.views.atomfeed'),
-    (r'^atom/gezegen/kullanici/(?P<user>\d+)/$', 'oi.feedjack.views.atomfeed'),
+    (r'^atom/gezegen/kullanici/(?P<feedUser>\d+)/etiket/(?P<tag>.*)/$', 'oi.feedjack.views.atomfeed'),
+    (r'^atom/gezegen/kullanici/(?P<feedUser>\d+)/$', 'oi.feedjack.views.atomfeed'),
     (r'^atom/gezegen/etiket/(?P<tag>.*)/$', 'oi.feedjack.views.atomfeed'),
 
     (r'^rss/(?P<url>.*)$', 'django.contrib.syndication.views.feed', {'feed_dict': rss_dict}),
