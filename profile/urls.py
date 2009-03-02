@@ -10,16 +10,8 @@ from django.conf.urls.defaults import *
 from django.contrib.auth.models import User
 from oi.settings import USER_PER_PAGE
 
-user_dict = {
-             'queryset': User.objects.all().order_by('name'),
-             'template_name': 'user/user_list.html',
-             'paginate_by': USER_PER_PAGE,
-             'template_object_name': 'user'
-            }
-
 urlpatterns = patterns('',
-    (r'^liste/$', 'django.views.generic.simple.redirect_to', {'url': "sayfa/1/"}),
-    (r'^liste/sayfa/(?P<page>[0-9]+)/$', 'django.views.generic.list_detail.object_list', dict(user_dict)),
+    (r'^liste/$', 'oi.profile.views.user_list'),
     #the tested ones
     (r'^takip-edilen-konular/$', 'oi.profile.views.followed_topics'),
     (r'^giris/$', 'django.contrib.auth.views.login', {'template_name': 'user/login.html'}),

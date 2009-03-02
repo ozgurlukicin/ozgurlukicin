@@ -311,3 +311,8 @@ def reset_password(request, key):
         else:
             form = ResetPasswordForm()
             return render_response(request, 'user/change_password.html', {'form': form})
+
+@login_required
+def user_list(request):
+    profiles = Profile.objects.exclude(latitude=0, longitude=0)
+    return render_response(request, "user/user_list.html", {"profiles":profiles,"apikey":googleMapsApiKey})
