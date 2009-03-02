@@ -3,7 +3,7 @@
 
 {% block title %}Kullanıcı profili: {{ info }} - {% endblock %}
 
-{% block extrabody %} onload="load()" onunload="GUnload()"{% endblock %}
+{% block extrabody %} onunload="GUnload()"{% endblock %}
 
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
@@ -11,7 +11,7 @@
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={{ apikey }}" type="text/javascript"></script>
     <script type="text/javascript">
     //<![CDATA[
-    function load() {
+    jQuery(document).ready( function($) {
         if (GBrowserIsCompatible()) {
             var map = new GMap2(document.getElementById("id_map"));
             map.enableScrollWheelZoom();
@@ -33,7 +33,7 @@
             var marker = new GMarker(center);
             map.addOverlay(marker);
         }
-    }
+    });
     //]]>
     </script>
 {% endblock %}
