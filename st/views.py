@@ -79,6 +79,8 @@ def game_printable(request, slug):
 
 def news_detail(request, slug):
     news = get_object_or_404(News, slug=slug)
+    if not news.status and not request.user.has_perm("editor.change_contributednews"):
+        return render_response(request, "404.html")
     form=PostForm()
     return render_response(request, 'news/news_detail.html', locals())
 
