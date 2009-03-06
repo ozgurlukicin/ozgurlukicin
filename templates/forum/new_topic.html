@@ -2,9 +2,6 @@
 {% block extrahead %}
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
-<script language="javascript" type="text/javascript" src="/media/js/jquery.autocomplete.js"></script>
-<script language="javascript" type="text/javascript" src="/media/js/taghelper.js"></script>
-<style type="text/css" media="screen">@import url('/media/css/new/autocomplete.css');</style>
 {% endblock %}
 
 {% block content %}
@@ -20,7 +17,10 @@
 <form action="" method="post">
 <dl>
 {% for field in form %}
-    {% include "formfields.html" %}
+    <dt>{{ field.label_tag }}</dt>
+    <dd>{{ field }}</dd>
+    {% if field.help_text %}<dd>{{ field.help_text }}</dd>{% endif %}
+    {% if field.errors %}<dd class="myerrors" style="font-color: red">{{ field.errors }}</dd>{% endif %}
 {% endfor %}
 </dl>
 <input type="submit" value="Başlık Aç">
