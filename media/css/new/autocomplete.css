@@ -23,7 +23,7 @@
 }
 #selectedItems {
     overflow: hidden;
-    clear: none;
+    clear: both;
     margin-right: 10px;
     margin-bottom: 10px;
 }

@@ -34,7 +34,7 @@ $(document).ready(function() {
     /* create a tag input field for filtering through tags */
     $("#id_tags, #add_id_tags, #id_tags ~ .help:last").hide();
     $("#id_tags ~ .help:last").before("<input id=\"tagfilter\" class=\"vTextField\" type=\"text\" /><p class=\"help\">Bir etiket adı yazıp Enter'a basın.</p>");
-    $("#id_tags ~ .help:last").after("<a onclick=\"toggleTagMode();\" style=\"cursor:pointer\">[Tüm Etiketleri Göster/Gizle]</a>");
+    $("#id_tags ~ .help:last").after("<a onclick=\"toggleTagMode();\" style=\"cursor:pointer;clear:both;float:left\">[Tüm Etiketleri Göster/Gizle]</a>");
     updateSelectedList();
     /* add autocompletion support to our tag input field, fills autocomplete list from the selectbox */
     $("#tagfilter").autocomplete({
