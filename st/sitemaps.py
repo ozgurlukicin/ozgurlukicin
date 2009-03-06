@@ -8,7 +8,7 @@
 
 from django.contrib.sitemaps import Sitemap
 
-from oi.st.models import News
+from oi.st.models import News, HowTo, Game, Package, FS
 
 class NewsSitemap(Sitemap):
     changefreq = "hourly"
@@ -16,6 +16,46 @@ class NewsSitemap(Sitemap):
 
     def items(self):
         return News.objects.filter(status=True).order_by('-update')
+
+    def lastmod(self, obj):
+        return obj.update
+
+class HowToSitemap(Sitemap):
+    changefreq = "daily"
+    priority = 1.0
+
+    def items(self):
+        return HowTo.objects.filter(status=True).order_by('-update')
+
+    def lastmod(self, obj):
+        return obj.update
+
+class GameSitemap(Sitemap):
+    changefreq = "daily"
+    priority = 1.0
+
+    def items(self):
+        return Game.objects.filter(status=True).order_by('-update')
+
+    def lastmod(self, obj):
+        return obj.update
+
+class PackageSitemap(Sitemap):
+    changefreq = "daily"
+    priority = 1.0
+
+    def items(self):
+        return Package.objects.filter(status=True).order_by('-update')
+
+    def lastmod(self, obj):
+        return obj.update
+
+class FSSitemap(Sitemap):
+    changefreq = "monthly"
+    priority = 1.0
+
+    def items(self):
+        return FS.objects.filter(status=True).order_by('-update')
 
     def lastmod(self, obj):
         return obj.update
