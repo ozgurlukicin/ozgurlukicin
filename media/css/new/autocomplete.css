@@ -18,16 +18,14 @@
     color: red;
 }
 .ac_conteiner, #selectedItems {
-    position: relative;
-    float: right;
     width: 178px;
-    margin-right: 300px;
-    clear: right;
+    margin-left: 108px;
 }
 #selectedItems {
     overflow: hidden;
     clear: none;
     margin-right: 10px;
+    margin-bottom: 10px;
 }
 .ac_results {
     border: 1px solid gray;
