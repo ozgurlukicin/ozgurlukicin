@@ -8,12 +8,76 @@ fjlib.py
 
 from django.conf import settings
 from django.db import connection
-from django.core.paginator import ObjectPaginator, InvalidPage
-from django.db import backend
+from django.core.paginator import Paginator, InvalidPage
 from django.http import Http404
 
 from oi.feedjack import models
 from oi.feedjack import fjcache
+
+
+# this is taken from django, it was removed in r8191
+class ObjectPaginator(Paginator):
+    """
+    Legacy ObjectPaginator class, for backwards compatibility.
+
+    Note that each method on this class that takes page_number expects a
+    zero-based page number, whereas the new API (Paginator/Page) uses one-based
+    page numbers.
+    """
+    def __init__(self, query_set, num_per_page, orphans=0):
+        Paginator.__init__(self, query_set, num_per_page, orphans)
+        import warnings
+        warnings.warn("The ObjectPaginator is deprecated. Use django.core.paginator.Paginator instead.", DeprecationWarning)
+
+        # Keep these attributes around for backwards compatibility.
+        self.query_set = query_set
+        self.num_per_page = num_per_page
+        self._hits = self._pages = None
+
+    def validate_page_number(self, page_number):
+        try:
+            page_number = int(page_number) + 1
+        except ValueError:
+            raise PageNotAnInteger
+        return self.validate_number(page_number)
+
+    def get_page(self, page_number):
+        try:
+            page_number = int(page_number) + 1
+        except ValueError:
+            raise PageNotAnInteger
+        return self.page(page_number).object_list
+
+    def has_next_page(self, page_number):
+        return page_number < self.pages - 1
+
+    def has_previous_page(self, page_number):
+        return page_number > 0
+
+    def first_on_page(self, page_number):
+        """
+        Returns the 1-based index of the first object on the given page,
+        relative to total objects found (hits).
+        """
+        page_number = self.validate_page_number(page_number)
+        return (self.num_per_page * (page_number - 1)) + 1
+
+    def last_on_page(self, page_number):
+        """
+        Returns the 1-based index of the last object on the given page,
+        relative to total objects found (hits).
+        """
+        page_number = self.validate_page_number(page_number)
+        if page_number == self.num_pages:
+            return self.count
+        return page_number * self.num_per_page
+
+    # The old API called it "hits" instead of "count".
+    hits = Paginator.count
+
+    # The old API called it "pages" instead of "num_pages".
+    pages = Paginator.num_pages
+
 
 def sitefeeds(siteobj):
     """ Returns the active feeds of a site.
@@ -71,18 +135,18 @@ def get_posts_tags(object_list, sfeeds_obj, user_id, tag_name):
     tag_obj = None
     tags = models.Tag.objects.extra(\
       select={'post_id':'%s.%s' % (\
-        backend.quote_name('feedjack_post_tags'), \
-        backend.quote_name('post_id'))}, \
+        connection.ops.quote_name('feedjack_post_tags'), \
+        connection.ops.quote_name('post_id'))}, \
       tables=['feedjack_post_tags'], \
       where=[\
         '%s.%s=%s.%s' % (\
-          backend.quote_name('feedjack_tag'), \
-          backend.quote_name('id'), \
-          backend.quote_name('feedjack_post_tags'), \
-          backend.quote_name('tag_id')), \
+          connection.ops.quote_name('feedjack_tag'), \
+          connection.ops.quote_name('id'), \
+          connection.ops.quote_name('feedjack_post_tags'), \
+          connection.ops.quote_name('tag_id')), \
         '%s.%s IN (%s)' % (\
-          backend.quote_name('feedjack_post_tags'), \
-          backend.quote_name('post_id'), \
+          connection.ops.quote_name('feedjack_post_tags'), \
+          connection.ops.quote_name('post_id'), \
           ', '.join([str(post.id) for post in object_list]))])
     for tag in tags:
         if tag.post_id not in tagd:
@@ -176,7 +240,10 @@ def page_context(request, site, tag=None, user_id=None, sfeeds=None):
     """ Returns the context dictionary for a page view.
     """
     sfeeds_obj, sfeeds_ids = sfeeds
-    page = int(request.GET.get('page', 0))
+    try:
+        page = int(request.GET.get('page', 0))
+    except ValueError:
+        page = 0
     paginator, object_list = get_paginator(site, sfeeds_ids, \
       page=page, tag=tag, user=user_id)
     if object_list:

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2007 Artistanbul
+# Copyright 2007, 2008 Artistanbul
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
@@ -10,33 +10,38 @@ from os import path
 
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 from oi.settings import WEB_URL, NEWS_IN_HOMEPAGE, PACKAGES_IN_HOMEPAGE, GAMES_IN_HOMEPAGE, FS_IN_HOMEPAGE, HOWTOS_IN_HOMEPAGE
 
-from oi.st.forms import SearchForm,CommentForm
+from oi.st.forms import SearchForm,AdvancedSearchForm
 
-from oi.st.models import *
+from oi.st.models import News, Package, Game, HowTo, FS, PardusVersion, PardusMirror
+from oi.st.tags import Tag
 from oi.st.wrappers import render_response
 from oi.flatpages.models import FlatPage
+from oi.seminar.models import Seminar
 
 #for comments
 from django.contrib.auth.decorators import login_required
 from oi.forum.models import Forum,Topic,Post
 from oi.forum.views import flood_control
+from oi.forum.forms import PostForm
 from django.http import HttpResponseRedirect
 
+def robots(request):
+    return render_response(request, 'robots.txt')
+
 def home(request):
-    news = News.objects.filter(status=1).order_by('-update')[:NEWS_IN_HOMEPAGE]
-    packages = Package.objects.filter(status=1).order_by('-update')[:PACKAGES_IN_HOMEPAGE]
-    games = Game.objects.filter(status=1).order_by('-update')[:GAMES_IN_HOMEPAGE]
-    fss = FS.objects.filter(status=1).order_by('-update')[:FS_IN_HOMEPAGE]
-    howtos = HowTo.objects.filter(status=1).order_by('-update')[:HOWTOS_IN_HOMEPAGE]
+    news = News.objects.filter(status=True).order_by('-update')[:NEWS_IN_HOMEPAGE]
+    packages = Package.objects.filter(status=True).order_by('-update')[:PACKAGES_IN_HOMEPAGE]
+    games = Game.objects.filter(status=True).order_by('-update')[:GAMES_IN_HOMEPAGE]
+    howtos = HowTo.objects.filter(status=True).order_by('-update')[:HOWTOS_IN_HOMEPAGE]
+    seminar = Seminar.objects.filter(status=True).order_by('start_date')
     return render_response(request, 'home.html', locals())
 
 def fs_detail(request, slug):
     fs = get_object_or_404(FS, slug=slug)
-    tags = fs.tags.all()
-    videos = fs.videos.all()
     return render_response(request, 'fs/fs_detail.html', locals())
 
 def fs_printable(request, slug):
@@ -45,8 +50,7 @@ def fs_printable(request, slug):
 
 def howto_detail(request, slug):
     howto = get_object_or_404(HowTo, slug=slug)
-    tags = howto.tags.all()
-    videos = howto.videos.all()
+    form=PostForm()
     return render_response(request, 'howto/howto_detail.html', locals())
 
 def howto_printable(request, slug):
@@ -55,12 +59,18 @@ def howto_printable(request, slug):
 
 def game_detail(request, slug):
     game = get_object_or_404(Game, slug=slug)
-    tags = game.tags.all()
-    videos = game.videos.all()
-    for video in videos:
-        video.name = path.splitext(video.file)[0].split('/')[2]
-    licenses = game.license.all()
-    game.avg = ((game.gameplay+game.graphics+game.sound+game.scenario+game.atmosphere)/5.0)
+    game.avg = ((game.gameplay + game.graphics + game.sound + game.scenario + game.atmosphere)/5.0)
+    game.gameplay_range = range(0, game.gameplay)
+    game.gameplay_range_empty = range(0, 10 - game.gameplay)
+    game.graphics_range = range(0, game.graphics)
+    game.graphics_range_empty = range(0, 10 - game.graphics)
+    game.sound_range = range(0, game.sound)
+    game.sound_range_empty = range(0, 10 - game.sound)
+    game.scenario_range = range(0, game.scenario)
+    game.scenario_range_empty = range(0, 10 - game.scenario)
+    game.atmosphere_range = range(0, game.atmosphere)
+    game.atmosphere_range_empty = range(0, 10 - game.atmosphere)
+    form=PostForm()
     return render_response(request, 'game/game_detail.html', locals())
 
 def game_printable(request, slug):
@@ -69,27 +79,16 @@ def game_printable(request, slug):
 
 def news_detail(request, slug):
     news = get_object_or_404(News, slug=slug)
-    tags = news.tags.all()
-    form=CommentForm()
-    
-    if request.user.is_authenticated():
-        auth=True
-    
+    form=PostForm()
     return render_response(request, 'news/news_detail.html', locals())
 
 def news_printable(request, slug):
     news = get_object_or_404(News, slug=slug)
-    
     return render_response(request, 'news/news_printable.html', locals())
 
 def pkg_detail(request, slug):
     package = get_object_or_404(Package, slug=slug)
-    tags = package.tags.all()
-    videos = package.videos.all()
-    for video in videos:
-        video.name = path.splitext(video.file)[0].split('/')[2]
-    licenses = package.license.all()
-    sss = package.ss.all()
+    form=PostForm()
     return render_response(request, 'package/package_detail.html', locals())
 
 def pkg_printable(request, slug):
@@ -104,6 +103,8 @@ def tag_detail(request, tag):
         fs = FS.objects.filter(tags__name__exact=tag)
         howto = HowTo.objects.filter(tags__name__exact=tag)
         flatpages = FlatPage.objects.filter(tags__name__exact=tag)
+        topic=Topic.objects.filter(tags__name__exact=tag)
+
     except Tag.DoesNotExist:
         raise Http404
     return render_response(request, 'tag/tag_detail.html', locals())
@@ -123,11 +124,46 @@ def videobox(request, video):
     web_url = WEB_URL
     return render_response(request, 'videobox.html', locals())
 
+def advanced_search(request):
+    if request.method == 'POST':
+        form = AdvancedSearchForm(request.POST.copy())
+        if form.is_valid():
+            term = form.cleaned_data['term']
+            search_in = int(form.cleaned_data['search_in'])
+            depth = int(form.cleaned_data['depth'])
+
+            tags = Tag.objects.filter(name__icontains=term)[:50]
+
+            if depth == 0:
+                if search_in != 1:
+                    topics = Topic.objects.filter(title__icontains=term)[:50]
+                if search_in != 0:
+                    news = News.objects.filter(title__icontains=term).order_by('-update')[:50]
+                    packages = Package.objects.filter(title__icontains=term).order_by('-update')[:50]
+                    games = Game.objects.filter(title__icontains=term).order_by('-update')[:50]
+                    fs = FS.objects.filter(title__icontains=term).order_by('-update')[:50]
+                    howto = HowTo.objects.filter(title__icontains=term).order_by('-update')[:50]
+                    flatpages = FlatPage.objects.filter(title__icontains=term)[:50]
+            else:
+                if search_in != 1:
+                    posts = Post.objects.filter(text__icontains=term).order_by("-created")[:50]
+                if search_in != 0:
+                    news = News.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).order_by('-update')[:50]
+                    packages = Package.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).order_by('-update')[:50]
+                    games = Game.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).order_by('-update')[:50]
+                    fs = FS.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).order_by('-update')[:50]
+                    howto = HowTo.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).order_by('-update')[:50]
+                    flatpages = FlatPage.objects.filter(Q(title__icontains=term)|Q(text__icontains=term))[:50]
+            searched = True
+    else:
+        form = AdvancedSearchForm()
+    return render_response(request, 'advancedsearch.html', locals())
+
 def search(request):
     if request.method == 'POST':
         form = SearchForm(request.POST.copy())
         if form.is_valid():
-            term = form.clean_data['term']
+            term = form.cleaned_data['term']
 
             searched = True
             tags = Tag.objects.filter(name__icontains=term).order_by('name')
@@ -137,6 +173,9 @@ def search(request):
             fs = FS.objects.filter(tags__name__icontains=term).order_by('-update')
             howto = HowTo.objects.filter(tags__name__icontains=term).order_by('-update')
             flatpages = FlatPage.objects.filter(tags__name__icontains=term).order_by('title')
+            #for forum also
+            topic=Topic.objects.filter(tags__name__icontains=term).order_by('title')
+
             total = tags.count()
             total += news.count()
             total += packages.count()
@@ -144,56 +183,6 @@ def search(request):
             total += fs.count()
             total += howto.count()
             total += flatpages.count()
-
-    else:
-        pass
+            total += topic.count()
 
     return render_response(request, 'search.html', locals())
-    
-@login_required
-def comment_news(request,slug):
-    """ When someone comments it is adde to forum (check for flooding also !)...
-    validate the html tags all for now...(may change!)
-    """
-    news = get_object_or_404(News, slug=slug)
-    #news = News.objects.filter(id=id)
-    
-    if request.method== 'POST':
-            
-        new_data = request.POST.copy()
-        
-        form=CommentForm(new_data)
-        
-        #flood control
-        flood,timeout = flood_control(request)
-        
-        if form.is_valid() and not flood:
-            
-            t=Topic.objects.filter(title=news.title)
-            if not t:
-                tags = news.tags.all()
-                return render_response(request,'news/news_detail.html',{'news':news,'tags':tags,'form':form,'auth':True})
-        
-            post = Post(topic=t[0],
-                                author=request.user,
-                                text=form.clean_data['yorum']
-                               )
-            try:
-				post.save()
-            except Exception:
-                render_to_response('db_error.html')
-                
-            return HttpResponseRedirect(post.get_absolute_url())
-            
-        
-        else:
-            #hata mesaji gonder
-            tags = news.tags.all()
-            return render_response(request,'news/news_detail.html',{'news':news,'tags':tags,'form':form,'auth':True})
-            
-    
-    form=CommentForm()
-    tags = news.tags.all()
-    return render_response(request,'news/news_detail.html',{'news':news,'tags':tags,'form':form,'auth':True})
-        
-    #do something here

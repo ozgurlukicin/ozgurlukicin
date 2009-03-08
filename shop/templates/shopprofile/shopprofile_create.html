@@ -1,0 +1,20 @@
+{% extends "shop_base.html" %}
+{% block title %}Dükkan - Profil Oluştur{% endblock %}
+{% block content %}
+<form method="post" action="">
+    {% for field in form %}
+    <div class="field_container">
+        <div class="field_label">{{ field.label_tag }}</div>
+        <div class="field_field">
+            {{ field }}
+            {% if field.errors %}{{ field.errors }}{% endif %}
+        </div>
+        <div class="help_text">
+            {% if field.help_text %}{{ field.help_text }}{% endif %}
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    {% endfor %}
+    <div style="clear:left; text-align:center; padding-top:5px;"><input type="submit" value="Profili Oluştur" /></div>
+</form>
+{% endblock %}

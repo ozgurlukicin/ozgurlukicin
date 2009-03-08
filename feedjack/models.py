@@ -17,7 +17,7 @@ SITE_ORDERBY_CHOICES = (
 )
 
 class Link(models.Model):
-    name = models.CharField('name', maxlength=100, unique=True)
+    name = models.CharField('name', max_length=100, unique=True)
     link = models.URLField('link', verify_exists=True)
 
     class Meta:
@@ -27,16 +27,16 @@ class Link(models.Model):
     class Admin:
         pass
 
-    def __str__(self):
+    def __unicode__(self):
         return '%s (%s)' % (self.name, self.link)
 
 
 class Site(models.Model):
-    name = models.CharField('name', maxlength=100)
-    url = models.CharField('url', maxlength=100, unique=True, \
+    name = models.CharField('name', max_length=100)
+    url = models.CharField('url', max_length=100, unique=True, \
       help_text='Example' + ': http://www.planetexample.com, ' \
         'http://www.planetexample.com:8000/foo')
-    title = models.CharField('title', maxlength=200)
+    title = models.CharField('title', max_length=200)
     description = models.TextField('description')
     welcome = models.TextField('welcome', null=True, blank=True)
     greets = models.TextField('greets', null=True, blank=True)
@@ -47,26 +47,27 @@ class Site(models.Model):
       choices=SITE_ORDERBY_CHOICES)
     tagcloud_levels = models.IntegerField('tagcloud level', default=5)
     show_tagcloud = models.BooleanField('show tagcloud', default=True)
-    
+
     use_internal_cache = models.BooleanField('use internal cache', default=True)
     cache_duration = models.IntegerField('cache duration', default=60*60*24, \
       help_text='Duration in seconds of the cached pages and data.')
 
-    links = models.ManyToManyField(Link, verbose_name='links', filter_interface=models.VERTICAL, \
+    links = models.ManyToManyField(Link, verbose_name='links', \
       null=True, blank=True)
-    template = models.CharField('template', maxlength=100, null=True, blank=True, \
+    template = models.CharField('template', max_length=100, null=True, blank=True, \
       help_text='This template must be a directory in your feedjack ' \
         'templates directory. Leave blank to use the default template.')
 
     class Admin:
         list_display = ('url', 'name')
+        filter_vertical = ('links',)
 
     class Meta:
         verbose_name = 'site'
         verbose_name_plural = 'sites'
         ordering = ('name',)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
     def save(self):
@@ -90,17 +91,17 @@ class Site(models.Model):
 class Feed(models.Model):
     feed_url = models.URLField('feed url', unique=True)
 
-    name = models.CharField('name', maxlength=100)
-    shortname = models.CharField('shortname', maxlength=50)
+    name = models.CharField('name', max_length=100)
+    shortname = models.CharField('shortname', max_length=50)
     is_active = models.BooleanField('is active', default=True, \
       help_text='If disabled, this feed will not be further updated.')
 
-    title = models.CharField('title', maxlength=200, blank=True)
+    title = models.CharField('title', max_length=200, blank=True)
     tagline = models.TextField('tagline', blank=True)
     link = models.URLField('link', blank=True)
 
     # http://feedparser.org/docs/http-etag.html
-    etag = models.CharField('etag', maxlength=50, blank=True)
+    etag = models.CharField('etag', max_length=50, blank=True)
     last_modified = models.DateTimeField('last modified', null=True, blank=True)
     last_checked = models.DateTimeField('last checked', null=True, blank=True)
 
@@ -121,21 +122,21 @@ class Feed(models.Model):
         verbose_name_plural = 'feeds'
         ordering = ('name', 'feed_url',)
 
-    def __str__(self):
+    def __unicode__(self):
         return '%s (%s)' % (self.name, self.feed_url)
 
     def save(self):
         super(Feed, self).save()
 
 class Tag(models.Model):
-    name = models.CharField('name', maxlength=50, unique=True)
+    name = models.CharField('name', max_length=50, unique=True)
 
     class Meta:
         verbose_name = 'tag'
         verbose_name_plural = 'tags'
         ordering = ('name',)
-    
-    def __str__(self):
+
+    def __unicode__(self):
         return self.name
 
     def save(self):
@@ -143,21 +144,22 @@ class Tag(models.Model):
 
 class Post(models.Model):
     feed = models.ForeignKey(Feed, verbose_name='feed', null=False, blank=False)
-    title = models.CharField('title', maxlength=255)
+    title = models.CharField('title', max_length=255)
     link = models.URLField('link', )
     content = models.TextField('content', blank=True)
     date_modified = models.DateTimeField('date modified', null=True, blank=True)
-    guid = models.CharField('guid', maxlength=200, db_index=True)
-    author = models.CharField('author', maxlength=50, blank=True)
+    guid = models.CharField('guid', max_length=200, db_index=True)
+    author = models.CharField('author', max_length=50, blank=True)
     author_email = models.EmailField('author email', blank=True)
     comments = models.URLField('comments', blank=True)
-    tags = models.ManyToManyField(Tag, verbose_name='tags', filter_interface=models.VERTICAL)
+    tags = models.ManyToManyField(Tag, verbose_name='tags')
     date_created = models.DateField('date created', auto_now_add=True)
 
     class Admin:
         list_display = ('title', 'link', 'author', 'date_modified')
         search_fields = ['link', 'title']
         date_hierarchy = 'date_modified'
+        filter_vertical = ('tags',)
 
     class Meta:
         verbose_name = 'post'
@@ -165,7 +167,7 @@ class Post(models.Model):
         ordering = ('-date_modified',)
         unique_together = (('feed', 'guid'),)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
     def save(self):
@@ -179,9 +181,9 @@ class Subscriber(models.Model):
     site = models.ForeignKey(Site, verbose_name='site' )
     feed = models.ForeignKey(Feed, verbose_name='feed' )
 
-    name = models.CharField('name', maxlength=100, null=True, blank=True, \
+    name = models.CharField('name', max_length=100, null=True, blank=True, \
       help_text='Keep blank to use the Feed\'s original name.')
-    shortname = models.CharField('shortname', maxlength=50, null=True, blank=True, \
+    shortname = models.CharField('shortname', max_length=50, null=True, blank=True, \
       help_text='Keep blank to use the Feed\'s original shortname.')
     is_active = models.BooleanField('is active', default=True, \
       help_text='If disabled, this subscriber will not appear in the site or '\
@@ -197,7 +199,7 @@ class Subscriber(models.Model):
         ordering = ('site', 'name', 'feed')
         unique_together = (('site', 'feed'),)
 
-    def __str__(self):
+    def __unicode__(self):
         return '%s in %s' % (self.feed, self.site)
 
     def get_cloud(self):

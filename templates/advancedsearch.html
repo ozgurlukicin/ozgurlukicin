@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Advanced Search" %} - {% endblock %}
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+{% endblock %}
+{% block content %}
+<div class="center" style="text-align: left; padding-left: 50px;">
+    <form method="post" action="">
+        <style type="text/css">ul{overflow:hidden;padding:0;list-style-type:none;}</style>
+        {% for field in form %}
+        <dl>
+            <dt><label for="id_{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
+            <dd>{{ field }}</dd>
+        </dl>
+        {% endfor %}
+    <input type="submit" value="{% trans "Show results" %}" />
+    </form>
+</div>
+{% if searched %}
+<div class="fs_title transparent_link">{% if tags or topics or posts or news or packages or games or fs or howto or flatpages %}{% blocktrans %}Pages containing {{ term }}{% endblocktrans %}{% else %}{% blocktrans %}No pages found containing {{ term }}{% endblocktrans %}{% endif %}</div>
+{% ifnotequal total 0 %}
+<div class="fs_content">
+    {% if tags %}
+        <div class="purple">
+            <h2><span>{% blocktrans with tags.count as count %}Tags ({{ count }}){% endblocktrans %}</span></h2>
+            <ul style="padding-left: 16px;" class="grey">
+            {% for obj in tags %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.name }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    {% if news %}
+        <div class="purple">
+            <h2><span>{% blocktrans with news.count as count %}News ({{ count }}){% endblocktrans %}</span></h2>
+            <ul style="padding-left: 16px;" class="grey">
+            {% for obj in news %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+	{% if howto %}
+        <div class="purple">
+            <h2><span>{% blocktrans with howto.count as count %}Howto ({{ count }}){% endblocktrans %}</span></h2>
+            <ul style="padding-left: 16px;" class="grey">
+            {% for obj in howto %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if packages %}
+        <div class="orange">
+            <h2><span>{% blocktrans with packages.count as count %}Package ({{ count }}){% endblocktrans %}</span></h2>
+            <ul style="padding-left: 16px;" class="grey">
+            {% for obj in packages %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if fs %}
+        <div class="green">
+            <h2><span>{% blocktrans with fs.count as count %}First Steps ({{ count }}){% endblocktrans %}</span></h2>
+            <ul style="padding-left: 16px;" class="grey">
+            {% for obj in fs %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if games %}
+        <div class="darkblue">
+            <h2><span>{% blocktrans with games.count as count %}Games ({{ count }}){% endblocktrans %}</span></h2>
+            <ul style="padding-left: 16px;" class="grey">
+            {% for obj in games %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if topics or posts %}
+        <div class="darkblue">
+            <h2><span>{% if posts %}{% blocktrans with posts.count as count %}Forum ({{ count }}){% endblocktrans %}{% else %}{% blocktrans with topics.count as count %}Forum ({{ count }}){% endblocktrans %}{% endif %}</span></h2>
+            <ul style="padding-left: 16px;" class="grey">
+            {% if posts %}
+            {% for obj in posts %}
+                <li><a href="{{ obj.topic.get_absolute_url }}">{{ obj.topic.title }}</a></li>
+            {% endfor %}
+            {% else %}
+            {% for obj in topics %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></li>
+            {% endfor %}
+            {% endif %}
+            </ul>
+        </div>
+    {% endif %}
+
+
+    {% if flatpages %}
+        <div class="green">
+            <h2><span>{% blocktrans with flatpages.count as count %}Flatpages ({{ count }}){% endblocktrans %}</span></h2>
+            <ul style="padding-left: 16px;" class="grey">
+            {% for obj in flatpages %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.text|truncatewords:"10"|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</div>
+{% endifnotequal %}
+{% ifequal total 0 %}
+<div class="fs_content">{% trans "No content found." %}</div>
+{% endifequal %}
+{% endif %}
+{% endblock %}

@@ -1,65 +1,55 @@
-{% load library %}
-{% block title %}Forum - {% endblock %}
-
-{% block pagetype %}page-single{% endblock %}
-
-{% block section %}forum{% endblock %}
-{% block section_logo %}<img src="/media/img/forum_header_logo.png">{% endblock %}
-
+{% extends "forum/forum_base.html" %}
+{% load library i18n %}
+{% load gravatar %}
+{% block extrahead %}
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
-<script language="javascript" type="text/javascript">
-tinyMCE.init({
-	theme : "advanced",
-		mode : "textareas",
-		plugins : "fullpage",
-		theme_advanced_buttons3_add : "fullpage"
-});
-</script>
-
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
+<style type="text/css" media="screen">@import url('/media/css/new/forum_topic.css');</style>
+{% endblock %}
 {% block content %}
-
-
-{% if user.is_authenticated %}
-{% if flood %}Flood yapma lan, {{ timeout }}sn var.{% endif %}
-<form action="" method="POST">
-<dl>
+<div class="topbar">
+    <div class="navigation"><a href="/">{% trans "Mainpage" %}</a> &#62; <a href="/forum/">{% trans "Forum" %}</a> &#62; <a href="{{ topic.forum.get_absolute_url }}">{{ topic.forum.name }}</a> &#62; <a href="{{ topic.get_absolute_url }}" class="bold">{{ topic.title }}</a></div>
+</div>
+{% if flood %}{% blocktrans %}Flood protection, please wait for {{ timeout }} seconds.{% endblocktrans %}{% endif %}
+<form action="" method="post">
+{% if quote_id %}<input type="hidden" name="quote_id" value="{{ quote_id }}" />{% endif %}
 {% for field in form %}
-    <dt>{{ field.label_tag }}</dt>
-    <dd>{{ field }}</dd>
-    {% if field.help_text %}<dd>{{ field.help_text }}</dd>{% endif %}
-    {% if field.errors %}<dd class="myerrors">{{ field.errors }}</dd>{% endif %}
+    <dl>
+        <dt><label for="{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
+        <dd>{{ field|safe }}</dd>
+    </dl>
 {% endfor %}
-</dl>
-<input type="submit" value="Send">
+<input type="submit" value="{% trans "Reply" %}" />
 </form>
-{% else %}
-<p>You must be signed in to send a reply.</p>
-{% endif %}
-
 
 {% for post in posts %}
-<div {% if post.hidden %}style="opacity: 0.5;"{% endif %}><a name="post{{ post.id }}"></a>
-<span style="float: left;"><a href="{{ post.get_absolute_url }}">#{{ forloop.counter }}</a></span>
-<span style="float: right;">{{ post.created|date:"d-m-Y H:i" }}</span><br />
-<div id="author_info">{{ post.author.avatar }} {{ post.author }}{% if perms.post.can_see_ip %} ({{ post.ip }}){% endif %}</div>
-<div style="padding-top: 10px;">{{ post.text|linebreaksbr }}<br />
-{% ifnotequal post.edit_count 0 %}<br />Bu ileti {{ post.edit_count }} kez değiştirilmiştir, son kez {{ post.edited }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.<br />{% endifnotequal %}
+
+{% if post.hidden and not perms.forum.can_see_hidden_posts %}
+{% else %}
+<div class="post_base" {% if post.hidden %}style="opacity: 0.5;"{% endif %}>
+    <div class="post_profile">
+        <div class="author">{{ post.author }}</div>
+        <div class="author_description">{{ post.author.get_profile.title }}</div>
+        <div class="avatar"><img src="{% avatar_url post.author.email 100 "g" post.author.get_profile.avatar.file.url %}" alt="{% trans "avatar" %}" width="100" height="100"></div>
+        {% if perms.forum.can_see_post_ip %}<div class="ip">({{ post.ip }})</div>{% endif %}
+        <div class="register_date">{% trans "Register Date:" %}<br />{{ post.author.date_joined|date:"d-m-Y" }}</div>
+        <div class="button"><a href="{{ post.author.get_profile.get_absolute_url }}"><img src="/media/img/new/button_info.png" alt="{% trans "info" %}" /></a></div>
+    </div>
+    <div class="post_message">
+        <div class="post_message_top">
+            <div class="post_message_top_icon">
+                <a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="{% trans "post address" %}" /></a>
+            </div>
+            <div class="post_message_top_date">
+                {{ post.created|date:"d-m-Y H:i" }}
+            </div>
+        </div>
+        <div class="post_message_content">
+            <div class="post_message_text">{{ post.text|renderbbcode|safe }}</div>
+        </div>
+    </div>
 </div>
-
-<br />{% if forloop.first %}{% if perms.topic.can_edit %}<a href="{{ topic.get_edit_url }}">edit</a>{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ topic.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% else %}{% if perms.post.can_edit %}<a href="{{ post.get_edit_url }}">edit</a>{% else %}{% ifequal post.author.id request.user.id %}<a href="{{ post.get_edit_url }}">edit</a>{% endifequal %}{% endif %}{% endif %} <a href="{{ post.get_quote_url }}">quote</a>
-
-{% if perms.post.can_hide and not forloop.first and not post.hidden %}<a href="{{ post.get_hide_url }}">hide</a>{% endif %}
-{% if perms.post.can_hide and not forloop.first and post.hidden %}<a href="{{ post.get_hide_url }}">unhide</a>{% endif %}
-
-{% if perms.post.can_delete and not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>{% else %}
-{% ifequal post.author.id request.user.id %}{% ifequal post topic.topic_latest_post %}{% if not forloop.first %}<a href="{{ post.get_delete_url }}">delete</a>{% endif %}{% endifequal %}{% endifequal %}
 {% endif %}
-
-<hr>
-{% if post.hidden %}</div>{% endif %}
 {% endfor %}
-
-
 {% endblock %}
-
 {% block sidebartop %}{% endblock %}

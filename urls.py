@@ -6,12 +6,15 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.conf.urls.defaults import *
-from django.contrib.comments.models import FreeComment
 
 from oi.settings import WEB_URL, DOCUMENT_ROOT, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, NEWS_PER_PAGE, TAG_PER_PAGE, HOWTO_PER_PAGE
-from oi.st.models import Package, Game, FS, News, Tag, HowTo
+from oi.st.models import Package, Game, FS, News, HowTo
+from oi.st.tags import Tag
 from oi.seminar.models import Seminar
 from oi.st.feeds import *
+from django.contrib import admin
+
+admin.autodiscover()
 
 rss_dict = {
             '': Main_RSS,
@@ -32,39 +35,44 @@ atom_dict = {
             }
 
 package_dict = {
-                'queryset': Package.objects.filter(status=1).order_by('title'),
+                'queryset': Package.objects.filter(status=True).order_by('title'),
                 'template_name': 'package/package_main.html',
                 'paginate_by': PACKAGE_PER_PAGE,
-                'template_object_name': 'package'
+                'template_object_name': 'package',
                }
 
 game_dict = {
-             'queryset': Game.objects.filter(status=1).order_by('title'),
+             'queryset': Game.objects.filter(status=True).order_by('title'),
              'template_name': 'game/game_main.html',
              'paginate_by': GAME_PER_PAGE,
-             'template_object_name': 'game'
+             'template_object_name': 'game',
             }
 
 fs_dict = {
-           'queryset': FS.objects.filter(status=1).order_by('order'),
+           'queryset': FS.objects.filter(status=True).order_by('order'),
            'template_name': 'fs/fs_main.html',
            'paginate_by': FS_PER_PAGE,
-           'template_object_name': 'fs'
+           'template_object_name': 'fs',
           }
 
 howto_dict = {
-              'queryset': HowTo.objects.filter(status=1).order_by('title'),
+              'queryset': HowTo.objects.filter(status=True).order_by('title'),
               'template_name': 'howto/howto_main.html',
               'paginate_by': HOWTO_PER_PAGE,
-              'template_object_name': 'howto'
+              'template_object_name': 'howto',
+              'extra_context': {
+                  'firststep': FS.objects.filter(status=True).order_by('order')[:10],
+                  },
              }
 
 news_dict = {
-             'queryset': News.objects.filter(status=1).order_by('-update'),
+             'queryset': News.objects.filter(status=True).order_by('-update'),
              'template_name': 'news/news_main.html',
              'paginate_by': NEWS_PER_PAGE,
              'template_object_name': 'news',
-             'extra_context': {'seminar': Seminar.objects.filter(status=1).order_by('date')}
+             'extra_context': {
+                 'seminar': Seminar.objects.filter(status=True).order_by('start_date'),
+                 }
             }
 
 tag_dict = {
@@ -75,20 +83,13 @@ tag_dict = {
            }
 
 urlpatterns = patterns('',
-	
-	#comments
-	
-    (r'^comments/post/$', 'oi.comments.views.post_comment'),
-    (r'^comments/posted/$', 'oi.comments.views.comment_was_posted'),
 
-	
+    (r'^robots.txt$', 'oi.st.views.robots'),
+
     #News
-    #(r'^haber/yorum/(?P<id>\d+)/$', 'oi.st.views.comment_news'),
-    (r'^haber/yorum/(?P<slug>.*)/$', 'oi.st.views.comment_news'),
     (r'^haber/$', 'django.views.generic.list_detail.object_list', dict(news_dict)),
     (r'^haber/(?P<slug>.*)/yazdir/$', 'oi.st.views.news_printable'),
     (r'^haber/(?P<slug>.*)/$', 'oi.st.views.news_detail'),
-    
 
     #Packages
     (r'^paket/$', 'django.views.generic.list_detail.object_list', dict(package_dict)),
@@ -121,6 +122,7 @@ urlpatterns = patterns('',
 
     #Search
     (r'^arama/$', 'oi.st.views.search'),
+    (r'^gelismisarama/$', 'oi.st.views.advanced_search'),
 
     #Download
     (r'^indir/$', 'oi.st.views.download'),
@@ -136,18 +138,37 @@ urlpatterns = patterns('',
     (r'^forum/', include('oi.forum.urls')),
 
     #Bug tracker
-    (r'^bocuk/', include('oi.bug.urls')),
+    (r'^hata/', include('oi.bug.urls')),
 
     #Planet
     (r'^gezegen/', include('oi.feedjack.urls')),
 
+    #Editor
+    (r'^editor/', include('oi.editor.urls')),
+
     #Tema
-    (r'^tema/', include('oi.sanat.urls')),
-	
+    (r'^tema/', include('oi.tema.urls')),
+
+    #Yeni Fikirler
+    (r'^yenifikir/', include('oi.ideas.urls')),
+
+    # Shop
+    (r'^dukkan/', include('oi.shop.urls')),
+
+    #Petition
+    (r'^petition/', include('oi.petition.urls')),
+    (r'^ooxml/', 'oi.petition.views.petition_sign'),
+
+    #Ideas
+    (r'^yenifikir/', include('oi.ideas.urls')),
+
+    #Webalizer
+    url(r'^admin/webalizer/', include('webalizer.urls')),
+
     #Django
     (r'^$', 'oi.st.views.home'),
-    (r'^admin/upload/image/add/$', 'oi.upload.views.image_upload'),
-    (r'^admin/', include('django.contrib.admin.urls')),
+    (r'^admin/upload/image/tinymce/$', 'oi.upload.views.image_upload'),
+    (r'^admin/(.*)', admin.site.root),
     (r'^media/(.*)$', 'django.views.static.serve', {'document_root': '%s/media' % DOCUMENT_ROOT, 'show_indexes': True}),
 
     #Feeds

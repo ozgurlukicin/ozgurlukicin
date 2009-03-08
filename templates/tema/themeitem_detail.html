@@ -1,0 +1,31 @@
+{% extends "tema/base.html" %}
+{% block header_menu %}
+    {% include "header.html" %}
+{% endblock %}
+{% block ust_menu %}
+    {% include "ust_menu_ayrinti.html" %}
+{% endblock %}
+
+{% block content %}
+{% if button_change %}<a href="{{ object.get_change_url }}">Düzenle</a>{% endif %}
+<div class="themeitem">
+    <div class="themeitem_title">{{ object.name }}</div>
+    <div class="themeitem_screenshots">
+        {% for screenshot in object.screenshot_set.all %}
+        <a href="{{ sceenshot.image }}"><img src="{{ screenshot.thumbnail }}" alt="ekran görüntüsü" width="100"/></a>
+        {% endfor %}
+    </div>
+    <div class="themeitem_category"><a href="{{ object.category.get_absolute_url }}">{{ object.category }}</a></div>
+    <div class="themeitem_edit_date">{{ object.submit_date|date:"d F Y" }}</div>
+    <div class="themeitem_download_count">{{ object.download_count }}</div>
+    <div class="themeitem_rating">{{ object.rating }} <a href="/tema/oyla/{{ object.id }}/0/">0</a> <a href="/tema/oyla/{{ object.id }}/1/">1</a> <a href="/tema/oyla/{{ object.id }}/2/">2</a> <a href="/tema/oyla/{{ object.id }}/3/">3</a> <a href="/tema/oyla/{{ object.id }}/4/">4</a></div>
+    <div class="themeitem_author"><a href="/tema/kullanici/{{ object.author }}/">{{ object.author }}</a></div>
+    <div class="themeitem_description">Tanım:<br />{{ object.description|linebreaksbr }}</div>
+    <div class="themeitem_license">Lisans: {{ object.license }}</div>
+    <div class="themeitem_downloads">
+        {% for file in object.file_set.all %}
+        <a href="{{ file.get_absolute_url }}">{{ file.title }}</a><br/>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

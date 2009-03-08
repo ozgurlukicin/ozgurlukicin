@@ -1,32 +1,101 @@
 {% extends "base.html" %}
+{% load gravatar %}
+{% load i18n %}
 
-{% block title %}Kullanıcı: {{ infoname }} -{% endblock %}
+{% block title %}{% trans "User Profile" %}: {{ info }} - {% endblock %}
 
-{% block header_menu %}
-    <!-- Burası header kısmı -->
-	{% include "header.html" %}
+{% block extrabody %} onload="load()" onunload="GUnload()"{% endblock %}
+
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/profile.css');</style>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={{ apikey }}" type="text/javascript"></script>
+    <script type="text/javascript">
+    //<![CDATA[
+    function load() {
+        if (GBrowserIsCompatible()) {
+            var map = new GMap2(document.getElementById("id_map"));
+            map.enableScrollWheelZoom();
+
+            // initialize user location
+            var center = new GLatLng(39, 35);
+            var heightLevel = 5;
+            var lng = {{ info.get_profile.longitude }};
+            var ltd = {{ info.get_profile.latitude }};
+
+            if ((lng != 0) || (ltd != 0)) {
+                center = new GLatLng(ltd, lng);
+                heightLevel = 9;
+            }
+            map.setCenter(center, heightLevel);
+            map.addControl(new GSmallMapControl());
+            map.addControl(new GMapTypeControl());
+
+            var marker = new GMarker(center);
+            map.addOverlay(marker);
+        }
+    }
+    //]]>
+    </script>
 {% endblock %}
-<br/>
-{% block ust_menu %}
-	<!-- Burası üst menü kısmı -->
-	{% include "ust_menu_ayrinti.html" %}
-	
-{% endblock %}
-
-<br/>
-
 
 {% block content %}
+<div id="user_profile">
+    <div id="user_profile_left">
+        <h3>{{ info }}</h3>
+        <div class="img_container">
+            <img src="{% avatar_url info.email 100 "g" info.get_profile.avatar.file.url %}" alt="{% trans "Avatar" %}" />
+        </div>
+        {% ifequal request.user.id info.id %}<a href="/kullanici/duzenle/"><img src="/media/img/new/profile_edit.png" alt="{% trans "Edit my profile" %}"></a>{% endifequal %}
+        <div class="profile_info">
+            {% if has_sent_messages %}<a href="/kullanici/iletiler/{{ info }}/">{% trans "Posts in Forum" %}</a>{% else %}<a>{% trans "No Posts in Forum" %}</a>{% endif %}
+        </div>
+    </div>
+    <div id="user_profile_right">
+            <h3>Kişisel Bilgiler</h3>
+            <div class="profile_info">
+                <div class="profile_titles">{% trans "Name" %}</div><div class="profile_value">: {{ info.first_name }}</div>
+            </div>
+            <div class="profile_info">
+                <div class="profile_titles">{% trans "Surname" %} </div><div class="profile_value">: {{ info.last_name }}</div>
+            </div>
+            <div class="profile_info">
+                <div class="profile_titles">{% trans "City" %} </div><div class="profile_value">: {{ info.get_profile.get_city_display }}</div>
+            </div>
+            {% if info.get_profile.show_birthday %}
+            <div class="profile_info">
+                <div class="profile_titles">{% trans "Birth Date" %} </div><div class="profile_value">: {{ info.get_profile.birthday|date:"d F Y" }}</div>
+            </div>
+            {% endif %}
+            <div class="profile_info">
+                <div class="profile_titles">{% trans "Registration Date" %} </div><div class="profile_value">: {{ info.date_joined|date:"d F Y" }}</div>
+            </div>
 
-{% if info %}
+            <h3>{% trans "Contact Information" %}</h3>
 
-Ad: {{ info.first_name }} <br />
-Web: {{ info.get_profile.homepage }} <br />
+            {% if info.get_profile.show_email %}
+            <div class="profile_info">
+                <div class="profile_titles">{% trans "E-mail" %} </div><div class="profile_value">: <a href="mailto:{{ info.email }}">{{ info.email }}</a></div>
+            </div>
+            {% endif %}
+            <div class="profile_info">
+                <div class="profile_titles">{% trans "Web Site" %} </div><div class="profile_value">: <a href="{{ info.get_profile.homepage }}" target="_blank">{{ info.get_profile.homepage }}</a></div>
+            </div>
+            <div class="profile_info">
+                <div class="profile_titles">{% trans "Jabber" %} </div><div class="profile_value">: {{ info.get_profile.jabber }}</div>
+            </div>
+            <div class="profile_info">
+                <div class="profile_titles">{% trans "MSN" %} </div><div class="profile_value">: {{ info.get_profile.msn }}</div>
+            </div>
+            <div class="profile_info">
+                <div class="profile_titles">{% trans "ICQ" %} </div><div class="profile_value">: {{ info.get_profile.icq }}</div>
+            </div>
 
-{% else %}
-
-Böyle bir kullanıcı yok! <br />
-
-{% endif %}
-
+            {% if info.get_profile.bio %}
+            <h3>{% trans "About" %}</h3>
+            <div id="profile_bio">{{ info.get_profile.bio|linebreaksbr }}</div>
+            {% endif %}
+            <div id="id_map" class="googlemap"></div>
+    </div>
+</div>
 {% endblock %}

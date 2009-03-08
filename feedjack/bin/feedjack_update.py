@@ -91,12 +91,12 @@ def get_entry_data(entry, feed, options):
         author = encode(entry.get('author', entry.get('creator', '')))
     if not author_email:
         author_email = 'nospam@nospam.com'
-    
+
     try:
         content = encode(entry.content[0].value)
     except:
         content = encode(entry.get('summary', entry.get('description', '')))
-    
+
 
     # Patch for resizing images, Eren Turkay <turkay.eren@gmail.com>
     # 2007-07-01
@@ -133,16 +133,17 @@ def get_entry_data(entry, feed, options):
                 file.close()
 
                 im = Image.open(tmp, 'r')
+                # we'll do it respecting aspect ratio
+                resize_x = im.size[0]
+                resize_y = im.size[1]
 
-                if settings.FEEDJACK_MAX_IMAGE_X and im.size[0] > settings.FEEDJACK_MAX_IMAGE_X:
+                if settings.FEEDJACK_MAX_IMAGE_X and resize_x > settings.FEEDJACK_MAX_IMAGE_X:
+                    resize_y = int(settings.FEEDJACK_MAX_IMAGE_X * 1.0 / resize_x * resize_y)
                     resize_x = settings.FEEDJACK_MAX_IMAGE_X
-                else:
-                    resize_x = im.size[0]
 
-                if settings.FEEDJACK_MAX_IMAGE_Y and im.size[1] > settings.FEEDJACK_MAX_IMAGE_Y:
+                if settings.FEEDJACK_MAX_IMAGE_Y and resize_y > settings.FEEDJACK_MAX_IMAGE_Y:
+                    resize_x = int(settings.FEEDJACK_MAX_IMAGE_Y * 1.0 / resize_y * resize_x)
                     resize_y = settings.FEEDJACK_MAX_IMAGE_Y
-                else:
-                    resize_y = im.size[1]
 
                 # if there is a change on images, continue the process
                 if im.size[0] != resize_x or im.size[1] != resize_y:
@@ -168,6 +169,10 @@ def get_entry_data(entry, feed, options):
                     if options.verbose:
                         print '  RESIZE: Skipped, there is no change\n'
 
+                try:
+                    os.unlink(tmp)
+                except:
+                    pass
             # endpatch
 
     if entry.has_key('modified_parsed'):
@@ -251,7 +256,7 @@ def process_feed(feed, options):
         print '#\n# Processing feed (%d):' % feed.id, feed.feed_url, '\n#'
     else:
         print '# Processing feed (%d):' % feed.id, feed.feed_url
-    
+
     # we check the etag and the modified time to save bandwith and avoid bans
     try:
         fpf = feedparser.parse(feed.feed_url, agent=USER_AGENT,
@@ -259,7 +264,7 @@ def process_feed(feed, options):
     except:
         print '! ERROR: feed cannot be parsed'
         return 1
-    
+
     if hasattr(fpf, 'status'):
         if options.verbose:
             print 'fpf.status:', fpf.status
@@ -284,7 +289,7 @@ def process_feed(feed, options):
         feed.last_modified = mtime(fpf.modified)
     except:
         pass
-    
+
     feed.title = encode(fpf.feed.get('title', ''))[0:254]
     feed.tagline = encode(fpf.feed.get('tagline', ''))
     feed.link = encode(fpf.feed.get('link', ''))
@@ -363,7 +368,7 @@ def main():
 
     # settting socket timeout (default= 10 seconds)
     socket.setdefaulttimeout(options.timeout)
-    
+
     if options.feed:
         for feed in options.feed:
             try:

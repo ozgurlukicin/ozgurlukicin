@@ -1,30 +1,12 @@
-{% load library %}
 {% extends "base.html" %}
-
+{% block extrahead %}
+    <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+    <style type="text/css" media="screen">@import url('/media/css/bug.css');</style>
+{% endblock %}
 {% block title %}Pardus {% if version.number %}{{ version.number }} ({{ version.codename }}) {% endif %}Sürüm Notları - {% endblock %}
 
-{% block pagetype %}page{% endblock %}
-
-{% block header_menu %}
-    <!-- Burası header kısmı -->
-	{% include "header.html" %}
-{% endblock %}
-<br/>
-{% block ust_menu %}
-	<!-- Burası üst menü kısmı -->
-	{% include "ust_menu_ayrinti.html" %}
-	
-{% endblock %}
-
-<br/>
-
-{% block alt_resim %}
-
-{% endblock %}
-
 {% block content %}
-<div class="fs_title transparent_link">Pardus {% if version.number %}{{ version.number }} ({{ version.codename }}) {% endif %}Sürüm Notları</div>
 <div class="page_content grey">
-{{ releasenote }}
+{{ releasenote|safe }}
 </div>
 {% endblock %}

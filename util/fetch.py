@@ -24,22 +24,22 @@ def read_html(url, etag=None, modified=None, agent=''):
         m = refreshRe.search(data)
         if not m:
             break
-            
+
         redirectUrl = m.group(1)
         if redirectUrl == '/nojs.htm':  # yuck; special case for jacklewis.net
             break
-            
+
         url = urlparse.urljoin(f.url, redirectUrl)
         if url in tried:
             break
         tried.add(url)
-        
+
         f, data = read_resource(url, etag, modified, agent)
         if not hasattr(f, 'status'):
             f.status = 301  # Treat a <meta> redirect as permanent
 
     return f, data
-    
+
 
 def read_resource(url, etag=None, modified=None, agent='', isFeed=False):
     ''' Open and read data from a URL.
@@ -62,14 +62,14 @@ def read_resource(url, etag=None, modified=None, agent='', isFeed=False):
         f = urllib.urlopen(url)
         data = f.read()
         f.close()
-    
+
     # Even though we ask for no encoding, some sites still return gzip
     # http://hughhewitt.townhall.com/blog is one
     if f.info().get('content-encoding', None) == 'gzip':
         data = gzip.GzipFile(fileobj=StringIO.StringIO(data)).read()
-    
+
     return f, data
-        
+
 
 def open_resource(url, etag=None, modified=None, agent='', isFeed=False):
     """URL --> stream
@@ -94,7 +94,7 @@ def open_resource(url, etag=None, modified=None, agent='', isFeed=False):
 
     if modified:
         request.add_header('If-Modified-Since', modified)
-    
+
     request.add_header('Accept-encoding', '')
 
     if isFeed:
@@ -110,4 +110,4 @@ def open_resource(url, etag=None, modified=None, agent='', isFeed=False):
     finally:
         opener.close() # JohnD
 
- 
+

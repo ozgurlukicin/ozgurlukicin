@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load library %}
+
+{% block title %}{{ flatpage.title }} - {% endblock %}
+
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+{% endblock %}
+
+{% block content %}
+<div class="fs_title transparent_link">{{ flatpage.title }}</div>
+<div class="page_content grey">
+{{ flatpage.text|safe }}
+</div>
+<h2 style="text-align: center;">OOXML'e ben de hayır demek istiyorum!</h2>
+<div style="text-align: left; padding-left: 50px; clear: left;">
+    {% if form.errors %}
+    <span class="error">Lütfen formu eksiksiz doldurunuz<br /></span>
+    {% endif %}
+
+    <form method="post" action=".">
+        {% for field in form %}
+        <dl>
+            <dt style="width:40%;"><label for="id_{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
+            <dd>{{ field }}</dd>
+        </dl>
+        {% endfor %}
+        <div style="clear:both;"><br /><input type="submit" value="İmzala" /></div>
+    </form>
+
+    <br />
+    <span>Son 20 imza:</span>
+    {% for petitioner in petitioners %}
+    <ul>
+        <li>{{ petitioner.firstname }} {{ petitioner.lastname }} - {{ petitioner.get_city_display }} - {{ petitioner.job }} {% if petitioner.homepage %}<a href="{{ petitioner.homepage }}" target="_blank"><img src="/media/dijital/img/forum/msg_sim.gif" border="0px" alt="adrese git" /></a>{% else %}-{% endif %} {{ petitioner.signed|timedelta }}</li>
+    </ul>
+    {% endfor %}
+    <span><a href="/petition/liste/?page=1">Tüm İmzalar</a></span>
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<div class="sidebar_box">
+    <div class="sidebar_top">&nbsp;</div>
+    <div class="sidebar_middle">
+        <h2>Etiketler</h2>
+        {% for tag in flatpage.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
+    </div>
+    <div class="sidebar_bottom">&nbsp;</div>
+</div>
+{% endblock %}

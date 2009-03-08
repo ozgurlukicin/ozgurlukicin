@@ -7,9 +7,9 @@
 <script type="text/javascript">
 function mySubmit() {
   var URL = document.getElementById("url").innerHTML;
-  var win = tinyMCE.getWindowArg("window");
+  var win = tinyMCEPopup.getWindowArg("window");
 
-  win.document.getElementById(tinyMCE.getWindowArg("input")).value = URL;
+  win.document.getElementById(tinyMCEPopup.getWindowArg("input")).value = URL;
 
   if (win.getImageData) win.getImageData();
 

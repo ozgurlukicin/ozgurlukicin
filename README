@@ -1,7 +1,13 @@
 Requires:
- Django environment (Python, Web Server (Apache recommended), mod_python (if Apache preferred), Django)
+ Django environment (Python, Web Server (Apache recommended), mod_python (if Apache preferred), Django*)
  Python Imaging Library (PIL)
+ BeautifulSoup
+ ElementTree
  DBMS (MySQL recommended)
+ Urlgrabber (For gravatar support)
+
+Note About TinyMCE:
+* We're using a patch to hide unneeded tabs in advimage and advlink plugins. It can be found under patches directory.
 
 Setup:
  1. edit settings.py

@@ -143,7 +143,7 @@ function init() {
 
 		switch (eq.toLowerCase()) {
 			case "content-type":
-				tmp = getReItem(/charset\s*=\s*(.*)\s*/gi, value, 1);
+				tmp = getReItem(/charset\s*=\s*(.*)\s*/gi, va, 1);
 
 				// Override XML encoding
 				if (tmp != "")
@@ -369,11 +369,11 @@ function updateAction() {
 	h = h.replace(/type=\"\-mce\-/gi, 'type="');
 
 	tinyMCEPopup.editor.plugins.fullpage.head = h;
+	tinyMCEPopup.editor.plugins.fullpage._setBodyAttribs(tinyMCEPopup.editor, {});
 	tinyMCEPopup.close();
 }
 
 function changedStyleField(field) {
-	//alert(field.id);
 }
 
 function setMeta(he, k, v) {

@@ -15,18 +15,19 @@ SITE_DESC = 'Pardus için bir numaralı bilgi kaynağı'
 DEBUG = True
 TESTING = True
 TEMPLATE_DEBUG = DEBUG
-WEB_URL = 'http://127.0.0.1:9999'
-DOCUMENT_ROOT = '/home/makkalot/public_html/oi'
+WEB_URL = 'http://localhost:8000'
+DOCUMENT_ROOT = '/home/user'
+
 DATABASE_ENGINE = 'mysql'
 DATABASE_NAME = 'oi'
 DATABASE_USER = 'root'
-DATABASE_PASSWORD = '010684'
+DATABASE_PASSWORD = ''
 DATABASE_HOST = 'localhost'
 DATABASE_PORT = ''
 
 # Email
-DEFAULT_FROM_EMAIL = 'accounts@ozgurlukicin.com'
-EMAIL_HOST = 'mail.ozgurlukicin.com'
+DEFAULT_FROM_EMAIL = 'noreply@ozgurlukicin.com'
+#EMAIL_USE_TLS = True
 
 # Pagination
 USER_PER_PAGE = 10
@@ -39,7 +40,7 @@ TAG_PER_PAGE = 10
 SEMINAR_PER_PAGE = 10
 
 # News in homepage
-NEWS_IN_HOMEPAGE = 2
+NEWS_IN_HOMEPAGE = 5
 PACKAGES_IN_HOMEPAGE = 2
 GAMES_IN_HOMEPAGE = 2
 FS_IN_HOMEPAGE = 2
@@ -57,7 +58,7 @@ PROFILE_EDIT_URL = '/kullanici/duzenle/'
 # Feedjack Settings for resizing images
 FEEDJACK_RESIZE_IMAGE = True
 FEEDJACK_MAX_IMAGE_Y = False
-FEEDJACK_MAX_IMAGE_X = 550
+FEEDJACK_MAX_IMAGE_X = 610
 FEEDJACK_UPLOAD_DIR = "%s/media/feedjack" % DOCUMENT_ROOT
 FEEDJACK_UPLOAD_URL = "%s/media/feedjack" % WEB_URL
 
@@ -68,6 +69,8 @@ SITE_ID = 1
 MEDIA_ROOT = '%s/media/' % DOCUMENT_ROOT
 MEDIA_URL = '%s/media/' % WEB_URL
 ADMIN_MEDIA_PREFIX = '%s/media/' % WEB_URL
+WEBALIZER_DIR = ''
+FORCE_SCRIPT_NAME = ''
 
 SECRET_KEY = 'n9-*x3!&!(x*z_!13)cyxil4fh+ov_+3!y($&4t7iit=)d)=93'
 
@@ -76,22 +79,29 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.load_template_source',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = ("oi.context_processors.testing","django.core.context_processors.auth")
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'oi.context_processors.testing',
+    'django.core.context_processors.auth',
+    'django.core.context_processors.request',
+)
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    #'django.contrib.csrf.middleware.CsrfMiddleware',
+#    'django.contrib.csrf.middleware.CsrfMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'oi.flatpages.middleware.FlatpageFallbackMiddleware',
     'oi.middleware.threadlocals.ThreadLocals',
+#    'oi.middleware.debug.DebugFooter',
+    'oi.middleware.ban.BanWare',
 )
 
 ROOT_URLCONF = 'oi.urls'
 
 TEMPLATE_DIRS = (
     '%s/templates' % DOCUMENT_ROOT,
+    '%s/shop/templates' % DOCUMENT_ROOT,
 )
 
 INSTALLED_APPS = (
@@ -109,9 +119,16 @@ INSTALLED_APPS = (
     'oi.seminar',
     'oi.profile',
     'oi.forum',
-    'oi.sanat',
-	'oi.comments',
-	
+    'oi.tema',
+    'oi.petition',
+    'oi.poll',
+    # shop apps
+    'oi.shop.shopprofile',
+    'oi.shop.product',
+    'oi.shop.cart',
+    'oi.ideas',
+    'oi.ezine',
+    'oi.webalizer',
 )
 
 CITY_LIST = (
@@ -185,8 +202,8 @@ CITY_LIST = (
     ('samsun','Samsun'),
     ('siirt','Siirt'),
     ('sinop','Sinop'),
-    ('sivas','Sivas'),
     ('sirnak','Şırnak'),
+    ('sivas','Sivas'),
     ('tekirdag','Tekirdag'),
     ('tokat','Tokat'),
     ('trabzon','Trabzon'),
@@ -194,7 +211,8 @@ CITY_LIST = (
     ('urfa','Urfa'),
     ('usak','Uşak'),
     ('van','Van'),
-    ('yozgat','Yozgat'),
     ('yalova', 'Yalova'),
-    ('zonguldak','Zonguldak')
+    ('yozgat','Yozgat'),
+    ('zonguldak','Zonguldak'),
+    ('zzyurtdisi', 'Yurtdışı'),
 )

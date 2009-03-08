@@ -1,0 +1,76 @@
+{% extends "idea_list.html" %}
+{% load i18n %}
+{% block idea %}
+
+{% if duplicate_of %}
+<h3>Bu fikir <a href="{{ duplicate_of.get_absolute_url }}">#{{ duplicate_of.id }}</a> numaralı fikrin aynısı</h3>
+{% endif %}
+
+<div class="idea_container">
+        {% include "idea_top.html" %}
+
+        <div class="tags"><span class="h3">{% trans "Tags" %} :</span>
+        {% for tag in idea.tags.all %}
+            <a href="/yenifikir/listele/etiket/{{ tag.name }}" title="{{ tag.name }}">{{ tag.name }}</a>
+        {% endfor %}
+        </div>
+
+        {% if idea.bug_numbers %}
+        <div class="h3">{% trans "Bug reports" %}</div>
+        <div class='idea_detail_box'>
+        {% for bug in bugs %}
+        {% blocktrans %}Bug <a href="http://bugs.pardus.org.tr/show_bug.cgi?id={{ bug }}">#{{ bug }}</a> is related with this idea{% endblocktrans %}<br />
+        {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if idea.forum_url %}
+        <div class="h3">{% trans "Related Forum Link" %}</div>
+        <ul class='idea_detail_box'>
+            <li><a href="{{ idea.forum_url }}">{{ idea.forum_url }}</a></li>
+        </ul>
+    {% endif %}
+    {% if duplicates %}
+        <div class="h3">{% trans "Ideas that were marked as duplicate of this idea" %}</div>
+        <ul class='idea_detail_box'>
+        {% for duplicate in duplicates %}
+        <li><a href="{{ duplicate.get_absolute_url }}"><strong>#{{ duplicate.id }}</strong> {{ duplicate.title }}</a> {% blocktrans count duplicate.vote_count as vote_count %}({{ vote_count }} vote){% plural %}({{ vote_count }} votes){% endblocktrans %}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+
+        <br />
+    {% if user_can_change_idea  %}
+    <span class="h3"><a href="/yenifikir/duzenle/{{ idea.id }}/">{% trans "Edit idea" %}</a></span>
+    {% endif %}
+    {% if perms.ideas.change_idea %}
+     _<span class="h3"><a href="javascript:;" onclick="$('#tekrarform').toggle(); return false;">{% trans "Report duplicate idea" %}</a></span> _
+    <span class="h3"><a href="javascript:;" onclick="$('#changeStatusForm').toggle();">{% trans "Change idea status" %}</a></span> _
+    <span class="h3"><a href="/yenifikir/sil/{{ idea.id }}/">{% trans "Delete idea" %}</a></span>
+
+    <div class="idea_detail_box" style="display: none;" id="tekrarform"> 
+        <form  method="post" action="javascript:;">
+        <p>{% trans "Did you see a duplicate of this idea? Then, help us by reporting it!" %} </p>
+        {% trans "Idea number" %} :<input type="text" name="duplicate_id" id="duplicate_id" size="4" />
+        <input type="submit" value="{% trans "Report" %}" onclick="duplicate({{ idea.id }})" id="dup_submit" /><br />
+        <span id="duplicate_form_info"></span>
+        </form>
+    </div>
+    <div class="idea_detail_box" style="display: none;" id="changeStatusForm">
+    <form method="POST" action="javascript:;">
+        <select name="id_status" id="id_status">
+            <option value="">---------</option>
+            {% for status in statusform %}
+                <option value="{{ status.id }}">{{ status.name }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="{% trans "Change" %}" onclick="changeStatus({{ idea.id }})" />
+        <span id="status_form_info"></span>
+    </form>
+    </div>
+    {% endif %}
+</div>
+<div style="clear:both"></div>
+</div>
+
+{% endblock %}

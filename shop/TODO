@@ -1,0 +1,33 @@
+===============================================
+Don’t code today what you can’t debug tomorrow
+===============================================
+
+Legend:
+- To do
+? Not sure
+/ In progress
++ Completed
+
+
+- Specific thumbnail field for image adding. (ImageWithThumbnail)
+
+[*] Category
+    + Image for each category
+    + Show how many products a category have in the category tree. E.g: T-shirts (14)
+    + Product listing for each category
+
+
+[*] Product
+    + Create Product class, damn?!
+    + Make sure that product can have more than 1 picture.
+
+    + Calculate total price, considering tax
+    - On product info page, product's all childs are shown regardless of their active/deactive status. Fix this
+
+[*] User
+    - Don't forget to control user's bill information as bill class doesn't have any check.
+    - Add javascript. It will be used to print out different bill form. E.g: When the user checks invidual bill,
+            only address form will be displayed. But when the user selects company bill, another form will be displayed.
+            Additionally, user can have both bill type
+
+    - Add "mycart" to right

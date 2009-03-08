@@ -1,65 +1,87 @@
 {% extends "base.html" %}
-
-{% block header_menu %}
-    <!-- Burası header kısmı -->
-	{% include "header.html" %}
+{% load i18n %}
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/object_lists.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+<script type="text/javascript" src="/media/js/home.js"></script>
 {% endblock %}
-
-<br/>		
-{% block ust_menu %}
-	{% include "ust_menu.html" %}
+{% block leftcolumn %}
+    <div class="sidebarcolumn leftcolumn">
+    <div class="leftcolumn_content">
+    <h2>{% trans "Pardus Events" %}</h2>
+    <ul>
+        {% for sem in seminar %}
+        <li{% if not forloop.last %} style="border-bottom:1px solid #EAEAEA;padding-bottom:5px;margin-bottom:5px;"{% endif %}>
+        <div><span class="bold">{{ sem.start_date|date:"d F Y H.i" }}{% if sem.end_date %} - {{ sem.end_date|date:"d F Y H.i" }}{% endif %}</span></div>
+            <div>{{ sem.description }}</div>
+            <div><span class="bold">{% trans "Place:" %}</span> <a href="{{ sem.get_absolute_url }}" target="_blank">{{ sem.place.name }}</a></div>
+            <div><span class="bold">{% trans "Speakers:" %}</span> {% for att in sem.attender.all %}{% if forloop.last %}{% if att.user %}<a href="{{ att.user.get_profile.get_absolute_url }}">{% endif %}{{ att.name }}{% if att.user %}</a>{% endif %}{% else %}{% if att.user %}<a href="{{ att.user.get_profile.get_absolute_url }}">{% endif %}{{ att.name }}{% if att.user %}</a>{% endif %}, {% endif %}{% endfor %}</div>
+        </li>
+        {% endfor %}
+    </ul>
+    </div>
+    </div>
 {% endblock %}
-
-{% block alt_resim %}
-    
-{% endblock %}
-        
-<br/>
 {% block content %}
-		<div id="news_container">
-            {% for new in news %}
-            <div id="news-{{ new.id }}" class="news {% cycle alignleft,alignright %}"">
-                <div class="news_title_mini transparent_link"><span class="sari">Haber:</span> <a href="{{ new.get_absolute_url }}">{{ new.title }}</a></div>
-                <div class="news_content_mini grey">{{ new.sum }}</div>
+    {% for news in news %}
+    <div id="news_{{ forloop.counter }}" class="news_container{% if forloop.first %} active"{% else %}" style="display: none;"{% endif %}>
+        <div class="column">
+            <div class="left_column">
+                <img src="{{ news.image.file.url }}" alt="{{ news.image.get_alt_string }}" />
             </div>
-            {% endfor %}
-        </div>		
-
-        <div id="fs_container">
-            {% for fs in fss %}
-            <div id="fs-{{ fs.id }}" class="fs {% cycle alignleft,alignright %}">
-                <div class="fs_title_mini transparent_link"><span class="sari">İlk adım: </span><a href="{{ fs.get_absolute_url }}">{{ fs.title }}</a></div>
-                <div class="fs_content_mini grey">{{ fs.sum }}</div>
+            <div class="right_column">
+                <span>{% trans "News" %}</span>
+                <div class="title"><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></div>
+                <div class="summary">{{ news.sum|safe }}<br /></div>
+                <div class="info"><span class="bold">{{ news.update|date:"d" }} {{ news.update|date:"F"|slice:":3" }}</span> {{ news.update|date:"Y" }} <span class="bold">/</span> <a href="{{ news.topic.get_latest_post_url }}">{% blocktrans count news.topic.posts|add:"-1" as number_of_comments %}<span class="bold">{{ number_of_comments }}</span> Comment{% plural %}<span class="bold">{{ number_of_comments }}</span> Comments{% endblocktrans %}</a></div>
             </div>
-            {% endfor %}
+            <div style="clear:both;"></div>
         </div>
-        <br />
-        <div id="howto_container">
-            {% for howto in howtos %}
-            <div id="howto-{{ howto.id }}" class="howtos {% cycle alignleft,alignright %}">
-                <div class="howtos_title_mini transparent_link"><span class="sari">Nasıl:</span> <a href="{{ howto.get_absolute_url }}">{{ howto.title }}</a></div>
-                <div class="howtos_content_mini grey">{{ howto.sum }}</div>
-            </div>
-            {% endfor %}
+    </div>
+    {% endfor %}
+    <div id='counter'><span id="news_count">1</span> / 5</div>
+    <span id='button_news_changer'>
+        <a href="javascript:;" onclick="change_news(-1); clearInterval(intval);"><img id="img_news_prev" src="/media/img/new/news_previous.png" alt="{% trans "Previous" %}" /></a><a href="javascript:;" onclick="change_news(1); clearInterval(intval);"><img id="img_news_next" src="/media/img/new/news_next.png" alt="{% trans "Next" %}" /></a>
+    </span>
+    <div class="summary_container">
+        {% for howto in howtos %}
+        <div class="column first">
+            <img src="{{ howto.image.file.url }}" alt="{{ howto.image.get_alt_string }}" /><br />
+            <img src="/media/img/new/image_bottom.png" alt="_" />
+            <div class="info"><span class="bold">{{ howto.update|date:"d" }} {{ howto.update|date:"F"|slice:":3" }}</span> {{ howto.update|date:"Y" }} <span class="bold">/</span> <a href="{{ howto.topic.get_latest_post_url }}">{% blocktrans count howto.topic.posts|add:"-1" as number_of_comments %}<span class="bold">{{ number_of_comments }}</span> Comment{% plural %}<span class="bold">{{ number_of_comments }}</span> Comments{% endblocktrans %}</a></div>
         </div>
-        <br />
-        <div id="packages_container">
-            {% for package in packages %}
-            <div id="package-{{ package.id }}" class="packages {% cycle alignleft,alignright %}">
-                <div class="packages_title_mini transparent_link"><span class="sari">Paket: </span><a href="{{ package.get_absolute_url }}">{{ package.title }}</a></div>
-                <div class="packages_content_mini grey">{{ package.sum }}</div>
-            </div>
-            {% endfor %}
+        <div class="column">
+            <span>{% trans "Howto" %}</span>
+            <div class="title"><a href="{{ howto.get_absolute_url }}">{{ howto.title }}</a></div>
+            <div class="summary">{{ howto.sum|safe|truncatewords_html:23 }}</div>
         </div>
-        <br />
-        <div id="games_container">
-            {% for game in games %}
-            <div id="game-{{ game.id }}" class="games {% cycle alignleft,alignright %}">
-                <div class="games_title_mini transparent_link"><span class="sari">Oyun:</span> <a href="{{ game.get_absolute_url }}">{{ game.title }}</a></div>
-                <div class="games_content_mini grey">{{ game.sum }}</div>
-            </div>
-            {% endfor %}
+        {% if forloop.first %}<div class="columnspacer"></div>{% endif %}
+        {% endfor %}
+        {% for package in packages %}
+        <div class="column first">
+            <img src="{{ package.image.file.url }}" alt="{{ package.image.get_alt_string }}" /><br />
+            <img src="/media/img/new/image_bottom.png" alt="_" />
+            <div class="info"><span class="bold">{{ package.update|date:"d" }} {{ package.update|date:"F"|slice:":3" }}</span> {{ package.update|date:"Y" }} <span class="bold">/</span> <a href="{{ package.topic.get_latest_post_url }}">{% blocktrans count package.topic.posts|add:"-1" as number_of_comments %}<span class="bold">{{ number_of_comments }}</span> Comment{% plural %}<span class="bold">{{ number_of_comments }}</span> Comments{% endblocktrans %}</a></div>
         </div>
-        <br />
-        
+        <div class="column">
+            <span>Paket</span>
+            <div class="title"><a href="{{ package.get_absolute_url }}">{{ package.title }}</a></div>
+            <div class="summary">{{ package.sum|safe|truncatewords_html:23 }}</div>
+        </div>
+        {% if forloop.first %}<div class="columnspacer"></div>{% endif %}
+        {% endfor %}
+        {% for game in games %}
+        <div class="column first">
+            <img src="{{ game.image.file.url }}" alt="{{ game.image.get_alt_string }}" /><br />
+            <img src="/media/img/new/image_bottom.png" alt="_" />
+            <div class="info"><span class="bold">{{ game.update|date:"d" }} {{ game.update|date:"F"|slice:":3" }}</span> {{ game.update|date:"Y" }} <span class="bold">/</span> <a href="{{ game.topic.get_latest_post_url }}">{% blocktrans count game.topic.posts|add:"-1" as number_of_comments %}<span class="bold">{{ number_of_comments }}</span> Comment{% plural %}<span class="bold">{{ number_of_comments }}</span> Comments{% endblocktrans %}</a></div>
+        </div>
+        <div class="column">
+            <span>{% trans "Game" %}</span>
+            <div class="title"><a href="{{ game.get_absolute_url }}">{{ game.title }}</a></div>
+            <div class="summary">{{ game.sum|safe|truncatewords_html:23 }}</div>
+        </div>
+        {% if forloop.first %}<div class="columnspacer"></div>{% endif %}
+        {% endfor %}
+    </div>
 {% endblock %}

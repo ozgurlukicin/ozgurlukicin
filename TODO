@@ -1,5 +1,5 @@
 ===============================================
-Don’t code today what you can’t debug tomorrow
+Don't code today what you can't debug tomorrow
 ===============================================
 
 Legend:
@@ -16,8 +16,8 @@ Legend:
   + register
   + edit profile
   - user list
-  - show profile
-  - avatar support
+  + show profile
+  + avatar support
   + lost password support
 
 - FreeComment support for news (also maybe packages, games etc.)
@@ -52,7 +52,7 @@ Legend:
     - Markup language (BBCode??)
     - Smiley
     + Quotations
-  - Feeds
+  + Feeds
   - Search
   - Log & monitor all IP's
   - User/IP Ban

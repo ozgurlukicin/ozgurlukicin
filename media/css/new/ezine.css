@@ -1,0 +1,12 @@
+#ezine #img {
+    margin: 5px;
+    float: left;
+}
+#ezine hr {
+    border: 1px solid #eee;
+    margin: 10px;
+}
+#ezine .content {
+    clear: left;
+    margin-left : 20px;
+}

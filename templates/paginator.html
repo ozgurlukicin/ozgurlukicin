@@ -1,17 +1,19 @@
-<div id="pagination" class="paginator">
-<br/>
+{% load i18n %}
+<div class="paginator">
 {% spaceless %}
-{% if show_first %}<span class="prev"><a href="?page=1" title="First Page">İlk</a></span>{% endif %}
-{% if has_previous %}<span class="prev"><a href="?page={{ previous }}" title="Previous Page">Önceki</a></span>{% else %}<span class="prev-na">Önceki</span>{% endif %}
+{% if show_first %}<div class="prev"><a href="?page=1" title="{% trans "First Page" %}">&lt;&lt;</a></div>{% endif %}
+{% if has_previous %}<div class="prev"><a href="?page={{ previous }}" title="{% trans "Previous Page" %}">&lt;</a></div>{% else %}<div class="prev-na">&lt;</div>{% endif %}
 {% for num in page_numbers %}
     {% ifequal num page %}
-        <span class="curr" title="Current Page">{{ num }}</span>
+        <div class="curr" title="{% trans "Current Page" %}">{{ num }}</div>
     {% else %}
-        <span class="page"><a href="?page={{ num }}" title="Page {{ num }}">{{ num }}</a></span>
+        <div class="page"><a href="?page={{ num }}" title="{% blocktrans %}Page {{ num }}{% endblocktrans %}">{{ num }}</a></div>
     {% endifequal %}
 {% endfor %}
-{% if has_next %}<span class="next"><a href="?page={{ next }}" title="Next Page">Sonraki</a></span>{% else %}<span class="next-na">Sonraki</span>{% endif %}
-{% if show_last %}<span class="next"><a href="?page={{ pages }}" title="Last Page">Son</a></span>{% endif %}
+{% if has_next %}<div class="next"><a href="?page={{ next }}" title="{% trans "Next Page" %}">&gt;</a></div>{% else %}<div class="next-na">&gt;</div>{% endif %}
+{% if show_last %}<div class="next"><a href="?page={{ pages }}" title="{% trans "Last Page" %}">&gt;&gt;</a></div>{% endif %}
 {% endspaceless %}
-<br/><br/><span class="paginate-desc">Her sayfada {{ results_per_page }} kayıt olmak üzere {{ pages }} sayfada toplam {{ hits }} kayıt listeleniyor.</span>
+<!--
+<br/><div class="paginate-desc">Her sayfada {{ results_per_page }} kayıt olmak üzere {{ pages }} sayfada toplam {{ hits }} kayıt listeleniyor.</div>
+-->
 </div>

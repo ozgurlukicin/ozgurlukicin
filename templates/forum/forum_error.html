@@ -1,0 +1,8 @@
+{% extends "forum/forum_base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Error!" %} - {% endblock %}
+
+{% block content %}
+    <div id="space">&nbsp;</div>
+    <div class="forum_error">{{ message }}<br /><a href="javascript: history.go(-1)">{% trans "Click here to go back" %}</a></div>
+{% endblock %}

@@ -1,0 +1,294 @@
+Translatable string marking status
+
+Legend
+------
++: done
+*: not done
+/: second review
+-: needs to be removed
+
+These are templates to be marked
+--------------------------------
+
+*   |-- 404.html
+*   |-- 500.html
++   |-- admin
++   |   |-- base.html
++   |   `-- seminar
++   |       `-- place
++   |           `-- change_form.html
++   |-- advancedsearch.html
++   |-- base.html
++   |-- bug
++   |   |-- bug_add.html
++   |   |-- bug_detail.html
++   |   `-- bug_main.html
+*   |-- comments
+*   |   |-- comment_display.html
+*   |   |-- comment_form.html
+*   |   |-- comment_form_fields.html
+*   |   |-- comment_preview.html
+*   |   `-- trackback_display.html
++   |-- db_error.html
+*   |-- delete.html
+-   |-- download
+-   |   |-- download.html
+-   |   `-- download_relnotes.html
++   |-- feedjack
+-   |   |-- default
+-   |   |   `-- post_list.html
+-   |   |-- foaf.xml
++   |   |-- oi
++   |   |   `-- post_list.html
+-   |   `-- opml.xml
++   |-- feeds
++   |   |-- feed_description.html
++   |   `-- feed_title.html
+-   |-- file_upload
+-   |   |-- file_upload.html
+-   |   `-- file_upload_success.html
++   |-- flatpages
++   |   `-- default.html
++   |-- footer.html
+*   |-- forum
++   |   |-- abuse_list.html
++   |   |-- change_poll.html
++   |   |-- create_poll.html
++   |   |-- feed_description.html
++   |   |-- feed_title.html
++   |   |-- forum_base.html
++   |   |-- forum_detail.html
++   |   |-- forum_done.html
++   |   |-- forum_error.html
++   |   |-- forum_list.html
+-   |   |-- merge.html
+-   |   |-- move.html
++   |   |-- new_topic.html
++   |   |-- post_edit.html
++   |   |-- post_list.html
++   |   |-- post_list_for_user.html
++   |   |-- reply.html
++   |   |-- report.html
++   |   |-- topic.html
++   |   `-- unread.html
++   |-- fs
++   |   |-- fs_detail.html
++   |   |-- fs_main.html
++   |   `-- fs_printable.html
++   |-- game
++   |   |-- game_detail.html
++   |   |-- game_main.html
++   |   `-- game_printable.html
++   |-- header.html
++   |-- home.html
++   |-- howto
++   |   |-- howto_detail.html
++   |   |-- howto_main.html
++   |   `-- howto_printable.html
++   |-- menu.html
++   |-- news
++   |   |-- news_detail.html
++   |   |-- news_main.html
++   |   `-- news_printable.html
++   |-- package
++   |   |-- package_detail.html
++   |   |-- package_main.html
++   |   `-- package_printable.html
++   |-- paginator.html
+-   |-- petition
+-   |   |-- petitioner_list.html
+-   |   |-- sign.html
+-   |   `-- sign_done.html
++   |-- printable.html
++   |-- robots.txt
++   |-- search.html
++   |-- seminar
++   |   `-- seminar_detail.html
++   |-- tag
++   |   `-- tag_detail.html
+-   |-- tema
+-   |   |-- base.html
+-   |   |-- eski_detail.html
+-   |   |-- feed_description.html
+-   |   |-- feed_title.html
+-   |   |-- kategori.html
+-   |   |-- message.html
+-   |   |-- themeitem_change.html
+-   |   |-- themeitem_create.html
+-   |   |-- themeitem_detail.html
+-   |   |-- themeitem_list.html
+-   |   `-- upload.html
+-   |-- test.html
+*   |-- user
++   |   |-- change_password.html
++   |   |-- change_password_done.html
++   |   |-- confirm.html
++   |   |-- dashboard.html
++   |   |-- followed_topics.html
++   |   |-- login.html
++   |   |-- logout.html
++   |   |-- lostpassword.html
++   |   |-- lostpassword_done.html
++   |   |-- password.html
++   |   |-- profile.html
++   |   |-- profile_edit.html
++   |   |-- register.html
++   |   |-- register_done.html
+-   |   `-- user_list.html
+-   |-- ust_menu.html
+-   |-- ust_menu_ayrinti.html
++   |-- video.html
++   `-- videobox.html
++   ideas
++   |-- templates
++   |   |-- feeds
++   |   |   |-- ideafeed_description.html
++   |   |   `-- ideafeed_title.html
++   |   |-- idea_add_form.html
++   |   |-- idea_base.html
++   |   |-- idea_detail.html
++   |   |-- idea_list.html
++   |   `-- idea_top.html
+
+These are python files to be marked
+-----------------------------------
+
++   |-- __init__.py
+*   |-- bug
++   |   |-- __init__.py
++   |   |-- forms.py
++   |   |-- models.py
++   |   |-- settings.py
++   |   |-- urls.py
+*   |   `-- views.py
++   |-- context_processors.py
++   |-- flatpages
++   |   |-- __init__.py
++   |   |-- admin.py
++   |   |-- middleware.py
++   |   |-- models.py
++   |   |-- urls.py
++   |   `-- views.py
+*   |-- forum
++   |   |-- __init__.py
++   |   |-- admin.py
++   |   |-- feeds.py
++   |   |-- forms.py
++   |   |-- models.py
++   |   |-- settings.py
++   |   |-- tools.py
++   |   |-- urls.py
+-   |   |-- util.py // WHAT IS THIS?
++   |   `-- views.py // mail things should be tested carefully
++   |-- ideas
++   |   |-- __init__.py
++   |   |-- admin.py
++   |   |-- feeds.py
++   |   |-- forms.py
++   |   |-- models.py
++   |   |-- settings.py
++   |   |-- templatetags
++   |   |   |-- __init__.py
++   |   |   `-- ideas.py
++   |   |-- urls.py
++   |   `-- views.py // This may cause some problems since forum name and some categories are hardcoded
++   |-- middleware
++   |   |-- __init__.py
++   |   |-- ban.py
++   |   |-- debug.py
++   |   `-- threadlocals.py
+*   |-- petition
+*   |   |-- __init__.py
+*   |   |-- models.py
+*   |   |-- settings.py
+*   |   |-- templatetags
+*   |   |   |-- __init__.py
+*   |   |   `-- petition.py
+*   |   |-- urls.py
+*   |   `-- views.py
+*   |-- poll
+*   |   |-- __init__.py
+*   |   `-- models.py
+*   |-- profile
++   |   |-- __init__.py
++   |   |-- admin.py
++   |   |-- forms.py // has lots of code repeat (especially in password checking)
++   |   |-- models.py // has too many imports
++   |   |-- settings.py
++   |   |-- sql
++   |   |-- urls.py
++   |   `-- views.py
+*   |-- seminar
+*   |   |-- __init__.py
+*   |   |-- admin.py
+*   |   |-- models.py
+*   |   |-- urls.py
+*   |   `-- views.py
+*   |-- settings.py
+*   |-- shop
+*   |   |-- __init__.py
+*   |   |-- cart
+*   |   |   |-- __init__.py
+*   |   |   |-- forms.py
+*   |   |   |-- models.py
+*   |   |   |-- urls.py
+*   |   |   `-- views.py
+*   |   |-- main
+*   |   |   |-- __init__.py
+*   |   |   `-- views.py
+*   |   |-- product
+*   |   |   |-- __init__.py
+*   |   |   |-- admin.py
+*   |   |   |-- models.py
+*   |   |   |-- templatetags
+*   |   |   |   |-- __init__.py
+*   |   |   |   `-- shop_library.py
+*   |   |   `-- views.py
+*   |   |-- shopprofile
+*   |   |   |-- __init__.py
+*   |   |   |-- admin.py
+*   |   |   |-- forms.py
+*   |   |   |-- models.py
+*   |   |   |-- urls.py
+*   |   |   `-- views.py
+*   |   |-- templates
+*   |   |   |-- cart
+*   |   |   |-- category
+*   |   |   |-- product
+*   |   |   `-- shopprofile
+*   |   `-- urls.py
+*   |-- st
+*   |   |-- __init__.py
+*   |   |-- admin.py
+*   |   |-- feeds.py
+*   |   |-- forms.py
+*   |   |-- models.py
+*   |   |-- signals.py
+*   |   |-- tags.py
+*   |   |-- templatetags
+*   |   |   |-- __init__.py
+*   |   |   |-- gravatar.py
+*   |   |   `-- library.py
+*   |   |-- views.py
+*   |   `-- wrappers.py
+*   |-- tema
+*   |   |-- __init__.py
+*   |   |-- feeds.py
+*   |   |-- forms.py
+*   |   |-- models.py
+*   |   |-- settings.py
+*   |   |-- signals.py
+*   |   |-- urls.py
+*   |   |-- utils.py
+*   |   `-- views.py
+*   |-- upload
+*   |   |-- __init__.py
+*   |   |-- admin.py
+*   |   |-- models.py
+*   |   `-- views.py
+*   |-- urls.py
+*   |-- util
+*   |   |-- __init__.py
+*   |   |-- feedparser.py
+*   |   |-- fetch.py
+*   |   `-- forum_filler.py

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Followed Topics" %} - {% endblock %}
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+{% endblock %}
+{% block content %}
+{% if no_entry %}
+{% blocktrans %}There's no topic that you have been following. Click <a href="/forum/">here</a> to return forum.{% endblocktrans %}
+{% else %}
+<form action="" method="POST">
+    <strong>{% trans "Followed topics" %}: </strong><br /><br />
+{% for watch in watch_list %}
+    <input type="checkbox" name="topic_watch_list" value="{{ watch.topic_id }}" />&nbsp;&nbsp;<a href="{{watch.topic.get_absolute_url }}" target="_blank">{{ watch.topic.title }}</a></input><br />
+{% endfor %}
+<br />
+<input type="submit" value="{% trans "İzleme Listesinden Çıkar" %}">
+</form>
+{% endif %}
+{% endblock %}

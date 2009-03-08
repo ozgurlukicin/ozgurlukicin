@@ -3,6 +3,10 @@
 
 {% block title %}Kullanıcılar - {% endblock %}
 
+{% block extrahead %}
+<style media="screen" type="text/css">@import url('/media/css/new/st.css');</style>
+{% endblock %}
+
 {% block header_menu %}
     <!-- Burası header kısmı -->
 	{% include "header.html" %}
@@ -11,14 +15,13 @@
 {% block ust_menu %}
 	<!-- Burası üst menü kısmı -->
 	{% include "ust_menu_ayrinti.html" %}
-	
+
 {% endblock %}
 
 <br/>
 
 
 {% block content %}
-
 
 {% for user in user_list %}
 Name: {{ user.username }} <br />

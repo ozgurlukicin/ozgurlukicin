@@ -1,0 +1,17 @@
+{% block section_logo %}<img src="/media/img/forum_header_logo.png">{% endblock %}
+
+{% block content %}
+<br/>{{topic.forum}} &#62; {{ topic.title }} başlıklı konuyu taşımak istediğiniz forumu seçin.<br />
+<form action="" method="post">
+<dl>
+    <dt>{{ form.forum2.label_tag }}</dt>
+    <dd>{{ form.forum2 }}</dd>
+    {% if form.forum2.help_text %}<dd>{{ field.forum2.help_text }}</dd>{% endif %}
+    {% if form.forum2.errors %}<dd class="myerrors">{{ field.forum2.errors }}</dd>{% endif %}
+</dl>
+<input type="submit" value="Move">
+</form>
+{% if error %}
+    <strong>{{ error }}</strong>
+{% endif %}
+{% endblock %}

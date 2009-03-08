@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load library %}
+
+{% block title %}OOXML'e Hayır Diyenler - {% endblock %}
+
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
+
+{% endblock %}
+
+{% block content %}
+    <div class=!page_title'>OOXML'e Hayır Diyenler</div>
+    {% if is_paginated %}
+    <div id="post_pagination">{% paginator %}</div>
+    {% endif %}
+<div class='page_content'>
+    {% for petitioner in petitioner_list %}
+    <ul>
+        <li>{{ petitioner.firstname }} {{ petitioner.lastname }} - {{ petitioner.get_city_display }} - {{ petitioner.job }} {% if petitioner.homepage %}<a href="{{ petitioner.homepage }}" target="_blank"><img src="/media/dijital/img/forum/msg_sim.gif" border="0px" alt="adrese git" /></a>{% else %}-{% endif %} {{ petitioner.signed|timedelta }}</li>
+    </ul>
+    {% endfor %}
+    {% if is_paginated %}
+    <div id="post_pagination">{% paginator %}</div>
+    {% endif %}
+</div>
+{% endblock %}

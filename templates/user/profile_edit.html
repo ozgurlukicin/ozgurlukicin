@@ -1,56 +1,85 @@
 {% extends "base.html" %}
-
-{% block title %}Profil Düzenle -  {% endblock %}
-
+{% load i18n %}
+{% block title %}{% trans "Edit Profile" %} -  {% endblock %}
 {% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/profile.css');</style>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={{ apikey }}" type="text/javascript"></script>
+    <script type="text/javascript">
+    //<![CDATA[
+    function load() {
+        if (GBrowserIsCompatible()) {
+            var map = new GMap2(document.getElementById("id_map"));
+            map.enableScrollWheelZoom();
+
+            // initialize user location
+            var center = new GLatLng(39, 35);
+            var heightLevel = 5;
+            var lng = document.getElementById("id_longitude");
+            var ltd = document.getElementById("id_latitude");
+
+            if ((lng.value != 0) || (ltd.value != 0)) {
+                center = new GLatLng(ltd.value, lng.value);
+                heightLevel = 9;
+            }
+            map.setCenter(center, heightLevel);
+            map.addControl(new GSmallMapControl());
+            map.addControl(new GMapTypeControl());
+
+            var marker = new GMarker(center, {draggable: true});
+
+            GEvent.addListener(marker, "dragstart", function() {
+                    map.closeInfoWindow();
+                    });
+            GEvent.addListener(marker, "dragend", function() {
+                    marker.openInfoWindowHtml("Koordinatlar:<br />" + marker.getLatLng().lat().toFixed(6) + "<br />" + marker.getLatLng().lng().toFixed(6));
+                    lng.value = marker.getLatLng().lng().toFixed(6);
+                    ltd.value = marker.getLatLng().lat().toFixed(6);
+                    });
+            map.addOverlay(marker);
+        }
+    }
+    //]]>
+    </script>
 {% endblock %}
-
-{% block header_menu %}
-    <!-- Burası header kısmı -->
-	{% include "header.html" %}
-{% endblock %}
-<br/>
-{% block ust_menu %}
-	<!-- Burası üst menü kısmı -->
-	{% include "ust_menu_ayrinti.html" %}
-	
-{% endblock %}
-
-<br/>
-
-
-
+{% block extrabody %} onload="load()" onunload="GUnload()"{% endblock %}
 {% block content %}
-<br />
-
-<!--
-NOT: register.html'den çaldım, bunu da düzeltmek gerekecek
-
--Eren
-
--->
-
 {% if form.errors %}
-<font color="red">Profil güncellenemedi, lütfen aşağıdaki hataları düzeltin<br /></font>
+<span class="error">{% trans "Profile couldn't be updated, please fix the errors below" %}</span>
+<br />
 {% endif %}
 
 {% if profile_updated %}
-<font color="green">Profiliniz başarıyla güncellendi<br /></font>
+<span style="color:green;">{% trans "Your profile is updated successfully" %}</span>
+<br />
 {% endif %}
-
-<br />
-<form method="POST" action=".">
-    <table><tbody>
+<script language="JavaScript">
+    function updateAvatar(obj) {
+        document.avatarImage.src = "/media/" + obj[obj.selectedIndex].value;
+    }
+</script>
+<form id="profileEditForm" method="post" action=".">
     {% for field in form %}
-    <tr>
-        <td width="30%"><label for="id_{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}</td>
-        <td>{{ field }}</td>
-        <td>{% if field.errors %}{{ field.errors }}{% endif %}</td>
-    </tr>
+    <div class="field_container">
+        <div class="field_label">
+            <label for="id_{{ field.name }}">{{ field.label }}</label>
+        </div>
+        <div class="field_field">
+            {{ field }}
+            {% if field.errors %}
+                <br /><span class="error">{{ field.errors }}</span>
+            {% endif %}
+            {% ifequal field.name "avatar" %}
+            <br /><img name="avatarImage" src="{{user.get_profile.avatar.file.url}}" alt="avatar" />
+            <br />{% blocktrans %}If you have a gravatar associated with your e-mail address, it will be displayed instead of this. For more information about gravatar click <a href="http://www.gravatar.com" target="_blank">here</a>.{% endblocktrans %}
+            {% endifequal %}
+        </div>
+        <div class="help_text">{% if field.help_text %}{{ field.help_text }}{% endif %}</div>
+        <div style="clear:both;"></div>
+    </div>
     {% endfor %}
-    </tbody></table>
-<br />
-<center> <input type="submit" value="Düzenle" /> </center>
+    <dl><dt><label for="id_map">{% trans "Map" %}</label><dt><div id="id_map" class="googlemap"></div></dt></dl>
+    <div style="clear:left; text-align:center; padding-top:5px;"><input type="submit" value="{% trans "Edit" %}" /></div>
+    <div style="clear:left; text-align:center; margin-top: 6px;"><a href="/kullanici/parola-degistir/">{% trans "Change Password" %}</a></div>
 </form>
-
 {% endblock %}

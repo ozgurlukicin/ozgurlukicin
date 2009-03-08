@@ -1,0 +1,5 @@
+.headerbar .edit, .forum_list .item .edit { width: 153px }
+.headerbar .date, .forum_list .item .date { width: 153px }
+.forum_list .forum_item {
+    background: url(/media/img/new/editorlist_item_bg.png) no-repeat bottom left;
+}

@@ -1,60 +1,108 @@
-{% load library %}
-{% block content %}
-
-<style>
-#forum_header { background-color: #c0c0c0; }
-#forum_icon { width: 5%; float: left; }
-#forum_name { width: 40%; float: left; }
-#forum_lastpost { width: 25%; float: left; }
-#forum_topics { width: 10%; float: left; }
-#forum_posts { width: 10%; float: left; }
-#category { float: left; clear: left; width: 100%; }
-#category_title { background-color: #c0c0c0; }
-#category_forums_item { clear: left; }
-#category_forums_item_icon { width: 5%; float: left; }
-#category_forums_item_title { width: 40%; float: left; }
-#category_forums_item_lastpost { width: 25%; float: left; }
-#category_forums_item_topics { width: 10%; float: left; }
-#category_forums_item_posts { width: 10%; float: left; }
-</style>
-
-{% if not user.is_authenticated %}
-        <form method="post" action="/kullanici/giris/">
-            <input type="text" id="id_username" name="username" size="8" class="vTextField required" value="" maxlength="30" /><br />
-            <input type="password" id="id_password" name="password" size="8" class="vPasswordField required" value="" maxlength="30" /><br />
-            <input type="hidden" name="next" value="{{next}}" />
-            <input type="submit" value="giriş" id="form_submit" />
-        </form>
-		
-		<a href="/kullanici/kayit/">Kayit Ol</a>|<a href="/kullanici/kayip/">Kayip parola?</a><a href="/">Ana sayfa</a>
-        {% else %}
-            Hoşgeldin <b>{{ user.username }}</b>!<br />
-            <br />İstiyorsan profil sayfana <a class="sari" href="/kullanici/duzenle/">buradan</a> ulaşabilir veya <a class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsin. Yada : <a href="/">Ana sayfa</a>
-        
-{% endif %}
-<div id="forum_header">
-    <span id="forum_icon">&nbsp;</span>
-    <span id="forum_name">Forum</span>
-    <span id="forum_lastpost">Son İleti</span>
-    <span id="forum_topics">Konular</span>
-    <span id="forum_posts">İletiler</span>
-</div>
-{% for category in categories %}
-<div id="category" {% if category.hidden and perms.forum.can_see_hidden_categories %}style="opacity: 0.5;"{% endif %}>
-<div id="category_title">{{ category.name }}</div>
-<div id="category_forums">
-    {% for forum in category.forum_set.all %}
-    <div id="category_forums_item" {% if forum.hidden and perms.forum.can_see_hidden_forums %}style="opacity: 0.5;"{% endif %}>
-        <div id="category_forums_item_icon">icon</div>
-        <div id="category_forums_item_title"><a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a></div>
-        <div id="category_forums_item_lastpost"><a href="{{ forum.forum_latest_post.get_absolute_url }}">{{ forum.forum_latest_post.topic.title }}</a> {{ forum.forum_latest_post.author }} tarafından {{ forum.forum_latest_post.edited|timedelta }}</div>
-        <div id="category_forums_item_topics">{{ forum.topics }}</div>
-        <div id="category_forums_item_posts">{{ forum.posts }}</div>
-    </div>
-    {% endfor %}
-</div>
-</div>
-{% endfor %}
+{% extends "forum/forum_base.html" %}
+{% load library i18n %}
+{% block extrahead %}
+    <style type="text/css" media="screen">@import url('/media/css/new/forum_list.css');</style>
+    <style type="text/css" media="screen">@import url('/media/css/new/forum_main.css');</style>
 {% endblock %}
-
-{% block sidebartop %}{% endblock %}
+{% block content %}
+<div class="topbar">
+    <div class="navigation"><a href="/">{% trans "Mainpage" %}</a> &#62; <a href="/forum/" class="bold">{% trans "Forum" %}</a></div>
+    <div class="notice">{% blocktrans %}You may read our forum rules at the <a href="/hakkinda/icerik-politikasi/" class="bold">Content Policy</a> article.{% endblocktrans %}</div>
+</div>
+<div class="headerbar">
+    <div class="icon">&nbsp;</div>
+    <div class="title">{% trans "Forum" %}</div>
+    <div class="spacer">&nbsp;</div>
+    <div class="topics">{% trans "Topics" %}</div>
+    <div class="spacer">&nbsp;</div>
+    <div class="posts">{% trans "Posts" %}</div>
+    <div class="spacer">&nbsp;</div>
+    <div class="lastpost">{% trans "Latest Post" %}</div>
+</div>
+{% for category, forum_list in categories %}
+{% if category.hidden and not perms.forum.can_see_hidden_categories %}
+{% else %}
+<div class="category" {% if category.hidden %}style="opacity: 0.5;"{% endif %}>
+    <div class="titlebar"><h2>{{ category.name }}</h2></div>
+    <div class="forum_list">
+        {% for forum in forum_list %}
+        {% if forum.hidden and not perms.forum.can_see_hidden_forums %}
+        {% else %}
+        <div class="item forum_item" {% if forum.hidden %}style="opacity: 0.5;"{% endif %}>
+            <div class="icon"><a href="{{ forum.get_absolute_url }}"><img{% if forum.is_read %} src="/media/dijital/img/forum/topic.png" alt="{% trans "Read forum" %}" title="{% trans "Read forum" %}"{% else %} src="/media/dijital/img/forum/topic_unread.png" alt="{% trans "Unread forum" %}" title="{% trans "Unread forum" %}"{% endif %} /></a></div>
+            <div class="spacer">&nbsp;</div>
+            <div class="title"><a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a><br />{{ forum.description }}</div>
+            <div class="spacer">&nbsp;</div>
+            <div class="topics">{{ forum.topics }}</div>
+            <div class="spacer">&nbsp;</div>
+            <div class="posts">{{ forum.posts }}</div>
+            <div class="spacer">&nbsp;</div>
+            <div class="lastpost">{% if forum.forum_latest_post %}{{ forum.forum_latest_post.edited|date:"d F Y H:i" }}<br /><a href="{{ forum.forum_latest_post.author.get_profile.get_absolute_url }}">{{ forum.forum_latest_post.author }}</a> <a href="{{ forum.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="{% trans "go to post" %}" /></a>{% else %}{% trans "No posts yet" %}{% endif %}</div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+<div class="category">
+    <div class="titlebar">
+        <h2><a href="/forum/son-iletiler/">{% trans "Latest Posts" %}</a></h2>
+        <h2>Son Anketler</h2>
+    </div>
+    <div class="latest">
+    <div class="latest_container rightborder">
+    {% for topic in latest_posts %}
+        <div class="post">
+            <div class="topic">[<a href="{{ topic.forum.get_absolute_url }}">{{ topic.forum }}</a>] <strong><a href="{{ topic.get_latest_post_url }}">{{ topic }}</a></strong></div>
+            <div class="post">
+                <span class="date">{{ topic.topic_latest_post.created|date:"d F Y H:i" }}</span>
+                <span class="profile_link"><a href="{{ topic.topic_latest_post.author.get_profile.get_absolute_url }}">{{ topic.topic_latest_post.author }}</a> <a href="{{ topic.topic_latest_post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="{% trans "go to post" %}" /></a></span>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    <div class="latest_container">
+        {% for topic in latest_topics_with_polls %}
+        <div class="post">
+            <div class="topic">[<a href="{{ topic.forum.get_absolute_url }}">{{ topic.forum }}</a>] <strong><a href="{{ topic.get_absolute_url }}">{{ topic }}</a></strong></div>
+            <div class="post">
+                <span class="date">{{ topic.poll.created|date:"d F Y H:i" }}</span>
+                <span class="profile_link"><a href="{{ topic.topic_latest_post.author.get_profile.get_absolute_url }}">{{ topic.topic_latest_post.author }}</a> <a href="{{ topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="{% trans "go to post" %}" /></a></span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+    <div class="titlebar"><h2>{% trans "Statistics" %}</h2></div>
+    <div class="stats">
+        <div class="image"><img src="/media/dijital/img/forum/stats.gif" alt="..."/></div>
+        <div class="text left">
+            <div class="labels">{% trans "Date" %}<br />{% trans "Total Members" %}<br />{% trans "Total Posts" %}</div>
+            <div class="spacers">:<br />:<br />:</div>
+            <div class="values">{{ currentdate|date:"d F Y H:i" }}<br />{{ usercount }}<br />{{ posts }}</div>
+        </div>
+        <div class="text right">
+            <div class="labels">{% trans "Total Categories" %}<br />{% trans "Total Topics" %}</div>
+            <div class="spacers">:<br />:</div>
+            <div class="values">{{ forums }}<br />{{ topics }}</div>
+        </div>
+        <div class="userlist"><span class="bold">{% trans "Members Born Today :" %}</span> {% if not births %}{% trans "None" %}{% else %}{% for profile in births %}<a href="{{ profile.get_absolute_url }}">{{ profile.user }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}</div>
+    </div>
+    <div class="titlebar"><h2>{% trans "Meanings of icons in forum" %}</h2></div>
+    <div class="icons_help">
+        <div>
+            <img src="/media/dijital/img/forum/topic.png" alt="{% trans "Read Topic" %}" title="{% trans "Read Topic" %}" /> {% trans "Read forum or topic" %}<br />
+            <img src="/media/dijital/img/forum/topic_unread.png" alt="{% trans "Unread Topic" %}" title="{% trans "Unread Topic" %}" /> {% trans "Containts new posts" %}<br />
+        </div>
+        <div>
+            <img src="/media/dijital/img/forum/topic_locked.png" alt="{% trans "Locked Topic" %}" title="{% trans "Locked Topic" %}" /> {% trans "Locked (closed to new topics)" %}<br />
+            <img src="/media/dijital/img/forum/topic_unread_locked.png" alt="{% trans "Locked and Unread Topic" %}" title="{% trans "Locked and Unread Topic" %}" /> {% trans "Locked and contains new posts" %}<br />
+        </div>
+        <div>
+            <img src="/media/dijital/img/forum/topic_sticky.png" alt="{% trans "Sticky Topic" %}" title="{% trans "Sticky Topic" %}" /> {% trans "Sticky (stays on top)" %}<br />
+            <img src="/media/dijital/img/forum/topic_sticky_locked.png" alt="{% trans "Locked and Sticky Topic" %}" title="{% trans "Locked and Sticky Topic" %}" /> {% trans "Locked and sticky" %}<br />
+        </div>
+    </div>
+</div>
+{% endblock %}

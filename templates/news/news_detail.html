@@ -1,50 +1,69 @@
-{% load library %}
 {% extends "base.html" %}
-
-{% block title %}{{ news.title }} - Haberler - {% endblock %}
-
-{% block pagetype %}page{% endblock %}
-
-{% block section %}news{% endblock %}
-
-{% block header_menu %}
-    <!-- Burası header kısmı -->
-	{% include "header.html" %}
+{% load library %}
+{% load i18n %}
+{% block title %}{{ news.title }} - {% trans "News" %} - {% endblock %}
+{% block extrahead %}
+<style media="screen" type="text/css">@import url('/media/css/new/article.css');</style>
+<style media="screen" type="text/css">@import url('/media/css/new/st.css');</style>
+<!--facebook-->
+<meta name="title" content="{{ news.title|safe }}" />
+<meta name="description" content="{{ news.sum|safe|striptags }}" />
+<link rel="image_src" href="{{ news.image.file.url }}" />
+<meta name="medium" content="news" />
+<!--end facebook-->
+{% if user.is_authenticated %}
+    <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
+    <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
+{% endif %}
 {% endblock %}
-<br/>
-{% block ust_menu %}
-	<!-- Burası üst menü kısmı -->
-	{% include "ust_menu_ayrinti.html" %}
-	
-{% endblock %}
-<br/>
-
 
 {% block content %}
-<div class="news_title transparent_link">{{ news.title }}</div>
-<div class="page_content grey">
-{{ news.text }}
+<div class="page_title">{{ news.title }}</div>
+<div class="page_content">
+{{ news.text|safe }}
 </div>
-<div class="page_properties"><a href="{{ news.get_printable_url }}"><img src="/media/img/print.png" /></a></div>
-<div class="page_last_update">Son güncelleme: {{ news.update|timedelta }}</div>
-	{% if auth %}
-		{% if form %}
-			<form method="post" action="/haber/yorum/{{news.slug}}/">
-								
-				{{form}}
-				<input type="submit" value="Yolla">
-			</form>
-		{% endif %}
-	{% endif %}
+<div style="clear: both;"></div>
+<div class="page_comments">
+    <a href="{{ news.topic.get_latest_post_url }}">{% blocktrans count news.topic.posts|add:"-1" as number_of_comments %}{{ number_of_comments }} comment{% plural %}{{ number_of_comments }} comments{% endblocktrans %}</a> <a href="{{ news.topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a>
+</div>
+
+{% if user.is_authenticated %}
+    {% if form %}
+    <p>
+        <form method="post" action="{{ news.topic.get_reply_url }}">
+            {{form}}
+            <br/>
+            <input type="submit" value="{% trans "Send" %}" />
+        </form>
+    </p>
+    {% endif %}
+{% endif %}
+<div class="page_printable"><a href="{{ news.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
+<div class="page_last_update">{% trans "Last update:" %} {{ news.update|timedelta }}</div>
 
 {% endblock %}
 
-{% block sidebar %}
-<div class="sidebar sidebar_top_img">&nbsp;</div>
-<div class="sidebar sidebar_baslik">Etiketler</div>
-<div class="sidebar sidebar_ic">{% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}</div>
-
-<div class="sidebar sidebar_baslik">Yazar</div>
-<div class="sidebar sidebar_ic">{{ news.author }}</div>
-<div class="sidebar sidebar_alt_img">&nbsp;</div>
+{% block leftcolumn %}
+<div class="sidebarcolumn leftcolumn">
+    <h2>{% trans "Tags" %}</h2>
+    <p><img src="/media/img/new/tag.png" style="vertical-align: middle;" /> {% for tag in news.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if forloop.last %}{% else %}, {% endif %}{% endfor %}
+    </p>
+    <br />
+    <h2>{% trans "Author" %}</h2>
+    <p>{{ news.author }}</p>
+    <h2>Paylaş</h2>
+    <script language="javascript" type="text/javascript">
+        var newstitle = "{{ news.title|safe|addslashes }}";
+        var newssummary = "{{ news.sum|safe|striptags|addslashes|cut:"\n" }}";
+        var newsurl = "{{ request.build_absolute_uri }}";
+    </script>
+    <p>
+    <a href="http://delicious.com/save" title="del.icio.us'a ekle" onclick='window.open("http://delicious.com/save?v=5&amp;noui&amp;jump=close&amp;url="+encodeURIComponent(newsurl)+"&title="+encodeURIComponent(newstitle), "delicious","toolbar=no,width=550,height=550"); return false;'><img src="/media/img/new/servicelinks/delicious.png" alt="del.icio.us'a ekle" /></a>
+    <a href="http://facebook.com/sharer.php" title="facebook'a ekle" onclick='window.open("http://facebook.com/sharer.php?u="+encodeURIComponent(newsurl)+"&t="+encodeURIComponent(newstitle), "facebook","toolbar=no,width=550,height=550"); return false;'><img src="/media/img/new/servicelinks/facebook.png" alt="facebook'a ekle" /></a>
+    <a href="http://twitter.com/home" title="twitter'a ekle" onclick='window.open("http://twitter.com/home?status="+encodeURIComponent(newstitle)+": "+encodeURIComponent(newsurl), "twitter","toolbar=no,width=800,height=550"); return false;'><img src="/media/img/new/servicelinks/twitter.png" alt="twitter'a ekle" /></a>
+    <a href="http://www.stumbleupon.com/" title="stumbleupon'a ekle" onclick='window.open("http://www.stumbleupon.com/submit?url="+encodeURIComponent(newsurl), "stumbleupon","toolbar=no,width=800,height=550"); return false;'><img src="/media/img/new/servicelinks/stumbleupon.png" alt="stumbleupon'a ekle" /></a>
+    <a href="http://www.google.com/bookmarks/" title="google bookmarks'a ekle" onclick='window.open("http://www.google.com/bookmarks/mark?op=add&hl=tr&bkmk="+encodeURIComponent(newsurl)+"&title="+encodeURIComponent(newstitle)+"&annotation="+encodeURIComponent(newssummary)+"&labels="+encodeURIComponent("{% for tag in news.tags.all %}{{ tag.name }}{% if not forloop.last %},{% endif %}{% endfor %}"), "google bookmarks","toolbar=no,width=800,height=550"); return false;'><img src="/media/img/new/servicelinks/googlebookmarks.png" alt="google bookmarks'a ekle" /></a>
+    <a href="http://technorati.com/" title="technorati'ye ekle" onclick='window.open("http://technorati.com/faves?sub=addfavbtn&add="+encodeURIComponent(newsurl), "technorati","toolbar=no,width=1000,height=550"); return false;'><img src="/media/img/new/servicelinks/technorati.png" alt="technorati'ye ekle" /></a>
+    </p>
+</div>
 {% endblock %}

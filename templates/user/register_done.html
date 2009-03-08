@@ -1,24 +1,10 @@
 {% extends "base.html" %}
-
-{% block title %}Kayıt Tamamlandı - {% endblock %}
-
-{% block header_menu %}
-    <!-- Burası header kısmı -->
-	{% include "header.html" %}
+{% load i18n %}
+{% block title %}{% trans "Registration Done" %} - {% endblock %}
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 {% endblock %}
-<br/>
-{% block ust_menu %}
-	<!-- Burası üst menü kısmı -->
-	{% include "ust_menu_ayrinti.html" %}
-	
-{% endblock %}
-
-<br/>
-
-
 {% block content %}
-
-<br />
-<b>{{ user }}</b>, kayıt işleminiz başarıyla tamamlandı! Lütfen E-posta adresinize gönderilen bağlantıya tıklayarak üyeliğinizi aktif hale getirin. <a href="/">Anasayfa</a>
-
+<b>{% blocktrans %}{{ user }}</b>, you have successfully registered! Please
+activate your account by clicking the link sent to your e-mail address.{% endblocktrans %} <a href="/">{% trans "Homepage" %}</a>
 {% endblock %}
