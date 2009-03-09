@@ -9,7 +9,6 @@ from datetime import datetime
 
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.sitemaps import ping_google
 
 from oi.middleware import threadlocals
 from oi.st.tags import Tag
@@ -250,12 +249,6 @@ class Topic(models.Model):
             f.topics += 1
             f.save()
         super(Topic, self).save()
-        try:
-            ping_google("/forum/sitemap.xml")
-        # we're catching SitemapNotFound exception
-        # no need to import this exception class since there is only 1 exception in the function.
-        except:
-            pass
 
     def delete(self):
         if self.id:
