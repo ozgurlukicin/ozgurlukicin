@@ -22,7 +22,7 @@ class NewsSitemap(Sitemap):
 
 class HowToSitemap(Sitemap):
     changefreq = "daily"
-    priority = 1.0
+    priority = 0.8
 
     def items(self):
         return HowTo.objects.filter(status=True).order_by('-update')
@@ -32,7 +32,7 @@ class HowToSitemap(Sitemap):
 
 class GameSitemap(Sitemap):
     changefreq = "daily"
-    priority = 1.0
+    priority = 0.7
 
     def items(self):
         return Game.objects.filter(status=True).order_by('-update')
@@ -42,7 +42,7 @@ class GameSitemap(Sitemap):
 
 class PackageSitemap(Sitemap):
     changefreq = "daily"
-    priority = 1.0
+    priority = 0.6
 
     def items(self):
         return Package.objects.filter(status=True).order_by('-update')
@@ -52,7 +52,7 @@ class PackageSitemap(Sitemap):
 
 class FSSitemap(Sitemap):
     changefreq = "monthly"
-    priority = 1.0
+    priority = 0.9
 
     def items(self):
         return FS.objects.filter(status=True).order_by('-update')
