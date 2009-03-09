@@ -27,8 +27,8 @@ class ObjectPaginator(Paginator):
     """
     def __init__(self, query_set, num_per_page, orphans=0):
         Paginator.__init__(self, query_set, num_per_page, orphans)
-        import warnings
-        warnings.warn("The ObjectPaginator is deprecated. Use django.core.paginator.Paginator instead.", DeprecationWarning)
+        #import warnings
+        #warnings.warn("The ObjectPaginator is deprecated. Use django.core.paginator.Paginator instead.", DeprecationWarning)
 
         # Keep these attributes around for backwards compatibility.
         self.query_set = query_set
@@ -273,7 +273,8 @@ def page_context(request, site, tag=None, user_id=None, sfeeds=None):
     from oi.feedjack import fjcloud
     ctx['tagcloud'] = fjcloud.getcloud(site, user_id)
     ctx['user_id'] = user_id
-    ctx['user'] = user_obj
+    #Because we need Django's user, not feedjack's
+    #ctx['user'] = user_obj
     ctx['tag'] = tag_obj
     ctx['subscribers'] = sfeeds_obj
     return ctx
