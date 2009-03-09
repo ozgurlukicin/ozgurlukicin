@@ -82,7 +82,7 @@ def opml(request):
     return blogroll(request, 'opml')
 
 
-def buildfeed(request, feedclass, tag=None, feedUser=None):
+def buildfeed(request, feedclass, tag=None, user=None):
     """ View that handles the feeds.
     """
 
@@ -91,7 +91,7 @@ def buildfeed(request, feedclass, tag=None, feedUser=None):
         return response
 
     object_list = fjlib.get_paginator(site, sfeeds_ids, page=0, tag=tag, \
-      user=feedUser)[1]
+      user=user)[1]
 
     feed = feedclass(\
         title=site.title,
@@ -100,15 +100,14 @@ def buildfeed(request, feedclass, tag=None, feedUser=None):
         feed_url='%s/%s' % (site.url, '/feed/rss/'))
     for post in object_list:
         feed.add_item( \
-          title = '%s: %s' % (post.feed.name.decode('utf-8'), \
-            post.title.decode('utf-8')), \
+          title = '%s: %s' % (post.feed.name, post.title), \
           link = post.link, \
-          description = post.content.decode('utf-8'), \
-          author_email = post.author_email.decode('utf-8'), \
-          author_name = post.author.decode('utf-8'), \
+          description = post.content, \
+          author_email = post.author_email, \
+          author_name = post.author, \
           pubdate = post.date_modified, \
           unique_id = post.link, \
-          categories = [tag.name .decode('utf-8') for tag in post.tags.all()])
+          categories = [tag.name for tag in post.tags.all()])
     response = HttpResponse(mimetype=feed.mime_type)
 
     # per host caching
@@ -119,17 +118,17 @@ def buildfeed(request, feedclass, tag=None, feedUser=None):
         fjcache.cache_set(site, cachekey, response)
     return response
 
-def rssfeed(request, tag=None, feedUser=None):
+def rssfeed(request, tag=None, user=None):
     """ Generates the RSS2 feed.
     """
-    return buildfeed(request, feedgenerator.Rss201rev2Feed, tag, feedUser)
+    return buildfeed(request, feedgenerator.Rss201rev2Feed, tag, user)
 
-def atomfeed(request, tag=None, feedUser=None):
-    """ Generates the Atom 1.0 feed.
+def atomfeed(request, tag=None, user=None):
+    """ Generates the Atom 1.0 feed. 
     """
-    return buildfeed(request, feedgenerator.Atom1Feed, tag, feedUser)
+    return buildfeed(request, feedgenerator.Atom1Feed, tag, user)
 
-def mainview(request, tag=None, feedUser=None):
+def mainview(request, tag=None, user=None):
     """ View that handles all page requests.
     """
 
@@ -137,9 +136,11 @@ def mainview(request, tag=None, feedUser=None):
     if response:
         return response
 
-    ctx = fjlib.page_context(request, site, tag, feedUser, (sfeeds_obj, sfeeds_ids))
+    ctx = fjlib.page_context(request, site, tag, user, (sfeeds_obj, \
+      sfeeds_ids))
 
-    response = render_response(request, 'feedjack/%s/post_list.html' % (site.template), ctx)
+    response = render_response(request, 'feedjack/%s/post_list.html' % \
+      (site.template), ctx)
 
     # per host caching, in case the cache middleware is enabled
     patch_vary_headers(response, ['Host'])
@@ -149,3 +150,4 @@ def mainview(request, tag=None, feedUser=None):
     return response
 
 #~
+

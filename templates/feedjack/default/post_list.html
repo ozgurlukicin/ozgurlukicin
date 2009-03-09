@@ -1,13 +1,13 @@
 {% load i18n %}
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <!--
   Feedjack LostWoods theme
   Simple and green (where's the brown? -brown doesn't count)
-
-  Copyright Diego Escalante Urrelo <descalante@aureal.com.pe>
+ 
+  Copyright Diego Escalante Urrelo <diegoe@gnome.org>
  -->
 <head>
 	<meta name="description" content="Feedjack" />
@@ -42,8 +42,8 @@
 {% if has_next %}
 <li><a href="?page={{ next }}">&gt;&gt;</a></li>
 {% endif %}
-{% if feedUser %}
-<li class="username"><a href="{{ feedUser.feed.link }}">{{ feedUser.name }}</a>{% trans "talks about" %} »</li>
+{% if user %}
+<li class="username"><a href="{{ user.feed.link }}">{{ user.name }}</a>{% trans "talks about" %} »</li>
 {% endif %}
 {% if tag %}
 <li class="tagname">{{ tag.name }}</li>
@@ -52,15 +52,15 @@
 </div>
 
     <div id="buttons">
-      <a href="{{ site.url }}/feed/rss/" title="RSS 2.0 feed"><img src="{{ media_url }}/img/button-rss.png"/></a> &bull;
+      <a href="{{ site.url }}/feed/rss/" title="RSS 2.0 feed"><img src="{{ media_url }}/img/button-rss.png"/></a> &bull;   
       <a href="http://www.djangoproject.com/"><img src="http://media.djangoproject.com/img/badges/djangosite80x15.gif" border="0" alt="A Django site." title="A Django site."></a> &bull;
       <img src="{{ media_url }}/img/button-hacker.png"/><br/>
-      <a href="{{ site.url }}/feed/atom/" title="Atom 1.0 feed"><img src="{{ media_url }}/img/button-atom.png"/></a> &bull;
-      <a href="{{ site.url }}/opml/" title="OPML"><img src="{{ media_url }}/img/button-opml.png"/></a> &bull;
+      <a href="{{ site.url }}/feed/atom/" title="Atom 1.0 feed"><img src="{{ media_url }}/img/button-atom.png"/></a> &bull; 
+      <a href="{{ site.url }}/opml/" title="OPML"><img src="{{ media_url }}/img/button-opml.png"/></a> &bull; 
       <a href="{{ site.url }}/foaf/" title="FOAF"><img src="{{ media_url }}/img/button-foaf.png"/></a>
     </div>
 
-{% if feedUser %}
+{% if user %}
 <div id="usertags">
     <ul>
     {% for tag in tagcloud %}
@@ -75,7 +75,7 @@
     {% endfor %}
     </ul>
 </div>
-{% endif %}
+{% endif %}    
 
 <div id="content">
 
@@ -89,7 +89,7 @@
   {% ifchanged %}
   <!-- {{ item.date_modified|date:"F j, Y" }} -->
   <div class="avatar">
-    <img
+    <img 
      src="{{ media_url }}/img/faces/{{ item.subscriber.shortname}}.png" alt="">
     <br/>
     <span class="name">{{ item.subscriber.name }}</span><br/>
@@ -124,7 +124,7 @@
   <div class="post-title">» {{ item.subscriber.name }}</div>
   {% endif %}
   <div class="post-content">
-    <p>{{ item.content }}</p>
+    <p>{{ item.content|safe }}</p>
     <div class="post-meta">
       <a href="{{ item.link }}">
       {% if item.author %}{% blocktrans with item.author as author %}by {{ author }} at{% endblocktrans %}{% endif %}
@@ -145,11 +145,11 @@
 <div id="sidebar">
 <h4>{{ site.name }}</h4>
 
-{{ site.welcome }}
+{{ site.welcome|safe }}
 
 <h4>
 {% if user_id %}
-  {% blocktrans with feedUser.name as person %}What {{ person }} talks about{% endblocktrans %}
+  {% blocktrans with user.name as person %}What {{ person }} talks about{% endblocktrans %}
 {% else %}
   {% blocktrans %}What people talk about{% endblocktrans %}
 {% endif %}
@@ -197,7 +197,7 @@ title="{{ feed.feed.title }}">{{ feed.name }}</a></li>
 
 
 <h4>{% trans "Greetings" %}</h4>
-{{ site.greets }}
+{{ site.greets|safe }}
 
 </div>
 
@@ -215,8 +215,8 @@ title="{{ feed.feed.title }}">{{ feed.name }}</a></li>
 {% if has_next %}
 <li><a href="?page={{ next }}">&gt;&gt;</a></li>
 {% endif %}
-{% if feedUser %}
-<li class="username"><a href="{{ feedUser.feed.link }}">{{ feedUser.name }}</a></li>
+{% if user %}
+<li class="username"><a href="{{ user.feed.link }}">{{ user.name }}</a></li>
 {% endif %}
 {% if tag %}
 <li class="tagname">{{ tag.name }}</li>

@@ -10,6 +10,7 @@ from django.conf import settings
 from django.db import connection
 from django.core.paginator import Paginator, InvalidPage
 from django.http import Http404
+from django.utils.encoding import smart_unicode
 
 from oi.feedjack import models
 from oi.feedjack import fjcache
@@ -123,7 +124,7 @@ def get_extra_content(site, sfeeds_ids, ctx):
         ctx['feeds'] = []
         ctx['last_modified'] = '??'
     ctx['site'] = site
-    ctx['media_url'] = '%simg/feedjack/%s' % (settings.MEDIA_URL, site.template)
+    ctx['media_url'] = '%s/feedjack/%s' % (settings.MEDIA_URL, site.template)
 
 def get_posts_tags(object_list, sfeeds_obj, user_id, tag_name):
     """ Adds a qtags property in every post object in a page.
@@ -170,9 +171,10 @@ def get_posts_tags(object_list, sfeeds_obj, user_id, tag_name):
 def getcurrentsite(http_post, path_info, query_string):
     """ Returns the site id and the page cache key based on the request.
     """
-    url = 'http://%s/%s' % (http_post.rstrip('/'), \
-      path_info.lstrip('/'))
-    pagecachekey = '%s?%s' % (path_info, query_string)
+    url = u'http://%s/%s' % (smart_unicode(http_post.rstrip('/')), \
+      smart_unicode(path_info.lstrip('/')))
+    pagecachekey = '%s?%s' % (smart_unicode(path_info), \
+      smart_unicode(query_string))
     hostdict = fjcache.hostcache_get()
 
     if not hostdict:
@@ -271,7 +273,7 @@ def page_context(request, site, tag=None, user_id=None, sfeeds=None):
     from oi.feedjack import fjcloud
     ctx['tagcloud'] = fjcloud.getcloud(site, user_id)
     ctx['user_id'] = user_id
-    ctx['feedUser'] = user_obj
+    ctx['user'] = user_obj
     ctx['tag'] = tag_obj
     ctx['subscribers'] = sfeeds_obj
     return ctx

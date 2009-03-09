@@ -22,7 +22,7 @@ def str2md5(key):
     """ Returns the md5 hash of a string.
     """
     ctx = md5.new()
-    ctx.update(key)
+    ctx.update(key.encode('utf-8'))
     return ctx.hexdigest()
 
 def getkey(stype, site_id=None, key=None):
@@ -54,7 +54,7 @@ def cache_get(site_id, key):
 
 def cache_set(site, key, data):
     """ Sets cache data for a site.
-
+    
     All keys related to a site are stored in a meta key. This key is per-site.
     """
     tkey = getkey(T_ITEM, site.id, key)
