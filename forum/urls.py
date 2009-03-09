@@ -8,6 +8,11 @@
 from django.conf.urls.defaults import patterns
 from oi.forum.feeds import *
 from oi.forum.models import Post
+from oi.forum.sitemaps import TopicSitemap
+
+sitemaps = {
+        "topics": TopicSitemap,
+        }
 
 rss_dict = {
             'post': RSS,
@@ -23,6 +28,7 @@ atom_dict = {
 
 urlpatterns = patterns('',
     (r'^$', 'oi.forum.views.main'),
+    (r'^sitemap.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
     (r'^rss/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': rss_dict}),
     (r'^atom/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': atom_dict}),
 

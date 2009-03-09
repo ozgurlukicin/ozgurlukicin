@@ -62,7 +62,7 @@ def create_forum_topic(article, forum_name):
         post.save()
     if article.status:
         try:
-            ping_google()
+            ping_google("/sitemap.xml")
         # we're catching SitemapNotFound exception
         # no need to import this exception class since there is only 1 exception in the function.
         except:
