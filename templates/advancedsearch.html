@@ -3,21 +3,19 @@
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 {% endblock %}
 {% block content %}
-<div class="center" style="text-align: left; padding-left: 50px;">
-    <form method="post" action="">
-        <style type="text/css">ul{overflow:hidden;padding:0;list-style-type:none;}</style>
-        {% for field in form %}
-            {% include "formfields.html" %}
-        {% endfor %}
-    <input type="submit" value="Sonuçları göster" />
-    </form>
-</div>
+<form method="post" action="">
+    <style type="text/css">ul{overflow:hidden;padding:0;list-style-type:none;}</style>
+    {% for field in form %}
+        {% include "formfields.html" %}
+    {% endfor %}
+<input type="submit" value="Sonuçları göster" />
+</form>
 {% if searched %}
-<div class="fs_title transparent_link">{{ term }} kelimesini içeren sayfa{% if tags or topics or posts or news or packages or games or fs or howto or flatpages %}lar{% else %} bulunamadı.{% endif %}</div>
+<br /><div class="page_title">{{ term }} kelimesini içeren sayfa{% if tags or topics or posts or news or packages or games or fs or howto or flatpages %}lar{% else %} bulunamadı.{% endif %}</div>
 {% ifnotequal total 0 %}
-<div class="fs_content">
+<div class="searchresults">
     {% if tags %}
-        <div class="purple">
+        <div class="tags">
             <h2><span>Etiketler ({{ tags.count }} adet)</span></h2>
             <ul style="padding-left: 16px;" class="grey">
             {% for obj in tags %}
@@ -27,7 +25,7 @@
         </div>
     {% endif %}
     {% if news %}
-        <div class="purple">
+        <div class="news">
             <h2><span>Haberler ({{ news.count }} adet)</span></h2>
             <ul style="padding-left: 16px;" class="grey">
             {% for obj in news %}
@@ -37,8 +35,8 @@
         </div>
     {% endif %}
 
-	{% if howto %}
-        <div class="purple">
+    {% if howto %}
+        <div class="howto">
             <h2><span>Nasıl ({{ howto.count }} adet)</span></h2>
             <ul style="padding-left: 16px;" class="grey">
             {% for obj in howto %}
@@ -49,7 +47,7 @@
     {% endif %}
 
     {% if packages %}
-        <div class="orange">
+        <div class="packages">
             <h1><span>Paketler ({{ packages.count }} adet)</span></h1>
             <ul style="padding-left: 16px;" class="grey">
             {% for obj in packages %}
@@ -60,7 +58,7 @@
     {% endif %}
 
     {% if fs %}
-        <div class="green">
+        <div class="firststeps">
             <h2><span>İlk adımlar ({{ fs.count }} adet)</span></h2>
             <ul style="padding-left: 16px;" class="grey">
             {% for obj in fs %}
@@ -71,7 +69,7 @@
     {% endif %}
 
     {% if games %}
-        <div class="darkblue">
+        <div class="games">
             <h2><span>Oyunlar ({{ games.count }} adet)</span></h2>
             <ul style="padding-left: 16px;" class="grey">
             {% for obj in games %}
@@ -81,8 +79,8 @@
         </div>
     {% endif %}
 
-	{% if topics or posts %}
-        <div class="darkblue">
+    {% if topics or posts %}
+        <div class="forum">
             <h2><span>Forum ({% if posts %}{{ posts.count }}{% else %}{{ topics.count }}{% endif %} adet)</span></h2>
             <ul style="padding-left: 16px;" class="grey">
             {% if posts %}
@@ -100,7 +98,7 @@
 
 
     {% if flatpages %}
-        <div class="green">
+        <div class="flatpages">
             <h2><span>Sabit sayfalar ({{ flatpages.count }} adet)</span></h2>
             <ul style="padding-left: 16px;" class="grey">
             {% for obj in flatpages %}
@@ -112,7 +110,7 @@
 </div>
 {% endifnotequal %}
 {% ifequal total 0 %}
-<div class="fs_content">İçerik bulunamadı.</div>
+<div class="page_title">İçerik bulunamadı.</div>
 {% endifequal %}
 {% endif %}
 {% endblock %}
