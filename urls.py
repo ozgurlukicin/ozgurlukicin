@@ -131,7 +131,6 @@ urlpatterns = patterns('',
     (r'^etiket/(?P<tag>.*)/$', 'oi.st.views.tag_detail'),
 
     #Search
-    (r'^arama/$', 'oi.st.views.search'),
     (r'^gelismisarama/$', 'oi.st.views.advanced_search'),
 
     #Download

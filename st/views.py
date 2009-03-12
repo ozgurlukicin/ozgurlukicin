@@ -160,31 +160,3 @@ def advanced_search(request):
     else:
         form = AdvancedSearchForm()
     return render_response(request, 'advancedsearch.html', locals())
-
-def search(request):
-    if request.method == 'POST':
-        form = SearchForm(request.POST.copy())
-        if form.is_valid():
-            term = form.cleaned_data['term']
-
-            searched = True
-            tags = Tag.objects.filter(name__icontains=term).order_by('name')
-            news = News.objects.filter(tags__name__icontains=term).order_by('-update')
-            packages = Package.objects.filter(tags__name__icontains=term).order_by('-update')
-            games = Game.objects.filter(tags__name__icontains=term).order_by('-update')
-            fs = FS.objects.filter(tags__name__icontains=term).order_by('-update')
-            howto = HowTo.objects.filter(tags__name__icontains=term).order_by('-update')
-            flatpages = FlatPage.objects.filter(tags__name__icontains=term).order_by('title')
-            #for forum also
-            topic=Topic.objects.filter(tags__name__icontains=term).order_by('title')
-
-            total = tags.count()
-            total += news.count()
-            total += packages.count()
-            total += games.count()
-            total += fs.count()
-            total += howto.count()
-            total += flatpages.count()
-            total += topic.count()
-
-    return render_response(request, 'search.html', locals())
