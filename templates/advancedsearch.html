@@ -2,23 +2,12 @@
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 {% endblock %}
-
-{% block header_menu %}
-    {% include "header.html" %}
-{% endblock %}
-{% block ust_menu %}
-    {% include "ust_menu_ayrinti.html" %}
-{% endblock %}
-
 {% block content %}
 <div class="center" style="text-align: left; padding-left: 50px;">
     <form method="post" action="">
         <style type="text/css">ul{overflow:hidden;padding:0;list-style-type:none;}</style>
         {% for field in form %}
-        <dl>
-            <dt><label for="id_{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
-            <dd>{{ field }}</dd>
-        </dl>
+            {% include "formfields.html" %}
         {% endfor %}
     <input type="submit" value="Sonuçları göster" />
     </form>
