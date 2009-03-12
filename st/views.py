@@ -138,23 +138,23 @@ def advanced_search(request):
 
             if depth == 0:
                 if search_in != 1:
-                    topics = Topic.objects.filter(title__icontains=term)[:50]
+                    topics = Topic.objects.filter(title__icontains=term, hidden=False)[:50]
                 if search_in != 0:
-                    news = News.objects.filter(title__icontains=term).order_by('-update')[:50]
-                    packages = Package.objects.filter(title__icontains=term).order_by('-update')[:50]
-                    games = Game.objects.filter(title__icontains=term).order_by('-update')[:50]
-                    fs = FS.objects.filter(title__icontains=term).order_by('-update')[:50]
-                    howto = HowTo.objects.filter(title__icontains=term).order_by('-update')[:50]
+                    news = News.objects.filter(title__icontains=term, status=True).order_by('-update')[:50]
+                    packages = Package.objects.filter(title__icontains=term, status=True).order_by('-update')[:50]
+                    games = Game.objects.filter(title__icontains=term, status=True).order_by('-update')[:50]
+                    fs = FS.objects.filter(title__icontains=term, status=True).order_by('-update')[:50]
+                    howto = HowTo.objects.filter(title__icontains=term, status=True).order_by('-update')[:50]
                     flatpages = FlatPage.objects.filter(title__icontains=term)[:50]
             else:
                 if search_in != 1:
-                    posts = Post.objects.filter(text__icontains=term).order_by("-created")[:50]
+                    posts = Post.objects.filter(text__icontains=term, hidden=False).order_by("-created")[:50]
                 if search_in != 0:
-                    news = News.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).order_by('-update')[:50]
-                    packages = Package.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).order_by('-update')[:50]
-                    games = Game.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).order_by('-update')[:50]
-                    fs = FS.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).order_by('-update')[:50]
-                    howto = HowTo.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).order_by('-update')[:50]
+                    news = News.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).filter(status=True).order_by('-update')[:50]
+                    packages = Package.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).filter(status=True).order_by('-update')[:50]
+                    games = Game.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).filter(status=True).order_by('-update')[:50]
+                    fs = FS.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).filter(status=True).order_by('-update')[:50]
+                    howto = HowTo.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).filter(status=True).order_by('-update')[:50]
                     flatpages = FlatPage.objects.filter(Q(title__icontains=term)|Q(text__icontains=term))[:50]
             searched = True
     else:
