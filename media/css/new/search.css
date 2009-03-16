@@ -5,6 +5,7 @@
     width: 626px;
     padding-left: 10px;
     font-weight: bold;
+    cursor: pointer;
 }
 .searchresults .title img {
     float: right;
