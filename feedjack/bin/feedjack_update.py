@@ -158,43 +158,47 @@ class ProcessEntry:
                     file.write(image_data)
                     file.close()
 
-                    im = Image.open(tmp, 'r')
-                    # we'll do it respecting aspect ratio
-                    resize_x = im.size[0]
-                    resize_y = im.size[1]
+                    try:
+                        im = Image.open(tmp, 'r')
+                        # we'll do it respecting aspect ratio
+                        resize_x, resize_y = im.size[0], im.size[1]
 
-                    if settings.FEEDJACK_MAX_IMAGE_X and resize_x > settings.FEEDJACK_MAX_IMAGE_X:
-                        resize_y = int(settings.FEEDJACK_MAX_IMAGE_X * 1.0 / resize_x * resize_y)
-                        resize_x = settings.FEEDJACK_MAX_IMAGE_X
+                        if settings.FEEDJACK_MAX_IMAGE_X and resize_x > settings.FEEDJACK_MAX_IMAGE_X:
+                            resize_y = int(settings.FEEDJACK_MAX_IMAGE_X * 1.0 / resize_x * resize_y)
+                            resize_x = settings.FEEDJACK_MAX_IMAGE_X
 
-                    if settings.FEEDJACK_MAX_IMAGE_Y and resize_y > settings.FEEDJACK_MAX_IMAGE_Y:
-                        resize_x = int(settings.FEEDJACK_MAX_IMAGE_Y * 1.0 / resize_y * resize_x)
-                        resize_y = settings.FEEDJACK_MAX_IMAGE_Y
+                        if settings.FEEDJACK_MAX_IMAGE_Y and resize_y > settings.FEEDJACK_MAX_IMAGE_Y:
+                            resize_x = int(settings.FEEDJACK_MAX_IMAGE_Y * 1.0 / resize_y * resize_x)
+                            resize_y = settings.FEEDJACK_MAX_IMAGE_Y
 
-                    # if there is a change on images, continue the process
-                    if im.size[0] != resize_x or im.size[1] != resize_y:
-                        res = im.resize((resize_x, resize_y), Image.ANTIALIAS)
-                        res.save("%s/%s" % (settings.FEEDJACK_UPLOAD_DIR, image_name))
+                        # if there is a change on images, continue the process
+                        if im.size[0] != resize_x or im.size[1] != resize_y:
+                            res = im.resize((resize_x, resize_y), Image.ANTIALIAS)
+                            try:
+                                res.save("%s/%s" % (settings.FEEDJACK_UPLOAD_DIR, image_name))
 
-                        # generate a site url that will be showed in feedjack index and replace it with original
-                        resized_image_url = "%s/%s" % (settings.FEEDJACK_UPLOAD_URL, image_name)
-                        img['src'] = resized_image_url
+                                # generate a site url that will be showed in feedjack index and replace it with original
+                                resized_image_url = "%s/%s" % (settings.FEEDJACK_UPLOAD_URL, image_name)
+                                img['src'] = resized_image_url
 
-                        # if it has width
-                        if img.has_key("width"):
-                            img['width'] = resize_x
+                                # if it has width
+                                if img.has_key("width"):
+                                    img['width'] = resize_x
 
-                        # if it has height
-                        if img.has_key("height"):
-                            img['height'] = resize_y
+                                # if it has height
+                                if img.has_key("height"):
+                                    img['height'] = resize_y
 
-                        content = soup
-                        if self.options.verbose:
-                            print '  RESIZE: Image resized %s, %s' % (url, resized_image_url)
-                    else:
-                        if self.options.verbose:
-                            print '  RESIZE: Skipped, there is no change\n'
-
+                                content = soup
+                                if self.options.verbose:
+                                    print '  RESIZE: Image resized %s, %s' % (url, resized_image_url)
+                            except KeyError:
+                                print '  RESIZE: Bad file extension (%s), aborting' % (image_name)
+                        else:
+                            if self.options.verbose:
+                                print '  RESIZE: Skipped, there is no change\n'
+                    except IOError:
+                        print '  RESIZE: PIL cannot identify the image file, aborting'
                     try:
                         os.unlink(tmp)
                     except:
@@ -578,6 +582,7 @@ def main():
         tcom = u'no threadpool module available, no parallel fetching'
 
     prints('* END: %s (%s)' % (unicode(datetime.datetime.now()), tcom))
+    sys.exit()
 
 if __name__ == '__main__':
     main()
