@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block extrahead %}
+<script language="javascript" type="text/javascript" src="/media/js/searchhelper.js"></script>
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/search.css');</style>
 {% endblock %}
 {% block content %}
 <form method="post" action="">
@@ -16,8 +18,8 @@
 <div class="searchresults">
     {% if tags %}
         <div class="tags">
-            <h2><span>Etiketler ({{ tags.count }} adet)</span></h2>
-            <ul style="padding-left: 16px;" class="grey">
+            <div class="title"><span>Etiketler ({{ tags.count }} adet)</span></div>
+            <ul>
             {% for obj in tags %}
                 <li><a href="{{ obj.get_absolute_url }}">{{ obj.name }}</a></li>
             {% endfor %}
@@ -26,10 +28,10 @@
     {% endif %}
     {% if news %}
         <div class="news">
-            <h2><span>Haberler ({{ news.count }} adet)</span></h2>
-            <ul style="padding-left: 16px;" class="grey">
+            <div class="title"><span>Haberler ({{ news.count }} adet)</span></div>
+            <ul>
             {% for obj in news %}
-                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.sum|striptags }}</li>
             {% endfor %}
             </ul>
         </div>
@@ -37,10 +39,10 @@
 
     {% if howto %}
         <div class="howto">
-            <h2><span>Nasıl ({{ howto.count }} adet)</span></h2>
-            <ul style="padding-left: 16px;" class="grey">
+            <div class="title"><span>Nasıl ({{ howto.count }} adet)</span></div>
+            <ul>
             {% for obj in howto %}
-                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.sum|striptags }}</li>
             {% endfor %}
             </ul>
         </div>
@@ -49,9 +51,9 @@
     {% if packages %}
         <div class="packages">
             <h1><span>Paketler ({{ packages.count }} adet)</span></h1>
-            <ul style="padding-left: 16px;" class="grey">
+            <ul>
             {% for obj in packages %}
-                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.sum|striptags }}</li>
             {% endfor %}
             </ul>
         </div>
@@ -59,10 +61,10 @@
 
     {% if fs %}
         <div class="firststeps">
-            <h2><span>İlk adımlar ({{ fs.count }} adet)</span></h2>
-            <ul style="padding-left: 16px;" class="grey">
+            <div class="title"><span>İlk adımlar ({{ fs.count }} adet)</span></div>
+            <ul>
             {% for obj in fs %}
-                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.sum|striptags }}</li>
             {% endfor %}
             </ul>
         </div>
@@ -70,10 +72,10 @@
 
     {% if games %}
         <div class="games">
-            <h2><span>Oyunlar ({{ games.count }} adet)</span></h2>
-            <ul style="padding-left: 16px;" class="grey">
+            <div class="title"><span>Oyunlar ({{ games.count }} adet)</span></div>
+            <ul>
             {% for obj in games %}
-                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.sum|striptags }}</li>
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.sum|striptags }}</li>
             {% endfor %}
             </ul>
         </div>
@@ -81,8 +83,8 @@
 
     {% if topics or posts %}
         <div class="forum">
-            <h2><span>Forum ({% if posts %}{{ posts.count }}{% else %}{{ topics.count }}{% endif %} adet)</span></h2>
-            <ul style="padding-left: 16px;" class="grey">
+            <div class="title"><span>Forum ({% if posts %}{{ posts.count }}{% else %}{{ topics.count }}{% endif %} adet)</span></div>
+            <ul>
             {% if posts %}
             {% for obj in posts %}
                 <li><a href="{{ obj.topic.get_absolute_url }}">{{ obj.topic.title }}</a></li>
@@ -99,10 +101,10 @@
 
     {% if flatpages %}
         <div class="flatpages">
-            <h2><span>Sabit sayfalar ({{ flatpages.count }} adet)</span></h2>
-            <ul style="padding-left: 16px;" class="grey">
+            <div class="title"><span>Sabit sayfalar ({{ flatpages.count }} adet)</span></div>
+            <ul>
             {% for obj in flatpages %}
-                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - {{ obj.text|truncatewords:"10"|striptags }}</li>
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.text|truncatewords:"10"|striptags }}</li>
             {% endfor %}
             </ul>
         </div>

@@ -1,0 +1,23 @@
+.searchresults .title {
+    background: transparent url(/media/img/new/forum_category_bg.png) repeat-x scroll 0 0;
+    line-height: 30px;
+    height: 30px;
+    width: 626px;
+    padding-left: 10px;
+    font-weight: bold;
+}
+.searchresults .title img {
+    float: right;
+    position: relative;
+    top: -20px;
+    right: 10px;
+}
+.searchresults li {
+    border-bottom: 1px solid #EAEAEA;
+    padding: 2px 0px 2px 20px;
+    width: 616px;
+}
+.searchresults li a {
+    color: #666;
+    font-weight: bold;
+}
