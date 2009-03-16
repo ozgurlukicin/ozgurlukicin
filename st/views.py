@@ -99,13 +99,13 @@ def pkg_printable(request, slug):
 
 def tag_detail(request, tag):
     try:
-        news = News.objects.filter(tags__name__exact=tag)
-        packages = Package.objects.filter(tags__name__exact=tag)
-        games = Game.objects.filter(tags__name__exact=tag)
-        fs = FS.objects.filter(tags__name__exact=tag)
-        howto = HowTo.objects.filter(tags__name__exact=tag)
-        flatpages = FlatPage.objects.filter(tags__name__exact=tag)
-        topic=Topic.objects.filter(tags__name__exact=tag)
+        news = News.objects.filter(tags__name__exact=tag, status=True)[:100]
+        packages = Package.objects.filter(tags__name__exact=tag, status=True)[:100]
+        games = Game.objects.filter(tags__name__exact=tag, status=True)[:100]
+        fs = FS.objects.filter(tags__name__exact=tag, status=True)[:100]
+        howto = HowTo.objects.filter(tags__name__exact=tag, status=True)[:100]
+        flatpages = FlatPage.objects.filter(tags__name__exact=tag)[:100]
+        topic=Topic.objects.filter(tags__name__exact=tag, hidden=False).order_by("-id")[:100]
 
     except Tag.DoesNotExist:
         raise Http404
