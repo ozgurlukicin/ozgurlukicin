@@ -21,7 +21,13 @@ function load() {
         var mgr = new GMarkerManager(map);
         var markers = [{% for profile in profiles %}new GMarker(new GLatLng({{ profile.latitude }},{{ profile.longitude }})){% if not forloop.last %},{% endif %}{% endfor %}];
         {% for profile in profiles %}GEvent.addListener(markers[{{ forloop.counter0 }}],"click",function(){this.openInfoWindowHtml("<a href=\"{{ profile.get_absolute_url }}\">{{ profile.user.username }}</a>");});{% endfor %}
-        mgr.addMarkers(markers, 1);
+        mgr.addMarkers(markers.slice(0,10), 5);
+        mgr.addMarkers(markers.slice(0,20), 6);
+        mgr.addMarkers(markers.slice(0,40), 7);
+        mgr.addMarkers(markers.slice(0,80), 8);
+        mgr.addMarkers(markers.slice(0,160), 9);
+        mgr.addMarkers(markers.slice(0,200), 10);
+        mgr.addMarkers(markers, 11);
         mgr.refresh();
     }
 }
