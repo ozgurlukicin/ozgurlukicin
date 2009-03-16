@@ -50,7 +50,7 @@
 
     {% if packages %}
         <div class="packages">
-            <h1><span>Paketler ({{ packages.count }} adet)</span></h1>
+            <div class="title"><span>Paketler ({{ packages.count }} adet)</span></div>
             <ul>
             {% for obj in packages %}
                 <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.sum|striptags }}</li>
