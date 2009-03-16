@@ -37,5 +37,52 @@ function load() {
 {% block extrabody %} onload="load()" onunload="GUnload()"{% endblock %}
 
 {% block content %}
+<div class="page_title">Özgürlükiçin Kullanıcıları Listesi</div>
+<p>Haritayı yaklaştırdıkça daha çok kullanıcı listelenecektir.</p>
 <div id="id_map" class="googlemap" style="width:610px;height:400px;"></div>
+{% endblock %}
+{% block leftcolumn %}
+<div class="sidebarcolumn leftcolumn">
+    <div class="leftcolumn_content">
+        <h2>İlgili sayfalar</h2>
+        <ul>
+            <li>
+            <span class="bullet">»</span>
+            <a href="/hakkinda/icerik-politikasi/">İçerik Politikası</a>
+            </li>
+            <li>
+            <span class="bullet">»</span>
+            <a href="/hakkinda/gizlilik-politikasi/">Gizlilik Politikası</a>
+            </li>
+            <li>
+            <span class="bullet">»</span>
+            <a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a>
+            </li>
+            <li>
+            <span class="bullet">»</span>
+            <a href="/e-dergi/">E-Dergi</a>
+            </li>
+            <li>
+            <span class="bullet">»</span>
+            <a href="/hakkinda/">Hakkında</a>
+            </li>
+            <li>
+            <span class="bullet">»</span>
+            <a href="/bize_ulasmak_icin/">Bize Ulaşın</a>
+            </li>
+            <li>
+            <span class="bullet">»</span>
+            <a href="/seminer/">Seminer</a>
+            </li>
+            <li>
+            <span class="bullet">»</span>
+            <a href="/yoneticiler/">Yöneticiler</a>
+            </li>
+        </ul>
+    </div>
+    <div class="leftcolumn_content">
+        <h2>Etiketler</h2>
+        <img src="/media/img/new/tag.png" alt="etiket" /> <a href="/etiket/ozgurlukicin.com/">ozgurlukicin.com</a>
+    </div>
+</div>
 {% endblock %}
