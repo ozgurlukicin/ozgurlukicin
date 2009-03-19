@@ -1,35 +1,37 @@
 {% extends "base.html" %}
+{% load library %}
 {% block title %}E-Dergi -  {% endblock %}
 {% block extrahead %}
-<style type="text/css" media="screen">@import url('/media/css/new/object_lists.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
-<style type="text/css" media="screen">@import url('/media/css/new/ezine.css');</style>
 {% endblock %}
 {% block content %}
-
+<div class="page_title">Özgürlükİçin e-dergi yayında!</div>
+<div class="page_content">
+{% ifnotequal ezines.count 1 %}
+    <p><a href="http://www.ozgurlukicin.com/">Özgürlükİçin</a> topluluğu tarafından hazırlanan "<strong>Özgürlükİçin e-dergi</strong> "nin {{ ezine.number }}. sayısı yayımlandı. Yola çıktığı günden bugüne koskocaman bir yayına dönüşen e-dergimiz bu ay tam <strong>{{ ezine.page_count }} sayfa</strong> olarak sitemizde yerini aldı.</p>
+    <p>E-derginin içeriği ise şöyle:</p>
+{% endifnotequal %}
 {% for ezine in ezines %}
-<div id="ezine">
-    <img id="img" src="/media/{{ ezine.image }}/" alt="{{ ezine.title }} resim" /><br />
-    <h2>
-        {% if not id %}
-        <a href="{{ ezine.id }}/" title="{{ ezine.title }}">{{ ezine.title }}</a>
-        {% else %}
-        {{ ezine.title }}
-        {% endif %}
-    </h2>
-    <h3>İndir : </h3>
-    <sub><img src="http://www.ozgurlukicin.com/media/upload/image/pdf.png" alt="pdf" /></sub>
-    <a href="/media/{{ ezine.download_300dpi }}">300dpi ({{ ezine.size_300dpi }} MB)</a>
-    <sub><img src="http://www.ozgurlukicin.com/media/upload/image/pdf.png" almt="pdf" /></sub>
-    <a href="/media/{{ ezine.download_96dpi }}">96dpi ({{ ezine.size_96dpi }} MB)</a>
-    {% ifequal forloop.counter 1 %}
-        <div class="content"><h3>İçindekiler</h3>
-            {{ ezine.description|safe }}
-        </div>
-    {% endifequal %}
-    <div style="clear:both"></div>
+{% if forloop.first %}
+    <p><img src="{{ ezine.image.file.url }}" alt="{{ ezine.title }}" align="left"> <span style="font-size: x-large;">{{ ezine.title }}</span></p>
+    <p><strong> Editör:</strong> {{ ezine.editor }}</p>
+    <p>&nbsp;</p>
+    <h3>İndir:</h3>
+    <p><a href="{{ ezine.download_300dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" /> 300 dpi ({{ ezine.size_300dpi|filesizeformat }})</a> <a href="{{ ezine.download_96dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" /> 96 dpi ({{ ezine.size_96dpi|filesizeformat }})</a></p>
+    <p>&nbsp;</p>
+    {{ ezine.description|safe }}
+{% ifnotequal ezines.count 1 %}
     <hr />
-</div>
+    <p>Özgürlükİçin topluluğu tarafından hazırlanan "Özgürlükİçin e-dergi"nin eski sayılarına aşağıdan ulaşabilirsiniz.</p>
+{% endifnotequal %}
+{% else %}
+    <p><img id="img" src="{{ ezine.image.file.name|thumbnail:"250x200" }}" alt="{{ ezine.title }}" /> <span style="font-size: x-large;">{{ ezine.title }}</span></p>
+    <p><strong> Editör:</strong> {{ ezine.editor }}</p>
+    <p>&nbsp;</p>
+    <h3>İndir:</h3>
+    <p><a href="{{ ezine.download_300dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" /> 300 dpi ({{ ezine.size_300dpi|filesizeformat }})</a> <a href="{{ ezine.download_96dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" /> 96 dpi ({{ ezine.size_96dpi|filesizeformat }})</a></p>
+    <p>&nbsp;</p>
+{% endif %}
 {% endfor %}
-
+</div>
 {% endblock %}

@@ -1,15 +1,20 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+from oi.upload.models import Image
 
 class Ezine(models.Model):
-    title = models.CharField('Başlık', max_length=128, blank=False)
+    number = models.PositiveIntegerField("Sayı")
+    title = models.CharField('Başlık', max_length=64, help_text="alt satıra düşmesi için arada &lt;br/&gt; kullanın \"Özgürlükİçin e-dergi &lt;br/&gt; Şubat / Mart 2009\" gibi")
     description = models.TextField('İçindekiler')
-    image = models.FileField('Görsel', upload_to='edergi/images/')
-    download_300dpi = models.FileField('300dpi dergi', upload_to='edergi/300dpi/')
-    size_300dpi = models.CharField("300dpi dergi boyutu", max_length=8)
-    download_96dpi = models.FileField('96dpi dergi', upload_to='edergi/96dpi/')
-    size_96dpi = models.CharField("96dpi dergi boyutu", max_length=8)
+    image = models.ForeignKey(Image, verbose_name="Dergi Görseli", blank=True, null=True, help_text="Görselin 310x205 boyutlarında olmasına dikkat edin! Yeni görsel eklemek için + düğmesine tıklayın.")
+    editor = models.CharField('Editör', max_length=64)
+    page_count = models.PositiveIntegerField("Sayfa sayısı")
+    download_300dpi = models.CharField('300dpi dergi adresi', max_length=256, help_text="/media/dosya/oi_say11_buyuk.pdf gibi")
+    size_300dpi = models.PositiveIntegerField("300dpi dergi boyutu", help_text="bayt cinsinden")
+    download_96dpi = models.CharField('96dpi dergi adresi', max_length=256, help_text="/media/dosya/oi_say11_kucuk.pdf gibi")
+    size_96dpi = models.PositiveIntegerField("96dpi dergi boyutu", help_text="bayt cinsinden")
+    is_active = models.BooleanField()
 
     def __unicode__(self):
         return self.title
