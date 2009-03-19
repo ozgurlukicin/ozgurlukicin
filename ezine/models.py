@@ -4,7 +4,7 @@ from django.db import models
 from oi.upload.models import Image
 
 class Ezine(models.Model):
-    number = models.PositiveIntegerField("Sayı")
+    number = models.PositiveIntegerField("Sayı", primary_key=True, unique=True)
     title = models.CharField('Başlık', max_length=64, help_text="alt satıra düşmesi için arada &lt;br/&gt; kullanın \"Özgürlükİçin e-dergi &lt;br/&gt; Şubat / Mart 2009\" gibi")
     description = models.TextField('İçindekiler')
     image = models.ForeignKey(Image, verbose_name="Dergi Görseli", blank=True, null=True, help_text="Görselin 310x205 boyutlarında olmasına dikkat edin! Yeni görsel eklemek için + düğmesine tıklayın.")
