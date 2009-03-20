@@ -54,6 +54,10 @@
             <span class="bullet">»</span>
             <a href="/kullanici/liste/">Kullanıcılarımız</a>
             </li>
+            {% ifnotequal flatpage.url "/teknik/" %}<li>
+            <span class="bullet">»</span>
+            <a href="/teknik/">Teknik</a>
+            </li>{% endifnotequal %}
         </ul>
     </div>
     <div class="leftcolumn_content">
