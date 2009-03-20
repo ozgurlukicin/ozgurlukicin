@@ -1,11 +1,4 @@
 {% extends "tema/base.html" %}
-{% block header_menu %}
-    {% include "header.html" %}
-{% endblock %}
-{% block ust_menu %}
-    {% include "ust_menu_ayrinti.html" %}
-{% endblock %}
-
 {% block content %}
 {% if button_change %}<a href="{{ object.get_change_url }}">Düzenle</a>{% endif %}
 <div class="themeitem">

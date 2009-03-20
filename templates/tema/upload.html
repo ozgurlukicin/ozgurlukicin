@@ -1,13 +1,6 @@
 {% extends "tema/base.html" %}
 {% load thumbman %}
 {% load comment_utils %}
-{% block header_menu %}
-    {% include "header.html" %}
-{% endblock %}
-{% block ust_menu %}
-    {% include "ust_menu_ayrinti.html" %}
-{% endblock %}
-
 {% block content %}
 
 <form action="/tema/ekle/" method="post" enctype="multipart/form-data">
