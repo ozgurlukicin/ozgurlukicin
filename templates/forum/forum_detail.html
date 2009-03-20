@@ -33,7 +33,7 @@
         {% else %}
 
         <div class="item topic_item" {% if topic.hidden %}style="opacity: 0.5;"{% endif %}>
-            <div class="icon"><a href="{{ topic.get_absolute_url }}">{% if topic.locked and not topic.sticky %}<img src="/media/dijital/img/forum/topic{% if not topic.is_read %}_unread{% endif %}_locked.png" border="0" alt="Kilitli Başlık" title="Kilitli Başlık" />{% endif %}{% if topic.sticky and not topic.locked %}<img src="/media/dijital/img/forum/topic_sticky.png" border="0" alt="Sabit Başlık" title="Sabit Başlık" />{% endif %}{% if not topic.locked and not topic.sticky %}<img src="/media/dijital/img/forum/topic{% if not topic.is_read %}_unread{% endif %}.png" border="0" {% if topic.is_read %}alt="Okunmuş Başlık" title="Okunmuş Başlık"{% else %}alt="Okunmamış Başlık" title="Okunmamış Başlık"{% endif %} />{% endif %}{% if topic.locked and topic.sticky %}<img src="/media/dijital/img/forum/topic_sticky_locked.png" border="0" alt="Sabit ve Kilitli Başlık" title="Sabit ve Kilitli Başlık" />{% endif %}</a></div>
+            <div class="icon"><a href="{{ topic.get_absolute_url }}">{% if topic.locked and not topic.sticky %}<img src="/media/img/new/forum/topic{% if not topic.is_read %}_unread{% endif %}_locked.png" border="0" alt="Kilitli Başlık" title="Kilitli Başlık" />{% endif %}{% if topic.sticky and not topic.locked %}<img src="/media/img/new/forum/topic_sticky.png" border="0" alt="Sabit Başlık" title="Sabit Başlık" />{% endif %}{% if not topic.locked and not topic.sticky %}<img src="/media/img/new/forum/topic{% if not topic.is_read %}_unread{% endif %}.png" border="0" {% if topic.is_read %}alt="Okunmuş Başlık" title="Okunmuş Başlık"{% else %}alt="Okunmamış Başlık" title="Okunmamış Başlık"{% endif %} />{% endif %}{% if topic.locked and topic.sticky %}<img src="/media/img/new/forum/topic_sticky_locked.png" border="0" alt="Sabit ve Kilitli Başlık" title="Sabit ve Kilitli Başlık" />{% endif %}</a></div>
             <div class="spacer">&nbsp;</div>
             <div class="topic_title"><a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a>{% ifequal forum.slug "guncellenen-basliklar" %}<br />Forum: {{ topic.forum }}{% endifequal %}</div>
             <div class="spacer">&nbsp;</div>
@@ -41,7 +41,7 @@
             <div class="spacer">&nbsp;</div>
             <div class="posts">{{ topic.views }}</div>
             <div class="spacer">&nbsp;</div>
-            <div class="lastpost">{{ topic.topic_latest_post.edited|date:"d F Y H:i" }}<br /><a href="/kullanici/profil/{{ topic.topic_latest_post.author }}" class="profile_link">{{ topic.topic_latest_post.author }}</a> <a href="{{ topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="iletiye git" border="0"/></a></div>
+            <div class="lastpost">{{ topic.topic_latest_post.edited|date:"d F Y H:i" }}<br /><a href="/kullanici/profil/{{ topic.topic_latest_post.author }}" class="profile_link">{{ topic.topic_latest_post.author }}</a> <a href="{{ topic.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="iletiye git" border="0"/></a></div>
             <div class="spacer">&nbsp;</div>
             <div class="follow"><a href="/forum/rss/topic/{{ topic.id }}/"><img src="/media/img/new/rss.png" alt="RSS" /></a></div>
         </div>

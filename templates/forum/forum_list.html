@@ -29,7 +29,7 @@
         {% if forum.hidden and not perms.forum.can_see_hidden_forums %}
         {% else %}
         <div class="item forum_item" {% if forum.hidden %}style="opacity: 0.5;"{% endif %}>
-            <div class="icon"><a href="{{ forum.get_absolute_url }}"><img{% if forum.is_read %} src="/media/dijital/img/forum/topic.png" alt="Okunmuş forum" title="Okunmuş forum"{% else %} src="/media/dijital/img/forum/topic_unread.png" alt="Okunmamış forum" title="Okunmamış forum"{% endif %} /></a></div>
+            <div class="icon"><a href="{{ forum.get_absolute_url }}"><img{% if forum.is_read %} src="/media/img/new/forum/topic.png" alt="Okunmuş forum" title="Okunmuş forum"{% else %} src="/media/img/new/forum/topic_unread.png" alt="Okunmamış forum" title="Okunmamış forum"{% endif %} /></a></div>
             <div class="spacer">&nbsp;</div>
             <div class="title"><a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a><br />{{ forum.description }}</div>
             <div class="spacer">&nbsp;</div>
@@ -37,7 +37,7 @@
             <div class="spacer">&nbsp;</div>
             <div class="posts">{{ forum.posts }}</div>
             <div class="spacer">&nbsp;</div>
-            <div class="lastpost">{% if forum.forum_latest_post %}{{ forum.forum_latest_post.edited|date:"d F Y H:i" }}<br /><a href="{{ forum.forum_latest_post.author.get_profile.get_absolute_url }}">{{ forum.forum_latest_post.author }}</a> <a href="{{ forum.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="iletiye git" /></a>{% else %}Henüz ileti yok{% endif %}</div>
+            <div class="lastpost">{% if forum.forum_latest_post %}{{ forum.forum_latest_post.edited|date:"d F Y H:i" }}<br /><a href="{{ forum.forum_latest_post.author.get_profile.get_absolute_url }}">{{ forum.forum_latest_post.author }}</a> <a href="{{ forum.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="iletiye git" /></a>{% else %}Henüz ileti yok{% endif %}</div>
         </div>
         {% endif %}
         {% endfor %}
@@ -57,7 +57,7 @@
             <div class="topic">[<a href="{{ topic.forum.get_absolute_url }}">{{ topic.forum }}</a>] <strong><a href="{{ topic.get_latest_post_url }}">{{ topic }}</a></strong></div>
             <div class="post">
                 <span class="date">{{ topic.topic_latest_post.created|date:"d F Y H:i" }}</span>
-                <span class="profile_link"><a href="{{ topic.topic_latest_post.author.get_profile.get_absolute_url }}">{{ topic.topic_latest_post.author }}</a> <a href="{{ topic.topic_latest_post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="iletiye git" /></a></span>
+                <span class="profile_link"><a href="{{ topic.topic_latest_post.author.get_profile.get_absolute_url }}">{{ topic.topic_latest_post.author }}</a> <a href="{{ topic.topic_latest_post.get_absolute_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="iletiye git" /></a></span>
             </div>
         </div>
     {% endfor %}
@@ -68,7 +68,7 @@
             <div class="topic">[<a href="{{ topic.forum.get_absolute_url }}">{{ topic.forum }}</a>] <strong><a href="{{ topic.get_absolute_url }}">{{ topic }}</a></strong></div>
             <div class="post">
                 <span class="date">{{ topic.poll.created|date:"d F Y H:i" }}</span>
-                <span class="profile_link"><a href="{{ topic.topic_latest_post.author.get_profile.get_absolute_url }}">{{ topic.topic_latest_post.author }}</a> <a href="{{ topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="iletiye git" /></a></span>
+                <span class="profile_link"><a href="{{ topic.topic_latest_post.author.get_profile.get_absolute_url }}">{{ topic.topic_latest_post.author }}</a> <a href="{{ topic.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="iletiye git" /></a></span>
             </div>
         </div>
         {% endfor %}
@@ -76,7 +76,7 @@
     </div>
     <div class="titlebar"><h2>İstatistikler</h2></div>
     <div class="stats">
-        <div class="image"><img src="/media/dijital/img/forum/stats.gif" alt="pati"/></div>
+        <div class="image"><img src="/media/img/new/forum/stats.png" alt="pati"/></div>
         <div class="text left">
             <div class="labels">Tarih<br />Toplam Üye Sayısı<br />Toplam İleti Sayısı</div>
             <div class="spacers">:<br />:<br />:</div>
@@ -92,17 +92,17 @@
     <div class="titlebar"><h2>Forumdaki simgelerin anlamları</h2></div>
     <div class="icons_help">
         <div>
-            <img src="/media/dijital/img/forum/topic.png" alt="Okunmuş Başlık" title="Okunmuş Başlık" /> Okunmuş forum ya da konu<br />
-            <img src="/media/dijital/img/forum/topic_unread.png" alt="Okunmamış Başlık" title="Okunmamış Başlık" /> Yeni ileti var<br />
+            <img src="/media/img/new/forum/topic.png" alt="Okunmuş Başlık" title="Okunmuş Başlık" /> Okunmuş forum ya da konu<br />
+            <img src="/media/img/new/forum/topic_unread.png" alt="Okunmamış Başlık" title="Okunmamış Başlık" /> Yeni ileti var<br />
         </div>
         <div>
-            <img src="/media/dijital/img/forum/topic_locked.png" alt="Kilitli Başlık" title="Kilitli Başlık" /> Kilitli (yeni iletilere kapalı)<br />
-            <img src="/media/dijital/img/forum/topic_unread_locked.png" alt="Kilitli ve Okunmamış Başlık" title="Kilitli ve Okunmamış Başlık" 
+            <img src="/media/img/new/forum/topic_locked.png" alt="Kilitli Başlık" title="Kilitli Başlık" /> Kilitli (yeni iletilere kapalı)<br />
+            <img src="/media/img/new/forum/topic_unread_locked.png" alt="Kilitli ve Okunmamış Başlık" title="Kilitli ve Okunmamış Başlık" 
     /> Kilitli ve okunmamış ileti var<br />
         </div>
         <div>
-            <img src="/media/dijital/img/forum/topic_sticky.png" alt="Sabit Başlık" title="Sabit Başlık" /> Sabit (her zaman üstte kalır)<br />
-            <img src="/media/dijital/img/forum/topic_sticky_locked.png" alt="Kilitli ve Sabit Başlık" title="Kilitli ve Sabit Başlık" /> Kilitli ve sabit<br />
+            <img src="/media/img/new/forum/topic_sticky.png" alt="Sabit Başlık" title="Sabit Başlık" /> Sabit (her zaman üstte kalır)<br />
+            <img src="/media/img/new/forum/topic_sticky_locked.png" alt="Kilitli ve Sabit Başlık" title="Kilitli ve Sabit Başlık" /> Kilitli ve sabit<br />
         </div>
     </div>
 </div>

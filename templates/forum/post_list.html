@@ -13,7 +13,7 @@
 <div class="post_list">
 {% for post in post_list %}
 <div class="post">
-    <div class="top"><div class="address"><a href="{{ post.topic.forum.get_absolute_url }}">{{ post.topic.forum }}</a> &#62; <a href="{{ post.topic.get_absolute_url }}">{{ post.topic }}</a></div><div class="button"><a href="{{ post.topic.get_reply_url }}"><img src="/media/img/new/forum/button_reply.png" alt="Yanıtla"></a></div><div class="author"><a href="{{ post.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="iletiye git" /></a> <a href="{{ post.author.get_profile.get_absolute_url }}">{{ post.author }}</a> - {{ post.created|date:"d F Y H:i" }}</div></div>
+    <div class="top"><div class="address"><a href="{{ post.topic.forum.get_absolute_url }}">{{ post.topic.forum }}</a> &#62; <a href="{{ post.topic.get_absolute_url }}">{{ post.topic }}</a></div><div class="button"><a href="{{ post.topic.get_reply_url }}"><img src="/media/img/new/forum/button_reply.png" alt="Yanıtla"></a></div><div class="author"><a href="{{ post.get_absolute_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="iletiye git" /></a> <a href="{{ post.author.get_profile.get_absolute_url }}">{{ post.author }}</a> - {{ post.created|date:"d F Y H:i" }}</div></div>
     <div class="message">{{ post.text|renderbbcode|safe }}</div>
 </div>
 {% endfor %}

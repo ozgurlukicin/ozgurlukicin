@@ -32,7 +32,7 @@
     <span>Son 20 imza:</span>
     {% for petitioner in petitioners %}
     <ul>
-        <li>{{ petitioner.firstname }} {{ petitioner.lastname }} - {{ petitioner.get_city_display }} - {{ petitioner.job }} {% if petitioner.homepage %}<a href="{{ petitioner.homepage }}" target="_blank"><img src="/media/dijital/img/forum/msg_sim.gif" border="0px" alt="adrese git" /></a>{% else %}-{% endif %} {{ petitioner.signed|timedelta }}</li>
+        <li>{{ petitioner.firstname }} {{ petitioner.lastname }} - {{ petitioner.get_city_display }} - {{ petitioner.job }} {% if petitioner.homepage %}<a href="{{ petitioner.homepage }}" target="_blank"><img src="/media/img/new/forum/go_to_msg.png" border="0px" alt="adrese git" /></a>{% else %}-{% endif %} {{ petitioner.signed|timedelta }}</li>
     </ul>
     {% endfor %}
     <span><a href="/petition/liste/?page=1">Tüm İmzalar</a></span>
