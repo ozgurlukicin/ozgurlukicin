@@ -29,7 +29,7 @@
     {% endif %}
 {% endif %}
 <div class="page_printable"><a href="{{ package.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
-<div class="page_last_update">Son güncelleme: {{ package.update|timedelta }}</div>
+<div class="page_last_update">Son güncelleme: {{ package.update|date:"d F Y" }}</div>
 
 
 {% endblock %}

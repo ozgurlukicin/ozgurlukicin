@@ -39,7 +39,7 @@
     {% endif %}
 {% endif %}
 <div class="page_printable"><a href="{{ news.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
-<div class="page_last_update">Son güncelleme: {{ news.update|timedelta }}</div>
+<div class="page_last_update">Son güncelleme: {{ news.update|date:"d F Y" }}</div>
 
 {% endblock %}
 

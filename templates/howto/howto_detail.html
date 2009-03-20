@@ -30,7 +30,7 @@
 {% endif %}
 </p>
 <div class="page_printable"><a href="{{ howto.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
-<div class="page_last_update">Son güncelleme: {{ howto.update|timedelta }}</div>
+<div class="page_last_update">Son güncelleme: {{ howto.update|date:"d F Y" }}</div>
 
 {% endblock %}
 
