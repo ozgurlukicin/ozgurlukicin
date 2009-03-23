@@ -17,7 +17,7 @@
     <p><strong> Editör:</strong> {{ ezine.editor }}</p>
     <p>&nbsp;</p>
     <h3>İndir:</h3>
-    <p><a href="{{ ezine.download_300dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" /> 300 dpi ({{ ezine.size_300dpi|filesizeformat }})</a> <a href="{{ ezine.download_96dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" /> 96 dpi ({{ ezine.size_96dpi|filesizeformat }})</a></p>
+    <p><a href="{{ ezine.download_300dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" alt="indir" /> 300 dpi ({{ ezine.size_300dpi|filesizeformat }})</a> <a href="{{ ezine.download_96dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" alt="indir" /> 96 dpi ({{ ezine.size_96dpi|filesizeformat }})</a></p>
     <p>&nbsp;</p>
     {{ ezine.description|safe }}
 {% ifnotequal ezines.count 1 %}
@@ -29,7 +29,7 @@
     <p><strong> Editör:</strong> {{ ezine.editor }}</p>
     <p>&nbsp;</p>
     <h3>İndir:</h3>
-    <p><a href="{{ ezine.download_300dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" /> 300 dpi ({{ ezine.size_300dpi|filesizeformat }})</a> <a href="{{ ezine.download_96dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" /> 96 dpi ({{ ezine.size_96dpi|filesizeformat }})</a></p>
+    <p><a href="{{ ezine.download_300dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" alt="indir" /> 300 dpi ({{ ezine.size_300dpi|filesizeformat }})</a> <a href="{{ ezine.download_96dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" alt="indir" /> 96 dpi ({{ ezine.size_96dpi|filesizeformat }})</a></p>
     <p>&nbsp;</p>
 {% endif %}
 {% endfor %}
