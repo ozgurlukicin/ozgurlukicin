@@ -19,3 +19,6 @@
     display: none;
     clear: both;
 }
+.page_content hr {
+    clear: both;
+}

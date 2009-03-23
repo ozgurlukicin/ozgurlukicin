@@ -24,14 +24,14 @@
     <p>Özgürlükİçin topluluğu tarafından hazırlanan "Özgürlükİçin e-dergi"nin eski sayılarına aşağıdan ulaşabilirsiniz.</p>
 {% endifnotequal %}
 {% else %}
-    <p><img src="{{ ezine.image.file.url }}" alt="{{ ezine.title }}" align="left" style="width:250px"/> <span style="font-size: x-large;">{{ ezine.title|safe }}</span></p>
+    <p style="margin-top:30px"><img src="{{ ezine.image.file.url }}" alt="{{ ezine.title }}" align="left" style="width:250px"/> <span style="font-size: x-large;">{{ ezine.title|safe }}</span></p>
     <p><strong> Editör:</strong> {{ ezine.editor }}</p>
-    <p>&nbsp;</p>
     <h3>İndir:</h3>
     <p><a href="{{ ezine.download_300dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" alt="indir" /> 300 dpi ({{ ezine.size_300dpi|filesizeformat }})</a> <a href="{{ ezine.download_96dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" alt="indir" /> 96 dpi ({{ ezine.size_96dpi|filesizeformat }})</a></p>
     <div class="ezine_toggle" onclick="$(this).next().toggle()"><span>Dergi içeriğini göster/gizle</span><img src="/media/img/new/button_toggle.png" alt="[Gizle/Göster]" /></div>
-    <div class="ezine_content" style="display:none">{{ ezine.description|safe }}</div>
+    <div class="ezine_content">{{ ezine.description|safe }}</div>
 {% endif %}
 {% endfor %}
 </div>
 {% endblock %}
+{% block ezine %}{% endblock %}

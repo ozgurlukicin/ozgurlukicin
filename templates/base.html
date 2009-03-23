@@ -88,10 +88,12 @@ class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabil
         <div id="sidebar_bottom">
             {% block sidebar_bottom_top %}
             {% endblock %}
+            {% block ezine %}
             <div class="sidebar_bottom_content">
                 <a href="/e-dergi/"><img src="/media/img/oi-edergi-11-kapak.png" alt="e-dergi" /></a>
                 <p>Özgürlükiçin'in şimdi bir de e-dergisi var! Okumak için <a href="/e-dergi/">buraya</a> tıklayın.</p>
             </div>
+            {% endblock %}
             {% block petition %}{% petition_box %}{% endblock %}
             {% block sidebar_bottom_bottom %}
             {% endblock %}
