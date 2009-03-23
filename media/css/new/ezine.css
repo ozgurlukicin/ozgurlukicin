@@ -1,12 +1,21 @@
-#ezine #img {
-    margin: 5px;
-    float: left;
+.ezine_toggle {
+    background: transparent url(/media/img/new/forum_category_bg.png) repeat-x scroll 0 0;
+    line-height: 30px;
+    height: 30px;
+    width: 626px;
+    padding-left: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 1px;
+    clear: both;
 }
-#ezine hr {
-    border: 1px solid #eee;
-    margin: 10px;
+.ezine_toggle img {
+    float: right;
+    position: relative;
+    top: -25px;
+    right: 10px;
 }
-#ezine .content {
-    clear: left;
-    margin-left : 20px;
+.ezine_content {
+    display: none;
+    clear: both;
 }

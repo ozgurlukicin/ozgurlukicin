@@ -2,6 +2,7 @@
 {% block title %}E-Dergi -  {% endblock %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/ezine.css');</style>
 {% endblock %}
 {% block content %}
 <div class="page_title">Özgürlükİçin e-dergi yayında!</div>
@@ -28,7 +29,7 @@
     <p>&nbsp;</p>
     <h3>İndir:</h3>
     <p><a href="{{ ezine.download_300dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" alt="indir" /> 300 dpi ({{ ezine.size_300dpi|filesizeformat }})</a> <a href="{{ ezine.download_96dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" alt="indir" /> 96 dpi ({{ ezine.size_96dpi|filesizeformat }})</a></p>
-    <p style="clear:left;"><a style="cursor:pointer" onclick="$(this).parent().next().toggle()">Dergi içeriğini göster/gizle</a></p>
+    <div class="ezine_toggle" onclick="$(this).next().toggle()"><span>Dergi içeriğini göster/gizle</span><img src="/media/img/new/button_toggle.png" alt="[Gizle/Göster]" /></div>
     <div class="ezine_content" style="display:none">{{ ezine.description|safe }}</div>
 {% endif %}
 {% endfor %}
