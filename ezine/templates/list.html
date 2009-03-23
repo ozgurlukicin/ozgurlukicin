@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load library %}
 {% block title %}E-Dergi -  {% endblock %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
@@ -24,7 +23,7 @@
     <p>Özgürlükİçin topluluğu tarafından hazırlanan "Özgürlükİçin e-dergi"nin eski sayılarına aşağıdan ulaşabilirsiniz.</p>
 {% endifnotequal %}
 {% else %}
-    <p><img src="{{ ezine.image.file.name|thumbnail:"250x200" }}" alt="{{ ezine.title }}" align="left" /> <span style="font-size: x-large;">{{ ezine.title|safe }}</span></p>
+    <p><img src="{{ ezine.image.file.url }}" alt="{{ ezine.title }}" align="left" style="width:250px"/> <span style="font-size: x-large;">{{ ezine.title|safe }}</span></p>
     <p><strong> Editör:</strong> {{ ezine.editor }}</p>
     <p>&nbsp;</p>
     <h3>İndir:</h3>
