@@ -21,7 +21,7 @@
     <div class="first_ezine_content" style="clear:left;">{{ ezine.description|safe }}</div>
 {% ifnotequal ezines.count 1 %}
     <hr />
-    <p>Özgürlükİçin topluluğu tarafından hazırlanan "Özgürlükİçin e-dergi"nin eski sayılarına aşağıdan ulaşabilirsiniz.</p>
+    <p style="margin-top:20px">Özgürlükİçin topluluğu tarafından hazırlanan "Özgürlükİçin e-dergi"nin eski sayılarına aşağıdan ulaşabilirsiniz.</p>
 {% endifnotequal %}
 {% else %}
     <p style="margin-top:30px"><img src="{{ ezine.image.file.url }}" alt="{{ ezine.title }}" align="left" style="width:250px"/> <span style="font-size: large;">{{ ezine.title|safe }}</span></p>
