@@ -8,7 +8,7 @@
 <div class="page_title">Özgürlükİçin e-dergi yayında!</div>
 <div class="page_content">
 {% ifnotequal ezines.count 1 %}
-    <p><a href="http://www.ozgurlukicin.com/">Özgürlükİçin</a> topluluğu tarafından hazırlanan "<strong>Özgürlükİçin e-dergi</strong> "nin {{ ezine.issue }}. sayısı yayımlandı. Yola çıktığı günden bugüne koskocaman bir yayına dönüşen e-dergimiz bu ay tam <strong>{{ ezine.page_count }} sayfa</strong> olarak sitemizde yerini aldı.</p>
+    <p><a href="http://www.ozgurlukicin.com/">Özgürlükİçin</a> topluluğu tarafından hazırlanan "<strong>Özgürlükİçin e-dergi</strong> "nin {{ ezines.0.issue }}. sayısı yayımlandı. Yola çıktığı günden bugüne koskocaman bir yayına dönüşen e-dergimiz bu ay tam <strong>{{ ezines.0.page_count }} sayfa</strong> olarak sitemizde yerini aldı.</p>
     <p>E-derginin içeriği ise şöyle:</p>
 {% endifnotequal %}
 {% for ezine in ezines %}
