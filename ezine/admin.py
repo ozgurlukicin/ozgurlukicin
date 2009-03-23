@@ -7,7 +7,7 @@
 
 from django.contrib import admin
 
-from oi.ezine.models import Ezine 
+from oi.ezine.models import Ezine
 from oi.st.tags import Tag
 
 class EzineAdmin(admin.ModelAdmin):
