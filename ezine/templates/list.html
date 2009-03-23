@@ -13,7 +13,7 @@
 {% endifnotequal %}
 {% for ezine in ezines %}
 {% if forloop.first %}
-    <p><img src="{{ ezine.image.file.url }}" alt="{{ ezine.title }}" align="left"> <span style="font-size: x-large;">{{ ezine.title }}</span></p>
+    <p><img src="{{ ezine.image.file.url }}" alt="{{ ezine.title }}" align="left"> <span style="font-size: x-large;">{{ ezine.title|safe }}</span></p>
     <p><strong> Editör:</strong> {{ ezine.editor }}</p>
     <p>&nbsp;</p>
     <h3>İndir:</h3>
@@ -25,7 +25,7 @@
     <p>Özgürlükİçin topluluğu tarafından hazırlanan "Özgürlükİçin e-dergi"nin eski sayılarına aşağıdan ulaşabilirsiniz.</p>
 {% endifnotequal %}
 {% else %}
-    <p><img id="img" src="{{ ezine.image.file.name|thumbnail:"250x200" }}" alt="{{ ezine.title }}" /> <span style="font-size: x-large;">{{ ezine.title }}</span></p>
+    <p><img id="img" src="{{ ezine.image.file.name|thumbnail:"250x200" }}" alt="{{ ezine.title }}" /> <span style="font-size: x-large;">{{ ezine.title|safe }}</span></p>
     <p><strong> Editör:</strong> {{ ezine.editor }}</p>
     <p>&nbsp;</p>
     <h3>İndir:</h3>
