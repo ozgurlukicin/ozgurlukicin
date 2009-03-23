@@ -24,7 +24,7 @@
     <p>Özgürlükİçin topluluğu tarafından hazırlanan "Özgürlükİçin e-dergi"nin eski sayılarına aşağıdan ulaşabilirsiniz.</p>
 {% endifnotequal %}
 {% else %}
-    <p style="margin-top:30px"><img src="{{ ezine.image.file.url }}" alt="{{ ezine.title }}" align="left" style="width:250px"/> <span style="font-size: x-large;">{{ ezine.title|safe }}</span></p>
+    <p style="margin-top:30px"><img src="{{ ezine.image.file.url }}" alt="{{ ezine.title }}" align="left" style="width:250px"/> <span style="font-size: large;">{{ ezine.title|safe }}</span></p>
     <p><strong> Editör:</strong> {{ ezine.editor }}</p>
     <h3>İndir:</h3>
     <p><a href="{{ ezine.download_300dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" alt="indir" /> 300 dpi ({{ ezine.size_300dpi|filesizeformat }})</a> <a href="{{ ezine.download_96dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" alt="indir" /> 96 dpi ({{ ezine.size_96dpi|filesizeformat }})</a></p>
