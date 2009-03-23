@@ -18,7 +18,7 @@
     <p>&nbsp;</p>
     <h3>İndir:</h3>
     <p><a href="{{ ezine.download_300dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" alt="indir" /> 300 dpi ({{ ezine.size_300dpi|filesizeformat }})</a> <a href="{{ ezine.download_96dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" alt="indir" /> 96 dpi ({{ ezine.size_96dpi|filesizeformat }})</a></p>
-    <div class="ezine_content" style="clear:left;">{{ ezine.description|safe }}</div>
+    <div class="first_ezine_content" style="clear:left;">{{ ezine.description|safe }}</div>
 {% ifnotequal ezines.count 1 %}
     <hr />
     <p>Özgürlükİçin topluluğu tarafından hazırlanan "Özgürlükİçin e-dergi"nin eski sayılarına aşağıdan ulaşabilirsiniz.</p>
