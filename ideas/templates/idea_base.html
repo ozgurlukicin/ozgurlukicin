@@ -45,6 +45,15 @@
 class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.</p>
             {% endif %}
         </div>
+        <div class="sidebar_content">
+            <h2>Ara</h2>
+            <form method="post" action="/gelismisarama/">
+                <input type="text" name="term" size="20" /><br />
+                <input type="image" src="/media/img/new/button_search.png" value="Ara" />
+                <input type="hidden" name="search_in" value="3" />
+                <input type="hidden" name="depth" value="0" />
+            </form>
+        </div>
         {% block extrasidemenu %}
 <div class="brainmenu">
     <h2>Yeni Fikirler</h2>
@@ -72,15 +81,6 @@ class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabil
     </ul>
 </div>
         {% endblock %}
-        <div class="sidebar_content">
-            <h2>Ara</h2>
-            <form method="post" action="/gelismisarama/">
-                <input type="text" name="term" size="20" /><br />
-                <input type="image" src="/media/img/new/button_search.png" value="Ara" />
-                <input type="hidden" name="search_in" value="2" />
-                <input type="hidden" name="depth" value="0" />
-            </form>
-        </div>
         <div class="sidebar_content">
             <a href="/dukkan/"><img src="/media/img/new/tshirt.png" alt="t-shirt" /></a>
         </div>

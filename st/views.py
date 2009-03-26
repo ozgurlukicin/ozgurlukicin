@@ -21,6 +21,7 @@ from oi.st.tags import Tag
 from oi.st.wrappers import render_response
 from oi.flatpages.models import FlatPage
 from oi.seminar.models import Seminar
+from oi.ideas.models import Idea
 
 #for comments
 from django.contrib.auth.decorators import login_required
@@ -137,9 +138,11 @@ def advanced_search(request):
             tags = Tag.objects.filter(name__icontains=term)[:50]
 
             if depth == 0:
-                if search_in != 1:
+                if search_in == 0 or search_in == 2:
                     topics = Topic.objects.filter(title__icontains=term, hidden=False)[:50]
-                if search_in != 0:
+                if search_in == 3 or search_in == 2:
+                    ideas = Idea.objects.filter(title__icontains=term, is_hidden=False).order_by('-vote_count')[:50]
+                if search_in == 1 or search_in == 2:
                     news = News.objects.filter(title__icontains=term, status=True).order_by('-update')[:50]
                     packages = Package.objects.filter(title__icontains=term, status=True).order_by('-update')[:50]
                     games = Game.objects.filter(title__icontains=term, status=True).order_by('-update')[:50]
@@ -147,9 +150,11 @@ def advanced_search(request):
                     howto = HowTo.objects.filter(title__icontains=term, status=True).order_by('-update')[:50]
                     flatpages = FlatPage.objects.filter(title__icontains=term)[:50]
             else:
-                if search_in != 1:
+                if search_in == 0 or search_in == 2:
                     posts = Post.objects.filter(text__icontains=term, hidden=False).order_by("-created")[:50]
-                if search_in != 0:
+                if search_in == 3 or search_in == 2:
+                    ideas = Idea.objects.filter(Q(title__icontains=term)|Q(description__icontains=term)).filter(is_hidden=False).order_by('-vote_count')[:50]
+                if search_in == 1 or search_in == 2:
                     news = News.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).filter(status=True).order_by('-update')[:50]
                     packages = Package.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).filter(status=True).order_by('-update')[:50]
                     games = Game.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).filter(status=True).order_by('-update')[:50]

@@ -13,7 +13,7 @@
 <input type="submit" value="Sonuçları göster" />
 </form>
 {% if searched %}
-<br /><div class="page_title">{{ term }} kelimesini içeren sayfa{% if tags or topics or posts or news or packages or games or fs or howto or flatpages %}lar{% else %} bulunamadı.{% endif %}</div>
+<br /><div class="page_title">{{ term }} kelimesini içeren sayfa{% if tags or topics or posts or news or packages or games or fs or howto or ideas or flatpages %}lar{% else %} bulunamadı.{% endif %}</div>
 {% ifnotequal total 0 %}
 <div class="searchresults">
     {% if tags %}
@@ -76,6 +76,17 @@
             <ul>
             {% for obj in games %}
                 <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.sum|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if ideas %}
+        <div class="ideas">
+            <div class="title"><span>Yeni Fikirler ({{ ideas.count }} adet)</span></div>
+            <ul>
+            {% for obj in ideas %}
+            <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }} | {{ obj.vote_count }} puan | {{ obj.category }} kategorisinde</a><br />{{ obj.description|striptags|truncatewords:23 }}</li>
             {% endfor %}
             </ul>
         </div>
