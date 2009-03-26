@@ -86,7 +86,7 @@
             <div class="title"><span>Yeni Fikirler ({{ ideas.count }} adet)</span></div>
             <ul>
             {% for obj in ideas %}
-            <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }} | {{ obj.vote_count }} puan | {{ obj.category }} kategorisinde</a><br />{{ obj.description|striptags|truncatewords:23 }}</li>
+            <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }} | {{ obj.vote_count }} puan | {{ obj.category }}</a><br />{{ obj.description|striptags|truncatewords:23 }}</li>
             {% endfor %}
             </ul>
         </div>
