@@ -35,7 +35,7 @@
         <li{% if not forloop.last %} style="border-bottom:1px solid #EAEAEA;padding-bottom:5px;margin-bottom:5px;"{% endif %}>
         <div><span class="bold">{{ sem.start_date|date:"d F Y H.i" }}{% if sem.end_date %} - {{ sem.end_date|date:"d F Y H.i" }}{% endif %}</span></div>
             <div>{{ sem.description }}</div>
-            <div><span class="bold">Yer:</span> <a href="{{ sem.get_absolute_url }}" target="_blank">{{ sem.place.name }}</a></div>
+            <div><span class="bold">Yer:</span> <a onclick="window.open('{{ sem.get_absolute_url }}','{{ sem.place.name }}','toolbar=no,width=620,height=580')" style="cursor:pointer">{{ sem.place.name }}</a></div>
             <div><span class="bold">Konuşmacılar:</span> {% for att in sem.attender.all %}{% if forloop.last %}{% if att.user %}<a href="{{ att.user.get_profile.get_absolute_url }}">{% endif %}{{ att.name }}{% if att.user %}</a>{% endif %}{% else %}{% if att.user %}<a href="{{ att.user.get_profile.get_absolute_url }}">{% endif %}{{ att.name }}{% if att.user %}</a>{% endif %}, {% endif %}{% endfor %}</div>
         </li>
         {% endfor %}
