@@ -52,6 +52,12 @@ class Forum_Rss(RSS):
             post.title = post.topic.title
         return objects
 
+    def title(self, obj):
+        return "%s %s forumu" % (SITE_NAME, obj.name)
+
+    def description(self, obj):
+        return obj.description
+
 class Forum_Atom(Forum_Rss):
     feed_type = Atom1Feed
     subtitle = Forum_Rss.description
