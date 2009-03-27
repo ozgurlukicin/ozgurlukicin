@@ -12,7 +12,7 @@ from oi.settings import SITE_NAME, WEB_URL, SITE_DESC
 
 from django.contrib.syndication.feeds import FeedDoesNotExist
 from django.core.exceptions import ObjectDoesNotExist
-from oi.forum.models import Topic,Post
+from oi.forum.models import Forum,Topic,Post
 from oi.st.tags import Tag
 
 
@@ -41,6 +41,20 @@ class RSS(Feed):
 class Atom(RSS):
     feed_type = Atom1Feed
     subtitle = RSS.description
+
+class Forum_Rss(RSS):
+    def get_object(self, bits):
+        return Forum.objects.get(slug=bits[0])
+
+    def items(self, obj):
+        objects = Post.objects.filter(hidden=False, topic__forum=obj).order_by('-edited')[:40]
+        for post in objects:
+            post.title = post.topic.title
+        return objects
+
+class Forum_Atom(Forum_Rss):
+    feed_type = Atom1Feed
+    subtitle = Forum_Rss.description
 
 class Topic_Rss(Feed):
     """ Acilan forumlara gore"""

@@ -274,6 +274,9 @@ class Forum(models.Model):
     def get_absolute_url(self):
         return '/forum/%s/' % self.slug
 
+    def get_rss_url(self):
+        return "/forum/rss/forum/&s/" % self.slug
+
     def get_latest_post_url(self):
         import oi.forum.settings
 

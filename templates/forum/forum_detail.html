@@ -1,6 +1,7 @@
 {% extends "forum/forum_base.html" %}
 {% load library %}
 {% block extrahead %}
+    <link rel="alternate" type="application/rss+xml" title="{{ forum.name }} - Özgürlükİçin Forum" href="{{ forum.get_rss_url }}" />
     {% for topic in topic_list %}
     {% if not topic.hidden %}<link rel="alternate" type="application/rss+xml" title="{{topic.title}} - Özgürlükİçin Forum" href="/forum/rss/topic/{{ topic.id }}" />{% endif %}
     {% endfor %}

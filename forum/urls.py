@@ -12,12 +12,14 @@ from oi.forum.models import Post
 rss_dict = {
             'post': RSS,
             'topic': Topic_Rss,
+            'forum': Forum_Rss,
             'tag': Tag_Rss,
             }
 
 atom_dict = {
             'post': Atom,
             'topic': Topic_Atom,
+            'forum': Forum_Atom,
             'tag': Tag_Atom,
             }
 
