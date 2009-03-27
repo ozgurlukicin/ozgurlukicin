@@ -269,6 +269,7 @@ class Forum(models.Model):
     posts = models.IntegerField(default=0, verbose_name='İleti sayısı')
     forum_latest_post = models.ForeignKey(Post, blank=True, null=True, related_name='forum_latest_post', verbose_name='Son ileti')
     order = models.PositiveIntegerField(verbose_name='Sıralama')
+    is_published = models.BooleanField(blank=True, default=True, verbose_name="Yayınlanacak", help_text="Forum içeriğinin son iletilerde ve genel RSS'te yayınlanacağını belirler.")
 
     def get_absolute_url(self):
         return '/forum/%s/' % self.slug

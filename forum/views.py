@@ -68,7 +68,7 @@ def main(request):
 
     usercount = User.objects.count()
     currentdate = datetime.now()
-    latest_posts = Topic.objects.filter(topic_latest_post__hidden=False).order_by("topic_latest_post").distinct()[:5]
+    latest_posts = Topic.objects.filter(topic_latest_post__hidden=False, forum__is_published=True).order_by("topic_latest_post").distinct()[:5]
     if request.user.has_perm("forum.can_change_abusereport"):
         abuse_count = AbuseReport.objects.count()
 
@@ -105,7 +105,7 @@ def forum(request, forum_slug):
                        allow_empty = True)
 
 def latest_posts(request):
-    posts = Post.objects.filter(hidden=False).order_by('-created')[:NUMBER_OF_LATEST_POSTS]
+    posts = Post.objects.filter(hidden=False, topic__forum__is_published=True).order_by('-created')[:NUMBER_OF_LATEST_POSTS]
     abuse_count = 0
     if request.user.has_perm("forum.can_change_abusereport"):
         abuse_count = AbuseReport.objects.count()
@@ -119,7 +119,7 @@ def latest_posts(request):
 
 def latest_topics(request):
     lastvisit_control(request)
-    topics = Topic.objects.filter(topic_latest_post__hidden=False).order_by("topic_latest_post").distinct()[:NUMBER_OF_LATEST_TOPICS]
+    topics = Topic.objects.filter(topic_latest_post__hidden=False, forum__is_published=True).order_by("topic_latest_post").distinct()[:NUMBER_OF_LATEST_TOPICS]
 
     if request.user.is_authenticated():
         for topic in topics:

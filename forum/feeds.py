@@ -24,7 +24,7 @@ class RSS(Feed):
     description_template = 'forum/feed_description.html'
 
     def items(self):
-        objects = Post.objects.filter(hidden=0).order_by('-edited')[:120]
+        objects = Post.objects.filter(hidden=0, topic__forum__is_published=True).order_by('-edited')[:120]
         for post in objects:
             post.title = post.topic.title
         return objects
