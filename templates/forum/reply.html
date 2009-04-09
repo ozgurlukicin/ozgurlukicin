@@ -15,10 +15,7 @@
 <form action="" method="post">
 {% if quote_id %}<input type="hidden" name="quote_id" value="{{ quote_id }}" />{% endif %}
 {% for field in form %}
-    <dl>
-        <dt><label for="{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
-        <dd>{{ field|safe }}</dd>
-    </dl>
+    {% include "formfields.html" %}
 {% endfor %}
 <input type="submit" value="Yanıtla" />
 </form>
