@@ -2,6 +2,8 @@
 {% load library %}
 
 {% block title %}{{ howto.title }} - Nasıl - {% endblock %}
+{% block metadescription %}{{ howto.sum|safe|striptags|cut:"\"" }}{% endblock %}
+{% block metakeywords %}{% for tag in howto.tags.all %}{{ tag.name }}{% if not forloop.last %},{% endif %}{% endfor %}{% endblock %}
 
 {% block extrahead %}
     <style type="text/css" media="screen">@import url('/media/css/new/article.css');</style>
