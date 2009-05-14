@@ -2,6 +2,8 @@
 {% load library %}
 
 {% block title %}{{ game.title }} - Oyunlar - {% endblock %}
+{% block metadescription %}{{ game.sum|safe|striptags|cut:"\"" }}{% endblock %}
+{% block metakeywords %}{% for tag in game.tags.all %}{{ tag.name }}{% if not forloop.last %},{% endif %}{% endfor %}{% endblock %}
 
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/article.css');</style>
