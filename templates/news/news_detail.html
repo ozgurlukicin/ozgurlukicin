@@ -2,8 +2,8 @@
 {% load library %}
 
 {% block title %}{{ news.title }} - Haberler - {% endblock %}
-{% block metadescription %}<meta name="description" content="{{ news.sum|safe|striptags|cut:"\"" }}" />{% endblock %}
-{% block metakeywords %}<meta name="keywords" content="pardus,linux,{% for tag in news.tags.all %}{{ tag.name }}{% if not forloop.last %},{% endif %}{% endfor %}" />{% endblock %}
+{% block metadescription %}{{ news.sum|safe|striptags|cut:"\"" }}{% endblock %}
+{% block metakeywords %}{% for tag in news.tags.all %}{{ tag.name }}{% if not forloop.last %},{% endif %}{% endfor %}{% endblock %}
 {% block extrahead %}
 <style media="screen" type="text/css">@import url('/media/css/new/article.css');</style>
 <style media="screen" type="text/css">@import url('/media/css/new/st.css');</style>
