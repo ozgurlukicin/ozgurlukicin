@@ -7,7 +7,7 @@
 
 from django.contrib import admin
 
-from oi.st.models import Wiki, Contribute, OtherFile, ScreenShot, Video, License, FS, HowTo, Game, News, Package, PardusVersion, PardusMirror
+from oi.st.models import Wiki, Contribute, OtherFile, ScreenShot, Video, License, FS, HowTo, Workshop, Game, News, Package, PardusVersion, PardusMirror
 from oi.st.tags import Tag
 
 class StSimpleAdmin(admin.ModelAdmin):
@@ -45,6 +45,13 @@ class HowToAdmin(ArticleAdmin):
         ('Genel', {'fields': ('author', 'title', 'image', 'sum', 'text', 'videos', 'tags', 'wiki', 'update', 'status',)}),
         ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
     )
+
+class WorkshopAdmin(ArticleAdmin):
+    fieldsets = (
+        ('Genel', {'fields': ('author', 'title', 'image', 'sum', 'text', 'tags', 'update', 'status',)}),
+        ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
+    )
+
 
 class GameAdmin(ArticleAdmin):
     fieldsets = (
@@ -85,6 +92,7 @@ admin.site.register(ScreenShot, FileAdmin)
 admin.site.register(Video, FileAdmin)
 admin.site.register(FS, FSAdmin)
 admin.site.register(HowTo, HowToAdmin)
+admin.site.register(Workshop, WorkshopAdmin)
 admin.site.register(Game, GameAdmin)
 admin.site.register(News, NewsAdmin)
 admin.site.register(Package, PackageAdmin)

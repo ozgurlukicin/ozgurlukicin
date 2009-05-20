@@ -16,7 +16,7 @@ from oi.settings import WEB_URL, NEWS_IN_HOMEPAGE, PACKAGES_IN_HOMEPAGE, GAMES_I
 
 from oi.st.forms import SearchForm,AdvancedSearchForm
 
-from oi.st.models import News, Package, Game, HowTo, FS, PardusVersion, PardusMirror
+from oi.st.models import News, Package, Game, HowTo, Workshop, FS, PardusVersion, PardusMirror
 from oi.st.tags import Tag
 from oi.st.wrappers import render_response
 from oi.flatpages.models import FlatPage
@@ -57,6 +57,15 @@ def howto_detail(request, slug):
 def howto_printable(request, slug):
     howto = get_object_or_404(HowTo, slug=slug)
     return render_response(request, 'howto/howto_printable.html', locals())
+
+def workshop_detail(request, slug):
+    workshop = get_object_or_404(Workshop, slug=slug)
+    form = PostForm()
+    return render_response(request, 'workshop/workshop_detail.html', locals())
+
+def workshop_printable(request, slug):
+    workshop = get_object_or_404(Workshop, slug=slug)
+    return render_response(request, 'workshop/workshop_printable.html', locals())
 
 def game_detail(request, slug):
     game = get_object_or_404(Game, slug=slug)

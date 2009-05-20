@@ -171,6 +171,35 @@ class FS(models.Model):
         verbose_name = "İlk Adım"
         verbose_name_plural = "İlk Adımlar"
 
+class Workshop(models.Model):
+    title = models.CharField('Başlık', max_length=32, blank=False)
+    slug = models.SlugField('SEF Başlık')
+    sum = models.TextField('Özet', blank=False)
+    image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
+    text = models.TextField('Metin', blank=False)
+    tags = models.ManyToManyField(Tag, blank=False)
+    update = models.DateTimeField('Son Güncelleme', blank=False)
+    author = models.CharField('Yazar', max_length=32)
+    status = models.BooleanField('Aktif')
+    topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
+
+    def __unicode__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return "/atolye/%s/" % self.slug
+
+    def get_printable_url(self):
+        return "/atolye/%s/yazdir/" % self.slug
+
+    def save(self):
+        create_forum_topic(self, "Atölye")
+        super(Workshop, self).save()
+
+    class Meta:
+        verbose_name = "Atölye"
+        verbose_name_plural = "Atölye Belgeleri"
+
 class HowTo(models.Model):
     title = models.CharField('Başlık', max_length=32, blank=False)
     slug = models.SlugField('SEF Başlık')

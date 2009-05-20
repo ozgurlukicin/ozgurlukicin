@@ -7,8 +7,8 @@
 
 from django.conf.urls.defaults import *
 
-from oi.settings import WEB_URL, DOCUMENT_ROOT, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, NEWS_PER_PAGE, TAG_PER_PAGE, HOWTO_PER_PAGE
-from oi.st.models import Package, Game, FS, News, HowTo
+from oi.settings import WEB_URL, DOCUMENT_ROOT, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, NEWS_PER_PAGE, TAG_PER_PAGE, HOWTO_PER_PAGE, WORKSHOP_PER_PAGE
+from oi.st.models import Package, Game, FS, News, HowTo, Workshop
 from oi.st.tags import Tag
 from oi.seminar.models import Seminar
 from oi.st.feeds import *
@@ -66,6 +66,13 @@ howto_dict = {
                   },
              }
 
+workshop_dict = {
+             'queryset': Workshop.objects.filter(status=True).order_by('title'),
+             'template_name': 'workshop/workshop_main.html',
+             'paginate_by': WORKSHOP_PER_PAGE,
+             'template_object_name': 'workshop',
+            }
+
 news_dict = {
              'queryset': News.objects.filter(status=True).order_by('-update'),
              'template_name': 'news/news_main.html',
@@ -120,6 +127,11 @@ urlpatterns = patterns('',
     (r'^nasil/$', 'django.views.generic.list_detail.object_list', dict(howto_dict)),
     (r'^nasil/(?P<slug>.*)/yazdir/$', 'oi.st.views.howto_printable'),
     (r'^nasil/(?P<slug>.*)/$', 'oi.st.views.howto_detail'),
+
+    #Workshop
+    (r'^atolye/$', 'django.views.generic.list_detail.object_list', dict(workshop_dict)),
+    (r'^atolye/(?P<slug>.*)/yazdir/$', 'oi.st.views.workshop_printable'),
+    (r'^atolye/(?P<slug>.*)/$', 'oi.st.views.workshop_detail'),
 
     #Games
     (r'^oyun/$', 'django.views.generic.list_detail.object_list', dict(game_dict)),
