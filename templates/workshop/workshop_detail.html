@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load library %}
+
+{% block title %}{{ workshop.title }} - Atölye - {% endblock %}
+{% block metadescription %}{{ workshop.sum|safe|striptags|cut:"\"" }}{% endblock %}
+{% block metakeywords %}{% for tag in workshop.tags.all %}{{ tag.name }}{% if not forloop.last %},{% endif %}{% endfor %}{% endblock %}
+
+{% block extrahead %}
+    <style type="text/css" media="screen">@import url('/media/css/new/article.css');</style>
+    <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+{% if user.is_authenticated %}
+    <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
+    <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="page_title">{{ workshop.title }}</div>
+<div class="page_content">
+{{ workshop.text|safe }}
+</div>
+<div style="float:right; margin-right:10px"><a href="{{ workshop.topic.get_latest_post_url }}">{{ workshop.topic.posts|add:"-1" }} yorum</a> <a href="{{ workshop.topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a></div>
+<p>
+{% if user.is_authenticated %}
+    {% if form %}
+        <form method="post" action="{{ workshop.topic.get_reply_url }}">
+            {{ form }}
+            <br />
+            <input type="submit" value="Gönder" />
+        </form>
+    {% endif %}
+{% endif %}
+</p>
+<div class="page_printable"><a href="{{ workshop.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
+<div class="page_last_update">Son güncelleme: {{ workshop.update|date:"d F Y" }}</div>
+
+{% endblock %}
+
+{% block leftcolumn %}
+<div class="sidebarcolumn leftcolumn">
+    <div class="leftcolumn_content">
+        <h2>Etiketler</h2>
+        <p><img src="/media/img/new/tag.png" style="vertical-align: middle;" /> {% for tag in workshop.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if forloop.last %}{% else %},{% endif %} {% endfor %}
+        </p>
+    </div>
+    <div class="leftcolumn_content">
+        <h2>Yazar</h2>
+        <p>{{ workshop.author }}</p>
+    </div>
+    <div class="leftcolumn_content">
+        <h2>Katkıda bulunun</h2>
+        <p>Nasıl bölümüne katkıda bulunmak istiyorsanız <a href="/katki/nasil/">buraya</a> tıklayarak size kılavuzluk edecek sayfaya gidebilirsiniz.</p>
+    </div>
+</div>
+{% endblock %}
