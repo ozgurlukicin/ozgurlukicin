@@ -17,10 +17,7 @@ import sys
 
 import feedparser
 
-try:
-    import threadpool
-except ImportError:
-    threadpool = None
+threadpool = None
 
 VERSION = '0.9.16'
 URL = 'http://www.feedjack.org/'
