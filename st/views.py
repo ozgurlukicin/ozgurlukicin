@@ -157,6 +157,7 @@ def advanced_search(request):
                     games = Game.objects.filter(title__icontains=term, status=True).order_by('-update')[:50]
                     fs = FS.objects.filter(title__icontains=term, status=True).order_by('-update')[:50]
                     howto = HowTo.objects.filter(title__icontains=term, status=True).order_by('-update')[:50]
+                    workshop = Workshop.objects.filter(title__icontains=term, status=True).order_by('-update')[:50]
                     flatpages = FlatPage.objects.filter(title__icontains=term)[:50]
             else:
                 if search_in == 0 or search_in == 2:
@@ -169,6 +170,7 @@ def advanced_search(request):
                     games = Game.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).filter(status=True).order_by('-update')[:50]
                     fs = FS.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).filter(status=True).order_by('-update')[:50]
                     howto = HowTo.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).filter(status=True).order_by('-update')[:50]
+                    workshop = Workshop.objects.filter(Q(title__icontains=term)|Q(text__icontains=term)).filter(status=True).order_by('-update')[:50]
                     flatpages = FlatPage.objects.filter(Q(title__icontains=term)|Q(text__icontains=term))[:50]
             searched = True
     else:

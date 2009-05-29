@@ -81,6 +81,17 @@
         </div>
     {% endif %}
 
+    {% if workshop %}
+        <div class="workshop">
+            <div class="title"><span>Atölye ({{ workshop.count }} adet)</span></div>
+            <ul>
+            {% for obj in workshop %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.sum|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
     {% if ideas %}
         <div class="ideas">
             <div class="title"><span>Yeni Fikirler ({{ ideas.count }} adet)</span></div>
