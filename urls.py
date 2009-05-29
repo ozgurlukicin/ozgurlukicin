@@ -13,7 +13,7 @@ from oi.st.tags import Tag
 from oi.seminar.models import Seminar
 from oi.st.feeds import *
 from django.contrib import admin
-from oi.st.sitemaps import NewsSitemap, HowToSitemap, PackageSitemap, GameSitemap, FSSitemap
+from oi.st.sitemaps import NewsSitemap, HowToSitemap, PackageSitemap, GameSitemap, FSSitemap, WorkshopSitemap
 
 admin.autodiscover()
 
@@ -96,6 +96,7 @@ sitemaps = {
         'game': GameSitemap,
         'package': PackageSitemap,
         'firststep': FSSitemap,
+        'workshop': WorkshopSitemap,
         }
 
 urlpatterns = patterns('',
