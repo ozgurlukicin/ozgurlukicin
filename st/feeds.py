@@ -8,8 +8,8 @@
 from django.contrib.syndication.feeds import Feed
 from django.utils.feedgenerator import Atom1Feed
 
-from oi.st.models import Game, FS, News, Package, HowTo
-from oi.settings import WEB_URL, SITE_NAME, SITE_DESC, NEWS_IN_HOMEPAGE, PACKAGES_IN_HOMEPAGE, GAMES_IN_HOMEPAGE, FS_IN_HOMEPAGE, HOWTOS_IN_HOMEPAGE, NEWS_PER_PAGE, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, HOWTO_PER_PAGE
+from oi.st.models import Game, FS, News, Package, HowTo, Workshop
+from oi.settings import WEB_URL, SITE_NAME, SITE_DESC, NEWS_IN_HOMEPAGE, PACKAGES_IN_HOMEPAGE, GAMES_IN_HOMEPAGE, FS_IN_HOMEPAGE, HOWTOS_IN_HOMEPAGE, NEWS_PER_PAGE, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, HOWTO_PER_PAGE, WORKSHOP_PER_PAGE
 
 class CommonFeed(Feed):
     link = WEB_URL
@@ -108,5 +108,17 @@ class Package_RSS(CommonFeed):
         return Package.objects.filter(status=1).order_by('-update')[:PACKAGE_PER_PAGE]
 
 class Package_Atom(Package_RSS):
+    feed_type = Atom1Feed
+    subtitle = Package_RSS.description
+
+class Workshop_RSS(CommonFeed):
+    title = SITE_NAME + " - Atölye"
+    title_template = 'feeds/feed_title.html'
+    description_template = 'feeds/feed_description.html'
+
+    def items(self):
+        return Workshop.objects.filter(status=1).order_by('-update')[:WORKSHOP_PER_PAGE]
+
+class Workshop_Atom(Workshop_RSS):
     feed_type = Atom1Feed
     subtitle = Package_RSS.description

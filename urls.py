@@ -24,6 +24,7 @@ rss_dict = {
             'oyun': Game_RSS,
             'paket': Package_RSS,
             'nasil': HowTo_RSS,
+            'atolye': Workshop_RSS,
            }
 
 atom_dict = {
@@ -33,6 +34,7 @@ atom_dict = {
              'oyun': Game_Atom,
              'paket': Package_Atom,
              'nasil': HowTo_Atom,
+             'atolye': Workshop_Atom,
             }
 
 package_dict = {
