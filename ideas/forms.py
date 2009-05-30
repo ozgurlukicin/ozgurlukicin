@@ -13,6 +13,12 @@ class NewIdeaForm(forms.ModelForm):
         model = Idea
         exclude = ('file',"submitter", "status", "vote_count", "duplicate", "is_hidden", "is_duplicate", "comment_count", "topic")
 
+    def clean_tags(self):
+        field_data = self.cleaned_data['tags']
+        if len(field_data) > 5:
+            raise forms.ValidationError("En fazla 5 etiket seçebilirsiniz. Lütfen açtığınız başlığa uygun etiket seçiniz.")
+        return field_data
+
 #    def __init__(self,*args,**kwargs):
 #        super(NewIdeaForm, self).__init__(*args, **kwargs)
 #        related_categories = RelatedCategory.objects.all()
