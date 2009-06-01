@@ -22,6 +22,7 @@ from django.db.models import signals
 from oi.st.tags import Tag
 from oi.st.signals import remove_video_thumbnail_on_delete
 from oi.upload.models import Image as Img
+from oi.upload.models import Logo
 
 FFMPEG_COMMAND = "ffmpeg"
 
@@ -174,6 +175,7 @@ class FS(models.Model):
 class Workshop(models.Model):
     title = models.CharField('Başlık', max_length=32, blank=False)
     slug = models.SlugField('SEF Başlık')
+    logo = models.ForeignKey(Logo, blank=True, null=True, help_text="114x114 boyutlarında olmalıdır")
     sum = models.TextField('Özet', blank=False)
     image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
     text = models.TextField('Metin', blank=False)

@@ -7,9 +7,10 @@
 
 from django.contrib import admin
 
-from oi.upload.models import Image
+from oi.upload.models import Image, Logo
 
 class ImageAdmin(admin.ModelAdmin):
     search_fields = ['file']
 
 admin.site.register(Image, ImageAdmin)
+admin.site.register(Logo, ImageAdmin)

@@ -24,3 +24,17 @@ class Image(models.Model):
     class Meta:
         verbose_name = "Görsel"
         verbose_name_plural = "Görseller"
+
+class Logo(models.Model):
+    file = models.ImageField("Görsel", upload_to='upload/image/')
+
+    def __unicode__(self):
+        return unicode(self.file)
+
+    def get_alt_string(self):
+        "returns file name without extension"
+        return ".".join(self.file.path.rsplit(".")[:-1])[self.file.path.rfind("/")+1:]
+
+    class Meta:
+        verbose_name = "Logo"
+        verbose_name_plural = "Logolar"

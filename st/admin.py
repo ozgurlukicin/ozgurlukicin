@@ -48,7 +48,7 @@ class HowToAdmin(ArticleAdmin):
 
 class WorkshopAdmin(ArticleAdmin):
     fieldsets = (
-        ('Genel', {'fields': ('author', 'title', 'image', 'sum', 'text', 'tags', 'update', 'status',)}),
+        ('Genel', {'fields': ('author', 'title', 'logo', 'image', 'sum', 'text', 'tags', 'update', 'status',)}),
         ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
     )
 
