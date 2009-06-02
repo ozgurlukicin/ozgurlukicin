@@ -60,6 +60,7 @@ def howto_printable(request, slug):
 
 def workshop_detail(request, slug):
     workshop = get_object_or_404(Workshop, slug=slug)
+    related_workshops = workshop.logo.workshop_set.filter(status=True).exclude(id=workshop.id)
     form = PostForm()
     return render_response(request, 'workshop/workshop_detail.html', locals())
 
