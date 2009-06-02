@@ -51,6 +51,8 @@ def fs_printable(request, slug):
 
 def howto_detail(request, slug):
     howto = get_object_or_404(HowTo, slug=slug)
+    if howto.logo:
+        related_howtos = howto.logo.howto_set.filter(status=True).exclude(id=howto.id)
     form=PostForm()
     return render_response(request, 'howto/howto_detail.html', locals())
 

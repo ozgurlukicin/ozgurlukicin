@@ -42,7 +42,7 @@ class FSAdmin(ArticleAdmin):
 
 class HowToAdmin(ArticleAdmin):
     fieldsets = (
-        ('Genel', {'fields': ('author', 'title', 'image', 'sum', 'text', 'videos', 'tags', 'wiki', 'update', 'status',)}),
+        ('Genel', {'fields': ('author', 'title', 'logo', 'image', 'sum', 'text', 'videos', 'tags', 'wiki', 'update', 'status',)}),
         ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
     )
 

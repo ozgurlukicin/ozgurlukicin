@@ -205,6 +205,7 @@ class Workshop(models.Model):
 class HowTo(models.Model):
     title = models.CharField('Başlık', max_length=32, blank=False)
     slug = models.SlugField('SEF Başlık')
+    logo = models.ForeignKey(Logo, blank=True, null=True, help_text="114x114 boyutlarında olmalıdır")
     sum = models.TextField('Özet', blank=False)
     image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
     text = models.TextField('Metin', blank=False)
