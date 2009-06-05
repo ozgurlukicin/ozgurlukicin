@@ -191,4 +191,5 @@ div.topic_news_box a {
 pre {
     width: 95%;
     overflow: auto;
+    margin-bottom: 10px;
 }
