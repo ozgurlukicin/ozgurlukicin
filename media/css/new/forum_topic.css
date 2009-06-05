@@ -188,3 +188,7 @@ div.topic_news_box a {
     padding: 0px;
     font-style: italic;
 }
+pre {
+    width: 95%;
+    overflow: auto;
+}

@@ -50,3 +50,7 @@
     margin-right: 10px;
     font-weight: bold;
 }
+pre {
+    width: 90%;
+    overflow: auto;
+}
