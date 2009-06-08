@@ -28,6 +28,26 @@
 <div class="category">
     <div class="titlebar"><h2>{{ forum }}</h2></div>
     <div class="forum_list">
+        {% for topic in general_topic_list %}
+
+        {% if topic.hidden and not perms.forum.can_see_hidden_topics %}
+        {% else %}
+
+        <div class="item topic_item" {% if topic.hidden %}style="opacity: 0.5;"{% endif %}>
+            <div class="icon"><a href="{{ topic.get_absolute_url }}"><img src="/media/img/new/forum/topic_sticky_locked.png" border="0" alt="Genel Duyuru" title="Genel Duyuru" /></a></div>
+            <div class="spacer">&nbsp;</div>
+            <div class="topic_title"><a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a>{% ifequal forum.slug "guncellenen-basliklar" %}<br />Forum: {{ topic.forum }}{% endifequal %}</div>
+            <div class="spacer">&nbsp;</div>
+            <div class="topics">{{ topic.posts }}</div>
+            <div class="spacer">&nbsp;</div>
+            <div class="posts">{{ topic.views }}</div>
+            <div class="spacer">&nbsp;</div>
+            <div class="lastpost">{{ topic.topic_latest_post.edited|date:"d F Y H:i" }}<br /><a href="/kullanici/profil/{{ topic.topic_latest_post.author }}" class="profile_link">{{ topic.topic_latest_post.author }}</a> <a href="{{ topic.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="iletiye git" border="0"/></a></div>
+            <div class="spacer">&nbsp;</div>
+            <div class="follow"><a href="/forum/rss/topic/{{ topic.id }}/"><img src="/media/img/new/rss.png" alt="RSS" /></a></div>
+        </div>
+        {% endif %}
+        {% endfor %}
         {% for topic in topic_list %}
 
         {% if topic.hidden and not perms.forum.can_see_hidden_topics %}

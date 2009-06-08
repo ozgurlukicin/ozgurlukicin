@@ -51,6 +51,7 @@ urlpatterns = patterns('',
     (r'^(?P<forum_slug>.*)/(?P<topic_id>\d+)/poll/change/$', 'oi.forum.views.change_poll'),
     (r'^(?P<forum_slug>.*)/(?P<topic_id>\d+)/poll/delete/$', 'oi.forum.views.delete_poll'),
     (r'^(?P<forum_slug>.*)/(?P<topic_id>\d+)/poll/vote/(?P<option_id>\d+)/$', 'oi.forum.views.vote_poll'),
+    (r'^(?P<forum_slug>.*)/(?P<topic_id>\d+)/togglegeneral/$', 'oi.forum.views.toggle_general_topic'),
     (r'^(?P<forum_slug>.*)/(?P<topic_id>\d+)/$', 'oi.forum.views.topic'),
     (r'^(?P<forum_slug>.*)/$', 'oi.forum.views.forum'),
 )

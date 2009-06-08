@@ -80,7 +80,8 @@ def forum(request, forum_slug):
     lastvisit_control(request)
 
     forum = get_object_or_404(Forum, slug=forum_slug)
-    topics = forum.topic_set.all().order_by('-sticky', 'topic_latest_post')
+    general_topics = Topic.objects.filter(general=True).order_by('-sticky', 'topic_latest_post')
+    topics = forum.topic_set.all().filter(general=False).order_by('-sticky', 'topic_latest_post')
 
     if request.user.is_authenticated():
         for topic in topics:
@@ -100,7 +101,7 @@ def forum(request, forum_slug):
     return customgeneric.object_list(request, topics,
                        template_name = 'forum/forum_detail.html',
                        template_object_name = 'topic',
-                       extra_context = {'forum': forum, 'abuse_count': abuse_count},
+                       extra_context = {'forum': forum, 'abuse_count': abuse_count, 'general_topic_list': general_topics},
                        paginate_by = TOPICS_PER_PAGE,
                        allow_empty = True)
 
@@ -1006,3 +1007,18 @@ def delete_poll(request, forum_slug, topic_id):
     topic.save()
     poll.delete()
     return HttpResponseRedirect(topic.get_absolute_url())
+
+@permission_required("forum.can_change_general", login_url="/kullanici/giris/")
+def toggle_general_topic(request, forum_slug, topic_id):
+    topic = get_object_or_404(Topic, pk=topic_id)
+    forum = topic.forum
+    if forum.slug != forum_slug:
+        return HttpResponseRedirect(topic.get_absolute_url())
+    if topic.general:
+        topic.general = False
+    else:
+        topic.locked = True
+        topic.general = True
+        topic.sticky = True
+    topic.save()
+    return HttpResponseRedirect(topic.forum.get_absolute_url())

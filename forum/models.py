@@ -156,6 +156,7 @@ class Topic(models.Model):
     sticky = models.BooleanField(blank=True, null=True, default=0, verbose_name='Sabit')
     locked = models.BooleanField(blank=True, null=True, default=0, verbose_name='Kilitli')
     hidden = models.BooleanField(blank=True, null=True, default=0, verbose_name='Gizli')
+    general = models.BooleanField(blank=True, null=True, default=False, verbose_name='Genel')
     posts = models.IntegerField(default=0, verbose_name='İleti sayısı')
     views = models.IntegerField(default=0, verbose_name='Görüntülenme sayısı')
     topic_latest_post = models.ForeignKey(Post, blank=True, null=True, related_name='topic_latest_post', verbose_name='Son ileti')
@@ -203,6 +204,9 @@ class Topic(models.Model):
     def get_change_poll_url(self):
         return '/forum/%s/%s/poll/change/' % (self.forum.slug, self.id)
 
+    def get_toggle_general_url(self):
+        return '/forum/%s/%s/togglegeneral/' % (self.forum.slug, self.id)
+
     def get_delete_poll_url(self):
         return '/forum/%s/%s/poll/delete/' % (self.forum.slug, self.id)
 
@@ -241,6 +245,7 @@ class Topic(models.Model):
                        ("can_move_topic", "Can move topic"),
                        ("can_create_poll", "Can create poll"),
                        ("can_change_poll", "Can change poll"),
+                       ("can_change_general", "Can change general topic"),
                       )
 
     def save(self):

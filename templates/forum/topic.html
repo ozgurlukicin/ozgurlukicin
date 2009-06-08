@@ -18,6 +18,9 @@
     {% if perms.forum.can_create_poll and not topic.poll %}
     <div class="notice"><a href="{{ topic.get_create_poll_url }}"><img src="/media/img/new/forum/button_add_poll.png" alt="anket ekle" /></a></div>
     {% endif %}
+    {% if perms.forum.can_change_general %}
+    <div class="notice"><a href="{{ topic.get_toggle_general_url }}">Duyuru Yap{% if topic.general %}ma{% endif %}</a></div>
+    {% endif %}
 </div>
 <div class="category">
     <div class="titlebar">
