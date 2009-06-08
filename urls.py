@@ -183,6 +183,9 @@ urlpatterns = patterns('',
     (r'^petition/', include('oi.petition.urls')),
     (r'^ooxml/', 'oi.petition.views.petition_sign'),
 
+    # Paste
+    (r'^yapistir/', include('oi.paste.urls')),
+
     # Ezine
     (r'^e-dergi/', include('oi.ezine.urls')),
 
