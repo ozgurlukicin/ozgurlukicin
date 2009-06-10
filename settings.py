@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     'oi.ezine',
     'oi.webalizer',
     'oi.editor',
+    'oi.paste',
 )
 
 CITY_LIST = (
