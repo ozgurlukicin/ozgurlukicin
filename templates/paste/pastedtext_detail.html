@@ -8,7 +8,8 @@
 <p>Bu metin yönetici tarafından gizlenmiştir.</p>
 {% if perms.paste.hide_pastedtext %}
 <a href="{{ paste.get_toggle_url }}">Göster</a>
-<pre style="width:615px;overflow:auto;margin-top:10px;border:1px solid #666;padding:5px">{{ paste.text }}</pre>
+<p>{{ paste.author }} tarafından {{ paste.date|date:"d F Y H:i" }} tarihinde gönderilmiş ve yönetici tarafından gizlenmiştir.</p>
+{{ paste.highlighted_text|safe }}
 {% endif %}
 {% else %}
 {% if perms.paste.hide_pastedtext %}<a href="{{ paste.get_toggle_url }}">Gizle</a>{% endif %}
