@@ -11,4 +11,4 @@ from oi.paste.models import PastedText
 class PastedTextForm(forms.ModelForm):
     class Meta:
         model = PastedText
-        exclude = ("author", "ip", "is_hidden")
+        exclude = ("author", "ip", "is_hidden", "highlighted_text")
