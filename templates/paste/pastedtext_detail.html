@@ -12,7 +12,7 @@
 {% endif %}
 {% else %}
 {% if perms.paste.hide_pastedtext %}<a href="{{ paste.get_toggle_url }}">Gizle</a>{% endif %}
-<p>{{ paste.author }} tarafından {{ paste.date }} tarihinde gönderilmiştir.</p>
+<p>{{ paste.author }} tarafından {{ paste.date|date:"d F Y H:i" }} tarihinde gönderilmiştir.</p>
 <p><a href="">Bu sayfaya bağlantı (sağ tıklayıp bağlantıyı kopyalayabilirsiniz)</a></p>
 {{ paste.highlighted_text|safe }}
 {% endif %}
