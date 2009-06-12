@@ -20,6 +20,7 @@
 {% if flood %}<font color="red">Flood koruması aktif, lütfen {{ timeout }} saniye bekleyin.</font>{% endif %}
 <form action="" method="post">
 <div class="wrapper">
+    <p style="padding-bottom:10px">Uzun bir metin ya da kod yazmanız gerekiyorsa <a href="/yapistir/" target="_blank">yapıştırma aracını</a> kullanabilirsiniz.</p>
 {% for field in form %}
     {% include "field.html" %}
 {% endfor %}

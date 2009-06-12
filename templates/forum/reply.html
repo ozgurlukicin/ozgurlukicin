@@ -13,6 +13,7 @@
 {% if user.is_authenticated %}
 {% if flood %}Flood koruması aktif, lütfen {{ timeout }} saniye bekleyin.{% endif %}
 <form action="" method="post">
+    <p style="padding:10px">Uzun bir metin ya da kod yazmanız gerekiyorsa <a href="/yapistir/" target="_blank">yapıştırma aracını</a> kullanabilirsiniz.</p>
 {% if quote_id %}<input type="hidden" name="quote_id" value="{{ quote_id }}" />{% endif %}
 {% for field in form %}
     {% include "formfields.html" %}
