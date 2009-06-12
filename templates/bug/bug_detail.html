@@ -17,6 +17,7 @@
 {% endfor %}
 </dl>
 <input type="submit" value="Değiştir" />
+<input type="button" value="Sil" onclick="window.location='{{ bug.get_delete_url }}'" />
 </form>
 </div>
 {% else %}

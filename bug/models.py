@@ -41,6 +41,9 @@ class Bug(models.Model):
     def get_absolute_url(self):
         return "/hata/%s/" % self.id
 
+    def get_delete_url(self):
+        return "/hata/sil/%d/" % self.id
+
     class Admin:
         list_display = ('status', 'title', 'submitter', 'assigned_to')
         list_filter = ('status', 'submitted_date')

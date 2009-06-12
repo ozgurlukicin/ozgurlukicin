@@ -114,6 +114,14 @@ Atanan: %(assigned_to)s
                 send_mail(email_subject % email_dict, email_body % email_dict, BUG_FROM_EMAIL, [subscriber], fail_silently=True)
     return HttpResponseRedirect(bug.get_absolute_url())
 
+@permission_required('bug.delete_bug', login_url="/kullanici/giris/")
+def delete_bug(request, id):
+    bug = Bug.objects.get(id=id)
+    if request.method == "POST":
+        bug.delete()
+        return HttpResponseRedirect("/hata/")
+    return render_response(request, 'bug/bug_delete_confirm.html', locals())
+
 def main(request):
     bugs = Bug.objects.order_by("status")
     return object_list(request, bugs,
