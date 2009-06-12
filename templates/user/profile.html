@@ -61,7 +61,7 @@
             <div class="profile_info">
                 <div class="profile_titles">Şehir </div><div class="profile_value">: {{ info.get_profile.get_city_display }}</div>
             </div>
-            {% if info.get_profile.show_birthday %}
+            {% if info.get_profile.show_birthday or user.is_staff %}
             <div class="profile_info">
                 <div class="profile_titles">Doğum Tarihi </div><div class="profile_value">: {{ info.get_profile.birthday|date:"d F Y" }}</div>
             </div>
@@ -72,7 +72,7 @@
 
             <h3>İletişim Bilgileri</h3>
 
-            {% if info.get_profile.show_email %}
+            {% if info.get_profile.show_email or user.is_staff %}
             <div class="profile_info">
                 <div class="profile_titles">E-posta </div><div class="profile_value">: <a href="mailto:{{ info.email }}">{{ info.email }}</a></div>
             </div>
