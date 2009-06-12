@@ -7,14 +7,18 @@
 {% if paste.is_hidden %}
 <p>Bu metin yönetici tarafından gizlenmiştir.</p>
 {% if perms.paste.hide_pastedtext %}
-<a href="{{ paste.get_toggle_url }}">Göster</a>
+<a href="{{ paste.get_toggle_url }}"><img src="/media/img/new/forum/button_show.png" alt="göster" /></a>
 <p>{{ paste.author }} tarafından {{ paste.date|date:"d F Y H:i" }} tarihinde gönderilmiş ve yönetici tarafından gizlenmiştir.</p>
 {{ paste.highlighted_text|safe }}
 {% endif %}
 {% else %}
-{% if perms.paste.hide_pastedtext %}<a href="{{ paste.get_toggle_url }}">Gizle</a>{% endif %}
+{% if perms.paste.hide_pastedtext %}
+    <a href="{{ paste.get_toggle_url }}"><img src="/media/img/new/forum/button_hide.png" alt="gizle" /></a>
+{% else %}
+    {% ifequal paste.author user %}<a href="{{ paste.get_hide_url }}"><img src="/media/img/new/forum/button_hide.png" alt="gizle" /></a>{% endifequal %}
+{% endif %}
 <p>{{ paste.author }} tarafından {{ paste.date|date:"d F Y H:i" }} tarihinde gönderilmiştir.</p>
-<p><a href="">Bu sayfaya bağlantı (sağ tıklayıp bağlantıyı kopyalayabilirsiniz)</a></p>
+<p><a href="{{ request.build_absolute_uri }}">{{ request.build_absolute_uri }}</a> (sağ tıklayıp bağlantıyı kopyalayabilirsiniz)</p>
 {{ paste.highlighted_text|safe }}
 {% endif %}
 {% endblock %}

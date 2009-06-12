@@ -66,5 +66,8 @@ class PastedText(models.Model):
     def get_absolute_url(self):
         return "/yapistir/%d/" % self.id
 
+    def get_hide_url(self):
+        return "/yapistir/%d/hide/" % self.id
+
     def get_toggle_url(self):
-        return "/yapistir/%d/toggle" % self.id
+        return "/yapistir/%d/toggle/" % self.id

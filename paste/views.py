@@ -37,6 +37,19 @@ def pastedtext_toggle_hidden(request, id):
         return HttpResponseRedirect(paste.get_absolute_url())
     return render_response(request, "paste/pastedtext_toggle.html", {"paste":paste})
 
+@login_required
+def pastedtext_hide(request, id):
+    paste = get_object_or_404(PastedText, id=id)
+    if request.user == paste.author:
+        if request.method == "POST":
+            paste.is_hidden = True
+            paste.save()
+            return HttpResponseRedirect(paste.get_absolute_url())
+        return render_response(request, "paste/pastedtext_toggle.html", {"paste":paste})
+    else:
+        return HttpResponseRedirect("/kullanici/giris/")
+
+
 def pastedtext_detail(request, id):
     paste = get_object_or_404(PastedText, id=id)
     return render_response(request, "paste/pastedtext_detail.html", {"paste":paste})
