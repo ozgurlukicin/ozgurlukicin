@@ -20,13 +20,6 @@ class ParentCategory(models.Model):
 
     def get_absolute_url(self):
         return "/tema/listele/%s/tumu/tarih/" % (self.slug)
-
-    class Admin:
-        list_display = ('name',)
-        search_fields = ['name']
-        ordering=["name"]
-        prepopulated_fields = {'slug': ('name',)}
-
     class Meta:
         verbose_name="Kategori"
         verbose_name_plural="Kategoriler"
@@ -45,12 +38,6 @@ class SubCategory(models.Model):
     def get_absolute_url(self):
         return "/tema/listele/%s/%s/tarih/" % (self.parent.slug, self.slug)
 
-    class Admin:
-        list_display = ("name", "parent")
-        search_fields = ["name", "parent"]
-        ordering=["name"]
-        prepopulated_fields = {'slug': ("name",)}
-
     class Meta:
         verbose_name="Alt Kategori"
         verbose_name_plural="Alt Kategoriler"
@@ -68,8 +55,8 @@ class ThemeItem(models.Model):
     changelog = models.TextField(blank=True, verbose_name="Değişiklik Listesi", help_text="Eklediğiniz içeriğin değişikliklerini sürüm numarası ve sürümdeki değişikliklerin listesi şeklinde belirtebilirsiniz.")
     rating = models.IntegerField(default=50, verbose_name="Puan")
     download_count = models.IntegerField(default=0, verbose_name="İndirilme Sayısı")
-    submit_date = models.DateTimeField(auto_now_add=True, verbose_name="Oluşturulma Tarihi")
-    edit_date = models.DateTimeField(auto_now_add=True, verbose_name="Düzenlenme Tarihi")
+    submit_date = models.DateTimeField(verbose_name="Oluşturulma Tarihi")
+    edit_date = models.DateTimeField(verbose_name="Düzenlenme Tarihi")
     comment_enabled = models.BooleanField(default=True,verbose_name="Yoruma Açık", help_text="Diğer üyelerin bu içeriğe yorum yapıp yapamayacağını buradan belirtebilirsiniz.")
     #TODO: change this to False before we're on air
     approved = models.BooleanField(default=True, verbose_name="Kabul Edilmiş")
@@ -80,21 +67,6 @@ class ThemeItem(models.Model):
 
     def __unicode__(self):
         return self.name
-
-    class Admin:
-        fields = (
-                (None, {
-                    "fields": ("name", "category", "description", "changelog", "approved")
-                    }),
-                ("Diğer", {
-                    "classes": "collapse",
-                    "fields": ("author", "license", "rating", "download_count", "submit_date", "edit_date", "comment_enabled", "parentcategory")
-                    })
-                )
-        list_display = ("name", "license", "category", "approved")
-        list_display_links = ("name",)
-        list_filter = ("approved", "comment_enabled")
-        search_fields = ["name", "description", "changelog"]
 
     class Meta:
         verbose_name="Sanat Birimi"
@@ -114,9 +86,6 @@ class File(models.Model):
     title = models.CharField(max_length=100, verbose_name="Başlık", help_text="Buraya, dosyanın kullanıcılara görünecek adını yazın.")
     file = models.FileField(upload_to="upload/tema/dosya/")
 
-    class Admin:
-        pass
-
     class Meta:
         verbose_name = "Dosya"
         verbose_name_plural = "Dosyalar"
@@ -134,9 +103,6 @@ class ScreenShot(models.Model):
     def __unicode__(self):
         return self.image
 
-    class Admin:
-        pass
-
     class Meta:
         verbose_name = "Ekran Görüntüsü"
         verbose_name_plural = "Ekran Görüntüleri"
@@ -148,32 +114,6 @@ class Vote(models.Model):
     user = models.ForeignKey(User)
     rating = models.IntegerField(default=50, verbose_name="Puan")
 
-    class Admin:
-        pass
-
     class Meta:
         verbose_name = "Oy"
         verbose_name_plural = "Oylar"
-
-
-class Comment(models.Model):
-    "Comment on a theme item from a user"
-
-    parent = models.ForeignKey("self", related_name="child")
-    theme_item = models.ForeignKey(ThemeItem)
-    author = models.ForeignKey(User, related_name="tema_comment")
-    text = models.TextField(verbose_name="İleti")
-    submit_date = models.DateTimeField(verbose_name="Oluşturulma Tarihi")
-    edit_date = models.DateTimeField(verbose_name="Düzenlenme Tarihi")
-    edit_count = models.IntegerField(default=0, verbose_name="Güncellenme sayısı")
-    last_edited_by = models.ForeignKey(User, blank=True, null=True, related_name="tema_comment_edit", verbose_name="Yazar")
-    ip = models.IPAddressField(blank=True, verbose_name="IP adresi")
-    order = models.IntegerField(default=0, verbose_name="Görüntülenme Sırası")
-    level = models.IntegerField(default=0, verbose_name="Görüntülenme Seviyesi")
-
-    class Admin:
-        pass
-
-    class Meta:
-        verbose_name = "Yorum"
-        verbose_name_plural = "Yorumlar"

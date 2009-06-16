@@ -7,7 +7,7 @@
 
 from oi.forum.views import flood_control
 from oi.st.wrappers import render_response
-from oi.tema.models import ParentCategory, SubCategory, ThemeItem, File, ScreenShot, Vote, Comment
+from oi.tema.models import ParentCategory, SubCategory, ThemeItem, File, ScreenShot, Vote
 from oi.tema.forms import ThemeItemForm
 from oi.tema.settings import THEME_ITEM_PER_PAGE
 
@@ -68,7 +68,6 @@ def themeitem_detail(request, parentcategory, subcategory, item_id):
 
     return render_response(request, 'tema/themeitem_detail.html', locals())
 
-
 def list_user(request, username):
     "Theme items of a user"
     user = get_object_or_404(User, username=username)
@@ -79,7 +78,6 @@ def list_user(request, username):
             'paginate_by': THEME_ITEM_PER_PAGE,
             }
     return object_list(request, **params)
-
 
 @login_required
 def vote(request, item_id, rating):
@@ -108,7 +106,6 @@ def vote(request, item_id, rating):
     themeitem.save()
 
     return HttpResponseRedirect(themeitem.get_absolute_url())
-
 
 @login_required
 def themeitem_create(request):
