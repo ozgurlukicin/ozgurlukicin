@@ -10,13 +10,12 @@ from django import forms
 from oi.tema.models import ThemeItem
 
 vote_choices=(
-        (0, '0'),
-        (1, '1'),
-        (2, '2'),
-        (3, '3'),
-        (4, '4'),
-        (5, '5'),
-        )
+    (0,   '1'),
+    (25,  '2'),
+    (50,  '3'),
+    (75,  '4'),
+    (100, '5'),
+)
 
 class ThemeItemForm(forms.ModelForm):
     class Meta:

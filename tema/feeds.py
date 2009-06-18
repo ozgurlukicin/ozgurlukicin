@@ -8,7 +8,7 @@
 from django.contrib.syndication.feeds import Feed
 from django.utils.feedgenerator import Atom1Feed
 
-from oi.tema.models import ThemeItem, ParentCategory
+from oi.tema.models import ThemeItem
 from oi.settings import SITE_NAME, WEB_URL, SITE_DESC
 
 from django.contrib.syndication.feeds import FeedDoesNotExist
@@ -63,7 +63,6 @@ class Category_Tema_Rss(Feed):
             raise FeedDoesNotExist
         return "%s%s" % (WEB_URL, item.get_absolute_url())
 
-
 class Category_Tema_Atom(Category_Tema_Rss):
     """ Category Atom"""
     feed_type = Atom1Feed
@@ -97,7 +96,6 @@ class User_Tema_Rss(Feed):
         if not item:
             raise FeedDoesNotExist
         return "%s%s" % (WEB_URL, item.get_absolute_url())
-
 
 class User_Tema_Atom(User_Tema_Rss):
     feed_type = Atom1Feed

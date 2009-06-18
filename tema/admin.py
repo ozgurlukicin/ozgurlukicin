@@ -8,18 +8,6 @@
 from django.contrib import admin
 from oi.tema.models import *
 
-class ParentCategoryAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-    search_fields = ['name']
-    ordering=["name"]
-    prepopulated_fields = {'slug': ('name',)}
-
-class SubCategoryAdmin(admin.ModelAdmin):
-    list_display = ("name", "parent")
-    search_fields = ["name", "parent"]
-    ordering=["name"]
-    prepopulated_fields = {'slug': ("name",)}
-
 class ThemeItemAdmin(admin.ModelAdmin):
     fieldsets = (
             (None, {
@@ -27,7 +15,7 @@ class ThemeItemAdmin(admin.ModelAdmin):
                 }),
             ("Diğer", {
                 "classes": "collapse",
-                "fields": ("author", "license", "rating", "download_count", "submit_date", "edit_date", "comment_enabled", "parentcategory")
+                "fields": ("author", "license", "rating", "download_count", "submit_date", "edit_date", "comment_enabled")
                 })
             )
     list_display = ("name", "license", "category", "approved")
@@ -35,6 +23,5 @@ class ThemeItemAdmin(admin.ModelAdmin):
     list_filter = ("approved", "comment_enabled")
     search_fields = ["name", "description", "changelog"]
 
-admin.site.register(ParentCategory, ParentCategoryAdmin)
-admin.site.register(SubCategory, SubCategoryAdmin)
 admin.site.register(ThemeItem, ThemeItemAdmin)
+admin.site.register(License, admin.ModelAdmin)

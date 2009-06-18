@@ -7,7 +7,7 @@
 
 from oi.forum.views import flood_control
 from oi.st.wrappers import render_response
-from oi.tema.models import ParentCategory, SubCategory, ThemeItem, File, ScreenShot, Vote
+from oi.tema.models import ThemeItem, File, ScreenShot, Vote
 from oi.tema.forms import ThemeItemForm
 from oi.tema.settings import THEME_ITEM_PER_PAGE
 
@@ -18,11 +18,11 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 
-def themeitem_list(request, parentcategory, subcategory, order_by):
+def themeitem_list(request):
     "List approved theme items"
     #first we take approved items
-    themeItems=ThemeItem.objects.filter(approved=True)
-
+    themeItems = ThemeItem.objects.filter(approved=True)
+    """
     #filter by parent category if no subcategory is selected
     if parentcategory != "tum-kategoriler":
         parentcategory = get_object_or_404(ParentCategory, slug=parentcategory)
@@ -44,21 +44,20 @@ def themeitem_list(request, parentcategory, subcategory, order_by):
         themeItems = themeItems.order_by("-rating")
     else:# order_by == "alfabe"
         themeItems = themeItems.order_by("name")
-
+    """
     params = {
             "queryset": themeItems,
             "paginate_by": THEME_ITEM_PER_PAGE,
-            "extra_context": {
-                "order_by": order_by,
-                "parentcategory": parentcategory,
-                "subcategory": subcategory,
-                "categories": ParentCategory.objects.all(),
-                },
-            }
+    }
+    """
+    "extra_context": {
+        "order_by": order_by,
+        "parentcategory": parentcategory,
+        },
+    """
     return object_list(request, **params)
 
-
-def themeitem_detail(request, parentcategory, subcategory, item_id):
+def themeitem_detail(request, category, item_id):
     object = get_object_or_404(ThemeItem, pk=item_id)
     if not object.approved and not request.user == object.author:
         return render_response(request, "404.html")
@@ -133,7 +132,7 @@ def themeitem_create(request):
     return render_response(request, "tema/themeitem_create.html", locals())
 
 @login_required
-def themeitem_change(request, parentcategory, subcategory, item_id):
+def themeitem_change(request, item_id):
     object = get_object_or_404(ThemeItem, pk=item_id)
     if request.user == object.author or request.user.has_perm("can_change_themeitem"):
         if request.method == "POST":
