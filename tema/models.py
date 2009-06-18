@@ -5,8 +5,11 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
+from PIL import Image
+
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.files import File
 
 from oi.st.tags import Tag
 
@@ -34,17 +37,22 @@ WALLPAPER_SIZES_V = (
     (1080, "1080"),
     (1200, "1200"),
 )
+class WallPaperSize:
+    def __init__(self, width, height, screen_type):
+        self.width, self.height, self.ratio = width, height, screen_type
+    def __str__(self):
+        return "%dx%d" % (self.width, self.height)
+
 WALLPAPER_SIZES = (
-    (0,  "800x600"),
-    (1,  "1024x768"),
-    (2,  "1152x864"),
-    (3,  "1280x800"),
-    (4,  "1280x1024"),
-    (5,  "1440x900"),
-    (6,  "1600x1050"),
-    (7,  "1600x1200"),
-    (8,  "1920x1080"),
-    (9,  "1920x1200"),
+    WallPaperSize( 800,  600, "n"),
+    WallPaperSize(1024,  768, "n"),
+    WallPaperSize(1152,  864, "n"),
+    WallPaperSize(1280,  800, "w"),
+    WallPaperSize(1280, 1024, "n"),
+    WallPaperSize(1440,  900, "w"),
+    WallPaperSize(1600, 1200, "n"),
+    WallPaperSize(1680, 1050, "w"),
+    WallPaperSize(1920, 1200, "w"),
 )
 
 class License(models.Model):
@@ -90,8 +98,6 @@ class ThemeItem(models.Model):
         return "/tema/duzenle/%s/" % self.id
 
 class Wallpaper(ThemeItem):
-    horizontal_size = models.IntegerField(choices=WALLPAPER_SIZES_H)
-    vertical_size = models.IntegerField(choices=WALLPAPER_SIZES_V)
     scalable = models.BooleanField(default=False)
     papers = models.ManyToManyField("WallpaperFile")
 
@@ -101,7 +107,15 @@ class Wallpaper(ThemeItem):
 
     def create_smaller_wallpapers(self, wallpaper, create_other_ratioes=True):
         "create smaller wallpapers from given one"
-        pass
+        #calculate sizes to create
+        for size in WALLPAPER_SIZES:
+            if size.width < wallpaper.image.width:
+                image = Image.open(wallpaper.image.path)
+                image.thumbnail((size.width,size.height), Image.ANTIALIAS)
+                newPaper = self.papers.create(title=str(size))
+                #FIXME: Those don't work, dunno why
+                #newPaper.image.save(wallpaper.image.path, image.getdata(), save=True)
+                #newPaper.image.save(wallpaper.image.path, image.tostring(), save=True)
 
 class File(models.Model):
     "File for download"
@@ -120,7 +134,7 @@ class ScreenShot(models.Model):
     image = models.ImageField(upload_to="upload/tema/goruntu/", verbose_name="Görüntü")
 
     def __unicode__(self):
-        return self.image
+        return self.image.name
 
     class Meta:
         verbose_name = "Ekran Görüntüsü"
@@ -132,11 +146,11 @@ class WallpaperFile(models.Model):
     image = models.ImageField(upload_to="upload/tema/goruntu/", verbose_name="Görüntü")
 
     def __unicode__(self):
-        return self.title or self.image
+        return self.title or self.image.name
 
     class Meta:
-        verbose_name = "Ekran Görüntüsü"
-        verbose_name_plural = "Ekran Görüntüleri"
+        verbose_name = "Duvar Kağıdı Dosyası"
+        verbose_name_plural = "Duvar Kağıdı Dosyaları"
 
 class Vote(models.Model):
     "Vote of a user"

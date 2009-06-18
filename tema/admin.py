@@ -23,5 +23,18 @@ class ThemeItemAdmin(admin.ModelAdmin):
     list_filter = ("approved", "comment_enabled")
     search_fields = ["name", "description", "changelog"]
 
+class WallpaperAdmin(ThemeItemAdmin):
+    fieldsets = (
+            (None, {
+                "fields": ("name", "category", "description", "changelog", "scalable", "papers", "approved")
+                }),
+            ("Diğer", {
+                "classes": "collapse",
+                "fields": ("author", "license", "rating", "download_count", "submit_date", "edit_date", "comment_enabled")
+                })
+            )
+
 admin.site.register(ThemeItem, ThemeItemAdmin)
+admin.site.register(Wallpaper, WallpaperAdmin)
+admin.site.register(WallpaperFile, admin.ModelAdmin)
 admin.site.register(License, admin.ModelAdmin)
