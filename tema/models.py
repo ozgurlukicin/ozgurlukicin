@@ -143,7 +143,7 @@ class ScreenShot(models.Model):
 class WallpaperFile(models.Model):
     "A wallpaper file"
     title = models.CharField("Başlık", max_length=32, blank=True)
-    image = models.ImageField(upload_to="upload/tema/goruntu/", verbose_name="Görüntü")
+    image = models.ImageField(upload_to="upload/tema/duvar-kagidi/", verbose_name="Görüntü")
 
     def __unicode__(self):
         return self.title or self.image.name
