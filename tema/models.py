@@ -9,7 +9,7 @@ from PIL import Image
 
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.files import File
+from django.core.files.base import ContentFile
 
 from oi.st.tags import Tag
 
@@ -44,15 +44,16 @@ class WallPaperSize:
         return "%dx%d" % (self.width, self.height)
 
 WALLPAPER_SIZES = (
-    WallPaperSize( 800,  600, "n"),
-    WallPaperSize(1024,  768, "n"),
-    WallPaperSize(1152,  864, "n"),
-    WallPaperSize(1280,  800, "w"),
-    WallPaperSize(1280, 1024, "n"),
-    WallPaperSize(1440,  900, "w"),
-    WallPaperSize(1600, 1200, "n"),
-    WallPaperSize(1680, 1050, "w"),
-    WallPaperSize(1920, 1200, "w"),
+    #n:normal, w:wide, s:special
+    WallPaperSize( 800.0,  600.0, "n"),
+    WallPaperSize(1024.0,  768.0, "n"),
+    WallPaperSize(1152.0,  864.0, "n"),
+    WallPaperSize(1280.0,  800.0, "w"),
+    WallPaperSize(1280.0, 1024.0, "s"),
+    WallPaperSize(1440.0,  900.0, "w"),
+    WallPaperSize(1600.0, 1200.0, "n"),
+    WallPaperSize(1680.0, 1050.0, "w"),
+    WallPaperSize(1920.0, 1200.0, "w"),
 )
 
 class License(models.Model):
@@ -99,7 +100,7 @@ class ThemeItem(models.Model):
 
 class Wallpaper(ThemeItem):
     scalable = models.BooleanField(default=False)
-    papers = models.ManyToManyField("WallpaperFile")
+    papers = models.ManyToManyField("WallpaperFile", blank=True)
 
     class Meta:
         verbose_name="Duvar Kağıdı"
@@ -111,11 +112,14 @@ class Wallpaper(ThemeItem):
         for size in WALLPAPER_SIZES:
             if size.width < wallpaper.image.width:
                 image = Image.open(wallpaper.image.path)
+                #crop if required
+                if wallpaper.image.width == 1280 and wallpaper.image.height == 1024:
+                    image = image.crop((0, 32, 1280, 992))
                 image.thumbnail((size.width,size.height), Image.ANTIALIAS)
                 newPaper = self.papers.create(title=str(size))
-                #FIXME: Those don't work, dunno why
-                #newPaper.image.save(wallpaper.image.path, image.getdata(), save=True)
-                #newPaper.image.save(wallpaper.image.path, image.tostring(), save=True)
+                file = ContentFile("")
+                newPaper.image.save(wallpaper.image.path, file, save=True)
+                image.save(newPaper.image.path)
 
 class File(models.Model):
     "File for download"
