@@ -8,7 +8,7 @@
 from oi.forum.views import flood_control
 from oi.st.wrappers import render_response
 from oi.tema.models import ThemeItem, File, ScreenShot, Vote
-from oi.tema.forms import ThemeItemForm
+from oi.tema.forms import *
 from oi.tema.settings import THEME_ITEM_PER_PAGE
 
 from django.views.generic.list_detail import object_list

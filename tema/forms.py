@@ -20,15 +20,15 @@ vote_choices=(
 class ThemeItemForm(forms.ModelForm):
     class Meta:
         model = ThemeItem
-        exclude = ("parentcategory", "author", "rating", "download_count", "submit_date", "edit_date", "approved")
+        exclude = ("parentcategory", "thumbnail", "author", "rating", "download_count", "submit_date", "edit_date", "approved")
 
 class ThemeTypeForm(forms.Form):
-    category = forms.CharField("Kategori", max_length=24, choices=CATEGORIES)
+    category = forms.ChoiceField(label="Kategori", choices=CATEGORIES)
 
 class WallpaperForm(forms.ModelForm):
     class Meta:
         model = Wallpaper
-        exclude = ("author", "rating", "download_count", "submit_date", "edit_date", "approved", "scalable", "papers")
+        exclude = ("author", "rating", "category", "thumbnail", "download_count", "submit_date", "edit_date", "approved", "scalable", "papers")
 
 class WallpaperFileForm(forms.Form):
     class Meta:

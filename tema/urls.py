@@ -23,7 +23,8 @@ urlpatterns = patterns ('oi.tema.views',
         (r'^duzenle/(?P<item_id>[0-9]+)/$','themeitem_change'),
         (r'^kullanici/(?P<username>[a-z]+)/$','list_user'),
         (r'^oyla/(?P<item_id>[0-9]+)/(?P<rating>[0-4])/$','vote'),
-        (r'^ekle/$','themeitem_create'),
+        (r'^ekle/$','themeitem_add'),
+        (r'^ekle/duvar-kagitlari/$','themeitem_add_wallpaper'),
         (r'^/(?P<category>[a-z0-9-_]+)/$','themeitem_list'),
 )
 
