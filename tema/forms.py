@@ -30,6 +30,8 @@ class WallpaperForm(forms.ModelForm):
         model = Wallpaper
         exclude = ("author", "rating", "category", "thumbnail", "download_count", "submit", "update", "status", "scalable", "papers", "changelog", "slug")
 
-class WallpaperFileForm(forms.Form):
+class WallpaperFileForm(forms.ModelForm):
+    create_thumbs = forms.BooleanField(label="Küçüklerini Oluştur", required=False, initial=True, help_text="Büyük bir duvar kağıdı gönderiyorsanız bu seçenekle küçüklerinin otomatik oluşturulmasını sağlayabilirsiniz.")
     class Meta:
         model = WallpaperFile
+        exclude = ("scalable",)

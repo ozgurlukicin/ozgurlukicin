@@ -133,6 +133,7 @@ def themeitem_add_wallpaper(request):
             item = form.save(commit=False)
             item.author = request.user
             item.submit = item.update = datetime.datetime.now()
+            item.slug = str(item.id)
             item.save()
             #TODO: Send e-mail to admins
             return render_response(request, "tema/themeitem_add_complete.html", locals())

@@ -26,7 +26,7 @@ class ThemeItemAdmin(admin.ModelAdmin):
 class WallpaperAdmin(ThemeItemAdmin):
     fieldsets = (
             (None, {
-                "fields": ("title", "text", "changelog", "scalable", "papers", "status")
+                "fields": ("title", "text", "changelog", "papers", "status")
                 }),
             ("Diğer", {
                 "classes": "collapse",

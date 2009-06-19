@@ -96,7 +96,6 @@ class ThemeItem(models.Model):
         return "/tema/duzenle/%s/" % self.id
 
 class Wallpaper(ThemeItem):
-    scalable = models.BooleanField(default=False)
     papers = models.ManyToManyField("WallpaperFile", blank=True)
 
     class Meta:
@@ -152,8 +151,9 @@ class ScreenShot(models.Model):
 
 class WallpaperFile(models.Model):
     "A wallpaper file"
-    title = models.CharField("Başlık", max_length=32, blank=True)
-    image = models.ImageField(upload_to="upload/tema/duvar-kagidi/", verbose_name="Görüntü")
+    title = models.CharField("Başlık", max_length=32, blank=True, help_text="Boyuta göre otomatik doldurulmasını istiyorsanız boş bırakabilirsiniz.")
+    scalable = models.BooleanField(default=False)
+    image = models.ImageField(upload_to="upload/tema/duvar-kagidi/", verbose_name="Duvar Kağıdı")
 
     def __unicode__(self):
         return self.title or self.image.name
