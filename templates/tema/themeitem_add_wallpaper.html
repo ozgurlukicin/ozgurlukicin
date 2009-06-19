@@ -1,9 +1,17 @@
 {% extends "tema/base.html" %}
 {% block content %}
-<form action="/tema/ekle/" method="post">
+<form action="" method="POST">
+    <p>{{ form.non_field_errors }}</p>
     {% for field in form %}
     {% include "formfields.html" %}
     {% endfor %}
+    {% for form in fileforms.forms %}
+        {% for field in form %}
+        <p>{{ form.non_field_errors }}</p>
+        {% include "formfields.html" %}
+        {% endfor %}
+    {% endfor %}
+    {{ fileforms.management_form }}
     <div style="clear:both"><input type="submit" value="Ekle" /></div>
 </form>
 {% endblock %}

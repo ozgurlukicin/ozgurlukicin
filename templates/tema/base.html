@@ -3,25 +3,11 @@
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 {% endblock %}
 {% block leftcolumn_top %}
-{% block tema_menu %}
-    <div class="tema_order_by">
-        <a href="/tema/listele/{{ parentcategory|default_if_none:"tum-kategoriler" }}/{{ subcategory|default_if_none:"tumu" }}/tarih/">En yeniler</a>
-        <a href="/tema/listele/{{ parentcategory|default_if_none:"tum-kategoriler" }}/{{ subcategory|default_if_none:"tumu" }}/indirilme/">En çok indirilenler</a>
-        <a href="/tema/listele/{{ parentcategory|default_if_none:"tum-kategoriler" }}/{{ subcategory|default_if_none:"tumu" }}/puan/">En yüksek puanlılar</a>
-        <a href="/tema/listele/{{ parentcategory|default_if_none:"tum-kategoriler" }}/{{ subcategory|default_if_none:"tumu" }}/alfabe/">Alfabe sırası</a>
-        <a href="/tema/ekle/">Ekle</a>
-    </div>
-
-    <div class="tema_order_by">
-        <h3><a href="/tema/listele/tum-kategoriler/tumu/{{ order_by|default:"tarih" }}/">Tümü</a></h3>
-        {% for category in categories %}
-        <h3><a href="/tema/listele/{{ category.slug|default_if_none:"tum-kategoriler" }}/tumu/{{ order_by|default_if_none:"tarih" }}/">{{ category.name }}</a></h3>
-        <ul>
-        {% for sub_category in category.subcategory_set.all %}
-        <li><a href="/tema/listele/{{ category.slug|default_if_none:"tum-kategoriler" }}/{{ sub_category.slug|default_if_none:"tumu" }}/{{ order_by|default_if_none:"tarih" }}/">{{ sub_category.name }}</a></li>
-        {% endfor %}
-        </ul>
-        {% endfor %}
-    </div>
-    {% endblock %}
+<div class="tema_order_by">
+    <ul>
+        <li><a href="/tema/">Tümü</a></li>
+        <li><a href="/tema/duvar-kagitlari/">Duvar Kağıtları</a></li>
+        <li><a href="/tema/ekle/">Ekle</a></li>
+    </ul>
+</div>
 {% endblock %}

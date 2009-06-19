@@ -19,6 +19,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
+from django.forms.formsets import formset_factory
 
 def themeitem_list(request, category=None):
     "List approved theme items"
@@ -122,19 +123,22 @@ def themeitem_add(request):
 
 @login_required
 def themeitem_add_wallpaper(request):
+    WallpaperFileFormSet = formset_factory(WallpaperFileForm, extra=5, max_num=5)
     if request.method == "POST":
         form = WallpaperForm(request.POST.copy())
+        fileforms = WallpaperFileFormSet(request.POST.copy(), request.FILES)
         flood, timeout = flood_control(request)
 
         if form.is_valid() and not flood:
-            wallpaper = form.save()
-            wallpaper.author = request.user
-            wallpaper.submit = wallpaper.update = datetime.datetime.now()
-            wallpaper.save()
+            item = form.save(commit=False)
+            item.author = request.user
+            item.submit = item.update = datetime.datetime.now()
+            item.save()
             #TODO: Send e-mail to admins
-            return HttpResponseRedirect(wallpaper.get_absolute_url())
+            return render_response(request, "tema/themeitem_add_complete.html", locals())
     else:
         form = WallpaperForm()
+        fileforms = WallpaperFileFormSet()
     return render_response(request, "tema/themeitem_add_wallpaper.html", locals())
 
 @login_required

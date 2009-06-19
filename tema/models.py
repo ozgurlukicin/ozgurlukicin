@@ -70,6 +70,7 @@ class License(models.Model):
 class ThemeItem(models.Model):
     "A theme item mainly consists of screenshots and files to download"
     title = models.CharField(max_length=100, unique=True, verbose_name="Başlık", help_text="Buraya, ekleyeceğiniz içeriğin ismini yazın.")
+    slug = models.SlugField('SEF Başlık')
     tags = models.ManyToManyField(Tag, verbose_name="Etiketler")
     author = models.ForeignKey(User)
     license = models.ForeignKey(License, verbose_name="Lisans")
@@ -91,9 +92,6 @@ class ThemeItem(models.Model):
         verbose_name="Sanat Birimi"
         verbose_name_plural="Sanat Birimleri"
 
-    def get_absolute_url(self):
-        return "/tema/%s/%s/" % (self.category, self.id)
-
     def get_change_url(self):
         return "/tema/duzenle/%s/" % self.id
 
@@ -104,6 +102,9 @@ class Wallpaper(ThemeItem):
     class Meta:
         verbose_name="Duvar Kağıdı"
         verbose_name_plural="Duvar Kağıtları"
+
+    def get_absolute_url(self):
+        return "/tema/duvar-kagitlari/%s/" % (self.slug)
 
     def create_smaller_wallpapers(self, wallpaper, create_other_ratioes=False):
         "create smaller wallpapers from given one"
