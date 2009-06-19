@@ -106,20 +106,26 @@ class Wallpaper(ThemeItem):
         verbose_name="Duvar Kağıdı"
         verbose_name_plural="Duvar Kağıtları"
 
-    def create_smaller_wallpapers(self, wallpaper, create_other_ratioes=True):
+    def create_smaller_wallpapers(self, wallpaper, create_other_ratioes=False):
         "create smaller wallpapers from given one"
-        #calculate sizes to create
+        #make smaller sizes
         for size in WALLPAPER_SIZES:
             if size.width < wallpaper.image.width:
-                image = Image.open(wallpaper.image.path)
-                #crop if required
-                if wallpaper.image.width == 1280 and wallpaper.image.height == 1024:
-                    image = image.crop((0, 32, 1280, 992))
-                image.thumbnail((size.width,size.height), Image.ANTIALIAS)
-                newPaper = self.papers.create(title=str(size))
-                file = ContentFile("")
-                newPaper.image.save(wallpaper.image.path, file, save=True)
-                image.save(newPaper.image.path)
+                if wallpaper.image.width*1.0/wallpaper.image.height == size.width/size.height:
+                    image = Image.open(wallpaper.image.path)
+                    image.thumbnail((size.width,size.height), Image.ANTIALIAS)
+                    newPaper = self.papers.create(title=str(size))
+                    file = ContentFile("")
+                    newPaper.image.save(wallpaper.image.path, file, save=True)
+                    image.save(newPaper.image.path)
+                #crop if it's 1280x1024
+                elif wallpaper.image.width == 1280 and wallpaper.image.height == 1024:
+                    image = Image.open(wallpaper.image.path).crop((0, 32, 1280, 992))
+                    image.thumbnail((size.width,size.height), Image.ANTIALIAS)
+                    newPaper = self.papers.create(title=str(size))
+                    file = ContentFile("")
+                    newPaper.image.save(wallpaper.image.path, file, save=True)
+                    image.save(newPaper.image.path)
 
 class File(models.Model):
     "File for download"

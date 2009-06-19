@@ -107,29 +107,28 @@ def vote(request, item_id, rating):
     return HttpResponseRedirect(themeitem.get_absolute_url())
 
 @login_required
-def themeitem_create(request):
+def themeitem_add(request):
     if request.method == "POST":
-        form = ThemeItemForm(request.POST.copy())
+        form = ThemeTypeForm(request.POST.copy())
+        if form.is_valid():
+            return HttpResponseRedirect("/tema/ekle/" + form.cleaned_data["category"])
+    else:
+        form = ThemeTypeForm()
+    return render_response(request, "tema/themeitem_add.html", locals())
+
+@login_required
+def themeitem_add_wallpaper(request):
+    if request.method == "POST":
+        form = WallpaperForm(request.POST.copy())
         flood, timeout = flood_control(request)
 
         if form.is_valid() and not flood:
-            object = ThemeItem(
-                    name = form.cleaned_data["name"],
-                    category = form.cleaned_data["category"],
-                    license = form.cleaned_data["license"],
-                    description = form.cleaned_data["description"],
-                    changelog = form.cleaned_data["changelog"],
-                    comment_enabled = form.cleaned_data["comment_enabled"],
-
-                    author = request.user,
-                    )
-            object.parentcategory = object.category.parent
-            object.save()
+            wallpaper = form.save()
             #TODO: Send e-mail to admins
             return HttpResponseRedirect(object.get_absolute_url())
     else:
-        form = ThemeItemForm()
-    return render_response(request, "tema/themeitem_create.html", locals())
+        form = WallpaperForm()
+    return render_response(request, "tema/themeitem_add_wallpaper.html", locals())
 
 @login_required
 def themeitem_change(request, item_id):

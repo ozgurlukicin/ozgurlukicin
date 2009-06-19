@@ -1,119 +1,27 @@
-{% load petition %}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>{% block title %}{% endblock %}Tema - Özgürlük için...</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta http-equiv="imagetoolbar" content="no" />
-<link rel="shortcut icon" href="/media/img/fav.png" />
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Anasayfa" href="/rss" />
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Haberler" href="/rss/haber" />
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Nasıl" href="/rss/nasil" />
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - İlk Adımlar" href="/rss/ia" />
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Paketler" href="/rss/paket" />
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Oyunlar" href="/rss/oyun" />
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Gezegen" href="/rss/gezegen/" />
-
-<style type="text/css" media="screen">@import url('/media/css/tema.css');</style>
-<style type="text/css" media="screen">@import url('/media/dijital/css/ozgurlukicin.css');</style>
-
-<script type="text/javascript" src="/media/dijital/js/base.js"></script>
-<!--[if lt IE 7.]>
-<script defer type="text/javascript" src="/media/js/pngfix.js"></script>
-<![endif]-->
-{% block extrahead %}{% endblock %}
-</head>
-<body{% block extrabody %}{% endblock %}>
-{% block header_menu %}
+{% extends "base.html" %}
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 {% endblock %}
+{% block leftcolumn_top %}
+{% block tema_menu %}
+    <div class="tema_order_by">
+        <a href="/tema/listele/{{ parentcategory|default_if_none:"tum-kategoriler" }}/{{ subcategory|default_if_none:"tumu" }}/tarih/">En yeniler</a>
+        <a href="/tema/listele/{{ parentcategory|default_if_none:"tum-kategoriler" }}/{{ subcategory|default_if_none:"tumu" }}/indirilme/">En çok indirilenler</a>
+        <a href="/tema/listele/{{ parentcategory|default_if_none:"tum-kategoriler" }}/{{ subcategory|default_if_none:"tumu" }}/puan/">En yüksek puanlılar</a>
+        <a href="/tema/listele/{{ parentcategory|default_if_none:"tum-kategoriler" }}/{{ subcategory|default_if_none:"tumu" }}/alfabe/">Alfabe sırası</a>
+        <a href="/tema/ekle/">Ekle</a>
+    </div>
 
-{% block ust_menu %}
+    <div class="tema_order_by">
+        <h3><a href="/tema/listele/tum-kategoriler/tumu/{{ order_by|default:"tarih" }}/">Tümü</a></h3>
+        {% for category in categories %}
+        <h3><a href="/tema/listele/{{ category.slug|default_if_none:"tum-kategoriler" }}/tumu/{{ order_by|default_if_none:"tarih" }}/">{{ category.name }}</a></h3>
+        <ul>
+        {% for sub_category in category.subcategory_set.all %}
+        <li><a href="/tema/listele/{{ category.slug|default_if_none:"tum-kategoriler" }}/{{ sub_category.slug|default_if_none:"tumu" }}/{{ order_by|default_if_none:"tarih" }}/">{{ sub_category.name }}</a></li>
+        {% endfor %}
+        </ul>
+        {% endfor %}
+    </div>
+    {% endblock %}
 {% endblock %}
-<div id="{% block pagetype %}page{% endblock %}">
-    <div id="content">
-        {% block tema_menu %}
-        <div class="tema_order_by">
-            <a href="/tema/listele/{{ parentcategory|default_if_none:"tum-kategoriler" }}/{{ subcategory|default_if_none:"tumu" }}/tarih/">En yeniler</a>
-            <a href="/tema/listele/{{ parentcategory|default_if_none:"tum-kategoriler" }}/{{ subcategory|default_if_none:"tumu" }}/indirilme/">En çok indirilenler</a>
-            <a href="/tema/listele/{{ parentcategory|default_if_none:"tum-kategoriler" }}/{{ subcategory|default_if_none:"tumu" }}/puan/">En yüksek puanlılar</a>
-            <a href="/tema/listele/{{ parentcategory|default_if_none:"tum-kategoriler" }}/{{ subcategory|default_if_none:"tumu" }}/alfabe/">Alfabe sırası</a>
-            <a href="/tema/ekle/">Ekle</a>
-        </div>
-
-        <div class="tema_order_by">
-            <h3><a href="/tema/listele/tum-kategoriler/tumu/{{ order_by|default:"tarih" }}/">Tümü</a></h3>
-            {% for category in categories %}
-            <h3><a href="/tema/listele/{{ category.slug|default_if_none:"tum-kategoriler" }}/tumu/{{ order_by|default_if_none:"tarih" }}/">{{ category.name }}</a></h3>
-            <ul>
-            {% for sub_category in category.subcategory_set.all %}
-            <li><a href="/tema/listele/{{ category.slug|default_if_none:"tum-kategoriler" }}/{{ sub_category.slug|default_if_none:"tumu" }}/{{ order_by|default_if_none:"tarih" }}/">{{ sub_category.name }}</a></li>
-            {% endfor %}
-            </ul>
-            {% endfor %}
-        </div>
-        {% endblock %}
-        {% block content %}
-        {% endblock %}
-    </div>
-
-    <div id="sidebar">
-        {% block sidebartop %}
-        <div class="sidebar_box">
-            <div class="sidebar_top">&nbsp;</div>
-            <div class="sidebar_middle">
-                <h2>Kullanıcı Kutusu</h2>
-                {% if not user.is_authenticated %}
-                    <form method="post" action="/kullanici/giris/">
-                        <input type="text" id="userbox_username" name="username" size="18" class="vTextField required" value="" maxlength="20" /><br />
-                        <input type="password" id="userbox_password" name="password" size="18" class="vPasswordField required" value="" maxlength="30" /><br />
-                        <input type="hidden" name="next" value="{{ request.get_full_path }}" />
-                        <input type="submit" value="Giriş" />
-                    </form>
-                    <p><a href="/kullanici/kayit/">Kayıt ol</a> | <a class="sari"  href="/kullanici/kayip/">Kayıp parola</a></p>
-                {% else %}
-                    <p>Merhaba <b>{{ user.username }}</b>!
-                    <br />Profil sayfanıza <a href="/kullanici/profil/{{ request.user.username }}/">buradan</a> ulaşabilir ya da <a 
-class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.</p>
-                {% endif %}
-            </div>
-            <div class="sidebar_bottom">&nbsp;</div>
-        </div>
-        <div class="sidebar_box">
-            <div class="sidebar_top">&nbsp;</div>
-            <div class="sidebar_middle">
-                <h2>Ara</h2>
-                <form method="post" action="/arama/">
-                    <input type="text" name="term" size="20" /><br />
-                    <input type="submit" value="Bul" />
-                </form>
-            </div>
-            <div class="sidebar_bottom">&nbsp;</div>
-        </div>
-
-        {% petition_box %}
-        <div class="sidebar_box">
-            <div class="sidebar_top">&nbsp;</div>
-            <div class="sidebar_middle">
-                <h2>Özgürlükiçin'i destekleyin</h2>
-                <a href="/banner/"><img src="/media/img/pardus_ozgurluk.png" alt="Özgürlükİçin Pardus" /></a>
-                <p>Pardus'un tanıtımına katkıda bulunmak isteyenler için Özgürlükiçin düğmeleri yayınlandı. Sitenizde, blogunuzda yayınlamak için siz de <a href="/banner/">hazır kodlarımızdan</a> yararlanabilirsiniz.</p>
-            </div>
-            <div class="sidebar_bottom">&nbsp;</div>
-        </div>
-        {% block alt_resim %}
-        {% endblock %}
-
-        {% endblock %}
-        {% block sidebar %}
-        {% endblock %}
-        {% block sidebarbottom %}
-        {% endblock %}
-    </div>
-    <div id="footer">
-        {% block footer %}
-        {% endblock %}
-    </div>
-    {% include "footer.html" %}
-</div>
-</body>
-</html>

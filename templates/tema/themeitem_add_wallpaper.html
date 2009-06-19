@@ -1,0 +1,9 @@
+{% extends "tema/base.html" %}
+{% block content %}
+<form action="/tema/ekle/" method="post">
+    {% for field in form %}
+    {% include "formfields.html" %}
+    {% endfor %}
+    <div style="clear:both"><input type="submit" value="Ekle" /></div>
+</form>
+{% endblock %}
