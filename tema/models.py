@@ -69,21 +69,20 @@ class License(models.Model):
 
 class ThemeItem(models.Model):
     "A theme item mainly consists of screenshots and files to download"
-    name = models.CharField(max_length=100, unique=True, verbose_name="Başlık", help_text="Buraya, ekleyeceğiniz içeriğin ismini yazın.")
-    category = models.CharField("Kategori", max_length=24, choices=CATEGORIES)
+    title = models.CharField(max_length=100, unique=True, verbose_name="Başlık", help_text="Buraya, ekleyeceğiniz içeriğin ismini yazın.")
     tags = models.ManyToManyField(Tag, verbose_name="Etiketler")
     author = models.ForeignKey(User)
     license = models.ForeignKey(License, verbose_name="Lisans")
-    description = models.TextField(blank=False, verbose_name="Tanım", help_text="Ekleyeceğiniz dosyalar hakkındaki açıklamalarınızı bu bölümde belirtebilirsiniz.")
+    text = models.TextField(blank=False, verbose_name="Tanım", help_text="Ekleyeceğiniz dosyalar hakkındaki açıklamalarınızı bu bölümde belirtebilirsiniz.")
     changelog = models.TextField(blank=True, verbose_name="Değişiklik Listesi", help_text="Eklediğiniz içeriğin değişikliklerini sürüm numarası ve sürümdeki değişikliklerin listesi şeklinde belirtebilirsiniz.")
     rating = models.IntegerField(default=50, verbose_name="Puan")
     download_count = models.IntegerField(default=0, verbose_name="İndirilme Sayısı")
-    submit_date = models.DateTimeField(verbose_name="Oluşturulma Tarihi")
-    edit_date = models.DateTimeField(verbose_name="Düzenlenme Tarihi")
+    submit = models.DateTimeField(verbose_name="Oluşturulma Tarihi")
+    update = models.DateTimeField(verbose_name="Düzenlenme Tarihi")
     comment_enabled = models.BooleanField(default=True,verbose_name="Yoruma Açık", help_text="Diğer üyelerin bu içeriğe yorum yapıp yapamayacağını buradan belirtebilirsiniz.")
     thumbnail = models.ImageField("Küçük Resim", blank=True, upload_to="upload/tema/kucuk/")
     #TODO: change this to False before we're on air
-    approved = models.BooleanField(default=True, verbose_name="Kabul Edilmiş")
+    status = models.BooleanField(default=True, verbose_name="Kabul Edilmiş")
 
     def __unicode__(self):
         return self.name

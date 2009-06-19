@@ -5,6 +5,8 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
+import datetime
+
 from oi.forum.views import flood_control
 from oi.st.wrappers import render_response
 from oi.tema.models import ThemeItem, File, ScreenShot, Vote
@@ -18,10 +20,13 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 
-def themeitem_list(request):
+def themeitem_list(request, category=None):
     "List approved theme items"
     #first we take approved items
-    themeItems = ThemeItem.objects.filter(approved=True)
+    themeItems = ThemeItem.objects.all()
+    if category == "duvar-kagitlari":
+        themeItems = Wallpaper.objects.all()
+    themeItems = themeItems.filter(approved=True)
     """
     #filter by parent category if no subcategory is selected
     if parentcategory != "tum-kategoriler":
@@ -103,7 +108,6 @@ def vote(request, item_id, rating):
         rating += vote.rating
     themeitem.rating = rating / voteCount
     themeitem.save()
-
     return HttpResponseRedirect(themeitem.get_absolute_url())
 
 @login_required
@@ -124,8 +128,11 @@ def themeitem_add_wallpaper(request):
 
         if form.is_valid() and not flood:
             wallpaper = form.save()
+            wallpaper.author = request.user
+            wallpaper.submit = wallpaper.update = datetime.datetime.now()
+            wallpaper.save()
             #TODO: Send e-mail to admins
-            return HttpResponseRedirect(object.get_absolute_url())
+            return HttpResponseRedirect(wallpaper.get_absolute_url())
     else:
         form = WallpaperForm()
     return render_response(request, "tema/themeitem_add_wallpaper.html", locals())

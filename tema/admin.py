@@ -11,26 +11,26 @@ from oi.tema.models import *
 class ThemeItemAdmin(admin.ModelAdmin):
     fieldsets = (
             (None, {
-                "fields": ("name", "category", "description", "changelog", "approved")
+                "fields": ("title", "text", "changelog", "status")
                 }),
             ("Diğer", {
                 "classes": "collapse",
-                "fields": ("author", "license", "rating", "download_count", "submit_date", "edit_date", "comment_enabled")
+                "fields": ("author", "license", "rating", "download_count", "submit", "update", "comment_enabled")
                 })
             )
-    list_display = ("name", "license", "category", "approved")
-    list_display_links = ("name",)
-    list_filter = ("approved", "comment_enabled")
-    search_fields = ["name", "description", "changelog"]
+    list_display = ("title", "license", "status")
+    list_display_links = ("title",)
+    list_filter = ("status", "comment_enabled")
+    search_fields = ["title", "text", "changelog"]
 
 class WallpaperAdmin(ThemeItemAdmin):
     fieldsets = (
             (None, {
-                "fields": ("name", "category", "description", "changelog", "scalable", "papers", "approved")
+                "fields": ("title", "text", "changelog", "scalable", "papers", "status")
                 }),
             ("Diğer", {
                 "classes": "collapse",
-                "fields": ("author", "license", "rating", "download_count", "submit_date", "edit_date", "comment_enabled")
+                "fields": ("author", "license", "rating", "download_count", "submit", "update", "comment_enabled")
                 })
             )
 
