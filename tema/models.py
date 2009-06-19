@@ -18,25 +18,6 @@ CATEGORIES = (
     ("ekran-goruntuleri", "Ekran Görüntüleri"),
 )
 
-WALLPAPER_SIZES_H = (
-    (800, "800"),
-    (1024, "1024"),
-    (1152, "1152"),
-    (1280, "1280"),
-    (1440, "1440"),
-    (1600, "1600"),
-    (1920, "1920"),
-)
-WALLPAPER_SIZES_V = (
-    (600, "600"),
-    (768, "768"),
-    (864, "864"),
-    (900, "900"),
-    (1024, "1024"),
-    (1050, "1050"),
-    (1080, "1080"),
-    (1200, "1200"),
-)
 class WallPaperSize:
     def __init__(self, width, height, screen_type):
         self.width, self.height, self.ratio = width, height, screen_type
@@ -86,7 +67,7 @@ class ThemeItem(models.Model):
     status = models.BooleanField(default=True, verbose_name="Kabul Edilmiş")
 
     def __unicode__(self):
-        return self.name
+        return self.title
 
     class Meta:
         verbose_name="Sanat Birimi"
@@ -156,7 +137,7 @@ class WallpaperFile(models.Model):
     image = models.ImageField(upload_to="upload/tema/duvar-kagidi/", verbose_name="Duvar Kağıdı")
 
     def __unicode__(self):
-        return self.title or self.image.name
+        return self.title or "..." + self.image.name[-24:]
 
     class Meta:
         verbose_name = "Duvar Kağıdı Dosyası"

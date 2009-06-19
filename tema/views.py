@@ -27,7 +27,7 @@ def themeitem_list(request, category=None):
     themeItems = ThemeItem.objects.all()
     if category == "duvar-kagitlari":
         themeItems = Wallpaper.objects.all()
-    themeItems = themeItems.filter(approved=True)
+    themeItems = themeItems.filter(status=True)
     """
     #filter by parent category if no subcategory is selected
     if parentcategory != "tum-kategoriler":
