@@ -129,12 +129,14 @@ def themeitem_add_wallpaper(request):
         fileforms = WallpaperFileFormSet(request.POST.copy(), request.FILES)
         flood, timeout = flood_control(request)
 
-        if form.is_valid() and not flood:
+        if form.is_valid() and fileforms.is_valid() and not flood:
             item = form.save(commit=False)
             item.author = request.user
             item.submit = item.update = datetime.datetime.now()
             item.slug = str(item.id)
             item.save()
+            for form in fileforms.forms:
+                item.papers.add(form.save())
             #TODO: Send e-mail to admins
             return render_response(request, "tema/themeitem_add_complete.html", locals())
     else:
