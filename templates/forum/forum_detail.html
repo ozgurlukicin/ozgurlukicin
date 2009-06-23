@@ -34,7 +34,7 @@
         {% else %}
 
         <div class="item topic_item" {% if topic.hidden %}style="opacity: 0.5;"{% endif %}>
-            <div class="icon"><a href="{{ topic.get_absolute_url }}"><img src="/media/img/new/forum/topic_sticky_locked.png" border="0" alt="Genel Duyuru" title="Genel Duyuru" /></a></div>
+            <div class="icon"><a href="{{ topic.get_absolute_url }}"><img src="/media/img/new/forum/topic_announce{% if topic.locked %}_locked{% endif %}.png" border="0" alt="Genel Duyuru" title="Genel Duyuru" /></a></div>
             <div class="spacer">&nbsp;</div>
             <div class="topic_title"><a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a>{% ifequal forum.slug "guncellenen-basliklar" %}<br />Forum: {{ topic.forum }}{% endifequal %}</div>
             <div class="spacer">&nbsp;</div>
