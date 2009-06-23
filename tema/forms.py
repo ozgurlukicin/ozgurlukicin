@@ -45,7 +45,7 @@ class WallpaperForm(forms.ModelForm):
         exclude = ("author", "rating", "category", "thumbnail", "download_count", "submit", "update", "status", "scalable", "papers", "changelog", "slug")
 
 class WallpaperFileForm(forms.ModelForm):
-    create_thumbs = forms.BooleanField(label="Küçüklerini Oluştur", required=False, initial=True, help_text="Büyük bir duvar kağıdı gönderiyorsanız bu seçenekle küçüklerinin otomatik oluşturulmasını sağlayabilirsiniz.")
+    create_smaller_wallpapers = forms.BooleanField(label="Küçüklerini Oluştur", required=False, initial=True, help_text="Büyük bir duvar kağıdı gönderiyorsanız bu seçenekle küçüklerinin otomatik oluşturulmasını sağlayabilirsiniz.")
 
     def clean_image(self):
         image = self.cleaned_data["image"]
@@ -56,4 +56,4 @@ class WallpaperFileForm(forms.ModelForm):
 
     class Meta:
         model = WallpaperFile
-        exclude = ("scalable",)
+        exclude = ("title", "scalable")

@@ -123,7 +123,8 @@ def themeitem_add(request):
 
 @login_required
 def themeitem_add_wallpaper(request):
-    WallpaperFileFormSet = formset_factory(WallpaperFileForm, extra=5, max_num=5)
+    #TODO: add SVG support
+    WallpaperFileFormSet = formset_factory(WallpaperFileForm)
     if request.method == "POST":
         form = WallpaperForm(request.POST.copy())
         fileforms = WallpaperFileFormSet(request.POST.copy(), request.FILES)
@@ -136,7 +137,14 @@ def themeitem_add_wallpaper(request):
             item.slug = str(item.id)
             item.save()
             for form in fileforms.forms:
-                item.papers.add(form.save())
+                paper = form.save(commit=False)
+                paper.title = "%dx%d" % (paper.image.width, paper.image.height)
+                paper.save()
+                item.title = item.title.replace(paper.title, "")
+                item.save()
+                if form.cleaned_data["create_smaller_wallpapers"]:
+                    item.create_smaller_wallpapers(paper)
+                item.papers.add(paper)
             #TODO: Send e-mail to admins
             return render_response(request, "tema/themeitem_add_complete.html", locals())
     else:
