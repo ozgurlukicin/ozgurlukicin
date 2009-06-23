@@ -26,7 +26,7 @@ def thumbnail(file, size='200x200'):
             os.unlink(miniature_filename)
         # if the image wasn't already resized, resize it
         if not os.path.exists(miniature_filename):
-            print '>>> debug: resizing the image to the format %s!' % size
+            #print '>>> debug: resizing the image to the format %s!' % size
             image = Image.open(filename)
             image.thumbnail([x, y]) # generate a 200x200 thumbnail
             image.save(miniature_filename, image.format)
