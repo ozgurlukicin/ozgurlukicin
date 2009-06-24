@@ -11,11 +11,11 @@
         <version>{{ wallpaper.version }}</version>
         <release/>
         <releasedate>{{ wallpaper.update }}</releasedate>
-        <preview>{{ wallpaper.get_thumbnail_url }}</preview>
-        <payload>{{ wallpaper.get_download_url }}</payload>
+        <preview>{{ SITE_URL }}{{ wallpaper.get_thumbnail_url }}</preview>
+        <payload>{{ SITE_URL }}{{ wallpaper.get_download_url }}</payload>
         <rating>{{ wallpaper.rating }}</rating>
         <downloads>{{ wallpaper.download_count }}</downloads>
-        <more>{{ wallpaper.get_absolute_url }}</more>
+        <more>{{ SITE_URL }}{{ wallpaper.get_absolute_url }}</more>
     </stuff>
     {% endfor %}
 </knewstuff>

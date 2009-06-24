@@ -194,6 +194,7 @@ def ghns_wallpapers(request):
     xml = loader.get_template("tema/wallpaper-providers.xml").render(Context({"SITE_URL":settings.WEB_URL}))
     return HttpResponse(xml, mimetype="text/xml")
 
-def ghns_wallpapers(request):
-    xml = loader.get_template("tema/wallpaper.xml").render(Context({"SITE_URL":settings.WEB_URL}))
+def ghns_wallpaper(request):
+    wallpapers = Wallpaper.objects.filter(status=True).order_by("update")
+    xml = loader.get_template("tema/wallpaper.xml").render(Context({"SITE_URL":settings.WEB_URL,"wallpapers":wallpapers}))
     return HttpResponse(xml, mimetype="text/xml")

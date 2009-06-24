@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE knewstuffproviders SYSTEM "knewstuffproviders.dtd">
 <knewstuffproviders>
-    <provider downloadurl="{{ SITE_URL }}tema/khotnewstuff/wallpaper.xml" downloadurl-score="{{ SITE_URL }}tema/khotnewstuff/wallpaper/wallpaper-score.xml" downloadurl-downloads="{{ SITE_URL }}tema/khotnewstuff/wallpaper/wallpaper-downloads.xml" nouploadurl="{{ SITE_URL }}" webaccess="{{ SITE_URL }}" >
+    <provider downloadurl="{{ SITE_URL }}/tema/khotnewstuff/wallpaper/wallpaper.xml" downloadurl-score="{{ SITE_URL }}/tema/khotnewstuff/wallpaper/wallpaper-score.xml" downloadurl-downloads="{{ SITE_URL }}/tema/khotnewstuff/wallpaper/wallpaper-downloads.xml" nouploadurl="{{ SITE_URL }}" webaccess="{{ SITE_URL }}" >
         <title>Özgürlükiçin Duvar Kağıtları</title>
     </provider>
 </knewstuffproviders>
