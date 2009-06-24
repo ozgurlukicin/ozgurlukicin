@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2007 ArtIstanbul
+# Copyright 2007 TÜBİTAK UEKAE
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
@@ -15,11 +15,13 @@ from oi.tema.settings import THEME_ITEM_PER_PAGE
 
 from django.views.generic.list_detail import object_list
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 from django.forms.formsets import formset_factory
+from django.template import Context, loader
+from django.conf import settings
 
 def themeitem_list(request, category=None):
     "List approved theme items"
@@ -187,3 +189,11 @@ def themeitem_change(request, item_id):
         return render_response(request, "tema/themeitem_change.html", locals())
     else:
         return render_response(request, "tema/message.html", {"type": "error", "message": "Bu işlemi yapmak için yetkiniz yok."})
+
+def ghns_wallpapers(request):
+    xml = loader.get_template("tema/wallpaper-providers.xml").render(Context({"SITE_URL":settings.WEB_URL}))
+    return HttpResponse(xml, mimetype="text/xml")
+
+def ghns_wallpapers(request):
+    xml = loader.get_template("tema/wallpaper.xml").render(Context({"SITE_URL":settings.WEB_URL}))
+    return HttpResponse(xml, mimetype="text/xml")

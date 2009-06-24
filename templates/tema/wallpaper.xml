@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<knewstuff>
+    {% for wallpaper in wallpapers %}
+    <stuff>
+        <id>{{ wallpaper.id }}</id>
+        <name>{{ wallpaper.title }}</name>
+        <author>{{ wallpaper.author }}</author>
+        <email>{{ wallpaper.author.email }}</email>
+        <license>{{ wallpaper.license }}</license>
+        <summary>{{ wallpaper.text }}</summary>
+        <version>{{ wallpaper.version }}</version>
+        <release/>
+        <releasedate>{{ wallpaper.update }}</releasedate>
+        <preview>{{ wallpaper.get_thumbnail_url }}</preview>
+        <payload>{{ wallpaper.get_download_url }}</payload>
+        <rating>{{ wallpaper.rating }}</rating>
+        <downloads>{{ wallpaper.download_count }}</downloads>
+        <more>{{ wallpaper.get_absolute_url }}</more>
+    </stuff>
+    {% endfor %}
+</knewstuff>

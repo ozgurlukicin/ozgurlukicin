@@ -26,6 +26,8 @@ urlpatterns = patterns ('oi.tema.views',
         (r'^ekle/$','themeitem_add'),
         (r'^ekle/duvar-kagitlari/$','themeitem_add_wallpaper'),
         (r'^(?P<category>[a-z0-9-_]+)/$','themeitem_list'),
+        (r'^khotnewstuff/wallpaper-providers.xml$', 'ghns_wallpapers'),
+        (r'^khotnewstuff/wallpaper/wallpaper.xml$', 'ghns_wallpaper'),
 )
 
 urlpatterns+=patterns('',
