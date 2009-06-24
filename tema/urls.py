@@ -28,6 +28,7 @@ urlpatterns = patterns ('oi.tema.views',
         (r'^(?P<category>[a-z0-9-_]+)/$','themeitem_list'),
         (r'^khotnewstuff/wallpaper-providers.xml$', 'ghns_wallpapers'),
         (r'^khotnewstuff/wallpaper/wallpaper.xml$', 'ghns_wallpaper'),
+        (r'^yonetim/$', 'themeitem_queue'),
 )
 
 urlpatterns+=patterns('',
