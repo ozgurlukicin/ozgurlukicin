@@ -77,6 +77,11 @@ class ThemeItem(models.Model):
     def get_change_url(self):
         return "/tema/duzenle/%s/" % self.id
 
+    class Meta:
+        permissions = (
+            ("manage_queue", "Can Manage Tema Queue"),
+        )
+
 class Wallpaper(ThemeItem):
     papers = models.ManyToManyField("WallpaperFile", blank=True)
 
