@@ -23,7 +23,7 @@ VALID_WALLPAPER_SIZES = (
     (1920, 1200),
 )
 
-vote_choices=(
+vote_choices = (
     (0,   '1'),
     (25,  '2'),
     (50,  '3'),
@@ -37,7 +37,7 @@ class ThemeItemForm(forms.ModelForm):
         exclude = ("parentcategory", "thumbnail", "author", "rating", "download_count", "submit", "update", "status", "slug")
 
 class ThemeTypeForm(forms.Form):
-    category = forms.ChoiceField(label="Kategori", choices=CATEGORIES)
+    category = forms.ChoiceField(label="Kategori", choices=CATEGORIES, help_text="Ekleyeceğiniz içerik için bir kategori seçin")
 
 class WallpaperForm(forms.ModelForm):
     class Meta:
