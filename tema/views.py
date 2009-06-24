@@ -16,7 +16,7 @@ from oi.tema.settings import THEME_ITEM_PER_PAGE
 from django.views.generic.list_detail import object_list
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 from django.forms.formsets import formset_factory
@@ -198,3 +198,8 @@ def ghns_wallpaper(request):
     wallpapers = Wallpaper.objects.filter(status=True).order_by("update")
     xml = loader.get_template("tema/wallpaper.xml").render(Context({"SITE_URL":settings.WEB_URL,"wallpapers":wallpapers}))
     return HttpResponse(xml, mimetype="text/xml")
+
+@permission_required('tema.manage_queue', login_url="/kullanici/giris/")
+def themeitem_queue(request):
+    queue = ThemeItem.objects.filter(status=False)
+    return render_response("tema/queue.html", locals())
