@@ -28,6 +28,7 @@ class RegisterForm(forms.Form):
     password_again = forms.CharField(label='Parola (tekrar)', max_length=32, widget=forms.PasswordInput, help_text='En az 5 karakter')
     city = forms.ChoiceField(label='Şehir', choices=CITY_LIST)
     homepage = forms.URLField(label='Web Sayfası', verify_exists=False, required=False, help_text='(zorunlu değil)')
+    pardus_version = forms.ChoiceField(label="Kullandığınız Pardus sürümü", required=False, choices=PARDUS_VERSIONS)
     msn = forms.EmailField(label='MSN', max_length=50, required=False, help_text='(zorunlu değil)')
     jabber = forms.EmailField(label='Jabber', max_length=50, required=False, help_text='(zorunlu değil)')
     icq = forms.CharField(label='ICQ', max_length=15, required=False, help_text='(zorunlu değil)')

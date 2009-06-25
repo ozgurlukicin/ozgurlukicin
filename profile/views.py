@@ -175,6 +175,8 @@ def user_register(request):
             profile.jabber = form.cleaned_data['jabber']
             profile.msn = form.cleaned_data['msn']
             profile.icq = form.cleaned_data['icq']
+            if form.cleaned_data['pardus_version'] != 0:
+                profile.pardus_version = form.cleaned_data['pardus_version']
             profile.save()
 
             for number in form.cleaned_data['contributes']: # it's ManyToManyField's unique id
