@@ -128,6 +128,7 @@ def user_profile_edit(request):
                 'longitude': u.get_profile().longitude,
                 'show_email': u.get_profile().show_email,
                 'show_birthday': u.get_profile().show_birthday,
+                'pardus_version': u.get_profile().pardus_version,
                 }
 
         form = ProfileEditForm(default_data)
