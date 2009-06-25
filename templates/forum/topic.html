@@ -62,7 +62,7 @@
         <div class="avatar"><img src="{% avatar_url post.author.email 100 "g" post.author.get_profile.avatar.file.url %}" alt="avatar" width="100" height="100"></div>
         {% if perms.forum.can_see_post_ip %}<div class="ip">({{ post.ip }})</div>{% endif %}
         <div class="register_date">Kayıt Tarihi:<br />{{ post.author.date_joined|date:"d-m-Y" }}</div>
-        {% if post.author.get_profile.pardus_version %}<div class="register_date">Sürüm:<br /><strong>{{ post.author.get_profile.get_pardus_version_display }}</strong></div>{% endif %}
+        {% if post.author.get_profile.pardus_version %}<div class="register_date">Sürüm: <strong>{{ post.author.get_profile.get_pardus_version_display }}</strong></div>{% endif %}
         <div class="button"><a href="/kullanici/profil/{{ post.author }}"><img src="/media/img/new/button_info.png" alt="bilgi" /></a></div>
     </div>
     <div class="post_message">

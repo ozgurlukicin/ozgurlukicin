@@ -57,7 +57,7 @@
 }
 .post_message_content img { max-width:623px }
 .post_message_text {
-    min-height: 280px;
+    min-height: 250px;
 }
 .post_message_content hr {
     border: 0px;
