@@ -16,7 +16,7 @@ from oi.middleware import threadlocals
 from oi.settings import CITY_LIST
 from oi.st.models import Contribute
 from oi.st.forms import XssField
-from oi.profile.models import ForbiddenUsername, Avatar, LostPassword, Profile
+from oi.profile.models import ForbiddenUsername, Avatar, LostPassword, Profile, PARDUS_VERSIONS
 
 class RegisterForm(forms.Form):
     username = forms.CharField(label='Kullanıcı Adı', max_length=20, help_text='En az 3, en fazla 20 karakter')
@@ -109,6 +109,7 @@ class ProfileEditForm(forms.Form):
     msn = forms.EmailField(label='MSN', max_length=50, required=False)
     jabber = forms.EmailField(label='Jabber', max_length=50, required=False)
     icq = forms.CharField(label='ICQ', max_length=15, required=False)
+    pardus_version = forms.ChoiceField(label="Kullandığınız Pardus sürümü", required=False, choices=PARDUS_VERSIONS)
     show_email = forms.BooleanField(label='E-posta Adresini Göster', required=False, help_text='Profil sayfasında diğerleri e-posta adresinizi görsün mü?')
     show_birthday = forms.BooleanField(label='Doğum Tarihini Göster', required=False, help_text='Profil sayfasında diğerleri doğum tarihinizi görebilsin mi?')
     bio = XssField(label="Kendinizi Tanıtın", required=False, help_text="Burada kısaca kendinizi tanıtabilirsiniz. Yazdıklarınız profilinizde görünecektir.", max_length=2048, widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}))

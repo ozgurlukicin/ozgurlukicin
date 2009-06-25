@@ -86,6 +86,8 @@ def user_profile_edit(request):
             u.get_profile().msn = form.cleaned_data['msn']
             u.get_profile().icq = form.cleaned_data['icq']
             u.get_profile().birthday = form.cleaned_data['birthday']
+            if form.cleaned_data['pardus_version'] != 0:
+                u.get_profile().pardus_version = form.cleaned_data['pardus_version']
             u.get_profile().show_email = form.cleaned_data['show_email']
             u.get_profile().show_birthday = form.cleaned_data['show_birthday']
             u.get_profile().latitude = form.cleaned_data['latitude']

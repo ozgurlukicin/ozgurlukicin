@@ -17,6 +17,14 @@ from oi.st.models import Contribute
 
 from oi.shop.shopprofile.models import ShopProfile
 
+PARDUS_VERSIONS = (
+    (0, "---"),
+    (4,"Pardus 2009"),
+    (3,"Pardus 2008"),
+    (2,"Pardus 2007"),
+    (1,"Pardus 1.0"),
+)
+
 class ForbiddenUsername(models.Model):
     name = models.CharField("Kullanıcı adı", max_length=30)
 
@@ -66,6 +74,7 @@ class Profile(models.Model):
     jabber = models.EmailField('Jabber', max_length=50, blank=True)
     icq = models.CharField('ICQ', max_length=15, blank=True)
     city = models.CharField('Şehir', blank=True, choices=CITY_LIST, max_length=40)
+    pardus_version = models.IntegerField(blank=True, null=True, choices=PARDUS_VERSIONS)
     show_email = models.BooleanField('E-posta Göster', default=0)
     show_birthday = models.BooleanField('Doğum Tarihini Göster', default=0)
     contributes = models.ManyToManyField(Contribute, blank=True, verbose_name='Katkılar')

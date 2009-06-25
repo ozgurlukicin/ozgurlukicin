@@ -69,6 +69,11 @@
             <div class="profile_info">
                 <div class="profile_titles">Kayıt Tarihi </div><div class="profile_value">: {{ info.date_joined|date:"d F Y" }}</div>
             </div>
+            {% if info.get_profile.pardus_version %}
+            <div class="profile_info">
+                <div class="profile_titles">Pardus Sürümü </div><div class="profile_value">: {{ info.get_profile.get_pardus_version_display }}</div>
+            </div>
+            {% endif %}
 
             <h3>İletişim Bilgileri</h3>
 
