@@ -170,6 +170,9 @@ def themeitem_add_wallpaper(request):
             item.submit = item.update = datetime.datetime.now()
             slug = slugify(replace_turkish(item.title))
             item.save()
+            for tag in form.cleaned_data["tags"]:
+                t=Tag.objects.get(name=tag)
+                item.tags.add(t)
             item.slug = str(item.id) + "-" + slug
             item.save()
             for form in fileforms.forms:

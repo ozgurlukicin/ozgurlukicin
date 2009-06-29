@@ -13,10 +13,20 @@
     <div class="themeitem_author"><a href="/tema/kullanici/{{ object.author }}/">{{ object.author }}</a></div>
     <div class="themeitem_description">Tanım:<br />{{ object.text|linebreaksbr }}</div>
     <div class="themeitem_license">Lisans: {{ object.license }}</div>
+    <div class="themeitem_tags">{% for tag in object.tags.all %}{{ tag }}{% endfor %}</div>
     <div class="themeitem_downloads">
         {% for paper in object.papers.all %}
         <a href="{{ paper.image.url }}">{{ paper.title }}</a><br/>
         {% endfor %}
+    </div>
+    <div class="themeitem_comments">
+        <a href="{{ object.topic.get_latest_post_url }}" title="Yorumlar">
+        {% if object.topic.posts|add:"-1" %}
+            {{ object.topic.posts|add:"-1" }} tane yorum yapıldı.
+        {% else %}
+            İlk yorum yapan siz olun!
+        {% endif %}
+        </a>
     </div>
 </div>
 {% endblock %}
