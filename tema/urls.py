@@ -19,7 +19,7 @@ user_feed_dict = {
 urlpatterns = patterns ('oi.tema.views',
         #the first page listing
         (r'^$','themeitem_list'),
-        (r'^(?P<category>[a-z0-9-_]+)/(?P<item_id>[0-9]+)/$','themeitem_detail'),
+        (r'^(?P<category>[a-z0-9-_]+)/(?P<slug>[a-z0-9-_]+)/$','themeitem_detail'),
         (r'^duzenle/(?P<item_id>[0-9]+)/$','themeitem_change'),
         (r'^kullanici/(?P<username>[a-z]+)/$','list_user'),
         (r'^oyla/(?P<item_id>[0-9]+)/(?P<rating>[0-4])/$','vote'),

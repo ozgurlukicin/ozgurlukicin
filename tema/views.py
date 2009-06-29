@@ -15,7 +15,7 @@ from oi.tema.settings import THEME_ITEM_PER_PAGE
 
 from django.views.generic.list_detail import object_list
 from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
@@ -88,13 +88,12 @@ def themeitem_list(request, category=None):
     """
     return object_list(request, **params)
 
-def themeitem_detail(request, category, item_id):
-    object = get_object_or_404(ThemeItem, pk=item_id)
-    if not object.approved and not request.user == object.author:
-        return render_response(request, "404.html")
-
-    if request.user == object.author or request.user.has_perm("can_change_themeitem"):
+def themeitem_detail(request, category, slug):
+    if request.user.has_perm("tema.change_themeitem"):
+        object = get_object_or_404(ThemeItem, slug=slug)
         button_change = True
+    else:
+        object = get_object_or_404(ThemeItem, slug=slug, status=True)
 
     return render_response(request, 'tema/themeitem_detail.html', locals())
 
@@ -172,6 +171,12 @@ def themeitem_add_wallpaper(request):
                 if form.cleaned_data["create_smaller_wallpapers"]:
                     item.create_smaller_wallpapers(paper)
                 item.papers.add(paper)
+            firstpaper = item.papers.all()[0]
+            thumbnail = Image.open(firstpaper.image.path)
+            thumbnail.thumbnail((150,200), Image.ANTIALIAS)
+            file = ContentFile("")
+            item.thumbnail.save(firstpaper.image.path, file, save=True)
+            thumbnail.save(item.thumbnail.path)
             #TODO: Send e-mail to admins
             return render_response(request, "tema/themeitem_add_complete.html", locals())
     else:

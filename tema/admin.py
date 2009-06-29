@@ -11,7 +11,7 @@ from oi.tema.models import *
 class ThemeItemAdmin(admin.ModelAdmin):
     fieldsets = (
             (None, {
-                "fields": ("title", "text", "changelog", "status")
+                "fields": ("title", "slug", "text", "changelog", "status")
                 }),
             ("Diğer", {
                 "classes": "collapse",
@@ -26,7 +26,7 @@ class ThemeItemAdmin(admin.ModelAdmin):
 class WallpaperAdmin(ThemeItemAdmin):
     fieldsets = (
             (None, {
-                "fields": ("title", "text", "changelog", "papers", "status")
+                "fields": ("title", "slug", "text", "changelog", "papers", "status")
                 }),
             ("Diğer", {
                 "classes": "collapse",

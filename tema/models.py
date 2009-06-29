@@ -92,6 +92,9 @@ class Wallpaper(ThemeItem):
     def get_absolute_url(self):
         return "/tema/duvar-kagitlari/%s/" % (self.slug)
 
+    def get_download_url(self):
+        return self.papers.all()[0].image.url
+
     def create_smaller_wallpapers(self, wallpaper, create_other_ratioes=False):
         "create smaller wallpapers from given one"
         #make smaller sizes
