@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 from django.core.files.base import ContentFile
 
 from oi.st.tags import Tag
+from oi.forum.models import Topic
 
 CATEGORIES = (
     ("duvar-kagitlari", "Duvar Kağıtları"),
