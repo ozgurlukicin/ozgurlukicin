@@ -22,6 +22,28 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.forms.formsets import formset_factory
 from django.template import Context, loader
 from django.conf import settings
+from django.template.defaultfilters import slugify
+
+TURKISH_CHARS = (
+    ("ç", "c"),
+    ("ğ", "g"),
+    ("ı", "i"),
+    ("ö", "o"),
+    ("ş", "s"),
+    ("ü", "u"),
+    ("Ç", "c"),
+    ("Ğ", "g"),
+    ("İ", "i"),
+    ("Ö", "o"),
+    ("Ş", "s"),
+    ("Ü", "u"),
+)
+
+def replace_turkish(text):
+    #replace Turkish characters
+    for i in TURKISH_CHARS:
+        text = text.replace(i[0], i[1])
+    return text
 
 def themeitem_list(request, category=None):
     "List approved theme items"
@@ -56,6 +78,7 @@ def themeitem_list(request, category=None):
     params = {
             "queryset": themeItems,
             "paginate_by": THEME_ITEM_PER_PAGE,
+            "template_name": "tema/themeitem_list.html",
     }
     """
     "extra_context": {
@@ -136,7 +159,9 @@ def themeitem_add_wallpaper(request):
             item = form.save(commit=False)
             item.author = request.user
             item.submit = item.update = datetime.datetime.now()
-            item.slug = str(item.id)
+            slug = slugify(replace_turkish(item.title))
+            item.save()
+            item.slug = str(item.id) + "-" + slug
             item.save()
             for form in fileforms.forms:
                 paper = form.save(commit=False)

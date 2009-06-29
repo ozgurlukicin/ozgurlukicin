@@ -50,8 +50,8 @@ class License(models.Model):
 
 class ThemeItem(models.Model):
     "A theme item mainly consists of screenshots and files to download"
-    title = models.CharField(max_length=100, unique=True, verbose_name="Başlık", help_text="Buraya, ekleyeceğiniz içeriğin ismini yazın.")
-    slug = models.SlugField('SEF Başlık')
+    title = models.CharField(max_length=100, verbose_name="Başlık", help_text="Buraya, ekleyeceğiniz içeriğin ismini yazın.")
+    slug = models.SlugField('SEF Başlık', unique=True, blank=True)
     tags = models.ManyToManyField(Tag, verbose_name="Etiketler")
     author = models.ForeignKey(User)
     license = models.ForeignKey(License, verbose_name="Lisans")
