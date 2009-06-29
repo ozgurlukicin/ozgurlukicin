@@ -39,7 +39,13 @@ function load() {
 {% block content %}
 <div class="page_title">Özgürlükiçin Kullanıcıları Listesi</div>
 <p>Haritayı yaklaştırdıkça daha çok kullanıcı listelenecektir.</p>
-<div id="id_map" class="googlemap" style="width:610px;height:400px;"></div>
+<div id="id_map" class="googlemap" style="width:610px;height:400px;margin-bottom:10px"></div>
+<hr/><br/>
+<div class="page_title">Pardus Sürümleri Grafiği</div>
+<p>Aşağıdaki grafikte profilinde kullandığı Pardus sürümünü seçen kullanıcılarımızın sayısı görülmektedir.</p>
+<div id="chart">
+    <img src="{{ chartUrl }}" alt="Pardus sürümleri grafiği" />
+</div>
 {% endblock %}
 {% block leftcolumn %}
 <div class="sidebarcolumn leftcolumn">

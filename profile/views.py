@@ -320,4 +320,14 @@ def reset_password(request, key):
 @login_required
 def user_list(request):
     profiles = Profile.objects.exclude(latitude=0, longitude=0)
-    return render_response(request, "user/user_list.html", {"profiles":profiles,"apikey":googleMapsApiKey})
+    versions = {
+        "Pardus 1.0": Profile.objects.filter(pardus_version=1).count(),
+        "Pardus 2007": Profile.objects.filter(pardus_version=2).count(),
+        "Pardus 2008": Profile.objects.filter(pardus_version=3).count(),
+        "Pardus 2009": Profile.objects.filter(pardus_version=4).count(),
+    }
+    chl, chd = "", ""
+    for key in versions.keys(): chl += "%s (%d)" % (key, versions[key]) + "|"
+    for key in versions.values(): chd += str(key) + ","
+    chartUrl = "http://chart.apis.google.com/chart?chs=600x200&cht=p3&chl=%s&chd=t:%s" % (chl[:-1], chd[:-1])
+    return render_response(request, "user/user_list.html", {"profiles":profiles,"apikey":googleMapsApiKey, "chartUrl": chartUrl})
