@@ -34,7 +34,7 @@ vote_choices = (
 class ThemeItemForm(forms.ModelForm):
     class Meta:
         model = ThemeItem
-        exclude = ("parentcategory", "thumbnail", "author", "rating", "download_count", "submit", "update", "status", "slug")
+        exclude = ("parentcategory", "thumbnail", "author", "rating", "download_count", "submit", "update", "status", "slug", "topic")
 
 class ThemeTypeForm(forms.Form):
     category = forms.ChoiceField(label="Kategori", choices=CATEGORIES, help_text="Ekleyeceğiniz içerik için bir kategori seçin")
@@ -42,7 +42,7 @@ class ThemeTypeForm(forms.Form):
 class WallpaperForm(forms.ModelForm):
     class Meta:
         model = Wallpaper
-        exclude = ("author", "rating", "category", "thumbnail", "download_count", "submit", "update", "status", "scalable", "papers", "changelog", "slug")
+        exclude = ("author", "rating", "category", "thumbnail", "download_count", "submit", "update", "status", "scalable", "papers", "changelog", "slug", "topic")
 
 class WallpaperFileForm(forms.ModelForm):
     create_smaller_wallpapers = forms.BooleanField(label="Küçüklerini Oluştur", required=False, initial=True, help_text="Büyük bir duvar kağıdı gönderiyorsanız bu seçenekle küçüklerinin otomatik oluşturulmasını sağlayabilirsiniz.")

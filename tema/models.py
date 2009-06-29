@@ -13,6 +13,7 @@ from django.core.files.base import ContentFile
 
 from oi.st.tags import Tag
 from oi.forum.models import Topic
+from oi.forum.tools import create_forum_topic
 
 CATEGORIES = (
     ("duvar-kagitlari", "Duvar Kağıtları"),
@@ -70,6 +71,10 @@ class ThemeItem(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    def save(self):
+        create_forum_topic(self, "Tema")
+        super(ThemeItem, self).save()
 
     class Meta:
         verbose_name="Sanat Birimi"
