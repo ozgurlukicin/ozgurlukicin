@@ -89,13 +89,21 @@ def themeitem_list(request, category=None):
     return object_list(request, **params)
 
 def themeitem_detail(request, category, slug):
+    type = ThemeItem
+    template_name = "tema/themeitem_detail"
+    if category == "duvar-kagitlari":
+        type = Wallpaper
+        template_name = "tema/themeitem_wallpaper_detail.html"
     if request.user.has_perm("tema.change_themeitem"):
-        object = get_object_or_404(ThemeItem, slug=slug)
+        object = get_object_or_404(type, slug=slug)
         button_change = True
     else:
-        object = get_object_or_404(ThemeItem, slug=slug, status=True)
+        object = get_object_or_404(type, slug=slug, status=True)
 
-    return render_response(request, 'tema/themeitem_detail.html', locals())
+    template_name = "tema/themeitem_detail"
+    if category == "duvar-kagitlari":
+        template_name = "tema/themeitem_wallpaper_detail.html"
+    return render_response(request, template_name, locals())
 
 def list_user(request, username):
     "Theme items of a user"
