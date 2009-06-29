@@ -64,8 +64,8 @@ class ThemeItem(models.Model):
     update = models.DateTimeField(verbose_name="Düzenlenme Tarihi")
     comment_enabled = models.BooleanField(default=True,verbose_name="Yoruma Açık", help_text="Diğer üyelerin bu içeriğe yorum yapıp yapamayacağını buradan belirtebilirsiniz.")
     thumbnail = models.ImageField("Küçük Resim", blank=True, upload_to="upload/tema/kucuk/")
-    #TODO: change this to False before we're on air
-    status = models.BooleanField(default=True, verbose_name="Kabul Edilmiş")
+    status = models.BooleanField(default=False, verbose_name="Kabul Edilmiş")
+    topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
 
     def __unicode__(self):
         return self.title
