@@ -5,6 +5,8 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
+import re
+
 from django import forms
 
 from oi.shipit.models import *

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+{% endblock %}
+{% block title %}CD Gönder - {% endblock %}
+{% block content %}
+<form method="POST" action="">
+    <h2>Pardus CD'si İstek Formu</h2>
+    {% for field in form %}
+    {% include "formfields.html" %}
+    {% endfor %}
+    <input type="Submit" value="Gönder" />
+</form>
+{% endblock %}

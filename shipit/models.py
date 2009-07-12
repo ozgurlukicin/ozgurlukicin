@@ -5,21 +5,27 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
+import random, sha
+
 from django.db import models
 
 from oi.settings import CITY_LIST
 
 class CdClient(models.Model):
-    firstname = models.CharField("Ad", max_length=30)
-    lastname = models.CharField("Soyad", max_length=30)
+    first_name = models.CharField("Ad", max_length=30)
+    last_name = models.CharField("Soyad", max_length=30)
+    email = models.EmailField("E-Posta")
     address = models.TextField("Adres")
     postcode = models.CharField("Posta Kodu", blank=True, max_length=5)
     town = models.CharField("İlçe", max_length=40)
     city = models.CharField("Şehir", choices=CITY_LIST, max_length=40)
     phone_area = models.CharField("Alan Kodu", max_length=3)
     phone_number = models.CharField("Telefon Numarası", max_length=7)
+
+    confirmed = models.BooleanField("Onaylandı")
     sent = models.BooleanField("Gönderildi")
     taken = models.BooleanField("Alındı")
+    hash = models.CharField("Etkinleştirme Anahtarı", max_length=40)
 
     def get_full_name(self):
         return u"%s %s" % (self.first_name, self.last_name)
@@ -29,3 +35,10 @@ class CdClient(models.Model):
 
     def __unicode__(self):
         return self.get_full_name()
+
+    def save(self):
+        if not self.hash:
+            random.seed()
+            salt = sha.new(str(random.random())).hexdigest()
+            self.hash = sha.new(salt).hexdigest()
+        super(CdClient, self).save()

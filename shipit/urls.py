@@ -7,6 +7,7 @@
 
 from django.conf.urls.defaults import *
 
-urlpatterns = patterns('',
-    (r'^$', 'oi.shipit.views.create_cdclient'),
+urlpatterns = patterns('oi.shipit.views',
+    (r'^$', 'create_cdclient'),
+    (r'^onay/(?P<id>\d+)/(?P<hash>[\w]{40})/$', 'confirm_cdclient'),
 )
