@@ -11,4 +11,5 @@ urlpatterns = patterns('oi.shipit.views',
     (r'^$', 'create_cdclient'),
     (r'^liste/$', 'cdclient_list'),
     (r'^onay/(?P<id>\d+)/(?P<hash>[\w]{40})/$', 'confirm_cdclient'),
+    (r'^duzenle/(?P<id>\d+)/$', 'change_cdclient'),
 )

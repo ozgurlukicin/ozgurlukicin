@@ -37,3 +37,8 @@ class CdClientForm(forms.ModelForm):
         if not match:
             raise forms.ValidationError("Lütfen geçerli bir telefon numarası girin.")
         return phone_number
+
+class CdClientChangeForm(CdClientForm):
+    class Meta:
+        model = CdClient
+        exclude = ("ip", "hash")

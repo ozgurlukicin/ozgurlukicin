@@ -49,8 +49,19 @@ def confirm_cdclient(request, id, hash):
 def cdclient_list(request):
     cdClients = CdClient.objects.filter(confirmed=True)
     return object_list(
-            request,
-            cdClients,
-            paginate_by = CDCLIENTS_PER_PAGE,
-            allow_empty = True,
-            )
+        request,
+        cdClients,
+        paginate_by = CDCLIENTS_PER_PAGE,
+        allow_empty = True,
+    )
+
+@permission_required("shipit.change_cdclient")
+def change_cdclient(request, id):
+    cdClient = get_object_or_404(CdClient, id=id)
+    if request.method == "POST":
+        form = CdClientChangeForm(request.POST, instance=cdClient)
+        if form.is_valid():
+            form.save()
+    else:
+        form = CdClientChangeForm(instance=cdClient)
+    return render_response(request, "shipit/change_cdclient.html", locals())
