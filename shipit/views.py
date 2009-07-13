@@ -27,10 +27,16 @@ def create_cdclient(request):
             mail.send(fail_silently=True)
             return render_response(request, "shipit/sent.html", locals())
     else:
-        form = CdClientForm()
+        initial = {}
+        if request.user.is_authenticated():
+            initial["first_name"] = request.user.first_name
+            initial["last_name"] = request.user.last_name
+            initial["email"] = request.user.email
+            initial["city"] = request.user.get_profile().city
+        form = CdClientForm(initial=initial)
     return render_response(request, "shipit/create_cdclient.html", locals())
 
-def confirm_cdclient(self, id, hash):
+def confirm_cdclient(request, id, hash):
     cdClient = get_object_or_404(CdClient, id=id, hash=hash, confirmed=False)
     cdClient.confirmed = True
     cdClient.save()
