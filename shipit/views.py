@@ -8,9 +8,12 @@
 from django.shortcuts import get_object_or_404
 from django.core.mail import EmailMessage
 from django.template import Context, loader
+from django.contrib.auth.decorators import permission_required
+from django.views.generic.list_detail import object_list
 
 from oi.shipit.forms import *
 from oi.shipit.models import *
+from oi.shipit.settings import *
 from oi.st.wrappers import render_response
 from oi.settings import DEFAULT_FROM_EMAIL
 from oi.forum.views import flood_control
@@ -41,3 +44,13 @@ def confirm_cdclient(request, id, hash):
     cdClient.confirmed = True
     cdClient.save()
     return render_response(request, "shipit/confirmed.html", locals())
+
+@permission_required("shipit.change_cdclient")
+def cdclient_list(request):
+    cdClients = CdClient.objects.filter(confirmed=True)
+    return object_list(
+            request,
+            cdClients,
+            paginate_by = CDCLIENTS_PER_PAGE,
+            allow_empty = True,
+            )
