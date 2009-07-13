@@ -18,17 +18,17 @@ class CdClientForm(forms.ModelForm):
 
     def clean_postcode(self):
         postcode = self.cleaned_data["postcode"]
-        match = re.match(re.compile(r"^\d{5}$"), postcode)
-        if not match:
-            raise forms.ValidationError("Lütfen geçerli bir posta kodu girin.")
+        if postcode:
+            match = re.match(re.compile(r"^\d{5}$"), postcode)
+            if not match:
+                raise forms.ValidationError("Lütfen geçerli bir posta kodu girin veya boş bırakın.")
         return postcode
 
     def clean_phone_area(self):
         phone_area = self.cleaned_data["phone_area"]
-        if phone_area:
-            match = re.match(re.compile(r"^\d{3}$"), phone_area)
-            if not match:
-                raise forms.ValidationError("Lütfen geçerli bir alan kodu girin.")
+        match = re.match(re.compile(r"^\d{3}$"), phone_area)
+        if not match:
+            raise forms.ValidationError("Lütfen geçerli bir alan kodu girin.")
         return phone_area
 
     def clean_phone_number(self):
