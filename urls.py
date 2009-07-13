@@ -189,6 +189,9 @@ urlpatterns = patterns('',
     # Ezine
     (r'^e-dergi/', include('oi.ezine.urls')),
 
+    #Shipit
+    (r'^cdgonder/', include('oi.shipit.urls')),
+
     #Webalizer
     url(r'^admin/webalizer/', include('webalizer.urls')),
 
