@@ -8,6 +8,7 @@
 import random, sha
 
 from django.db import models
+from django.contrib.sites.models import Site
 
 from oi.settings import CITY_LIST
 from oi.middleware import threadlocals
@@ -50,3 +51,6 @@ class CdClient(models.Model):
         if not self.ip:
             self.ip = threadlocals.get_current_ip()
         super(CdClient, self).save()
+
+    def get_confirm_url(self):
+        return "http://%s/cdgonder/%s/%s/" % (Site.objects.get_current().domain, self.id, self.hash)
