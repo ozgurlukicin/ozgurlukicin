@@ -77,3 +77,8 @@ def change_cdclient(request, id):
     else:
         form = CdClientChangeForm(instance=cdClient)
     return render_response(request, "shipit/change_cdclient.html", locals())
+
+@permission_required("shipit.change_cdclient")
+def cdclient_detail(request, id):
+    cdClient = get_object_or_404(CdClient, id=id)
+    return render_response(request, "shipit/cdclient_detail.html", locals())
