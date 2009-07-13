@@ -43,6 +43,18 @@ def confirm_cdclient(request, id, hash):
     cdClient = get_object_or_404(CdClient, id=id, hash=hash, confirmed=False)
     cdClient.confirmed = True
     cdClient.save()
+    #send mail to lists
+    message = loader.get_template("shipit/confirmed_email.html").render(Context({"cdClient":cdClient}))
+    mail = EmailMessage(
+        "Pardus CD isteği",
+        message,
+        "Özgürlükiçin <%s>" % DEFAULT_FROM_EMAIL,
+        [CD_MAIL_LIST],
+        headers={"Message-ID":"%s-%s" % (cdClient.id, cdClient.hash)}
+    )
+    mail.content_subtype = "html"
+    mail.send(fail_silently=True)
+
     return render_response(request, "shipit/confirmed.html", locals())
 
 @permission_required("shipit.change_cdclient")
