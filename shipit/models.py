@@ -10,6 +10,7 @@ import random, sha
 from django.db import models
 
 from oi.settings import CITY_LIST
+from oi.middleware import threadlocals
 
 class CdClient(models.Model):
     first_name = models.CharField("Ad", max_length=30)
@@ -21,6 +22,8 @@ class CdClient(models.Model):
     city = models.CharField("Şehir", choices=CITY_LIST, max_length=40)
     phone_area = models.CharField("Alan Kodu", max_length=3)
     phone_number = models.CharField("Telefon Numarası", max_length=7)
+    ip = models.IPAddressField(blank=True, verbose_name='IP adresi')
+    date = models.DateTimeField(auto_now_add=True)
 
     confirmed = models.BooleanField("Onaylandı")
     sent = models.BooleanField("Gönderildi")
@@ -41,4 +44,6 @@ class CdClient(models.Model):
             random.seed()
             salt = sha.new(str(random.random())).hexdigest()
             self.hash = sha.new(salt).hexdigest()
+        if not self.ip:
+            self.ip = threadlocals.get_current_ip()
         super(CdClient, self).save()
