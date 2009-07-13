@@ -13,7 +13,7 @@ from oi.shipit.forms import *
 from oi.shipit.models import *
 from oi.st.wrappers import render_response
 from oi.settings import DEFAULT_FROM_EMAIL
-from oi.forum import flood_control
+from oi.forum.views import flood_control
 
 def create_cdclient(request):
     if request.method == "POST":
