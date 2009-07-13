@@ -7,6 +7,7 @@
 
 from django.shortcuts import get_object_or_404
 from django.core.mail import EmailMessage
+from django.template import Context, loader
 
 from oi.shipit.forms import *
 from oi.shipit.models import *
@@ -18,7 +19,7 @@ def create_cdclient(request):
         form = CdClientForm(request.POST.copy())
         if form.is_valid():
             cdClient = form.save()
-            message = loader.get_template("templates/shipit/confirm_email.html").render(Context({"cdClient":cdClient}))
+            message = loader.get_template("shipit/confirm_email.html").render(Context({"cdClient":cdClient}))
             mail = EmailMessage("Pardus CD isteğiniz", message, "Özgürlükiçin <%s>" % DEFAULT_FROM_EMAIL, ["%s <%s>" % (cdClient.get_full_name(), cdClient.email)])
             mail.content_subtype = "html"
             mail.send(fail_silently=True)

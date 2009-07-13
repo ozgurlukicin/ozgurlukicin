@@ -14,7 +14,7 @@ from oi.shipit.models import *
 class CdClientForm(forms.ModelForm):
     class Meta:
         model = CdClient
-        exclude = ("sent", "taken")
+        exclude = ("sent", "taken", "hash", "confirmed")
 
     def clean_postcode(self):
         postcode = self.cleaned_data["postcode"]
