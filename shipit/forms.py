@@ -14,7 +14,7 @@ from oi.shipit.models import *
 class CdClientForm(forms.ModelForm):
     class Meta:
         model = CdClient
-        exclude = ("sent", "taken", "hash", "confirmed")
+        exclude = ("sent", "taken", "hash", "confirmed", "date", "ip")
 
     def clean_postcode(self):
         postcode = self.cleaned_data["postcode"]
@@ -25,9 +25,10 @@ class CdClientForm(forms.ModelForm):
 
     def clean_phone_area(self):
         phone_area = self.cleaned_data["phone_area"]
-        match = re.match(re.compile(r"^\d{3}$"), phone_area)
-        if not match:
-            raise forms.ValidationError("Lütfen geçerli bir alan kodu girin.")
+        if phone_area:
+            match = re.match(re.compile(r"^\d{3}$"), phone_area)
+            if not match:
+                raise forms.ValidationError("Lütfen geçerli bir alan kodu girin.")
         return phone_area
 
     def clean_phone_number(self):
