@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404
 from django.core.mail import EmailMessage
 from django.template import Context, loader
 from django.contrib.auth.decorators import permission_required
-from django.views.generic.list_detail import object_list
+from django.http import HttpResponseRedirect
 
 from oi.shipit.forms import *
 from oi.shipit.models import *
@@ -59,13 +59,16 @@ def confirm_cdclient(request, id, hash):
 
 @permission_required("shipit.change_cdclient")
 def cdclient_list(request):
-    cdClients = CdClient.objects.filter(confirmed=True)
-    return object_list(
-        request,
-        cdClients,
-        paginate_by = CDCLIENTS_PER_PAGE,
-        allow_empty = True,
-    )
+    if request.method == "POST":
+        form = CodeForm(request.POST.copy())
+        if form.is_valid():
+            code = form.cleaned_data["code"]
+            cdClient = CdClient.objects.get(id=int(str(code)[3:]))
+            return HttpResponseRedirect(cdClient.get_absoulte_url())
+    else:
+        form = CodeForm()
+
+    return render_response(request, "shipit/cdclient_list.html", locals())
 
 @permission_required("shipit.change_cdclient")
 def change_cdclient(request, id):

@@ -55,5 +55,8 @@ class CdClient(models.Model):
     def get_confirm_url(self):
         return "http://%s/cdgonder/onay/%s/%s/" % (Site.objects.get_current().domain, self.id, self.hash)
 
+    def get_absoulte_url(self):
+        return "/cdgonder/detay/%s" % self.id
+
     def get_id(self):
         return "700%s" % self.id

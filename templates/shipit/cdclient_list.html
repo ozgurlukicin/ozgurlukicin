@@ -4,13 +4,10 @@
 {% endblock %}
 {% block title %}CD Gönder - {% endblock %}
 {% block content %}
-<ul>
-{% for cdClient in object_list %}
-<li>
-{{ cdClient }} &lt;{{ cdClient.email }}&gt;
-{{ cdClient.address }}
-- {{ cdClient.postcode }} {{ cdClient.town }} / {{ cdClient.get_city_display }}
-</li>
-{% endfor %}
-</ul>
+<form method="POST" action="">
+    {% for field in form %}
+    {% include "formfields.html" %}
+    {% endfor %}
+    <input type="Submit" value="Getir" />
+</form>
 {% endblock %}
