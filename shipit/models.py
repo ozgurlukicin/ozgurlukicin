@@ -13,8 +13,8 @@ from oi.settings import CITY_LIST
 from oi.middleware import threadlocals
 
 class CdClient(models.Model):
-    number_of_cds = models.IntegerField("CD Adedi", default=1)
-    reason = models.TextField("CD isteme sebebiniz", max_length=512)
+    number_of_cds = models.PositiveIntegerField("CD adedi", default=1)
+    reason = models.TextField("CD isteme sebebiniz", max_length=512, blank=True)
     first_name = models.CharField("Ad", max_length=30)
     last_name = models.CharField("Soyad", max_length=30)
     company = models.CharField("Şirket/Kurum", max_length=30, blank=True)

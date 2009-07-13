@@ -16,6 +16,13 @@ class CdClientForm(forms.ModelForm):
         model = CdClient
         exclude = ("sent", "taken", "hash", "confirmed", "date", "ip")
 
+    def clean(self):
+        if self.cleaned_data.has_key("number_of_cds"):
+            if self.cleaned_data["number_of_cds"]>1:
+                if not self.cleaned_data["reason"]:
+                    raise forms.ValidationError("Birden fazla CD istiyorsanız sebebini yazmalısınız.")
+        return self.cleaned_data
+
     def clean_postcode(self):
         postcode = self.cleaned_data["postcode"]
         if postcode:
@@ -37,6 +44,12 @@ class CdClientForm(forms.ModelForm):
         if not match:
             raise forms.ValidationError("Lütfen geçerli bir telefon numarası girin.")
         return phone_number
+
+    def clean_number_of_cds(self):
+        number_of_cds = self.cleaned_data["number_of_cds"]
+        if number_of_cds < 1:
+            raise forms.ValidationError("Lütfen geçerli bir CD sayısı girin.")
+        return number_of_cds
 
 class CdClientChangeForm(CdClientForm):
     class Meta:
