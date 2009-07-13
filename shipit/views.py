@@ -13,11 +13,13 @@ from oi.shipit.forms import *
 from oi.shipit.models import *
 from oi.st.wrappers import render_response
 from oi.settings import DEFAULT_FROM_EMAIL
+from oi.forum import flood_control
 
 def create_cdclient(request):
     if request.method == "POST":
         form = CdClientForm(request.POST.copy())
-        if form.is_valid():
+        flood, timeout = flood_control(request)
+        if form.is_valid() and not flood:
             cdClient = form.save()
             message = loader.get_template("shipit/confirm_email.html").render(Context({"cdClient":cdClient}))
             mail = EmailMessage("Pardus CD isteğiniz", message, "Özgürlükiçin <%s>" % DEFAULT_FROM_EMAIL, ["%s <%s>" % (cdClient.get_full_name(), cdClient.email)])
@@ -28,7 +30,7 @@ def create_cdclient(request):
         form = CdClientForm()
     return render_response(request, "shipit/create_cdclient.html", locals())
 
-def confirm_cdclient(self, id, key):
+def confirm_cdclient(self, id, hash):
     cdClient = get_object_or_404(CdClient, id=id, hash=hash, confirmed=False)
     cdClient.confirmed = True
     cdClient.save()
