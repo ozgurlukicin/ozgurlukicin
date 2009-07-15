@@ -19,9 +19,9 @@ user_feed_dict = {
 urlpatterns = patterns ('oi.tema.views',
         #the first page listing
         (r'^$','themeitem_list'),
-        (r'^duzenle/(?P<item_id>[0-9]+)/$','themeitem_change'),
-        (r'^kullanici/(?P<username>[a-z]+)/$','list_user'),
-        (r'^oyla/(?P<item_id>[0-9]+)/(?P<rating>[0-4])/$','vote'),
+        #(r'^duzenle/(?P<item_id>[0-9]+)/$','themeitem_change'),
+        #(r'^kullanici/(?P<username>[a-z]+)/$','list_user'),
+        #(r'^oyla/(?P<item_id>[0-9]+)/(?P<rating>[0-4])/$','vote'),
         (r'^ekle/$','themeitem_add'),
         (r'^ekle/duvar-kagitlari/$','themeitem_add_wallpaper'),
         (r'^khotnewstuff/wallpaper-providers.xml$', 'ghns_wallpapers'),
@@ -29,13 +29,15 @@ urlpatterns = patterns ('oi.tema.views',
         (r'^khotnewstuff/wallpaper/wallpaper-score.xml$', 'ghns_wallpaper_score'),
         (r'^khotnewstuff/wallpaper/wallpaper-downloads.xml$', 'ghns_wallpaper_downloads'),
         (r'^yonetim/$', 'themeitem_queue'),
+        #(r'^listele/(?P<category>[a-z0-9-_]+)/(?P<sort_type>[a-z0-9-_]+)/$','themeitem_sort'),
         (r'^(?P<category>[a-z0-9-_]+)/$','themeitem_list'),
         (r'^(?P<category>[a-z0-9-_]+)/(?P<slug>[a-z0-9-_]+)/$','themeitem_detail'),
 )
-
+"""
 urlpatterns+=patterns('',
         #the rss feeds
         #(r'^feed/(?P<url>.*)/yeni/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
         (r'^feed/kategori/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': cat_feed_dict}),
         (r'^feed/kullanici/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': user_feed_dict}),
 )
+"""
