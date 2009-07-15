@@ -1,5 +1,7 @@
 {% extends "tema/base.html" %}
 
+{% load gravatar %}
+
 {% block temaextrahead %}
 <style media="screen" type="text/css">@import url('/media/css/new/tema.css');</style>
 {% endblock %}
@@ -9,30 +11,54 @@
 
 <div class="themeitem_main">
     <div class="themeitem_top">
-        <div class="themeitem_top_title">Bu bir title</div>
+        <div class="themeitem_top_title">{{ object.title }}</div>
         <div class="themeitem_top_user">
-            <div class="themeitem_top_user_avatar"><img src="http://www.gravatar.com/avatar/698ad68791be31755e0bb97efc70d243" /></div>
-            <div class="themeitem_top_user_name">Eren</div>
+            <div class="themeitem_top_user_avatar"><a href="{{ object.author.get_profile.get_absolute_url }}"><img src="{% avatar_url object.author.email 50 "g" object.author.get_profile.avatar.file.url %}" /></a></div>
+            <div class="themeitem_top_user_name"><a href="{{ object.author.get_profile.get_absolute_url }}">{{ object.author }}</a></div>
         </div>
     </div>
 
     <div class="themeitem_middle">
         <div class="themeitem_middle_leftcolumn">
-            <div class="themeitem_middle_leftcolumn_thumbnail"><img src="http://localhost:8000/media/82436-Linux3.jpg" /></div>
-            <div class="themeitem_middle_leftcolumn_resolution"><a href="a">1280x1900</a><br /><a href="a">1280x1900</a><br /><a href="a">1280x1900</a></div>
+            <div class="themeitem_middle_leftcolumn_thumbnail"><img src="{{ object.thumbnail.url }}" alt="{{ object.title }}" /></div>
+            <div class="themeitem_middle_leftcolumn_resolution">
+
+                {% for paper in object.papers.all %}
+                 <a href="{{ paper.image.url }}">{{ paper.title }}</a><br/>
+                {% endfor %}
+
+            </div>
+            {% if button_change %}<div class="themeitem_middle_leftcolumn_buttons"><a href="{{ object.get_change_url }}">Düzenle</a></br></div>{% endif %}
         </div>
 
-        <div class="themeitem_middle_rightcolumn">w</div>
+        <div class="themeitem_middle_rightcolumn">
+            <div class="themeitem_middle_rightcolumn_context">
+                <b>Gönderildiği Tarih:</b> {{ object.submit|date:"d F Y" }} <br />
+                <b>İndirilme sayısı:</b> {{ object.download_count }} <br /><br />
+                <hr />
+                <br />
+                {{ object.text }}
+            </div>
+        
+        </div>
 
     </div>
     <div class="themeitem_bottom">
+        <div class="themeitem_bottom_inner">
 
+            <a href="{{ object.topic.get_latest_post_url }}" title="Yorumlar">
+            {% if object.topic.posts|add:"-1" %}
+                {{ object.topic.posts|add:"-1" }} tane yorum yapıldı.
+            {% else %}
+                İlk yorum yapan siz olun!
+            {% endif %}
+            </a>
+        </div>
     </div>
 
 </div>
 
 <!--
-{% if button_change %}<a href="{{ object.get_change_url }}">Düzenle</a>{% endif %}
 <div class="themeitem">
     <div class="themeitem_title">{{ object.name }}</div>
     <div class="themeitem_screenshots">
