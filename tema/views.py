@@ -186,12 +186,20 @@ def themeitem_add_wallpaper(request):
                 if form.cleaned_data["create_smaller_wallpapers"]:
                     item.create_smaller_wallpapers(paper)
                 item.papers.add(paper)
+
+            #create thumbnail from first paper
             firstpaper = item.papers.all()[0]
             thumbnail = Image.open(firstpaper.image.path)
             thumbnail.thumbnail((150,200), Image.ANTIALIAS)
             file = ContentFile("")
             item.thumbnail.save(firstpaper.image.path, file, save=True)
             thumbnail.save(item.thumbnail.path)
+
+            #update topic post with the thumbnail
+            post = item.topic.post_set.order_by("created")[0]
+            post.text = loader.get_template("tema/forum_wallpaper.html").render(Context({"object":item}))
+            post.save()
+
             #TODO: Send e-mail to admins
             return render_response(request, "tema/themeitem_add_complete.html", locals())
     else:

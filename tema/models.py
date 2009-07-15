@@ -10,6 +10,7 @@ from PIL import Image
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.files.base import ContentFile
+from django.template import Context, loader
 
 from oi.st.tags import Tag
 from oi.forum.models import Topic
@@ -74,6 +75,12 @@ class ThemeItem(models.Model):
 
     def save(self):
         create_forum_topic(self, "Tema")
+        if self.thumbnail:
+            #update topic post with the thumbnail
+            post = self.topic.post_set.order_by("created")[0]
+            post.text = loader.get_template("tema/forum_wallpaper.html").render(Context({"object":self}))
+            post.save()
+
         super(ThemeItem, self).save()
 
     class Meta:
