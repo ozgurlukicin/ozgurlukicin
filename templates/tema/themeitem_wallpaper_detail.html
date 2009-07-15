@@ -33,8 +33,7 @@
 
         <div class="themeitem_middle_rightcolumn">
             <div class="themeitem_middle_rightcolumn_context">
-                <b>Gönderildiği Tarih:</b> {{ object.submit|date:"d F Y" }} <br />
-                <b>İndirilme sayısı:</b> {{ object.download_count }} <br /><br />
+                <b>Gönderildiği Tarih:</b> {{ object.submit|date:"d F Y" }} <br /><br />
                 <hr />
                 <br />
                 {{ object.text }}
@@ -57,35 +56,4 @@
     </div>
 
 </div>
-
-<!--
-<div class="themeitem">
-    <div class="themeitem_title">{{ object.name }}</div>
-    <div class="themeitem_screenshots">
-        <a href="{{ object.get_download_url }}"><img src="{{ object.thumbnail.url }}" alt="ekran görüntüsü"/></a>
-    </div>
-    <div class="themeitem_category"><a href="{{ object.category.get_absolute_url }}">{{ object.category }}</a></div>
-    <div class="themeitem_edit_date">{{ object.submit_date|date:"d F Y" }}</div>
-    <div class="themeitem_download_count">{{ object.download_count }}</div>
-    <div class="themeitem_rating">{{ object.rating }} <a href="/tema/oyla/{{ object.id }}/0/">0</a> <a href="/tema/oyla/{{ object.id }}/1/">1</a> <a href="/tema/oyla/{{ object.id }}/2/">2</a> <a href="/tema/oyla/{{ object.id }}/3/">3</a> <a href="/tema/oyla/{{ object.id }}/4/">4</a></div>
-    <div class="themeitem_author"><a href="/tema/kullanici/{{ object.author }}/">{{ object.author }}</a></div>
-    <div class="themeitem_description">Tanım:<br />{{ object.text|linebreaksbr }}</div>
-    <div class="themeitem_license">Lisans: {{ object.license }}</div>
-    <div class="themeitem_tags">{% for tag in object.tags.all %}{{ tag }}{% endfor %}</div>
-    <div class="themeitem_downloads">
-        {% for paper in object.papers.all %}
-        <a href="{{ paper.image.url }}">{{ paper.title }}</a><br/>
-        {% endfor %}
-    </div>
-    <div class="themeitem_comments">
-        <a href="{{ object.topic.get_latest_post_url }}" title="Yorumlar">
-        {% if object.topic.posts|add:"-1" %}
-            {{ object.topic.posts|add:"-1" }} tane yorum yapıldı.
-        {% else %}
-            İlk yorum yapan siz olun!
-        {% endif %}
-        </a>
-    </div>
-</div>
--->
 {% endblock %}
