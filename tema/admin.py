@@ -11,7 +11,7 @@ from oi.tema.models import *
 class ThemeItemAdmin(admin.ModelAdmin):
     fieldsets = (
             (None, {
-                "fields": ("title", "slug", "text", "changelog", "status", "tags")
+                "fields": ("thumbnail", "title", "slug", "text", "changelog", "status", "tags")
                 }),
             ("Diğer", {
                 "classes": "collapse",
@@ -22,6 +22,12 @@ class ThemeItemAdmin(admin.ModelAdmin):
     list_display_links = ("title",)
     list_filter = ("status", "comment_enabled")
     search_fields = ["title", "text", "changelog"]
+
+    class Media:
+        js = ("js/jquery-1.2.6.min.js", "js/temaimages.js", "js/jquery.autocomplete.js", "js/taghelper.js")
+        css = {
+            "all": ("css/new/autocomplete.css",),
+        }
 
 class WallpaperAdmin(ThemeItemAdmin):
     fieldsets = (
