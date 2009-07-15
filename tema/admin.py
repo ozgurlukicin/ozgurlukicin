@@ -32,7 +32,7 @@ class ThemeItemAdmin(admin.ModelAdmin):
 class WallpaperAdmin(ThemeItemAdmin):
     fieldsets = (
             (None, {
-                "fields": ("title", "slug", "text", "changelog", "papers", "status", "tags")
+                "fields": ("thumbnail", "title", "slug", "text", "changelog", "papers", "status", "tags")
                 }),
             ("Diğer", {
                 "classes": "collapse",
