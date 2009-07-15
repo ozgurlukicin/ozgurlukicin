@@ -6,7 +6,7 @@
 
 .themeitem_top {
     height: 60px;
-    background-color: #EAEAEA;
+    border: 1px #EDEDED solid;
 }
 
 .themeitem_top_title {
@@ -19,7 +19,6 @@
 }
 
 .themeitem_top_user {
-    border: 1px #000000 solid;
     height: 50px;
     width: 187px;
     float: right;
@@ -47,8 +46,41 @@
 /* middle */
 
 .themeitem_middle {
-    height: 400px;
-    background-color: #8C60B0;
+    height: 300px;
+}
+
+.themeitem_middle_leftcolumn {
+    float: left;
+    width: 180px;
+    height: 100%;
+    margin-top: 1px;
+    border: 1px #EDEDED solid;
+}
+
+.themeitem_middle_leftcolumn_thumbnail {
+    float: left;
+    width: 150px;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+.themeitem_middle_leftcolumn_resolution {
+    float: left;
+    width: 100px;
+    margin-left: 30px;
+    margin-top: 13px;
+    text-align: center;
+}
+
+.themeitem_middle_rightcolumn {
+    float: left;
+    margin-left: 1px;
+    margin-top: 1px;
+    height: 100%;
+    width: 460px;
+    border-left: 1px #EDEDED solid;
+    border-top: 1px #EDEDED solid;
+    border-bottom: 1px #EDEDED solid;
 }
 
 /* bottom */
@@ -56,5 +88,6 @@
 .themeitem_bottom {
     height: 30px;
     background-color: #A53723;
+    margin-top: 2px;
 }
 
