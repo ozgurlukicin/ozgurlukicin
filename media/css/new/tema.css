@@ -10,7 +10,8 @@
 }
 
 .themeitem_top_title {
-    width: 280px;
+    width: 430px;
+    height: 40px;
     padding: 10px;
     float: left;
     font-size: 17px;
@@ -72,6 +73,14 @@
     text-align: center;
 }
 
+.themeitem_middle_leftcolumn_buttons {
+    float: left;
+    width: 100px;
+    margin-left: 30px;
+    margin-top: 13px;
+    text-align: center;
+}
+
 .themeitem_middle_rightcolumn {
     float: left;
     margin-left: 1px;
@@ -83,11 +92,28 @@
     border-bottom: 1px #EDEDED solid;
 }
 
+.themeitem_middle_rightcolumn hr {
+    color: #FFFFFF;
+}
+
+.themeitem_middle_rightcolumn_context {
+    margin-top: 5px;
+    margin-left: 8px;
+}
+
 /* bottom */
 
 .themeitem_bottom {
-    height: 30px;
-    background-color: #A53723;
+    height: 26px;
     margin-top: 2px;
+    border: 1px #EDEDED solid;
+}
+
+.themeitem_bottom_inner {
+    float: right;
+    width: 250px;
+    height: 25px;
+    margin-top: 2px;
+    text-align: right;
 }
 
