@@ -1,5 +1,31 @@
 {% extends "tema/base.html" %}
+
+{% block temaextrahead %}
+<style media="screen" type="text/css">@import url('/media/css/new/tema.css');</style>
+{% endblock %}
+
+
 {% block content %}
+
+<div class="themeitem_main">
+    <div class="themeitem_top">
+        <div class="themeitem_top_title">Bu bir title</div>
+        <div class="themeitem_top_user">
+            <div class="themeitem_top_user_avatar"><img src="http://www.gravatar.com/avatar/698ad68791be31755e0bb97efc70d243" /></div>
+            <div class="themeitem_top_user_name">Eren</div>
+        </div>
+    </div>
+
+    <div class="themeitem_middle">
+
+    </div>
+    <div class="themeitem_bottom">
+
+    </div>
+
+</div>
+
+<!--
 {% if button_change %}<a href="{{ object.get_change_url }}">Düzenle</a>{% endif %}
 <div class="themeitem">
     <div class="themeitem_title">{{ object.name }}</div>
@@ -29,4 +55,5 @@
         </a>
     </div>
 </div>
+-->
 {% endblock %}

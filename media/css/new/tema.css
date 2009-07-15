@@ -1,0 +1,60 @@
+.themeitem_main {
+    width: 644px;
+}
+
+/* Top Menu */
+
+.themeitem_top {
+    height: 60px;
+    background-color: #EAEAEA;
+}
+
+.themeitem_top_title {
+    width: 280px;
+    padding: 10px;
+    float: left;
+    font-size: 17px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.themeitem_top_user {
+    border: 1px #000000 solid;
+    height: 50px;
+    width: 187px;
+    float: right;
+    margin-top: 4px;
+    margin-right: 5px;
+}
+
+.themeitem_top_user img {
+    height: 50px;
+}
+
+.themeitem_top_user_avatar {
+    float: left;
+    height: 50px;
+}
+
+.themeitem_top_user_name {
+    height: 20px;
+    width: 137px;
+    text-align: center;
+    float: left;
+    margin-top: 15px;
+}
+
+/* middle */
+
+.themeitem_middle {
+    height: 400px;
+    background-color: #8C60B0;
+}
+
+/* bottom */
+
+.themeitem_bottom {
+    height: 30px;
+    background-color: #A53723;
+}
+
