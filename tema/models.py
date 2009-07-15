@@ -28,15 +28,15 @@ class WallPaperSize:
 
 WALLPAPER_SIZES = (
     #n:normal, w:wide, s:special
-    WallPaperSize( 800.0,  600.0, "n"),
-    WallPaperSize(1024.0,  768.0, "n"),
-    WallPaperSize(1152.0,  864.0, "n"),
-    WallPaperSize(1280.0,  800.0, "w"),
-    WallPaperSize(1280.0, 1024.0, "s"),
-    WallPaperSize(1440.0,  900.0, "w"),
-    WallPaperSize(1600.0, 1200.0, "n"),
-    WallPaperSize(1680.0, 1050.0, "w"),
     WallPaperSize(1920.0, 1200.0, "w"),
+    WallPaperSize(1680.0, 1050.0, "w"),
+    WallPaperSize(1600.0, 1200.0, "n"),
+    WallPaperSize(1440.0,  900.0, "w"),
+    WallPaperSize(1280.0, 1024.0, "s"),
+    WallPaperSize(1280.0,  800.0, "w"),
+    WallPaperSize(1152.0,  864.0, "n"),
+    WallPaperSize(1024.0,  768.0, "n"),
+    WallPaperSize( 800.0,  600.0, "n"),
 )
 
 class License(models.Model):

@@ -47,6 +47,8 @@ def replace_turkish(text):
 
 def themeitem_list(request, category=None):
     "List approved theme items"
+    #this category is fixed for now
+    category = "duvar-kagitlari"
     #first we take approved items
     themeItems = ThemeItem.objects.all()
     if category == "duvar-kagitlari":
