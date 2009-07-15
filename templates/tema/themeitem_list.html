@@ -1,10 +1,26 @@
 {% extends "tema/base.html" %}
+
+{% block temaextrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/object_lists.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
+{% endblock %}
+
 {% block content %}
-<div class="itemlist">
+
+<!-- taken from news list -->
+<div class="summary_container">
 {% for object in object_list %}
-<a href="{{ object.get_absolute_url }}"><img src="{{ object.thumbnail.url }}" alt="ekran görüntüsü"/></a>
-{{ object.title }}
-{{ object.update|date:"d F Y" }}
+    <div class="column first">
+        <img src="{{ object.thumbnail.url }}" alt="{{ object.title }}" /><br />
+        <img src="/media/img/new/image_bottom.png" alt="gölge" />
+        <div class="info"><span class="bold">{{ object.update|date:"d" }} {{ object.update|date:"F"|slice:":3" }}</span> {{ object.update|date:"Y" }} <span class="bold">/</span> <a href="{{ object.topic.get_latest_post_url }}"><span class="bold">{{ object.topic.posts|add:"-1" }}</span> Yorum</a></div>
+    </div>
+    <div class="column">
+        <div class="title"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></div>
+        <div class="summary">{{ object.sum|safe|truncatewords_html:23 }}</div>
+    </div>
+    <div class="{% cycle columnspacer, %}"></div>
 {% endfor %}
 </div>
+
 {% endblock %}
