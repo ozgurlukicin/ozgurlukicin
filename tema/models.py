@@ -13,7 +13,6 @@ from django.core.files.base import ContentFile
 from django.template import Context, loader
 
 from oi.st.tags import Tag
-from oi.st.models import License
 from oi.forum.models import Topic
 from oi.forum.tools import create_forum_topic
 
@@ -40,6 +39,17 @@ WALLPAPER_SIZES = (
     WallPaperSize(1024.0,  768.0, "n"),
     WallPaperSize( 800.0,  600.0, "n"),
 )
+
+class License(models.Model):
+    name = models.CharField(max_length=16, blank=False, unique=True)
+    url = models.URLField()
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Lisans"
+        verbose_name_plural = "Lisanslar"
 
 class ThemeItem(models.Model):
     "A theme item mainly consists of screenshots and files to download"
