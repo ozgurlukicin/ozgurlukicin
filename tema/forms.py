@@ -42,7 +42,7 @@ class ThemeTypeForm(forms.Form):
 class WallpaperForm(forms.ModelForm):
     class Meta:
         model = Wallpaper
-        exclude = ("author", "rating", "category", "thumbnail", "download_count", "submit", "update", "status", "scalable", "papers", "changelog", "slug", "topic")
+        exclude = ("author", "rating", "category", "thumbnail", "download_count", "submit", "update", "status", "scalable", "papers", "changelog", "slug", "topic", "version")
 
 class WallpaperFileForm(forms.ModelForm):
     create_smaller_wallpapers = forms.BooleanField(label="Küçüklerini Oluştur", required=False, initial=True, help_text="Büyük bir duvar kağıdı gönderiyorsanız bu seçenekle küçüklerinin otomatik oluşturulmasını sağlayabilirsiniz.")
