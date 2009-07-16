@@ -4,4 +4,11 @@
     <provider downloadurl="{{ SITE_URL }}/tema/khotnewstuff/wallpaper/wallpaper.xml" downloadurl-score="{{ SITE_URL }}/tema/khotnewstuff/wallpaper/wallpaper-score.xml" downloadurl-downloads="{{ SITE_URL }}/tema/khotnewstuff/wallpaper/wallpaper-downloads.xml" nouploadurl="{{ SITE_URL }}/tema/" webaccess="{{ SITE_URL }}/tema/" >
         <title>Özgürlükiçin Duvar Kağıtları</title>
     </provider>
+    <provider
+        downloadurl="http://download.kde.org/khotnewstuff/wallpaper/wallpaper.xml"
+        downloadurl-score="http://download.kde.org/khotnewstuff/wallpaper/wallpaper-score.xml"
+        downloadurl-downloads="http://download.kde.org/khotnewstuff/wallpaper/wallpaper-downloads.xml"
+        nouploadurl="http://www.kde-look.org/" webaccess="http://www.kde-look.org/" >
+         <title>KDE-Look.org Wallpapers</title>
+    </provider>
 </knewstuffproviders>
