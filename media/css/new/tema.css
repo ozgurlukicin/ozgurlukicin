@@ -116,3 +116,14 @@
     text-align: right;
 }
 
+/* forms */
+#id_comment_enabled, #id_form-0-create_smaller_wallpapers {
+    float: left;
+}
+.field_container {
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.help {
+    clear:left;
+}
