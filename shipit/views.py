@@ -90,7 +90,25 @@ def cdclient_detail(request, id):
 def cdclient_cargo(request, id):
     cdClient = get_object_or_404(CdClient, id=id)
     if request.method == "POST":
-        cdClient.sent = True
-        cdClient.save()
-        return HttpResponseRedirect(cdClient.get_absoulte_url())
+        form = CargoForm(request.POST.copy())
+        if form.is_valid():
+            cargo = form.save(commit=False)
+            cargo.cdclient = cdClient
+            cargo.save()
+            message = loader.get_template("shipit/sent_email.html").render(Context({"cdClient":cdClient,"cargo":cargo}))
+            mail = EmailMessage(
+                "Pardus CD isteğiniz",
+                message,
+                "Özgürlükiçin <%s>" % DEFAULT_FROM_EMAIL,
+                [CD_MAIL_LIST, cdClient.email],
+                headers={"Message-ID":"%s-%s" % (cdClient.id, cdClient.hash)}
+            )
+            mail.content_subtype = "html"
+            mail.send(fail_silently=True)
+            cdClient.sent = True
+            cdClient.save()
+
+            return HttpResponseRedirect(cdClient.get_absoulte_url())
+    else:
+        form = CargoForm()
     return render_response(request, "shipit/cargo.html", locals())

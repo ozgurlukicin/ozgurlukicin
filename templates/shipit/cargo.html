@@ -1,8 +1,9 @@
 {% extends "shipit/base.html" %}
 {% block content %}
 <form method="POST" action="">
-    <p>Bu isteğin kargoya verildiğinden emin misiniz?</p>
+    {% for field in form %}
+    {% include "formfields.html" %}
+    {% endfor %}
     <input type="submit" value="Kargoya Verildi" />
-    <input type="button" value="İptal" onclick="location.href='{{ cdclient.get_absoulte_url }}'" />
 </form>
 {% endblock %}

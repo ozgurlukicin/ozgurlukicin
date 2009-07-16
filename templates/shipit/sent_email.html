@@ -1,0 +1,8 @@
+<p>Sayın {{ cdClient }},</p><br/>
+<p>Özgürlükiçin'den talep ettiğiniz Pardus CD'niz belirttiğiniz adrese kargoyla gönderilmiştir.</p><br/>
+<p>Adres:</p><br/>
+<p>{{ cdClient.address }}</p>
+<p>{{ cdClient.postcode }} {{ cdClient.town }}/{{ cdClient.get_city_display }}</p>
+<p>Tel: {{ cdClient.get_full_phone }}</p><br/>
+<p>Kargo şirketi: <a href="{{ cargo.company.web_site }}">{{ cargo.company }}</a></p>
+<p>Kargo takip kodu: <b>{{ cargo.follow_code }}</b></p>

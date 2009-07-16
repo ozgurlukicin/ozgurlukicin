@@ -73,3 +73,9 @@ class CodeForm(forms.Form):
             except:
                 raise forms.ValidationError("Girdiğiniz kod geçerli değil")
         return icode
+
+class CargoForm(forms.ModelForm):
+    date = forms.DateField(label="Gönderme Tarihi", input_formats=("%d/%m/%Y","%Y-%m-%d"))
+    class Meta:
+        model = Cargo
+        exclude = ("cdclient")

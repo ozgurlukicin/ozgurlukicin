@@ -1,7 +1,7 @@
 {% extends "shipit/base.html" %}
 {% block content %}
 
-{% if cdClient.sent %}Bu istek kargoya verilmiş.{% else %}<a href="{{ cdClient.get_cargo_url }}">Kargoya Verildi</a>{% endif %}
+{% if cdClient.sent %}Bu istek kargoya verilmiş.{% else %}<a href="{{ cdClient.get_cargo_url }}">Kargoya Ver</a>{% endif %}
 <table class="cdclient">
     <tr>
         <td>Sipariş No</td>

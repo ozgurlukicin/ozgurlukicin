@@ -63,3 +63,16 @@ class CdClient(models.Model):
 
     def get_id(self):
         return "700%s" % self.id
+
+class CargoCompany(models.Model):
+    name = models.CharField(max_length=64)
+    web_site = models.URLField("Web sitesi")
+
+    def __unicode__(self):
+        return self.name
+
+class Cargo(models.Model):
+    cdclient = models.ForeignKey(CdClient, unique=True)
+    follow_code = models.CharField("Takip kodu", max_length=20)
+    company = models.ForeignKey(CargoCompany, verbose_name="Kargo şirketi")
+    date = models.DateField()
