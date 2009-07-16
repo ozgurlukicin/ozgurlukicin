@@ -75,7 +75,7 @@ class CodeForm(forms.Form):
         return icode
 
 class CargoForm(forms.ModelForm):
-    date = forms.DateField(label="Gönderme Tarihi", input_formats=("%d/%m/%Y","%Y-%m-%d"))
+    date = forms.DateField(label="Gönderme Tarihi", input_formats=("%d/%m/%Y","%Y-%m-%d"), help_text="15/08/2009 gibi")
     class Meta:
         model = Cargo
         exclude = ("cdclient")
