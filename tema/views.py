@@ -15,7 +15,7 @@ from oi.tema.settings import THEME_ITEM_PER_PAGE
 
 from django.views.generic.list_detail import object_list
 from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound, Http404
 from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
@@ -238,6 +238,16 @@ def themeitem_change(request, item_id):
     else:
         return render_response(request, "tema/message.html", {"type": "error", "message": "Bu işlemi yapmak için yetkiniz yok."})
 
+def themeitem_download(request, category, slug, id):
+    if category == "duvar-kagitlari":
+        object = get_object_or_404(WallpaperFile, id=id)
+        wallpaper = object.wallpaper_set.all()[0]
+        wallpaper.download_count += 1
+        wallpaper.save()
+    else:
+        raise Http404
+    return render_response(request, "tema/themeitem_download.html", locals())
+
 def ghns_wallpapers(request):
     xml = loader.get_template("tema/wallpaper-providers.xml").render(Context({"SITE_URL":settings.WEB_URL}))
     return HttpResponse(xml, mimetype="text/xml")
@@ -253,7 +263,7 @@ def ghns_wallpaper_score(request):
     return HttpResponse(xml, mimetype="text/xml")
 
 def ghns_wallpaper_downloads(request):
-    wallpapers = Wallpaper.objects.filter(status=True).order_by("download_count")
+    wallpapers = Wallpaper.objects.filter(status=True).order_by("download_count", "update")
     xml = loader.get_template("tema/wallpaper.xml").render(Context({"SITE_URL":settings.WEB_URL,"wallpapers":wallpapers}))
     return HttpResponse(xml, mimetype="text/xml")
 

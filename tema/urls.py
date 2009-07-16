@@ -32,6 +32,7 @@ urlpatterns = patterns ('oi.tema.views',
         #(r'^listele/(?P<category>[a-z0-9-_]+)/(?P<sort_type>[a-z0-9-_]+)/$','themeitem_sort'),
         (r'^(?P<category>[a-z0-9-_]+)/$','themeitem_list'),
         (r'^(?P<category>[a-z0-9-_]+)/(?P<slug>[a-z0-9-_]+)/$','themeitem_detail'),
+        (r'^(?P<category>[a-z0-9-_]+)/(?P<slug>[a-z0-9-_]+)/(?P<id>\d+)/$','themeitem_download'),
 )
 """
 urlpatterns+=patterns('',

@@ -24,7 +24,7 @@
             <div class="themeitem_middle_leftcolumn_resolution">
 
                 {% for paper in object.papers.all %}
-                 <a href="{{ paper.image.url }}">{{ paper.title }}</a><br/>
+                 <a href="{{ paper.get_absolute_url }}">{{ paper.title }}</a><br/>
                 {% endfor %}
 
             </div>

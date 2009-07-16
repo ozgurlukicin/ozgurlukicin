@@ -159,6 +159,12 @@ class WallpaperFile(models.Model):
     scalable = models.BooleanField(default=False)
     image = models.ImageField(upload_to="upload/tema/duvar-kagidi/", verbose_name="Duvar Kağıdı")
 
+    def get_absolute_url(self):
+        return "/tema/duvar-kagitlari/%s/%s/" % (self.wallpaper_set.all()[0].slug, self.id)
+
+    def get_download_url(self):
+        return self.image.url
+
     def __unicode__(self):
         return self.title or "..." + self.image.name[-24:]
 
