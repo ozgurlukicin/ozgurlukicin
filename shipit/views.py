@@ -17,6 +17,7 @@ from oi.shipit.settings import *
 from oi.st.wrappers import render_response
 from oi.settings import DEFAULT_FROM_EMAIL
 from oi.forum.views import flood_control
+from oi.settings import WEB_URL
 
 def create_cdclient(request):
     if request.method == "POST":
@@ -44,7 +45,7 @@ def confirm_cdclient(request, id, hash):
     cdClient.confirmed = True
     cdClient.save()
     #send mail to lists
-    message = loader.get_template("shipit/confirmed_email.html").render(Context({"cdClient":cdClient}))
+    message = loader.get_template("shipit/confirmed_email.html").render(Context({"cdClient":cdClient,"WEB_URL":WEB_URL}))
     mail = EmailMessage(
         "Pardus CD isteği",
         message,
