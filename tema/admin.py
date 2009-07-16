@@ -43,4 +43,3 @@ class WallpaperAdmin(ThemeItemAdmin):
 admin.site.register(ThemeItem, ThemeItemAdmin)
 admin.site.register(Wallpaper, WallpaperAdmin)
 admin.site.register(WallpaperFile, admin.ModelAdmin)
-admin.site.register(License, admin.ModelAdmin)
