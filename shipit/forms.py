@@ -16,7 +16,7 @@ class CdClientForm(forms.ModelForm):
     phone_number = forms.CharField(label="Telefon Numarası", max_length=7, widget=forms.TextInput(attrs={"style":"width:130px"}))
     class Meta:
         model = CdClient
-        exclude = ("sent", "taken", "hash", "confirmed", "date", "ip")
+        exclude = ("sent", "taken", "hash", "confirmed", "date", "ip", "reason", "number_of_cds", "company")
 
     def clean(self):
         if self.cleaned_data.has_key("number_of_cds"):

@@ -1,13 +1,7 @@
-{% extends "base.html" %}
-{% block extrahead %}
-<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
-<script language="javascript" type="text/javascript" src="/media/js/shipit.js"></script>
-{% endblock %}
-{% block title %}CD Gönder - {% endblock %}
+{% extends "shipit/base.html" %}
 {% block content %}
 <form method="POST" action="">
     <h2>Pardus CD'si İstek Formu</h2>
-    <p>Özel istek formu için <a href="#" id="specialform">tıklayın.</a></p>
     {% if flood %}<div class="error">Lütfen formu tekrar göndermeden önce {{ timeout }} saniye bekleyiniz.</div>{% endif %}
     {% if form.non_field_errors %}<div class="error">{{ form.non_field_errors }}</div>{% endif %}
     {% for field in form %}
