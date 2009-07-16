@@ -1,21 +1,53 @@
-{% extends "base.html" %}
-{% block extrahead %}
-<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
-{% endblock %}
-{% block title %}CD Gönder - {% endblock %}
+{% extends "shipit/base.html" %}
 {% block content %}
-{{ cdClient.get_id }}
-{{ cdClient.get_full_name }}
-{{ cdClient.company }}
-{{ cdClient.address }}
-{{ cdClient.postcode }}
-{{ cdClient.town }}
-{{ cdClient.get_city_display }}
-{{ cdClient.get_full_phone }}
 
-{{ cdClient.number_of_cds }}
-{{ cdClient.reason }}
-{{ cdClient.sent }}
-{{ cdClient.taken }}
-{{ cdClient.date }}
+{% if cdClient.sent %}Bu istek kargoya verilmiş.{% else %}<a href="{{ cdClient.get_cargo_url }}">Kargoya Verildi</a>{% endif %}
+<table class="cdclient">
+    <tr>
+        <td>Sipariş No</td>
+        <td>{{ cdClient.get_id }}</td>
+    </tr>
+    <tr>
+        <td>Adı</td>
+        <td>{{ cdClient.get_full_name }}</td>
+    </tr>
+    {% if cdClient.company %}
+    <tr>
+        <td>Şirket</td>
+        <td>{{ cdClient.company }}</td>
+    </tr>
+    {% endif %}
+    <tr>
+        <td>Adres</td>
+        <td>{{ cdClient.address }}</td>
+    </tr>
+    {% if postcode %}
+    <tr>
+        <td>Posta Kodu</td>
+        <td>{{ cdClient.postcode }}</td>
+    </tr>
+    {% endif %}
+    <tr>
+        <td>Şehir</td>
+        <td>{{ cdClient.town }} / {{ cdClient.get_city_display }}</td>
+    </tr>
+    <tr>
+        <td>Telefon</td>
+        <td>{{ cdClient.get_full_phone }}</td>
+    </tr>
+    <tr>
+        <td>CD Miktarı</td>
+        <td>{{ cdClient.number_of_cds }}</td>
+    </tr>
+    {% if cdClient.reason %}
+    <tr>
+        <td>İsteme Sebebi</td>
+        <td>{{ cdClient.reason }}</td>
+    </tr>
+    {% endif %}
+    <tr>
+        <td>Tarih</td>
+        <td>{{ cdClient.date }}</td>
+    </tr>
+</table>
 {% endblock %}

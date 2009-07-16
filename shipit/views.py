@@ -85,3 +85,12 @@ def change_cdclient(request, id):
 def cdclient_detail(request, id):
     cdClient = get_object_or_404(CdClient, id=id)
     return render_response(request, "shipit/cdclient_detail.html", locals())
+
+@permission_required("shipit.change_cdclient")
+def cdclient_cargo(request, id):
+    cdClient = get_object_or_404(CdClient, id=id)
+    if request.method == "POST":
+        cdClient.sent = True
+        cdClient.save()
+        return HttpResponseRedirect(cdClient.get_absoulte_url())
+    return render_response(request, "shipit/cargo.html", locals())

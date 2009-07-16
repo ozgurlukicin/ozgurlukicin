@@ -1,4 +1,7 @@
 <p>{{ cdClient }}, CD isteğinde bulundu. Bilgileri aşağıdaki gibidir.</p>
+<br/>
+<p>Sipariş No: <b><a href="{{ cdClient.get_absoulte_url }}">{{ cdClient.get_id }}</a></b></p>
+<br/>
 <p>Adres:</p>
 <p>{{ cdClient.address }}</p>
 <p>{{ cdClient.postcode }} {{ cdClient.town }}/{{ cdClient.get_city_display }}</p>
