@@ -12,6 +12,8 @@ from django import forms
 from oi.shipit.models import *
 
 class CdClientForm(forms.ModelForm):
+    phone_area = forms.CharField(label="Telefon Numarası", max_length=3, widget=forms.TextInput(attrs={"style":"width:30px;margin-right:5px"}))
+    phone_number = forms.CharField(label="Telefon Numarası", max_length=7, widget=forms.TextInput(attrs={"style":"width:130px"}))
     class Meta:
         model = CdClient
         exclude = ("sent", "taken", "hash", "confirmed", "date", "ip")
