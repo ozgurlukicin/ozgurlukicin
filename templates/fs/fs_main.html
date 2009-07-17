@@ -8,51 +8,21 @@
 
 {% endblock %}
 {% block content %}
-<div class="summary_container" style="background-color: #642437;">
-<div style="padding-left: 160px; padding-top:100px" class="pardus-2009-resim">
-        <img src="/media/img/pardus.png"/>
-</div>
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+
+<div class="summary_container">
+{% for fs in fs_list %}
+    <div class="column first">
+        <img src="{{ fs.image.file.url }}" alt="{{ fs.image.get_alt_string }}" /><br />
+        <img src="/media/img/new/image_bottom.png" alt="gölge" />
+    </div>
+    <div class="column">
+        <div class="title"><a href="{{ fs.get_absolute_url }}">{{ fs.title }}</a></div>
+        <div class="summary">{{ fs.sum|safe|truncatewords_html:23 }}</div>
+    </div>
+    <div class="{% cycle columnspacer, %}"></div>
+{% endfor %}
+
+{% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div><div class="paginator_description"><span class="bold">{{ pages }}</span> sayfada toplam <span class="bold">{{ hits }}</span> ilk adım yazısı bulunmaktadır.</div></div>{% endif %}
 
 </div>
 
