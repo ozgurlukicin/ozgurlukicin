@@ -29,6 +29,7 @@ class WallPaperSize:
 
 WALLPAPER_SIZES = (
     #n:normal, w:wide, s:special
+    WallPaperSize(2880.0, 1800.0, "w"),
     WallPaperSize(1920.0, 1200.0, "w"),
     WallPaperSize(1680.0, 1050.0, "w"),
     WallPaperSize(1600.0, 1200.0, "n"),
