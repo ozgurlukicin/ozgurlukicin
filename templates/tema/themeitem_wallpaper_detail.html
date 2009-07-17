@@ -40,21 +40,22 @@
                 <br />
                 {{ object.text }}
             </div>
-        </div>
 
-    </div>
-    <div class="themeitem_bottom">
-        <div class="themeitem_bottom_inner">
+            <div class="themeitem_middle_rightcolumn_bottom">
+                <div class="themeitem_middle_rightcolumn_bottom_inner">
 
-            <a href="{{ object.topic.get_latest_post_url }}" title="Yorumlar">
-            {% if object.topic.posts|add:"-1" %}
-                {{ object.topic.posts|add:"-1" }} tane yorum yapıldı.
-            {% else %}
-                İlk yorum yapan siz olun!
-            {% endif %}
-            </a>
+                    <a href="{{ object.topic.get_latest_post_url }}" title="Yorumlar">
+                    {% if object.topic.posts|add:"-1" %}
+                        {{ object.topic.posts|add:"-1" }} tane yorum yapıldı.
+                    {% else %}
+                        İlk yorum yapan siz olun!
+                    {% endif %}
+                    </a>
+                </div>
+    </div>
         </div>
     </div>
+
 
 </div>
 {% endblock %}

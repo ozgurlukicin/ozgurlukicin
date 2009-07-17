@@ -84,7 +84,6 @@
     float: left;
     margin-left: 1px;
     margin-top: 1px;
-    height: 100%;
     width: 460px;
     border-left: 1px #EDEDED solid;
     border-top: 1px #EDEDED solid;
@@ -96,19 +95,19 @@
 }
 
 .themeitem_middle_rightcolumn_context {
+    margin: 5px 8px 8px 8px;
     margin-top: 5px;
     margin-left: 8px;
 }
 
 /* bottom */
 
-.themeitem_bottom {
+.themeitem_middle_rightcolumn_bottom {
     height: 26px;
     margin-top: 2px;
-    border: 1px #EDEDED solid;
 }
 
-.themeitem_bottom_inner {
+.themeitem_middle_rightcolumn_bottom_inner {
     float: right;
     width: 250px;
     height: 25px;
