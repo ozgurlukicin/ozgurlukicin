@@ -41,7 +41,7 @@ WALLPAPER_SIZES = (
 )
 
 class License(models.Model):
-    name = models.CharField(max_length=16, blank=False, unique=True)
+    name = models.CharField(max_length=32, blank=False, unique=True)
     url = models.URLField()
 
     def __unicode__(self):
