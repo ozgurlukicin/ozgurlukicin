@@ -103,16 +103,17 @@
 /* bottom */
 
 .themeitem_middle_rightcolumn_bottom {
-    height: 26px;
+    height: 20px;
     margin-top: 2px;
 }
 
 .themeitem_middle_rightcolumn_bottom_inner {
     float: right;
     width: 250px;
-    height: 25px;
+    height: 20px;
     margin-top: 2px;
     text-align: right;
+    padding-right: 15px;
 }
 
 /* forms */
