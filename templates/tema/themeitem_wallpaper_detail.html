@@ -33,7 +33,8 @@
 
         <div class="themeitem_middle_rightcolumn">
             <div class="themeitem_middle_rightcolumn_context">
-                <b>Gönderildiği Tarih:</b> {{ object.submit|date:"d F Y" }} <br /><br />
+                <b>Lisans:</b> <a href="{{ object.license.url }}">{{ object.license.name }}</a> <br />
+                <b>Gönderildiği Tarih:</b> {{ object.submit|date:"d F Y" }} <br />
                 <b>İndirilme Sayısı:</b> {{ object.download_count }} <br /><br />
                 <hr />
                 <br />
