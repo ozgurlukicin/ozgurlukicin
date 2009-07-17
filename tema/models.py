@@ -116,7 +116,7 @@ class Wallpaper(ThemeItem):
                 #respect the ratio
                 if wallpaper.image.width*1.0/wallpaper.image.height == size.width/size.height:
                     image = Image.open(wallpaper.image.path)
-                    image.thumbnail((size.width,size.height), Image.ANTIALIAS)
+                    image.thumbnail((int(size.width),int(size.height)))
                     newPaper = self.papers.create(title=str(size))
                     file = ContentFile("")
                     newPaper.image.save(wallpaper.image.path, file, save=True)
@@ -124,7 +124,7 @@ class Wallpaper(ThemeItem):
                 #crop a little if it's 1280x1024
                 elif wallpaper.image.width == 1280 and wallpaper.image.height == 1024:
                     image = Image.open(wallpaper.image.path).crop((0, 32, 1280, 992))
-                    image.thumbnail((size.width,size.height), Image.ANTIALIAS)
+                    image.thumbnail((int(size.width),int(size.height)))
                     newPaper = self.papers.create(title=str(size))
                     file = ContentFile("")
                     newPaper.image.save(wallpaper.image.path, file, save=True)
