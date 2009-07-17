@@ -17,7 +17,7 @@
     </div>
     <div class="column">
         <div class="title"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></div>
-        <div class="summary">{{ object.sum|safe|truncatewords_html:23 }}</div>
+        <div class="summary">{{ object.text|safe|truncatewords_html:23 }}</div>
     </div>
     <div class="{% cycle columnspacer, %}"></div>
 {% endfor %}
