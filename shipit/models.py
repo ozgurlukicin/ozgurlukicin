@@ -18,6 +18,7 @@ class CdClient(models.Model):
     reason = models.TextField("CD isteme sebebiniz", max_length=512, blank=True)
     first_name = models.CharField("Ad", max_length=30)
     last_name = models.CharField("Soyad", max_length=30)
+    tcidentity = models.CharField("TC kimlik no", max_length="11")
     company = models.CharField("Şirket/Kurum", max_length=30, blank=True)
     email = models.EmailField("E-Posta")
     address = models.TextField("Adres")
