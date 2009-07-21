@@ -202,6 +202,11 @@ form .field_container .help_text {
     line-height: 17px;
     margin-left: 8px;
 }
+
+a[class="admin"] {
+    color: #F28E1C;
+}
+
 span.bullet {
     color: #CCCCCC;
     font-size: 9px;
