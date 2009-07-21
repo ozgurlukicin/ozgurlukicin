@@ -28,6 +28,7 @@
 
             </div>
             {% if button_change %}<div class="themeitem_middle_leftcolumn_buttons"><a href="{{ object.get_change_url }}">Düzenle</a></br></div>{% endif %}
+            <div class="themeitem_middle_leftcolumn_buttons"><a href="{{ object.get_abuse_url }}"><img src="/media/img/new/forum/button_complaint.png" /></a></div>
         </div>
 
         <div class="themeitem_middle_rightcolumn">
@@ -51,7 +52,6 @@
                     {% endif %}
                     </a>
                 </div>
-                <div class="themeitem_middle_rightcolumn_bottom_inner2"><a href="{{ object.get_abuse_url }}">Şikayet Et</a></div>
     </div>
         </div>
     </div>
