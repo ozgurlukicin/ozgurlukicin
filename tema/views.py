@@ -9,10 +9,19 @@ import datetime
 
 from oi.forum.views import flood_control
 from oi.st.wrappers import render_response
-from oi.tema.models import ThemeItem, File, ScreenShot, Vote
+from oi.tema.models import ThemeItem, File, ScreenShot, Vote, ThemeAbuseReport
 from oi.tema.forms import *
 from oi.tema.settings import THEME_ITEM_PER_PAGE
 
+
+from oi.forum.forms import AbuseForm
+from oi.forum.postmarkup import render_bbcode
+from oi.forum.settings import ABUSE_MAIL_LIST
+from oi.settings import WEB_URL, DEFAULT_FROM_EMAIL
+
+
+from django.core.mail import send_mail
+from django.template.defaultfilters import striptags
 from django.views.generic.list_detail import object_list
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound, Http404
@@ -119,6 +128,50 @@ def list_user(request, username):
             'paginate_by': THEME_ITEM_PER_PAGE,
             }
     return object_list(request, **params)
+
+@login_required
+def report_abuse(request, item_id):
+    themeitem = get_object_or_404(ThemeItem, id=item_id)
+
+    try:
+        ThemeAbuseReport.objects.get(themeitem=item_id)
+        return render_response(request, "forum/forum_error.html", {"message":"Bu ileti daha önce raporlanmış."})
+    except ObjectDoesNotExist:
+        if request.method == 'POST':
+            form = AbuseForm(request.POST.copy())
+            if form.is_valid():
+                report = ThemeAbuseReport(themeitem=themeitem, submitter=request.user, reason=form.cleaned_data["reason"])
+                report.save()
+
+                email_subject = "Özgürlükİçin - Tema Şikayeti"
+                email_body ="""
+%(topic)s başlıklı şikayet edildi.
+İletiyi görmek için buraya tıklayın: %(link)s
+
+İletinin içeriği: (<b>%(sender)s</b> tarafından yazılmış):
+%(message)s
+Şikayet metni buydu (%(reporter)s tarafından şikayet edilmiş):
+%(reason)s
+"""
+                email_dict = {
+                        "topic":themeitem.title,
+                        "reporter":request.user.username,
+                        "link":WEB_URL + themeitem.get_absolute_url(),
+                        "message":striptags(render_bbcode(themeitem.text)),
+                        "reason":striptags(report.reason),
+                        "sender":themeitem.author.username,
+                        }
+                send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, [ABUSE_MAIL_LIST], fail_silently=True)
+
+                return render_response(request, 'forum/forum_done.html', {
+                    "message": "İleti şikayetiniz ilgililere ulaştırılmıştır. Teşekkür Ederiz.",
+                    "back": themeitem.get_absolute_url()
+                    })
+            else:
+                return render_response(request, 'tema/report.html', {"form": form, "themeitem": themeitem})
+        else:
+            form = AbuseForm(auto_id=True)
+            return render_response(request, 'tema/report.html', {"form": form, "themeitem": themeitem})
 
 @login_required
 def vote(request, item_id, rating):
@@ -237,6 +290,24 @@ def themeitem_change(request, item_id):
         return render_response(request, "tema/themeitem_change.html", locals())
     else:
         return render_response(request, "tema/message.html", {"type": "error", "message": "Bu işlemi yapmak için yetkiniz yok."})
+
+
+@permission_required('tema.can_change_themeabusereport', login_url="/kullanici/giris/")
+def list_abuse(request):
+    abuse_count = ThemeAbuseReport.objects.count()
+
+    if request.method == 'POST':
+        list = request.POST.getlist('abuse_list')
+        for id in list:
+            ThemeAbuseReport.objects.get(id=id).delete()
+        return HttpResponseRedirect(request.path)
+    else:
+        if ThemeAbuseReport.objects.count() == 0:
+            return render_response(request, 'tema/abuse_list.html', {'no_entry': True})
+        else:
+            abuse_list = ThemeAbuseReport.objects.all()
+            return render_response(request, 'tema/abuse_list.html', {'abuse_list': abuse_list, "abuse_count":abuse_count})
+
 
 def themeitem_download(request, category, slug, id):
     if category == "duvar-kagitlari":

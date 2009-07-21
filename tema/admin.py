@@ -40,7 +40,19 @@ class WallpaperAdmin(ThemeItemAdmin):
                 })
             )
 
+class ThemeAbuseReportAdmin(admin.ModelAdmin):
+    fieldsets = (
+            (None, {
+                "fields": ("themeitem","submitter","reason")
+                }),
+            )
+    list_display = ("submitter","themeitem", "reason")
+    list_filter = ("submitter",)
+    search_fields = ["submitter","reason","post"]
+
+
 admin.site.register(ThemeItem, ThemeItemAdmin)
 admin.site.register(Wallpaper, WallpaperAdmin)
 admin.site.register(WallpaperFile, admin.ModelAdmin)
 admin.site.register(License, admin.ModelAdmin)
+admin.site.register(ThemeAbuseReport, ThemeAbuseReportAdmin)

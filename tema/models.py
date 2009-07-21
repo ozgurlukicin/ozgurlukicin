@@ -84,12 +84,20 @@ class ThemeItem(models.Model):
 
         super(ThemeItem, self).save()
 
+    # we only support wallpaper for now, so return wallpaper url.
+    # Later, fix this
+    def get_absolute_url(self):
+        return "/tema/duvar-kagitlari/%s" % self.slug
+
     class Meta:
         verbose_name="Sanat Birimi"
         verbose_name_plural="Sanat Birimleri"
 
     def get_change_url(self):
         return "/tema/duzenle/%s/" % self.id
+
+    def get_abuse_url(self):
+        return "/tema/raporla/%s/" % self.id
 
     class Meta:
         permissions = (
@@ -183,3 +191,13 @@ class Vote(models.Model):
     class Meta:
         verbose_name = "Oy"
         verbose_name_plural = "Oylar"
+
+
+class ThemeAbuseReport(models.Model):
+    themeitem = models.ForeignKey(ThemeItem, verbose_name='Tema İletisi')
+    submitter = models.ForeignKey(User, verbose_name='Raporlayan kullanıcı')
+    reason = models.TextField(max_length=512, blank=False, verbose_name="Sebep")
+
+    class Meta:
+        verbose_name = 'İleti şikayeti'
+        verbose_name_plural = 'İleti şikayetleri'

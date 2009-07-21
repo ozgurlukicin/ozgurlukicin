@@ -22,7 +22,6 @@
         <div class="themeitem_middle_leftcolumn">
             <div class="themeitem_middle_leftcolumn_thumbnail"><img src="{{ object.thumbnail.url }}" alt="{{ object.title }}" /></div>
             <div class="themeitem_middle_leftcolumn_resolution">
-
                 {% for paper in object.papers.all %}
                  <a href="{{ paper.get_absolute_url }}">{{ paper.title }}</a><br/>
                 {% endfor %}
@@ -52,6 +51,7 @@
                     {% endif %}
                     </a>
                 </div>
+                <div class="themeitem_middle_rightcolumn_bottom_inner2"><a href="{{ object.get_abuse_url }}">Şikayet Et</a></div>
     </div>
         </div>
     </div>

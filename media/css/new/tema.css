@@ -2,6 +2,12 @@ div#content {
     border: none;
 }
 
+
+/* copied from forum, used in abuse report */
+.post_message {
+    width: 465px;
+}
+
 .themeitem_main {
     width: 644px;
 }
@@ -117,6 +123,14 @@ div#content {
     margin-top: 2px;
     text-align: right;
     padding-right: 15px;
+}
+
+.themeitem_middle_rightcolumn_bottom_inner2 {
+    float:left
+    height: 20px;
+    width: 56px;
+    margin-left: 8px;
+    text-align: left;
 }
 
 /* forms */

@@ -1,4 +1,7 @@
 {% extends "tema/theme_base_without_ezine.html" %}
+
+{% load tema %}
+
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 {% block temaextrahead %}{% endblock %}
@@ -10,6 +13,7 @@
         <li><a href="/tema/duvar-kagitlari/">Duvar Kağıtları</a></li>
         <li><a href="/hakkinda/lisanslar/">Lisans Bilgileri</a></li>
         <li></li>
+        {% if perms.forum.can_change_themeabusereport %}<li><a href="/tema/raporlanmis-temalar/">Şikayet Edilmiş Temalar ({% number_of_theme_abuse %})</a></li>{% endif %}
         <li></li>
         <li><a href="/tema/ekle/duvar-kagitlari/">Duvar Kağıdı Ekle</a></li>
     </ul>
