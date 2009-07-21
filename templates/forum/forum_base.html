@@ -48,7 +48,7 @@
                     <li><a href="/forum/son-iletiler/">Son İletiler</a></li>
                     <li><a href="/yapistir/">Yapıştırma Aracı</a></li>
                     <li><a href="/forum/tumunu-okunmus-say/?next={{ request.path }}">Tümünü Okunmuş Say</a></li>
-                    {% if perms.forum.can_change_abusereport %}<li><a href="/forum/raporlanmis-iletiler/" class="admin">Şikayet Edilmiş İletiler ({{abuse_count}})</a></li>{% endif %}
+                    {% if perms.forum.can_change_abusereport %}<li><a href="/forum/raporlanmis-iletiler/">Şikayet Edilmiş İletiler ({{abuse_count}})</a></li>{% endif %}
                     <li><a href="/kullanici/cikis/">Çıkış</a></li>
                 </ul>
             {% endif %}
