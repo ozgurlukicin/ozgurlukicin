@@ -42,9 +42,16 @@ class ThemeTypeForm(forms.Form):
 
 class WallpaperForm(forms.ModelForm):
     confirmation = forms.BooleanField(label="Onay", required=True, help_text="Bu duvar kağıdını dağıtma hakkına sahibim.")
+
     class Meta:
         model = Wallpaper
         exclude = ("author", "rating", "category", "thumbnail", "download_count", "submit", "update", "status", "scalable", "papers", "changelog", "slug", "topic", "version")
+
+    def clean_tags(self):
+        field_data = self.cleaned_data['tags']
+        if len(field_data) > 5:
+            raise forms.ValidationError("En fazla 5 etiket seçebilirsiniz. Lütfen açtığınız başlığa uygun etiket seçiniz.")
+        return field_data
 
 class WallpaperFileForm(forms.ModelForm):
     create_smaller_wallpapers = forms.BooleanField(label="Küçüklerini Oluştur", required=False, initial=True, help_text="Büyük bir duvar kağıdı gönderiyorsanız bu seçenekle küçüklerinin otomatik oluşturulmasını sağlayabilirsiniz.")
