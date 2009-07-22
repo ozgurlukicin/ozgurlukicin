@@ -41,6 +41,7 @@ class ThemeTypeForm(forms.Form):
     category = forms.ChoiceField(label="Kategori", choices=CATEGORIES, help_text="Ekleyeceğiniz içerik için bir kategori seçin")
 
 class WallpaperForm(forms.ModelForm):
+    confirmation = forms.BooleanField(label="Onay", required=True, help_text="Bu duvar kağıdını dağıtma hakkına sahibim.")
     class Meta:
         model = Wallpaper
         exclude = ("author", "rating", "category", "thumbnail", "download_count", "submit", "update", "status", "scalable", "papers", "changelog", "slug", "topic", "version")
