@@ -55,7 +55,7 @@ class CdClientForm(forms.ModelForm):
     phone_number = forms.CharField(label="Telefon Numarası", max_length=7, widget=forms.TextInput(attrs={"style":"width:130px"}))
     class Meta:
         model = CdClient
-        exclude = ("sent", "taken", "hash", "confirmed", "date", "ip", "reason", "number_of_cds", "company")
+        exclude = ("sent", "taken", "hash", "confirmed", "date", "ip", "reason", "number_of_cds", "company", "postcode")
 
     def clean(self):
         if self.cleaned_data.has_key("number_of_cds"):
@@ -63,14 +63,6 @@ class CdClientForm(forms.ModelForm):
                 if not self.cleaned_data["reason"]:
                     raise forms.ValidationError("Birden fazla CD istiyorsanız sebebini yazmalısınız.")
         return self.cleaned_data
-
-    def clean_postcode(self):
-        postcode = self.cleaned_data["postcode"]
-        if postcode:
-            match = re.match(re.compile(r"^\d{5}$"), postcode)
-            if not match:
-                raise forms.ValidationError("Lütfen geçerli bir posta kodu girin veya boş bırakın.")
-        return postcode
 
     def clean_phone_area(self):
         phone_area = self.cleaned_data["phone_area"]
