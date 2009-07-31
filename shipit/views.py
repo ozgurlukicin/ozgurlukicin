@@ -113,3 +113,8 @@ def cdclient_cargo(request, id):
     else:
         form = CargoForm()
     return render_response(request, "shipit/cargo.html", locals())
+
+@permission_required("shipit.change_cdclient")
+def cdclient_list_to_send(request):
+    cdclient_list = CdClient.objects.filter(confirmed=True, sent=False)
+    return render_response(request, "shipit/clients_to_send.html", locals())
