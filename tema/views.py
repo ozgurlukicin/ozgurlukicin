@@ -205,7 +205,7 @@ def themeitem_rate(request, item_id):
     themeitem = get_object_or_404(ThemeItem, id=item_id)
     form = ThemeRatingForm(request.POST.copy())
     if form.is_valid() and Vote.objects.filter(theme_item=item_id, user=request.user).count()<1:
-        Vote.objects.create(theme_item=themeitem, user=request.user, rating=form.cleaned_data["rating"]*25)
+        Vote.objects.create(theme_item=themeitem, user=request.user, rating=int(form.cleaned_data["rating"])*25)
         themeitem.update_rating()
     return HttpResponseRedirect(themeitem.get_absolute_url())
 
