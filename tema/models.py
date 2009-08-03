@@ -100,6 +100,12 @@ class ThemeItem(models.Model):
     def get_abuse_url(self):
         return "/tema/raporla/%s/" % self.id
 
+    def get_rating_url(self):
+        return "/tema/oyla/%s/" % self.id
+
+    def get_rating_step(self):
+        return self.rating/20;
+
     class Meta:
         permissions = (
             ("manage_queue", "Can Manage Tema Queue"),

@@ -4,6 +4,13 @@
 
 {% block temaextrahead %}
 <style media="screen" type="text/css">@import url('/media/css/new/tema.css');</style>
+<style media="screen" type="text/css">@import url('/media/css/new/jquery.rating.css');</style>
+<script type="text/javascript">
+    var is_authenticated = {% if user.is_authenticated %}true{% else %}false{% endif %};
+    var rating = {{ object.get_rating_step }};
+</script>
+<script type="text/javascript" src="/media/js/jquery.rating.pack.js"></script>
+<script type="text/javascript" src="/media/js/tema_rating.js"></script>
 {% endblock %}
 
 
@@ -33,6 +40,15 @@
 
         <div class="themeitem_middle_rightcolumn">
             <div class="themeitem_middle_rightcolumn_context">
+                <div class="themeitem_middle_stars">
+                    <form method="POST" action="{{ object.get_rating_url }}" style="padding:0px; background:none;">
+                        <input name="star1" type="radio" class="temastar star {half:true}" value="çok kötü" />
+                        <input name="star1" type="radio" class="temastar star {half:true}" value="kötü" />
+                        <input name="star1" type="radio" class="temastar star {half:true}" value="iyi" />
+                        <input name="star1" type="radio" class="temastar star {half:true}" value="çok iyi" />
+                        <input name="star1" type="radio" class="temastar star {half:true}" value="harika" />
+                    </form>
+                </div>
                 <b>Lisans:</b> <a href="{{ object.license.url }}">{{ object.license.name }}</a> <br />
                 <b>Gönderildiği Tarih:</b> {{ object.submit|date:"d F Y" }} <br />
                 <b>İndirilme Sayısı:</b> {{ object.download_count }} <br /><br />
