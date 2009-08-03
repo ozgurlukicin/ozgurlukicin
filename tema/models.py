@@ -88,7 +88,7 @@ class ThemeItem(models.Model):
     # we only support wallpaper for now, so return wallpaper url.
     # Later, fix this
     def get_absolute_url(self):
-        return "/tema/duvar-kagitlari/%s" % self.slug
+        return "/tema/duvar-kagitlari/%s/" % self.slug
 
     class Meta:
         verbose_name="Sanat Birimi"
@@ -104,7 +104,18 @@ class ThemeItem(models.Model):
         return "/tema/oyla/%s/" % self.id
 
     def get_rating_step(self):
-        return self.rating/20;
+        return self.rating/25;
+
+    def update_rating(self):
+        # we assume all theme items have 10 times 50 points
+        votes = self.vote_set.all()
+        #10 * 50 points
+        vote_total = 500
+        for vote in votes:
+            vote_total += vote.rating
+
+        self.rating = vote_total/(self.vote_set.count()+10)
+        self.save()
 
     class Meta:
         permissions = (

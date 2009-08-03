@@ -25,12 +25,12 @@ VALID_WALLPAPER_SIZES = (
     (2880, 1800),
 )
 
-vote_choices = (
-    (0,   '1'),
-    (25,  '2'),
-    (50,  '3'),
-    (75,  '4'),
-    (100, '5'),
+RATINGS = (
+    (0, 'çok kötü'),
+    (1, 'kötü'),
+    (2, 'iyi'),
+    (3, 'çok iyi'),
+    (4, 'harika'),
 )
 
 class ThemeItemForm(forms.ModelForm):
@@ -67,3 +67,6 @@ class WallpaperFileForm(forms.ModelForm):
     class Meta:
         model = WallpaperFile
         exclude = ("title", "scalable")
+
+class ThemeRatingForm(forms.Form):
+    rating = forms.ChoiceField(choices=RATINGS)

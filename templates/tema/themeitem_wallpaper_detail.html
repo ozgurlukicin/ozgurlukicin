@@ -41,14 +41,15 @@
         <div class="themeitem_middle_rightcolumn">
             <div class="themeitem_middle_rightcolumn_context">
                 <div class="themeitem_middle_stars">
-                    <form method="POST" action="{{ object.get_rating_url }}" style="padding:0px; background:none;">
-                        <input name="star1" type="radio" class="temastar star {half:true}" value="çok kötü" />
-                        <input name="star1" type="radio" class="temastar star {half:true}" value="kötü" />
-                        <input name="star1" type="radio" class="temastar star {half:true}" value="iyi" />
-                        <input name="star1" type="radio" class="temastar star {half:true}" value="çok iyi" />
-                        <input name="star1" type="radio" class="temastar star {half:true}" value="harika" />
+                    <form id="ratingform" method="POST" action="{{ object.get_rating_url }}">
+                        <input name="rating" type="radio" class="auto-submit-star {half:true}" value="0" />
+                        <input name="rating" type="radio" class="auto-submit-star {half:true}" value="1" />
+                        <input name="rating" type="radio" class="auto-submit-star {half:true}" value="2" />
+                        <input name="rating" type="radio" class="auto-submit-star {half:true}" value="3" />
+                        <input name="rating" type="radio" class="auto-submit-star {half:true}" value="4" />
                     </form>
                 </div>
+                <div id="themeitem_middle_stars_text">({{ object.vote_set.count }} oy)</div>
                 <b>Lisans:</b> <a href="{{ object.license.url }}">{{ object.license.name }}</a> <br />
                 <b>Gönderildiği Tarih:</b> {{ object.submit|date:"d F Y" }} <br />
                 <b>İndirilme Sayısı:</b> {{ object.download_count }} <br /><br />

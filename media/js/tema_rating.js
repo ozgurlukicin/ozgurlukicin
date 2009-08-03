@@ -1,8 +1,10 @@
+var rating_loaded = false;
 function submit_rating(value, link) {
-    alert(value);
+    if (rating_loaded) $("#ratingform").submit();
 }
 $(document).ready(function() {
-    $(".temastar").rating("select", rating);
-    $(".temastar").rating("readOnly", !is_authenticated);
-    $(".temastar").rating({callback: submit_rating});
+    $(".auto-submit-star").rating({callback: submit_rating});
+    $(".auto-submit-star").rating("select", rating);
+    $(".auto-submit-star").rating("readOnly", !is_authenticated);
+    rating_loaded = true;
 });

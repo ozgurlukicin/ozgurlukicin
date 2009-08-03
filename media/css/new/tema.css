@@ -144,3 +144,22 @@ div#content {
 .help {
     clear:left;
 }
+
+.themeitem_middle_stars {
+    width: 120px;
+    float: right;
+}
+.rating-cancel {
+    display: none;
+}
+#ratingform {
+    padding: 0px !important;
+    background: none !important;
+}
+#themeitem_middle_stars_text {
+    float: right;
+    clear: right;
+    text-align: center;
+    width: 120px;
+    margin-top: 5px;
+}
