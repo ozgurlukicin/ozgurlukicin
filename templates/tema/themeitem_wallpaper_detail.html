@@ -49,7 +49,7 @@
                         <input name="rating" type="radio" class="auto-submit-star {half:true}" value="4" />
                     </form>
                 </div>
-                <div id="themeitem_middle_stars_text">({{ object.vote_set.count }} oy)</div>
+                <div id="themeitem_middle_stars_text">{{ object.get_rating_percent }} ({{ object.vote_set.count }} oy)</div>
                 <b>Lisans:</b> <a href="{{ object.license.url }}">{{ object.license.name }}</a> <br />
                 <b>Gönderildiği Tarih:</b> {{ object.submit|date:"d F Y" }} <br />
                 <b>İndirilme Sayısı:</b> {{ object.download_count }} <br /><br />
