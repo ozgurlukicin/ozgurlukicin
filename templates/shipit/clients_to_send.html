@@ -8,7 +8,7 @@
             <tr><td style="width:100px">İsim</td><td style="width:450px">Adres</td><td style="width:80px">Telefon</td></tr>
             {% for client in cdclient_list %}
             <tr>
-                <td>{{ client.get_full_name }}</td><td>{{ client.address }} {{ client.town }}/{{ client.city }}</td><td>{{ client.get_full_phone }}</td>
+                <td>{{ client.get_full_name }}</td><td>{{ client.address }} {{ client.town }}/{{ client.get_city_display }}</td><td>{{ client.get_full_phone }}</td>
             </tr>
             {% endfor %}
         </table>
