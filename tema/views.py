@@ -174,45 +174,26 @@ def report_abuse(request, item_id):
             return render_response(request, 'tema/report.html', {"form": form, "themeitem": themeitem})
 
 @login_required
-def vote(request, item_id, rating):
-    """
-    Vote a theme item.
-    If user has already voted, then existing vote should be changed
-    """
-    themeitem = get_object_or_404(ThemeItem, pk=item_id)
-    rating = int(rating) * 25
-
-    try:
-        vote = Vote.objects.get(theme_item=themeitem, user=request.user.id)
-        vote.rating = rating
-        vote.save()
-
-    except ObjectDoesNotExist:
-        vote = Vote(theme_item=themeitem, user=request.user)
-        vote.save()
-
-    # Update rating of the item. This can be faster but this way is more convenient
-    voteCount = Vote.objects.filter(theme_item=themeitem).count()
-    rating = 0
-    for vote in Vote.objects.filter(theme_item=themeitem):
-        rating += vote.rating
-    themeitem.rating = rating / voteCount
-    themeitem.save()
-    return HttpResponseRedirect(themeitem.get_absolute_url())
-
-@login_required
 def themeitem_rate(request, item_id):
     themeitem = get_object_or_404(ThemeItem, id=item_id)
-    form = ThemeRatingForm(request.POST.copy())
-    if form.is_valid():
-        if Vote.objects.filter(theme_item=item_id, user=request.user).count()<1:
-            Vote.objects.create(theme_item=themeitem, user=request.user, rating=int(form.cleaned_data["rating"])*25)
-        else:
-            vote = Vote.objects.get(theme_item=themeitem, user=request.user)
-            vote.rating = int(form.cleaned_data["rating"])*25
-            vote.save()
-        themeitem.update_rating()
-    return HttpResponseRedirect(themeitem.get_absolute_url())
+    if request.method == "POST":
+        form = ThemeRatingForm(request.POST.copy())
+        if form.is_valid():
+            if Vote.objects.filter(theme_item=item_id, user=request.user).count()<1:
+                #create new vote
+                Vote.objects.create(theme_item=themeitem, user=request.user, rating=int(float(form.cleaned_data["rating"])*20))
+            else:
+                #update existing vote
+                vote = Vote.objects.get(theme_item=themeitem, user=request.user)
+                vote.rating = int(float(form.cleaned_data["rating"])*20)
+                vote.save()
+            themeitem.update_rating()
+            return HttpResponse("ok")
+    else:
+        return HttpResponse("%.1f/10 (%d oy)" % (themeitem.get_rating_percent(), themeitem.vote_set.count()))
+
+def themeitem_get_rating(request, item_id):
+    themeitem = get_object_or_404(ThemeItem, id=item_id)
 
 @login_required
 def themeitem_add(request):

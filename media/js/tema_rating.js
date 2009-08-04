@@ -1,10 +1,6 @@
-var rating_loaded = false;
-function submit_rating(value, link) {
-    if (rating_loaded) $("#ratingform").submit();
+function rating_updated() {
+    jQuery.get(rating_url,function(data){$("#themeitem_middle_stars_text").text(data);});
 }
 $(document).ready(function() {
-    $(".auto-submit-star").rating({callback: submit_rating});
-    $(".auto-submit-star").rating("select", rating);
-    $(".auto-submit-star").rating("readOnly", !is_authenticated);
-    rating_loaded = true;
+    $(".rating").rating(rating_url, {maxvalue:5,curvalue:rating,increment:.5});
 });

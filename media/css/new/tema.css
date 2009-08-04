@@ -146,15 +146,14 @@ div#content {
 }
 
 .themeitem_middle_stars {
-    width: 120px;
+    width: 100px;
     float: right;
 }
-.rating-cancel {
-    display: none;
+.themeitem_middle_stars .rating {
+    margin:0px;
 }
-#ratingform {
-    padding: 0px !important;
-    background: none !important;
+.rating .cancel {
+    display: none;
 }
 #themeitem_middle_stars_text {
     float: right;

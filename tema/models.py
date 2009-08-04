@@ -104,7 +104,7 @@ class ThemeItem(models.Model):
         return "/tema/oyla/%s/" % self.id
 
     def get_rating_step(self):
-        return self.rating/25;
+        return 1.0*self.rating/20;
 
     def get_rating_percent(self):
         return 1.0*self.rating/10;

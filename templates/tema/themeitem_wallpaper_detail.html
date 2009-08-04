@@ -4,12 +4,13 @@
 
 {% block temaextrahead %}
 <style media="screen" type="text/css">@import url('/media/css/new/tema.css');</style>
-<style media="screen" type="text/css">@import url('/media/css/new/jquery.rating.css');</style>
+<style media="screen" type="text/css">@import url('/media/css/new/rating.css');</style>
 <script type="text/javascript">
     var is_authenticated = {% if user.is_authenticated %}true{% else %}false{% endif %};
     var rating = {{ object.get_rating_step }};
+    var rating_url = "{{ object.get_rating_url }}";
 </script>
-<script type="text/javascript" src="/media/js/jquery.rating.pack.js"></script>
+<script type="text/javascript" src="/media/js/jquery.rating.js"></script>
 <script type="text/javascript" src="/media/js/tema_rating.js"></script>
 {% endblock %}
 
@@ -41,13 +42,7 @@
         <div class="themeitem_middle_rightcolumn">
             <div class="themeitem_middle_rightcolumn_context">
                 <div class="themeitem_middle_stars">
-                    <form id="ratingform" method="POST" action="{{ object.get_rating_url }}">
-                        <input name="rating" type="radio" class="auto-submit-star {half:true}" value="0" />
-                        <input name="rating" type="radio" class="auto-submit-star {half:true}" value="1" />
-                        <input name="rating" type="radio" class="auto-submit-star {half:true}" value="2" />
-                        <input name="rating" type="radio" class="auto-submit-star {half:true}" value="3" />
-                        <input name="rating" type="radio" class="auto-submit-star {half:true}" value="4" />
-                    </form>
+                    <div class="rating"></div>
                 </div>
                 <div id="themeitem_middle_stars_text">{{ object.get_rating_percent }}/10 ({{ object.vote_set.count }} oy)</div>
                 <b>Lisans:</b> <a href="{{ object.license.url }}">{{ object.license.name }}</a> <br />

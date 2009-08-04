@@ -26,11 +26,16 @@ VALID_WALLPAPER_SIZES = (
 )
 
 RATINGS = (
-    (0, 'çok kötü'),
-    (1, 'kötü'),
-    (2, 'iyi'),
-    (3, 'çok iyi'),
-    (4, 'harika'),
+    (0.5, 'çok kötü'),
+    (1, 'çok kötü'),
+    (1.5, 'kötü'),
+    (2, 'kötü'),
+    (2.5, 'iyi'),
+    (3, 'iyi'),
+    (3.5, 'çok iyi'),
+    (4, 'çok iyi'),
+    (4.5, 'harika'),
+    (5, 'harika'),
 )
 
 class ThemeItemForm(forms.ModelForm):
