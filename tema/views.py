@@ -173,9 +173,10 @@ def report_abuse(request, item_id):
             form = AbuseForm(auto_id=True)
             return render_response(request, 'tema/report.html', {"form": form, "themeitem": themeitem})
 
-@login_required
 def themeitem_rate(request, item_id):
     themeitem = get_object_or_404(ThemeItem, id=item_id)
+    if not request.user.is_authenticated():
+        return HttpResponse('Oy kullanmak için giriş yapmalısınız!')
     if request.method == "POST":
         form = ThemeRatingForm(request.POST.copy())
         if form.is_valid():
