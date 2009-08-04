@@ -110,13 +110,13 @@ class ThemeItem(models.Model):
         return 1.0*self.rating/10;
 
     def update_rating(self):
-        #we assume all theme items have 50 points
+        #we assume all theme items have 10*50 points
         votes = self.vote_set.all()
-        vote_total = 50
+        vote_total = 500
         for vote in votes:
             vote_total += vote.rating
 
-        self.rating = vote_total/(self.vote_set.count()+1)
+        self.rating = vote_total/(self.vote_set.count()+10)
         self.save()
 
     class Meta:
