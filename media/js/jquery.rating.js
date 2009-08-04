@@ -88,11 +88,11 @@ jQuery.fn.rating = function(url, options) {
   stars.click(function(){
 		if(settings.cancel == true){
       settings.curvalue = (stars.index(this) * settings.increment) + settings.increment;
+      // modified for updating text
       jQuery.post(container.url, {
         "rating": jQuery(this).children('a')[0].href.split('#')[1] 
-      });
-      //for updating
-      rating_updated();
+      }, function(data){$("#themeitem_middle_stars_text").text(data);}
+      );
 			return false;
 		} else if (settings.maxvalue == 1) {
 			settings.curvalue = (settings.curvalue == 0) ? 1 : 0;

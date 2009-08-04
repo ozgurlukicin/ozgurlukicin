@@ -188,9 +188,7 @@ def themeitem_rate(request, item_id):
                 vote.rating = int(float(form.cleaned_data["rating"])*20)
                 vote.save()
             themeitem.update_rating()
-            return HttpResponse("ok")
-    else:
-        return HttpResponse("%.1f/10 (%d oy)" % (themeitem.get_rating_percent(), themeitem.vote_set.count()))
+    return HttpResponse("%.1f/10 (%d oy)" % (themeitem.get_rating_percent(), themeitem.vote_set.count()))
 
 def themeitem_get_rating(request, item_id):
     themeitem = get_object_or_404(ThemeItem, id=item_id)
