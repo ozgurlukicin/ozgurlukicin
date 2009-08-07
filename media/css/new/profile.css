@@ -22,7 +22,7 @@
 #user_profile_right {
     float: left;
     width: 400px;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 #user_profile_right .profile_info {
     clear: both;
@@ -39,12 +39,12 @@
 #profile_bio {
     overflow: hidden;
     clear: both;
-    width: 440px;
+    width: 447px;
     margin-top: 8px;
 }
 #id_map {
     margin-top: 8px;
-    width: 440px;
+    width: 447px;
     height: 300px;
     overflow: hidden;
 }
