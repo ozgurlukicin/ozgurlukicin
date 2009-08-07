@@ -46,7 +46,7 @@
     {% if perms.ideas.change_idea %}
      _<span class="h3"><a href="javascript:;" onclick="$('#tekrarform').toggle(); return false;">Fikir tekrarı bildir</a></span> _
     <span class="h3"><a href="javascript:;" onclick="$('#changeStatusForm').toggle();">Fikir durumunu değiştir</a></span> _
-    <span class="h3"><a href="/yenifikir/sil/{{ idea.id }}/">Fikri sil</a></span>
+    <span class="h3"><a href="/yenifikir/sil/{{ idea.id }}/" onclick="return confirm('Bu fikri silmek istediğinizden emin misiniz?');">Fikri sil</a></span>
 
     <div class="idea_detail_box" style="display: none;" id="tekrarform"> 
         <form  method="post" action="javascript:;">
