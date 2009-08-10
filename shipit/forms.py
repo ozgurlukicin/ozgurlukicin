@@ -21,12 +21,19 @@ class TurkishIdentityNumberField(forms.Field):
     """
     default_error_messages = {
         'invalid': 'Lütfen geçerli bir TC kimlik numarası girin.',
+        'duplicate': 'Bu TC kimlik numarası daha önce kullanılmış.',
     }
 
     def clean(self, value):
         super(TurkishIdentityNumberField, self).clean(value)
         if not value:
             return u''
+
+        #check for duplicates
+        if CdClient.objects.filter(tcidentity=value, confirmed=True).count() > 0:
+            raise forms.ValidationError(self.error_messages['duplicate'])
+
+        #check number integrity
         match = re.match(re.compile(r"^\d{11}$"), value)
         if not match:
             raise forms.ValidationError(self.error_messages['invalid'])

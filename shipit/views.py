@@ -42,6 +42,8 @@ def create_cdclient(request):
 
 def confirm_cdclient(request, id, hash):
     cdClient = get_object_or_404(CdClient, id=id, hash=hash, confirmed=False)
+    if CdClient.objects.filter(tcidentity=cdClient.tcidentity, confirmed=True).count()>0:
+        return HttpResponse("Bu TC kimlik numarası daha önce kullanılmış!")
     cdClient.confirmed = True
     cdClient.save()
     #send mail to lists
