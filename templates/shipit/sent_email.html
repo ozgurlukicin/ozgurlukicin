@@ -5,7 +5,7 @@
 <p>{{ cdClient.postcode }} {{ cdClient.town }}/{{ cdClient.get_city_display }}</p>
 <p>Tel: {{ cdClient.get_full_phone }}</p><br/>
 <p>Kargo şirketi: <a href="{{ cargo.company.web_site }}">{{ cargo.company }}</a></p>
-<p>Kargo takip kodu: <b><a href="http://www.mngkargo.com.tr/iactive/takip.asp?fatseri=9I&fi=2&fatnumara={{ cargo.follow_code }}">{{ cargo.follow_code }}</a></b></p>
+<p>Kargo takip kodu: <b><a href="http://www.mngkargo.com.tr/iactive/takip.asp?fi=2&fatseri={{ cargo.serial }}&fatnumara={{ cargo.follow_code }}">{{ cargo.serial }}-{{ cargo.follow_code }}</a></b></p>
 <p>--<br />
 Özgürlükiçin,<br />
 <a href="http://www.ozgurlukicin.com/">www.ozgurlukicin.com</a></p>

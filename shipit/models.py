@@ -74,6 +74,7 @@ class CargoCompany(models.Model):
 
 class Cargo(models.Model):
     cdclient = models.ForeignKey(CdClient, unique=True)
+    serial = models.CharField("Seri No", max_length=8, default="9I")
     follow_code = models.CharField("Takip kodu", max_length=20)
     company = models.ForeignKey(CargoCompany, verbose_name="Kargo şirketi")
     date = models.DateField()
