@@ -87,6 +87,7 @@ def change_cdclient(request, id):
 @permission_required("shipit.change_cdclient")
 def cdclient_detail(request, id):
     cdClient = get_object_or_404(CdClient, id=id)
+    cargo = Cargo.objects.filter(cdclient=cdClient)
     return render_response(request, "shipit/cdclient_detail.html", locals())
 
 @permission_required("shipit.change_cdclient")

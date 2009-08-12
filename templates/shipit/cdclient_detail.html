@@ -49,5 +49,9 @@
         <td>Tarih</td>
         <td>{{ cdClient.date }}</td>
     </tr>
+    <tr>
+        <td>Kargo takip kodu:</td>
+        <td>{% for cargo in cargo %}<a href="http://www.mngkargo.com.tr/iactive/takip.asp?fi=1&fatseri={{ cargo.serial }}&fatnumara={{ cargo.follow_code }}">{{ cargo.serial }}-{{ cargo.follow_code }}</a>{% endfor %}</td>
+    </tr>
 </table>
 {% endblock %}
