@@ -67,7 +67,7 @@ def cdclient_list(request):
         form = SearchForm(request.POST.copy())
         if form.is_valid():
             term = form.cleaned_data["term"]
-            cdClient_list = CdClient.objects.filter(Q(first_name__icontains=term)|Q(last_name__icontains=term)|Q(address__icontains=term)|Q(phone_number__icontains=term))
+            cdClient_list = CdClient.objects.filter(Q(first_name__icontains=term)|Q(last_name__icontains=term)|Q(address__icontains=term)|Q(phone_number__icontains=term)).filter(sent=False)
     else:
         form = SearchForm()
 
