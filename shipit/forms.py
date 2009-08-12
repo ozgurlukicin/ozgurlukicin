@@ -96,21 +96,8 @@ class CdClientChangeForm(CdClientForm):
         model = CdClient
         exclude = ("ip", "hash")
 
-class CodeForm(forms.Form):
-    code = forms.IntegerField(label="Sipariş kodu")
-
-    def clean_code(self):
-        icode = self.cleaned_data["code"]
-        code = str(icode)
-        if len(code) < 3 or code[:3] != "700":
-            raise forms.ValidationError("Girdiğiniz kod geçerli değil")
-        else:
-            code = code[3:]
-            try:
-                CdClient.objects.get(id=int(code))
-            except:
-                raise forms.ValidationError("Girdiğiniz kod geçerli değil")
-        return icode
+class SearchForm(forms.Form):
+    term = forms.CharField(label="Aranacak metin")
 
 class CargoForm(forms.ModelForm):
     date = forms.DateField(label="Gönderme Tarihi", input_formats=("%d/%m/%Y","%Y-%m-%d"), help_text="15/08/2009 gibi")

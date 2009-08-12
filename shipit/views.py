@@ -10,6 +10,7 @@ from django.core.mail import EmailMessage
 from django.template import Context, loader
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponseRedirect
+from django.db.models import Q
 
 from oi.shipit.forms import *
 from oi.shipit.models import *
@@ -63,13 +64,12 @@ def confirm_cdclient(request, id, hash):
 @permission_required("shipit.change_cdclient")
 def cdclient_list(request):
     if request.method == "POST":
-        form = CodeForm(request.POST.copy())
+        form = SearchForm(request.POST.copy())
         if form.is_valid():
-            code = form.cleaned_data["code"]
-            cdClient = CdClient.objects.get(id=int(str(code)[3:]))
-            return HttpResponseRedirect(cdClient.get_absoulte_url())
+            term = form.cleaned_data["term"]
+            cdClient_list = CdClient.objects.filter(Q(first_name__icontains=term)|Q(last_name__icontains=term)|Q(address__icontains=term)|Q(phone_number__icontains=term))
     else:
-        form = CodeForm()
+        form = SearchForm()
 
     return render_response(request, "shipit/cdclient_list.html", locals())
 
