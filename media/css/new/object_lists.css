@@ -93,7 +93,6 @@ div.news_container div.column div.right_column {
     text-align: center;
     line-height:25px;
     margin-bottom: 5px;
-    margin-left: 5px;
     background: url('/media/img/new/news_progress_bg.png') no-repeat;
 }
 #news_count img {
