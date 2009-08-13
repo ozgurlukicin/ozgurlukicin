@@ -16,6 +16,7 @@ function select_news(i) {
 function change_news(direction) {
     $("#news_" + current_news).hide();
     current_news = (current_news+direction) % news_count;
+    if (current_news<0) current_news = 4;
     $("#news_" + current_news).fadeIn();
     select_news(current_news);
 }
