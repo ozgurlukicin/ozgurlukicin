@@ -94,7 +94,11 @@ div.news_container div.column div.right_column {
     line-height:25px;
     margin-bottom: 5px;
     margin-left: 5px;
-    background: url('/media/img/new/news_numbers_bg.png') no-repeat;
+    background: url('/media/img/new/news_progress_bg.png') no-repeat;
+}
+#news_count img {
+    margin: 1px;
+    margin-top: 9px;
 }
 
 .hidden {
