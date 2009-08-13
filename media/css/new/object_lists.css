@@ -99,6 +99,7 @@ div.news_container div.column div.right_column {
 #news_count img {
     margin: 1px;
     margin-top: 9px;
+    cursor: pointer;
 }
 
 .hidden {

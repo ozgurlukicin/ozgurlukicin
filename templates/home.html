@@ -23,7 +23,7 @@
 {% endblock %}
 {% block content %}
     {% for news in news %}
-    <div id="news_{{ forloop.counter }}" class="news_container{% if forloop.first %} active"{% else %}" style="display: none;"{% endif %}>
+    <div id="news_{{ forloop.counter0 }}" class="news_container{% if forloop.first %} active"{% else %}" style="display: none;"{% endif %}>
         <div class="column">
             <div class="left_column">
                 <img src="{{ news.image.file.url }}" alt="{{ news.image.get_alt_string }}" />
@@ -38,7 +38,7 @@
         </div>
     </div>
     {% endfor %}
-    <div id="counter"><span id="news_count"><img src="/media/img/new/news_progress_selected.png" /><img src="/media/img/new/news_progress.png" /><img src="/media/img/new/news_progress.png" /><img src="/media/img/new/news_progress.png" /><img src="/media/img/new/news_progress.png" /></span></div>
+    <div id="counter"><span id="news_count">{% for news in news %}<img src="/media/img/new/news_progress{% if forloop.first %}_selected{% endif %}.png" onclick="direct_select({{ forloop.counter0 }})" />{% endfor %}</span></div>
     <span id='button_news_changer'>
         <a href="javascript:;" onclick="change_news(-1); clearInterval(intval);"><img id="img_news_prev" src="/media/img/new/news_previous.png" alt="Önceki haber" /></a><a href="javascript:;" onclick="change_news(1); clearInterval(intval);"><img id="img_news_next" src="/media/img/new/news_next.png" alt="Sonraki haber" /></a>
     </span>
