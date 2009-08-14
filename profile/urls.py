@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     #the tested ones
     (r'^takip-edilen-konular/$', 'oi.profile.views.followed_topics'),
     (r'^giris/$', 'django.contrib.auth.views.login', {'template_name': 'user/login.html'}),
-    (r'^cikis/$', 'django.contrib.auth.views.logout', {'template_name': 'user/logout.html'}),
+    (r'^cikis/$', 'django.contrib.auth.views.logout', {'template_name': 'user/logout.html',"next_page":"/"}),
     (r'^kayit/$', 'oi.profile.views.user_register'),
     (r'^onay/(?P<name>[\w-]+)/(?P<key>[\w-]+)/$', 'oi.profile.views.user_confirm'),
     (r'^duzenle/$', 'oi.profile.views.user_profile_edit'),
