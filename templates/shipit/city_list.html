@@ -5,7 +5,7 @@
     <body>
         <style>td{ border-top:1px solid black;font-size:10px;font-family:"DejaVu Sans Condensed" }</style>
         <table>
-            <tr><td style="width:100px">İsim</td><td style="width:450px">Adres</td><td style="width:80px">Telefon</td></tr>
+            <tr><td style="width:100px">Şehir</td><td style="width:150px">Kişi Sayısı({{ total }})</td></tr>
             {% for city in city_list %}
             <tr>
                 <td>{{ city.1 }}</td><td>{{ city.0 }}</td>

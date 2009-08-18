@@ -133,4 +133,6 @@ def cdclient_list_cities(request):
     for city in CITY_LIST:
         city_list.append((CdClient.objects.filter(sent=True, city=city[0]).count(), city[1]))
     city_list.sort()
+    city_list.reverse()
+    total = CdClient.objects.filter(sent=True).count()
     return render_response(request, "shipit/city_list.html", locals())
