@@ -18,7 +18,7 @@ from oi.shipit.settings import *
 from oi.st.wrappers import render_response
 from oi.settings import DEFAULT_FROM_EMAIL
 from oi.forum.views import flood_control
-from oi.settings import WEB_URL
+from oi.settings import WEB_URL, CITY_LIST
 
 def create_cdclient(request):
     if request.method == "POST":
@@ -126,3 +126,11 @@ def cdclient_list_to_send(request):
 def cdclient_list_sent(request):
     cdclient_list = CdClient.objects.filter(confirmed=True)
     return render_response(request, "shipit/clients_to_send.html", locals())
+
+@permission_required("shipit.change_cdclient")
+def cdclient_list_cities(request):
+    city_list = []
+    for city in CITY_LIST:
+        city_list.append((CdClient.objects.filter(sent=True, city=city[0]).count(), city[1]))
+    city_list.sort()
+    return render_response(request, "shipit/city_list.html", locals())
