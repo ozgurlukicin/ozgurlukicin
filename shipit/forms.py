@@ -58,7 +58,7 @@ class TurkishIdentityNumberField(forms.Field):
 
 class CdClientForm(forms.ModelForm):
     tcidentity = TurkishIdentityNumberField(label="TC kimlik no")
-    phone_area = forms.CharField(label="Telefon Numarası (sabit hat)", max_length=3, widget=forms.TextInput(attrs={"style":"width:30px;margin-right:5px"}))
+    phone_area = forms.CharField(label="Telefon (sabit hat)", max_length=3, widget=forms.TextInput(attrs={"style":"width:30px;margin-right:5px"}))
     phone_number = forms.CharField(label="Telefon Numarası", max_length=7, widget=forms.TextInput(attrs={"style":"width:130px"}))
     class Meta:
         model = CdClient
