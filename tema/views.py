@@ -336,3 +336,12 @@ def ghns_wallpaper_downloads(request):
 def themeitem_queue(request):
     queue = ThemeItem.objects.filter(status=False)
     return render_response("tema/queue.html", locals())
+
+@permission_required("tema.manage_queue", login_url="/kullanici/giris/")
+def themeitem_delete(request, item_id):
+    themeItem = get_object_or_404(ThemeItem, id=item_id)
+    if request.method == "POST":
+        themeItem.delete()
+        return HttpResponseRedirect("/tema/")
+    else:
+        return render_response(request, "tema/themeitem_delete.html", locals())

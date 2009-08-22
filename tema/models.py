@@ -104,10 +104,10 @@ class ThemeItem(models.Model):
         return "/tema/oyla/%s/" % self.id
 
     def get_rating_step(self):
-        return 1.0*self.rating/20;
+        return 1.0*self.rating/20
 
     def get_rating_percent(self):
-        return 1.0*self.rating/10;
+        return 1.0*self.rating/10
 
     def update_rating(self):
         #we assume all theme items have 10*50 points
@@ -118,6 +118,9 @@ class ThemeItem(models.Model):
 
         self.rating = vote_total/(self.vote_set.count()+10)
         self.save()
+
+    def get_delete_url(self):
+        return "/tema/sil/%d/" % self.id
 
     class Meta:
         permissions = (

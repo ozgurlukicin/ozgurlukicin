@@ -36,6 +36,7 @@
 
             </div>
             {% if button_change %}<div class="themeitem_middle_leftcolumn_buttons"><a href="{{ object.get_change_url }}">Düzenle</a></br></div>{% endif %}
+            {% if perms.tema.delete_themeitem %}<div class="themeitem_middle_leftcolumn_buttons"><a href="{{ object.get_delete_url }}">Sil</a></br></div>{% endif %}
             <div class="themeitem_middle_leftcolumn_buttons"><a href="{{ object.get_abuse_url }}"><img src="/media/img/new/forum/button_complaint.png" /></a></div>
         </div>
 
