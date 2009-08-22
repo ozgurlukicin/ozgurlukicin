@@ -19,7 +19,7 @@
     <div class="notice"><a href="{{ topic.get_create_poll_url }}"><img src="/media/img/new/forum/button_add_poll.png" alt="anket ekle" /></a></div>
     {% endif %}
     {% if perms.forum.can_change_general %}
-    <div class="notice"><a href="{{ topic.get_toggle_general_url }}">Duyuru Yap{% if topic.general %}ma{% endif %}</a></div>
+    <div class="notice"><a href="{{ topic.get_toggle_general_url }}">{% if topic.general %}<img src="/media/img/new/button_remove_general_topic.png" alt="Genel duyuruyu kaldır" />{% else %}<img src="/media/img/new/button_general_topic.png" alt="Genel duyuru yap" />{% endif %}</a></div>
     {% endif %}
 </div>
 <div class="category">
