@@ -41,14 +41,14 @@
 
         <br />
     {% if user_can_change_idea  %}
-    <span class="h3"><a href="/yenifikir/duzenle/{{ idea.id }}/">Fikri düzenle</a></span>
+    <span class="h3"><a href="/yenifikir/duzenle/{{ idea.id }}/"><img src="/media/img/new/forum/button_edit.png" alt="Fikri düzenle" /></a></span>
     {% endif %}
     {% if perms.ideas.change_idea %}
-     _<span class="h3"><a href="javascript:;" onclick="$('#tekrarform').toggle(); return false;">Fikir tekrarı bildir</a></span> _
-    <span class="h3"><a href="javascript:;" onclick="$('#changeStatusForm').toggle();">Fikir durumunu değiştir</a></span> _
-    <span class="h3"><a href="/yenifikir/sil/{{ idea.id }}/" onclick="return confirm('Bu fikri silmek istediğinizden emin misiniz?');">Fikri sil</a></span>
+    <span class="h3"><a href="javascript:;" onclick="$('#tekrarform').toggle(); return false;"><img src="/media/img/new/ideas/button_duplicate_idea.png" alt="Fikir tekrarı bildir" /></a></span>
+     <span class="h3"><a href="javascript:;" onclick="$('#changeStatusForm').toggle();"><img src="/media/img/new/ideas/button_change_status.png" alt="Fikrin durumunu değiştir" /></a></span>
+    <span class="h3"><a href="/yenifikir/sil/{{ idea.id }}/" onclick="return confirm('Bu fikri silmek istediğinizden emin misiniz?');"><img src="/media/img/new/forum/button_delete.png" alt="Fikri sil" /></a></span>
 
-    <div class="idea_detail_box" style="display: none;" id="tekrarform"> 
+    <div class="idea_detail_box" style="display: none;" id="tekrarform">
         <form  method="post" action="javascript:;">
         <p>Bu fikrin aynısını daha önce görmüşmüydünüz ? O zaman fikir tekrarını bildirerek bize yardımcı olun! </p>
         Fikir numarası :<input type="text" name="duplicate_id" id="duplicate_id" size="4" />
