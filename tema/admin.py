@@ -18,7 +18,7 @@ class ThemeItemAdmin(admin.ModelAdmin):
                 "fields": ("author", "license", "rating", "download_count", "submit", "update", "comment_enabled")
                 })
             )
-    list_display = ("title", "license", "status")
+    list_display = ("title", "author", "license", "status")
     list_display_links = ("title",)
     list_filter = ("status", "comment_enabled")
     search_fields = ["title", "text", "changelog"]
