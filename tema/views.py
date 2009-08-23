@@ -286,7 +286,7 @@ def themeitem_change(request, item_id):
         return render_response(request, "tema/message.html", {"type": "error", "message": "Bu işlemi yapmak için yetkiniz yok."})
 
 
-@permission_required('tema.can_change_themeabusereport', login_url="/kullanici/giris/")
+@permission_required('tema.change_themeabusereport', login_url="/kullanici/giris/")
 def list_abuse(request):
     abuse_count = ThemeAbuseReport.objects.count()
 
