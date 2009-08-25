@@ -17,7 +17,7 @@ for wallpaper in Wallpaper.objects.all():
 
         for smallWallpaper in otherWallpapers:
             image = Image.open(biggestWallpaper.image.path)
-            if image.width == 1280 and image.height == 1024:
+            if image.size[0] == 1280 and image.size[1] == 1024:
                 image = image.crop((0, 32, 1280, 992))
 
             smallImage = Image.open(smallWallpaper.image.path)
