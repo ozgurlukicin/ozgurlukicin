@@ -227,7 +227,7 @@ class HowTo(models.Model):
         return "/nasil/%s/yazdir/" % self.slug
 
     def save(self):
-        create_forum_topic(self, "Nasıl")
+        create_forum_topic(self, "Nasıl Belgeleri")
         super(HowTo, self).save()
 
     class Meta:
@@ -271,7 +271,7 @@ class Game(models.Model):
         return "/oyun/%s/yazdir/" % self.slug
 
     def save(self):
-        create_forum_topic(self, "Oyunlar")
+        create_forum_topic(self, "Oyun İncelemeleri")
         super(Game, self).save()
 
     class Meta:
@@ -340,7 +340,7 @@ class Package(models.Model):
         return "/paket/%s/yazdir/" % self.slug
 
     def save(self):
-        create_forum_topic(self, "Paketler")
+        create_forum_topic(self, "Paket Tanıtımları")
         super(Package, self).save()
 
     class Meta:
