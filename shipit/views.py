@@ -128,6 +128,15 @@ def cdclient_list_sent(request):
     return render_response(request, "shipit/clients_to_send.html", locals())
 
 @permission_required("shipit.change_cdclient")
+def cdclient_list_not_sent(request):
+    cdclient_list = CdClient.objects.filter(confirmed=True)[:1627]
+    count = 0
+    for client in cdclient_list:
+        if not client.sent:
+            count += 1
+    return render_response(request, "shipit/clients_not_sent.html", locals())
+
+@permission_required("shipit.change_cdclient")
 def cdclient_list_cities(request):
     city_list = []
     for city in CITY_LIST:

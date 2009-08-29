@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    </head>
+    <body>
+        <style>td{ border-top:1px solid black;font-size:10px;font-family:"DejaVu Sans Condensed" }</style>
+        <table>
+            <tr><td style="width:100px">({{ count }}) İsim</td><td style="width:450px">Adres</td><td style="width:80px">Telefon</td></tr>
+            {% for client in cdclient_list %}
+            {% if not client.sent %}
+            <tr>
+                <td>{{ client.get_full_name }}</td><td>{{ client.address }} {{ client.town }}/{{ client.get_city_display }}</td><td>{{ client.get_full_phone }}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+    </body>
+</html>
