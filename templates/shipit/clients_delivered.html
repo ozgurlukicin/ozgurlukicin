@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    </head>
+    <body>
+        <style>td{ border-top:1px solid black;font-size:10px;font-family:"DejaVu Sans Condensed" }</style>
+        <table>
+            <tr><td style="width:100px">({{ cargo_list.count }}) İsim</td><td style="width:450px">Şehir</td><td style="width:80px">Kargo Takip Kodu</td></tr>
+            {% for cargo in cargo_list %}
+            <tr>
+                <td>{{ cargo.cdclient.get_full_name }}</td><td>{{ cargo.cdclient.town }}/{{ cargo.cdclient.get_city_display }}</td><td><a href="http://www.mngkargo.com.tr/iactive/takip.asp?fi=1&fatseri={{ cargo.serial }}&fatnumara={{ cargo.follow_code }}" target="_blank">{{ cargo.serial }}-{{ cargo.follow_code }}</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
