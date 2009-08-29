@@ -21,6 +21,7 @@ class StatusCategory(models.Model):
 class Status(models.Model):
     category = models.ForeignKey(StatusCategory, verbose_name = "Durum Kategori")
     name = models.CharField("İsim", max_length = 128)
+    is_invalid = models.BooleanField("Geçersiz", default=False)
 
     def __unicode__(self):
         return self.name

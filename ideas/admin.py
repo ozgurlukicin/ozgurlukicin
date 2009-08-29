@@ -14,7 +14,7 @@ class StatusCategoryAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
 class StatusAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ("name", "is_invalid")
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ("name",)}
