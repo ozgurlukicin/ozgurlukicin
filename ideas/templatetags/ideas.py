@@ -15,7 +15,7 @@ register = Library()
 
 @register.simple_tag
 def idea_list():
-    ideas = Idea.objects.filter(is_hidden=False).order_by('-id')[:IDEAS_IN_HOMEPAGE]
+    ideas = Idea.objects.filter(is_hidden=False, status__is_invalid=False).order_by('-id')[:IDEAS_IN_HOMEPAGE]
     html = ''
     for idea in ideas:
         description = truncatewords_html(idea.description, 20)
