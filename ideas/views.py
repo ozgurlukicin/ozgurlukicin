@@ -65,6 +65,9 @@ def list(request, field="", filter_slug=""):
             s = Status.objects.get(name="Gönüllü Aranıyor")
             ideas = ideas.filter(status=s)
             page_title = "Gönüllü arayan fikirler"
+        if filter_slug == "gecersiz":
+            ideas = Idea.objects.filter(is_hidden=False, status__is_invalid=True).order_by("-vote_count", "-id")
+            page_title = "Geçersiz Fikirler"
     elif field == 'favori' and filter_slug == 'fikirler':
         page_title = "Favori fikirleriniz"
         try:
