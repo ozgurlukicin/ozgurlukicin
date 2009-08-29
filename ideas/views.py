@@ -88,7 +88,7 @@ def list(request, field="", filter_slug=""):
     categories = Category.objects.order_by('name')
     if request.user.is_authenticated():
         if request.GET.has_key("page"):
-            page = request.GET["page"]
+            page = int(request.GET["page"])
         else:
             page = 1
         for idea in ideas[(page-1)*IDEAS_PER_PAGE:page*IDEAS_PER_PAGE]:
