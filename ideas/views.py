@@ -87,7 +87,11 @@ def list(request, field="", filter_slug=""):
             page_title = "Son beş fikir"
     categories = Category.objects.order_by('name')
     if request.user.is_authenticated():
-        for idea in ideas:
+        if request.GET.has_key("page"):
+            page = request.GET["page"]
+        else:
+            page = 1
+        for idea in ideas[(page-1)*IDEAS_PER_PAGE:page*IDEAS_PER_PAGE]:
             try:
                 f = Favorite.objects.get(user=request.user.id, idea=idea.id)
                 idea.is_favorited = True
