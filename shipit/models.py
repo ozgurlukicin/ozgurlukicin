@@ -10,7 +10,7 @@ import random, sha
 from django.db import models
 from django.contrib.sites.models import Site
 
-from oi.settings import CITY_LIST
+from oi.shipit.settings import CITY_LIST
 from oi.middleware import threadlocals
 
 class CdClient(models.Model):
