@@ -120,16 +120,19 @@ def cdclient_cargo(request, id):
 @permission_required("shipit.change_cdclient")
 def cdclient_list_to_send(request):
     cdclient_list = CdClient.objects.filter(confirmed=True, sent=False)
+    show_date = request.GET.has_key("date")
     return render_response(request, "shipit/clients_to_send.html", locals())
 
 @permission_required("shipit.change_cdclient")
 def cdclient_list_sent(request):
     cdclient_list = CdClient.objects.filter(confirmed=True)
+    show_date = request.GET.has_key("date")
     return render_response(request, "shipit/clients_to_send.html", locals())
 
 @permission_required("shipit.change_cdclient")
 def cdclient_list_delivered(request):
     cargo_list = Cargo.objects.all()
+    show_date = request.GET.has_key("date")
     return render_response(request, "shipit/clients_delivered.html", locals())
 
 @permission_required("shipit.change_cdclient")
@@ -139,6 +142,7 @@ def cdclient_list_not_sent(request):
     for client in cdclient_list:
         if not client.sent:
             count += 1
+    show_date = request.GET.has_key("date")
     return render_response(request, "shipit/clients_not_sent.html", locals())
 
 @permission_required("shipit.change_cdclient")
