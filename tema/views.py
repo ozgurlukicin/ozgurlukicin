@@ -245,7 +245,8 @@ def themeitem_add_wallpaper(request):
             #TODO: Send e-mail to admins
             return render_response(request, "tema/themeitem_add_complete.html", locals())
     else:
-        form = WallpaperForm()
+        tags = [t.pk for t in Tag.objects.filter(name="duvar kağıdı")]
+        form = WallpaperForm(initial={"tags":tags})
         fileforms = WallpaperFileFormSet()
     return render_response(request, "tema/themeitem_add_wallpaper.html", locals())
 
