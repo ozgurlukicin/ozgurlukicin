@@ -4,7 +4,10 @@
 
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/brainstorm.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/autocomplete.css');</style>
+<script language="javascript" type="text/javascript" src="/media/js/jquery.autocomplete.js"></script>
 <script type="text/javascript" src="/media/js/brainstorm.js"></script>
+<script type="text/javascript" src="/media/js/taghelper_idea.js"></script>
 {% endblock %}
 {% block idea %}
 {% if user.is_authenticated %}
