@@ -16,7 +16,7 @@ from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
 from django.views.generic.list_detail import object_list
 
-from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_URL, WEB_URL, PROFILE_EDIT_URL, WEB_URL
+from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_URL, WEB_URL, PROFILE_EDIT_URL
 
 # Model object for followed topics
 from oi.forum.models import WatchList, AbuseReport, Post
