@@ -121,11 +121,13 @@ def themeitem_detail(request, category, slug):
 def list_user(request, username):
     "Theme items of a user"
     user = get_object_or_404(User, username=username)
-    themeItems = user.themeitem_set.filter(approved=True)
+    themeItems = Wallpaper.objects.filter(status=True, author=user)
 
     params={
             'queryset': themeItems,
             'paginate_by': THEME_ITEM_PER_PAGE,
+            "template_name": "tema/themeitem_list.html",
+            "extra_context": {"author":user},
             }
     return object_list(request, **params)
 

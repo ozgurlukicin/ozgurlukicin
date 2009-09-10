@@ -20,7 +20,7 @@ urlpatterns = patterns ('oi.tema.views',
         #the first page listing
         (r'^$','themeitem_list'),
         #(r'^duzenle/(?P<item_id>[0-9]+)/$','themeitem_change'),
-        #(r'^kullanici/(?P<username>[a-z]+)/$','list_user'),
+        (r'^kullanici/(?P<username>.+)/$','list_user'),
         #(r'^oyla/(?P<item_id>[0-9]+)/(?P<rating>[0-4])/$','vote'),
         #(r'^ekle/$','themeitem_add'),
         (r'^raporla/(?P<item_id>\d+)/$', 'report_abuse'),
