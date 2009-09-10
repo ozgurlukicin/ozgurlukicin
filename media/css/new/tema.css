@@ -15,12 +15,12 @@ div#content {
 /* Top Menu */
 
 .themeitem_top {
-    height: 60px;
+    height: 72px;
     border: 1px #EDEDED solid;
 }
 
 .themeitem_top_title {
-    width: 430px;
+    width: 420px;
     height: 40px;
     padding: 10px;
     float: left;
@@ -30,14 +30,18 @@ div#content {
 
 .themeitem_top_user {
     height: 50px;
-    width: 187px;
+    width: 197px;
     float: right;
     margin-top: 4px;
     margin-right: 5px;
 }
 
-.themeitem_top_user img {
-    height: 50px;
+.themeitem_top_user_content {
+    height: 12px;
+    width: 137px;
+    text-align: center;
+    float: right;
+    clear: right;
 }
 
 .themeitem_top_user_avatar {
