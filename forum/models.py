@@ -29,7 +29,7 @@ class Post(models.Model):
     topic = models.ForeignKey('Topic', verbose_name='Konu')
     author = models.ForeignKey(User, verbose_name='Yazar')
     text = models.TextField(verbose_name='İleti')
-    hidden = models.BooleanField(blank=True, null=True, default=0, verbose_name='Gizli')
+    hidden = models.NullBooleanField(blank=True, default=0, verbose_name='Gizli')
     created = models.DateTimeField(blank=True, null=True, auto_now_add=True, verbose_name='Oluşturulma tarihi')
     edited = models.DateTimeField(blank=True, null=True, auto_now_add=True, verbose_name='Güncellenme tarihi')
     edit_count = models.IntegerField(default=0, verbose_name='Güncellenme sayısı')
@@ -153,10 +153,10 @@ class Topic(models.Model):
     """
     forum = models.ForeignKey('Forum', verbose_name='Forum')
     title = models.CharField(max_length=100, verbose_name='Başlık')
-    sticky = models.BooleanField(blank=True, null=True, default=0, verbose_name='Sabit')
-    locked = models.BooleanField(blank=True, null=True, default=0, verbose_name='Kilitli')
-    hidden = models.BooleanField(blank=True, null=True, default=0, verbose_name='Gizli')
-    general = models.BooleanField(blank=True, null=True, default=False, verbose_name='Genel')
+    sticky = models.NullBooleanField(blank=True, default=0, verbose_name='Sabit')
+    locked = models.NullBooleanField(blank=True, default=0, verbose_name='Kilitli')
+    hidden = models.NullBooleanField(blank=True, default=0, verbose_name='Gizli')
+    general = models.NullBooleanField(blank=True, default=False, verbose_name='Genel')
     posts = models.IntegerField(default=0, verbose_name='İleti sayısı')
     views = models.IntegerField(default=0, verbose_name='Görüntülenme sayısı')
     topic_latest_post = models.ForeignKey(Post, blank=True, null=True, related_name='topic_latest_post', verbose_name='Son ileti')
@@ -268,8 +268,8 @@ class Forum(models.Model):
     name = models.CharField(max_length=100, verbose_name='İsim')
     slug = models.SlugField(verbose_name='SEF isim')
     description = models.TextField(verbose_name='Açıklama')
-    hidden = models.BooleanField(blank=True, null=True, default=0, verbose_name='Gizli')
-    locked = models.BooleanField(blank=True, null=True, default=0, verbose_name='Kapalı')
+    hidden = models.NullBooleanField(blank=True, default=0, verbose_name='Gizli')
+    locked = models.NullBooleanField(blank=True, default=0, verbose_name='Kapalı')
     topics = models.IntegerField(default=0, verbose_name='Konu sayısı')
     posts = models.IntegerField(default=0, verbose_name='İleti sayısı')
     forum_latest_post = models.ForeignKey(Post, blank=True, null=True, related_name='forum_latest_post', verbose_name='Son ileti')
@@ -305,7 +305,7 @@ class Forum(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=255, verbose_name='Kategori ismi')
-    hidden = models.BooleanField(blank=True, null=True, verbose_name='Gizli')
+    hidden = models.NullBooleanField(blank=True, verbose_name='Gizli')
     order = models.PositiveIntegerField(unique=True, verbose_name='Sıralama')
 
     def __unicode__(self):
