@@ -182,10 +182,13 @@ def mark_all_as_read(request):
     request.session["read_forum_dict"] = {}
     return HttpResponseRedirect(request.GET["next"])
 
-def topic(request, forum_slug, topic_id):
+def topic(request, forum_slug, topic_slug):
     lastvisit_control(request)
 
-    topic = get_object_or_404(Topic, pk=topic_id)
+    if topic_slug.isdigit():
+        topic = Topic.objects.get(pk=topic_slug)
+    else:
+        topic = get_object_or_404(Topic, slug=topic_slug)
     forum = topic.forum
     if forum.slug != forum_slug:
         return HttpResponseRedirect(topic.get_absolute_url())
@@ -200,7 +203,7 @@ def topic(request, forum_slug, topic_id):
 
         # is the user watching this topic?
         try:
-            request.user.watchlist_set.get(topic__id=topic_id)
+            request.user.watchlist_set.get(topic__id=topic.id)
             watching = True
         except ObjectDoesNotExist:
             pass
@@ -266,11 +269,11 @@ def topic(request, forum_slug, topic_id):
                        allow_empty = True)
 
 @login_required
-def follow(request, forum_slug, topic_id):
-    topic = get_object_or_404(Topic, pk=topic_id)
+def follow(request, forum_slug, topic_slug):
+    topic = get_object_or_404(Topic, slug=topic_slug)
 
     # determine if user already added this to prevent double adding.
-    if len(WatchList.objects.filter(topic__id=topic_id).filter(user__username=request.user.username)) > 0:
+    if len(WatchList.objects.filter(topic__id=topic.id).filter(user__username=request.user.username)) > 0:
         errorMessage = 'Bu başlığı zaten izlemektesiniz.'
         return render_response(request, 'forum/forum_error.html', {'message': errorMessage})
     else:
@@ -279,8 +282,8 @@ def follow(request, forum_slug, topic_id):
         return HttpResponseRedirect(topic.get_absolute_url())
 
 @login_required
-def reply(request, forum_slug, topic_id, quote_id=False):
-    topic = get_object_or_404(Topic, pk=topic_id)
+def reply(request, forum_slug, topic_slug, quote_id=False):
+    topic = get_object_or_404(Topic, slug=topic_slug)
 
     posts = topic.post_set.order_by('-created')[:POSTS_PER_PAGE]
 
@@ -327,7 +330,7 @@ def reply(request, forum_slug, topic_id, quote_id=False):
 </style>"""
 
             # send email to everyone who follows this topic.
-            watchlists = WatchList.objects.filter(topic__id=topic_id)
+            watchlists = WatchList.objects.filter(topic__id=topic.id)
             for watchlist in watchlists:
                 send_mail_with_header('[Ozgurlukicin-forum] Re: %s' % topic.title,
                                       '%s\n%s<br /><br /><a href="%s">%s</a>' % (css, render_bbcode(form.cleaned_data['text']), post_url, post_url),
@@ -367,9 +370,9 @@ def reply(request, forum_slug, topic_id, quote_id=False):
     return render_response(request, 'forum/reply.html', locals())
 
 @login_required
-def edit_post(request, forum_slug, topic_id, post_id):
+def edit_post(request, forum_slug, topic_slug, post_id):
     forum = get_object_or_404(Forum, slug=forum_slug)
-    topic = get_object_or_404(Topic, pk=topic_id)
+    topic = get_object_or_404(Topic, slug=topic_slug)
     post = get_object_or_404(Post, pk=post_id)
     posts = topic.post_set.filter(created__lt = post.created).order_by('-created')[:POSTS_PER_PAGE]
 
@@ -457,9 +460,9 @@ def new_topic(request, forum_slug):
     return render_response(request, 'forum/new_topic.html', locals())
 
 @permission_required('forum.change_topic', login_url="/kullanici/giris/")
-def edit_topic(request, forum_slug, topic_id):
+def edit_topic(request, forum_slug, topic_slug):
     forum = get_object_or_404(Forum, slug=forum_slug)
-    topic = get_object_or_404(Topic, pk=topic_id)
+    topic = get_object_or_404(Topic, slug=topic_slug)
     first_post = topic.post_set.order_by('created')[0]
 
     if request.user.has_perm("forum.can_change_abusereport"):
@@ -500,9 +503,9 @@ def edit_topic(request, forum_slug, topic_id):
     return render_response(request, 'forum/new_topic.html', locals())
 
 @permission_required('forum.can_merge_topic', login_url="/kullanici/giris/")
-def merge(request, forum_slug, topic_id):
+def merge(request, forum_slug, topic_slug):
     forum = get_object_or_404(Forum, slug=forum_slug)
-    topic = get_object_or_404(Topic, pk=topic_id)
+    topic = get_object_or_404(Topic, slug=topic_slug)
 
     if forum.locked or topic.locked:
         hata="Kilitli konularda bu tür işlemler yapılamaz!"
@@ -553,9 +556,9 @@ def merge(request, forum_slug, topic_id):
     return render_response(request, 'forum/merge.html', locals())
 
 @permission_required('forum.can_move_topic', login_url="/kullanici/giris/")
-def move(request, forum_slug, topic_id):
+def move(request, forum_slug, topic_slug):
     forum = get_object_or_404(Forum, slug=forum_slug)
-    topic = get_object_or_404(Topic, pk=topic_id)
+    topic = get_object_or_404(Topic, slug=topic_slug)
 
     if forum.locked or topic.locked:
         hata="Kilitli konularda bu tür işlemler yapılamaz!"
@@ -616,8 +619,8 @@ def move(request, forum_slug, topic_id):
         return render_response(request, 'forum/move.html', locals())
 
 @permission_required('forum.can_hide_post', login_url="/kullanici/giris/")
-def hide(request, forum_slug, topic_id, post_id=False):
-    topic = get_object_or_404(Topic, pk=topic_id)
+def hide(request, forum_slug, topic_slug, post_id=False):
+    topic = get_object_or_404(Topic, slug=topic_slug)
 
     if post_id:
         post = get_object_or_404(Post, pk=post_id)
@@ -650,8 +653,8 @@ def hide(request, forum_slug, topic_id, post_id=False):
         return HttpResponseRedirect(topic.forum.get_absolute_url())
 
 @permission_required('forum.can_stick_topic', login_url="/kullanici/giris/")
-def stick(request, forum_slug, topic_id):
-    topic = get_object_or_404(Topic, pk=topic_id)
+def stick(request, forum_slug, topic_slug):
+    topic = get_object_or_404(Topic, slug=topic_slug)
 
     if topic.sticky:
         topic.sticky = 0
@@ -665,8 +668,8 @@ def stick(request, forum_slug, topic_id):
         return HttpResponseRedirect(topic.forum.get_absolute_url())
 
 @permission_required('forum.can_lock_topic', login_url="/kullanici/giris/")
-def lock(request, forum_slug, topic_id):
-    topic = get_object_or_404(Topic, pk=topic_id)
+def lock(request, forum_slug, topic_slug):
+    topic = get_object_or_404(Topic, slug=topic_slug)
 
     if topic.locked:
         topic.locked = 0
@@ -702,10 +705,10 @@ def lastvisit_control(request):
             request.session["read_forum_dict"] = {}
 
 @login_required
-def delete_post(request,forum_slug,topic_id, post_id):
+def delete_post(request,forum_slug,topic_slug, post_id):
     """ The delete part should be controlled better !"""
     forum = get_object_or_404(Forum, slug=forum_slug)
-    topic = get_object_or_404(Topic, pk=topic_id)
+    topic = get_object_or_404(Topic, slug=topic_slug)
     post = get_object_or_404(Post, pk=post_id)
 
     if not request.user.has_perm('forum.delete_post'):
@@ -786,8 +789,8 @@ def list_abuse(request):
             return render_response(request, 'forum/abuse_list.html', {'abuse_list': abuse_list, "abuse_count":abuse_count})
 
 @permission_required('forum.can_create_poll', login_url="/kullanici/giris/")
-def create_poll(request, forum_slug, topic_id):
-    topic = get_object_or_404(Topic, pk=topic_id)
+def create_poll(request, forum_slug, topic_slug):
+    topic = get_object_or_404(Topic, slug=topic_slug)
     forum = topic.forum
     if forum.slug != forum_slug:
         return HttpResponseRedirect(topic.get_create_poll_url())
@@ -833,8 +836,8 @@ def create_poll(request, forum_slug, topic_id):
     return render_response(request, "forum/create_poll.html", locals())
 
 @permission_required("forum.can_change_poll", login_url="/kullanici/giris/")
-def change_poll(request, forum_slug, topic_id):
-    topic = get_object_or_404(Topic, pk=topic_id)
+def change_poll(request, forum_slug, topic_slug):
+    topic = get_object_or_404(Topic, slug=topic_slug)
     forum = topic.forum
     if forum.slug != forum_slug:
         return HttpResponseRedirect(topic.get_change_poll_url())
@@ -910,8 +913,8 @@ def change_poll(request, forum_slug, topic_id):
     return render_response(request, "forum/change_poll.html", locals())
 
 @login_required
-def vote_poll(request,forum_slug,topic_id,option_id):
-    topic = get_object_or_404(Topic, pk=topic_id)
+def vote_poll(request,forum_slug,topic_slug,option_id):
+    topic = get_object_or_404(Topic, slug=topic_slug)
     option = get_object_or_404(PollOption, pk=option_id)
     forum = topic.forum
     if forum.slug != forum_slug:
@@ -987,8 +990,8 @@ def vote_poll(request,forum_slug,topic_id,option_id):
     return HttpResponseRedirect(topic.get_absolute_url())
 
 @permission_required("forum.can_change_poll", login_url="/kullanici/giris/")
-def delete_poll(request, forum_slug, topic_id):
-    topic = get_object_or_404(Topic, pk=topic_id)
+def delete_poll(request, forum_slug, topic_slug):
+    topic = get_object_or_404(Topic, slug=topic_slug)
     forum = topic.forum
     if forum.slug != forum_slug:
         return HttpResponseRedirect(topic.get_absolute_url())
@@ -1009,8 +1012,8 @@ def delete_poll(request, forum_slug, topic_id):
     return HttpResponseRedirect(topic.get_absolute_url())
 
 @permission_required("forum.can_change_general", login_url="/kullanici/giris/")
-def toggle_general_topic(request, forum_slug, topic_id):
-    topic = get_object_or_404(Topic, pk=topic_id)
+def toggle_general_topic(request, forum_slug, topic_slug):
+    topic = get_object_or_404(Topic, slug=topic_slug)
     forum = topic.forum
     if forum.slug != forum_slug:
         return HttpResponseRedirect(topic.get_absolute_url())

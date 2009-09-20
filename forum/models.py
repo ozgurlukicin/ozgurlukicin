@@ -58,23 +58,23 @@ class Post(models.Model):
                 j = k
         page = i / oi.forum.settings.POSTS_PER_PAGE + 1
 
-        return '/forum/%s/%s/?page=%s#post%s' % (self.topic.forum.slug, self.topic.id, page, self.id)
+        return '/forum/%s/%s/?page=%s#post%s' % (self.topic.forum.slug, self.topic.slug, page, self.id)
 
     def get_quote_url(self):
-        return '/forum/%s/%s/quote/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
+        return '/forum/%s/%s/quote/%s/' % (self.topic.forum.slug, self.topic.slug, self.id)
 
     def get_edit_url(self):
         """ returns topic edit url of the post """
-        return '/forum/%s/%s/edit/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
+        return '/forum/%s/%s/edit/%s/' % (self.topic.forum.slug, self.topic.slug, self.id)
 
     def get_hide_url(self):
-        return '/forum/%s/%s/hide/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
+        return '/forum/%s/%s/hide/%s/' % (self.topic.forum.slug, self.topic.slug, self.id)
 
     def get_delete_url(self):
-        return '/forum/%s/%s/delete/%s/' % (self.topic.forum.slug, self.topic.id, self.id)
+        return '/forum/%s/%s/delete/%s/' % (self.topic.forum.slug, self.topic.slug, self.id)
 
     def get_delete_confirm_url(self):
-        return '/forum/%s/%s/delete/%s/yes/' % (self.topic.forum.slug, self.topic.id, self.id)
+        return '/forum/%s/%s/delete/%s/yes/' % (self.topic.forum.slug, self.topic.slug, self.id)
 
     # creates unique message id for each post. This is used by "Message-ID" header.
     def get_email_id(self):
@@ -153,6 +153,7 @@ class Topic(models.Model):
     """
     forum = models.ForeignKey('Forum', verbose_name='Forum')
     title = models.CharField(max_length=100, verbose_name='Başlık')
+    slug = models.SlugField('SEF Başlık')
     sticky = models.NullBooleanField(blank=True, default=0, verbose_name='Sabit')
     locked = models.NullBooleanField(blank=True, default=0, verbose_name='Kilitli')
     hidden = models.NullBooleanField(blank=True, default=0, verbose_name='Gizli')
@@ -167,51 +168,51 @@ class Topic(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return '/forum/%s/%s/?page=1' % (self.forum.slug, self.id)
+        return '/forum/%s/%s/' % (self.forum.slug, self.slug)
 
     def get_latest_post_url(self):
         import oi.forum.settings
         lastpage = ((self.posts - 1) / oi.forum.settings.POSTS_PER_PAGE) + 1
-        return '/forum/%s/%s/?page=%s#post%s' % (self.forum.slug, self.id, lastpage, self.topic_latest_post.id)
+        return '/forum/%s/%s/?page=%s#post%s' % (self.forum.slug, self.slug, lastpage, self.topic_latest_post.id)
 
     def get_follow_url(self):
-        return '/forum/%s/%s/follow' % (self.forum.slug, self.id)
+        return '/forum/%s/%s/follow' % (self.forum.slug, self.slug)
 
     def get_reply_url(self):
-        return '/forum/%s/%s/reply/' % (self.forum.slug, self.id)
+        return '/forum/%s/%s/reply/' % (self.forum.slug, self.slug)
 
     def get_merge_url(self):
-        return '/forum/%s/%s/merge/' % (self.forum.slug, self.id)
+        return '/forum/%s/%s/merge/' % (self.forum.slug, self.slug)
 
     def get_move_url(self):
-        return '/forum/%s/%s/move/' % (self.forum.slug, self.id)
+        return '/forum/%s/%s/move/' % (self.forum.slug, self.slug)
 
     def get_edit_url(self):
-        return '/forum/%s/%s/edit/' % (self.forum.slug, self.id)
+        return '/forum/%s/%s/edit/' % (self.forum.slug, self.slug)
 
     def get_stick_url(self):
-        return '/forum/%s/%s/stick/' % (self.forum.slug, self.id)
+        return '/forum/%s/%s/stick/' % (self.forum.slug, self.slug)
 
     def get_lock_url(self):
-        return '/forum/%s/%s/lock/' % (self.forum.slug, self.id)
+        return '/forum/%s/%s/lock/' % (self.forum.slug, self.slug)
 
     def get_hide_url(self):
-        return '/forum/%s/%s/hide/' % (self.forum.slug, self.id)
+        return '/forum/%s/%s/hide/' % (self.forum.slug, self.slug)
 
     def get_create_poll_url(self):
-        return '/forum/%s/%s/poll/create/' % (self.forum.slug, self.id)
+        return '/forum/%s/%s/poll/create/' % (self.forum.slug, self.slug)
 
     def get_change_poll_url(self):
-        return '/forum/%s/%s/poll/change/' % (self.forum.slug, self.id)
+        return '/forum/%s/%s/poll/change/' % (self.forum.slug, self.slug)
 
     def get_toggle_general_url(self):
-        return '/forum/%s/%s/togglegeneral/' % (self.forum.slug, self.id)
+        return '/forum/%s/%s/togglegeneral/' % (self.forum.slug, self.slug)
 
     def get_delete_poll_url(self):
-        return '/forum/%s/%s/poll/delete/' % (self.forum.slug, self.id)
+        return '/forum/%s/%s/poll/delete/' % (self.forum.slug, self.slug)
 
     def get_email_id(self):
-        return '<%s.%s@%s>' % (md5.new(self.title).hexdigest(), self.id, FORUM_FROM_EMAIL.split('@')[1])
+        return '<%s.%s@%s>' % (md5.new(self.title).hexdigest(), self.slug, FORUM_FROM_EMAIL.split('@')[1])
 
     # <a title="...."> for tooltip. Just get a short context of first post on the topic.
     def get_tooltip_context(self):
@@ -248,12 +249,12 @@ class Topic(models.Model):
                        ("can_change_general", "Can change general topic"),
                       )
 
-    def save(self):
-        if not self.id:
-            f = Forum.objects.get(id=self.forum.id)
-            f.topics += 1
-            f.save()
-        super(Topic, self).save()
+    #def save(self):
+        #if not self.id:
+            #f = Forum.objects.get(id=self.forum.id)
+            #f.topics += 1
+            #f.save()
+        #super(Topic, self).save()
 
     def delete(self):
         if self.id:
@@ -287,7 +288,7 @@ class Forum(models.Model):
 
         latest_topic = self.forum_latest_post.topic
         lastpage = ((latest_topic.posts - 1) / oi.forum.settings.POSTS_PER_PAGE) + 1
-        return '/forum/%s/%s/?page=%s#post%s' % (self.slug, latest_topic.id, lastpage, self.forum_latest_post.id)
+        return '/forum/%s/%s/?page=%s#post%s' % (self.slug, latest_topic.slug, lastpage, self.forum_latest_post.id)
 
     def __unicode__(self):
         return self.name
