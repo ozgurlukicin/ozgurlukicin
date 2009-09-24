@@ -102,3 +102,6 @@ class Profile(models.Model):
 
     def get_absolute_url(self):
         return '/kullanici/profil/%s/' % self.user.username
+
+    def get_theme_content_url(self):
+        return "/tema/kullanici/%s/" % self.user.username
