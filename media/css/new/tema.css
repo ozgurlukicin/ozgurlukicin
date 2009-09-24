@@ -36,6 +36,10 @@ div#content {
     margin-right: 5px;
 }
 
+.themeitem_top_user img {
+    height: 60px;
+}
+
 .themeitem_top_user_content {
     height: 12px;
     width: 137px;
