@@ -71,6 +71,7 @@ class ThemeItem(models.Model):
     thumbnail = models.ImageField("Küçük Resim", blank=True, upload_to="upload/tema/kucuk/")
     status = models.BooleanField(default=False, verbose_name="Kabul Edilmiş")
     topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
+    origin_url = models.URLField("Özgün Çalışma", blank=True, help_text="Başka bir çalışmayı temel aldıysanız bunun bağlantısını yazın.")
 
     def __unicode__(self):
         return self.title
