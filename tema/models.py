@@ -89,7 +89,10 @@ class ThemeItem(models.Model):
     # we only support wallpaper for now, so return wallpaper url.
     # Later, fix this
     def get_absolute_url(self):
-        return "/tema/duvar-kagitlari/%s/" % self.slug
+        if Wallpaper.objects.filter(id = self.id).count():
+            return "/tema/duvar-kagitlari/%s/" % self.slug
+        elif DesktopScreenshot.objects.filter(id = self.id).count():
+            return "/tema/ekran-goruntuleri/%s/" % self.slug
 
     class Meta:
         verbose_name="Sanat Birimi"
@@ -127,6 +130,24 @@ class ThemeItem(models.Model):
         permissions = (
             ("manage_queue", "Can Manage Tema Queue"),
         )
+
+class DesktopScreenshot(ThemeItem):
+    image = models.ImageField(upload_to="upload/tema/duvar-kagidi/", verbose_name="Ekran Görüntüsü")
+
+    class Meta:
+        verbose_name="Ekran Görüntüsü"
+        verbose_name_plural="Ekran Görüntüleri"
+
+    def get_absolute_url(self):
+        return "/tema/ekran-goruntuleri/%s/" % (self.slug)
+
+
+    def get_redirect_url(self):
+        return "/tema/ekran-goruntuleri/%s/%s/" % (self.slug, self.id)
+
+    def get_download_url(self):
+        return self.image.url
+
 
 class Wallpaper(ThemeItem):
     papers = models.ManyToManyField("WallpaperFile", blank=True)

@@ -56,53 +56,27 @@ def replace_turkish(text):
 
 def themeitem_list(request, category=None):
     "List approved theme items"
-    #this category is fixed for now
-    category = "duvar-kagitlari"
-    #first we take approved items
     themeItems = ThemeItem.objects.all()
     if category == "duvar-kagitlari":
         themeItems = Wallpaper.objects.all()
+    elif category == "ekran-goruntuleri":
+        themeItems = DesktopScreenshot.objects.all()
+    else:
+        themeItems = ThemeItem.objects.all()
+
     themeItems = themeItems.filter(status=True).order_by("-update")
-    """
-    #filter by parent category if no subcategory is selected
-    if parentcategory != "tum-kategoriler":
-        parentcategory = get_object_or_404(ParentCategory, slug=parentcategory)
-        themeItems = themeItems.filter(parentcategory=parentcategory)
-        parentcategory = parentcategory.slug
-
-    #filter by subcategory
-    if subcategory != "tumu":
-        subcategory = get_object_or_404(SubCategory, slug=subcategory)
-        themeItems = themeItems.filter(category=subcategory)
-        subcategory = subcategory.slug
-
-    #order_by
-    if order_by == "tarih":
-        themeItems = themeItems.order_by("-edit_date")
-    elif order_by == "indirilme":
-        themeItems = themeItems.order_by("-download_count")
-    elif order_by == "puan":
-        themeItems = themeItems.order_by("-rating")
-    else:# order_by == "alfabe"
-        themeItems = themeItems.order_by("name")
-    """
     params = {
             "queryset": themeItems,
             "paginate_by": THEME_ITEM_PER_PAGE,
             "template_name": "tema/themeitem_list.html",
     }
-    """
-    "extra_context": {
-        "order_by": order_by,
-        "parentcategory": parentcategory,
-        },
-    """
     return object_list(request, **params)
 
 def themeitem_detail(request, category, slug):
     #get category specific things
     category_dict = {
         "duvar-kagitlari": (Wallpaper, "tema/themeitem_wallpaper_detail.html"),
+        "ekran-goruntuleri": (DesktopScreenshot, "tema/themeitem_desktopscreenshot_detail.html"),
     }
     object_type = ThemeItem
     template_name = "tema/themeitem_detail.html"
@@ -205,6 +179,39 @@ def themeitem_add(request):
     else:
         form = ThemeTypeForm()
     return render_response(request, "tema/themeitem_add.html", locals())
+
+@login_required
+def themeitem_add_desktopscreenshot(request):
+    if request.method == "POST":
+        form = DesktopScreenShotForm(request.POST.copy(), request.FILES)
+        flood, timeout = flood_control(request)
+
+        if form.is_valid() and not flood:
+            item = form.save(commit=False)
+            item.author = request.user
+            item.submit = item.update = datetime.datetime.now()
+            slug = slugify(replace_turkish(item.title))
+            item.save()
+            for tag in form.cleaned_data["tags"]:
+                t=Tag.objects.get(name=tag)
+                item.tags.add(t)
+            item.slug = str(item.id) + "-" + slug
+            item.save()
+
+            #create thumbnail
+            thumbnail = Image.open(item.image.path)
+            thumbnail.thumbnail((150,200), Image.ANTIALIAS)
+            file = ContentFile("")
+            item.thumbnail.save(item.image.path, file, save=True)
+            thumbnail.save(item.thumbnail.path)
+
+            #TODO: Send e-mail to admins
+            return render_response(request, "tema/themeitem_add_complete.html", locals())
+    else:
+        tags = [t.pk for t in Tag.objects.filter(name="masaüstü")]
+        form = DesktopScreenShotForm(initial={"tags":tags})
+    return render_response(request, "tema/themeitem_add_desktopscreenshot.html", locals())
+
 
 @login_required
 def themeitem_add_wallpaper(request):
@@ -312,6 +319,10 @@ def themeitem_download(request, category, slug, id):
         wallpaper = object.wallpaper_set.all()[0]
         wallpaper.download_count += 1
         wallpaper.save()
+    elif category == "ekran-goruntuleri":
+        object = get_object_or_404(DesktopScreenshot, id=id)
+        object.download_count += 1
+        object.save()
     else:
         raise Http404
     return render_response(request, "tema/themeitem_download.html", locals())

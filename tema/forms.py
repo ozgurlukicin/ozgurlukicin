@@ -46,6 +46,19 @@ class ThemeItemForm(forms.ModelForm):
 class ThemeTypeForm(forms.Form):
     category = forms.ChoiceField(label="Kategori", choices=CATEGORIES, help_text="Ekleyeceğiniz içerik için bir kategori seçin")
 
+class DesktopScreenShotForm(forms.ModelForm):
+    confirmation = forms.BooleanField(label="Onay", required=True, help_text="Bu ekran görüntüsünü dağıtma hakkına sahibim.")
+
+    class Meta:
+        model = DesktopScreenshot
+        exclude = ("author", "rating", "category", "thumbnail", "download_count", "submit", "update", "status", "scalable", "papers", "changelog", "slug", "topic", "version")
+
+    def clean_tags(self):
+        field_data = self.cleaned_data['tags']
+        if len(field_data) > 5:
+            raise forms.ValidationError("En fazla 5 etiket seçebilirsiniz. Lütfen açtığınız başlığa uygun etiket seçiniz.")
+        return field_data
+
 class WallpaperForm(forms.ModelForm):
     confirmation = forms.BooleanField(label="Onay", required=True, help_text="Bu duvar kağıdını dağıtma hakkına sahibim.")
 
