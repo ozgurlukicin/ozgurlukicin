@@ -20,7 +20,7 @@ def top_content(category=None):
     if category == "duvar-kagitlari":
         object_list = Wallpaper.objects.all()
         title = "En Beğenilen Duvar Kağıtları"
-    elif category == "ekran-goruntuleri":
+    elif category == "masaustu-goruntuleri":
         object_list = DesktopScreenshot.objects.all()
         title = "En Beğenilen Masaüstleri"
     else:

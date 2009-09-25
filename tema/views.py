@@ -59,7 +59,7 @@ def themeitem_list(request, category=None):
     themeItems = ThemeItem.objects.all()
     if category == "duvar-kagitlari":
         themeItems = Wallpaper.objects.all()
-    elif category == "ekran-goruntuleri":
+    elif category == "masaustu-goruntuleri":
         themeItems = DesktopScreenshot.objects.all()
     else:
         themeItems = ThemeItem.objects.all()
@@ -77,7 +77,7 @@ def themeitem_detail(request, category, slug):
     #get category specific things
     category_dict = {
         "duvar-kagitlari": (Wallpaper, "tema/themeitem_wallpaper_detail.html"),
-        "ekran-goruntuleri": (DesktopScreenshot, "tema/themeitem_desktopscreenshot_detail.html"),
+        "masaustu-goruntuleri": (DesktopScreenshot, "tema/themeitem_desktopscreenshot_detail.html"),
     }
     object_type = ThemeItem
     template_name = "tema/themeitem_detail.html"
@@ -320,7 +320,7 @@ def themeitem_download(request, category, slug, id):
         wallpaper = object.wallpaper_set.all()[0]
         wallpaper.download_count += 1
         wallpaper.save()
-    elif category == "ekran-goruntuleri":
+    elif category == "masaustu-goruntuleri":
         object = get_object_or_404(DesktopScreenshot, id=id)
         object.download_count += 1
         object.save()
