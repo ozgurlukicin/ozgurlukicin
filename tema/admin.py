@@ -40,7 +40,19 @@ class WallpaperAdmin(ThemeItemAdmin):
                 })
             )
 
+class DesktopScreenshotAdmin(ThemeItemAdmin):
+    fieldsets = (
+            (None, {
+                "fields": ("thumbnail", "title", "slug", "text", "changelog", "image", "status", "tags")
+                }),
+            ("Diğer", {
+                "classes": "collapse",
+                "fields": ("author", "license", "rating", "download_count", "submit", "update", "comment_enabled")
+                })
+            )
+
 admin.site.register(ThemeItem, ThemeItemAdmin)
 admin.site.register(Wallpaper, WallpaperAdmin)
+admin.site.register(DesktopScreenshot, DesktopScreenshotAdmin)
 admin.site.register(WallpaperFile, admin.ModelAdmin)
 admin.site.register(License, admin.ModelAdmin)
