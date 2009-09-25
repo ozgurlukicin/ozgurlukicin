@@ -18,7 +18,7 @@ from oi.forum.tools import create_forum_topic
 
 CATEGORIES = (
     ("duvar-kagitlari", "Duvar Kağıtları"),
-    ("ekran-goruntuleri", "Ekran Görüntüleri"),
+    ("masaustu-goruntuleri", "Ekran Görüntüleri"),
 )
 
 class WallPaperSize:
@@ -92,7 +92,7 @@ class ThemeItem(models.Model):
         if Wallpaper.objects.filter(id = self.id).count():
             return "/tema/duvar-kagitlari/%s/" % self.slug
         elif DesktopScreenshot.objects.filter(id = self.id).count():
-            return "/tema/ekran-goruntuleri/%s/" % self.slug
+            return "/tema/masaustu-goruntuleri/%s/" % self.slug
 
     class Meta:
         verbose_name="Sanat Birimi"
@@ -139,11 +139,11 @@ class DesktopScreenshot(ThemeItem):
         verbose_name_plural="Ekran Görüntüleri"
 
     def get_absolute_url(self):
-        return "/tema/ekran-goruntuleri/%s/" % (self.slug)
+        return "/tema/masaustu-goruntuleri/%s/" % (self.slug)
 
 
     def get_redirect_url(self):
-        return "/tema/ekran-goruntuleri/%s/%s/" % (self.slug, self.id)
+        return "/tema/masaustu-goruntuleri/%s/%s/" % (self.slug, self.id)
 
     def get_download_url(self):
         return self.image.url
