@@ -35,7 +35,7 @@
         </script>
     </head>
     <body onload="load()" onunload="GUnload()">
-        {% if object.place.description %}<div style="width:500px;padding:50px">{{ object.place.description }}{% if object.place.phone %} - TEL: {{ object.place.phone }}{% endif %}</div>{% endif %}
+        {% if object.place.description %}<div style="width:500px;padding:50px">{{ object.place.description|linebreaksbr }}{% if object.place.phone %} - TEL: {{ object.place.phone }}{% endif %}</div>{% endif %}
         <div id="id_map" style="width:600px;height:400px"></div>
     </body>
 </html>
