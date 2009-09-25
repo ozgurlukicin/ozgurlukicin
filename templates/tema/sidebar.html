@@ -1,5 +1,5 @@
 <div style="margin-top:10px" class="leftcolumn_content">
-    <h2 style="margin:5px">En Çok Beğenilenler</h2>
+    <h2 style="margin:5px">{{ title }}</h2>
 <ul>
     {% for object in object_list %}
     <li style="margin-bottom:5px"><a href="{{ object.get_absolute_url }}">({{object.get_rating_percent}}) {{ object.title }}</a></li>

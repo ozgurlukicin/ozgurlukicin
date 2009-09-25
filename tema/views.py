@@ -69,6 +69,7 @@ def themeitem_list(request, category=None):
             "queryset": themeItems,
             "paginate_by": THEME_ITEM_PER_PAGE,
             "template_name": "tema/themeitem_list.html",
+            "extra_context": {"category":category},
     }
     return object_list(request, **params)
 
@@ -101,7 +102,7 @@ def list_user(request, username):
             'queryset': themeItems,
             'paginate_by': THEME_ITEM_PER_PAGE,
             "template_name": "tema/themeitem_list.html",
-            "extra_context": {"author":user},
+            "extra_context": {"author":user,"category":None},
             }
     return object_list(request, **params)
 
