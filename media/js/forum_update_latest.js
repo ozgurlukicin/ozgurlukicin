@@ -9,8 +9,8 @@ function syncData(data) {
     //insert new data
     $(data).each(function(i) {
         if ($(".latest").html().indexOf(this.id)<0) {
-            $(this).hide();
-            $(this).prependTo($(".latest"));
+            $(".latest").prepend($(this).parent().html());
+            $(".latest > .post:first").hide();
         }
     });
     //now do animations
