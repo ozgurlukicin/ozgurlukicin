@@ -48,10 +48,8 @@
 <div class="category">
     <div class="titlebar">
         <h2><a href="/forum/son-iletiler/">Son İletiler</a></h2>
-        <h2>Son Anketler</h2>
     </div>
     <div class="latest">
-    <div class="latest_container rightborder">
     {% for topic in latest_posts %}
         <div class="post">
             <div class="topic">[<a href="{{ topic.forum.get_absolute_url }}">{{ topic.forum }}</a>] <strong><a href="{{ topic.get_latest_post_url }}">{{ topic }}</a></strong></div>
@@ -61,18 +59,6 @@
             </div>
         </div>
     {% endfor %}
-    </div>
-    <div class="latest_container">
-        {% for topic in latest_topics_with_polls %}
-        <div class="post">
-            <div class="topic">[<a href="{{ topic.forum.get_absolute_url }}">{{ topic.forum }}</a>] <strong><a href="{{ topic.get_absolute_url }}">{{ topic }}</a></strong></div>
-            <div class="post">
-                <span class="date">{{ topic.poll.created|date:"d F Y H:i" }}</span>
-                <span class="profile_link"><a href="{{ topic.topic_latest_post.author.get_profile.get_absolute_url }}">{{ topic.topic_latest_post.author }}</a> <a href="{{ topic.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="iletiye git" /></a></span>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
     </div>
     <div class="titlebar"><h2>İstatistikler</h2></div>
     <div class="stats">

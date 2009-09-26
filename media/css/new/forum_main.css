@@ -8,30 +8,17 @@
     color: #666666;
     text-decoration: none;
 }
-.category .latest_container {
-    float: left;
-    width: 395px;
-    overflow: hidden;
-}
-.category .rightborder {
-    border-right: 1px #F2F2F2 solid;
-    margin-right: 4px;
-}
 .latest {
     overflow: hidden;
     margin-bottom: 1px;
 }
-.latest_container {
-    font-size: 11px;
-    overflow: hidden;
-}
-.latest_container .post {
+.latest .post {
     border-bottom: 1px #EAEAEA solid;
     overflow: hidden;
     margin-right: 4px;
 }
-.latest_container .post .post { border: none; }
-.latest_container .post a {
+.latest .post .post { border: none; }
+.latest .post a {
     color: #666666;
     text-decoration: none;
 }
