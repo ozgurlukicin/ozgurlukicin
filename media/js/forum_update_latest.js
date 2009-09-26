@@ -2,15 +2,15 @@ function syncData(data) {
     if (data) {
     //remove non-existent
     $(".latest > .post").each(function(i) {
-            alert($(this).html());
-        if (data.indexOf($(this).html())<0) {
+        if (data.indexOf(this.id)<0) {
             $(this).addClass("tohide");
         }
     });
     //insert new data
     $(data).each(function(i) {
-        if (!$(".latest").html().indexOf($(this).html())<0) {
-            $(this).hide().appendTo(".latest");
+        if ($(".latest").html().indexOf(this.id)<0) {
+            $(this).hide();
+            $(this).prependTo($(".latest"));
         }
     });
     //now do animations
