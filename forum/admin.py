@@ -24,7 +24,6 @@ class TopicAdmin(admin.ModelAdmin):
     list_display = ("forum", "title")
     ordering = ["-title"]
     search_fields = ["title"]
-    prepopulated_fields = {'slug': ("title",)}
 
 class PostAdmin(admin.ModelAdmin):
     list_display = ("id", "topic", "author")
