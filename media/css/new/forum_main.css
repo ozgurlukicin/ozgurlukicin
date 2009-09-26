@@ -16,8 +16,13 @@
     border-bottom: 1px #EAEAEA solid;
     overflow: hidden;
     margin-right: 4px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
-.latest .post .post { border: none; }
+.latest .post div {
+    float:left;
+    width:20%;
+}
 .latest .post a {
     color: #666666;
     text-decoration: none;
@@ -25,26 +30,22 @@
 .post .profile_link {
     float: right;
 }
-.post .topic, .post .post {
-    margin-left: 5px;
-    line-height: 15px;
-}
-.post .forum {
-    margin-top: 5px;
+.post .forum a { color: #999999; }
+.post div.forum {
     color: #999999;
 }
-.post .forum { margin-left: 5px; }
-.post .forum a { color: #999999; }
-.post .date {
-    float: left;
-    color: #999;
-    margin-bottom: 5px;
+.post div.topic {
+    width: 45%;
+    font-weight: bold;
 }
-.post .topic {
-    margin-top: 5px;
-    margin-bottom: 3px;
-    height: 15px;
-    overflow: hidden;
+.post div.date {
+    color: #999;
+    width: 19%;
+    float: right;
+    text-align: right;
+}
+.post div.link {
+    width: 16px;
 }
 .stats {
     overflow: hidden;
