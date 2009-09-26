@@ -3,6 +3,7 @@
 {% block extrahead %}
     <style type="text/css" media="screen">@import url('/media/css/new/forum_list.css');</style>
     <style type="text/css" media="screen">@import url('/media/css/new/forum_main.css');</style>
+    <script type="text/javascript" src="/media/js/forum_update_latest.js"></script>
 {% endblock %}
 {% block content %}
 <div class="topbar">
@@ -50,15 +51,7 @@
         <h2><a href="/forum/son-iletiler/">Son İletiler</a></h2>
     </div>
     <div class="latest">
-    {% for topic in latest_posts %}
-        <div class="post">
-            <div class="topic">[<a href="{{ topic.forum.get_absolute_url }}">{{ topic.forum }}</a>] <strong><a href="{{ topic.get_latest_post_url }}">{{ topic }}</a></strong></div>
-            <div class="post">
-                <span class="date">{{ topic.topic_latest_post.created|date:"d F Y H:i" }}</span>
-                <span class="profile_link"><a href="{{ topic.topic_latest_post.author.get_profile.get_absolute_url }}">{{ topic.topic_latest_post.author }}</a> <a href="{{ topic.topic_latest_post.get_absolute_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="iletiye git" /></a></span>
-            </div>
-        </div>
-    {% endfor %}
+        {% include "forum/latest_posts_small.html" %}
     </div>
     <div class="titlebar"><h2>İstatistikler</h2></div>
     <div class="stats">

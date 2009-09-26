@@ -99,6 +99,13 @@ def forum(request, forum_slug):
                        paginate_by = TOPICS_PER_PAGE,
                        allow_empty = True)
 
+def latest_posts_small(request, post_id):
+    if int(post_id) == Post.objects.order_by("-created")[0].id:
+        return HttpResponse("")
+    else:
+        latest_posts = Topic.objects.filter(topic_latest_post__hidden=False, forum__is_published=True, forum__hidden=False).order_by("topic_latest_post").distinct()[:10]
+        return render_response(request, "forum/latest_posts_small.html", locals())
+
 def latest_posts(request):
     posts = Post.objects.filter(hidden=False, topic__forum__is_published=True, topic__forum__hidden=False).order_by('-created')[:NUMBER_OF_LATEST_POSTS]
     abuse_count = 0
