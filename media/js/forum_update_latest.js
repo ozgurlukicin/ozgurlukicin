@@ -9,7 +9,7 @@ function syncData(data) {
     //insert new data
     $(data).each(function(i) {
         if ($(".latest").html().indexOf(this.id)<0) {
-            $(".latest").prepend($(this).parent().html());
+            $(".latest").prepend(this);
             $(".latest > .post:first").hide();
         }
     });
