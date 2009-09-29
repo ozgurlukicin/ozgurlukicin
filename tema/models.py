@@ -132,11 +132,11 @@ class ThemeItem(models.Model):
         )
 
 class DesktopScreenshot(ThemeItem):
-    image = models.ImageField(upload_to="upload/tema/duvar-kagidi/", verbose_name="Ekran Görüntüsü")
+    image = models.ImageField(upload_to="upload/tema/masaustu-goruntusu/", verbose_name="Masaüstü Görüntüsü")
 
     class Meta:
-        verbose_name="Ekran Görüntüsü"
-        verbose_name_plural="Ekran Görüntüleri"
+        verbose_name="Masaüstü Görüntüsü"
+        verbose_name_plural="Masaüstü Görüntüleri"
 
     def get_absolute_url(self):
         return "/tema/masaustu-goruntuleri/%s/" % (self.slug)
