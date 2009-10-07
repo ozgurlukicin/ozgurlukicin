@@ -5,7 +5,8 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-from PIL import Image
+import os, tempfile
+from PIL import Image, ImageFont
 
 from django import forms
 
@@ -58,6 +59,21 @@ class FontForm(forms.ModelForm):
         if len(field_data) > 5:
             raise forms.ValidationError("En fazla 5 etiket seçebilirsiniz. Lütfen açtığınız başlığa uygun etiket seçiniz.")
         return field_data
+
+    def clean_font(self):
+        font = self.cleaned_data["font"]
+        if font:
+            tmp = tempfile.mktemp()
+            file = open(tmp, "w")
+            file.write(font.read())
+            file.close()
+            try:
+                ImageFont.truetype(tmp, 22)
+            except IOError:
+                os.unlink(tmp)
+                raise forms.ValidationError("Gönderdiğiniz yazıtipi okunamadı.")
+            os.unlink(tmp)
+        return font
 
 
 class DesktopScreenShotForm(forms.ModelForm):
