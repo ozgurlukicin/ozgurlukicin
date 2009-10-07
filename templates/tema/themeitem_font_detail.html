@@ -52,7 +52,7 @@
                 <br />
                 {{ object.text }}
                 <br /><br />
-                <b>Önizleme:</b>
+                <b>Önizleme (aşağıdaki kutuya bir şeyler yazıp Enter'e basın):</b>
                 <br />
                 <img name="fontimage" src="{{ object.title|slice:":20" }}/" alt="{{ object.title }}" />
                 <input type="text" maxlength="20" value="{{ object.title|slice:":20" }}" onchange="fontimage.src=this.value" />
