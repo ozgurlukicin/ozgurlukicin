@@ -7,7 +7,7 @@
 
 from django import template
 from django.template import Context, loader
-from oi.tema.models import ThemeItem, ThemeAbuseReport, DesktopScreenshot, Wallpaper
+from oi.tema.models import ThemeItem, ThemeAbuseReport, DesktopScreenshot, Wallpaper, Font
 
 register = template.Library()
 
@@ -23,6 +23,9 @@ def top_content(category=None):
     elif category == "masaustu-goruntuleri":
         object_list = DesktopScreenshot.objects.all()
         title = "En Beğenilen Masaüstleri"
+    elif category == "yazitipleri":
+        object_list = Font.objects.all()
+        title = "En Beğenilen Yazıtipleri"
     else:
         object_list = ThemeItem.objects.all()
         title = "En Çok Beğenilenler"
