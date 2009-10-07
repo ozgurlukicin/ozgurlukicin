@@ -49,6 +49,7 @@ class ThemeTypeForm(forms.Form):
 
 class FontForm(forms.ModelForm):
     confirmation = forms.BooleanField(label="Onay", required=True, help_text="Bu yazıtipini dağıtma hakkına sahibim.")
+    origin_url = forms.URLField(label="Web Sitesi", required=True, help_text="Yazıtipi üreticisinin web sitesi.")
 
     class Meta:
         model = Font
