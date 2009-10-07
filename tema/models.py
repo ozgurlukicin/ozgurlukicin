@@ -19,6 +19,7 @@ from oi.forum.tools import create_forum_topic
 CATEGORIES = (
     ("duvar-kagitlari", "Duvar Kağıtları"),
     ("masaustu-goruntuleri", "Ekran Görüntüleri"),
+    ("yazitipleri", "Yazıtipleri"),
 )
 
 class WallPaperSize:
