@@ -52,9 +52,10 @@ class DesktopScreenshotAdmin(ThemeItemAdmin):
             )
 
 class FontAdmin(ThemeItemAdmin):
+    list_display = ("title", "version", "author", "license", "status")
     fieldsets = (
             (None, {
-                "fields": ("thumbnail", "title", "slug", "text", "changelog", "font", "status", "tags")
+                "fields": ("thumbnail", "title", "slug", "version", "text", "changelog", "font", "status", "tags")
                 }),
             ("Diğer", {
                 "classes": "collapse",
