@@ -240,7 +240,7 @@ def themeitem_add_font(request):
                 else:
                     draw.text((x, text[0]), text[1], font=smallfont, fill=fill)
             file = ContentFile("")
-            item.thumbnail.save(item.font.path.replace(".ttf", ".png"), file, save=True)
+            item.thumbnail.save(item.font.path[:item.font.path.rfind(".")]+".png", file, save=True)
             thumbnail.save(item.thumbnail.path)
 
             #TODO: Send e-mail to admins
