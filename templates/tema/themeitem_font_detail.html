@@ -19,7 +19,7 @@
 
 <div class="themeitem_main">
     <div class="themeitem_top">
-        <div class="themeitem_top_title">{{ object.title }}</div>
+        <div class="themeitem_top_title">{{ object.title }} {{ object.version }}</div>
         <div class="themeitem_top_user">
             <div class="themeitem_top_user_avatar"><a href="{{ object.author.get_profile.get_absolute_url }}"><img src="{% avatar_url object.author.email 60 "g" object.author.get_profile.avatar.file.url %}" /></a></div>
             <div class="themeitem_top_user_name"><a href="{{ object.author.get_profile.get_absolute_url }}">{{ object.author }}</a></div>
@@ -52,7 +52,7 @@
                 <br />
                 {{ object.text }}
                 <br /><br />
-                <b>Önizleme (aşağıdaki kutuya bir şeyler yazıp Enter'e basın):</b>
+                <b>Önizleme</b> (aşağıdaki kutuya bir şeyler yazıp Enter'e basın):
                 <br />
                 <img name="fontimage" src="{{ object.title|slice:":20" }}/" alt="{{ object.title }}" />
                 <input type="text" maxlength="20" value="{{ object.title|slice:":20" }}" onchange="fontimage.src=this.value" />

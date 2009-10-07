@@ -52,7 +52,7 @@ class FontForm(forms.ModelForm):
 
     class Meta:
         model = Font
-        exclude = ("author", "rating", "category", "thumbnail", "download_count", "submit", "update", "status", "scalable", "changelog", "slug", "topic", "version")
+        exclude = ("author", "rating", "category", "thumbnail", "download_count", "submit", "update", "status", "scalable", "changelog", "slug", "topic")
 
     def clean_tags(self):
         field_data = self.cleaned_data['tags']
