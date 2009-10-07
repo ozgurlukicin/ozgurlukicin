@@ -131,6 +131,24 @@ class ThemeItem(models.Model):
             ("manage_queue", "Can Manage Tema Queue"),
         )
 
+class Font(ThemeItem):
+    font = models.FileField("Yazıtipi dosyası", upload_to="upload/tema/yazitipi/", verbose_name="Yazıtipi")
+    is_turkish = models.BooleanField("Türkçe karakterleri içeriyor", default=True)
+
+    class Meta:
+        verbose_name="Yazıtipi"
+        verbose_name_plural="Yazıtipleri"
+
+    def get_absolute_url(self):
+        return "/tema/yazitipleri/%s/" % (self.slug)
+
+    def get_redirect_url(self):
+        return "/tema/yazitipleri/%s/%s/" % (self.slug, self.id)
+
+    def get_download_url(self):
+        return self.font.url
+
+
 class DesktopScreenshot(ThemeItem):
     image = models.ImageField(upload_to="upload/tema/masaustu-goruntusu/", verbose_name="Masaüstü Görüntüsü")
 
@@ -140,7 +158,6 @@ class DesktopScreenshot(ThemeItem):
 
     def get_absolute_url(self):
         return "/tema/masaustu-goruntuleri/%s/" % (self.slug)
-
 
     def get_redirect_url(self):
         return "/tema/masaustu-goruntuleri/%s/%s/" % (self.slug, self.id)
