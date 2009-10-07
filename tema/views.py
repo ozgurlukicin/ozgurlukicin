@@ -7,6 +7,8 @@
 
 import datetime
 
+import Image, ImageFont, ImageDraw
+
 from oi.forum.views import flood_control
 from oi.st.wrappers import render_response
 from oi.tema.models import ThemeItem, File, ScreenShot, Vote, ThemeAbuseReport, DesktopScreenshot, Wallpaper, Font
@@ -62,7 +64,7 @@ def replace_turkish(text):
 
 def themeitem_list(request, category=None):
     "List approved theme items"
-    if category_dict.has_key(category)::
+    if category_dict.has_key(category):
         themeItems = category_dict[category][0].objects.all()
     else:
         themeItems = ThemeItem.objects.all()
@@ -179,6 +181,46 @@ def themeitem_add(request):
     else:
         form = ThemeTypeForm()
     return render_response(request, "tema/themeitem_add.html", locals())
+
+@login_required
+def themeitem_add_font(request):
+    if request.method == "POST":
+        form = FontForm(request.POST.copy(), request.FILES)
+        flood, timeout = flood_control(request)
+
+        if form.is_valid() and not flood:
+            item = form.save(commit=False)
+            item.author = request.user
+            item.submit = item.update = datetime.datetime.now()
+            slug = slugify(replace_turkish(item.title))
+            item.save()
+            for tag in form.cleaned_data["tags"]:
+                t=Tag.objects.get(name=tag)
+                item.tags.add(t)
+            item.slug = str(item.id) + "-" + slug
+            item.save()
+
+            #create thumbnail
+            thumbnail = Image.new("RGBA", (150, 120))
+            draw = ImageDraw.Draw(thumbnail)
+            bigfont = ImageFont.truetype(item.font.path, 22)
+            smallfont = ImageFont.truetype(item.font.path, 12)
+            draw.text((5, 5), "Aa Ee Rr", font=bigfont)
+            draw.text((10, 25), u"Dağ başını", font=smallfont)
+            draw.text((10, 40), u"duman almış,", font=smallfont)
+            draw.text((10, 55), u"Gümüş dere", font=smallfont)
+            draw.text((10, 70), u"durmaz akar.", font=smallfont)
+            file = ContentFile("")
+            item.thumbnail.save(item.font.path.replace(".ttf", ".png"), file, save=True)
+            thumbnail.save(item.thumbnail.path)
+
+            #TODO: Send e-mail to admins
+            return render_response(request, "tema/themeitem_add_complete.html", locals())
+    else:
+        tags = [t.pk for t in Tag.objects.filter(name="yazıtipi")]
+        form = FontForm(initial={"tags":tags})
+    return render_response(request, "tema/themeitem_add_font.html", locals())
+
 
 @login_required
 def themeitem_add_desktopscreenshot(request):
@@ -321,6 +363,10 @@ def themeitem_download(request, category, slug, id):
         wallpaper.save()
     elif category == "masaustu-goruntuleri":
         object = get_object_or_404(DesktopScreenshot, id=id)
+        object.download_count += 1
+        object.save()
+    elif category == "yazitipleri":
+        object = get_object_or_404(Font, id=id)
         object.download_count += 1
         object.save()
     else:

@@ -94,6 +94,8 @@ class ThemeItem(models.Model):
             return "/tema/duvar-kagitlari/%s/" % self.slug
         elif DesktopScreenshot.objects.filter(id = self.id).count():
             return "/tema/masaustu-goruntuleri/%s/" % self.slug
+        elif Font.objects.filter(id = self.id).count():
+            return "/tema/yazitipleri/%s/" % self.slug
 
     class Meta:
         verbose_name="Sanat Birimi"
@@ -133,7 +135,7 @@ class ThemeItem(models.Model):
         )
 
 class Font(ThemeItem):
-    font = models.FileField("Yazıtipi dosyası", upload_to="upload/tema/yazitipi/", verbose_name="Yazıtipi")
+    font = models.FileField("Yazıtipi dosyası", upload_to="upload/tema/yazitipi/")
     is_turkish = models.BooleanField("Türkçe karakterleri içeriyor", default=True)
 
     class Meta:
