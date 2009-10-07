@@ -201,15 +201,27 @@ def themeitem_add_font(request):
             item.save()
 
             #create thumbnail
-            thumbnail = Image.new("RGBA", (150, 120))
+            twidth = 150
+            theight = 100
+            thumbnail = Image.new("RGBA", (twidth, theight))
             draw = ImageDraw.Draw(thumbnail)
             bigfont = ImageFont.truetype(item.font.path, 22)
-            smallfont = ImageFont.truetype(item.font.path, 12)
-            draw.text((5, 5), "Aa Ee Rr", font=bigfont)
-            draw.text((10, 25), u"Dağ başını", font=smallfont)
-            draw.text((10, 40), u"duman almış,", font=smallfont)
-            draw.text((10, 55), u"Gümüş dere", font=smallfont)
-            draw.text((10, 70), u"durmaz akar.", font=smallfont)
+            smallfont = ImageFont.truetype(item.font.path, 14)
+            fill = (112,112,112)
+            draw.text((5, 5), "Aa Ee Rr", font=bigfont, fill=fill)
+            text_list = (
+                (30, "Dag basini", u"Dağ başını"),
+                (45, "duman almis,", u"duman almış,"),
+                (60, "Gumus dere", u"Gümüş dere"),
+                (75, "durmaz akar.", u"durmaz akar."),
+            )
+            for text in text_list:
+                s = draw.textsize(text[1], font=smallfont)
+                x = twidth - s[0] - 5
+                if item.is_turkish:
+                    draw.text((x, text[0]), text[2], font=smallfont, fill=fill)
+                else:
+                    draw.text((x, text[0]), text[1], font=smallfont, fill=fill)
             file = ContentFile("")
             item.thumbnail.save(item.font.path.replace(".ttf", ".png"), file, save=True)
             thumbnail.save(item.thumbnail.path)
