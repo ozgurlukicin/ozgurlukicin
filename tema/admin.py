@@ -32,7 +32,7 @@ class ThemeItemAdmin(admin.ModelAdmin):
 class WallpaperAdmin(ThemeItemAdmin):
     fieldsets = (
             (None, {
-                "fields": ("thumbnail", "title", "slug", "text", "changelog", "papers", "status", "tags")
+                "fields": ("thumbnail", "title", "slug", "origin_url", "text", "changelog", "papers", "status", "tags")
                 }),
             ("Diğer", {
                 "classes": "collapse",
@@ -43,7 +43,7 @@ class WallpaperAdmin(ThemeItemAdmin):
 class DesktopScreenshotAdmin(ThemeItemAdmin):
     fieldsets = (
             (None, {
-                "fields": ("thumbnail", "title", "slug", "text", "changelog", "image", "status", "tags")
+                "fields": ("thumbnail", "title", "slug", "origin_url", "text", "changelog", "image", "status", "tags")
                 }),
             ("Diğer", {
                 "classes": "collapse",
@@ -55,7 +55,7 @@ class FontAdmin(ThemeItemAdmin):
     list_display = ("title", "version", "author", "license", "status")
     fieldsets = (
             (None, {
-                "fields": ("thumbnail", "title", "slug", "version", "text", "changelog", "font", "status", "tags")
+                "fields": ("thumbnail", "title", "slug", "version", "origin_url", "text", "changelog", "font", "status", "tags")
                 }),
             ("Diğer", {
                 "classes": "collapse",
