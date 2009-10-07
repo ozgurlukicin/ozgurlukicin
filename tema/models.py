@@ -63,7 +63,7 @@ class ThemeItem(models.Model):
     license = models.ForeignKey(License, verbose_name="Lisans")
     text = models.TextField(blank=False, verbose_name="Tanım", help_text="Ekleyeceğiniz dosyalar hakkındaki açıklamalarınızı bu bölümde belirtebilirsiniz.")
     changelog = models.TextField(blank=True, verbose_name="Değişiklik Listesi", help_text="Eklediğiniz içeriğin değişikliklerini sürüm numarası ve sürümdeki değişikliklerin listesi şeklinde belirtebilirsiniz.")
-    version = models.CharField("Sürüm Numarası", default="0.1", max_length=16)
+    version = models.CharField("Sürüm Numarası", default="", max_length=16, blank=True, help_text="0.1 gibi")
     rating = models.IntegerField(default=50, verbose_name="Puan")
     download_count = models.IntegerField(default=0, verbose_name="İndirilme Sayısı")
     submit = models.DateTimeField(verbose_name="Oluşturulma Tarihi")
