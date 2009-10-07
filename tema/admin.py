@@ -11,7 +11,7 @@ from oi.tema.models import *
 class ThemeItemAdmin(admin.ModelAdmin):
     fieldsets = (
             (None, {
-                "fields": ("thumbnail", "title", "slug", "text", "changelog", "status", "tags")
+                "fields": ("thumbnail", "title", "slug", "origin_url", "text", "changelog", "status", "tags")
                 }),
             ("Diğer", {
                 "classes": "collapse",
