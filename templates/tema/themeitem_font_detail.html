@@ -54,8 +54,8 @@
                 <br /><br />
                 <b>Önizleme</b> (aşağıdaki kutuya bir şeyler yazıp Enter'e basın):
                 <br />
-                <img name="fontimage" src="{{ object.title|slice:":20" }}/" alt="{{ object.title }}" />
-                <input type="text" maxlength="20" value="{{ object.title|slice:":20" }}" onchange="fontimage.src=this.value" />
+                <img name="fontimage" src="onizle/{{ object.title|slice:":20" }}/" alt="{{ object.title }}" />
+                <input type="text" maxlength="20" value="{{ object.title|slice:":20" }}" onchange="fontimage.src='onizle/'+this.value" />
             </div>
 
             <div class="themeitem_middle_rightcolumn_bottom">
