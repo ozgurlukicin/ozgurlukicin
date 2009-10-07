@@ -5,7 +5,7 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-import datetime
+import datetime, tempfile, os
 
 import Image, ImageFont, ImageDraw
 
@@ -181,6 +181,23 @@ def themeitem_add(request):
     else:
         form = ThemeTypeForm()
     return render_response(request, "tema/themeitem_add.html", locals())
+
+def font_image(request, slug, text):
+    font = get_object_or_404(Font, slug=slug)
+    #create thumbnail
+    twidth = 440
+    theight = 80
+    image = Image.new("RGBA", (twidth, theight))
+    draw = ImageDraw.Draw(image)
+    font = ImageFont.truetype(font.font.path, 50)
+    fill = (112,112,112)
+    draw.text((5, 5), text, font=font, fill=fill)
+    #FIXME: We should get png data without writing to disk
+    handle, tmp = tempfile.mkstemp(suffix=".png")
+    image.save(tmp)
+    data = open(tmp).read()
+    os.unlink(tmp)
+    return HttpResponse(data, mimetype="image/png")
 
 @login_required
 def themeitem_add_font(request):

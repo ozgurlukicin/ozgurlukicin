@@ -47,10 +47,15 @@
                 <b>Lisans:</b> <a href="{{ object.license.url }}">{{ object.license.name }}</a> <br />
                 <b>Gönderildiği Tarih:</b> {{ object.submit|date:"d F Y" }} <br />
                 <b>İndirme Sayısı:</b> {{ object.download_count }} <br />
-                {% if object.origin_url %}<b><a href="{{ object.origin_url }}" target="_blank">Özgün Çalışma</a></b><br />{% endif %}<br />
+                {% if object.origin_url %}<b><a href="{{ object.origin_url }}" target="_blank">Web Sayfası</a></b><br />{% endif %}<br />
                 <hr />
                 <br />
                 {{ object.text }}
+                <br /><br />
+                <b>Önizleme:</b>
+                <br />
+                <img name="fontimage" src="{{ object.title|slice:":20" }}/" alt="{{ object.title }}" />
+                <input type="text" maxlength="20" value="{{ object.title|slice:":20" }}" onchange="fontimage.src=this.value" />
             </div>
 
             <div class="themeitem_middle_rightcolumn_bottom">

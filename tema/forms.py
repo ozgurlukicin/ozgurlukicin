@@ -63,7 +63,7 @@ class FontForm(forms.ModelForm):
     def clean_font(self):
         font = self.cleaned_data["font"]
         if font:
-            tmp = tempfile.mktemp()
+            handle, tmp = tempfile.mkstemp()
             file = open(tmp, "w")
             file.write(font.read())
             file.close()

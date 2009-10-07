@@ -1,3 +1,10 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#
+# Copyright 2009 TÜBİTAK UEKAE
+# Licensed under the GNU General Public License, version 3.
+# See the file http://www.gnu.org/copyleft/gpl.txt.
+
 from django.conf.urls.defaults import *
 from oi.tema.feeds import *
 
@@ -36,6 +43,7 @@ urlpatterns = patterns ('oi.tema.views',
         (r'^khotnewstuff/wallpaper/wallpaper-downloads.xml$', 'ghns_wallpaper_downloads'),
         (r'^yonetim/$', 'themeitem_queue'),
         #(r'^listele/(?P<category>[a-z0-9-_]+)/(?P<sort_type>[a-z0-9-_]+)/$','themeitem_sort'),
+        (r'^yazitipleri/(?P<slug>[a-z0-9-_]+)/(?P<text>.{1,20})/$','font_image'),
         (r'^(?P<category>[a-z0-9-_]+)/$','themeitem_list'),
         (r'^(?P<category>[a-z0-9-_]+)/(?P<slug>[a-z0-9-_]+)/$','themeitem_detail'),
         (r'^(?P<category>[a-z0-9-_]+)/(?P<slug>[a-z0-9-_]+)/(?P<id>\d+)/$','themeitem_download'),
