@@ -9,7 +9,7 @@ import datetime
 
 from oi.forum.views import flood_control
 from oi.st.wrappers import render_response
-from oi.tema.models import ThemeItem, File, ScreenShot, Vote, ThemeAbuseReport
+from oi.tema.models import ThemeItem, File, ScreenShot, Vote, ThemeAbuseReport, DesktopScreenshot, Wallpaper, Font
 from oi.tema.forms import *
 from oi.tema.settings import THEME_ITEM_PER_PAGE
 
@@ -48,6 +48,12 @@ TURKISH_CHARS = (
     ("Ü", "u"),
 )
 
+category_dict = {
+    "duvar-kagitlari": (Wallpaper, "tema/themeitem_wallpaper_detail.html"),
+    "masaustu-goruntuleri": (DesktopScreenshot, "tema/themeitem_desktopscreenshot_detail.html"),
+    "yazitipleri": (Font, "tema/themeitem_font_detail.html"),
+}
+
 def replace_turkish(text):
     #replace Turkish characters
     for i in TURKISH_CHARS:
@@ -56,11 +62,8 @@ def replace_turkish(text):
 
 def themeitem_list(request, category=None):
     "List approved theme items"
-    themeItems = ThemeItem.objects.all()
-    if category == "duvar-kagitlari":
-        themeItems = Wallpaper.objects.all()
-    elif category == "masaustu-goruntuleri":
-        themeItems = DesktopScreenshot.objects.all()
+    if category_dict.has_key(category)::
+        themeItems = category_dict[category][0].objects.all()
     else:
         themeItems = ThemeItem.objects.all()
 
@@ -75,10 +78,6 @@ def themeitem_list(request, category=None):
 
 def themeitem_detail(request, category, slug):
     #get category specific things
-    category_dict = {
-        "duvar-kagitlari": (Wallpaper, "tema/themeitem_wallpaper_detail.html"),
-        "masaustu-goruntuleri": (DesktopScreenshot, "tema/themeitem_desktopscreenshot_detail.html"),
-    }
     object_type = ThemeItem
     template_name = "tema/themeitem_detail.html"
     if category_dict.has_key(category):
