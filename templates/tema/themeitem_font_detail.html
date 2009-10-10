@@ -30,9 +30,7 @@
     <div class="themeitem_middle">
         <div class="themeitem_middle_leftcolumn">
             <div class="themeitem_middle_leftcolumn_thumbnail"><img src="{{ object.thumbnail.url }}" alt="{{ object.title }}" /></div>
-            <div class="themeitem_middle_leftcolumn_resolution">
-                 <a href="{{ object.get_redirect_url }}">İndir</a><br/>
-            </div>
+            <div class="themeitem_middle_leftcolumn_buttons"><a href="{{ object.get_redirect_url }}"><img src="/media/img/new/button_download.png" alt="İndir" /></a></div>
             {% if button_change %}<div class="themeitem_middle_leftcolumn_buttons"><a href="{{ object.get_change_url }}"><img src="/media/img/new/forum/button_edit.png" alt="Değiştir" /></a></br></div>{% endif %}
             {% if perms.tema.delete_themeitem %}<div class="themeitem_middle_leftcolumn_buttons"><a href="{{ object.get_delete_url }}"><img src="/media/img/new/forum/button_delete.png" alt="Sil" /></a></br></div>{% endif %}
             <div class="themeitem_middle_leftcolumn_buttons"><a href="{{ object.get_abuse_url }}"><img src="/media/img/new/forum/button_complaint.png" /></a></div>
