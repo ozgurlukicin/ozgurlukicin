@@ -83,7 +83,7 @@ class DesktopScreenShotForm(forms.ModelForm):
     text = forms.CharField(label="Tanım", required=True, help_text="Ekleyeceğiniz dosyalar hakkındaki açıklamalarınızı bu bölümde belirtebilirsiniz.", widget=forms.Textarea(attrs={"style":"width:400px"}))
     confirmation = forms.BooleanField(label="Onay", required=True, help_text="Bu ekran görüntüsünü dağıtma hakkına sahibim.")
     license = forms.ModelChoiceField(label="Lisans", queryset=License.objects.order_by("name"), empty_label="---------")
-    origin_url = forms.URLField(label="Özgün Çalışma", required=True, help_text="Başka bir çalışmayı temel aldıysanız bunun bağlantısını yazın.", widget=forms.TextInput(attrs={"style":"width:400px"}))
+    origin_url = forms.URLField(label="Özgün Çalışma", required=False, help_text="Başka bir çalışmayı temel aldıysanız bunun bağlantısını yazın.", widget=forms.TextInput(attrs={"style":"width:400px"}))
 
     class Meta:
         model = DesktopScreenshot
@@ -100,7 +100,7 @@ class WallpaperForm(forms.ModelForm):
     text = forms.CharField(label="Tanım", required=True, help_text="Ekleyeceğiniz dosyalar hakkındaki açıklamalarınızı bu bölümde belirtebilirsiniz.", widget=forms.Textarea(attrs={"style":"width:400px"}))
     confirmation = forms.BooleanField(label="Onay", required=True, help_text="Bu duvar kağıdını dağıtma hakkına sahibim.")
     license = forms.ModelChoiceField(label="Lisans", queryset=License.objects.order_by("name"), empty_label="---------")
-    origin_url = forms.URLField(label="Özgün Çalışma", required=True, help_text="Başka bir çalışmayı temel aldıysanız bunun bağlantısını yazın.", widget=forms.TextInput(attrs={"style":"width:400px"}))
+    origin_url = forms.URLField(label="Özgün Çalışma", required=False, help_text="Başka bir çalışmayı temel aldıysanız bunun bağlantısını yazın.", widget=forms.TextInput(attrs={"style":"width:400px"}))
 
     class Meta:
         model = Wallpaper
