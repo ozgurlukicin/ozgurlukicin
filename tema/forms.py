@@ -49,7 +49,8 @@ class ThemeTypeForm(forms.Form):
 
 class FontForm(forms.ModelForm):
     confirmation = forms.BooleanField(label="Onay", required=True, help_text="Bu yazıtipini dağıtma hakkına sahibim.")
-    origin_url = forms.URLField(label="Web Sitesi", required=True, help_text="Yazıtipi üreticisinin web sitesi.")
+    license = forms.ModelChoiceField(label="Lisans", queryset=License.objects.order_by("name"), empty_label="---------")
+    origin_url = forms.URLField(label="Web Sitesi", required=True, help_text="Yazıtipi üreticisinin web sitesi.", widget=forms.TextInput(attrs={"style":"width:400px"}))
 
     class Meta:
         model = Font
@@ -79,6 +80,8 @@ class FontForm(forms.ModelForm):
 
 class DesktopScreenShotForm(forms.ModelForm):
     confirmation = forms.BooleanField(label="Onay", required=True, help_text="Bu ekran görüntüsünü dağıtma hakkına sahibim.")
+    license = forms.ModelChoiceField(label="Lisans", queryset=License.objects.order_by("name"), empty_label="---------")
+    origin_url = forms.URLField(label="Özgün Çalışma", required=True, help_text="Başka bir çalışmayı temel aldıysanız bunun bağlantısını yazın.", widget=forms.TextInput(attrs={"style":"width:400px"}))
 
     class Meta:
         model = DesktopScreenshot
@@ -93,6 +96,8 @@ class DesktopScreenShotForm(forms.ModelForm):
 
 class WallpaperForm(forms.ModelForm):
     confirmation = forms.BooleanField(label="Onay", required=True, help_text="Bu duvar kağıdını dağıtma hakkına sahibim.")
+    license = forms.ModelChoiceField(label="Lisans", queryset=License.objects.order_by("name"), empty_label="---------")
+    origin_url = forms.URLField(label="Özgün Çalışma", required=True, help_text="Başka bir çalışmayı temel aldıysanız bunun bağlantısını yazın.", widget=forms.TextInput(attrs={"style":"width:400px"}))
 
     class Meta:
         model = Wallpaper
