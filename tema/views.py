@@ -407,17 +407,17 @@ def ghns_wallpapers(request):
     return HttpResponse(xml, mimetype="text/xml")
 
 def ghns_wallpaper(request):
-    wallpapers = Wallpaper.objects.filter(status=True).order_by("-update")[:100]
+    wallpapers = Wallpaper.objects.filter(status=True).order_by("-update")[:50]
     xml = loader.get_template("tema/wallpaper.xml").render(Context({"SITE_URL":settings.WEB_URL,"wallpapers":wallpapers}))
     return HttpResponse(xml, mimetype="text/xml")
 
 def ghns_wallpaper_score(request):
-    wallpapers = Wallpaper.objects.filter(status=True).order_by("-rating", "-update")[:100]
+    wallpapers = Wallpaper.objects.filter(status=True).order_by("-rating", "-update")[:50]
     xml = loader.get_template("tema/wallpaper.xml").render(Context({"SITE_URL":settings.WEB_URL,"wallpapers":wallpapers}))
     return HttpResponse(xml, mimetype="text/xml")
 
 def ghns_wallpaper_downloads(request):
-    wallpapers = Wallpaper.objects.filter(status=True).order_by("-download_count", "-update")[:100]
+    wallpapers = Wallpaper.objects.filter(status=True).order_by("-download_count", "-update")[:50]
     xml = loader.get_template("tema/wallpaper.xml").render(Context({"SITE_URL":settings.WEB_URL,"wallpapers":wallpapers}))
     return HttpResponse(xml, mimetype="text/xml")
 
