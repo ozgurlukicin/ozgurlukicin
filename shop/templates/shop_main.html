@@ -1,15 +1,6 @@
 {% extends "shop_base.html" %}
 {% block content %}
-    <div id="shop_intro"><div class="title">Pardus 2008 t-shirtleri hazır</div><div class="text">T-shirtleri e-dükkânımızdan seçip satın alabilirsiniz.</div></div>
-    <div id="product_list">
-    {% for product in products %}
-        {% if not product.parent %}
-        <div class="product_item rightborder">
-            <div class="photo"><a href="{{ product.get_absolute_url }}"><img src="{{ product.images.all.0.picture.url }}" alt="{{ product }}" /></a></div>
-            <div class="title">{{ product }}</div>
-            <div class="button"><a href="{{ product.get_absolute_url }}"><img src="/media/img/new/shop/button_buy.png" alt="Satın Al" /></a></div>
-        </div>
-        {% endif %}
-    {% endfor %}
-    </div>
+<br /><br />
+<center>Üzgünüz... E-Dükkan, yapılandırma çalışmalarından ardından tekrar hizmete girecektir.</center>
+
 {% endblock %}

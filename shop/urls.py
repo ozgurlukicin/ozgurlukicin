@@ -11,11 +11,11 @@ urlpatterns = patterns('oi.shop',
         # Home page
         (r'^$', 'main.views.home'),
         # Profile
-        (r'^profil/', include('oi.shop.shopprofile.urls')),
+        #(r'^profil/', include('oi.shop.shopprofile.urls')),
         # Shopping Cart
-        (r'^sepet/', include('oi.shop.cart.urls')),
+        #(r'^sepet/', include('oi.shop.cart.urls')),
         # Category
-        (r'^kategori/(?P<slug>.*)/$', 'product.views.get_category_products'),
+        #(r'^kategori/(?P<slug>.*)/$', 'product.views.get_category_products'),
         # Product
-        (r'^urun/(?P<category_slug>.*)/(?P<product_slug>.*)/$', 'product.views.get_product'),
+        #(r'^urun/(?P<category_slug>.*)/(?P<product_slug>.*)/$', 'product.views.get_product'),
         )
