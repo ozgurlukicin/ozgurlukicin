@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'oi.editor',
     'oi.paste',
     'oi.shipit',
+    'oi.piyango',
 )
 
 CITY_LIST = (
