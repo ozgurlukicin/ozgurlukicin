@@ -11,6 +11,7 @@ from django.template import Context, loader
 from oi.forum.views import flood_control
 from oi.piyango.forms import PersonForm
 from oi.st.wrappers import render_response
+from oi.settings import DEFAULT_FROM_EMAIL
 from oi.piyango.settings import PIYANGO_MAIL_LIST
 
 def create_person(request):
