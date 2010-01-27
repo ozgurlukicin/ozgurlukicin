@@ -1,0 +1,8 @@
+<p>{{ person }}, çekilişe katıldı. Bilgileri aşağıdaki gibidir.</p>
+<br/>
+<p>Sipariş No: <b><a href="{{ WEB_URL }}{{ person.get_absoulte_url }}">{{ person.get_id }}</a></b></p>
+<br/>
+<p>Adres:</p>
+<p>{{ person.address }}</p>
+<p>{{ person.postcode }} {{ person.town }}/{{ person.get_city_display }}</p>
+<p>Tel: {{ person.get_full_phone }}</p>

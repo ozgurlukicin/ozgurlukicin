@@ -1,0 +1,32 @@
+{% extends "piyango/base.html" %}
+{% block content %}
+<form method="POST" action="">
+    <h2>Çekilişe Katılım Formu</h2>
+    <br />
+    <p>Piyango hakkındaki ilkelerimizi okumak için <a href="/hakkinda/piyango/">bu adresi</a> ziyaret edebilir, Çekilişe katılmak için aşağıdaki formu doldurabilirsiniz.</p>
+    <br />
+    {% if flood %}<div class="error">Lütfen formu tekrar göndermeden önce {{ timeout }} saniye bekleyiniz.</div>{% endif %}
+    {% if form.non_field_errors %}<div class="error">{{ form.non_field_errors }}</div>{% endif %}
+    {% for field in form %}
+    {% ifequal field.name "phone_area" %}
+<div class="field_container">
+    <div class="field_label">{{ field.label_tag }}</div>
+    <div class="field_field">
+        {{ field }} {{ form.phone_number }}
+        {% if field.errors %}{{ field.errors }}{% endif %}
+        {% if form.phone_number.errors %}{{ form.phone_number.errors }}{% endif %}
+    </div>
+    <div class="help_text">
+        {% if field.help_text %}{{ field.help_text }}{% endif %}
+    </div>
+    <div style="clear:both;"></div>
+</div>
+    {% else %}
+        {% ifnotequal field.name "phone_number" %}
+        {% include "formfields.html" %}
+        {% endifnotequal %}
+    {% endifequal %}
+    {% endfor %}
+    <input type="Submit" value="Gönder" />
+</form>
+{% endblock %}
