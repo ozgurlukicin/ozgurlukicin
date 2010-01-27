@@ -5,8 +5,12 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
+import random
+import sha
+
 from django.db import models
 from oi.shipit.settings import CITY_LIST
+from oi.middleware import threadlocals
 
 class Person(models.Model):
     first_name = models.CharField("Ad", max_length=30)
