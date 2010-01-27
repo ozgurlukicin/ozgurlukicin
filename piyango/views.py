@@ -7,6 +7,7 @@
 
 from django.core.mail import EmailMessage
 from django.template import Context, loader
+from django.shortcuts import get_object_or_404
 
 from oi.forum.views import flood_control
 from oi.piyango.forms import PersonForm
