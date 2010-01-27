@@ -193,7 +193,7 @@ urlpatterns = patterns('',
     (r'^cdgonder/', include('oi.shipit.urls')),
 
     #Piyango
-    (r'^piyango/', include('oi.shipit.urls')),
+    (r'^piyango/', include('oi.piyango.urls')),
 
     #Webalizer
     url(r'^admin/webalizer/', include('webalizer.urls')),
