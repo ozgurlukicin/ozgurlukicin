@@ -14,6 +14,7 @@ from oi.piyango.forms import PersonForm
 from oi.st.wrappers import render_response
 from oi.settings import DEFAULT_FROM_EMAIL
 from oi.piyango.settings import PIYANGO_MAIL_LIST
+from oi.piyango.models import Person
 
 def create_person(request):
     if request.method == "POST":
