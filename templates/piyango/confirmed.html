@@ -6,5 +6,7 @@
 {% block content %}
 <p>Sayın {{ person }},</p>
 <br />
-<p>Çekilişe katılma isteğiniz onaylanmıştır.</p>
+<p>Pardus 5. yıl çekilişine katılma isteğiniz onaylanmıştır. Çekiliş numaranız aşağıdaki gibidir:</p>
+<br />
+<h3>{{ person.get_id }}</h3>
 {% endblock %}

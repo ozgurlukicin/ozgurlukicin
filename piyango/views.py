@@ -47,7 +47,7 @@ def confirm_person(request, id, hash):
     #send mail to lists
     message = loader.get_template("piyango/confirmed_email.html").render(Context({"person":person,"WEB_URL":WEB_URL}))
     mail = EmailMessage(
-        "Pardus Çekilişi",
+        "Pardus 5. Yıl Çekilişi",
         message,
         "Özgürlükiçin <%s>" % DEFAULT_FROM_EMAIL,
         [PIYANGO_MAIL_LIST],
@@ -55,5 +55,17 @@ def confirm_person(request, id, hash):
     )
     mail.content_subtype = "html"
     mail.send(fail_silently=True)
+    #send mail to person
+    message = loader.get_template("piyango/confirmed_email_person.html").render(Context({"person":person,"WEB_URL":WEB_URL}))
+    mail = EmailMessage(
+        "Pardus Çekilişi",
+        message,
+        "Özgürlükiçin <%s>" % DEFAULT_FROM_EMAIL,
+        [person.email],
+        headers={"Message-ID":"%s-%s" % (person.id, person.hash)}
+    )
+    mail.content_subtype = "html"
+    mail.send(fail_silently=True)
+
 
     return render_response(request, "piyango/confirmed.html", locals())
