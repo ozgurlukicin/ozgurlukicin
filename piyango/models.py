@@ -17,8 +17,8 @@ from oi.middleware import threadlocals
 class Person(models.Model):
     first_name = models.CharField("Ad", max_length=30)
     last_name = models.CharField("Soyad", max_length=30)
-    tcidentity = models.CharField("TC kimlik no", max_length=11)
-    email = models.EmailField("E-Posta")
+    tcidentity = models.CharField("TC Kimlik No", max_length=11)
+    email = models.EmailField("E-posta")
     address = models.TextField("Adres")
     town = models.CharField("İlçe", max_length=40)
     city = models.CharField("Şehir", choices=CITY_LIST, max_length=40)

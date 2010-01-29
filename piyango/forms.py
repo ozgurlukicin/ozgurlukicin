@@ -13,7 +13,7 @@ from oi.piyango.models import Person
 from oi.shipit.forms import TurkishIdentityNumberField
 
 class PersonForm(forms.ModelForm):
-    tcidentity = TurkishIdentityNumberField(label="TC kimlik no")
+    tcidentity = TurkishIdentityNumberField(label="TC Kimlik No")
     phone_area = forms.CharField(label="Telefon", max_length=3, widget=forms.TextInput(attrs={"style":"width:30px;margin-right:5px"}))
     phone_number = forms.CharField(label="Telefon Numarası", max_length=7, widget=forms.TextInput(attrs={"style":"width:130px"}))
     class Meta:
