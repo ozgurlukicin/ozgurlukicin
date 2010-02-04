@@ -4,7 +4,7 @@
         </div>
         <div class="idea_vote" id="vote{{ idea.id }}">{{ idea.vote_count }}</div>
         <div id="vote{{ idea.id }}_0">
-            <input id="img_{{ idea.id }}_0" tvalue="Bu fikri sevmedim" type="image" src="/media/img/new/ideas_vote{% ifequal idea.user_vote -1 %}d{% endifequal %}_0.png" onclick="oyla({{ idea.id }}, 0);" />
+            <input id="img_{{ idea.id }}_0" value="Bu fikri sevmedim" type="image" src="/media/img/new/ideas_vote{% ifequal idea.user_vote -1 %}d{% endifequal %}_0.png" onclick="oyla({{ idea.id }}, 0);" />
         </div>
     </div>
     <div class="idea_right">
