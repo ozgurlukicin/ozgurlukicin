@@ -8,7 +8,7 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('oi.shipit.views',
-    #(r'^$', 'create_cdclient'),
+    (r'^$', 'create_cdclient'),
     (r'^gonderilecek/$', 'cdclient_list_to_send'),
     (r'^gonderildi/$', 'cdclient_list_sent'),
     (r'^gonderilmedi/$', 'cdclient_list_not_sent'),
