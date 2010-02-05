@@ -6,10 +6,11 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 import re, random, datetime
-try:
-    from hashlib import sha1 as sha
-except ImportError:
-    import sha
+#try:
+#    from hashlib import sha1 as sha
+#except ImportError:
+#    import sha
+import sha
 
 from django.db import models
 from django.contrib.auth.models import User

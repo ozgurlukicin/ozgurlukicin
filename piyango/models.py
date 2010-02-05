@@ -6,10 +6,11 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 import random
-try:
-    from hashlib import sha1 as sha
-except ImportError:
-    import sha
+#try:
+#    from hashlib import sha1 as sha
+#except ImportError:
+#    import sha
+import sha
 
 from django.db import models
 from django.contrib.sites.models import Site
