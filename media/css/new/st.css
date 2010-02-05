@@ -89,6 +89,7 @@ div.sidebar_bottom_content a {
 }
 div.sidebar_bottom_content img {
     margin-bottom: 10px;
+    width: 100%;
 }
 div#ooxmlbar {
     margin: 10px;
