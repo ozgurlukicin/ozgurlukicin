@@ -5,7 +5,11 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-import re, random, datetime, sha
+import re, random, datetime
+try:
+    from hashlib import sha1 as sha
+except ImportError:
+    import sha
 
 from django.db import models
 from django.contrib.auth.models import User

@@ -5,7 +5,11 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-import random, sha
+import random
+try:
+    from hashlib import sha1 as sha
+except ImportError:
+    import sha
 
 from django.db import models
 from django.contrib.sites.models import Site

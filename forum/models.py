@@ -16,7 +16,10 @@ from oi.poll.models import Poll
 
 from oi.forum.settings import FORUM_FROM_EMAIL
 
-import md5
+try:
+    from hashlib import md5
+except ImportError:
+    import md5
 
 class Post(models.Model):
     """
