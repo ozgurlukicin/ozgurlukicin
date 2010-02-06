@@ -60,7 +60,7 @@
     <p>{{ package.path }}</p>
     <h2>Etiketler</h2>
     <p>
-    <img src="/media/img/new/tag.png" style="vertical-align: middle;" /> {% for tag in package.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if not forloop.last%},{% endif %} {% endfor %}
+    <img src="/media/img/new/tag.png" style="vertical-align: middle;" alt="etiketler" /> {% for tag in package.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if not forloop.last%},{% endif %} {% endfor %}
     </p>
     {% if package.wiki.all %}
         <h2>İlgili wiki sayfaları</h2>
