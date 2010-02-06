@@ -35,7 +35,7 @@ div.summary_container div.columnspacer {
     width: 180px;
     float: left;
 }
-.column .info, .column .info b {
+.column .info, .column .info a {
     font-size: 8px;
 }
 .column .info a {
