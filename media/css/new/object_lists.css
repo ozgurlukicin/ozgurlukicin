@@ -35,8 +35,8 @@ div.summary_container div.columnspacer {
     width: 180px;
     float: left;
 }
-.column .info, .column .info span {
-    font-size: 8px;
+.column .info, .column .info a, .column .info span {
+    font-size: 9px;
 }
 .column .info a {
     text-decoration: none;
