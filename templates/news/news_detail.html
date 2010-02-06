@@ -25,7 +25,7 @@
 </div>
 <div style="clear: both;"></div>
 <div class="page_comments">
-    <a href="{{ news.topic.get_latest_post_url }}">{{ news.topic.posts|add:"-1" }} yorum</a> <a href="{{ news.topic.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" /></a>
+    <a href="{{ news.topic.get_latest_post_url }}">{{ news.topic.posts|add:"-1" }} yorum</a> <a href="{{ news.topic.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="." /></a>
 </div>
 
 {% if user.is_authenticated %}

@@ -20,7 +20,7 @@
     {{ game.text|safe }}
 </div>
 <div style="clear:both;"></div>
-<div style="float:right;margin-right:10px"><a href="{{ game.topic.get_latest_post_url }}">{{ game.topic.posts|add:"-1" }} yorum</a> <a href="{{ game.topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a></div>
+<div style="float:right;margin-right:10px"><a href="{{ game.topic.get_latest_post_url }}">{{ game.topic.posts|add:"-1" }} yorum</a> <a href="{{ game.topic.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="." /></a></div>
 {% if user.is_authenticated %}
     {% if form %}
     <p>

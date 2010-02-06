@@ -19,7 +19,7 @@
 <div class="page_content">
 {{ howto.text|safe }}
 </div>
-<div style="float:right; margin-right:10px"><a href="{{ howto.topic.get_latest_post_url }}">{{ howto.topic.posts|add:"-1" }} yorum</a> <a href="{{ howto.topic.get_latest_post_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" /></a></div>
+<div style="float:right; margin-right:10px"><a href="{{ howto.topic.get_latest_post_url }}">{{ howto.topic.posts|add:"-1" }} yorum</a> <a href="{{ howto.topic.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="." /></a></div>
 <p>
 {% if user.is_authenticated %}
     {% if form %}
