@@ -2,13 +2,14 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
-from oi.ideas.models import Idea, RelatedCategory, Status
+from oi.ideas.models import Idea, RelatedCategory, Status, Related
 from oi.st.forms import XssField
 
 class CommentForm(forms.Form):
     text = forms.CharField(label="Yorumunuz", required=True, widget=forms.Textarea(attrs={ 'cols':'83%', 'rows':'7'}))
 
 class NewIdeaForm(forms.ModelForm):
+    related_to = forms.ModelChoiceField(queryset=Related.objects.order_by("name"), required=False, label="Şu paketle ilgili", help_text="Bu alanı boş bırakabilirsiniz.")
     class Meta:
         model = Idea
         exclude = ('file',"submitter", "status", "vote_count", "duplicate", "is_hidden", "is_duplicate", "comment_count", "topic")
