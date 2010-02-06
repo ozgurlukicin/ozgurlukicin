@@ -40,22 +40,20 @@
 
 <div class="sidebarcolumn leftcolumn">
     <h2>Bilgiler</h2>
-    <p>
-        <table>
-            <tr>
-                <td>Lisans</td><td>:{% for license in game.license.all %}<a href="{{ license.url }}">{{ license.name }}</a>{% endfor %}</td>
-            </tr>
-            <tr>
-                <td>Paket boyutu</td><td>:{{ game.download_size|filesizeformat }}</td>
-            </tr>
-            <tr>
-                <td>Kurulu boyutu</td><td>:{{ game.installed_size|filesizeformat }}</td>
-            </tr>
-            <tr>
-                <td colspan="3"><br /><a href="{{ game.url }}">Oyunun Web Sitesi</a></td>
-            </tr>
-        </table>
-    </p>
+    <table>
+        <tr>
+            <td>Lisans</td><td>:{% for license in game.license.all %}<a href="{{ license.url }}">{{ license.name }}</a>{% endfor %}</td>
+        </tr>
+        <tr>
+            <td>Paket boyutu</td><td>:{{ game.download_size|filesizeformat }}</td>
+        </tr>
+        <tr>
+            <td>Kurulu boyutu</td><td>:{{ game.installed_size|filesizeformat }}</td>
+        </tr>
+        <tr>
+            <td colspan="3"><br /><a href="{{ game.url }}">Oyunun Web Sitesi</a></td>
+        </tr>
+    </table>
 
     <h2>Değerlendirme</h2>
     <p>Öğrenme süresi: {{ game.learning_time }}</p>
