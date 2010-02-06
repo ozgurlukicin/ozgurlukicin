@@ -92,7 +92,7 @@
             </div>
             {% endifequal %}
             {% endif %}
-            {% if perms.forum.can_hide_post and not forloop.first and not post.hidden %}
+            {% if perms.forum.can_hide_post and not post.hidden %}
             <div class="post_message_top_button">
                 <a href="{{ post.get_hide_url }}"><img src="/media/img/new/forum/button_hide.png" alt="gizle" /></a>
             </div>
