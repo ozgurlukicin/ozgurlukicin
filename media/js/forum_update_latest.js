@@ -2,13 +2,13 @@ function syncData(data) {
     if (data) {
     //remove non-existent
     $(".latest > .post").each(function(i) {
-        if (data.indexOf(parseInt(this.id.replace("id","")))<0) {
+        if (data.indexOf(this.id)<0) {
             $(this).addClass("tohide");
         }
     });
     //insert new data
     $(data).each(function(i) {
-        if ($(".latest").html().indexOf(parseInt(this.id.replace("id","")))<0) {
+        if ($(".latest").html().indexOf(this.id)<0) {
             $(this).addClass("newcomer");
             $(".latest").prepend(this);
         }
@@ -24,7 +24,7 @@ function syncData(data) {
 }
 var t;
 function updatePosts(delay) {
-    var id = $(".latest > .post")[0].id.replace("id","");
+    var id = $(".latest > .post")[0].id;
     $(".ajaxloader").show();
     $.get("/forum/son-iletiler/"+id+"/", syncData);
     t = setTimeout("updatePosts(" + delay + ")", delay);
