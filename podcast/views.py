@@ -16,6 +16,6 @@ def main(request):
     return render_response(request, 'podcast/main.html', locals())
 
 def feed(request):
-    WEB_URL = settings.WEB_URL
+    WEB_URL = oi.settings.WEB_URL
     episode_list = Episode.objects.filter(status=True)
     return render_response(request, 'podcast/feed.html', locals())
