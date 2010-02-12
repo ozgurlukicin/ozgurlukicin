@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load library %}
 {% block title %}Podcast - {% endblock %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/object_lists.css');</style>
@@ -21,7 +22,7 @@
             <div style="clear:both;"></div>
         </div>
     </div>
-    {% endfor %}
+    {% endwith %}
     <div class="summary_container">
     {% for episode in episode_list %}
         <div class="column first">
@@ -36,4 +37,5 @@
         <div class="{% cycle columnspacer, %}"></div>
     {% endfor %}
     </div>
+    {% if is_paginated %}<div class="paginator_block"><div class="paginator_pages">{% paginator %}</div><div class="paginator_description"><span class="bold">{{ pages }}</span> sayfada toplam <span class="bold">{{ hits }}</span> podcast bulunmaktadır.</div></div>{% endif %}
 {% endblock %}
