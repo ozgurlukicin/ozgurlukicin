@@ -102,7 +102,26 @@
                 <a href="{{ post.get_hide_url }}"><img src="/media/img/new/forum/button_show.png" alt="göster" /></a>
             </div>
             {% endif %}
-        {% endif %}
+            {% if perms.forum.delete_post and not forloop.first %}
+            <div class="post_message_top_button">
+            <form method="post" action="{{post.get_delete_url}}">
+                <input type="image" src="/media/img/new/forum/button_delete.png" alt="sil" />
+            </form>
+            </div>
+            {% else %}
+                {% ifequal post.author.id request.user.id %}
+                    {% ifequal post topic.topic_latest_post %}
+                        {% if not forloop.first %}
+                        <div class="post_message_top_button">
+                        <form method="post" action="{{post.get_delete_url}}">
+                            <input type="image" src="/media/img/new/forum/button_delete.png" alt="sil" />
+                        </form>
+                        </div>
+                        {% endif %}
+                    {% endifequal %}
+                {% endifequal %}
+                {% endif %}
+            {% endif %}
         </div>
         <div class="post_message_content">
             <div class="post_message_text">{{ post.text|renderbbcode|safe }}</div>
