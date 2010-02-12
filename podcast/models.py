@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from oi.upload.models import Image
 from oi.forum.models import Topic
 from oi.forum.tools import create_forum_topic
+from oi.st.tags import Tag
 
 class Author(models.Model):
     name = models.CharField('Gerçek Adı', max_length=64, blank=False, unique=True)
@@ -49,7 +50,7 @@ class Episode(models.Model):
     file_size_mp3 = models.IntegerField()
     file_url_ogg = models.URLField()
     file_size_ogg = models.IntegerField()
-    date = models.DateTimeField()
+    update = models.DateTimeField()
     status = models.BooleanField("Aktif")
     topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
 

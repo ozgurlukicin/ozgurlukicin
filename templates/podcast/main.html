@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Podcast - {% endblock %}
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/object_lists.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
+{% endblock %}
+{% block content %}
+    {% with episode_list.0 as episode %}
+    <div class="news_container">
+        <div class="column">
+            <div class="left_column">
+                <img src="{{ episode.image.file.url }}" alt="{{ episode.title }}" />
+            </div>
+            <div class="right_column">
+                <span>Podcastler</span>
+                <div class="title"><a href="{{ episode.get_absolute_url }}">{{ episode.title }}</a></div>
+                <div class="summary">{{ episode.sum|safe }}<br /></div>
+                <div class="info"><span class="bold">{{ episode.update|date:"d" }} {{ episode.update|date:"F"|slice:":3" }}</span> {{ episode.update|date:"Y" }} <span class="bold">/</span> <a href="{{ episode.topic.get_latest_post_url }}"><span class="bold">{{ episode.topic.posts|add:"-1" }}</span> Yorum</a></div>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="summary_container">
+    {% for episode in episode_list %}
+        <div class="column first">
+             <img src="{{ episode.image.file.url }}" alt="{{ episode.image.get_alt_string }}" /><br />
+            <img src="/media/img/new/image_bottom.png" alt="gölge" />
+            <div class="info"><span class="bold">{{ episode.update|date:"d" }} {{ episode.update|date:"F"|slice:":3" }}</span> {{ episode.update|date:"Y" }} <span class="bold">/</span> <a href="{{ episode.topic.get_latest_post_url }}"><span class="bold">{{ episode.topic.posts|add:"-1" }}</span> Yorum</a></div>
+        </div>
+        <div class="column">
+            <div class="title"><a href="{{ episode.get_absolute_url }}">{{ episode.title }}</a></div>
+            <div class="summary">{{ episode.sum|safe|truncatewords_html:23 }}</div>
+        </div>
+        <div class="{% cycle columnspacer, %}"></div>
+    {% endfor %}
+    </div>
+{% endblock %}
