@@ -26,15 +26,15 @@
     <item>
         <title>{{ episode.title }}</title>
         <link>{{ episode.file_url_mp3 }}</link>
-        <description>{{ episode.description|striptags }}</description>
+        <description>{{ episode.text|striptags }}</description>
         <author>{% for author in episode.authors.all %}{% if forloop.last %}{{ author.name }}{% else %}{{ author.name }}, {% endif %}{% endfor %}</author>
         <enclosure url="{{ episode.file_url_mp3 }}" length="{{ episode.file_size_mp3 }}" type="audio/mpeg" />
         <guid isPermalink="true">{{ episode.file_url_mp3 }}</guid>
         <pubDate>{{ episode.date|date:"r" }} GMT</pubDate>
         <itunes:author>{% for author in episode.authors.all %}{% if forloop.last %}{{ author.name }}{% else %}{{ author.name }}, {% endif %}{% endfor %}</itunes:author>
-        <itunes:summary>{{ episode.summary|striptags }}</itunes:summary>
+        <itunes:summary>{{ episode.sum|striptags }}</itunes:summary>
         <itunes:duration>{{ episode.minutes }}:{{ episode.seconds }}</itunes:duration>
-        <itunes:keywords>{{ episode.keywords }}</itunes:keywords>
+        <itunes:keywords>{% for tag in episode.tags.all %}{% if forloop.last %}{{ tag }}{% else %}{{ tag }}, {% endif %}{% endfor %}</itunes:keywords>
         <itunes:explicit>no</itunes:explicit>
     </item>
     {% endfor %}
