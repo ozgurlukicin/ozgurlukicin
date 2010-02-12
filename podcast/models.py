@@ -8,6 +8,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from oi.upload.models import Image
+from oi.forum.models import Topic
+from oi.forum.tools import create_forum_topic
+
 class Author(models.Model):
     name = models.CharField('Gerçek Adı', max_length=64, blank=False, unique=True)
     user = models.ForeignKey(User, verbose_name="Öİ Kullanıcı Adı", blank=True, null=True, help_text="Zorunlu değil", related_name="podcast_author")
@@ -32,9 +36,12 @@ class License(models.Model):
         verbose_name_plural = "Lisanslar"
 
 class Episode(models.Model):
-    title = models.CharField(max_length=64)
-    summary = models.TextField()
-    description = models.TextField()
+    title = models.CharField("Başlık", max_length=32)
+    slug = models.SlugField("SEF Başlık")
+    image = models.ForeignKey(Image, verbose_name="Görsel", blank=True, null=True)
+    sum = models.TextField("Özet")
+    text = models.TextField("Metin")
+    tags = models.ManyToManyField(Tag)
     authors = models.ManyToManyField(Author)
     minutes = models.IntegerField()
     seconds = models.IntegerField()
@@ -43,10 +50,15 @@ class Episode(models.Model):
     file_url_ogg = models.URLField()
     file_size_ogg = models.IntegerField()
     date = models.DateTimeField()
-    active = models.BooleanField()
+    status = models.BooleanField("Aktif")
+    topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
 
     def __unicode__(self):
         return self.title
+
+    def save(self):
+        create_forum_topic(self, "Podcast")
+        super(Episode, self).save()
 
     class Meta:
         verbose_name = "Bölüm"
