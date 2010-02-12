@@ -1,3 +1,4 @@
+{% load petition %}
 {% load ideas %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -91,12 +92,7 @@ class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabil
                 <p>Özgürlükiçin'in şimdi bir de e-dergisi var! Okumak için <a href="/e-dergi/">buraya</a> tıklayın.</p>
             </div>
             {% endblock %}
-            {% block petition %}
-            <div class="sidebar_bottom_content">
-                <a href="/piyango/"><img src="/media/img/piyango.png" alt="Geleneksel Pardus Piyangosu" /></a>
-                <p>40 kullanıcımızı müthiş hediyeler bekliyor!</p>
-            </div>
-            {% endblock %}
+            {% block petition %}{% petition_box %}{% endblock %}
             {% block sidebar_bottom_bottom %}
             {% endblock %}
         </div>

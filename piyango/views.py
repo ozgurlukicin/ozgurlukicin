@@ -18,6 +18,7 @@ from oi.piyango.models import Person
 from oi.settings import WEB_URL
 
 def create_person(request):
+    """
     if request.method == "POST":
         form = PersonForm(request.POST.copy())
         flood, timeout = flood_control(request)
@@ -36,6 +37,7 @@ def create_person(request):
             initial["email"] = request.user.email
             initial["city"] = request.user.get_profile().city
         form = PersonForm(initial=initial)
+    """
     return render_response(request, "piyango/create_person.html", locals())
 
 def confirm_person(request, id, hash):
