@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+
+<channel>
+    <title>Özgürlükiçin Podcast</title>
+    <link>{{ WEB_URL }}/podcast/</link>
+    <description>Özgürlükiçin Podcast Yayınları</description>
+    <language>tr-TR</language>
+    <copyright>&#x2117; &amp; &#xA9; {% now "Y" %} Özgürlükiçin.com. Creative Commons: Attribution-Non-Commercial-Share Alike (by-nc-sa).</copyright>
+    <managingEditor>Özgürlükiçin Topluluğu</managingEditor>
+    <lastBuildDate>{{ episode_list.0.date|date:"r" }}</lastBuildDate>
+    <generator>Django Web Framework</generator>
+    <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+    <itunes:author>Özgürlükiçin.com</itunes:author>
+    <itunes:owner>
+        <itunes:name>ozgurlukicin</itunes:name>
+        <itunes:email>ozgrulukicin@ozgurlukicin.com</itunes:email>
+    </itunes:owner>
+    <itunes:summary>Özgürlükiçin Sohbetleri</itunes:summary>
+    <itunes:category text="Technology">
+      <itunes:category text="Tech News" />
+    </itunes:category>
+    <itunes:explicit>no</itunes:block>
+
+    {% for episode in episode_list %}
+    <item>
+        <title>{{ episode.title }}</title>
+        <link>{{ episode.file_url_mp3 }}</link>
+        <description>{{ episode.description|striptags }}</description>
+        <author>{% for author in episode.authors.all %}{% if forloop.last %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.name }}{% if author.user %}</a>{% endif %}{% else %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.name }}{% if author.user %}</a>{% endif %}, {% endif %}{% endfor %}</author>
+        <enclosure url="{{ episode.file_url_mp3 }}" length="{{ episode.file_size_mp3 }}" type="audio/mpeg" />
+        <guid isPermalink="true">{{ episode.file_url_mp3 }}</guid>
+        <pubDate>{{ episode.date|date:"r" }} GMT</pubDate>
+        <itunes:author>{% for author in episode.authors.all %}{% if forloop.last %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.name }}{% if author.user %}</a>{% endif %}{% else %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.name }}{% if author.user %}</a>{% endif %}, {% endif %}{% endfor %}</itunes:author>
+        {% if episode.subtitle %}<itunes:subtitle>{{ episode.subtitle }}</itunes:subtitle>{% endif %}
+        <itunes:summary>{{ episode.summary|striptags }}</itunes:summary>
+        <itunes:duration>{{ episode.minutes }}:{{ episode.seconds }}</itunes:duration>
+        <itunes:keywords>{{ episode.keywords }}</itunes:keywords>
+        <itunes:explicit>no</itunes:explicit>
+    </item>
+    {% endfor %}
+</channel>
+</rss>

@@ -1,0 +1,18 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#
+# Copyright 2010 TÜBİTAK UEKAE
+# Licensed under the GNU General Public License, version 3.
+# See the file http://www.gnu.org/copyleft/gpl.txt.
+
+from django.views.generic.list_detail import object_list
+
+from oi.podcast.models import *
+
+def main(request):
+    episode_list = Episode.objects.filter(active=True)
+    return render_response(request, 'podcast/main.html', locals())
+
+def feed(request):
+    episode_list = Episode.objects.filter(active=True)
+    return render_response(request, 'podcast/feed.html', locals())
