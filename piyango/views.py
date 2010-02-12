@@ -8,6 +8,7 @@
 from django.core.mail import EmailMessage
 from django.template import Context, loader
 from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
 
 from oi.forum.views import flood_control
 from oi.piyango.forms import PersonForm
@@ -41,6 +42,7 @@ def create_person(request):
     return render_response(request, "piyango/create_person.html", locals())
 
 def confirm_person(request, id, hash):
+    """
     person = get_object_or_404(Person, id=id, hash=hash, confirmed=False)
     if Person.objects.filter(tcidentity=person.tcidentity, confirmed=True).count()>0:
         return HttpResponse("Bu TC kimlik numarası daha önce kullanılmış!")
@@ -71,3 +73,5 @@ def confirm_person(request, id, hash):
 
 
     return render_response(request, "piyango/confirmed.html", locals())
+    """
+    return HttpResponseRedirect("/piyango/")
