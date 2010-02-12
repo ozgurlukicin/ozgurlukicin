@@ -12,10 +12,10 @@ from oi.podcast.models import *
 import oi.settings
 
 def main(request):
-    episode_list = Episode.objects.filter(active=True)
+    episode_list = Episode.objects.filter(status=True)
     return render_response(request, 'podcast/main.html', locals())
 
 def feed(request):
     WEB_URL = settings.WEB_URL
-    episode_list = Episode.objects.filter(active=True)
+    episode_list = Episode.objects.filter(status=True)
     return render_response(request, 'podcast/feed.html', locals())
