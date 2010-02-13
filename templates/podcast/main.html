@@ -26,7 +26,7 @@
     <div class="summary_container">
     {% for episode in episode_list %}
         <div class="column first">
-             <img src="{{ episode.image.file.url }}" alt="{{ episode.image.get_alt_string }}" /><br />
+            <img src="{{ episode.image.file.url }}" alt="{{ episode.image.get_alt_string }}" /><br />
             <img src="/media/img/new/image_bottom.png" alt="gölge" />
             <div class="info"><span class="bold">{{ episode.update|date:"d" }} {{ episode.update|date:"F"|slice:":3" }}</span> {{ episode.update|date:"Y" }} <span class="bold">/</span> <a href="{{ episode.topic.get_latest_post_url }}"><span class="bold">{{ episode.topic.posts|add:"-1" }}</span> Yorum</a></div>
         </div>
