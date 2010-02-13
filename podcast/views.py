@@ -20,7 +20,7 @@ def main(request):
     return render_response(request, 'podcast/main.html', locals())
 
 def detail(request, slug):
-    episode = get_object_or_404(Episode, status=True, slug=slug)
+    episode = get_object_or_404(Episode, slug=slug)
     form = PostForm()
     return render_response(request, 'podcast/detail.html', locals())
 
