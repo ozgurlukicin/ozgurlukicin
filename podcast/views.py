@@ -21,4 +21,4 @@ def feed(request):
     WEB_URL = oi.settings.WEB_URL
     episode_list = Episode.objects.filter(status=True)
     xml = loader.get_template("podcast/feed.html").render(Context(locals()))
-    return HttpResponse(xml, mimetype="text/xml")
+    return HttpResponse(xml, mimetype="application/xml")
