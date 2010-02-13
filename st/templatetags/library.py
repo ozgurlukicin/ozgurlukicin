@@ -83,6 +83,6 @@ def rfc822datetime(value):
     if value:
         rfc822days = ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
         rfc822months = ("Jan", "Feb", "Mar", "Apr", "Jun", "Jul", "Aug", "Oct", "Nov", "Dec")
-        return "%s, %s %s %d %s:%s:%s +0200" % (rfc822days[value.isoweekday()], str(value.day).zfill(2), rfc822months[value.month-1], d.year, str(value.hour).zfill(2), str(value.minute).zfill(2), str(value.second).zfill(2))
+        return "%s, %s %s %d %s:%s:%s +0200" % (rfc822days[value.isoweekday()], str(value.day).zfill(2), rfc822months[value.month-1], value.year, str(value.hour).zfill(2), str(value.minute).zfill(2), str(value.second).zfill(2))
     else:
         return ""
