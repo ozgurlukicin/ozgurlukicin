@@ -195,6 +195,9 @@ urlpatterns = patterns('',
     #Piyango
     (r'^piyango/', include('oi.piyango.urls')),
 
+    #Podcast
+    (r'^podcast/', include('oi.podcast.urls')),
+
     #Webalizer
     url(r'^admin/webalizer/', include('webalizer.urls')),
 
