@@ -8,18 +8,18 @@
 {% endblock %}
 {% block content %}
     {% with episode_list.0 as episode %}
-    <div class="news_container" style="background-image:url('/media/podcasts/bg.png');height:250px;">
-        <div class="column" style="margin-left:16px;margin-top:20px">
+    <div class="news_container podcast_main" style="background-image:url('/media/podcasts/bg.png');height:250px;">
+        <div class="column">
             <div class="left_column">
                 <img src="{{ episode.image.file.url }}" alt="{{ episode.title }}" />
             </div>
             <div class="right_column">
                 <span style="color:white">Özgürlükiçin Podcast</span>
                 <div class="title"><a href="{{ episode.get_absolute_url }}" style="color:white">{{ episode.title }}</a></div>
-                <div class="summary" style="width:280px;color:white">{{ episode.sum|safe }}<br />
+                <div class="summary">{{ episode.sum|safe }}<br />
                     {% include "podcast/mp3player.html" %}
                 </div>
-                <div class="info" style="color:white"><span class="bold">{{ episode.update|date:"d" }} {{ episode.update|date:"F"|slice:":3" }}</span> {{ episode.update|date:"Y" }} <span class="bold">/</span> <a href="{{ episode.topic.get_latest_post_url }}" style="color:white"><span class="bold">{{ episode.topic.posts|add:"-1" }}</span> Yorum</a></div>
+                <div class="info"><span class="bold">{{ episode.update|date:"d" }} {{ episode.update|date:"F"|slice:":3" }}</span> {{ episode.update|date:"Y" }} <span class="bold">/</span> <a href="{{ episode.topic.get_latest_post_url }}"><span class="bold">{{ episode.topic.posts|add:"-1" }}</span> Yorum</a></div>
             </div>
             <div style="clear:both;"></div>
         </div>

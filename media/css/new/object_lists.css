@@ -108,3 +108,17 @@ div.news_container div.column div.right_column {
 .hidden {
     display:none;
 }
+.podcast_main {
+    background-image:url('/media/podcasts/bg.png');
+    height:250px;
+}
+.podcast_main .column {
+    margin-left:16px;
+    margin-top:20px;
+}
+.podcast_main * {
+    color: white !important;
+}
+.podcast_main .summary {
+    width: 280px;
+}
