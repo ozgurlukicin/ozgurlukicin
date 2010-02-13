@@ -8,13 +8,13 @@
 {% endblock %}
 {% block content %}
     {% with episode_list.0 as episode %}
-    <div class="news_container">
+    <div class="news_container" style="background-image:url('/media/podcast/bg.png')">
         <div class="column">
             <div class="left_column">
                 <img src="{{ episode.image.file.url }}" alt="{{ episode.title }}" />
             </div>
             <div class="right_column">
-                <span>Podcastler</span>
+                <span>Özgürlükiçin Podcast</span>
                 <div class="title"><a href="{{ episode.get_absolute_url }}">{{ episode.title }}</a></div>
                 <div class="summary">{{ episode.sum|safe }}<br />
                 <object type="application/x-shockwave-flash" data="/media/podcasts/player_mp3_maxi.swf" width="276" height="28">

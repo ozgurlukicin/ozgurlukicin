@@ -55,8 +55,8 @@
     <p><img src="/media/img/new/tag.png" style="vertical-align: middle;" alt="etiketler" /> {% for tag in episode.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if forloop.last %}{% else %}, {% endif %}{% endfor %}
     </p>
     <br />
-    <h2>Konuşmacılar</h2>
-    <p>{% for author in episode.authors.all %}{% if forloop.last %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.name }}{% if author.user %}</a>{% endif %}{% else %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.name }}{% if author.user %}</a>{% endif %}, {% endif %}{% endfor %}</p>
+    <h2>Sunan</h2>
+    <p>{% for author in episode.authors.all %}{% if forloop.last %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.name }}{% if author.user %}</a>{% endif %}{% else %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.name }}{% if author.user %}</a>{% endif %},<br />{% endif %}{% endfor %}</p>
     <h2>Paylaş</h2>
     <script language="javascript" type="text/javascript">
         var newstitle = "{{ episode.title|safe|addslashes }}";
