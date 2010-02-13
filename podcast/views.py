@@ -6,6 +6,8 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.views.generic.list_detail import object_list
+from django.http import HttpResponse
+from django.template import Context, loader
 
 from oi.st.wrappers import render_response
 from oi.podcast.models import *
@@ -18,4 +20,5 @@ def main(request):
 def feed(request):
     WEB_URL = oi.settings.WEB_URL
     episode_list = Episode.objects.filter(status=True)
-    return render_response(request, 'podcast/feed.html', locals())
+    xml = loader.get_template("podcast/feed.html").render(Context(locals()))
+    return HttpResponse(xml, mimetype="text/xml")
