@@ -21,6 +21,7 @@
 {% block content %}
 <div class="page_title">{{ episode.title }}</div>
 <div class="page_content">
+{% include "podcast/mp3player.html" %}<br />
 {{ episode.text|safe }}
 </div>
 <div style="clear: both;"></div>

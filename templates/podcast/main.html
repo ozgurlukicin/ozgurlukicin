@@ -17,11 +17,7 @@
                 <span>Özgürlükiçin Podcast</span>
                 <div class="title"><a href="{{ episode.get_absolute_url }}">{{ episode.title }}</a></div>
                 <div class="summary">{{ episode.sum|safe }}<br />
-                <object type="application/x-shockwave-flash" data="/media/podcasts/player_mp3_maxi.swf" width="276" height="28">
-                    <param name="movie" value="/media/podcasts/player_mp3_maxi.swf" />
-                    <param name="bgcolor" value="#ffffff" />
-                    <param name="FlashVars" value="mp3={{ episode.file_url_mp3 }}&width=276&height=28&loadingcolor=ffffff&skin=/media/podcasts/player_skin.jpg&bgcolor1=4ba4db&bgcolor2=2e87be&slidercolor1=ffffff&slidercolor2=cccccc&sliderovercolor=ffffff&buttoncolor=cecece&buttonovercolor=ffffff" />
-                </object>
+                    {% include "podcast/mp3player.html" %}
                 </div>
                 <div class="info"><span class="bold">{{ episode.update|date:"d" }} {{ episode.update|date:"F"|slice:":3" }}</span> {{ episode.update|date:"Y" }} <span class="bold">/</span> <a href="{{ episode.topic.get_latest_post_url }}"><span class="bold">{{ episode.topic.posts|add:"-1" }}</span> Yorum</a></div>
             </div>
