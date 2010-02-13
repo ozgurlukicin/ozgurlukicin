@@ -7,6 +7,7 @@
 
 from django.views.generic.list_detail import object_list
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from django.template import Context, loader
 
 from oi.st.wrappers import render_response
@@ -16,6 +17,10 @@ import oi.settings
 def main(request):
     episode_list = Episode.objects.filter(status=True)
     return render_response(request, 'podcast/main.html', locals())
+
+def detail(request, slug):
+    episode = get_object_or_404(Episode, status=True, slug=slug)
+    return render_response(request, 'podcast/detail.html', locals())
 
 def feed(request):
     WEB_URL = oi.settings.WEB_URL

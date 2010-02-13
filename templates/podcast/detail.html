@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load library %}
+
+{% block title %}{{ episode.title }} - Podcast - {% endblock %}
+{% block metadescription %}{{ episode.sum|safe|striptags|cut:"\"" }}{% endblock %}
+{% block metakeywords %}{% for tag in episode.tags.all %}{{ tag.name }}{% if not forloop.last %},{% endif %}{% endfor %}{% endblock %}
+{% block extrahead %}
+<style media="screen" type="text/css">@import url('/media/css/new/article.css');</style>
+<style media="screen" type="text/css">@import url('/media/css/new/st.css');</style>
+<!--facebook-->
+<meta name="title" content="{{ episode.title|safe }}" />
+<link rel="image_src" href="{{ episode.image.file.url }}" />
+<meta name="medium" content="episode" />
+<!--end facebook-->
+{% if user.is_authenticated %}
+    <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
+    <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="page_title">{{ episode.title }}</div>
+<div class="page_content">
+{{ episode.text|safe }}
+</div>
+<div style="clear: both;"></div>
+<div class="page_comments">
+    <a href="{{ episode.topic.get_latest_post_url }}">{{ episode.topic.posts|add:"-1" }} yorum</a> <a href="{{ episode.topic.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="." /></a>
+</div>
+
+{% if user.is_authenticated %}
+    {% if form %}
+    <p>
+        <form method="post" action="{{ episode.topic.get_reply_url }}">
+            {{form}}
+            <br/>
+            <input type="submit" value="Gönder" />
+        </form>
+    </p>
+    {% endif %}
+{% endif %}
+<div class="page_printable"><a href="{{ episode.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
+<div class="page_last_update">Son güncelleme: {{ episode.update|date:"d F Y" }}</div>
+
+{% endblock %}
+
+{% block leftcolumn %}
+<div class="sidebarcolumn leftcolumn">
+    <h2>İndir</h2>
+    <p><a href="{{ episode.file_url_mp3 }}">mp3 ({{ episode.file_size_mp3|filesizeformat }})</a></p>
+    <p><a href="{{ episode.file_url_ogg }}">ogg ({{ episode.file_size_ogg|filesizeformat }})</a></p>
+    <p><a href="/podcast/feed/">Podcast beslemesi</a></p>
+    <br />
+    <h2>Etiketler</h2>
+    <p><img src="/media/img/new/tag.png" style="vertical-align: middle;" alt="etiketler" /> {% for tag in episode.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if forloop.last %}{% else %}, {% endif %}{% endfor %}
+    </p>
+    <br />
+    <h2>Konuşmacılar</h2>
+    <p>{% for author in episode.authors.all %}{% if forloop.last %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.name }}{% if author.user %}</a>{% endif %}{% else %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.name }}{% if author.user %}</a>{% endif %}, {% endif %}{% endfor %}</p>
+    <h2>Paylaş</h2>
+    <script language="javascript" type="text/javascript">
+        var newstitle = "{{ episode.title|safe|addslashes }}";
+        var newssummary = "{{ episode.sum|safe|striptags|addslashes|cut:"\n" }}";
+        var newsurl = "{{ request.build_absolute_uri }}";
+    </script>
+    <p>
+    <a href="http://delicious.com/save" title="del.icio.us'a ekle" onclick='window.open("http://delicious.com/save?v=5&amp;noui&amp;jump=close&amp;url="+encodeURIComponent(newsurl)+"&title="+encodeURIComponent(newstitle), "delicious","toolbar=no,width=550,height=550"); return false;'><img src="/media/img/new/servicelinks/delicious.png" alt="del.icio.us'a ekle" /></a>
+    <a href="http://facebook.com/sharer.php" title="facebook'a ekle" onclick='window.open("http://facebook.com/sharer.php?u="+encodeURIComponent(newsurl)+"&t="+encodeURIComponent(newstitle), "facebook","toolbar=no,width=550,height=550"); return false;'><img src="/media/img/new/servicelinks/facebook.png" alt="facebook'a ekle" /></a>
+    <a href="http://identi.ca/" title="identica'ya ekle" onclick='window.open("http://identi.ca/index.php?action=newnotice&status_textarea=!oi "+encodeURIComponent(newstitle)+": "+encodeURIComponent(newsurl), "identi.ca","toolbar=no,width=800,height=450"); return false;'><img src="/media/img/new/servicelinks/identica.png" alt="identica'ya ekle" /></a>
+    <a href="http://twitter.com/home" title="twitter'a ekle" onclick='window.open("http://twitter.com/home?status="+encodeURIComponent(newstitle)+": "+encodeURIComponent(newsurl), "twitter","toolbar=no,width=800,height=550"); return false;'><img src="/media/img/new/servicelinks/twitter.png" alt="twitter'a ekle" /></a>
+    <a href="http://www.stumbleupon.com/" title="stumbleupon'a ekle" onclick='window.open("http://www.stumbleupon.com/submit?url="+encodeURIComponent(newsurl), "stumbleupon","toolbar=no,width=800,height=550"); return false;'><img src="/media/img/new/servicelinks/stumbleupon.png" alt="stumbleupon'a ekle" /></a>
+    <a href="http://www.google.com/" title="google buzz'a ekle" onclick='window.open("http://www.google.com/reader/link?url="+encodeURIComponent(newsurl)+"&title="+encodeURIComponent(newstitle)+"&snippet="+encodeURIComponent(newssummary)+"&srcURL=www.ozgurlukicin.com&srcTitle=Özgürlükİçin.com"); return false;'><img src="/media/img/new/servicelinks/googlebuzz.png" alt="google buzz'a ekle" /></a>
+    <a href="http://technorati.com/" title="technorati'ye ekle" onclick='window.open("http://technorati.com/faves?sub=addfavbtn&add="+encodeURIComponent(newsurl), "technorati","toolbar=no,width=1000,height=550"); return false;'><img src="/media/img/new/servicelinks/technorati.png" alt="technorati'ye ekle" /></a>
+    </p>
+</div>
+{% endblock %}
