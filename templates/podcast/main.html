@@ -10,9 +10,6 @@
     {% with episode_list.0 as episode %}
     <div class="news_container podcast_main" style="background-image:url('/media/podcasts/bg.png');height:250px;">
         <div class="column">
-            <div class="left_column">
-                <img src="{{ episode.image.file.url }}" alt="{{ episode.title }}" />
-            </div>
             <div class="right_column">
                 <span style="color:white">Özgürlükiçin Podcast</span>
                 <div class="title"><a href="{{ episode.get_absolute_url }}" style="color:white">{{ episode.title }}</a></div>

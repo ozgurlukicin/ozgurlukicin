@@ -11,6 +11,7 @@ from django.shortcuts import get_object_or_404
 from django.template import Context, loader
 
 from oi.st.wrappers import render_response
+from oi.forum.forms import PostForm
 from oi.podcast.models import *
 import oi.settings
 
@@ -20,6 +21,7 @@ def main(request):
 
 def detail(request, slug):
     episode = get_object_or_404(Episode, status=True, slug=slug)
+    form = PostForm()
     return render_response(request, 'podcast/detail.html', locals())
 
 def feed(request):
