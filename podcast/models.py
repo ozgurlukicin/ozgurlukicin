@@ -61,6 +61,9 @@ class Episode(models.Model):
         create_forum_topic(self, "Podcast")
         super(Episode, self).save()
 
+    def get_absolute_url(self):
+        return "/podcast/bolum/%s/" % self.slug
+
     class Meta:
         verbose_name = "Bölüm"
         verbose_name_plural = "Bölümler"
