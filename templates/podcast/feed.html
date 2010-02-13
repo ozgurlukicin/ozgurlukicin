@@ -7,7 +7,7 @@
     <description>Özgürlükiçin Podcast Yayınları</description>
     <language>tr-TR</language>
     <copyright>&#x2117; &amp; &#xA9; {% now "Y" %} Özgürlükiçin.com. Creative Commons: Attribution-Non-Commercial-Share Alike (by-nc-sa).</copyright>
-    <lastBuildDate>{{ episode_list.0.update|date:"r" }} +0200</lastBuildDate>
+    <lastBuildDate>{{ episode_list.0.update|date:"r" }}</lastBuildDate>
     <docs>http://blogs.law.harvard.edu/tech/rss</docs>
     <itunes:author>Özgürlükiçin.com</itunes:author>
     <itunes:owner>
@@ -19,7 +19,7 @@
     <itunes:category text="Technology">
       <itunes:category text="Tech News" />
     </itunes:category>
-    <itunes:explicit>no</itunes:block>
+    <itunes:explicit>no</itunes:explicit>
 
     {% for episode in episode_list %}
     <item>
@@ -29,7 +29,7 @@
         <author>{% for author in episode.authors.all %}{% if forloop.last %}{{ author.name }}{% else %}{{ author.name }}, {% endif %}{% endfor %}</author>
         <enclosure url="{{ episode.file_url_mp3 }}" length="{{ episode.file_size_mp3 }}" type="audio/mpeg" />
         <guid isPermalink="true">{{ episode.file_url_mp3 }}</guid>
-        <pubDate>{{ episode.update|date:"r" }} +0200</pubDate>
+        <pubDate>{{ episode.update|date:"r" }}</pubDate>
         <itunes:author>{% for author in episode.authors.all %}{% if forloop.last %}{{ author.name }}{% else %}{{ author.name }}, {% endif %}{% endfor %}</itunes:author>
         <itunes:summary>{{ episode.sum|striptags }}</itunes:summary>
         <itunes:duration>00:{{ episode.minutes }}:{{ episode.seconds }}</itunes:duration>
