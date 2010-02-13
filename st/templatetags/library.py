@@ -77,3 +77,12 @@ def timedelta(value, arg=None):
         return "%s sonra" % timesince(cmp,value)
     else:
         return "%s önce" % timesince(value,cmp)
+
+@register.filter
+def rfc822datetime(value):
+    if value:
+        rfc822days = ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+        rfc822months = ("Jan", "Feb", "Mar", "Apr", "Jun", "Jul", "Aug", "Oct", "Nov", "Dec")
+        return "%s, %s %s %d %s:%s:%s +0200" % (rfc822days[value.isoweekday()], (value.day).zfill(2), rfc822months[value.month-1], d.year, (value.hour).zfill(2), (value.minute).zfill(2), (value.second).zfill(2))
+    else:
+        return ""
