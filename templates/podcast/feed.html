@@ -30,7 +30,7 @@
         <author>{% for author in episode.authors.all %}{% if forloop.last %}{{ author.name }}{% else %}{{ author.name }}, {% endif %}{% endfor %}</author>
         <enclosure url="{{ episode.file_url_mp3 }}" length="{{ episode.file_size_mp3 }}" type="audio/mpeg" />
         <guid isPermalink="true">{{ episode.file_url_mp3 }}</guid>
-        <pubDate>{{ episode.date|date:"r" }} GMT</pubDate>
+        <pubDate>{{ episode.update|date:"r" }} GMT</pubDate>
         <itunes:author>{% for author in episode.authors.all %}{% if forloop.last %}{{ author.name }}{% else %}{{ author.name }}, {% endif %}{% endfor %}</itunes:author>
         <itunes:summary>{{ episode.sum|striptags }}</itunes:summary>
         <itunes:duration>{{ episode.minutes }}:{{ episode.seconds }}</itunes:duration>
