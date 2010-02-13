@@ -21,8 +21,8 @@
 {% block content %}
 <div class="page_title">{{ episode.title }}</div>
 <div class="page_content">
-{% include "podcast/mp3player.html" %}<br />
-{{ episode.text|safe }}
+{{ episode.text|safe }}<br />
+{% include "podcast/mp3player.html" %}
 </div>
 <div style="clear: both;"></div>
 <div class="page_comments">
