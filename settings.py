@@ -134,6 +134,7 @@ INSTALLED_APPS = (
     'oi.paste',
     'oi.shipit',
     'oi.piyango',
+    'oi.podcast',
 )
 
 CITY_LIST = (
