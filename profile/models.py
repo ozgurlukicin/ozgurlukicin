@@ -5,12 +5,9 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-import re, random, datetime
-#try:
-#    from hashlib import sha1 as sha
-#except ImportError:
-#    import sha
-import sha
+import datetime
+import random
+import re
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -19,7 +16,6 @@ from django import forms
 from oi.middleware import threadlocals
 from oi.settings import CITY_LIST
 from oi.st.models import Contribute
-
 from oi.shop.shopprofile.models import ShopProfile
 
 PARDUS_VERSIONS = (
