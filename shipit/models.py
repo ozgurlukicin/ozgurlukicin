@@ -6,11 +6,7 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 import random
-#try:
-#    from hashlib import sha1 as sha
-#except ImportError:
-#    import sha
-import sha
+from hashlib import sha1 as sha
 
 from django.db import models
 from django.contrib.sites.models import Site
@@ -52,8 +48,8 @@ class CdClient(models.Model):
     def save(self):
         if not self.hash:
             random.seed()
-            salt = sha.new(str(random.random())).hexdigest()
-            self.hash = sha.new(salt).hexdigest()
+            salt = sha(str(random.random())).hexdigest()
+            self.hash = sha(salt).hexdigest()
         if not self.ip:
             self.ip = threadlocals.get_current_ip()
         super(CdClient, self).save()
