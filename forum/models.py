@@ -6,6 +6,7 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from datetime import datetime
+from hashlib import md5
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -16,11 +17,6 @@ from oi.poll.models import Poll
 
 from oi.forum.settings import FORUM_FROM_EMAIL
 
-#try:
-#    from hashlib import md5
-#except ImportError:
-#    import md5
-import md5
 
 class Post(models.Model):
     """
@@ -215,7 +211,7 @@ class Topic(models.Model):
         return '/forum/%s/%s/poll/delete/' % (self.forum.slug, self.id)
 
     def get_email_id(self):
-        return '<%s.%s@%s>' % (md5.new(self.title).hexdigest(), self.id, FORUM_FROM_EMAIL.split('@')[1])
+        return '<%s.%s@%s>' % (md5(self.title).hexdigest(), self.id, FORUM_FROM_EMAIL.split('@')[1])
 
     # <a title="...."> for tooltip. Just get a short context of first post on the topic.
     def get_tooltip_context(self):
