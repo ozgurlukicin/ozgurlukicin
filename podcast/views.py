@@ -37,3 +37,9 @@ def feed(request):
     episode_list = Episode.objects.filter(status=True).order_by("-update")
     xml = loader.get_template("podcast/feed.html").render(Context(locals()))
     return HttpResponse(xml, mimetype="application/xml")
+
+def feed_ogg(request):
+    WEB_URL = oi.settings.WEB_URL
+    episode_list = Episode.objects.filter(status=True).order_by("-update")
+    xml = loader.get_template("podcast/feed_ogg.html").render(Context(locals()))
+    return HttpResponse(xml, mimetype="application/xml")

@@ -10,5 +10,7 @@ from django.conf.urls.defaults import patterns
 urlpatterns = patterns('oi.podcast.views',
     (r'^$', 'main'),
     (r'^feed/$', 'feed'),
+    (r'^feed/mp3/$', 'feed'),
+    (r'^feed/ogg/$', 'feed_ogg'),
     (r'^bolum/(?P<slug>.*)/$', 'detail'),
 )
