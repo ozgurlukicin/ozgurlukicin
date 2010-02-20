@@ -1,0 +1,25 @@
+{% load library %}<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+
+<channel>
+    <title>Özgürlükiçin Podcast</title>
+    <link>{{ WEB_URL }}/podcast/</link>
+    <description>Özgürlükiçin Podcast Yayınları</description>
+    <language>tr-TR</language>
+    <copyright>&#x2117; &amp; &#xA9; {% now "Y" %} Özgürlükiçin.com. Creative Commons: Attribution-Non-Commercial-Share Alike (by-nc-sa).</copyright>
+    <lastBuildDate>{{ episode_list.0.update|rfc822datetime }}</lastBuildDate>
+    <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+
+    {% for episode in episode_list %}
+    <item>
+        <title>{{ episode.title }}</title>
+        <link>{{ WEB_URL }}{{ episode.get_absolute_url }}</link>
+        <description>{{ episode.sum|striptags }}</description>
+        <author>{% for author in episode.authors.all %}{% if forloop.last %}{{ author.name }}{% else %}{{ author.name }}, {% endif %}{% endfor %}</author>
+        <enclosure url="{{ episode.file_url_ogg }}" length="{{ episode.file_size_ogg }}" type="application/ogg" />
+        <guid>{{ episode.file_url_ogg }}</guid>
+        <pubDate>{{ episode.update|rfc822datetime }}</pubDate>
+    </item>
+    {% endfor %}
+</channel>
+</rss>
