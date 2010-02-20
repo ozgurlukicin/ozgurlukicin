@@ -16,13 +16,13 @@
                 <div class="summary">{{ episode.sum|safe }}<br />
                     {% include "podcast/mp3player.html" %}
                 </div>
-                <div class="info"><span class="bold">{{ episode.update|date:"d" }} {{ episode.update|date:"F"|slice:":3" }}</span> {{ episode.update|date:"Y" }} <span class="bold">/</span> <a href="{{ episode.topic.get_latest_post_url }}"><span class="bold">{{ episode.topic.posts|add:"-1" }}</span> Yorum</a></div>
+                <div class="info" style="margin-top:5px"><span class="bold">{{ episode.update|date:"d" }} {{ episode.update|date:"F"|slice:":3" }}</span> {{ episode.update|date:"Y" }} <span class="bold">/</span> <a href="{{ episode.topic.get_latest_post_url }}"><span class="bold">{{ episode.topic.posts|add:"-1" }}</span> Yorum</a></div>
             </div>
             <div style="clear:both;"></div>
         </div>
     </div>
     {% endwith %}
-    <div class="summary_container">
+    <div class="summary_container" style="margin-top:20px">
     {% for episode in episode_list %}
         <div class="column first">
             <img src="{{ episode.image.file.url }}" alt="{{ episode.image.get_alt_string }}" /><br />
