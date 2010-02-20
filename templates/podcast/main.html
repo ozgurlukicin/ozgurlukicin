@@ -14,7 +14,7 @@
                 <span style="color:white">Özgürlükiçin Podcast</span>
                 <div class="title"><a href="{{ last_episode.get_absolute_url }}" style="color:white">{{ last_episode.title }}</a></div>
                 <div class="summary">{{ last_episode.sum|safe }}<br />
-                    {% include "podcast/mp3player.html" %}
+                    {% with last_episode as episode %}{% include "podcast/mp3player.html" %}{% endwith %}
                 </div>
                 <div class="info" style="margin-top:5px"><span class="bold">{{ last_episode.update|date:"d" }} {{ last_episode.update|date:"F"|slice:":3" }}</span> {{ last_episode.update|date:"Y" }} <span class="bold">/</span> <a href="{{ last_episode.topic.get_latest_post_url }}"><span class="bold">{{ last_episode.topic.posts|add:"-1" }}</span> Yorum</a></div>
             </div>
