@@ -19,7 +19,7 @@ import oi.settings
 
 def main(request):
     last_episode = Episode.objects.filter(status=True).order_by("-update")[0]
-    episode_list = Episode.objects.filter(status=True, id__ne=last_episode.id).order_by("-update")
+    episode_list = Episode.objects.filter(status=True).exclude(id=last_episode.id).order_by("-update")
     return object_list(request, episode_list,
             template_name="podcast/main.html",
             template_object_name="episode",
