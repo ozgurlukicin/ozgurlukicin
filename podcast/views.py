@@ -16,7 +16,7 @@ from oi.podcast.models import *
 import oi.settings
 
 def main(request):
-    episode_list = Episode.objects.filter(status=True)
+    episode_list = Episode.objects.filter(status=True).order_by("-update")
     return render_response(request, 'podcast/main.html', locals())
 
 def detail(request, slug):
@@ -26,6 +26,6 @@ def detail(request, slug):
 
 def feed(request):
     WEB_URL = oi.settings.WEB_URL
-    episode_list = Episode.objects.filter(status=True)
+    episode_list = Episode.objects.filter(status=True).order_by("-update")
     xml = loader.get_template("podcast/feed.html").render(Context(locals()))
     return HttpResponse(xml, mimetype="application/xml")
