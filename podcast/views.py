@@ -23,7 +23,7 @@ def main(request):
     return object_list(request, episode_list,
             template_name="podcast/main.html",
             template_object_name="episode",
-            extra_context={"last_episode":last_episode}
+            extra_context={"last_episode":last_episode},
             paginate_by=EPISODES_PER_PAGE,
     )
 
