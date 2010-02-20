@@ -9,16 +9,23 @@ from django.views.generic.list_detail import object_list
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.template import Context, loader
+from django.views.generic.list_detail import object_list
 
 from oi.st.wrappers import render_response
 from oi.forum.forms import PostForm
 from oi.podcast.models import *
+from oi.podcast.settings import EPISODES_PER_PAGE
 import oi.settings
 
 def main(request):
     last_episode = Episode.objects.filter(status=True).order_by("-update")[0]
     episode_list = Episode.objects.filter(status=True, id__ne=last_episode.id).order_by("-update")
-    return render_response(request, 'podcast/main.html', locals())
+    return object_list(request, episode_list,
+            template_name="podcast/main.html",
+            template_object_name="episode",
+            extra_context={"last_episode":last_episode}
+            paginate_by=EPISODES_PER_PAGE,
+    )
 
 def detail(request, slug):
     episode = get_object_or_404(Episode, slug=slug)
