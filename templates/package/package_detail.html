@@ -41,16 +41,16 @@
     <h2>Ayrıntılar</h2>
     <table>
         <tr>
-            <td>Lisans</td><td>: {% for license in package.license.all %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}</td>
+            <td>Lisans: {% for license in package.license.all %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}</td>
         </tr>
         <tr>
-            <td>Paket boyutu</td><td>: {{ package.download_size|filesizeformat }}</td>
+            <td>Paket boyutu: {{ package.download_size|filesizeformat }}</td>
         </tr>
         <tr>
-            <td>Kurulu boyutu:</td><td>: {{ package.installed_size|filesizeformat }}</td>
+            <td>Kurulu boyut: {{ package.installed_size|filesizeformat }}</td>
         </tr>
         <tr>
-            <td colspan="2"><br /><a href="{{ package.url }}">Paketin Web Sitesi</a></td>
+            <td><br /><a href="{{ package.url }}">Paketin Web Sitesi</a></td>
         </tr>
     </table>
     <h2>Editör notu</h2>
