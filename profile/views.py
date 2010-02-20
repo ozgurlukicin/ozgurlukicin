@@ -326,8 +326,11 @@ def user_list(request):
         "Pardus 2008": Profile.objects.filter(pardus_version=3).count(),
         "Pardus 2009": Profile.objects.filter(pardus_version=4).count(),
     }
-    chl, chd = "", ""
-    for key in versions.keys(): chl += "%s (%d)" % (key, versions[key]) + "|"
-    for key in versions.values(): chd += str(key) + ","
+    chl, chd, total = "", "", 0
+    for value in versions.values():
+        total += value
+    for item in versions.items():
+        chl += "%s (%d)" % (item[0], item[1]) + "|"
+        chd += str(item[1]*100.0/total) + ","
     chartUrl = "http://chart.apis.google.com/chart?chs=600x200&cht=p3&chl=%s&chd=t:%s" % (chl[:-1], chd[:-1])
     return render_response(request, "user/user_list.html", {"profiles":profiles,"apikey":googleMapsApiKey, "chartUrl": chartUrl})
