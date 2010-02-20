@@ -82,6 +82,7 @@ div.sidebar_bottom_content {
     padding-bottom: 10px;
     border-bottom: 1px #EAEAEA solid;
     margin-bottom: 15px;
+    margin-top: 10px;
 }
 div.sidebar_bottom_content a {
     font-weight: bold;
