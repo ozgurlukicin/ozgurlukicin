@@ -16,7 +16,8 @@ from oi.podcast.models import *
 import oi.settings
 
 def main(request):
-    episode_list = Episode.objects.filter(status=True).order_by("-update")
+    last_episode = Episode.objects.filter(status=True).order_by("-update")[0]
+    episode_list = Episode.objects.filter(status=True, id__ne=last_episode.id).order_by("-update")
     return render_response(request, 'podcast/main.html', locals())
 
 def detail(request, slug):
