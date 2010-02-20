@@ -7,21 +7,19 @@
 <style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
 {% endblock %}
 {% block content %}
-    {% with last_episode as episode %}
     <div class="news_container podcast_main" style="background-image:url('/media/podcasts/bg.png');height:250px;">
         <div class="column">
             <div class="right_column">
                 <span style="color:white">Özgürlükiçin Podcast</span>
-                <div class="title"><a href="{{ episode.get_absolute_url }}" style="color:white">{{ episode.title }}</a></div>
-                <div class="summary">{{ episode.sum|safe }}<br />
+                <div class="title"><a href="{{ last_episode.get_absolute_url }}" style="color:white">{{ last_episode.title }}</a></div>
+                <div class="summary">{{ last_episode.sum|safe }}<br />
                     {% include "podcast/mp3player.html" %}
                 </div>
-                <div class="info" style="margin-top:5px"><span class="bold">{{ episode.update|date:"d" }} {{ episode.update|date:"F"|slice:":3" }}</span> {{ episode.update|date:"Y" }} <span class="bold">/</span> <a href="{{ episode.topic.get_latest_post_url }}"><span class="bold">{{ episode.topic.posts|add:"-1" }}</span> Yorum</a></div>
+                <div class="info" style="margin-top:5px"><span class="bold">{{ last_episode.update|date:"d" }} {{ last_episode.update|date:"F"|slice:":3" }}</span> {{ last_episode.update|date:"Y" }} <span class="bold">/</span> <a href="{{ last_episode.topic.get_latest_post_url }}"><span class="bold">{{ last_episode.topic.posts|add:"-1" }}</span> Yorum</a></div>
             </div>
             <div style="clear:both;"></div>
         </div>
     </div>
-    {% endwith %}
     <div class="summary_container" style="margin-top:20px">
     {% for episode in episode_list %}
         <div class="column first">
@@ -37,4 +35,21 @@
     {% endfor %}
     </div>
     {% if is_paginated %}<div class="paginator_block"><div class="paginator_pages">{% paginator %}</div><div class="paginator_description"><span class="bold">{{ pages }}</span> sayfada toplam <span class="bold">{{ hits }}</span> podcast bulunmaktadır.</div></div>{% endif %}
+{% endblock %}
+{% block leftcolumn %}
+<div class="sidebarcolumn leftcolumn">
+    <h2>Bu Hafta</h2>
+    <br />
+    <h2>İndir</h2>
+    <p><a href="{{ last_episode.file_url_mp3 }}">mp3 ({{ last_episode.file_size_mp3|filesizeformat }})</a></p>
+    <p><a href="{{ last_episode.file_url_ogg }}">ogg ({{ last_episode.file_size_ogg|filesizeformat }})</a></p>
+    <p><a href="/podcast/feed/">Podcast beslemesi</a></p>
+    <br />
+    <h2>Etiketler</h2>
+    <p><img src="/media/img/new/tag.png" style="vertical-align: middle;" alt="etiketler" /> {% for tag in last_episode.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if forloop.last %}{% else %}, {% endif %}{% endfor %}
+    </p>
+    <br />
+    <h2>Sunan</h2>
+    <p>{% for author in last_episode.authors.all %}{% if forloop.last %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.name }}{% if author.user %}</a>{% endif %}{% else %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.name }}{% if author.user %}</a>{% endif %},<br />{% endif %}{% endfor %}</p>
+</div>
 {% endblock %}
