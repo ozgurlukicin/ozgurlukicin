@@ -93,7 +93,9 @@ class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabil
                 <p>Özgürlükiçin'in şimdi bir de e-dergisi var! Okumak için <a href="/e-dergi/">buraya</a> tıklayın.</p>
             </div>
             {% endblock %}
-            {% block petition %}{% petition_box %}{% endblock %}
+            {% block petition %}
+                {% comment %}{% petition_box %}{% endcomment %}
+            {% endblock %}
             {% block sidebar_bottom_bottom %}
             {% endblock %}
         </div>
