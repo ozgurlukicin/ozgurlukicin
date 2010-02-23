@@ -1,4 +1,6 @@
-<audio src="{{ episode.file_url_ogg }}" controls="controls">
+<audio controls>
+<source src="{{ episode.file_url_ogg }}" />
+<source src="{{ episode.file_url_mp3 }}" />
 <object type="application/x-shockwave-flash" data="/media/podcasts/player_mp3_maxi.swf" width="276" height="28">
     <param name="movie" value="/media/podcasts/player_mp3_maxi.swf" />
     <param name="bgcolor" value="#ffffff" />
