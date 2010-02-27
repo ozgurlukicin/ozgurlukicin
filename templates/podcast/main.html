@@ -16,7 +16,7 @@
                 <div class="summary">{{ last_episode.sum|safe }}<br />
                     {% with last_episode as episode %}{% include "podcast/audioplayer.html" %}{% endwith %}
                 </div>
-                <div class="info" style="margin-top:5px"><span class="bold">{{ last_episode.update|date:"d" }} {{ last_episode.update|date:"F"|slice:":3" }}</span> {{ last_episode.update|date:"Y" }} <span class="bold">/</span> <a href="{{ last_episode.topic.get_latest_post_url }}"><span class="bold">{{ last_episode.topic.posts|add:"-1" }}</span> Yorum</a></div>
+                <div class="info" style="margin-top:5px"><span class="bold">Uzunluk: {{ last_episode.minutes }}:{{ last_episode.seconds }}</span><br /><span class="bold">{{ last_episode.update|date:"d" }} {{ last_episode.update|date:"F"|slice:":3" }}</span> {{ last_episode.update|date:"Y" }} <span class="bold">/</span> <a href="{{ last_episode.topic.get_latest_post_url }}"><span class="bold">{{ last_episode.topic.posts|add:"-1" }}</span> Yorum</a></div>
             </div>
             <div style="clear:both;"></div>
         </div>
