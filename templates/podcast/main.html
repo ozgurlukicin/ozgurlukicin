@@ -41,10 +41,10 @@
 <div class="sidebarcolumn leftcolumn">
     <h2>Güncel Podcast</h2>
     <h2>İndir</h2>
-    <p><a href="{{ last_episode.file_url_mp3 }}">mp3 ({{ last_episode.file_size_mp3|filesizeformat }})</a></p>
     <p><a href="{{ last_episode.file_url_ogg }}">ogg ({{ last_episode.file_size_ogg|filesizeformat }})</a></p>
-    <p><a href="/podcast/feed/mp3/">mp3 beslemesi</a></p>
+    <p><a href="{{ last_episode.file_url_mp3 }}">mp3 ({{ last_episode.file_size_mp3|filesizeformat }})</a></p>
     <p><a href="/podcast/feed/ogg/">ogg beslemesi</a></p>
+    <p><a href="/podcast/feed/mp3/">mp3 beslemesi</a></p>
     <br />
     <h2>Etiketler</h2>
     <p><img src="/media/img/new/tag.png" style="vertical-align: middle;" alt="etiketler" /> {% for tag in last_episode.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if forloop.last %}{% else %}, {% endif %}{% endfor %}
