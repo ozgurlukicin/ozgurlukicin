@@ -32,7 +32,7 @@
         <pubDate>{{ episode.update|rfc822datetime }}</pubDate>
         <itunes:author>{% for author in episode.authors.all %}{% if forloop.last %}{{ author.name }}{% else %}{{ author.name }}, {% endif %}{% endfor %}</itunes:author>
         <itunes:summary>{{ episode.sum|striptags }}</itunes:summary>
-        <itunes:duration>00:{{ episode.minutes }}:{{ episode.seconds }}</itunes:duration>
+        <itunes:duration>00:{{ episode.get_length }}</itunes:duration>
         <itunes:keywords>{% for tag in episode.tags.all %}{% if forloop.last %}{{ tag }}{% else %}{{ tag }}, {% endif %}{% endfor %}</itunes:keywords>
         <itunes:explicit>no</itunes:explicit>
     </item>

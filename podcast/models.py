@@ -64,6 +64,12 @@ class Episode(models.Model):
     def get_absolute_url(self):
         return "/podcast/bolum/%s/" % self.slug
 
+    def get_length(self):
+        return "%s:%s" % (
+            "0%d" % self.minutes if self.minutes<10 else str(self.minutes),
+            "0%d" % self.seconds if self.seconds<10 else str(self.seconds)
+        )
+
     class Meta:
         verbose_name = "Bölüm"
         verbose_name_plural = "Bölümler"
