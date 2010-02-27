@@ -1,9 +1,9 @@
-<audio controls="true">
+{% comment %}<audio controls="true">
 <source src="{{ episode.file_url_ogg }}" type="audio/ogg" />
-<source src="{{ episode.file_url_mp3 }}" type="audio/mpeg" />
+<source src="{{ episode.file_url_mp3 }}" type="audio/mpeg" />{% endcomment %}
 <object type="application/x-shockwave-flash" data="/media/podcasts/player_mp3_maxi.swf" width="276" height="28">
     <param name="movie" value="/media/podcasts/player_mp3_maxi.swf" />
     <param name="bgcolor" value="#ffffff" />
     <param name="FlashVars" value="mp3={{ episode.file_url_mp3 }}&width=276&height=28&loadingcolor=ffffff&skin=/media/podcasts/player_skin.jpg&bgcolor1=4ba4db&bgcolor2=2e87be&slidercolor1=ffffff&slidercolor2=cccccc&sliderovercolor=ffffff&buttoncolor=cecece&buttonovercolor=ffffff&showstop=1&showvolume=1" />
 </object>
-</audio>
+{% comment %}</audio>{% endcomment %}
