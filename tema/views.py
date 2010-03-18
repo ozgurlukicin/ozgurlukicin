@@ -423,8 +423,13 @@ def ghns_wallpaper_downloads(request):
 
 @permission_required('tema.manage_queue', login_url="/kullanici/giris/")
 def themeitem_queue(request):
-    queue = ThemeItem.objects.filter(status=False)
-    return render_response("tema/queue.html", locals())
+    themeItems = ThemeItem.objects.filter(status=False).order_by("-update")
+    params = {
+            "queryset": themeItems,
+            "paginate_by": THEME_ITEM_PER_PAGE,
+            "template_name": "tema/themeitem_list.html",
+    }
+    return object_list(request, **params)
 
 @permission_required("tema.manage_queue", login_url="/kullanici/giris/")
 def themeitem_delete(request, item_id):
