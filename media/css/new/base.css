@@ -14,6 +14,7 @@ img {
 }
 body {
     background-color: #EAEAEA;
+    font-family: sans-serif;
 }
 div#header {
     width: 993px;
