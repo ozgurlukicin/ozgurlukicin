@@ -26,6 +26,7 @@ div#sidebar div a {
 div.sidebarcolumn {
     float: left;
     width: 153px;
+    font-family: sans-serif;
 }
 div.rightcolumn {
     border-left: 1px #EAEAEA solid;
