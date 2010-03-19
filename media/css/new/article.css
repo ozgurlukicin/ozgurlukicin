@@ -26,6 +26,9 @@
 .leftcolumn p, .leftcolumn td, .leftcolumn span {
     font-size: 11px;
 }
+.leftcolumn p {
+    font-family: sans-serif;
+}
 .leftcolumn .minibox_container {
     background: #fff;
     width: 141px;
