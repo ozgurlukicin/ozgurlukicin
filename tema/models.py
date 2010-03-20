@@ -11,10 +11,13 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.files.base import ContentFile
 from django.template import Context, loader
+from django.core.mail import EmailMessage
 
 from oi.st.tags import Tag
 from oi.forum.models import Topic
 from oi.forum.tools import create_forum_topic
+from oi.settings import WEB_URL, DEFAULT_FROM_EMAIL
+from oi.tema.settings import TEMA_ADMIN_MAIL
 
 CATEGORIES = (
     ("duvar-kagitlari", "Duvar Kağıtları"),
@@ -87,13 +90,33 @@ class ThemeItem(models.Model):
             post.text = loader.get_template("tema/forum_wallpaper.html").render(Context({"object":self}))
             post.save()
         if self.status:
-            pass#send mail to author
+            #send mail to author? (this should only send once when accepted)
+            pass
         if not self.status and self.deny_reason:
-            pass#send deny mail to author
+            message = loader.get_template("tema/mail/rejected.html").render(Context({"themeitem":self,"WEB_URL":WEB_URL}))
+            mail = EmailMessage(
+                "Özgürlükiçin Tema - Reddedilen İçerik",
+                message,
+                "Özgürlükiçin Tema <%s>" % TEMA_ADMIN_MAIL,
+                [themeitem.user.email]
+            )
+            mail.send(fail_silently=True)
+
+        new_content = False
         if self.id == None:
-            pass#send mail to admins
+            new_content = True
 
         super(ThemeItem, self).save()
+        if new_content:
+            #send mail to admins
+            message = loader.get_template("tema/mail/new_content.html").render(Context({"themeitem":self,"WEB_URL":WEB_URL}))
+            mail = EmailMessage(
+                "Özgürlükiçin Tema - Yeni İçerik",
+                message,
+                "Özgürlükiçin <%s>" % DEFAULT_FROM_EMAIL,
+                [TEMA_ADMIN_MAIL]
+            )
+            mail.send(fail_silently=True)
 
     # we only support wallpaper for now, so return wallpaper url.
     # Later, fix this
