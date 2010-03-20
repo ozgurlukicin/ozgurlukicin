@@ -98,7 +98,7 @@ class ThemeItem(models.Model):
                 "Özgürlükiçin Tema - Reddedilen İçerik",
                 message,
                 "Özgürlükiçin Tema <%s>" % TEMA_ADMIN_MAIL,
-                [this.author.email]
+                [self.author.email]
             )
             mail.send(fail_silently=True)
 
