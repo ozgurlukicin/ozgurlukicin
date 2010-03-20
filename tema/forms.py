@@ -42,7 +42,8 @@ RATINGS = (
 class ThemeItemForm(forms.ModelForm):
     class Meta:
         model = ThemeItem
-        exclude = ("parentcategory", "thumbnail", "author", "rating", "download_count", "submit", "update", "status", "slug", "topic")
+        exclude = ("parentcategory", "thumbnail", "author", "rating",
+                "download_count", "submit", "update", "status", "deny_reason", "slug", "topic")
 
 class ThemeTypeForm(forms.Form):
     category = forms.ChoiceField(label="Kategori", choices=CATEGORIES, help_text="Ekleyeceğiniz içerik için bir kategori seçin")
@@ -55,7 +56,8 @@ class FontForm(forms.ModelForm):
 
     class Meta:
         model = Font
-        exclude = ("author", "rating", "category", "thumbnail", "download_count", "submit", "update", "status", "scalable", "changelog", "slug", "topic")
+        exclude = ("author", "rating", "category", "thumbnail",
+                "download_count", "submit", "update", "status", "deny_reason", "scalable", "changelog", "slug", "topic")
 
     def clean_tags(self):
         field_data = self.cleaned_data['tags']
@@ -87,7 +89,8 @@ class DesktopScreenShotForm(forms.ModelForm):
 
     class Meta:
         model = DesktopScreenshot
-        exclude = ("author", "rating", "category", "thumbnail", "download_count", "submit", "update", "status", "scalable", "papers", "changelog", "slug", "topic", "version")
+        exclude = ("author", "rating", "category", "thumbnail",
+                "download_count", "submit", "update", "status", "deny_reason", "scalable", "papers", "changelog", "slug", "topic", "version")
 
     def clean_tags(self):
         field_data = self.cleaned_data['tags']
@@ -104,7 +107,8 @@ class WallpaperForm(forms.ModelForm):
 
     class Meta:
         model = Wallpaper
-        exclude = ("author", "rating", "category", "thumbnail", "download_count", "submit", "update", "status", "scalable", "papers", "changelog", "slug", "topic", "version")
+        exclude = ("author", "rating", "category", "thumbnail",
+                "download_count", "submit", "update", "status", "deny_reason" , "scalable", "papers", "changelog", "slug", "topic", "version")
 
     def clean_tags(self):
         field_data = self.cleaned_data['tags']

@@ -71,6 +71,8 @@ class ThemeItem(models.Model):
     comment_enabled = models.BooleanField(default=True,verbose_name="Yoruma Açık", help_text="Diğer üyelerin bu içeriğe yorum yapıp yapamayacağını buradan belirtebilirsiniz.")
     thumbnail = models.ImageField("Küçük Resim", blank=True, upload_to="upload/tema/kucuk/")
     status = models.BooleanField(default=False, verbose_name="Kabul Edilmiş")
+    deny_reason = models.TextField(blank=True, verbose_name="Reddetme Nedeni",
+            help_text="Kabul edilmediyse sebebini yazın (ekleyen kişiye gönderilecek e-posta metni)")
     topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
     origin_url = models.URLField("Özgün Çalışma", blank=True, help_text="Başka bir çalışmayı temel aldıysanız bunun bağlantısını yazın.")
 
@@ -84,6 +86,12 @@ class ThemeItem(models.Model):
             post = self.topic.post_set.order_by("created")[0]
             post.text = loader.get_template("tema/forum_wallpaper.html").render(Context({"object":self}))
             post.save()
+        if self.status:
+            pass#send mail to author
+        if not self.status and self.deny_reason:
+            pass#send deny mail to author
+        if self.id == None:
+            pass#send mail to admins
 
         super(ThemeItem, self).save()
 

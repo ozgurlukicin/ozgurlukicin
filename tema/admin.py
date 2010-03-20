@@ -11,7 +11,8 @@ from oi.tema.models import *
 class ThemeItemAdmin(admin.ModelAdmin):
     fieldsets = (
             (None, {
-                "fields": ("thumbnail", "title", "slug", "origin_url", "text", "changelog", "status", "tags")
+                "fields": ("thumbnail", "title", "slug", "origin_url", "text",
+                    "changelog", "status", "deny_reason", "tags")
                 }),
             ("Diğer", {
                 "classes": "collapse",
@@ -32,7 +33,8 @@ class ThemeItemAdmin(admin.ModelAdmin):
 class WallpaperAdmin(ThemeItemAdmin):
     fieldsets = (
             (None, {
-                "fields": ("thumbnail", "title", "slug", "origin_url", "text", "changelog", "papers", "status", "tags")
+                "fields": ("thumbnail", "title", "slug", "origin_url", "text",
+                    "changelog", "papers", "status", "deny_reason", "tags")
                 }),
             ("Diğer", {
                 "classes": "collapse",
@@ -43,7 +45,8 @@ class WallpaperAdmin(ThemeItemAdmin):
 class DesktopScreenshotAdmin(ThemeItemAdmin):
     fieldsets = (
             (None, {
-                "fields": ("thumbnail", "title", "slug", "origin_url", "text", "changelog", "image", "status", "tags")
+                "fields": ("thumbnail", "title", "slug", "origin_url", "text",
+                    "changelog", "image", "status", "deny_reason", "tags")
                 }),
             ("Diğer", {
                 "classes": "collapse",
@@ -55,7 +58,9 @@ class FontAdmin(ThemeItemAdmin):
     list_display = ("title", "version", "author", "license", "status")
     fieldsets = (
             (None, {
-                "fields": ("thumbnail", "title", "slug", "version", "origin_url", "text", "changelog", "font", "status", "tags")
+                "fields": ("thumbnail", "title", "slug", "version",
+                    "origin_url", "text", "changelog", "font", "status",
+                    "deny_reason", "tags")
                 }),
             ("Diğer", {
                 "classes": "collapse",
