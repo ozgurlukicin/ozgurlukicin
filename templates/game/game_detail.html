@@ -44,12 +44,16 @@
         <tr>
             <td>Lisans</td><td>:{% for license in game.license.all %}<a href="{{ license.url }}">{{ license.name }}</a>{% endfor %}</td>
         </tr>
+        {% ifnotequal game.download_size 0 %}
         <tr>
             <td>Paket boyutu</td><td>:{{ game.download_size }} MB</td>
         </tr>
+        {% endif %}
+        {% ifnotequal game.installed_size 0 %}
         <tr>
             <td>Kurulu boyutu</td><td>:{{ game.installed_size }} MB</td>
         </tr>
+        {% endif %}
         <tr>
             <td colspan="3"><br /><a href="{{ game.url }}">Oyunun Web Sitesi</a></td>
         </tr>

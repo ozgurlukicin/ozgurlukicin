@@ -43,12 +43,16 @@
         <tr>
             <td>Lisans: {% for license in package.license.all %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}</td>
         </tr>
+        {% ifnotequal package.download_size 0 %}
         <tr>
             <td>Paket boyutu: {{ package.download_size }} MB</td>
         </tr>
+        {% endif %}
+        {% ifnotequal package.installed_size 0 %}
         <tr>
             <td>Kurulu boyut: {{ package.installed_size }} MB</td>
         </tr>
+        {% endif %}
         <tr>
             <td><br /><a href="{{ package.url }}">Paketin Web Sitesi</a></td>
         </tr>
