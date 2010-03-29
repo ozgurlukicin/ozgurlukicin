@@ -48,12 +48,12 @@
         <tr>
             <td>Paket boyutu</td><td>:{{ game.download_size }} MB</td>
         </tr>
-        {% endif %}
+        {% endifnotequal %}
         {% ifnotequal game.installed_size 0 %}
         <tr>
             <td>Kurulu boyutu</td><td>:{{ game.installed_size }} MB</td>
         </tr>
-        {% endif %}
+        {% endifnotequal %}
         <tr>
             <td colspan="3"><br /><a href="{{ game.url }}">Oyunun Web Sitesi</a></td>
         </tr>
