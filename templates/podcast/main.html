@@ -11,7 +11,7 @@
     <div class="news_container podcast_main" style="background-image:url('/media/podcasts/bg.png');height:250px;">
         <div class="column">
             <div class="right_column">
-                <span style="color:white">Özgürlükiçin Podcast</span>
+                <span style="color:white">Ajans Pardus</span>
                 <div class="title"><a href="{{ last_episode.get_absolute_url }}" style="color:white">{{ last_episode.title }}</a></div>
                 <div class="summary">{{ last_episode.sum|safe }}<br />
                     {% with last_episode as episode %}{% include "podcast/audioplayer.html" %}{% endwith %}
@@ -39,7 +39,7 @@
 {% endblock %}
 {% block leftcolumn %}
 <div class="sidebarcolumn leftcolumn">
-    <h2>Güncel Podcast</h2>
+    <h2>Güncel Ajans</h2>
     <h2>İndir</h2>
     <p><a href="{{ last_episode.file_url_ogg }}">ogg ({{ last_episode.file_size_ogg|filesizeformat }})</a></p>
     <p><a href="{{ last_episode.file_url_mp3 }}">mp3 ({{ last_episode.file_size_mp3|filesizeformat }})</a></p>
