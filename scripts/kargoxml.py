@@ -27,7 +27,7 @@ def add_column():
         town.text = field.town
 
         phone_work = ET.SubElement(cargo, 'phone_work')
-        phone_work.text = '%d%d' % (field.phone_area, field.phone_number)
+        phone_work.text = '%s%s' % (field.phone_area, field.phone_number)
 
         phone_gsm = ET.SubElement(cargo, 'phone_gsm')
         phone_gsm.text = '0'
