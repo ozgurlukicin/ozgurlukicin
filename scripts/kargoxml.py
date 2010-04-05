@@ -39,31 +39,31 @@ def add_column():
         tax_number.text = field.tcidentity
 
         cargo_count = ET.SubElement(cargo, 'cargo_count')
-        cargo_count = "1"
+        cargo_count.text = "1"
 
         cargo_type = ET.SubElement(cargo, 'cargo_type')
-        cargo_type.text = "1"
+        cargo_type.text = "0"
 
         payment_type = ET.SubElement(cargo, 'payment_type')
-        payment_type = "0"
+        payment_type.text = "0"
 
         dispatch_number = ET.SubElement(cargo, 'dispatch_number')
-        dispatch_number = "12343"
+        dispatch_number.text = "12343"
 
         referans_number = ET.SubElement(cargo, 'referans_number')
-        referans_number = "1234"
+        referans_number.text = "1234"
 
         cargo_content = ET.SubElement(cargo, 'cargo_content')
         cargo_content.text = "Pardus Kurulum CD'si"
 
         collection_type = ET.SubElement(cargo, 'collection_type')
-        collection_type = '0'
+        collection_type.text = '0'
 
         invoice_number = ET.SubElement(cargo, 'invoice_number')
         invoice_number.text = 'yk123'
 
         invoice_amount = ET.SubElement(cargo, 'invoice_amount')
-        invoice_amount.text = '12'
+        invoice_amount.text = '2,36'
 
     tree = ET.ElementTree(root)
     tree.write('kargo.xml')
