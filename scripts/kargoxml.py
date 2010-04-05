@@ -8,7 +8,7 @@ from xml.etree import ElementTree as ET
 
 def add_column():
     locale.setlocale(locale.LC_ALL, "tr_TR.UTF-8")
-    cdclient = CdClient.objects.filter(confirmed=1, sent=0, taken=0)[:300]
+    cdclient = CdClient.objects.filter(confirmed=1, sent=0, taken=0)[:304]
     root = ET.Element('document')
 
     for field in cdclient:
@@ -27,10 +27,14 @@ def add_column():
         town.text = field.town
 
         phone_work = ET.SubElement(cargo, 'phone_work')
-        phone_work.text = '%s%s' % (field.phone_area, field.phone_number)
-
         phone_gsm = ET.SubElement(cargo, 'phone_gsm')
-        phone_gsm.text = '0'
+
+        if field.phone_area.startswith('5'):
+            phone_work.text = '0'
+            phone_gsm.text = '%s%s' % (field.phone_area, field.phone_number)
+        else:
+            phone_work.text = '%s%s' % (field.phone_area, field.phone_number)
+            phone_gsm.text = '0'
 
         email_address = ET.SubElement(cargo, 'email_address')
         email_address.text = field.email
