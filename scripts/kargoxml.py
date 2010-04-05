@@ -6,7 +6,7 @@ from oi.shipit.models import CdClient
 from xml.etree import ElementTree as ET
 
 
-def add_column(cargo):
+def add_column():
     locale.setlocale(locale.LC_ALL, "tr_TR.UTF-8")
     cdclient = CdClient.objects.filter(confirmed=1, sent=0, taken=0)[:300]
     root = ET.Element('document')
