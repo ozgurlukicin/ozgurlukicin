@@ -66,4 +66,4 @@ def add_column():
         invoice_amount.text = '2,36'
 
     tree = ET.ElementTree(root)
-    tree.write('kargo.xml')
+    tree.write('kargo.xml', method='xml', encoding='utf-8')
