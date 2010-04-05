@@ -60,7 +60,7 @@ def add_column():
         collection_type.text = '0'
 
         invoice_number = ET.SubElement(cargo, 'invoice_number')
-        invoice_number.text = 'yk123'
+        invoice_number.text = '0000'
 
         invoice_amount = ET.SubElement(cargo, 'invoice_amount')
         invoice_amount.text = '2,36'
