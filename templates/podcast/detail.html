@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load library %}
 
-{% block title %}{{ episode.title }} - Podcast - {% endblock %}
+{% block title %}{{ episode.title }} - Ajans - {% endblock %}
 {% block metadescription %}{{ episode.sum|safe|striptags|cut:"\"" }}{% endblock %}
 {% block metakeywords %}{% for tag in episode.tags.all %}{{ tag.name }}{% if not forloop.last %},{% endif %}{% endfor %}{% endblock %}
 {% block extrahead %}
