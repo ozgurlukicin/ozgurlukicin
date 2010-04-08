@@ -1,5 +1,7 @@
 {% extends "idea_list.html" %}
 
+{% block title %}{{ idea.title }} - {% endblock %}
+
 {% block idea %}
 
 {% if duplicate_of %}
