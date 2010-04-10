@@ -58,7 +58,7 @@ class Episode(models.Model):
         return self.title
 
     def save(self):
-        create_forum_topic(self, "Podcast")
+        create_forum_topic(self, "Ajans Pardus")
         super(Episode, self).save()
 
     def get_absolute_url(self):
