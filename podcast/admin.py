@@ -10,7 +10,7 @@ from django.contrib import admin
 from oi.podcast.models import *
 
 class EpisodeAdmin(admin.ModelAdmin):
-    exclude = ("topic",)
+    exclude = ("topic", 'guests')
     class Media:
         js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js", "js/jquery-1.2.6.min.js", "js/adminimages.js", "js/jquery.autocomplete.js", "js/taghelper.js")
         css = {
