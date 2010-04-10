@@ -16,12 +16,12 @@ DEBUG = True
 TESTING = True
 TEMPLATE_DEBUG = DEBUG
 WEB_URL = 'http://localhost:8000'
-DOCUMENT_ROOT = '/home/ahmet/svn/oi'
+DOCUMENT_ROOT = '/home/user'
 
 DATABASE_ENGINE = 'mysql'
 DATABASE_NAME = 'oi'
 DATABASE_USER = 'root'
-DATABASE_PASSWORD = 'root'
+DATABASE_PASSWORD = ''
 DATABASE_HOST = 'localhost'
 DATABASE_PORT = ''
 
