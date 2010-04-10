@@ -53,7 +53,6 @@ class Episode(models.Model):
     update = models.DateTimeField()
     status = models.BooleanField("Aktif")
     topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
-    guests = models.CharField("Konuklar", max_length=512, null=True)
 
     def __unicode__(self):
         return self.title
@@ -70,9 +69,6 @@ class Episode(models.Model):
             "0%d" % self.minutes if self.minutes<10 else str(self.minutes),
             "0%d" % self.seconds if self.seconds<10 else str(self.seconds)
         )
-
-    def get_guests(self):
-        return self.guests.split(', ')
 
     class Meta:
         verbose_name = "Bölüm"
