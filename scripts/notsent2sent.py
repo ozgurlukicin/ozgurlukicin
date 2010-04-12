@@ -15,7 +15,12 @@ sys.path.append(project_dir)
 sys.path.append(os.path.split(project_dir)[0])
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
+from settings import CITY_LIST
 from shipit.models import CdClient
+
+city_dict = {}
+for i in CITY_LIST:
+    city_dict[i[-1]] = i[0]
 
 
 def main(csv_file_path):
@@ -23,7 +28,7 @@ def main(csv_file_path):
 
     sent_list = get_sent_list(csv_file_path)
 
-    if not sent_list:
+    if sent_list:
         mark_as_sent(sent_list)
 
 
@@ -48,6 +53,62 @@ it's not a file.")
 
 def mark_as_sent(sent_list):
     """Mark as sent"""
+    users = CdClient.objects.all()
+    for sent in sent_list:
+        phone_area, phone_number = get_phone(sent)
+        first_name, last_name = get_name(sent)
+        args = {
+            'phone_area': phone_area,
+            'phone_number': phone_number,
+            'first_name': first_name,
+            'last_name': last_name,
+        }
+
+        city = get_location(sent)
+        if city != None:
+            args['city'] = city
+
+        try:
+            user = users.get(**args)
+            print("User: %s %s") % (user.first_name, user.last_name),
+            if not user.sent:
+                user.sent = 1 # True
+                user.save()
+
+                print("is marked as sent!")
+            else:
+                print("is already marked as send.")
+        except CdClient.MultipleObjectsReturned:
+            print(sent)
+
+        except CdClient.DoesNotExist:
+            print(sent)
+
+
+def get_phone(csv_line):
+    area, phone = csv_line.split(',')[-1].split(' ')
+    area = area.replace('"(', '').replace(')', '')
+    phone = phone.replace('"\n', '')
+
+    return area, phone
+
+def get_name(csv_line):
+    name = csv_line.split(',')[0].split(' ')
+    if len(name[:-1]) == 1:
+        first_name = name[0]
+    else:
+        first_name = ' '.join(name[:-1])
+    last_name = name[-1]
+
+    return first_name.replace('"', ''), last_name.replace('"', '')
+
+def get_location(csv_line):
+    city = csv_line.split(',')[-2]
+
+    try:
+        return city_dict[city.replace('"', '')]
+    except KeyError:
+        return None
 
 if __name__ == '__main__':
     args = sys.argv
