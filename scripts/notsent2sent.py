@@ -54,6 +54,11 @@ it's not a file.")
 def mark_as_sent(sent_list):
     """Mark as sent"""
     users = CdClient.objects.all()
+    multiple_errors_file = open('multiple_errors.csv', 'w')
+    m_error = 0
+    not_exist_errors_file = open('not_exist_errors.csv', 'w')
+    n_error = 0
+
     for sent in sent_list:
         phone_area, phone_number = get_phone(sent)
         first_name, last_name = get_name(sent)
@@ -79,10 +84,18 @@ def mark_as_sent(sent_list):
             else:
                 print("is already marked as send.")
         except CdClient.MultipleObjectsReturned:
-            print(sent)
+            multiple_errors_file.write(sent)
+            m_error += 1
 
         except CdClient.DoesNotExist:
-            print(sent)
+            not_exist_errors_file.write(sent)
+            n_error += 1
+
+    multiple_errors_file.close()
+    not_exist_errors_file.close()
+
+    print("\nNumber of multiple user error: %s") % m_error
+    print("Number of not exist error: %s") % n_error
 
 
 def get_phone(csv_line):
@@ -91,6 +104,7 @@ def get_phone(csv_line):
     phone = phone.replace('"\n', '')
 
     return area, phone
+
 
 def get_name(csv_line):
     name = csv_line.split(',')[0].split(' ')
@@ -102,6 +116,7 @@ def get_name(csv_line):
 
     return first_name.replace('"', ''), last_name.replace('"', '')
 
+
 def get_location(csv_line):
     city = csv_line.split(',')[-2]
 
@@ -109,6 +124,7 @@ def get_location(csv_line):
         return city_dict[city.replace('"', '')]
     except KeyError:
         return None
+
 
 if __name__ == '__main__':
     args = sys.argv
