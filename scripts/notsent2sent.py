@@ -10,8 +10,12 @@ import sys
 import os
 
 script_dir = os.path.abspath(os.path.dirname(__file__))
-sys.path.append(os.path.split(script_dir)[0])
+project_dir = os.path.split(script_dir)[0]
+sys.path.append(project_dir)
+sys.path.append(os.path.split(project_dir)[0])
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+
+from shipit.models import CdClient
 
 
 def main(csv_file_path):
@@ -25,10 +29,10 @@ def main(csv_file_path):
 
 def get_sent_list(csv_file_path):
     """Checking and opening for check_csv_file"""
-    if not os.path.splitext(csv_file_path)[-1] == '.csv':
-       print("It's not a .csv file.")
+    if os.path.splitext(csv_file_path)[-1] != '.csv':
+        print("It's not a .csv file.")
 
-       return False
+        return False
 
     try:
         csv_file = file(csv_file_path, 'r')
