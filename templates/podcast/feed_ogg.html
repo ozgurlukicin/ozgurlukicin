@@ -15,9 +15,9 @@
         <title>{{ episode.title }}</title>
         <link>{{ WEB_URL }}{{ episode.get_absolute_url }}</link>
         <description>{{ episode.sum|striptags }}</description>
-        <author>{% for author in episode.authors.all %}{% if forloop.last %}{{ author.name }}{% else %}{{ author.name }}, {% endif %}{% endfor %}</author>
-        <enclosure url="{{ episode.file_url_ogg }}" length="{{ episode.file_size_ogg }}" type="application/ogg" />
-        <guid>{{ episode.file_url_ogg }}</guid>
+        <author>{% for author in episode.authors.all %}{% if forloop.last %}{{ author.user.get_full_name }}{% else %}{{ author.user.get_full_name }}, {% endif %}{% endfor %}</author>
+        <enclosure url="{{ episode.oggfile.url }}" length="{{ episode.oggfile.size }}" type="application/ogg" />
+        <guid>{{ episode.oggfile.url }}</guid>
         <pubDate>{{ episode.update|rfc822datetime }}</pubDate>
     </item>
     {% endfor %}

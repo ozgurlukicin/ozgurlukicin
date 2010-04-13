@@ -41,8 +41,8 @@
 <div class="sidebarcolumn leftcolumn">
     <h2>Güncel Ajans</h2>
     <h2>İndir</h2>
-    <p><a href="{{ last_episode.file_url_ogg }}">ogg ({{ last_episode.file_size_ogg|filesizeformat }})</a></p>
-    <p><a href="{{ last_episode.file_url_mp3 }}">mp3 ({{ last_episode.file_size_mp3|filesizeformat }})</a></p>
+    <p><a href="{{ last_episode.file_url_ogg }}">ogg ({{ last_episode.oggfile.size|filesizeformat }})</a></p>
+    <p><a href="{{ last_episode.file_url_mp3 }}">mp3 ({{ last_episode.mp3file.size|filesizeformat }})</a></p>
     <p><a href="/podcast/feed/ogg/">ogg beslemesi</a></p>
     <p><a href="/podcast/feed/mp3/">mp3 beslemesi</a></p>
     <br />

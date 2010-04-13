@@ -12,29 +12,18 @@ from oi.upload.models import Image
 from oi.forum.models import Topic
 from oi.forum.tools import create_forum_topic
 from oi.st.tags import Tag
+from oi.podcast.utils import getDuration
 
 class Author(models.Model):
-    name = models.CharField('Gerçek Adı', max_length=64, blank=False, unique=True)
-    user = models.ForeignKey(User, verbose_name="Öİ Kullanıcı Adı", blank=True, null=True, help_text="Zorunlu değil", related_name="podcast_author")
+    user = models.ForeignKey(User, verbose_name="Öİ Kullanıcı Adı", related_name="podcast_author")
 
     def __unicode__(self):
-        return self.name
+        return self.user.username
 
     class Meta:
-        ordering = ['name']
+        ordering = ['user']
         verbose_name = "Konuşmacı"
         verbose_name_plural = "Konuşmacılar"
-
-class License(models.Model):
-    name = models.CharField(max_length=16, blank=False, unique=True)
-    url = models.URLField()
-
-    def __unicode__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "Lisans"
-        verbose_name_plural = "Lisanslar"
 
 class Episode(models.Model):
     title = models.CharField("Başlık", max_length=32)
@@ -46,10 +35,8 @@ class Episode(models.Model):
     authors = models.ManyToManyField(Author)
     minutes = models.IntegerField()
     seconds = models.IntegerField()
-    file_url_mp3 = models.CharField(max_length=200, help_text="/media/podcasts/oi_podcast_E01.mp3")
-    file_size_mp3 = models.IntegerField()
-    file_url_ogg = models.CharField(max_length=200, help_text="/media/podcasts/oi_podcast_E01.ogg")
-    file_size_ogg = models.IntegerField()
+    mp3file = models.FileField(upload_to="podcasts/")
+    oggfile = models.FileField(upload_to="podcasts/")
     update = models.DateTimeField()
     status = models.BooleanField("Aktif")
     topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
@@ -58,6 +45,7 @@ class Episode(models.Model):
         return self.title
 
     def save(self):
+        self.minutes, self.seconds = getDuration(self.mp3file.path)
         create_forum_topic(self, "Ajans Pardus")
         super(Episode, self).save()
 
