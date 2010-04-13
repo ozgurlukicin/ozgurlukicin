@@ -138,7 +138,7 @@ def cdclient_list_delivered(request):
 @permission_required("shipit.change_cdclient")
 def cdclient_list_not_sent(request):
     #cdclient_list = CdClient.objects.filter(confirmed=True, sent=False)[:1627]
-    cdclient_list = CdClient.objects.filter(confirmed=True, sent=False)
+    cdclient_list = CdClient.objects.filter(confirmed=True, sent=False).order_by('-date')
     count = 0
     for client in cdclient_list:
         if not client.sent:
