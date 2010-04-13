@@ -2,6 +2,15 @@
 # -*- coding: utf-8 -*-
 
 import locale
+import sys
+import os
+
+script_dir = os.path.abspath(os.path.dirname(__file__))
+project_dir = os.path.split(script_dir)[0]
+sys.path.append(project_dir)
+sys.path.append(os.path.split(project_dir)[0])
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+
 from oi.shipit.models import CdClient
 from xml.etree import ElementTree as ET
 
@@ -72,3 +81,12 @@ def add_column(limit):
 
     tree = ET.ElementTree(root)
     tree.write('kargo.xml', encoding='utf-8')
+
+if __name__ == '__main__':
+    args = sys.argv
+
+    if len(args) != 2:
+        print("Usage: python %s [limit]") % __file__
+        sys.exit()
+
+    add_column(args[-1])
