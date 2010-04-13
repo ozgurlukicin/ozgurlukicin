@@ -40,11 +40,11 @@ def add_column(limit):
         phone_gsm = ET.SubElement(cargo, 'phone_gsm')
 
         if field.phone_area.startswith('5'):
-            phone_work.text = '0'
+            phone_work.text = ' '
             phone_gsm.text = '%s%s' % (field.phone_area, field.phone_number)
         else:
             phone_work.text = '%s%s' % (field.phone_area, field.phone_number)
-            phone_gsm.text = '0'
+            phone_gsm.text = ' '
 
         email_address = ET.SubElement(cargo, 'email_address')
         email_address.text = field.email
@@ -62,10 +62,10 @@ def add_column(limit):
         payment_type.text = "0"
 
         dispatch_number = ET.SubElement(cargo, 'dispatch_number')
-        dispatch_number.text = "12343"
+        dispatch_number.text = ' '
 
         referans_number = ET.SubElement(cargo, 'referans_number')
-        referans_number.text = "1234"
+        referans_number.text = ' '
 
         cargo_content = ET.SubElement(cargo, 'cargo_content')
         cargo_content.text = "Pardus Kurulum CD'si"
@@ -74,7 +74,7 @@ def add_column(limit):
         collection_type.text = '0'
 
         invoice_number = ET.SubElement(cargo, 'invoice_number')
-        invoice_number.text = '0000'
+        invoice_number.text = ' '
 
         invoice_amount = ET.SubElement(cargo, 'invoice_amount')
         invoice_amount.text = '2,36'
