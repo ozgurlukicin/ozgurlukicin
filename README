@@ -5,6 +5,7 @@ Requires:
  ElementTree
  DBMS (MySQL recommended)
  Pygments (for colorizing text in paste application)
+ PyMAD (for gathering podcast information)
 
 Note About TinyMCE:
 * We're using a patch to hide unneeded tabs in advimage and advlink plugins. It can be found under patches directory.
