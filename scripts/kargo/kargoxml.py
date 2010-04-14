@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import locale
 import sys
 import os
 
@@ -16,7 +15,6 @@ from xml.etree import ElementTree as ET
 
 
 def add_column(limit, timestamp):
-    locale.setlocale(locale.LC_ALL, "tr_TR.UTF-8")
     cdclient = CdClient.objects.filter(confirmed=1,
         sent=0, taken=0).order_by('date')[:limit]
     root = ET.Element('document')
