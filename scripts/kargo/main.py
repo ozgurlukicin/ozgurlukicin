@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
+from datetime import date
 
 from kargoxml import add_column
 
@@ -13,4 +14,4 @@ if __name__ == '__main__':
         print("Usage: python %s [limit]") % __file__
         sys.exit()
 
-    add_column(args[-1])
+    add_column(args[-1], date.today().isoformat())

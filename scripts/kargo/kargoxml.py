@@ -15,7 +15,7 @@ from oi.shipit.models import CdClient
 from xml.etree import ElementTree as ET
 
 
-def add_column(limit):
+def add_column(limit, timestamp):
     locale.setlocale(locale.LC_ALL, "tr_TR.UTF-8")
     cdclient = CdClient.objects.filter(confirmed=1,
         sent=0, taken=0).order_by('date')[:limit]
@@ -54,4 +54,4 @@ def add_column(limit):
             phone_gsm.text = ' '
 
     tree = ET.ElementTree(root)
-    tree.write('kargo.xml', encoding='utf-8')
+    tree.write('kargo_%s.xml' % timestamp, encoding='utf-8')
