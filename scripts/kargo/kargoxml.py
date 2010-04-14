@@ -5,7 +5,7 @@ import locale
 import sys
 import os
 
-script_dir = os.path.abspath(os.path.dirname(__file__))
+script_dir = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
 project_dir = os.path.split(script_dir)[0]
 sys.path.append(project_dir)
 sys.path.append(os.path.split(project_dir)[0])

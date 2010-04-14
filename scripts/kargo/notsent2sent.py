@@ -9,7 +9,7 @@
 import sys
 import os
 
-script_dir = os.path.abspath(os.path.dirname(__file__))
+script_dir = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
 project_dir = os.path.split(script_dir)[0]
 sys.path.append(project_dir)
 sys.path.append(os.path.split(project_dir)[0])
@@ -77,7 +77,7 @@ def mark_as_sent(sent_list):
             user = users.get(**args)
             print("User: %s %s") % (user.first_name, user.last_name),
             if not user.sent:
-                user.sent = 1 # True
+                user.sent = 1  # True
                 user.save()
 
                 print("is marked as sent!")
