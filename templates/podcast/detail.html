@@ -56,14 +56,6 @@
     <br />
     <h2>Sunan</h2>
     <p>{% for author in episode.authors.all %}{% if forloop.last %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.user.get_full_name }}{% if author.user %}</a>{% endif %}{% else %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.user.get_full_name }}{% if author.user %}</a>{% endif %},<br />{% endif %}{% endfor %}</p>
-    {% if episode.guests %}
-      <h2>Konuklar</h2>
-      <p>
-        {% for guest in episode.get_guests %}
-          {{ guest }}<br />
-        {% endfor %}
-      </p>
-    {% endif %}
     <br />
     <h2>Paylaş</h2>
     <script language="javascript" type="text/javascript">
