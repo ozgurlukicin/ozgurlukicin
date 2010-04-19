@@ -50,6 +50,8 @@
     <p><a href="/podcast/feed/ogg/">ogg beslemesi</a></p>
     <p><a href="/podcast/feed/mp3/">mp3 beslemesi</a></p>
     <br />
+    <h2>Uzunluk</h2>
+    <p>{{ episode.get_length }}</p>
     <h2>Etiketler</h2>
     <p><img src="/media/img/new/tag.png" style="vertical-align: middle;" alt="etiketler" /> {% for tag in episode.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if forloop.last %}{% else %}, {% endif %}{% endfor %}
     </p>
