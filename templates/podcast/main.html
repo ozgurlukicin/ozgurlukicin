@@ -51,6 +51,6 @@
     </p>
     <br />
     <h2>Sunan</h2>
-    <p>{% for author in last_episode.authors.all %}{% if forloop.last %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.name }}{% if author.user %}</a>{% endif %}{% else %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.name }}{% if author.user %}</a>{% endif %},<br />{% endif %}{% endfor %}</p>
+    <p>{% for author in last_episode.authors.all %}{% if forloop.last %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.user.get_full_name }}{% if author.user %}</a>{% endif %}{% else %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.user.get_full_name }}{% if author.user %}</a>{% endif %},<br />{% endif %}{% endfor %}</p>
 </div>
 {% endblock %}
