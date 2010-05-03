@@ -33,6 +33,7 @@ class Episode(models.Model):
     text = models.TextField("Metin")
     tags = models.ManyToManyField(Tag)
     authors = models.ManyToManyField(Author)
+    guests = models.TextField("Konuklar", blank=True, null=True)
     minutes = models.IntegerField()
     seconds = models.IntegerField()
     mp3file = models.FileField(upload_to="podcasts/")
@@ -57,6 +58,9 @@ class Episode(models.Model):
             "0%d" % self.minutes if self.minutes<10 else str(self.minutes),
             "0%d" % self.seconds if self.seconds<10 else str(self.seconds)
         )
+
+    def get_guests_list(self):
+        return self.guests.split(',')
 
     class Meta:
         verbose_name = "Bölüm"
