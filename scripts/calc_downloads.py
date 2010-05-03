@@ -3,15 +3,18 @@
 
 import re
 
-LOG = "oi_podcast.log"
-EPISODELIST = range(1, 13)
+LOGPODCAST = "oi_podcast.log"
+LOGEDERGI = "edergi.log"
+EPISODELISTPODCAST = range(1, 13)
+EPISODELISTEDERGI = range(1, 22)
 
-def get_amount_list():
-    log_list = file(LOG).readlines()
+
+def get_amount_list(log_file, regex):
+    log_list = file(log_file).readlines()
     amount_list = []
 
     for line in log_list:
-        m = re.search('(?<=oi_podcast_E)\w+.(mp3|ogg)', line)
+        m = re.search(regex, line)
         try:
             amount_list.append(m.group())
         except:
@@ -22,11 +25,15 @@ def get_amount_list():
 
     return amount_list
 
-def print_output():
-    amount_list = get_amount_list()
 
-    for episode in EPISODELIST:
-        if episode < 10:
+def print_output():
+    regex_podcast = '(?<=oi_podcast_E)\w+.(mp3|ogg)'
+    regex_edergi = '(?<=oi_say)\w+_(buyuk|kucuk).pdf'
+
+    # podcasts
+    amount_list = get_amount_list(LOGPODCAST, regex_podcast)
+    for episode in EPISODELISTPODCAST:
+        if episode < 10: # dirty hacking
             episode = "0%s" % episode
         amount_ogg = amount_list.count('%s.ogg' % episode)
         amount_mp3 = amount_list.count('%s.mp3' % episode)
@@ -34,6 +41,19 @@ def print_output():
         print("podcast %s (toplam: %s)" % (episode, (amount_ogg + amount_mp3)))
         print("    ogg: %s" % amount_ogg)
         print("    mp3: %s\n" % amount_mp3)
+
+    # edergis
+    amount_list = get_amount_list(LOGEDERGI, regex_edergi)
+    for episode in EPISODELISTEDERGI:
+        if episode < 10: # still dirty hacking
+            episode = "0%s" % episode
+        amount_buyuk = amount_list.count('%s_buyuk.pdf' % episode)
+        amount_kucuk = amount_list.count('%s_kucuk.pdf' % episode)
+
+        print("edergi %s (toplam: %s)" % (episode, (amount_buyuk + amount_kucuk)))
+        print("    buyuk: %s" % amount_buyuk)
+        print("    küçük: %s\n" % amount_kucuk)
+
 
 if __name__ == "__main__":
     print_output()
