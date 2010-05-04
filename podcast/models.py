@@ -33,7 +33,7 @@ class Episode(models.Model):
     text = models.TextField("Metin")
     tags = models.ManyToManyField(Tag)
     authors = models.ManyToManyField(Author)
-    guests = models.TextField("Konuklar", blank=True, null=True)
+    guests = models.CharField("Konuklar", blank=True, null=True, max_length=1024)
     minutes = models.IntegerField()
     seconds = models.IntegerField()
     mp3file = models.FileField(upload_to="podcasts/")
