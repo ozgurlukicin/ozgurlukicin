@@ -1,0 +1,41 @@
+{% load library %}<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+
+<channel>
+    <title>Ajans Pardus</title>
+    <link>{{ WEB_URL }}/podcast/</link>
+    <description>Ajans Pardus</description>
+    <language>tr-TR</language>
+    <copyright>&#x2117; &amp; &#xA9; {% now "Y" %} Özgürlükiçin.com. Creative Commons: Attribution-Non-Commercial-Share Alike (by-nc-sa).</copyright>
+    <lastBuildDate>{{ episode_list.0.update|rfc822datetime }}</lastBuildDate>
+    <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+    <itunes:author>Özgürlükiçin.com</itunes:author>
+    <itunes:owner>
+        <itunes:name>ozgurlukicin</itunes:name>
+        <itunes:email>info@pardus.org.tr</itunes:email>
+    </itunes:owner>
+    <itunes:summary>Özgürlükiçin Sohbetleri</itunes:summary>
+    <itunes:image href="{{ WEB_URL }}/media/podcasts/podcast_300.png" />
+    <itunes:category text="Technology">
+      <itunes:category text="Tech News" />
+    </itunes:category>
+    <itunes:explicit>no</itunes:explicit>
+
+    {% for episode in episode_list %}
+    <item>
+        <title>{{ episode.title }}</title>
+        <link>{{ WEB_URL }}{{ episode.get_absolute_url }}</link>
+        <description>{{ episode.sum|striptags }}</description>
+        <author>{% for author in episode.authors.all %}{% if forloop.last %}{{ author.user.get_full_name }}{% else %}{{ author.user.get_full_name }}, {% endif %}{% endfor %}</author>
+        <enclosure url="{{ episode.mp3file.url }}" length="{{ episode.mp3file.size }}" type="audio/mpeg" />
+        <guid>{{ episode.mp3file.url }}</guid>
+        <pubDate>{{ episode.update|rfc822datetime }}</pubDate>
+        <itunes:author>{% for author in episode.authors.all %}{% if forloop.last %}{{ author.user.get_full_name }}{% else %}{{ author.user.get_full_name }} , {% endif %}{% endfor %}</itunes:author>
+        <itunes:summary>{{ episode.sum|striptags }}</itunes:summary>
+        <itunes:duration>00:{{ episode.get_length }}</itunes:duration>
+        <itunes:keywords>{% for tag in episode.tags.all %}{% if forloop.last %}{{ tag }}{% else %}{{ tag }}, {% endif %}{% endfor %}</itunes:keywords>
+        <itunes:explicit>no</itunes:explicit>
+    </item>
+    {% endfor %}
+</channel>
+</rss>

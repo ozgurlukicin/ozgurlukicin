@@ -1,0 +1,89 @@
+{% extends "forum/forum_base.html" %}
+{% load library %}
+{% block extrahead %}
+    <style type="text/css" media="screen">@import url('/media/css/new/forum_list.css');</style>
+    <style type="text/css" media="screen">@import url('/media/css/new/forum_main.css');</style>
+    <script type="text/javascript" src="/media/js/forum_update_latest.js"></script>
+{% endblock %}
+{% block content %}
+<div class="topbar">
+    <div class="navigation" style="width:400px"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/" class="bold">Forum</a></div>
+    <div class="notice">Forum kurallarına <a href="/hakkinda/forum-kurallari/" class="bold">buradan</a> ulaşabilirsiniz.</div>
+</div>
+<div class="headerbar">
+    <div class="icon">&nbsp;</div>
+    <div class="title">Forum</div>
+    <div class="spacer">&nbsp;</div>
+    <div class="topics">Başlıklar</div>
+    <div class="spacer">&nbsp;</div>
+    <div class="posts">İletiler</div>
+    <div class="spacer">&nbsp;</div>
+    <div class="lastpost">Son İleti</div>
+</div>
+{% for category, forum_list in categories %}
+{% if category.hidden and not perms.forum.can_see_hidden_categories %}
+{% else %}
+<div class="category" {% if category.hidden %}style="opacity: 0.5;"{% endif %}>
+    <div class="titlebar"><h2>{{ category.name }}</h2></div>
+    <div class="forum_list">
+        {% for forum in forum_list %}
+        {% if forum.hidden and not perms.forum.can_see_hidden_forums %}
+        {% else %}
+        <div class="item forum_item" {% if forum.hidden %}style="opacity: 0.5;"{% endif %}>
+            <div class="icon"><a href="{{ forum.get_absolute_url }}"><img{% if forum.is_read %} src="/media/img/new/forum/topic.png" alt="Okunmuş forum" title="Okunmuş forum"{% else %} src="/media/img/new/forum/topic_unread.png" alt="Okunmamış forum" title="Okunmamış forum"{% endif %} /></a></div>
+            <div class="spacer">&nbsp;</div>
+            <div class="title"><a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a><br />{{ forum.description }}</div>
+            <div class="spacer">&nbsp;</div>
+            <div class="topics">{{ forum.topics }}</div>
+            <div class="spacer">&nbsp;</div>
+            <div class="posts">{{ forum.posts }}</div>
+            <div class="spacer">&nbsp;</div>
+            <div class="lastpost">{% if forum.forum_latest_post %}{{ forum.forum_latest_post.edited|date:"d F Y H:i" }}<br /><a href="{{ forum.forum_latest_post.author.get_profile.get_absolute_url }}">{{ forum.forum_latest_post.author }}</a> <a href="{{ forum.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="iletiye git" /></a>{% else %}Henüz ileti yok{% endif %}</div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+<div class="category">
+    <div class="titlebar">
+        <h2><a href="/forum/son-iletiler/">Son İletiler</a><img src="/media/img/new/ajax-loader.gif" alt="..." class="ajaxloader" /></h2>
+    </div>
+    <div class="latest">
+        {% include "forum/latest_posts_small.html" %}
+    </div>
+    <div class="titlebar"><h2>İstatistikler</h2></div>
+    <div class="stats">
+        <div class="image"><img src="/media/img/new/forum/stats.png" alt="pati"/></div>
+        <div class="text left">
+            <div class="labels">Tarih<br />Toplam Üye Sayısı<br />Toplam İleti Sayısı</div>
+            <div class="spacers">:<br />:<br />:</div>
+            <div class="values">{{ currentdate|date:"d F Y H:i" }}<br />{{ usercount }}<br />{{ posts }}</div>
+        </div>
+        <div class="text right">
+            <div class="labels">Toplam Kategori Sayısı<br />Toplam Başlık Sayısı</div>
+            <div class="spacers">:<br />:</div>
+            <div class="values">{{ forums }}<br />{{ topics }}</div>
+        </div>
+        <div class="userlist"><span class="bold">Bugün Doğan Üyelerimiz :</span> {% if not births %}Yok{% else %}{% for profile in births %}<a href="{{ profile.get_absolute_url }}">{{ profile.user }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}</div>
+    </div>
+    <div class="titlebar"><h2>Forumdaki simgelerin anlamları</h2></div>
+    <div class="icons_help">
+        <div>
+            <img src="/media/img/new/forum/topic.png" alt="Okunmuş Başlık" title="Okunmuş Başlık" /> Okunmuş forum ya da konu<br />
+            <img src="/media/img/new/forum/topic_unread.png" alt="Okunmamış Başlık" title="Okunmamış Başlık" /> Yeni ileti var<br />
+            <img src="/media/img/new/forum/topic_announce.png" alt="Genel Duyuru" title="Genel Duyuru" /> Genel duyuru<br />
+        </div>
+        <div>
+            <img src="/media/img/new/forum/topic_locked.png" alt="Kilitli Başlık" title="Kilitli Başlık" /> Kilitli (yeni iletilere kapalı)<br />
+            <img src="/media/img/new/forum/topic_unread_locked.png" alt="Kilitli ve Okunmamış Başlık" title="Kilitli ve Okunmamış Başlık" /> Kilitli ve okunmamış ileti var<br />
+            <img src="/media/img/new/forum/topic_announce_locked.png" alt="Kilitli Genel Duyuru" title="Kilitli Genel Duyuru" /> Kilitli genel duyuru<br />
+        </div>
+        <div>
+            <img src="/media/img/new/forum/topic_sticky.png" alt="Sabit Başlık" title="Sabit Başlık" /> Sabit (her zaman üstte kalır)<br />
+            <img src="/media/img/new/forum/topic_sticky_locked.png" alt="Kilitli ve Sabit Başlık" title="Kilitli ve Sabit Başlık" /> Kilitli ve sabit<br />
+        </div>
+    </div>
+</div>
+{% endblock %}

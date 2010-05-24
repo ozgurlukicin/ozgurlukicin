@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% block extrahead %}
+<script language="javascript" type="text/javascript" src="/media/js/searchhelper.js"></script>
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/search.css');</style>
+{% endblock %}
+{% block content %}
+<form method="post" action="">
+    <style type="text/css">ul{overflow:hidden;padding:0;list-style-type:none;}</style>
+    {% for field in form %}
+        {% include "formfields.html" %}
+    {% endfor %}
+<input type="submit" value="Sonuçları göster" />
+</form>
+{% if searched %}
+<br /><div class="page_title">{{ term }} kelimesini içeren sayfa{% if tags or topics or posts or news or packages or games or fs or howto or ideas or flatpages %}lar{% else %} bulunamadı.{% endif %}</div>
+{% ifnotequal total 0 %}
+<div class="searchresults">
+    {% if tags %}
+        <div class="tags">
+            <div class="title"><span>Etiketler ({{ tags.count }} adet)</span></div>
+            <ul>
+            {% for obj in tags %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.name }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    {% if news %}
+        <div class="news">
+            <div class="title"><span>Haberler ({{ news.count }} adet)</span></div>
+            <ul>
+            {% for obj in news %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.sum|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if howto %}
+        <div class="howto">
+            <div class="title"><span>Nasıl ({{ howto.count }} adet)</span></div>
+            <ul>
+            {% for obj in howto %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.sum|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if packages %}
+        <div class="packages">
+            <div class="title"><span>Paketler ({{ packages.count }} adet)</span></div>
+            <ul>
+            {% for obj in packages %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.sum|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if fs %}
+        <div class="firststeps">
+            <div class="title"><span>İlk adımlar ({{ fs.count }} adet)</span></div>
+            <ul>
+            {% for obj in fs %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.sum|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if games %}
+        <div class="games">
+            <div class="title"><span>Oyunlar ({{ games.count }} adet)</span></div>
+            <ul>
+            {% for obj in games %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.sum|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if workshop %}
+        <div class="workshop">
+            <div class="title"><span>Atölye ({{ workshop.count }} adet)</span></div>
+            <ul>
+            {% for obj in workshop %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.sum|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if ideas %}
+        <div class="ideas">
+            <div class="title"><span>Yeni Fikirler ({{ ideas.count }} adet)</span></div>
+            <ul>
+            {% for obj in ideas %}
+            <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }} | {{ obj.vote_count }} puan | {{ obj.category }}</a><br />{{ obj.description|striptags|truncatewords:23 }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if topics or posts %}
+        <div class="forum">
+            <div class="title"><span>Forum ({% if posts %}{{ posts.count }}{% else %}{{ topics.count }}{% endif %} adet)</span></div>
+            <ul>
+            {% if posts %}
+            {% for obj in posts %}
+                <li><a href="{{ obj.topic.get_absolute_url }}">{{ obj.topic.title }}</a></li>
+            {% endfor %}
+            {% else %}
+            {% for obj in topics %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></li>
+            {% endfor %}
+            {% endif %}
+            </ul>
+        </div>
+    {% endif %}
+
+
+    {% if flatpages %}
+        <div class="flatpages">
+            <div class="title"><span>Sabit sayfalar ({{ flatpages.count }} adet)</span></div>
+            <ul>
+            {% for obj in flatpages %}
+                <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.text|truncatewords:"10"|striptags }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</div>
+{% endifnotequal %}
+{% ifequal total 0 %}
+<div class="page_title">İçerik bulunamadı.</div>
+{% endifequal %}
+{% endif %}
+{% endblock %}

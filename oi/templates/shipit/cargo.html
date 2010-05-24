@@ -1,0 +1,9 @@
+{% extends "shipit/base.html" %}
+{% block content %}
+<form method="POST" action="">
+    {% for field in form %}
+    {% include "formfields.html" %}
+    {% endfor %}
+    <input type="submit" value="Kargoya Verildi" />
+</form>
+{% endblock %}

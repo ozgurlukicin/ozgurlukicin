@@ -1,0 +1,16 @@
+{% extends "bug/bug_main.html" %}
+{% block title %}{{ bug.name }}Hata Raporla - {% endblock %}
+{% block extrahead %}
+    <style type="text/css" media="screen">@import url('/media/css/new/bug.css');</style>
+{% endblock %}
+{% block content %}
+<div class="topbar">
+    <div class="navigation"><a href="/">Ana Sayfa</a> &#62; <a href="/hata/">Hata</a> &#62; <a href="/hata/ekle/" class="bold">Yeni Hata</a></div>
+</div>
+<form action="" method="post" class="bugform">
+{% for field in form %}
+    {% include "formfields.html" %}
+{% endfor %}
+<input type="submit" value="Hatayı Raporla" />
+</form>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "tema/base.html" %}
+
+{% load gravatar %}
+
+{% block temaextrahead %}
+<style media="screen" type="text/css">@import url('/media/css/new/tema.css');</style>
+<style media="screen" type="text/css">@import url('/media/css/new/rating.css');</style>
+<script type="text/javascript">
+    var is_authenticated = {% if user.is_authenticated %}true{% else %}false{% endif %};
+    var rating = {{ object.get_rating_step }};
+    var rating_url = "{{ object.get_rating_url }}";
+</script>
+<script type="text/javascript" src="/media/js/jquery.rating.js"></script>
+<script type="text/javascript" src="/media/js/tema_rating.js"></script>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="themeitem_main">
+    <div class="themeitem_top">
+        <div class="themeitem_top_title">{{ object.title }}</div>
+        <div class="themeitem_top_user">
+            <div class="themeitem_top_user_avatar"><a href="{{ object.author.get_profile.get_absolute_url }}"><img src="{% avatar_url object.author.email 60 "g" object.author.get_profile.avatar.file.url %}" /></a></div>
+            <div class="themeitem_top_user_name"><a href="{{ object.author.get_profile.get_absolute_url }}">{{ object.author }}</a></div>
+            <div class="themeitem_top_user_content"><a href="{{ object.author.get_profile.get_theme_content_url }}">Diğer İçerikleri</a></div>
+        </div>
+    </div>
+
+    <div class="themeitem_middle">
+        <div class="themeitem_middle_leftcolumn">
+            <div class="themeitem_middle_leftcolumn_thumbnail"><img src="{{ object.thumbnail.url }}" alt="{{ object.title }}" /></div>
+            <div class="themeitem_middle_leftcolumn_resolution">
+                 <a href="{{ object.get_redirect_url }}">Büyük Resim</a><br/>
+            </div>
+            {% if button_change %}<div class="themeitem_middle_leftcolumn_buttons"><a href="{{ object.get_change_url }}"><img src="/media/img/new/forum/button_edit.png" alt="Değiştir" /></a></br></div>{% endif %}
+            {% if perms.tema.delete_themeitem %}<div class="themeitem_middle_leftcolumn_buttons"><a href="{{ object.get_delete_url }}"><img src="/media/img/new/forum/button_delete.png" alt="Sil" /></a></br></div>{% endif %}
+            <div class="themeitem_middle_leftcolumn_buttons"><a href="{{ object.get_abuse_url }}"><img src="/media/img/new/forum/button_complaint.png" /></a></div>
+        </div>
+
+        <div class="themeitem_middle_rightcolumn">
+            <div class="themeitem_middle_rightcolumn_context">
+                <div class="themeitem_middle_stars">
+                    <div class="rating"></div>
+                </div>
+                <div id="themeitem_middle_stars_text">{{ object.get_rating_percent }}/10 ({{ object.vote_set.count }} oy)</div>
+                <b>Lisans:</b> <a href="{{ object.license.url }}">{{ object.license.name }}</a> <br />
+                <b>Gönderildiği Tarih:</b> {{ object.submit|date:"d F Y" }} <br />
+                <b>Gösterim Sayısı:</b> {{ object.download_count }} <br />
+                {% if object.origin_url %}<b><a href="{{ object.origin_url }}" target="_blank">Özgün Çalışma</a></b><br />{% endif %}<br />
+                <hr />
+                <br />
+                {{ object.text }}
+            </div>
+
+            <div class="themeitem_middle_rightcolumn_bottom">
+                <div class="themeitem_middle_rightcolumn_bottom_inner">
+
+                    <a href="{{ object.topic.get_latest_post_url }}" title="Yorumlar">
+                    {% if object.topic.posts|add:"-1" %}
+                        {{ object.topic.posts|add:"-1" }} tane yorum yapıldı.
+                    {% else %}
+                        İlk yorum yapan siz olun!
+                    {% endif %}
+                    </a>
+                </div>
+    </div>
+        </div>
+    </div>
+
+
+</div>
+{% endblock %}

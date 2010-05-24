@@ -1,0 +1,926 @@
+/* colors */
+.purple {
+    color: #9218A4;
+}
+
+.purple h1, .purple h2, .purple h3, .purple h4, .purple h5, .purple h6 {
+    color: #7C1889;
+}
+
+.green {
+    color: #69A200;
+}
+
+.green h1, .green h2, .green h3, .green h4, .green h5, .green h6 {
+    color: #537D00;
+}
+
+.blue {
+    color: #10A8C1;
+}
+
+.blue h1, .blue h2, .blue h3, .blue h4, .blue h5, .blue h6 {
+    color: #339966;
+}
+
+.darkblue {
+    color: #33718B;
+}
+
+.darkblue h1, .darkblue h2, .darkblue h3, .darkblue h4, .darkblue h5, .darkblue h6 {
+    color: #306981;
+}
+
+.orange {
+    color: #DB5F00;
+}
+
+.orange h1, .orange h2, .
+h3, .orange h4, .orange h5, .orange h6 {
+    color: #CE5900;
+}
+
+.yellow {
+    color: #827300;
+}
+
+.yellow h1, .yellow h2, .yellow h3, .yellow h4, .yellow h5, .yellow h6 {
+    color: #339966;
+}
+
+.grey {
+    color: #000000;
+}
+
+.yellow h1, .yellow h2, .yellow h3, .yellow h4, .yellow h5, .yellow h6 {
+    color: #323436;
+}
+
+.gri{
+	color:#707070;
+}
+
+span {
+    color: #51798E;
+}
+
+a:link {
+    color: #51798E;
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:visited {
+    color: #375261;
+}
+
+a:active {
+    color: #375261;
+}
+
+/*sorry the name is not meaningful*/
+.sari{
+	color:#51798E;
+}
+
+/* required by footer */
+a.siyah {
+    color: #000000;
+}
+
+.siyah{
+	color: #000000;
+}
+
+/* header */
+#header {
+    height: 140px;
+    border-bottom: 3px solid #59780a;
+}
+
+/*burası uçacak*/
+.home_header {
+    background: url('/media/img/home_header_bg.png') repeat-x;
+}
+
+.news_header {
+    background: url('/media/img/news_header_bg.png') repeat-x;
+}
+
+.forum_header {
+    background: url('/media/img/forum_header_bg.png') repeat-x;
+}
+
+.fs_header {
+    background: url('/media/img/fs_header_bg.png') repeat-x;
+}
+
+.howto_header {
+    background: url('/media/img/howto_header_bg.png') repeat-x;
+}
+
+.package_header {
+    background: url('/media/img/package_header_bg.png') repeat-x;
+}
+
+.game_header {
+    background: url('/media/img/game_header_bg.png') repeat-x;
+}
+
+.planet_header {
+    background: url('/media/img/planet_header_bg.png') repeat-x;
+}
+/*burası uçacak soon*/
+
+#logo {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#logo a {
+    background-color: transparent;
+}
+
+#section_logo {
+    padding-left: 755px;
+    margin-top: -90px;
+}
+
+/* page */
+#page {
+    margin: 0px auto;
+    width: 900px;
+    background:url(/media/dijital/img/ara_bg.jpg);
+    background-repeat:no-repeat;
+    background-color: #CFD7D7;
+}
+
+#page-single {
+    margin: 0px auto;
+    width: 900px;
+    border-bottom: 5px solid #d5e6eb;
+    border-left: 5px solid #d5e6eb;
+    border-right: 5px solid #d5e6eb;
+    background: #FFFFFF url('/media/img/content_bg_single.png') repeat-y;
+}
+
+#content {
+    padding: 10px 0px 20px 10px;
+    float: left;
+    width: 71%;
+}
+
+.page_title {
+    font-size: 18px;
+    border-bottom: 1px dashed #c0c0c0;
+    padding-bottom: 6px;
+    padding-left: 2px;
+    margin-right: 10px;
+    color: #339966;
+}
+
+.page_content {
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.page_last_update {
+    margin-top: 30px;
+    padding-right: 10px;
+    float: right;
+    opacity: 0.4;
+}
+
+.page_properties {
+    margin-top: 20px;
+    float: left;
+}
+
+
+/* footer */
+
+
+#footer {
+    clear: both;
+    color: #ACD7EE;
+    font-size: 95%;
+    line-height: 130%;
+    padding-bottom: 10px;
+}
+
+
+#credits {
+    margin: 0px auto;
+    width: 900px;
+    color: #7a9299;
+    font-size: 85%;
+    line-height: 120%;
+}
+
+#credits a, #credit a:visited {
+    color: #048db4;
+}
+
+#credits a:hover {
+    background-color: transparent;
+}
+
+.footer_about {
+    background: url('/media/img/footer_about.png') no-repeat left center;
+    padding-left: 18px;
+    padding-bottom: 2px;
+    margin-left: 8px;
+}
+
+.footer_rss {
+    background: url('/media/img/footer_rss.png') no-repeat left center;
+    padding-left: 18px;
+    padding-bottom: 2px;
+    margin-left: 8px;
+}
+
+.footer_bug {
+    background: url('/media/img/footer_bug.png') no-repeat left center;
+    padding-left: 18px;
+    padding-bottom: 2px;
+    margin-left: 8px;
+}
+
+/* misc */
+.clear {
+    clear:both;
+}
+
+.rating_bar {
+    text-align: center;
+}
+
+.game_average_point {
+    background: url('/media/dijital/img/game_average_point.jpg') left top no-repeat;
+    margin-left: 65px;
+    height: 85px;
+    width: 85px;
+    font-size: 30px;
+    text-align: center;
+    padding-top: 32px;
+    margin-bottom: -30px;
+    color: #000000;
+}
+
+
+.transparent_link {
+    color: #000000;
+}
+
+.transparent_link a, .transparent_link a:visited {
+    color: #000000;
+    text-decoration: none;
+}
+
+.transparent_link a:hover {
+    background-color: transparent;
+}
+
+/* alignments */
+.center {
+    text-align: center;
+}
+
+img.center, img[align="center"] {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.alignleft {
+    clear: left;
+    float: left;
+}
+
+img.alignleft, img[align="left"] {
+    float: left;
+    margin: 2px 10px 5px 0px;
+}
+
+.alignright {
+    clear: right;
+    float: right;
+}
+
+img.alignright, img[align="right"] {
+    float:right;
+    margin: 2px 0px 5px 10px;
+}
+
+/* pop */
+#pop {
+    position: fixed;
+    visibility: hidden;
+    top: -300px;
+    left: 0px;
+    z-index: 10000;
+    padding: 0px;
+    opacity: 0;
+    -moz-opacity: 0;
+    -khtml-opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.pop_red {
+    background-color: #FFB1B1;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 3px solid #965454;
+    border-right: 3px solid #C87979;
+    border-top: 3px solid #FFDEDE;
+    border-left: 3px solid #FFDEDE;
+    -moz-border-radius: 10px;
+}
+
+.pop_green {
+    background-color: #8CFFA2;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 3px solid #65CD79;
+    border-right: 3px solid #65CD79;
+    border-top: 3px solid #c9ffd3;
+    border-left: 3px solid #c9ffd3;
+    -moz-border-radius: 10px;
+}
+
+/* notes */
+.note_std, .note_attention, .note_warning, .note_tip, .note_question {
+    color: #333;
+    padding: 1em 0em 1em 4em;
+    margin: 1em auto;
+    width: 80% !important;
+    background-position: 10px 2ex;
+    background-repeat: no-repeat;
+    min-height: 24px;
+}
+
+.note_std {
+    color: inherit;
+    background-color: #FFFFE0;
+    border: 1px solid #FFFF85;
+    background-image: url('/media/img/note.png');
+}
+
+.note_warning {
+    color: inherit;
+    background-color: #FFE0E1;
+    border: 1px solid #FF8589;
+    background-image: url('/media/img/cross.png');
+}
+
+.note_attention {
+    color: inherit;
+    background-color: #FEE8BD;
+    border: 1px solid #FCD483;
+    background-image: url('/media/img/error.png');
+}
+
+.note_question {
+    color: inherit;
+    background-color: #EFF5FF;
+    border: 1px solid #85B4FF;
+    background-image: url('/media/img/question.png');
+}
+
+.note_tip {
+    color: inherit;
+    background-color: #DBFFB9;
+    border: 1px solid #789940;
+    background-image: url('/media/img/tip.png');
+}
+
+/* pagination */
+.paginator {
+    padding-top: 12px;
+    clear: both;
+    text-align: center;
+    font-size: 12px;
+}
+
+/*.paginate-pages {
+    padding: 2px 3px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.paginate-first, .paginate-last {
+    padding: 2px 6px;
+    border: 1px solid #ddd;
+    font-weight: bold;
+}
+
+.paginate-previous, .paginate-next {
+    padding: 2px 3px;
+    border: 1px solid #ddd;
+}
+
+.paginate-link {
+    padding: 2px 4px;
+    border: 1px solid #ddd;
+}
+
+.paginate-current {
+    padding: 2px 4px;
+    border: 1px solid #ddd;
+    font-weight: bold;
+    background:#417690;
+    color:#f4f379;
+}*/
+
+.paginate-current {
+    font-weight: bold;
+}
+
+/* forms */
+form { clear: both; }
+
+input#userbox_username {
+    padding: 0px;
+    padding-left: 18px;
+    background: #ffffff url('/media/img/input_username.png') no-repeat;
+    vertical-align: middle;
+}
+
+input#userbox_password {
+    padding: 0px;
+    padding-left: 18px;
+    background: #ffffff url('/media/img/input_password.png') no-repeat;
+    vertical-align: middle;
+}
+
+input#form_submit {
+    vertical-align: middle;
+}
+
+dl {clear: left; padding: 4px 0px;}
+dt {width: 30%; float:left;}
+.error {color: red;}
+
+/* planet */
+.planet_date {
+    margin-top: 20px;
+    margin-left: 4px;
+    height: 20px;
+    width: 120px;
+    padding-top: 4px;
+    font-size: 18px;
+    color: #51798E;
+    /*background: url('/media/img/planet_date_bg.png') no-repeat;*/
+    text-align: center;
+	/*background-color: #FFCA06;;*/
+}
+
+.planet_title {
+    margin-top: 10px;
+    padding-top: 4px;
+    padding-left: 10px;
+    margin-left: 2px;
+    height: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    /*background: url('/media/img/planet_title.png') no-repeat;*/
+}
+
+.planet_content {
+    padding-left: 12px;
+    padding-right: 20px;
+    min-height: 120px;
+}
+
+.planet_author {
+    max-width: 120px;
+    max-height: 120px;
+   /* background-color: #7C7C7C;*/
+    padding: 5px;
+    border: 1px;
+    border-style: solid;
+    border-color: #7C7C7C;
+    float: right;
+    text-align: center;
+    clear: left;
+    overflow: hidden;
+}
+
+/* kwicks */
+#menu_container {
+    height: 60px;
+    width: 724px;
+    position: absolute;
+    margin-top: 16px;
+}
+
+#menu {
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+}
+
+#menu .menu {
+    float: left;
+    display: block;
+    width: 120px;
+    height: 30px;
+    overflow: hidden;
+}
+
+/* content */
+#news_container, #howto_container, #packages_container, #games_container {
+    overflow: auto;
+    width: 100%;
+}
+
+div.news, div.howtos, div.packages, div.games {
+    overflow: hidden;
+    width: 100%;
+}
+
+/*div.news img, div.howtos img, div.packages img, div.games img,
+div.main_news img, div.main_howtos img, div.main_packages img, div.main_games img { margin: 10px; padding: 0px; }*/
+
+.news_title_mini {
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-left: 12px;
+    height: 25px;
+    margin-top: 10px;
+    width: 293px;
+}
+
+.news_title {
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-left: 12px;
+    height: 25px;
+    margin-top: 10px;
+}
+
+.news_content_mini {
+    width: 293px;
+    padding-left: 10px;
+    padding-right: 16px;
+    overflow: auto;
+}
+
+.news_content {
+    padding-left: 10px;
+    padding-right: 16px;
+    overflow: auto;
+}
+
+.packages_title_mini {
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-left: 12px;
+    height: 25px;
+    margin-top: 10px;
+    width: 293px;
+}
+
+.packages_title {
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-left: 12px;
+    height: 25px;
+    margin-top: 10px;
+}
+
+.packages_content_mini {
+    width: 293px;
+    padding-left: 10px;
+    padding-right: 16px;
+    overflow: auto;
+}
+
+.packages_content {
+    padding-left: 10px;
+    padding-right: 16px;
+    overflow: auto;
+}
+
+.games_title_mini {
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-left: 12px;
+    height: 25px;
+    margin-top: 10px;
+    width: 293px;
+}
+
+.games_title {
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-left: 12px;
+    height: 25px;
+    margin-top: 10px;
+}
+
+.games_content_mini {
+    width: 293px;
+    padding-left: 10px;
+    padding-right: 16px;
+    overflow: auto;
+}
+
+.games_content {
+	color:#202020;
+	font-family:"Liberation Sans","Liberation Serif",Arial;
+    padding-left: 10px;
+    padding-right: 16px;
+    overflow: auto;
+}
+
+.fs_title_mini {
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-left: 12px;
+    height: 25px;
+    margin-top: 10px;
+    width: 293px;
+}
+
+.fs_title {
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-left: 12px;
+    height: 25px;
+    margin-top: 10px;
+}
+
+.fs_content_mini {
+    width: 293px;
+    padding-left: 10px;
+    padding-right: 16px;
+    overflow: auto;
+}
+
+.fs_content {
+    padding-left: 10px;
+    padding-right: 16px;
+    overflow: auto;
+}
+
+.howtos_title_mini {
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-left: 12px;
+    height: 25px;
+    margin-top: 10px;
+    width: 293px;
+}
+
+.howtos_title {
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-left: 12px;
+    height: 25px;
+    margin-top: 10px;
+}
+.howtos_content_mini {
+    width: 293px;
+    padding-left: 10px;
+    padding-right: 16px;
+    overflow: auto;
+}
+.howtos_content {
+    padding-left: 10px;
+    padding-right: 16px;
+    overflow: auto;
+}
+
+div.post {
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Sidebar */
+div #sidebar {
+    float: right;
+    position: relative;
+    width: 234px;
+    margin: 40px 10px 0px 0px;
+}
+div.sidebar_box {
+    margin-bottom: 10px;
+}
+div.sidebar_top {
+    background-image: url('/media/dijital/img/d_tblust.jpg');
+    height: 10px;
+    line-height: 10px;
+}
+div.sidebar_middle {
+    background-image: url('/media/dijital/img/d_tblbg.jpg');
+    padding: 0px 10px;
+    text-align: center;
+    color: #696569;
+}
+div.sidebar_middle h2 {
+    color: #51798E;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 0px;
+}
+div.sidebar_middle ul {
+    margin: 0px 0px 0px 10px;
+    padding: 0px;
+    text-align: left;
+    list-style-position: inside;
+}
+div.sidebar_middle form { margin: 0px; }
+div.sidebar_middle p { margin: 0px; }
+div.sidebar_bottom {
+    background-image: url('/media/dijital/img/d_tblalt.jpg');
+    height: 12px;
+    line-height: 12px;
+}
+ul.sidebar_firststeps { list-style-image: url("/media/img/fav.png"); }
+ul.sidebar_seminar { list-style-type: none; }
+ul.sidebar_subscribers { list-style-image: url('/media/img/bt_next.png'); }
+ul.sidebar_planets { list-style-image: url('/media/img/other_planets.png'); }
+
+img {
+    border: none;
+}
+
+p {
+    padding: 0px 0px 15px;
+    margin: 0px;
+}
+
+h1 {
+    font-size: 20px;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+h4 {
+    font-size: 14px;
+}
+
+h5 {
+    font-size: 12px;
+}
+
+h6 {
+    font-size: 10px;
+}
+
+#user_profile {
+    padding: 10px;
+}
+#user_profile_left {
+    float:left;
+    text-align: center;
+    padding: 10px;
+}
+#user_profile_right {
+    float:left;
+    padding: 10px;
+}
+
+/** PAGINATOR **/
+.paginator { padding:.5em .75em; font:normal .8em arial; }
+
+.paginator a {
+    text-decoration: none;
+}
+
+.paginator .prev-na,
+.paginator .next-na {
+    padding:.3em;
+    font:bold .875em arial;
+}
+
+.paginator .prev-na,
+.paginator .next-na {
+    border:1px solid #CCCCCC;
+    background-color:#F9F9F9;
+    color:#AAAAAA;
+    font-weight:normal;
+}
+
+.paginator .prev a, .paginator .prev a:visited,
+.paginator .next a, .paginator .next a:visited {
+    border:1px solid #CCCCCC;
+    background-color:#EEEEEE;
+    color:#6992AE;
+    padding:.3em;
+    font:bold .875em arial;
+}
+
+.paginator .page a, .paginator .page a:visited, .paginator .curr {
+    padding:.25em;
+    font:normal .875em verdana;
+    border:1px solid #CCCCCC;
+    background-color:#EEEEEE;
+    color:#6288A2;
+}
+
+.paginator .curr { 
+    background-color:#4E6D81;
+    color: #FFFFFF;
+    border:1px solid #CCCCCC;
+    font-weight:bold;
+    font-size:1.2em;
+}
+
+.paginator .page a:hover,
+.paginator .curr a:hover,
+.paginator .prev a:hover,
+.paginator .next a:hover {
+    color:#FFFFFF;
+    background-color:#6992AE;
+    border:1px solid #234F32;
+}
+.paginator_block { text-align: center; }
+
+label {
+    font-weight: bold;
+}
+
+/* taken from django trac and modified */
+input, textarea, select { margin: 2px }
+
+input[type=button], input[type=submit], input[type=reset] {
+    background-color: #EEEEEE;
+    color: #222222;
+    border: 1px outset #CCCCCC;
+    padding: .1em .5em;
+}
+
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
+     background-color: #6992AE;
+     color: #FFFFFF;
+}
+
+input[type=text], input[type=password], textarea {
+    padding: 2px;
+    border: 1px solid #D7D7D7
+}
+
+input[type=text]:focus, input[type=password]:focus, textarea:focus {
+    padding: 2px;
+    border: 1px solid #45586F;
+}
+
+#profileEditForm input[type=text]{
+    width:230px;
+}
+
+div.googlemap {
+    width: 407px;
+    height: 300px;
+    clear: left;
+    overflow: hidden;
+}
+/* Footer */
+#footer_new {
+    background-color: #6992A6;
+    height: 32px;
+    width: 100%;
+    font-size: 11px;
+    font-family: "Liberation Sans","Liberation Serif", Arial;
+    overflow: auto;
+    clear: both;
+    color: #FFF;
+}
+#footer_new a {
+    text-decoration: none;
+    color: #FFF;
+}
+#footer_copyright {
+    float: left;
+    padding: 10px 0px 0px 10px;
+}
+#footer_links {
+    float: right;
+    padding: 10px 10px 0px 0px;
+}
+/* End of footer */

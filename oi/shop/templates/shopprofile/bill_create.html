@@ -1,0 +1,13 @@
+{% extends "shop_base.html" %}
+{% block title %}Dükkan - Fatura Bilgisi Güncelle{% endblock %}
+{% block content %}
+<form method="post" action="">
+    {% for field in form %}
+        <dl>
+            <dt><label for="id_{{ field.name }}">{{ field.label }}</label>{% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}{% if field.errors %}<br /><span class="error">{{ field.errors }}</span>{% endif %}</dt>
+            <dt>{{ field }}</dt>
+        </dl>
+    {% endfor %}
+    <div style="clear:left; text-align:center; padding-top:5px;"><input type="submit" value="Fatura Bilgisini Güncelle" /></div>
+</form>
+{% endblock %}

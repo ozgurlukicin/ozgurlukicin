@@ -1,0 +1,13 @@
+{% extends "editor/base.html" %}
+{% block extrahead %}
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
+<script type="text/javascript" src="/media/js/urlify.js"></script>
+<script type="text/javascript" src="/media/js/admin/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="/media/js/editor.js"></script>
+{% endblock %}
+{% block content %}
+<form method="post" action="">
+    {% include "editor/news_form.html" %}
+    <input type="submit" value="Gönder" />
+</form>
+{% endblock %}

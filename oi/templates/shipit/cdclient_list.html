@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+{% endblock %}
+{% block title %}CD Gönder - {% endblock %}
+{% block content %}
+<form method="POST" action="">
+    {% for field in form %}
+    {% include "formfields.html" %}
+    {% endfor %}
+    <input type="Submit" value="Getir" />
+</form>
+<ul>
+{% for cdClient in cdClient_list %}
+<li><a href="{{ cdClient.get_absoulte_url }}">{{ cdClient }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

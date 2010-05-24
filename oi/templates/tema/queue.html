@@ -1,0 +1,7 @@
+{% extends "tema/base.html" %}
+{% block content %}
+<h2>Sırada bekleyenler</h2>
+{% for themeitem in queue %}
+<div>{{ themeitem }}</div>
+{% endfor %}
+{% endblock %}

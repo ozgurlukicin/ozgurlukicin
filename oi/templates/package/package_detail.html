@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load library %}
+
+{% block title %}{{ package.title }} - Paketler - {% endblock %}
+{% block metadescription %}{{ package.sum|safe|striptags|cut:"\"" }}{% endblock %}
+{% block metakeywords %}{% for tag in package.tags.all %}{{ tag.name }}{% if not forloop.last %},{% endif %}{% endfor %}{% endblock %}
+
+{% block extrahead %}
+    <style type="text/css" media="screen">@import url('/media/css/new/article.css');</style>
+    <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+{% if user.is_authenticated %}
+    <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
+    <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="page_title">{{ package.title }}</div>
+<div class="page_content">
+{{ package.text|safe }}
+</div>
+
+<div class="page_comments"><a href="{{ package.topic.get_latest_post_url }}">{{ package.topic.posts|add:"-1" }} yorum</a> <a href="{{ package.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="." /></a></div>
+{% if user.is_authenticated %}
+    {% if form %}
+        <form method="post" action="{{ package.topic.get_reply_url }}">
+            {{ form }}
+            <br/>
+            <input type="submit" value="Gönder" />
+        </form>
+    {% endif %}
+{% endif %}
+<div class="page_printable"><a href="{{ package.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
+<div class="page_last_update">Son güncelleme: {{ package.update|date:"d F Y" }}</div>
+
+
+{% endblock %}
+
+{% block leftcolumn %}
+<div class="sidebarcolumn leftcolumn">
+    <h2>Ayrıntılar</h2>
+    <table>
+        <tr>
+            <td>Lisans: {% for license in package.license.all %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}</td>
+        </tr>
+        {% ifnotequal package.download_size 0 %}
+        <tr>
+            <td>Paket boyutu: {{ package.download_size }} MB</td>
+        </tr>
+        {% endifnotequal %}
+        {% ifnotequal package.installed_size 0 %}
+        <tr>
+            <td>Kurulu boyut: {{ package.installed_size }} MB</td>
+        </tr>
+        {% endifnotequal %}
+        <tr>
+            <td><br /><a href="{{ package.url }}">Paketin Web Sitesi</a></td>
+        </tr>
+    </table>
+    <h2>Editör notu</h2>
+    <p><img src="/media/img/new/rating_{{ package.point }}.png" alt="{{ package.point }} puan" /></p>
+
+    <h2>Menüdeki yeri</h2>
+    <p>{{ package.path }}</p>
+    <h2>Etiketler</h2>
+    <p>
+    <img src="/media/img/new/tag.png" style="vertical-align: middle;" alt="etiketler" /> {% for tag in package.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if not forloop.last%},{% endif %} {% endfor %}
+    </p>
+    {% if package.wiki.all %}
+        <h2>İlgili wiki sayfaları</h2>
+        <p>
+        {% for wiki in package.wiki.all %}<a href="{{ wiki.get_absolute_url }}">{{ wiki.name }}</a><br />{% endfor %}
+        </p>
+    {% endif %}
+
+{% if package.ss.all %}
+        <h2>Ekran görüntüleri</h2>
+        {% for ss in package.ss.all %}<a href="{{ ss.file.url }}" title="{{ ss.desc }}"><img src="{{ ss.file.name|thumbnail:"144x200" }}" style="margin-left:4px" /></a>{% endfor %}</a>
+{% endif %}
+
+        <h2>Yazar</h2>
+        <p>{{ package.author }}</p>
+        <h2>Katkıda bulunun</h2>
+        <p>Paketler bölümüne katkıda bulunmak istiyorsanız <a
+            href="/katki/paket/">buraya</a> tıklayarak size kılavuzluk edecek
+        sayfaya gidebilirsiniz.</p>
+</div>
+{% endblock %}
+{% block sidebar_bottom_top %}
+{% if package.videos.all %}
+        <h2>İlgili Videolar</h2>
+        {% for video in package.videos.all %}
+        <div style="margin: 0px 0px 10px 10px;">
+        {% include "video.html" %}
+        </div>
+        {% endfor %}
+{% endif %}
+{% endblock %}

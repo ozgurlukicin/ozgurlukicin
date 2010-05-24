@@ -1,0 +1,24 @@
+{% extends "tema/base.html" %}
+{% block temaextrahead %}
+<script language="javascript" type="text/javascript" src="/media/js/jquery.autocomplete.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/taghelper.js"></script>
+<style type="text/css" media="screen">@import url('/media/css/new/autocomplete.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/formfield.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/tema.css');</style>
+{% endblock %}
+{% block content %}
+<form action="" method="POST" enctype="multipart/form-data">
+    <p>{{ form.non_field_errors }}</p>
+    {% for field in form %}
+    {% include "field.html" %}
+    {% endfor %}
+    {% for form in fileforms.forms %}
+        {% for field in form %}
+        <p>{{ form.non_field_errors }}</p>
+        {% include "field.html" %}
+        {% endfor %}
+    {% endfor %}
+    {{ fileforms.management_form }}
+    <div style="clear:both"><input type="submit" value="Ekle" /></div>
+</form>
+{% endblock %}

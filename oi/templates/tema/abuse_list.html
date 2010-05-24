@@ -1,0 +1,18 @@
+{% extends "tema/base.html" %}
+
+{% block title %}Raporlanmış Temalar - {% endblock %}
+{% block content %}
+{% if no_entry %}
+Raporlanmış herhangi bir ileti bulunmamaktadır. Tema sayfasına dönmek için <a href="/tema/">Tıklayın</a>
+{% else %}
+<form action="" method="POST">
+    <strong>Raporlanmış Temalar: </strong><br /><br />
+{% for abuse in abuse_list %}
+<input type="checkbox" name="abuse_list" value="{{ abuse.id }}" />&nbsp;&nbsp;<a href="{{abuse.themeitem.get_absolute_url }}" target="_blank">{{ abuse.themeitem.title }}</a> | Raporlayan: <a href="{{ abuse.submitter.get_profile.get_absolute_url }}">{{ abuse.submitter }}</a><br />Sebep:<br />{{ abuse.reason|striptags }}</input><hr />
+{% endfor %}
+<br />
+<input type="submit" value="Şikayet Listesinden Çıkar" />
+</form>
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Çıkış - {% endblock %}
+
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+{% endblock %}
+
+{% block content %}
+
+<br />
+
+{% if user.is_authenticated %}
+<script type="text/javascript">
+    <!--
+    setTimeout("window.location = '/';", 5000);
+    //-->
+</script>
+Sistemden çıktınız. Ana sayfaya yönlendiriliyorsunuz. Beklemek istemiyorsanız <a href="/">buraya tıklayın.</a> <br />
+{% else %}
+Henüz giriş yapmamışsınız, giriş yapmak için <a href="/kullanici/giris/">buraya</a> tıklayın. <br />
+{% endif %}
+
+{% endblock %}

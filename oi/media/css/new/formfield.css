@@ -1,0 +1,24 @@
+label {
+    display: block;
+    float: left;
+    padding: 0 1em 3px 0;
+    width: 8em;
+}
+form .wrapper {
+    padding: 10px;
+    overflow: hidden;
+}
+form p.help {
+    padding-left: 38px;
+    margin-left: 7em;
+    color: #888888;
+    float: left;
+    font-size: 11px;
+    width: 40%;
+}
+form label {
+    color: #666666;
+}
+form .field_container {
+    margin-bottom: 15px;
+}

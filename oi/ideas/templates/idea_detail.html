@@ -1,0 +1,78 @@
+{% extends "idea_list.html" %}
+
+{% block title %}{{ idea.title }} - {% endblock %}
+
+{% block idea %}
+
+{% if duplicate_of %}
+<h3>Bu fikir <a href="{{ duplicate_of.get_absolute_url }}">#{{ duplicate_of.id }}</a> numaralı fikrin aynısı</h3>
+{% endif %}
+
+<div class="idea_container">
+        {% include "idea_top.html" %}
+
+        <div class="tags"><span class="h3">Etiketler :</span>
+        {% for tag in idea.tags.all %}
+            <a href="/yenifikir/listele/etiket/{{ tag.name }}" title="{{ tag.name }}">{{ tag.name }}</a>
+        {% endfor %}
+        </div>
+
+        {% if idea.bug_numbers %}
+        <div class="h3">Hata kayıtları</div>
+        <div class='idea_detail_box'>
+        {% for bug in bugs %}
+        <a href="http://bugs.pardus.org.tr/show_bug.cgi?id={{ bug }}">#{{ bug }}</a> numaralı hata bu fikir ile ilgili<br />
+        {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if idea.forum_url %}
+        <div class="h3">İlgili Forum Bağlantısı</div>
+        <ul class='idea_detail_box'>
+            <li><a href="{{ idea.forum_url }}">{{ idea.forum_url }}</a></li>
+        </ul>
+    {% endif %}
+    {% if duplicates %}
+        <div class="h3">Bu fikrin aynısı olarak işaretlenen fikirler</div>
+        <ul class='idea_detail_box'>
+        {% for duplicate in duplicates %}
+            <li><a href="{{ duplicate.get_absolute_url }}"><strong>#{{ duplicate.id }}</strong> {{ duplicate.title }}</a> ({{ duplicate.vote_count }} oy)</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+
+        <br />
+    {% if user_can_change_idea  %}
+    <span class="h3"><a href="/yenifikir/duzenle/{{ idea.id }}/"><img src="/media/img/new/forum/button_edit.png" alt="Fikri düzenle" /></a></span>
+    {% endif %}
+    {% if perms.ideas.change_idea %}
+    <span class="h3"><a href="javascript:;" onclick="$('#tekrarform').toggle(); return false;"><img src="/media/img/new/ideas/button_duplicate_idea.png" alt="Fikir tekrarı bildir" /></a></span>
+     <span class="h3"><a href="javascript:;" onclick="$('#changeStatusForm').toggle();"><img src="/media/img/new/ideas/button_change_status.png" alt="Fikrin durumunu değiştir" /></a></span>
+    <span class="h3"><a href="/yenifikir/sil/{{ idea.id }}/" onclick="return confirm('Bu fikri silmek istediğinizden emin misiniz?');"><img src="/media/img/new/forum/button_delete.png" alt="Fikri sil" /></a></span>
+
+    <div class="idea_detail_box" style="display: none;" id="tekrarform">
+        <form  method="post" action="javascript:;">
+        <p>Bu fikrin aynısını daha önce görmüşmüydünüz ? O zaman fikir tekrarını bildirerek bize yardımcı olun! </p>
+        Fikir numarası :<input type="text" name="duplicate_id" id="duplicate_id" size="4" />
+        <input type="submit" value="Bildir" onclick="duplicate({{ idea.id }})" id="dup_submit" /><br />
+        <span id="duplicate_form_info"></span>
+        </form>
+    </div>
+    <div class="idea_detail_box" style="display: none;" id="changeStatusForm">
+    <form method="POST" action="javascript:;">
+        <select name="id_status" id="id_status">
+            <option value="">---------</option>
+            {% for status in statusform %}
+                <option value="{{ status.id }}">{{ status.name }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Değiştir" onclick="changeStatus({{ idea.id }})" />
+        <span id="status_form_info"></span>
+    </form>
+    </div>
+    {% endif %}
+</div>
+<div style="clear:both"></div>
+</div>
+
+{% endblock %}

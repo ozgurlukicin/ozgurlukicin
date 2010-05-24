@@ -1,0 +1,33 @@
+{% extends "forum/forum_base.html" %}
+{% block extrahead %}
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/jquery.autocomplete.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/taghelper.js"></script>
+<style type="text/css" media="screen">@import url('/media/css/new/autocomplete.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/formfield.css');</style>
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="forum_address">
+    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; Yeni Başlık</div>
+</div>
+{% if form.errors %}
+<font color="red">Başlık açılamadı, lütfen aşağıdaki hataları düzeltin</font><br />
+{% endif %}
+
+{% if flood %}<font color="red">Flood koruması aktif, lütfen {{ timeout }} saniye bekleyin.</font>{% endif %}
+<form action="" method="post">
+<div class="wrapper">
+    <p style="padding-bottom:10px">Uzun bir metin ya da kod yazmanız gerekiyorsa <a href="/yapistir/" target="_blank">yapıştırma aracını</a> kullanabilirsiniz.</p>
+{% for field in form %}
+    {% include "field.html" %}
+{% endfor %}
+</div>
+<input type="submit" value="Başlık Aç">
+</form>
+{% else %}
+<p>Başlık açmak için oturum açmanız gerekiyor.</p>
+{% endif %}
+{% endblock %}

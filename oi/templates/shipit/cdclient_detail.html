@@ -1,0 +1,57 @@
+{% extends "shipit/base.html" %}
+{% block content %}
+
+{% if cdClient.sent %}Bu istek kargoya verilmiş.{% else %}<a href="{{ cdClient.get_cargo_url }}">Kargoya Ver</a>{% endif %}
+<table class="cdclient">
+    <tr>
+        <td>Sipariş No</td>
+        <td>{{ cdClient.get_id }}</td>
+    </tr>
+    <tr>
+        <td>Adı</td>
+        <td>{{ cdClient.get_full_name }}</td>
+    </tr>
+    {% if cdClient.company %}
+    <tr>
+        <td>Şirket</td>
+        <td>{{ cdClient.company }}</td>
+    </tr>
+    {% endif %}
+    <tr>
+        <td>Adres</td>
+        <td>{{ cdClient.address }}</td>
+    </tr>
+    {% if postcode %}
+    <tr>
+        <td>Posta Kodu</td>
+        <td>{{ cdClient.postcode }}</td>
+    </tr>
+    {% endif %}
+    <tr>
+        <td>Şehir</td>
+        <td>{{ cdClient.town }} / {{ cdClient.get_city_display }}</td>
+    </tr>
+    <tr>
+        <td>Telefon</td>
+        <td>{{ cdClient.get_full_phone }}</td>
+    </tr>
+    <tr>
+        <td>CD Miktarı</td>
+        <td>{{ cdClient.number_of_cds }}</td>
+    </tr>
+    {% if cdClient.reason %}
+    <tr>
+        <td>İsteme Sebebi</td>
+        <td>{{ cdClient.reason }}</td>
+    </tr>
+    {% endif %}
+    <tr>
+        <td>Tarih</td>
+        <td>{{ cdClient.date }}</td>
+    </tr>
+    <tr>
+        <td>Kargo takip kodu:</td>
+        <td>{% for cargo in cargo %}<a href="http://www.mngkargo.com.tr/iactive/takip.asp?fi=1&fatseri={{ cargo.serial }}&fatnumara={{ cargo.follow_code }}">{{ cargo.serial }}-{{ cargo.follow_code }}</a>{% endfor %}</td>
+    </tr>
+</table>
+{% endblock %}

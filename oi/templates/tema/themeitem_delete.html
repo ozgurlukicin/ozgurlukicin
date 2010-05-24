@@ -1,0 +1,9 @@
+{% extends "tema/base.html" %}
+{% block content %}
+<form method="POST" action="{{ themeItem.get_delete_url }}">
+    <div><img src="{{ themeItem.thumbnail.url }}" alt="{{ themeItem.title }}" /></div>
+    <p>Bu temayı silmek istediğinizden emin misiniz?</p>
+    <input type="submit" value="Sil" />
+    <input type="button" value="Vazgeç" onclick="history.back()" />
+</form>
+{% endblock %}
