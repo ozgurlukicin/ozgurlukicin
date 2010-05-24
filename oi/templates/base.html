@@ -67,9 +67,8 @@
                     </form>
                     <span class="loginlinks"><a href="/kullanici/kayit/">{% trans "Sign up" %}</a><br /><a class="sari"  href="/kullanici/kayip/">{% trans "Forgot password" %}</a></span>
                 {% else %}
-                    <p>Merhaba {{ user.username }}!</p>
-                    <p>Profil sayfanıza <a href="{{ request.user.get_profile.get_absolute_url }}">buradan</a> ulaşabilir ya da <a 
-class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.</p>
+                    <p>{% trans "Hello" %}, <b>{{ user.username }}</b>!</p>
+                    <p><a href="{{ request.user.get_profile.get_absolute_url }}">{% trans "Profile page" %}</a> | <a class="sari" href="/kullanici/cikis/">{% trans "Logout" %}</a>
                 {% endif %}
             </div>
             <div class="rightcolumn_content">
