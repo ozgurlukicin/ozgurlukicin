@@ -58,8 +58,8 @@ class TurkishIdentityNumberField(forms.Field):
 
 class CdClientForm(forms.ModelForm):
     tcidentity = TurkishIdentityNumberField(label="TC kimlik no")
-    phone_area = forms.CharField(label="Telefon (sabit hat)", max_length=3, widget=forms.TextInput(attrs={"style":"width:30px;margin-right:5px"}))
-    phone_number = forms.CharField(label="Telefon Numarası", max_length=7, widget=forms.TextInput(attrs={"style":"width:130px"}))
+    phone_number = forms.CharField(label="Telefon Numarası", max_length=10, widget=forms.TextInput())
+    gsm_number = forms.CharField(label="Cep Telefonu Numarası", max_length=10, widget=forms.TextInput())
     class Meta:
         model = CdClient
         exclude = ("sent", "taken", "hash", "confirmed", "date", "ip", "reason", "number_of_cds", "company", "postcode")
@@ -71,19 +71,27 @@ class CdClientForm(forms.ModelForm):
                     raise forms.ValidationError("Birden fazla CD istiyorsanız sebebini yazmalısınız.")
         return self.cleaned_data
 
-    def clean_phone_area(self):
-        phone_area = self.cleaned_data["phone_area"]
-        match = re.match(re.compile(r"^\d{3}$"), phone_area)
-        if not match:
-            raise forms.ValidationError("Lütfen geçerli bir alan kodu girin.")
-        return phone_area
-
     def clean_phone_number(self):
         phone_number = self.cleaned_data["phone_number"]
-        match = re.match(re.compile(r"^\d{7}$"), phone_number)
+        match = re.match(re.compile(r"^\d{10}$"), phone_number)
         if not match:
             raise forms.ValidationError("Lütfen geçerli bir telefon numarası girin.")
+
+        if phone_number.startswith("5"):
+            raise forms.ValidationError("5 ile başlayan alan kodları GSM içindir.")
+
         return phone_number
+
+    def clean_gsm_number(self):
+        gsm_number = self.cleaned_data["gsm_number"]
+        match = re.match(re.compile(r"^\d{10}$"), gsm_number)
+        if not match:
+            raise forms.ValidationError("Lütfen geçerli bir telefon numarası girin.")
+
+        if not gsm_number.startswith("5"):
+            raise forms.ValidationError("Türkiye'de GSM alan kodları 5'le başlar.")
+
+        return gsm_number
 
     def clean_number_of_cds(self):
         number_of_cds = self.cleaned_data["number_of_cds"]
