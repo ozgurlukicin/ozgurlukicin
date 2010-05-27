@@ -11,11 +11,13 @@
     {% if flood %}<div class="error">Lütfen formu tekrar göndermeden önce {{ timeout }} saniye bekleyiniz.</div>{% endif %}
     {% if form.non_field_errors %}<div class="error">{{ form.non_field_errors }}</div>{% endif %}
     {% for field in form %}
+        {% ifnotequal field.name "phone_area" %}{% ifnotequal field.name "gsm_area" %}
         {% ifequal field.name "phone_number" %}
           <div class="field_container">
-              <div class="field_label">{{ field.label_tag }}</div>
+              <div class="field_label">{{ form.phone_area.label_tag }}</div>
               <div class="field_field">
-                  {{ form.phone_number }} <span style="font-size: 11px;">(Örn: 2223334455)</span>
+                  +90 {{ form.phone_area }} {{ form.phone_number }} <span style="font-size: 11px;">(Örn: 222-3334455)</span>
+                  {% if form.phone_area.errors %}{{ form.phone_area.errors }}{% endif %}
                   {% if form.phone_number.errors %}{{ form.phone_number.errors }}{% endif %}
               </div>
               <div class="help_text">
@@ -26,9 +28,10 @@
         {% else %}
             {% ifequal field.name "gsm_number" %}
               <div class="field_container">
-                  <div class="field_label">{{ field.label_tag }}</div>
+                  <div class="field_label">{{ form.gsm_area.label_tag }}</div>
                   <div class="field_field">
-                      {{ form.gsm_number }} <span style="font-size: 11px;">(Örn: 5556667788)</span>
+                      +90 {{ form.gsm_area }} {{ form.gsm_number }} <span style="font-size: 11px;">(Örn: 555-6667788)</span>
+                      {% if form.gsm_area.errors %}{{ form.gsm_area.errors }}{% endif %}
                       {% if form.gsm_number.errors %}{{ form.gsm_number.errors }}{% endif %}
                   </div>
                   <div class="help_text">
@@ -39,7 +42,7 @@
             {% else %}
                 {% include "formfields.html" %}
             {% endifequal %}
-        {% endifequal %}
+        {% endifequal %}{% endifnotequal %}{% endifnotequal %}
     {% endfor %}
     <input type="submit" value="Gönder" />
 </form>

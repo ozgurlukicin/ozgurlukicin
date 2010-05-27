@@ -26,8 +26,10 @@ class CdClient(models.Model):
     postcode = models.CharField("Posta kodu", blank=True, max_length=5)
     town = models.CharField("İlçe", max_length=40)
     city = models.CharField("Şehir", choices=CITY_LIST, max_length=40)
-    phone_number = models.CharField("Telefon numarası", max_length=10)
-    gsm_number = models.CharField("Cep telefonu numarası", max_length=10)
+    phone_area = models.CharField("Alan kodu", max_length=3)
+    phone_number = models.CharField("Telefon numarası", max_length=7)
+    gsm_area = models.CharField("GSM alan kodu", max_length=3)
+    gsm_number = models.CharField("Cep telefonu numarası", max_length=7)
     ip = models.IPAddressField(blank=True, verbose_name='IP adresi')
     date = models.DateTimeField(auto_now_add=True)
 
@@ -38,6 +40,9 @@ class CdClient(models.Model):
 
     def get_full_name(self):
         return u"%s %s" % (self.first_name, self.last_name)
+
+    def get_full_phone(self):
+        return u"(%s) %s" % (self.phone_area, self.phone_number)
 
     def __unicode__(self):
         return self.get_full_name()
