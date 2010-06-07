@@ -5,7 +5,7 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-from django.contrib.syndication.feeds import Feed
+from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Atom1Feed
 
 from oi.tema.models import ThemeItem

@@ -5,12 +5,11 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-from django.contrib.syndication.feeds import Feed
+from django.contrib.syndication.views import Feed, FeedDoesNotExist
 from django.utils.feedgenerator import Atom1Feed
 
 from oi.settings import SITE_NAME, WEB_URL, SITE_DESC
 
-from django.contrib.syndication.feeds import FeedDoesNotExist
 from django.core.exceptions import ObjectDoesNotExist
 from oi.forum.models import Forum,Topic,Post
 from oi.st.tags import Tag
