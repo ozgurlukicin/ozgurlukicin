@@ -5,8 +5,8 @@ import re
 
 LOGPODCAST = "oi_podcast.log"
 LOGEDERGI = "edergi.log"
-EPISODELISTPODCAST = range(1, 13)
-EPISODELISTEDERGI = range(1, 22)
+EPISODELISTPODCAST = range(1, 18)
+EPISODELISTEDERGI = range(1, 23)
 
 
 def get_amount_list(log_file, regex):
