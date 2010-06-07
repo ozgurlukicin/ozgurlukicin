@@ -1,0 +1,463 @@
+Translatable string marking status
+
+Legend
+------
+_: needs to be removed
+-: not started
+*: in progress
++: done
+
+These are templates to be marked
+--------------------------------
+
+-   |-- ezine
+-   |   `-- templates
+-   |       `-- list.html
+-   |-- ideas
+-   |   |-- templates
+-   |   |   |-- feeds
+-   |   |   |   |-- ideafeed_description.html
+-   |   |   |   `-- ideafeed_title.html
+-   |   |   |-- idea_add_form.html
+-   |   |   |-- idea_base.html
+-   |   |   |-- idea_detail.html
+-   |   |   |-- idea_list.html
+-   |   |   `-- idea_top.html
+-   |-- shop
+-   |   `-- templates
+-   |       |-- cart
+-   |       |   `-- buy.html
+-   |       |-- category
+-   |       |   `-- category_list.html
+-   |       |-- product
+-   |       |   `-- product_info.html
+-   |       |-- shop_base.html
+-   |       |-- shop_main.html
+-   |       `-- shopprofile
+-   |           |-- bill_create.html
+-   |           |-- shopprofile_create.html
+-   |           `-- shopprofile_main.html
+-   |-- templates
+-   |   |-- 404.html
+-   |   |-- 500.html
+-   |   |-- admin
+-   |   |   |-- base.html
+-   |   |   `-- seminar
+-   |   |       `-- place
+-   |   |           `-- change_form.html
+-   |   |-- advancedsearch.html
+-   |   |-- base.html
+-   |   |-- bug
+-   |   |   |-- bug_add.html
+-   |   |   |-- bug_delete_confirm.html
+-   |   |   |-- bug_detail.html
+-   |   |   `-- bug_main.html
+-   |   |-- comments
+-   |   |   |-- comment_display.html
+-   |   |   |-- comment_form_fields.html
+-   |   |   |-- comment_form.html
+-   |   |   |-- comment_preview.html
+-   |   |   `-- trackback_display.html
+-   |   |-- db_error.html
+-   |   |-- download
+-   |   |   |-- download.html
+-   |   |   `-- download_relnotes.html
+-   |   |-- editor
+-   |   |   |-- base.html
+-   |   |   |-- change.html
+-   |   |   |-- create.html
+-   |   |   |-- list.html
+-   |   |   `-- news_form.html
+-   |   |-- feedjack
+-   |   |   |-- default
+-   |   |   |   `-- post_list.html
+-   |   |   |-- oi
+-   |   |   |   `-- post_list.html
+-   |   |   `-- sinx
+-   |   |       `-- post_list.html
+-   |   |-- feeds
+-   |   |   |-- feed_description.html
+-   |   |   `-- feed_title.html
+-   |   |-- field.html
+-   |   |-- file_upload
+-   |   |   |-- file_upload.html
+-   |   |   `-- file_upload_success.html
+-   |   |-- flatpages
+-   |   |   `-- default.html
+-   |   |-- footer.html
+-   |   |-- formfields.html
+-   |   |-- forum
+-   |   |   |-- abuse_list.html
+-   |   |   |-- change_poll.html
+-   |   |   |-- create_poll.html
+-   |   |   |-- feed_description.html
+-   |   |   |-- feed_title.html
+-   |   |   |-- forum_base.html
+-   |   |   |-- forum_detail.html
+-   |   |   |-- forum_done.html
+-   |   |   |-- forum_error.html
+-   |   |   |-- forum_footer.html
+-   |   |   |-- forum_header.html
+-   |   |   |-- forum_list.html
+-   |   |   |-- latest_posts_small.html
+-   |   |   |-- merge.html
+-   |   |   |-- move.html
+-   |   |   |-- new_topic.html
+-   |   |   |-- post_edit.html
+-   |   |   |-- post_list_for_user.html
+-   |   |   |-- post_list.html
+-   |   |   |-- reply.html
+-   |   |   |-- report.html
+-   |   |   |-- topic.html
+-   |   |   `-- unread.html
+-   |   |-- fs
+-   |   |   |-- fs_detail.html
+-   |   |   |-- fs_main.html
+-   |   |   `-- fs_printable.html
+-   |   |-- game
+-   |   |   |-- game_detail.html
+-   |   |   |-- game_main.html
+-   |   |   `-- game_printable.html
+-   |   |-- header.html
+-   |   |-- home.html
+-   |   |-- howto
+-   |   |   |-- howto_detail.html
+-   |   |   |-- howto_main.html
+-   |   |   `-- howto_printable.html
+-   |   |-- menu.html
+-   |   |-- news
+-   |   |   |-- news_detail.html
+-   |   |   |-- news_main.html
+-   |   |   `-- news_printable.html
+-   |   |-- package
+-   |   |   |-- package_detail.html
+-   |   |   |-- package_main.html
+-   |   |   `-- package_printable.html
+-   |   |-- paginator.html
+-   |   |-- paste
+-   |   |   |-- pastedtext_add.html
+-   |   |   |-- pastedtext_detail.html
+-   |   |   `-- pastedtext_toggle.html
+-   |   |-- petition
+-   |   |   |-- petitioner_list.html
+-   |   |   |-- sign_done.html
+-   |   |   `-- sign.html
+-   |   |-- piyango
+-   |   |   |-- base.html
+-   |   |   |-- confirmed_email.html
+-   |   |   |-- confirmed_email_person.html
+-   |   |   |-- confirmed.html
+-   |   |   |-- confirm_email.html
+-   |   |   |-- create_person.html
+-   |   |   `-- sent.html
+-   |   |-- podcast
+-   |   |   |-- audioplayer.html
+-   |   |   |-- detail.html
+-   |   |   |-- feed.html
+-   |   |   |-- feed_ogg.html
+-   |   |   `-- main.html
+-   |   |-- printable.html
+-   |   |-- seminar
+-   |   |   |-- attender.html
+-   |   |   |-- place.html
+-   |   |   |-- seminar_detail.html
+-   |   |   `-- seminar.html
+-   |   |-- shipit
+-   |   |   |-- base.html
+-   |   |   |-- cargo.html
+-   |   |   |-- cdclient_detail.html
+-   |   |   |-- cdclient_list.html
+-   |   |   |-- change_cdclient.html
+-   |   |   |-- city_list.html
+-   |   |   |-- clients_delivered.html
+-   |   |   |-- clients_not_sent.html
+-   |   |   |-- clients_to_send.html
+-   |   |   |-- confirmed_email.html
+-   |   |   |-- confirmed.html
+-   |   |   |-- confirm_email.html
+-   |   |   |-- create_cdclient.html
+-   |   |   |-- sent_email.html
+-   |   |   `-- sent.html
+-   |   |-- tag
+-   |   |   `-- tag_detail.html
+-   |   |-- tema
+-   |   |   |-- abuse_list.html
+-   |   |   |-- base.html
+-   |   |   |-- eski_detail.html
+-   |   |   |-- feed_description.html
+-   |   |   |-- feed_title.html
+-   |   |   |-- forum_wallpaper.html
+-   |   |   |-- kategori.html
+-   |   |   |-- mail
+-   |   |   |   |-- new_content.html
+-   |   |   |   `-- rejected.html
+-   |   |   |-- message.html
+-   |   |   |-- queue.html
+-   |   |   |-- report.html
+-   |   |   |-- sidebar.html
+-   |   |   |-- theme_base_without_ezine.html
+-   |   |   |-- themeitem_add_complete.html
+-   |   |   |-- themeitem_add_desktopscreenshot.html
+-   |   |   |-- themeitem_add_font.html
+-   |   |   |-- themeitem_add.html
+-   |   |   |-- themeitem_add_wallpaper.html
+-   |   |   |-- themeitem_change.html
+-   |   |   |-- themeitem_delete.html
+-   |   |   |-- themeitem_desktopscreenshot_detail.html
+-   |   |   |-- themeitem_detail.html
+-   |   |   |-- themeitem_download.html
+-   |   |   |-- themeitem_font_detail.html
+-   |   |   |-- themeitem_list.html
+-   |   |   |-- themeitem_wallpaper_detail.html
+-   |   |   `-- upload.html
+-   |   |-- test.html
+-   |   |-- user
+-   |   |   |-- change_password_done.html
+-   |   |   |-- change_password.html
+-   |   |   |-- confirm.html
+-   |   |   |-- dashboard.html
+-   |   |   |-- followed_topics.html
+-   |   |   |-- login.html
+-   |   |   |-- logout.html
+-   |   |   |-- lostpassword_done.html
+-   |   |   |-- lostpassword.html
+-   |   |   |-- password.html
+-   |   |   |-- profile_edit.html
+-   |   |   |-- profile.html
+-   |   |   |-- register_done.html
+-   |   |   |-- register.html
+-   |   |   `-- user_list.html
+-   |   |-- videobox.html
+-   |   |-- video.html
+-   |   `-- workshop
+-   |       |-- workshop_detail.html
+-   |       |-- workshop_main.html
+-   |       `-- workshop_printable.html
+-   `-- webalizer
+-       `-- templates
+-           `-- webalizer
+-               |-- base.html
+-               `-- index.html
+
+These are python files to be marked
+-----------------------------------
+
+-   |-- bug
+-   |   |-- forms.py
+-   |   |-- __init__.py
+-   |   |-- models.py
+-   |   |-- settings.py
+-   |   |-- urls.py
+-   |   `-- views.py
+-   |-- context_processors.py
+-   |-- editor
+-   |   |-- forms.py
+-   |   |-- __init__.py
+-   |   |-- models.py
+-   |   |-- settings.py
+-   |   |-- urls.py
+-   |   `-- views.py
+-   |-- ezine
+-   |   |-- admin.py
+-   |   |-- __init__.py
+-   |   |-- models.py
+-   |   |-- urls.py
+-   |   `-- views.py
+-   |-- feedjack
+-   |   |-- admin.py
+-   |   |-- bin
+-   |   |   `-- feedjack_update.py
+-   |   |-- fjcache.py
+-   |   |-- fjcloud.py
+-   |   |-- fjlib.py
+-   |   |-- __init__.py
+-   |   |-- models.py
+-   |   |-- urls.py
+-   |   `-- views.py
+-   |-- flatpages
+-   |   |-- admin.py
+-   |   |-- __init__.py
+-   |   |-- middleware.py
+-   |   |-- models.py
+-   |   |-- urls.py
+-   |   `-- views.py
+-   |-- forum
+-   |   |-- admin.py
+-   |   |-- customgeneric.py
+-   |   |-- feeds.py
+-   |   |-- forms.py
+-   |   |-- __init__.py
+-   |   |-- models.py
+-   |   |-- postmarkup.py
+-   |   |-- settings.py
+-   |   |-- stripogram
+-   |   |   |-- html2safehtml.py
+-   |   |   |-- html2text.py
+-   |   |   |-- HTMLParser.py
+-   |   |   |-- __init__.py
+-   |   |   `-- testStripogram.py
+-   |   |-- tools.py
+-   |   |-- urls.py
+-   |   |-- util.py
+-   |   `-- views.py
+-   |-- ideas
+-   |   |-- admin.py
+-   |   |-- feeds.py
+-   |   |-- forms.py
+-   |   |-- __init__.py
+-   |   |-- models.py
+-   |   |-- settings.py
+-   |   |-- templatetags
+-   |   |   |-- ideas.py
+-   |   |   `-- __init__.py
+-   |   |-- urls.py
+-   |   `-- views.py
+-   |-- __init__.py
+-   |-- manage.py
+-   |-- middleware
+-   |   |-- ban.py
+-   |   |-- debug.py
+-   |   |-- __init__.py
+-   |   `-- threadlocals.py
+-   |-- paste
+-   |   |-- forms.py
+-   |   |-- __init__.py
+-   |   |-- models.py
+-   |   |-- urls.py
+-   |   `-- views.py
+-   |-- patches
+-   |-- petition
+-   |   |-- __init__.py
+-   |   |-- models.py
+-   |   |-- settings.py
+-   |   |-- templatetags
+-   |   |   |-- __init__.py
+-   |   |   `-- petition.py
+-   |   |-- urls.py
+-   |   `-- views.py
+-   |-- piyango
+-   |   |-- forms.py
+-   |   |-- __init__.py
+-   |   |-- models.py
+-   |   |-- settings.py
+-   |   |-- urls.py
+-   |   `-- views.py
+-   |-- podcast
+-   |   |-- admin.py
+-   |   |-- __init__.py
+-   |   |-- models.py
+-   |   |-- settings.py
+-   |   |-- urls.py
+-   |   |-- utils.py
+-   |   `-- views.py
+-   |-- poll
+-   |   |-- __init__.py
+-   |   `-- models.py
+-   |-- profile
+-   |   |-- admin.py
+-   |   |-- forms.py
+-   |   |-- __init__.py
+-   |   |-- models.py
+-   |   |-- settings.py
+-   |   |-- sql
+-   |   |-- urls.py
+-   |   `-- views.py
+-   |-- scripts
+-   |   |-- calc_downloads.py
+-   |   |-- csvfill.py
+-   |   |-- fixpapers.py
+-   |   |-- gen_shipit_pdf.py
+-   |   |-- ideas_package_update.py
+-   |   |-- __init__.py
+-   |   `-- kargo
+-   |       |-- kargocsv.py
+-   |       |-- kargoxml.py
+-   |       |-- main.py
+-   |       `-- notsent2sent.py
+-   |-- seminar
+-   |   |-- admin.py
+-   |   |-- __init__.py
+-   |   |-- models.py
+-   |   |-- urls.py
+-   |   `-- views.py
+-   |-- settings.py
+-   |-- shipit
+-   |   |-- admin.py
+-   |   |-- forms.py
+-   |   |-- __init__.py
+-   |   |-- models.py
+-   |   |-- settings.py
+-   |   |-- urls.py
+-   |   `-- views.py
+-   |-- shop
+-   |   |-- cart
+-   |   |   |-- forms.py
+-   |   |   |-- __init__.py
+-   |   |   |-- models.py
+-   |   |   |-- urls.py
+-   |   |   `-- views.py
+-   |   |-- __init__.py
+-   |   |-- main
+-   |   |   |-- __init__.py
+-   |   |   `-- views.py
+-   |   |-- product
+-   |   |   |-- admin.py
+-   |   |   |-- __init__.py
+-   |   |   |-- models.py
+-   |   |   |-- templatetags
+-   |   |   |   |-- __init__.py
+-   |   |   |   `-- shop_library.py
+-   |   |   `-- views.py
+-   |   |-- shopprofile
+-   |   |   |-- admin.py
+-   |   |   |-- forms.py
+-   |   |   |-- __init__.py
+-   |   |   |-- models.py
+-   |   |   |-- urls.py
+-   |   |   `-- views.py
+-   |   `-- urls.py
+-   |-- st
+-   |   |-- admin.py
+-   |   |-- feeds.py
+-   |   |-- forms.py
+-   |   |-- __init__.py
+-   |   |-- models.py
+-   |   |-- signals.py
+-   |   |-- sitemaps.py
+-   |   |-- tags.py
+-   |   |-- templatetags
+-   |   |   |-- gravatar.py
+-   |   |   |-- __init__.py
+-   |   |   `-- library.py
+-   |   |-- views.py
+-   |   `-- wrappers.py
+-   |-- tema
+-   |   |-- admin.py
+-   |   |-- feeds.py
+-   |   |-- forms.py
+-   |   |-- __init__.py
+-   |   |-- models.py
+-   |   |-- settings.py
+-   |   |-- signals.py
+-   |   |-- templatetags
+-   |   |   |-- __init__.py
+-   |   |   `-- tema.py
+-   |   |-- urls.py
+-   |   |-- utils.py
+-   |   `-- views.py
+-   |-- upload
+-   |   |-- admin.py
+-   |   |-- __init__.py
+-   |   |-- models.py
+-   |   `-- views.py
+-   |-- urls.py
+-   |-- util
+-   |   |-- feedparser.py
+-   |   |-- fetch.py
+-   |   |-- forum_filler.py
+-   |   `-- __init__.py
+-   `-- webalizer
+-       |-- __init__.py
+-       |-- models.py
+-       |-- urls.py
+-       `-- views.py
