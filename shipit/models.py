@@ -28,6 +28,8 @@ class CdClient(models.Model):
     city = models.CharField("Şehir", choices=CITY_LIST, max_length=40)
     phone_area = models.CharField("Alan kodu", max_length=3)
     phone_number = models.CharField("Telefon numarası", max_length=7)
+    gsm_area = models.CharField("GSM alan kodu", max_length=3)
+    gsm_number = models.CharField("Cep telefonu numarası", max_length=7)
     ip = models.IPAddressField(blank=True, verbose_name='IP adresi')
     date = models.DateTimeField(auto_now_add=True)
 

@@ -5,8 +5,6 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-from os import getcwd
-
 ADMINS = ()
 MANAGERS = ADMINS
 
@@ -18,18 +16,14 @@ DEBUG = True
 TESTING = True
 TEMPLATE_DEBUG = DEBUG
 WEB_URL = 'http://localhost:8000'
-DOCUMENT_ROOT = getcwd()
+DOCUMENT_ROOT = '/home/user'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'oi',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
+DATABASE_ENGINE = 'mysql'
+DATABASE_NAME = 'oi'
+DATABASE_USER = 'root'
+DATABASE_PASSWORD = ''
+DATABASE_HOST = 'localhost'
+DATABASE_PORT = ''
 
 # Email
 DEFAULT_FROM_EMAIL = 'noreply@ozgurlukicin.com'
@@ -70,7 +64,7 @@ FEEDJACK_UPLOAD_DIR = "%s/media/feedjack" % DOCUMENT_ROOT
 FEEDJACK_UPLOAD_URL = "%s/media/feedjack" % WEB_URL
 
 TIME_ZONE = 'Europe/Istanbul'
-LANGUAGE_CODE = 'tr-tr'
+LANGUAGE_CODE = 'tr'
 SITE_ID = 1
 
 MEDIA_ROOT = '%s/media/' % DOCUMENT_ROOT
@@ -94,8 +88,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.middleware.csrf.CsrfResponseMiddleware',
+#    'django.contrib.csrf.middleware.CsrfMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'oi.flatpages.middleware.FlatpageFallbackMiddleware',

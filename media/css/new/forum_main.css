@@ -35,7 +35,7 @@
     color: #999999;
 }
 .post div.topic {
-    width: 45%;
+    width: 44%;
     font-weight: bold;
 }
 .post div.date {
@@ -45,7 +45,7 @@
     text-align: right;
 }
 .post div.link {
-    width: 16%;
+    width: 17%;
 }
 .ajaxloader {
     display: none;

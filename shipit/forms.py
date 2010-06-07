@@ -60,6 +60,8 @@ class CdClientForm(forms.ModelForm):
     tcidentity = TurkishIdentityNumberField(label="TC kimlik no")
     phone_area = forms.CharField(label="Telefon (sabit hat)", max_length=3, widget=forms.TextInput(attrs={"style":"width:30px;margin-right:5px"}))
     phone_number = forms.CharField(label="Telefon Numarası", max_length=7, widget=forms.TextInput(attrs={"style":"width:130px"}))
+    gsm_area = forms.CharField(label="Telefon (GSM)", max_length=3, widget=forms.TextInput(attrs={"style":"width:30px;margin-right:5px"}))
+    gsm_number = forms.CharField(label="Cep Telefonu Numarası", max_length=7, widget=forms.TextInput(attrs={"style":"width:130px"}))
     class Meta:
         model = CdClient
         exclude = ("sent", "taken", "hash", "confirmed", "date", "ip", "reason", "number_of_cds", "company", "postcode")
@@ -75,7 +77,11 @@ class CdClientForm(forms.ModelForm):
         phone_area = self.cleaned_data["phone_area"]
         match = re.match(re.compile(r"^\d{3}$"), phone_area)
         if not match:
-            raise forms.ValidationError("Lütfen geçerli bir alan kodu girin.")
+            raise forms.ValidationError("Lütfen geçerli bir telefon numarası girin.")
+
+        if phone_area.startswith("5"):
+            raise forms.ValidationError("5 ile başlayan alan kodları GSM içindir.")
+
         return phone_area
 
     def clean_phone_number(self):
@@ -83,7 +89,27 @@ class CdClientForm(forms.ModelForm):
         match = re.match(re.compile(r"^\d{7}$"), phone_number)
         if not match:
             raise forms.ValidationError("Lütfen geçerli bir telefon numarası girin.")
+
         return phone_number
+
+    def clean_gsm_area(self):
+        gsm_area = self.cleaned_data["gsm_area"]
+        match = re.match(re.compile(r"^\d{3}$"), gsm_area)
+        if not match:
+            raise forms.ValidationError("Lütfen geçerli bir telefon numarası girin.")
+
+        if not gsm_area.startswith("5"):
+            raise forms.ValidationError("Türkiye'de GSM alan kodları 5'le başlar.")
+
+        return gsm_area
+
+    def clean_gsm_number(self):
+        gsm_number = self.cleaned_data["gsm_number"]
+        match = re.match(re.compile(r"^\d{7}$"), gsm_number)
+        if not match:
+            raise forms.ValidationError("Lütfen geçerli bir telefon numarası girin.")
+
+        return gsm_number
 
     def clean_number_of_cds(self):
         number_of_cds = self.cleaned_data["number_of_cds"]

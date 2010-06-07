@@ -1,7 +1,5 @@
 {% load petition %}
 {% load ideas %}
-{% load i18n %}
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -45,7 +43,7 @@
             {% block leftcolumn_top %}
             {% endblock %}
             <div class="brainstorm">
-                <h2>{% trans "Brainstorm" %}</h2>
+                <h2>Beyin Fırtınası</h2>
                 {% idea_list %}
             </div>
             {% block leftcolumn_bottom %}
@@ -57,7 +55,7 @@
             {% block rightcolumn_top %}
             {% endblock %}
             <div class="rightcolumn_content">
-                <h2>{% trans "User Box" %}</h2>
+                <h2>Kullanıcı Kutusu</h2>
                 {% if not user.is_authenticated %}
                     <form method="post" action="/kullanici/giris/">
                         <input type="text" id="userbox_username" name="username" size="18" value="" maxlength="20" /><br />
@@ -65,10 +63,11 @@
                         <input type="hidden" name="next" value="{{ request.get_full_path }}" />
                         <input type="image" src="/media/img/new/button_login.png" value="Giriş" />
                     </form>
-                    <span class="loginlinks"><a href="/kullanici/kayit/">{% trans "Sign up" %}</a><br /><a class="sari"  href="/kullanici/kayip/">{% trans "Forgot password" %}</a></span>
+                    <span class="loginlinks"><a href="/kullanici/kayit/">Kayıt ol</a><br /><a class="sari"  href="/kullanici/kayip/">Kayıp parola</a></span>
                 {% else %}
-                    <p>{% trans "Hello" %}, <b>{{ user.username }}</b>!</p>
-                    <p><a href="{{ request.user.get_profile.get_absolute_url }}">{% trans "Profile page" %}</a> | <a class="sari" href="/kullanici/cikis/">{% trans "Logout" %}</a>
+                    <p>Merhaba {{ user.username }}!</p>
+                    <p>Profil sayfanıza <a href="{{ request.user.get_profile.get_absolute_url }}">buradan</a> ulaşabilir ya da <a 
+class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.</p>
                 {% endif %}
             </div>
             <div class="rightcolumn_content">
@@ -81,6 +80,7 @@
                 </form>
             </div>
             {% block rightcolumn_bottom %}
+        <a href="http://www.ozgurlukicin.com"><img border="0" class="alignnone" src="http://cekirdek.pardus.org.tr/~bahadir/counter/timer.php?w=150&h=206" alt="Özgürlük İçin... Pardus..." /></a>
             {% endblock %}
         </div>
         {% endblock %}
