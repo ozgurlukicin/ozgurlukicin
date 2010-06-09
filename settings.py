@@ -119,7 +119,6 @@ INSTALLED_APPS = (
     'oi.flatpages',
     'oi.st',
     'oi.upload',
-    'oi.bug',
     'oi.feedjack',
     'oi.seminar',
     'oi.profile',

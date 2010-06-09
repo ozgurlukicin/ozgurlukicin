@@ -161,9 +161,6 @@ urlpatterns = patterns('',
     #Forum
     (r'^forum/', include('oi.forum.urls')),
 
-    #Bug tracker
-    (r'^hata/', include('oi.bug.urls')),
-
     #Planet
     (r'^gezegen/', include('oi.feedjack.urls')),
 
