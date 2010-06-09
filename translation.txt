@@ -12,7 +12,7 @@ These are templates to be marked
 
 -   |-- ezine
 -   |   `-- templates
--   |       `-- list.html
+*   |       `-- list.html
 -   |-- ideas
 -   |   |-- templates
 -   |   |   |-- feeds

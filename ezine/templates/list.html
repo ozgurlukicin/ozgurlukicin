@@ -1,22 +1,23 @@
+{% load i18n %}
 {% extends "base.html" %}
-{% block title %}E-Dergi -  {% endblock %}
+{% block title %}{% trans "E-Zine" %} -  {% endblock %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/new/ezine.css');</style>
 {% endblock %}
 {% block content %}
-<div class="page_title">Özgürlükİçin e-dergi yayında!</div>
+<div class="page_title">{% trans "Spread Pardus e-zine is online!" %}</div>
 <div class="page_content">
 {% ifnotequal ezines.count 1 %}
-    <p><a href="http://www.ozgurlukicin.com/">Özgürlükİçin</a> topluluğu tarafından hazırlanan "<strong>Özgürlükİçin e-dergi</strong> "nin {{ ezines.0.issue }}. sayısı yayımlandı. Yola çıktığı günden bugüne koskocaman bir yayına dönüşen e-dergimiz bu ay tam <strong>{{ ezines.0.page_count }} sayfa</strong> olarak sitemizde yerini aldı.</p>
-    <p>E-derginin içeriği ise şöyle:</p>
+<p><a href="http://www.ozgurlukicin.com/">Özgürlükİçin</a> topluluğu tarafından hazırlanan "<strong>Özgürlükİçin e-dergi</strong> "nin {{ ezines.0.issue }}. sayısı yayımlandı. Yola çıktığı günden bugüne koskocaman bir yayına dönüşen e-dergimiz bu ay tam <strong>{{ ezines.0.page_count }} sayfa</strong> olarak sitemizde yerini aldı.</p>
+<p>E-derginin içeriği ise şöyle:</p>
 {% endifnotequal %}
 {% for ezine in ezines %}
 {% if forloop.first %}
     <p><img src="{{ ezine.image.file.url }}" alt="{{ ezine.title }}" align="left" /> <span style="font-size: x-large;">{{ ezine.title|safe }}</span></p>
-    <p><strong> Editör:</strong> {{ ezine.editor }}</p>
+    <p><strong> {% trans "Editor" %}:</strong> {{ ezine.editor }}</p>
     <p>&nbsp;</p>
-    <h3>İndir:</h3>
+    <h3>{% trans "Download" %}:</h3>
     <p><a href="{{ ezine.download_300dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" alt="indir" /> 300 dpi ({{ ezine.size_300dpi|filesizeformat }})</a> <a href="{{ ezine.download_96dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" alt="indir" /> 96 dpi ({{ ezine.size_96dpi|filesizeformat }})</a></p>
     <div class="first_ezine_content" style="clear:left;">{{ ezine.description|safe }}</div>
 {% ifnotequal ezines.count 1 %}
@@ -25,10 +26,10 @@
 {% endifnotequal %}
 {% else %}
     <p style="margin-top:30px"><img src="{{ ezine.image.file.url }}" alt="{{ ezine.title }}" align="left" style="width:250px"/> <span style="font-size: large;">{{ ezine.title|safe }}</span></p>
-    <p><strong> Editör:</strong> {{ ezine.editor }}</p>
-    <h3>İndir:</h3>
-    <p><a href="{{ ezine.download_300dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" alt="indir" /> 300 dpi ({{ ezine.size_300dpi|filesizeformat }})</a> <a href="{{ ezine.download_96dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" alt="indir" /> 96 dpi ({{ ezine.size_96dpi|filesizeformat }})</a></p>
-    <div class="ezine_toggle" onclick="$(this).next().toggle()"><span>Dergi içeriğini göster/gizle</span><img src="/media/img/new/button_toggle.png" alt="[Gizle/Göster]" /></div>
+    <p><strong> {% trans "Editor" %}:</strong> {{ ezine.editor }}</p>
+    <h3>{% trans "Download" %}:</h3>
+    <p><a href="{{ ezine.download_300dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" alt="indir" /> 300 dpi ({{ ezine.size_300dpi|filesizeformat }})</a> <a href="{{ ezine.download_96dpi }}"><img src="/media/upload/image/pdf.png" style="vertical-align:middle" alt="{% trans "download" %}" /> 96 dpi ({{ ezine.size_96dpi|filesizeformat }})</a></p>
+    <div class="ezine_toggle" onclick="$(this).next().toggle()"><span>{% trans "Show/hide e-zine content" %}</span><img src="/media/img/new/button_toggle.png" alt="{% trans "[Show/Hide]" %}" /></div>
     <div class="ezine_content">{{ ezine.description|safe }}</div>
 {% endif %}
 {% endfor %}

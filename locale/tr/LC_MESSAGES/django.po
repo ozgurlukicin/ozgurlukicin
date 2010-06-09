@@ -1,0 +1,401 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-06-09 13:43+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ezine/templates/list.html:3
+msgid "E-Zine"
+msgstr ""
+
+#: ezine/templates/list.html:9
+msgid "Spread Pardus e-zine is online!"
+msgstr ""
+
+#: ezine/templates/list.html:18 ezine/templates/list.html.py:29
+msgid "Editor"
+msgstr ""
+
+#: ezine/templates/list.html:20 ezine/templates/list.html.py:30
+msgid "Download"
+msgstr ""
+
+#: ezine/templates/list.html:31
+msgid "download"
+msgstr ""
+
+#: ezine/templates/list.html:32
+msgid "Show/hide e-zine content"
+msgstr ""
+
+#: ezine/templates/list.html:32
+msgid "[Show/Hide]"
+msgstr ""
+
+#: feedjack/admin.py:31
+msgid "Fields updated automatically by Feedjack"
+msgstr ""
+
+#: feedjack/models.py:17
+msgid "Date published."
+msgstr ""
+
+#: feedjack/models.py:18
+msgid "Date the post was first obtained."
+msgstr ""
+
+#: feedjack/models.py:22 feedjack/models.py:38 feedjack/models.py:98
+#: feedjack/models.py:126 feedjack/models.py:173
+msgid "name"
+msgstr ""
+
+#: feedjack/models.py:23 feedjack/models.py:26 feedjack/models.py:105
+#: feedjack/models.py:142
+msgid "link"
+msgstr ""
+
+#: feedjack/models.py:27 feedjack/models.py:61
+msgid "links"
+msgstr ""
+
+#: feedjack/models.py:39
+msgid "url"
+msgstr ""
+
+#: feedjack/models.py:42
+msgid "Example"
+msgstr ""
+
+#: feedjack/models.py:45 feedjack/models.py:103 feedjack/models.py:141
+msgid "title"
+msgstr ""
+
+#: feedjack/models.py:46
+msgid "description"
+msgstr ""
+
+#: feedjack/models.py:47
+msgid "welcome"
+msgstr ""
+
+#: feedjack/models.py:48
+msgid "greets"
+msgstr ""
+
+#: feedjack/models.py:50
+msgid "default site"
+msgstr ""
+
+#: feedjack/models.py:51
+msgid "posts per page"
+msgstr ""
+
+#: feedjack/models.py:52
+msgid "order posts by"
+msgstr ""
+
+#: feedjack/models.py:54
+msgid "tagcloud level"
+msgstr ""
+
+#: feedjack/models.py:55
+msgid "show tagcloud"
+msgstr ""
+
+#: feedjack/models.py:57
+msgid "use internal cache"
+msgstr ""
+
+#: feedjack/models.py:58
+msgid "cache duration"
+msgstr ""
+
+#: feedjack/models.py:59
+msgid "Duration in seconds of the cached pages and data."
+msgstr ""
+
+#: feedjack/models.py:63
+msgid "template"
+msgstr ""
+
+#: feedjack/models.py:65
+msgid ""
+"This template must be a directory in your feedjack templates directory. "
+"Leave blank to use the default template."
+msgstr ""
+
+#: feedjack/models.py:69 feedjack/models.py:170
+msgid "site"
+msgstr ""
+
+#: feedjack/models.py:70
+msgid "sites"
+msgstr ""
+
+#: feedjack/models.py:96
+msgid "feed url"
+msgstr ""
+
+#: feedjack/models.py:99 feedjack/models.py:175
+msgid "shortname"
+msgstr ""
+
+#: feedjack/models.py:100 feedjack/models.py:178
+msgid "is active"
+msgstr ""
+
+#: feedjack/models.py:101
+msgid "If disabled, this feed will not be further updated."
+msgstr ""
+
+#: feedjack/models.py:104
+msgid "tagline"
+msgstr ""
+
+#: feedjack/models.py:108
+msgid "etag"
+msgstr ""
+
+#: feedjack/models.py:109
+msgid "last modified"
+msgstr ""
+
+#: feedjack/models.py:110
+msgid "last checked"
+msgstr ""
+
+#: feedjack/models.py:113 feedjack/models.py:140 feedjack/models.py:171
+#: templates/feedjack/default/post_list.html:189
+msgid "feed"
+msgstr ""
+
+#: feedjack/models.py:114
+msgid "feeds"
+msgstr ""
+
+#: feedjack/models.py:129
+msgid "tag"
+msgstr ""
+
+#: feedjack/models.py:130 feedjack/models.py:149
+msgid "tags"
+msgstr ""
+
+#: feedjack/models.py:143
+msgid "content"
+msgstr ""
+
+#: feedjack/models.py:144
+msgid "date modified"
+msgstr ""
+
+#: feedjack/models.py:145
+msgid "guid"
+msgstr ""
+
+#: feedjack/models.py:146
+msgid "author"
+msgstr ""
+
+#: feedjack/models.py:147
+msgid "author email"
+msgstr ""
+
+#: feedjack/models.py:148
+msgid "comments"
+msgstr ""
+
+#: feedjack/models.py:150
+msgid "date created"
+msgstr ""
+
+#: feedjack/models.py:153
+msgid "post"
+msgstr ""
+
+#: feedjack/models.py:154
+msgid "posts"
+msgstr ""
+
+#: feedjack/models.py:174
+msgid "Keep blank to use the Feed's original name."
+msgstr ""
+
+#: feedjack/models.py:177
+msgid "Keep blank to use the Feed's original shortname."
+msgstr ""
+
+#: feedjack/models.py:179
+msgid ""
+"If disabled, this subscriber will not appear in the site or in the site's "
+"feed."
+msgstr ""
+
+#: feedjack/models.py:183
+msgid "subscriber"
+msgstr ""
+
+#: feedjack/models.py:184
+msgid "subscribers"
+msgstr ""
+
+#: templates/admin/base.html:25
+msgid "Welcome,"
+msgstr ""
+
+#: templates/admin/base.html:25
+msgid "Documentation"
+msgstr ""
+
+#: templates/admin/base.html:25
+msgid "Change password"
+msgstr ""
+
+#: templates/admin/base.html:25
+msgid "Log out"
+msgstr ""
+
+#: templates/admin/base.html:30
+#: templates/admin/seminar/place/change_form.html:56
+msgid "Home"
+msgstr ""
+
+#: templates/admin/seminar/place/change_form.html:59
+msgid "Add"
+msgstr ""
+
+#: templates/admin/seminar/place/change_form.html:66
+msgid "History"
+msgstr ""
+
+#: templates/admin/seminar/place/change_form.html:67
+msgid "View on site"
+msgstr ""
+
+#: templates/admin/seminar/place/change_form.html:77
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/feedjack/default/post_list.html:28
+#: templates/feedjack/sinx/post_list.html:18
+msgid ""
+"A <a href=\"http://www.feedjack.org/\" class=\"love_feedjack\" title="
+"\"Feedjack Powered\">Feedjack</a> powered Planet"
+msgstr ""
+
+#: templates/feedjack/default/post_list.html:39
+#: templates/feedjack/default/post_list.html:73
+#: templates/feedjack/default/post_list.html:108
+#: templates/feedjack/default/post_list.html:167
+#: templates/feedjack/default/post_list.html:212
+#: templates/feedjack/sinx/post_list.html:90
+#: templates/feedjack/sinx/post_list.html:138
+#, python-format
+msgid "%(posts)s post"
+msgid_plural "%(posts)s posts"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/feedjack/default/post_list.html:46
+msgid "talks about"
+msgstr ""
+
+#: templates/feedjack/default/post_list.html:101
+msgid "is about"
+msgstr ""
+
+#: templates/feedjack/default/post_list.html:130
+#: templates/feedjack/sinx/post_list.html:50
+#, python-format
+msgid "by %(author)s at"
+msgstr ""
+
+#: templates/feedjack/default/post_list.html:133
+#: templates/feedjack/sinx/post_list.html:50
+msgid "under"
+msgstr ""
+
+#: templates/feedjack/default/post_list.html:138
+#: templates/feedjack/sinx/post_list.html:51
+msgid "Comments"
+msgstr ""
+
+#: templates/feedjack/default/post_list.html:152
+#, python-format
+msgid "What %(person)s talks about"
+msgstr ""
+
+#: templates/feedjack/default/post_list.html:154
+msgid "What people talk about"
+msgstr ""
+
+#: templates/feedjack/default/post_list.html:173
+msgid "Meta"
+msgstr ""
+
+#: templates/feedjack/default/post_list.html:175
+msgid "Last update"
+msgstr ""
+
+#: templates/feedjack/default/post_list.html:180
+msgid "People"
+msgstr ""
+
+#: templates/feedjack/default/post_list.html:187
+#, python-format
+msgid "feed (last modified: %(last_modified)s)"
+msgstr ""
+
+#: templates/feedjack/default/post_list.html:199
+msgid "Greetings"
+msgstr ""
+
+#: templates/feedjack/sinx/post_list.html:50
+msgid "Author link"
+msgstr ""
+
+#: templates/feedjack/sinx/post_list.html:81
+msgid "Tag soup"
+msgstr ""
+
+#: templates/feedjack/sinx/post_list.html:95
+msgid "Friends"
+msgstr ""
+
+#: templates/feedjack/sinx/post_list.html:107
+msgid "Links"
+msgstr ""
+
+#: templates/feedjack/sinx/post_list.html:125
+msgid "Welcome"
+msgstr ""
+
+#: templates/feedjack/sinx/post_list.html:131
+msgid "Credits"
+msgstr ""
+
+#: templates/feedjack/sinx/post_list.html:140
+msgid "Back"
+msgstr ""
+
+#: templates/feedjack/sinx/post_list.html:140
+msgid "Forward"
+msgstr ""
+
+#: webalizer/templates/webalizer/index.html:7
+msgid "settings.WEBALIZER_DIR is not configured"
+msgstr ""
