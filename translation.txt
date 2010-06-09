@@ -10,16 +10,16 @@ _: needs to be removed
 These are templates to be marked
 --------------------------------
 
--   |-- ezine
--   |   `-- templates
+    |-- ezine
+    |   `-- templates
 *   |       `-- list.html
--   |-- ideas
--   |   |-- templates
--   |   |   |-- feeds
--   |   |   |   |-- ideafeed_description.html
--   |   |   |   `-- ideafeed_title.html
--   |   |   |-- idea_add_form.html
--   |   |   |-- idea_base.html
++   |-- ideas
+    |   |-- templates
+    |   |   |-- feeds
++   |   |   |   |-- ideafeed_description.html
++   |   |   |   `-- ideafeed_title.html
++   |   |   |-- idea_add_form.html
+*   |   |   |-- idea_base.html
 -   |   |   |-- idea_detail.html
 -   |   |   |-- idea_list.html
 -   |   |   `-- idea_top.html

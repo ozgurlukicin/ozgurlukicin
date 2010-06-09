@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-09 13:43+0300\n"
+"POT-Creation-Date: 2010-06-09 14:50+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -249,6 +249,128 @@ msgstr ""
 
 #: feedjack/models.py:184
 msgid "subscribers"
+msgstr ""
+
+#: ideas/templates/idea_add_form.html:4
+msgid "Submit New Idea"
+msgstr ""
+
+#: ideas/templates/idea_add_form.html:15
+msgid "Idea couldn't be submitted, please fix the errors below."
+msgstr ""
+
+#: ideas/templates/idea_add_form.html:21
+msgid "Submit"
+msgstr ""
+
+#: ideas/templates/idea_base.html:5
+msgid "Brainstorm"
+msgstr ""
+
+#: ideas/templates/idea_base.html:6
+msgid "Spread Pardus"
+msgstr ""
+
+#: ideas/templates/idea_base.html:12 ideas/templates/idea_base.html.py:59
+#: ideas/templates/idea_base.html:61
+msgid "New Ideas"
+msgstr ""
+
+#: ideas/templates/idea_base.html:34
+msgid "User Box"
+msgstr ""
+
+#: ideas/templates/idea_base.html:40
+msgid "Login"
+msgstr ""
+
+#: ideas/templates/idea_base.html:42
+msgid "Register"
+msgstr ""
+
+#: ideas/templates/idea_base.html:42
+msgid "Lost Password"
+msgstr ""
+
+#: ideas/templates/idea_base.html:44
+#, python-format
+msgid "Hello %(username)s!"
+msgstr ""
+
+#: ideas/templates/idea_base.html:45
+#, python-format
+msgid ""
+"You can display your profile page by clicking <a href=\"%(profile_url)s"
+"\">here</a> or you can logout by clicking <a class=\"sari\" href=\"/"
+"kullanici/cikis/\">here</a>."
+msgstr ""
+
+#: ideas/templates/idea_base.html:49 ideas/templates/idea_base.html.py:54
+msgid "Search"
+msgstr ""
+
+#: ideas/templates/idea_base.html:61
+msgid "New Ideas Mainpage"
+msgstr ""
+
+#: ideas/templates/idea_base.html:62
+msgid "Submit Idea"
+msgstr ""
+
+#: ideas/templates/idea_base.html:64
+msgid "My Ideas"
+msgstr ""
+
+#: ideas/templates/idea_base.html:65
+msgid "Favuorite Ideas"
+msgstr ""
+
+#: ideas/templates/idea_base.html:67
+msgid "Today's popular ideas"
+msgstr ""
+
+#: ideas/templates/idea_base.html:68
+msgid "This week's popular ideas"
+msgstr ""
+
+#: ideas/templates/idea_base.html:69
+msgid "This month's popular ideas"
+msgstr ""
+
+#: ideas/templates/idea_base.html:70
+msgid "Alltime popular ideas"
+msgstr ""
+
+#: ideas/templates/idea_base.html:71
+msgid "Recently commented ideas"
+msgstr ""
+
+#: ideas/templates/idea_base.html:72
+msgid "Latest Ideas"
+msgstr ""
+
+#: ideas/templates/idea_base.html:73
+msgid "Looking for Volunteers"
+msgstr ""
+
+#: ideas/templates/idea_base.html:74
+msgid "Ideas in progress"
+msgstr ""
+
+#: ideas/templates/idea_base.html:75
+msgid "Resolved ideas"
+msgstr ""
+
+#: ideas/templates/idea_base.html:76
+msgid "Invalid ideas"
+msgstr ""
+
+#: ideas/templates/idea_base.html:79
+msgid "Categories"
+msgstr ""
+
+#: ideas/templates/idea_base.html:86
+msgid "shipit"
 msgstr ""
 
 #: templates/admin/base.html:25

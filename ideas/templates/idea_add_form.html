@@ -1,6 +1,7 @@
 {% extends "idea_list.html" %}
+{% load i18n %}
 
-{% block title %}Yeni Fikir Ekle - {% endblock %}
+{% block title %}{% trans "Submit New Idea" %} - {% endblock %}
 
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/brainstorm.css');</style>
@@ -10,17 +11,13 @@
 <script type="text/javascript" src="/media/js/taghelper_idea.js"></script>
 {% endblock %}
 {% block idea %}
-{% if user.is_authenticated %}
 {% if form.errors %}
-<p><font color="red">Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin.</font></p>
+<p><font color="red">{% trans "Idea couldn't be submitted, please fix the errors below." %}</font></p>
 {% endif %}
 <form method="POST" action="" enctype="multipart/form-data">
 {% for field in form %}
     {% include "formfields.html" %}
 {% endfor %}
-<input type="submit" value="Gönder" />
+<input type="submit" value="{% trans "Submit" %}" />
 </form>
-{% else %}
-<p>Yeni fikir eklemek için oturum açmanız gerekiyor.</p>
-{% endif %}
 {% endblock %}
