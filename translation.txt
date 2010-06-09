@@ -20,7 +20,7 @@ These are templates to be marked
 +   |   |   |   `-- ideafeed_title.html
 +   |   |   |-- idea_add_form.html
 *   |   |   |-- idea_base.html
--   |   |   |-- idea_detail.html
++   |   |   |-- idea_detail.html
 -   |   |   |-- idea_list.html
 -   |   |   `-- idea_top.html
 -   |-- shop
