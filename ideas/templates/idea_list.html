@@ -1,5 +1,5 @@
 {% extends "idea_base.html" %}
-{% load library %}
+{% load library i18n %}
 
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/brainstorm.css');</style>
@@ -9,7 +9,7 @@
 
 {% block content %}
 <div id="idea_topbar"><span id="idea_list_title">{{ page_title }}</span>
-    <span id="idea_submit"><a href="/yenifikir/ekle/" title="Yeni Fikir Ekle"><img src="/media/img/new/ideas_submit.png" alt="submit idea" /></a></span>
+    <span id="idea_submit"><a href="/yenifikir/ekle/" title="{% trans "Submit New Idea" %}"><img src="/media/img/new/ideas_submit.png" alt="{% trans "Submit New Idea" %}" /></a></span>
 </div>
 {% block idea %}
 {% for idea in object_list %}

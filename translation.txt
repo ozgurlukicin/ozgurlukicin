@@ -21,15 +21,15 @@ These are templates to be marked
 +   |   |   |-- idea_add_form.html
 *   |   |   |-- idea_base.html
 +   |   |   |-- idea_detail.html
--   |   |   |-- idea_list.html
--   |   |   `-- idea_top.html
--   |-- shop
--   |   `-- templates
--   |       |-- cart
++   |   |   |-- idea_list.html
+*   |   |   `-- idea_top.html
+    |-- shop
+    |   `-- templates
+    |       |-- cart
 -   |       |   `-- buy.html
--   |       |-- category
+    |       |-- category
 -   |       |   `-- category_list.html
--   |       |-- product
+    |       |-- product
 -   |       |   `-- product_info.html
 -   |       |-- shop_base.html
 -   |       |-- shop_main.html
