@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-06-10 14:38+0300\n"
-"PO-Revision-Date: 2010-06-09 16:47+0300\n"
+"PO-Revision-Date: 2010-06-10 15:11+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -255,7 +255,7 @@ msgstr ""
 
 #: ideas/templates/idea_add_form.html:4 ideas/templates/idea_list.html:12
 msgid "Submit New Idea"
-msgstr ""
+msgstr "Yeni Fikir Ekle"
 
 #: ideas/templates/idea_add_form.html:15
 msgid "Idea couldn't be submitted, please fix the errors below."
@@ -307,6 +307,9 @@ msgid ""
 "\">here</a> or you can logout by clicking <a class=\"sari\" href=\"/"
 "kullanici/cikis/\">here</a>."
 msgstr ""
+"Profil sayfanıza <a href=\"%(profile_url)s\">buradan</a> ulaşabilir ya da <a "
+"class=\"sari\" href=\"/kullanici/cikis/\">buraya</a> tıklayarak sistemden "
+"çıkabilirsiniz."
 
 #: ideas/templates/idea_base.html:48 ideas/templates/idea_base.html.py:53
 #: templates/base.html:77
@@ -452,206 +455,202 @@ msgid "Change"
 msgstr "Değiştir"
 
 #: ideas/templates/idea_top.html:4
-#, fuzzy
 msgid "I liked this idea"
-msgstr "Geçersiz fikirler"
+msgstr "Bu fikri sevdim"
 
 #: ideas/templates/idea_top.html:8
 msgid "I didn't like this idea"
-msgstr ""
+msgstr "Bu fikri sevmedim"
 
 #: ideas/templates/idea_top.html:16
 msgid "Remove from my favourites"
-msgstr ""
+msgstr "Favorilerimden çıkar"
 
 #: ideas/templates/idea_top.html:16
-#, fuzzy
 msgid "Idea is in your favourites"
-msgstr "Çözüm sürecindeki fikirler"
+msgstr "Fikir favorilerinize eklenmiş"
 
 #: ideas/templates/idea_top.html:19
 msgid "Add to my favourites"
-msgstr ""
+msgstr "Favorilerime ekle"
 
 #: ideas/templates/idea_top.html:28
 msgid "Comment"
-msgstr ""
+msgstr "Yorum"
 
 #: ideas/templates/idea_top.html:29
 #: templates/feedjack/default/post_list.html:138
 #: templates/feedjack/sinx/post_list.html:51
 msgid "Comments"
-msgstr ""
+msgstr "Yorumlar"
 
 #: ideas/templates/idea_top.html:31
 #, python-format
 msgid "There is %(comment_count)s comment."
 msgid_plural "There are %(comment_count)s comments."
-msgstr[0] ""
+msgstr[0] " %(comment_count)s tane yorum yapıldı."
 
 #: ideas/templates/idea_top.html:33
 msgid "Be the first one to comment!"
-msgstr ""
+msgstr "İlk yorum yapan siz olun!"
 
 #: templates/404.html:3
 msgid "Page Not Found"
-msgstr ""
+msgstr "Sayfa Bulunamadı"
 
 #: templates/404.html:11 templates/500.html:11
 msgid "Click <a href=\"/\">here</a> to visit main page."
-msgstr ""
+msgstr "Anasayfa'ya gitmek için <a href=\"/\">tıklayın</a>."
 
 #: templates/404.html:12 templates/500.html:12
 msgid "Click <a href=\"/e-dergi/\">here</a> to visit e-zine page."
-msgstr ""
+msgstr "Özgürlükİçin e-dergiye gitmek için <a href=\"/e-dergi/\">tıklayın</a>."
 
 #: templates/404.html:13 templates/500.html:13
 msgid "Click <a href=\"/forum/\">here</a> to visit forums."
-msgstr ""
+msgstr "Özgürlükİçin forumlarına gitmek için <a href=\"/forum/\">tıklayın</a>."
 
 #: templates/500.html:3
 msgid "Page Cannot Be Displayed"
-msgstr ""
+msgstr "Sayfa Görüntülenemiyor"
 
 #: templates/500.html:8
 msgid "Page cannot be displayed"
-msgstr ""
+msgstr "Sayfa görüntülenemiyor"
 
 #: templates/advancedsearch.html:3
 msgid "Advanced Search"
-msgstr ""
+msgstr "Gelişmiş Arama"
 
 #: templates/advancedsearch.html:15
 msgid "Show results"
-msgstr ""
+msgstr "Sonuçları göster"
 
 #: templates/advancedsearch.html:18
 #, python-format
 msgid "Pages containing %(term)s"
-msgstr ""
+msgstr "%(term)s kelimesini içeren sayfalar"
 
 #: templates/advancedsearch.html:18
 #, python-format
 msgid "No pages found containing %(term)s"
-msgstr ""
+msgstr "%(term)s kelimesini içeren sayfa bulunamadı"
 
 #: templates/advancedsearch.html:23
 #, python-format
 msgid "Tags (%(count)s)"
-msgstr ""
+msgstr "Etiketler (%(count)s)"
 
 #: templates/advancedsearch.html:33
 #, python-format
 msgid "News (%(count)s)"
-msgstr ""
+msgstr "Haberler (%(count)s)"
 
 #: templates/advancedsearch.html:44
 #, python-format
 msgid "Howto (%(count)s)"
-msgstr ""
+msgstr "Nasıl (%(count)s)"
 
 #: templates/advancedsearch.html:55
 #, python-format
 msgid "Package (%(count)s)"
-msgstr ""
+msgstr "Paketler (%(count)s)"
 
 #: templates/advancedsearch.html:66
 #, python-format
 msgid "First Steps (%(count)s)"
-msgstr ""
+msgstr "İlk Adımlar (%(count)s)"
 
 #: templates/advancedsearch.html:77
 #, python-format
 msgid "Games (%(count)s)"
-msgstr ""
+msgstr "Oyunlar (%(count)s)"
 
 #: templates/advancedsearch.html:88
 #, python-format
 msgid "Workshop (%(count)s)"
-msgstr ""
+msgstr "Atölye (%(count)s)"
 
 #: templates/advancedsearch.html:99
 #, python-format
 msgid "Ideas (%(count)s)"
-msgstr ""
+msgstr "Fikirler (%(count)s)"
 
 #: templates/advancedsearch.html:110
 #, python-format
 msgid "Forum (%(count)s)"
-msgstr ""
+msgstr "Forum (%(count)s)"
 
 #: templates/advancedsearch.html:128
 #, python-format
 msgid "Flatpages (%(count)s)"
-msgstr ""
+msgstr "Sabit Sayfalar (%(count)s)"
 
 #: templates/advancedsearch.html:139
 msgid "No content found."
-msgstr ""
+msgstr "İçerik bulunamadı."
 
 #: templates/base.html:13 templates/base.html.py:14 templates/base.html:15
 #: templates/base.html.py:16 templates/base.html:17 templates/base.html.py:18
 #: templates/base.html:19 templates/base.html.py:20 templates/base.html:21
 #: templates/base.html.py:22
-#, fuzzy
 msgid "Spread Pardus RSS"
-msgstr "Özgürlükiçin"
+msgstr "Özgürlükiçin RSS"
 
 #: templates/base.html:13
 msgid "Main Page"
-msgstr ""
+msgstr "Ana Sayfa"
 
 #: templates/base.html:14 templates/editor/list.html:12
-#, fuzzy
 msgid "News"
-msgstr "Yeni Fikirler"
+msgstr "Haberler"
 
 #: templates/base.html:15
 msgid "Howto"
-msgstr ""
+msgstr "Nasıl"
 
 #: templates/base.html:16
 msgid "First Steps"
-msgstr ""
+msgstr "İlk Adımlar"
 
 #: templates/base.html:17
 msgid "Packages"
-msgstr ""
+msgstr "Paketler"
 
 #: templates/base.html:18
 msgid "Workshop"
-msgstr ""
+msgstr "Atölye"
 
 #: templates/base.html:19
 msgid "Games"
-msgstr ""
+msgstr "Oyunlar"
 
 #: templates/base.html:20 templates/feedjack/oi/post_list.html:3
 msgid "Planet"
-msgstr ""
+msgstr "Gezegen"
 
 #: templates/base.html:21
 msgid "Forum"
-msgstr ""
+msgstr "Forum"
 
 #: templates/base.html:22
 msgid "Podcast"
-msgstr ""
+msgstr "Ajans"
 
 #: templates/base.html:67
-#, fuzzy
 msgid "Lost password"
-msgstr "Parola değiştir"
+msgstr "Kayıp parola"
 
 #: templates/base.html:93
-#, fuzzy
 msgid "e-zine"
-msgstr "E-Dergi"
+msgstr "e-dergi"
 
 #: templates/base.html:94
 msgid ""
 "Spread Pardus has an e-zine! Click <a href=\"/e-dergi/\">here</a> to read it."
 msgstr ""
+"Özgürlükiçin'in şimdi bir de e-dergisi var! Okumak için <a "
+"href=\"/e-dergi/\">buraya</a> tıklayın."
 
 #: templates/admin/base.html:25
 msgid "Welcome,"
@@ -692,48 +691,45 @@ msgid_plural "Please correct the errors below."
 msgstr[0] "Lütfen aşağıdaki hatayı düzeltin."
 
 #: templates/download/download.html:5
-#, fuzzy
 msgid "Download Pardus"
-msgstr "İndir"
+msgstr "Pardus İndir"
 
 #: templates/download/download.html:13
 #, python-format
 msgid "Download Pardus %(version)s"
-msgstr ""
+msgstr "Pardus %(version)s İndir"
 
 #: templates/download/download.html:15
 msgid "Install CD"
-msgstr ""
+msgstr "Kurulan CD"
 
 #: templates/editor/change.html:11
 msgid "Save"
-msgstr ""
+msgstr "Kaydet"
 
 #: templates/editor/list.html:10
-#, fuzzy
 msgid "Add News"
-msgstr "Yeni Fikirler"
+msgstr "Haber Ekle"
 
 #: templates/editor/list.html:14 templates/editor/list.html.py:24
-#, fuzzy
 msgid "Edit"
-msgstr "Editör"
+msgstr "Düzenle"
 
 #: templates/editor/list.html:16
 msgid "Date"
-msgstr ""
+msgstr "Tarih"
 
 #: templates/editor/news_form.html:6
 msgid "Filter Images"
-msgstr ""
+msgstr "Görselleri Filtrele"
 
 #: templates/editor/news_form.html:11
 msgid "You can search images using this box."
-msgstr ""
+msgstr "Burayı kullanarak görsellerde arama yapabilirsiniz."
 
 #: templates/editor/news_form.html:21
 msgid "Use the search box above and select an image from the list"
-msgstr ""
+msgstr "Üstteki arama kutusunu kullanıp listeden bir görsel seçiniz"
 
 #: templates/feedjack/default/post_list.html:28
 #: templates/feedjack/sinx/post_list.html:18
@@ -805,24 +801,23 @@ msgstr ""
 
 #: templates/feedjack/oi/post_list.html:33
 msgid "Authors"
-msgstr ""
+msgstr "Yazarlar"
 
 #: templates/feedjack/oi/post_list.html:45
 msgid "Rules"
-msgstr ""
+msgstr "Kurallar"
 
 #: templates/feedjack/oi/post_list.html:47 templates/flatpages/default.html:36
 msgid "Planet Rules"
-msgstr ""
+msgstr "Gezegen Kuralları"
 
 #: templates/feedjack/oi/post_list.html:57
 msgid "Other planets"
-msgstr ""
+msgstr "Diğer Gezegenler"
 
 #: templates/feedjack/oi/post_list.html:64
-#, fuzzy
 msgid "Last Update"
-msgstr "Son eklenenler"
+msgstr "Son Güncelleme"
 
 #: templates/feedjack/sinx/post_list.html:50
 msgid "Author link"
@@ -850,66 +845,65 @@ msgstr ""
 
 #: templates/feedjack/sinx/post_list.html:140
 msgid "Back"
-msgstr ""
+msgstr "Geri"
 
 #: templates/feedjack/sinx/post_list.html:140
 msgid "Forward"
-msgstr ""
+msgstr "İleri"
 
 #: templates/file_upload/file_upload.html:5
 msgid "upload"
-msgstr ""
+msgstr "gönder"
 
 #: templates/file_upload/file_upload.html:14
 msgid "File"
-msgstr ""
+msgstr "Dosya"
 
 #: templates/file_upload/file_upload.html:17
 msgid "Upload"
-msgstr ""
+msgstr "Gönder"
 
 #: templates/flatpages/default.html:20
 msgid "Related Pages"
-msgstr ""
+msgstr "İlgili Sayfalar"
 
 #: templates/flatpages/default.html:24
 msgid "Content Policy"
-msgstr ""
+msgstr "İçerik Politikası"
 
 #: templates/flatpages/default.html:28
 msgid "Privacy Policy"
-msgstr ""
+msgstr "Gizlilik Politikası"
 
 #: templates/flatpages/default.html:32
 msgid "Forum Rules"
-msgstr ""
+msgstr "Forum Kuralları"
 
 #: templates/flatpages/default.html:44
 msgid "About"
-msgstr ""
+msgstr "Hakkında"
 
 #: templates/flatpages/default.html:48
 msgid "Contact"
-msgstr ""
+msgstr "Bize Ulaşın"
 
 #: templates/flatpages/default.html:52
-#, fuzzy
 msgid "Seminar"
-msgstr "Arama"
+msgstr "Seminer"
 
 #: templates/flatpages/default.html:56
 msgid "Admins"
-msgstr ""
+msgstr "Yöneticiler"
 
 #: templates/flatpages/default.html:60
-#, fuzzy
 msgid "Users"
-msgstr "Kullanıcı Kutusu"
+msgstr "Kullanıcılar"
 
 #: templates/flatpages/default.html:64
 msgid "Technical"
-msgstr ""
+msgstr "Teknik"
 
 #: webalizer/templates/webalizer/index.html:7
 msgid "settings.WEBALIZER_DIR is not configured"
-msgstr ""
+msgstr "settings.WEBALIZER_DIR ayarlanmamış"
+
