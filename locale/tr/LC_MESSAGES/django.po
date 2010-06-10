@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-10 12:54+0300\n"
+"POT-Creation-Date: 2010-06-10 14:11+0300\n"
 "PO-Revision-Date: 2010-06-09 16:47+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -263,11 +263,12 @@ msgstr "Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin."
 msgid "Submit"
 msgstr "Gönder"
 
-#: ideas/templates/idea_base.html:5
+#: ideas/templates/idea_base.html:5 templates/base.html:47
 msgid "Brainstorm"
 msgstr "Yeni Fikirler"
 
-#: ideas/templates/idea_base.html:5
+#: ideas/templates/idea_base.html:5 templates/base.html:7
+#: templates/base.html.py:83
 msgid "Spread Pardus"
 msgstr "Özgürlükiçin"
 
@@ -276,15 +277,15 @@ msgstr "Özgürlükiçin"
 msgid "New Ideas"
 msgstr "Yeni Fikirler"
 
-#: ideas/templates/idea_base.html:33
+#: ideas/templates/idea_base.html:33 templates/base.html:59
 msgid "User Box"
 msgstr "Kullanıcı Kutusu"
 
-#: ideas/templates/idea_base.html:39
+#: ideas/templates/idea_base.html:39 templates/base.html:65
 msgid "Login"
 msgstr "Giriş"
 
-#: ideas/templates/idea_base.html:41
+#: ideas/templates/idea_base.html:41 templates/base.html:67
 msgid "Register"
 msgstr "Kayıt Ol"
 
@@ -292,12 +293,12 @@ msgstr "Kayıt Ol"
 msgid "Lost Password"
 msgstr "Parola değiştir"
 
-#: ideas/templates/idea_base.html:43
+#: ideas/templates/idea_base.html:43 templates/base.html:69
 #, python-format
 msgid "Hello %(username)s!"
 msgstr "Merhaba %(username)s!"
 
-#: ideas/templates/idea_base.html:44
+#: ideas/templates/idea_base.html:44 templates/base.html:70
 #, python-format
 msgid ""
 "You can display your profile page by clicking <a href=\"%(profile_url)s"
@@ -306,6 +307,7 @@ msgid ""
 msgstr ""
 
 #: ideas/templates/idea_base.html:48 ideas/templates/idea_base.html.py:53
+#: templates/base.html:77
 msgid "Search"
 msgstr "Arama"
 
@@ -583,6 +585,70 @@ msgstr ""
 
 #: templates/advancedsearch.html:139
 msgid "No content found."
+msgstr ""
+
+#: templates/base.html:13 templates/base.html.py:14 templates/base.html:15
+#: templates/base.html.py:16 templates/base.html:17 templates/base.html.py:18
+#: templates/base.html:19 templates/base.html.py:20 templates/base.html:21
+#: templates/base.html.py:22
+#, fuzzy
+msgid "Spread Pardus RSS"
+msgstr "Özgürlükiçin"
+
+#: templates/base.html:13
+msgid "Main Page"
+msgstr ""
+
+#: templates/base.html:14
+#, fuzzy
+msgid "News"
+msgstr "Yeni Fikirler"
+
+#: templates/base.html:15
+msgid "Howto"
+msgstr ""
+
+#: templates/base.html:16
+msgid "First Steps"
+msgstr ""
+
+#: templates/base.html:17
+msgid "Packages"
+msgstr ""
+
+#: templates/base.html:18
+msgid "Workshop"
+msgstr ""
+
+#: templates/base.html:19
+msgid "Games"
+msgstr ""
+
+#: templates/base.html:20
+msgid "Planet"
+msgstr ""
+
+#: templates/base.html:21
+msgid "Forum"
+msgstr ""
+
+#: templates/base.html:22
+msgid "Podcast"
+msgstr ""
+
+#: templates/base.html:67
+#, fuzzy
+msgid "Lost password"
+msgstr "Parola değiştir"
+
+#: templates/base.html:93
+#, fuzzy
+msgid "e-zine"
+msgstr "E-Dergi"
+
+#: templates/base.html:94
+msgid ""
+"Spread Pardus has an e-zine! Click <a href=\"/e-dergi/\">here</a> to read it."
 msgstr ""
 
 #: templates/admin/base.html:25

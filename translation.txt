@@ -46,14 +46,13 @@ These are templates to be marked
     |   |       `-- place
 +   |   |           `-- change_form.html
 +   |   |-- advancedsearch.html
--   |   |-- base.html
+*   |   |-- base.html
     |   |-- comments
 -   |   |   |-- comment_display.html
 -   |   |   |-- comment_form_fields.html
 -   |   |   |-- comment_form.html
 -   |   |   |-- comment_preview.html
 -   |   |   `-- trackback_display.html
--   |   |-- db_error.html
 -   |   |-- download
 -   |   |   |-- download.html
 -   |   |   `-- download_relnotes.html

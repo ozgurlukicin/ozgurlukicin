@@ -1,24 +1,25 @@
 {% load petition %}
 {% load ideas %}
+{% load i18n %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>{% block title %}{% endblock %}Özgürlük için...</title>
+<title>{% block title %}{% endblock %}{% trans "Spread Pardus" %}</title>
 <meta name="description" content="{% block metadescription %}Pardus'un yaygınlığını artırmak ve bilgi paylaşımı için kurulan bir topluluk sitesi. Haberler, yardım belgeleri ve forum ve daha fazlasını içeriyor.{% endblock %}" />
 <meta name="keywords" content="Pardus, Linux, {% block metakeywords %}kurulum, özgür yazılım, KDE, haber, forum{% endblock %}" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="imagetoolbar" content="no" />
 <link rel="shortcut icon" href="/media/img/fav.png" />
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Anasayfa" href="/rss" />
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Haberler" href="/rss/haber" />
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Nasıl" href="/rss/nasil" />
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - İlk Adımlar" href="/rss/ia" />
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Paketler" href="/rss/paket" />
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Atölye" href="/rss/atolye/" />
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Oyunlar" href="/rss/oyun" />
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Gezegen" href="/rss/gezegen/" />
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Forum" href="/forum/rss/post/" />
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin Podcast" href="/podcast/feed/" />
+<link rel="alternate" type="application/rss+xml" title="{% trans "Spread Pardus RSS" %} - {% trans "Main Page" %}" href="/rss" />
+<link rel="alternate" type="application/rss+xml" title="{% trans "Spread Pardus RSS" %} - {% trans "News" %}" href="/rss/haber" />
+<link rel="alternate" type="application/rss+xml" title="{% trans "Spread Pardus RSS" %} - {% trans "Howto" %}" href="/rss/nasil" />
+<link rel="alternate" type="application/rss+xml" title="{% trans "Spread Pardus RSS" %} - {% trans "First Steps" %}" href="/rss/ia" />
+<link rel="alternate" type="application/rss+xml" title="{% trans "Spread Pardus RSS" %} - {% trans "Packages" %}" href="/rss/paket" />
+<link rel="alternate" type="application/rss+xml" title="{% trans "Spread Pardus RSS" %} - {% trans "Workshop" %}" href="/rss/atolye/" />
+<link rel="alternate" type="application/rss+xml" title="{% trans "Spread Pardus RSS" %} - {% trans "Games" %}" href="/rss/oyun" />
+<link rel="alternate" type="application/rss+xml" title="{% trans "Spread Pardus RSS" %} - {% trans "Planet" %}" href="/rss/gezegen/" />
+<link rel="alternate" type="application/rss+xml" title="{% trans "Spread Pardus RSS" %} - {% trans "Forum" %}" href="/forum/rss/post/" />
+<link rel="alternate" type="application/rss+xml" title="{% trans "Spread Pardus RSS" %} - {% trans "Podcast" %}" href="/podcast/feed/" />
 
 <style type="text/css" media="screen">@import url('/media/css/new/base.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/new/jquery.tooltip.chilipack.css');</style>
@@ -43,7 +44,7 @@
             {% block leftcolumn_top %}
             {% endblock %}
             <div class="brainstorm">
-                <h2>Beyin Fırtınası</h2>
+                <h2>{% trans "Brainstorm" %}</h2>
                 {% idea_list %}
             </div>
             {% block leftcolumn_bottom %}
@@ -55,32 +56,31 @@
             {% block rightcolumn_top %}
             {% endblock %}
             <div class="rightcolumn_content">
-                <h2>Kullanıcı Kutusu</h2>
+                <h2>{% trans "User Box" %}</h2>
                 {% if not user.is_authenticated %}
                     <form method="post" action="/kullanici/giris/">
                         <input type="text" id="userbox_username" name="username" size="18" value="" maxlength="20" /><br />
                         <input type="password" id="userbox_password" name="password" size="18" value="" maxlength="30" /><br />
                         <input type="hidden" name="next" value="{{ request.get_full_path }}" />
-                        <input type="image" src="/media/img/new/button_login.png" value="Giriş" />
+                        <input type="image" src="/media/img/new/button_login.png" value="{% trans "Login" %}" />
                     </form>
-                    <span class="loginlinks"><a href="/kullanici/kayit/">Kayıt ol</a><br /><a class="sari"  href="/kullanici/kayip/">Kayıp parola</a></span>
+                    <span class="loginlinks"><a href="/kullanici/kayit/">{% trans "Register" %}</a><br /><a class="sari" href="/kullanici/kayip/">{% trans "Lost password" %}</a></span>
                 {% else %}
-                    <p>Merhaba {{ user.username }}!</p>
-                    <p>Profil sayfanıza <a href="{{ request.user.get_profile.get_absolute_url }}">buradan</a> ulaşabilir ya da <a 
-class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabilirsiniz.</p>
+                    <p>{% blocktrans with user.username as username %}Hello {{ username }}!{% endblocktrans %}</p>
+                    <p>{% blocktrans with request.user.get_profile.get_absolute_url as profile_url %}You can display your profile page by clicking <a href="{{ profile_url }}">here</a> or you can logout by clicking <a class="sari" href="/kullanici/cikis/">here</a>.{% endblocktrans %}</p>
                 {% endif %}
             </div>
             <div class="rightcolumn_content">
                 <h2>Ara</h2>
                 <form method="post" action="/gelismisarama/">
                     <input type="text" name="term" size="20" /><br />
-                    <input type="image" src="/media/img/new/button_search.png" value="Ara" />
+                    <input type="image" src="/media/img/new/button_search.png" value="{% trans "Search" %}" />
                     <input type="hidden" name="search_in" value="2" />
                     <input type="hidden" name="depth" value="0" />
                 </form>
             </div>
             {% block rightcolumn_bottom %}
-        <a href="http://www.ozgurlukicin.com"><img border="0" class="alignnone" src="http://cekirdek.pardus.org.tr/~bahadir/counter/timer.php?w=150&h=206" alt="Özgürlük İçin... Pardus..." /></a>
+        <a href="http://www.ozgurlukicin.com"><img border="0" class="alignnone" src="http://cekirdek.pardus.org.tr/~bahadir/counter/timer.php?w=150&h=206" alt="{% trans "Spread Pardus" %}" /></a>
             {% endblock %}
         </div>
         {% endblock %}
@@ -90,8 +90,8 @@ class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabil
             {% endblock %}
             {% block ezine %}
             <div class="sidebar_bottom_content">
-                <a href="/e-dergi/"><img src="/media/img/oi-edergi-kapak.png" alt="e-dergi" /></a>
-                <p>Özgürlükiçin'in şimdi bir de e-dergisi var! Okumak için <a href="/e-dergi/">buraya</a> tıklayın.</p>
+                <a href="/e-dergi/"><img src="/media/img/oi-edergi-kapak.png" alt="{% trans "e-zine" %}" /></a>
+                <p>{% blocktrans %}Spread Pardus has an e-zine! Click <a href="/e-dergi/">here</a> to read it.{% endblocktrans %}</p>
             </div>
             {% endblock %}
             {% block petition %}
