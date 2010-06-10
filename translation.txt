@@ -93,8 +93,8 @@ These are templates to be marked
 +   |   |   |-- forum_list.html
 +   |   |   |-- latest_posts_small.html
 +   |   |   |-- merge.html
--   |   |   |-- move.html
--   |   |   |-- new_topic.html
++   |   |   |-- move.html
++   |   |   |-- new_topic.html
 -   |   |   |-- post_edit.html
 -   |   |   |-- post_list_for_user.html
 -   |   |   |-- post_list.html

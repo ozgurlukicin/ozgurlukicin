@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-10 17:17+0300\n"
+"POT-Creation-Date: 2010-06-10 18:00+0300\n"
 "PO-Revision-Date: 2010-06-10 15:11+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -642,7 +642,7 @@ msgstr "Gezegen"
 #: templates/forum/change_poll.html:5 templates/forum/create_poll.html:5
 #: templates/forum/forum_base.html:11 templates/forum/forum_detail.html:13
 #: templates/forum/forum_detail.html:39 templates/forum/forum_list.html:10
-#: templates/forum/forum_list.html.py:15
+#: templates/forum/forum_list.html.py:15 templates/forum/new_topic.html:14
 msgid "Forum"
 msgstr "Forum"
 
@@ -967,6 +967,7 @@ msgstr "Favorilerimden çıkar"
 
 #: templates/forum/change_poll.html:5 templates/forum/create_poll.html:5
 #: templates/forum/forum_detail.html:13 templates/forum/forum_list.html:10
+#: templates/forum/new_topic.html:14
 #, fuzzy
 msgid "Mainpage"
 msgstr "Ana Sayfa"
@@ -1039,7 +1040,7 @@ msgstr "Çık"
 msgid "Spread Pardus Forum"
 msgstr "Özgürlükiçin"
 
-#: templates/forum/forum_detail.html:14
+#: templates/forum/forum_detail.html:14 templates/forum/new_topic.html:14
 msgid "New Topic"
 msgstr ""
 
@@ -1202,6 +1203,31 @@ msgstr ""
 #: templates/forum/merge.html:6
 #, python-format
 msgid "Select the topic to append %(forum)s &#62; %(topic)s."
+msgstr ""
+
+#: templates/forum/move.html:5
+#, python-format
+msgid "Select the forum to move %(forum)s &#62; %(topic)s."
+msgstr ""
+
+#: templates/forum/new_topic.html:17
+#, fuzzy
+msgid "Couldn't create topic, please fix the errors below"
+msgstr "Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin."
+
+#: templates/forum/new_topic.html:20
+#, python-format
+msgid "Flood protection, please wait for %(timeout)s seconds."
+msgstr ""
+
+#: templates/forum/new_topic.html:23
+msgid ""
+"You can use our <a href=\"/yapistir/\" target=\"_blank\">paste tool</a> if "
+"you need to insert a long text or code."
+msgstr ""
+
+#: templates/forum/new_topic.html:28
+msgid "Create Topic"
 msgstr ""
 
 #: webalizer/templates/webalizer/index.html:7

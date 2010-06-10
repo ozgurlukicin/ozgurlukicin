@@ -1,4 +1,5 @@
 {% extends "forum/forum_base.html" %}
+{% load i18n %}
 {% block extrahead %}
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
@@ -9,25 +10,21 @@
 {% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
 <div class="forum_address">
-    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; Yeni Başlık</div>
+    <div class="current_topic"><a href="/">{% trans "Mainpage" %}</a> &#62; <a href="/forum/">{% trans "Forum" %}</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; {% trans "New Topic" %}</div>
 </div>
 {% if form.errors %}
-<font color="red">Başlık açılamadı, lütfen aşağıdaki hataları düzeltin</font><br />
+<font color="red">{% trans "Couldn't create topic, please fix the errors below" %}</font><br />
 {% endif %}
 
-{% if flood %}<font color="red">Flood koruması aktif, lütfen {{ timeout }} saniye bekleyin.</font>{% endif %}
+{% if flood %}{% blocktrans %}Flood protection, please wait for {{ timeout }} seconds.{% endblocktrans %}{% endif %}
 <form action="" method="post">
 <div class="wrapper">
-    <p style="padding-bottom:10px">Uzun bir metin ya da kod yazmanız gerekiyorsa <a href="/yapistir/" target="_blank">yapıştırma aracını</a> kullanabilirsiniz.</p>
+    <p style="padding-bottom:10px">{% blocktrans %}You can use our <a href="/yapistir/" target="_blank">paste tool</a> if you need to insert a long text or code.{% endblocktrans %}</p>
 {% for field in form %}
     {% include "field.html" %}
 {% endfor %}
 </div>
-<input type="submit" value="Başlık Aç">
+<input type="submit" value="{% trans "Create Topic" %}">
 </form>
-{% else %}
-<p>Başlık açmak için oturum açmanız gerekiyor.</p>
-{% endif %}
 {% endblock %}
