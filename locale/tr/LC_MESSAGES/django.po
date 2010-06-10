@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-09 17:18+0300\n"
+"POT-Creation-Date: 2010-06-10 12:54+0300\n"
 "PO-Revision-Date: 2010-06-09 16:47+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -267,37 +267,37 @@ msgstr "Gönder"
 msgid "Brainstorm"
 msgstr "Yeni Fikirler"
 
-#: ideas/templates/idea_base.html:6
+#: ideas/templates/idea_base.html:5
 msgid "Spread Pardus"
 msgstr "Özgürlükiçin"
 
-#: ideas/templates/idea_base.html:12 ideas/templates/idea_base.html.py:59
-#: ideas/templates/idea_base.html:61
+#: ideas/templates/idea_base.html:11 ideas/templates/idea_base.html.py:58
+#: ideas/templates/idea_base.html:60
 msgid "New Ideas"
 msgstr "Yeni Fikirler"
 
-#: ideas/templates/idea_base.html:34
+#: ideas/templates/idea_base.html:33
 msgid "User Box"
 msgstr "Kullanıcı Kutusu"
 
-#: ideas/templates/idea_base.html:40
+#: ideas/templates/idea_base.html:39
 msgid "Login"
 msgstr "Giriş"
 
-#: ideas/templates/idea_base.html:42
+#: ideas/templates/idea_base.html:41
 msgid "Register"
 msgstr "Kayıt Ol"
 
-#: ideas/templates/idea_base.html:42
+#: ideas/templates/idea_base.html:41
 msgid "Lost Password"
 msgstr "Parola değiştir"
 
-#: ideas/templates/idea_base.html:44
+#: ideas/templates/idea_base.html:43
 #, python-format
 msgid "Hello %(username)s!"
 msgstr "Merhaba %(username)s!"
 
-#: ideas/templates/idea_base.html:45
+#: ideas/templates/idea_base.html:44
 #, python-format
 msgid ""
 "You can display your profile page by clicking <a href=\"%(profile_url)s"
@@ -305,71 +305,71 @@ msgid ""
 "kullanici/cikis/\">here</a>."
 msgstr ""
 
-#: ideas/templates/idea_base.html:49 ideas/templates/idea_base.html.py:54
+#: ideas/templates/idea_base.html:48 ideas/templates/idea_base.html.py:53
 msgid "Search"
 msgstr "Arama"
 
-#: ideas/templates/idea_base.html:61
+#: ideas/templates/idea_base.html:60
 msgid "New Ideas Mainpage"
 msgstr "Yeni Fikirler Anasayfa"
 
-#: ideas/templates/idea_base.html:62
+#: ideas/templates/idea_base.html:61
 msgid "Submit Idea"
 msgstr "Fikir Ekle"
 
-#: ideas/templates/idea_base.html:64
+#: ideas/templates/idea_base.html:63
 msgid "My Ideas"
 msgstr "Eklediğim Fikirler"
 
-#: ideas/templates/idea_base.html:65
+#: ideas/templates/idea_base.html:64
 msgid "Favuorite Ideas"
 msgstr "Favorilerim"
 
-#: ideas/templates/idea_base.html:67
+#: ideas/templates/idea_base.html:66
 msgid "Today's popular ideas"
 msgstr "Bugünkü popüler fikirler"
 
-#: ideas/templates/idea_base.html:68
+#: ideas/templates/idea_base.html:67
 msgid "This week's popular ideas"
 msgstr "Bu haftaki popüler fikirler"
 
-#: ideas/templates/idea_base.html:69
+#: ideas/templates/idea_base.html:68
 msgid "This month's popular ideas"
 msgstr "Bu ayki popüler fikirler"
 
-#: ideas/templates/idea_base.html:70
+#: ideas/templates/idea_base.html:69
 msgid "Alltime popular ideas"
 msgstr "Tüm zamanların popüler fikirleri"
 
-#: ideas/templates/idea_base.html:71
+#: ideas/templates/idea_base.html:70
 msgid "Recently commented ideas"
 msgstr "Son tartışılanlar"
 
-#: ideas/templates/idea_base.html:72
+#: ideas/templates/idea_base.html:71
 msgid "Latest Ideas"
 msgstr "Son eklenenler"
 
-#: ideas/templates/idea_base.html:73
+#: ideas/templates/idea_base.html:72
 msgid "Looking for Volunteers"
 msgstr "Gönüllü arananlar"
 
-#: ideas/templates/idea_base.html:74
+#: ideas/templates/idea_base.html:73
 msgid "Ideas in progress"
 msgstr "Çözüm sürecindeki fikirler"
 
-#: ideas/templates/idea_base.html:75
+#: ideas/templates/idea_base.html:74
 msgid "Resolved ideas"
 msgstr "Çözülen fikirler"
 
-#: ideas/templates/idea_base.html:76
+#: ideas/templates/idea_base.html:75
 msgid "Invalid ideas"
 msgstr "Geçersiz fikirler"
 
-#: ideas/templates/idea_base.html:79
+#: ideas/templates/idea_base.html:78
 msgid "Categories"
 msgstr "Kategoriler"
 
-#: ideas/templates/idea_base.html:86
+#: ideas/templates/idea_base.html:85
 msgid "shipit"
 msgstr "cdgonder"
 
@@ -487,6 +487,102 @@ msgstr[0] ""
 
 #: ideas/templates/idea_top.html:33
 msgid "Be the first one to comment!"
+msgstr ""
+
+#: templates/404.html:3
+msgid "Page Not Found"
+msgstr ""
+
+#: templates/404.html:11 templates/500.html:11
+msgid "Click <a href=\"/\">here</a> to visit main page."
+msgstr ""
+
+#: templates/404.html:12 templates/500.html:12
+msgid "Click <a href=\"/e-dergi/\">here</a> to visit e-zine page."
+msgstr ""
+
+#: templates/404.html:13 templates/500.html:13
+msgid "Click <a href=\"/forum/\">here</a> to visit forums."
+msgstr ""
+
+#: templates/500.html:3
+msgid "Page Cannot Be Displayed"
+msgstr ""
+
+#: templates/500.html:8
+msgid "Page cannot be displayed"
+msgstr ""
+
+#: templates/advancedsearch.html:3
+msgid "Advanced Search"
+msgstr ""
+
+#: templates/advancedsearch.html:15
+msgid "Show results"
+msgstr ""
+
+#: templates/advancedsearch.html:18
+#, python-format
+msgid "Pages containing %(term)s"
+msgstr ""
+
+#: templates/advancedsearch.html:18
+#, python-format
+msgid "No pages found containing %(term)s"
+msgstr ""
+
+#: templates/advancedsearch.html:23
+#, python-format
+msgid "Tags (%(count)s)"
+msgstr ""
+
+#: templates/advancedsearch.html:33
+#, python-format
+msgid "News (%(count)s)"
+msgstr ""
+
+#: templates/advancedsearch.html:44
+#, python-format
+msgid "Howto (%(count)s)"
+msgstr ""
+
+#: templates/advancedsearch.html:55
+#, python-format
+msgid "Package (%(count)s)"
+msgstr ""
+
+#: templates/advancedsearch.html:66
+#, python-format
+msgid "First Steps (%(count)s)"
+msgstr ""
+
+#: templates/advancedsearch.html:77
+#, python-format
+msgid "Games (%(count)s)"
+msgstr ""
+
+#: templates/advancedsearch.html:88
+#, python-format
+msgid "Workshop (%(count)s)"
+msgstr ""
+
+#: templates/advancedsearch.html:99
+#, python-format
+msgid "Ideas (%(count)s)"
+msgstr ""
+
+#: templates/advancedsearch.html:110
+#, python-format
+msgid "Forum (%(count)s)"
+msgstr ""
+
+#: templates/advancedsearch.html:128
+#, python-format
+msgid "Flatpages (%(count)s)"
+msgstr ""
+
+#: templates/advancedsearch.html:139
+msgid "No content found."
 msgstr ""
 
 #: templates/admin/base.html:25

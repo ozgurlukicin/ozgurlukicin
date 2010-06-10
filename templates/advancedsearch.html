@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Advanced Search" %} - {% endblock %}
 {% block extrahead %}
 <script language="javascript" type="text/javascript" src="/media/js/searchhelper.js"></script>
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
@@ -10,15 +12,15 @@
     {% for field in form %}
         {% include "formfields.html" %}
     {% endfor %}
-<input type="submit" value="Sonuçları göster" />
+<input type="submit" value="{% trans "Show results" %}" />
 </form>
 {% if searched %}
-<br /><div class="page_title">{{ term }} kelimesini içeren sayfa{% if tags or topics or posts or news or packages or games or fs or howto or ideas or flatpages %}lar{% else %} bulunamadı.{% endif %}</div>
+<br /><div class="page_title">{% if tags or topics or posts or news or packages or games or fs or howto or flatpages %}{% blocktrans %}Pages containing {{ term }}{% endblocktrans %}{% else %}{% blocktrans %}No pages found containing {{ term }}{% endblocktrans %}{% endif %}</div>
 {% ifnotequal total 0 %}
 <div class="searchresults">
     {% if tags %}
         <div class="tags">
-            <div class="title"><span>Etiketler ({{ tags.count }} adet)</span></div>
+            <div class="title"><span>{% blocktrans with tags.count as count %}Tags ({{ count }}){% endblocktrans %}</span></div>
             <ul>
             {% for obj in tags %}
                 <li><a href="{{ obj.get_absolute_url }}">{{ obj.name }}</a></li>
@@ -28,7 +30,7 @@
     {% endif %}
     {% if news %}
         <div class="news">
-            <div class="title"><span>Haberler ({{ news.count }} adet)</span></div>
+            <div class="title"><span>{% blocktrans with news.count as count %}News ({{ count }}){% endblocktrans %}</span></div>
             <ul>
             {% for obj in news %}
                 <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.sum|striptags }}</li>
@@ -39,7 +41,7 @@
 
     {% if howto %}
         <div class="howto">
-            <div class="title"><span>Nasıl ({{ howto.count }} adet)</span></div>
+            <div class="title"><span>{% blocktrans with howto.count as count %}Howto ({{ count }}){% endblocktrans %}</span></div>
             <ul>
             {% for obj in howto %}
                 <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.sum|striptags }}</li>
@@ -50,7 +52,7 @@
 
     {% if packages %}
         <div class="packages">
-            <div class="title"><span>Paketler ({{ packages.count }} adet)</span></div>
+            <div class="title"><span>{% blocktrans with packages.count as count %}Package ({{ count }}){% endblocktrans %}</span></div>
             <ul>
             {% for obj in packages %}
                 <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.sum|striptags }}</li>
@@ -61,7 +63,7 @@
 
     {% if fs %}
         <div class="firststeps">
-            <div class="title"><span>İlk adımlar ({{ fs.count }} adet)</span></div>
+            <div class="title"><span>{% blocktrans with fs.count as count %}First Steps ({{ count }}){% endblocktrans %}</span></div>
             <ul>
             {% for obj in fs %}
                 <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.sum|striptags }}</li>
@@ -72,7 +74,7 @@
 
     {% if games %}
         <div class="games">
-            <div class="title"><span>Oyunlar ({{ games.count }} adet)</span></div>
+            <div class="title"><span>{% blocktrans with games.count as count %}Games ({{ count }}){% endblocktrans %}</span></div>
             <ul>
             {% for obj in games %}
                 <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.sum|striptags }}</li>
@@ -83,7 +85,7 @@
 
     {% if workshop %}
         <div class="workshop">
-            <div class="title"><span>Atölye ({{ workshop.count }} adet)</span></div>
+            <div class="title"><span>{% blocktrans with workshop.count as count %}Workshop ({{ count }}){% endblocktrans %}</span></div>
             <ul>
             {% for obj in workshop %}
                 <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.sum|striptags }}</li>
@@ -94,7 +96,7 @@
 
     {% if ideas %}
         <div class="ideas">
-            <div class="title"><span>Yeni Fikirler ({{ ideas.count }} adet)</span></div>
+            <div class="title"><span>{% blocktrans with ideas.count as count %}Ideas ({{ count }}){% endblocktrans %}</span></div>
             <ul>
             {% for obj in ideas %}
             <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }} | {{ obj.vote_count }} puan | {{ obj.category }}</a><br />{{ obj.description|striptags|truncatewords:23 }}</li>
@@ -105,7 +107,7 @@
 
     {% if topics or posts %}
         <div class="forum">
-            <div class="title"><span>Forum ({% if posts %}{{ posts.count }}{% else %}{{ topics.count }}{% endif %} adet)</span></div>
+            <div class="title"><span>{% if posts %}{% blocktrans with posts.count as count %}Forum ({{ count }}){% endblocktrans %}{% else %}{% blocktrans with topics.count as count %}Forum ({{ count }}){% endblocktrans %}{% endif %}</span></div>
             <ul>
             {% if posts %}
             {% for obj in posts %}
@@ -123,7 +125,7 @@
 
     {% if flatpages %}
         <div class="flatpages">
-            <div class="title"><span>Sabit sayfalar ({{ flatpages.count }} adet)</span></div>
+            <div class="title"><span>{% blocktrans with flatpages.count as count %}Flatpages ({{ count }}){% endblocktrans %}</span></div>
             <ul>
             {% for obj in flatpages %}
                 <li><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a><br />{{ obj.text|truncatewords:"10"|striptags }}</li>
@@ -134,7 +136,7 @@
 </div>
 {% endifnotequal %}
 {% ifequal total 0 %}
-<div class="page_title">İçerik bulunamadı.</div>
+<div class="page_title">{% trans "No content found." %}</div>
 {% endifequal %}
 {% endif %}
 {% endblock %}

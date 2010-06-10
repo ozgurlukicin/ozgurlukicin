@@ -41,11 +41,11 @@ These are templates to be marked
 +   |   |-- 404.html
 +   |   |-- 500.html
     |   |-- admin
--   |   |   |-- base.html
++   |   |   |-- base.html
     |   |   `-- seminar
     |   |       `-- place
--   |   |           `-- change_form.html
--   |   |-- advancedsearch.html
++   |   |           `-- change_form.html
++   |   |-- advancedsearch.html
 -   |   |-- base.html
     |   |-- comments
 -   |   |   |-- comment_display.html
