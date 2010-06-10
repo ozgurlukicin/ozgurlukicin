@@ -78,9 +78,9 @@ These are templates to be marked
 +   |   |   `-- file_upload_success.html
     |   |-- flatpages
 +   |   |   `-- default.html
--   |   |-- footer.html
--   |   |-- formfields.html
--   |   |-- forum
++   |   |-- footer.html
++   |   |-- formfields.html
+    |   |-- forum
 -   |   |   |-- abuse_list.html
 -   |   |   |-- change_poll.html
 -   |   |   |-- create_poll.html

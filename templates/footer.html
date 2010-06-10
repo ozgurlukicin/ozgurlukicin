@@ -1,14 +1,16 @@
+{% load i18n %}
 <div id="footer">
     <div class="footer_left">
         <div class="logo"><a href="/"><img alt="oi_text" src="/media/img/new/footer_oi_text.png" /></a></div>
         <div class="slash"><img alt="slash"  src="/media/img/new/slash.png" /></div>
-        <div class="links"><a href="/hakkinda/">Hakkında</a>   |   <a href="/takip_et/">Takip Et</a></div>
+        <div class="links"><a href="/hakkinda/">{% trans "About" %}</a>   |    <a href="/takip_et/">{% trans "Follow" %}</a></div>
         <div class="about">
-            <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" title="Creative Commons (by-nc-sa)">Creative Commons (by-nc-sa)</a> / <a href="http://www.pardus.org.tr" title="Pardus">Pardus</a> logosu <a href="http://uekae.tubitak.gov.tr" title="TÜBİTAK/UEKAE">TÜBİTAK/UEKAE</a>’nin tescilli markasıdır.</div>
+            <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/"
+                title="Creative Commons (by-nc-sa)">Creative Commons (by-nc-sa)</a> / {% blocktrans %}Pardus<a href="http://www.pardus.org.tr" title="Pardus"></a> logo is a registered trademark of <a href="http://uekae.tubitak.gov.tr" title="TÜBİTAK/UEKAE">TÜBİTAK/UEKAE</a>.{% endblocktrans %}</div>
     </div>
     <div class="footer_right">
-        <div class="column" style="width:91px"><a href="/ia/">İlk Adımlar</a><br /><a href="/nasil/">Nasıl</a><br /><a href="/paket/">Paketler</a><br /><a href="/oyun/">Oyunlar</a></div>
-        <div class="column"><a href="/haber/">Haberler</a><br /><a href="/yenifikir/">Beyin</a><br /><a href="/gezegen/">Gezegen</a><br /><a href="/tema/">Temalar</a></div>
-        <div class="column"><a href="/forum/">Forum</a><br /><a href="/atolye/">Atölye</a><br /><a href="/cdgonder/">CD Gönder</a><br /><a href="/podcast/">Ajans</a></div>
+        <div class="column" style="width:91px"><a href="/ia/">{% trans "First Steps" %}</a><br /><a href="/nasil/">{% trans "Howto" %}</a><br /><a href="/paket/">{% trans "Packages" %}</a><br /><a href="/oyun/">{% trans "Games" %}</a></div>
+        <div class="column"><a href="/haber/">{% trans "News" %}</a><br /><a href="/yenifikir/">{% trans "Brainstorm" %}</a><br /><a href="/gezegen/">{% trans "Planet" %}</a><br /><a href="/tema/">{%trans "Themes" %}</a></div>
+        <div class="column"><a href="/forum/">{% trans "Forum" %}</a><br /><a href="/atolye/">{% trans "Workshop" %}</a><br /><a href="/cdgonder/">{% trans "Shipit" %}</a><br /><a href="/podcast/">{% trans "Podcast" %}</a></div>
     </div>
 </div>

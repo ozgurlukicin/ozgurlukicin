@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-10 14:38+0300\n"
+"POT-Creation-Date: 2010-06-10 15:31+0300\n"
 "PO-Revision-Date: 2010-06-10 15:11+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -266,6 +266,7 @@ msgid "Submit"
 msgstr "Gönder"
 
 #: ideas/templates/idea_base.html:5 templates/base.html:47
+#: templates/footer.html:13
 msgid "Brainstorm"
 msgstr "Yeni Fikirler"
 
@@ -601,39 +602,41 @@ msgstr "Özgürlükiçin RSS"
 msgid "Main Page"
 msgstr "Ana Sayfa"
 
-#: templates/base.html:14 templates/editor/list.html:12
+#: templates/base.html:14 templates/footer.html:13
+#: templates/editor/list.html:12
 msgid "News"
 msgstr "Haberler"
 
-#: templates/base.html:15
+#: templates/base.html:15 templates/footer.html:12
 msgid "Howto"
 msgstr "Nasıl"
 
-#: templates/base.html:16
+#: templates/base.html:16 templates/footer.html:12
 msgid "First Steps"
 msgstr "İlk Adımlar"
 
-#: templates/base.html:17
+#: templates/base.html:17 templates/footer.html:12
 msgid "Packages"
 msgstr "Paketler"
 
-#: templates/base.html:18
+#: templates/base.html:18 templates/footer.html:14
 msgid "Workshop"
 msgstr "Atölye"
 
-#: templates/base.html:19
+#: templates/base.html:19 templates/footer.html:12
 msgid "Games"
 msgstr "Oyunlar"
 
-#: templates/base.html:20 templates/feedjack/oi/post_list.html:3
+#: templates/base.html:20 templates/footer.html:13
+#: templates/feedjack/oi/post_list.html:3
 msgid "Planet"
 msgstr "Gezegen"
 
-#: templates/base.html:21
+#: templates/base.html:21 templates/footer.html:14
 msgid "Forum"
 msgstr "Forum"
 
-#: templates/base.html:22
+#: templates/base.html:22 templates/footer.html:14
 msgid "Podcast"
 msgstr "Ajans"
 
@@ -649,8 +652,32 @@ msgstr "e-dergi"
 msgid ""
 "Spread Pardus has an e-zine! Click <a href=\"/e-dergi/\">here</a> to read it."
 msgstr ""
-"Özgürlükiçin'in şimdi bir de e-dergisi var! Okumak için <a "
-"href=\"/e-dergi/\">buraya</a> tıklayın."
+"Özgürlükiçin'in şimdi bir de e-dergisi var! Okumak için <a href=\"/e-dergi/"
+"\">buraya</a> tıklayın."
+
+#: templates/footer.html:6 templates/flatpages/default.html:44
+msgid "About"
+msgstr "Hakkında"
+
+#: templates/footer.html:6
+msgid "Follow"
+msgstr ""
+
+#: templates/footer.html:9
+msgid ""
+"Pardus<a href=\"http://www.pardus.org.tr\" title=\"Pardus\"></a> logo is a "
+"registered trademark of <a href=\"http://uekae.tubitak.gov.tr\" title="
+"\"TÜBİTAK/UEKAE\">TÜBİTAK/UEKAE</a>."
+msgstr ""
+
+#: templates/footer.html:13
+msgid "Themes"
+msgstr ""
+
+#: templates/footer.html:14
+#, fuzzy
+msgid "Shipit"
+msgstr "cdgonder"
 
 #: templates/admin/base.html:25
 msgid "Welcome,"
@@ -879,10 +906,6 @@ msgstr "Gizlilik Politikası"
 msgid "Forum Rules"
 msgstr "Forum Kuralları"
 
-#: templates/flatpages/default.html:44
-msgid "About"
-msgstr "Hakkında"
-
 #: templates/flatpages/default.html:48
 msgid "Contact"
 msgstr "Bize Ulaşın"
@@ -906,4 +929,3 @@ msgstr "Teknik"
 #: webalizer/templates/webalizer/index.html:7
 msgid "settings.WEBALIZER_DIR is not configured"
 msgstr "settings.WEBALIZER_DIR ayarlanmamış"
-
