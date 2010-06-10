@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-10 15:31+0300\n"
+"POT-Creation-Date: 2010-06-10 15:43+0300\n"
 "PO-Revision-Date: 2010-06-10 15:11+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -633,6 +633,7 @@ msgid "Planet"
 msgstr "Gezegen"
 
 #: templates/base.html:21 templates/footer.html:14
+#: templates/forum/change_poll.html:5 templates/forum/create_poll.html:5
 msgid "Forum"
 msgstr "Forum"
 
@@ -925,6 +926,63 @@ msgstr "Kullanıcılar"
 #: templates/flatpages/default.html:64
 msgid "Technical"
 msgstr "Teknik"
+
+#: templates/forum/abuse_list.html:3
+#, fuzzy
+msgid "Reported Posts"
+msgstr "Bildir"
+
+#: templates/forum/abuse_list.html:6
+#, fuzzy
+msgid ""
+"There's no reported post. Click <a href=\"/forum/\">here</a> to go to forum"
+msgstr "Özgürlükİçin forumlarına gitmek için <a href=\"/forum/\">tıklayın</a>."
+
+#: templates/forum/abuse_list.html:9
+msgid "Reported Posts:"
+msgstr ""
+
+#: templates/forum/abuse_list.html:11
+#, fuzzy
+msgid "Reporter:"
+msgstr "Bildir"
+
+#: templates/forum/abuse_list.html:11
+msgid "Reason:"
+msgstr ""
+
+#: templates/forum/abuse_list.html:14
+#, fuzzy
+msgid "Remove from Abuse List"
+msgstr "Favorilerimden çıkar"
+
+#: templates/forum/change_poll.html:5 templates/forum/create_poll.html:5
+#, fuzzy
+msgid "Mainpage"
+msgstr "Ana Sayfa"
+
+#: templates/forum/change_poll.html:5 templates/forum/change_poll.html:20
+#, fuzzy
+msgid "Change Poll"
+msgstr "Değiştir"
+
+#: templates/forum/change_poll.html:8
+#, fuzzy
+msgid "Poll couldn't be changed. Please fix the errors below."
+msgstr "Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin."
+
+#: templates/forum/create_poll.html:5
+msgid "Add Poll"
+msgstr ""
+
+#: templates/forum/create_poll.html:8
+#, fuzzy
+msgid "Poll couldn't be created. Please fix the errors below."
+msgstr "Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin."
+
+#: templates/forum/create_poll.html:20
+msgid "Create Poll"
+msgstr ""
 
 #: webalizer/templates/webalizer/index.html:7
 msgid "settings.WEBALIZER_DIR is not configured"

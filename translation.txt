@@ -81,9 +81,9 @@ These are templates to be marked
 +   |   |-- footer.html
 +   |   |-- formfields.html
     |   |-- forum
--   |   |   |-- abuse_list.html
--   |   |   |-- change_poll.html
--   |   |   |-- create_poll.html
++   |   |   |-- abuse_list.html
++   |   |   |-- change_poll.html
++   |   |   |-- create_poll.html
 -   |   |   |-- feed_description.html
 -   |   |   |-- feed_title.html
 -   |   |   |-- forum_base.html

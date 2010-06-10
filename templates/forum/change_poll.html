@@ -1,11 +1,11 @@
 {% extends "forum/forum_base.html" %}
-
+{% load i18n %}
 {% block content %}
 <div class="forum_address">
-    <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; <a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a> &#62; Anketi Değiştir</div>
+    <div class="current_topic"><a href="/">{% trans "Mainpage" %}</a> &#62; <a href="/forum/">{% trans "Forum" %}</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; <a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a> &#62; {% trans "Change Poll" %}</div>
 </div>
 {% if form.errors %}
-<font color="red">Anket değiştirilemedi, lütfen aşağıdaki hataları düzeltin</font><br />
+<font color="red">{% trans "Poll couldn't be changed. Please fix the errors below." %}</font><br />
 {% endif %}
 
 <form action="" method="post">
@@ -17,6 +17,6 @@
     {% if field.errors %}<dd class="myerrors" style="font-color: red">{{ field.errors }}</dd>{% endif %}
 {% endfor %}
 </dl>
-<input type="submit" value="Anketi Değiştir">
+<input type="submit" value="{% trans "Change Poll" %}" />
 </form>
 {% endblock %}
