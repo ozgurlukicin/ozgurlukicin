@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-10 16:33+0300\n"
+"POT-Creation-Date: 2010-06-10 16:37+0300\n"
 "PO-Revision-Date: 2010-06-10 15:11+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -281,6 +281,7 @@ msgid "New Ideas"
 msgstr "Yeni Fikirler"
 
 #: ideas/templates/idea_base.html:33 templates/base.html:59
+#: templates/forum/forum_base.html:34
 msgid "User Box"
 msgstr "Kullanıcı Kutusu"
 
@@ -997,11 +998,6 @@ msgstr ""
 msgid "Forum "
 msgstr "Forum"
 
-#: templates/forum/forum_base.html:34
-#, fuzzy
-msgid "Userbox"
-msgstr "Kullanıcı Kutusu"
-
 #: templates/forum/forum_base.html:46
 msgid "Profile"
 msgstr ""
@@ -1096,3 +1092,7 @@ msgstr ""
 #: webalizer/templates/webalizer/index.html:7
 msgid "settings.WEBALIZER_DIR is not configured"
 msgstr "settings.WEBALIZER_DIR ayarlanmamış"
+
+#, fuzzy
+#~ msgid "Userbox"
+#~ msgstr "Kullanıcı Kutusu"
