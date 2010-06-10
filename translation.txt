@@ -33,26 +33,21 @@ These are templates to be marked
 -   |       |   `-- product_info.html
 -   |       |-- shop_base.html
 -   |       |-- shop_main.html
--   |       `-- shopprofile
+    |       `-- shopprofile
 -   |           |-- bill_create.html
 -   |           |-- shopprofile_create.html
 -   |           `-- shopprofile_main.html
--   |-- templates
--   |   |-- 404.html
--   |   |-- 500.html
--   |   |-- admin
+    |-- templates
++   |   |-- 404.html
++   |   |-- 500.html
+    |   |-- admin
 -   |   |   |-- base.html
--   |   |   `-- seminar
--   |   |       `-- place
+    |   |   `-- seminar
+    |   |       `-- place
 -   |   |           `-- change_form.html
 -   |   |-- advancedsearch.html
 -   |   |-- base.html
--   |   |-- bug
--   |   |   |-- bug_add.html
--   |   |   |-- bug_delete_confirm.html
--   |   |   |-- bug_detail.html
--   |   |   `-- bug_main.html
--   |   |-- comments
+    |   |-- comments
 -   |   |   |-- comment_display.html
 -   |   |   |-- comment_form_fields.html
 -   |   |   |-- comment_form.html

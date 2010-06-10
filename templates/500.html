@@ -1,15 +1,16 @@
 {% extends "base.html" %}
-{% block title %}Sayfa Bulunamadı - {% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Page Cannot Be Displayed" %} - {% endblock %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 {% endblock %}
 {% block content %}
-<div class="page_title">Sayfa gösterilemiyor...</div>
+<div class="page_title">{% trans "Page cannot be displayed" %}...</div>
 <div class="page_content">
 <ul>
-    <li>Anasayfa'ya gitmek için <a href="/">tıklayın</a></li>
-    <li>Özgürlükİçin e-dergiye gitmek için <a href="/e-dergi/">tıklayın</a></li>
-    <li>Özgürlükİçin forumlarına gitmek için <a href="/forum/">tıklayın</a></li>
+    <li>{% blocktrans %}Click <a href="/">here</a> to visit main page.{% endblocktrans %}</li>
+    <li>{% blocktrans %}Click <a href="/e-dergi/">here</a> to visit e-zine page.{% endblocktrans %}</li>
+    <li>{% blocktrans %}Click <a href="/forum/">here</a> to visit forums.{% endblocktrans %}</li>
 </ul>
 </div>
 {% endblock %}
