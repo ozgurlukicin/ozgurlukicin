@@ -16,7 +16,7 @@
     sha1sum: <strong>{{ version.install_sha1sum }}</strong></p>
 
     <div>
-        <p>Yardım için, <a href="http://www.pardus.org.tr/belgeler/kurulum_nasil.html">kurulum kılavuzu</a>'na başvurabilir, ayrıca {{ version.number }} {{ version.codename }} sürümü özellikleri hakkında bilgi almak için <a href="/indir/{{ version.number }}/surum_notu/">sürüm notları</a> belgesini okuyabilirsiniz.</p>
+        <p>Pardus kurulum kalıbının CD'ye aktarılmasıyla ilgili yardım için, <a href="http://www.ozgurlukicin.com/ia/pardus-20092-cdsi-yazmak/">Pardus {{ version.number }} CD'si Yazmak</a>,  Pardus kurulumu için detaylı bilgiler içinse <a href="http://www.ozgurlukicin.com/ia/pardus-nasil-kurulur/">Pardus {{ version.number }} Nasıl Kurulur?</a> belgelerine başvurabilirsiniz. Ayrıca {{ version.number }} {{ version.codename }} sürümü özellikleri hakkında bilgi almak için <a href="/indir/{{ version.number }}/surum_notu/">sürüm notları</a> belgesini okuyabilirsiniz.</p>
 
         {% if install_mirrors %}
         <p>Pardus {{ version.number }} {{ version.codename }} Kurulan CD'sini indirmek için aşağıdaki linkleri kullanabilirsiniz.</p>
@@ -28,7 +28,7 @@
         </ul>
         {% endif %}
 
-        <p>Ayrıca {{ version.number }} {{ version.codename }} Kurulan CD'sini <a href="{{ version.install_torrent }}">torrent</a> adresini kullanarak P2P araçları ile de indirebilirsiniz. Pardus ile birlikte gelen KTorrent ile ilgili yazımızı okumak için <a href="/paket/ktorrent/">tıklayın</a>.</p>
+        <p>Ayrıca {{ version.number }} {{ version.codename }} Kurulan CD'sini <a href="{{ version.install_torrent }}">torrent</a> adresini kullanarak P2P araçları ile de indirebilirsiniz.  Torrent ile indirme yapmak için Ktorrent uygulamasını kullanabilirsiniz. Pardus ile birlikte gelen KTorrent ile ilgili yazımızı okumak için <a href="/paket/ktorrent/">tıklayın</a>.</p>
     </div>
 </div>
 {% endblock %}
