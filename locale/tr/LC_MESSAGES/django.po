@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-10 18:00+0300\n"
-"PO-Revision-Date: 2010-06-10 15:11+0300\n"
+"POT-Creation-Date: 2010-06-10 18:49+0300\n"
+"PO-Revision-Date: 2010-06-10 18:48+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -671,18 +671,18 @@ msgstr "Hakkında"
 
 #: templates/footer.html:6 templates/forum/forum_detail.html:26
 msgid "Follow"
-msgstr ""
+msgstr "Takip Et"
 
 #: templates/footer.html:9
 msgid ""
-"Pardus<a href=\"http://www.pardus.org.tr\" title=\"Pardus\"></a> logo is a "
+"<a href=\"http://www.pardus.org.tr\" title=\"Pardus\">Pardus</a> logo is a "
 "registered trademark of <a href=\"http://uekae.tubitak.gov.tr\" title="
 "\"TÜBİTAK/UEKAE\">TÜBİTAK/UEKAE</a>."
 msgstr ""
 
 #: templates/footer.html:13
 msgid "Themes"
-msgstr ""
+msgstr "Temalar"
 
 #: templates/footer.html:14
 #, fuzzy
@@ -785,7 +785,7 @@ msgstr ""
 #, python-format
 msgid "%(posts)s post"
 msgid_plural "%(posts)s posts"
-msgstr[0] ""
+msgstr[0] "%(posts)s ileti"
 
 #: templates/feedjack/default/post_list.html:46
 msgid "talks about"
@@ -958,7 +958,7 @@ msgstr "Bildir"
 
 #: templates/forum/abuse_list.html:11
 msgid "Reason:"
-msgstr ""
+msgstr "Sebep:"
 
 #: templates/forum/abuse_list.html:14
 #, fuzzy
@@ -984,7 +984,7 @@ msgstr "Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin."
 
 #: templates/forum/create_poll.html:5
 msgid "Add Poll"
-msgstr ""
+msgstr "Anket Ekle"
 
 #: templates/forum/create_poll.html:8
 #, fuzzy
@@ -993,7 +993,7 @@ msgstr "Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin."
 
 #: templates/forum/create_poll.html:20
 msgid "Create Poll"
-msgstr ""
+msgstr "Anket Oluştur"
 
 #: templates/forum/forum_base.html:5
 #, fuzzy
@@ -1002,15 +1002,15 @@ msgstr "Forum"
 
 #: templates/forum/forum_base.html:46
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 #: templates/forum/forum_base.html:47
 msgid "Followed Topics"
-msgstr ""
+msgstr "Takip Edilen Başlıklar"
 
 #: templates/forum/forum_base.html:48
 msgid "Updated Topics"
-msgstr ""
+msgstr "Güncellenen Başlıklar"
 
 #: templates/forum/forum_base.html:49 templates/forum/forum_list.html:51
 #, fuzzy
@@ -1019,11 +1019,11 @@ msgstr "Son eklenenler"
 
 #: templates/forum/forum_base.html:50
 msgid "Paste Tool"
-msgstr ""
+msgstr "Yapıştırma Aracı"
 
 #: templates/forum/forum_base.html:51
 msgid "Mark All as Read"
-msgstr ""
+msgstr "Tümünü Okunmuş Say"
 
 #: templates/forum/forum_base.html:52
 #, fuzzy, python-format
@@ -1042,11 +1042,11 @@ msgstr "Özgürlükiçin"
 
 #: templates/forum/forum_detail.html:14 templates/forum/new_topic.html:14
 msgid "New Topic"
-msgstr ""
+msgstr "Yeni Başlık"
 
 #: templates/forum/forum_detail.html:18
 msgid "Topic"
-msgstr ""
+msgstr "Başlık"
 
 #: templates/forum/forum_detail.html:20 templates/forum/forum_list.html:19
 #, fuzzy
@@ -1065,53 +1065,55 @@ msgstr "Son eklenenler"
 
 #: templates/forum/forum_detail.html:57 templates/forum/forum_list.html:79
 msgid "Locked Topic"
-msgstr ""
+msgstr "Kilitli Başlık"
 
 #: templates/forum/forum_detail.html:57 templates/forum/forum_list.html:84
 msgid "Sticky Topic"
-msgstr ""
+msgstr "Sabit Başlık"
 
 #: templates/forum/forum_detail.html:57 templates/forum/forum_list.html:74
 msgid "Read Topic"
-msgstr ""
+msgstr "Okunmuş Başlık"
 
 #: templates/forum/forum_detail.html:57 templates/forum/forum_list.html:75
 msgid "Unread Topic"
-msgstr ""
+msgstr "Okunmamış Başlık"
 
 #: templates/forum/forum_detail.html:57 templates/forum/forum_list.html:85
 msgid "Locked and Sticky Topic"
-msgstr ""
+msgstr "Kilitli ve Sabit Başlık"
 
 #: templates/forum/forum_detail.html:65 templates/forum/forum_list.html:41
 msgid "go to post"
-msgstr ""
+msgstr "iletiye git"
 
 #: templates/forum/forum_detail.html:67
 msgid "RSS"
-msgstr ""
+msgstr "RSS"
 
 #: templates/forum/forum_done.html:3
 msgid "Done"
-msgstr ""
+msgstr "Tamamlandı"
 
 #: templates/forum/forum_done.html:7 templates/forum/forum_error.html:7
 msgid "Click here to go back"
-msgstr ""
+msgstr "Geri gitmek için tıklayın"
 
 #: templates/forum/forum_error.html:3
 msgid "Error!"
-msgstr ""
+msgstr "Hata!"
 
 #: templates/forum/forum_list.html:11
 msgid ""
 "You may read our forum rules <a href=\"/hakkinda/forum-kurallari/\" class="
 "\"bold\">here</a>."
 msgstr ""
+"Forum kurallarına <a href=\"/hakkinda/forum-kurallari/\" class=\"bold"
+"\">buradan</a> ulaşabilirsiniz."
 
 #: templates/forum/forum_list.html:17
 msgid "Topics"
-msgstr ""
+msgstr "Başlıklar"
 
 #: templates/forum/forum_list.html:33
 #, fuzzy
@@ -1120,23 +1122,23 @@ msgstr "İlgili Forum Bağlantısı"
 
 #: templates/forum/forum_list.html:33
 msgid "Unread forum"
-msgstr ""
+msgstr "Okunmamış Forum"
 
 #: templates/forum/forum_list.html:41
 msgid "No posts yet"
-msgstr ""
+msgstr "Henüz ileti yok"
 
 #: templates/forum/forum_list.html:56
 msgid "Statistics"
-msgstr ""
+msgstr "İstatistikler"
 
 #: templates/forum/forum_list.html:58
 msgid "claw"
-msgstr ""
+msgstr "pati"
 
 #: templates/forum/forum_list.html:60
 msgid "Total Members"
-msgstr ""
+msgstr "Toplam Üye Sayısı"
 
 #: templates/forum/forum_list.html:60
 #, fuzzy
@@ -1150,65 +1152,65 @@ msgstr "Kategoriler"
 
 #: templates/forum/forum_list.html:65
 msgid "Total Topics"
-msgstr ""
+msgstr "Toplam Başlık Sayısı"
 
 #: templates/forum/forum_list.html:69
 msgid "Members Born Today :"
-msgstr ""
+msgstr "Bugün Doğan Üyelerimiz :"
 
 #: templates/forum/forum_list.html:69
 msgid "None"
-msgstr ""
+msgstr "Yok"
 
 #: templates/forum/forum_list.html:71
 msgid "Meanings of icons in forum"
-msgstr ""
+msgstr "Forumdaki simgelerin anlamları"
 
 #: templates/forum/forum_list.html:74
 msgid "Read forum or topic"
-msgstr ""
+msgstr "Okunmuş forum ya da konu"
 
 #: templates/forum/forum_list.html:75
 msgid "Containts new posts"
-msgstr ""
+msgstr "Yeni ileti var"
 
 #: templates/forum/forum_list.html:76
 msgid "General Announcement"
-msgstr ""
+msgstr "Genel duyuru"
 
 #: templates/forum/forum_list.html:79
 msgid "Locked (closed to new topics)"
-msgstr ""
+msgstr "Kilitli (yeni iletilere kapalı)"
 
 #: templates/forum/forum_list.html:80
 msgid "Locked and Unread Topic"
-msgstr ""
+msgstr "Kilitli ve Okunmamış Başlık"
 
 #: templates/forum/forum_list.html:80
 msgid "Locked and contains new posts"
-msgstr ""
+msgstr "Kilitli ve okunmamış ileti var"
 
 #: templates/forum/forum_list.html:81
 msgid "Locked General Announcement"
-msgstr ""
+msgstr "Kilitli Genel Duyuru"
 
 #: templates/forum/forum_list.html:84
 msgid "Sticky (stays on top)"
-msgstr ""
+msgstr "Sabit (her zaman üstte kalır)"
 
 #: templates/forum/forum_list.html:85
 msgid "Locked and sticky"
-msgstr ""
+msgstr "Kilitli ve sabit"
 
 #: templates/forum/merge.html:6
 #, python-format
 msgid "Select the topic to append %(forum)s &#62; %(topic)s."
-msgstr ""
+msgstr "%(forum)s &#62; %(topic)s başlığını birleştireceğiniz başlığı seçin."
 
 #: templates/forum/move.html:5
 #, python-format
 msgid "Select the forum to move %(forum)s &#62; %(topic)s."
-msgstr ""
+msgstr "%(forum)s &#62; %(topic)s başlığını taşıyacağınız forumu seçin."
 
 #: templates/forum/new_topic.html:17
 #, fuzzy
@@ -1218,17 +1220,19 @@ msgstr "Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin."
 #: templates/forum/new_topic.html:20
 #, python-format
 msgid "Flood protection, please wait for %(timeout)s seconds."
-msgstr ""
+msgstr "Flood koruması aktif, lütfen %(timeout)s saniye bekleyin."
 
 #: templates/forum/new_topic.html:23
 msgid ""
 "You can use our <a href=\"/yapistir/\" target=\"_blank\">paste tool</a> if "
 "you need to insert a long text or code."
 msgstr ""
+"Uzun bir metin ya da kod yazmanız gerekiyorsa <a href=\"/yapistir/\" target="
+"\"_blank\">yapıştırma aracını</a> kullanabilirsiniz."
 
 #: templates/forum/new_topic.html:28
 msgid "Create Topic"
-msgstr ""
+msgstr "Başlık Aç"
 
 #: webalizer/templates/webalizer/index.html:7
 msgid "settings.WEBALIZER_DIR is not configured"
