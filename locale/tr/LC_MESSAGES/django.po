@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-10 16:37+0300\n"
+"POT-Creation-Date: 2010-06-10 16:51+0300\n"
 "PO-Revision-Date: 2010-06-10 15:11+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -1087,6 +1087,18 @@ msgstr ""
 
 #: templates/forum/forum_detail.html:67
 msgid "RSS"
+msgstr ""
+
+#: templates/forum/forum_done.html:3
+msgid "Done"
+msgstr ""
+
+#: templates/forum/forum_done.html:7 templates/forum/forum_error.html:7
+msgid "Click here to go back"
+msgstr ""
+
+#: templates/forum/forum_error.html:3
+msgid "Error!"
 msgstr ""
 
 #: webalizer/templates/webalizer/index.html:7

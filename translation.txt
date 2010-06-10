@@ -88,9 +88,8 @@ These are templates to be marked
 +   |   |   |-- feed_title.html
 *   |   |   |-- forum_base.html
 +   |   |   |-- forum_detail.html
--   |   |   |-- forum_done.html
--   |   |   |-- forum_error.html
--   |   |   |-- forum_footer.html
++   |   |   |-- forum_done.html
++   |   |   |-- forum_error.html
 -   |   |   |-- forum_header.html
 -   |   |   |-- forum_list.html
 -   |   |   |-- latest_posts_small.html
