@@ -1,29 +1,29 @@
 {% extends "forum/forum_base.html" %}
-{% load library %}
+{% load library i18n %}
 {% block extrahead %}
-    <link rel="alternate" type="application/rss+xml" title="{{ forum.name }} - Özgürlükİçin Forum" href="{{ forum.get_rss_url }}" />
+    <link rel="alternate" type="application/rss+xml" title="{{ forum.name }} - {% trans "Spread Pardus Forum" %}" href="{{ forum.get_rss_url }}" />
     {% for topic in topic_list %}
-    {% if not topic.hidden %}<link rel="alternate" type="application/rss+xml" title="{{topic.title}} - Özgürlükİçin Forum" href="/forum/rss/topic/{{ topic.id }}" />{% endif %}
+    {% if not topic.hidden %}<link rel="alternate" type="application/rss+xml" title="{{topic.title}} - {% trans "Spread Pardus Forum" %}" href="/forum/rss/topic/{{ topic.id }}" />{% endif %}
     {% endfor %}
     <style type="text/css" media="screen">@import url('/media/css/new/forum_list.css');</style>
     <style type="text/css" media="screen">@import url('/media/css/new/forum_paginator.css');</style>
 {% endblock %}
 {% block content %}
 <div class="topbar">
-    <div class="navigation"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}" class="bold">{{ forum.name }}</a></div>
-    {% ifnotequal forum.slug "guncellenen-basliklar" %}<div class="notice"><a href="/forum/{{ forum.slug }}/new/"><img src="/media/img/new/forum/button_new_topic.png" alt="Yeni Başlık" /></a></div>{% endifnotequal %}
+    <div class="navigation"><a href="/">{% trans "Mainpage" %}</a> &#62; <a href="/forum/">{% trans "Forum" %}</a> &#62; <a href="{{ forum.get_absolute_url }}" class="bold">{{ forum.name }}</a></div>
+    {% ifnotequal forum.slug "guncellenen-konular" %}<div class="notice"><a href="/forum/{{ forum.slug }}/new/"><img src="/media/img/new/forum/button_new_topic.png" alt="{% trans "New Topic" %}" /></a></div>{% endifnotequal %}
 </div>
 <div class="headerbar">
     <div class="icon">&nbsp;</div>
-    <div class="topic_title">Başlık</div>
+    <div class="topic_title">{% trans "Topic" %}</div>
     <div class="spacer">&nbsp;</div>
-    <div class="topics">İletiler</div>
+    <div class="topics">{% trans "Posts" %}</div>
     <div class="spacer">&nbsp;</div>
-    <div class="posts">Gösterim</div>
+    <div class="posts">{% trans "Views" %}</div>
     <div class="spacer">&nbsp;</div>
-    <div class="lastpost">Son İleti</div>
+    <div class="lastpost">{% trans "Latest Post" %}</div>
     <div class="spacer">&nbsp;</div>
-    <div class="follow">Takip Et</div>
+    <div class="follow">{% trans "Follow" %}</div>
 </div>
 <div class="category">
     <div class="titlebar"><h2>{{ forum }}</h2></div>
@@ -36,7 +36,7 @@
         <div class="item topic_item" {% if topic.hidden %}style="opacity: 0.5;"{% endif %}>
             <div class="icon"><a href="{{ topic.get_absolute_url }}"><img src="/media/img/new/forum/topic_announce{% if topic.locked %}_locked{% endif %}.png" border="0" alt="Genel Duyuru" title="Genel Duyuru" /></a></div>
             <div class="spacer">&nbsp;</div>
-            <div class="topic_title"><a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a>{% ifequal forum.slug "guncellenen-basliklar" %}<br />Forum: {{ topic.forum }}{% endifequal %}</div>
+            <div class="topic_title"><a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a>{% ifequal forum.slug "guncellenen-basliklar" %}<br />{% trans "Forum" %}: {{ topic.forum }}{% endifequal %}</div>
             <div class="spacer">&nbsp;</div>
             <div class="topics">{{ topic.posts }}</div>
             <div class="spacer">&nbsp;</div>
@@ -54,7 +54,7 @@
         {% else %}
 
         <div class="item topic_item" {% if topic.hidden %}style="opacity: 0.5;"{% endif %}>
-            <div class="icon"><a href="{{ topic.get_absolute_url }}">{% if topic.locked and not topic.sticky %}<img src="/media/img/new/forum/topic{% if not topic.is_read %}_unread{% endif %}_locked.png" border="0" alt="Kilitli Başlık" title="Kilitli Başlık" />{% endif %}{% if topic.sticky and not topic.locked %}<img src="/media/img/new/forum/topic_sticky.png" border="0" alt="Sabit Başlık" title="Sabit Başlık" />{% endif %}{% if not topic.locked and not topic.sticky %}<img src="/media/img/new/forum/topic{% if not topic.is_read %}_unread{% endif %}.png" border="0" {% if topic.is_read %}alt="Okunmuş Başlık" title="Okunmuş Başlık"{% else %}alt="Okunmamış Başlık" title="Okunmamış Başlık"{% endif %} />{% endif %}{% if topic.locked and topic.sticky %}<img src="/media/img/new/forum/topic_sticky_locked.png" border="0" alt="Sabit ve Kilitli Başlık" title="Sabit ve Kilitli Başlık" />{% endif %}</a></div>
+            <div class="icon"><a href="{{ topic.get_absolute_url }}">{% if topic.locked and not topic.sticky %}<img src="/media/img/new/forum/topic{% if not topic.is_read %}_unread{% endif %}_locked.png" alt="{% trans "Locked Topic" %}" title="{% trans "Locked Topic" %}" />{% endif %}{% if topic.sticky and not topic.locked %}<img src="/media/img/new/forum/topic_sticky.png" alt="{% trans "Sticky Topic" %}" title="{% trans "Sticky Topic" %}" />{% endif %}{% if not topic.locked and not topic.sticky %}<img src="/media/img/new/forum/topic{% if not topic.is_read %}_unread{% endif %}.png" {% if topic.is_read %}alt="{% trans "Read Topic" %}" title="{% trans "Read Topic" %}"{% else %}alt="{% trans "Unread Topic" %}" title="{% trans "Unread Topic" %}"{% endif %} />{% endif %}{% if topic.locked and topic.sticky %}<img src="/media/img/new/forum/topic_sticky_locked.png" alt="{% trans "Locked and Sticky Topic" %}" title="{% trans "Locked and Sticky Topic" %}" />{% endif %}</a></div>
             <div class="spacer">&nbsp;</div>
             <div class="topic_title"><a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a>{% ifequal forum.slug "guncellenen-basliklar" %}<br />Forum: {{ topic.forum }}{% endifequal %}</div>
             <div class="spacer">&nbsp;</div>
@@ -62,9 +62,9 @@
             <div class="spacer">&nbsp;</div>
             <div class="posts">{{ topic.views }}</div>
             <div class="spacer">&nbsp;</div>
-            <div class="lastpost">{{ topic.topic_latest_post.edited|date:"d F Y H:i" }}<br /><a href="/kullanici/profil/{{ topic.topic_latest_post.author }}" class="profile_link">{{ topic.topic_latest_post.author }}</a> <a href="{{ topic.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="iletiye git" border="0"/></a></div>
+            <div class="lastpost">{{ topic.topic_latest_post.edited|date:"d F Y H:i" }}<br /><a href="{{ topic.topic_latest_post.author.get_profile.get_absolute_url }}" class="profile_link">{{ topic.topic_latest_post.author }}</a> <a href="{{ topic.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="{% trans "go to post" %}" /></a></div>
             <div class="spacer">&nbsp;</div>
-            <div class="follow"><a href="/forum/rss/topic/{{ topic.id }}/"><img src="/media/img/new/rss.png" alt="RSS" /></a></div>
+            <div class="follow"><a href="/forum/rss/topic/{{ topic.id }}/"><img src="/media/img/new/rss.png" alt="{% trans "RSS" %}" /></a></div>
         </div>
         {% endif %}
         {% endfor %}

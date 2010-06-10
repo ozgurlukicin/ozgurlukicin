@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-10 15:43+0300\n"
+"POT-Creation-Date: 2010-06-10 16:33+0300\n"
 "PO-Revision-Date: 2010-06-10 15:11+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -271,7 +271,7 @@ msgid "Brainstorm"
 msgstr "Yeni Fikirler"
 
 #: ideas/templates/idea_base.html:5 templates/base.html:7
-#: templates/base.html.py:83
+#: templates/base.html.py:83 templates/forum/forum_base.html:5
 msgid "Spread Pardus"
 msgstr "Özgürlükiçin"
 
@@ -285,10 +285,12 @@ msgid "User Box"
 msgstr "Kullanıcı Kutusu"
 
 #: ideas/templates/idea_base.html:39 templates/base.html:65
+#: templates/forum/forum_base.html:40
 msgid "Login"
 msgstr "Giriş"
 
 #: ideas/templates/idea_base.html:41 templates/base.html:67
+#: templates/forum/forum_base.html:42
 msgid "Register"
 msgstr "Kayıt Ol"
 
@@ -297,6 +299,7 @@ msgid "Lost Password"
 msgstr "Parola değiştir"
 
 #: ideas/templates/idea_base.html:43 templates/base.html:69
+#: templates/forum/forum_base.html:44
 #, python-format
 msgid "Hello %(username)s!"
 msgstr "Merhaba %(username)s!"
@@ -313,7 +316,8 @@ msgstr ""
 "çıkabilirsiniz."
 
 #: ideas/templates/idea_base.html:48 ideas/templates/idea_base.html.py:53
-#: templates/base.html:77
+#: templates/base.html:77 templates/forum/forum_base.html:58
+#: templates/forum/forum_base.html.py:61
 msgid "Search"
 msgstr "Arama"
 
@@ -378,6 +382,7 @@ msgid "Categories"
 msgstr "Kategoriler"
 
 #: ideas/templates/idea_base.html:85 templates/feedjack/oi/post_list.html:68
+#: templates/forum/forum_base.html:67
 msgid "shipit"
 msgstr "cdgonder"
 
@@ -594,7 +599,7 @@ msgstr "İçerik bulunamadı."
 #: templates/base.html:13 templates/base.html.py:14 templates/base.html:15
 #: templates/base.html.py:16 templates/base.html:17 templates/base.html.py:18
 #: templates/base.html:19 templates/base.html.py:20 templates/base.html:21
-#: templates/base.html.py:22
+#: templates/base.html.py:22 templates/forum/forum_base.html:11
 msgid "Spread Pardus RSS"
 msgstr "Özgürlükiçin RSS"
 
@@ -634,6 +639,8 @@ msgstr "Gezegen"
 
 #: templates/base.html:21 templates/footer.html:14
 #: templates/forum/change_poll.html:5 templates/forum/create_poll.html:5
+#: templates/forum/forum_base.html:11 templates/forum/forum_detail.html:13
+#: templates/forum/forum_detail.html:39
 msgid "Forum"
 msgstr "Forum"
 
@@ -641,7 +648,7 @@ msgstr "Forum"
 msgid "Podcast"
 msgstr "Ajans"
 
-#: templates/base.html:67
+#: templates/base.html:67 templates/forum/forum_base.html:42
 msgid "Lost password"
 msgstr "Kayıp parola"
 
@@ -660,7 +667,7 @@ msgstr ""
 msgid "About"
 msgstr "Hakkında"
 
-#: templates/footer.html:6
+#: templates/footer.html:6 templates/forum/forum_detail.html:26
 msgid "Follow"
 msgstr ""
 
@@ -957,6 +964,7 @@ msgid "Remove from Abuse List"
 msgstr "Favorilerimden çıkar"
 
 #: templates/forum/change_poll.html:5 templates/forum/create_poll.html:5
+#: templates/forum/forum_detail.html:13
 #, fuzzy
 msgid "Mainpage"
 msgstr "Ana Sayfa"
@@ -982,6 +990,107 @@ msgstr "Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin."
 
 #: templates/forum/create_poll.html:20
 msgid "Create Poll"
+msgstr ""
+
+#: templates/forum/forum_base.html:5
+#, fuzzy
+msgid "Forum "
+msgstr "Forum"
+
+#: templates/forum/forum_base.html:34
+#, fuzzy
+msgid "Userbox"
+msgstr "Kullanıcı Kutusu"
+
+#: templates/forum/forum_base.html:46
+msgid "Profile"
+msgstr ""
+
+#: templates/forum/forum_base.html:47
+msgid "Followed Topics"
+msgstr ""
+
+#: templates/forum/forum_base.html:48
+msgid "Updated Topics"
+msgstr ""
+
+#: templates/forum/forum_base.html:49
+#, fuzzy
+msgid "Latest Posts"
+msgstr "Son eklenenler"
+
+#: templates/forum/forum_base.html:50
+msgid "Paste Tool"
+msgstr ""
+
+#: templates/forum/forum_base.html:51
+msgid "Mark All as Read"
+msgstr ""
+
+#: templates/forum/forum_base.html:52
+#, fuzzy, python-format
+msgid "Abuse Reports (%(abuse_count)s)"
+msgstr "İlk Adımlar (%(count)s)"
+
+#: templates/forum/forum_base.html:53
+#, fuzzy
+msgid "Logout"
+msgstr "Çık"
+
+#: templates/forum/forum_detail.html:4 templates/forum/forum_detail.html:6
+#, fuzzy
+msgid "Spread Pardus Forum"
+msgstr "Özgürlükiçin"
+
+#: templates/forum/forum_detail.html:14
+msgid "New Topic"
+msgstr ""
+
+#: templates/forum/forum_detail.html:18
+msgid "Topic"
+msgstr ""
+
+#: templates/forum/forum_detail.html:20
+#, fuzzy
+msgid "Posts"
+msgstr "Ajans"
+
+#: templates/forum/forum_detail.html:22
+#, fuzzy
+msgid "Views"
+msgstr "Haberler"
+
+#: templates/forum/forum_detail.html:24
+#, fuzzy
+msgid "Latest Post"
+msgstr "Son eklenenler"
+
+#: templates/forum/forum_detail.html:57
+msgid "Locked Topic"
+msgstr ""
+
+#: templates/forum/forum_detail.html:57
+msgid "Sticky Topic"
+msgstr ""
+
+#: templates/forum/forum_detail.html:57
+msgid "Read Topic"
+msgstr ""
+
+#: templates/forum/forum_detail.html:57
+msgid "Unread Topic"
+msgstr ""
+
+#: templates/forum/forum_detail.html:57
+msgid "Locked and Sticky Topic"
+msgstr ""
+
+#: templates/forum/forum_detail.html:65
+msgid "go to post"
+msgstr ""
+
+#: templates/forum/forum_detail.html:67
+msgid "RSS"
 msgstr ""
 
 #: webalizer/templates/webalizer/index.html:7

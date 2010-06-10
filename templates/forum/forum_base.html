@@ -1,13 +1,14 @@
+{% load i18n %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Forum - {% block title %}{% endblock %}Özgürlük için...</title>
-<meta name="description" content="Pardus'un yaygınlığını artırmak ve bilgi paylaşımı için kurulan bir topluluk sitesi. Haberler, yardım belgeleri ve forum ve daha fazlasını içeriyor." />
+<title>{% trans "Forum " %}- {% block title %}{% endblock %}{% trans "Spread Pardus" %}</title>
 <meta name="keywords" content="Pardus, Linux, kurulum, özgür yazılım, KDE, haber, forum" />
+<meta name="description" content="Pardus'un yaygınlığını artırmak ve bilgi paylaşımı için kurulan bir topluluk sitesi. Haberler, yardım belgeleri ve forum ve daha fazlasını içeriyor." />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="imagetoolbar" content="no" />
 <link rel="shortcut icon" href="/media/img/fav.png" />
-<link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Forum" href="/forum/rss/post/" />
+<link rel="alternate" type="application/rss+xml" title="{% trans "Spread Pardus RSS" %} - {% trans "Forum" %}" href="/forum/rss/post/" />
 
 <style type="text/css" media="screen">@import url('/media/css/new/base.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/new/forum_base.css');</style>
@@ -30,40 +31,40 @@
         {% block sidebar_top %}
         {% endblock %}
         <div class="sidebar_content">
-            <h2>Kullanıcı Kutusu</h2>
+            <h2>{% trans "Userbox" %}</h2>
             {% if not user.is_authenticated %}
                 <form method="post" action="/kullanici/giris/">
                     <input type="text" id="userbox_username" name="username" size="18" value="" maxlength="20" /><br />
                     <input type="password" id="userbox_password" name="password" size="18" value="" maxlength="30" /><br />
                     <input type="hidden" name="next" value="{{ request.get_full_path }}" />
-                    <input type="image" src="/media/img/new/button_login.png" value="Giriş" />
+                    <input type="image" src="/media/img/new/button_login.png" value="{% trans "Login" %}" />
                 </form>
-                <span class="loginlinks"><a href="/kullanici/kayit/">Kayıt ol</a><br /><a href="/kullanici/kayip/">Kayıp parola</a></span>
+                <span class="loginlinks"><a href="/kullanici/kayit/">{% trans "Register" %}</a><br /><a href="/kullanici/kayip/">{% trans "Lost password" %}</a></span>
             {% else %}
-                <p>Merhaba {{ user.username }}!</p>
+                <p>{% blocktrans with user.username as username %}Hello {{ username }}!{% endblocktrans %}</p>
                 <ul>
-                    <li><a href="/kullanici/profil/{{ user.username }}/">Profil</a></li>
-                    <li><a href="/kullanici/takip-edilen-konular/">Takip Edilen Başlıklar</a></li>
-                    <li><a href="/forum/guncellenen-basliklar/">Güncellenen Başlıklar</a></li>
-                    <li><a href="/forum/son-iletiler/">Son İletiler</a></li>
-                    <li><a href="/yapistir/">Yapıştırma Aracı</a></li>
-                    <li><a href="/forum/tumunu-okunmus-say/?next={{ request.path }}">Tümünü Okunmuş Say</a></li>
-                    {% if perms.forum.can_change_abusereport %}<li><a href="/forum/raporlanmis-iletiler/">Şikayet Edilmiş İletiler ({{abuse_count}})</a></li>{% endif %}
-                    <li><a href="/kullanici/cikis/">Çıkış</a></li>
+                    <li><a href="{{ user.get_profile.get_absolute_url }}/">{% trans "Profile" %}</a></li>
+                    <li><a href="/kullanici/takip-edilen-konular/">{% trans "Followed Topics" %}</a></li>
+                    <li><a href="/forum/guncellenen-basliklar/">{% trans "Updated Topics" %}</a><li>
+                    <li><a href="/forum/son-iletiler/">{% trans "Latest Posts" %}</a><li>
+                    <li><a href="/yapistir/">{% trans "Paste Tool" %}</a></li>
+                    <li><a href="/forum/tumunu-okunmus-say/?next={{ request.path }}">{% trans "Mark All as Read" %}</a></li>
+                    <li>{% if perms.forum.can_change_abusereport and abuse_count %}<a href="/forum/raporlanmis-iletiler/">{% blocktrans %}Abuse Reports ({{abuse_count}}){% endblocktrans %}</a> {% endif %}</li>
+                    <li><a href="/kullanici/cikis/">{% trans "Logout" %}</a></li>
                 </ul>
             {% endif %}
             </div>
         <div class="sidebar_content">
-            <h2>Ara</h2>
+            <h2>{% trans "Search" %}</h2>
             <form method="post" action="/gelismisarama/">
                 <input type="text" name="term" size="20" /><br />
-                <input type="image" src="/media/img/new/button_search.png" value="Ara" />
+                <input type="image" src="/media/img/new/button_search.png" value="{% trans "Search" %}" />
                 <input type="hidden" name="search_in" value="0" />
                 <input type="hidden" name="depth" value="0" />
             </form>
         </div>
         <div class="sidebar_content">
-            <a href="/cdgonder/"><img src="/media/img/new/cdgonder.png" alt="cdgonder" /></a>
+            <a href="/cdgonder/"><img src="/media/img/new/cdgonder.png" alt="{% trans "shipit" %}" /></a>
         </div>
         {% block sidebar_bottom %}
         {% endblock %}
