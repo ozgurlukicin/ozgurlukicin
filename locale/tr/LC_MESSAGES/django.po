@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-10 17:05+0300\n"
+"POT-Creation-Date: 2010-06-10 17:17+0300\n"
 "PO-Revision-Date: 2010-06-10 15:11+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -1197,6 +1197,11 @@ msgstr ""
 
 #: templates/forum/forum_list.html:85
 msgid "Locked and sticky"
+msgstr ""
+
+#: templates/forum/merge.html:6
+#, python-format
+msgid "Select the topic to append %(forum)s &#62; %(topic)s."
 msgstr ""
 
 #: webalizer/templates/webalizer/index.html:7
