@@ -53,31 +53,31 @@ These are templates to be marked
 -   |   |   |-- comment_form.html
 -   |   |   |-- comment_preview.html
 -   |   |   `-- trackback_display.html
--   |   |-- download
--   |   |   |-- download.html
+    |   |-- download
+*   |   |   |-- download.html
 -   |   |   `-- download_relnotes.html
--   |   |-- editor
--   |   |   |-- base.html
--   |   |   |-- change.html
--   |   |   |-- create.html
--   |   |   |-- list.html
--   |   |   `-- news_form.html
--   |   |-- feedjack
--   |   |   |-- default
--   |   |   |   `-- post_list.html
--   |   |   |-- oi
--   |   |   |   `-- post_list.html
--   |   |   `-- sinx
--   |   |       `-- post_list.html
--   |   |-- feeds
--   |   |   |-- feed_description.html
--   |   |   `-- feed_title.html
--   |   |-- field.html
--   |   |-- file_upload
--   |   |   |-- file_upload.html
--   |   |   `-- file_upload_success.html
--   |   |-- flatpages
--   |   |   `-- default.html
+    |   |-- editor
++   |   |   |-- base.html
++   |   |   |-- change.html
++   |   |   |-- create.html
++   |   |   |-- list.html
++   |   |   `-- news_form.html
+    |   |-- feedjack
+    |   |   |-- default
+    |   |   |   `-- post_list.html
+    |   |   |-- oi
++   |   |   |   `-- post_list.html
+    |   |   `-- sinx
+    |   |       `-- post_list.html
+    |   |-- feeds
++   |   |   |-- feed_description.html
++   |   |   `-- feed_title.html
++   |   |-- field.html
+    |   |-- file_upload
++   |   |   |-- file_upload.html
++   |   |   `-- file_upload_success.html
+    |   |-- flatpages
++   |   |   `-- default.html
 -   |   |-- footer.html
 -   |   |-- formfields.html
 -   |   |-- forum

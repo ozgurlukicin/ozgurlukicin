@@ -1,13 +1,14 @@
+{% load i18n %}
 {% for field in form %}
 {% ifnotequal forloop.counter 2 %}
 {% ifequal forloop.counter 3 %}
 <div class="field_container">
-    <div class="field_label">Görselleri Filtrele</div>
+    <div class="field_label">{% trans "Filter Images" %}</div>
     <div class="field_field">
         <input id="filter" type="text" value="" />
     </div>
     <div class="help_text">
-        Burayı kullanarak görsellerde arama yapabilirsiniz.
+        {% trans "You can search images using this box." %}
     </div>
     <div style="clear:both;"></div>
 </div>
@@ -17,7 +18,7 @@
     <div class="field_field">
         {{ field }}
         {% if field.errors %}{{ field.errors }}{% endif %}
-        {% ifequal forloop.counter 3 %}<a href="/admin/upload/image/add/" class="add-another" id="add_id_image" onclick="return showAddAnotherPopup(this);"><img src="/media/img/admin/icon_addlink.gif" width="10" height="10" alt="Ekle"/></a><br /><br /><img src="" id="image_thumb" alt="Üstteki arama kutusunu kullanıp listeden bir görsel seçiniz" />{% endifequal %}
+        {% ifequal forloop.counter 3 %}<a href="/admin/upload/image/add/" class="add-another" id="add_id_image" onclick="return showAddAnotherPopup(this);"><img src="/media/img/admin/icon_addlink.gif" width="10" height="10" alt="Ekle"/></a><br /><br /><img src="" id="image_thumb" alt="{% trans "Use the search box above and select an image from the list" %}" />{% endifequal %}
     </div>
     <div class="help_text">
         {% if field.help_text %}{{ field.help_text }}{% endif %}

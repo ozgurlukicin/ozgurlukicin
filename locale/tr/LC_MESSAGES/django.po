@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-10 14:11+0300\n"
+"POT-Creation-Date: 2010-06-10 14:38+0300\n"
 "PO-Revision-Date: 2010-06-09 16:47+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ezine/templates/list.html:3
+#: ezine/templates/list.html:3 templates/flatpages/default.html:40
 msgid "E-Zine"
 msgstr "E-Dergi"
 
@@ -25,6 +25,7 @@ msgid "Spread Pardus e-zine is online!"
 msgstr "Özgürlükİçin e-dergi yayında!"
 
 #: ezine/templates/list.html:18 ezine/templates/list.html.py:29
+#: templates/editor/base.html:3
 msgid "Editor"
 msgstr "Editör"
 
@@ -190,6 +191,7 @@ msgid "tag"
 msgstr ""
 
 #: feedjack/models.py:130 feedjack/models.py:149
+#: templates/feedjack/oi/post_list.html:16
 msgid "tags"
 msgstr ""
 
@@ -259,7 +261,7 @@ msgstr ""
 msgid "Idea couldn't be submitted, please fix the errors below."
 msgstr "Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin."
 
-#: ideas/templates/idea_add_form.html:21
+#: ideas/templates/idea_add_form.html:21 templates/editor/create.html:12
 msgid "Submit"
 msgstr "Gönder"
 
@@ -371,7 +373,7 @@ msgstr "Geçersiz fikirler"
 msgid "Categories"
 msgstr "Kategoriler"
 
-#: ideas/templates/idea_base.html:85
+#: ideas/templates/idea_base.html:85 templates/feedjack/oi/post_list.html:68
 msgid "shipit"
 msgstr "cdgonder"
 
@@ -380,7 +382,7 @@ msgstr "cdgonder"
 msgid "This is duplicate of idea <a href=\"%(url)s\">#%(id)s</a>"
 msgstr "Bu fikir <a href=\"%(url)s\">#%(id)s</a> numaralı fikrin aynısı"
 
-#: ideas/templates/idea_detail.html:14
+#: ideas/templates/idea_detail.html:14 templates/flatpages/default.html:69
 msgid "Tags"
 msgstr "Etiketler"
 
@@ -599,7 +601,7 @@ msgstr "Özgürlükiçin"
 msgid "Main Page"
 msgstr ""
 
-#: templates/base.html:14
+#: templates/base.html:14 templates/editor/list.html:12
 #, fuzzy
 msgid "News"
 msgstr "Yeni Fikirler"
@@ -624,7 +626,7 @@ msgstr ""
 msgid "Games"
 msgstr ""
 
-#: templates/base.html:20
+#: templates/base.html:20 templates/feedjack/oi/post_list.html:3
 msgid "Planet"
 msgstr ""
 
@@ -688,6 +690,50 @@ msgstr "Sitede görüntüle"
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
 msgstr[0] "Lütfen aşağıdaki hatayı düzeltin."
+
+#: templates/download/download.html:5
+#, fuzzy
+msgid "Download Pardus"
+msgstr "İndir"
+
+#: templates/download/download.html:13
+#, python-format
+msgid "Download Pardus %(version)s"
+msgstr ""
+
+#: templates/download/download.html:15
+msgid "Install CD"
+msgstr ""
+
+#: templates/editor/change.html:11
+msgid "Save"
+msgstr ""
+
+#: templates/editor/list.html:10
+#, fuzzy
+msgid "Add News"
+msgstr "Yeni Fikirler"
+
+#: templates/editor/list.html:14 templates/editor/list.html.py:24
+#, fuzzy
+msgid "Edit"
+msgstr "Editör"
+
+#: templates/editor/list.html:16
+msgid "Date"
+msgstr ""
+
+#: templates/editor/news_form.html:6
+msgid "Filter Images"
+msgstr ""
+
+#: templates/editor/news_form.html:11
+msgid "You can search images using this box."
+msgstr ""
+
+#: templates/editor/news_form.html:21
+msgid "Use the search box above and select an image from the list"
+msgstr ""
 
 #: templates/feedjack/default/post_list.html:28
 #: templates/feedjack/sinx/post_list.html:18
@@ -757,6 +803,27 @@ msgstr ""
 msgid "Greetings"
 msgstr ""
 
+#: templates/feedjack/oi/post_list.html:33
+msgid "Authors"
+msgstr ""
+
+#: templates/feedjack/oi/post_list.html:45
+msgid "Rules"
+msgstr ""
+
+#: templates/feedjack/oi/post_list.html:47 templates/flatpages/default.html:36
+msgid "Planet Rules"
+msgstr ""
+
+#: templates/feedjack/oi/post_list.html:57
+msgid "Other planets"
+msgstr ""
+
+#: templates/feedjack/oi/post_list.html:64
+#, fuzzy
+msgid "Last Update"
+msgstr "Son eklenenler"
+
 #: templates/feedjack/sinx/post_list.html:50
 msgid "Author link"
 msgstr ""
@@ -787,6 +854,60 @@ msgstr ""
 
 #: templates/feedjack/sinx/post_list.html:140
 msgid "Forward"
+msgstr ""
+
+#: templates/file_upload/file_upload.html:5
+msgid "upload"
+msgstr ""
+
+#: templates/file_upload/file_upload.html:14
+msgid "File"
+msgstr ""
+
+#: templates/file_upload/file_upload.html:17
+msgid "Upload"
+msgstr ""
+
+#: templates/flatpages/default.html:20
+msgid "Related Pages"
+msgstr ""
+
+#: templates/flatpages/default.html:24
+msgid "Content Policy"
+msgstr ""
+
+#: templates/flatpages/default.html:28
+msgid "Privacy Policy"
+msgstr ""
+
+#: templates/flatpages/default.html:32
+msgid "Forum Rules"
+msgstr ""
+
+#: templates/flatpages/default.html:44
+msgid "About"
+msgstr ""
+
+#: templates/flatpages/default.html:48
+msgid "Contact"
+msgstr ""
+
+#: templates/flatpages/default.html:52
+#, fuzzy
+msgid "Seminar"
+msgstr "Arama"
+
+#: templates/flatpages/default.html:56
+msgid "Admins"
+msgstr ""
+
+#: templates/flatpages/default.html:60
+#, fuzzy
+msgid "Users"
+msgstr "Kullanıcı Kutusu"
+
+#: templates/flatpages/default.html:64
+msgid "Technical"
 msgstr ""
 
 #: webalizer/templates/webalizer/index.html:7

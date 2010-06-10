@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load library %}
+{% load i18n %}
 
 {% block title %}{{ flatpage.title }} - {% endblock %}
 
@@ -16,56 +17,56 @@
 {% block leftcolumn %}
 <div class="sidebarcolumn leftcolumn">
     <div class="leftcolumn_content">
-        <h2>İlgili sayfalar</h2>
+        <h2>{% trans "Related Pages" %}</h2>
         <ul>
             {% ifnotequal flatpage.url "/hakkinda/icerik-politikasi/" %}<li>
             <span class="bullet">»</span>
-            <a href="/hakkinda/icerik-politikasi/">İçerik Politikası</a>
+            <a href="/hakkinda/icerik-politikasi/">{% trans "Content Policy" %}</a>
             </li>{% endifnotequal %}
             {% ifnotequal flatpage.url "/hakkinda/gizlilik-politikasi/" %}<li>
             <span class="bullet">»</span>
-            <a href="/hakkinda/gizlilik-politikasi/">Gizlilik Politikası</a>
+            <a href="/hakkinda/gizlilik-politikasi/">{% trans "Privacy Policy" %}</a>
             </li>{% endifnotequal %}
             {% ifnotequal flatpage.url "/hakkinda/forum-kurallari/" %}<li>
             <span class="bullet">»</span>
-            <a href="/hakkinda/forum-kurallari/">Forum Kuralları</a>
+            <a href="/hakkinda/forum-kurallari/">{% trans "Forum Rules" %}</a>
             </li>{% endifnotequal %}
             {% ifnotequal flatpage.url "/hakkinda/gezegen-kurallari/" %}<li>
             <span class="bullet">»</span>
-            <a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a>
+            <a href="/hakkinda/gezegen-kurallari/">{% trans "Planet Rules" %}</a>
             </li>{% endifnotequal %}
             {% ifnotequal flatpage.url "/e-dergi/" %}<li>
             <span class="bullet">»</span>
-            <a href="/e-dergi/">E-Dergi</a>
+            <a href="/e-dergi/">{% trans "E-Zine" %}</a>
             </li>{% endifnotequal %}
             {% ifnotequal flatpage.url "/hakkinda/" %}<li>
             <span class="bullet">»</span>
-            <a href="/hakkinda/">Hakkında</a>
+            <a href="/hakkinda/">{% trans "About" %}</a>
             </li>{% endifnotequal %}
             {% ifnotequal flatpage.url "/bize_ulasmak_icin/" %}<li>
             <span class="bullet">»</span>
-            <a href="/bize_ulasmak_icin/">Bize Ulaşın</a>
+            <a href="/bize_ulasmak_icin/">{% trans "Contact" %}</a>
             </li>{% endifnotequal %}
             {% ifnotequal flatpage.url "/seminer/" %}<li>
             <span class="bullet">»</span>
-            <a href="/seminer/">Seminer</a>
+            <a href="/seminer/">{% trans "Seminar" %}</a>
             </li>{% endifnotequal %}
             {% ifnotequal flatpage.url "/yoneticiler/" %}<li>
             <span class="bullet">»</span>
-            <a href="/yoneticiler/">Yöneticiler</a>
+            <a href="/yoneticiler/">{% trans "Admins" %}</a>
             </li>{% endifnotequal %}
             <li>
             <span class="bullet">»</span>
-            <a href="/kullanici/liste/">Kullanıcılarımız</a>
+            <a href="/kullanici/liste/">{% trans "Users" %}</a>
             </li>
             {% ifnotequal flatpage.url "/teknik/" %}<li>
             <span class="bullet">»</span>
-            <a href="/teknik/">Teknik</a>
+            <a href="/teknik/">{% trans "Technical" %}</a>
             </li>{% endifnotequal %}
         </ul>
     </div>
     <div class="leftcolumn_content">
-        <h2>Etiketler</h2>
+        <h2>{% trans "Tags" %}</h2>
         <img src="/media/img/new/tag.png" alt="etiket" />{% for tag in flatpage.tags.all %} <a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
     </div>
 </div>
