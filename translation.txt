@@ -22,7 +22,7 @@ These are templates to be marked
 *   |   |   |-- idea_base.html
 +   |   |   |-- idea_detail.html
 +   |   |   |-- idea_list.html
-*   |   |   `-- idea_top.html
++   |   |   `-- idea_top.html
     |-- shop
     |   `-- templates
     |       |-- cart

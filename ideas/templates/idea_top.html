@@ -18,10 +18,7 @@
             <span id="favoriekle{{ idea.id }}" class="favorite" {% if idea.is_favorited %}style="display:none;" {% endif %}>
                 <a href={% if user.is_authenticated %}"/yenifikir/ayrinti/1/favori/ekle" onclick="favori({{ idea.id }}, 'ekle'); return false;"{% else %}"/kullanici/giris/"{% endif %} title="{% trans "Add to my favourites" %}"><img src="/media/img/new/ideas_favorite.png" alt="{% trans "Add to my favourites" %}" /></a>
             </span>
-            <a href="{{ idea.submitter.get_profile.get_absolute_url }}" title="{{ idea.submitter }} kullanıcısının profiline git">{{ idea.submitter }}</a>
-        tarafından {{ idea.submitted_date|date:"j M Y" }} tarihinde
-            <a href="{{ idea.category.get_absolute_url }}" title="{{ idea.category }}">{{ idea.category }}</a> kategorisine
-            {% if idea.related_to %}<a href="/yenifikir/listele/ilgili/{{ idea.related_to }}" title="{{ idea.related_to }}">{{ idea.related_to }}</a> ile ilgili olarak{% endif %} gönderildi. 
+            {% blocktrans with idea.submitter.get_profile.get_absolute_url as profile_url and idea.submitter as submitter and idea.submitted_date|date:"j M Y" as submitted_date and idea.category.get_absolute_url as category_url and idea.category as category %}Was sent by <a href="{{ profile_url }}" title="go to {{ submitter }}'s profile">{{ submitter }}</a> on {{ submitted_date }} to <a href="{{ category_url }}" title="{{ category }}">{{ category }}</a> category.{% endblocktrans %}{% if idea.related_to %}{% blocktrans with idea.related_to as related_to %}It's related to <a href="/yenifikir/listele/ilgili/{{ related_to }}" title="{{ related_to }}">{{ related_to }}</a>.{% endblocktrans %}{% endif %}
         </div>
         <div class="idea_content">{{ idea.description|linebreaksbr }}</div>
         <div class="idea_comments">
