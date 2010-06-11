@@ -23,7 +23,7 @@
     <div class="{% cycle columnspacer, %}"></div>
 {% endfor %}
 
-{% if is_paginated %}<div class="paginator_block"><div class="paginator_pages">{% paginator %}</div><div class="paginator_description"><span class="bold">{{ pages }}</span> sayfada toplam <span class="bold">{{ hits }}</span> ilk adım yazısı bulunmaktadır.</div></div>{% endif %}
+{% if is_paginated %}<div class="paginator_block"><div class="paginator_pages">{% paginator %}</div><div class="paginator_description">{% blocktrans %}There's a total of <span class="bold">{{ hits }}</span> first step articles in <span class="bold">{{ pages }}</span> pages.{% endblocktrans %}</div></div>{% endif %}
 
 </div>
 
