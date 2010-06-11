@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/object_lists.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
@@ -7,14 +8,14 @@
 {% block leftcolumn %}
     <div class="sidebarcolumn leftcolumn">
     <div class="leftcolumn_content">
-    <h2>Pardus Etkinlikleri</h2>
+    <h2>{% trans "Pardus Events" %}</h2>
     <ul>
         {% for sem in seminar %}
         <li{% if not forloop.last %} style="border-bottom:1px solid #EAEAEA;padding-bottom:5px;margin-bottom:5px;"{% endif %}>
         <div><span class="bold">{{ sem.start_date|date:"d F Y H.i" }}{% if sem.end_date %} - {{ sem.end_date|date:"d F Y H.i" }}{% endif %}</span></div>
             <div>{{ sem.description }}</div>
-            <div><span class="bold">Yer:</span> <a onclick="window.open('{{ sem.get_absolute_url }}','{{ sem.place.name }}','toolbar=no,width=620,height=580')" style="cursor:pointer">{{ sem.place.name }}</a></div>
-            <div><span class="bold">Konuşmacılar:</span> {% for att in sem.attender.all %}{% if forloop.last %}{% if att.user %}<a href="{{ att.user.get_profile.get_absolute_url }}">{% endif %}{{ att.name }}{% if att.user %}</a>{% endif %}{% else %}{% if att.user %}<a href="{{ att.user.get_profile.get_absolute_url }}">{% endif %}{{ att.name }}{% if att.user %}</a>{% endif %}, {% endif %}{% endfor %}</div>
+            <div><span class="bold">{% trans "Place:" %}</span> <a onclick="window.open('{{ sem.get_absolute_url }}','{{ sem.place.name }}','toolbar=no,width=620,height=580')" style="cursor:pointer">{{ sem.place.name }}</a></div>
+            <div><span class="bold">{% trans "Speakers:" %}</span> {% for att in sem.attender.all %}{% if forloop.last %}{% if att.user %}<a href="{{ att.user.get_profile.get_absolute_url }}">{% endif %}{{ att.name }}{% if att.user %}</a>{% endif %}{% else %}{% if att.user %}<a href="{{ att.user.get_profile.get_absolute_url }}">{% endif %}{{ att.name }}{% if att.user %}</a>{% endif %}, {% endif %}{% endfor %}</div>
         </li>
         {% endfor %}
     </ul>
@@ -32,7 +33,7 @@
                 <span>Haberler</span>
                 <div class="title"><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></div>
                 <div class="summary">{{ news.sum|safe }}<br /></div>
-                <div class="info"><span class="bold">{{ news.update|date:"d" }} {{ news.update|date:"F"|slice:":3" }}</span> {{ news.update|date:"Y" }} <span class="bold">/</span> <a href="{{ news.topic.get_latest_post_url }}"><span class="bold">{{ news.topic.posts|add:"-1" }}</span> Yorum</a></div>
+                <div class="info"><span class="bold">{{ news.update|date:"d" }} {{ news.update|date:"F"|slice:":3" }}</span> {{ news.update|date:"Y" }} <span class="bold">/</span> <a href="{{ news.topic.get_latest_post_url }}">{% blocktrans count news.topic.posts|add:"-1" as number_of_comments %}<span class="bold">{{ number_of_comments }}</span> Comment{% plural %}<span class="bold">{{ number_of_comments }}</span> Comments{% endblocktrans %}</a></div>
             </div>
             <div style="clear:both;"></div>
         </div>
@@ -40,14 +41,14 @@
     {% endfor %}
     <div id="counter"><span id="news_count">{% for news in news %}<img src="/media/img/new/news_progress{% if forloop.first %}_selected{% endif %}.png" onclick="direct_select({{ forloop.counter0 }})" alt="." />{% endfor %}</span></div>
     <span id='button_news_changer'>
-        <a href="javascript:;" onclick="change_news(-1); clearInterval(intval);"><img id="img_news_prev" src="/media/img/new/news_previous.png" alt="Önceki haber" /></a><a href="javascript:;" onclick="change_news(1); clearInterval(intval);"><img id="img_news_next" src="/media/img/new/news_next.png" alt="Sonraki haber" /></a>
+        <a href="javascript:;" onclick="change_news(-1); clearInterval(intval);"><img id="img_news_prev" src="/media/img/new/news_previous.png" alt="{% trans "Previous News" %}" /></a><a href="javascript:;" onclick="change_news(1); clearInterval(intval);"><img id="img_news_next" src="/media/img/new/news_next.png" alt="{% trans "Next news" %}" /></a>
     </span>
     <div class="summary_container">
         {% for howto in howtos %}
         <div class="column first">
             <img src="{{ howto.image.file.url }}" alt="{{ howto.image.get_alt_string }}" /><br />
-            <img src="/media/img/new/image_bottom.png" alt="gölge" />
-            <div class="info"><span class="bold">{{ howto.update|date:"d" }} {{ howto.update|date:"F"|slice:":3" }}</span> {{ howto.update|date:"Y" }} <span class="bold">/</span> <a href="{{ howto.topic.get_latest_post_url }}"><span class="bold">{{ howto.topic.posts|add:"-1" }}</span> Yorum</a></div>
+            <img src="/media/img/new/image_bottom.png" alt="_" />
+            <div class="info"><span class="bold">{{ howto.update|date:"d" }} {{ howto.update|date:"F"|slice:":3" }}</span> {{ howto.update|date:"Y" }} <span class="bold">/</span> <a href="{{ howto.topic.get_latest_post_url }}">{% blocktrans count howto.topic.posts|add:"-1" as number_of_comments %}<span class="bold">{{ number_of_comments }}</span> Comment{% plural %}<span class="bold">{{ number_of_comments }}</span> Comments{% endblocktrans %}</a></div>
         </div>
         <div class="column">
             <span>Nasıl</span>
@@ -59,8 +60,8 @@
         {% for package in packages %}
         <div class="column first">
             <img src="{{ package.image.file.url }}" alt="{{ package.image.get_alt_string }}" /><br />
-            <img src="/media/img/new/image_bottom.png" alt="gölge" />
-            <div class="info"><span class="bold">{{ package.update|date:"d" }} {{ package.update|date:"F"|slice:":3" }}</span> {{ package.update|date:"Y" }} <span class="bold">/</span> <a href="{{ package.topic.get_latest_post_url }}"><span class="bold">{{ package.topic.posts|add:"-1" }}</span> Yorum</a></div>
+            <img src="/media/img/new/image_bottom.png" alt="_" />
+            <div class="info"><span class="bold">{{ package.update|date:"d" }} {{ package.update|date:"F"|slice:":3" }}</span> {{ package.update|date:"Y" }} <span class="bold">/</span> <a href="{{ package.topic.get_latest_post_url }}">{% blocktrans count package.topic.posts|add:"-1" as number_of_comments %}<span class="bold">{{ number_of_comments }}</span> Comment{% plural %}<span class="bold">{{ number_of_comments }}</span> Comments{% endblocktrans %}</a></div>
         </div>
         <div class="column">
             <span>Paket</span>
@@ -72,8 +73,8 @@
         {% for game in games %}
         <div class="column first">
             <img src="{{ game.image.file.url }}" alt="{{ game.image.get_alt_string }}" /><br />
-            <img src="/media/img/new/image_bottom.png" alt="gölge" />
-            <div class="info"><span class="bold">{{ game.update|date:"d" }} {{ game.update|date:"F"|slice:":3" }}</span> {{ game.update|date:"Y" }} <span class="bold">/</span> <a href="{{ game.topic.get_latest_post_url }}"><span class="bold">{{ game.topic.posts|add:"-1" }}</span> Yorum</a></div>
+            <img src="/media/img/new/image_bottom.png" alt="_" />
+            <div class="info"><span class="bold">{{ game.update|date:"d" }} {{ game.update|date:"F"|slice:":3" }}</span> {{ game.update|date:"Y" }} <span class="bold">/</span> <a href="{{ game.topic.get_latest_post_url }}">{% blocktrans count game.topic.posts|add:"-1" as number_of_comments %}<span class="bold">{{ number_of_comments }}</span> Comment{% plural %}<span class="bold">{{ number_of_comments }}</span> Comments{% endblocktrans %}</a></div>
         </div>
         <div class="column">
             <span>Oyun</span>

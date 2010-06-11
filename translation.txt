@@ -110,8 +110,8 @@ These are templates to be marked
 +   |   |   |-- game_detail.html
 +   |   |   |-- game_main.html
 +   |   |   `-- game_printable.html
--   |   |-- header.html
--   |   |-- home.html
++   |   |-- header.html
++   |   |-- home.html
     |   |-- howto
 -   |   |   |-- howto_detail.html
 -   |   |   |-- howto_main.html
