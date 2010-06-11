@@ -98,7 +98,7 @@ These are templates to be marked
 +   |   |   |-- post_edit.html
 +   |   |   |-- post_list_for_user.html
 +   |   |   |-- post_list.html
--   |   |   |-- reply.html
++   |   |   |-- reply.html
 -   |   |   |-- report.html
 -   |   |   |-- topic.html
 -   |   |   `-- unread.html

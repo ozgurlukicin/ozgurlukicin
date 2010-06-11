@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-11 12:21+0300\n"
+"POT-Creation-Date: 2010-06-11 12:46+0300\n"
 "PO-Revision-Date: 2010-06-10 18:48+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -644,6 +644,7 @@ msgstr "Gezegen"
 #: templates/forum/forum_detail.html:39 templates/forum/forum_list.html:10
 #: templates/forum/forum_list.html.py:15 templates/forum/new_topic.html:14
 #: templates/forum/post_edit.html:11 templates/forum/post_list.html:11
+#: templates/forum/reply.html:11
 msgid "Forum"
 msgstr "Forum"
 
@@ -969,7 +970,7 @@ msgstr "Favorilerimden çıkar"
 #: templates/forum/change_poll.html:5 templates/forum/create_poll.html:5
 #: templates/forum/forum_detail.html:13 templates/forum/forum_list.html:10
 #: templates/forum/new_topic.html:14 templates/forum/post_edit.html:11
-#: templates/forum/post_list.html:11
+#: templates/forum/post_list.html:11 templates/forum/reply.html:11
 #, fuzzy
 msgid "Mainpage"
 msgstr "Ana Sayfa"
@@ -1221,11 +1222,12 @@ msgid "Couldn't create topic, please fix the errors below"
 msgstr "Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin."
 
 #: templates/forum/new_topic.html:20 templates/forum/post_edit.html:13
+#: templates/forum/reply.html:13
 #, python-format
 msgid "Flood protection, please wait for %(timeout)s seconds."
 msgstr "Flood koruması aktif, lütfen %(timeout)s saniye bekleyin."
 
-#: templates/forum/new_topic.html:23
+#: templates/forum/new_topic.html:23 templates/forum/reply.html:15
 msgid ""
 "You can use our <a href=\"/yapistir/\" target=\"_blank\">paste tool</a> if "
 "you need to insert a long text or code."
@@ -1237,20 +1239,20 @@ msgstr ""
 msgid "Create Topic"
 msgstr "Başlık Aç"
 
-#: templates/forum/post_edit.html:33
+#: templates/forum/post_edit.html:33 templates/forum/reply.html:31
 msgid "avatar"
 msgstr ""
 
-#: templates/forum/post_edit.html:35
+#: templates/forum/post_edit.html:35 templates/forum/reply.html:33
 #, fuzzy
 msgid "Register Date:"
 msgstr "Kayıt Ol"
 
-#: templates/forum/post_edit.html:36
+#: templates/forum/post_edit.html:36 templates/forum/reply.html:34
 msgid "info"
 msgstr ""
 
-#: templates/forum/post_edit.html:41
+#: templates/forum/post_edit.html:41 templates/forum/reply.html:39
 msgid "post address"
 msgstr ""
 
@@ -1259,7 +1261,7 @@ msgstr ""
 msgid "RSS - Forum"
 msgstr "Forum"
 
-#: templates/forum/post_list.html:16
+#: templates/forum/post_list.html:16 templates/forum/reply.html:20
 msgid "Reply"
 msgstr ""
 
