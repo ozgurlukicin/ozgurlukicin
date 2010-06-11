@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% load library %}
+{% load i18n %}
 
-{% block title %}{{ game.title }} - Oyunlar - {% endblock %}
+{% block title %}{{ game.title }} - {% trans "Games" %} - {% endblock %}
 {% block metadescription %}{{ game.sum|safe|striptags|cut:"\"" }}{% endblock %}
 {% block metakeywords %}{% for tag in game.tags.all %}{{ tag.name }}{% if not forloop.last %},{% endif %}{% endfor %}{% endblock %}
 
@@ -20,90 +21,89 @@
     {{ game.text|safe }}
 </div>
 <div style="clear:both;"></div>
-<div style="float:right;margin-right:10px"><a href="{{ game.topic.get_latest_post_url }}">{{ game.topic.posts|add:"-1" }} yorum</a> <a href="{{ game.topic.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="." /></a></div>
+<div style="float:right; margin-right:10px"><a href="{{ game.topic.get_latest_post_url }}">{% blocktrans count game.topic.posts|add:"-1" as number_of_comments %}{{ number_of_comments }} comment{% plural %}{{ number_of_comments }} comments{% endblocktrans %}</a> <a href="{{ game.topic.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" /></a></div>
 {% if user.is_authenticated %}
     {% if form %}
     <p>
         <form method="post" action="{{ game.topic.get_reply_url }}">
             {{form}}
             <br />
-            <input type="submit" value="Gönder" />
+            <input type="submit" value="{% trans "Submit" %}" />
         </form>
     </p>
     {% endif %}
 {% endif %}
-<div class="page_printable"><a href="{{ game.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
-<div class="page_last_update">Son güncelleme: {{ game.update|date:"d F Y" }}</div>
+<div class="page_printable"><a href="{{ game.get_printable_url }}"><img src="/media/img/print.png" alt="{% trans "print" %}" title="{% trans "printer friendly view" %}" /></a></div>
+<div class="page_last_update">{% trans "Last update:" %} {{ game.update|date:"d F Y" }}</div>
 {% endblock %}
 
 {% block leftcolumn %}
 
 <div class="sidebarcolumn leftcolumn">
-    <h2>Bilgiler</h2>
+    <h2>{% trans "Details" %}</h2>
     <table>
         <tr>
-            <td>Lisans</td><td>:{% for license in game.license.all %}<a href="{{ license.url }}">{{ license.name }}</a>{% endfor %}</td>
+            <td>{% trans "Licence" %}</td><td>:{% for license in game.license.all %}<a href="{{ license.url }}">{{ license.name }}</a>{% endfor %}</td>
         </tr>
         {% ifnotequal game.download_size 0 %}
         <tr>
-            <td>Paket boyutu</td><td>:{{ game.download_size }} MB</td>
+            <td>{% trans "Package size" %}</td><td>:{{ game.download_size }} MB</td>
         </tr>
         {% endifnotequal %}
         {% ifnotequal game.installed_size 0 %}
         <tr>
-            <td>Kurulu boyutu</td><td>:{{ game.installed_size }} MB</td>
+            <td>{% trans "Installed size" %}</td><td>:{{ game.installed_size }} MB</td>
         </tr>
         {% endifnotequal %}
         <tr>
-            <td colspan="3"><br /><a href="{{ game.url }}">Oyunun Web Sitesi</a></td>
+            <td colspan="3"><br /><a href="{{ game.url }}">{% trans "Web site of the game" %}</a></td>
         </tr>
     </table>
-
-    <h2>Değerlendirme</h2>
-    <p>Öğrenme süresi: {{ game.learning_time }}</p>
-    <span>Oynanabilirlik</span><span class="rating">{{ game.gameplay }}/10</span>
+    <h2>{% trans "Ratings" %}</h2>
+    <p>{% trans "Learning Time:" %} {{ game.learning_time }}</p>
+    <span>{% trans "Gameplay" %}</span><span class="rating">{{ game.gameplay }}/10</span>
     <div class="minibox_container">
         {% for i in game.gameplay_range %}<span class="minibox full">&nbsp;</span>{% endfor %}
         {% for i in game.gameplay_range_empty %}<span class="minibox empty">&nbsp;</span>{% endfor %}
     </div>
 
-    <span>Grafik</span><span class="rating">{{ game.graphics }}/10</span>
+    <span>{% trans "Graphics" %}</span><span class="rating">{{ game.graphics }}/10</span>
     <div class="minibox_container">
         {% for i in game.graphics_range %}<span class="minibox full">&nbsp;</span>{% endfor %}
         {% for i in game.graphics_range_empty %}<span class="minibox empty">&nbsp;</span>{% endfor %}
     </div>
-    <span>Ses</span><span class="rating">{{ game.sound }}/10</span>
+    <span>{% trans "Sound" %}</span><span class="rating">{{ game.sound }}/10</span>
     <div class="minibox_container">
         {% for i in game.sound_range %}<span class="minibox full">&nbsp;</span>{% endfor %}
         {% for i in game.sound_range_empty %}<span class="minibox empty">&nbsp;</span>{% endfor %}
     </div>
-    <span>Senaryo</span><span class="rating">{{ game.scenario }}/10</span>
+    <span>{% trans "Scenario" %}</span><span class="rating">{{ game.scenario }}/10</span>
     <div class="minibox_container">
         {% for i in game.scenario_range %}<span class="minibox full">&nbsp;</span>{% endfor %}
         {% for i in game.scenario_range_empty %}<span class="minibox empty">&nbsp;</span>{% endfor %}
     </div>
-    <span>Atmosfer</span><span class="rating">{{ game.atmosphere }}/10</span>
+    <span>{% trans "Atmosphere" %}</span><span class="rating">{{ game.atmosphere }}/10</span>
     <div class="minibox_container">
         {% for i in game.atmosphere_range %}<span class="minibox full">&nbsp;</span>{% endfor %}
         {% for i in game.atmosphere_range_empty %}<span class="minibox empty">&nbsp;</span>{% endfor %}
     </div>
     <div class="game_average_point">{{ game.avg }}</div>
 
-    <h2>Menüdeki yeri</h2>
+    <h2>{% trans "Place in Menu" %}</h2>
     <p>{{ game.path }}</p>
 
-    <h2>Etiketler</h2>
+    <h2>{% trans "Tags" %}</h2>
     <p><img src="/media/img/new/tag.png" style="vertical-align: middle;" alt="etiketler" /> {% for tag in game.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if not forloop.last %},{% endif %} {% endfor %}</p>
 
     {% if game.wiki.all %}
-    <h2>İlgili wiki sayfaları</h2>
+    <h2>{% trans "Related Wiki Pages" %}</h2>
     <p>
         {% for wiki in game.wiki.all %}<a href="{{ wiki.get_absolute_url }}">{{ wiki.name }}</a><br />{% endfor %}
 {% endif %}
     </p>
 
     {% if game.videos.all %}
-    <h2>İlgili Videolar</h2>
+    <h2>{% trans "Related Videos" %}</h2>
     <p>
         {% for video in game.videos.all %}
         {% include "video.html" %}
@@ -111,12 +111,10 @@
     </p>
     {% endif %}
 
-    <h2>Yazar</h2>
+    <h2>{% trans "Author" %}</h2>
     <p>{{ game.author }}</p>
 
-    <h2>Katkıda bulunun</h2>
-    <p>Oyunlar bölümüne katkıda bulunmak istiyorsanız <a
-            href="/katki/oyun/">buraya</a> tıklayarak size kılavuzluk edecek
-        sayfaya gidebilirsiniz.</p>
+    <h2>{% trans "Contribute" %}</h2>
+    <p>{% blocktrans %}If you want to contribute to games section, click <a href="/katki/oyun/">here</a> to visit the contribution guide.{% endblocktrans %}</p>
 </div>
 {% endblock %}

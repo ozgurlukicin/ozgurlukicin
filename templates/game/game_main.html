@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load library %}
-{% block title %}Oyunlar - {% endblock %}
+{% block title %}{% trans "Games" %} - {% endblock %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/object_lists.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
@@ -11,8 +12,8 @@
 {% for game in game_list %}
     <div class="column first">
         <img src="{{ game.image.file.url }}" alt="{{ game.image.get_alt_string }}" /><br />
-        <img src="/media/img/new/image_bottom.png" alt="gölge" />
-        <div class="info"><span class="bold">{{ game.update|date:"d" }} {{ game.update|date:"F"|slice:":3" }}</span> {{ game.update|date:"Y" }} <span class="bold">/</span> <a href="{{ game.topic.get_latest_post_url }}"><span class="bold">{{ game.topic.posts|add:"-1" }}</span> Yorum</a></div>
+        <img src="/media/img/new/image_bottom.png" alt="_" />
+        <div class="info"><span class="bold">{{ game.update|date:"d" }} {{ game.update|date:"F"|slice:":3" }}</span> {{ game.update|date:"Y" }} <span class="bold">/</span> <a href="{{ game.topic.get_latest_post_url }}">{% blocktrans count game.topic.posts|add:"-1" as number_of_comments %}<span class="bold">{{ number_of_comments }}</span> comment{% plural %}<span class="bold">{{ number_of_comments }}</span> comments{% endblocktrans %}</a></div>
     </div>
     <div class="column">
         <div class="title"><a href="{{ game.get_absolute_url }}">{{ game.title }}</a></div>
@@ -22,17 +23,15 @@
 {% endfor %}
 </div>
 
-{% if is_paginated %}<div class="paginator_block"><div class="paginator_pages">{% paginator %}</div><div class="paginator_description"><span class="bold">{{ pages }}</span> sayfada toplam <span class="bold">{{ hits }}</span> oyun incelemesi bulunmaktadır.</div></div>{% endif %}
+{% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div><div class="paginator_description">{% blocktrans %}There's a total of <span class="bold">{{ hits }}</span> game reviews in <span class="bold">{{ pages }}</span> pages.{% endblocktrans %}</div></div>{% endif %}
 {% endblock %}
 
 {% block sidebar %}
 <div class="sidebar_box">
     <div class="sidebar_top">&nbsp;</div>
     <div class="sidebar_middle">
-        <h2>Katkıda bulunun</h2>
-        <p>Oyunlar bölümüne katkıda bulunmak istiyorsanız <a
-            href="/katki/oyun/">buraya</a> tıklayarak size kılavuzluk edecek
-        sayfaya gidebilirsiniz.</p>
+        <h2>{% trans "Contribute" %}</h2>
+        <p>{% blocktrans %}If you want to contribute games section click <a href="/katki/oyun/">here</a> to view our contribution guide.{% endblocktrans %}</p>
     </div>
     <div class="sidebar_bottom">&nbsp;</div>
 </div>

@@ -107,9 +107,9 @@ These are templates to be marked
 +   |   |   |-- fs_main.html
 +   |   |   `-- fs_printable.html
     |   |-- game
--   |   |   |-- game_detail.html
--   |   |   |-- game_main.html
--   |   |   `-- game_printable.html
++   |   |   |-- game_detail.html
++   |   |   |-- game_main.html
++   |   |   `-- game_printable.html
 -   |   |-- header.html
 -   |   |-- home.html
     |   |-- howto
