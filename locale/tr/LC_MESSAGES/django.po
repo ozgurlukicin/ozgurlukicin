@@ -2,13 +2,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Uğur Çetin <jnmbk@users.sourceforge.net>, 2010.
+# Anıl Özbek, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-06-11 14:08+0300\n"
-"PO-Revision-Date: 2010-06-10 18:48+0300\n"
-"Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
+"PO-Revision-Date: 2010-06-11 16:26+0300\n"
+"Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -687,15 +688,17 @@ msgid ""
 "registered trademark of <a href=\"http://uekae.tubitak.gov.tr\" title="
 "\"TÜBİTAK/UEKAE\">TÜBİTAK/UEKAE</a>."
 msgstr ""
+"<a href=\"http://www.pardus.org.tr\" title=\"Pardus\">Pardus</a> logosu <a "
+"href=\"http://uekae.tubitak.gov.tr\" title=\"TÜBİTAK/UEKAE\">TÜBİTAK/UEKAE<"
+"/a>’nin tescilli markasıdır."
 
 #: templates/footer.html:13
 msgid "Themes"
 msgstr "Temalar"
 
 #: templates/footer.html:14
-#, fuzzy
 msgid "Shipit"
-msgstr "cdgonder"
+msgstr "CD Gönder"
 
 #: templates/admin/base.html:25
 msgid "Welcome,"
@@ -945,33 +948,31 @@ msgid "Technical"
 msgstr "Teknik"
 
 #: templates/forum/abuse_list.html:3
-#, fuzzy
 msgid "Reported Posts"
-msgstr "Bildir"
+msgstr "Raporlanmış İletiler"
 
 #: templates/forum/abuse_list.html:6
-#, fuzzy
 msgid ""
 "There's no reported post. Click <a href=\"/forum/\">here</a> to go to forum"
-msgstr "Özgürlükİçin forumlarına gitmek için <a href=\"/forum/\">tıklayın</a>."
+msgstr ""
+"Raporlanmış herhangi bir ileti bulunmamaktadır. Foruma dönmek için <a "
+"href=\"/forum/\">Tıklayın"
 
 #: templates/forum/abuse_list.html:9
 msgid "Reported Posts:"
-msgstr ""
+msgstr "Raporlanmış İletiler:"
 
 #: templates/forum/abuse_list.html:11
-#, fuzzy
 msgid "Reporter:"
-msgstr "Bildir"
+msgstr "Raporlayan:"
 
 #: templates/forum/abuse_list.html:11
 msgid "Reason:"
 msgstr "Sebep:"
 
 #: templates/forum/abuse_list.html:14
-#, fuzzy
 msgid "Remove from Abuse List"
-msgstr "Favorilerimden çıkar"
+msgstr "Şikayet Listesinden Çıkar"
 
 #: templates/forum/change_poll.html:5 templates/forum/create_poll.html:5
 #: templates/forum/forum_detail.html:13 templates/forum/forum_list.html:10
@@ -979,28 +980,24 @@ msgstr "Favorilerimden çıkar"
 #: templates/forum/post_list.html:11 templates/forum/reply.html:11
 #: templates/forum/report.html:12 templates/forum/topic.html:14
 #: templates/forum/topic.html.py:187 templates/forum/unread.html:6
-#, fuzzy
 msgid "Mainpage"
 msgstr "Ana Sayfa"
 
 #: templates/forum/change_poll.html:5 templates/forum/change_poll.html:20
-#, fuzzy
 msgid "Change Poll"
-msgstr "Değiştir"
+msgstr "Anketi Değiştir"
 
 #: templates/forum/change_poll.html:8
-#, fuzzy
 msgid "Poll couldn't be changed. Please fix the errors below."
-msgstr "Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin."
+msgstr "Anket değiştirilemedi, lütfen aşağıdaki hataları düzeltin"
 
 #: templates/forum/create_poll.html:5
 msgid "Add Poll"
 msgstr "Anket Ekle"
 
 #: templates/forum/create_poll.html:8
-#, fuzzy
 msgid "Poll couldn't be created. Please fix the errors below."
-msgstr "Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin."
+msgstr "Anket oluşturulamadı, lütfen aşağıdaki hataları düzeltin."
 
 #: templates/forum/create_poll.html:20
 msgid "Create Poll"
@@ -1025,9 +1022,8 @@ msgstr "Güncellenen Başlıklar"
 
 #: templates/forum/forum_base.html:49 templates/forum/forum_list.html:51
 #: templates/forum/post_list.html:11
-#, fuzzy
 msgid "Latest Posts"
-msgstr "Son eklenenler"
+msgstr "Son İletiler"
 
 #: templates/forum/forum_base.html:50
 msgid "Paste Tool"
@@ -1038,19 +1034,17 @@ msgid "Mark All as Read"
 msgstr "Tümünü Okunmuş Say"
 
 #: templates/forum/forum_base.html:52
-#, fuzzy, python-format
+#, python-format
 msgid "Abuse Reports (%(abuse_count)s)"
-msgstr "İlk Adımlar (%(count)s)"
+msgstr "Şikayet Edilmiş İletiler (%(abuse_count)s)"
 
 #: templates/forum/forum_base.html:53
-#, fuzzy
 msgid "Logout"
-msgstr "Çık"
+msgstr "Çıkış"
 
 #: templates/forum/forum_detail.html:4 templates/forum/forum_detail.html:6
-#, fuzzy
 msgid "Spread Pardus Forum"
-msgstr "Özgürlükiçin"
+msgstr "Özgürlükİçin Forum"
 
 #: templates/forum/forum_detail.html:14 templates/forum/new_topic.html:14
 msgid "New Topic"
@@ -1062,20 +1056,17 @@ msgstr "Başlık"
 
 #: templates/forum/forum_detail.html:20 templates/forum/forum_list.html:19
 #: templates/forum/unread.html:11
-#, fuzzy
 msgid "Posts"
-msgstr "Ajans"
+msgstr "İletiler"
 
 #: templates/forum/forum_detail.html:22 templates/forum/unread.html:12
-#, fuzzy
 msgid "Views"
-msgstr "Haberler"
+msgstr "Görüntüleme"
 
 #: templates/forum/forum_detail.html:24 templates/forum/forum_list.html:21
 #: templates/forum/unread.html:13
-#, fuzzy
 msgid "Latest Post"
-msgstr "Son eklenenler"
+msgstr "Son İleti"
 
 #: templates/forum/forum_detail.html:57 templates/forum/forum_list.html:79
 #: templates/forum/unread.html:23
@@ -1132,9 +1123,8 @@ msgid "Topics"
 msgstr "Başlıklar"
 
 #: templates/forum/forum_list.html:33
-#, fuzzy
 msgid "Read forum"
-msgstr "İlgili Forum Bağlantısı"
+msgstr "Okunmuş forum"
 
 #: templates/forum/forum_list.html:33
 msgid "Unread forum"
@@ -1157,9 +1147,8 @@ msgid "Total Members"
 msgstr "Toplam Üye Sayısı"
 
 #: templates/forum/forum_list.html:60
-#, fuzzy
 msgid "Total Posts"
-msgstr "Bildir"
+msgstr "Toplam İleti Sayısı"
 
 #: templates/forum/forum_list.html:65
 #, fuzzy
@@ -1229,9 +1218,8 @@ msgid "Select the forum to move %(forum)s &#62; %(topic)s."
 msgstr "%(forum)s &#62; %(topic)s başlığını taşıyacağınız forumu seçin."
 
 #: templates/forum/new_topic.html:17
-#, fuzzy
 msgid "Couldn't create topic, please fix the errors below"
-msgstr "Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin."
+msgstr "Başlık açılamadı, lütfen aşağıdaki hataları düzeltin"
 
 #: templates/forum/new_topic.html:20 templates/forum/post_edit.html:13
 #: templates/forum/reply.html:13
@@ -1254,222 +1242,208 @@ msgstr "Başlık Aç"
 #: templates/forum/post_edit.html:33 templates/forum/reply.html:31
 #: templates/forum/topic.html:62
 msgid "avatar"
-msgstr ""
+msgstr "avatar"
 
 #: templates/forum/post_edit.html:35 templates/forum/reply.html:33
 #: templates/forum/report.html:29 templates/forum/topic.html:64
-#, fuzzy
 msgid "Register Date:"
-msgstr "Kayıt Ol"
+msgstr "Kayıt Tarihi:"
 
 #: templates/forum/post_edit.html:36 templates/forum/reply.html:34
 #: templates/forum/report.html:30 templates/forum/topic.html:66
 msgid "info"
-msgstr ""
+msgstr "bilgi"
 
 #: templates/forum/post_edit.html:41 templates/forum/reply.html:39
 #: templates/forum/report.html:35
 msgid "post address"
-msgstr ""
+msgstr "ileti adresi"
 
 #: templates/forum/post_list.html:4
-#, fuzzy
 msgid "RSS - Forum"
-msgstr "Forum"
+msgstr "RSS - Forum"
 
 #: templates/forum/post_list.html:16 templates/forum/reply.html:20
 #: templates/forum/topic.html:155
 msgid "Reply"
-msgstr ""
+msgstr "Yanıtla"
 
 #: templates/forum/post_list.html:16
 msgid "Go to message"
-msgstr ""
+msgstr "İletiye git"
 
 #: templates/forum/post_list_for_user.html:3
 #, python-format
 msgid "Posts sent by %(author)s"
-msgstr ""
+msgstr "%(author)s tarafından gönderilen iletiler"
 
 #: templates/forum/report.html:12
-#, fuzzy
 msgid "Report Post"
-msgstr "Bildir"
+msgstr "İleti Raporla"
 
 #: templates/forum/topic.html:16
-#, fuzzy
 msgid "follow"
-msgstr "Takip Et"
+msgstr "izle"
 
 #: templates/forum/topic.html:16
 msgid "Follow with e-mail"
-msgstr ""
+msgstr "E-posta ile izle"
 
 #: templates/forum/topic.html:19
-#, fuzzy
 msgid "add poll"
-msgstr "Anket Ekle"
+msgstr "anket ekle"
 
 #: templates/forum/topic.html:34
-#, fuzzy
 msgid "Poll"
-msgstr "Anket Ekle"
+msgstr "Anket"
 
 #: templates/forum/topic.html:40
-#, fuzzy
 msgid "click here to vote"
-msgstr "Geri gitmek için tıklayın"
+msgstr "oy vermek için tıklayın"
 
 #: templates/forum/topic.html:45
 msgid "%(percent)s%"
-msgstr ""
+msgstr "%%(percent)s"
 
 #: templates/forum/topic.html:49
 msgid "Click on an option to vote for it."
-msgstr ""
+msgstr "Oylamaya katılmak için şıklardan birini tıklayın."
 
 #: templates/forum/topic.html:50
 msgid "Voting deadline:"
-msgstr ""
+msgstr "Oylama bitiş tarihi:"
 
 #: templates/forum/topic.html:51
-#, fuzzy
 msgid "change"
-msgstr "Değiştir"
+msgstr "değiştir"
 
 #: templates/forum/topic.html:51 templates/forum/topic.html.py:108
 #: templates/forum/topic.html:117
 msgid "delete"
-msgstr ""
+msgstr "sil"
 
 #: templates/forum/topic.html:65
 msgid "Version"
-msgstr ""
+msgstr "Sürüm"
 
 #: templates/forum/topic.html:79
-#, fuzzy
 msgid "report"
-msgstr "Bildir"
+msgstr "raporla"
 
 #: templates/forum/topic.html:79
-#, fuzzy
 msgid "Report abuse"
-msgstr "Bildir"
+msgstr "Kurallara uymayan iletiyi şikayet et"
 
 #: templates/forum/topic.html:82
 msgid "quote"
-msgstr ""
+msgstr "alıntıla"
 
 #: templates/forum/topic.html:86 templates/forum/topic.html.py:91
-#, fuzzy
 msgid "edit"
-msgstr "Düzenle"
+msgstr "düzenle"
 
 #: templates/forum/topic.html:97
 msgid "hide"
-msgstr ""
+msgstr "gizle"
 
 #: templates/forum/topic.html:102
 msgid "show"
-msgstr ""
+msgstr "göster"
 
 #: templates/forum/topic.html:135
 #, python-format
 msgid "This post was edited once."
 msgid_plural "This post was edited %(edit_count)s times."
-msgstr[0] ""
+msgstr[0] "Bu ileti %(edit_count)s kez değiştirilmiştir."
 
 #: templates/forum/topic.html:135
 #, python-format
 msgid "Last edit was made at %(edit_date)s by %(last_edited_by)s."
 msgstr ""
+"Son düzenleme %(edit_date)s tarihinde %(last_edited_by)s tarafından "
+"yapılmıştır."
 
 #: templates/forum/topic.html:158
 msgid "Unlock"
-msgstr ""
+msgstr "Kilidi kaldır"
 
 #: templates/forum/topic.html:161
-#, fuzzy
 msgid "Merge Topic"
-msgstr "Yeni Başlık"
+msgstr "Başlığı Birleştir"
 
 #: templates/forum/topic.html:164
-#, fuzzy
 msgid "Move Topic"
-msgstr "Yeni Başlık"
+msgstr "Başlığı Taşı"
 
 #: templates/forum/topic.html:167
-#, fuzzy
 msgid "Hide Topic"
-msgstr "Yeni Başlık"
+msgstr "Başlığı Gizle"
 
 #: templates/forum/topic.html:170
-#, fuzzy
 msgid "Show Topic"
-msgstr "Yeni Başlık"
+msgstr "Başlığı Göster"
 
 #: templates/forum/topic.html:173
 msgid "Make Sticky"
-msgstr ""
+msgstr "Sabitle"
 
 #: templates/forum/topic.html:176
 msgid "Remove Sticky"
-msgstr ""
+msgstr "Sabitliği Kaldır"
 
 #: templates/forum/topic.html:179
-#, fuzzy
 msgid "Lock Topic"
-msgstr "Kilitli Başlık"
+msgstr "Başlığı Kilitle"
 
 #: templates/forum/topic.html:182
-#, fuzzy
 msgid "Edit Topic"
-msgstr "Okunmuş Başlık"
+msgstr "Başlığı Düzenle"
 
 #: templates/forum/unread.html:6
 msgid "Unread Topics ({{ topic_count }})"
-msgstr ""
+msgstr "Okunmamış Başlık ({{ topic_count }})"
 
 #: templates/forum/unread.html:23
-#, fuzzy
 msgid "Fixed Topic"
-msgstr "Okunmuş Başlık"
+msgstr "Sabit Başlık"
 
 #: templates/forum/unread.html:23
-#, fuzzy
 msgid "Fixed and Locked Topic"
-msgstr "Kilitli Başlık"
+msgstr "Sabit ve Kilitli Başlık"
 
 #: templates/fs/fs_detail.html:16
-#, fuzzy
 msgid "Last update:"
-msgstr "Son Güncelleme"
+msgstr "Son güncelleme:"
 
 #: templates/fs/fs_detail.html:22 templates/fs/fs_main.html:36
 msgid "Contribute"
-msgstr ""
+msgstr "Katkıda bulunun"
 
 #: templates/fs/fs_detail.html:23
 msgid ""
 "If you want to contribute to first steps section, click <a href=\"/katki/"
 "ilk_adimlar/\">here</a> to visit the contribution guide."
 msgstr ""
+"İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a "
+"href=\"/katki/ilk_adimlar/\">buraya</a> tıklayarak size kılavuzluk edecek "
+"sayfaya gidebilirsiniz."
 
 #: templates/fs/fs_detail.html:33
-#, fuzzy
 msgid "Related Videos"
-msgstr "İlgili Sayfalar"
+msgstr "İlgili Videolar"
 
 #: templates/fs/fs_detail.html:42
-#, fuzzy
 msgid "Author"
-msgstr "Yazarlar"
+msgstr "Yazar"
 
 #: templates/fs/fs_main.html:37
 msgid ""
 "If you want to contribute first steps section click <a href=\"/katki/oyun/"
 "\">here</a> to view our contribution guide."
 msgstr ""
+"İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a "
+"href=\"/katki/ilk_adimlar/\">buraya</a> tıklayarak size kılavuzluk edecek "
+"sayfaya gidebilirsiniz."
 
 #: webalizer/templates/webalizer/index.html:7
 msgid "settings.WEBALIZER_DIR is not configured"
