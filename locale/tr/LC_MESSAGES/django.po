@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-11 16:29+0300\n"
+"POT-Creation-Date: 2010-06-11 16:32+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -657,13 +657,14 @@ msgstr "Gezegen"
 
 #: templates/base.html:21 templates/footer.html:14
 #: templates/forum/change_poll.html:5 templates/forum/create_poll.html:5
-#: templates/forum/forum_base.html:11 templates/forum/forum_detail.html:13
-#: templates/forum/forum_detail.html:39 templates/forum/forum_list.html:10
-#: templates/forum/forum_list.html.py:15 templates/forum/new_topic.html:14
-#: templates/forum/post_edit.html:11 templates/forum/post_list.html:11
-#: templates/forum/reply.html:11 templates/forum/report.html:12
-#: templates/forum/topic.html:8 templates/forum/topic.html.py:14
-#: templates/forum/topic.html:187 templates/forum/unread.html:6
+#: templates/forum/forum_base.html:5 templates/forum/forum_base.html.py:11
+#: templates/forum/forum_detail.html:13 templates/forum/forum_detail.html:39
+#: templates/forum/forum_list.html:10 templates/forum/forum_list.html.py:15
+#: templates/forum/new_topic.html:14 templates/forum/post_edit.html:11
+#: templates/forum/post_list.html:11 templates/forum/reply.html:11
+#: templates/forum/report.html:12 templates/forum/topic.html:8
+#: templates/forum/topic.html.py:14 templates/forum/topic.html:187
+#: templates/forum/unread.html:6
 msgid "Forum"
 msgstr "Forum"
 
@@ -1082,11 +1083,6 @@ msgstr "Anket oluşturulamadı, lütfen aşağıdaki hataları düzeltin."
 #: templates/forum/create_poll.html:20
 msgid "Create Poll"
 msgstr "Anket Oluştur"
-
-#: templates/forum/forum_base.html:5
-#, fuzzy
-msgid "Forum "
-msgstr "Forum"
 
 #: templates/forum/forum_base.html:46
 msgid "Profile"
@@ -1842,6 +1838,10 @@ msgstr "Hakkında"
 #: webalizer/templates/webalizer/index.html:7
 msgid "settings.WEBALIZER_DIR is not configured"
 msgstr "settings.WEBALIZER_DIR ayarlanmamış"
+
+#, fuzzy
+#~ msgid "Forum "
+#~ msgstr "Forum"
 
 #, fuzzy
 #~ msgid "Userbox"
