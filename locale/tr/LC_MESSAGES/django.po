@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-11 14:08+0300\n"
+"POT-Creation-Date: 2010-06-11 16:29+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -193,6 +193,7 @@ msgstr ""
 
 #: feedjack/models.py:130 feedjack/models.py:149
 #: templates/feedjack/oi/post_list.html:16
+#: templates/package/package_detail.html:65
 msgid "tags"
 msgstr ""
 
@@ -263,6 +264,7 @@ msgid "Idea couldn't be submitted, please fix the errors below."
 msgstr "Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin."
 
 #: ideas/templates/idea_add_form.html:21 templates/editor/create.html:12
+#: templates/game/game_detail.html:31 templates/howto/howto_detail.html:29
 msgid "Submit"
 msgstr "Gönder"
 
@@ -272,7 +274,8 @@ msgid "Brainstorm"
 msgstr "Yeni Fikirler"
 
 #: ideas/templates/idea_base.html:5 templates/base.html:7
-#: templates/base.html.py:83 templates/forum/forum_base.html:5
+#: templates/base.html.py:83 templates/header.html:4
+#: templates/forum/forum_base.html:5
 msgid "Spread Pardus"
 msgstr "Özgürlükiçin"
 
@@ -394,7 +397,9 @@ msgid "This is duplicate of idea <a href=\"%(url)s\">#%(id)s</a>"
 msgstr "Bu fikir <a href=\"%(url)s\">#%(id)s</a> numaralı fikrin aynısı"
 
 #: ideas/templates/idea_detail.html:14 templates/flatpages/default.html:69
-#: templates/fs/fs_detail.html:26
+#: templates/fs/fs_detail.html:26 templates/game/game_detail.html:95
+#: templates/howto/howto_detail.html:57 templates/news/news_detail.html:49
+#: templates/package/package_detail.html:63
 msgid "Tags"
 msgstr "Etiketler"
 
@@ -611,21 +616,27 @@ msgid "Main Page"
 msgstr "Ana Sayfa"
 
 #: templates/base.html:14 templates/footer.html:13
-#: templates/editor/list.html:12
+#: templates/editor/list.html:12 templates/news/news_detail.html:4
+#: templates/news/news_main.html:4 templates/news/news_printable.html:3
 msgid "News"
 msgstr "Haberler"
 
 #: templates/base.html:15 templates/footer.html:12
+#: templates/howto/howto_detail.html:4 templates/howto/howto_main.html:4
+#: templates/howto/howto_printable.html:3
 msgid "Howto"
 msgstr "Nasıl"
 
 #: templates/base.html:16 templates/footer.html:12
 #: templates/fs/fs_detail.html:4 templates/fs/fs_main.html:4
-#: templates/fs/fs_printable.html:3
+#: templates/fs/fs_printable.html:3 templates/howto/howto_main.html:34
 msgid "First Steps"
 msgstr "İlk Adımlar"
 
 #: templates/base.html:17 templates/footer.html:12
+#: templates/package/package_detail.html:5
+#: templates/package/package_main.html:4
+#: templates/package/package_printable.html:3
 msgid "Packages"
 msgstr "Paketler"
 
@@ -634,6 +645,8 @@ msgid "Workshop"
 msgstr "Atölye"
 
 #: templates/base.html:19 templates/footer.html:12
+#: templates/game/game_detail.html:5 templates/game/game_main.html:4
+#: templates/game/game_printable.html:3
 msgid "Games"
 msgstr "Oyunlar"
 
@@ -689,8 +702,8 @@ msgid ""
 "\"TÜBİTAK/UEKAE\">TÜBİTAK/UEKAE</a>."
 msgstr ""
 "<a href=\"http://www.pardus.org.tr\" title=\"Pardus\">Pardus</a> logosu <a "
-"href=\"http://uekae.tubitak.gov.tr\" title=\"TÜBİTAK/UEKAE\">TÜBİTAK/UEKAE<"
-"/a>’nin tescilli markasıdır."
+"href=\"http://uekae.tubitak.gov.tr\" title=\"TÜBİTAK/UEKAE\">TÜBİTAK/UEKAE</"
+"a>’nin tescilli markasıdır."
 
 #: templates/footer.html:13
 msgid "Themes"
@@ -699,6 +712,73 @@ msgstr "Temalar"
 #: templates/footer.html:14
 msgid "Shipit"
 msgstr "CD Gönder"
+
+#: templates/header.html:4
+#, fuzzy
+msgid "Spread Pardus Mainpage"
+msgstr "Özgürlükiçin"
+
+#: templates/header.html:6
+#, fuzzy
+msgid "Download Pardus 2009"
+msgstr "Pardus İndir"
+
+#: templates/home.html:11
+msgid "Pardus Events"
+msgstr ""
+
+#: templates/home.html:17 templates/news/news_main.html:39
+#, fuzzy
+msgid "Place:"
+msgstr "Gezegen"
+
+#: templates/home.html:18 templates/news/news_main.html:40
+msgid "Speakers:"
+msgstr ""
+
+#: templates/home.html:36 templates/home.html.py:51 templates/home.html:64
+#: templates/home.html.py:77
+#, python-format
+msgid "<span class=\"bold\">%(number_of_comments)s</span> Comment"
+msgid_plural "<span class=\"bold\">%(number_of_comments)s</span> Comments"
+msgstr[0] ""
+
+#: templates/home.html:44
+msgid "Previous News"
+msgstr ""
+
+#: templates/home.html:44
+#, fuzzy
+msgid "Next news"
+msgstr "Haberler"
+
+#: templates/paginator.html:4
+#, fuzzy
+msgid "First Page"
+msgstr "İlk Adımlar"
+
+#: templates/paginator.html:5
+msgid "Previous Page"
+msgstr ""
+
+#: templates/paginator.html:8
+msgid "Current Page"
+msgstr ""
+
+#: templates/paginator.html:10
+#, fuzzy, python-format
+msgid "Page %(num)s"
+msgstr "Paketler (%(count)s)"
+
+#: templates/paginator.html:13
+#, fuzzy
+msgid "Next Page"
+msgstr "İlgili Sayfalar"
+
+#: templates/paginator.html:14
+#, fuzzy
+msgid "Last Page"
+msgstr "Son Güncelleme"
 
 #: templates/admin/base.html:25
 msgid "Welcome,"
@@ -955,8 +1035,8 @@ msgstr "Raporlanmış İletiler"
 msgid ""
 "There's no reported post. Click <a href=\"/forum/\">here</a> to go to forum"
 msgstr ""
-"Raporlanmış herhangi bir ileti bulunmamaktadır. Foruma dönmek için <a "
-"href=\"/forum/\">Tıklayın"
+"Raporlanmış herhangi bir ileti bulunmamaktadır. Foruma dönmek için <a href="
+"\"/forum/\">Tıklayın"
 
 #: templates/forum/abuse_list.html:9
 msgid "Reported Posts:"
@@ -1342,11 +1422,12 @@ msgstr "alıntıla"
 msgid "edit"
 msgstr "düzenle"
 
-#: templates/forum/topic.html:97
+#: templates/forum/topic.html:97 templates/paste/pastedtext_detail.html:17
+#: templates/paste/pastedtext_detail.html:19
 msgid "hide"
 msgstr "gizle"
 
-#: templates/forum/topic.html:102
+#: templates/forum/topic.html:102 templates/paste/pastedtext_detail.html:11
 msgid "show"
 msgstr "göster"
 
@@ -1411,11 +1492,17 @@ msgstr "Sabit Başlık"
 msgid "Fixed and Locked Topic"
 msgstr "Sabit ve Kilitli Başlık"
 
-#: templates/fs/fs_detail.html:16
+#: templates/fs/fs_detail.html:16 templates/game/game_detail.html:37
+#: templates/howto/howto_detail.html:35 templates/news/news_detail.html:43
+#: templates/package/package_detail.html:35
 msgid "Last update:"
 msgstr "Son güncelleme:"
 
 #: templates/fs/fs_detail.html:22 templates/fs/fs_main.html:36
+#: templates/game/game_detail.html:117 templates/game/game_main.html:33
+#: templates/howto/howto_detail.html:85 templates/howto/howto_main.html:47
+#: templates/package/package_detail.html:81
+#: templates/package/package_main.html:33
 msgid "Contribute"
 msgstr "Katkıda bulunun"
 
@@ -1424,26 +1511,333 @@ msgid ""
 "If you want to contribute to first steps section, click <a href=\"/katki/"
 "ilk_adimlar/\">here</a> to visit the contribution guide."
 msgstr ""
-"İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a "
-"href=\"/katki/ilk_adimlar/\">buraya</a> tıklayarak size kılavuzluk edecek "
-"sayfaya gidebilirsiniz."
+"İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
+"ilk_adimlar/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
+"gidebilirsiniz."
 
-#: templates/fs/fs_detail.html:33
+#: templates/fs/fs_detail.html:33 templates/game/game_detail.html:106
+#: templates/package/package_detail.html:87
 msgid "Related Videos"
 msgstr "İlgili Videolar"
 
-#: templates/fs/fs_detail.html:42
+#: templates/fs/fs_detail.html:42 templates/game/game_detail.html:114
+#: templates/howto/howto_detail.html:80 templates/news/news_detail.html:53
+#: templates/package/package_detail.html:79
 msgid "Author"
 msgstr "Yazar"
+
+#: templates/fs/fs_main.html:26
+#, python-format
+msgid ""
+"There's a total of <span class=\"bold\">%(hits)s</span> first step articles "
+"in <span class=\"bold\">%(pages)s</span> pages."
+msgstr ""
 
 #: templates/fs/fs_main.html:37
 msgid ""
 "If you want to contribute first steps section click <a href=\"/katki/oyun/"
 "\">here</a> to view our contribution guide."
 msgstr ""
-"İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a "
-"href=\"/katki/ilk_adimlar/\">buraya</a> tıklayarak size kılavuzluk edecek "
-"sayfaya gidebilirsiniz."
+"İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
+"ilk_adimlar/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
+"gidebilirsiniz."
+
+#: templates/game/game_detail.html:24 templates/howto/howto_detail.html:22
+#: templates/news/news_detail.html:28 templates/package/package_detail.html:24
+#, python-format
+msgid "%(number_of_comments)s comment"
+msgid_plural "%(number_of_comments)s comments"
+msgstr[0] ""
+
+#: templates/game/game_detail.html:36 templates/howto/howto_detail.html:34
+#: templates/news/news_detail.html:42 templates/package/package_detail.html:34
+msgid "print"
+msgstr ""
+
+#: templates/game/game_detail.html:36 templates/howto/howto_detail.html:34
+#: templates/news/news_detail.html:42 templates/package/package_detail.html:34
+msgid "printer friendly view"
+msgstr ""
+
+#: templates/game/game_detail.html:43 templates/package/package_detail.html:39
+msgid "Details"
+msgstr ""
+
+#: templates/game/game_detail.html:46
+msgid "Licence"
+msgstr ""
+
+#: templates/game/game_detail.html:50
+#, fuzzy
+msgid "Package size"
+msgstr "Paketler"
+
+#: templates/game/game_detail.html:55
+#, fuzzy
+msgid "Installed size"
+msgstr "Kurulan CD"
+
+#: templates/game/game_detail.html:59
+msgid "Web site of the game"
+msgstr ""
+
+#: templates/game/game_detail.html:62
+msgid "Ratings"
+msgstr ""
+
+#: templates/game/game_detail.html:63
+msgid "Learning Time:"
+msgstr ""
+
+#: templates/game/game_detail.html:64
+#, fuzzy
+msgid "Gameplay"
+msgstr "Oyunlar"
+
+#: templates/game/game_detail.html:70
+msgid "Graphics"
+msgstr ""
+
+#: templates/game/game_detail.html:75
+msgid "Sound"
+msgstr ""
+
+#: templates/game/game_detail.html:80
+#, fuzzy
+msgid "Scenario"
+msgstr "Seminer"
+
+#: templates/game/game_detail.html:85
+msgid "Atmosphere"
+msgstr ""
+
+#: templates/game/game_detail.html:92
+msgid "Place in Menu"
+msgstr ""
+
+#: templates/game/game_detail.html:99 templates/package/package_detail.html:68
+#, fuzzy
+msgid "Related Wiki Pages"
+msgstr "İlgili Sayfalar"
+
+#: templates/game/game_detail.html:118
+#, fuzzy
+msgid ""
+"If you want to contribute to games section, click <a href=\"/katki/oyun/"
+"\">here</a> to visit the contribution guide."
+msgstr ""
+"İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
+"ilk_adimlar/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
+"gidebilirsiniz."
+
+#: templates/game/game_main.html:16 templates/howto/howto_main.html:16
+#: templates/news/news_main.html:16 templates/package/package_main.html:16
+#, python-format
+msgid "<span class=\"bold\">%(number_of_comments)s</span> comment"
+msgid_plural "<span class=\"bold\">%(number_of_comments)s</span> comments"
+msgstr[0] ""
+
+#: templates/game/game_main.html:26
+#, python-format
+msgid ""
+"There's a total of <span class=\"bold\">%(hits)s</span> game reviews in "
+"<span class=\"bold\">%(pages)s</span> pages."
+msgstr ""
+
+#: templates/game/game_main.html:34
+#, fuzzy
+msgid ""
+"If you want to contribute games section click <a href=\"/katki/oyun/\">here</"
+"a> to view our contribution guide."
+msgstr ""
+"İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
+"ilk_adimlar/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
+"gidebilirsiniz."
+
+#: templates/howto/howto_detail.html:48
+#, fuzzy
+msgid "Related Articles"
+msgstr "İlgili Videolar"
+
+#: templates/howto/howto_detail.html:63
+#, fuzzy
+msgid "Related wiki pages"
+msgstr "İlgili Sayfalar"
+
+#: templates/howto/howto_detail.html:71
+#, fuzzy
+msgid "Related videos"
+msgstr "İlgili Videolar"
+
+#: templates/howto/howto_detail.html:86 templates/howto/howto_main.html:48
+#, fuzzy
+msgid ""
+"If you want to contribute to howto section, click <a href=\"/katki/nasil/"
+"\">here</a> to visit the contribution guide."
+msgstr ""
+"İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
+"ilk_adimlar/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
+"gidebilirsiniz."
+
+#: templates/howto/howto_main.html:26
+#, python-format
+msgid ""
+"There's a total of <span class=\"bold\">%(hits)s</span> howto articles in "
+"<span class=\"bold\">%(pages)s</span> pages."
+msgstr ""
+
+#: templates/news/news_detail.html:37 templates/package/package_detail.html:30
+msgid "Send"
+msgstr ""
+
+#: templates/news/news_detail.html:55
+#, fuzzy
+msgid "Share"
+msgstr "Kaydet"
+
+#: templates/news/news_detail.html:62
+msgid "add to del.icio.us"
+msgstr ""
+
+#: templates/news/news_detail.html:63
+msgid "add to facebook"
+msgstr ""
+
+#: templates/news/news_detail.html:64
+msgid "add to identica"
+msgstr ""
+
+#: templates/news/news_detail.html:65
+msgid "add to twitter"
+msgstr ""
+
+#: templates/news/news_detail.html:66
+msgid "add to stumbleupon"
+msgstr ""
+
+#: templates/news/news_detail.html:67
+msgid "add to google buzz"
+msgstr ""
+
+#: templates/news/news_detail.html:68
+msgid "add to technorati"
+msgstr ""
+
+#: templates/news/news_main.html:26
+#, python-format
+msgid ""
+"There's a total of <span class=\"bold\">%(hits)s</span> news in <span class="
+"\"bold\">%(pages)s</span> pages."
+msgstr ""
+
+#: templates/package/package_detail.html:42
+msgid "Licence:"
+msgstr ""
+
+#: templates/package/package_detail.html:46
+#, fuzzy
+msgid "Package size:"
+msgstr "Paketler"
+
+#: templates/package/package_detail.html:51
+#, fuzzy
+msgid "Installed size:"
+msgstr "Kurulan CD"
+
+#: templates/package/package_detail.html:55
+msgid "Web site of the package"
+msgstr ""
+
+#: templates/package/package_detail.html:58
+#, fuzzy
+msgid "Editors Note"
+msgstr "Editör"
+
+#: templates/package/package_detail.html:59
+#, fuzzy, python-format
+msgid "%(points)s point"
+msgid_plural "%(points)s points"
+msgstr[0] "%(posts)s ileti"
+
+#: templates/package/package_detail.html:61
+msgid "Place in Pardus Menu"
+msgstr ""
+
+#: templates/package/package_detail.html:75
+msgid "Screenshots"
+msgstr ""
+
+#: templates/package/package_detail.html:82
+#, fuzzy
+msgid ""
+"If you want to contribute to packages section, click <a href=\"/katki/paket/"
+"\">here</a> to visit the contribution guide."
+msgstr ""
+"İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
+"ilk_adimlar/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
+"gidebilirsiniz."
+
+#: templates/package/package_main.html:26
+#, python-format
+msgid ""
+"There's a total of <span class=\"bold\">%(hits)s</span> package reviews in "
+"<span class=\"bold\">%(pages)s</span> pages."
+msgstr ""
+
+#: templates/package/package_main.html:34
+#, fuzzy
+msgid ""
+"If you want to contribute packages section click <a href=\"/katki/paket/"
+"\">here</a> to view our contribution guide."
+msgstr ""
+"İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
+"ilk_adimlar/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
+"gidebilirsiniz."
+
+#: templates/paste/pastedtext_add.html:9
+msgid ""
+"You can use Spread Pardus paste tool for sharing texts like your console "
+"outputs and programming codes. Our <a href=\"/icerik-politikasi/\">content</"
+"a> and <a href=\"/forum-kurallari/\">forum</a> policies also applies to this "
+"paste tool."
+msgstr ""
+
+#: templates/paste/pastedtext_add.html:12
+#, fuzzy
+msgid "Paste"
+msgstr "Ajans"
+
+#: templates/paste/pastedtext_detail.html:9
+msgid "This text has been hidden by an admin."
+msgstr ""
+
+#: templates/paste/pastedtext_detail.html:12
+#, python-format
+msgid "It was sent by %(author)s on %(date)s and was hidden by an admin."
+msgstr ""
+
+#: templates/paste/pastedtext_detail.html:21
+#, fuzzy, python-format
+msgid "This was sent by %(author)s on %(date)s."
+msgstr "%(author)s tarafından gönderilen iletiler"
+
+#: templates/paste/pastedtext_detail.html:22
+msgid "you can copy link by right clicking this"
+msgstr ""
+
+#: templates/paste/pastedtext_toggle.html:8
+#, fuzzy
+msgid "Are you sure you want to hide/show this text?"
+msgstr "Bu fikri silmek istediğinizden emin misiniz?"
+
+#: templates/paste/pastedtext_toggle.html:9
+msgid "Yes"
+msgstr ""
+
+#: templates/paste/pastedtext_toggle.html:10
+#, fuzzy
+msgid "Abort"
+msgstr "Hakkında"
 
 #: webalizer/templates/webalizer/index.html:7
 msgid "settings.WEBALIZER_DIR is not configured"

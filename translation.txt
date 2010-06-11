@@ -143,7 +143,7 @@ These are templates to be marked
 -   |   |   |-- create_person.html
 -   |   |   `-- sent.html
     |   |-- podcast
--   |   |   |-- audioplayer.html
++   |   |   |-- audioplayer.html
 -   |   |   |-- detail.html
 -   |   |   |-- feed.html
 -   |   |   |-- feed_ogg.html
