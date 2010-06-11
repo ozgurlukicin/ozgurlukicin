@@ -113,9 +113,9 @@ These are templates to be marked
 +   |   |-- header.html
 +   |   |-- home.html
     |   |-- howto
--   |   |   |-- howto_detail.html
--   |   |   |-- howto_main.html
--   |   |   `-- howto_printable.html
++   |   |   |-- howto_detail.html
++   |   |   |-- howto_main.html
++   |   |   `-- howto_printable.html
 -   |   |-- menu.html
     |   |-- news
 -   |   |   |-- news_detail.html
