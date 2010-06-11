@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-10 18:49+0300\n"
+"POT-Creation-Date: 2010-06-11 12:21+0300\n"
 "PO-Revision-Date: 2010-06-10 18:48+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -643,6 +643,7 @@ msgstr "Gezegen"
 #: templates/forum/forum_base.html:11 templates/forum/forum_detail.html:13
 #: templates/forum/forum_detail.html:39 templates/forum/forum_list.html:10
 #: templates/forum/forum_list.html.py:15 templates/forum/new_topic.html:14
+#: templates/forum/post_edit.html:11 templates/forum/post_list.html:11
 msgid "Forum"
 msgstr "Forum"
 
@@ -740,7 +741,7 @@ msgstr "Pardus %(version)s İndir"
 msgid "Install CD"
 msgstr "Kurulan CD"
 
-#: templates/editor/change.html:11
+#: templates/editor/change.html:11 templates/forum/post_edit.html:22
 msgid "Save"
 msgstr "Kaydet"
 
@@ -967,7 +968,8 @@ msgstr "Favorilerimden çıkar"
 
 #: templates/forum/change_poll.html:5 templates/forum/create_poll.html:5
 #: templates/forum/forum_detail.html:13 templates/forum/forum_list.html:10
-#: templates/forum/new_topic.html:14
+#: templates/forum/new_topic.html:14 templates/forum/post_edit.html:11
+#: templates/forum/post_list.html:11
 #, fuzzy
 msgid "Mainpage"
 msgstr "Ana Sayfa"
@@ -1013,6 +1015,7 @@ msgid "Updated Topics"
 msgstr "Güncellenen Başlıklar"
 
 #: templates/forum/forum_base.html:49 templates/forum/forum_list.html:51
+#: templates/forum/post_list.html:11
 #, fuzzy
 msgid "Latest Posts"
 msgstr "Son eklenenler"
@@ -1217,7 +1220,7 @@ msgstr "%(forum)s &#62; %(topic)s başlığını taşıyacağınız forumu seçi
 msgid "Couldn't create topic, please fix the errors below"
 msgstr "Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin."
 
-#: templates/forum/new_topic.html:20
+#: templates/forum/new_topic.html:20 templates/forum/post_edit.html:13
 #, python-format
 msgid "Flood protection, please wait for %(timeout)s seconds."
 msgstr "Flood koruması aktif, lütfen %(timeout)s saniye bekleyin."
@@ -1233,6 +1236,41 @@ msgstr ""
 #: templates/forum/new_topic.html:28
 msgid "Create Topic"
 msgstr "Başlık Aç"
+
+#: templates/forum/post_edit.html:33
+msgid "avatar"
+msgstr ""
+
+#: templates/forum/post_edit.html:35
+#, fuzzy
+msgid "Register Date:"
+msgstr "Kayıt Ol"
+
+#: templates/forum/post_edit.html:36
+msgid "info"
+msgstr ""
+
+#: templates/forum/post_edit.html:41
+msgid "post address"
+msgstr ""
+
+#: templates/forum/post_list.html:4
+#, fuzzy
+msgid "RSS - Forum"
+msgstr "Forum"
+
+#: templates/forum/post_list.html:16
+msgid "Reply"
+msgstr ""
+
+#: templates/forum/post_list.html:16
+msgid "Go to message"
+msgstr ""
+
+#: templates/forum/post_list_for_user.html:3
+#, python-format
+msgid "Posts sent by %(author)s"
+msgstr ""
 
 #: webalizer/templates/webalizer/index.html:7
 msgid "settings.WEBALIZER_DIR is not configured"

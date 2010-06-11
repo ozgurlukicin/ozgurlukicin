@@ -95,9 +95,9 @@ These are templates to be marked
 +   |   |   |-- merge.html
 +   |   |   |-- move.html
 +   |   |   |-- new_topic.html
--   |   |   |-- post_edit.html
--   |   |   |-- post_list_for_user.html
--   |   |   |-- post_list.html
++   |   |   |-- post_edit.html
++   |   |   |-- post_list_for_user.html
++   |   |   |-- post_list.html
 -   |   |   |-- reply.html
 -   |   |   |-- report.html
 -   |   |   |-- topic.html

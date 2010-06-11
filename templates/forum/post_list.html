@@ -1,19 +1,19 @@
 {% extends "forum/forum_base.html" %}
-{% load library %}
+{% load library i18n %}
 {% block extrahead %}
-    <link rel="alternate" type="application/rss+xml" title="Özgürlükİçin RSS - Forum" href="/forum/rss/post/" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS - Forum" %}" href="/forum/rss/post/" />
     <style type="text/css" media="screen">@import url('/media/css/new/forum_topic.css');</style>
     <style type="text/css" media="screen">@import url('/media/css/new/forum_post_list.css');</style>
     <style type="text/css" media="screen">@import url('/media/css/new/forum_paginator.css');</style>
 {% endblock %}
 {% block content %}
 <div class="topbar">
-    <div class="navigation"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; {% block post_owner %}<a href="/forum/son-iletiler/">Son İletiler</a>{% endblock %}</div>
+    <div class="navigation"><a href="/">{% trans "Mainpage" %}</a> &#62; <a href="/forum/">{% trans "Forum" %}</a> &#62; {% block post_owner %}<a href="/forum/son-iletiler/">{% trans "Latest Posts" %}</a>{% endblock %}</div>
 </div>
 <div class="post_list">
 {% for post in post_list %}
 <div class="post">
-    <div class="top"><div class="address"><a href="{{ post.topic.forum.get_absolute_url }}">{{ post.topic.forum }}</a> &#62; <a href="{{ post.topic.get_absolute_url }}">{{ post.topic }}</a></div><div class="button"><a href="{{ post.topic.get_reply_url }}"><img src="/media/img/new/forum/button_reply.png" alt="Yanıtla"></a></div><div class="author"><a href="{{ post.get_absolute_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="iletiye git" /></a> <a href="{{ post.author.get_profile.get_absolute_url }}">{{ post.author }}</a> - {{ post.created|date:"d F Y H:i" }}</div></div>
+    <div class="top"><div class="address"><a href="{{ post.topic.forum.get_absolute_url }}">{{ post.topic.forum }}</a> &#62; <a href="{{ post.topic.get_absolute_url }}">{{ post.topic }}</a></div><div class="button"><a href="{{ post.topic.get_reply_url }}"><img src="/media/img/new/forum/button_reply.png" alt="{% trans "Reply" %}"></a></div><div class="author"><a href="{{ post.get_absolute_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="{% trans "Go to message" %}" /></a> <a href="{{ post.author.get_profile.get_absolute_url }}">{{ post.author }}</a> - {{ post.created|date:"d F Y H:i" }}</div></div>
     <div class="message">{{ post.text|renderbbcode|safe }}</div>
 </div>
 {% endfor %}
