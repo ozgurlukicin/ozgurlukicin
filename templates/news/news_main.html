@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load library %}
-{% block title %}Haberler - {% endblock %}
+{% load i18n %}
+{% block title %}{% trans "News" %} - {% endblock %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/object_lists.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
@@ -11,8 +12,8 @@
 {% for news in news_list %}
     <div class="column first">
         <img src="{{ news.image.file.url }}" alt="{{ news.image.get_alt_string }}" /><br />
-        <img src="/media/img/new/image_bottom.png" alt="gölge" />
-        <div class="info"><span class="bold">{{ news.update|date:"d" }} {{ news.update|date:"F"|slice:":3" }}</span> {{ news.update|date:"Y" }} <span class="bold">/</span> <a href="{{ news.topic.get_latest_post_url }}"><span class="bold">{{ news.topic.posts|add:"-1" }}</span> Yorum</a></div>
+        <img src="/media/img/new/image_bottom.png" alt="_" />
+        <div class="info"><span class="bold">{{ news.update|date:"d" }} {{ news.update|date:"F"|slice:":3" }}</span> {{ news.update|date:"Y" }} <span class="bold">/</span> <a href="{{ news.topic.get_latest_post_url }}">{% blocktrans count news.topic.posts|add:"-1" as number_of_comments %}<span class="bold">{{ number_of_comments }}</span> comment{% plural %}<span class="bold">{{ number_of_comments }}</span> comments{% endblocktrans %}</a></div>
     </div>
     <div class="column">
         <div class="title"><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></div>
@@ -22,7 +23,7 @@
 {% endfor %}
 </div>
 
-{% if is_paginated %}<div class="paginator_block"><div class="paginator_pages">{% paginator %}</div><div class="paginator_description"><span class="bold">{{ pages }}</span> sayfada toplam <span class="bold">{{ hits }}</span> haber bulunmaktadır.</div></div>{% endif %}
+{% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div><div class="paginator_description">{% blocktrans %}There's a total of <span class="bold">{{ hits }}</span> news in <span class="bold">{{ pages }}</span> pages.{% endblocktrans %}</div></div>{% endif %}
 {% endblock %}
 
 {% block leftcolumn %}
@@ -35,8 +36,8 @@
         <li{% if not forloop.last %} style="border-bottom:1px solid #EAEAEA;padding-bottom:5px;margin-bottom:5px;"{% endif %}>
         <div><span class="bold">{{ sem.start_date|date:"d F Y H.i" }}{% if sem.end_date %} - {{ sem.end_date|date:"d F Y H.i" }}{% endif %}</span></div>
             <div>{{ sem.description }}</div>
-            <div><span class="bold">Yer:</span> <a onclick="window.open('{{ sem.get_absolute_url }}','{{ sem.place.name }}','toolbar=no,width=620,height=580')" style="cursor:pointer">{{ sem.place.name }}</a></div>
-            <div><span class="bold">Konuşmacılar:</span> {% for att in sem.attender.all %}{% if forloop.last %}{% if att.user %}<a href="{{ att.user.get_profile.get_absolute_url }}">{% endif %}{{ att.name }}{% if att.user %}</a>{% endif %}{% else %}{% if att.user %}<a href="{{ att.user.get_profile.get_absolute_url }}">{% endif %}{{ att.name }}{% if att.user %}</a>{% endif %}, {% endif %}{% endfor %}</div>
+            <div><span class="bold">{% trans "Place:" %}</span> <a onclick="window.open('{{ sem.get_absolute_url }}','{{ sem.place.name }}','toolbar=no,width=620,height=580')" style="cursor:pointer">{{ sem.place.name }}</a></div>
+            <div><span class="bold">{% trans "Speakers:" %}</span> {% for att in sem.attender.all %}{% if forloop.last %}{% if att.user %}<a href="{{ att.user.get_profile.get_absolute_url }}">{% endif %}{{ att.name }}{% if att.user %}</a>{% endif %}{% else %}{% if att.user %}<a href="{{ att.user.get_profile.get_absolute_url }}">{% endif %}{{ att.name }}{% if att.user %}</a>{% endif %}, {% endif %}{% endfor %}</div>
         </li>
         {% endfor %}
     </ul>
