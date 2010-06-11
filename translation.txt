@@ -102,39 +102,39 @@ These are templates to be marked
 +   |   |   |-- report.html
 +   |   |   |-- topic.html
 +   |   |   `-- unread.html
--   |   |-- fs
+    |   |-- fs
 -   |   |   |-- fs_detail.html
 -   |   |   |-- fs_main.html
 -   |   |   `-- fs_printable.html
--   |   |-- game
+    |   |-- game
 -   |   |   |-- game_detail.html
 -   |   |   |-- game_main.html
 -   |   |   `-- game_printable.html
 -   |   |-- header.html
 -   |   |-- home.html
--   |   |-- howto
+    |   |-- howto
 -   |   |   |-- howto_detail.html
 -   |   |   |-- howto_main.html
 -   |   |   `-- howto_printable.html
 -   |   |-- menu.html
--   |   |-- news
+    |   |-- news
 -   |   |   |-- news_detail.html
 -   |   |   |-- news_main.html
 -   |   |   `-- news_printable.html
--   |   |-- package
+    |   |-- package
 -   |   |   |-- package_detail.html
 -   |   |   |-- package_main.html
 -   |   |   `-- package_printable.html
--   |   |-- paginator.html
--   |   |-- paste
+    |   |-- paginator.html
+    |   |-- paste
 -   |   |   |-- pastedtext_add.html
 -   |   |   |-- pastedtext_detail.html
 -   |   |   `-- pastedtext_toggle.html
--   |   |-- petition
+    |   |-- petition
 -   |   |   |-- petitioner_list.html
 -   |   |   |-- sign_done.html
 -   |   |   `-- sign.html
--   |   |-- piyango
+    |   |-- piyango
 -   |   |   |-- base.html
 -   |   |   |-- confirmed_email.html
 -   |   |   |-- confirmed_email_person.html
@@ -142,19 +142,19 @@ These are templates to be marked
 -   |   |   |-- confirm_email.html
 -   |   |   |-- create_person.html
 -   |   |   `-- sent.html
--   |   |-- podcast
+    |   |-- podcast
 -   |   |   |-- audioplayer.html
 -   |   |   |-- detail.html
 -   |   |   |-- feed.html
 -   |   |   |-- feed_ogg.html
 -   |   |   `-- main.html
 -   |   |-- printable.html
--   |   |-- seminar
+    |   |-- seminar
 -   |   |   |-- attender.html
 -   |   |   |-- place.html
 -   |   |   |-- seminar_detail.html
 -   |   |   `-- seminar.html
--   |   |-- shipit
+    |   |-- shipit
 -   |   |   |-- base.html
 -   |   |   |-- cargo.html
 -   |   |   |-- cdclient_detail.html
@@ -170,9 +170,9 @@ These are templates to be marked
 -   |   |   |-- create_cdclient.html
 -   |   |   |-- sent_email.html
 -   |   |   `-- sent.html
--   |   |-- tag
+    |   |-- tag
 -   |   |   `-- tag_detail.html
--   |   |-- tema
+    |   |-- tema
 -   |   |   |-- abuse_list.html
 -   |   |   |-- base.html
 -   |   |   |-- eski_detail.html
@@ -180,7 +180,7 @@ These are templates to be marked
 -   |   |   |-- feed_title.html
 -   |   |   |-- forum_wallpaper.html
 -   |   |   |-- kategori.html
--   |   |   |-- mail
+    |   |   |-- mail
 -   |   |   |   |-- new_content.html
 -   |   |   |   `-- rejected.html
 -   |   |   |-- message.html
@@ -203,7 +203,7 @@ These are templates to be marked
 -   |   |   |-- themeitem_wallpaper_detail.html
 -   |   |   `-- upload.html
 -   |   |-- test.html
--   |   |-- user
+    |   |-- user
 -   |   |   |-- change_password_done.html
 -   |   |   |-- change_password.html
 -   |   |   |-- confirm.html
@@ -221,41 +221,34 @@ These are templates to be marked
 -   |   |   `-- user_list.html
 -   |   |-- videobox.html
 -   |   |-- video.html
--   |   `-- workshop
+    |   `-- workshop
 -   |       |-- workshop_detail.html
 -   |       |-- workshop_main.html
 -   |       `-- workshop_printable.html
--   `-- webalizer
--       `-- templates
--           `-- webalizer
+    `-- webalizer
+        `-- templates
+            `-- webalizer
 -               |-- base.html
 -               `-- index.html
 
 These are python files to be marked
 -----------------------------------
 
--   |-- bug
--   |   |-- forms.py
--   |   |-- __init__.py
--   |   |-- models.py
--   |   |-- settings.py
--   |   |-- urls.py
--   |   `-- views.py
 -   |-- context_processors.py
--   |-- editor
+    |-- editor
 -   |   |-- forms.py
 -   |   |-- __init__.py
 -   |   |-- models.py
 -   |   |-- settings.py
 -   |   |-- urls.py
 -   |   `-- views.py
--   |-- ezine
+    |-- ezine
 -   |   |-- admin.py
 -   |   |-- __init__.py
 -   |   |-- models.py
 -   |   |-- urls.py
 -   |   `-- views.py
--   |-- feedjack
+    |-- feedjack
 -   |   |-- admin.py
 -   |   |-- bin
 -   |   |   `-- feedjack_update.py
@@ -266,14 +259,14 @@ These are python files to be marked
 -   |   |-- models.py
 -   |   |-- urls.py
 -   |   `-- views.py
--   |-- flatpages
+    |-- flatpages
 -   |   |-- admin.py
 -   |   |-- __init__.py
 -   |   |-- middleware.py
 -   |   |-- models.py
 -   |   |-- urls.py
 -   |   `-- views.py
--   |-- forum
+    |-- forum
 -   |   |-- admin.py
 -   |   |-- customgeneric.py
 -   |   |-- feeds.py
@@ -282,7 +275,7 @@ These are python files to be marked
 -   |   |-- models.py
 -   |   |-- postmarkup.py
 -   |   |-- settings.py
--   |   |-- stripogram
+    |   |-- stripogram
 -   |   |   |-- html2safehtml.py
 -   |   |   |-- html2text.py
 -   |   |   |-- HTMLParser.py
@@ -292,33 +285,33 @@ These are python files to be marked
 -   |   |-- urls.py
 -   |   |-- util.py
 -   |   `-- views.py
--   |-- ideas
+    |-- ideas
 -   |   |-- admin.py
 -   |   |-- feeds.py
 -   |   |-- forms.py
 -   |   |-- __init__.py
 -   |   |-- models.py
 -   |   |-- settings.py
--   |   |-- templatetags
+    |   |-- templatetags
 -   |   |   |-- ideas.py
 -   |   |   `-- __init__.py
 -   |   |-- urls.py
 -   |   `-- views.py
 -   |-- __init__.py
 -   |-- manage.py
--   |-- middleware
+    |-- middleware
 -   |   |-- ban.py
 -   |   |-- debug.py
 -   |   |-- __init__.py
 -   |   `-- threadlocals.py
--   |-- paste
+    |-- paste
 -   |   |-- forms.py
 -   |   |-- __init__.py
 -   |   |-- models.py
 -   |   |-- urls.py
 -   |   `-- views.py
 -   |-- patches
--   |-- petition
+    |-- petition
 -   |   |-- __init__.py
 -   |   |-- models.py
 -   |   |-- settings.py
@@ -327,14 +320,14 @@ These are python files to be marked
 -   |   |   `-- petition.py
 -   |   |-- urls.py
 -   |   `-- views.py
--   |-- piyango
+    |-- piyango
 -   |   |-- forms.py
 -   |   |-- __init__.py
 -   |   |-- models.py
 -   |   |-- settings.py
 -   |   |-- urls.py
 -   |   `-- views.py
--   |-- podcast
+    |-- podcast
 -   |   |-- admin.py
 -   |   |-- __init__.py
 -   |   |-- models.py
@@ -342,10 +335,10 @@ These are python files to be marked
 -   |   |-- urls.py
 -   |   |-- utils.py
 -   |   `-- views.py
--   |-- poll
+    |-- poll
 -   |   |-- __init__.py
 -   |   `-- models.py
--   |-- profile
+    |-- profile
 -   |   |-- admin.py
 -   |   |-- forms.py
 -   |   |-- __init__.py
@@ -354,7 +347,7 @@ These are python files to be marked
 -   |   |-- sql
 -   |   |-- urls.py
 -   |   `-- views.py
--   |-- scripts
+    |-- scripts
 -   |   |-- calc_downloads.py
 -   |   |-- csvfill.py
 -   |   |-- fixpapers.py
@@ -366,14 +359,14 @@ These are python files to be marked
 -   |       |-- kargoxml.py
 -   |       |-- main.py
 -   |       `-- notsent2sent.py
--   |-- seminar
+    |-- seminar
 -   |   |-- admin.py
 -   |   |-- __init__.py
 -   |   |-- models.py
 -   |   |-- urls.py
 -   |   `-- views.py
 -   |-- settings.py
--   |-- shipit
+    |-- shipit
 -   |   |-- admin.py
 -   |   |-- forms.py
 -   |   |-- __init__.py
@@ -381,7 +374,7 @@ These are python files to be marked
 -   |   |-- settings.py
 -   |   |-- urls.py
 -   |   `-- views.py
--   |-- shop
+    |-- shop
 -   |   |-- cart
 -   |   |   |-- forms.py
 -   |   |   |-- __init__.py
@@ -392,7 +385,7 @@ These are python files to be marked
 -   |   |-- main
 -   |   |   |-- __init__.py
 -   |   |   `-- views.py
--   |   |-- product
+    |   |-- product
 -   |   |   |-- admin.py
 -   |   |   |-- __init__.py
 -   |   |   |-- models.py
@@ -400,7 +393,7 @@ These are python files to be marked
 -   |   |   |   |-- __init__.py
 -   |   |   |   `-- shop_library.py
 -   |   |   `-- views.py
--   |   |-- shopprofile
+    |   |-- shopprofile
 -   |   |   |-- admin.py
 -   |   |   |-- forms.py
 -   |   |   |-- __init__.py
@@ -408,7 +401,7 @@ These are python files to be marked
 -   |   |   |-- urls.py
 -   |   |   `-- views.py
 -   |   `-- urls.py
--   |-- st
+    |-- st
 -   |   |-- admin.py
 -   |   |-- feeds.py
 -   |   |-- forms.py
@@ -423,7 +416,7 @@ These are python files to be marked
 -   |   |   `-- library.py
 -   |   |-- views.py
 -   |   `-- wrappers.py
--   |-- tema
+    |-- tema
 -   |   |-- admin.py
 -   |   |-- feeds.py
 -   |   |-- forms.py
@@ -437,18 +430,18 @@ These are python files to be marked
 -   |   |-- urls.py
 -   |   |-- utils.py
 -   |   `-- views.py
--   |-- upload
+    |-- upload
 -   |   |-- admin.py
 -   |   |-- __init__.py
 -   |   |-- models.py
 -   |   `-- views.py
 -   |-- urls.py
--   |-- util
+    |-- util
 -   |   |-- feedparser.py
 -   |   |-- fetch.py
 -   |   |-- forum_filler.py
 -   |   `-- __init__.py
--   `-- webalizer
+    `-- webalizer
 -       |-- __init__.py
 -       |-- models.py
 -       |-- urls.py
