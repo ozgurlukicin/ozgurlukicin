@@ -125,11 +125,11 @@ These are templates to be marked
 +   |   |   |-- package_detail.html
 +   |   |   |-- package_main.html
 +   |   |   `-- package_printable.html
-    |   |-- paginator.html
++   |   |-- paginator.html
     |   |-- paste
--   |   |   |-- pastedtext_add.html
--   |   |   |-- pastedtext_detail.html
--   |   |   `-- pastedtext_toggle.html
++   |   |   |-- pastedtext_add.html
++   |   |   |-- pastedtext_detail.html
++   |   |   `-- pastedtext_toggle.html
     |   |-- petition
 -   |   |   |-- petitioner_list.html
 -   |   |   |-- sign_done.html

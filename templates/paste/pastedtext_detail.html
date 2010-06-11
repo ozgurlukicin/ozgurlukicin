@@ -1,24 +1,25 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/new/pygments.css');</style>
 {% endblock %}
 {% block content %}
 {% if paste.is_hidden %}
-<p>Bu metin yönetici tarafından gizlenmiştir.</p>
+<p>{% trans "This text has been hidden by an admin." %}</p>
 {% if perms.paste.hide_pastedtext %}
-<a href="{{ paste.get_toggle_url }}"><img src="/media/img/new/forum/button_show.png" alt="göster" /></a>
-<p>{{ paste.author }} tarafından {{ paste.date|date:"d F Y H:i" }} tarihinde gönderilmiş ve yönetici tarafından gizlenmiştir.</p>
+<a href="{{ paste.get_toggle_url }}"><img src="/media/img/new/forum/button_show.png" alt="{% trans "show" %}" /></a>
+<p>{% blocktrans with paste.author as author and paste.date|date:"d F Y H:i" as date %}It was sent by {{ author }} on {{ date }} and was hidden by an admin.{% endblocktrans %}</p>
 {{ paste.highlighted_text|safe }}
 {% endif %}
 {% else %}
 {% if perms.paste.hide_pastedtext %}
-    <a href="{{ paste.get_toggle_url }}"><img src="/media/img/new/forum/button_hide.png" alt="gizle" /></a>
+    <a href="{{ paste.get_toggle_url }}"><img src="/media/img/new/forum/button_hide.png" alt="{% trans "hide" %}" /></a>
 {% else %}
-    {% ifequal paste.author user %}<a href="{{ paste.get_hide_url }}"><img src="/media/img/new/forum/button_hide.png" alt="gizle" /></a>{% endifequal %}
+    {% ifequal paste.author user %}<a href="{{ paste.get_hide_url }}"><img src="/media/img/new/forum/button_hide.png" alt="{% trans "hide" %}" /></a>{% endifequal %}
 {% endif %}
-<p>{{ paste.author }} tarafından {{ paste.date|date:"d F Y H:i" }} tarihinde gönderilmiştir.</p>
-<p><a href="{{ request.build_absolute_uri }}">{{ request.build_absolute_uri }}</a> (sağ tıklayıp bağlantıyı kopyalayabilirsiniz)</p>
+<p>{% blocktrans with paste.author as author and paste.date|date:"d F Y H:i" as date %}This was sent by {{ author }} on {{ date }}.{% endblocktrans %}</p>
+<p><a href="{{ request.build_absolute_uri }}">{{ request.build_absolute_uri }}</a> ({% trans "you can copy link by right clicking this" %})</p>
 {{ paste.highlighted_text|safe }}
 {% endif %}
 {% endblock %}

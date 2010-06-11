@@ -1,11 +1,12 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 {% endblock %}
 {% block content %}
 <form method="POST" target="">
-    <p>Bu yazıyı gizlemek/göstermek istediğinizden emin misiniz?</p>
-    <input type="submit" value="Evet" />
-    <input type="button" value="Vazgeç" onclick="history.back()" />
+    <p>{% trans "Are you sure you want to hide/show this text?" %}</p>
+    <input type="submit" value="{% trans "Yes" %}" />
+    <input type="button" value="{% trans "Abort" %}" onclick="history.back()" />
 </form>
 {% endblock %}

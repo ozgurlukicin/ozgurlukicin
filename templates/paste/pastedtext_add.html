@@ -1,13 +1,14 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/new/pygments.css');</style>
 {% endblock %}
 {% block content %}
 <form method="POST" target="">
-    <p>Özgürlükiçin yapıştırma aracını, foruma ekleyeceğiniz konsol komutlarının çıktılarını ve yazdığınız kodları paylaşmak için kullanabilirsiniz. <a href="/icerik-politikasi/">İçerik</a> ve <a href="/forum-kurallari/">forum</a> kuralları yapıştırma aracımız için de geçerlidir.</p><br/>
+    <p>{% blocktrans %}You can use Spread Pardus paste tool for sharing texts like your console outputs and programming codes. Our <a href="/icerik-politikasi/">content</a> and <a href="/forum-kurallari/">forum</a> policies also applies to this paste tool.{% endblocktrans %}</p><br/>
     <textarea name="text" style="width:615px;height:500px;margin-bottom:10px"></textarea>
     {{ form.syntax }}
-<input type="submit" value="Yapıştır" />
+<input type="submit" value="{% trans "Paste" %}" />
 </form>
 {% endblock %}
