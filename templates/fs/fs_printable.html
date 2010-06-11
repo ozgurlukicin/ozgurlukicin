@@ -1,6 +1,6 @@
 {% extends "printable.html" %}
-
-{% block title %}{{ fs.title }} - İlk Adımlar - {% endblock %}
+{% load i18n %}
+{% block title %}{{ fs.title }} - {% trans "First Steps" %} - {% endblock %}
 
 {% block content %}
 <h1>{{ fs.title }}</h1>

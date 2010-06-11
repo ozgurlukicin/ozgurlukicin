@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 {% load library %}
-
-{% block title %}{{ fs.title }} - İlk Adımlar - {% endblock %}
-
+{% load i18n %}
+{% block title %}{{ fs.title }} - {% trans "First Steps" %} - {% endblock %}
 {% block extrahead %}
     <style type="text/css" media="screen">@import url('/media/css/new/article.css');</style>
     <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
@@ -14,24 +13,24 @@
     {{ fs.text|safe }}
 </div>
 <div class="page_printable"><a href="{{ fs.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
-<div class="page_last_update">Son güncelleme: {{ fs.update|timedelta }}</div>
+<div class="page_last_update">{% trans "Last update:" %} {{ fs.update|timedelta }}</div>
 {% endblock %}
 
 {% block leftcolumn %}
 <div class="sidebarcolumn leftcolumn">
     <div class="leftcolumn_content">
-        <h2>Katkıda bulunun</h2>
-        <p>İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a href="/katki/ilk_adimlar/">buraya</a> tıklayarak size kılavuzluk edecek sayfaya gidebilirsiniz.</p>
+        <h2>{% trans "Contribute" %}</h2>
+        <p>{% blocktrans %}If you want to contribute to first steps section, click <a href="/katki/ilk_adimlar/">here</a> to visit the contribution guide.{% endblocktrans %}</p>
     </div>
     <div class="leftcolumn_content">
-        <h2>Etiketler</h2>
+        <h2>{% trans "Tags" %}</h2>
         <p>
         <img src="/media/img/new/tag.png" style="vertical-align: middle;" alt="etiketler" /> {% for tag in fs.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if forloop.last %}{% else %},{% endif %} {% endfor %}
         </p>
     </div>
     {% if fs.videos.all %}
     <div class="leftcolumn_content">
-        <h2>İlgili Videolar</h2>
+        <h2>{% trans "Related Videos" %}</h2>
         <p>
             {% for video in fs.videos.all %}
             {% include "video.html" %}
@@ -40,7 +39,7 @@
     </div>
     {% endif %}
     <div class="leftcolumn_content">
-        <h2>Yazar</h2>
+        <h2>{% trans "Author" %}</h2>
         <p>{{ fs.author }}</p>
     </div>
 </div>
