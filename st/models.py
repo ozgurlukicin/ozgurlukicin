@@ -25,6 +25,7 @@ from oi.upload.models import Image as Img
 from oi.upload.models import Logo
 
 FFMPEG_COMMAND = "ffmpeg"
+ratings = ((1,'1'),(2,'2'),(3,'3'),(4,'4'),(5,'5'),(6,'6'),(7,'7'),(8,'8'),(9,'9'),(10,'10'))
 
 class Wiki(models.Model):
     name = models.CharField('Madde adı', max_length=128, blank=False, unique=True)
@@ -235,8 +236,6 @@ class HowTo(models.Model):
         verbose_name_plural = "Nasıl Belgeleri"
 
 class Game(models.Model):
-    ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'))
-
     title = models.CharField('Başlık', max_length=32, blank=False)
     slug = models.SlugField('SEF Başlık')
     image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
@@ -308,8 +307,6 @@ class News(models.Model):
         verbose_name_plural = "Haberler"
 
 class Package(models.Model):
-    ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'))
-
     title = models.CharField('Başlık', max_length=32, blank=False, help_text='Paket ismi')
     slug = models.SlugField('SEF Başlık')
     image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
