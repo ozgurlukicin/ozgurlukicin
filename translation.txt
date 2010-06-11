@@ -99,9 +99,9 @@ These are templates to be marked
 +   |   |   |-- post_list_for_user.html
 +   |   |   |-- post_list.html
 +   |   |   |-- reply.html
--   |   |   |-- report.html
--   |   |   |-- topic.html
--   |   |   `-- unread.html
++   |   |   |-- report.html
++   |   |   |-- topic.html
++   |   |   `-- unread.html
 -   |   |-- fs
 -   |   |   |-- fs_detail.html
 -   |   |   |-- fs_main.html

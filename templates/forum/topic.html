@@ -1,22 +1,22 @@
 {% extends "forum/forum_base.html" %}
-{% load library %}
+{% load library i18n %}
 {% load gravatar %}
 {% block title %}
 {{topic.title}} -
 {% endblock %}
 {% block extrahead %}
-    <link rel="alternate" type="application/rss+xml" title="{{topic.title}} - Özgürlükİçin Forum" href="/forum/rss/topic/{{ topic.id }}" />
+    <link rel="alternate" type="application/rss+xml" title="{{topic.title}} - {% trans "Forum" %}" href="/forum/rss/topic/{{ topic.id }}" />
     <style type="text/css" media="screen">@import url('/media/css/new/forum_topic.css');</style>
     <style type="text/css" media="screen">@import url('/media/css/new/forum_paginator.css');</style>
 {% endblock %}
 {% block content %}
 <div class="topbar">
-    <div class="navigation"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; <a href="{{ topic.get_absolute_url }}" class="bold">{{ topic.title }}</a></div>
+    <div class="navigation"><a href="/">{% trans "Mainpage" %}</a> &#62; <a href="/forum/">{% trans "Forum" %}</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; <a href="{{ topic.get_absolute_url }}" class="bold">{{ topic.title }}</a></div>
     {% if request.user.is_authenticated and not watching %}
-    <div class="notice"><a href="{{ topic.get_follow_url }}"><img src="/media/img/new/forum/button_follow.png" alt="izle" title="E-posta ile izle" /></a></div>
+    <div class="notice"><a href="{{ topic.get_follow_url }}"><img src="/media/img/new/forum/button_follow.png" alt="{% trans "follow" %}" title="{% trans "Follow with e-mail" %}" /></a></div>
     {% endif %}
     {% if perms.forum.can_create_poll and not topic.poll %}
-    <div class="notice"><a href="{{ topic.get_create_poll_url }}"><img src="/media/img/new/forum/button_add_poll.png" alt="anket ekle" /></a></div>
+    <div class="notice"><a href="{{ topic.get_create_poll_url }}"><img src="/media/img/new/forum/button_add_poll.png" alt="{% trans "add poll" %}" /></a></div>
     {% endif %}
     {% if perms.forum.can_change_general %}
     <div class="notice"><a href="{{ topic.get_toggle_general_url }}">{% if topic.general %}<img src="/media/img/new/button_remove_general_topic.png" alt="Genel duyuruyu kaldır" />{% else %}<img src="/media/img/new/button_general_topic.png" alt="Genel duyuru yap" />{% endif %}</a></div>
@@ -31,24 +31,24 @@
 {% if topic.poll %}
 <div class="poll">
     <div class="poll_header">
-        <div class="poll_title">Anket</div>
+        <div class="poll_title">{% trans "Poll" %}</div>
         <div class="poll_question">{{ topic.poll.question }}</div>
     </div>
     <div class="poll_options">
     {% for option in poll_options %}
     <div class="poll_option">
-        <div class="poll_option_text">{% if poll_enabled %}<a href="{{ forum.get_absolute_url }}{{ topic.id }}/poll/vote/{{ option.id }}/" title="oy vermek için tıklayın">{{ option.text }}</a>{% else %}{{ option.text }}{% endif %}</div>
+        <div class="poll_option_text">{% if poll_enabled %}<a href="{{ forum.get_absolute_url }}{{ topic.id }}/poll/vote/{{ option.id }}/" title="{% trans "click here to vote" %}">{{ option.text }}</a>{% else %}{{ option.text }}{% endif %}</div>
         <div class="poll_option_bar">
             <div class="poll_bar">
                 <div style="width:{{ option.percent }}%;"></div>
             </div>
-            <div>%{{ option.percent }} ({{ option.vote_count }} oy)</div>
+            <div>{% blocktrans with option.percent as percent %}{{ percent }}%{% endblocktrans %} {% blocktrans count option.vote_count as vote_count %}({{ vote_count }} vote){% plural %}({{ vote_count }} votes){% endblocktrans %}</div>
         </div>
     </div>
     {% endfor %}
-        {% if poll_enabled %}<div class="poll_help">Oylamaya katılmak için şıklardan birini tıklayın.</div>{% endif %}
-        {% if topic.poll.date_limit %}<div class="poll_help">Oylama bitiş tarihi: {{ topic.poll.end_date|date:"j F Y l" }}</div>{% endif %}
-        {% if perms.forum.can_change_poll %}<div class="poll_buttons"><a href="{{ topic.get_change_poll_url }}"><img src="/media/img/new/forum/button_change_poll.png" alt="değiştir" /></a><a href="{{ topic.get_delete_poll_url }}"><img src="/media/img/new/forum/button_delete_poll.png" alt="sil" /></a></div>{% endif %}
+        {% if poll_enabled %}<div class="poll_help">{% trans "Click on an option to vote for it." %}</div>{% endif %}
+        {% if topic.poll.date_limit %}<div class="poll_help">{% trans "Voting deadline:" %} {{ topic.poll.end_date|date:"j F Y l" }}</div>{% endif %}
+        {% if perms.forum.can_change_poll %}<div class="poll_buttons"><a href="{{ topic.get_change_poll_url }}"><img src="/media/img/new/forum/button_change_poll.png" alt="{% trans "change" %}" /></a><a href="{{ topic.get_delete_poll_url }}"><img src="/media/img/new/forum/button_delete_poll.png" alt="{% trans "delete" %}" /></a></div>{% endif %}
     </div>
 </div>
 {% endif %}
@@ -59,11 +59,11 @@
     <div class="post_profile">
         <div class="author">{{ post.author }}</div>
         <div class="author_description">{{ post.author.get_profile.title }}</div>
-        <div class="avatar"><img src="{% avatar_url post.author.email 100 "g" post.author.get_profile.avatar.file.url %}" alt="avatar" width="100" height="100"></div>
+        <div class="avatar"><img src="{% avatar_url post.author.email 100 "g" post.author.get_profile.avatar.file.url %}" alt="{% trans "avatar" %}" width="100" height="100"></div>
         {% if perms.forum.can_see_post_ip %}<div class="ip">({{ post.ip }})</div>{% endif %}
-        <div class="register_date">Kayıt Tarihi:<br />{{ post.author.date_joined|date:"d-m-Y" }}</div>
-        {% if post.author.get_profile.pardus_version %}<div class="register_date">Sürüm: <strong>{{ post.author.get_profile.get_pardus_version_display }}</strong></div>{% endif %}
-        <div class="button"><a href="/kullanici/profil/{{ post.author }}"><img src="/media/img/new/button_info.png" alt="bilgi" /></a></div>
+        <div class="register_date">{% trans "Register Date:" %}<br />{{ post.author.date_joined|date:"d-m-Y" }}</div>
+        {% if post.author.get_profile.pardus_version %}<div class="register_date">{% trans "Version" %}: <strong>{{ post.author.get_profile.get_pardus_version_display }}</strong></div>{% endif %}
+        <div class="button"><a href="{{ post.author.get_profile.get_absolute_url }}"><img src="/media/img/new/button_info.png" alt="{% trans "info" %}" /></a></div>
     </div>
     <div class="post_message">
         <div class="post_message_top">
@@ -76,36 +76,36 @@
             </div>
             {% if request.user.is_authenticated and not topic.locked %}
             <div class="post_message_top_button">
-                <a href="{{ post.get_abuse_report_url }}"><img src="/media/img/new/forum/button_complaint.png" alt="raporla" title="Kurallara uymayan iletiyi şikayet et" /></a>
+                <a href="{{ post.get_abuse_report_url }}"><img src="/media/img/new/forum/button_complaint.png" alt="{% trans "report" %}" title="{% trans "Report abuse" %}" /></a>
             </div>
             <div class="post_message_top_button">
-                <a href="{{ post.get_quote_url }}"><img src="/media/img/new/forum/button_quote.png" alt="alıntıla" /></a>
+                <a href="{{ post.get_quote_url }}"><img src="/media/img/new/forum/button_quote.png" alt="{% trans "quote" %}" /></a>
             </div>
             {% if perms.forum.change_post %}
             <div class="post_message_top_button">
-                <a href="{{ post.get_edit_url }}"><img src="/media/img/new/forum/button_edit.png" alt="düzenle" /></a>
+                <a href="{{ post.get_edit_url }}"><img src="/media/img/new/forum/button_edit.png" alt="{% trans "edit" %}" /></a>
             </div>
             {% else %}
             {% ifequal post.author.id request.user.id %}
             <div class="post_message_top_button">
-                <a href="{{ post.get_edit_url }}"><img src="/media/img/new/forum/button_edit.png" alt="düzenle" /></a>
+                <a href="{{ post.get_edit_url }}"><img src="/media/img/new/forum/button_edit.png" alt="{% trans "edit" %}" /></a>
             </div>
             {% endifequal %}
             {% endif %}
             {% if perms.forum.can_hide_post and not post.hidden %}
             <div class="post_message_top_button">
-                <a href="{{ post.get_hide_url }}"><img src="/media/img/new/forum/button_hide.png" alt="gizle" /></a>
+                <a href="{{ post.get_hide_url }}"><img src="/media/img/new/forum/button_hide.png" alt="{% trans "hide" %}" /></a>
             </div>
             {% endif %}
             {% if perms.forum.can_hide_post and not forloop.first and post.hidden %}
             <div class="post_message_top_button">
-                <a href="{{ post.get_hide_url }}"><img src="/media/img/new/forum/button_show.png" alt="göster" /></a>
+                <a href="{{ post.get_hide_url }}"><img src="/media/img/new/forum/button_show.png" alt="{% trans "show" %}" /></a>
             </div>
             {% endif %}
             {% if perms.forum.delete_post and not forloop.first %}
             <div class="post_message_top_button">
             <form method="post" action="{{post.get_delete_url}}">
-                <input type="image" src="/media/img/new/forum/button_delete.png" alt="sil" />
+                <input type="image" src="/media/img/new/forum/button_delete.png" alt="{% trans "delete" %}" />
             </form>
             </div>
             {% else %}
@@ -114,7 +114,7 @@
                         {% if not forloop.first %}
                         <div class="post_message_top_button">
                         <form method="post" action="{{post.get_delete_url}}">
-                            <input type="image" src="/media/img/new/forum/button_delete.png" alt="sil" />
+                            <input type="image" src="/media/img/new/forum/button_delete.png" alt="{% trans "delete" %}" />
                         </form>
                         </div>
                         {% endif %}
@@ -127,12 +127,12 @@
             <div class="post_message_text">{{ post.text|renderbbcode|safe }}</div>
             {% if forloop.first %}
             <div class="post_message_tags">
-                <img src="/media/img/new/tag.png" alt="etiket" />{% for tag in topic.tags.all %}<span class="tag"><a href="/etiket/{{tag.name}}/">{{tag.name}}</a></span>{% endfor %}
+                <img src="/media/img/new/tag.png" alt="{% trans "tag" %}" />{% for tag in topic.tags.all %}<span class="tag"><a href="/etiket/{{tag.name}}/">{{tag.name}}</a></span>{% endfor %}
             </div>
             {% endif %}
             {% ifnotequal post.edit_count 0 %}
             <div class="post_message_bottom">
-                <span style="font-size:x-small; font-style:italic;">Bu ileti {{ post.edit_count }} kez değiştirilmiş olup, son kez {{ post.edited|date:"d-m-Y H:i" }} tarihinde {{ post.last_edited_by }} tarafından değiştirilmiştir.</span><br />
+                <span style="font-size:x-small; font-style:italic;">{% blocktrans count post.edit_count as edit_count %}This post was edited once.{% plural %}This post was edited {{ edit_count }} times.{% endblocktrans %} {% blocktrans with post.edited|date:"d-m-Y H:i" as edit_date and post.last_edited_by as last_edited_by %}Last edit was made at {{ edit_date }} by {{ last_edited_by }}.{% endblocktrans %}</span><br />
             </div>
             {% endifnotequal %}
             {% if post.author.get_profile.signature %}<div class="post_message_bottom"><hr />{{ post.author.get_profile.signature }}</div>{% endif %}
@@ -152,39 +152,39 @@
 {% endfor %}
 <div id="post_bottom">
     {% if not topic.locked %}
-        <div><a href="{{ topic.get_reply_url }}"><img src="/media/img/new/forum/button_reply.png" alt="Yanıtla" /></a></div>
+        <div><a href="{{ topic.get_reply_url }}"><img src="/media/img/new/forum/button_reply.png" alt="{% trans "Reply" %}" /></a></div>
     {% endif %}
     {% if perms.forum.can_lock_topic and topic.locked %}
-        <div><a href="{{ topic.get_lock_url }}"><img src="/media/img/new/forum/button_unlock_topic.png" alt="Kilidi kaldır" /></a></div>
+        <div><a href="{{ topic.get_lock_url }}"><img src="/media/img/new/forum/button_unlock_topic.png" alt="{% trans "Unlock" %}" /></a></div>
     {% endif %}
     {% if perms.forum.can_merge_topic %}
-    <div><a href="{{ topic.get_merge_url }}"><img src="/media/img/new/forum/button_merge_topic.png" alt="Başlığı Birleştir" /></a></div>
+    <div><a href="{{ topic.get_merge_url }}"><img src="/media/img/new/forum/button_merge_topic.png" alt="{% trans "Merge Topic" %}" /></a></div>
     {% endif %}
     {% if perms.forum.can_move_topic %}
-        <div><a href="{{ topic.get_move_url }}"><img src="/media/img/new/forum/button_move_topic.png" alt="Başlığı Taşı" /></a></div>
+        <div><a href="{{ topic.get_move_url }}"><img src="/media/img/new/forum/button_move_topic.png" alt="{% trans "Move Topic" %}" /></a></div>
     {% endif %}
     {% if perms.forum.can_hide_topic and not topic.hidden %}
-        <div><a href="{{ topic.get_hide_url }}"><img src="/media/img/new/forum/button_hide_topic.png" alt="Başlığı Gizle" /></a></div>
+        <div><a href="{{ topic.get_hide_url }}"><img src="/media/img/new/forum/button_hide_topic.png" alt="{% trans "Hide Topic" %}" /></a></div>
     {% endif %}
     {% if perms.forum.can_hide_topic and topic.hidden %}
-        <div><a href="{{ topic.get_hide_url }}"><img src="/media/img/new/forum/button_show_topic.png" alt="Başlığı Göster" /></a></div>
+        <div><a href="{{ topic.get_hide_url }}"><img src="/media/img/new/forum/button_show_topic.png" alt="{% trans "Show Topic" %}" /></a></div>
     {% endif %}
     {% if perms.forum.can_stick_topic and not topic.sticky %}
-        <div><a href="{{ topic.get_stick_url }}"><img src="/media/img/new/forum/button_stick_topic.png" alt="Sabitle" /></a></div>
+        <div><a href="{{ topic.get_stick_url }}"><img src="/media/img/new/forum/button_stick_topic.png" alt="{% trans "Make Sticky" %}" /></a></div>
     {% endif %}
     {% if perms.forum.can_stick_topic and topic.sticky %}
-    <div><a href="{{ topic.get_stick_url }}"><img src="/media/img/new/forum/button_unstick_topic.png" alt="Sabitliği Kaldır" /></a></div>
+    <div><a href="{{ topic.get_stick_url }}"><img src="/media/img/new/forum/button_unstick_topic.png" alt="{% trans "Remove Sticky" %}" /></a></div>
     {% endif %}
     {% if perms.forum.can_lock_topic and not topic.locked %}
-    <div><a href="{{ topic.get_lock_url }}"><img src="/media/img/new/forum/button_lock_topic.png" alt="Başlığı Kilitle" /></a></div>
+    <div><a href="{{ topic.get_lock_url }}"><img src="/media/img/new/forum/button_lock_topic.png" alt="{% trans "Lock Topic" %}" /></a></div>
     {% endif %}
     {% if perms.forum.change_topic %}
-        <div><a href="{{ topic.get_edit_url }}"><img src="/media/img/new/forum/button_edit_topic.png" alt="Başlığı Düzenle" /></a></div>
+        <div><a href="{{ topic.get_edit_url }}"><img src="/media/img/new/forum/button_edit_topic.png" alt="{% trans "Edit Topic" %}" /></a></div>
     {% endif %}
 </div>
     {% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div></div>{% endif %}
 <div class="topbar">
-    <div class="navigation"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; <a href="{{ topic.get_absolute_url }}" class="bold">{{ topic.title }}</a></div>
+    <div class="navigation"><a href="/">{% trans "Mainpage" %}</a> &#62; <a href="/forum/">{% trans "Forum" %}</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; <a href="{{ topic.get_absolute_url }}" class="bold">{{ topic.title }}</a></div>
 </div>
 {% endblock %}
 {% block sidebartop %}{% endblock %}

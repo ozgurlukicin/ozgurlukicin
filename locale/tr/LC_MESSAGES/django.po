@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-11 12:46+0300\n"
+"POT-Creation-Date: 2010-06-11 12:57+0300\n"
 "PO-Revision-Date: 2010-06-10 18:48+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -186,7 +186,7 @@ msgstr ""
 msgid "feeds"
 msgstr ""
 
-#: feedjack/models.py:129
+#: feedjack/models.py:129 templates/forum/topic.html:130
 msgid "tag"
 msgstr ""
 
@@ -417,7 +417,7 @@ msgstr "İlgili Forum Bağlantısı"
 msgid "Ideas that were marked as duplicate of this idea"
 msgstr "Bu fikrin aynısı olarak işaretlenen fikirler"
 
-#: ideas/templates/idea_detail.html:39
+#: ideas/templates/idea_detail.html:39 templates/forum/topic.html:45
 #, python-format
 msgid "(%(vote_count)s vote)"
 msgid_plural "(%(vote_count)s votes)"
@@ -453,7 +453,7 @@ msgstr ""
 msgid "Idea number"
 msgstr "Fikir numarası"
 
-#: ideas/templates/idea_detail.html:57
+#: ideas/templates/idea_detail.html:57 templates/forum/report.html:21
 msgid "Report"
 msgstr "Bildir"
 
@@ -644,7 +644,9 @@ msgstr "Gezegen"
 #: templates/forum/forum_detail.html:39 templates/forum/forum_list.html:10
 #: templates/forum/forum_list.html.py:15 templates/forum/new_topic.html:14
 #: templates/forum/post_edit.html:11 templates/forum/post_list.html:11
-#: templates/forum/reply.html:11
+#: templates/forum/reply.html:11 templates/forum/report.html:12
+#: templates/forum/topic.html:8 templates/forum/topic.html.py:14
+#: templates/forum/topic.html:187 templates/forum/unread.html:6
 msgid "Forum"
 msgstr "Forum"
 
@@ -672,6 +674,7 @@ msgid "About"
 msgstr "Hakkında"
 
 #: templates/footer.html:6 templates/forum/forum_detail.html:26
+#: templates/forum/unread.html:14
 msgid "Follow"
 msgstr "Takip Et"
 
@@ -971,6 +974,8 @@ msgstr "Favorilerimden çıkar"
 #: templates/forum/forum_detail.html:13 templates/forum/forum_list.html:10
 #: templates/forum/new_topic.html:14 templates/forum/post_edit.html:11
 #: templates/forum/post_list.html:11 templates/forum/reply.html:11
+#: templates/forum/report.html:12 templates/forum/topic.html:14
+#: templates/forum/topic.html.py:187 templates/forum/unread.html:6
 #, fuzzy
 msgid "Mainpage"
 msgstr "Ana Sayfa"
@@ -1048,26 +1053,29 @@ msgstr "Özgürlükiçin"
 msgid "New Topic"
 msgstr "Yeni Başlık"
 
-#: templates/forum/forum_detail.html:18
+#: templates/forum/forum_detail.html:18 templates/forum/unread.html:10
 msgid "Topic"
 msgstr "Başlık"
 
 #: templates/forum/forum_detail.html:20 templates/forum/forum_list.html:19
+#: templates/forum/unread.html:11
 #, fuzzy
 msgid "Posts"
 msgstr "Ajans"
 
-#: templates/forum/forum_detail.html:22
+#: templates/forum/forum_detail.html:22 templates/forum/unread.html:12
 #, fuzzy
 msgid "Views"
 msgstr "Haberler"
 
 #: templates/forum/forum_detail.html:24 templates/forum/forum_list.html:21
+#: templates/forum/unread.html:13
 #, fuzzy
 msgid "Latest Post"
 msgstr "Son eklenenler"
 
 #: templates/forum/forum_detail.html:57 templates/forum/forum_list.html:79
+#: templates/forum/unread.html:23
 msgid "Locked Topic"
 msgstr "Kilitli Başlık"
 
@@ -1080,6 +1088,7 @@ msgid "Read Topic"
 msgstr "Okunmuş Başlık"
 
 #: templates/forum/forum_detail.html:57 templates/forum/forum_list.html:75
+#: templates/forum/unread.html:23
 msgid "Unread Topic"
 msgstr "Okunmamış Başlık"
 
@@ -1240,19 +1249,23 @@ msgid "Create Topic"
 msgstr "Başlık Aç"
 
 #: templates/forum/post_edit.html:33 templates/forum/reply.html:31
+#: templates/forum/topic.html:62
 msgid "avatar"
 msgstr ""
 
 #: templates/forum/post_edit.html:35 templates/forum/reply.html:33
+#: templates/forum/report.html:29 templates/forum/topic.html:64
 #, fuzzy
 msgid "Register Date:"
 msgstr "Kayıt Ol"
 
 #: templates/forum/post_edit.html:36 templates/forum/reply.html:34
+#: templates/forum/report.html:30 templates/forum/topic.html:66
 msgid "info"
 msgstr ""
 
 #: templates/forum/post_edit.html:41 templates/forum/reply.html:39
+#: templates/forum/report.html:35
 msgid "post address"
 msgstr ""
 
@@ -1262,6 +1275,7 @@ msgid "RSS - Forum"
 msgstr "Forum"
 
 #: templates/forum/post_list.html:16 templates/forum/reply.html:20
+#: templates/forum/topic.html:155
 msgid "Reply"
 msgstr ""
 
@@ -1273,6 +1287,155 @@ msgstr ""
 #, python-format
 msgid "Posts sent by %(author)s"
 msgstr ""
+
+#: templates/forum/report.html:12
+#, fuzzy
+msgid "Report Post"
+msgstr "Bildir"
+
+#: templates/forum/topic.html:16
+#, fuzzy
+msgid "follow"
+msgstr "Takip Et"
+
+#: templates/forum/topic.html:16
+msgid "Follow with e-mail"
+msgstr ""
+
+#: templates/forum/topic.html:19
+#, fuzzy
+msgid "add poll"
+msgstr "Anket Ekle"
+
+#: templates/forum/topic.html:34
+#, fuzzy
+msgid "Poll"
+msgstr "Anket Ekle"
+
+#: templates/forum/topic.html:40
+#, fuzzy
+msgid "click here to vote"
+msgstr "Geri gitmek için tıklayın"
+
+#: templates/forum/topic.html:45
+msgid "%(percent)s%"
+msgstr ""
+
+#: templates/forum/topic.html:49
+msgid "Click on an option to vote for it."
+msgstr ""
+
+#: templates/forum/topic.html:50
+msgid "Voting deadline:"
+msgstr ""
+
+#: templates/forum/topic.html:51
+#, fuzzy
+msgid "change"
+msgstr "Değiştir"
+
+#: templates/forum/topic.html:51 templates/forum/topic.html.py:108
+#: templates/forum/topic.html:117
+msgid "delete"
+msgstr ""
+
+#: templates/forum/topic.html:65
+msgid "Version"
+msgstr ""
+
+#: templates/forum/topic.html:79
+#, fuzzy
+msgid "report"
+msgstr "Bildir"
+
+#: templates/forum/topic.html:79
+#, fuzzy
+msgid "Report abuse"
+msgstr "Bildir"
+
+#: templates/forum/topic.html:82
+msgid "quote"
+msgstr ""
+
+#: templates/forum/topic.html:86 templates/forum/topic.html.py:91
+#, fuzzy
+msgid "edit"
+msgstr "Düzenle"
+
+#: templates/forum/topic.html:97
+msgid "hide"
+msgstr ""
+
+#: templates/forum/topic.html:102
+msgid "show"
+msgstr ""
+
+#: templates/forum/topic.html:135
+#, python-format
+msgid "This post was edited once."
+msgid_plural "This post was edited %(edit_count)s times."
+msgstr[0] ""
+
+#: templates/forum/topic.html:135
+#, python-format
+msgid "Last edit was made at %(edit_date)s by %(last_edited_by)s."
+msgstr ""
+
+#: templates/forum/topic.html:158
+msgid "Unlock"
+msgstr ""
+
+#: templates/forum/topic.html:161
+#, fuzzy
+msgid "Merge Topic"
+msgstr "Yeni Başlık"
+
+#: templates/forum/topic.html:164
+#, fuzzy
+msgid "Move Topic"
+msgstr "Yeni Başlık"
+
+#: templates/forum/topic.html:167
+#, fuzzy
+msgid "Hide Topic"
+msgstr "Yeni Başlık"
+
+#: templates/forum/topic.html:170
+#, fuzzy
+msgid "Show Topic"
+msgstr "Yeni Başlık"
+
+#: templates/forum/topic.html:173
+msgid "Make Sticky"
+msgstr ""
+
+#: templates/forum/topic.html:176
+msgid "Remove Sticky"
+msgstr ""
+
+#: templates/forum/topic.html:179
+#, fuzzy
+msgid "Lock Topic"
+msgstr "Kilitli Başlık"
+
+#: templates/forum/topic.html:182
+#, fuzzy
+msgid "Edit Topic"
+msgstr "Okunmuş Başlık"
+
+#: templates/forum/unread.html:6
+msgid "Unread Topics ({{ topic_count }})"
+msgstr ""
+
+#: templates/forum/unread.html:23
+#, fuzzy
+msgid "Fixed Topic"
+msgstr "Okunmuş Başlık"
+
+#: templates/forum/unread.html:23
+#, fuzzy
+msgid "Fixed and Locked Topic"
+msgstr "Kilitli Başlık"
 
 #: webalizer/templates/webalizer/index.html:7
 msgid "settings.WEBALIZER_DIR is not configured"
