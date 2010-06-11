@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% load library %}
+{% load i18n %}
 
-{% block title %}{{ package.title }} - Paketler - {% endblock %}
+{% block title %}{{ package.title }} - {% trans "Packages" %} - {% endblock %}
 {% block metadescription %}{{ package.sum|safe|striptags|cut:"\"" }}{% endblock %}
 {% block metakeywords %}{% for tag in package.tags.all %}{{ tag.name }}{% if not forloop.last %},{% endif %}{% endfor %}{% endblock %}
 
@@ -20,75 +21,70 @@
 {{ package.text|safe }}
 </div>
 
-<div class="page_comments"><a href="{{ package.topic.get_latest_post_url }}">{{ package.topic.posts|add:"-1" }} yorum</a> <a href="{{ package.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="." /></a></div>
+<div class="page_comments"><a href="{{ package.topic.get_latest_post_url }}">{% blocktrans count package.topic.posts|add:"-1" as number_of_comments %}{{ number_of_comments }} comment{% plural %}{{ number_of_comments }} comments{% endblocktrans %}</a> <a href="{{ package.topic.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="." /></a></div>
 {% if user.is_authenticated %}
     {% if form %}
         <form method="post" action="{{ package.topic.get_reply_url }}">
             {{ form }}
             <br/>
-            <input type="submit" value="Gönder" />
+            <input type="submit" value="{% trans "Send" %}" />
         </form>
     {% endif %}
 {% endif %}
-<div class="page_printable"><a href="{{ package.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
-<div class="page_last_update">Son güncelleme: {{ package.update|date:"d F Y" }}</div>
-
-
+<div class="page_printable"><a href="{{ package.get_printable_url }}"><img src="/media/img/print.png" alt="{% trans "print" %}" title="{% trans "printer friendly view" %}" /></a></div>
+<div class="page_last_update">{% trans "Last update:" %} {{ package.update|date:"d F Y" }}</div>
 {% endblock %}
-
 {% block leftcolumn %}
 <div class="sidebarcolumn leftcolumn">
-    <h2>Ayrıntılar</h2>
+    <h2>{% trans "Details" %}</h2>
     <table>
         <tr>
-            <td>Lisans: {% for license in package.license.all %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}</td>
+            <td>{% trans "Licence:" %} {% for license in package.license.all %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}</td>
         </tr>
         {% ifnotequal package.download_size 0 %}
         <tr>
-            <td>Paket boyutu: {{ package.download_size }} MB</td>
+            <td>{% trans "Package size:" %} {{ package.download_size }} MB</td>
         </tr>
         {% endifnotequal %}
         {% ifnotequal package.installed_size 0 %}
         <tr>
-            <td>Kurulu boyut: {{ package.installed_size }} MB</td>
+            <td>{% trans "Installed size:" %} {{ package.installed_size }} MB</td>
         </tr>
         {% endifnotequal %}
         <tr>
-            <td><br /><a href="{{ package.url }}">Paketin Web Sitesi</a></td>
+            <td><br /><a href="{{ package.url }}">{% trans "Web site of the package" %}</a></td>
         </tr>
     </table>
-    <h2>Editör notu</h2>
-    <p><img src="/media/img/new/rating_{{ package.point }}.png" alt="{{ package.point }} puan" /></p>
+    <h2>{% trans "Editors Note" %}</h2>
+    <p><img src="/media/img/new/rating_{{ package.point }}.png" alt="{% blocktrans count package.point as points %}{{ points }} point{% plural %}{{ points }} points{% endblocktrans %}" /></p>
 
-    <h2>Menüdeki yeri</h2>
+    <h2>{% trans "Place in Pardus Menu" %}</h2>
     <p>{{ package.path }}</p>
-    <h2>Etiketler</h2>
+    <h2>{% trans "Tags" %}</h2>
     <p>
-    <img src="/media/img/new/tag.png" style="vertical-align: middle;" alt="etiketler" /> {% for tag in package.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if not forloop.last%},{% endif %} {% endfor %}
+    <img src="/media/img/new/tag.png" style="vertical-align: middle;" alt="{% trans "tags" %}" /> {% for tag in package.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if not forloop.last%},{% endif %} {% endfor %}
     </p>
     {% if package.wiki.all %}
-        <h2>İlgili wiki sayfaları</h2>
+        <h2>{% trans "Related Wiki Pages" %}</h2>
         <p>
         {% for wiki in package.wiki.all %}<a href="{{ wiki.get_absolute_url }}">{{ wiki.name }}</a><br />{% endfor %}
         </p>
     {% endif %}
 
 {% if package.ss.all %}
-        <h2>Ekran görüntüleri</h2>
+        <h2>{% trans "Screenshots" %}</h2>
         {% for ss in package.ss.all %}<a href="{{ ss.file.url }}" title="{{ ss.desc }}"><img src="{{ ss.file.name|thumbnail:"144x200" }}" style="margin-left:4px" /></a>{% endfor %}</a>
 {% endif %}
 
-        <h2>Yazar</h2>
+        <h2>{% trans "Author" %}</h2>
         <p>{{ package.author }}</p>
-        <h2>Katkıda bulunun</h2>
-        <p>Paketler bölümüne katkıda bulunmak istiyorsanız <a
-            href="/katki/paket/">buraya</a> tıklayarak size kılavuzluk edecek
-        sayfaya gidebilirsiniz.</p>
+        <h2>{% trans "Contribute" %}</h2>
+        <p>{% blocktrans %}If you want to contribute to packages section, click <a href="/katki/paket/">here</a> to visit the contribution guide.{% endblocktrans %}</p>
 </div>
 {% endblock %}
 {% block sidebar_bottom_top %}
 {% if package.videos.all %}
-        <h2>İlgili Videolar</h2>
+        <h2>{% trans "Related Videos" %}</h2>
         {% for video in package.videos.all %}
         <div style="margin: 0px 0px 10px 10px;">
         {% include "video.html" %}

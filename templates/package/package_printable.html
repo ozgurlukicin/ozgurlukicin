@@ -1,9 +1,6 @@
 {% extends "printable.html" %}
-
-{% block title %}{{ package.title }} - Paketler - {% endblock %}
-
-{% block pagetype %}page{% endblock %}
-
+{% load i18n %}
+{% block title %}{{ package.title }} - {% trans "Packages" %} - {% endblock %}
 {% block content %}
 <h1>{{ package.title }}</h1>
 <div class="page_content">

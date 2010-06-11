@@ -122,9 +122,9 @@ These are templates to be marked
 +   |   |   |-- news_main.html
 +   |   |   `-- news_printable.html
     |   |-- package
--   |   |   |-- package_detail.html
--   |   |   |-- package_main.html
--   |   |   `-- package_printable.html
++   |   |   |-- package_detail.html
++   |   |   |-- package_main.html
++   |   |   `-- package_printable.html
     |   |-- paginator.html
     |   |-- paste
 -   |   |   |-- pastedtext_add.html
