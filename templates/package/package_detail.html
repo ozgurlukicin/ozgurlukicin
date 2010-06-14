@@ -39,7 +39,7 @@
     <h2>{% trans "Details" %}</h2>
     <table>
         <tr>
-            <td>{% trans "Licence:" %} {% for license in package.license.all %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}</td>
+            <td>{% trans "License:" %} {% for license in package.license.all %}<a href="{{ license.url }}">{{ license.name }}</a> {% endfor %}</td>
         </tr>
         {% ifnotequal package.download_size 0 %}
         <tr>
