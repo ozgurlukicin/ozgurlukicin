@@ -24,5 +24,5 @@
 {% endfor %}
 </div>
 
-{% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div><div class="paginator_description">{% blocktrans %}There's a total of <span class="bold">{{ hits }}</span> content in <span class="bold">{{ pages }}</span> pages.{% endblocktrans %}</div></div>{% endif %}
+{% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div><div class="paginator_description">{% blocktrans %}There's a total of <span class="bold">{{ hits }}</span> contents in <span class="bold">{{ pages }}</span> pages.{% endblocktrans %}</div></div>{% endif %}
 {% endblock %}
