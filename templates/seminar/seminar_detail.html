@@ -1,7 +1,8 @@
+{% load i18n %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>Özgürlük için...</title>
+        <title>{% trans "Spread Pardus" %}</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta http-equiv="imagetoolbar" content="no" />
         <link rel="shortcut icon" href="/media/img/fav.png" />
@@ -35,7 +36,7 @@
         </script>
     </head>
     <body onload="load()" onunload="GUnload()">
-        {% if object.place.description %}<div style="width:500px;padding:50px">{{ object.place.description|linebreaksbr }}{% if object.place.phone %} - TEL: {{ object.place.phone }}{% endif %}</div>{% endif %}
+        {% if object.place.description %}<div style="width:500px;padding:50px">{{ object.place.description|linebreaksbr }}{% if object.place.phone %} - {% trans "TEL:" %} {{ object.place.phone }}{% endif %}</div>{% endif %}
         <div id="id_map" style="width:600px;height:400px"></div>
     </body>
 </html>

@@ -148,12 +148,9 @@ These are templates to be marked
 +   |   |   |-- feed.html
 +   |   |   |-- feed_ogg.html
 +   |   |   `-- main.html
--   |   |-- printable.html
+*   |   |-- printable.html
     |   |-- seminar
--   |   |   |-- attender.html
--   |   |   |-- place.html
--   |   |   |-- seminar_detail.html
--   |   |   `-- seminar.html
++   |   |   |-- seminar_detail.html
     |   |-- shipit
 -   |   |   |-- base.html
 -   |   |   |-- cargo.html
