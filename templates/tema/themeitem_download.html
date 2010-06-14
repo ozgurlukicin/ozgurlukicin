@@ -1,5 +1,6 @@
 {% extends "tema/base.html" %}
+{% load i18n %}
 {% block content %}
 <script type="text/javascript">setTimeout("window.location = '{{ object.get_download_url }}';", 3000);</script>
-<p>İndirmeniz 3 saniye içinde başlayacaktır. Eğer başlamazsa <a href="{{ object.get_download_url }}">buraya</a> tıklayın.</p>
+<p>{% blocktrans with object.get_download_url as download_url %}Your download will start in 3 seconds. Click <a href="{{ download_url }}">here</a> if it doesn't start.{% endblocktrans %}</p>
 {% endblock %}

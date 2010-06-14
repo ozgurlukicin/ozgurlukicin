@@ -1,4 +1,5 @@
 {% extends "tema/base.html" %}
+{% load i18n %}
 {% block temaextrahead %}
 <script language="javascript" type="text/javascript" src="/media/js/jquery.autocomplete.js"></script>
 <script language="javascript" type="text/javascript" src="/media/js/taghelper.js"></script>
@@ -19,6 +20,6 @@
         {% endfor %}
     {% endfor %}
     {{ fileforms.management_form }}
-    <div style="clear:both"><input type="submit" value="Ekle" /></div>
+    <div style="clear:both"><input type="submit" value="{% trans "Submit" %}" /></div>
 </form>
 {% endblock %}

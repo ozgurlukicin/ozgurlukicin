@@ -1,9 +1,10 @@
 {% extends "tema/base.html" %}
+{% load i18n %}
 {% block content %}
 <form action="" method="POST">
     {% for field in form %}
     {% include "formfields.html" %}
     {% endfor %}
-    <div style="clear:both"><input type="submit" value="Ekle" /></div>
+    <div style="clear:both"><input type="submit" value="{% trans "Submit" %}" /></div>
 </form>
 {% endblock %}

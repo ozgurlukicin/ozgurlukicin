@@ -1,9 +1,10 @@
 {% extends "tema/base.html" %}
+{% load i18n %}
 {% block content %}
 <form method="POST" action="{{ themeItem.get_delete_url }}">
     <div><img src="{{ themeItem.thumbnail.url }}" alt="{{ themeItem.title }}" /></div>
-    <p>Bu temayı silmek istediğinizden emin misiniz?</p>
-    <input type="submit" value="Sil" />
-    <input type="button" value="Vazgeç" onclick="history.back()" />
+    <p>{% trans "Are you sure you want to delete this theme?" %}</p>
+    <input type="submit" value="{% trans "Delete" %}" />
+    <input type="button" value="{% trans "Abort" %}" onclick="history.back()" />
 </form>
 {% endblock %}
