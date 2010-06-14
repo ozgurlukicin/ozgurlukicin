@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-11 16:32+0300\n"
+"POT-Creation-Date: 2010-06-14 13:23+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -31,6 +31,7 @@ msgid "Editor"
 msgstr "Editör"
 
 #: ezine/templates/list.html:20 ezine/templates/list.html.py:30
+#: templates/podcast/detail.html:48
 msgid "Download"
 msgstr "İndir"
 
@@ -193,7 +194,7 @@ msgstr ""
 
 #: feedjack/models.py:130 feedjack/models.py:149
 #: templates/feedjack/oi/post_list.html:16
-#: templates/package/package_detail.html:65
+#: templates/package/package_detail.html:65 templates/podcast/detail.html:57
 msgid "tags"
 msgstr ""
 
@@ -265,6 +266,7 @@ msgstr "Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin."
 
 #: ideas/templates/idea_add_form.html:21 templates/editor/create.html:12
 #: templates/game/game_detail.html:31 templates/howto/howto_detail.html:29
+#: templates/podcast/detail.html:39
 msgid "Submit"
 msgstr "Gönder"
 
@@ -321,8 +323,8 @@ msgstr ""
 "çıkabilirsiniz."
 
 #: ideas/templates/idea_base.html:48 ideas/templates/idea_base.html.py:53
-#: templates/base.html:77 templates/forum/forum_base.html:58
-#: templates/forum/forum_base.html.py:61
+#: templates/base.html:74 templates/base.html.py:77
+#: templates/forum/forum_base.html:58 templates/forum/forum_base.html.py:61
 msgid "Search"
 msgstr "Arama"
 
@@ -399,7 +401,7 @@ msgstr "Bu fikir <a href=\"%(url)s\">#%(id)s</a> numaralı fikrin aynısı"
 #: ideas/templates/idea_detail.html:14 templates/flatpages/default.html:69
 #: templates/fs/fs_detail.html:26 templates/game/game_detail.html:95
 #: templates/howto/howto_detail.html:57 templates/news/news_detail.html:49
-#: templates/package/package_detail.html:63
+#: templates/package/package_detail.html:63 templates/podcast/detail.html:56
 msgid "Tags"
 msgstr "Etiketler"
 
@@ -488,23 +490,38 @@ msgstr "Fikir favorilerinize eklenmiş"
 msgid "Add to my favourites"
 msgstr "Favorilerime ekle"
 
-#: ideas/templates/idea_top.html:28
+#: ideas/templates/idea_top.html:21
+#, python-format
+msgid ""
+"Was sent by <a href=\"%(profile_url)s\" title=\"go to %(submitter)s's profile"
+"\">%(submitter)s</a> on %(submitted_date)s to <a href=\"%(category_url)s\" "
+"title=\"%(category)s\">%(category)s</a> category."
+msgstr ""
+
+#: ideas/templates/idea_top.html:21
+#, python-format
+msgid ""
+"It's related to <a href=\"/yenifikir/listele/ilgili/%(related_to)s\" title="
+"\"%(related_to)s\">%(related_to)s</a>."
+msgstr ""
+
+#: ideas/templates/idea_top.html:25
 msgid "Comment"
 msgstr "Yorum"
 
-#: ideas/templates/idea_top.html:29
+#: ideas/templates/idea_top.html:26
 #: templates/feedjack/default/post_list.html:138
 #: templates/feedjack/sinx/post_list.html:51
 msgid "Comments"
 msgstr "Yorumlar"
 
-#: ideas/templates/idea_top.html:31
+#: ideas/templates/idea_top.html:28
 #, python-format
 msgid "There is %(comment_count)s comment."
 msgid_plural "There are %(comment_count)s comments."
 msgstr[0] " %(comment_count)s tane yorum yapıldı."
 
-#: ideas/templates/idea_top.html:33
+#: ideas/templates/idea_top.html:30
 msgid "Be the first one to comment!"
 msgstr "İlk yorum yapan siz olun!"
 
@@ -669,6 +686,7 @@ msgid "Forum"
 msgstr "Forum"
 
 #: templates/base.html:22 templates/footer.html:14
+#: templates/podcast/detail.html:5
 msgid "Podcast"
 msgstr "Ajans"
 
@@ -1540,6 +1558,7 @@ msgstr ""
 
 #: templates/game/game_detail.html:24 templates/howto/howto_detail.html:22
 #: templates/news/news_detail.html:28 templates/package/package_detail.html:24
+#: templates/podcast/detail.html:30
 #, python-format
 msgid "%(number_of_comments)s comment"
 msgid_plural "%(number_of_comments)s comments"
@@ -1686,36 +1705,36 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-#: templates/news/news_detail.html:55
+#: templates/news/news_detail.html:55 templates/podcast/detail.html:68
 #, fuzzy
 msgid "Share"
 msgstr "Kaydet"
 
-#: templates/news/news_detail.html:62
+#: templates/news/news_detail.html:62 templates/podcast/detail.html:75
 msgid "add to del.icio.us"
 msgstr ""
 
-#: templates/news/news_detail.html:63
+#: templates/news/news_detail.html:63 templates/podcast/detail.html:76
 msgid "add to facebook"
 msgstr ""
 
-#: templates/news/news_detail.html:64
+#: templates/news/news_detail.html:64 templates/podcast/detail.html:77
 msgid "add to identica"
 msgstr ""
 
-#: templates/news/news_detail.html:65
+#: templates/news/news_detail.html:65 templates/podcast/detail.html:78
 msgid "add to twitter"
 msgstr ""
 
-#: templates/news/news_detail.html:66
+#: templates/news/news_detail.html:66 templates/podcast/detail.html:79
 msgid "add to stumbleupon"
 msgstr ""
 
-#: templates/news/news_detail.html:67
+#: templates/news/news_detail.html:67 templates/podcast/detail.html:80
 msgid "add to google buzz"
 msgstr ""
 
-#: templates/news/news_detail.html:68
+#: templates/news/news_detail.html:68 templates/podcast/detail.html:81
 msgid "add to technorati"
 msgstr ""
 
@@ -1834,6 +1853,28 @@ msgstr ""
 #, fuzzy
 msgid "Abort"
 msgstr "Hakkında"
+
+#: templates/podcast/detail.html:51
+msgid "ogg feed"
+msgstr ""
+
+#: templates/podcast/detail.html:52
+msgid "mp3 feed"
+msgstr ""
+
+#: templates/podcast/detail.html:54
+#, fuzzy
+msgid "Duration"
+msgstr "Belgelendirme"
+
+#: templates/podcast/detail.html:60
+#, fuzzy
+msgid "Commentators"
+msgstr "Yorumlar"
+
+#: templates/podcast/detail.html:63
+msgid "Guests"
+msgstr ""
 
 #: webalizer/templates/webalizer/index.html:7
 msgid "settings.WEBALIZER_DIR is not configured"

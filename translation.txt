@@ -144,7 +144,7 @@ These are templates to be marked
 -   |   |   `-- sent.html
     |   |-- podcast
 +   |   |   |-- audioplayer.html
--   |   |   |-- detail.html
++   |   |   |-- detail.html
 -   |   |   |-- feed.html
 -   |   |   |-- feed_ogg.html
 -   |   |   `-- main.html

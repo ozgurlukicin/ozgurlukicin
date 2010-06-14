@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% load library %}
+{% load i18n %}
 
-{% block title %}{{ episode.title }} - Ajans - {% endblock %}
+{% block title %}{{ episode.title }} - {% trans "Podcast" %} - {% endblock %}
 {% block metadescription %}{{ episode.sum|safe|striptags|cut:"\"" }}{% endblock %}
 {% block metakeywords %}{% for tag in episode.tags.all %}{{ tag.name }}{% if not forloop.last %},{% endif %}{% endfor %}{% endblock %}
 {% block extrahead %}
@@ -26,7 +27,7 @@
 </div>
 <div style="clear: both;"></div>
 <div class="page_comments">
-    <a href="{{ episode.topic.get_latest_post_url }}">{{ episode.topic.posts|add:"-1" }} yorum</a> <a href="{{ episode.topic.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="." /></a>
+    <a href="{{ episode.topic.get_latest_post_url }}">{% blocktrans count episode.topic.posts|add:"-1" as number_of_comments %}{{ number_of_comments }} comment{% plural %}{{ number_of_comments }} comments{% endblocktrans %}</a> <a href="{{ episode.topic.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="." /></a>
 </div>
 
 {% if user.is_authenticated %}
@@ -35,7 +36,7 @@
         <form method="post" action="{{ episode.topic.get_reply_url }}">
             {{form}}
             <br/>
-            <input type="submit" value="Gönder" />
+            <input type="submit" value="{% trans "Submit" %}" />
         </form>
     </p>
     {% endif %}
@@ -44,40 +45,40 @@
 
 {% block leftcolumn %}
 <div class="sidebarcolumn leftcolumn">
-    <h2>İndir</h2>
+    <h2>{% trans "Download" %}</h2>
     <p><a href="{{ episode.oggfile.url }}">ogg ({{ episode.oggfile.size|filesizeformat }})</a></p>
     <p><a href="{{ episode.mp3file.url }}">mp3 ({{ episode.mp3file.size|filesizeformat }})</a></p>
-    <p><a href="/podcast/feed/ogg/">ogg beslemesi</a></p>
-    <p><a href="/podcast/feed/mp3/">mp3 beslemesi</a></p>
+    <p><a href="/podcast/feed/ogg/">{% trans "ogg feed" %}</a></p>
+    <p><a href="/podcast/feed/mp3/">{% trans "mp3 feed" %}</a></p>
     <br />
-    <h2>Uzunluk</h2>
+    <h2>{% trans "Duration" %}</h2>
     <p>{{ episode.get_length }}</p>
-    <h2>Etiketler</h2>
-    <p><img src="/media/img/new/tag.png" style="vertical-align: middle;" alt="etiketler" /> {% for tag in episode.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if forloop.last %}{% else %}, {% endif %}{% endfor %}
+    <h2>{% trans "Tags" %}</h2>
+    <p><img src="/media/img/new/tag.png" style="vertical-align: middle;" alt="{% trans "tags" %}" /> {% for tag in episode.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if forloop.last %}{% else %}, {% endif %}{% endfor %}
     </p>
     <br />
-    <h2>Sunan</h2>
+    <h2>{% trans "Commentators" %}</h2>
     <p>{% for author in episode.authors.all %}{% if forloop.last %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.user.get_full_name }}{% if author.user %}</a>{% endif %}{% else %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.user.get_full_name }}{% if author.user %}</a>{% endif %},<br />{% endif %}{% endfor %}</p>
     {% if episode.guests %}
-        <h2>Konuklar</h2>
+        <h2>{% trans "Guests" %}</h2>
         {% for guest in episode.get_guests_list %}
             <p>{{ guest }}</p>
         {% endfor %}
     {% endif %}
-    <h2>Paylaş</h2>
+    <h2>{% trans "Share" %}</h2>
     <script language="javascript" type="text/javascript">
         var newstitle = "{{ episode.title|safe|addslashes }}";
         var newssummary = "{{ episode.sum|safe|striptags|addslashes|cut:"\n" }}";
         var newsurl = "{{ request.build_absolute_uri }}";
     </script>
     <p>
-    <a href="http://delicious.com/save" title="del.icio.us'a ekle" onclick='window.open("http://delicious.com/save?v=5&amp;noui&amp;jump=close&amp;url="+encodeURIComponent(newsurl)+"&title="+encodeURIComponent(newstitle), "delicious","toolbar=no,width=550,height=550"); return false;'><img src="/media/img/new/servicelinks/delicious.png" alt="del.icio.us'a ekle" /></a>
-    <a href="http://facebook.com/sharer.php" title="facebook'a ekle" onclick='window.open("http://facebook.com/sharer.php?u="+encodeURIComponent(newsurl)+"&t="+encodeURIComponent(newstitle), "facebook","toolbar=no,width=550,height=550"); return false;'><img src="/media/img/new/servicelinks/facebook.png" alt="facebook'a ekle" /></a>
-    <a href="http://identi.ca/" title="identica'ya ekle" onclick='window.open("http://identi.ca/index.php?action=newnotice&status_textarea=!oi "+encodeURIComponent(newstitle)+": "+encodeURIComponent(newsurl), "identi.ca","toolbar=no,width=800,height=450"); return false;'><img src="/media/img/new/servicelinks/identica.png" alt="identica'ya ekle" /></a>
-    <a href="http://twitter.com/home" title="twitter'a ekle" onclick='window.open("http://twitter.com/home?status="+encodeURIComponent(newstitle)+": "+encodeURIComponent(newsurl), "twitter","toolbar=no,width=800,height=550"); return false;'><img src="/media/img/new/servicelinks/twitter.png" alt="twitter'a ekle" /></a>
-    <a href="http://www.stumbleupon.com/" title="stumbleupon'a ekle" onclick='window.open("http://www.stumbleupon.com/submit?url="+encodeURIComponent(newsurl), "stumbleupon","toolbar=no,width=800,height=550"); return false;'><img src="/media/img/new/servicelinks/stumbleupon.png" alt="stumbleupon'a ekle" /></a>
-    <a href="http://www.google.com/" title="google buzz'a ekle" onclick='window.open("http://www.google.com/reader/link?url="+encodeURIComponent(newsurl)+"&title="+encodeURIComponent(newstitle)+"&snippet="+encodeURIComponent(newssummary)+"&srcURL=www.ozgurlukicin.com&srcTitle=Özgürlükİçin.com"); return false;'><img src="/media/img/new/servicelinks/googlebuzz.png" alt="google buzz'a ekle" /></a>
-    <a href="http://technorati.com/" title="technorati'ye ekle" onclick='window.open("http://technorati.com/faves?sub=addfavbtn&add="+encodeURIComponent(newsurl), "technorati","toolbar=no,width=1000,height=550"); return false;'><img src="/media/img/new/servicelinks/technorati.png" alt="technorati'ye ekle" /></a>
+    <a href="http://delicious.com/save" title="del.icio.us'a ekle" onclick='window.open("http://delicious.com/save?v=5&amp;noui&amp;jump=close&amp;url="+encodeURIComponent(newsurl)+"&title="+encodeURIComponent(newstitle), "delicious","toolbar=no,width=550,height=550"); return false;'><img src="/media/img/new/servicelinks/delicious.png" alt="{% trans "add to del.icio.us" %}" /></a>
+    <a href="http://facebook.com/sharer.php" title="facebook'a ekle" onclick='window.open("http://facebook.com/sharer.php?u="+encodeURIComponent(newsurl)+"&t="+encodeURIComponent(newstitle), "facebook","toolbar=no,width=550,height=550"); return false;'><img src="/media/img/new/servicelinks/facebook.png" alt="{% trans "add to facebook" %}" /></a>
+    <a href="http://identi.ca/" title="identica'ya ekle" onclick='window.open("http://identi.ca/index.php?action=newnotice&status_textarea=!oi "+encodeURIComponent(newstitle)+": "+encodeURIComponent(newsurl), "identi.ca","toolbar=no,width=800,height=450"); return false;'><img src="/media/img/new/servicelinks/identica.png" alt="{% trans "add to identica" %}" /></a>
+    <a href="http://twitter.com/home" title="twitter'a ekle" onclick='window.open("http://twitter.com/home?status="+encodeURIComponent(newstitle)+": "+encodeURIComponent(newsurl), "twitter","toolbar=no,width=800,height=550"); return false;'><img src="/media/img/new/servicelinks/twitter.png" alt="{% trans "add to twitter" %}" /></a>
+    <a href="http://www.stumbleupon.com/" title="stumbleupon'a ekle" onclick='window.open("http://www.stumbleupon.com/submit?url="+encodeURIComponent(newsurl), "stumbleupon","toolbar=no,width=800,height=550"); return false;'><img src="/media/img/new/servicelinks/stumbleupon.png" alt="{% trans "add to stumbleupon" %}" /></a>
+    <a href="http://www.google.com/" title="google buzz'a ekle" onclick='window.open("http://www.google.com/reader/link?url="+encodeURIComponent(newsurl)+"&title="+encodeURIComponent(newstitle)+"&snippet="+encodeURIComponent(newssummary)+"&srcURL=www.ozgurlukicin.com&srcTitle=Özgürlükİçin.com"); return false;'><img src="/media/img/new/servicelinks/googlebuzz.png" alt="{% trans "add to google buzz" %}" /></a>
+    <a href="http://technorati.com/" title="technorati'ye ekle" onclick='window.open("http://technorati.com/faves?sub=addfavbtn&add="+encodeURIComponent(newsurl), "technorati","toolbar=no,width=1000,height=550"); return false;'><img src="/media/img/new/servicelinks/technorati.png" alt="{% trans "add to technorati" %}" /></a>
     </p>
 </div>
 {% endblock %}
