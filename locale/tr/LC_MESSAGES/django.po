@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-14 15:58+0300\n"
+"POT-Creation-Date: 2010-06-14 16:13+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -272,7 +272,7 @@ msgid "Submit"
 msgstr "Gönder"
 
 #: ideas/templates/idea_base.html:5 templates/base.html:47
-#: templates/footer.html:13
+#: templates/footer.html:13 templates/tema/theme_base_without_ezine.html:47
 msgid "Brainstorm"
 msgstr "Yeni Fikirler"
 
@@ -281,6 +281,7 @@ msgstr "Yeni Fikirler"
 #: templates/printable.html:5 templates/forum/forum_base.html:5
 #: templates/podcast/feed.html:9 templates/podcast/feed.html.py:12
 #: templates/seminar/seminar_detail.html:5
+#: templates/tema/theme_base_without_ezine.html:7
 msgid "Spread Pardus"
 msgstr "Özgürlükiçin"
 
@@ -291,16 +292,19 @@ msgstr "Yeni Fikirler"
 
 #: ideas/templates/idea_base.html:33 templates/base.html:59
 #: templates/forum/forum_base.html:34
+#: templates/tema/theme_base_without_ezine.html:59
 msgid "User Box"
 msgstr "Kullanıcı Kutusu"
 
 #: ideas/templates/idea_base.html:39 templates/base.html:65
 #: templates/forum/forum_base.html:40
+#: templates/tema/theme_base_without_ezine.html:65
 msgid "Login"
 msgstr "Giriş"
 
 #: ideas/templates/idea_base.html:41 templates/base.html:67
 #: templates/forum/forum_base.html:42
+#: templates/tema/theme_base_without_ezine.html:67
 msgid "Register"
 msgstr "Kayıt Ol"
 
@@ -310,11 +314,13 @@ msgstr "Parola değiştir"
 
 #: ideas/templates/idea_base.html:43 templates/base.html:69
 #: templates/forum/forum_base.html:44
+#: templates/tema/theme_base_without_ezine.html:69
 #, python-format
 msgid "Hello %(username)s!"
 msgstr "Merhaba %(username)s!"
 
 #: ideas/templates/idea_base.html:44 templates/base.html:70
+#: templates/tema/theme_base_without_ezine.html:70
 #, python-format
 msgid ""
 "You can display your profile page by clicking <a href=\"%(profile_url)s"
@@ -328,6 +334,8 @@ msgstr ""
 #: ideas/templates/idea_base.html:48 ideas/templates/idea_base.html.py:53
 #: templates/base.html:74 templates/base.html.py:77
 #: templates/forum/forum_base.html:58 templates/forum/forum_base.html.py:61
+#: templates/tema/theme_base_without_ezine.html:74
+#: templates/tema/theme_base_without_ezine.html:77
 msgid "Search"
 msgstr "Arama"
 
@@ -393,6 +401,7 @@ msgstr "Kategoriler"
 
 #: ideas/templates/idea_base.html:85 templates/feedjack/oi/post_list.html:68
 #: templates/forum/forum_base.html:67
+#: templates/tema/theme_base_without_ezine.html:83
 msgid "shipit"
 msgstr "cdgonder"
 
@@ -467,6 +476,7 @@ msgid "Idea number"
 msgstr "Fikir numarası"
 
 #: ideas/templates/idea_detail.html:57 templates/forum/report.html:21
+#: templates/tema/report.html:22
 msgid "Report"
 msgstr "Bildir"
 
@@ -629,10 +639,20 @@ msgstr "İçerik bulunamadı."
 #: templates/base.html.py:16 templates/base.html:17 templates/base.html.py:18
 #: templates/base.html:19 templates/base.html.py:20 templates/base.html:21
 #: templates/base.html.py:22 templates/forum/forum_base.html:11
+#: templates/tema/theme_base_without_ezine.html:13
+#: templates/tema/theme_base_without_ezine.html:14
+#: templates/tema/theme_base_without_ezine.html:15
+#: templates/tema/theme_base_without_ezine.html:16
+#: templates/tema/theme_base_without_ezine.html:17
+#: templates/tema/theme_base_without_ezine.html:18
+#: templates/tema/theme_base_without_ezine.html:19
+#: templates/tema/theme_base_without_ezine.html:20
+#: templates/tema/theme_base_without_ezine.html:21
+#: templates/tema/theme_base_without_ezine.html:22
 msgid "Spread Pardus RSS"
 msgstr "Özgürlükiçin RSS"
 
-#: templates/base.html:13
+#: templates/base.html:13 templates/tema/theme_base_without_ezine.html:13
 msgid "Main Page"
 msgstr "Ana Sayfa"
 
@@ -640,12 +660,14 @@ msgstr "Ana Sayfa"
 #: templates/editor/list.html:12 templates/news/news_detail.html:4
 #: templates/news/news_main.html:4 templates/news/news_printable.html:3
 #: templates/tag/tag_detail.html:14
+#: templates/tema/theme_base_without_ezine.html:14
 msgid "News"
 msgstr "Haberler"
 
 #: templates/base.html:15 templates/footer.html:12
 #: templates/howto/howto_detail.html:4 templates/howto/howto_main.html:4
 #: templates/howto/howto_printable.html:3 templates/tag/tag_detail.html:25
+#: templates/tema/theme_base_without_ezine.html:15
 msgid "Howto"
 msgstr "Nasıl"
 
@@ -653,6 +675,7 @@ msgstr "Nasıl"
 #: templates/fs/fs_detail.html:4 templates/fs/fs_main.html:4
 #: templates/fs/fs_printable.html:3 templates/howto/howto_main.html:34
 #: templates/tag/tag_detail.html:47
+#: templates/tema/theme_base_without_ezine.html:16
 msgid "First Steps"
 msgstr "İlk Adımlar"
 
@@ -660,21 +683,25 @@ msgstr "İlk Adımlar"
 #: templates/package/package_detail.html:5
 #: templates/package/package_main.html:4
 #: templates/package/package_printable.html:3 templates/tag/tag_detail.html:36
+#: templates/tema/theme_base_without_ezine.html:17
 msgid "Packages"
 msgstr "Paketler"
 
 #: templates/base.html:18 templates/footer.html:14
+#: templates/tema/theme_base_without_ezine.html:18
 msgid "Workshop"
 msgstr "Atölye"
 
 #: templates/base.html:19 templates/footer.html:12
 #: templates/game/game_detail.html:5 templates/game/game_main.html:4
 #: templates/game/game_printable.html:3 templates/tag/tag_detail.html:58
+#: templates/tema/theme_base_without_ezine.html:19
 msgid "Games"
 msgstr "Oyunlar"
 
 #: templates/base.html:20 templates/footer.html:13
 #: templates/feedjack/oi/post_list.html:3
+#: templates/tema/theme_base_without_ezine.html:20
 msgid "Planet"
 msgstr "Gezegen"
 
@@ -688,15 +715,18 @@ msgstr "Gezegen"
 #: templates/forum/report.html:12 templates/forum/topic.html:8
 #: templates/forum/topic.html.py:14 templates/forum/topic.html:187
 #: templates/forum/unread.html:6 templates/tag/tag_detail.html:69
+#: templates/tema/theme_base_without_ezine.html:21
 msgid "Forum"
 msgstr "Forum"
 
 #: templates/base.html:22 templates/footer.html:14
 #: templates/podcast/detail.html:5 templates/podcast/main.html:4
+#: templates/tema/theme_base_without_ezine.html:22
 msgid "Podcast"
 msgstr "Ajans"
 
 #: templates/base.html:67 templates/forum/forum_base.html:42
+#: templates/tema/theme_base_without_ezine.html:67
 msgid "Lost password"
 msgstr "Kayıp parola"
 
@@ -1085,6 +1115,7 @@ msgstr "Şikayet Listesinden Çıkar"
 #: templates/forum/post_list.html:11 templates/forum/reply.html:11
 #: templates/forum/report.html:12 templates/forum/topic.html:14
 #: templates/forum/topic.html.py:187 templates/forum/unread.html:6
+#: templates/tema/report.html:13
 msgid "Mainpage"
 msgstr "Ana Sayfa"
 
@@ -1203,10 +1234,11 @@ msgid "Done"
 msgstr "Tamamlandı"
 
 #: templates/forum/forum_done.html:7 templates/forum/forum_error.html:7
+#: templates/tema/message.html:7
 msgid "Click here to go back"
 msgstr "Geri gitmek için tıklayın"
 
-#: templates/forum/forum_error.html:3
+#: templates/forum/forum_error.html:3 templates/tema/message.html:3
 msgid "Error!"
 msgstr "Hata!"
 
@@ -1346,16 +1378,18 @@ msgstr "avatar"
 
 #: templates/forum/post_edit.html:35 templates/forum/reply.html:33
 #: templates/forum/report.html:29 templates/forum/topic.html:64
+#: templates/tema/report.html:30
 msgid "Register Date:"
 msgstr "Kayıt Tarihi:"
 
 #: templates/forum/post_edit.html:36 templates/forum/reply.html:34
 #: templates/forum/report.html:30 templates/forum/topic.html:66
+#: templates/tema/report.html:31
 msgid "info"
 msgstr "bilgi"
 
 #: templates/forum/post_edit.html:41 templates/forum/reply.html:39
-#: templates/forum/report.html:35
+#: templates/forum/report.html:35 templates/tema/report.html:36
 msgid "post address"
 msgstr "ileti adresi"
 
@@ -2018,6 +2052,16 @@ msgstr ""
 #: templates/tema/forum_wallpaper.html:5
 msgid "Link to original work"
 msgstr ""
+
+#: templates/tema/report.html:13
+#, fuzzy
+msgid "Theme"
+msgstr "Temalar"
+
+#: templates/tema/report.html:13
+#, fuzzy
+msgid "Report Abuse"
+msgstr "Kurallara uymayan iletiyi şikayet et"
 
 #: webalizer/templates/webalizer/index.html:7
 msgid "settings.WEBALIZER_DIR is not configured"

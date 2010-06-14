@@ -178,11 +178,11 @@ These are templates to be marked
     |   |   |-- mail
 -   |   |   |   |-- new_content.html
 -   |   |   |   `-- rejected.html
--   |   |   |-- message.html
++   |   |   |-- message.html
 -   |   |   |-- queue.html
--   |   |   |-- report.html
--   |   |   |-- sidebar.html
--   |   |   |-- theme_base_without_ezine.html
++   |   |   |-- report.html
++   |   |   |-- sidebar.html
+*   |   |   |-- theme_base_without_ezine.html
 -   |   |   |-- themeitem_add_complete.html
 -   |   |   |-- themeitem_add_desktopscreenshot.html
 -   |   |   |-- themeitem_add_font.html

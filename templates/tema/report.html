@@ -1,6 +1,7 @@
 {% extends "tema/base.html" %}
 {% load library %}
 {% load gravatar %}
+{% load i18n %}
 {% block temaextrahead %}
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
@@ -9,7 +10,7 @@
 {% endblock %}
 {% block content %}
 <div class="topbar">
-    <div class="navigation"><a href="/">Ana Sayfa</a> &#62; <a href="/tema/">Tema</a> &#62; <a href="{{ themeitem.get_absolute_url }}">{{ themeitem.title }}</a> &#62; <span class="bold">İleti Raporla</span></div>
+    <div class="navigation"><a href="/">{% trans "Mainpage" %}</a> &#62; <a href="/tema/">{% trans "Theme" %}</a> &#62; <a href="{{ themeitem.get_absolute_url }}">{{ themeitem.title }}</a> &#62; <span class="bold">{% trans "Report Abuse" %}</span></div>
 </div>
 <form action="" method="POST">
 {% for field in form %}
@@ -18,21 +19,21 @@
         <dd>{{ field|safe }}</dd>
     </dl>
 {% endfor %}
-<input type="submit" value="Raporla" />
+<input type="submit" value="{% trans "Report" %}" />
 </form>
 
 <div class="post_base">
     <div class="post_profile">
         <div class="author">{{ themeitem.author }}</div>
-        {% if themeitem.author.is_staff %}<div class="author_description">Forum Yöneticisi</div>{% endif %}
+        <div class="author_description">{{ post.author.get_profile.title }}</div>
         <div class="avatar"><img src="{% avatar_url themeitem.author.email 100 "g" themeitem.author.get_profile.avatar.file.url %}" alt="avatar" width="100" height="100"></div>
-        <div class="register_date">Kayıt Tarihi:<br />{{ themeitem.author.date_joined|date:"d-m-Y" }}</div>
-        <div class="button"><a href="/kullanici/profil/{{ themeitem.author }}"><img src="/media/img/new/button_info.png" alt="bilgi" /></a></div>
+        <div class="register_date">{% trans "Register Date:" %}<br />{{ themeitem.author.date_joined|date:"d-m-Y" }}</div>
+        <div class="button"><a href="/kullanici/profil/{{ themeitem.author }}"><img src="/media/img/new/button_info.png" alt="{% trans "info" %}" /></a></div>
     </div>
     <div class="post_message">
         <div class="post_message_top">
             <div class="post_message_top_icon">
-                <a href="{{ themeitem.get_absolute_url }}"><img src="/media/dijital/img/forum/msg_sim.gif" alt="ileti adresi" /></a>
+                <a href="{{ themeitem.get_absolute_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="{% trans "post address" %}" /></a>
             </div>
             <div class="post_message_top_date">
                 {{ themeitem.update|date:"d-m-Y H:i" }}
