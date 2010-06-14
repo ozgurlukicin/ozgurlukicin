@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-14 15:24+0300\n"
+"POT-Creation-Date: 2010-06-14 15:40+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -387,7 +387,7 @@ msgstr "Çözülen fikirler"
 msgid "Invalid ideas"
 msgstr "Geçersiz fikirler"
 
-#: ideas/templates/idea_base.html:78
+#: ideas/templates/idea_base.html:78 templates/tema/base.html:14
 msgid "Categories"
 msgstr "Kategoriler"
 
@@ -1067,15 +1067,15 @@ msgstr ""
 msgid "Reported Posts:"
 msgstr "Raporlanmış İletiler:"
 
-#: templates/forum/abuse_list.html:11
+#: templates/forum/abuse_list.html:11 templates/tema/abuse_list.html:11
 msgid "Reporter:"
 msgstr "Raporlayan:"
 
-#: templates/forum/abuse_list.html:11
+#: templates/forum/abuse_list.html:11 templates/tema/abuse_list.html:11
 msgid "Reason:"
 msgstr "Sebep:"
 
-#: templates/forum/abuse_list.html:14
+#: templates/forum/abuse_list.html:14 templates/tema/abuse_list.html:14
 msgid "Remove from Abuse List"
 msgstr "Şikayet Listesinden Çıkar"
 
@@ -1954,6 +1954,62 @@ msgstr[0] "(%(vote_count)s oy)"
 #, fuzzy
 msgid "Flatpages"
 msgstr "Görselleri Filtrele"
+
+#: templates/tema/abuse_list.html:3
+#, fuzzy
+msgid "Reported Themes"
+msgstr "Raporlanmış İletiler"
+
+#: templates/tema/abuse_list.html:6
+#, fuzzy
+msgid ""
+"There is no reported entry. Click here to visit <a href=\"/tema/\">main</a> "
+"theme page."
+msgstr ""
+"Raporlanmış herhangi bir ileti bulunmamaktadır. Foruma dönmek için <a href="
+"\"/forum/\">Tıklayın"
+
+#: templates/tema/abuse_list.html:9
+#, fuzzy
+msgid "Reported Themes:"
+msgstr "Raporlanmış İletiler:"
+
+#: templates/tema/base.html:15
+msgid "Wallpapers"
+msgstr ""
+
+#: templates/tema/base.html:16
+msgid "Desktop Screenshots"
+msgstr ""
+
+#: templates/tema/base.html:17
+#, fuzzy
+msgid "Fonts"
+msgstr "Yorumlar"
+
+#: templates/tema/base.html:19
+msgid "Licence Information"
+msgstr ""
+
+#: templates/tema/base.html:20
+msgid "Theme Abuse Reports"
+msgstr ""
+
+#: templates/tema/base.html:22
+msgid "Add Content"
+msgstr ""
+
+#: templates/tema/base.html:23
+msgid "Wallpaper"
+msgstr ""
+
+#: templates/tema/base.html:24
+msgid "Desktop Screenshot"
+msgstr ""
+
+#: templates/tema/base.html:25
+msgid "Font"
+msgstr ""
 
 #: webalizer/templates/webalizer/index.html:7
 msgid "settings.WEBALIZER_DIR is not configured"
