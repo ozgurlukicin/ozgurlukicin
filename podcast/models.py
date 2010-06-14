@@ -48,8 +48,10 @@ class Episode(models.Model):
     def save(self):
         self.minutes, self.seconds = 0, 0
         create_forum_topic(self, "Ajans Pardus")
+        #first save file on disk, second save record duration
         super(Episode, self).save()
         self.minutes, self.seconds = getDuration(self.mp3file.path)
+        super(Episode, self).save()
 
     def get_absolute_url(self):
         return "/podcast/bolum/%s/" % self.slug
