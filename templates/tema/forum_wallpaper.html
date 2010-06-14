@@ -1,4 +1,5 @@
+{% load i18n %}
 <p><a href="{{ object.get_absolute_url }}"><img src="{{ object.thumbnail.url }}" alt="ekran görüntüsü"/></a></p>
 <p>{{ object.text|linebreaksbr }}</p>
-<p><a href="{{ object.get_absolute_url }}">Tema sayfasına bağlantı</a></p>
-{% if object.origin_url %}<p><a href="{{ object.origin_url }}" target="_blank">Özgün çalışmaya bağlantı</a></p>{% endif %}
+<p><a href="{{ object.get_absolute_url }}">{% trans "Link to theme page" %}</a></p>
+{% if object.origin_url %}<p><a href="{{ object.origin_url }}" target="_blank">{% trans "Link to original work" %}</a></p>{% endif %}

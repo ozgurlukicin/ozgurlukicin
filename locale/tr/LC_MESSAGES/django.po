@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-14 15:40+0300\n"
+"POT-Creation-Date: 2010-06-14 15:58+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -1585,7 +1585,7 @@ msgid "Details"
 msgstr ""
 
 #: templates/game/game_detail.html:46
-msgid "Licence"
+msgid "License"
 msgstr ""
 
 #: templates/game/game_detail.html:50
@@ -1752,7 +1752,7 @@ msgid ""
 msgstr ""
 
 #: templates/package/package_detail.html:42
-msgid "Licence:"
+msgid "License:"
 msgstr ""
 
 #: templates/package/package_detail.html:46
@@ -1988,7 +1988,7 @@ msgid "Fonts"
 msgstr "Yorumlar"
 
 #: templates/tema/base.html:19
-msgid "Licence Information"
+msgid "License Information"
 msgstr ""
 
 #: templates/tema/base.html:20
@@ -2009,6 +2009,14 @@ msgstr ""
 
 #: templates/tema/base.html:25
 msgid "Font"
+msgstr ""
+
+#: templates/tema/forum_wallpaper.html:4
+msgid "Link to theme page"
+msgstr ""
+
+#: templates/tema/forum_wallpaper.html:5
+msgid "Link to original work"
 msgstr ""
 
 #: webalizer/templates/webalizer/index.html:7

@@ -172,10 +172,9 @@ These are templates to be marked
     |   |-- tema
 +   |   |   |-- abuse_list.html
 +   |   |   |-- base.html
--   |   |   |-- feed_description.html
--   |   |   |-- feed_title.html
--   |   |   |-- forum_wallpaper.html
--   |   |   |-- kategori.html
++   |   |   |-- feed_description.html
++   |   |   |-- feed_title.html
++   |   |   |-- forum_wallpaper.html
     |   |   |-- mail
 -   |   |   |   |-- new_content.html
 -   |   |   |   `-- rejected.html
