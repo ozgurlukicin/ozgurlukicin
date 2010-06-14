@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-14 15:03+0300\n"
+"POT-Creation-Date: 2010-06-14 15:24+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -639,25 +639,27 @@ msgstr "Ana Sayfa"
 #: templates/base.html:14 templates/footer.html:13
 #: templates/editor/list.html:12 templates/news/news_detail.html:4
 #: templates/news/news_main.html:4 templates/news/news_printable.html:3
+#: templates/tag/tag_detail.html:14
 msgid "News"
 msgstr "Haberler"
 
 #: templates/base.html:15 templates/footer.html:12
 #: templates/howto/howto_detail.html:4 templates/howto/howto_main.html:4
-#: templates/howto/howto_printable.html:3
+#: templates/howto/howto_printable.html:3 templates/tag/tag_detail.html:25
 msgid "Howto"
 msgstr "Nasıl"
 
 #: templates/base.html:16 templates/footer.html:12
 #: templates/fs/fs_detail.html:4 templates/fs/fs_main.html:4
 #: templates/fs/fs_printable.html:3 templates/howto/howto_main.html:34
+#: templates/tag/tag_detail.html:47
 msgid "First Steps"
 msgstr "İlk Adımlar"
 
 #: templates/base.html:17 templates/footer.html:12
 #: templates/package/package_detail.html:5
 #: templates/package/package_main.html:4
-#: templates/package/package_printable.html:3
+#: templates/package/package_printable.html:3 templates/tag/tag_detail.html:36
 msgid "Packages"
 msgstr "Paketler"
 
@@ -667,7 +669,7 @@ msgstr "Atölye"
 
 #: templates/base.html:19 templates/footer.html:12
 #: templates/game/game_detail.html:5 templates/game/game_main.html:4
-#: templates/game/game_printable.html:3
+#: templates/game/game_printable.html:3 templates/tag/tag_detail.html:58
 msgid "Games"
 msgstr "Oyunlar"
 
@@ -685,7 +687,7 @@ msgstr "Gezegen"
 #: templates/forum/post_list.html:11 templates/forum/reply.html:11
 #: templates/forum/report.html:12 templates/forum/topic.html:8
 #: templates/forum/topic.html.py:14 templates/forum/topic.html:187
-#: templates/forum/unread.html:6
+#: templates/forum/unread.html:6 templates/tag/tag_detail.html:69
 msgid "Forum"
 msgstr "Forum"
 
@@ -1923,6 +1925,35 @@ msgstr "Son İleti"
 #: templates/seminar/seminar_detail.html:39
 msgid "TEL:"
 msgstr ""
+
+#: templates/tag/tag_detail.html:3
+#, python-format
+msgid "%(tag)s Tagged Content"
+msgstr ""
+
+#: templates/tag/tag_detail.html:10
+#, python-format
+msgid "%(tag)s tagged content"
+msgstr ""
+
+#: templates/tag/tag_detail.html:14 templates/tag/tag_detail.html.py:25
+#: templates/tag/tag_detail.html:36 templates/tag/tag_detail.html.py:47
+#: templates/tag/tag_detail.html:58 templates/tag/tag_detail.html.py:81
+#, fuzzy, python-format
+msgid "(%(count)s article)"
+msgid_plural "(%(count)s articles)"
+msgstr[0] "(%(vote_count)s oy)"
+
+#: templates/tag/tag_detail.html:69
+#, fuzzy, python-format
+msgid "(%(count)s topic)"
+msgid_plural "(%(count)s topics)"
+msgstr[0] "(%(vote_count)s oy)"
+
+#: templates/tag/tag_detail.html:81
+#, fuzzy
+msgid "Flatpages"
+msgstr "Görselleri Filtrele"
 
 #: webalizer/templates/webalizer/index.html:7
 msgid "settings.WEBALIZER_DIR is not configured"

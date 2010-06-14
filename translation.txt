@@ -168,7 +168,7 @@ These are templates to be marked
 -   |   |   |-- sent_email.html
 -   |   |   `-- sent.html
     |   |-- tag
--   |   |   `-- tag_detail.html
++   |   |   `-- tag_detail.html
     |   |-- tema
 -   |   |   |-- abuse_list.html
 -   |   |   |-- base.html
