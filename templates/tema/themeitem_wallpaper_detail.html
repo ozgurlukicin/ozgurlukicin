@@ -1,6 +1,7 @@
 {% extends "tema/base.html" %}
 
 {% load gravatar %}
+{% load i18n %}
 
 {% block temaextrahead %}
 <style media="screen" type="text/css">@import url('/media/css/new/tema.css');</style>
@@ -23,7 +24,7 @@
         <div class="themeitem_top_user">
             <div class="themeitem_top_user_avatar"><a href="{{ object.author.get_profile.get_absolute_url }}"><img src="{% avatar_url object.author.email 60 "g" object.author.get_profile.avatar.file.url %}" /></a></div>
             <div class="themeitem_top_user_name"><a href="{{ object.author.get_profile.get_absolute_url }}">{{ object.author }}</a></div>
-            <div class="themeitem_top_user_content"><a href="{{ object.author.get_profile.get_theme_content_url }}">Diğer İçerikleri</a></div>
+            <div class="themeitem_top_user_content"><a href="{{ object.author.get_profile.get_theme_content_url }}">{% trans "Other Contents" %}</a></div>
         </div>
     </div>
 
@@ -36,8 +37,8 @@
                 {% endfor %}
 
             </div>
-            {% if button_change %}<div class="themeitem_middle_leftcolumn_buttons"><a href="{{ object.get_change_url }}"><img src="/media/img/new/forum/button_edit.png" alt="Değiştir" /></a></br></div>{% endif %}
-            {% if perms.tema.delete_themeitem %}<div class="themeitem_middle_leftcolumn_buttons"><a href="{{ object.get_delete_url }}"><img src="/media/img/new/forum/button_delete.png" alt="Sil" /></a></br></div>{% endif %}
+            {% if button_change %}<div class="themeitem_middle_leftcolumn_buttons"><a href="{{ object.get_change_url }}"><img src="/media/img/new/forum/button_edit.png" alt="{% trans "Edit" %}" /></a></br></div>{% endif %}
+            {% if perms.tema.delete_themeitem %}<div class="themeitem_middle_leftcolumn_buttons"><a href="{{ object.get_delete_url }}"><img src="/media/img/new/forum/button_delete.png" alt="{% trans "Delete" %}" /></a></br></div>{% endif %}
             <div class="themeitem_middle_leftcolumn_buttons"><a href="{{ object.get_abuse_url }}"><img src="/media/img/new/forum/button_complaint.png" /></a></div>
         </div>
 
@@ -46,11 +47,11 @@
                 <div class="themeitem_middle_stars">
                     <div class="rating"></div>
                 </div>
-                <div id="themeitem_middle_stars_text">{{ object.get_rating_percent }}/10 ({{ object.vote_set.count }} oy)</div>
-                <b>Lisans:</b> <a href="{{ object.license.url }}">{{ object.license.name }}</a> <br />
-                <b>Gönderildiği Tarih:</b> {{ object.submit|date:"d F Y" }} <br />
-                <b>İndirilme Sayısı:</b> {{ object.download_count }} <br />
-                {% if object.origin_url %}<b><a href="{{ object.origin_url }}" target="_blank">Özgün Çalışma</a></b><br />{% endif %}<br />
+                <div id="themeitem_middle_stars_text">{{ object.get_rating_percent }}/10 ({% blocktrans count object.vote_set.count as vote_count %}{{ vote_count }} vote{% plural %}{{ vote_count }} votes{% endblocktrans %})</div>
+                <b>{% trans "License:" %}</b> <a href="{{ object.license.url }}">{{ object.license.name }}</a> <br />
+                <b>{% trans "Submit Date:" %}</b> {{ object.submit|date:"d F Y" }} <br />
+                <b>{% trans "Downloads:" %}</b> {{ object.download_count }} <br />
+                {% if object.origin_url %}<b><a href="{{ object.origin_url }}" target="_blank">{% trans "Originalk Work" %}</a></b><br />{% endif %}<br />
                 <hr />
                 <br />
                 {{ object.text }}
@@ -59,11 +60,11 @@
             <div class="themeitem_middle_rightcolumn_bottom">
                 <div class="themeitem_middle_rightcolumn_bottom_inner">
 
-                    <a href="{{ object.topic.get_latest_post_url }}" title="Yorumlar">
+                    <a href="{{ object.topic.get_latest_post_url }}" title="{% trans "Comments" %}">
                     {% if object.topic.posts|add:"-1" %}
-                        {{ object.topic.posts|add:"-1" }} tane yorum yapıldı.
+                        {% blocktrans count object.topic.posts|add:"-1" as comment_count %}There is {{ comment_count }} comment.{% plural %}There are {{ comment_count }} comments.{% endblocktrans %}
                     {% else %}
-                        İlk yorum yapan siz olun!
+                        {% trans "Be the first one to comment!" %}
                     {% endif %}
                     </a>
                 </div>

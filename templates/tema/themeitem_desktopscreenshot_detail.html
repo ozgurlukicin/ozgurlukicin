@@ -44,7 +44,7 @@
                 <div class="themeitem_middle_stars">
                     <div class="rating"></div>
                 </div>
-                <div id="themeitem_middle_stars_text">{{ object.get_rating_percent }}/10 ({{ object.vote_set.count }} oy)</div>
+                <div id="themeitem_middle_stars_text">{{ object.get_rating_percent }}/10 ({% blocktrans count object.vote_set.count as vote_count %}{{ vote_count }} vote{% plural %}{{ vote_count }} votes{% endblocktrans %})</div>
                 <b>{% trans "License:" %}</b> <a href="{{ object.license.url }}">{{ object.license.name }}</a> <br />
                 <b>{% trans "Submit Date:" %}</b> {{ object.submit|date:"d F Y" }} <br />
                 <b>{% trans "Views:" %}</b> {{ object.download_count }} <br />
@@ -57,7 +57,7 @@
             <div class="themeitem_middle_rightcolumn_bottom">
                 <div class="themeitem_middle_rightcolumn_bottom_inner">
 
-                    <a href="{{ object.topic.get_latest_post_url }}" title="Yorumlar">
+                    <a href="{{ object.topic.get_latest_post_url }}" title="{% trans "Comments" %}">
                     {% if object.topic.posts|add:"-1" %}
                         {% blocktrans count object.topic.posts|add:"-1" as comment_count %}There is {{ comment_count }} comment.{% plural %}There are {{ comment_count }} comments.{% endblocktrans %}
                     {% else %}

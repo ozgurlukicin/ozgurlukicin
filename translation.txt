@@ -193,10 +193,10 @@ These are templates to be marked
 +   |   |   |-- themeitem_desktopscreenshot_detail.html
 +   |   |   |-- themeitem_detail.html
 +   |   |   |-- themeitem_download.html
--   |   |   |-- themeitem_font_detail.html
--   |   |   |-- themeitem_list.html
--   |   |   |-- themeitem_wallpaper_detail.html
--   |   |   `-- upload.html
++   |   |   |-- themeitem_font_detail.html
++   |   |   |-- themeitem_list.html
++   |   |   |-- themeitem_wallpaper_detail.html
++   |   |   `-- upload.html
 -   |   |-- test.html
     |   |-- user
 -   |   |   |-- change_password_done.html

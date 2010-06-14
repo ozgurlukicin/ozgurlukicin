@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-14 17:02+0300\n"
+"POT-Creation-Date: 2010-06-14 17:48+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -32,6 +32,7 @@ msgstr "Editör"
 
 #: ezine/templates/list.html:20 ezine/templates/list.html.py:30
 #: templates/podcast/detail.html:48 templates/podcast/main.html:44
+#: templates/tema/themeitem_font_detail.html:34
 msgid "Download"
 msgstr "İndir"
 
@@ -530,11 +531,16 @@ msgstr "Yorum"
 #: ideas/templates/idea_top.html:26
 #: templates/feedjack/default/post_list.html:138
 #: templates/feedjack/sinx/post_list.html:51
+#: templates/tema/themeitem_desktopscreenshot_detail.html:60
+#: templates/tema/themeitem_font_detail.html:63
+#: templates/tema/themeitem_wallpaper_detail.html:63
 msgid "Comments"
 msgstr "Yorumlar"
 
 #: ideas/templates/idea_top.html:28
 #: templates/tema/themeitem_desktopscreenshot_detail.html:62
+#: templates/tema/themeitem_font_detail.html:65
+#: templates/tema/themeitem_wallpaper_detail.html:65
 #, python-format
 msgid "There is %(comment_count)s comment."
 msgid_plural "There are %(comment_count)s comments."
@@ -542,6 +548,8 @@ msgstr[0] " %(comment_count)s tane yorum yapıldı."
 
 #: ideas/templates/idea_top.html:30
 #: templates/tema/themeitem_desktopscreenshot_detail.html:64
+#: templates/tema/themeitem_font_detail.html:67
+#: templates/tema/themeitem_wallpaper_detail.html:67
 msgid "Be the first one to comment!"
 msgstr "İlk yorum yapan siz olun!"
 
@@ -766,7 +774,7 @@ msgstr ""
 "href=\"http://uekae.tubitak.gov.tr\" title=\"TÜBİTAK/UEKAE\">TÜBİTAK/UEKAE</"
 "a>’nin tescilli markasıdır."
 
-#: templates/footer.html:13
+#: templates/footer.html:13 templates/tema/themeitem_list.html:8
 msgid "Themes"
 msgstr "Temalar"
 
@@ -902,6 +910,8 @@ msgstr "Haber Ekle"
 
 #: templates/editor/list.html:14 templates/editor/list.html.py:24
 #: templates/tema/themeitem_detail.html:4
+#: templates/tema/themeitem_font_detail.html:35
+#: templates/tema/themeitem_wallpaper_detail.html:40
 msgid "Edit"
 msgstr "Düzenle"
 
@@ -1049,7 +1059,7 @@ msgstr "gönder"
 msgid "File"
 msgstr "Dosya"
 
-#: templates/file_upload/file_upload.html:17
+#: templates/file_upload/file_upload.html:17 templates/tema/upload.html:13
 msgid "Upload"
 msgstr "Gönder"
 
@@ -1795,6 +1805,8 @@ msgstr ""
 #: templates/package/package_detail.html:42
 #: templates/tema/themeitem_desktopscreenshot_detail.html:48
 #: templates/tema/themeitem_detail.html:16
+#: templates/tema/themeitem_font_detail.html:46
+#: templates/tema/themeitem_wallpaper_detail.html:51
 msgid "License:"
 msgstr ""
 
@@ -1949,6 +1961,7 @@ msgid "Duration:"
 msgstr "Belgelendirme"
 
 #: templates/podcast/main.html:20 templates/podcast/main.html.py:30
+#: templates/tema/themeitem_list.html:17
 #, fuzzy, python-format
 msgid "<span class=\"bold\">%(comment_count)s</span> Comment"
 msgid_plural "<span class=\"bold\">%(comment_count)s</span> Comments"
@@ -2089,11 +2102,15 @@ msgstr "Bu fikri silmek istediğinizden emin misiniz?"
 
 #: templates/tema/themeitem_delete.html:7
 #: templates/tema/themeitem_desktopscreenshot_detail.html:38
+#: templates/tema/themeitem_font_detail.html:36
+#: templates/tema/themeitem_wallpaper_detail.html:41
 #, fuzzy
 msgid "Delete"
 msgstr "sil"
 
 #: templates/tema/themeitem_desktopscreenshot_detail.html:27
+#: templates/tema/themeitem_font_detail.html:27
+#: templates/tema/themeitem_wallpaper_detail.html:27
 #, fuzzy
 msgid "Other Contents"
 msgstr "Diğer Gezegenler"
@@ -2102,7 +2119,17 @@ msgstr "Diğer Gezegenler"
 msgid "Larger Picture"
 msgstr ""
 
+#: templates/tema/themeitem_desktopscreenshot_detail.html:47
+#: templates/tema/themeitem_font_detail.html:45
+#: templates/tema/themeitem_wallpaper_detail.html:50
+#, fuzzy, python-format
+msgid "%(vote_count)s vote"
+msgid_plural "%(vote_count)s votes"
+msgstr[0] "(%(vote_count)s oy)"
+
 #: templates/tema/themeitem_desktopscreenshot_detail.html:49
+#: templates/tema/themeitem_font_detail.html:47
+#: templates/tema/themeitem_wallpaper_detail.html:52
 #, fuzzy
 msgid "Submit Date:"
 msgstr "Fikir Ekle"
@@ -2113,6 +2140,7 @@ msgid "Views:"
 msgstr "Görüntüleme"
 
 #: templates/tema/themeitem_desktopscreenshot_detail.html:51
+#: templates/tema/themeitem_wallpaper_detail.html:54
 msgid "Originalk Work"
 msgstr ""
 
@@ -2126,6 +2154,37 @@ msgstr "Belgelendirme"
 msgid ""
 "Your download will start in 3 seconds. Click <a href=\"%(download_url)s"
 "\">here</a> if it doesn't start."
+msgstr ""
+
+#: templates/tema/themeitem_font_detail.html:48
+#: templates/tema/themeitem_wallpaper_detail.html:53
+#, fuzzy
+msgid "Downloads:"
+msgstr "İndir"
+
+#: templates/tema/themeitem_font_detail.html:49
+#, fuzzy
+msgid "Web Page"
+msgstr "İlgili Sayfalar"
+
+#: templates/tema/themeitem_font_detail.html:54
+msgid "Preview"
+msgstr ""
+
+#: templates/tema/themeitem_font_detail.html:54
+msgid "write something in the box below and press Enter"
+msgstr ""
+
+#: templates/tema/themeitem_list.html:8
+#, fuzzy, python-format
+msgid "content sent by %(author)s"
+msgstr "%(author)s tarafından gönderilen iletiler"
+
+#: templates/tema/themeitem_list.html:27
+#, python-format
+msgid ""
+"There's a total of <span class=\"bold\">%(hits)s</span> content in <span "
+"class=\"bold\">%(pages)s</span> pages."
 msgstr ""
 
 #: webalizer/templates/webalizer/index.html:7

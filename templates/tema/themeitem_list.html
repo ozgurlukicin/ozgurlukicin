@@ -1,10 +1,11 @@
 {% extends "tema/base.html" %}
 {% load library %}
+{% load i18n %}
 {% block temaextrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/object_lists.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
 {% endblock %}
-{% block title %}Temalar - {% if author %}{{ author }} tarafından gönderilen içerik - {% endif %}{% endblock %}
+{% block title %}{% trans "Themes" %} - {% if author %}{% blocktrans %}content sent by {{ author }}{% endblocktrans %} - {% endif %}{% endblock %}
 {% block content %}
 
 <!-- taken from news list -->
@@ -13,7 +14,7 @@
     <div class="column first">
         {% if object.thumbnail %}<img src="{{ object.thumbnail.url }}" alt="{{ object.title }}" />{% endif %}<br />
         <img src="/media/img/new/image_bottom.png" alt="gölge" />
-        <div class="info"><span class="bold">{{ object.update|date:"d" }} {{ object.update|date:"F"|slice:":3" }}</span> {{ object.update|date:"Y" }} <span class="bold">/</span> <a href="{{ object.topic.get_latest_post_url }}"><span class="bold">{{ object.topic.posts|add:"-1" }}</span> Yorum</a></div>
+        <div class="info"><span class="bold">{{ object.update|date:"d" }} {{ object.update|date:"F"|slice:":3" }}</span> {{ object.update|date:"Y" }} <span class="bold">/</span> <a href="{{ object.topic.get_latest_post_url }}">{% blocktrans count object.topic.posts|add:"-1" as comment_count %}<span class="bold">{{ comment_count }}</span> Comment{% plural %}<span class="bold">{{ comment_count }}</span> Comments{% endblocktrans %}</a></div>
     </div>
     <div class="column">
         <div class="title"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></div>
@@ -23,5 +24,5 @@
 {% endfor %}
 </div>
 
-{% if is_paginated %}<div class="paginator_block"><div class="paginator_pages">{% paginator %}</div><div class="paginator_description"><span class="bold">{{ pages }}</span> sayfada toplam <span class="bold">{{ hits }}</span> içerik bulunmaktadır.</div></div>{% endif %}
+{% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div><div class="paginator_description">{% blocktrans %}There's a total of <span class="bold">{{ hits }}</span> content in <span class="bold">{{ pages }}</span> pages.{% endblocktrans %}</div></div>{% endif %}
 {% endblock %}
