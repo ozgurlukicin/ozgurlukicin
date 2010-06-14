@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load library %}
-{% block title %}Ajans - {% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Podcast" %} - {% endblock %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/object_lists.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
@@ -11,12 +12,12 @@
     <div class="news_container podcast_main" style="background-image:url('/media/podcasts/bg.png');height:250px;">
         <div class="column">
             <div class="right_column">
-                <span style="color:white">Ajans Pardus</span>
+                <span style="color:white">{% trans "Pardus Podcast" %}</span>
                 <div class="title"><a href="{{ last_episode.get_absolute_url }}" style="color:white">{{ last_episode.title }}</a></div>
                 <div class="summary">{{ last_episode.sum|safe }}<br />
                     {% with last_episode as episode %}{% include "podcast/audioplayer.html" %}{% endwith %}
                 </div>
-                <div class="info" style="margin-top:5px"><span class="bold">Uzunluk: {{ last_episode.get_length }}</span><br /><span class="bold">{{ last_episode.update|date:"d" }} {{ last_episode.update|date:"F"|slice:":3" }}</span> {{ last_episode.update|date:"Y" }} <span class="bold">/</span> <a href="{{ last_episode.topic.get_latest_post_url }}"><span class="bold">{{ last_episode.topic.posts|add:"-1" }}</span> Yorum</a></div>
+                <div class="info" style="margin-top:5px"><span class="bold">{% trans "Duration:" %} {{ last_episode.get_length }}</span><br /><span class="bold">{{ last_episode.update|date:"d" }} {{ last_episode.update|date:"F"|slice:":3" }}</span> {{ last_episode.update|date:"Y" }} <span class="bold">/</span> <a href="{{ last_episode.topic.get_latest_post_url }}">{% blocktrans with last_episode.topic.posts|add:"-1" as comment_count %}<span class="bold">{{ comment_count }}</span> Comment{% plural %}<span class="bold">{{ comment_count }}</span> Comments{% endblocktrans %}</a></div>
             </div>
             <div style="clear:both;"></div>
         </div>
@@ -26,7 +27,7 @@
         <div class="column first">
             <img src="{{ episode.image.file.url }}" alt="{{ episode.image.get_alt_string }}" /><br />
             <img src="/media/img/new/image_bottom.png" alt="gölge" />
-            <div class="info"><span class="bold">{{ episode.update|date:"d" }} {{ episode.update|date:"F"|slice:":3" }}</span> {{ episode.update|date:"Y" }} <span class="bold">/</span> <a href="{{ episode.topic.get_latest_post_url }}"><span class="bold">{{ episode.topic.posts|add:"-1" }}</span> Yorum</a></div>
+            <div class="info"><span class="bold">{{ episode.update|date:"d" }} {{ episode.update|date:"F"|slice:":3" }}</span> {{ episode.update|date:"Y" }} <span class="bold">/</span> <a href="{{ episode.topic.get_latest_post_url }}">{% blocktrans with episode.topic.posts|add:"-1" as comment_count %}<span class="bold">{{ comment_count }}</span> Comment{% plural %}<span class="bold">{{ comment_count }}</span> Comments{% endblocktrans %}</a></div>
         </div>
         <div class="column">
             <div class="title"><a href="{{ episode.get_absolute_url }}">{{ episode.title }}</a></div>
@@ -35,25 +36,25 @@
         <div class="{% cycle columnspacer, %}"></div>
     {% endfor %}
     </div>
-    {% if is_paginated %}<div class="paginator_block"><div class="paginator_pages">{% paginator %}</div><div class="paginator_description"><span class="bold">{{ pages }}</span> sayfada toplam <span class="bold">{{ hits }}</span> ajans bulunmaktadır.</div></div>{% endif %}
+    {% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div><div class="paginator_description">{% blocktrans %}There's a total of <span class="bold">{{ hits }}</span> podcasts in <span class="bold">{{ pages }}</span> pages.{% endblocktrans %}</div></div>{% endif %}
 {% endblock %}
 {% block leftcolumn %}
 <div class="sidebarcolumn leftcolumn">
-    <h2>Güncel Ajans</h2>
-    <h2>İndir</h2>
+    <h2>{% trans "Latest Podcast" %}</h2>
+    <h2>{% trans "Download" %}</h2>
     <p><a href="{{ last_episode.oggfile.url }}">ogg ({{ last_episode.oggfile.size|filesizeformat }})</a></p>
     <p><a href="{{ last_episode.mp3file.url }}">mp3 ({{ last_episode.mp3file.size|filesizeformat }})</a></p>
-    <p><a href="/podcast/feed/ogg/">ogg beslemesi</a></p>
-    <p><a href="/podcast/feed/mp3/">mp3 beslemesi</a></p>
+    <p><a href="/podcast/feed/ogg/">{% trans "ogg feed" %}</a></p>
+    <p><a href="/podcast/feed/mp3/">{% trans "mp3 feed" %}</a></p>
     <br />
-    <h2>Etiketler</h2>
-    <p><img src="/media/img/new/tag.png" style="vertical-align: middle;" alt="etiketler" /> {% for tag in last_episode.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if forloop.last %}{% else %}, {% endif %}{% endfor %}
+    <h2>{% trans "Tags" %}</h2>
+    <p><img src="/media/img/new/tag.png" style="vertical-align: middle;" alt="{% trans "tags" %}" /> {% for tag in last_episode.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if forloop.last %}{% else %}, {% endif %}{% endfor %}
     </p>
     <br />
-    <h2>Sunan</h2>
+    <h2>{% trans "Commentators" %}</h2>
     <p>{% for author in last_episode.authors.all %}{% if forloop.last %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.user.get_full_name }}{% if author.user %}</a>{% endif %}{% else %}{% if author.user %}<a href="{{ author.user.get_profile.get_absolute_url }}">{% endif %}{{ author.user.get_full_name }}{% if author.user %}</a>{% endif %},<br />{% endif %}{% endfor %}</p>
     {% if last_episode.guests %}
-        <h2>Konuklar</h2>
+        <h2>{% trans "Guests" %}</h2>
         {% for guest in last_episode.get_guests_list %}
             <p>{{ guest }}</p>
         {% endfor %}

@@ -1,12 +1,12 @@
-{% load library %}<?xml version="1.0" encoding="UTF-8"?>
+{% load library i18n %}<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 
 <channel>
-    <title>Ajans Pardus</title>
+    <title>{% trans "Pardus Podcast" %}</title>
     <link>{{ WEB_URL }}/podcast/</link>
-    <description>Ajans Pardus</description>
+    <description>{% trans "Pardus Podcast" %}</description>
     <language>tr-TR</language>
-    <copyright>&#x2117; &amp; &#xA9; {% now "Y" %} Özgürlükiçin.com. Creative Commons: Attribution-Non-Commercial-Share Alike (by-nc-sa).</copyright>
+    <copyright>&#x2117; &amp; &#xA9; {% now "Y" %} {% trans "Pardus Podcast" %}. Creative Commons: Attribution-Non-Commercial-Share Alike (by-nc-sa).</copyright>
     <lastBuildDate>{{ episode_list.0.update|rfc822datetime }}</lastBuildDate>
     <docs>http://blogs.law.harvard.edu/tech/rss</docs>
 

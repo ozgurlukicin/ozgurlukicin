@@ -1,20 +1,20 @@
-{% load library %}<?xml version="1.0" encoding="UTF-8"?>
+{% load library i18n %}<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
 
 <channel>
-    <title>Ajans Pardus</title>
+    <title>{% trans "Pardus Podcast" %}</title>
     <link>{{ WEB_URL }}/podcast/</link>
-    <description>Ajans Pardus</description>
+    <description>{% trans "Pardus Podcast" %}</description>
     <language>tr-TR</language>
-    <copyright>&#x2117; &amp; &#xA9; {% now "Y" %} Özgürlükiçin.com. Creative Commons: Attribution-Non-Commercial-Share Alike (by-nc-sa).</copyright>
+    <copyright>&#x2117; &amp; &#xA9; {% now "Y" %} {% trans "Spread Pardus" %}. Creative Commons: Attribution-Non-Commercial-Share Alike (by-nc-sa).</copyright>
     <lastBuildDate>{{ episode_list.0.update|rfc822datetime }}</lastBuildDate>
     <docs>http://blogs.law.harvard.edu/tech/rss</docs>
-    <itunes:author>Özgürlükiçin.com</itunes:author>
+    <itunes:author>{% trans "Spread Pardus" %}</itunes:author>
     <itunes:owner>
-        <itunes:name>ozgurlukicin</itunes:name>
+        <itunes:name>{% trans "spreadpardus" %}</itunes:name>
         <itunes:email>info@pardus.org.tr</itunes:email>
     </itunes:owner>
-    <itunes:summary>Özgürlükiçin Sohbetleri</itunes:summary>
+    <itunes:summary>{% trans "Spread Pardus Talks" %}</itunes:summary>
     <itunes:image href="{{ WEB_URL }}/media/podcasts/podcast_300.png" />
     <itunes:category text="Technology">
       <itunes:category text="Tech News" />

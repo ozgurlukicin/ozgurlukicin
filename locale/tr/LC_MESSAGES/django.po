@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-14 13:23+0300\n"
+"POT-Creation-Date: 2010-06-14 13:38+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -31,7 +31,7 @@ msgid "Editor"
 msgstr "Editör"
 
 #: ezine/templates/list.html:20 ezine/templates/list.html.py:30
-#: templates/podcast/detail.html:48
+#: templates/podcast/detail.html:48 templates/podcast/main.html:44
 msgid "Download"
 msgstr "İndir"
 
@@ -195,6 +195,7 @@ msgstr ""
 #: feedjack/models.py:130 feedjack/models.py:149
 #: templates/feedjack/oi/post_list.html:16
 #: templates/package/package_detail.html:65 templates/podcast/detail.html:57
+#: templates/podcast/main.html:51
 msgid "tags"
 msgstr ""
 
@@ -277,7 +278,8 @@ msgstr "Yeni Fikirler"
 
 #: ideas/templates/idea_base.html:5 templates/base.html:7
 #: templates/base.html.py:83 templates/header.html:4
-#: templates/forum/forum_base.html:5
+#: templates/forum/forum_base.html:5 templates/podcast/feed.html:9
+#: templates/podcast/feed.html.py:12
 msgid "Spread Pardus"
 msgstr "Özgürlükiçin"
 
@@ -402,6 +404,7 @@ msgstr "Bu fikir <a href=\"%(url)s\">#%(id)s</a> numaralı fikrin aynısı"
 #: templates/fs/fs_detail.html:26 templates/game/game_detail.html:95
 #: templates/howto/howto_detail.html:57 templates/news/news_detail.html:49
 #: templates/package/package_detail.html:63 templates/podcast/detail.html:56
+#: templates/podcast/main.html:50
 msgid "Tags"
 msgstr "Etiketler"
 
@@ -686,7 +689,7 @@ msgid "Forum"
 msgstr "Forum"
 
 #: templates/base.html:22 templates/footer.html:14
-#: templates/podcast/detail.html:5
+#: templates/podcast/detail.html:5 templates/podcast/main.html:4
 msgid "Podcast"
 msgstr "Ajans"
 
@@ -1854,11 +1857,11 @@ msgstr ""
 msgid "Abort"
 msgstr "Hakkında"
 
-#: templates/podcast/detail.html:51
+#: templates/podcast/detail.html:51 templates/podcast/main.html:47
 msgid "ogg feed"
 msgstr ""
 
-#: templates/podcast/detail.html:52
+#: templates/podcast/detail.html:52 templates/podcast/main.html:48
 msgid "mp3 feed"
 msgstr ""
 
@@ -1867,14 +1870,54 @@ msgstr ""
 msgid "Duration"
 msgstr "Belgelendirme"
 
-#: templates/podcast/detail.html:60
+#: templates/podcast/detail.html:60 templates/podcast/main.html:54
 #, fuzzy
 msgid "Commentators"
 msgstr "Yorumlar"
 
-#: templates/podcast/detail.html:63
+#: templates/podcast/detail.html:63 templates/podcast/main.html:57
 msgid "Guests"
 msgstr ""
+
+#: templates/podcast/feed.html:5 templates/podcast/feed.html.py:7
+#: templates/podcast/feed_ogg.html:5 templates/podcast/feed_ogg.html.py:7
+#: templates/podcast/feed_ogg.html:9 templates/podcast/main.html:15
+#, fuzzy
+msgid "Pardus Podcast"
+msgstr "Ajans"
+
+#: templates/podcast/feed.html:14
+#, fuzzy
+msgid "spreadpardus"
+msgstr "Özgürlükiçin"
+
+#: templates/podcast/feed.html:17
+#, fuzzy
+msgid "Spread Pardus Talks"
+msgstr "Özgürlükiçin"
+
+#: templates/podcast/main.html:20
+#, fuzzy
+msgid "Duration:"
+msgstr "Belgelendirme"
+
+#: templates/podcast/main.html:20 templates/podcast/main.html.py:30
+#, fuzzy, python-format
+msgid "<span class=\"bold\">%(comment_count)s</span> Comment"
+msgid_plural "<span class=\"bold\">%(comment_count)s</span> Comments"
+msgstr[0] " %(comment_count)s tane yorum yapıldı."
+
+#: templates/podcast/main.html:39
+#, python-format
+msgid ""
+"There's a total of <span class=\"bold\">%(hits)s</span> podcasts in <span "
+"class=\"bold\">%(pages)s</span> pages."
+msgstr ""
+
+#: templates/podcast/main.html:43
+#, fuzzy
+msgid "Latest Podcast"
+msgstr "Son İleti"
 
 #: webalizer/templates/webalizer/index.html:7
 msgid "settings.WEBALIZER_DIR is not configured"
