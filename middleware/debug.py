@@ -98,6 +98,8 @@ class DebugFooter:
         template_rendered.connect(self._storeRenderedTemplates)
 
     def process_response(self, request, response):
+        if not request.user.is_staff:
+            return response
 
         # Only include debug info for text/html pages not accessed via Ajax
         if 'text/html' not in response['Content-Type']:
