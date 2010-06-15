@@ -214,12 +214,12 @@ These are templates to be marked
 +   |   |   |-- register_done.html
 +   |   |   |-- register.html
 +   |   |   `-- user_list.html
--   |   |-- videobox.html
--   |   |-- video.html
++   |   |-- videobox.html
++   |   |-- video.html
     |   `-- workshop
--   |       |-- workshop_detail.html
--   |       |-- workshop_main.html
--   |       `-- workshop_printable.html
++   |       |-- workshop_detail.html
++   |       |-- workshop_main.html
++   |       `-- workshop_printable.html
     `-- webalizer
         `-- templates
             `-- webalizer

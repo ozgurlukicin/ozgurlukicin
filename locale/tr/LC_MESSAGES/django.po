@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-15 12:33+0300\n"
+"POT-Creation-Date: 2010-06-15 13:14+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -198,7 +198,7 @@ msgstr ""
 #: feedjack/models.py:130 feedjack/models.py:149
 #: templates/feedjack/oi/post_list.html:16
 #: templates/package/package_detail.html:65 templates/podcast/detail.html:57
-#: templates/podcast/main.html:51
+#: templates/podcast/main.html:51 templates/workshop/workshop_detail.html:57
 msgid "tags"
 msgstr ""
 
@@ -270,10 +270,12 @@ msgstr "Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin."
 
 #: ideas/templates/idea_add_form.html:21 templates/editor/create.html:12
 #: templates/game/game_detail.html:31 templates/howto/howto_detail.html:29
-#: templates/podcast/detail.html:39 templates/tema/themeitem_add.html:8
+#: templates/news/news_detail.html:37 templates/podcast/detail.html:39
+#: templates/tema/themeitem_add.html:8
 #: templates/tema/themeitem_add_desktopscreenshot.html:23
 #: templates/tema/themeitem_add_font.html:23
 #: templates/tema/themeitem_add_wallpaper.html:23
+#: templates/workshop/workshop_detail.html:30
 msgid "Submit"
 msgstr "Gönder"
 
@@ -423,6 +425,7 @@ msgstr "Bu fikir <a href=\"%(url)s\">#%(id)s</a> numaralı fikrin aynısı"
 #: templates/howto/howto_detail.html:57 templates/news/news_detail.html:49
 #: templates/package/package_detail.html:63 templates/podcast/detail.html:56
 #: templates/podcast/main.html:50 templates/user/user_list.html:95
+#: templates/workshop/workshop_detail.html:56
 msgid "Tags"
 msgstr "Etiketler"
 
@@ -707,6 +710,9 @@ msgstr "Paketler"
 
 #: templates/base.html:18 templates/footer.html:14
 #: templates/tema/theme_base_without_ezine.html:18
+#: templates/workshop/workshop_detail.html:5
+#: templates/workshop/workshop_main.html:4
+#: templates/workshop/workshop_printable.html:4
 msgid "Workshop"
 msgstr "Atölye"
 
@@ -1573,6 +1579,7 @@ msgstr "Sabit ve Kilitli Başlık"
 #: templates/fs/fs_detail.html:16 templates/game/game_detail.html:37
 #: templates/howto/howto_detail.html:35 templates/news/news_detail.html:43
 #: templates/package/package_detail.html:35
+#: templates/workshop/workshop_detail.html:36
 msgid "Last update:"
 msgstr "Son güncelleme:"
 
@@ -1601,6 +1608,7 @@ msgstr "İlgili Videolar"
 #: templates/fs/fs_detail.html:42 templates/game/game_detail.html:114
 #: templates/howto/howto_detail.html:80 templates/news/news_detail.html:53
 #: templates/package/package_detail.html:79
+#: templates/workshop/workshop_detail.html:61
 msgid "Author"
 msgstr "Yazar"
 
@@ -1622,7 +1630,7 @@ msgstr ""
 
 #: templates/game/game_detail.html:24 templates/howto/howto_detail.html:22
 #: templates/news/news_detail.html:28 templates/package/package_detail.html:24
-#: templates/podcast/detail.html:30
+#: templates/podcast/detail.html:30 templates/workshop/workshop_detail.html:23
 #, python-format
 msgid "%(number_of_comments)s comment"
 msgid_plural "%(number_of_comments)s comments"
@@ -1635,6 +1643,7 @@ msgstr ""
 
 #: templates/game/game_detail.html:36 templates/howto/howto_detail.html:34
 #: templates/news/news_detail.html:42 templates/package/package_detail.html:34
+#: templates/workshop/workshop_detail.html:35
 msgid "printer friendly view"
 msgstr ""
 
@@ -1711,6 +1720,7 @@ msgstr ""
 
 #: templates/game/game_main.html:16 templates/howto/howto_main.html:16
 #: templates/news/news_main.html:16 templates/package/package_main.html:16
+#: templates/workshop/workshop_main.html:16
 #, python-format
 msgid "<span class=\"bold\">%(number_of_comments)s</span> comment"
 msgid_plural "<span class=\"bold\">%(number_of_comments)s</span> comments"
@@ -1734,6 +1744,7 @@ msgstr ""
 "gidebilirsiniz."
 
 #: templates/howto/howto_detail.html:48
+#: templates/workshop/workshop_detail.html:47
 #, fuzzy
 msgid "Related Articles"
 msgstr "İlgili Videolar"
@@ -1763,11 +1774,6 @@ msgstr ""
 msgid ""
 "There's a total of <span class=\"bold\">%(hits)s</span> howto articles in "
 "<span class=\"bold\">%(pages)s</span> pages."
-msgstr ""
-
-#: templates/news/news_detail.html:37 templates/package/package_detail.html:30
-#: templates/user/change_password.html:32 templates/user/lostpassword.html:35
-msgid "Send"
 msgstr ""
 
 #: templates/news/news_detail.html:55 templates/podcast/detail.html:68
@@ -1808,6 +1814,11 @@ msgstr ""
 msgid ""
 "There's a total of <span class=\"bold\">%(hits)s</span> news in <span class="
 "\"bold\">%(pages)s</span> pages."
+msgstr ""
+
+#: templates/package/package_detail.html:30
+#: templates/user/change_password.html:32 templates/user/lostpassword.html:35
+msgid "Send"
 msgstr ""
 
 #: templates/package/package_detail.html:42
@@ -2575,6 +2586,13 @@ msgstr "Ajans"
 #, fuzzy
 msgid "spreadpardus.com"
 msgstr "Özgürlükiçin"
+
+#: templates/workshop/workshop_main.html:26
+#, python-format
+msgid ""
+"There's a total of <span class=\"bold\">%(hits)s</span> workshop articles in "
+"<span class=\"bold\">%(pages)s</span> pages."
+msgstr ""
 
 #: webalizer/templates/webalizer/index.html:7
 msgid "settings.WEBALIZER_DIR is not configured"

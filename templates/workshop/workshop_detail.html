@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% load library %}
+{% load i18n %}
 
-{% block title %}{{ workshop.title }} - Atölye - {% endblock %}
+{% block title %}{{ workshop.title }} - {% trans "Workshop" %} - {% endblock %}
 {% block metadescription %}{{ workshop.sum|safe|striptags|cut:"\"" }}{% endblock %}
 {% block metakeywords %}{% for tag in workshop.tags.all %}{{ tag.name }}{% if not forloop.last %},{% endif %}{% endfor %}{% endblock %}
 
@@ -19,20 +20,20 @@
 <div class="page_content">
 {{ workshop.text|safe }}
 </div>
-<div style="float:right; margin-right:10px"><a href="{{ workshop.topic.get_latest_post_url }}">{{ workshop.topic.posts|add:"-1" }} yorum</a> <a href="{{ workshop.topic.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="." /></a></div>
+<div style="float:right; margin-right:10px"><a href="{{ workshop.topic.get_latest_post_url }}">{% blocktrans count workshop.topic.posts|add:"-1" as number_of_comments %}{{ number_of_comments }} comment{% plural %}{{ number_of_comments }} comments{% endblocktrans %}</a> <a href="{{ workshop.topic.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="." /></a></div>
 <p>
 {% if user.is_authenticated %}
     {% if form %}
         <form method="post" action="{{ workshop.topic.get_reply_url }}">
             {{ form }}
             <br />
-            <input type="submit" value="Gönder" />
+            <input type="submit" value="{% trans "Submit" %}" />
         </form>
     {% endif %}
 {% endif %}
 </p>
-<div class="page_printable"><a href="{{ workshop.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
-<div class="page_last_update">Son güncelleme: {{ workshop.update|date:"d F Y" }}</div>
+<div class="page_printable"><a href="{{ workshop.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="{% trans "printer friendly view" %}" /></a></div>
+<div class="page_last_update">{% trans "Last update:" %} {{ workshop.update|date:"d F Y" }}</div>
 
 {% endblock %}
 
@@ -43,7 +44,7 @@
     </div>
     {% if related_workshops %}
     <div class="leftcolumn_content">
-        <h2>İlgili Yazılar</h2>
+        <h2>{% trans "Related Articles" %}</h2>
         <ul>
         {% for article in related_workshops %}
             <li><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></li>
@@ -52,12 +53,12 @@
     </div>
     {% endif %}
     <div class="leftcolumn_content">
-        <h2>Etiketler</h2>
-        <p><img src="/media/img/new/tag.png" style="vertical-align: middle;" alt="etiketler" /> {% for tag in workshop.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if forloop.last %}{% else %},{% endif %} {% endfor %}
+        <h2>{% trans "Tags" %}</h2>
+        <p><img src="/media/img/new/tag.png" style="vertical-align: middle;" alt="{% trans "tags" %}" /> {% for tag in workshop.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if forloop.last %}{% else %},{% endif %} {% endfor %}
         </p>
     </div>
     <div class="leftcolumn_content">
-        <h2>Yazar</h2>
+        <h2>{% trans "Author" %}</h2>
         <p>{{ workshop.author }}</p>
     </div>
 </div>
