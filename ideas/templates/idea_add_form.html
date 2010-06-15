@@ -4,17 +4,22 @@
 {% block title %}{% trans "Submit New Idea" %} - {% endblock %}
 
 {% block extrahead %}
-<style type="text/css" media="screen">@import url('/media/css/new/brainstorm.css');</style>
-<style type="text/css" media="screen">@import url('/media/css/new/autocomplete.css');</style>
-<script language="javascript" type="text/javascript" src="/media/js/jquery.autocomplete.js"></script>
-<script type="text/javascript" src="/media/js/brainstorm.js"></script>
-<script type="text/javascript" src="/media/js/taghelper_idea.js"></script>
+  <style type="text/css" media="screen">@import url('/media/css/new/brainstorm.css');</style>
+  <style type="text/css" media="screen">@import url('/media/css/new/autocomplete.css');</style>
+  <script language="javascript" type="text/javascript" src="/media/js/jquery.autocomplete.js"></script>
+  <script type="text/javascript" src="/media/js/brainstorm.js"></script>
+  <script type="text/javascript" src="/media/js/taghelper_idea.js"></script>
+  <script type="text/javascript" src="/media/js/jquery.corner.js"></script>
+  <script type="text/javascript" src="/media/js/warning.js"></script>
 {% endblock %}
 {% block idea %}
 {% if form.errors %}
 <p><font color="red">{% trans "Idea couldn't be submitted, please fix the errors below." %}</font></p>
 {% endif %}
 <form method="POST" action="" enctype="multipart/form-data">
+<div style="padding: 10px">
+    <p class="warning-dialog">Nasıl yeni fikir ekleyeceğinizi biliyor musunuz? Eğer yeniyseniz, lütfen <a href="http://www.ozgurlukicin.com/forum/yeni-fikirler/10103/">burada yer alan</a> makalemizi okuyunuz. Bu, hem sizin değerli fikirlerinizi daha iyi anlatabilmeniz için önemlidir, hem de bizim Pardus geliştiricilerine ayrıntılı ve açıklayıcı biçimde fikirlerinizi sunmamız için gereklidir.</p>
+</div>
 {% for field in form %}
     {% include "formfields.html" %}
 {% endfor %}
