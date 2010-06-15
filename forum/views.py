@@ -412,7 +412,7 @@ def edit_post(request, forum_slug, topic_id, post_id):
 def new_topic(request, forum_slug):
     forum = get_object_or_404(Forum, slug=forum_slug)
 
-    if forum.locked and not request.user.has_perm("forum.can_add_topic"):
+    if forum.locked and not request.user.has_perm("forum.add_topic"):
         return render_response(request, "forum/forum_error.html", { "message":"Bu forumda yeni başlık açamazsınız. Lütfen kilitli olmayan bir forumda başlık açınız." })
 
     if request.method == 'POST':

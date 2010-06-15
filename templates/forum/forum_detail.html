@@ -11,7 +11,7 @@
 {% block content %}
 <div class="topbar">
     <div class="navigation"><a href="/">{% trans "Mainpage" %}</a> &#62; <a href="/forum/">{% trans "Forum" %}</a> &#62; <a href="{{ forum.get_absolute_url }}" class="bold">{{ forum.name }}</a></div>
-    {% ifnotequal forum.slug "guncellenen-konular" %}<div class="notice">{% if forum.locked and not perms.forum.can_add_topic %}{% else %}<a href="/forum/{{ forum.slug }}/new/"><img src="/media/img/new/forum/button_new_topic.png" alt="{% trans "New Topic" %}" /></a>{% endif %}</div>{% endifnotequal %}
+    {% ifnotequal forum.slug "guncellenen-konular" %}<div class="notice">{% if forum.locked and not perms.forum.add_topic %}{% else %}<a href="/forum/{{ forum.slug }}/new/"><img src="/media/img/new/forum/button_new_topic.png" alt="{% trans "New Topic" %}" /></a>{% endif %}</div>{% endifnotequal %}
 </div>
 <div class="headerbar">
     <div class="icon">&nbsp;</div>
