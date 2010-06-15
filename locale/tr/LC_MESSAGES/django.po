@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-15 13:14+0300\n"
+"POT-Creation-Date: 2010-06-15 16:11+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -17,19 +17,82 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ezine/templates/list.html:3 templates/flatpages/default.html:40
-#: templates/user/user_list.html:70
+#: ezine/models.py:8
+msgid "Issue"
+msgstr ""
+
+#: ezine/models.py:9
+#, fuzzy
+msgid "Title"
+msgstr "Dosya"
+
+#: ezine/models.py:9
+msgid ""
+"use &lt;br/&gt; to break line like \"Spread Pardus E-zine &lt;br/&gt; March "
+"2009\""
+msgstr ""
+
+#: ezine/models.py:10
+#, fuzzy
+msgid "Contents"
+msgstr "Yorumlar"
+
+#: ezine/models.py:11
+#, fuzzy
+msgid "E-zine Image"
+msgstr "Görselleri Filtrele"
+
+#: ezine/models.py:12 ezine/templates/list.html:18
+#: ezine/templates/list.html.py:29 templates/editor/base.html:3
+msgid "Editor"
+msgstr "Editör"
+
+#: ezine/models.py:13
+#, fuzzy
+msgid "Page count"
+msgstr "Paketler (%(count)s)"
+
+#: ezine/models.py:14
+msgid "300dpi e-zine address"
+msgstr ""
+
+#: ezine/models.py:14
+msgid "like /media/dosya/sp_i11_big.pdf"
+msgstr ""
+
+#: ezine/models.py:15
+msgid "300dpi e-zine size"
+msgstr ""
+
+#: ezine/models.py:15 ezine/models.py:17
+msgid "in bytes"
+msgstr ""
+
+#: ezine/models.py:16
+msgid "96dpi e-zine address"
+msgstr ""
+
+#: ezine/models.py:16
+msgid "like /media/dosya/sp_i11_sml.pdf"
+msgstr ""
+
+#: ezine/models.py:17
+msgid "96dpi e-zine size"
+msgstr ""
+
+#: ezine/models.py:24 ezine/templates/list.html:3
+#: templates/flatpages/default.html:40 templates/user/user_list.html:70
 msgid "E-Zine"
+msgstr "E-Dergi"
+
+#: ezine/models.py:25
+#, fuzzy
+msgid "E-Zines"
 msgstr "E-Dergi"
 
 #: ezine/templates/list.html:9
 msgid "Spread Pardus e-zine is online!"
 msgstr "Özgürlükİçin e-dergi yayında!"
-
-#: ezine/templates/list.html:18 ezine/templates/list.html.py:29
-#: templates/editor/base.html:3
-msgid "Editor"
-msgstr "Editör"
 
 #: ezine/templates/list.html:20 ezine/templates/list.html.py:30
 #: templates/podcast/detail.html:48 templates/podcast/main.html:44

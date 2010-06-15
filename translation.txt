@@ -238,9 +238,9 @@ These are python files to be marked
 -   |   |-- urls.py
 -   |   `-- views.py
     |-- ezine
--   |   |-- admin.py
--   |   |-- __init__.py
--   |   |-- models.py
++   |   |-- admin.py
++   |   |-- __init__.py
++   |   |-- models.py
 -   |   |-- urls.py
 -   |   `-- views.py
     |-- feedjack
