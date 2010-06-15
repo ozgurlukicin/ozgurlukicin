@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-15 16:11+0300\n"
+"POT-Creation-Date: 2010-06-15 16:17+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Issue"
 msgstr ""
 
-#: ezine/models.py:9
+#: ezine/models.py:9 flatpages/models.py:17
 #, fuzzy
 msgid "Title"
 msgstr "Dosya"
@@ -322,6 +322,42 @@ msgstr ""
 #: feedjack/models.py:184
 msgid "subscribers"
 msgstr ""
+
+#: flatpages/admin.py:16
+msgid "General"
+msgstr ""
+
+#: flatpages/admin.py:17
+msgid "Other"
+msgstr ""
+
+#: flatpages/models.py:16
+msgid "URL"
+msgstr ""
+
+#: flatpages/models.py:18
+msgid "Text"
+msgstr ""
+
+#: flatpages/models.py:21 templates/editor/list.html:16
+#: templates/forum/forum_list.html:60
+msgid "Date"
+msgstr "Tarih"
+
+#: flatpages/models.py:22
+#, fuzzy
+msgid "Template name"
+msgstr "İlgili Sayfalar"
+
+#: flatpages/models.py:25
+#, fuzzy
+msgid "Flatpage"
+msgstr "Görselleri Filtrele"
+
+#: flatpages/models.py:26 templates/tag/tag_detail.html:81
+#, fuzzy
+msgid "Flatpages"
+msgstr "Görselleri Filtrele"
 
 #: ideas/templates/idea_add_form.html:4 ideas/templates/idea_list.html:12
 msgid "Submit New Idea"
@@ -989,10 +1025,6 @@ msgstr "Haber Ekle"
 #: templates/user/profile_edit.html:82
 msgid "Edit"
 msgstr "Düzenle"
-
-#: templates/editor/list.html:16 templates/forum/forum_list.html:60
-msgid "Date"
-msgstr "Tarih"
 
 #: templates/editor/news_form.html:6
 msgid "Filter Images"
@@ -2088,11 +2120,6 @@ msgstr[0] "(%(vote_count)s oy)"
 msgid "(%(count)s topic)"
 msgid_plural "(%(count)s topics)"
 msgstr[0] "(%(vote_count)s oy)"
-
-#: templates/tag/tag_detail.html:81
-#, fuzzy
-msgid "Flatpages"
-msgstr "Görselleri Filtrele"
 
 #: templates/tema/abuse_list.html:3
 #, fuzzy

@@ -10,18 +10,20 @@ from django.contrib.auth.models import User
 from oi.st.tags import Tag
 from oi.middleware import threadlocals
 
+from django.utils.translation import ugettext as _
+
 class FlatPage(models.Model):
-    url = models.CharField('URL', max_length=100)
-    title = models.CharField('Başlık', max_length=200)
-    text = models.TextField('Metin')
+    url = models.CharField(_('URL'), max_length=100)
+    title = models.CharField(_('Title'), max_length=200)
+    text = models.TextField(_('Text'))
     author = models.ForeignKey(User, blank=True, editable=False)
     tags = models.ManyToManyField(Tag)
-    update = models.DateTimeField('Tarih', blank=False)
-    template_name = models.CharField('Şablon adı', max_length=70, blank=True)
+    update = models.DateTimeField(_('Date'), blank=False)
+    template_name = models.CharField(_('Template name'), max_length=70, blank=True)
 
     class Meta:
-        verbose_name = 'Statik sayfa'
-        verbose_name_plural = 'Statik sayfalar'
+        verbose_name = _('Flatpage')
+        verbose_name_plural = _('Flatpages')
 
     def __unicode__(self):
         return "%s -- %s" % (self.url, self.title)

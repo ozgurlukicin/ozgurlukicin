@@ -241,8 +241,8 @@ These are python files to be marked
 +   |   |-- admin.py
 +   |   |-- __init__.py
 +   |   |-- models.py
--   |   |-- urls.py
--   |   `-- views.py
++   |   |-- urls.py
++   |   `-- views.py
     |-- feedjack
 -   |   |-- admin.py
 -   |   |-- bin
@@ -255,12 +255,12 @@ These are python files to be marked
 -   |   |-- urls.py
 -   |   `-- views.py
     |-- flatpages
--   |   |-- admin.py
--   |   |-- __init__.py
--   |   |-- middleware.py
--   |   |-- models.py
--   |   |-- urls.py
--   |   `-- views.py
++   |   |-- admin.py
++   |   |-- __init__.py
++   |   |-- middleware.py
++   |   |-- models.py
++   |   |-- urls.py
++   |   `-- views.py
     |-- forum
 -   |   |-- admin.py
 -   |   |-- customgeneric.py

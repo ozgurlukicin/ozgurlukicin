@@ -9,10 +9,12 @@ from django.contrib import admin
 
 from oi.flatpages.models import FlatPage
 
+from django.utils.translation import ugettext as _
+
 class FlatPageAdmin(admin.ModelAdmin):
     fieldsets = (
-        ('Genel', {'fields': ('url', 'title', 'text', 'tags', 'update')}),
-        ('Diğer', {'classes': 'collapse', 'fields': ('template_name',)}),
+        (_('General'), {'fields': ('url', 'title', 'text', 'tags', 'update')}),
+        (_('Other'), {'classes': 'collapse', 'fields': ('template_name',)}),
     )
 
     list_display = ('id', 'url', 'title', 'update')
