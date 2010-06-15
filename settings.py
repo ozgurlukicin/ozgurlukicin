@@ -5,6 +5,8 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
+from os import path
+
 ADMINS = ()
 MANAGERS = ADMINS
 
@@ -16,14 +18,18 @@ DEBUG = True
 TESTING = True
 TEMPLATE_DEBUG = DEBUG
 WEB_URL = 'http://localhost:8000'
-DOCUMENT_ROOT = '/home/user'
+DOCUMENT_ROOT = path.abspath(path.dirname(__file__))
 
-DATABASE_ENGINE = 'mysql'
-DATABASE_NAME = 'oi'
-DATABASE_USER = 'root'
-DATABASE_PASSWORD = ''
-DATABASE_HOST = 'localhost'
-DATABASE_PORT = ''
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "oi",
+        "USER": "root",
+        "PASSWORD": "root",
+        "HOST": "localhost",
+        "PORT": "",
+    }
+}
 
 # Email
 DEFAULT_FROM_EMAIL = 'noreply@ozgurlukicin.com'
@@ -88,7 +94,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-#    'django.contrib.csrf.middleware.CsrfMiddleware',
+    'django.contrib.csrf.middleware.CsrfMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'oi.flatpages.middleware.FlatpageFallbackMiddleware',
