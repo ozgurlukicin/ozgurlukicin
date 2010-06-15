@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-14 17:48+0300\n"
+"POT-Creation-Date: 2010-06-15 12:33+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -18,6 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ezine/templates/list.html:3 templates/flatpages/default.html:40
+#: templates/user/user_list.html:70
 msgid "E-Zine"
 msgstr "E-Dergi"
 
@@ -190,6 +191,7 @@ msgid "feeds"
 msgstr ""
 
 #: feedjack/models.py:129 templates/forum/topic.html:130
+#: templates/user/user_list.html:96
 msgid "tag"
 msgstr ""
 
@@ -303,6 +305,7 @@ msgstr "Kullanıcı Kutusu"
 #: ideas/templates/idea_base.html:39 templates/base.html:65
 #: templates/forum/forum_base.html:40
 #: templates/tema/theme_base_without_ezine.html:65
+#: templates/user/login.html:27
 msgid "Login"
 msgstr "Giriş"
 
@@ -312,7 +315,8 @@ msgstr "Giriş"
 msgid "Register"
 msgstr "Kayıt Ol"
 
-#: ideas/templates/idea_base.html:41
+#: ideas/templates/idea_base.html:41 templates/user/lostpassword.html:3
+#: templates/user/lostpassword_done.html:3
 msgid "Lost Password"
 msgstr "Parola değiştir"
 
@@ -418,7 +422,7 @@ msgstr "Bu fikir <a href=\"%(url)s\">#%(id)s</a> numaralı fikrin aynısı"
 #: templates/fs/fs_detail.html:26 templates/game/game_detail.html:95
 #: templates/howto/howto_detail.html:57 templates/news/news_detail.html:49
 #: templates/package/package_detail.html:63 templates/podcast/detail.html:56
-#: templates/podcast/main.html:50
+#: templates/podcast/main.html:50 templates/user/user_list.html:95
 msgid "Tags"
 msgstr "Etiketler"
 
@@ -756,6 +760,7 @@ msgstr ""
 "\">buraya</a> tıklayın."
 
 #: templates/footer.html:6 templates/flatpages/default.html:44
+#: templates/user/profile.html:103 templates/user/user_list.html:74
 msgid "About"
 msgstr "Hakkında"
 
@@ -912,6 +917,7 @@ msgstr "Haber Ekle"
 #: templates/tema/themeitem_detail.html:4
 #: templates/tema/themeitem_font_detail.html:35
 #: templates/tema/themeitem_wallpaper_detail.html:40
+#: templates/user/profile_edit.html:82
 msgid "Edit"
 msgstr "Düzenle"
 
@@ -1008,6 +1014,7 @@ msgid "Rules"
 msgstr "Kurallar"
 
 #: templates/feedjack/oi/post_list.html:47 templates/flatpages/default.html:36
+#: templates/user/user_list.html:66
 msgid "Planet Rules"
 msgstr "Gezegen Kuralları"
 
@@ -1059,19 +1066,19 @@ msgstr "gönder"
 msgid "File"
 msgstr "Dosya"
 
-#: templates/file_upload/file_upload.html:17 templates/tema/upload.html:13
+#: templates/file_upload/file_upload.html:17 templates/tema/upload.html:14
 msgid "Upload"
 msgstr "Gönder"
 
-#: templates/flatpages/default.html:20
+#: templates/flatpages/default.html:20 templates/user/user_list.html:54
 msgid "Related Pages"
 msgstr "İlgili Sayfalar"
 
-#: templates/flatpages/default.html:24
+#: templates/flatpages/default.html:24 templates/user/user_list.html:58
 msgid "Content Policy"
 msgstr "İçerik Politikası"
 
-#: templates/flatpages/default.html:28
+#: templates/flatpages/default.html:28 templates/user/user_list.html:62
 msgid "Privacy Policy"
 msgstr "Gizlilik Politikası"
 
@@ -1079,23 +1086,23 @@ msgstr "Gizlilik Politikası"
 msgid "Forum Rules"
 msgstr "Forum Kuralları"
 
-#: templates/flatpages/default.html:48
+#: templates/flatpages/default.html:48 templates/user/user_list.html:78
 msgid "Contact"
 msgstr "Bize Ulaşın"
 
-#: templates/flatpages/default.html:52
+#: templates/flatpages/default.html:52 templates/user/user_list.html:82
 msgid "Seminar"
 msgstr "Seminer"
 
-#: templates/flatpages/default.html:56
+#: templates/flatpages/default.html:56 templates/user/user_list.html:86
 msgid "Admins"
 msgstr "Yöneticiler"
 
-#: templates/flatpages/default.html:60
+#: templates/flatpages/default.html:60 templates/user/user_list.html:3
 msgid "Users"
 msgstr "Kullanıcılar"
 
-#: templates/flatpages/default.html:64
+#: templates/flatpages/default.html:64 templates/user/user_list.html:90
 msgid "Technical"
 msgstr "Teknik"
 
@@ -1160,7 +1167,7 @@ msgstr "Anket Oluştur"
 msgid "Profile"
 msgstr "Profil"
 
-#: templates/forum/forum_base.html:47
+#: templates/forum/forum_base.html:47 templates/user/followed_topics.html:3
 msgid "Followed Topics"
 msgstr "Takip Edilen Başlıklar"
 
@@ -1186,7 +1193,7 @@ msgstr "Tümünü Okunmuş Say"
 msgid "Abuse Reports (%(abuse_count)s)"
 msgstr "Şikayet Edilmiş İletiler (%(abuse_count)s)"
 
-#: templates/forum/forum_base.html:53
+#: templates/forum/forum_base.html:53 templates/user/logout.html:3
 msgid "Logout"
 msgstr "Çıkış"
 
@@ -1759,6 +1766,7 @@ msgid ""
 msgstr ""
 
 #: templates/news/news_detail.html:37 templates/package/package_detail.html:30
+#: templates/user/change_password.html:32 templates/user/lostpassword.html:35
 msgid "Send"
 msgstr ""
 
@@ -2183,9 +2191,390 @@ msgstr "%(author)s tarafından gönderilen iletiler"
 #: templates/tema/themeitem_list.html:27
 #, python-format
 msgid ""
-"There's a total of <span class=\"bold\">%(hits)s</span> content in <span "
+"There's a total of <span class=\"bold\">%(hits)s</span> contents in <span "
 "class=\"bold\">%(pages)s</span> pages."
 msgstr ""
+
+#: templates/user/change_password.html:3
+#, fuzzy
+msgid "Change Lost Password"
+msgstr "Parola değiştir"
+
+#: templates/user/change_password.html:10
+msgid "You have alredy logged in."
+msgstr ""
+
+#: templates/user/change_password.html:10
+#, fuzzy
+msgid "Click <a href=\"/\">here</a> to return to mainpage."
+msgstr "Anasayfa'ya gitmek için <a href=\"/\">tıklayın</a>."
+
+#: templates/user/change_password.html:14 templates/user/confirm.html:13
+msgid ""
+"Incorrect key. Please use the link that has been sent to your e-mail address!"
+msgstr ""
+
+#: templates/user/change_password.html:17
+msgid ""
+"Your key has expired, please click <a href=\"/kullanici/kayip\">here</a> to "
+"request e-mail again and click the link within 24 hours."
+msgstr ""
+
+#: templates/user/change_password.html:22
+msgid "There were some errors. Please fill the form again."
+msgstr ""
+
+#: templates/user/change_password_done.html:3 templates/user/password.html:3
+#: templates/user/password.html.py:23 templates/user/profile_edit.html:83
+#, fuzzy
+msgid "Change Password"
+msgstr "Parola değiştir"
+
+#: templates/user/change_password_done.html:9
+msgid "Your password has been changed successfully."
+msgstr ""
+
+#: templates/user/change_password_done.html:9
+#, fuzzy, python-format
+msgid "Click <a href=\"%(login_url)s\">here</a> to login."
+msgstr "Anasayfa'ya gitmek için <a href=\"/\">tıklayın</a>."
+
+#: templates/user/confirm.html:3
+msgid "Registration Approval"
+msgstr ""
+
+#: templates/user/confirm.html:9
+msgid "There's no such user!"
+msgstr ""
+
+#: templates/user/confirm.html:10
+msgid "You have already logged in."
+msgstr ""
+
+#: templates/user/confirm.html:10 templates/user/confirm.html.py:11
+#, fuzzy
+msgid "Click <a href=\"/\">here</a> to return to mainpage"
+msgstr "Anasayfa'ya gitmek için <a href=\"/\">tıklayın</a>."
+
+#: templates/user/confirm.html:11
+msgid "This account has already been activated!"
+msgstr ""
+
+#: templates/user/confirm.html:12
+msgid ""
+"Your key has expired, please try to register again and activate within 48 "
+"hours."
+msgstr ""
+
+#: templates/user/confirm.html:13
+#, fuzzy
+msgid "Click <a href=\"/kullanici/kayit/\">here</a> to register again."
+msgstr "Anasayfa'ya gitmek için <a href=\"/\">tıklayın</a>."
+
+#: templates/user/confirm.html:14
+msgid ""
+"Your account has been activated successfully! You can login using the User "
+"Box on the right side of this page."
+msgstr ""
+
+#: templates/user/dashboard.html:3
+msgid "Dashboard"
+msgstr ""
+
+#: templates/user/dashboard.html:8
+#, fuzzy, python-format
+msgid "Hello, <b>%(user)s!"
+msgstr "Merhaba %(username)s!"
+
+#: templates/user/dashboard.html:10
+#, python-format
+msgid ""
+"You have been registered since %(join_date)s. <br/><br />You can edit your "
+"profile by clicking <a href=\"/kullanici/duzenle/\">here</a>."
+msgstr ""
+
+#: templates/user/followed_topics.html:9
+#, fuzzy
+msgid ""
+"There's no topic that you have been following. Click <a href=\"/forum/"
+"\">here</a> to return forum."
+msgstr ""
+"Raporlanmış herhangi bir ileti bulunmamaktadır. Foruma dönmek için <a href="
+"\"/forum/\">Tıklayın"
+
+#: templates/user/followed_topics.html:12
+#, fuzzy
+msgid "Followed topics"
+msgstr "Takip Edilen Başlıklar"
+
+#: templates/user/followed_topics.html:17
+#, fuzzy
+msgid "Remove from Watchlist"
+msgstr "Şikayet Listesinden Çıkar"
+
+#: templates/user/login.html:6
+#, fuzzy
+msgid "User Login"
+msgstr "Kullanıcı Kutusu"
+
+#: templates/user/login.html:11
+msgid "Username or password doesn't match, please try again."
+msgstr ""
+
+#: templates/user/login.html:13
+msgid ""
+"You don't have enough permissions to access this page. If you are already "
+"registered, enter your username and password below. If you have forgotton "
+"your password click <a href=\"/kullanici/kayip/\">here</a>. If you're not "
+"registered click <a href=\"/kullanici/kayit/\">here</a> to register."
+msgstr ""
+
+#: templates/user/login.html:18
+#, fuzzy
+msgid "Username"
+msgstr "Kullanıcılar"
+
+#: templates/user/login.html:22
+#, fuzzy
+msgid "Password"
+msgstr "Parola değiştir"
+
+#: templates/user/login.html:31
+#, fuzzy
+msgid ""
+"You're already logged in. Click <a href=\"/kullanici/cikis/\">here</a> to "
+"logout"
+msgstr ""
+"Raporlanmış herhangi bir ileti bulunmamaktadır. Foruma dönmek için <a href="
+"\"/forum/\">Tıklayın"
+
+#: templates/user/logout.html:14
+msgid ""
+"You have logged out. You're being redirected to mainpage now. Click <a href="
+"\"/\">here</a> if you don't want to wait."
+msgstr ""
+
+#: templates/user/logout.html:16
+msgid ""
+"You haven't logged in yet, click <a href=\"/kullanici/giris/\">here</a> to "
+"login."
+msgstr ""
+
+#: templates/user/lostpassword.html:16
+msgid ""
+"You have already logged in. You're being redirected to mainpage now. Click "
+"<a href=\"/\">here</a> if you don't want to wait."
+msgstr ""
+
+#: templates/user/lostpassword.html:19
+msgid ""
+"Please enter your username and e-mail address to recover your password. Then "
+"click on the link that has been sent to your e-mail address."
+msgstr ""
+
+#: templates/user/lostpassword.html:22
+msgid "Operation couldn't be completed."
+msgstr ""
+
+#: templates/user/lostpassword_done.html:8
+msgid ""
+"A password reset link has been sent to your e-mail address, you can change "
+"your password by clicking it within the following 24 hours."
+msgstr ""
+
+#: templates/user/password.html:10
+#, fuzzy
+msgid "Password couldn't be changed, please correct the errors below"
+msgstr "Anket değiştirilemedi, lütfen aşağıdaki hataları düzeltin"
+
+#: templates/user/password.html:14
+msgid "Password was successfully changed."
+msgstr ""
+
+#: templates/user/password.html:14
+msgid "Return to profile page"
+msgstr ""
+
+#: templates/user/profile.html:5
+#, fuzzy
+msgid "User Profile"
+msgstr "Profil"
+
+#: templates/user/profile.html:47
+#, fuzzy
+msgid "Avatar"
+msgstr "avatar"
+
+#: templates/user/profile.html:49
+msgid "Edit my profile"
+msgstr ""
+
+#: templates/user/profile.html:52
+msgid "Posts in Forum"
+msgstr ""
+
+#: templates/user/profile.html:52
+msgid "No Posts in Forum"
+msgstr ""
+
+#: templates/user/profile.html:58
+msgid "Personal Information"
+msgstr ""
+
+#: templates/user/profile.html:60
+#, fuzzy
+msgid "Name"
+msgstr "Oyunlar"
+
+#: templates/user/profile.html:63
+msgid "Surname"
+msgstr ""
+
+#: templates/user/profile.html:66
+msgid "City"
+msgstr ""
+
+#: templates/user/profile.html:70
+#, fuzzy
+msgid "Birth Date"
+msgstr "Fikir Ekle"
+
+#: templates/user/profile.html:74
+#, fuzzy
+msgid "Registration Date"
+msgstr "Kayıt Tarihi:"
+
+#: templates/user/profile.html:78
+#, fuzzy
+msgid "Pardus Version"
+msgstr "Sürüm"
+
+#: templates/user/profile.html:82
+msgid "Contact Information"
+msgstr ""
+
+#: templates/user/profile.html:86
+msgid "E-mail"
+msgstr ""
+
+#: templates/user/profile.html:90
+#, fuzzy
+msgid "Web Site"
+msgstr "İlgili Sayfalar"
+
+#: templates/user/profile.html:93
+msgid "Jabber"
+msgstr ""
+
+#: templates/user/profile.html:96
+msgid "MSN"
+msgstr ""
+
+#: templates/user/profile.html:99
+msgid "ICQ"
+msgstr ""
+
+#: templates/user/profile_edit.html:3
+#, fuzzy
+msgid "Edit Profile"
+msgstr "Profil"
+
+#: templates/user/profile_edit.html:48
+#, fuzzy
+msgid "Profile couldn't be updated, please fix the errors below"
+msgstr "Anket oluşturulamadı, lütfen aşağıdaki hataları düzeltin."
+
+#: templates/user/profile_edit.html:53
+msgid "Your profile is updated successfully"
+msgstr ""
+
+#: templates/user/profile_edit.html:74
+msgid ""
+"If you have a gravatar associated with your e-mail address, it will be "
+"displayed instead of this. For more information about gravatar click <a href="
+"\"http://www.gravatar.com\" target=\"_blank\">here</a>."
+msgstr ""
+
+#: templates/user/profile_edit.html:81
+msgid "Map"
+msgstr ""
+
+#: templates/user/register.html:3
+#, fuzzy
+msgid "Registration"
+msgstr "Kayıt Ol"
+
+#: templates/user/register.html:10
+#, fuzzy
+msgid ""
+"Your registration couldn't be completed, please fill the from completely"
+msgstr "Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin."
+
+#: templates/user/register.html:13
+#, fuzzy
+msgid ""
+"You are already logged in, click <a href=\"/\">here</a> to visit mainpage."
+msgstr "Anasayfa'ya gitmek için <a href=\"/\">tıklayın</a>."
+
+#: templates/user/register.html:20
+msgid ""
+"I have read the <a href=\"/hakkinda/icerik-politikasi/\" target=\"_blank"
+"\">Content Policy</a> and"
+msgstr ""
+
+#: templates/user/register.html:20
+msgid "I Decline"
+msgstr ""
+
+#: templates/user/register.html:20
+msgid "I Accept"
+msgstr ""
+
+#: templates/user/register_done.html:3
+#, fuzzy
+msgid "Registration Done"
+msgstr "Kayıt Tarihi:"
+
+#: templates/user/register_done.html:8
+#, python-format
+msgid ""
+"%(user)s</b>, you have successfully registered! Please\n"
+"activate your account by clicking the link sent to your e-mail address."
+msgstr ""
+
+#: templates/user/register_done.html:9
+#, fuzzy
+msgid "Homepage"
+msgstr "Anasayfa"
+
+#: templates/user/user_list.html:41
+#, fuzzy
+msgid "Spread Pardus Users List"
+msgstr "Özgürlükiçin"
+
+#: templates/user/user_list.html:42
+msgid "More users will appear when you zoom in."
+msgstr ""
+
+#: templates/user/user_list.html:45
+msgid "Pardus Versions Chart"
+msgstr ""
+
+#: templates/user/user_list.html:46
+msgid ""
+"Only users who has chosen their Pardus version in profile page are shown in "
+"the chart below."
+msgstr ""
+
+#: templates/user/user_list.html:48
+#, fuzzy
+msgid "Pardus versions chart"
+msgstr "Ajans"
+
+#: templates/user/user_list.html:96
+#, fuzzy
+msgid "spreadpardus.com"
+msgstr "Özgürlükiçin"
 
 #: webalizer/templates/webalizer/index.html:7
 msgid "settings.WEBALIZER_DIR is not configured"

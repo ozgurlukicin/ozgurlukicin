@@ -1,24 +1,18 @@
 {% extends "base.html" %}
-
-{% block title %}Çıkış - {% endblock %}
-
+{% load i18n %}
+{% block title %}{% trans "Logout" %} - {% endblock %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 {% endblock %}
-
 {% block content %}
-
-<br />
-
 {% if user.is_authenticated %}
 <script type="text/javascript">
     <!--
     setTimeout("window.location = '/';", 5000);
     //-->
 </script>
-Sistemden çıktınız. Ana sayfaya yönlendiriliyorsunuz. Beklemek istemiyorsanız <a href="/">buraya tıklayın.</a> <br />
+{% blocktrans %}You have logged out. You're being redirected to mainpage now. Click <a href="/">here</a> if you don't want to wait.{% endblocktrans %} <br />
 {% else %}
-Henüz giriş yapmamışsınız, giriş yapmak için <a href="/kullanici/giris/">buraya</a> tıklayın. <br />
+{% blocktrans %}You haven't logged in yet, click <a href="/kullanici/giris/">here</a> to login.{% endblocktrans %} <br />
 {% endif %}
-
 {% endblock %}

@@ -1,14 +1,11 @@
 {% extends "base.html" %}
-
-{% block title %}Kullanıcı Sayfası - {% endblock %}
-
+{% load i18n %}
+{% block title %}{% trans "Dashboard" %} - {% endblock %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 {% endblock %}
 {% block content %}
+{% blocktrans %}Hello, <b>{{ user }}!{% endblocktrans %}</b>
 <br />
-
-Merhaba, <b>{{ user.username }}!</b>
-<br />
-Aramıza {{ user.date_joined|date:"d F Y" }} tarihinde katılmışsınız. <br/><br />İstiyorsanız kullanıcı bilgilerinizi <a href="/kullanici/duzenle/">buraya</a> tıklayarak düzenleyebilirsiniz.
+{% blocktrans with user.date_joined|date:"d F Y" as join_date %}You have been registered since {{ join_date }}. <br/><br />You can edit your profile by clicking <a href="/kullanici/duzenle/">here</a>.{% endblocktrans%}
 {% endblock %}

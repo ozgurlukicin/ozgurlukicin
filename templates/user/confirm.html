@@ -1,17 +1,15 @@
 {% extends "base.html" %}
-
-{% block title %}Üyelik Onayı - {% endblock %}
-
+{% load i18n %}
+{% block title %}{% trans "Registration Approval" %} - {% endblock %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 {% endblock %}
-
 {% block content %}
 <br />
-{% if no_user %}Böyle bir kullanıcı mevcut değil!{% endif %}
-{% if authenticated %}Zaten giriş yapmışsınız. Anasayfaya gitmek için <a href="/">tıklayın</a>{% endif %}
-{% if actived %}Bu hesap zaten aktif edilmiş! Anasayfaya gitmek için <a href="/">tıklayınız</a>{% endif %}
-{% if key_expired %}Anahtar zaman aşımına uğradı, lütfen yeniden kayıt olun ve hesabınızı e-posta adresinize gönderilen anahtarla birlikte 48 saat içerisinde aktif hale getirin.{% endif %}
-{% if key_incorrect %}Anahtar geçersiz, lütfen e-posta adresinize gönderilen bağlantıyı kullanın! Tekrar kayıt olmak için <a href="/kullanici/kayit/">tıklayın</a>{% endif %}
-{% if ok %}Üyeliğiniz aktif hale getirildi! Sağ taraftaki kullanıcı kutusunu kullanarak giriş yapabilirsiniz.{% endif %}
+{% if no_user %}{% trans "There's no such user!" %}{% endif %}
+{% if authenticated %}{% trans "You have already logged in." %} {% blocktrans %}Click <a href="/">here</a> to return to mainpage{% endblocktrans %}{% endif %}
+{% if actived %}{% trans "This account has already been activated!" %} {% blocktrans %}Click <a href="/">here</a> to return to mainpage{% endblocktrans %}{% endif %}
+{% if key_expired %}{% trans "Your key has expired, please try to register again and activate within 48 hours." %}{% endif %}
+{% if key_incorrect %}{% trans "Incorrect key. Please use the link that has been sent to your e-mail address!" %} {% blocktrans %}Click <a href="/kullanici/kayit/">here</a> to register again.{% endblocktrans %}{% endif %}
+{% if ok %}{% trans "Your account has been activated successfully! You can login using the User Box on the right side of this page." %}{% endif %}
 {% endblock %}

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{% block title %}Kullanıcılar - {% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Users" %} - {% endblock %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/new/profile.css');</style>
@@ -37,62 +38,62 @@ function load() {
 {% block extrabody %} onload="load()" onunload="GUnload()"{% endblock %}
 
 {% block content %}
-<div class="page_title">Özgürlükiçin Kullanıcıları Listesi</div>
-<p>Haritayı yaklaştırdıkça daha çok kullanıcı listelenecektir.</p>
+<div class="page_title">{% trans "Spread Pardus Users List" %}</div>
+<p>{% trans "More users will appear when you zoom in." %}</p>
 <div id="id_map" class="googlemap" style="width:610px;height:400px;margin-bottom:20px"></div>
 <hr/><br/>
-<div class="page_title">Pardus Sürümleri Grafiği</div>
-<p>Aşağıdaki grafikte, profilinde kullandığı Pardus sürümünü seçen kullanıcılarımızın sayısı görülmektedir.</p>
+<div class="page_title">{% trans "Pardus Versions Chart" %}</div>
+<p>{% trans "Only users who has chosen their Pardus version in profile page are shown in the chart below." %}</p>
 <div id="chart">
-    <img src="{{ chartUrl }}" alt="Pardus sürümleri grafiği" />
+    <img src="{{ chartUrl }}" alt="{% trans "Pardus versions chart" %}" />
 </div>
 {% endblock %}
 {% block leftcolumn %}
 <div class="sidebarcolumn leftcolumn">
     <div class="leftcolumn_content">
-        <h2>İlgili sayfalar</h2>
+        <h2>{% trans "Related Pages" %}</h2>
         <ul>
             <li>
             <span class="bullet">»</span>
-            <a href="/hakkinda/icerik-politikasi/">İçerik Politikası</a>
+            <a href="/hakkinda/icerik-politikasi/">{% trans "Content Policy" %}</a>
             </li>
             <li>
             <span class="bullet">»</span>
-            <a href="/hakkinda/gizlilik-politikasi/">Gizlilik Politikası</a>
+            <a href="/hakkinda/gizlilik-politikasi/">{% trans "Privacy Policy" %}</a>
             </li>
             <li>
             <span class="bullet">»</span>
-            <a href="/hakkinda/gezegen-kurallari/">Gezegen Kuralları</a>
+            <a href="/hakkinda/gezegen-kurallari/">{% trans "Planet Rules" %}</a>
             </li>
             <li>
             <span class="bullet">»</span>
-            <a href="/e-dergi/">E-Dergi</a>
+            <a href="/e-dergi/">{% trans "E-Zine" %}</a>
             </li>
             <li>
             <span class="bullet">»</span>
-            <a href="/hakkinda/">Hakkında</a>
+            <a href="/hakkinda/">{% trans "About" %}</a>
             </li>
             <li>
             <span class="bullet">»</span>
-            <a href="/bize_ulasmak_icin/">Bize Ulaşın</a>
+            <a href="/bize_ulasmak_icin/">{% trans "Contact" %}</a>
             </li>
             <li>
             <span class="bullet">»</span>
-            <a href="/seminer/">Seminer</a>
+            <a href="/seminer/">{% trans "Seminar" %}</a>
             </li>
             <li>
             <span class="bullet">»</span>
-            <a href="/yoneticiler/">Yöneticiler</a>
+            <a href="/yoneticiler/">{% trans "Admins" %}</a>
             </li>
             <li>
             <span class="bullet">»</span>
-            <a href="/teknik/">Teknik</a>
+            <a href="/teknik/">{% trans "Technical" %}</a>
             </li>
         </ul>
     </div>
     <div class="leftcolumn_content">
-        <h2>Etiketler</h2>
-        <img src="/media/img/new/tag.png" alt="etiket" /> <a href="/etiket/ozgurlukicin.com/">ozgurlukicin.com</a>
+        <h2>{% trans "Tags" %}</h2>
+        <img src="/media/img/new/tag.png" alt="{% trans "tag" %}" /> <a href="/etiket/{% trans "spreadpardus.com" %}/">{% trans "spreadpardus.com" %}</a>
     </div>
 </div>
 {% endblock %}

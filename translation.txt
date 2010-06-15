@@ -199,21 +199,21 @@ These are templates to be marked
 +   |   |   `-- upload.html
 -   |   |-- test.html
     |   |-- user
--   |   |   |-- change_password_done.html
--   |   |   |-- change_password.html
--   |   |   |-- confirm.html
--   |   |   |-- dashboard.html
--   |   |   |-- followed_topics.html
--   |   |   |-- login.html
--   |   |   |-- logout.html
--   |   |   |-- lostpassword_done.html
--   |   |   |-- lostpassword.html
--   |   |   |-- password.html
--   |   |   |-- profile_edit.html
--   |   |   |-- profile.html
--   |   |   |-- register_done.html
--   |   |   |-- register.html
--   |   |   `-- user_list.html
++   |   |   |-- change_password_done.html
++   |   |   |-- change_password.html
++   |   |   |-- confirm.html
++   |   |   |-- dashboard.html
++   |   |   |-- followed_topics.html
++   |   |   |-- login.html
++   |   |   |-- logout.html
++   |   |   |-- lostpassword_done.html
++   |   |   |-- lostpassword.html
++   |   |   |-- password.html
++   |   |   |-- profile_edit.html
++   |   |   |-- profile.html
++   |   |   |-- register_done.html
++   |   |   |-- register.html
++   |   |   `-- user_list.html
 -   |   |-- videobox.html
 -   |   |-- video.html
     |   `-- workshop

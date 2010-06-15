@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{% block title %}Profil Düzenle -  {% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Edit Profile" %} -  {% endblock %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/new/profile.css');</style>
@@ -44,15 +45,14 @@
 {% block extrabody %} onload="load()" onunload="GUnload()"{% endblock %}
 {% block content %}
 {% if form.errors %}
-<span class="error">Profil güncellenemedi, lütfen aşağıdaki hataları düzeltin</span>
+<span class="error">{% trans "Profile couldn't be updated, please fix the errors below" %}</span>
 <br />
 {% endif %}
 
 {% if profile_updated %}
-<span style="color:green;">Profiliniz başarıyla güncellendi</span>
+<span style="color:green;">{% trans "Your profile is updated successfully" %}</span>
 <br />
 {% endif %}
-
 <script language="JavaScript">
     function updateAvatar(obj) {
         document.avatarImage.src = "/media/" + obj[obj.selectedIndex].value;
@@ -71,15 +71,15 @@
             {% endif %}
             {% ifequal field.name "avatar" %}
             <br /><img name="avatarImage" src="{{user.get_profile.avatar.file.url}}" alt="avatar" />
-            <br />E-posta adresinize kayıtlı bir gravatarınız varsa bunun yerine kullanılacaktır. Gravatar hakkında bilgi için <a href="/haber/profillerinizi-senlendirin/">buraya</a> tıklayın.
+            <br />{% blocktrans %}If you have a gravatar associated with your e-mail address, it will be displayed instead of this. For more information about gravatar click <a href="http://www.gravatar.com" target="_blank">here</a>.{% endblocktrans %}
             {% endifequal %}
         </div>
         <div class="help_text">{% if field.help_text %}{{ field.help_text }}{% endif %}</div>
         <div style="clear:both;"></div>
     </div>
     {% endfor %}
-    <dl><dt><label for="id_map">Harita</label><dt><div id="id_map" class="googlemap"></div></dt></dl>
-    <div style="clear:left; text-align:center; padding-top:5px;"><input type="submit" value="Düzenle" /></div>
-    <div style="clear:left; text-align:center; margin-top: 6px;"><a href="/kullanici/parola-degistir/">Parolayı Değiştir</a></div>
+    <dl><dt><label for="id_map">{% trans "Map" %}</label><dt><div id="id_map" class="googlemap"></div></dt></dl>
+    <div style="clear:left; text-align:center; padding-top:5px;"><input type="submit" value="{% trans "Edit" %}" /></div>
+    <div style="clear:left; text-align:center; margin-top: 6px;"><a href="/kullanici/parola-degistir/">{% trans "Change Password" %}</a></div>
 </form>
 {% endblock %}
