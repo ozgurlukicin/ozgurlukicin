@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-15 16:17+0300\n"
+"POT-Creation-Date: 2010-06-15 16:32+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Issue"
 msgstr ""
 
-#: ezine/models.py:9 flatpages/models.py:17
+#: ezine/models.py:9 flatpages/models.py:17 forum/forms.py:22
 #, fuzzy
 msgid "Title"
 msgstr "Dosya"
@@ -335,7 +335,7 @@ msgstr ""
 msgid "URL"
 msgstr ""
 
-#: flatpages/models.py:18
+#: flatpages/models.py:18 forum/forms.py:23 forum/forms.py:41
 msgid "Text"
 msgstr ""
 
@@ -358,6 +358,109 @@ msgstr "Görselleri Filtrele"
 #, fuzzy
 msgid "Flatpages"
 msgstr "Görselleri Filtrele"
+
+#: forum/feeds.py:20 forum/forms.py:52 templates/base.html:21
+#: templates/footer.html:14 templates/forum/change_poll.html:5
+#: templates/forum/create_poll.html:5 templates/forum/forum_base.html:5
+#: templates/forum/forum_base.html.py:11 templates/forum/forum_detail.html:13
+#: templates/forum/forum_detail.html:39 templates/forum/forum_list.html:10
+#: templates/forum/forum_list.html.py:15 templates/forum/new_topic.html:14
+#: templates/forum/post_edit.html:11 templates/forum/post_list.html:11
+#: templates/forum/reply.html:11 templates/forum/report.html:12
+#: templates/forum/topic.html:8 templates/forum/topic.html.py:14
+#: templates/forum/topic.html:187 templates/forum/unread.html:6
+#: templates/tag/tag_detail.html:69
+#: templates/tema/theme_base_without_ezine.html:21
+msgid "Forum"
+msgstr "Forum"
+
+#: forum/feeds.py:56
+#, python-format
+msgid "%(site_name)s %(forum_name)s forum"
+msgstr ""
+
+#: forum/feeds.py:82
+#, fuzzy
+msgid " Forum Title : "
+msgstr "Forum Kuralları"
+
+#: forum/feeds.py:122
+msgid " Forum Tag order : "
+msgstr ""
+
+#: forum/forms.py:24 ideas/templates/idea_detail.html:14
+#: templates/flatpages/default.html:69 templates/fs/fs_detail.html:26
+#: templates/game/game_detail.html:95 templates/howto/howto_detail.html:57
+#: templates/news/news_detail.html:49 templates/package/package_detail.html:63
+#: templates/podcast/detail.html:56 templates/podcast/main.html:50
+#: templates/user/user_list.html:95 templates/workshop/workshop_detail.html:56
+msgid "Tags"
+msgstr "Etiketler"
+
+#: forum/forms.py:36
+msgid ""
+"You can choose 5 tags at most. Please choose only relevant tags with your "
+"topic."
+msgstr ""
+
+#: forum/forms.py:44 templates/forum/forum_detail.html:18
+#: templates/forum/unread.html:10
+msgid "Topic"
+msgstr "Başlık"
+
+#: forum/forms.py:60
+#, fuzzy
+msgid "Abuse Reason"
+msgstr "Sebep:"
+
+#: forum/forms.py:60
+msgid "(can be 512 characters at most)"
+msgstr ""
+
+#: forum/forms.py:63
+#, fuzzy
+msgid "End Date"
+msgstr "Tarih"
+
+#: forum/forms.py:63
+msgid "Specify when voting will end. like 30/8/2008."
+msgstr ""
+
+#: forum/forms.py:64
+msgid "1st Choice"
+msgstr ""
+
+#: forum/forms.py:65
+msgid "2nd Choice"
+msgstr ""
+
+#: forum/forms.py:66
+msgid "3rd Choice"
+msgstr ""
+
+#: forum/forms.py:67
+msgid "4th Choice"
+msgstr ""
+
+#: forum/forms.py:68
+msgid "5th Choice"
+msgstr ""
+
+#: forum/forms.py:69
+msgid "6th Choice"
+msgstr ""
+
+#: forum/forms.py:70
+msgid "7th Choice"
+msgstr ""
+
+#: forum/forms.py:71
+msgid "8th Choice"
+msgstr ""
+
+#: forum/forms.py:82
+msgid "You have to specify an end date for voting."
+msgstr ""
 
 #: ideas/templates/idea_add_form.html:4 ideas/templates/idea_list.html:12
 msgid "Submit New Idea"
@@ -518,15 +621,6 @@ msgstr "cdgonder"
 #, python-format
 msgid "This is duplicate of idea <a href=\"%(url)s\">#%(id)s</a>"
 msgstr "Bu fikir <a href=\"%(url)s\">#%(id)s</a> numaralı fikrin aynısı"
-
-#: ideas/templates/idea_detail.html:14 templates/flatpages/default.html:69
-#: templates/fs/fs_detail.html:26 templates/game/game_detail.html:95
-#: templates/howto/howto_detail.html:57 templates/news/news_detail.html:49
-#: templates/package/package_detail.html:63 templates/podcast/detail.html:56
-#: templates/podcast/main.html:50 templates/user/user_list.html:95
-#: templates/workshop/workshop_detail.html:56
-msgid "Tags"
-msgstr "Etiketler"
 
 #: ideas/templates/idea_detail.html:21
 msgid "Bug reports"
@@ -827,20 +921,6 @@ msgstr "Oyunlar"
 #: templates/tema/theme_base_without_ezine.html:20
 msgid "Planet"
 msgstr "Gezegen"
-
-#: templates/base.html:21 templates/footer.html:14
-#: templates/forum/change_poll.html:5 templates/forum/create_poll.html:5
-#: templates/forum/forum_base.html:5 templates/forum/forum_base.html.py:11
-#: templates/forum/forum_detail.html:13 templates/forum/forum_detail.html:39
-#: templates/forum/forum_list.html:10 templates/forum/forum_list.html.py:15
-#: templates/forum/new_topic.html:14 templates/forum/post_edit.html:11
-#: templates/forum/post_list.html:11 templates/forum/reply.html:11
-#: templates/forum/report.html:12 templates/forum/topic.html:8
-#: templates/forum/topic.html.py:14 templates/forum/topic.html:187
-#: templates/forum/unread.html:6 templates/tag/tag_detail.html:69
-#: templates/tema/theme_base_without_ezine.html:21
-msgid "Forum"
-msgstr "Forum"
 
 #: templates/base.html:22 templates/footer.html:14
 #: templates/podcast/detail.html:5 templates/podcast/main.html:4
@@ -1305,10 +1385,6 @@ msgstr "Özgürlükİçin Forum"
 #: templates/forum/forum_detail.html:14 templates/forum/new_topic.html:14
 msgid "New Topic"
 msgstr "Yeni Başlık"
-
-#: templates/forum/forum_detail.html:18 templates/forum/unread.html:10
-msgid "Topic"
-msgstr "Başlık"
 
 #: templates/forum/forum_detail.html:20 templates/forum/forum_list.html:19
 #: templates/forum/unread.html:11

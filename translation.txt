@@ -262,10 +262,10 @@ These are python files to be marked
 +   |   |-- urls.py
 +   |   `-- views.py
     |-- forum
--   |   |-- admin.py
--   |   |-- customgeneric.py
--   |   |-- feeds.py
--   |   |-- forms.py
++   |   |-- admin.py
++   |   |-- customgeneric.py
++   |   |-- feeds.py
++   |   |-- forms.py
 -   |   |-- __init__.py
 -   |   |-- models.py
 -   |   |-- postmarkup.py

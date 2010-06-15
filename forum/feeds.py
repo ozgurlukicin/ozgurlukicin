@@ -13,10 +13,11 @@ from oi.settings import SITE_NAME, WEB_URL, SITE_DESC
 from django.core.exceptions import ObjectDoesNotExist
 from oi.forum.models import Forum,Topic,Post
 from oi.st.tags import Tag
+from django.utils.translation import ugettext as _
 
 
 class RSS(Feed):
-    title = SITE_NAME + "Forum"
+    title = SITE_NAME + _("Forum")
     link = WEB_URL
     description = SITE_DESC
     title_template = 'forum/feed_title.html'
@@ -52,7 +53,7 @@ class Forum_Rss(RSS):
         return objects
 
     def title(self, obj):
-        return "%s %s forumu" % (SITE_NAME, obj.name)
+        return _("%(site_name)s %(forum_name)s forum") % {"site_name":SITE_NAME, "forum_name":obj.name}
 
     def description(self, obj):
         return obj.description
@@ -78,7 +79,7 @@ class Topic_Rss(Feed):
 
     def title(self,obj):
         """ Istenilen forumun baslik kismi """
-        return SITE_NAME + " Forum Konusu : "+obj.title
+        return SITE_NAME + _(" Forum Title : ")+obj.title
 
     def link(self,obj):
         """ Linkini dondur bir de"""
@@ -118,7 +119,7 @@ class Tag_Rss(Topic_Rss):
 
     def title(self,obj):
         """ Istenilen tag baslik kismi """
-        return SITE_NAME + " Forum Tag sıralaması : "+obj.name
+        return SITE_NAME + _(" Forum Tag order : ")+obj.name
 
     def items(self,obj):
         """ Istenilen Konular burada olacak"""
