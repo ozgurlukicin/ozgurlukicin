@@ -8,6 +8,13 @@ a, a:visited, a:active {
 text-decoration: none;
 color: #009FE0;
 }
+p.warning-dialog {
+    padding: 10px 10px 10px 45px;
+    margin-bottom: 10px;
+    background: #FFFFC0 url('/media/img/warning-dialog.png') 5px 5px no-repeat;
+    border: 1px solid #C00000;
+    min-height: 25px;
+}
 img {
     border: 0px;
     behavior: url(/media/css/new/iepngfix.htc);
