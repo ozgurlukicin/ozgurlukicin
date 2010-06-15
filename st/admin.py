@@ -7,7 +7,8 @@
 
 from django.contrib import admin
 
-from oi.st.models import Wiki, Contribute, OtherFile, ScreenShot, Video, License, FS, HowTo, Workshop, Game, News, Package, PardusVersion, PardusMirror
+from oi.st.models import Wiki, Contribute, OtherFile, ScreenShot, Video, License, FS, HowTo, Workshop, Game, News, Package, PardusVersion, PardusMirror, Author
+from oi.seminar.admin import AttenderAdmin
 from oi.st.tags import Tag
 
 class StSimpleAdmin(admin.ModelAdmin):
@@ -21,7 +22,7 @@ class FileAdmin(admin.ModelAdmin):
     search_fields = ['file', 'desc']
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'status', 'update')
+    list_display = ('title', 'status', 'update')
     list_filter = ('update',)
     ordering = ('-id',)
     search_fields = ('title', 'text', 'tags__name')
@@ -35,27 +36,26 @@ class ArticleAdmin(admin.ModelAdmin):
 
 class FSAdmin(ArticleAdmin):
     fieldsets = (
-        ('Genel', {'fields': ('author', 'title', 'image', 'sum', 'text', 'videos', 'tags', 'order', 'update', 'status',)}),
+        ('Genel', {'fields': ('authors', 'title', 'image', 'sum', 'text', 'videos', 'tags', 'order', 'update', 'status',)}),
         ('Diğer', {'fields': ('slug',), 'classes': ('collapse',)}),
     )
     ordering = ('order',)
 
 class HowToAdmin(ArticleAdmin):
     fieldsets = (
-        ('Genel', {'fields': ('author', 'title', 'logo', 'image', 'sum', 'text', 'videos', 'tags', 'wiki', 'update', 'status',)}),
+        ('Genel', {'fields': ('authors', 'title', 'logo', 'image', 'sum', 'text', 'videos', 'tags', 'wiki', 'update', 'status',)}),
         ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
     )
 
 class WorkshopAdmin(ArticleAdmin):
     fieldsets = (
-        ('Genel', {'fields': ('author', 'title', 'logo', 'image', 'sum', 'text', 'tags', 'update', 'status',)}),
+        ('Genel', {'fields': ('authors', 'title', 'logo', 'image', 'sum', 'text', 'tags', 'update', 'status',)}),
         ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
     )
 
-
 class GameAdmin(ArticleAdmin):
     fieldsets = (
-        ('Genel', {'fields': ('author', 'title', 'image', 'sum', 'text', 'videos', 'tags', 'wiki', 'update', 'status')}),
+        ('Genel', {'fields': ('authors', 'title', 'image', 'sum', 'text', 'videos', 'tags', 'wiki', 'update', 'status')}),
         ('Oyun bilgileri', {'fields': ('url', 'path', 'learning_time', 'license', 'installed_size', 'download_size')}),
         ('Değerlendirme', {'fields': ('gameplay', 'graphics', 'sound', 'scenario', 'atmosphere')}),
         ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
@@ -63,12 +63,12 @@ class GameAdmin(ArticleAdmin):
 
 class NewsAdmin(ArticleAdmin):
     fieldsets = (
-            ('Genel', {'fields': ('author', 'title', 'image', 'sum', 'text', 'tags', 'update', 'status')}),
+            ('Genel', {'fields': ('authors', 'title', 'image', 'sum', 'text', 'tags', 'update', 'status')}),
             ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
             )
 class PackageAdmin(ArticleAdmin):
     fieldsets = (
-        ('Genel', {'fields': ('author', 'title', 'image', 'sum','text', 'license','installed_size','download_size','url','point','path','ss','tags','wiki','videos','update','status')}),
+        ('Genel', {'fields': ('authors', 'title', 'image', 'sum','text', 'license','installed_size','download_size','url','point','path','ss','tags','wiki','videos','update','status')}),
         ('Diğer', {'fields': ('slug',), 'classes': 'collapse'}),
     )
 
@@ -98,3 +98,4 @@ admin.site.register(News, NewsAdmin)
 admin.site.register(Package, PackageAdmin)
 admin.site.register(PardusVersion, PardusVersionAdmin)
 admin.site.register(PardusMirror, PardusMirrorAdmin)
+admin.site.register(Author, AttenderAdmin)

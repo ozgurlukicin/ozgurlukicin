@@ -49,7 +49,6 @@ def pastedtext_hide(request, id):
     else:
         return HttpResponseRedirect("/kullanici/giris/")
 
-
 def pastedtext_detail(request, id):
     paste = get_object_or_404(PastedText, id=id)
     return render_response(request, "paste/pastedtext_detail.html", {"paste":paste})

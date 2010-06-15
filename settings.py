@@ -15,10 +15,11 @@ SITE_DESC = 'Pardus için bir numaralı bilgi kaynağı'
 DEBUG = True
 TESTING = True
 TEMPLATE_DEBUG = DEBUG
-WEB_URL = 'http://localhost:8000'
-DOCUMENT_ROOT = '/home/user'
+WEB_URL = 'http://127.0.0.1:8000'
+DOCUMENT_ROOT = '/home/jnmbk/public_html/oi'
 
 DATABASE_ENGINE = 'mysql'
+#DATABASE_ENGINE = "mysql"
 DATABASE_NAME = 'oi'
 DATABASE_USER = 'root'
 DATABASE_PASSWORD = ''
@@ -88,12 +89,12 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-#    'django.contrib.csrf.middleware.CsrfMiddleware',
+    #'django.contrib.csrf.middleware.CsrfMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'oi.flatpages.middleware.FlatpageFallbackMiddleware',
     'oi.middleware.threadlocals.ThreadLocals',
-#    'oi.middleware.debug.DebugFooter',
+    'oi.middleware.debug.DebugFooter',
     'oi.middleware.ban.BanWare',
 )
 

@@ -147,6 +147,24 @@ class License(models.Model):
         verbose_name = "Lisans"
         verbose_name_plural = "Lisanslar"
 
+class Author(models.Model):
+    name = models.CharField('Gerçek Adı', max_length=64, blank=False, unique=True)
+    user = models.ForeignKey(User, verbose_name="Öİ Kullanıcı Adı", blank=True, null=True, help_text="Zorunlu değil")
+
+    def __unicode__(self):
+        return self.name
+
+    def has_profile(self):
+        return True if self.user else False
+
+    def get_absolute_url(self):
+        return self.user.get_profile.get_absolute_url()
+
+    class Meta:
+        ordering = ['name']
+        verbose_name = "Yazar"
+        verbose_name_plural = "Yazarlar"
+
 class FS(models.Model):
     title = models.CharField('Başlık', max_length=32, blank=False)
     slug = models.SlugField('SEF Başlık')
@@ -156,6 +174,7 @@ class FS(models.Model):
     tags = models.ManyToManyField(Tag, blank=False)
     videos = models.ManyToManyField(Video, blank=True)
     update = models.DateTimeField('Son Güncelleme', blank=False)
+    authors = models.ManyToManyField(Author, verbose_name='Yazarlar')
     author = models.CharField('Yazar', max_length=32)
     order = models.PositiveIntegerField(unique=True, verbose_name='Sıralama')
     status = models.BooleanField('Aktif')
@@ -183,6 +202,7 @@ class Workshop(models.Model):
     tags = models.ManyToManyField(Tag, blank=False)
     update = models.DateTimeField('Son Güncelleme', blank=False)
     author = models.CharField('Yazar', max_length=32)
+    authors = models.ManyToManyField(Author, verbose_name='Yazarlar')
     status = models.BooleanField('Aktif')
     topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
 
@@ -214,6 +234,7 @@ class HowTo(models.Model):
     wiki = models.ManyToManyField(Wiki, blank=True)
     videos = models.ManyToManyField(Video, blank=True)
     update = models.DateTimeField('Son Güncelleme', blank=False)
+    authors = models.ManyToManyField(Author, verbose_name='Yazarlar')
     author = models.CharField('Yazar', max_length=32)
     status = models.BooleanField('Aktif')
     topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
@@ -256,6 +277,7 @@ class Game(models.Model):
     wiki = models.ManyToManyField(Wiki, blank=True)
     videos = models.ManyToManyField(Video, blank=True)
     update = models.DateTimeField('Son Güncelleme', blank=False)
+    authors = models.ManyToManyField(Author, verbose_name='Yazarlar')
     author = models.CharField('Yazar', max_length=32)
     status = models.BooleanField('Aktif')
     topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
@@ -285,6 +307,7 @@ class News(models.Model):
     text = models.TextField('Metin', blank=False)
     tags = models.ManyToManyField(Tag, verbose_name="Etiketler", blank=False)
     update = models.DateTimeField('Tarih', blank=False)
+    authors = models.ManyToManyField(Author, verbose_name='Yazarlar')
     author = models.CharField('Yazar', max_length=32)
     status = models.BooleanField('Aktif')
     topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
@@ -323,6 +346,7 @@ class Package(models.Model):
     wiki = models.ManyToManyField(Wiki, blank=True)
     videos = models.ManyToManyField(Video, blank=True)
     update = models.DateTimeField('Son Güncelleme', blank=False)
+    authors = models.ManyToManyField(Author, verbose_name='Yazarlar')
     author = models.CharField('Yazar', max_length=32)
     status = models.BooleanField('Aktif')
     topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
