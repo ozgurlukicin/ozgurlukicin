@@ -229,7 +229,7 @@ These are templates to be marked
 These are python files to be marked
 -----------------------------------
 
--   |-- context_processors.py
++   |-- context_processors.py
     |-- editor
 -   |   |-- forms.py
 -   |   |-- __init__.py

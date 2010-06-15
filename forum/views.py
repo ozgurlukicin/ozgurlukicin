@@ -285,8 +285,8 @@ def reply(request, forum_slug, topic_id, quote_id=False):
 
     posts = topic.post_set.order_by('-created')[:POSTS_PER_PAGE]
 
-    if topic.forum.locked or topic.locked:
-        return render_response(request, "forum/forum_error.html", {"message": "forum ya da başlık kilitli"})
+    if topic.locked:
+        return render_response(request, "forum/forum_error.html", {"message": "Başlık kilitli."})
 
     if request.method == 'POST':
         form = PostForm(request.POST.copy())
@@ -382,9 +382,8 @@ def edit_post(request, forum_slug, topic_id, post_id):
         if not post_user:
             return HttpResponse("That is a Wrong way my friend :) ")
 
-    if forum.locked or topic.locked:
-        # FIXME: Give an error message
-        return HttpResponse("Forum or topic is locked")
+    if topic.locked:
+        return render_response(request, "forum/forum_error.html", { "message":"Başlık kilitli." })
 
     if request.method == 'POST':
         form = PostForm(request.POST.copy())
@@ -413,8 +412,8 @@ def edit_post(request, forum_slug, topic_id, post_id):
 def new_topic(request, forum_slug):
     forum = get_object_or_404(Forum, slug=forum_slug)
 
-    if forum.locked:
-        return HttpResponse('Forum is locked')
+    if forum.locked and not request.user.has_perm("forum.can_add_topic"):
+        return render_response(request, "forum/forum_error.html", { "message":"Bu forumda yeni başlık açamazsınız. Lütfen kilitli olmayan bir forumda başlık açınız." })
 
     if request.method == 'POST':
         form = TopicForm(request.POST.copy())
@@ -466,8 +465,8 @@ def edit_topic(request, forum_slug, topic_id):
     if request.user.has_perm("forum.can_change_abusereport"):
         abuse_count = AbuseReport.objects.count()
 
-    if forum.locked or topic.locked:
-        return HttpResponse('Forum or topic is locked')
+    if topic.locked:
+        return render_response(request, "forum/forum_error.html", { "message":"Başlık kilitli." })
 
     if request.method == 'POST':
         form = TopicForm(request.POST.copy())
@@ -505,7 +504,7 @@ def merge(request, forum_slug, topic_id):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
 
-    if forum.locked or topic.locked:
+    if topic.locked:
         hata="Kilitli konularda bu tür işlemler yapılamaz!"
         return render_response(request, 'forum/merge.html', locals())
 
@@ -558,7 +557,7 @@ def move(request, forum_slug, topic_id):
     forum = get_object_or_404(Forum, slug=forum_slug)
     topic = get_object_or_404(Topic, pk=topic_id)
 
-    if forum.locked or topic.locked:
+    if topic.locked:
         hata="Kilitli konularda bu tür işlemler yapılamaz!"
         return render_response(request, 'forum/move.html', locals())
 
@@ -718,8 +717,8 @@ def delete_post(request,forum_slug,topic_id, post_id):
         if not post_user:
             return HttpResponse("That is a Wrong way my friend :) ")
 
-    if forum.locked or topic.locked:
-        return HttpResponse("Forum or topic is locked")
+    if topic.locked:
+        return render_response(request, "forum/forum_error.html", { "message":"Başlık kilitli." })
 
     if request.method == 'POST':
         post.delete()
@@ -794,7 +793,7 @@ def create_poll(request, forum_slug, topic_id):
         return HttpResponseRedirect(topic.get_create_poll_url())
 
     # check locks
-    if forum.locked or topic.locked:
+    if topic.locked:
         return HttpResponse('Forum or topic is locked')
 
     # check if it already has a poll
@@ -847,7 +846,7 @@ def change_poll(request, forum_slug, topic_id):
         return HttpResponseRedirect(topic.get_create_poll_url())
 
     # check locks
-    if forum.locked or topic.locked:
+    if topic.locked:
         return HttpResponse('Forum or topic is locked')
 
     if request.method == 'POST':
@@ -929,7 +928,7 @@ def vote_poll(request,forum_slug,topic_id,option_id):
         return HttpResponseRedirect(topic.get_absolute_url())
 
     # check locks
-    if forum.locked or topic.locked:
+    if topic.locked:
         return HttpResponse("Forum ya da başlık kilitlidir.")
 
     # check date
@@ -1001,7 +1000,7 @@ def delete_poll(request, forum_slug, topic_id):
         return HttpResponseRedirect(topic.get_absolute_url())
 
     # check locks
-    if forum.locked or topic.locked:
+    if topic.locked:
         return HttpResponse('Forum or topic is locked')
 
     topic.poll=None
