@@ -266,10 +266,10 @@ These are python files to be marked
 +   |   |-- customgeneric.py
 +   |   |-- feeds.py
 +   |   |-- forms.py
--   |   |-- __init__.py
--   |   |-- models.py
--   |   |-- postmarkup.py
--   |   |-- settings.py
++   |   |-- __init__.py
++   |   |-- models.py
++   |   |-- postmarkup.py
++   |   |-- settings.py
     |   |-- stripogram
 -   |   |   |-- html2safehtml.py
 -   |   |   |-- html2text.py

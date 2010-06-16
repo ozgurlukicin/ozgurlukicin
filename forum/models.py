@@ -17,6 +17,7 @@ from oi.poll.models import Poll
 
 from oi.forum.settings import FORUM_FROM_EMAIL
 
+from django.utils.translation import ugettext as _
 
 class Post(models.Model):
     """
@@ -26,15 +27,16 @@ class Post(models.Model):
     get_absolute_url: absolute url of post
     save(): saves post and updates Topic and Forum objects
     """
-    topic = models.ForeignKey('Topic', verbose_name='Konu')
-    author = models.ForeignKey(User, verbose_name='Yazar')
-    text = models.TextField(verbose_name='İleti')
-    hidden = models.NullBooleanField(blank=True, default=0, verbose_name='Gizli')
-    created = models.DateTimeField(blank=True, null=True, auto_now_add=True, verbose_name='Oluşturulma tarihi')
-    edited = models.DateTimeField(blank=True, null=True, auto_now_add=True, verbose_name='Güncellenme tarihi')
-    edit_count = models.IntegerField(default=0, verbose_name='Güncellenme sayısı')
-    last_edited_by = models.ForeignKey(User, blank=True, null=True, related_name='last edited by', verbose_name='Yazar')
-    ip = models.IPAddressField(blank=True, verbose_name='IP adresi')
+<<<<<<< .working
+    topic = models.ForeignKey('Topic', verbose_name=_('Topic'))
+    author = models.ForeignKey(User, verbose_name=_('Author'))
+    text = models.TextField(verbose_name=_('Post'))
+    hidden = models.NullBooleanField(blank=True, default=0, verbose_name=_('Hidden'))
+    created = models.DateTimeField(blank=True, null=True, auto_now_add=True, verbose_name=_('Create date'))
+    edited = models.DateTimeField(blank=True, null=True, auto_now_add=True, verbose_name=_('Update date'))
+    edit_count = models.IntegerField(default=0, verbose_name=_('Number of updates'))
+    last_edited_by = models.ForeignKey(User, blank=True, null=True, related_name='last edited by', verbose_name=_('Last Editor'))
+    ip = models.IPAddressField(blank=True, verbose_name=_('IP address'))
 
     def __unicode__(self):
         return "%s" % self.id
@@ -88,12 +90,12 @@ class Post(models.Model):
 
     class Meta:
         ordering = ('-edited',)
-        verbose_name = 'İleti'
-        verbose_name_plural = 'İletiler'
+        verbose_name = _('Post')
+        verbose_name_plural = _('Posts')
         permissions = (
-                       ("can_see_post_ip", "Can see author ip"),
-                       ("can_hide_post", "Can hide"),
-                       ("can_see_hidden_posts", "Can see hidden posts"),
+                       ("can_see_post_ip", _("Can see author ip")),
+                       ("can_hide_post", _("Can hide")),
+                       ("can_see_hidden_posts", _("Can see hidden posts")),
                       )
 
     def save(self):
@@ -151,17 +153,16 @@ class Topic(models.Model):
     """
     Topic model.
     """
-    forum = models.ForeignKey('Forum', verbose_name='Forum')
-    title = models.CharField(max_length=100, verbose_name='Başlık')
-    sticky = models.NullBooleanField(blank=True, default=0, verbose_name='Sabit')
-    locked = models.NullBooleanField(blank=True, default=0, verbose_name='Kilitli')
-    hidden = models.NullBooleanField(blank=True, default=0, verbose_name='Gizli')
-    general = models.NullBooleanField(blank=True, default=False, verbose_name='Genel')
-    posts = models.IntegerField(default=0, verbose_name='İleti sayısı')
-    views = models.IntegerField(default=0, verbose_name='Görüntülenme sayısı')
-    topic_latest_post = models.ForeignKey(Post, blank=True, null=True, related_name='topic_latest_post', verbose_name='Son ileti')
-    tags = models.ManyToManyField(Tag, verbose_name='Etiketler')
-    poll = models.ForeignKey(Poll, blank=True, null=True, verbose_name="Anket")
+    forum = models.ForeignKey('Forum', verbose_name=_('Forum'))
+    title = models.CharField(max_length=100, verbose_name=_('Topic'))
+    sticky = models.NullBooleanField(blank=True, default=0, verbose_name=_('Sticy'))
+    locked = models.NullBooleanField(blank=True, default=0, verbose_name=_('Locked'))
+    hidden = models.NullBooleanField(blank=True, default=0, verbose_name=_('Hidden'))
+    posts = models.IntegerField(default=0, verbose_name=_('Number of posts'))
+    views = models.IntegerField(default=0, verbose_name=_('Number of views'))
+    topic_latest_post = models.ForeignKey(Post, blank=True, null=True, related_name='topic_latest_post', verbose_name=_('Latest posts'))
+    tags = models.ManyToManyField(Tag, verbose_name=_('Tags'))
+    poll = models.ForeignKey(Poll, blank=True, null=True, verbose_name=_("Poll"))
 
     def __unicode__(self):
         return self.title
@@ -233,18 +234,18 @@ class Topic(models.Model):
 
     class Meta:
         ordering = ('-sticky', '-topic_latest_post')
-        verbose_name = 'Konu'
-        verbose_name_plural = 'Konular'
+        verbose_name = _('Topic')
+        verbose_name_plural = _('Topics')
         permissions = (
-                       ("can_hide_topic", "Can hide topic"),
-                       ("can_stick_topic", "Can stick topic"),
-                       ("can_lock_topic", "Can lock topic"),
-                       ("can_tag_topic", "Can tag topic"),
-                       ("can_see_hidden_topics", "Can see hidden topics"),
-                       ("can_merge_topic", "Can merge topic"),
-                       ("can_move_topic", "Can move topic"),
-                       ("can_create_poll", "Can create poll"),
-                       ("can_change_poll", "Can change poll"),
+                       ("can_hide_topic", _("Can hide topic")),
+                       ("can_stick_topic", _("Can stick topic")),
+                       ("can_lock_topic", _("Can lock topic")),
+                       ("can_tag_topic", _("Can tag topic")),
+                       ("can_see_hidden_topics", _("Can see hidden topics")),
+                       ("can_merge_topic", _("Can merge topic")),
+                       ("can_move_topic", _("Can move topic")),
+                       ("can_create_poll", _("Can create poll")),
+                       ("can_change_poll", _("Can change poll")),
                        ("can_change_general", "Can change general topic"),
                       )
 
@@ -264,16 +265,16 @@ class Topic(models.Model):
         super(Topic, self).delete()
 
 class Forum(models.Model):
-    category = models.ForeignKey('Category', null=True, verbose_name='Kategori')
-    name = models.CharField(max_length=100, verbose_name='İsim')
-    slug = models.SlugField(verbose_name='SEF isim')
-    description = models.TextField(verbose_name='Açıklama')
-    hidden = models.NullBooleanField(blank=True, default=0, verbose_name='Gizli')
-    locked = models.NullBooleanField(blank=True, default=0, verbose_name='Kapalı')
-    topics = models.IntegerField(default=0, verbose_name='Konu sayısı')
-    posts = models.IntegerField(default=0, verbose_name='İleti sayısı')
-    forum_latest_post = models.ForeignKey(Post, blank=True, null=True, related_name='forum_latest_post', verbose_name='Son ileti')
-    order = models.PositiveIntegerField(verbose_name='Sıralama')
+    category = models.ForeignKey('Category', null=True, verbose_name=_('Category'))
+    name = models.CharField(max_length=100, verbose_name=_('Name'))
+    slug = models.SlugField(verbose_name=_('SEF name'))
+    description = models.TextField(verbose_name=_('Description'))
+    hidden = models.NullBooleanField(blank=True, default=0, verbose_name=_('Hidden'))
+    locked = models.NullBooleanField(blank=True, default=0, verbose_name=_('Locked'))
+    topics = models.IntegerField(default=0, verbose_name=_('Number of topics'))
+    posts = models.IntegerField(default=0, verbose_name=_('Number of posts'))
+    forum_latest_post = models.ForeignKey(Post, blank=True, null=True, related_name='forum_latest_post', verbose_name=_('Latest Post'))
+    order = models.PositiveIntegerField(verbose_name=_('Ordering'))
     is_published = models.BooleanField(blank=True, default=True, verbose_name="Yayınlanacak", help_text="Forum içeriğinin son iletilerde ve genel RSS'te yayınlanacağını belirler.")
 
     def get_absolute_url(self):
@@ -295,18 +296,18 @@ class Forum(models.Model):
     class Meta:
         ordering = ('order',)
         unique_together = (('category', 'order'),)
-        verbose_name = 'Forum'
-        verbose_name_plural = 'Forumlar'
+        verbose_name = _('Forum')
+        verbose_name_plural = _('Forums')
         permissions = (
-                       ("can_hide_forum", "Can hide forum"),
-                       ("can_lock_forum", "Can lock forum"),
-                       ("can_see_hidden_forums", "Can see hidden forums"),
+                       ("can_hide_forum", _("Can hide forum")),
+                       ("can_lock_forum", _("Can lock forum")),
+                       ("can_see_hidden_forums", _("Can see hidden forums")),
                       )
 
 class Category(models.Model):
-    name = models.CharField(max_length=255, verbose_name='Kategori ismi')
-    hidden = models.NullBooleanField(blank=True, verbose_name='Gizli')
-    order = models.PositiveIntegerField(unique=True, verbose_name='Sıralama')
+    name = models.CharField(max_length=255, verbose_name=_('Kategory name'))
+    hidden = models.NullBooleanField(blank=True, verbose_name=_('Hidden'))
+    order = models.PositiveIntegerField(unique=True, verbose_name=_('Ordering'))
 
     def __unicode__(self):
         return self.name
@@ -316,28 +317,28 @@ class Category(models.Model):
 
     class Meta:
         ordering = ['name']
-        verbose_name = 'Kategori'
-        verbose_name_plural = 'Kategoriler'
+        verbose_name = _('Category')
+        verbose_name_plural = _('Categories')
         permissions = (
-                       ("can_hide_category", "Can hide category"),
-                       ("can_see_hidden_categories", "Can see hidden categories"),
+                       ("can_hide_category", _("Can hide category")),
+                       ("can_see_hidden_categories", _("Can see hidden categories")),
                       )
 
 class AbuseReport(models.Model):
-    post = models.ForeignKey(Post, verbose_name='İleti')
-    submitter = models.ForeignKey(User, verbose_name='Raporlayan kullanıcı')
-    reason = models.TextField(max_length=512, blank=False, verbose_name="Sebep")
+    post = models.ForeignKey(Post, verbose_name=_('Post'))
+    submitter = models.ForeignKey(User, verbose_name=_('Reporter'))
+    reason = models.TextField(max_length=512, blank=False, verbose_name=_("Reason"))
 
     class Admin:
         list_display = ('post', 'submitter')
 
     class Meta:
-        verbose_name = 'İleti şikayeti'
-        verbose_name_plural = 'İleti şikayetleri'
+        verbose_name = _('Abuse Report')
+        verbose_name_plural = _('Abuse Reports')
 
 class WatchList(models.Model):
-    user = models.ForeignKey(User, verbose_name='Kullanıcı')
-    topic = models.ForeignKey(Topic, verbose_name='Konu')
+    user = models.ForeignKey(User, verbose_name=_('User'))
+    topic = models.ForeignKey(Topic, verbose_name=_('Topic'))
 
     def __unicode__(self):
         return '%s' % self.topic.title
@@ -346,5 +347,5 @@ class WatchList(models.Model):
         pass
 
     class Meta:
-        verbose_name = 'İzleme listesi'
-        verbose_name_plural = 'İzleme listeleri'
+        verbose_name = _('Watchlist')
+        verbose_name_plural = _('Watchlists')

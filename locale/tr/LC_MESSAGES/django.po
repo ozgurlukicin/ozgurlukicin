@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-15 16:32+0300\n"
+"POT-Creation-Date: 2010-06-16 11:25+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -359,17 +359,17 @@ msgstr "Görselleri Filtrele"
 msgid "Flatpages"
 msgstr "Görselleri Filtrele"
 
-#: forum/feeds.py:20 forum/forms.py:52 templates/base.html:21
-#: templates/footer.html:14 templates/forum/change_poll.html:5
-#: templates/forum/create_poll.html:5 templates/forum/forum_base.html:5
-#: templates/forum/forum_base.html.py:11 templates/forum/forum_detail.html:13
-#: templates/forum/forum_detail.html:39 templates/forum/forum_list.html:10
-#: templates/forum/forum_list.html.py:15 templates/forum/new_topic.html:14
-#: templates/forum/post_edit.html:11 templates/forum/post_list.html:11
-#: templates/forum/reply.html:11 templates/forum/report.html:12
-#: templates/forum/topic.html:8 templates/forum/topic.html.py:14
-#: templates/forum/topic.html:187 templates/forum/unread.html:6
-#: templates/tag/tag_detail.html:69
+#: forum/feeds.py:20 forum/forms.py:52 forum/models.py:156 forum/models.py:299
+#: templates/base.html:21 templates/footer.html:14
+#: templates/forum/change_poll.html:5 templates/forum/create_poll.html:5
+#: templates/forum/forum_base.html:5 templates/forum/forum_base.html.py:11
+#: templates/forum/forum_detail.html:13 templates/forum/forum_detail.html:39
+#: templates/forum/forum_list.html:10 templates/forum/forum_list.html.py:15
+#: templates/forum/new_topic.html:14 templates/forum/post_edit.html:11
+#: templates/forum/post_list.html:11 templates/forum/reply.html:11
+#: templates/forum/report.html:12 templates/forum/topic.html:8
+#: templates/forum/topic.html.py:14 templates/forum/topic.html:187
+#: templates/forum/unread.html:6 templates/tag/tag_detail.html:69
 #: templates/tema/theme_base_without_ezine.html:21
 msgid "Forum"
 msgstr "Forum"
@@ -388,7 +388,7 @@ msgstr "Forum Kuralları"
 msgid " Forum Tag order : "
 msgstr ""
 
-#: forum/forms.py:24 ideas/templates/idea_detail.html:14
+#: forum/forms.py:24 forum/models.py:164 ideas/templates/idea_detail.html:14
 #: templates/flatpages/default.html:69 templates/fs/fs_detail.html:26
 #: templates/game/game_detail.html:95 templates/howto/howto_detail.html:57
 #: templates/news/news_detail.html:49 templates/package/package_detail.html:63
@@ -403,8 +403,9 @@ msgid ""
 "topic."
 msgstr ""
 
-#: forum/forms.py:44 templates/forum/forum_detail.html:18
-#: templates/forum/unread.html:10
+#: forum/forms.py:44 forum/models.py:31 forum/models.py:157
+#: forum/models.py:237 forum/models.py:341
+#: templates/forum/forum_detail.html:18 templates/forum/unread.html:10
 msgid "Topic"
 msgstr "Başlık"
 
@@ -461,6 +462,245 @@ msgstr ""
 #: forum/forms.py:82
 msgid "You have to specify an end date for voting."
 msgstr ""
+
+#: forum/models.py:32 templates/fs/fs_detail.html:42
+#: templates/game/game_detail.html:114 templates/howto/howto_detail.html:80
+#: templates/news/news_detail.html:53 templates/package/package_detail.html:79
+#: templates/workshop/workshop_detail.html:61
+msgid "Author"
+msgstr "Yazar"
+
+#: forum/models.py:33 forum/models.py:93 forum/models.py:328
+#, fuzzy
+msgid "Post"
+msgstr "İletiler"
+
+#: forum/models.py:34 forum/models.py:160 forum/models.py:272
+#: forum/models.py:309
+#, fuzzy
+msgid "Hidden"
+msgstr "gizle"
+
+#: forum/models.py:35
+#, fuzzy
+msgid "Create date"
+msgstr "Son Güncelleme"
+
+#: forum/models.py:36
+#, fuzzy
+msgid "Update date"
+msgstr "Son Güncelleme"
+
+#: forum/models.py:37
+msgid "Number of updates"
+msgstr ""
+
+#: forum/models.py:38
+#, fuzzy
+msgid "Last Editor"
+msgstr "Editör"
+
+#: forum/models.py:39
+#, fuzzy
+msgid "IP address"
+msgstr "ileti adresi"
+
+#: forum/models.py:94 templates/forum/forum_detail.html:20
+#: templates/forum/forum_list.html:19 templates/forum/unread.html:11
+msgid "Posts"
+msgstr "İletiler"
+
+#: forum/models.py:96
+msgid "Can see author ip"
+msgstr ""
+
+#: forum/models.py:97
+#, fuzzy
+msgid "Can hide"
+msgstr "gizle"
+
+#: forum/models.py:98
+#, fuzzy
+msgid "Can see hidden posts"
+msgstr "Fikrin durumunu değiştir"
+
+#: forum/models.py:158
+#, fuzzy
+msgid "Sticy"
+msgstr "Sabitle"
+
+#: forum/models.py:159 forum/models.py:273
+#, fuzzy
+msgid "Locked"
+msgstr "Kilitli Başlık"
+
+#: forum/models.py:161 forum/models.py:275
+msgid "Number of posts"
+msgstr ""
+
+#: forum/models.py:162
+msgid "Number of views"
+msgstr ""
+
+#: forum/models.py:163
+#, fuzzy
+msgid "Latest posts"
+msgstr "Son İletiler"
+
+#: forum/models.py:165 templates/forum/topic.html:34
+msgid "Poll"
+msgstr "Anket"
+
+#: forum/models.py:238 templates/forum/forum_list.html:17
+msgid "Topics"
+msgstr "Başlıklar"
+
+#: forum/models.py:240
+#, fuzzy
+msgid "Can hide topic"
+msgstr "Başlığı Gizle"
+
+#: forum/models.py:241
+#, fuzzy
+msgid "Can stick topic"
+msgstr "Sabit Başlık"
+
+#: forum/models.py:242
+#, fuzzy
+msgid "Can lock topic"
+msgstr "Başlığı Kilitle"
+
+#: forum/models.py:243
+#, fuzzy
+msgid "Can tag topic"
+msgstr "Başlık Aç"
+
+#: forum/models.py:244
+msgid "Can see hidden topics"
+msgstr ""
+
+#: forum/models.py:245
+#, fuzzy
+msgid "Can merge topic"
+msgstr "Başlığı Birleştir"
+
+#: forum/models.py:246
+#, fuzzy
+msgid "Can move topic"
+msgstr "Başlığı Taşı"
+
+#: forum/models.py:247
+#, fuzzy
+msgid "Can create poll"
+msgstr "Anket Oluştur"
+
+#: forum/models.py:248
+#, fuzzy
+msgid "Can change poll"
+msgstr "Anketi Değiştir"
+
+#: forum/models.py:268 forum/models.py:320
+#, fuzzy
+msgid "Category"
+msgstr "Kategoriler"
+
+#: forum/models.py:269 templates/user/profile.html:60
+#, fuzzy
+msgid "Name"
+msgstr "Oyunlar"
+
+#: forum/models.py:270
+msgid "SEF name"
+msgstr ""
+
+#: forum/models.py:271
+#, fuzzy
+msgid "Description"
+msgstr "Belgelendirme"
+
+#: forum/models.py:274
+msgid "Number of topics"
+msgstr ""
+
+#: forum/models.py:276 templates/forum/forum_detail.html:24
+#: templates/forum/forum_list.html:21 templates/forum/unread.html:13
+msgid "Latest Post"
+msgstr "Son İleti"
+
+#: forum/models.py:277 forum/models.py:310
+msgid "Ordering"
+msgstr ""
+
+#: forum/models.py:300
+#, fuzzy
+msgid "Forums"
+msgstr "Forum"
+
+#: forum/models.py:302
+#, fuzzy
+msgid "Can hide forum"
+msgstr "Okunmuş forum"
+
+#: forum/models.py:303
+msgid "Can lock forum"
+msgstr ""
+
+#: forum/models.py:304
+msgid "Can see hidden forums"
+msgstr ""
+
+#: forum/models.py:308
+#, fuzzy
+msgid "Kategory name"
+msgstr "İlgili Sayfalar"
+
+#: forum/models.py:321 ideas/templates/idea_base.html:78
+#: templates/tema/base.html:14
+msgid "Categories"
+msgstr "Kategoriler"
+
+#: forum/models.py:323
+msgid "Can hide category"
+msgstr ""
+
+#: forum/models.py:324
+msgid "Can see hidden categories"
+msgstr ""
+
+#: forum/models.py:329
+#, fuzzy
+msgid "Reporter"
+msgstr "Raporlayan:"
+
+#: forum/models.py:330
+#, fuzzy
+msgid "Reason"
+msgstr "Sebep:"
+
+#: forum/models.py:336
+#, fuzzy
+msgid "Abuse Report"
+msgstr "Sebep:"
+
+#: forum/models.py:337
+#, fuzzy
+msgid "Abuse Reports"
+msgstr "Sebep:"
+
+#: forum/models.py:340
+#, fuzzy
+msgid "User"
+msgstr "Kullanıcılar"
+
+#: forum/models.py:350
+#, fuzzy
+msgid "Watchlist"
+msgstr "Şikayet Listesinden Çıkar"
+
+#: forum/models.py:351
+#, fuzzy
+msgid "Watchlists"
+msgstr "İstatistikler"
 
 #: ideas/templates/idea_add_form.html:4 ideas/templates/idea_list.html:12
 msgid "Submit New Idea"
@@ -606,10 +846,6 @@ msgstr "Çözülen fikirler"
 #: ideas/templates/idea_base.html:75
 msgid "Invalid ideas"
 msgstr "Geçersiz fikirler"
-
-#: ideas/templates/idea_base.html:78 templates/tema/base.html:14
-msgid "Categories"
-msgstr "Kategoriler"
 
 #: ideas/templates/idea_base.html:85 templates/feedjack/oi/post_list.html:68
 #: templates/forum/forum_base.html:67
@@ -1386,19 +1622,9 @@ msgstr "Özgürlükİçin Forum"
 msgid "New Topic"
 msgstr "Yeni Başlık"
 
-#: templates/forum/forum_detail.html:20 templates/forum/forum_list.html:19
-#: templates/forum/unread.html:11
-msgid "Posts"
-msgstr "İletiler"
-
 #: templates/forum/forum_detail.html:22 templates/forum/unread.html:12
 msgid "Views"
 msgstr "Görüntüleme"
-
-#: templates/forum/forum_detail.html:24 templates/forum/forum_list.html:21
-#: templates/forum/unread.html:13
-msgid "Latest Post"
-msgstr "Son İleti"
 
 #: templates/forum/forum_detail.html:57 templates/forum/forum_list.html:79
 #: templates/forum/unread.html:23
@@ -1450,10 +1676,6 @@ msgid ""
 msgstr ""
 "Forum kurallarına <a href=\"/hakkinda/forum-kurallari/\" class=\"bold"
 "\">buradan</a> ulaşabilirsiniz."
-
-#: templates/forum/forum_list.html:17
-msgid "Topics"
-msgstr "Başlıklar"
 
 #: templates/forum/forum_list.html:33
 msgid "Read forum"
@@ -1628,10 +1850,6 @@ msgstr "E-posta ile izle"
 msgid "add poll"
 msgstr "anket ekle"
 
-#: templates/forum/topic.html:34
-msgid "Poll"
-msgstr "Anket"
-
 #: templates/forum/topic.html:40
 msgid "click here to vote"
 msgstr "oy vermek için tıklayın"
@@ -1775,13 +1993,6 @@ msgstr ""
 #: templates/package/package_detail.html:87
 msgid "Related Videos"
 msgstr "İlgili Videolar"
-
-#: templates/fs/fs_detail.html:42 templates/game/game_detail.html:114
-#: templates/howto/howto_detail.html:80 templates/news/news_detail.html:53
-#: templates/package/package_detail.html:79
-#: templates/workshop/workshop_detail.html:61
-msgid "Author"
-msgstr "Yazar"
 
 #: templates/fs/fs_main.html:26
 #, python-format
@@ -2597,11 +2808,6 @@ msgstr ""
 #: templates/user/profile.html:58
 msgid "Personal Information"
 msgstr ""
-
-#: templates/user/profile.html:60
-#, fuzzy
-msgid "Name"
-msgstr "Oyunlar"
 
 #: templates/user/profile.html:63
 msgid "Surname"
