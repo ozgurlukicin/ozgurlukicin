@@ -9,7 +9,7 @@ class CommentForm(forms.Form):
     text = forms.CharField(label="Yorumunuz", required=True, widget=forms.Textarea(attrs={ 'cols':'83%', 'rows':'7'}))
 
 class NewIdeaForm(forms.ModelForm):
-    title = forms.CharField(label="Fikir Başlığı", widget=forms.TextInput(attrs={'style':'width: 500px;'}))
+    title = forms.CharField(label="Fikir Başlığı", widget=forms.TextInput(attrs={'style':'width: 400px;'}))
     related_to = forms.ModelChoiceField(label="İlgili paket", queryset=Related.objects.order_by("name"), required=False, help_text="Bu alanı boş bırakabilirsiniz.")
     class Meta:
         model = Idea
