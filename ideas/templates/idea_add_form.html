@@ -3,20 +3,52 @@
 {% block title %}Yeni Fikir Ekle - {% endblock %}
 
 {% block extrahead %}
-<style type="text/css" media="screen">@import url('/media/css/new/brainstorm.css');</style>
-<style type="text/css" media="screen">@import url('/media/css/new/autocomplete.css');</style>
-<script language="javascript" type="text/javascript" src="/media/js/jquery.autocomplete.js"></script>
-<script type="text/javascript" src="/media/js/brainstorm.js"></script>
-<script type="text/javascript" src="/media/js/taghelper_idea.js"></script>
+  <style type="text/css" media="screen">@import url('/media/css/new/brainstorm.css');</style>
+  <style type="text/css" media="screen">@import url('/media/css/new/autocomplete.css');</style>
+  <script language="javascript" type="text/javascript" src="/media/js/jquery.autocomplete.js"></script>
+  <script type="text/javascript" src="/media/js/brainstorm.js"></script>
+  <script type="text/javascript" src="/media/js/taghelper_idea.js"></script>
+  <script type="text/javascript" src="/media/js/jquery.corner.js"></script>
+  <script type="text/javascript" src="/media/js/warning.js"></script>
 {% endblock %}
 {% block idea %}
 {% if user.is_authenticated %}
+<form method="POST" action="" enctype="multipart/form-data">
+<div style="padding: 10px">
+    <p class="warning-dialog">Nasıl yeni fikir ekleyeceğinizi biliyor musunuz? Eğer yeniyseniz, lütfen <a href="http://www.ozgurlukicin.com/forum/yeni-fikirler/10103/" target="_blank">burada yer alan</a> makalemizi okuyunuz. Bu, hem sizin değerli fikirlerinizi daha iyi anlatabilmeniz için önemlidir, hem de bizim Pardus geliştiricilerine ayrıntılı ve açıklayıcı biçimde fikirlerinizi sunmamız için gereklidir.</p>
+</div>
 {% if form.errors %}
 <p><font color="red">Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin.</font></p>
 {% endif %}
-<form method="POST" action="" enctype="multipart/form-data">
 {% for field in form %}
-    {% include "formfields.html" %}
+    {% if field.name == 'description' %}
+        <div class="field_container">
+            <div class="field_label">
+                {{ field.label_tag }}<br />
+                <div style="font-size: 9px; color: #AAA;">({{ field.help_text }})</div>
+            </div>
+            <div class="field_field">
+                {{ field }}
+                {% if field.errors %}{{ field.errors }}{% endif %}
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+    {% else %} {% if field.name == 'related_to' %}
+        <div class="field_container">
+            <div class="field_label">
+                {{ field.label_tag }}<br />
+                <div style="font-size: 9px; color: #AAA;">({{ field.help_text }})</div>
+            </div>
+            <div class="field_field">
+                {{ field }}
+                {% if field.errors %}{{ field.errors }}{% endif %}
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+        {% else %}
+            {% include "formfields.html" %}
+        {% endif %}
+    {% endif %}
 {% endfor %}
 <input type="submit" value="Gönder" />
 </form>
