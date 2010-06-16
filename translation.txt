@@ -278,7 +278,6 @@ These are python files to be marked
 -   |   |   `-- testStripogram.py
 -   |   |-- tools.py
 -   |   |-- urls.py
--   |   |-- util.py
 -   |   `-- views.py
     |-- ideas
 -   |   |-- admin.py
