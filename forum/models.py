@@ -27,7 +27,6 @@ class Post(models.Model):
     get_absolute_url: absolute url of post
     save(): saves post and updates Topic and Forum objects
     """
-<<<<<<< .working
     topic = models.ForeignKey('Topic', verbose_name=_('Topic'))
     author = models.ForeignKey(User, verbose_name=_('Author'))
     text = models.TextField(verbose_name=_('Post'))
