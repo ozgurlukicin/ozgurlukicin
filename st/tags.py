@@ -6,9 +6,10 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.db import models
+from django.utils.translation import ugettext as _
 
 class Tag(models.Model):
-    name = models.CharField('Etiket', max_length=32, blank=False, unique=True)
+    name = models.CharField(_("Tag"), max_length=32, blank=False, unique=True)
 
     def __unicode__(self):
         return self.name
@@ -18,5 +19,5 @@ class Tag(models.Model):
 
     class Meta:
         ordering = ['name']
-        verbose_name = "Etiket"
-        verbose_name_plural = "Etiketler"
+        verbose_name = _("Tag")
+        verbose_name_plural = _("Tags")

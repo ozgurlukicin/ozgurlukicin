@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-18 15:44+0300\n"
+"POT-Creation-Date: 2010-06-18 15:47+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -393,7 +393,7 @@ msgid " Forum Tag order : "
 msgstr ""
 
 #: forum/forms.py:24 forum/models.py:163 ideas/models.py:79
-#: ideas/templates/idea_detail.html:14 st/models.py:288
+#: ideas/templates/idea_detail.html:14 st/models.py:288 st/tags.py:23
 #: templates/flatpages/default.html:69 templates/fs/fs_detail.html:26
 #: templates/game/game_detail.html:95 templates/howto/howto_detail.html:57
 #: templates/news/news_detail.html:49 templates/package/package_detail.html:63
@@ -2113,6 +2113,11 @@ msgstr "Sürüm"
 #, fuzzy
 msgid "Pardus Mirrors"
 msgstr "Ajans"
+
+#: st/tags.py:12 st/tags.py:22
+#, fuzzy
+msgid "Tag"
+msgstr "Etiketler"
 
 #: templates/404.html:3
 msgid "Page Not Found"

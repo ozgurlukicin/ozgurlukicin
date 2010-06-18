@@ -399,15 +399,15 @@ These are python files to be marked
 +   |   |-- forms.py
 +   |   |-- __init__.py
 +   |   |-- models.py
--   |   |-- signals.py
--   |   |-- sitemaps.py
--   |   |-- tags.py
--   |   |-- templatetags
--   |   |   |-- gravatar.py
--   |   |   |-- __init__.py
--   |   |   `-- library.py
--   |   |-- views.py
--   |   `-- wrappers.py
++   |   |-- signals.py
++   |   |-- sitemaps.py
++   |   |-- tags.py
+    |   |-- templatetags
++   |   |   |-- gravatar.py
++   |   |   |-- __init__.py
++   |   |   `-- library.py
++   |   |-- views.py
++   |   `-- wrappers.py
     |-- tema
 -   |   |-- admin.py
 -   |   |-- feeds.py
