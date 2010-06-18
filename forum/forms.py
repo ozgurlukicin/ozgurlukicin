@@ -21,7 +21,7 @@ from django.utils.translation import ugettext as _
 class TopicForm(forms.Form):
     title = forms.CharField(label=_('Title'), required=True, max_length=100, widget=forms.TextInput(attrs={'size': '40',}))
     text = XssField(label=_('Text'), required=True, widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
-    tags = forms.MultipleChoiceField(label=_('Tags'), required=True,help_text=_("You can select more than one tags by pressing and holding CTRL key. (5 at most)"))
+    tags = forms.MultipleChoiceField(label=_('Tags'), required=True,help_text=_("You can select more than one tag by pressing and holding CTRL key. (5 at most)"))
 
     def __init__(self,*args,**kwargs):
         """ It is for topic thing they are dynamic"""
