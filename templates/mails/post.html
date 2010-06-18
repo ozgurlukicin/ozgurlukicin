@@ -1,0 +1,16 @@
+{% load library %}
+<style type="text/css">
+.quote {
+    border: 1px solid #CCCCCC;
+    padding: 10px;
+    margin-bottom: 8px;
+    background-color: #E1E3FF;
+    color: #51615D;
+}
+.quote p {
+    padding-left: 12px;
+    font-style: italic;
+}
+</style>
+{{ post.text|renderbbcode|safe }}
+<br /><br /><a href="{{ WEB_URL }}{{ post.get_absolute_url }}">{{ WEB_URL }}{{ post.get_absolute_url }}</a>

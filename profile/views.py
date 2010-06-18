@@ -26,6 +26,8 @@ from oi.profile.models import Avatar, Profile, LostPassword
 from oi.profile.forms import RegisterForm, ProfileEditForm, LostPasswordForm, ChangePasswordForm, ResetPasswordForm
 from oi.profile.settings import googleMapsApiKey
 from oi.st.wrappers import render_response
+from django.utils.translation import ugettext as _
+from django.template import Context, loader
 
 @login_required
 def followed_topics(request):
@@ -35,7 +37,7 @@ def followed_topics(request):
             for id in list:
                 # control if posted topic id belongs to user
                 if not WatchList.objects.filter(topic__id=id).filter(user__username=request.user.username):
-                    return HttpResponse('Konu bu kullanıcıya ait değil!')
+                    return HttpResponse(_("Topic does not belong to this user!"))
                 else:
                     WatchList.objects.filter(topic__id=id).filter(user__username=request.user.username).delete()
         # FIXME: Shouldn't be hardcoded.
@@ -183,30 +185,22 @@ def user_register(request):
             for number in form.cleaned_data['contributes']: # it's ManyToManyField's unique id
                 user.get_profile().contributes.add(number)
 
-            now = datetime.datetime.now()
-            (date, hour) = now.isoformat()[:16].split("T")
-
-            email_dict = {'date': date,
-                    'hour': hour,
-                    'ip_addr': request.META['REMOTE_ADDR'],
+            email_dict = {
+                    'SITE_NAME': SITE_NAME,
+                    'date': datetime.datetime.now(),
+                    'ip': request.META['REMOTE_ADDR'],
                     'user': user.username,
-                    'link': '%s/kullanici/onay/%s/%s' % (WEB_URL, form.cleaned_data['username'], activation_key)}
+                    'link': '%s/kullanici/onay/%s/%s' % (WEB_URL, form.cleaned_data['username'], activation_key),
+                    }
 
-            email_subject = u"Özgürlükİçin.com Kullanıcı Hesabı, %(user)s"
-            email_body = u"""Merhaba!
-%(date)s %(hour)s tarihinde %(ip_addr)s IP adresli bilgisayardan yaptığınız Özgurlukİçin kullanıcı hesabınızı onaylamak için lutfen asağıdaki bağlantıyı 48 saat içerisinde ziyaret ediniz.
+            email_subject = _("%(SITE_NAME)s User Account, %(user)s")
 
-%(link)s
-
-Teşekkürler,
-Özgurlukİçin"""
-
+            email_body = loader.get_template("mails/register.html").render(Context(email_dict))
             email_to = form.cleaned_data['email']
 
-            send_mail(email_subject % email_dict, email_body % email_dict, DEFAULT_FROM_EMAIL, [email_to], fail_silently=True)
+            send_mail(email_subject % email_dict, email_body, DEFAULT_FROM_EMAIL, [email_to], fail_silently=True)
 
-            return render_response(request, 'user/register_done.html', {'form': form,
-                                                                   'user': form.cleaned_data['username']})
+            return render_response(request, 'user/register_done.html', {'form': form, 'user': form.cleaned_data['username']})
         else:
             return render_response(request, 'user/register.html', {'form': form})
     else:
@@ -235,40 +229,36 @@ def user_confirm(request, name, key):
 
 def lost_password(request):
     if request.method == 'POST':
-       form = LostPasswordForm(request.POST)
-       if form.is_valid():
-           # generate new key and e-mail it to user
-           random.seed()
-           salt = sha.new(str(random.random())).hexdigest()[8:]
-           key = sha.new(salt).hexdigest()
+        form = LostPasswordForm(request.POST)
+        if form.is_valid():
+            # generate new key and e-mail it to user
+            random.seed()
+            salt = sha.new(str(random.random())).hexdigest()[8:]
+            key = sha.new(salt).hexdigest()
 
-           u = User.objects.get(username=form.cleaned_data['username'])
-           lostpwd = LostPassword(user=u)
-           lostpwd.key = key
-           lostpwd.key_expires = datetime.datetime.today() + datetime.timedelta(1)
-           lostpwd.save()
+            u = User.objects.get(username=form.cleaned_data['username'])
+            lostpwd = LostPassword(user=u)
+            lostpwd.key = key
+            lostpwd.key_expires = datetime.datetime.today() + datetime.timedelta(1)
+            lostpwd.save()
 
-           now = datetime.datetime.now()
-           (date, hour) = now.isoformat()[:16].split("T")
+            # mail it
+            email_dict = {
+                    "SITE_NAME": SITE_NAME,
+                    'date': datetime.datetime.now(),
+                    'ip': request.META['REMOTE_ADDR'],
+                    'user': form.cleaned_data['username'],
+                    'link': 'http://www.ozgurlukicin.com/kullanici/kayip/degistir/%s' % key,
+                    }
 
-           # mail it
-           email_dict = {'date': date,
-                         'hour': hour,
-                         'ip': request.META['REMOTE_ADDR'],
-                         'user': form.cleaned_data['username'],
-                         'link': 'http://www.ozgurlukicin.com/kullanici/kayip/degistir/%s' % key}
+            email_subject = _("%(SITE_NAME)s User Password") % SITE_NAME
+            email_body = loader.get_template("mails/password.html").render(Context(email_dict))
+            email_to = form.cleaned_data['email']
 
-           email_subject = u"Özgürlükİçin.com Kullanıcı Parolası"
-           email_body = u"""Merhaba!
-%(date)s %(hour)s tarihinde %(ip)s IP adresli bilgisayardan kullanıcı parola sıfırlama isteği gönderildi. Lütfen parolanızı değiştirmek için aşağıdaki bağlantıyı 24 saat içerisinde ziyaret edin.
-
-%(link)s"""
-           email_to = form.cleaned_data['email']
-
-           send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, [email_to], fail_silently=True)
-           return render_response(request, 'user/lostpassword_done.html')
-       else:
-           return render_response(request, 'user/lostpassword.html', {'form': form})
+            send_mail(email_subject, email_body, DEFAULT_FROM_EMAIL, [email_to], fail_silently=True)
+            return render_response(request, 'user/lostpassword_done.html')
+        else:
+            return render_response(request, 'user/lostpassword.html', {'form': form})
     else:
         form = LostPasswordForm()
         return render_response(request, 'user/lostpassword.html', {'form': form})

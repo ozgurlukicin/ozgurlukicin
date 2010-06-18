@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-18 12:52+0300\n"
+"POT-Creation-Date: 2010-06-18 14:14+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -22,7 +22,7 @@ msgid "Issue"
 msgstr ""
 
 #: ezine/models.py:9 flatpages/models.py:17 forum/forms.py:22
-#: podcast/models.py:30
+#: podcast/models.py:30 profile/models.py:71
 #, fuzzy
 msgid "Title"
 msgstr "Dosya"
@@ -402,7 +402,7 @@ msgstr "Etiketler"
 
 #: forum/forms.py:24
 msgid ""
-"You can select more than one tags by pressing and holding CTRL key. (5 at "
+"You can select more than one tag by pressing and holding CTRL key. (5 at "
 "most)"
 msgstr ""
 
@@ -617,6 +617,7 @@ msgstr "Kategoriler"
 
 #: forum/models.py:268 ideas/models.py:13 ideas/models.py:24
 #: ideas/models.py:36 ideas/models.py:50 ideas/models.py:61
+#: profile/forms.py:24 profile/forms.py:105 profile/models.py:41
 #: templates/user/profile.html:60
 #, fuzzy
 msgid "Name"
@@ -700,7 +701,7 @@ msgstr "Sebep:"
 msgid "Abuse Reports"
 msgstr "Sebep:"
 
-#: forum/models.py:339
+#: forum/models.py:339 profile/models.py:52
 #, fuzzy
 msgid "User"
 msgstr "Kullanıcılar"
@@ -1043,8 +1044,8 @@ msgstr "Giriş"
 msgid "Register"
 msgstr "Kayıt Ol"
 
-#: ideas/templates/idea_base.html:41 templates/user/lostpassword.html:3
-#: templates/user/lostpassword_done.html:3
+#: ideas/templates/idea_base.html:41 profile/models.py:66
+#: templates/user/lostpassword.html:3 templates/user/lostpassword_done.html:3
 msgid "Lost Password"
 msgstr "Parola değiştir"
 
@@ -1264,7 +1265,8 @@ msgstr ""
 msgid "Can hide pasted text"
 msgstr "Fikrin durumunu değiştir"
 
-#: podcast/models.py:19 templates/user/login.html:18
+#: podcast/models.py:19 profile/forms.py:23 profile/forms.py:157
+#: profile/models.py:31 templates/user/login.html:18
 #, fuzzy
 msgid "Username"
 msgstr "Kullanıcılar"
@@ -1358,6 +1360,280 @@ msgstr "Son Güncelleme"
 #, fuzzy
 msgid "Polls"
 msgstr "Anket"
+
+#: profile/forms.py:23
+msgid "Minimum 3, maximum 20 characters"
+msgstr ""
+
+#: profile/forms.py:25 profile/forms.py:106 templates/user/profile.html:63
+msgid "Surname"
+msgstr ""
+
+#: profile/forms.py:26 profile/forms.py:107 templates/user/profile.html:70
+#, fuzzy
+msgid "Birth Date"
+msgstr "Fikir Ekle"
+
+#: profile/forms.py:26
+msgid "like 23/4/1985"
+msgstr ""
+
+#: profile/forms.py:27 profile/forms.py:108 profile/forms.py:158
+#: templates/user/profile.html:86
+msgid "E-mail"
+msgstr ""
+
+#: profile/forms.py:28 profile/forms.py:197 profile/forms.py:265
+#: templates/user/login.html:22
+#, fuzzy
+msgid "Password"
+msgstr "Parola değiştir"
+
+#: profile/forms.py:29
+#, fuzzy
+msgid "Password (again)"
+msgstr "Parola değiştir"
+
+#: profile/forms.py:29
+msgid "Minimum 5 characters"
+msgstr ""
+
+#: profile/forms.py:30 profile/forms.py:109 profile/models.py:78
+#: templates/user/profile.html:66
+msgid "City"
+msgstr ""
+
+#: profile/forms.py:31 profile/forms.py:110 profile/models.py:74
+#: templates/tema/themeitem_font_detail.html:49
+#, fuzzy
+msgid "Web Page"
+msgstr "İlgili Sayfalar"
+
+#: profile/forms.py:31 profile/forms.py:33 profile/forms.py:34
+#: profile/forms.py:35
+msgid "Not required"
+msgstr ""
+
+#: profile/forms.py:32 profile/forms.py:114
+#, fuzzy
+msgid "Pardus version that you're using"
+msgstr "Ajans"
+
+#: profile/forms.py:36 profile/models.py:82
+#, fuzzy
+msgid "Contributions"
+msgstr "Katkıda bulunun"
+
+#: profile/forms.py:36
+msgid ""
+"How can you contribute our community? (you may select more than one choice "
+"with holding down ctrl key, not required)"
+msgstr ""
+
+#: profile/forms.py:37
+#, fuzzy
+msgid "Contribution comment"
+msgstr "Katkıda bulunun"
+
+#: profile/forms.py:37
+msgid "Make comments about your contribution (not required)"
+msgstr ""
+
+#: profile/forms.py:38
+msgid "Show my e-mail address"
+msgstr ""
+
+#: profile/forms.py:38 profile/forms.py:115
+msgid ""
+"Do you want other members to see your e-mail address in your profile page?"
+msgstr ""
+
+#: profile/forms.py:39 profile/forms.py:116 profile/models.py:81
+#, fuzzy
+msgid "Show birth date"
+msgstr "Fikir Ekle"
+
+#: profile/forms.py:39 profile/forms.py:116
+msgid "Do you want other members to see your birth date in your profile page?"
+msgstr ""
+
+#: profile/forms.py:45
+msgid "Username must be at least 3 characters long"
+msgstr ""
+
+#: profile/forms.py:48
+msgid ""
+"Invalid username. Username can only contain \"a-z A-Z 0-9 _\" characters"
+msgstr ""
+
+#: profile/forms.py:52
+msgid "This username is forbidden"
+msgstr ""
+
+#: profile/forms.py:56
+msgid "This username is in use"
+msgstr ""
+
+#: profile/forms.py:68 profile/forms.py:150
+msgid "This e-mail address is in use"
+msgstr ""
+
+#: profile/forms.py:81 profile/forms.py:207 profile/forms.py:221
+#: profile/forms.py:243
+msgid "Password may not contain space character"
+msgstr ""
+
+#: profile/forms.py:84 profile/forms.py:213 profile/forms.py:227
+#: profile/forms.py:249
+#, fuzzy
+msgid "Password must be at least 5 characters long"
+msgstr "Anket değiştirilemedi, lütfen aşağıdaki hataları düzeltin"
+
+#: profile/forms.py:87 profile/forms.py:252 profile/forms.py:277
+msgid "Passwords don't match"
+msgstr ""
+
+#: profile/forms.py:98 profile/forms.py:136
+msgid "ICQ number must be a positive integer"
+msgstr ""
+
+#: profile/forms.py:101 profile/forms.py:139
+msgid "ICQ number can only contain numbers"
+msgstr ""
+
+#: profile/forms.py:104 profile/models.py:48 profile/models.py:72
+#: templates/user/profile.html:47
+#, fuzzy
+msgid "Avatar"
+msgstr "avatar"
+
+#: profile/forms.py:115 profile/models.py:80
+msgid "Show e-mail address"
+msgstr ""
+
+#: profile/forms.py:117 profile/models.py:84
+msgid "Introduce yourself"
+msgstr ""
+
+#: profile/forms.py:117
+msgid ""
+"Here, you can introduce yourself briefly. This will be shown in your profile "
+"page."
+msgstr ""
+
+#: profile/forms.py:118 profile/models.py:87
+#, fuzzy
+msgid "Signature"
+msgstr "Seminer"
+
+#: profile/forms.py:118
+msgid ""
+"This will be shown under your posts in forum pages (512 characters max.)"
+msgstr ""
+
+#: profile/forms.py:119 profile/models.py:88
+#, fuzzy
+msgid "Latitude"
+msgstr "Son eklenenler"
+
+#: profile/forms.py:120 profile/models.py:89
+msgid "Longitude"
+msgstr ""
+
+#: profile/forms.py:169
+msgid "This username is not registered"
+msgstr ""
+
+#: profile/forms.py:173
+msgid "This username has already requested a new password"
+msgstr ""
+
+#: profile/forms.py:189
+msgid "This e-mail address is not registered"
+msgstr ""
+
+#: profile/forms.py:196
+#, fuzzy
+msgid "Old password"
+msgstr "Kayıp parola"
+
+#: profile/forms.py:198 profile/forms.py:266
+#, fuzzy
+msgid "Password (Again)"
+msgstr "Parola değiştir"
+
+#: profile/forms.py:210 profile/forms.py:224 profile/forms.py:246
+msgid "Password must contain less than 32 characters"
+msgstr ""
+
+#: profile/forms.py:256
+msgid "Old password is wrong"
+msgstr ""
+
+#: profile/forms.py:260
+msgid "Fill all of the fields to change password"
+msgstr ""
+
+#: profile/models.py:37
+#, fuzzy
+msgid "Forbidden Username"
+msgstr "Kullanıcılar"
+
+#: profile/models.py:38
+msgid "Forbidden Usernames"
+msgstr ""
+
+#: profile/models.py:49
+#, fuzzy
+msgid "Avatars"
+msgstr "avatar"
+
+#: profile/models.py:53
+msgid "Key"
+msgstr ""
+
+#: profile/models.py:54
+#, fuzzy
+msgid "Timeout"
+msgstr "Dosya"
+
+#: profile/models.py:67
+#, fuzzy
+msgid "Lost Passwords"
+msgstr "Parola değiştir"
+
+#: profile/models.py:71
+msgid "example: 'Forum Moderator'"
+msgstr ""
+
+#: profile/models.py:83
+#, fuzzy
+msgid "Contribution Comment"
+msgstr "Katkıda bulunun"
+
+#: profile/models.py:102 templates/user/profile.html:5
+#, fuzzy
+msgid "User Profile"
+msgstr "Profil"
+
+#: profile/models.py:103
+#, fuzzy
+msgid "User Profiles"
+msgstr "Profil"
+
+#: profile/views.py:40
+msgid "Topic does not belong to this user!"
+msgstr ""
+
+#: profile/views.py:196
+#, python-format
+msgid "%(SITE_NAME)s User Account, %(user)s"
+msgstr ""
+
+#: profile/views.py:254
+#, python-format
+msgid "%(SITE_NAME)s User Password"
+msgstr ""
 
 #: templates/404.html:3
 msgid "Page Not Found"
@@ -2524,6 +2800,50 @@ msgid ""
 "<span class=\"bold\">%(pages)s</span> pages."
 msgstr ""
 
+#: templates/mails/abusereport.html:2
+#, python-format
+msgid ""
+"\n"
+"A post in \"%(post.topic)s\" has been reported. Visit this link to see the "
+"post:\n"
+"%(WEB_URL)s%(post.get_absolute_url)s\n"
+"\n"
+"Post was containing this message(written by %(post.author)s):\n"
+"%(post.text)s\n"
+"\n"
+"Report message was containing this message(written by %(report.submitter)"
+"s):\n"
+"%(report.reason)s\n"
+msgstr ""
+
+#: templates/mails/password.html:2
+#, python-format
+msgid ""
+"Greetings!\n"
+"Someone sent a password reset request for your account at %(date)s from %(ip)"
+"s. To change your password, please visit this link during the next 24 "
+"hours.\n"
+"\n"
+"%(link)s\n"
+"\n"
+"Thanks,\n"
+"%(SITE_NAME)s"
+msgstr ""
+
+#: templates/mails/register.html:2
+#, python-format
+msgid ""
+"Greetings!\n"
+"You have created a new user account in %(SITE_NAME)s at %(date)s from %(ip)"
+"s. To acknowledge this account please visit this link during the next 48 "
+"hours.\n"
+"\n"
+"%(link)s\n"
+"\n"
+"Thanks,\n"
+"%(SITE_NAME)s"
+msgstr ""
+
 #: templates/news/news_detail.html:55 templates/podcast/detail.html:68
 #, fuzzy
 msgid "Share"
@@ -2920,11 +3240,6 @@ msgstr ""
 msgid "Downloads:"
 msgstr "İndir"
 
-#: templates/tema/themeitem_font_detail.html:49
-#, fuzzy
-msgid "Web Page"
-msgstr "İlgili Sayfalar"
-
 #: templates/tema/themeitem_font_detail.html:54
 msgid "Preview"
 msgstr ""
@@ -3079,11 +3394,6 @@ msgid ""
 "registered click <a href=\"/kullanici/kayit/\">here</a> to register."
 msgstr ""
 
-#: templates/user/login.html:22
-#, fuzzy
-msgid "Password"
-msgstr "Parola değiştir"
-
 #: templates/user/login.html:31
 #, fuzzy
 msgid ""
@@ -3140,16 +3450,6 @@ msgstr ""
 msgid "Return to profile page"
 msgstr ""
 
-#: templates/user/profile.html:5
-#, fuzzy
-msgid "User Profile"
-msgstr "Profil"
-
-#: templates/user/profile.html:47
-#, fuzzy
-msgid "Avatar"
-msgstr "avatar"
-
 #: templates/user/profile.html:49
 msgid "Edit my profile"
 msgstr ""
@@ -3166,19 +3466,6 @@ msgstr ""
 msgid "Personal Information"
 msgstr ""
 
-#: templates/user/profile.html:63
-msgid "Surname"
-msgstr ""
-
-#: templates/user/profile.html:66
-msgid "City"
-msgstr ""
-
-#: templates/user/profile.html:70
-#, fuzzy
-msgid "Birth Date"
-msgstr "Fikir Ekle"
-
 #: templates/user/profile.html:74
 #, fuzzy
 msgid "Registration Date"
@@ -3191,10 +3478,6 @@ msgstr "Sürüm"
 
 #: templates/user/profile.html:82
 msgid "Contact Information"
-msgstr ""
-
-#: templates/user/profile.html:86
-msgid "E-mail"
 msgstr ""
 
 #: templates/user/profile.html:90

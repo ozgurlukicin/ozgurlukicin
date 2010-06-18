@@ -332,14 +332,13 @@ These are python files to be marked
 +   |   |-- __init__.py
 +   |   `-- models.py
     |-- profile
--   |   |-- admin.py
--   |   |-- forms.py
--   |   |-- __init__.py
--   |   |-- models.py
--   |   |-- settings.py
--   |   |-- sql
--   |   |-- urls.py
--   |   `-- views.py
++   |   |-- admin.py
++   |   |-- forms.py
++   |   |-- __init__.py
++   |   |-- models.py
++   |   |-- settings.py
++   |   |-- urls.py
++   |   `-- views.py
     |-- scripts
 -   |   |-- calc_downloads.py
 -   |   |-- csvfill.py

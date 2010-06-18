@@ -17,42 +17,43 @@ from oi.settings import CITY_LIST
 from oi.st.models import Contribute
 from oi.st.forms import XssField
 from oi.profile.models import ForbiddenUsername, Avatar, LostPassword, Profile, PARDUS_VERSIONS
+from django.utils.translation import ugettext as _
 
 class RegisterForm(forms.Form):
-    username = forms.CharField(label='Kullanıcı Adı', max_length=20, help_text='En az 3, en fazla 20 karakter')
-    firstname = forms.CharField(label='Adı', max_length=30)
-    lastname = forms.CharField(label='Soyadı', max_length=30)
-    birthday = forms.DateField(label='Doğum Tarihi', input_formats=('%d/%m/%Y', '%d/%m/%Y'), help_text='23/4/1985 gibi')
-    email = forms.EmailField(label='E-Posta')
-    password = forms.CharField(label='Parola', max_length=32, widget=forms.PasswordInput,)
-    password_again = forms.CharField(label='Parola (tekrar)', max_length=32, widget=forms.PasswordInput, help_text='En az 5 karakter')
-    city = forms.ChoiceField(label='Şehir', choices=CITY_LIST)
-    pardus_version = forms.ChoiceField(label="Kullandığınız Pardus sürümü", required=False, choices=PARDUS_VERSIONS)
-    homepage = forms.URLField(label='Web Sayfası', verify_exists=False, required=False, help_text='(zorunlu değil)')
-    msn = forms.EmailField(label='MSN', max_length=50, required=False, help_text='(zorunlu değil)')
-    jabber = forms.EmailField(label='Jabber', max_length=50, required=False, help_text='(zorunlu değil)')
-    icq = forms.CharField(label='ICQ', max_length=15, required=False, help_text='(zorunlu değil)')
-    contributes = forms.ModelMultipleChoiceField(label='Katkı Başlıkları', queryset=Contribute.objects.all(), required=False, help_text='Bize nasıl katkıda bulunabilirsiniz? (ctrl ile birden fazla seçim yapılabilir, zorunlu değil)')
-    contributes_summary = forms.CharField(label='Açıklama', widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), required=False, help_text='Katkı sağlayabilecekseniz açıklama yazın (zorunlu değil)')
-    show_email = forms.BooleanField(label='E-posta Adresini Göster', required=False, help_text='Profil sayfasında diğerleri e-posta adresinizi görebilsin mi?')
-    show_birthday = forms.BooleanField(label='Doğum Tarihini Göster', required=False, help_text='Profil sayfasında diğerleri doğum tarihinizi görebilsin mi?')
+    username = forms.CharField(label=_("Username"), max_length=20, help_text=_("Minimum 3, maximum 20 characters"))
+    firstname = forms.CharField(label=_("Name"), max_length=30)
+    lastname = forms.CharField(label=_("Surname"), max_length=30)
+    birthday = forms.DateField(label=_("Birth Date"), input_formats=('%d/%m/%Y', '%d/%m/%Y'), help_text=_("like 23/4/1985"))
+    email = forms.EmailField(label=_("E-mail"))
+    password = forms.CharField(label=_("Password"), max_length=32, widget=forms.PasswordInput)
+    password_again = forms.CharField(label=_("Password (again)"), max_length=32, widget=forms.PasswordInput, help_text=_("Minimum 5 characters"))
+    city = forms.ChoiceField(label=_("City"), choices=CITY_LIST)
+    homepage = forms.URLField(label=_("Web Page"), verify_exists=False, required=False, help_text=_("Not required"))
+    pardus_version = forms.ChoiceField(label=_("Pardus version that you're using"), required=False, choices=PARDUS_VERSIONS)
+    msn = forms.EmailField(label='MSN', max_length=50, required=False, help_text=_("Not required"))
+    jabber = forms.EmailField(label='Jabber', max_length=50, required=False, help_text=_("Not required"))
+    icq = forms.CharField(label='ICQ', max_length=15, required=False, help_text=_("Not required"))
+    contributes = forms.ModelMultipleChoiceField(label=_("Contributions"), queryset=Contribute.objects.all(), required=False, help_text=_("How can you contribute our community? (you may select more than one choice with holding down ctrl key, not required)"))
+    contributes_summary = forms.CharField(label=_("Contribution comment"), widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), required=False, help_text=_("Make comments about your contribution (not required)"))
+    show_email = forms.BooleanField(label=_("Show my e-mail address"), required=False, help_text=_("Do you want other members to see your e-mail address in your profile page?"))
+    show_birthday = forms.BooleanField(label=_("Show birth date"), required=False, help_text=_("Do you want other members to see your birth date in your profile page?"))
 
     def clean_username(self):
         field_data = self.cleaned_data['username']
 
         if len(field_data) < 3:
-            raise forms.ValidationError(u"Kullanıcı adı en az 3 karakter olmalıdır")
+            raise forms.ValidationError(_("Username must be at least 3 characters long"))
 
         if not re.match("[a-zA-Z0-9_]+$", field_data):
-            raise forms.ValidationError(u"Kullanıcı adı geçersiz. Kullanıcı adı sadece \"a-z A-Z 0-9 _\" karakterlerinden oluşabilir")
+            raise forms.ValidationError(_("Invalid username. Username can only contain \"a-z A-Z 0-9 _\" characters"))
 
         forbidden = ForbiddenUsername.objects.filter(name__iexact=field_data)
         if len(forbidden) > 0:
-            raise forms.ValidationError(u"Bu kullanıcı adının alınması yasaklanmış")
+            raise forms.ValidationError(_("This username is forbidden"))
 
         u = User.objects.filter(username__iexact=field_data)
         if len(u) > 0:
-            raise forms.ValidationError(u"Bu kullanıcı adı daha önce alınmış")
+            raise forms.ValidationError(_("This username is in use"))
 
         return field_data
 
@@ -64,7 +65,7 @@ class RegisterForm(forms.Form):
 
         u = User.objects.filter(email=field_data)
         if len(u) > 0:
-            raise forms.ValidationError(u"Bu e-posta adresi ile daha önceden kayıt yapılmış")
+            raise forms.ValidationError(_("This e-mail address is in use"))
 
         return field_data
 
@@ -77,13 +78,13 @@ class RegisterForm(forms.Form):
             password = self.cleaned_data['password']
 
         if len(field_data.split(' ')) != 1:
-            raise forms.ValidationError(u"Parolada boşluk olmamalıdır")
+            raise forms.ValidationError(_("Password may not contain space character"))
 
         if len(field_data) < 5:
-            raise forms.ValidationError(u"Parola en az 5 karakter olmalıdır")
+            raise forms.ValidationError(_("Password must be at least 5 characters long"))
 
         if (password or field_data) and password != field_data:
-                    raise forms.ValidationError(u"Parolalar eşleşmiyor")
+                    raise forms.ValidationError(_("Passwords don't match"))
 
         return field_data
 
@@ -94,29 +95,29 @@ class RegisterForm(forms.Form):
         try:
             number = int(field_data)
             if number < 0:
-                raise forms.ValidationError(u"ICQ numarası pozitif bir tamsayı olmalıdır")
+                raise forms.ValidationError(_("ICQ number must be a positive integer"))
             return field_data
         except ValueError:
-            raise forms.ValidationError(u"ICQ numarası sayılardan oluşmalıdır")
+            raise forms.ValidationError(_("ICQ number can only contain numbers"))
 
 class ProfileEditForm(forms.Form):
-    avatar = forms.ChoiceField(label='Avatar', widget=forms.Select(attrs={"onchange":"updateAvatar(this)", "onkeyup":"updateAvatar(this)"}))
-    firstname = forms.CharField(label='Adı', max_length=30)
-    lastname = forms.CharField(label='Soyadı', max_length=30)
-    birthday = forms.DateField(label='Doğum Tarihi', input_formats=('%d/%m/%Y', '%d/%m/%y'), help_text='23/4/1985 gibi')
-    email = forms.EmailField(label='E-posta')
-    city = forms.ChoiceField(label='Şehir', choices=CITY_LIST)
-    homepage = forms.URLField(label='Ana Sayfa', required=False, help_text='http:// ile başlamayı unutmayın')
+    avatar = forms.ChoiceField(label=_("Avatar"), widget=forms.Select(attrs={"onchange":"updateAvatar(this)", "onkeyup":"updateAvatar(this)"}))
+    firstname = forms.CharField(label=_("Name"), max_length=30)
+    lastname = forms.CharField(label=_("Surname"), max_length=30)
+    birthday = forms.DateField(label=_("Birth Date"), input_formats=('%d/%m/%Y', '%d/%m/%y'), help_text='23/4/1985 gibi')
+    email = forms.EmailField(label=_("E-mail"))
+    city = forms.ChoiceField(label=_("City"), choices=CITY_LIST)
+    homepage = forms.URLField(label=_("Web Page"), required=False, help_text="Start with http://")
     msn = forms.EmailField(label='MSN', max_length=50, required=False)
     jabber = forms.EmailField(label='Jabber', max_length=50, required=False)
     icq = forms.CharField(label='ICQ', max_length=15, required=False)
-    pardus_version = forms.ChoiceField(label="Kullandığınız Pardus sürümü", required=False, choices=PARDUS_VERSIONS)
-    show_email = forms.BooleanField(label='E-posta Adresini Göster', required=False, help_text='Profil sayfasında diğerleri e-posta adresinizi görsün mü?')
-    show_birthday = forms.BooleanField(label='Doğum Tarihini Göster', required=False, help_text='Profil sayfasında diğerleri doğum tarihinizi görebilsin mi?')
-    bio = XssField(label="Kendinizi Tanıtın", required=False, help_text="Burada kısaca kendinizi tanıtabilirsiniz. Yazdıklarınız profilinizde görünecektir.", max_length=2048, widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}))
-    signature = XssField(label='İmza', widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), required=False, help_text='Forumdaki her iletinizin altında görünecek imzanız (en fazla 512 karakter olabilir)', max_length=512)
-    latitude = forms.DecimalField(label='Enlem', max_digits=10, decimal_places=6)
-    longitude = forms.DecimalField(label='Boylam', max_digits=10, decimal_places=6)
+    pardus_version = forms.ChoiceField(label=_("Pardus version that you're using"), required=False, choices=PARDUS_VERSIONS)
+    show_email = forms.BooleanField(label=_("Show e-mail address"), required=False, help_text=_("Do you want other members to see your e-mail address in your profile page?"))
+    show_birthday = forms.BooleanField(label=_("Show birth date"), required=False, help_text=_("Do you want other members to see your birth date in your profile page?"))
+    bio = XssField(label=_("Introduce yourself"), required=False, help_text=_("Here, you can introduce yourself briefly. This will be shown in your profile page."), max_length=2048, widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}))
+    signature = XssField(label=_("Signature"), widget=forms.Textarea(attrs={'rows': 7, 'cols': 45}), required=False, help_text=_("This will be shown under your posts in forum pages (512 characters max.)"), max_length=512)
+    latitude = forms.DecimalField(label=_("Latitude"), max_digits=10, decimal_places=6)
+    longitude = forms.DecimalField(label=_("Longitude"), max_digits=10, decimal_places=6)
 
     def __init__(self,*args,**kwargs):
         super(ProfileEditForm, self).__init__(*args, **kwargs)
@@ -132,10 +133,10 @@ class ProfileEditForm(forms.Form):
         try:
             number = int(field_data)
             if number < 0:
-                raise forms.ValidationError(u"ICQ numarası pozitif bir tamsayı olmalıdır")
+                raise forms.ValidationError(_("ICQ number must be a positive integer"))
             return field_data
         except ValueError:
-            raise forms.ValidationError(u"ICQ numarası sayılardan oluşmalıdır")
+            raise forms.ValidationError(_("ICQ number can only contain numbers"))
 
     def clean_email(self):
         field_data = self.cleaned_data['email']
@@ -146,15 +147,15 @@ class ProfileEditForm(forms.Form):
         try:
             u = User.objects.get(email=field_data)
             if not u.id == self.user.id:
-                raise forms.ValidationError(u"Bu e-posta adresi ile başka birisi daha önceden kayıt yapmış")
+                raise forms.ValidationError(_("This e-mail address is in use"))
         except ObjectDoesNotExist:
             pass
 
         return field_data
 
 class LostPasswordForm(forms.Form):
-    username = forms.CharField(label='Kullanıcı adı', max_length=30)
-    email = forms.EmailField(label='E-posta')
+    username = forms.CharField(label=_("Username"), max_length=30)
+    email = forms.EmailField(label=_("E-mail"))
 
     def clean_username(self):
         # clean old keys when it's requested
@@ -165,11 +166,11 @@ class LostPasswordForm(forms.Form):
 
         # control username whether it exists or not
         if len(User.objects.filter(username__iexact=field_data)) == 0:
-            raise forms.ValidationError(u"Böyle bir kullanıcı yok")
+            raise forms.ValidationError(_("This username is not registered"))
 
         # control if this user has requested a new password
         if len(LostPassword.objects.filter(user__username__iexact=field_data)) > 0:
-            raise forms.ValidationError(u"Bu kullanıcı daha önce parola isteğinde bulunmuş")
+            raise forms.ValidationError(_("This username has already requested a new password"))
 
         return field_data
 
@@ -185,16 +186,16 @@ class LostPasswordForm(forms.Form):
         try:
             u = User.objects.get(username=username)
             if u.email != field_data:
-                raise forms.ValidationError(u"E-mail adresi uyuşmuyor")
+                raise forms.ValidationError(_("This e-mail address is not registered"))
         except User.DoesNotExist:
             pass
 
         return field_data
 
 class ChangePasswordForm(forms.Form):
-    old_password = forms.CharField(label='Eski Parola', widget=forms.PasswordInput, required=False)
-    password = forms.CharField(label='Parola', widget=forms.PasswordInput, required=False, help_text='Değiştirmek istiyorsanız her ikisini de doldurun')
-    password_again = forms.CharField(label='Parola (Tekrar)', widget=forms.PasswordInput, required=False)
+    old_password = forms.CharField(label=_("Old password"), widget=forms.PasswordInput)
+    password = forms.CharField(label=_("Password"), widget=forms.PasswordInput)
+    password_again = forms.CharField(label=_("Password (Again)"), widget=forms.PasswordInput)
 
     def set_user(self, user):
         self.user = user
@@ -203,13 +204,13 @@ class ChangePasswordForm(forms.Form):
         field_data = self.cleaned_data['old_password']
 
         if len(field_data.split(' ')) != 1:
-            raise forms.ValidationError(u"Parolada boşluk olmamalıdır")
+            raise forms.ValidationError(_("Password may not contain space character"))
 
         if len(field_data) > 32:
-            raise forms.ValidationError(u"Parola en fazla 32 karakter olmalıdır")
+            raise forms.ValidationError(_("Password must contain less than 32 characters"))
 
         if len(field_data) < 5:
-            raise forms.ValidationError(u"Parola en az 5 karakter olmalıdır")
+            raise forms.ValidationError(_("Password must be at least 5 characters long"))
 
         return field_data
 
@@ -217,13 +218,13 @@ class ChangePasswordForm(forms.Form):
         field_data = self.cleaned_data['password']
 
         if len(field_data.split(' ')) != 1:
-            raise forms.ValidationError(u"Parolada boşluk olmamalıdır")
+            raise forms.ValidationError(_("Password may not contain space character"))
 
         if len(field_data) > 32:
-            raise forms.ValidationError(u"Parola en fazla 32 karakter olmalıdır")
+            raise forms.ValidationError(_("Password must contain less than 32 characters"))
 
         if len(field_data) < 5:
-            raise forms.ValidationError(u"Parola en az 5 karakter olmalıdır")
+            raise forms.ValidationError(_("Password must be at least 5 characters long"))
 
         return field_data
 
@@ -239,30 +240,30 @@ class ChangePasswordForm(forms.Form):
         if old_password or password or field_data:
             if field_data and password and old_password:
                 if len(field_data.split(' ')) != 1:
-                    raise forms.ValidationError(u"Parolada boşluk olmamalıdır")
+                    raise forms.ValidationError(_("Password may not contain space character"))
 
                 if len(field_data) > 32:
-                    raise forms.ValidationError(u"Parola en fazla 32 karakter olmalıdır")
+                    raise forms.ValidationError(_("Password must contain less than 32 characters"))
 
                 if len(field_data) < 5:
-                    raise forms.ValidationError(u"Parola en az 5 karakter olmalıdır")
+                    raise forms.ValidationError(_("Password must be at least 5 characters long"))
 
                 if (password or field_data) and password != field_data:
-                    raise forms.ValidationError(u"Parolalar eşleşmiyor")
+                    raise forms.ValidationError(_("Passwords don't match"))
 
                 u = User.objects.get(username=self.user.username)
                 if not u.check_password(old_password):
-                    raise forms.ValidationError(u"Eski parola yanlış")
+                    raise forms.ValidationError(_("Old password is wrong"))
 
                 return field_data
             else:
-                raise forms.ValidationError(u"Parolayı değiştirmek için her 3 alanı da doldurun")
+                raise forms.ValidationError(_("Fill all of the fields to change password"))
         else:
             return ''
 
 class ResetPasswordForm(forms.Form):
-    password = forms.CharField(label='Parola', widget=forms.PasswordInput, max_length=32, min_length=5)
-    password_again = forms.CharField(label='Parola (Tekrar)', widget=forms.PasswordInput, max_length=32, min_length=5)
+    password = forms.CharField(label=_("Password"), widget=forms.PasswordInput, max_length=32, min_length=5)
+    password_again = forms.CharField(label=_("Password (Again)"), widget=forms.PasswordInput, max_length=32, min_length=5)
 
     def clean_password_again(self):
         field_data = self.cleaned_data['password_again']
@@ -273,6 +274,6 @@ class ResetPasswordForm(forms.Form):
             password = self.cleaned_data['password']
 
         if field_data != password:
-            raise forms.ValidationError('Parolalar eşleşmiyor')
+            raise forms.ValidationError(_("Passwords don't match"))
 
         return field_data
