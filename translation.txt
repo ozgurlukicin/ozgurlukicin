@@ -271,24 +271,24 @@ These are python files to be marked
 +   |   |-- postmarkup.py
 +   |   |-- settings.py
     |   |-- stripogram
--   |   |   |-- html2safehtml.py
--   |   |   |-- html2text.py
--   |   |   |-- HTMLParser.py
--   |   |   |-- __init__.py
--   |   |   `-- testStripogram.py
--   |   |-- tools.py
--   |   |-- urls.py
--   |   `-- views.py
++   |   |   |-- html2safehtml.py
++   |   |   |-- html2text.py
++   |   |   |-- HTMLParser.py
++   |   |   |-- __init__.py
++   |   |   `-- testStripogram.py
++   |   |-- tools.py
++   |   |-- urls.py
++   |   `-- views.py
     |-- ideas
--   |   |-- admin.py
--   |   |-- feeds.py
--   |   |-- forms.py
--   |   |-- __init__.py
--   |   |-- models.py
--   |   |-- settings.py
++   |   |-- admin.py
++   |   |-- feeds.py
++   |   |-- forms.py
++   |   |-- __init__.py
++   |   |-- models.py
++   |   |-- settings.py
     |   |-- templatetags
--   |   |   |-- ideas.py
--   |   |   `-- __init__.py
++   |   |   |-- ideas.py
++   |   |   `-- __init__.py
 -   |   |-- urls.py
 -   |   `-- views.py
 -   |-- __init__.py

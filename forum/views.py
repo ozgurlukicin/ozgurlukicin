@@ -34,6 +34,7 @@ from oi.settings import WEB_URL, DEFAULT_FROM_EMAIL
 # import bbcode renderer for quotation
 from oi.forum.postmarkup import render_bbcode
 from oi.profile.models import Profile
+from django.utils.translation import ugettext as _
 
 def main(request):
     lastvisit_control(request)
@@ -505,7 +506,7 @@ def merge(request, forum_slug, topic_id):
     topic = get_object_or_404(Topic, pk=topic_id)
 
     if topic.locked:
-        hata="Kilitli konularda bu tür işlemler yapılamaz!"
+        hata=_("Topic is locked.")
         return render_response(request, 'forum/merge.html', locals())
 
     if request.method == 'POST':
@@ -515,7 +516,7 @@ def merge(request, forum_slug, topic_id):
             topic2 = form.cleaned_data['topic2']
 
             if int(topic2)==topic.id:
-                hata="Aynı konuyu mu merge edeceksiniz !"
+                hata=_("Can't marge same topic")
                 return render_response(request, 'forum/merge.html', locals())
 
 
@@ -544,7 +545,7 @@ def merge(request, forum_slug, topic_id):
 
             return HttpResponseRedirect(topic2_object.get_absolute_url())
         else:
-            hata="Forum valid degil!"
+            hata=_("Invalid forum.")
             return render_response(request, 'forum/merge.html', locals())
 
     else:
@@ -558,7 +559,7 @@ def move(request, forum_slug, topic_id):
     topic = get_object_or_404(Topic, pk=topic_id)
 
     if topic.locked:
-        hata="Kilitli konularda bu tür işlemler yapılamaz!"
+        hata=_("Topic is locked.")
         return render_response(request, 'forum/move.html', locals())
 
     if request.method == 'POST':
@@ -569,7 +570,7 @@ def move(request, forum_slug, topic_id):
             forum2 = form.cleaned_data['forum2']
 
             if int(forum2) == forum.id:
-                error = "Konu zaten bu forumda olduğu için taşınamaz!"
+                error = _("Topic is already in this forum.")
                 return render_response(request, 'forum/move.html', locals())
 
             forum2_object=get_object_or_404(Forum, pk=int(forum2))
@@ -609,7 +610,7 @@ def move(request, forum_slug, topic_id):
 
             return HttpResponseRedirect(topic.get_absolute_url())
         else:
-            error = "Forum geçerli değil!"
+            error = _("Invalid forum.")
             return render_response(request, 'forum/move.html', locals())
     else:
         form = MoveForm(auto_id=True)
@@ -741,16 +742,16 @@ def report_abuse(request,post_id):
                 report = AbuseReport(post=post, submitter=request.user, reason=form.cleaned_data["reason"])
                 report.save()
                 # now send mail to staff
-                email_subject = "Özgürlükİçin Forum - İleti Şikayeti"
-                email_body ="""
-%(topic)s başlıklı konudaki bir ileti şikayet edildi.
-İletiyi forumda görmek için buraya tıklayın: %(link)s
+                email_subject = _("Spread Pardus Forum - Abuse Report")
+                email_body =_("""
+A post in under %(topic)s topic was reported as abuse.
+Click here to see the post in forum: %(link)s
 
-İletinin içeriği buydu (%(sender)s tarafından yazılmış):
+That was the text in post (written by %(sender)s):
 %(message)s
-Şikayet metni buydu (%(reporter)s tarafından şikayet edilmiş):
+This was the reporter's comment (written by %(reporter)s):
 %(reason)s
-"""
+""")
                 email_dict = {
                         "topic":post.topic.title,
                         "reporter":request.user.username,
@@ -761,7 +762,7 @@ def report_abuse(request,post_id):
                         }
                 send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, [ABUSE_MAIL_LIST], fail_silently=True)
                 return render_response(request, 'forum/forum_done.html', {
-                    "message": "İleti şikayetiniz ilgililere ulaştırılmıştır. Teşekkür Ederiz.",
+                    "message": _("Your report has been sent to admins. Thank you for your support."),
                     "back": post.get_absolute_url()
                     })
         else:
@@ -798,7 +799,7 @@ def create_poll(request, forum_slug, topic_id):
 
     # check if it already has a poll
     if topic.poll:
-        return HttpResponse('Bu konuya zaten anket eklenmiş')
+        return HttpResponse(_("There's already a poll in this topic."))
 
     if request.method == 'POST':
         form = PollForm(request.POST.copy())
@@ -929,11 +930,11 @@ def vote_poll(request,forum_slug,topic_id,option_id):
 
     # check locks
     if topic.locked:
-        return HttpResponse("Forum ya da başlık kilitlidir.")
+        return HttpResponse(_("Topic is locked."))
 
     # check date
     if poll.date_limit and datetime.now() > poll.end_date:
-        return HttpResponse("Oylama süresi dolmuştur.")
+        return HttpResponse(_("Voting time has expired."))
 
     if poll.allow_multiple_choices:
         # select/unselect option
@@ -1001,7 +1002,7 @@ def delete_poll(request, forum_slug, topic_id):
 
     # check locks
     if topic.locked:
-        return HttpResponse('Forum or topic is locked')
+        return HttpResponse(_('Topic is locked.'))
 
     topic.poll=None
     topic.save()

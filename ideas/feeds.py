@@ -10,9 +10,10 @@ from django.utils.feedgenerator import Atom1Feed
 
 from oi.settings import SITE_NAME, WEB_URL, SITE_DESC
 from oi.ideas.models import Idea
+from django.utils.translation import ugettext as _
 
 class RSS(Feed):
-    title = SITE_NAME + " Beyin Fırtınası"
+    title = SITE_NAME + _(" Brainstorm")
     link = WEB_URL
     description = SITE_DESC
 
