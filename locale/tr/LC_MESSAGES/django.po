@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-18 12:32+0300\n"
+"POT-Creation-Date: 2010-06-18 12:39+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -339,8 +339,8 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
-#: flatpages/models.py:21 ideas/models.py:73 templates/editor/list.html:16
-#: templates/forum/forum_list.html:60
+#: flatpages/models.py:21 ideas/models.py:73 paste/models.py:38
+#: templates/editor/list.html:16 templates/forum/forum_list.html:60
 msgid "Date"
 msgstr "Tarih"
 
@@ -470,7 +470,7 @@ msgstr ""
 msgid "You have to specify an end date for voting."
 msgstr ""
 
-#: forum/models.py:31 templates/fs/fs_detail.html:42
+#: forum/models.py:31 paste/models.py:36 templates/fs/fs_detail.html:42
 #: templates/game/game_detail.html:114 templates/howto/howto_detail.html:80
 #: templates/news/news_detail.html:53 templates/package/package_detail.html:79
 #: templates/workshop/workshop_detail.html:61
@@ -483,7 +483,7 @@ msgid "Post"
 msgstr "İletiler"
 
 #: forum/models.py:33 forum/models.py:159 forum/models.py:271
-#: forum/models.py:308 ideas/models.py:86
+#: forum/models.py:308 ideas/models.py:86 paste/models.py:39
 #, fuzzy
 msgid "Hidden"
 msgstr "gizle"
@@ -897,12 +897,98 @@ msgstr "Forum"
 msgid "New Idea"
 msgstr "Yeni Fikirler"
 
-#: ideas/models.py:97 ideas/templates/idea_base.html:11
+#: ideas/models.py:97 ideas/views.py:154 ideas/templates/idea_base.html:11
 #: ideas/templates/idea_base.html.py:58 ideas/templates/idea_base.html:60
 msgid "New Ideas"
 msgstr "Yeni Fikirler"
 
-#: ideas/templates/idea_add_form.html:4 ideas/templates/idea_list.html:12
+#: ideas/views.py:25
+#, python-format
+msgid "ideas in %s category"
+msgstr ""
+
+#: ideas/views.py:28
+#, python-format
+msgid "ideas tagged %s"
+msgstr ""
+
+#: ideas/views.py:32
+#, python-format
+msgid "ideas related to %s"
+msgstr ""
+
+#: ideas/views.py:36
+#, python-format
+msgid "ideas added by %s"
+msgstr ""
+
+#: ideas/views.py:40 ideas/templates/idea_base.html:66
+msgid "Today's popular ideas"
+msgstr "Bugünkü popüler fikirler"
+
+#: ideas/views.py:43 ideas/templates/idea_base.html:67
+msgid "This week's popular ideas"
+msgstr "Bu haftaki popüler fikirler"
+
+#: ideas/views.py:46 ideas/templates/idea_base.html:68
+msgid "This month's popular ideas"
+msgstr "Bu ayki popüler fikirler"
+
+#: ideas/views.py:48 ideas/templates/idea_base.html:69
+msgid "Alltime popular ideas"
+msgstr "Tüm zamanların popüler fikirleri"
+
+#: ideas/views.py:52 ideas/templates/idea_base.html:70
+msgid "Recently commented ideas"
+msgstr "Son tartışılanlar"
+
+#: ideas/views.py:55 ideas/templates/idea_base.html:71
+msgid "Latest Ideas"
+msgstr "Son eklenenler"
+
+#: ideas/views.py:62
+#, fuzzy
+msgid "Resolved"
+msgstr "Çözülen fikirler"
+
+#: ideas/views.py:64 ideas/templates/idea_base.html:74
+msgid "Resolved ideas"
+msgstr "Çözülen fikirler"
+
+#: ideas/views.py:66 ideas/views.py:68 ideas/templates/idea_base.html:72
+msgid "Looking for Volunteers"
+msgstr "Gönüllü arananlar"
+
+#: ideas/views.py:77
+#, fuzzy
+msgid "Favourite ideas"
+msgstr "Favorilerim"
+
+#: ideas/views.py:88
+msgid "Popular ideas of last two days"
+msgstr ""
+
+#: ideas/views.py:92
+#, fuzzy
+msgid "Last five ideas"
+msgstr "Son eklenenler"
+
+#: ideas/views.py:146
+#, python-format
+msgid "Details of idea number %d"
+msgstr ""
+
+#: ideas/views.py:180 ideas/templates/idea_detail.html:30
+msgid "Related Forum Link"
+msgstr "İlgili Forum Bağlantısı"
+
+#: ideas/views.py:182 ideas/views.py:241
+#, fuzzy
+msgid "Related bugs"
+msgstr "İlgili Sayfalar"
+
+#: ideas/views.py:201 ideas/templates/idea_add_form.html:4
+#: ideas/templates/idea_list.html:12
 msgid "Submit New Idea"
 msgstr "Yeni Fikir Ekle"
 
@@ -1002,41 +1088,9 @@ msgstr "Eklediğim Fikirler"
 msgid "Favuorite Ideas"
 msgstr "Favorilerim"
 
-#: ideas/templates/idea_base.html:66
-msgid "Today's popular ideas"
-msgstr "Bugünkü popüler fikirler"
-
-#: ideas/templates/idea_base.html:67
-msgid "This week's popular ideas"
-msgstr "Bu haftaki popüler fikirler"
-
-#: ideas/templates/idea_base.html:68
-msgid "This month's popular ideas"
-msgstr "Bu ayki popüler fikirler"
-
-#: ideas/templates/idea_base.html:69
-msgid "Alltime popular ideas"
-msgstr "Tüm zamanların popüler fikirleri"
-
-#: ideas/templates/idea_base.html:70
-msgid "Recently commented ideas"
-msgstr "Son tartışılanlar"
-
-#: ideas/templates/idea_base.html:71
-msgid "Latest Ideas"
-msgstr "Son eklenenler"
-
-#: ideas/templates/idea_base.html:72
-msgid "Looking for Volunteers"
-msgstr "Gönüllü arananlar"
-
 #: ideas/templates/idea_base.html:73
 msgid "Ideas in progress"
 msgstr "Çözüm sürecindeki fikirler"
-
-#: ideas/templates/idea_base.html:74
-msgid "Resolved ideas"
-msgstr "Çözülen fikirler"
 
 #: ideas/templates/idea_base.html:75
 msgid "Invalid ideas"
@@ -1065,10 +1119,6 @@ msgid ""
 msgstr ""
 "<a href=\"http://bugs.pardus.org.tr/show_bug.cgi?id=%(bug)s\">#%(bug)s</a> "
 "numaralı hata bu fikir ile ilgili"
-
-#: ideas/templates/idea_detail.html:30
-msgid "Related Forum Link"
-msgstr "İlgili Forum Bağlantısı"
 
 #: ideas/templates/idea_detail.html:36
 msgid "Ideas that were marked as duplicate of this idea"
@@ -1183,6 +1233,33 @@ msgstr[0] " %(comment_count)s tane yorum yapıldı."
 #: templates/tema/themeitem_wallpaper_detail.html:67
 msgid "Be the first one to comment!"
 msgstr "İlk yorum yapan siz olun!"
+
+#: paste/models.py:30
+#, fuzzy
+msgid "Plain text"
+msgstr "Gezegen"
+
+#: paste/models.py:35
+msgid "250000 characters at most"
+msgstr ""
+
+#: paste/models.py:37
+#, fuzzy
+msgid "IP Address"
+msgstr "ileti adresi"
+
+#: paste/models.py:40
+msgid "Syntax"
+msgstr ""
+
+#: paste/models.py:41
+msgid "Colorified Text"
+msgstr ""
+
+#: paste/models.py:48
+#, fuzzy
+msgid "Can hide pasted text"
+msgstr "Fikrin durumunu değiştir"
 
 #: templates/404.html:3
 msgid "Page Not Found"

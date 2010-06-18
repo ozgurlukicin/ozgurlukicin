@@ -289,22 +289,21 @@ These are python files to be marked
     |   |-- templatetags
 +   |   |   |-- ideas.py
 +   |   |   `-- __init__.py
--   |   |-- urls.py
--   |   `-- views.py
--   |-- __init__.py
--   |-- manage.py
++   |   |-- urls.py
++   |   `-- views.py
++   |-- __init__.py
++   |-- manage.py
     |-- middleware
--   |   |-- ban.py
--   |   |-- debug.py
--   |   |-- __init__.py
--   |   `-- threadlocals.py
++   |   |-- ban.py
++   |   |-- debug.py
++   |   |-- __init__.py
++   |   `-- threadlocals.py
     |-- paste
--   |   |-- forms.py
--   |   |-- __init__.py
--   |   |-- models.py
--   |   |-- urls.py
--   |   `-- views.py
--   |-- patches
++   |   |-- forms.py
++   |   |-- __init__.py
++   |   |-- models.py
++   |   |-- urls.py
++   |   `-- views.py
     |-- petition
 -   |   |-- __init__.py
 -   |   |-- models.py

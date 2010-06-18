@@ -12,6 +12,7 @@ from pygments import highlight
 from pygments.formatters import HtmlFormatter
 from pygments.lexers import get_lexer_by_name, guess_lexer
 from pygments.util import ClassNotFound
+from django.utils.translation import ugettext as _
 
 LANGUAGES = (
     ('bash', 'Bash'),
@@ -26,25 +27,25 @@ LANGUAGES = (
     ('python', 'Python'),
     ('rb', 'Ruby'),
     ('sql', 'SQL'),
-    ('text', 'Düz Metin'),
+    ('text', _('Plain text')),
     ('xml', 'XML'),
 )
 
 class PastedText(models.Model):
-    text = models.TextField("Yazı", max_length=250000, help_text="En fazla 250000 karakter")
-    author = models.ForeignKey(User, verbose_name="Kullanıcı")
-    ip = models.IPAddressField("IP Adresi", blank=True)
-    date = models.DateTimeField("Tarih", auto_now_add=True)
-    is_hidden = models.BooleanField("Gizli", default=False)
-    syntax = models.CharField("Sözdizimi", max_length=10, choices=LANGUAGES, default="text")
-    highlighted_text = models.TextField("Renklendirilmiş Metin", blank=True, editable=False)
+    text = models.TextField("Yazı", max_length=250000, help_text=_("250000 characters at most"))
+    author = models.ForeignKey(User, verbose_name=_("Author"))
+    ip = models.IPAddressField(_("IP Address"), blank=True)
+    date = models.DateTimeField(_("Date"), auto_now_add=True)
+    is_hidden = models.BooleanField(_("Hidden"), default=False)
+    syntax = models.CharField(_("Syntax"), max_length=10, choices=LANGUAGES, default="text")
+    highlighted_text = models.TextField(_("Colorified Text"), blank=True, editable=False)
 
     def __unicode__(self):
         return text[:20]
 
     class Meta:
         permissions = (
-            ("hide_pastedtext", "Can hide pasted text"),
+            ("hide_pastedtext", _("Can hide pasted text")),
         )
 
     def highlight(self):

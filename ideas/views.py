@@ -14,6 +14,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from oi.settings import MEDIA_ROOT
 from oi.ideas.settings import IDEAS_PER_PAGE
 import datetime
+from django.utils.translation import ugettext as _
 
 
 def list(request, field="", filter_slug=""):
@@ -21,46 +22,50 @@ def list(request, field="", filter_slug=""):
     if field == 'kategori':
         category_id = get_object_or_404(Category, slug = filter_slug)
         ideas = ideas.filter(category=category_id)
-        page_title = "%s kategorisindeki fikirler" % category_id
+        page_title = _("ideas in %s category") % category_id
     elif field == 'etiket':
         ideas = ideas.filter(tags__name__exact=filter_slug)
-        page_title = "%s etiketli fikirler" % filter_slug
+        page_title = _("ideas tagged %s") % filter_slug
     elif field == 'ilgili':
         related_id = get_object_or_404(Related, name=filter_slug)
         ideas = ideas.filter(related_to=related_id)
-        page_title = "%s ile ilgili fikirler" % filter_slug
+        page_title = _("ideas related to %s") % filter_slug
     elif field == 'ekleyen':
         submitter_id = get_object_or_404(User, username=filter_slug)
         ideas = ideas.filter(submitter=submitter_id)
-        page_title = "%s tarafından eklenen fikirler" % filter_slug
+        page_title = _("ideas added by %s") % filter_slug
     elif field == 'populer':
         if filter_slug == 'bugun':
             ideas = ideas.filter(submitted_date__gt=datetime.datetime.now()-datetime.timedelta(1))
-            page_title = "Bugünkü popüler fikirler"
+            page_title = _("Today's popular ideas")
         elif filter_slug == 'buhafta':
             ideas = ideas.filter(submitted_date__gt=datetime.datetime.now()-datetime.timedelta(7))
-            page_title = "Bu haftaki popüler fikirler"
+            page_title = _("This week's popular ideas")
         elif filter_slug == 'buay':
             ideas = ideas.filter(submitted_date__gt=datetime.datetime.now()-datetime.timedelta(30))
-            page_title = "Bu ayki popüler fikirler"
+            page_title = _("This month's popular ideas")
         elif filter_slug == 'tumzamanlar':
-            page_title = "Tüm zamanların popüler fikirleri"
+            page_title = _("Alltime popular ideas")
     elif field == 'son':
         if filter_slug == 'yorumlar':
             ideas = ideas.order_by("topic__topic_latest_post").filter(topic__posts__gt=1)
-            page_title = "En son yorum alan iletiler"
+            page_title = _("Recently commented ideas")
         if filter_slug == 'eklenen':
             ideas = ideas.order_by("-submitted_date")
-            page_title = "Son eklenen fikirler"
+            page_title = _("Latest Ideas")
     elif field == 'durum':
         if filter_slug == "cozum-surecinde":
             s = Status.objects.get(name="Çözüm Sürecinde")
             ideas = ideas.filter(status=s)
             page_title = "Çözüme kavuşmuş fikirler"
         if filter_slug == "cozuldu":
-            s = Status.objects.get(name="Çözüldü")
+            s = Status.objects.get(name=_("Resolved"))
             ideas = ideas.filter(status=s)
-            page_title = "Çözüme kavuşmuş fikirler"
+            page_title = _("Resolved ideas")
+        if filter_slug == "gonullu_araniyor":
+            s = Status.objects.get(name=_("Looking for Volunteers"))
+            ideas = ideas.filter(status=s)
+            page_title = _("Looking for Volunteers")
         if filter_slug == "gonullu_araniyor":
             s = Status.objects.get(name="Gönüllü Aranıyor")
             ideas = ideas.filter(status=s)
@@ -69,7 +74,7 @@ def list(request, field="", filter_slug=""):
             ideas = Idea.objects.filter(is_hidden=False, status__is_invalid=True).order_by("-vote_count", "-id")
             page_title = "Geçersiz Fikirler"
     elif field == 'favori' and filter_slug == 'fikirler':
-        page_title = "Favori fikirleriniz"
+        page_title = _("Favourite ideas")
         try:
             favorites = Favorite.objects.filter(user=request.user.id)
             ideas = []
@@ -80,11 +85,11 @@ def list(request, field="", filter_slug=""):
         except ObjectDoesNotExist:
             pass
     else:
-        page_title = "Son iki günün popüler fikirleri"
+        page_title = _("Popular ideas of last two days")
         ideas = ideas.filter(submitted_date__gt=datetime.datetime.now()-datetime.timedelta(2))
         if ideas.count() < 5:
             ideas = Idea.objects.filter(is_hidden=False, status__is_invalid=False).order_by("-submitted_date")[:5]
-            page_title = "Son beş fikir"
+            page_title = _("Last five ideas")
     categories = Category.objects.order_by('name')
     if request.user.is_authenticated():
         if request.GET.has_key("page"):
@@ -138,7 +143,7 @@ def detail(request, idea_id):
     duplicate_of = idea.duplicate
     bugs = idea.bug_numbers.replace(" ","").split(",")
     categories = Category.objects.order_by('name')
-    page_title = "%d numaralı fikrin detayları" % idea.id
+    page_title = _("Details of idea number %d") % idea.id
     return render_response(request, "idea_detail.html", locals())
 
 @login_required
@@ -146,7 +151,7 @@ def add(request):
     if request.method == 'POST':
         form = NewIdeaForm(request.POST, request.FILES)
         if form.is_valid():
-            forum = Forum.objects.get(name="Yeni Fikirler")
+            forum = Forum.objects.get(name=_("New Ideas"))
             topic = Topic(forum=forum,
                           title=form.cleaned_data['title'],
                           )
@@ -172,9 +177,9 @@ def add(request):
             post_text += "<a href=" + newidea.get_absolute_url() + ">" + newidea.title + "</a></p>"
             post_text += "<p>" + newidea.description + "</p>"
             if form.cleaned_data['forum_url']:
-                post_text += "<p>İlgili Forum Linki<br /><a href='" + newidea.forum_url + "'>" + newidea.forum_url + "</a></p>"
+                post_text += "<p>" + _("Related Forum Link") + "<br /><a href='" + newidea.forum_url + "'>" + newidea.forum_url + "</a></p>"
             if newidea.bug_numbers:
-                post_text += "<p>İlgili hatalar<br />"
+                post_text += "<p>" + _("Related bugs") + "<br />"
                 for bug in newidea.bug_numbers.replace(" ", "").split(","):
                     post_text += "<a href='http://bugs.pardus.org.tr/show_bug.cgi?id=" + bug + "'>" + bug + "</a> "
 
@@ -193,7 +198,7 @@ def add(request):
     else:
         form = NewIdeaForm(auto_id=True)
 
-    page_title = "Yeni Fikir Ekle"
+    page_title = _("Submit New Idea")
     categories = Category.objects.all()
     return render_response(request, "idea_add_form.html", locals())
 
@@ -231,9 +236,9 @@ def edit_idea(request, idea_id):
                 post_text += "<a href=" + idea.get_absolute_url() + ">" + idea.title + "</a></p>"
                 post_text += "<p>" + idea.description + "</p>"
                 if form.cleaned_data['forum_url']:
-                    post_text += "<p>İlgili Forum Linki<br /><a href='" + idea.forum_url + "'>" + idea.forum_url + "</a></p>"
+                    post_text += "<p>" + "Related Forum Link" + "<br /><a href='" + idea.forum_url + "'>" + idea.forum_url + "</a></p>"
                 if idea.bug_numbers:
-                    post_text += "<p>İlgili hatalar<br />"
+                    post_text += "<p>" + _("Related bugs") + "<br />"
                     for bug in idea.bug_numbers.replace(" ", "").split(","):
                         post_text += "<a href='http://bugs.pardus.org.tr/show_bug.cgi?id=" + bug + "'>" + bug + "</a> "
 
