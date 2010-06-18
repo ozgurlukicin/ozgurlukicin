@@ -10,6 +10,7 @@ from django.utils.feedgenerator import Atom1Feed
 
 from oi.st.models import Game, FS, News, Package, HowTo, Workshop
 from oi.settings import WEB_URL, SITE_NAME, SITE_DESC, NEWS_IN_HOMEPAGE, PACKAGES_IN_HOMEPAGE, GAMES_IN_HOMEPAGE, FS_IN_HOMEPAGE, HOWTOS_IN_HOMEPAGE, NEWS_PER_PAGE, PACKAGE_PER_PAGE, GAME_PER_PAGE, FS_PER_PAGE, HOWTO_PER_PAGE, WORKSHOP_PER_PAGE
+from django.utils.translation import ugettext as _
 
 class CommonFeed(Feed):
     link = WEB_URL
@@ -19,30 +20,30 @@ class CommonFeed(Feed):
         return item.update
 
 class Main_RSS(CommonFeed):
-    title = SITE_NAME + " - Anasayfa"
+    title = SITE_NAME + _(" - Mainpage")
     title_template = 'feeds/feed_title.html'
     description_template = 'feeds/feed_description.html'
 
     def items(self):
         output = []
         for news in News.objects.filter(status=1).order_by('-update')[:NEWS_IN_HOMEPAGE]:
-            news.title = 'Haber: %s' % news.title
+            news.title = _('News: %s') % news.title
             output.append(news)
 
         for package in Package.objects.filter(status=1).order_by('-update')[:PACKAGES_IN_HOMEPAGE]:
-            package.title = 'Paket: %s' % package.title
+            package.title = _('Package: %s') % package.title
             output.append(package)
 
         for game in Game.objects.filter(status=1).order_by('-update')[:GAMES_IN_HOMEPAGE]:
-            game.title = 'Oyun: %s' % game.title
+            game.title = _('Game: %s'_) % game.title
             output.append(game)
 
         for fs in FS.objects.filter(status=1).order_by('-update')[:FS_IN_HOMEPAGE]:
-            fs.title = 'İlk Adım: %s' % fs.title
+            fs.title = _('First Step: %s') % fs.title
             output.append(fs)
 
         for howto in HowTo.objects.filter(status=1).order_by('-update')[:HOWTOS_IN_HOMEPAGE]:
-            howto.title = 'Nasıl: %s' % howto.title
+            howto.title = _('Howto: %s') % howto.title
             output.append(howto)
 
         return output
@@ -52,7 +53,7 @@ class Main_Atom(Main_RSS):
     subtitle = Main_RSS.description
 
 class News_RSS(CommonFeed):
-    title = SITE_NAME + " - Haberler"
+    title = SITE_NAME + _(" - News")
     title_template = 'feeds/feed_title.html'
     description_template = 'feeds/feed_description.html'
 
@@ -64,7 +65,7 @@ class News_Atom(News_RSS):
     subtitle = News_RSS.description
 
 class FS_RSS(CommonFeed):
-    title = SITE_NAME + " - İlk Adımlar"
+    title = SITE_NAME + _(" - First Steps")
     title_template = 'feeds/feed_title.html'
     description_template = 'feeds/feed_description.html'
 
@@ -76,7 +77,7 @@ class FS_Atom(FS_RSS):
     subtitle = FS_RSS.description
 
 class HowTo_RSS(CommonFeed):
-    title = SITE_NAME + " - Nasıl"
+    title = SITE_NAME + _(" - Howto")
     title_template = 'feeds/feed_title.html'
     description_template = 'feeds/feed_description.html'
 
@@ -88,7 +89,7 @@ class HowTo_Atom(HowTo_RSS):
     subtitle = HowTo_RSS.description
 
 class Game_RSS(CommonFeed):
-    title = SITE_NAME + " - Oyunlar"
+    title = SITE_NAME + _(" - Games")
     title_template = 'feeds/feed_title.html'
     description_template = 'feeds/feed_description.html'
 
@@ -100,7 +101,7 @@ class Game_Atom(Game_RSS):
     subtitle = Game_RSS.description
 
 class Package_RSS(CommonFeed):
-    title = SITE_NAME + " - Paketler"
+    title = SITE_NAME + _(" - Packages")
     title_template = 'feeds/feed_title.html'
     description_template = 'feeds/feed_description.html'
 
@@ -112,7 +113,7 @@ class Package_Atom(Package_RSS):
     subtitle = Package_RSS.description
 
 class Workshop_RSS(CommonFeed):
-    title = SITE_NAME + " - Atölye"
+    title = SITE_NAME + _(" - Workshop")
     title_template = 'feeds/feed_title.html'
     description_template = 'feeds/feed_description.html'
 

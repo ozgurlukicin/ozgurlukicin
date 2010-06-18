@@ -395,9 +395,9 @@ These are python files to be marked
 -   |   `-- urls.py
     |-- st
 +   |   |-- admin.py
--   |   |-- feeds.py
--   |   |-- forms.py
--   |   |-- __init__.py
++   |   |-- feeds.py
++   |   |-- forms.py
++   |   |-- __init__.py
 +   |   |-- models.py
 -   |   |-- signals.py
 -   |   |-- sitemaps.py

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-18 15:37+0300\n"
+"POT-Creation-Date: 2010-06-18 15:44+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -364,7 +364,7 @@ msgid "Flatpages"
 msgstr "Görselleri Filtrele"
 
 #: forum/feeds.py:20 forum/forms.py:52 forum/models.py:155 forum/models.py:298
-#: templates/base.html:21 templates/footer.html:14
+#: st/forms.py:19 templates/base.html:21 templates/footer.html:14
 #: templates/forum/change_poll.html:5 templates/forum/create_poll.html:5
 #: templates/forum/forum_base.html:5 templates/forum/forum_base.html.py:11
 #: templates/forum/forum_detail.html:13 templates/forum/forum_detail.html:39
@@ -1017,7 +1017,7 @@ msgstr "Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin."
 msgid "Submit"
 msgstr "Gönder"
 
-#: ideas/templates/idea_base.html:5 templates/base.html:47
+#: ideas/templates/idea_base.html:5 st/forms.py:20 templates/base.html:47
 #: templates/footer.html:13 templates/tema/theme_base_without_ezine.html:47
 msgid "Brainstorm"
 msgstr "Yeni Fikirler"
@@ -1215,7 +1215,7 @@ msgid ""
 "\"%(related_to)s\">%(related_to)s</a>."
 msgstr ""
 
-#: ideas/templates/idea_top.html:25
+#: ideas/templates/idea_top.html:25 st/forms.py:53
 msgid "Comment"
 msgstr "Yorum"
 
@@ -1710,6 +1710,97 @@ msgstr "Seminer"
 #, fuzzy
 msgid "Seminars"
 msgstr "Seminer"
+
+#: st/feeds.py:23
+#, fuzzy
+msgid " - Mainpage"
+msgstr "Ana Sayfa"
+
+#: st/feeds.py:30
+#, fuzzy, python-format
+msgid "News: %s"
+msgstr "Haberler"
+
+#: st/feeds.py:34
+#, fuzzy, python-format
+msgid "Package: %s"
+msgstr "Paketler"
+
+#: st/feeds.py:38
+#, fuzzy, python-format
+msgid "Game: %s"
+msgstr "Oyunlar"
+
+#: st/feeds.py:42
+#, fuzzy, python-format
+msgid "First Step: %s"
+msgstr "İlk Adımlar"
+
+#: st/feeds.py:46
+#, fuzzy, python-format
+msgid "Howto: %s"
+msgstr "Nasıl"
+
+#: st/feeds.py:56
+#, fuzzy
+msgid " - News"
+msgstr "Haberler"
+
+#: st/feeds.py:68
+#, fuzzy
+msgid " - First Steps"
+msgstr "İlk Adımlar"
+
+#: st/feeds.py:80
+#, fuzzy
+msgid " - Howto"
+msgstr "Nasıl"
+
+#: st/feeds.py:92
+#, fuzzy
+msgid " - Games"
+msgstr "Oyunlar"
+
+#: st/feeds.py:104
+#, fuzzy
+msgid " - Packages"
+msgstr "Paketler"
+
+#: st/feeds.py:116
+#, fuzzy
+msgid " - Workshop"
+msgstr "Atölye"
+
+#: st/forms.py:14 st/forms.py:17
+msgid "Keyword"
+msgstr ""
+
+#: st/forms.py:18
+#, fuzzy
+msgid "Search Sections"
+msgstr "Belgelendirme"
+
+#: st/forms.py:21
+#, fuzzy
+msgid "Other Sections"
+msgstr "Diğer Gezegenler"
+
+#: st/forms.py:22
+msgid "All"
+msgstr ""
+
+#: st/forms.py:24
+#, fuzzy
+msgid "Search Depth"
+msgstr "Arama"
+
+#: st/forms.py:25
+msgid "Only Search in Titles"
+msgstr ""
+
+#: st/forms.py:26
+msgid "Search in Titles and Content"
+msgstr ""
 
 #: st/models.py:33
 msgid "Article Name"

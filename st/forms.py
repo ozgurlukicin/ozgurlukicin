@@ -8,21 +8,22 @@
 from BeautifulSoup import BeautifulSoup, Comment
 from django import forms
 import re
+from django.utils.translation import ugettext as _
 
 class SearchForm(forms.Form):
-    term = forms.CharField(label='Anahtar kelime', required=True, widget=forms.TextInput(attrs={'size': '40',}))
+    term = forms.CharField(label=_("Keyword"), required=True, widget=forms.TextInput(attrs={'size': '40',}))
 
 class AdvancedSearchForm(forms.Form):
-    term = forms.CharField(label='Anahtar kelime', required=True, min_length=3, widget=forms.TextInput(attrs={'size': '40',}))
-    search_in = forms.ChoiceField(label="Aranacak Bölümler", widget=forms.RadioSelect, choices=(
-        (0, "Forum"),
-        (3, "Beyin (Yeni Fikirler)"),
-        (1, "Diğer Bölümler"),
-        (2, "Tümü"),
+    term = forms.CharField(label=_('Keyword'), required=True, min_length=3, widget=forms.TextInput(attrs={'size': '40',}))
+    search_in = forms.ChoiceField(label=_("Search Sections"), widget=forms.RadioSelect, choices=(
+        (0, _("Forum")),
+        (3, _("Brainstorm")),
+        (1, _("Other Sections")),
+        (2, _("All")),
         ))
-    depth = forms.ChoiceField(label="Arama Derinliği", widget=forms.RadioSelect, choices=(
-        (0, "Sadece Başlıklarda Ara"),
-        (1, "Başlıklarda ve İçerikte Ara"),
+    depth = forms.ChoiceField(label=_("Search Depth"), widget=forms.RadioSelect, choices=(
+        (0, _("Only Search in Titles")),
+        (1, _("Search in Titles and Content")),
         ))
 
 class XssField(forms.CharField):
@@ -49,4 +50,4 @@ class XssField(forms.CharField):
 
 class CommentForm(forms.Form):
     """ The comment thingy add validation please..."""
-    yorum=XssField(label="Yorum",required=True,max_length=1000,widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
+    yorum=XssField(label=_("Comment"),required=True,max_length=1000,widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
