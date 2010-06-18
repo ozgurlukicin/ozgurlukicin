@@ -18,11 +18,12 @@ from oi.forum.models import Topic
 from oi.forum.tools import create_forum_topic
 from oi.settings import WEB_URL, DEFAULT_FROM_EMAIL
 from oi.tema.settings import TEMA_ADMIN_MAIL
+from django.utils.translation import ugettext as _
 
 CATEGORIES = (
-    ("duvar-kagitlari", "Duvar Kağıtları"),
-    ("masaustu-goruntuleri", "Ekran Görüntüleri"),
-    ("yazitipleri", "Yazıtipleri"),
+    ("duvar-kagitlari", _("Wallpapers")),
+    ("masaustu-goruntuleri", _("Screenshots")),
+    ("yazitipleri", _("Fonts")),
 )
 
 class WallPaperSize:
@@ -54,30 +55,30 @@ class License(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = "Lisans"
-        verbose_name_plural = "Lisanslar"
+        verbose_name = _("License")
+        verbose_name_plural = _("Licenses")
 
 class ThemeItem(models.Model):
     "A theme item mainly consists of screenshots and files to download"
-    title = models.CharField(max_length=100, verbose_name="Başlık", help_text="Buraya, ekleyeceğiniz içeriğin ismini yazın.")
-    slug = models.SlugField('SEF Başlık', unique=True, blank=True)
-    tags = models.ManyToManyField(Tag, verbose_name="Etiketler")
+    title = models.CharField(max_length=100, verbose_name=_("Title"), help_text=_("Type the name of your content here."))
+    slug = models.SlugField(_('SEF Title'), unique=True, blank=True)
+    tags = models.ManyToManyField(Tag, verbose_name=_("Tags"))
     author = models.ForeignKey(User)
-    license = models.ForeignKey(License, verbose_name="Lisans")
-    text = models.TextField(blank=False, verbose_name="Tanım", help_text="Ekleyeceğiniz dosyalar hakkındaki açıklamalarınızı bu bölümde belirtebilirsiniz.")
-    changelog = models.TextField(blank=True, verbose_name="Değişiklik Listesi", help_text="Eklediğiniz içeriğin değişikliklerini sürüm numarası ve sürümdeki değişikliklerin listesi şeklinde belirtebilirsiniz.")
-    version = models.CharField("Sürüm Numarası", default="", max_length=16, blank=True, help_text="0.1 gibi")
-    rating = models.IntegerField(default=50, verbose_name="Puan")
-    download_count = models.IntegerField(default=0, verbose_name="İndirilme Sayısı")
-    submit = models.DateTimeField(verbose_name="Oluşturulma Tarihi")
-    update = models.DateTimeField(verbose_name="Düzenlenme Tarihi")
-    comment_enabled = models.BooleanField(default=True,verbose_name="Yoruma Açık", help_text="Diğer üyelerin bu içeriğe yorum yapıp yapamayacağını buradan belirtebilirsiniz.")
-    thumbnail = models.ImageField("Küçük Resim", blank=True, upload_to="upload/tema/kucuk/")
-    status = models.BooleanField(default=False, verbose_name="Kabul Edilmiş")
-    deny_reason = models.TextField(blank=True, verbose_name="Reddetme Nedeni",
-            help_text="Kabul edilmediyse sebebini yazın (ekleyen kişiye gönderilecek e-posta metni)")
-    topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
-    origin_url = models.URLField("Özgün Çalışma", blank=True, help_text="Başka bir çalışmayı temel aldıysanız bunun bağlantısını yazın.")
+    license = models.ForeignKey(License, verbose_name=_("License"))
+    text = models.TextField(blank=False, verbose_name=_("Description"), help_text=_("You can specify your description about the files you submitted here."))
+    changelog = models.TextField(blank=True, verbose_name=_("Change List"), help_text=_("You can specify your changes with version numbers and list them here."))
+    version = models.CharField(_("Version Number"), default="", max_length=16, blank=True, help_text="like 0.1")
+    rating = models.IntegerField(default=50, verbose_name=("Rating"))
+    download_count = models.IntegerField(default=0, verbose_name=_("Downloads"))
+    submit = models.DateTimeField(verbose_name=_("Creation Date"))
+    update = models.DateTimeField(verbose_name=_("Update Date"))
+    comment_enabled = models.BooleanField(default=True,verbose_name=_("Open to Comments"), help_text=_("You can specify if you want other members to comment on your work."))
+    thumbnail = models.ImageField(_("Thumbnail"), blank=True, upload_to="upload/tema/kucuk/")
+    status = models.BooleanField(default=False, verbose_name=_("Approved"))
+    deny_reason = models.TextField(blank=True, verbose_name=_("Non-approval Reason"),
+            help_text=_("Type the reason here if you don't approve (this will be sent as an e-mail to submitter)"))
+    topic = models.ForeignKey(Topic)
+    origin_url = models.URLField(_("Original Work"), blank=True, help_text=_("Link to original work if exists."))
 
     def __unicode__(self):
         return self.title
@@ -95,9 +96,9 @@ class ThemeItem(models.Model):
         if not self.status and self.deny_reason:
             message = loader.get_template("tema/mail/rejected.html").render(Context({"themeitem":self,"WEB_URL":WEB_URL}))
             mail = EmailMessage(
-                "Özgürlükiçin Tema - Reddedilen İçerik",
+                _("Spread Pardus Theme - Non-approved content"),
                 message,
-                "Özgürlükiçin Tema <%s>" % TEMA_ADMIN_MAIL,
+                _("Spread Pardus Theme <%s>") % TEMA_ADMIN_MAIL,
                 [self.author.email]
             )
             mail.send(fail_silently=True)
@@ -111,9 +112,9 @@ class ThemeItem(models.Model):
             #send mail to admins
             message = loader.get_template("tema/mail/new_content.html").render(Context({"themeitem":self,"WEB_URL":WEB_URL}))
             mail = EmailMessage(
-                "Özgürlükiçin Tema - Yeni İçerik",
+                _("Spread Pardus Theme - New Content"),
                 message,
-                "Özgürlükiçin <%s>" % DEFAULT_FROM_EMAIL,
+                "Spread Pardus <%s>" % DEFAULT_FROM_EMAIL,
                 [TEMA_ADMIN_MAIL]
             )
             mail.send(fail_silently=True)
@@ -129,8 +130,8 @@ class ThemeItem(models.Model):
             return "/tema/yazitipleri/%s/" % self.slug
 
     class Meta:
-        verbose_name="Sanat Birimi"
-        verbose_name_plural="Sanat Birimleri"
+        verbose_name=_("Theme Item")
+        verbose_name_plural=_("Theme Items")
 
     def get_change_url(self):
         return "/tema/duzenle/%s/" % self.id
@@ -162,16 +163,16 @@ class ThemeItem(models.Model):
 
     class Meta:
         permissions = (
-            ("manage_queue", "Can Manage Tema Queue"),
+            ("manage_queue", _("Can Manage Tema Queue")),
         )
 
 class Font(ThemeItem):
-    font = models.FileField("Yazıtipi dosyası", upload_to="upload/tema/yazitipi/")
-    is_turkish = models.BooleanField("Türkçe karakterleri içeriyor", default=True)
+    font = models.FileField(_("Font file"), upload_to="upload/tema/yazitipi/")
+    is_turkish = models.BooleanField(_("Includes Turkish Characters"), default=True)
 
     class Meta:
-        verbose_name="Yazıtipi"
-        verbose_name_plural="Yazıtipleri"
+        verbose_name=_("Font")
+        verbose_name_plural=_("Fonts")
 
     def get_absolute_url(self):
         return "/tema/yazitipleri/%s/" % (self.slug)
@@ -187,8 +188,8 @@ class DesktopScreenshot(ThemeItem):
     image = models.ImageField(upload_to="upload/tema/masaustu-goruntusu/", verbose_name="Masaüstü Görüntüsü")
 
     class Meta:
-        verbose_name="Masaüstü Görüntüsü"
-        verbose_name_plural="Masaüstü Görüntüleri"
+        verbose_name=_("Desktop Screenshot")
+        verbose_name_plural=_("Desktop Screenshots")
 
     def get_absolute_url(self):
         return "/tema/masaustu-goruntuleri/%s/" % (self.slug)
@@ -204,8 +205,8 @@ class Wallpaper(ThemeItem):
     papers = models.ManyToManyField("WallpaperFile", blank=True)
 
     class Meta:
-        verbose_name="Duvar Kağıdı"
-        verbose_name_plural="Duvar Kağıtları"
+        verbose_name=_("Wallpaper")
+        verbose_name_plural=_("Wallpapers")
 
     def get_absolute_url(self):
         return "/tema/duvar-kagitlari/%s/" % (self.slug)
@@ -237,32 +238,32 @@ class Wallpaper(ThemeItem):
 
 class File(models.Model):
     "File for download"
-    title = models.CharField(max_length=100, verbose_name="Başlık", help_text="Buraya, dosyanın kullanıcılara görünecek adını yazın.")
+    title = models.CharField(max_length=100, verbose_name=_("Title"), help_text=_("Type here the name of file to show users."))
     file = models.FileField(upload_to="upload/tema/dosya/")
 
     class Meta:
-        verbose_name = "Dosya"
-        verbose_name_plural = "Dosyalar"
+        verbose_name = _("File")
+        verbose_name_plural = _("Files")
 
     def __unicode__(self):
         return self.file
 
 class ScreenShot(models.Model):
     "Screenshot of a theme item"
-    image = models.ImageField(upload_to="upload/tema/goruntu/", verbose_name="Görüntü")
+    image = models.ImageField(upload_to="upload/tema/goruntu/", verbose_name=_("Screenshot"))
 
     def __unicode__(self):
         return self.image.name
 
     class Meta:
-        verbose_name = "Ekran Görüntüsü"
-        verbose_name_plural = "Ekran Görüntüleri"
+        verbose_name = _("Screenshot")
+        verbose_name_plural = _("Screenshots")
 
 class WallpaperFile(models.Model):
     "A wallpaper file"
-    title = models.CharField("Başlık", max_length=32, blank=True, help_text="Boyuta göre otomatik doldurulmasını istiyorsanız boş bırakabilirsiniz.")
+    title = models.CharField(_("Title"), max_length=32, blank=True, help_text=_("Leave blank if you want automatic naming by size."))
     scalable = models.BooleanField(default=False)
-    image = models.ImageField(upload_to="upload/tema/duvar-kagidi/", verbose_name="Duvar Kağıdı")
+    image = models.ImageField(upload_to="upload/tema/duvar-kagidi/", verbose_name=_("Wallpaper"))
 
     def get_absolute_url(self):
         return "/tema/duvar-kagitlari/%s/%s/" % (self.wallpaper_set.all()[0].slug, self.id)
@@ -274,26 +275,21 @@ class WallpaperFile(models.Model):
         return self.title or "..." + self.image.name[-24:]
 
     class Meta:
-        verbose_name = "Duvar Kağıdı Dosyası"
-        verbose_name_plural = "Duvar Kağıdı Dosyaları"
+        verbose_name = _("Wallpaper File")
+        verbose_name_plural = _("Wallpaper Files")
 
 class Vote(models.Model):
     "Vote of a user"
 
     theme_item = models.ForeignKey(ThemeItem)
     user = models.ForeignKey(User)
-    rating = models.IntegerField(default=50, verbose_name="Puan")
-
-    class Meta:
-        verbose_name = "Oy"
-        verbose_name_plural = "Oylar"
-
+    rating = models.IntegerField(default=50)
 
 class ThemeAbuseReport(models.Model):
-    themeitem = models.ForeignKey(ThemeItem, verbose_name='Tema İletisi')
-    submitter = models.ForeignKey(User, verbose_name='Raporlayan kullanıcı')
-    reason = models.TextField(max_length=512, blank=False, verbose_name="Sebep")
+    themeitem = models.ForeignKey(ThemeItem, verbose_name=_("Theme Content"))
+    submitter = models.ForeignKey(User, verbose_name=_("Reporter"))
+    reason = models.TextField(max_length=512, blank=False, verbose_name=_("Reason"))
 
     class Meta:
-        verbose_name = 'İleti şikayeti'
-        verbose_name_plural = 'İleti şikayetleri'
+        verbose_name = _("Abuse Report")
+        verbose_name_plural = _("Abuse Reports")

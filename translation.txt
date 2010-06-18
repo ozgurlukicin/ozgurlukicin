@@ -413,10 +413,10 @@ These are python files to be marked
 +   |   |-- feeds.py
 +   |   |-- forms.py
 +   |   |-- __init__.py
--   |   |-- models.py
--   |   |-- settings.py
--   |   |-- signals.py
--   |   |-- templatetags
++   |   |-- models.py
++   |   |-- settings.py
++   |   |-- signals.py
+    |   |-- templatetags
 -   |   |   |-- __init__.py
 -   |   |   `-- tema.py
 -   |   |-- urls.py

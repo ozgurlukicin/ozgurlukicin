@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-18 16:40+0300\n"
+"POT-Creation-Date: 2010-06-18 17:01+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -24,6 +24,7 @@ msgstr ""
 #: ezine/models.py:9 flatpages/models.py:17 forum/forms.py:22
 #: podcast/models.py:30 profile/models.py:71 st/models.py:153 st/models.py:179
 #: st/models.py:209 st/models.py:241 st/models.py:283 st/models.py:312
+#: tema/models.py:63 tema/models.py:241 tema/models.py:264
 #, fuzzy
 msgid "Title"
 msgstr "Dosya"
@@ -394,11 +395,12 @@ msgstr ""
 
 #: forum/forms.py:24 forum/models.py:163 ideas/models.py:79
 #: ideas/templates/idea_detail.html:14 st/models.py:288 st/tags.py:23
-#: templates/flatpages/default.html:69 templates/fs/fs_detail.html:26
-#: templates/game/game_detail.html:95 templates/howto/howto_detail.html:57
-#: templates/news/news_detail.html:49 templates/package/package_detail.html:63
-#: templates/podcast/detail.html:56 templates/podcast/main.html:50
-#: templates/user/user_list.html:95 templates/workshop/workshop_detail.html:56
+#: tema/models.py:65 templates/flatpages/default.html:69
+#: templates/fs/fs_detail.html:26 templates/game/game_detail.html:95
+#: templates/howto/howto_detail.html:57 templates/news/news_detail.html:49
+#: templates/package/package_detail.html:63 templates/podcast/detail.html:56
+#: templates/podcast/main.html:50 templates/user/user_list.html:95
+#: templates/workshop/workshop_detail.html:56
 msgid "Tags"
 msgstr "Etiketler"
 
@@ -634,7 +636,7 @@ msgstr ""
 
 #: forum/models.py:270 ideas/models.py:75 st/models.py:47 st/models.py:57
 #: st/models.py:69 st/models.py:97 st/models.py:316 tema/forms.py:54
-#: tema/forms.py:87 tema/forms.py:105
+#: tema/forms.py:87 tema/forms.py:105 tema/models.py:68
 #, fuzzy
 msgid "Description"
 msgstr "Belgelendirme"
@@ -688,22 +690,22 @@ msgstr ""
 msgid "Can see hidden categories"
 msgstr ""
 
-#: forum/models.py:328
+#: forum/models.py:328 tema/models.py:290
 #, fuzzy
 msgid "Reporter"
 msgstr "Raporlayan:"
 
-#: forum/models.py:329
+#: forum/models.py:329 tema/models.py:291
 #, fuzzy
 msgid "Reason"
 msgstr "Sebep:"
 
-#: forum/models.py:335
+#: forum/models.py:335 tema/models.py:294
 #, fuzzy
 msgid "Abuse Report"
 msgstr "Sebep:"
 
-#: forum/models.py:336
+#: forum/models.py:336 tema/models.py:295
 #, fuzzy
 msgid "Abuse Reports"
 msgstr "Sebep:"
@@ -894,7 +896,7 @@ msgid ""
 "Enter related bug numbers with commas between them. (This can be left blank)"
 msgstr ""
 
-#: ideas/models.py:85 st/models.py:65
+#: ideas/models.py:85 st/models.py:65 tema/models.py:245
 #: templates/file_upload/file_upload.html:14
 msgid "File"
 msgstr "Dosya"
@@ -1289,7 +1291,7 @@ msgid "Speakers"
 msgstr ""
 
 #: podcast/models.py:31 st/models.py:154 st/models.py:180 st/models.py:210
-#: st/models.py:242 st/models.py:284 st/models.py:313
+#: st/models.py:242 st/models.py:284 st/models.py:313 tema/models.py:64
 #, fuzzy
 msgid "SEF Title"
 msgstr "Dosya"
@@ -1364,7 +1366,7 @@ msgstr ""
 msgid "Specify when vote casting will be disabled. like 30/8/2008."
 msgstr ""
 
-#: poll/models.py:48
+#: poll/models.py:48 tema/models.py:73
 #, fuzzy
 msgid "Creation Date"
 msgstr "Son Güncelleme"
@@ -1827,16 +1829,17 @@ msgstr "Katkıda bulunun"
 msgid "Contribution Names"
 msgstr "Katkıda bulunun"
 
-#: st/models.py:66
+#: st/models.py:66 tema/models.py:246
 #, fuzzy
 msgid "Files"
 msgstr "Dosya"
 
-#: st/models.py:93
+#: st/models.py:93 tema/models.py:253 tema/models.py:259
 msgid "Screenshot"
 msgstr ""
 
-#: st/models.py:94 templates/package/package_detail.html:75
+#: st/models.py:94 tema/models.py:25 tema/models.py:260
+#: templates/package/package_detail.html:75
 msgid "Screenshots"
 msgstr ""
 
@@ -1851,11 +1854,11 @@ msgid "Videos"
 msgstr "Görüntüleme"
 
 #: st/models.py:149 tema/forms.py:56 tema/forms.py:89 tema/forms.py:107
-#: templates/game/game_detail.html:46
+#: tema/models.py:58 tema/models.py:67 templates/game/game_detail.html:46
 msgid "License"
 msgstr ""
 
-#: st/models.py:150
+#: st/models.py:150 tema/models.py:59
 msgid "Licenses"
 msgstr ""
 
@@ -1994,7 +1997,7 @@ msgstr ""
 msgid "Headline image will be added to summary automaticly."
 msgstr ""
 
-#: st/models.py:289
+#: st/models.py:289 tema/models.py:74
 #, fuzzy
 msgid "Update Date"
 msgstr "Son Güncelleme"
@@ -2161,7 +2164,7 @@ msgstr ""
 msgid "Choose a category for your content"
 msgstr ""
 
-#: tema/forms.py:54 tema/forms.py:87 tema/forms.py:105
+#: tema/forms.py:54 tema/forms.py:87 tema/forms.py:105 tema/models.py:68
 msgid "You can specify your description about the files you submitted here."
 msgstr ""
 
@@ -2186,11 +2189,11 @@ msgstr ""
 msgid "I have the right to give this screenshot away to everyone."
 msgstr ""
 
-#: tema/forms.py:90 tema/forms.py:108
+#: tema/forms.py:90 tema/forms.py:108 tema/models.py:81
 msgid "Original Work"
 msgstr ""
 
-#: tema/forms.py:90 tema/forms.py:108
+#: tema/forms.py:90 tema/forms.py:108 tema/models.py:81
 msgid "Link to original work if exists."
 msgstr ""
 
@@ -2206,6 +2209,140 @@ msgstr ""
 #, python-format
 msgid "%(size)s is not a valid wallpaper size."
 msgstr ""
+
+#: tema/models.py:24 tema/models.py:209 templates/tema/base.html:15
+msgid "Wallpapers"
+msgstr ""
+
+#: tema/models.py:26 tema/models.py:175 templates/tema/base.html:17
+#, fuzzy
+msgid "Fonts"
+msgstr "Yorumlar"
+
+#: tema/models.py:63
+msgid "Type the name of your content here."
+msgstr ""
+
+#: tema/models.py:69
+#, fuzzy
+msgid "Change List"
+msgstr "Değiştir"
+
+#: tema/models.py:69
+msgid "You can specify your changes with version numbers and list them here."
+msgstr ""
+
+#: tema/models.py:70
+#, fuzzy
+msgid "Version Number"
+msgstr "Sürüm"
+
+#: tema/models.py:72
+#, fuzzy
+msgid "Downloads"
+msgstr "İndir"
+
+#: tema/models.py:75
+#, fuzzy
+msgid "Open to Comments"
+msgstr "Yorumlar"
+
+#: tema/models.py:75
+msgid "You can specify if you want other members to comment on your work."
+msgstr ""
+
+#: tema/models.py:76
+msgid "Thumbnail"
+msgstr ""
+
+#: tema/models.py:77
+msgid "Approved"
+msgstr ""
+
+#: tema/models.py:78
+msgid "Non-approval Reason"
+msgstr ""
+
+#: tema/models.py:79
+msgid ""
+"Type the reason here if you don't approve (this will be sent as an e-mail to "
+"submitter)"
+msgstr ""
+
+#: tema/models.py:99
+#, fuzzy
+msgid "Spread Pardus Theme - Non-approved content"
+msgstr "Özgürlükİçin e-dergi yayında!"
+
+#: tema/models.py:101
+#, fuzzy, python-format
+msgid "Spread Pardus Theme <%s>"
+msgstr "Özgürlükiçin"
+
+#: tema/models.py:115
+#, fuzzy
+msgid "Spread Pardus Theme - New Content"
+msgstr "Özgürlükİçin Forum"
+
+#: tema/models.py:133
+#, fuzzy
+msgid "Theme Item"
+msgstr "Temalar"
+
+#: tema/models.py:134
+#, fuzzy
+msgid "Theme Items"
+msgstr "Temalar"
+
+#: tema/models.py:166
+msgid "Can Manage Tema Queue"
+msgstr ""
+
+#: tema/models.py:170
+#, fuzzy
+msgid "Font file"
+msgstr "Profil"
+
+#: tema/models.py:171
+msgid "Includes Turkish Characters"
+msgstr ""
+
+#: tema/models.py:174 templates/tema/base.html:25
+msgid "Font"
+msgstr ""
+
+#: tema/models.py:191 templates/tema/base.html:24
+msgid "Desktop Screenshot"
+msgstr ""
+
+#: tema/models.py:192 templates/tema/base.html:16
+msgid "Desktop Screenshots"
+msgstr ""
+
+#: tema/models.py:208 tema/models.py:266 templates/tema/base.html:23
+msgid "Wallpaper"
+msgstr ""
+
+#: tema/models.py:241
+msgid "Type here the name of file to show users."
+msgstr ""
+
+#: tema/models.py:264
+msgid "Leave blank if you want automatic naming by size."
+msgstr ""
+
+#: tema/models.py:278
+msgid "Wallpaper File"
+msgstr ""
+
+#: tema/models.py:279
+msgid "Wallpaper Files"
+msgstr ""
+
+#: tema/models.py:289
+#, fuzzy
+msgid "Theme Content"
+msgstr "Diğer Gezegenler"
 
 #: templates/404.html:3
 msgid "Page Not Found"
@@ -3601,19 +3738,6 @@ msgstr ""
 msgid "Reported Themes:"
 msgstr "Raporlanmış İletiler:"
 
-#: templates/tema/base.html:15
-msgid "Wallpapers"
-msgstr ""
-
-#: templates/tema/base.html:16
-msgid "Desktop Screenshots"
-msgstr ""
-
-#: templates/tema/base.html:17
-#, fuzzy
-msgid "Fonts"
-msgstr "Yorumlar"
-
 #: templates/tema/base.html:19
 msgid "License Information"
 msgstr ""
@@ -3624,18 +3748,6 @@ msgstr ""
 
 #: templates/tema/base.html:22
 msgid "Add Content"
-msgstr ""
-
-#: templates/tema/base.html:23
-msgid "Wallpaper"
-msgstr ""
-
-#: templates/tema/base.html:24
-msgid "Desktop Screenshot"
-msgstr ""
-
-#: templates/tema/base.html:25
-msgid "Font"
 msgstr ""
 
 #: templates/tema/forum_wallpaper.html:4
