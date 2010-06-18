@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-18 15:47+0300\n"
+"POT-Creation-Date: 2010-06-18 16:40+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -408,7 +408,8 @@ msgid ""
 "most)"
 msgstr ""
 
-#: forum/forms.py:36 ideas/forms.py:22
+#: forum/forms.py:36 ideas/forms.py:22 tema/forms.py:67 tema/forms.py:100
+#: tema/forms.py:118
 msgid ""
 "You can choose 5 tags at most. Please choose only relevant tags with your "
 "topic."
@@ -614,7 +615,7 @@ msgid "Can change poll"
 msgstr "Anketi Değiştir"
 
 #: forum/models.py:267 forum/models.py:319 ideas/models.py:43
-#: ideas/models.py:60 ideas/models.py:77
+#: ideas/models.py:60 ideas/models.py:77 tema/forms.py:51
 #, fuzzy
 msgid "Category"
 msgstr "Kategoriler"
@@ -632,7 +633,8 @@ msgid "SEF name"
 msgstr ""
 
 #: forum/models.py:270 ideas/models.py:75 st/models.py:47 st/models.py:57
-#: st/models.py:69 st/models.py:97 st/models.py:316
+#: st/models.py:69 st/models.py:97 st/models.py:316 tema/forms.py:54
+#: tema/forms.py:87 tema/forms.py:105
 #, fuzzy
 msgid "Description"
 msgstr "Belgelendirme"
@@ -1848,7 +1850,8 @@ msgstr "gizle"
 msgid "Videos"
 msgstr "Görüntüleme"
 
-#: st/models.py:149 templates/game/game_detail.html:46
+#: st/models.py:149 tema/forms.py:56 tema/forms.py:89 tema/forms.py:107
+#: templates/game/game_detail.html:46
 msgid "License"
 msgstr ""
 
@@ -1914,7 +1917,8 @@ msgstr ""
 msgid "Download size"
 msgstr "İndir"
 
-#: st/models.py:249 st/models.py:320 templates/user/profile.html:90
+#: st/models.py:249 st/models.py:320 tema/forms.py:57
+#: templates/user/profile.html:90
 #, fuzzy
 msgid "Web Site"
 msgstr "İlgili Sayfalar"
@@ -2119,6 +2123,90 @@ msgstr "Ajans"
 msgid "Tag"
 msgstr "Etiketler"
 
+#: tema/feeds.py:21 templates/footer.html:13
+#: templates/tema/themeitem_list.html:8
+msgid "Themes"
+msgstr "Temalar"
+
+#: tema/feeds.py:23
+msgid "Wallapers, fonts and more."
+msgstr ""
+
+#: tema/feeds.py:84
+#, python-format
+msgid "%(site_name)s Theme: %(username)s"
+msgstr ""
+
+#: tema/forms.py:32 tema/forms.py:33
+msgid "very bad"
+msgstr ""
+
+#: tema/forms.py:34 tema/forms.py:35
+msgid "bad"
+msgstr ""
+
+#: tema/forms.py:36 tema/forms.py:37
+msgid "good"
+msgstr ""
+
+#: tema/forms.py:38 tema/forms.py:39
+msgid "very good"
+msgstr ""
+
+#: tema/forms.py:40 tema/forms.py:41
+msgid "excellent"
+msgstr ""
+
+#: tema/forms.py:51
+msgid "Choose a category for your content"
+msgstr ""
+
+#: tema/forms.py:54 tema/forms.py:87 tema/forms.py:105
+msgid "You can specify your description about the files you submitted here."
+msgstr ""
+
+#: tema/forms.py:55 tema/forms.py:88 tema/forms.py:106
+#, fuzzy
+msgid "Confirmation"
+msgstr "Katkıda bulunun"
+
+#: tema/forms.py:55
+msgid "I have the right to give this font away to everyone."
+msgstr ""
+
+#: tema/forms.py:57
+msgid "Web site of font maker."
+msgstr ""
+
+#: tema/forms.py:81
+msgid "Your font couldn't be read."
+msgstr ""
+
+#: tema/forms.py:88
+msgid "I have the right to give this screenshot away to everyone."
+msgstr ""
+
+#: tema/forms.py:90 tema/forms.py:108
+msgid "Original Work"
+msgstr ""
+
+#: tema/forms.py:90 tema/forms.py:108
+msgid "Link to original work if exists."
+msgstr ""
+
+#: tema/forms.py:106
+msgid "I have the right to give this wallpaper away to everyone."
+msgstr ""
+
+#: tema/forms.py:122
+msgid "Create Smaller Wallpapers"
+msgstr ""
+
+#: tema/forms.py:128
+#, python-format
+msgid "%(size)s is not a valid wallpaper size."
+msgstr ""
+
 #: templates/404.html:3
 msgid "Page Not Found"
 msgstr "Sayfa Bulunamadı"
@@ -2291,10 +2379,6 @@ msgstr ""
 "<a href=\"http://www.pardus.org.tr\" title=\"Pardus\">Pardus</a> logosu <a "
 "href=\"http://uekae.tubitak.gov.tr\" title=\"TÜBİTAK/UEKAE\">TÜBİTAK/UEKAE</"
 "a>’nin tescilli markasıdır."
-
-#: templates/footer.html:13 templates/tema/themeitem_list.html:8
-msgid "Themes"
-msgstr "Temalar"
 
 #: templates/footer.html:14
 msgid "Shipit"

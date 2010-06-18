@@ -15,10 +15,12 @@ from django.contrib.syndication.feeds import FeedDoesNotExist
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 
+from django.utils.translation import ugettext as _
+
 class Tema_RSS(Feed):
-    title = SITE_NAME + "Temalar"
+    title = SITE_NAME + _("Themes")
     link = WEB_URL
-    description = SITE_DESC + "Pencere dekorasyonları, duvar kağıtları ve daha fazlası."
+    description = SITE_DESC + _("Wallapers, fonts and more.")
     title_template = 'tema/feed_title.html'
     description_template = 'tema/feed_description.html'
 
@@ -79,7 +81,7 @@ class User_Tema_Rss(Feed):
         return User.objects.get(id=bits[0])
 
     def title(self,obj):
-        return "%s Tema Kullanıcı : %s" (SITE_NAME, obj.username)
+        return _("%(site_name)s Theme: %(username)s") % {"site_name":SITE_NAME, "username":obj.username}
 
     def description(self,obj):
         return SITE_DESC

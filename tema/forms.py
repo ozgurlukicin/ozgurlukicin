@@ -12,6 +12,8 @@ from django import forms
 
 from oi.tema.models import *
 
+from django.utils.translation import ugettext as _
+
 VALID_WALLPAPER_SIZES = (
     ( 800,  600),
     (1024,  768),
@@ -27,16 +29,16 @@ VALID_WALLPAPER_SIZES = (
 )
 
 RATINGS = (
-    (0.5, 'çok kötü'),
-    (1, 'çok kötü'),
-    (1.5, 'kötü'),
-    (2, 'kötü'),
-    (2.5, 'iyi'),
-    (3, 'iyi'),
-    (3.5, 'çok iyi'),
-    (4, 'çok iyi'),
-    (4.5, 'harika'),
-    (5, 'harika'),
+    (0.5, _('very bad')),
+    (1, _('very bad')),
+    (1.5, _('bad')),
+    (2, _('bad')),
+    (2.5, _('good')),
+    (3, _('good')),
+    (3.5, _('very good')),
+    (4, _('very good')),
+    (4.5, _('excellent')),
+    (5, _('excellent')),
 )
 
 class ThemeItemForm(forms.ModelForm):
@@ -46,13 +48,13 @@ class ThemeItemForm(forms.ModelForm):
                 "download_count", "submit", "update", "status", "deny_reason", "slug", "topic")
 
 class ThemeTypeForm(forms.Form):
-    category = forms.ChoiceField(label="Kategori", choices=CATEGORIES, help_text="Ekleyeceğiniz içerik için bir kategori seçin")
+    category = forms.ChoiceField(label=_("Category"), choices=CATEGORIES, help_text=_("Choose a category for your content"))
 
 class FontForm(forms.ModelForm):
-    text = forms.CharField(label="Tanım", required=True, help_text="Ekleyeceğiniz dosyalar hakkındaki açıklamalarınızı bu bölümde belirtebilirsiniz.", widget=forms.Textarea(attrs={"style":"width:400px"}))
-    confirmation = forms.BooleanField(label="Onay", required=True, help_text="Bu yazıtipini dağıtma hakkına sahibim.")
-    license = forms.ModelChoiceField(label="Lisans", queryset=License.objects.order_by("name"), empty_label="---------")
-    origin_url = forms.URLField(label="Web Sitesi", required=True, help_text="Yazıtipi üreticisinin web sitesi.", widget=forms.TextInput(attrs={"style":"width:400px"}))
+    text = forms.CharField(label=_("Description"), required=True, help_text=_("You can specify your description about the files you submitted here."), widget=forms.Textarea(attrs={"style":"width:400px"}))
+    confirmation = forms.BooleanField(label=_("Confirmation"), required=True, help_text=_("I have the right to give this font away to everyone."))
+    license = forms.ModelChoiceField(label=_("License"), queryset=License.objects.order_by("name"), empty_label="---------")
+    origin_url = forms.URLField(label=_("Web Site"), required=True, help_text=_("Web site of font maker."), widget=forms.TextInput(attrs={"style":"width:400px"}))
 
     class Meta:
         model = Font
@@ -62,7 +64,7 @@ class FontForm(forms.ModelForm):
     def clean_tags(self):
         field_data = self.cleaned_data['tags']
         if len(field_data) > 5:
-            raise forms.ValidationError("En fazla 5 etiket seçebilirsiniz. Lütfen açtığınız başlığa uygun etiket seçiniz.")
+            raise forms.ValidationError(_("You can choose 5 tags at most. Please choose only relevant tags with your topic."))
         return field_data
 
     def clean_font(self):
@@ -76,16 +78,16 @@ class FontForm(forms.ModelForm):
                 ImageFont.truetype(tmp, 22)
             except IOError:
                 os.unlink(tmp)
-                raise forms.ValidationError("Gönderdiğiniz yazıtipi okunamadı.")
+                raise forms.ValidationError(_("Your font couldn't be read."))
             os.unlink(tmp)
         return font
 
 
 class DesktopScreenShotForm(forms.ModelForm):
-    text = forms.CharField(label="Tanım", required=True, help_text="Ekleyeceğiniz dosyalar hakkındaki açıklamalarınızı bu bölümde belirtebilirsiniz.", widget=forms.Textarea(attrs={"style":"width:400px"}))
-    confirmation = forms.BooleanField(label="Onay", required=True, help_text="Bu ekran görüntüsünü dağıtma hakkına sahibim.")
-    license = forms.ModelChoiceField(label="Lisans", queryset=License.objects.order_by("name"), empty_label="---------")
-    origin_url = forms.URLField(label="Özgün Çalışma", required=False, help_text="Başka bir çalışmayı temel aldıysanız bunun bağlantısını yazın.", widget=forms.TextInput(attrs={"style":"width:400px"}))
+    text = forms.CharField(label=_("Description"), required=True, help_text=_("You can specify your description about the files you submitted here."), widget=forms.Textarea(attrs={"style":"width:400px"}))
+    confirmation = forms.BooleanField(label=_("Confirmation"), required=True, help_text=_("I have the right to give this screenshot away to everyone."))
+    license = forms.ModelChoiceField(label=_("License"), queryset=License.objects.order_by("name"), empty_label="---------")
+    origin_url = forms.URLField(label=_("Original Work"), required=False, help_text=_("Link to original work if exists."), widget=forms.TextInput(attrs={"style":"width:400px"}))
 
     class Meta:
         model = DesktopScreenshot
@@ -95,15 +97,15 @@ class DesktopScreenShotForm(forms.ModelForm):
     def clean_tags(self):
         field_data = self.cleaned_data['tags']
         if len(field_data) > 5:
-            raise forms.ValidationError("En fazla 5 etiket seçebilirsiniz. Lütfen açtığınız başlığa uygun etiket seçiniz.")
+            raise forms.ValidationError(_("You can choose 5 tags at most. Please choose only relevant tags with your topic."))
         return field_data
 
 
 class WallpaperForm(forms.ModelForm):
-    text = forms.CharField(label="Tanım", required=True, help_text="Ekleyeceğiniz dosyalar hakkındaki açıklamalarınızı bu bölümde belirtebilirsiniz.", widget=forms.Textarea(attrs={"style":"width:400px"}))
-    confirmation = forms.BooleanField(label="Onay", required=True, help_text="Bu duvar kağıdını dağıtma hakkına sahibim.")
-    license = forms.ModelChoiceField(label="Lisans", queryset=License.objects.order_by("name"), empty_label="---------")
-    origin_url = forms.URLField(label="Özgün Çalışma", required=False, help_text="Başka bir çalışmayı temel aldıysanız bunun bağlantısını yazın.", widget=forms.TextInput(attrs={"style":"width:400px"}))
+    text = forms.CharField(label=_("Description"), required=True, help_text=_("You can specify your description about the files you submitted here."), widget=forms.Textarea(attrs={"style":"width:400px"}))
+    confirmation = forms.BooleanField(label=_("Confirmation"), required=True, help_text=_("I have the right to give this wallpaper away to everyone."))
+    license = forms.ModelChoiceField(label=_("License"), queryset=License.objects.order_by("name"), empty_label="---------")
+    origin_url = forms.URLField(label=_("Original Work"), required=False, help_text=_("Link to original work if exists."), widget=forms.TextInput(attrs={"style":"width:400px"}))
 
     class Meta:
         model = Wallpaper
@@ -113,17 +115,17 @@ class WallpaperForm(forms.ModelForm):
     def clean_tags(self):
         field_data = self.cleaned_data['tags']
         if len(field_data) > 5:
-            raise forms.ValidationError("En fazla 5 etiket seçebilirsiniz. Lütfen açtığınız başlığa uygun etiket seçiniz.")
+            raise forms.ValidationError(_("You can choose 5 tags at most. Please choose only relevant tags with your topic."))
         return field_data
 
 class WallpaperFileForm(forms.ModelForm):
-    create_smaller_wallpapers = forms.BooleanField(label="Küçüklerini Oluştur", required=False, initial=True, help_text="Büyük bir duvar kağıdı gönderiyorsanız bu seçenekle küçüklerinin otomatik oluşturulmasını sağlayabilirsiniz.")
+    create_smaller_wallpapers = forms.BooleanField(label=_("Create Smaller Wallpapers"), required=False, initial=True, help_text="If you're sending a large wallpaper, this option will create smallers ones automaticly.")
 
     def clean_image(self):
         image = self.cleaned_data["image"]
         i = Image.open(image)
         if i.size not in VALID_WALLPAPER_SIZES:
-            raise forms.ValidationError("%dx%d geçerli bir duvar kağıdı büyüklüğü değil." % i.size)
+            raise forms.ValidationError(_("%(size)s is not a valid wallpaper size.") % {"size": "%dx%d" % i.size})
         return image
 
     class Meta:

@@ -409,10 +409,10 @@ These are python files to be marked
 +   |   |-- views.py
 +   |   `-- wrappers.py
     |-- tema
--   |   |-- admin.py
--   |   |-- feeds.py
--   |   |-- forms.py
--   |   |-- __init__.py
++   |   |-- admin.py
++   |   |-- feeds.py
++   |   |-- forms.py
++   |   |-- __init__.py
 -   |   |-- models.py
 -   |   |-- settings.py
 -   |   |-- signals.py
