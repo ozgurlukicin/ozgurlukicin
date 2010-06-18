@@ -352,11 +352,11 @@ These are python files to be marked
 -   |       |-- main.py
 -   |       `-- notsent2sent.py
     |-- seminar
--   |   |-- admin.py
--   |   |-- __init__.py
--   |   |-- models.py
--   |   |-- urls.py
--   |   `-- views.py
++   |   |-- admin.py
++   |   |-- __init__.py
++   |   |-- models.py
++   |   |-- urls.py
++   |   `-- views.py
 -   |-- settings.py
     |-- shipit
 -   |   |-- admin.py

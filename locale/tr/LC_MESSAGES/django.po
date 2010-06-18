@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-18 14:14+0300\n"
+"POT-Creation-Date: 2010-06-18 14:44+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -1266,17 +1266,17 @@ msgid "Can hide pasted text"
 msgstr "Fikrin durumunu değiştir"
 
 #: podcast/models.py:19 profile/forms.py:23 profile/forms.py:157
-#: profile/models.py:31 templates/user/login.html:18
+#: profile/models.py:31 seminar/models.py:30 templates/user/login.html:18
 #, fuzzy
 msgid "Username"
 msgstr "Kullanıcılar"
 
-#: podcast/models.py:26
+#: podcast/models.py:26 seminar/models.py:37
 #, fuzzy
 msgid "Speaker"
 msgstr "Arama"
 
-#: podcast/models.py:27
+#: podcast/models.py:27 seminar/models.py:38
 msgid "Speakers"
 msgstr ""
 
@@ -1299,7 +1299,7 @@ msgstr ""
 msgid "Guests"
 msgstr ""
 
-#: podcast/models.py:43
+#: podcast/models.py:43 seminar/models.py:46
 msgid "Active"
 msgstr ""
 
@@ -1410,7 +1410,7 @@ msgid "Web Page"
 msgstr "İlgili Sayfalar"
 
 #: profile/forms.py:31 profile/forms.py:33 profile/forms.py:34
-#: profile/forms.py:35
+#: profile/forms.py:35 seminar/models.py:30 seminar/models.py:45
 msgid "Not required"
 msgstr ""
 
@@ -1531,12 +1531,12 @@ msgid ""
 "This will be shown under your posts in forum pages (512 characters max.)"
 msgstr ""
 
-#: profile/forms.py:119 profile/models.py:88
+#: profile/forms.py:119 profile/models.py:88 seminar/models.py:17
 #, fuzzy
 msgid "Latitude"
 msgstr "Son eklenenler"
 
-#: profile/forms.py:120 profile/models.py:89
+#: profile/forms.py:120 profile/models.py:89 seminar/models.py:18
 msgid "Longitude"
 msgstr ""
 
@@ -1634,6 +1634,71 @@ msgstr ""
 #, python-format
 msgid "%(SITE_NAME)s User Password"
 msgstr ""
+
+#: seminar/models.py:14 seminar/models.py:25
+#, fuzzy
+msgid "Seminar Location"
+msgstr "Seminer"
+
+#: seminar/models.py:15
+#, fuzzy
+msgid "Location Description"
+msgstr "Belgelendirme"
+
+#: seminar/models.py:16
+msgid "Telephone"
+msgstr ""
+
+#: seminar/models.py:17
+msgid "like 40.903823"
+msgstr ""
+
+#: seminar/models.py:18
+msgid "like 29.226723"
+msgstr ""
+
+#: seminar/models.py:26
+msgid "Seminar Locations"
+msgstr ""
+
+#: seminar/models.py:29
+#, fuzzy
+msgid "Real Name"
+msgstr "Oyunlar"
+
+#: seminar/models.py:41
+#, fuzzy
+msgid "Seminar description"
+msgstr "Belgelendirme"
+
+#: seminar/models.py:42
+#, fuzzy
+msgid "Location"
+msgstr "Belgelendirme"
+
+#: seminar/models.py:43
+msgid "Attenders"
+msgstr ""
+
+#: seminar/models.py:44
+#, fuzzy
+msgid "Start date"
+msgstr "Son Güncelleme"
+
+#: seminar/models.py:45
+#, fuzzy
+msgid "End date"
+msgstr "Tarih"
+
+#: seminar/models.py:55 templates/flatpages/default.html:52
+#: templates/user/user_list.html:82
+msgid "Seminar"
+msgstr "Seminer"
+
+#: seminar/models.py:56
+#, fuzzy
+msgid "Seminars"
+msgstr "Seminer"
 
 #: templates/404.html:3
 msgid "Page Not Found"
@@ -2148,10 +2213,6 @@ msgstr "Forum Kuralları"
 #: templates/flatpages/default.html:48 templates/user/user_list.html:78
 msgid "Contact"
 msgstr "Bize Ulaşın"
-
-#: templates/flatpages/default.html:52 templates/user/user_list.html:82
-msgid "Seminar"
-msgstr "Seminer"
 
 #: templates/flatpages/default.html:56 templates/user/user_list.html:86
 msgid "Admins"
