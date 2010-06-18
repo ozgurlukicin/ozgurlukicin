@@ -30,7 +30,7 @@
                 <img src="{{ news.image.file.url }}" alt="{{ news.image.get_alt_string }}" />
             </div>
             <div class="right_column">
-                <span>Haberler</span>
+                <span>{% trans "News" %}</span>
                 <div class="title"><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></div>
                 <div class="summary">{{ news.sum|safe }}<br /></div>
                 <div class="info"><span class="bold">{{ news.update|date:"d" }} {{ news.update|date:"F"|slice:":3" }}</span> {{ news.update|date:"Y" }} <span class="bold">/</span> <a href="{{ news.topic.get_latest_post_url }}">{% blocktrans count news.topic.posts|add:"-1" as number_of_comments %}<span class="bold">{{ number_of_comments }}</span> Comment{% plural %}<span class="bold">{{ number_of_comments }}</span> Comments{% endblocktrans %}</a></div>
@@ -51,7 +51,7 @@
             <div class="info"><span class="bold">{{ howto.update|date:"d" }} {{ howto.update|date:"F"|slice:":3" }}</span> {{ howto.update|date:"Y" }} <span class="bold">/</span> <a href="{{ howto.topic.get_latest_post_url }}">{% blocktrans count howto.topic.posts|add:"-1" as number_of_comments %}<span class="bold">{{ number_of_comments }}</span> Comment{% plural %}<span class="bold">{{ number_of_comments }}</span> Comments{% endblocktrans %}</a></div>
         </div>
         <div class="column">
-            <span>Nasıl</span>
+            <span>{% trans "Howto" %}</span>
             <div class="title"><a href="{{ howto.get_absolute_url }}">{{ howto.title }}</a></div>
             <div class="summary">{{ howto.sum|safe|truncatewords_html:23 }}</div>
         </div>
@@ -64,7 +64,7 @@
             <div class="info"><span class="bold">{{ package.update|date:"d" }} {{ package.update|date:"F"|slice:":3" }}</span> {{ package.update|date:"Y" }} <span class="bold">/</span> <a href="{{ package.topic.get_latest_post_url }}">{% blocktrans count package.topic.posts|add:"-1" as number_of_comments %}<span class="bold">{{ number_of_comments }}</span> Comment{% plural %}<span class="bold">{{ number_of_comments }}</span> Comments{% endblocktrans %}</a></div>
         </div>
         <div class="column">
-            <span>Paket</span>
+            <span>{% trans "Package" %}</span>
             <div class="title"><a href="{{ package.get_absolute_url }}">{{ package.title }}</a></div>
             <div class="summary">{{ package.sum|safe|truncatewords_html:23 }}</div>
         </div>
@@ -77,7 +77,7 @@
             <div class="info"><span class="bold">{{ game.update|date:"d" }} {{ game.update|date:"F"|slice:":3" }}</span> {{ game.update|date:"Y" }} <span class="bold">/</span> <a href="{{ game.topic.get_latest_post_url }}">{% blocktrans count game.topic.posts|add:"-1" as number_of_comments %}<span class="bold">{{ number_of_comments }}</span> Comment{% plural %}<span class="bold">{{ number_of_comments }}</span> Comments{% endblocktrans %}</a></div>
         </div>
         <div class="column">
-            <span>Oyun</span>
+            <span>{% trans "Game" %}</span>
             <div class="title"><a href="{{ game.get_absolute_url }}">{{ game.title }}</a></div>
             <div class="summary">{{ game.sum|safe|truncatewords_html:23 }}</div>
         </div>

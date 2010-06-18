@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-18 17:29+0300\n"
+"POT-Creation-Date: 2010-06-18 17:59+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -1895,8 +1895,9 @@ msgid "Workshop Articles"
 msgstr "Atölye"
 
 #: st/models.py:237 templates/base.html:15 templates/footer.html:12
-#: templates/howto/howto_detail.html:4 templates/howto/howto_main.html:4
-#: templates/howto/howto_printable.html:3 templates/tag/tag_detail.html:25
+#: templates/home.html:54 templates/howto/howto_detail.html:4
+#: templates/howto/howto_main.html:4 templates/howto/howto_printable.html:3
+#: templates/tag/tag_detail.html:25
 #: templates/tema/theme_base_without_ezine.html:15
 msgid "Howto"
 msgstr "Nasıl"
@@ -1968,7 +1969,7 @@ msgstr ""
 msgid "like 1 day, 3 hours, 5 months, years."
 msgstr ""
 
-#: st/models.py:279
+#: st/models.py:279 templates/home.html:80
 #, fuzzy
 msgid "Game"
 msgstr "Oyunlar"
@@ -2003,9 +2004,10 @@ msgid "Update Date"
 msgstr "Son Güncelleme"
 
 #: st/models.py:308 st/models.py:309 templates/base.html:14
-#: templates/footer.html:13 templates/editor/list.html:12
-#: templates/news/news_detail.html:4 templates/news/news_main.html:4
-#: templates/news/news_printable.html:3 templates/tag/tag_detail.html:14
+#: templates/footer.html:13 templates/home.html:33
+#: templates/editor/list.html:12 templates/news/news_detail.html:4
+#: templates/news/news_main.html:4 templates/news/news_printable.html:3
+#: templates/tag/tag_detail.html:14
 #: templates/tema/theme_base_without_ezine.html:14
 msgid "News"
 msgstr "Haberler"
@@ -2025,7 +2027,7 @@ msgstr "İndir"
 msgid "Editor's Rating"
 msgstr "Editör"
 
-#: st/models.py:346
+#: st/models.py:346 templates/home.html:67
 #, fuzzy
 msgid "Package"
 msgstr "Paketler"
