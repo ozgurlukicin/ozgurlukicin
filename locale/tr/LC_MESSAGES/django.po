@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-18 12:39+0300\n"
+"POT-Creation-Date: 2010-06-18 12:52+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -22,6 +22,7 @@ msgid "Issue"
 msgstr ""
 
 #: ezine/models.py:9 flatpages/models.py:17 forum/forms.py:22
+#: podcast/models.py:30
 #, fuzzy
 msgid "Title"
 msgstr "Dosya"
@@ -336,6 +337,7 @@ msgid "URL"
 msgstr ""
 
 #: flatpages/models.py:18 forum/forms.py:23 forum/forms.py:41
+#: podcast/models.py:34 poll/models.py:28
 msgid "Text"
 msgstr ""
 
@@ -425,7 +427,7 @@ msgstr "Sebep:"
 msgid "(can be 512 characters at most)"
 msgstr ""
 
-#: forum/forms.py:63
+#: forum/forms.py:63 poll/models.py:47
 #, fuzzy
 msgid "End Date"
 msgstr "Tarih"
@@ -554,7 +556,8 @@ msgstr ""
 msgid "Latest posts"
 msgstr "Son İletiler"
 
-#: forum/models.py:164 templates/forum/topic.html:34
+#: forum/models.py:164 poll/models.py:13 poll/models.py:27 poll/models.py:61
+#: templates/forum/topic.html:34
 msgid "Poll"
 msgstr "Anket"
 
@@ -1243,7 +1246,7 @@ msgstr "Gezegen"
 msgid "250000 characters at most"
 msgstr ""
 
-#: paste/models.py:37
+#: paste/models.py:37 poll/models.py:16
 #, fuzzy
 msgid "IP Address"
 msgstr "ileti adresi"
@@ -1260,6 +1263,101 @@ msgstr ""
 #, fuzzy
 msgid "Can hide pasted text"
 msgstr "Fikrin durumunu değiştir"
+
+#: podcast/models.py:19 templates/user/login.html:18
+#, fuzzy
+msgid "Username"
+msgstr "Kullanıcılar"
+
+#: podcast/models.py:26
+#, fuzzy
+msgid "Speaker"
+msgstr "Arama"
+
+#: podcast/models.py:27
+msgid "Speakers"
+msgstr ""
+
+#: podcast/models.py:31
+#, fuzzy
+msgid "SEF Title"
+msgstr "Dosya"
+
+#: podcast/models.py:32
+#, fuzzy
+msgid "Image"
+msgstr "Anasayfa"
+
+#: podcast/models.py:33
+msgid "Summary"
+msgstr ""
+
+#: podcast/models.py:37 templates/podcast/detail.html:63
+#: templates/podcast/main.html:57
+msgid "Guests"
+msgstr ""
+
+#: podcast/models.py:43
+msgid "Active"
+msgstr ""
+
+#: podcast/models.py:70
+msgid "Episode"
+msgstr ""
+
+#: podcast/models.py:71
+msgid "Episodes"
+msgstr ""
+
+#: poll/models.py:14
+msgid "Option"
+msgstr ""
+
+#: poll/models.py:43
+#, fuzzy
+msgid "Question"
+msgstr "Sürüm"
+
+#: poll/models.py:44
+msgid "Changing vote is allowed"
+msgstr ""
+
+#: poll/models.py:44
+msgid "Check this if you want users to be able to change votes after casting."
+msgstr ""
+
+#: poll/models.py:45
+msgid "Multiple options allowed"
+msgstr ""
+
+#: poll/models.py:45
+msgid ""
+"Check this if you want users to be able to cast votes on multiple options. "
+"Warning: You can't change this option later."
+msgstr ""
+
+#: poll/models.py:46
+#, fuzzy
+msgid "Timed"
+msgstr "Dosya"
+
+#: poll/models.py:46
+msgid "Check this if you want voting to end at a specified date."
+msgstr ""
+
+#: poll/models.py:47
+msgid "Specify when vote casting will be disabled. like 30/8/2008."
+msgstr ""
+
+#: poll/models.py:48
+#, fuzzy
+msgid "Creation Date"
+msgstr "Son Güncelleme"
+
+#: poll/models.py:62
+#, fuzzy
+msgid "Polls"
+msgstr "Anket"
 
 #: templates/404.html:3
 msgid "Page Not Found"
@@ -2603,10 +2701,6 @@ msgstr "Belgelendirme"
 msgid "Commentators"
 msgstr "Yorumlar"
 
-#: templates/podcast/detail.html:63 templates/podcast/main.html:57
-msgid "Guests"
-msgstr ""
-
 #: templates/podcast/feed.html:5 templates/podcast/feed.html.py:7
 #: templates/podcast/feed_ogg.html:5 templates/podcast/feed_ogg.html.py:7
 #: templates/podcast/feed_ogg.html:9 templates/podcast/main.html:15
@@ -2984,11 +3078,6 @@ msgid ""
 "your password click <a href=\"/kullanici/kayip/\">here</a>. If you're not "
 "registered click <a href=\"/kullanici/kayit/\">here</a> to register."
 msgstr ""
-
-#: templates/user/login.html:18
-#, fuzzy
-msgid "Username"
-msgstr "Kullanıcılar"
 
 #: templates/user/login.html:22
 #, fuzzy

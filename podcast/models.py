@@ -13,34 +13,35 @@ from oi.forum.models import Topic
 from oi.forum.tools import create_forum_topic
 from oi.st.tags import Tag
 from oi.podcast.utils import getDuration
+from django.utils.translation import ugettext as _
 
 class Author(models.Model):
-    user = models.ForeignKey(User, verbose_name="Öİ Kullanıcı Adı", related_name="podcast_author")
+    user = models.ForeignKey(User, verbose_name=_("Username"), related_name="podcast_author")
 
     def __unicode__(self):
         return self.user.username
 
     class Meta:
         ordering = ['user']
-        verbose_name = "Konuşmacı"
-        verbose_name_plural = "Konuşmacılar"
+        verbose_name = _("Speaker")
+        verbose_name_plural = _("Speakers")
 
 class Episode(models.Model):
-    title = models.CharField("Başlık", max_length=32)
-    slug = models.SlugField("SEF Başlık")
-    image = models.ForeignKey(Image, verbose_name="Görsel", blank=True, null=True)
-    sum = models.TextField("Özet")
-    text = models.TextField("Metin")
+    title = models.CharField(_("Title"), max_length=32)
+    slug = models.SlugField(_("SEF Title"))
+    image = models.ForeignKey(Image, verbose_name=_("Image"), blank=True, null=True)
+    sum = models.TextField(_("Summary"))
+    text = models.TextField(_("Text"))
     tags = models.ManyToManyField(Tag)
     authors = models.ManyToManyField(Author)
-    guests = models.CharField("Konuklar", blank=True, null=True, max_length=1024)
+    guests = models.CharField(_("Guests"), blank=True, null=True, max_length=1024)
     minutes = models.IntegerField()
     seconds = models.IntegerField()
     mp3file = models.FileField(upload_to="podcasts/")
     oggfile = models.FileField(upload_to="podcasts/")
     update = models.DateTimeField()
-    status = models.BooleanField("Aktif")
-    topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
+    status = models.BooleanField(_("Active"))
+    topic = models.ForeignKey(Topic)
 
     def __unicode__(self):
         return self.title
@@ -66,5 +67,5 @@ class Episode(models.Model):
         return self.guests.split(',')
 
     class Meta:
-        verbose_name = "Bölüm"
-        verbose_name_plural = "Bölümler"
+        verbose_name = _("Episode")
+        verbose_name_plural = _("Episodes")

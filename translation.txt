@@ -321,16 +321,16 @@ These are python files to be marked
 -   |   |-- urls.py
 -   |   `-- views.py
     |-- podcast
--   |   |-- admin.py
--   |   |-- __init__.py
--   |   |-- models.py
--   |   |-- settings.py
--   |   |-- urls.py
--   |   |-- utils.py
--   |   `-- views.py
++   |   |-- admin.py
++   |   |-- __init__.py
++   |   |-- models.py
++   |   |-- settings.py
++   |   |-- urls.py
++   |   |-- utils.py
++   |   `-- views.py
     |-- poll
--   |   |-- __init__.py
--   |   `-- models.py
++   |   |-- __init__.py
++   |   `-- models.py
     |-- profile
 -   |   |-- admin.py
 -   |   |-- forms.py
