@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-18 17:01+0300\n"
+"POT-Creation-Date: 2010-06-18 17:29+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -2343,6 +2343,48 @@ msgstr ""
 #, fuzzy
 msgid "Theme Content"
 msgstr "Diğer Gezegenler"
+
+#: tema/views.py:126
+#, fuzzy
+msgid "Spread Pardus - Theme Report"
+msgstr "Özgürlükİçin Forum"
+
+#: tema/views.py:127
+#, python-format
+msgid ""
+"\n"
+"%(topic)s was reported as abuse.\n"
+"Click here to see the content: %(link)s\n"
+"\n"
+"Content Message (written by <b>%(sender)s</b>):\n"
+"%(message)s\n"
+"Reporter's Comment (written by %(reporter)s):\n"
+"%(reason)s\n"
+msgstr ""
+
+#: tema/views.py:147
+msgid "Your abuse report has been sent to admins. Thank you for your support."
+msgstr ""
+
+#: tema/views.py:159
+msgid "You have to login before voting!"
+msgstr ""
+
+#: tema/templatetags/tema.py:24
+msgid "Most Popular Wallpapers"
+msgstr ""
+
+#: tema/templatetags/tema.py:27
+msgid "Most Popular Desktop Screenshots"
+msgstr ""
+
+#: tema/templatetags/tema.py:30
+msgid "Most Popular Fonts"
+msgstr ""
+
+#: tema/templatetags/tema.py:33
+msgid "Most Popular"
+msgstr ""
 
 #: templates/404.html:3
 msgid "Page Not Found"

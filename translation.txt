@@ -415,13 +415,11 @@ These are python files to be marked
 +   |   |-- __init__.py
 +   |   |-- models.py
 +   |   |-- settings.py
-+   |   |-- signals.py
     |   |-- templatetags
--   |   |   |-- __init__.py
--   |   |   `-- tema.py
--   |   |-- urls.py
--   |   |-- utils.py
--   |   `-- views.py
++   |   |   |-- __init__.py
++   |   |   `-- tema.py
++   |   |-- urls.py
++   |   `-- views.py
     |-- upload
 -   |   |-- admin.py
 -   |   |-- __init__.py

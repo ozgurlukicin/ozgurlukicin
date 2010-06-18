@@ -35,6 +35,8 @@ from django.template import Context, loader
 from django.conf import settings
 from django.template.defaultfilters import slugify
 
+from django.utils.translation import ugettext as _
+
 TURKISH_CHARS = (
     ("ç", "c"),
     ("ğ", "g"),
@@ -121,16 +123,16 @@ def report_abuse(request, item_id):
                 report = ThemeAbuseReport(themeitem=themeitem, submitter=request.user, reason=form.cleaned_data["reason"])
                 report.save()
 
-                email_subject = "Özgürlükİçin - Tema Şikayeti"
-                email_body ="""
-%(topic)s başlıklı şikayet edildi.
-İletiyi görmek için buraya tıklayın: %(link)s
+                email_subject = _("Spread Pardus - Theme Report")
+                email_body =_("""
+%(topic)s was reported as abuse.
+Click here to see the content: %(link)s
 
-İletinin içeriği: (<b>%(sender)s</b> tarafından yazılmış):
+Content Message (written by <b>%(sender)s</b>):
 %(message)s
-Şikayet metni buydu (%(reporter)s tarafından şikayet edilmiş):
+Reporter's Comment (written by %(reporter)s):
 %(reason)s
-"""
+""")
                 email_dict = {
                         "topic":themeitem.title,
                         "reporter":request.user.username,
@@ -142,7 +144,7 @@ def report_abuse(request, item_id):
                 send_mail(email_subject, email_body % email_dict, DEFAULT_FROM_EMAIL, [ABUSE_MAIL_LIST], fail_silently=True)
 
                 return render_response(request, 'forum/forum_done.html', {
-                    "message": "İleti şikayetiniz ilgililere ulaştırılmıştır. Teşekkür Ederiz.",
+                    "message": _("Your abuse report has been sent to admins. Thank you for your support."),
                     "back": themeitem.get_absolute_url()
                     })
             else:
@@ -154,7 +156,7 @@ def report_abuse(request, item_id):
 def themeitem_rate(request, item_id):
     themeitem = get_object_or_404(ThemeItem, id=item_id)
     if not request.user.is_authenticated():
-        return HttpResponse('Oy kullanmak için giriş yapmalısınız!')
+        return HttpResponse(_('You have to login before voting!'))
     if request.method == "POST":
         form = ThemeRatingForm(request.POST.copy())
         if form.is_valid():
@@ -227,6 +229,8 @@ def themeitem_add_font(request):
             fill = (112,112,112)
             draw.text((5, 5), "Aa Ee Rr", font=bigfont, fill=fill)
             text_list = (
+                #FIXME: English version?
+                #The quick brown fox jumps over the lazy dog
                 (30, "Dag basini", u"Dağ başını"),
                 (45, "duman almis,", u"duman almış,"),
                 (60, "Gumus dere", u"Gümüş dere"),
