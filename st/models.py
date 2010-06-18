@@ -24,11 +24,13 @@ from oi.st.signals import remove_video_thumbnail_on_delete
 from oi.upload.models import Image as Img
 from oi.upload.models import Logo
 
+from django.utils.translation import ugettext as _
+
 FFMPEG_COMMAND = "ffmpeg"
 ratings = ((1,'1'),(2,'2'),(3,'3'),(4,'4'),(5,'5'),(6,'6'),(7,'7'),(8,'8'),(9,'9'),(10,'10'))
 
 class Wiki(models.Model):
-    name = models.CharField('Madde adı', max_length=128, blank=False, unique=True)
+    name = models.CharField(_("Article Name"), max_length=128, blank=False, unique=True)
 
     def __unicode__(self):
         return self.name
@@ -38,21 +40,21 @@ class Wiki(models.Model):
 
     class Meta:
         ordering = ['name']
-        verbose_name = "Wiki sayfası"
-        verbose_name_plural = "Wiki sayfaları"
+        verbose_name = _("Wiki page")
+        verbose_name_plural = _("Wiki pages")
 
 class Contribute(models.Model):
-    name = models.CharField('Tanım', max_length=64, blank=False, unique=True)
+    name = models.CharField(_("Description"), max_length=64, blank=False, unique=True)
 
     def __unicode__(self):
         return self.name
 
     class Meta:
-        verbose_name = "Katkı Adı"
-        verbose_name_plural = "Katkı Adları"
+        verbose_name = _("Contribution Name")
+        verbose_name_plural = _("Contribution Names")
 
 class OtherFile(models.Model):
-    desc = models.TextField('Açıklama')
+    desc = models.TextField(_("Description"))
     file = models.FileField(upload_to='dosya/')
     tags = models.ManyToManyField(Tag)
 
@@ -60,11 +62,11 @@ class OtherFile(models.Model):
         return unicode(self.file)
 
     class Meta:
-        verbose_name = "Dosya"
-        verbose_name_plural = "Dosyalar"
+        verbose_name = _("File")
+        verbose_name_plural = _("Files")
 
 class ScreenShot(models.Model):
-    desc = models.TextField('Açıklama')
+    desc = models.TextField(_("Description"))
     file = models.ImageField(upload_to='ekran_goruntusu/')
     tags = models.ManyToManyField(Tag)
 
@@ -88,11 +90,11 @@ class ScreenShot(models.Model):
         return thumb_url
 
     class Meta:
-        verbose_name = "Ekran Görüntüsü"
-        verbose_name_plural = "Ekran Görüntüleri"
+        verbose_name = _("Screenshot")
+        verbose_name_plural = _("Screenshots")
 
 class Video(models.Model):
-    desc = models.CharField('Açıklama', max_length=64)
+    desc = models.CharField(_("Description"), max_length=64)
     file = models.FileField(upload_to='upload/video/')
     tags = models.ManyToManyField(Tag)
 
@@ -103,8 +105,8 @@ class Video(models.Model):
         return "%s%s.png" % (MEDIA_URL, path.splitext(self.file)[0])
 
     class Meta:
-        verbose_name = "Video"
-        verbose_name_plural = "Videolar"
+        verbose_name = _("Video")
+        verbose_name_plural = _("Videos")
 
     def convertvideo(self, video):
         filename = path.splitext(self.file)[0]
@@ -144,21 +146,21 @@ class License(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = "Lisans"
-        verbose_name_plural = "Lisanslar"
+        verbose_name = _("License")
+        verbose_name_plural = _("Licenses")
 
 class FS(models.Model):
-    title = models.CharField('Başlık', max_length=32, blank=False)
-    slug = models.SlugField('SEF Başlık')
-    image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
-    sum = models.TextField('Özet', blank=False)
-    text = models.TextField('Metin', blank=False)
+    title = models.CharField(_("Title"), max_length=32, blank=False)
+    slug = models.SlugField(_("SEF Title"))
+    image = models.ForeignKey(Img, verbose_name=_("Image"), blank=True, null=True)
+    sum = models.TextField(_("Summary"), blank=False)
+    text = models.TextField(_("Text"), blank=False)
     tags = models.ManyToManyField(Tag, blank=False)
     videos = models.ManyToManyField(Video, blank=True)
-    update = models.DateTimeField('Son Güncelleme', blank=False)
-    author = models.CharField('Yazar', max_length=32)
-    order = models.PositiveIntegerField(unique=True, verbose_name='Sıralama')
-    status = models.BooleanField('Aktif')
+    update = models.DateTimeField(_("Last Update"), blank=False)
+    author = models.CharField(_("Author"), max_length=32)
+    order = models.PositiveIntegerField(unique=True, verbose_name=_("Ordering"))
+    status = models.BooleanField(_("Active"))
 
     def __unicode__(self):
         return self.title
@@ -170,21 +172,21 @@ class FS(models.Model):
         return "/ia/%s/yazdir/" % self.slug
 
     class Meta:
-        verbose_name = "İlk Adım"
-        verbose_name_plural = "İlk Adımlar"
+        verbose_name = _("First Step")
+        verbose_name_plural = _("First Steps")
 
 class Workshop(models.Model):
-    title = models.CharField('Başlık', max_length=32, blank=False)
-    slug = models.SlugField('SEF Başlık')
-    logo = models.ForeignKey(Logo, blank=True, null=True, help_text="114x114 boyutlarında olmalıdır")
-    sum = models.TextField('Özet', blank=False)
-    image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
-    text = models.TextField('Metin', blank=False)
+    title = models.CharField(_("Title"), max_length=32, blank=False)
+    slug = models.SlugField(_("SEF Title"))
+    logo = models.ForeignKey(Logo, blank=True, null=True, help_text=_("must be 114x114 in size"))
+    sum = models.TextField(_("Summary"), blank=False)
+    image = models.ForeignKey(Img, verbose_name=_("Image"), blank=True, null=True)
+    text = models.TextField(_("Text"), blank=False)
     tags = models.ManyToManyField(Tag, blank=False)
-    update = models.DateTimeField('Son Güncelleme', blank=False)
-    author = models.CharField('Yazar', max_length=32)
-    status = models.BooleanField('Aktif')
-    topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
+    update = models.DateTimeField(_("Last Update"), blank=False)
+    author = models.CharField(_("Author"), max_length=32)
+    status = models.BooleanField(_("Active"))
+    topic = models.ForeignKey(Topic)
 
     def __unicode__(self):
         return self.title
@@ -200,23 +202,23 @@ class Workshop(models.Model):
         super(Workshop, self).save()
 
     class Meta:
-        verbose_name = "Atölye"
-        verbose_name_plural = "Atölye Belgeleri"
+        verbose_name = _("Workshop Article")
+        verbose_name_plural = _("Workshop Articles")
 
 class HowTo(models.Model):
-    title = models.CharField('Başlık', max_length=32, blank=False)
-    slug = models.SlugField('SEF Başlık')
-    logo = models.ForeignKey(Logo, blank=True, null=True, help_text="114x114 boyutlarında olmalıdır")
-    sum = models.TextField('Özet', blank=False)
-    image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
-    text = models.TextField('Metin', blank=False)
+    title = models.CharField(_("Title"), max_length=32, blank=False)
+    slug = models.SlugField(_("SEF Title"))
+    logo = models.ForeignKey(Logo, blank=True, null=True, help_text=_("must be 114x114 in size"))
+    sum = models.TextField(_("Summary"), blank=False)
+    image = models.ForeignKey(Img, verbose_name=_("Image"), blank=True, null=True)
+    text = models.TextField(_("Text"), blank=False)
     tags = models.ManyToManyField(Tag, blank=False)
     wiki = models.ManyToManyField(Wiki, blank=True)
     videos = models.ManyToManyField(Video, blank=True)
-    update = models.DateTimeField('Son Güncelleme', blank=False)
-    author = models.CharField('Yazar', max_length=32)
-    status = models.BooleanField('Aktif')
-    topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
+    update = models.DateTimeField(_("Last Update"), blank=False)
+    author = models.CharField(_("Author"), max_length=32)
+    status = models.BooleanField(_("Active"))
+    topic = models.ForeignKey(Topic)
 
     def __unicode__(self):
         return self.title
@@ -232,33 +234,33 @@ class HowTo(models.Model):
         super(HowTo, self).save()
 
     class Meta:
-        verbose_name = "Nasıl"
-        verbose_name_plural = "Nasıl Belgeleri"
+        verbose_name = _("Howto")
+        verbose_name_plural = _("Howto Articles")
 
 class Game(models.Model):
-    title = models.CharField('Başlık', max_length=32, blank=False)
-    slug = models.SlugField('SEF Başlık')
-    image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
-    sum = models.TextField('Özet', blank=False)
-    text = models.TextField('Metin', blank=False)
+    title = models.CharField(_("Title"), max_length=32, blank=False)
+    slug = models.SlugField(_("SEF Title"))
+    image = models.ForeignKey(Img, verbose_name=_("Image"), blank=True, null=True)
+    sum = models.TextField(_("Summary"), blank=False)
+    text = models.TextField(_("Text"), blank=False)
     license = models.ManyToManyField(License)
-    installed_size = models.IntegerField('Kurulu boyut', help_text='MB cinsinden')
-    download_size = models.IntegerField('İndirilecek boyut', help_text='MB cinsinden')
-    url = models.URLField('Sitesi', verify_exists=True, help_text='Başına http:// koymayı unutmayın')
-    path = models.CharField('Çalıştırma Yolu', max_length=128, help_text='Paketin Pardus menüsündeki yeri (örn. Programlar > Yardımcı Programlar > KNazar)')
-    gameplay = models.SmallIntegerField('Oynanabilirlik', max_length=1, choices=ratings)
-    graphics = models.SmallIntegerField('Grafik', max_length=1, choices=ratings)
-    sound = models.SmallIntegerField('Ses', max_length=1, choices=ratings)
-    scenario = models.SmallIntegerField('Senaryo', max_length=1, choices=ratings)
-    atmosphere = models.SmallIntegerField('Atmosfer', max_length=1, choices=ratings)
-    learning_time = models.CharField('Öğrenme Süresi', max_length=128, help_text='1 gün, 3 saat, 5 ay, yıllarca gibi.')
+    installed_size = models.IntegerField(_("Installed size"), help_text=_("in MB"))
+    download_size = models.IntegerField(_("Download size"), help_text=_("in MB"))
+    url = models.URLField(_("Web Site"), verify_exists=True, help_text=_("Add http:// in front"))
+    path = models.CharField(_("Location in Menu"), max_length=128, help_text=_("like Programs > Accesories > KNazar)"))
+    gameplay = models.SmallIntegerField(_("Playability"), max_length=1, choices=ratings)
+    graphics = models.SmallIntegerField(_("Graphics"), max_length=1, choices=ratings)
+    sound = models.SmallIntegerField(_("Sound"), max_length=1, choices=ratings)
+    scenario = models.SmallIntegerField(_("Scenario"), max_length=1, choices=ratings)
+    atmosphere = models.SmallIntegerField(_("Atmosphere"), max_length=1, choices=ratings)
+    learning_time = models.CharField(_("Learning Time"), max_length=128, help_text=_('like 1 day, 3 hours, 5 months, years.'))
     tags = models.ManyToManyField(Tag, blank=False)
     wiki = models.ManyToManyField(Wiki, blank=True)
     videos = models.ManyToManyField(Video, blank=True)
-    update = models.DateTimeField('Son Güncelleme', blank=False)
-    author = models.CharField('Yazar', max_length=32)
-    status = models.BooleanField('Aktif')
-    topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
+    update = models.DateTimeField(_("Last Update"), blank=False)
+    author = models.CharField(_("Author"), max_length=32)
+    status = models.BooleanField(_("Active"))
+    topic = models.ForeignKey(Topic)
 
     def __unicode__(self):
         return self.title
@@ -274,20 +276,20 @@ class Game(models.Model):
         super(Game, self).save()
 
     class Meta:
-        verbose_name = "Oyun"
-        verbose_name_plural = "Oyunlar"
+        verbose_name = _("Game")
+        verbose_name_plural = _("Games")
 
 class News(models.Model):
-    title = models.CharField('Başlık', max_length=32, blank=False)
-    slug = models.SlugField('SEF Başlık', help_text="Haberin bağlantısını oluşturacak başlık (haber başlığıyla aynı olmalı fakat sadece küçük harf ve - içermelidir)", unique=True)
-    image = models.ForeignKey(Img, verbose_name="Açılış Görseli", blank=True, null=True, help_text="Görselin 310x205 boyutlarında olmasına dikkat edin! Yeni görsel eklemek için + düğmesine tıklayın.")
-    sum = models.TextField('Özet', blank=False, help_text="Açılış görseli haber özetine otomatik eklenecektir.")
-    text = models.TextField('Metin', blank=False)
-    tags = models.ManyToManyField(Tag, verbose_name="Etiketler", blank=False)
-    update = models.DateTimeField('Tarih', blank=False)
-    author = models.CharField('Yazar', max_length=32)
-    status = models.BooleanField('Aktif')
-    topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
+    title = models.CharField(_("Title"), max_length=32, blank=False)
+    slug = models.SlugField(_("SEF Title"), help_text=_("Should be the same as title but only consist of small letters and -"), unique=True)
+    image = models.ForeignKey(Img, verbose_name=_("Headline Image"), blank=True, null=True, help_text=_("Image should be 310x205 in size! Press + to upload a new image."))
+    sum = models.TextField(_("Summary"), blank=False, help_text=_("Headline image will be added to summary automaticly."))
+    text = models.TextField(_("Text"), blank=False)
+    tags = models.ManyToManyField(Tag, verbose_name=_("Tags"), blank=False)
+    update = models.DateTimeField(_("Update Date"), blank=False)
+    author = models.CharField(_("Author"), max_length=32)
+    status = models.BooleanField(_("Active"))
+    topic = models.ForeignKey(Topic)
 
     def __unicode__(self):
         return self.title
@@ -303,29 +305,29 @@ class News(models.Model):
         super(News, self).save()
 
     class Meta:
-        verbose_name = "Haber"
-        verbose_name_plural = "Haberler"
+        verbose_name = _("News")
+        verbose_name_plural = _("News")
 
 class Package(models.Model):
-    title = models.CharField('Başlık', max_length=32, blank=False, help_text='Paket ismi')
-    slug = models.SlugField('SEF Başlık')
-    image = models.ForeignKey(Img, verbose_name="Görsel", blank=True, null=True)
-    sum = models.TextField('Özet', blank=False)
-    text = models.TextField('Açıklama', blank=False)
+    title = models.CharField(_("Title"), max_length=32, blank=False, help_text='Paket ismi')
+    slug = models.SlugField(_("SEF Title"))
+    image = models.ForeignKey(Img, verbose_name=_("Image"), blank=True, null=True)
+    sum = models.TextField(_("Summary"), blank=False)
+    text = models.TextField(_("Description"), blank=False)
     license = models.ManyToManyField(License)
-    installed_size = models.IntegerField('Kurulu boyut', help_text='MB cinsinden')
-    download_size = models.IntegerField('İndirilecek boyut', help_text='MB cinsinden')
-    url = models.URLField('Sitesi', verify_exists=True, help_text='Başına http:// koymayı unutmayın')
-    point = models.SmallIntegerField('Editör Notu', max_length=1, choices=ratings)
-    path = models.CharField('Çalıştırma Yolu', max_length=128, help_text='Paketin Pardus menüsündeki yeri (örn. Programlar > Yardımcı Programlar > KNazar)')
+    installed_size = models.IntegerField(_("Installed Size"), help_text=_("in MB"))
+    download_size = models.IntegerField(_("Download Size"), help_text=_("in MB"))
+    url = models.URLField(_("Web Site"), verify_exists=True, help_text=_("Add http:// in front"))
+    point = models.SmallIntegerField(_("Editor's Rating"), max_length=1, choices=ratings)
+    path = models.CharField(_("Location in Menu"), max_length=128, help_text=_("like Programs > Accesories > KNazar)"))
     ss = models.ManyToManyField(ScreenShot)
     tags = models.ManyToManyField(Tag)
     wiki = models.ManyToManyField(Wiki, blank=True)
     videos = models.ManyToManyField(Video, blank=True)
-    update = models.DateTimeField('Son Güncelleme', blank=False)
-    author = models.CharField('Yazar', max_length=32)
-    status = models.BooleanField('Aktif')
-    topic = models.ForeignKey(Topic, verbose_name="Forumdaki Konusu")
+    update = models.DateTimeField(_("Last Update"), blank=False)
+    author = models.CharField(_("Author"), max_length=32)
+    status = models.BooleanField(_("Active"))
+    topic = models.ForeignKey(Topic)
 
     def __unicode__(self):
         return self.title
@@ -341,20 +343,20 @@ class Package(models.Model):
         super(Package, self).save()
 
     class Meta:
-        verbose_name = "Paket"
-        verbose_name_plural = "Paketler"
+        verbose_name = _("Package")
+        verbose_name_plural = _("Packages")
 
 class PardusVersion(models.Model):
-    number = models.CharField('Sürüm numarası', max_length = 16, blank = False, unique = True)
-    codename = models.CharField('Kod adı', max_length = 64, unique = True)
-    install_md5sum = models.CharField('Kurulan md5 özeti', max_length = 32, blank = False, unique = True)
-    install_sha1sum = models.CharField('Kurulan sha1 özeti', max_length = 40, blank = False, unique = True)
-    live_md5sum = models.CharField('Çalışan md5 özeti', max_length = 32, blank = False, unique = True)
-    live_sha1sum = models.CharField('Çalışan sha1 özeti', max_length = 40, blank = False, unique = True)
-    releasenote = models.TextField('Sürüm notu', blank = False)
-    install_torrent = models.CharField('Kurulan Torrent', max_length = 128)
-    live_torrent = models.CharField('Çalışan Torrent', max_length = 128)
-    status = models.BooleanField('Aktif')
+    number = models.CharField(_("Version number"), max_length = 16, blank = False, unique = True)
+    codename = models.CharField(_("Code Name"), max_length = 64, unique = True)
+    install_md5sum = models.CharField(_("MD5 sum of Install"), max_length = 32, blank = False, unique = True)
+    install_sha1sum = models.CharField(_("SHA1 sum of Install"), max_length = 40, blank = False, unique = True)
+    live_md5sum = models.CharField(_("MD5 sum of Live"), max_length = 32, blank = False, unique = True)
+    live_sha1sum = models.CharField(_("SHA1 sum of Live"), max_length = 40, blank = False, unique = True)
+    releasenote = models.TextField(_("Release Notes"), blank = False)
+    install_torrent = models.CharField(_("Install Torrent"), max_length = 128)
+    live_torrent = models.CharField(_("Live Torrent"), max_length = 128)
+    status = models.BooleanField(_("Active"))
 
     def __unicode__(self):
         return "Pardus %s" % self.number
@@ -363,22 +365,22 @@ class PardusVersion(models.Model):
         return "/indir/%s/" % self.number
 
     class Meta:
-        verbose_name = "Pardus Sürümü"
-        verbose_name_plural = "Pardus Sürümleri"
+        verbose_name = _("Pardus Version")
+        verbose_name_plural = _("Pardus Versions")
 
 class PardusMirror(models.Model):
-    cdtype = (('1','Kurulan'),('2','Çalışan'))
+    cdtype = ((1,_("Install")),(2,_("Live")))
 
-    name = models.CharField('Sunucu adı', max_length = 64, blank = False)
-    url = models.CharField('Adres', max_length = 128)
-    type = models.SmallIntegerField('CD Tipi', max_length=1, choices=cdtype)
-    order = models.PositiveIntegerField(verbose_name='Sıralama')
-    status = models.BooleanField('Aktif')
+    name = models.CharField(_("Server name"), max_length = 64, blank = False)
+    url = models.CharField(_("Address"), max_length = 128)
+    type = models.SmallIntegerField(_("CD Type"), max_length=1, choices=cdtype)
+    order = models.PositiveIntegerField(verbose_name=_("Ordering"))
+    status = models.BooleanField(_("Active"))
 
     def __unicode__(self):
         return self.name
 
     class Meta:
         unique_together = (('type', 'order'),('type', 'name'),)
-        verbose_name = "Pardus Yansısı"
-        verbose_name_plural = "Pardus Yansıları"
+        verbose_name = _("Pardus Mirror")
+        verbose_name_plural = _("Pardus Mirrors")

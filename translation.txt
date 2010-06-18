@@ -394,11 +394,11 @@ These are python files to be marked
 -   |   |   `-- views.py
 -   |   `-- urls.py
     |-- st
--   |   |-- admin.py
++   |   |-- admin.py
 -   |   |-- feeds.py
 -   |   |-- forms.py
 -   |   |-- __init__.py
--   |   |-- models.py
++   |   |-- models.py
 -   |   |-- signals.py
 -   |   |-- sitemaps.py
 -   |   |-- tags.py

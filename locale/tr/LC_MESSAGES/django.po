@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-18 14:44+0300\n"
+"POT-Creation-Date: 2010-06-18 15:37+0300\n"
 "PO-Revision-Date: 2010-06-11 16:26+0300\n"
 "Last-Translator: Anıl Özbek\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -22,7 +22,8 @@ msgid "Issue"
 msgstr ""
 
 #: ezine/models.py:9 flatpages/models.py:17 forum/forms.py:22
-#: podcast/models.py:30 profile/models.py:71
+#: podcast/models.py:30 profile/models.py:71 st/models.py:153 st/models.py:179
+#: st/models.py:209 st/models.py:241 st/models.py:283 st/models.py:312
 #, fuzzy
 msgid "Title"
 msgstr "Dosya"
@@ -337,7 +338,8 @@ msgid "URL"
 msgstr ""
 
 #: flatpages/models.py:18 forum/forms.py:23 forum/forms.py:41
-#: podcast/models.py:34 poll/models.py:28
+#: podcast/models.py:34 poll/models.py:28 st/models.py:157 st/models.py:184
+#: st/models.py:214 st/models.py:245 st/models.py:287
 msgid "Text"
 msgstr ""
 
@@ -391,12 +393,12 @@ msgid " Forum Tag order : "
 msgstr ""
 
 #: forum/forms.py:24 forum/models.py:163 ideas/models.py:79
-#: ideas/templates/idea_detail.html:14 templates/flatpages/default.html:69
-#: templates/fs/fs_detail.html:26 templates/game/game_detail.html:95
-#: templates/howto/howto_detail.html:57 templates/news/news_detail.html:49
-#: templates/package/package_detail.html:63 templates/podcast/detail.html:56
-#: templates/podcast/main.html:50 templates/user/user_list.html:95
-#: templates/workshop/workshop_detail.html:56
+#: ideas/templates/idea_detail.html:14 st/models.py:288
+#: templates/flatpages/default.html:69 templates/fs/fs_detail.html:26
+#: templates/game/game_detail.html:95 templates/howto/howto_detail.html:57
+#: templates/news/news_detail.html:49 templates/package/package_detail.html:63
+#: templates/podcast/detail.html:56 templates/podcast/main.html:50
+#: templates/user/user_list.html:95 templates/workshop/workshop_detail.html:56
 msgid "Tags"
 msgstr "Etiketler"
 
@@ -472,9 +474,11 @@ msgstr ""
 msgid "You have to specify an end date for voting."
 msgstr ""
 
-#: forum/models.py:31 paste/models.py:36 templates/fs/fs_detail.html:42
-#: templates/game/game_detail.html:114 templates/howto/howto_detail.html:80
-#: templates/news/news_detail.html:53 templates/package/package_detail.html:79
+#: forum/models.py:31 paste/models.py:36 st/models.py:161 st/models.py:187
+#: st/models.py:219 st/models.py:261 st/models.py:290 st/models.py:328
+#: templates/fs/fs_detail.html:42 templates/game/game_detail.html:114
+#: templates/howto/howto_detail.html:80 templates/news/news_detail.html:53
+#: templates/package/package_detail.html:79
 #: templates/workshop/workshop_detail.html:61
 msgid "Author"
 msgstr "Yazar"
@@ -627,7 +631,8 @@ msgstr "Oyunlar"
 msgid "SEF name"
 msgstr ""
 
-#: forum/models.py:270 ideas/models.py:75
+#: forum/models.py:270 ideas/models.py:75 st/models.py:47 st/models.py:57
+#: st/models.py:69 st/models.py:97 st/models.py:316
 #, fuzzy
 msgid "Description"
 msgstr "Belgelendirme"
@@ -641,7 +646,7 @@ msgstr ""
 msgid "Latest Post"
 msgstr "Son İleti"
 
-#: forum/models.py:276 forum/models.py:309
+#: forum/models.py:276 forum/models.py:309 st/models.py:162 st/models.py:377
 msgid "Ordering"
 msgstr ""
 
@@ -887,7 +892,8 @@ msgid ""
 "Enter related bug numbers with commas between them. (This can be left blank)"
 msgstr ""
 
-#: ideas/models.py:85 templates/file_upload/file_upload.html:14
+#: ideas/models.py:85 st/models.py:65
+#: templates/file_upload/file_upload.html:14
 msgid "File"
 msgstr "Dosya"
 
@@ -1280,17 +1286,20 @@ msgstr "Arama"
 msgid "Speakers"
 msgstr ""
 
-#: podcast/models.py:31
+#: podcast/models.py:31 st/models.py:154 st/models.py:180 st/models.py:210
+#: st/models.py:242 st/models.py:284 st/models.py:313
 #, fuzzy
 msgid "SEF Title"
 msgstr "Dosya"
 
-#: podcast/models.py:32
+#: podcast/models.py:32 st/models.py:155 st/models.py:183 st/models.py:213
+#: st/models.py:243 st/models.py:314
 #, fuzzy
 msgid "Image"
 msgstr "Anasayfa"
 
-#: podcast/models.py:33
+#: podcast/models.py:33 st/models.py:156 st/models.py:182 st/models.py:212
+#: st/models.py:244 st/models.py:286 st/models.py:315
 msgid "Summary"
 msgstr ""
 
@@ -1299,7 +1308,9 @@ msgstr ""
 msgid "Guests"
 msgstr ""
 
-#: podcast/models.py:43 seminar/models.py:46
+#: podcast/models.py:43 seminar/models.py:46 st/models.py:163 st/models.py:188
+#: st/models.py:220 st/models.py:262 st/models.py:291 st/models.py:329
+#: st/models.py:359 st/models.py:378
 msgid "Active"
 msgstr ""
 
@@ -1700,6 +1711,318 @@ msgstr "Seminer"
 msgid "Seminars"
 msgstr "Seminer"
 
+#: st/models.py:33
+msgid "Article Name"
+msgstr ""
+
+#: st/models.py:43
+msgid "Wiki page"
+msgstr ""
+
+#: st/models.py:44
+#, fuzzy
+msgid "Wiki pages"
+msgstr "İlgili Sayfalar"
+
+#: st/models.py:53
+#, fuzzy
+msgid "Contribution Name"
+msgstr "Katkıda bulunun"
+
+#: st/models.py:54
+#, fuzzy
+msgid "Contribution Names"
+msgstr "Katkıda bulunun"
+
+#: st/models.py:66
+#, fuzzy
+msgid "Files"
+msgstr "Dosya"
+
+#: st/models.py:93
+msgid "Screenshot"
+msgstr ""
+
+#: st/models.py:94 templates/package/package_detail.html:75
+msgid "Screenshots"
+msgstr ""
+
+#: st/models.py:108
+#, fuzzy
+msgid "Video"
+msgstr "gizle"
+
+#: st/models.py:109
+#, fuzzy
+msgid "Videos"
+msgstr "Görüntüleme"
+
+#: st/models.py:149 templates/game/game_detail.html:46
+msgid "License"
+msgstr ""
+
+#: st/models.py:150
+msgid "Licenses"
+msgstr ""
+
+#: st/models.py:160 st/models.py:186 st/models.py:218 st/models.py:260
+#: st/models.py:327 templates/feedjack/oi/post_list.html:64
+msgid "Last Update"
+msgstr "Son Güncelleme"
+
+#: st/models.py:175
+#, fuzzy
+msgid "First Step"
+msgstr "İlk Adımlar"
+
+#: st/models.py:176 templates/base.html:16 templates/footer.html:12
+#: templates/fs/fs_detail.html:4 templates/fs/fs_main.html:4
+#: templates/fs/fs_printable.html:3 templates/howto/howto_main.html:34
+#: templates/tag/tag_detail.html:47
+#: templates/tema/theme_base_without_ezine.html:16
+msgid "First Steps"
+msgstr "İlk Adımlar"
+
+#: st/models.py:181 st/models.py:211
+msgid "must be 114x114 in size"
+msgstr ""
+
+#: st/models.py:205
+#, fuzzy
+msgid "Workshop Article"
+msgstr "Atölye"
+
+#: st/models.py:206
+#, fuzzy
+msgid "Workshop Articles"
+msgstr "Atölye"
+
+#: st/models.py:237 templates/base.html:15 templates/footer.html:12
+#: templates/howto/howto_detail.html:4 templates/howto/howto_main.html:4
+#: templates/howto/howto_printable.html:3 templates/tag/tag_detail.html:25
+#: templates/tema/theme_base_without_ezine.html:15
+msgid "Howto"
+msgstr "Nasıl"
+
+#: st/models.py:238
+#, fuzzy
+msgid "Howto Articles"
+msgstr "İlgili Videolar"
+
+#: st/models.py:247 templates/game/game_detail.html:55
+#, fuzzy
+msgid "Installed size"
+msgstr "Kurulan CD"
+
+#: st/models.py:247 st/models.py:248 st/models.py:318 st/models.py:319
+msgid "in MB"
+msgstr ""
+
+#: st/models.py:248
+#, fuzzy
+msgid "Download size"
+msgstr "İndir"
+
+#: st/models.py:249 st/models.py:320 templates/user/profile.html:90
+#, fuzzy
+msgid "Web Site"
+msgstr "İlgili Sayfalar"
+
+#: st/models.py:249 st/models.py:320
+msgid "Add http:// in front"
+msgstr ""
+
+#: st/models.py:250 st/models.py:322
+#, fuzzy
+msgid "Location in Menu"
+msgstr "Belgelendirme"
+
+#: st/models.py:250 st/models.py:322
+msgid "like Programs > Accesories > KNazar)"
+msgstr ""
+
+#: st/models.py:251
+msgid "Playability"
+msgstr ""
+
+#: st/models.py:252 templates/game/game_detail.html:70
+msgid "Graphics"
+msgstr ""
+
+#: st/models.py:253 templates/game/game_detail.html:75
+msgid "Sound"
+msgstr ""
+
+#: st/models.py:254 templates/game/game_detail.html:80
+#, fuzzy
+msgid "Scenario"
+msgstr "Seminer"
+
+#: st/models.py:255 templates/game/game_detail.html:85
+msgid "Atmosphere"
+msgstr ""
+
+#: st/models.py:256
+msgid "Learning Time"
+msgstr ""
+
+#: st/models.py:256
+msgid "like 1 day, 3 hours, 5 months, years."
+msgstr ""
+
+#: st/models.py:279
+#, fuzzy
+msgid "Game"
+msgstr "Oyunlar"
+
+#: st/models.py:280 templates/base.html:19 templates/footer.html:12
+#: templates/game/game_detail.html:5 templates/game/game_main.html:4
+#: templates/game/game_printable.html:3 templates/tag/tag_detail.html:58
+#: templates/tema/theme_base_without_ezine.html:19
+msgid "Games"
+msgstr "Oyunlar"
+
+#: st/models.py:284
+msgid "Should be the same as title but only consist of small letters and -"
+msgstr ""
+
+#: st/models.py:285
+#, fuzzy
+msgid "Headline Image"
+msgstr "Görselleri Filtrele"
+
+#: st/models.py:285
+msgid "Image should be 310x205 in size! Press + to upload a new image."
+msgstr ""
+
+#: st/models.py:286
+msgid "Headline image will be added to summary automaticly."
+msgstr ""
+
+#: st/models.py:289
+#, fuzzy
+msgid "Update Date"
+msgstr "Son Güncelleme"
+
+#: st/models.py:308 st/models.py:309 templates/base.html:14
+#: templates/footer.html:13 templates/editor/list.html:12
+#: templates/news/news_detail.html:4 templates/news/news_main.html:4
+#: templates/news/news_printable.html:3 templates/tag/tag_detail.html:14
+#: templates/tema/theme_base_without_ezine.html:14
+msgid "News"
+msgstr "Haberler"
+
+#: st/models.py:318
+#, fuzzy
+msgid "Installed Size"
+msgstr "Kurulan CD"
+
+#: st/models.py:319
+#, fuzzy
+msgid "Download Size"
+msgstr "İndir"
+
+#: st/models.py:321
+#, fuzzy
+msgid "Editor's Rating"
+msgstr "Editör"
+
+#: st/models.py:346
+#, fuzzy
+msgid "Package"
+msgstr "Paketler"
+
+#: st/models.py:347 templates/base.html:17 templates/footer.html:12
+#: templates/package/package_detail.html:5
+#: templates/package/package_main.html:4
+#: templates/package/package_printable.html:3 templates/tag/tag_detail.html:36
+#: templates/tema/theme_base_without_ezine.html:17
+msgid "Packages"
+msgstr "Paketler"
+
+#: st/models.py:350
+#, fuzzy
+msgid "Version number"
+msgstr "Sürüm"
+
+#: st/models.py:351
+#, fuzzy
+msgid "Code Name"
+msgstr "Oyunlar"
+
+#: st/models.py:352
+msgid "MD5 sum of Install"
+msgstr ""
+
+#: st/models.py:353
+msgid "SHA1 sum of Install"
+msgstr ""
+
+#: st/models.py:354
+msgid "MD5 sum of Live"
+msgstr ""
+
+#: st/models.py:355
+msgid "SHA1 sum of Live"
+msgstr ""
+
+#: st/models.py:356
+#, fuzzy
+msgid "Release Notes"
+msgstr "İlgili Videolar"
+
+#: st/models.py:357
+#, fuzzy
+msgid "Install Torrent"
+msgstr "Kurulan CD"
+
+#: st/models.py:358
+msgid "Live Torrent"
+msgstr ""
+
+#: st/models.py:368 templates/user/profile.html:78
+#, fuzzy
+msgid "Pardus Version"
+msgstr "Sürüm"
+
+#: st/models.py:369
+#, fuzzy
+msgid "Pardus Versions"
+msgstr "Sürüm"
+
+#: st/models.py:372
+#, fuzzy
+msgid "Install"
+msgstr "Kurulan CD"
+
+#: st/models.py:372
+msgid "Live"
+msgstr ""
+
+#: st/models.py:374
+#, fuzzy
+msgid "Server name"
+msgstr "Kullanıcılar"
+
+#: st/models.py:375
+#, fuzzy
+msgid "Address"
+msgstr "ileti adresi"
+
+#: st/models.py:376
+msgid "CD Type"
+msgstr ""
+
+#: st/models.py:385
+#, fuzzy
+msgid "Pardus Mirror"
+msgstr "Sürüm"
+
+#: st/models.py:386
+#, fuzzy
+msgid "Pardus Mirrors"
+msgstr "Ajans"
+
 #: templates/404.html:3
 msgid "Page Not Found"
 msgstr "Sayfa Bulunamadı"
@@ -1817,37 +2140,6 @@ msgstr "Özgürlükiçin RSS"
 msgid "Main Page"
 msgstr "Ana Sayfa"
 
-#: templates/base.html:14 templates/footer.html:13
-#: templates/editor/list.html:12 templates/news/news_detail.html:4
-#: templates/news/news_main.html:4 templates/news/news_printable.html:3
-#: templates/tag/tag_detail.html:14
-#: templates/tema/theme_base_without_ezine.html:14
-msgid "News"
-msgstr "Haberler"
-
-#: templates/base.html:15 templates/footer.html:12
-#: templates/howto/howto_detail.html:4 templates/howto/howto_main.html:4
-#: templates/howto/howto_printable.html:3 templates/tag/tag_detail.html:25
-#: templates/tema/theme_base_without_ezine.html:15
-msgid "Howto"
-msgstr "Nasıl"
-
-#: templates/base.html:16 templates/footer.html:12
-#: templates/fs/fs_detail.html:4 templates/fs/fs_main.html:4
-#: templates/fs/fs_printable.html:3 templates/howto/howto_main.html:34
-#: templates/tag/tag_detail.html:47
-#: templates/tema/theme_base_without_ezine.html:16
-msgid "First Steps"
-msgstr "İlk Adımlar"
-
-#: templates/base.html:17 templates/footer.html:12
-#: templates/package/package_detail.html:5
-#: templates/package/package_main.html:4
-#: templates/package/package_printable.html:3 templates/tag/tag_detail.html:36
-#: templates/tema/theme_base_without_ezine.html:17
-msgid "Packages"
-msgstr "Paketler"
-
 #: templates/base.html:18 templates/footer.html:14
 #: templates/tema/theme_base_without_ezine.html:18
 #: templates/workshop/workshop_detail.html:5
@@ -1855,13 +2147,6 @@ msgstr "Paketler"
 #: templates/workshop/workshop_printable.html:4
 msgid "Workshop"
 msgstr "Atölye"
-
-#: templates/base.html:19 templates/footer.html:12
-#: templates/game/game_detail.html:5 templates/game/game_main.html:4
-#: templates/game/game_printable.html:3 templates/tag/tag_detail.html:58
-#: templates/tema/theme_base_without_ezine.html:19
-msgid "Games"
-msgstr "Oyunlar"
 
 #: templates/base.html:20 templates/footer.html:13
 #: templates/feedjack/oi/post_list.html:3
@@ -2149,10 +2434,6 @@ msgstr "Gezegen Kuralları"
 #: templates/feedjack/oi/post_list.html:57
 msgid "Other planets"
 msgstr "Diğer Gezegenler"
-
-#: templates/feedjack/oi/post_list.html:64
-msgid "Last Update"
-msgstr "Son Güncelleme"
 
 #: templates/feedjack/sinx/post_list.html:50
 msgid "Author link"
@@ -2736,19 +3017,10 @@ msgstr ""
 msgid "Details"
 msgstr ""
 
-#: templates/game/game_detail.html:46
-msgid "License"
-msgstr ""
-
 #: templates/game/game_detail.html:50
 #, fuzzy
 msgid "Package size"
 msgstr "Paketler"
-
-#: templates/game/game_detail.html:55
-#, fuzzy
-msgid "Installed size"
-msgstr "Kurulan CD"
 
 #: templates/game/game_detail.html:59
 msgid "Web site of the game"
@@ -2766,23 +3038,6 @@ msgstr ""
 #, fuzzy
 msgid "Gameplay"
 msgstr "Oyunlar"
-
-#: templates/game/game_detail.html:70
-msgid "Graphics"
-msgstr ""
-
-#: templates/game/game_detail.html:75
-msgid "Sound"
-msgstr ""
-
-#: templates/game/game_detail.html:80
-#, fuzzy
-msgid "Scenario"
-msgstr "Seminer"
-
-#: templates/game/game_detail.html:85
-msgid "Atmosphere"
-msgstr ""
 
 #: templates/game/game_detail.html:92
 msgid "Place in Menu"
@@ -2985,10 +3240,6 @@ msgstr[0] "%(posts)s ileti"
 
 #: templates/package/package_detail.html:61
 msgid "Place in Pardus Menu"
-msgstr ""
-
-#: templates/package/package_detail.html:75
-msgid "Screenshots"
 msgstr ""
 
 #: templates/package/package_detail.html:82
@@ -3532,19 +3783,9 @@ msgstr ""
 msgid "Registration Date"
 msgstr "Kayıt Tarihi:"
 
-#: templates/user/profile.html:78
-#, fuzzy
-msgid "Pardus Version"
-msgstr "Sürüm"
-
 #: templates/user/profile.html:82
 msgid "Contact Information"
 msgstr ""
-
-#: templates/user/profile.html:90
-#, fuzzy
-msgid "Web Site"
-msgstr "İlgili Sayfalar"
 
 #: templates/user/profile.html:93
 msgid "Jabber"
