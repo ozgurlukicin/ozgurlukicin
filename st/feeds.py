@@ -35,7 +35,7 @@ class Main_RSS(CommonFeed):
             output.append(package)
 
         for game in Game.objects.filter(status=1).order_by('-update')[:GAMES_IN_HOMEPAGE]:
-            game.title = _('Game: %s'_) % game.title
+            game.title = _('Game: %s') % game.title
             output.append(game)
 
         for fs in FS.objects.filter(status=1).order_by('-update')[:FS_IN_HOMEPAGE]:
