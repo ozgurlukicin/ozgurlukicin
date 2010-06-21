@@ -305,13 +305,13 @@ These are python files to be marked
 +   |   |-- urls.py
 +   |   `-- views.py
     |-- petition
--   |   |-- __init__.py
--   |   |-- models.py
--   |   |-- settings.py
--   |   |-- templatetags
++   |   |-- __init__.py
++   |   |-- models.py
++   |   |-- settings.py
+    |   |-- templatetags
 -   |   |   |-- __init__.py
 -   |   |   `-- petition.py
--   |   |-- urls.py
++   |   |-- urls.py
 -   |   `-- views.py
     |-- piyango
 -   |   |-- forms.py

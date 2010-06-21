@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-18 17:59+0300\n"
-"PO-Revision-Date: 2010-06-11 16:26+0300\n"
-"Last-Translator: Anıl Özbek\n"
+"POT-Creation-Date: 2010-06-21 14:58+0300\n"
+"PO-Revision-Date: 2010-06-21 17:01+0300\n"
+"Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,31 +19,30 @@ msgstr ""
 
 #: ezine/models.py:8
 msgid "Issue"
-msgstr ""
+msgstr "Sayı"
 
 #: ezine/models.py:9 flatpages/models.py:17 forum/forms.py:22
 #: podcast/models.py:30 profile/models.py:71 st/models.py:153 st/models.py:179
 #: st/models.py:209 st/models.py:241 st/models.py:283 st/models.py:312
 #: tema/models.py:63 tema/models.py:241 tema/models.py:264
-#, fuzzy
 msgid "Title"
-msgstr "Dosya"
+msgstr "Başlık"
 
 #: ezine/models.py:9
 msgid ""
 "use &lt;br/&gt; to break line like \"Spread Pardus E-zine &lt;br/&gt; March "
 "2009\""
 msgstr ""
+"alt satıra düşmesi için arada &lt;br/&gt; kullanın \"Özgürlükİçin e-dergi "
+"&lt;br/&gt; Mart 2009\" gibi"
 
 #: ezine/models.py:10
-#, fuzzy
 msgid "Contents"
-msgstr "Yorumlar"
+msgstr "İçindekiler"
 
 #: ezine/models.py:11
-#, fuzzy
 msgid "E-zine Image"
-msgstr "Görselleri Filtrele"
+msgstr "Dergi Görseli"
 
 #: ezine/models.py:12 ezine/templates/list.html:18
 #: ezine/templates/list.html.py:29 templates/editor/base.html:3
@@ -51,37 +50,36 @@ msgid "Editor"
 msgstr "Editör"
 
 #: ezine/models.py:13
-#, fuzzy
 msgid "Page count"
-msgstr "Paketler (%(count)s)"
+msgstr "Sayfa sayısı"
 
 #: ezine/models.py:14
 msgid "300dpi e-zine address"
-msgstr ""
+msgstr "300dpi dergi adresi"
 
 #: ezine/models.py:14
 msgid "like /media/dosya/sp_i11_big.pdf"
-msgstr ""
+msgstr "/media/dosya/oi_say11_buyuk.pdf gibi"
 
 #: ezine/models.py:15
 msgid "300dpi e-zine size"
-msgstr ""
+msgstr "300dpi dergi boyutu"
 
 #: ezine/models.py:15 ezine/models.py:17
 msgid "in bytes"
-msgstr ""
+msgstr "bayt cinsinden"
 
 #: ezine/models.py:16
 msgid "96dpi e-zine address"
-msgstr ""
+msgstr "96dpi dergi adresi"
 
 #: ezine/models.py:16
 msgid "like /media/dosya/sp_i11_sml.pdf"
-msgstr ""
+msgstr "/media/dosya/oi_say11_kucuk.pdf gibi"
 
 #: ezine/models.py:17
 msgid "96dpi e-zine size"
-msgstr ""
+msgstr "96dpi dergi boyutu"
 
 #: ezine/models.py:24 ezine/templates/list.html:3
 #: templates/flatpages/default.html:40 templates/user/user_list.html:70
@@ -89,9 +87,8 @@ msgid "E-Zine"
 msgstr "E-Dergi"
 
 #: ezine/models.py:25
-#, fuzzy
 msgid "E-Zines"
-msgstr "E-Dergi"
+msgstr "E-Dergiler"
 
 #: ezine/templates/list.html:9
 msgid "Spread Pardus e-zine is online!"
@@ -336,13 +333,13 @@ msgstr ""
 
 #: flatpages/models.py:16
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: flatpages/models.py:18 forum/forms.py:23 forum/forms.py:41
 #: podcast/models.py:34 poll/models.py:28 st/models.py:157 st/models.py:184
 #: st/models.py:214 st/models.py:245 st/models.py:287
 msgid "Text"
-msgstr ""
+msgstr "Yazı"
 
 #: flatpages/models.py:21 ideas/models.py:73 paste/models.py:38
 #: templates/editor/list.html:16 templates/forum/forum_list.html:60
@@ -382,7 +379,7 @@ msgstr "Forum"
 #: forum/feeds.py:56
 #, python-format
 msgid "%(site_name)s %(forum_name)s forum"
-msgstr ""
+msgstr "%(site_name)s %(forum_name)s forumu"
 
 #: forum/feeds.py:82
 #, fuzzy
@@ -391,7 +388,7 @@ msgstr "Forum Kuralları"
 
 #: forum/feeds.py:122
 msgid " Forum Tag order : "
-msgstr ""
+msgstr " Forum Etiket sırası : "
 
 #: forum/forms.py:24 forum/models.py:163 ideas/models.py:79
 #: ideas/templates/idea_detail.html:14 st/models.py:288 st/tags.py:23
@@ -408,7 +405,7 @@ msgstr "Etiketler"
 msgid ""
 "You can select more than one tag by pressing and holding CTRL key. (5 at "
 "most)"
-msgstr ""
+msgstr "\"CTRL basılı tutarak birden fazla etiket seçebilirsiniz!(En çok 5)"
 
 #: forum/forms.py:36 ideas/forms.py:22 tema/forms.py:67 tema/forms.py:100
 #: tema/forms.py:118
@@ -416,6 +413,8 @@ msgid ""
 "You can choose 5 tags at most. Please choose only relevant tags with your "
 "topic."
 msgstr ""
+"En fazla 5 etiket seçebilirsiniz. Lütfen açtığınız başlığa uygun etiket "
+"seçiniz."
 
 #: forum/forms.py:44 forum/models.py:30 forum/models.py:156
 #: forum/models.py:236 forum/models.py:340
@@ -430,7 +429,7 @@ msgstr "Sebep:"
 
 #: forum/forms.py:60
 msgid "(can be 512 characters at most)"
-msgstr ""
+msgstr "(en fazla 512 karakter olabilir)"
 
 #: forum/forms.py:63 poll/models.py:47
 #, fuzzy
@@ -439,43 +438,43 @@ msgstr "Tarih"
 
 #: forum/forms.py:63
 msgid "Specify when voting will end. like 30/8/2008."
-msgstr ""
+msgstr "Oylamanın ne zaman biteceğini belirleyin. 30/8/2008 gibi."
 
 #: forum/forms.py:64
 msgid "1st Choice"
-msgstr ""
+msgstr "1. Seçenek"
 
 #: forum/forms.py:65
 msgid "2nd Choice"
-msgstr ""
+msgstr "2. Seçenek"
 
 #: forum/forms.py:66
 msgid "3rd Choice"
-msgstr ""
+msgstr "3. Seçenek"
 
 #: forum/forms.py:67
 msgid "4th Choice"
-msgstr ""
+msgstr "4. Seçenek"
 
 #: forum/forms.py:68
 msgid "5th Choice"
-msgstr ""
+msgstr "5. Seçenek"
 
 #: forum/forms.py:69
 msgid "6th Choice"
-msgstr ""
+msgstr "6. Seçenek"
 
 #: forum/forms.py:70
 msgid "7th Choice"
-msgstr ""
+msgstr "7. Seçenek"
 
 #: forum/forms.py:71
 msgid "8th Choice"
-msgstr ""
+msgstr "8. Seçenek"
 
 #: forum/forms.py:82
 msgid "You have to specify an end date for voting."
-msgstr ""
+msgstr "Oylama bitiş tarihini belirlemelisiniz."
 
 #: forum/models.py:31 paste/models.py:36 st/models.py:161 st/models.py:187
 #: st/models.py:219 st/models.py:261 st/models.py:290 st/models.py:328
@@ -509,7 +508,7 @@ msgstr "Son Güncelleme"
 
 #: forum/models.py:36
 msgid "Number of updates"
-msgstr ""
+msgstr "Güncellenme sayısı"
 
 #: forum/models.py:37
 #, fuzzy
@@ -528,7 +527,7 @@ msgstr "İletiler"
 
 #: forum/models.py:95
 msgid "Can see author ip"
-msgstr ""
+msgstr "Yazarın IP adresini görebilir"
 
 #: forum/models.py:96
 #, fuzzy
@@ -552,11 +551,11 @@ msgstr "Kilitli Başlık"
 
 #: forum/models.py:160 forum/models.py:274
 msgid "Number of posts"
-msgstr ""
+msgstr "İleti sayısı"
 
 #: forum/models.py:161
 msgid "Number of views"
-msgstr ""
+msgstr "Görüntülenme sayısı"
 
 #: forum/models.py:162
 #, fuzzy
@@ -594,7 +593,7 @@ msgstr "Başlık Aç"
 
 #: forum/models.py:243
 msgid "Can see hidden topics"
-msgstr ""
+msgstr "Gizli başlıkları görebilir"
 
 #: forum/models.py:244
 #, fuzzy
@@ -632,7 +631,7 @@ msgstr "Oyunlar"
 
 #: forum/models.py:269 ideas/models.py:37
 msgid "SEF name"
-msgstr ""
+msgstr "SEF isim"
 
 #: forum/models.py:270 ideas/models.py:75 st/models.py:47 st/models.py:57
 #: st/models.py:69 st/models.py:97 st/models.py:316 tema/forms.py:54
@@ -643,7 +642,7 @@ msgstr "Belgelendirme"
 
 #: forum/models.py:273
 msgid "Number of topics"
-msgstr ""
+msgstr "Başlık sayısı"
 
 #: forum/models.py:275 templates/forum/forum_detail.html:24
 #: templates/forum/forum_list.html:21 templates/forum/unread.html:13
@@ -652,7 +651,7 @@ msgstr "Son İleti"
 
 #: forum/models.py:276 forum/models.py:309 st/models.py:162 st/models.py:377
 msgid "Ordering"
-msgstr ""
+msgstr "Sıralama"
 
 #: forum/models.py:299
 #, fuzzy
@@ -666,11 +665,11 @@ msgstr "Okunmuş forum"
 
 #: forum/models.py:302
 msgid "Can lock forum"
-msgstr ""
+msgstr "Forumu kilitleyebilir"
 
 #: forum/models.py:303
 msgid "Can see hidden forums"
-msgstr ""
+msgstr "Gizli forumları görebilir"
 
 #: forum/models.py:307
 #, fuzzy
@@ -684,11 +683,11 @@ msgstr "Kategoriler"
 
 #: forum/models.py:322
 msgid "Can hide category"
-msgstr ""
+msgstr "Kategoriyi gizleyebilir"
 
 #: forum/models.py:323
 msgid "Can see hidden categories"
-msgstr ""
+msgstr "Gizli kategoriyi görebilir"
 
 #: forum/models.py:328 tema/models.py:290
 #, fuzzy
@@ -728,7 +727,7 @@ msgstr "İstatistikler"
 #: forum/views.py:509 forum/views.py:562 forum/views.py:933
 #: forum/views.py:1005
 msgid "Topic is locked."
-msgstr ""
+msgstr "Başlık kilitli."
 
 #: forum/views.py:519
 #, fuzzy
@@ -742,7 +741,7 @@ msgstr "Okunmamış Forum"
 
 #: forum/views.py:573
 msgid "Topic is already in this forum."
-msgstr ""
+msgstr "Başlık zaten bu forumda."
 
 #: forum/views.py:745
 #, fuzzy
@@ -1297,7 +1296,8 @@ msgid "SEF Title"
 msgstr "Dosya"
 
 #: podcast/models.py:32 st/models.py:155 st/models.py:183 st/models.py:213
-#: st/models.py:243 st/models.py:314
+#: st/models.py:243 st/models.py:314 upload/models.py:17 upload/models.py:27
+#: upload/models.py:31
 #, fuzzy
 msgid "Image"
 msgstr "Anasayfa"
@@ -4243,6 +4243,20 @@ msgid ""
 "There's a total of <span class=\"bold\">%(hits)s</span> workshop articles in "
 "<span class=\"bold\">%(pages)s</span> pages."
 msgstr ""
+
+#: upload/models.py:28
+#, fuzzy
+msgid "Images"
+msgstr "Anasayfa"
+
+#: upload/models.py:41
+msgid "Icon"
+msgstr ""
+
+#: upload/models.py:42
+#, fuzzy
+msgid "Icons"
+msgstr "Yorumlar"
 
 #: webalizer/templates/webalizer/index.html:7
 msgid "settings.WEBALIZER_DIR is not configured"
