@@ -339,18 +339,6 @@ These are python files to be marked
 +   |   |-- settings.py
 +   |   |-- urls.py
 +   |   `-- views.py
-    |-- scripts
--   |   |-- calc_downloads.py
--   |   |-- csvfill.py
--   |   |-- fixpapers.py
--   |   |-- gen_shipit_pdf.py
--   |   |-- ideas_package_update.py
--   |   |-- __init__.py
--   |   `-- kargo
--   |       |-- kargocsv.py
--   |       |-- kargoxml.py
--   |       |-- main.py
--   |       `-- notsent2sent.py
     |-- seminar
 +   |   |-- admin.py
 +   |   |-- __init__.py
@@ -421,11 +409,11 @@ These are python files to be marked
 +   |   |-- urls.py
 +   |   `-- views.py
     |-- upload
--   |   |-- admin.py
--   |   |-- __init__.py
--   |   |-- models.py
--   |   `-- views.py
--   |-- urls.py
++   |   |-- admin.py
++   |   |-- __init__.py
++   |   |-- models.py
++   |   `-- views.py
++   |-- urls.py
     |-- util
 -   |   |-- feedparser.py
 -   |   |-- fetch.py

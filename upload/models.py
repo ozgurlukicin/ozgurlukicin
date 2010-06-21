@@ -8,11 +8,13 @@
 from django.db import models
 from django import forms
 
+from django.utils.translation import ugettext as _
+
 class ImageUploadForm(forms.Form):
     file = forms.ImageField()
 
 class Image(models.Model):
-    file = models.ImageField("Görsel", upload_to='upload/image/')
+    file = models.ImageField(_("Image"), upload_to='upload/image/')
 
     def __unicode__(self):
         return unicode(self.file)
@@ -22,11 +24,11 @@ class Image(models.Model):
         return ".".join(self.file.path.rsplit(".")[:-1])[self.file.path.rfind("/")+1:]
 
     class Meta:
-        verbose_name = "Görsel"
-        verbose_name_plural = "Görseller"
+        verbose_name = _("Image")
+        verbose_name_plural = _("Images")
 
 class Logo(models.Model):
-    file = models.ImageField("Görsel", upload_to='upload/image/')
+    file = models.ImageField(_("Image"), upload_to='upload/image/')
 
     def __unicode__(self):
         return unicode(self.file)
@@ -36,5 +38,5 @@ class Logo(models.Model):
         return ".".join(self.file.path.rsplit(".")[:-1])[self.file.path.rfind("/")+1:]
 
     class Meta:
-        verbose_name = "Logo"
-        verbose_name_plural = "Logolar"
+        verbose_name = _("Icon")
+        verbose_name_plural = _("Icons")
