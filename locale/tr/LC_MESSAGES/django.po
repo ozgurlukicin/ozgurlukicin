@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-06-23 13:13+0300\n"
-"PO-Revision-Date: 2010-06-23 14:29+0300\n"
+"PO-Revision-Date: 2010-06-23 15:34+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -3308,39 +3308,34 @@ msgid ""
 msgstr ""
 
 #: templates/game/game_main.html:34
-#, fuzzy
 msgid ""
 "If you want to contribute games section click <a href=\"/katki/oyun/\">here</"
 "a> to view our contribution guide."
 msgstr ""
-"İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
-"ilk_adimlar/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
+"Oyunlar bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
+"oyun/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
 "gidebilirsiniz."
 
 #: templates/howto/howto_detail.html:48
 #: templates/workshop/workshop_detail.html:47
-#, fuzzy
 msgid "Related Articles"
-msgstr "İlgili Videolar"
+msgstr "İlgili Yazılar"
 
 #: templates/howto/howto_detail.html:63
-#, fuzzy
 msgid "Related wiki pages"
-msgstr "İlgili Sayfalar"
+msgstr "İlgili wiki sayfaları"
 
 #: templates/howto/howto_detail.html:71
-#, fuzzy
 msgid "Related videos"
-msgstr "İlgili Videolar"
+msgstr "İlgili videolar"
 
 #: templates/howto/howto_detail.html:86 templates/howto/howto_main.html:48
-#, fuzzy
 msgid ""
 "If you want to contribute to howto section, click <a href=\"/katki/nasil/"
 "\">here</a> to visit the contribution guide."
 msgstr ""
-"İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
-"ilk_adimlar/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
+"Nasıl bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
+"nasil/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
 "gidebilirsiniz."
 
 #: templates/howto/howto_main.html:26
@@ -3395,9 +3390,8 @@ msgid ""
 msgstr ""
 
 #: templates/news/news_detail.html:55 templates/podcast/detail.html:68
-#, fuzzy
 msgid "Share"
-msgstr "Kaydet"
+msgstr "Paylaş"
 
 #: templates/news/news_detail.html:62 templates/podcast/detail.html:75
 msgid "add to del.icio.us"
@@ -3448,42 +3442,38 @@ msgid "License:"
 msgstr ""
 
 #: templates/package/package_detail.html:46
-#, fuzzy
 msgid "Package size:"
-msgstr "Paketler"
+msgstr "Paket boyutu:"
 
 #: templates/package/package_detail.html:51
-#, fuzzy
 msgid "Installed size:"
-msgstr "Kurulan CD"
+msgstr "Kurulum boyutu:"
 
 #: templates/package/package_detail.html:55
 msgid "Web site of the package"
 msgstr ""
 
 #: templates/package/package_detail.html:58
-#, fuzzy
 msgid "Editors Note"
-msgstr "Editör"
+msgstr "Editörün Notu"
 
 #: templates/package/package_detail.html:59
-#, fuzzy, python-format
+#, python-format
 msgid "%(points)s point"
 msgid_plural "%(points)s points"
-msgstr[0] "%(posts)s ileti"
+msgstr[0] "%(points)s puan"
 
 #: templates/package/package_detail.html:61
 msgid "Place in Pardus Menu"
 msgstr ""
 
 #: templates/package/package_detail.html:82
-#, fuzzy
 msgid ""
 "If you want to contribute to packages section, click <a href=\"/katki/paket/"
 "\">here</a> to visit the contribution guide."
 msgstr ""
-"İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
-"ilk_adimlar/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
+"Paketler bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
+"paket/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
 "gidebilirsiniz."
 
 #: templates/package/package_main.html:26
@@ -3494,13 +3484,12 @@ msgid ""
 msgstr ""
 
 #: templates/package/package_main.html:34
-#, fuzzy
 msgid ""
 "If you want to contribute packages section click <a href=\"/katki/paket/"
 "\">here</a> to view our contribution guide."
 msgstr ""
-"İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
-"ilk_adimlar/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
+"Paketler bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
+"paket/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
 "gidebilirsiniz."
 
 #: templates/paste/pastedtext_add.html:9
@@ -3512,9 +3501,8 @@ msgid ""
 msgstr ""
 
 #: templates/paste/pastedtext_add.html:12
-#, fuzzy
 msgid "Paste"
-msgstr "Ajans"
+msgstr "Yapıştır"
 
 #: templates/paste/pastedtext_detail.html:9
 msgid "This text has been hidden by an admin."
@@ -3526,18 +3514,17 @@ msgid "It was sent by %(author)s on %(date)s and was hidden by an admin."
 msgstr ""
 
 #: templates/paste/pastedtext_detail.html:21
-#, fuzzy, python-format
+#, python-format
 msgid "This was sent by %(author)s on %(date)s."
-msgstr "%(author)s tarafından gönderilen iletiler"
+msgstr "%(author)s tarafından %(date)s tarihinde gönderildi."
 
 #: templates/paste/pastedtext_detail.html:22
 msgid "you can copy link by right clicking this"
 msgstr ""
 
 #: templates/paste/pastedtext_toggle.html:8
-#, fuzzy
 msgid "Are you sure you want to hide/show this text?"
-msgstr "Bu fikri silmek istediğinizden emin misiniz?"
+msgstr "Bu yazıyı gizlemek/göstermek istediğinizden emin misiniz?"
 
 #: templates/paste/pastedtext_toggle.html:9
 msgid "Yes"
@@ -3545,9 +3532,8 @@ msgstr ""
 
 #: templates/paste/pastedtext_toggle.html:10
 #: templates/tema/themeitem_delete.html:8
-#, fuzzy
 msgid "Abort"
-msgstr "Hakkında"
+msgstr "İptal"
 
 #: templates/podcast/detail.html:51 templates/podcast/main.html:47
 msgid "ogg feed"
@@ -3558,43 +3544,37 @@ msgid "mp3 feed"
 msgstr ""
 
 #: templates/podcast/detail.html:54
-#, fuzzy
 msgid "Duration"
-msgstr "Belgelendirme"
+msgstr "Süre"
 
 #: templates/podcast/detail.html:60 templates/podcast/main.html:54
-#, fuzzy
 msgid "Commentators"
-msgstr "Yorumlar"
+msgstr "Konuşmacılar"
 
 #: templates/podcast/feed.html:5 templates/podcast/feed.html.py:7
 #: templates/podcast/feed_ogg.html:5 templates/podcast/feed_ogg.html.py:7
 #: templates/podcast/feed_ogg.html:9 templates/podcast/main.html:15
-#, fuzzy
 msgid "Pardus Podcast"
-msgstr "Ajans"
+msgstr "Ajans Pardus"
 
 #: templates/podcast/feed.html:14
-#, fuzzy
 msgid "spreadpardus"
-msgstr "Özgürlükiçin"
+msgstr "ozgurlukicin"
 
 #: templates/podcast/feed.html:17
-#, fuzzy
 msgid "Spread Pardus Talks"
-msgstr "Özgürlükiçin"
+msgstr "Özgürlükiçin Sohbetleri"
 
 #: templates/podcast/main.html:20
-#, fuzzy
 msgid "Duration:"
-msgstr "Belgelendirme"
+msgstr "Süre:"
 
 #: templates/podcast/main.html:20 templates/podcast/main.html.py:30
 #: templates/tema/themeitem_list.html:17
-#, fuzzy, python-format
+#, python-format
 msgid "<span class=\"bold\">%(comment_count)s</span> Comment"
 msgid_plural "<span class=\"bold\">%(comment_count)s</span> Comments"
-msgstr[0] " %(comment_count)s tane yorum yapıldı."
+msgstr[0] "<span class=\"bold\">%(comment_count)s</span> Yorum"
 
 #: templates/podcast/main.html:39
 #, python-format
@@ -3604,9 +3584,8 @@ msgid ""
 msgstr ""
 
 #: templates/podcast/main.html:43
-#, fuzzy
 msgid "Latest Podcast"
-msgstr "Son İleti"
+msgstr "Güncel Ajans"
 
 #: templates/seminar/seminar_detail.html:39
 msgid "TEL:"
@@ -3625,35 +3604,33 @@ msgstr ""
 #: templates/tag/tag_detail.html:14 templates/tag/tag_detail.html.py:25
 #: templates/tag/tag_detail.html:36 templates/tag/tag_detail.html.py:47
 #: templates/tag/tag_detail.html:58 templates/tag/tag_detail.html.py:81
-#, fuzzy, python-format
+#, python-format
 msgid "(%(count)s article)"
 msgid_plural "(%(count)s articles)"
-msgstr[0] "(%(vote_count)s oy)"
+msgstr[0] "(%(count)s yazı)"
 
 #: templates/tag/tag_detail.html:69
-#, fuzzy, python-format
+#, python-format
 msgid "(%(count)s topic)"
 msgid_plural "(%(count)s topics)"
-msgstr[0] "(%(vote_count)s oy)"
+msgstr[0] "(%(count)s başlık)"
 
 #: templates/tema/abuse_list.html:3
-#, fuzzy
 msgid "Reported Themes"
-msgstr "Raporlanmış İletiler"
+msgstr "Raporlanmış Temalar"
 
 #: templates/tema/abuse_list.html:6
-#, fuzzy
 msgid ""
 "There is no reported entry. Click here to visit <a href=\"/tema/\">main</a> "
 "theme page."
 msgstr ""
-"Raporlanmış herhangi bir ileti bulunmamaktadır. Foruma dönmek için <a href="
-"\"/forum/\">Tıklayın"
+"Raporlanmış herhangi bir ileti bulunmamaktadır. Tema ana sayfasına dönmek "
+"için <a href="
+"\"/tema/\">tıklayın</a>."
 
 #: templates/tema/abuse_list.html:9
-#, fuzzy
 msgid "Reported Themes:"
-msgstr "Raporlanmış İletiler:"
+msgstr "Raporlanmış Temalar:"
 
 #: templates/tema/base.html:19
 msgid "License Information"
@@ -3676,43 +3653,37 @@ msgid "Link to original work"
 msgstr ""
 
 #: templates/tema/report.html:13
-#, fuzzy
 msgid "Theme"
-msgstr "Temalar"
+msgstr "Tema"
 
 #: templates/tema/report.html:13
-#, fuzzy
 msgid "Report Abuse"
-msgstr "Kurallara uymayan iletiyi şikayet et"
+msgstr "Şikayet Et"
 
 #: templates/tema/themeitem_add_complete.html:4
 msgid "Your content is awaiting for review now."
 msgstr ""
 
 #: templates/tema/themeitem_change.html:12
-#, fuzzy
 msgid "Save Changes"
-msgstr "Değiştir"
+msgstr "Değişiklikleri Kaydet"
 
 #: templates/tema/themeitem_delete.html:6
-#, fuzzy
 msgid "Are you sure you want to delete this theme?"
-msgstr "Bu fikri silmek istediğinizden emin misiniz?"
+msgstr "Bu temayı silmek istediğinizden emin misiniz?"
 
 #: templates/tema/themeitem_delete.html:7
 #: templates/tema/themeitem_desktopscreenshot_detail.html:38
 #: templates/tema/themeitem_font_detail.html:36
 #: templates/tema/themeitem_wallpaper_detail.html:41
-#, fuzzy
 msgid "Delete"
-msgstr "sil"
+msgstr "Sil"
 
 #: templates/tema/themeitem_desktopscreenshot_detail.html:27
 #: templates/tema/themeitem_font_detail.html:27
 #: templates/tema/themeitem_wallpaper_detail.html:27
-#, fuzzy
 msgid "Other Contents"
-msgstr "Diğer Gezegenler"
+msgstr "Diğer İçerik"
 
 #: templates/tema/themeitem_desktopscreenshot_detail.html:35
 msgid "Larger Picture"
@@ -3721,22 +3692,20 @@ msgstr ""
 #: templates/tema/themeitem_desktopscreenshot_detail.html:47
 #: templates/tema/themeitem_font_detail.html:45
 #: templates/tema/themeitem_wallpaper_detail.html:50
-#, fuzzy, python-format
+#, python-format
 msgid "%(vote_count)s vote"
 msgid_plural "%(vote_count)s votes"
-msgstr[0] "(%(vote_count)s oy)"
+msgstr[0] "%(vote_count)s oy"
 
 #: templates/tema/themeitem_desktopscreenshot_detail.html:49
 #: templates/tema/themeitem_font_detail.html:47
 #: templates/tema/themeitem_wallpaper_detail.html:52
-#, fuzzy
 msgid "Submit Date:"
-msgstr "Fikir Ekle"
+msgstr "Gönderildiği Tarih:"
 
 #: templates/tema/themeitem_desktopscreenshot_detail.html:50
-#, fuzzy
 msgid "Views:"
-msgstr "Görüntüleme"
+msgstr "Gösterim Sayısı:"
 
 #: templates/tema/themeitem_desktopscreenshot_detail.html:51
 #: templates/tema/themeitem_wallpaper_detail.html:54
@@ -3744,9 +3713,8 @@ msgid "Originalk Work"
 msgstr ""
 
 #: templates/tema/themeitem_detail.html:15
-#, fuzzy
 msgid "Description:"
-msgstr "Belgelendirme"
+msgstr "Tanım:"
 
 #: templates/tema/themeitem_download.html:5
 #, python-format
@@ -3757,9 +3725,8 @@ msgstr ""
 
 #: templates/tema/themeitem_font_detail.html:48
 #: templates/tema/themeitem_wallpaper_detail.html:53
-#, fuzzy
 msgid "Downloads:"
-msgstr "İndir"
+msgstr "İndirme Sayısı:"
 
 #: templates/tema/themeitem_font_detail.html:54
 msgid "Preview"
@@ -3770,9 +3737,9 @@ msgid "write something in the box below and press Enter"
 msgstr ""
 
 #: templates/tema/themeitem_list.html:8
-#, fuzzy, python-format
+#, python-format
 msgid "content sent by %(author)s"
-msgstr "%(author)s tarafından gönderilen iletiler"
+msgstr "%(author)s tarafından gönderilen içerik"
 
 #: templates/tema/themeitem_list.html:27
 #, python-format
@@ -3782,18 +3749,16 @@ msgid ""
 msgstr ""
 
 #: templates/user/change_password.html:3
-#, fuzzy
 msgid "Change Lost Password"
-msgstr "Parola değiştir"
+msgstr "Kayıp Parola Değiştir"
 
 #: templates/user/change_password.html:10
 msgid "You have alredy logged in."
 msgstr ""
 
 #: templates/user/change_password.html:10
-#, fuzzy
 msgid "Click <a href=\"/\">here</a> to return to mainpage."
-msgstr "Anasayfa'ya gitmek için <a href=\"/\">tıklayın</a>."
+msgstr "Anasayfaya gitmek için <a href=\"/\">tıklayın</a>."
 
 #: templates/user/change_password.html:14 templates/user/confirm.html:13
 msgid ""
@@ -3812,18 +3777,17 @@ msgstr ""
 
 #: templates/user/change_password_done.html:3 templates/user/password.html:3
 #: templates/user/password.html.py:23 templates/user/profile_edit.html:83
-#, fuzzy
 msgid "Change Password"
-msgstr "Parola değiştir"
+msgstr "Parolayı Değiştir"
 
 #: templates/user/change_password_done.html:9
 msgid "Your password has been changed successfully."
 msgstr ""
 
 #: templates/user/change_password_done.html:9
-#, fuzzy, python-format
+#, python-format
 msgid "Click <a href=\"%(login_url)s\">here</a> to login."
-msgstr "Anasayfa'ya gitmek için <a href=\"/\">tıklayın</a>."
+msgstr "Giriş yapmak için <a href=\"%(login_url)s\">tıklayın</a>."
 
 #: templates/user/confirm.html:3
 msgid "Registration Approval"
@@ -3838,9 +3802,8 @@ msgid "You have already logged in."
 msgstr ""
 
 #: templates/user/confirm.html:10 templates/user/confirm.html.py:11
-#, fuzzy
 msgid "Click <a href=\"/\">here</a> to return to mainpage"
-msgstr "Anasayfa'ya gitmek için <a href=\"/\">tıklayın</a>."
+msgstr "Anasayfaya gitmek için <a href=\"/\">tıklayın</a>."
 
 #: templates/user/confirm.html:11
 msgid "This account has already been activated!"
@@ -3853,9 +3816,8 @@ msgid ""
 msgstr ""
 
 #: templates/user/confirm.html:13
-#, fuzzy
 msgid "Click <a href=\"/kullanici/kayit/\">here</a> to register again."
-msgstr "Anasayfa'ya gitmek için <a href=\"/\">tıklayın</a>."
+msgstr "Tekrar kayıt olmak için <a href=\"/kullanici/kayit/\">tıklayın</a>."
 
 #: templates/user/confirm.html:14
 msgid ""
@@ -3868,9 +3830,9 @@ msgid "Dashboard"
 msgstr ""
 
 #: templates/user/dashboard.html:8
-#, fuzzy, python-format
+#, python-format
 msgid "Hello, <b>%(user)s!"
-msgstr "Merhaba %(username)s!"
+msgstr "Merhaba, <b>%(user)s!"
 
 #: templates/user/dashboard.html:10
 #, python-format
@@ -3880,28 +3842,24 @@ msgid ""
 msgstr ""
 
 #: templates/user/followed_topics.html:9
-#, fuzzy
 msgid ""
 "There's no topic that you have been following. Click <a href=\"/forum/"
 "\">here</a> to return forum."
 msgstr ""
-"Raporlanmış herhangi bir ileti bulunmamaktadır. Foruma dönmek için <a href="
-"\"/forum/\">Tıklayın"
+"Takip ettiğiniz bir ileti bulunmamaktadır. Foruma dönmek için <a href="
+"\"/forum/\">tıklayın</a>."
 
 #: templates/user/followed_topics.html:12
-#, fuzzy
 msgid "Followed topics"
-msgstr "Takip Edilen Başlıklar"
+msgstr "Takip edilen başlıklar"
 
 #: templates/user/followed_topics.html:17
-#, fuzzy
 msgid "Remove from Watchlist"
-msgstr "Şikayet Listesinden Çıkar"
+msgstr "İzleme Listesinden Çıkar"
 
 #: templates/user/login.html:6
-#, fuzzy
 msgid "User Login"
-msgstr "Kullanıcı Kutusu"
+msgstr "Kullanıcı Girişi"
 
 #: templates/user/login.html:11
 msgid "Username or password doesn't match, please try again."
