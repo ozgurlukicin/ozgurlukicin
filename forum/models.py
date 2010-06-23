@@ -154,7 +154,7 @@ class Topic(models.Model):
     """
     forum = models.ForeignKey('Forum', verbose_name=_('Forum'))
     title = models.CharField(max_length=100, verbose_name=_('Topic'))
-    sticky = models.NullBooleanField(blank=True, default=0, verbose_name=_('Sticy'))
+    sticky = models.NullBooleanField(blank=True, default=0, verbose_name=_('Sticky'))
     locked = models.NullBooleanField(blank=True, default=0, verbose_name=_('Locked'))
     hidden = models.NullBooleanField(blank=True, default=0, verbose_name=_('Hidden'))
     posts = models.IntegerField(default=0, verbose_name=_('Number of posts'))
