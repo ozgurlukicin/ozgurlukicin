@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-21 14:58+0300\n"
-"PO-Revision-Date: 2010-06-23 12:41+0300\n"
+"POT-Creation-Date: 2010-06-23 13:13+0300\n"
+"PO-Revision-Date: 2010-06-23 14:29+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -526,7 +526,7 @@ msgid "Can see hidden posts"
 msgstr "Gizli iletileri görebilir"
 
 #: forum/models.py:157
-msgid "Sticy"
+msgid "Sticky"
 msgstr "Sabit"
 
 #: forum/models.py:158 forum/models.py:272
@@ -597,8 +597,8 @@ msgstr "Kategori"
 
 #: forum/models.py:268 ideas/models.py:13 ideas/models.py:24
 #: ideas/models.py:36 ideas/models.py:50 ideas/models.py:61
-#: profile/forms.py:24 profile/forms.py:105 profile/models.py:41
-#: templates/user/profile.html:60
+#: petition/models.py:17 petition/models.py:43 profile/forms.py:24
+#: profile/forms.py:105 profile/models.py:41 templates/user/profile.html:60
 msgid "Name"
 msgstr "İsim"
 
@@ -642,7 +642,7 @@ msgid "Can see hidden forums"
 msgstr "Gizli forumları görebilir"
 
 #: forum/models.py:307
-msgid "Kategory name"
+msgid "Category name"
 msgstr "Kategori adı"
 
 #: forum/models.py:320 ideas/models.py:44 ideas/templates/idea_base.html:78
@@ -829,9 +829,8 @@ msgid "Paste a topic address if you think it's related."
 msgstr ""
 
 #: ideas/models.py:84
-#, fuzzy
 msgid "Bug Numbers"
-msgstr "Hata kayıtları"
+msgstr "Hata Numaraları"
 
 #: ideas/models.py:84
 msgid ""
@@ -844,14 +843,12 @@ msgid "File"
 msgstr "Dosya"
 
 #: ideas/models.py:87
-#, fuzzy
 msgid "Forum Topic"
-msgstr "Forum"
+msgstr "Forum Başlığı"
 
 #: ideas/models.py:96
-#, fuzzy
 msgid "New Idea"
-msgstr "Yeni Fikirler"
+msgstr "Yeni Fikir"
 
 #: ideas/models.py:97 ideas/views.py:154 ideas/templates/idea_base.html:11
 #: ideas/templates/idea_base.html.py:58 ideas/templates/idea_base.html:60
@@ -903,9 +900,8 @@ msgid "Latest Ideas"
 msgstr "Son eklenenler"
 
 #: ideas/views.py:62
-#, fuzzy
 msgid "Resolved"
-msgstr "Çözülen fikirler"
+msgstr "Çözüldü"
 
 #: ideas/views.py:64 ideas/templates/idea_base.html:74
 msgid "Resolved ideas"
@@ -916,18 +912,16 @@ msgid "Looking for Volunteers"
 msgstr "Gönüllü arananlar"
 
 #: ideas/views.py:77
-#, fuzzy
 msgid "Favourite ideas"
-msgstr "Favorilerim"
+msgstr "Favori Fikirler"
 
 #: ideas/views.py:88
 msgid "Popular ideas of last two days"
 msgstr ""
 
 #: ideas/views.py:92
-#, fuzzy
 msgid "Last five ideas"
-msgstr "Son eklenenler"
+msgstr "Son 5 fikir"
 
 #: ideas/views.py:146
 #, python-format
@@ -939,9 +933,8 @@ msgid "Related Forum Link"
 msgstr "İlgili Forum Bağlantısı"
 
 #: ideas/views.py:182 ideas/views.py:241
-#, fuzzy
 msgid "Related bugs"
-msgstr "İlgili Sayfalar"
+msgstr "İlgili hatalar"
 
 #: ideas/views.py:201 ideas/templates/idea_add_form.html:4
 #: ideas/templates/idea_list.html:12
@@ -1191,18 +1184,16 @@ msgid "Be the first one to comment!"
 msgstr "İlk yorum yapan siz olun!"
 
 #: paste/models.py:30
-#, fuzzy
 msgid "Plain text"
-msgstr "Gezegen"
+msgstr "Düz metin"
 
 #: paste/models.py:35
 msgid "250000 characters at most"
 msgstr ""
 
 #: paste/models.py:37 poll/models.py:16
-#, fuzzy
 msgid "IP Address"
-msgstr "ileti adresi"
+msgstr "IP Adresi"
 
 #: paste/models.py:40
 msgid "Syntax"
@@ -1213,20 +1204,97 @@ msgid "Colorified Text"
 msgstr ""
 
 #: paste/models.py:48
-#, fuzzy
 msgid "Can hide pasted text"
-msgstr "Fikrin durumunu değiştir"
+msgstr "Yapıştırılmıiş yazıyı gizleyebilir"
+
+#: petition/models.py:18 petition/models.py:44 profile/forms.py:25
+#: profile/forms.py:106 templates/user/profile.html:63
+msgid "Surname"
+msgstr ""
+
+#: petition/models.py:19 petition/models.py:45 profile/forms.py:30
+#: profile/forms.py:109 profile/models.py:78 templates/user/profile.html:66
+msgid "City"
+msgstr ""
+
+#: petition/models.py:20 petition/models.py:46
+msgid "Job"
+msgstr ""
+
+#: petition/models.py:21 profile/forms.py:27 profile/forms.py:108
+#: profile/forms.py:158 templates/user/profile.html:86
+msgid "E-mail"
+msgstr ""
+
+#: petition/models.py:22 templates/forum/change_poll.html:5
+#: templates/forum/create_poll.html:5 templates/forum/forum_detail.html:13
+#: templates/forum/forum_list.html:10 templates/forum/new_topic.html:14
+#: templates/forum/post_edit.html:11 templates/forum/post_list.html:11
+#: templates/forum/reply.html:11 templates/forum/report.html:12
+#: templates/forum/topic.html:14 templates/forum/topic.html.py:187
+#: templates/forum/unread.html:6 templates/tema/report.html:13
+msgid "Mainpage"
+msgstr "Ana Sayfa"
+
+#: petition/models.py:23
+msgid "Sign date"
+msgstr "İmzalama tarihi"
+
+#: petition/models.py:24
+msgid "Activation Key"
+msgstr ""
+
+#: petition/models.py:25 podcast/models.py:43 seminar/models.py:46
+#: st/models.py:163 st/models.py:188 st/models.py:220 st/models.py:262
+#: st/models.py:291 st/models.py:329 st/models.py:359 st/models.py:378
+msgid "Active"
+msgstr ""
+
+#: petition/models.py:26
+msgid "Inform"
+msgstr "Bilgilendir"
+
+#: petition/models.py:32
+msgid "Signer"
+msgstr "İmzalayan"
+
+#: petition/models.py:33
+msgid "Signers"
+msgstr "İmzalayanlar"
+
+#: petition/models.py:47
+msgid "E-Mail"
+msgstr ""
+
+#: petition/models.py:48 st/models.py:249 st/models.py:320 tema/forms.py:57
+#: templates/user/profile.html:90
+msgid "Web Site"
+msgstr "Web Sitesi"
+
+#: petition/models.py:48
+msgid "(not required)"
+msgstr ""
+
+#: petition/models.py:49
+msgid "Inform me about events:"
+msgstr ""
+
+#: petition/models.py:49
+msgid "Select this if you want to get news about other Spread Pardus events."
+msgstr ""
+
+#: petition/models.py:59
+msgid "This e-mail address has already signed the petition."
+msgstr ""
 
 #: podcast/models.py:19 profile/forms.py:23 profile/forms.py:157
 #: profile/models.py:31 seminar/models.py:30 templates/user/login.html:18
-#, fuzzy
 msgid "Username"
-msgstr "Kullanıcılar"
+msgstr "Kullanıcı adı"
 
 #: podcast/models.py:26 seminar/models.py:37
-#, fuzzy
 msgid "Speaker"
-msgstr "Arama"
+msgstr "Konuşmacı"
 
 #: podcast/models.py:27 seminar/models.py:38
 msgid "Speakers"
@@ -1234,16 +1302,14 @@ msgstr ""
 
 #: podcast/models.py:31 st/models.py:154 st/models.py:180 st/models.py:210
 #: st/models.py:242 st/models.py:284 st/models.py:313 tema/models.py:64
-#, fuzzy
 msgid "SEF Title"
-msgstr "Dosya"
+msgstr "SEF Başlık"
 
 #: podcast/models.py:32 st/models.py:155 st/models.py:183 st/models.py:213
 #: st/models.py:243 st/models.py:314 upload/models.py:17 upload/models.py:27
 #: upload/models.py:31
-#, fuzzy
 msgid "Image"
-msgstr "Anasayfa"
+msgstr "Görsel"
 
 #: podcast/models.py:33 st/models.py:156 st/models.py:182 st/models.py:212
 #: st/models.py:244 st/models.py:286 st/models.py:315
@@ -1253,12 +1319,6 @@ msgstr ""
 #: podcast/models.py:37 templates/podcast/detail.html:63
 #: templates/podcast/main.html:57
 msgid "Guests"
-msgstr ""
-
-#: podcast/models.py:43 seminar/models.py:46 st/models.py:163 st/models.py:188
-#: st/models.py:220 st/models.py:262 st/models.py:291 st/models.py:329
-#: st/models.py:359 st/models.py:378
-msgid "Active"
 msgstr ""
 
 #: podcast/models.py:70
@@ -1274,9 +1334,8 @@ msgid "Option"
 msgstr ""
 
 #: poll/models.py:43
-#, fuzzy
 msgid "Question"
-msgstr "Sürüm"
+msgstr "Soru"
 
 #: poll/models.py:44
 msgid "Changing vote is allowed"
@@ -1297,9 +1356,8 @@ msgid ""
 msgstr ""
 
 #: poll/models.py:46
-#, fuzzy
 msgid "Timed"
-msgstr "Dosya"
+msgstr "Süreli"
 
 #: poll/models.py:46
 msgid "Check this if you want voting to end at a specified date."
@@ -1310,62 +1368,42 @@ msgid "Specify when vote casting will be disabled. like 30/8/2008."
 msgstr ""
 
 #: poll/models.py:48 tema/models.py:73
-#, fuzzy
 msgid "Creation Date"
-msgstr "Son Güncelleme"
+msgstr "Oluşturulma Tarihi"
 
 #: poll/models.py:62
-#, fuzzy
 msgid "Polls"
-msgstr "Anket"
+msgstr "Anketler"
 
 #: profile/forms.py:23
 msgid "Minimum 3, maximum 20 characters"
 msgstr ""
 
-#: profile/forms.py:25 profile/forms.py:106 templates/user/profile.html:63
-msgid "Surname"
-msgstr ""
-
 #: profile/forms.py:26 profile/forms.py:107 templates/user/profile.html:70
-#, fuzzy
 msgid "Birth Date"
-msgstr "Fikir Ekle"
+msgstr "Doğum Tarihi"
 
 #: profile/forms.py:26
 msgid "like 23/4/1985"
 msgstr ""
 
-#: profile/forms.py:27 profile/forms.py:108 profile/forms.py:158
-#: templates/user/profile.html:86
-msgid "E-mail"
-msgstr ""
-
 #: profile/forms.py:28 profile/forms.py:197 profile/forms.py:265
 #: templates/user/login.html:22
-#, fuzzy
 msgid "Password"
-msgstr "Parola değiştir"
+msgstr "Parola"
 
 #: profile/forms.py:29
-#, fuzzy
 msgid "Password (again)"
-msgstr "Parola değiştir"
+msgstr "Parola (tekrar)"
 
 #: profile/forms.py:29
 msgid "Minimum 5 characters"
 msgstr ""
 
-#: profile/forms.py:30 profile/forms.py:109 profile/models.py:78
-#: templates/user/profile.html:66
-msgid "City"
-msgstr ""
-
 #: profile/forms.py:31 profile/forms.py:110 profile/models.py:74
 #: templates/tema/themeitem_font_detail.html:49
-#, fuzzy
 msgid "Web Page"
-msgstr "İlgili Sayfalar"
+msgstr "Web Sayfası"
 
 #: profile/forms.py:31 profile/forms.py:33 profile/forms.py:34
 #: profile/forms.py:35 seminar/models.py:30 seminar/models.py:45
@@ -1373,14 +1411,12 @@ msgid "Not required"
 msgstr ""
 
 #: profile/forms.py:32 profile/forms.py:114
-#, fuzzy
 msgid "Pardus version that you're using"
-msgstr "Ajans"
+msgstr "Kullandığınız Pardus sürümü"
 
 #: profile/forms.py:36 profile/models.py:82
-#, fuzzy
 msgid "Contributions"
-msgstr "Katkıda bulunun"
+msgstr "Katkılar"
 
 #: profile/forms.py:36
 msgid ""
@@ -1407,9 +1443,8 @@ msgid ""
 msgstr ""
 
 #: profile/forms.py:39 profile/forms.py:116 profile/models.py:81
-#, fuzzy
 msgid "Show birth date"
-msgstr "Fikir Ekle"
+msgstr "Doğum tarihini göster"
 
 #: profile/forms.py:39 profile/forms.py:116
 msgid "Do you want other members to see your birth date in your profile page?"
@@ -1443,9 +1478,8 @@ msgstr ""
 
 #: profile/forms.py:84 profile/forms.py:213 profile/forms.py:227
 #: profile/forms.py:249
-#, fuzzy
 msgid "Password must be at least 5 characters long"
-msgstr "Anket değiştirilemedi, lütfen aşağıdaki hataları düzeltin"
+msgstr "Parola en az 5 karakter olmalıdır"
 
 #: profile/forms.py:87 profile/forms.py:252 profile/forms.py:277
 msgid "Passwords don't match"
@@ -1461,9 +1495,8 @@ msgstr ""
 
 #: profile/forms.py:104 profile/models.py:48 profile/models.py:72
 #: templates/user/profile.html:47
-#, fuzzy
 msgid "Avatar"
-msgstr "avatar"
+msgstr "Avatar"
 
 #: profile/forms.py:115 profile/models.py:80
 msgid "Show e-mail address"
@@ -1480,9 +1513,8 @@ msgid ""
 msgstr ""
 
 #: profile/forms.py:118 profile/models.py:87
-#, fuzzy
 msgid "Signature"
-msgstr "Seminer"
+msgstr "İmza"
 
 #: profile/forms.py:118
 msgid ""
@@ -1490,9 +1522,8 @@ msgid ""
 msgstr ""
 
 #: profile/forms.py:119 profile/models.py:88 seminar/models.py:17
-#, fuzzy
 msgid "Latitude"
-msgstr "Son eklenenler"
+msgstr "Enlem"
 
 #: profile/forms.py:120 profile/models.py:89 seminar/models.py:18
 msgid "Longitude"
@@ -1511,14 +1542,12 @@ msgid "This e-mail address is not registered"
 msgstr ""
 
 #: profile/forms.py:196
-#, fuzzy
 msgid "Old password"
-msgstr "Kayıp parola"
+msgstr "Eski parola"
 
 #: profile/forms.py:198 profile/forms.py:266
-#, fuzzy
 msgid "Password (Again)"
-msgstr "Parola değiştir"
+msgstr "Parola (Tekrar)"
 
 #: profile/forms.py:210 profile/forms.py:224 profile/forms.py:246
 msgid "Password must contain less than 32 characters"
@@ -1533,51 +1562,44 @@ msgid "Fill all of the fields to change password"
 msgstr ""
 
 #: profile/models.py:37
-#, fuzzy
 msgid "Forbidden Username"
-msgstr "Kullanıcılar"
+msgstr "Yasaklı Kullanıcı Adı"
 
 #: profile/models.py:38
 msgid "Forbidden Usernames"
 msgstr ""
 
 #: profile/models.py:49
-#, fuzzy
 msgid "Avatars"
-msgstr "avatar"
+msgstr "Avatarlar"
 
 #: profile/models.py:53
 msgid "Key"
 msgstr ""
 
 #: profile/models.py:54
-#, fuzzy
 msgid "Timeout"
-msgstr "Dosya"
+msgstr "Zaman aşımı"
 
 #: profile/models.py:67
-#, fuzzy
 msgid "Lost Passwords"
-msgstr "Parola değiştir"
+msgstr "Kayıp Parolalar"
 
 #: profile/models.py:71
 msgid "example: 'Forum Moderator'"
 msgstr ""
 
 #: profile/models.py:83
-#, fuzzy
 msgid "Contribution Comment"
-msgstr "Katkıda bulunun"
+msgstr "Katkı Açıklaması"
 
 #: profile/models.py:102 templates/user/profile.html:5
-#, fuzzy
 msgid "User Profile"
-msgstr "Profil"
+msgstr "Kullanıcı Profili"
 
 #: profile/models.py:103
-#, fuzzy
 msgid "User Profiles"
-msgstr "Profil"
+msgstr "Kullanıcı Profilleri"
 
 #: profile/views.py:40
 msgid "Topic does not belong to this user!"
@@ -1594,14 +1616,12 @@ msgid "%(SITE_NAME)s User Password"
 msgstr ""
 
 #: seminar/models.py:14 seminar/models.py:25
-#, fuzzy
 msgid "Seminar Location"
-msgstr "Seminer"
+msgstr "Seminer Yeri"
 
 #: seminar/models.py:15
-#, fuzzy
 msgid "Location Description"
-msgstr "Belgelendirme"
+msgstr "Yer Bilgisi"
 
 #: seminar/models.py:16
 msgid "Telephone"
@@ -1620,33 +1640,28 @@ msgid "Seminar Locations"
 msgstr ""
 
 #: seminar/models.py:29
-#, fuzzy
 msgid "Real Name"
-msgstr "Oyunlar"
+msgstr "Gerçek Adı"
 
 #: seminar/models.py:41
-#, fuzzy
 msgid "Seminar description"
-msgstr "Belgelendirme"
+msgstr "Seminer açıklaması"
 
 #: seminar/models.py:42
-#, fuzzy
 msgid "Location"
-msgstr "Belgelendirme"
+msgstr "Yer"
 
 #: seminar/models.py:43
 msgid "Attenders"
 msgstr ""
 
 #: seminar/models.py:44
-#, fuzzy
 msgid "Start date"
-msgstr "Son Güncelleme"
+msgstr "Başlangıç tarihi"
 
 #: seminar/models.py:45
-#, fuzzy
 msgid "End date"
-msgstr "Tarih"
+msgstr "Bitiş tarihi"
 
 #: seminar/models.py:55 templates/flatpages/default.html:52
 #: templates/user/user_list.html:82
@@ -1654,92 +1669,81 @@ msgid "Seminar"
 msgstr "Seminer"
 
 #: seminar/models.py:56
-#, fuzzy
 msgid "Seminars"
-msgstr "Seminer"
+msgstr "Seminerler"
 
 #: st/feeds.py:23
-#, fuzzy
 msgid " - Mainpage"
-msgstr "Ana Sayfa"
+msgstr " - Ana Sayfa"
 
 #: st/feeds.py:30
-#, fuzzy, python-format
+#, python-format
 msgid "News: %s"
-msgstr "Haberler"
+msgstr "Haberler: %s"
 
 #: st/feeds.py:34
-#, fuzzy, python-format
+#, python-format
 msgid "Package: %s"
-msgstr "Paketler"
+msgstr "Paketler: %s"
 
 #: st/feeds.py:38
-#, fuzzy, python-format
+#, python-format
 msgid "Game: %s"
-msgstr "Oyunlar"
+msgstr "Oyunlar: %s"
 
 #: st/feeds.py:42
-#, fuzzy, python-format
+#, python-format
 msgid "First Step: %s"
-msgstr "İlk Adımlar"
+msgstr "İlk Adımlar: %s"
 
 #: st/feeds.py:46
-#, fuzzy, python-format
+#, python-format
 msgid "Howto: %s"
-msgstr "Nasıl"
+msgstr "Nasıl: %s"
 
 #: st/feeds.py:56
-#, fuzzy
 msgid " - News"
-msgstr "Haberler"
+msgstr "- Haberler"
 
 #: st/feeds.py:68
-#, fuzzy
 msgid " - First Steps"
-msgstr "İlk Adımlar"
+msgstr " - İlk Adımlar"
 
 #: st/feeds.py:80
-#, fuzzy
 msgid " - Howto"
-msgstr "Nasıl"
+msgstr " - Nasıl"
 
 #: st/feeds.py:92
-#, fuzzy
 msgid " - Games"
-msgstr "Oyunlar"
+msgstr " - Oyunlar"
 
 #: st/feeds.py:104
-#, fuzzy
 msgid " - Packages"
-msgstr "Paketler"
+msgstr " - Paketler"
 
 #: st/feeds.py:116
-#, fuzzy
 msgid " - Workshop"
-msgstr "Atölye"
+msgstr " - Atölye"
 
 #: st/forms.py:14 st/forms.py:17
 msgid "Keyword"
 msgstr ""
 
 #: st/forms.py:18
-#, fuzzy
 msgid "Search Sections"
-msgstr "Belgelendirme"
+msgstr "Aranacak Bölümler"
 
 #: st/forms.py:21
-#, fuzzy
 msgid "Other Sections"
-msgstr "Diğer Gezegenler"
+msgstr "Diğer Bölümler"
 
 #: st/forms.py:22
 msgid "All"
 msgstr ""
 
 #: st/forms.py:24
-#, fuzzy
 msgid "Search Depth"
-msgstr "Arama"
+msgstr "Arama Derinliği"
 
 #: st/forms.py:25
 msgid "Only Search in Titles"
@@ -1758,24 +1762,20 @@ msgid "Wiki page"
 msgstr ""
 
 #: st/models.py:44
-#, fuzzy
 msgid "Wiki pages"
-msgstr "İlgili Sayfalar"
+msgstr "Wiki Sayfaları"
 
 #: st/models.py:53
-#, fuzzy
 msgid "Contribution Name"
-msgstr "Katkıda bulunun"
+msgstr "Katkı Adı"
 
 #: st/models.py:54
-#, fuzzy
 msgid "Contribution Names"
-msgstr "Katkıda bulunun"
+msgstr "Katkı Adları"
 
 #: st/models.py:66 tema/models.py:246
-#, fuzzy
 msgid "Files"
-msgstr "Dosya"
+msgstr "Dosyalar"
 
 #: st/models.py:93 tema/models.py:253 tema/models.py:259
 msgid "Screenshot"
@@ -1787,14 +1787,12 @@ msgid "Screenshots"
 msgstr ""
 
 #: st/models.py:108
-#, fuzzy
 msgid "Video"
-msgstr "gizle"
+msgstr "Video"
 
 #: st/models.py:109
-#, fuzzy
 msgid "Videos"
-msgstr "Görüntüleme"
+msgstr "Videolar"
 
 #: st/models.py:149 tema/forms.py:56 tema/forms.py:89 tema/forms.py:107
 #: tema/models.py:58 tema/models.py:67 templates/game/game_detail.html:46
@@ -1811,9 +1809,8 @@ msgid "Last Update"
 msgstr "Son Güncelleme"
 
 #: st/models.py:175
-#, fuzzy
 msgid "First Step"
-msgstr "İlk Adımlar"
+msgstr "İlk Adım"
 
 #: st/models.py:176 templates/base.html:16 templates/footer.html:12
 #: templates/fs/fs_detail.html:4 templates/fs/fs_main.html:4
@@ -1828,14 +1825,12 @@ msgid "must be 114x114 in size"
 msgstr ""
 
 #: st/models.py:205
-#, fuzzy
 msgid "Workshop Article"
 msgstr "Atölye"
 
 #: st/models.py:206
-#, fuzzy
 msgid "Workshop Articles"
-msgstr "Atölye"
+msgstr "Atölye "
 
 #: st/models.py:237 templates/base.html:15 templates/footer.html:12
 #: templates/home.html:54 templates/howto/howto_detail.html:4
@@ -1846,38 +1841,28 @@ msgid "Howto"
 msgstr "Nasıl"
 
 #: st/models.py:238
-#, fuzzy
 msgid "Howto Articles"
-msgstr "İlgili Videolar"
+msgstr "Nasıl"
 
 #: st/models.py:247 templates/game/game_detail.html:55
-#, fuzzy
 msgid "Installed size"
-msgstr "Kurulan CD"
+msgstr "Kurulum boyutu"
 
 #: st/models.py:247 st/models.py:248 st/models.py:318 st/models.py:319
 msgid "in MB"
 msgstr ""
 
 #: st/models.py:248
-#, fuzzy
 msgid "Download size"
-msgstr "İndir"
-
-#: st/models.py:249 st/models.py:320 tema/forms.py:57
-#: templates/user/profile.html:90
-#, fuzzy
-msgid "Web Site"
-msgstr "İlgili Sayfalar"
+msgstr "İndirme boyutu"
 
 #: st/models.py:249 st/models.py:320
 msgid "Add http:// in front"
 msgstr ""
 
 #: st/models.py:250 st/models.py:322
-#, fuzzy
 msgid "Location in Menu"
-msgstr "Belgelendirme"
+msgstr "Menüdeki Yeri"
 
 #: st/models.py:250 st/models.py:322
 msgid "like Programs > Accesories > KNazar)"
@@ -1896,9 +1881,8 @@ msgid "Sound"
 msgstr ""
 
 #: st/models.py:254 templates/game/game_detail.html:80
-#, fuzzy
 msgid "Scenario"
-msgstr "Seminer"
+msgstr "Senaryo"
 
 #: st/models.py:255 templates/game/game_detail.html:85
 msgid "Atmosphere"
@@ -1913,9 +1897,8 @@ msgid "like 1 day, 3 hours, 5 months, years."
 msgstr ""
 
 #: st/models.py:279 templates/home.html:80
-#, fuzzy
 msgid "Game"
-msgstr "Oyunlar"
+msgstr "Oyun"
 
 #: st/models.py:280 templates/base.html:19 templates/footer.html:12
 #: templates/game/game_detail.html:5 templates/game/game_main.html:4
@@ -1929,9 +1912,8 @@ msgid "Should be the same as title but only consist of small letters and -"
 msgstr ""
 
 #: st/models.py:285
-#, fuzzy
 msgid "Headline Image"
-msgstr "Görselleri Filtrele"
+msgstr "Açılış Görseli"
 
 #: st/models.py:285
 msgid "Image should be 310x205 in size! Press + to upload a new image."
@@ -1942,7 +1924,6 @@ msgid "Headline image will be added to summary automaticly."
 msgstr ""
 
 #: st/models.py:289 tema/models.py:74
-#, fuzzy
 msgid "Update Date"
 msgstr "Son Güncelleme"
 
@@ -1956,24 +1937,20 @@ msgid "News"
 msgstr "Haberler"
 
 #: st/models.py:318
-#, fuzzy
 msgid "Installed Size"
-msgstr "Kurulan CD"
+msgstr "Kurulum Boyutu"
 
 #: st/models.py:319
-#, fuzzy
 msgid "Download Size"
-msgstr "İndir"
+msgstr "İndirme Boyutu"
 
 #: st/models.py:321
-#, fuzzy
 msgid "Editor's Rating"
-msgstr "Editör"
+msgstr "Editör'ün Notu"
 
 #: st/models.py:346 templates/home.html:67
-#, fuzzy
 msgid "Package"
-msgstr "Paketler"
+msgstr "Paket"
 
 #: st/models.py:347 templates/base.html:17 templates/footer.html:12
 #: templates/package/package_detail.html:5
@@ -1984,14 +1961,12 @@ msgid "Packages"
 msgstr "Paketler"
 
 #: st/models.py:350
-#, fuzzy
 msgid "Version number"
-msgstr "Sürüm"
+msgstr "Sürüm numarası"
 
 #: st/models.py:351
-#, fuzzy
 msgid "Code Name"
-msgstr "Oyunlar"
+msgstr "Kod Adı"
 
 #: st/models.py:352
 msgid "MD5 sum of Install"
@@ -2010,66 +1985,56 @@ msgid "SHA1 sum of Live"
 msgstr ""
 
 #: st/models.py:356
-#, fuzzy
 msgid "Release Notes"
-msgstr "İlgili Videolar"
+msgstr "Sürüm Notları"
 
 #: st/models.py:357
-#, fuzzy
 msgid "Install Torrent"
-msgstr "Kurulan CD"
+msgstr "Kurulan Torrent"
 
 #: st/models.py:358
 msgid "Live Torrent"
 msgstr ""
 
 #: st/models.py:368 templates/user/profile.html:78
-#, fuzzy
 msgid "Pardus Version"
-msgstr "Sürüm"
+msgstr "Pardus Sürümü"
 
 #: st/models.py:369
-#, fuzzy
 msgid "Pardus Versions"
-msgstr "Sürüm"
+msgstr "Pardus Sürümleri"
 
 #: st/models.py:372
-#, fuzzy
 msgid "Install"
-msgstr "Kurulan CD"
+msgstr "Kurulan"
 
 #: st/models.py:372
 msgid "Live"
 msgstr ""
 
 #: st/models.py:374
-#, fuzzy
 msgid "Server name"
-msgstr "Kullanıcılar"
+msgstr "Sunucu adı"
 
 #: st/models.py:375
-#, fuzzy
 msgid "Address"
-msgstr "ileti adresi"
+msgstr "Adres"
 
 #: st/models.py:376
 msgid "CD Type"
 msgstr ""
 
 #: st/models.py:385
-#, fuzzy
 msgid "Pardus Mirror"
-msgstr "Sürüm"
+msgstr "Pardus Yansısı"
 
 #: st/models.py:386
-#, fuzzy
 msgid "Pardus Mirrors"
-msgstr "Ajans"
+msgstr "Pardus Yansıları"
 
 #: st/tags.py:12 st/tags.py:22
-#, fuzzy
 msgid "Tag"
-msgstr "Etiketler"
+msgstr "Etiket"
 
 #: tema/feeds.py:21 templates/footer.html:13
 #: templates/tema/themeitem_list.html:8
@@ -2114,9 +2079,8 @@ msgid "You can specify your description about the files you submitted here."
 msgstr ""
 
 #: tema/forms.py:55 tema/forms.py:88 tema/forms.py:106
-#, fuzzy
 msgid "Confirmation"
-msgstr "Katkıda bulunun"
+msgstr "Onay"
 
 #: tema/forms.py:55
 msgid "I have the right to give this font away to everyone."
@@ -2160,37 +2124,32 @@ msgid "Wallpapers"
 msgstr ""
 
 #: tema/models.py:26 tema/models.py:175 templates/tema/base.html:17
-#, fuzzy
 msgid "Fonts"
-msgstr "Yorumlar"
+msgstr "Yazıtipleri"
 
 #: tema/models.py:63
 msgid "Type the name of your content here."
 msgstr ""
 
 #: tema/models.py:69
-#, fuzzy
 msgid "Change List"
-msgstr "Değiştir"
+msgstr "Değişiklikler"
 
 #: tema/models.py:69
 msgid "You can specify your changes with version numbers and list them here."
 msgstr ""
 
 #: tema/models.py:70
-#, fuzzy
 msgid "Version Number"
-msgstr "Sürüm"
+msgstr "Sürüm Numarası"
 
 #: tema/models.py:72
-#, fuzzy
 msgid "Downloads"
-msgstr "İndir"
+msgstr "İndirme Sayısı"
 
 #: tema/models.py:75
-#, fuzzy
 msgid "Open to Comments"
-msgstr "Yorumlar"
+msgstr "Yoruma Açık"
 
 #: tema/models.py:75
 msgid "You can specify if you want other members to comment on your work."
@@ -2215,38 +2174,33 @@ msgid ""
 msgstr ""
 
 #: tema/models.py:99
-#, fuzzy
 msgid "Spread Pardus Theme - Non-approved content"
-msgstr "Özgürlükİçin e-dergi yayında!"
+msgstr "Özgürlükİçin Tema - Onaylanmamış İçerik"
 
 #: tema/models.py:101
-#, fuzzy, python-format
+#, python-format
 msgid "Spread Pardus Theme <%s>"
-msgstr "Özgürlükiçin"
+msgstr "Özgürlükiçin Tema <%s>"
 
 #: tema/models.py:115
-#, fuzzy
 msgid "Spread Pardus Theme - New Content"
-msgstr "Özgürlükİçin Forum"
+msgstr "Özgürlükİçin Tema - Yeni İçerik"
 
 #: tema/models.py:133
-#, fuzzy
 msgid "Theme Item"
-msgstr "Temalar"
+msgstr "Tema Birimi"
 
 #: tema/models.py:134
-#, fuzzy
 msgid "Theme Items"
-msgstr "Temalar"
+msgstr "Tema Birimleri"
 
 #: tema/models.py:166
 msgid "Can Manage Tema Queue"
 msgstr ""
 
 #: tema/models.py:170
-#, fuzzy
 msgid "Font file"
-msgstr "Profil"
+msgstr "Yazıtipi dosyası"
 
 #: tema/models.py:171
 msgid "Includes Turkish Characters"
@@ -2285,14 +2239,12 @@ msgid "Wallpaper Files"
 msgstr ""
 
 #: tema/models.py:289
-#, fuzzy
 msgid "Theme Content"
-msgstr "Diğer Gezegenler"
+msgstr "Tema İçeriği"
 
 #: tema/views.py:126
-#, fuzzy
 msgid "Spread Pardus - Theme Report"
-msgstr "Özgürlükİçin Forum"
+msgstr "Özgürlükİçin - Tema Şikayeti"
 
 #: tema/views.py:127
 #, python-format
@@ -2509,23 +2461,20 @@ msgid "Shipit"
 msgstr "CD Gönder"
 
 #: templates/header.html:4
-#, fuzzy
 msgid "Spread Pardus Mainpage"
-msgstr "Özgürlükiçin"
+msgstr "Özgürlükiçin Anasayfa"
 
 #: templates/header.html:6
-#, fuzzy
 msgid "Download Pardus 2009"
-msgstr "Pardus İndir"
+msgstr "Pardus 2009 İndir"
 
 #: templates/home.html:11
 msgid "Pardus Events"
 msgstr ""
 
 #: templates/home.html:17 templates/news/news_main.html:39
-#, fuzzy
 msgid "Place:"
-msgstr "Gezegen"
+msgstr "Yer:"
 
 #: templates/home.html:18 templates/news/news_main.html:40
 msgid "Speakers:"
@@ -2543,14 +2492,12 @@ msgid "Previous News"
 msgstr ""
 
 #: templates/home.html:44
-#, fuzzy
 msgid "Next news"
-msgstr "Haberler"
+msgstr "Sonraki Haber"
 
 #: templates/paginator.html:4
-#, fuzzy
 msgid "First Page"
-msgstr "İlk Adımlar"
+msgstr "İlk Sayfa"
 
 #: templates/paginator.html:5
 msgid "Previous Page"
@@ -2561,19 +2508,17 @@ msgid "Current Page"
 msgstr ""
 
 #: templates/paginator.html:10
-#, fuzzy, python-format
+#, python-format
 msgid "Page %(num)s"
-msgstr "Paketler (%(count)s)"
+msgstr "Sayfa %(num)s"
 
 #: templates/paginator.html:13
-#, fuzzy
 msgid "Next Page"
-msgstr "İlgili Sayfalar"
+msgstr "Sonraki Sayfa"
 
 #: templates/paginator.html:14
-#, fuzzy
 msgid "Last Page"
-msgstr "Son Güncelleme"
+msgstr "Son Sayfa"
 
 #: templates/admin/base.html:25
 msgid "Welcome,"
@@ -2838,16 +2783,6 @@ msgstr "Sebep:"
 msgid "Remove from Abuse List"
 msgstr "Şikayet Listesinden Çıkar"
 
-#: templates/forum/change_poll.html:5 templates/forum/create_poll.html:5
-#: templates/forum/forum_detail.html:13 templates/forum/forum_list.html:10
-#: templates/forum/new_topic.html:14 templates/forum/post_edit.html:11
-#: templates/forum/post_list.html:11 templates/forum/reply.html:11
-#: templates/forum/report.html:12 templates/forum/topic.html:14
-#: templates/forum/topic.html.py:187 templates/forum/unread.html:6
-#: templates/tema/report.html:13
-msgid "Mainpage"
-msgstr "Ana Sayfa"
-
 #: templates/forum/change_poll.html:5 templates/forum/change_poll.html:20
 msgid "Change Poll"
 msgstr "Anketi Değiştir"
@@ -2994,9 +2929,8 @@ msgid "Total Posts"
 msgstr "Toplam İleti Sayısı"
 
 #: templates/forum/forum_list.html:65
-#, fuzzy
 msgid "Total Categories"
-msgstr "Kategoriler"
+msgstr "Toplam Kategori Sayısı"
 
 #: templates/forum/forum_list.html:65
 msgid "Total Topics"
@@ -3322,9 +3256,8 @@ msgid "Details"
 msgstr ""
 
 #: templates/game/game_detail.html:50
-#, fuzzy
 msgid "Package size"
-msgstr "Paketler"
+msgstr "Paket boyutu"
 
 #: templates/game/game_detail.html:59
 msgid "Web site of the game"
@@ -3339,27 +3272,24 @@ msgid "Learning Time:"
 msgstr ""
 
 #: templates/game/game_detail.html:64
-#, fuzzy
 msgid "Gameplay"
-msgstr "Oyunlar"
+msgstr "Oynanabilirlik"
 
 #: templates/game/game_detail.html:92
 msgid "Place in Menu"
 msgstr ""
 
 #: templates/game/game_detail.html:99 templates/package/package_detail.html:68
-#, fuzzy
 msgid "Related Wiki Pages"
-msgstr "İlgili Sayfalar"
+msgstr "İlgili Wiki Sayfaları"
 
 #: templates/game/game_detail.html:118
-#, fuzzy
 msgid ""
 "If you want to contribute to games section, click <a href=\"/katki/oyun/"
 "\">here</a> to visit the contribution guide."
 msgstr ""
-"İlk adımlar bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
-"ilk_adimlar/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
+"Oyunlar bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
+"oyun/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
 "gidebilirsiniz."
 
 #: templates/game/game_main.html:16 templates/howto/howto_main.html:16
