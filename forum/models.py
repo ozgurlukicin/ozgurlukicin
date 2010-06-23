@@ -304,7 +304,7 @@ class Forum(models.Model):
                       )
 
 class Category(models.Model):
-    name = models.CharField(max_length=255, verbose_name=_('Kategory name'))
+    name = models.CharField(max_length=255, verbose_name=_('Category name'))
     hidden = models.NullBooleanField(blank=True, verbose_name=_('Hidden'))
     order = models.PositiveIntegerField(unique=True, verbose_name=_('Ordering'))
 
