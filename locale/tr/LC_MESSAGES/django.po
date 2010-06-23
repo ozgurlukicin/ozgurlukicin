@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-06-21 14:58+0300\n"
-"PO-Revision-Date: 2010-06-21 17:01+0300\n"
+"PO-Revision-Date: 2010-06-23 12:41+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -347,19 +347,16 @@ msgid "Date"
 msgstr "Tarih"
 
 #: flatpages/models.py:22
-#, fuzzy
 msgid "Template name"
-msgstr "İlgili Sayfalar"
+msgstr "Şablon adı"
 
 #: flatpages/models.py:25
-#, fuzzy
 msgid "Flatpage"
-msgstr "Görselleri Filtrele"
+msgstr "Statik sayfa"
 
 #: flatpages/models.py:26 templates/tag/tag_detail.html:81
-#, fuzzy
 msgid "Flatpages"
-msgstr "Görselleri Filtrele"
+msgstr "Statik sayfalar"
 
 #: forum/feeds.py:20 forum/forms.py:52 forum/models.py:155 forum/models.py:298
 #: st/forms.py:19 templates/base.html:21 templates/footer.html:14
@@ -382,9 +379,8 @@ msgid "%(site_name)s %(forum_name)s forum"
 msgstr "%(site_name)s %(forum_name)s forumu"
 
 #: forum/feeds.py:82
-#, fuzzy
 msgid " Forum Title : "
-msgstr "Forum Kuralları"
+msgstr " Forum Başlığı : "
 
 #: forum/feeds.py:122
 msgid " Forum Tag order : "
@@ -423,18 +419,16 @@ msgid "Topic"
 msgstr "Başlık"
 
 #: forum/forms.py:60
-#, fuzzy
 msgid "Abuse Reason"
-msgstr "Sebep:"
+msgstr "Şikayet Sebebi"
 
 #: forum/forms.py:60
 msgid "(can be 512 characters at most)"
 msgstr "(en fazla 512 karakter olabilir)"
 
 #: forum/forms.py:63 poll/models.py:47
-#, fuzzy
 msgid "End Date"
-msgstr "Tarih"
+msgstr "Bitiş Tarihi"
 
 #: forum/forms.py:63
 msgid "Specify when voting will end. like 30/8/2008."
@@ -486,39 +480,33 @@ msgid "Author"
 msgstr "Yazar"
 
 #: forum/models.py:32 forum/models.py:92 forum/models.py:327
-#, fuzzy
 msgid "Post"
-msgstr "İletiler"
+msgstr "İleti"
 
 #: forum/models.py:33 forum/models.py:159 forum/models.py:271
 #: forum/models.py:308 ideas/models.py:86 paste/models.py:39
-#, fuzzy
 msgid "Hidden"
-msgstr "gizle"
+msgstr "Gizli"
 
 #: forum/models.py:34
-#, fuzzy
 msgid "Create date"
-msgstr "Son Güncelleme"
+msgstr "Oluşturulma tarihi"
 
 #: forum/models.py:35
-#, fuzzy
 msgid "Update date"
-msgstr "Son Güncelleme"
+msgstr "Güncellenme tarihi"
 
 #: forum/models.py:36
 msgid "Number of updates"
 msgstr "Güncellenme sayısı"
 
 #: forum/models.py:37
-#, fuzzy
 msgid "Last Editor"
-msgstr "Editör"
+msgstr "Son Düzenleyen"
 
 #: forum/models.py:38
-#, fuzzy
 msgid "IP address"
-msgstr "ileti adresi"
+msgstr "IP adresi"
 
 #: forum/models.py:93 templates/forum/forum_detail.html:20
 #: templates/forum/forum_list.html:19 templates/forum/unread.html:11
@@ -530,24 +518,20 @@ msgid "Can see author ip"
 msgstr "Yazarın IP adresini görebilir"
 
 #: forum/models.py:96
-#, fuzzy
 msgid "Can hide"
-msgstr "gizle"
+msgstr "Gizleyebilir"
 
 #: forum/models.py:97
-#, fuzzy
 msgid "Can see hidden posts"
-msgstr "Fikrin durumunu değiştir"
+msgstr "Gizli iletileri görebilir"
 
 #: forum/models.py:157
-#, fuzzy
 msgid "Sticy"
-msgstr "Sabitle"
+msgstr "Sabit"
 
 #: forum/models.py:158 forum/models.py:272
-#, fuzzy
 msgid "Locked"
-msgstr "Kilitli Başlık"
+msgstr "Kilitli"
 
 #: forum/models.py:160 forum/models.py:274
 msgid "Number of posts"
@@ -558,9 +542,8 @@ msgid "Number of views"
 msgstr "Görüntülenme sayısı"
 
 #: forum/models.py:162
-#, fuzzy
 msgid "Latest posts"
-msgstr "Son İletiler"
+msgstr "Son iletiler"
 
 #: forum/models.py:164 poll/models.py:13 poll/models.py:27 poll/models.py:61
 #: templates/forum/topic.html:34
@@ -572,62 +555,52 @@ msgid "Topics"
 msgstr "Başlıklar"
 
 #: forum/models.py:239
-#, fuzzy
 msgid "Can hide topic"
-msgstr "Başlığı Gizle"
+msgstr "Başlığı gizleyebilir"
 
 #: forum/models.py:240
-#, fuzzy
 msgid "Can stick topic"
-msgstr "Sabit Başlık"
+msgstr "Başlığı sabitleyebilir"
 
 #: forum/models.py:241
-#, fuzzy
 msgid "Can lock topic"
-msgstr "Başlığı Kilitle"
+msgstr "Başlığı kilitleyebilir"
 
 #: forum/models.py:242
-#, fuzzy
 msgid "Can tag topic"
-msgstr "Başlık Aç"
+msgstr "Başlığı etiketleyebilir"
 
 #: forum/models.py:243
 msgid "Can see hidden topics"
 msgstr "Gizli başlıkları görebilir"
 
 #: forum/models.py:244
-#, fuzzy
 msgid "Can merge topic"
-msgstr "Başlığı Birleştir"
+msgstr "Başlığı birleştirebilir"
 
 #: forum/models.py:245
-#, fuzzy
 msgid "Can move topic"
-msgstr "Başlığı Taşı"
+msgstr "Başlığı taşıyabilir"
 
 #: forum/models.py:246
-#, fuzzy
 msgid "Can create poll"
-msgstr "Anket Oluştur"
+msgstr "Anket oluşturabilir"
 
 #: forum/models.py:247
-#, fuzzy
 msgid "Can change poll"
-msgstr "Anketi Değiştir"
+msgstr "Anketi değiştirebilir"
 
 #: forum/models.py:267 forum/models.py:319 ideas/models.py:43
 #: ideas/models.py:60 ideas/models.py:77 tema/forms.py:51
-#, fuzzy
 msgid "Category"
-msgstr "Kategoriler"
+msgstr "Kategori"
 
 #: forum/models.py:268 ideas/models.py:13 ideas/models.py:24
 #: ideas/models.py:36 ideas/models.py:50 ideas/models.py:61
 #: profile/forms.py:24 profile/forms.py:105 profile/models.py:41
 #: templates/user/profile.html:60
-#, fuzzy
 msgid "Name"
-msgstr "Oyunlar"
+msgstr "İsim"
 
 #: forum/models.py:269 ideas/models.py:37
 msgid "SEF name"
@@ -636,9 +609,8 @@ msgstr "SEF isim"
 #: forum/models.py:270 ideas/models.py:75 st/models.py:47 st/models.py:57
 #: st/models.py:69 st/models.py:97 st/models.py:316 tema/forms.py:54
 #: tema/forms.py:87 tema/forms.py:105 tema/models.py:68
-#, fuzzy
 msgid "Description"
-msgstr "Belgelendirme"
+msgstr "Açıklama"
 
 #: forum/models.py:273
 msgid "Number of topics"
@@ -654,14 +626,12 @@ msgid "Ordering"
 msgstr "Sıralama"
 
 #: forum/models.py:299
-#, fuzzy
 msgid "Forums"
-msgstr "Forum"
+msgstr "Forumlar"
 
 #: forum/models.py:301
-#, fuzzy
 msgid "Can hide forum"
-msgstr "Okunmuş forum"
+msgstr "Forumu gizleyebilir"
 
 #: forum/models.py:302
 msgid "Can lock forum"
@@ -672,9 +642,8 @@ msgid "Can see hidden forums"
 msgstr "Gizli forumları görebilir"
 
 #: forum/models.py:307
-#, fuzzy
 msgid "Kategory name"
-msgstr "İlgili Sayfalar"
+msgstr "Kategori adı"
 
 #: forum/models.py:320 ideas/models.py:44 ideas/templates/idea_base.html:78
 #: templates/tema/base.html:14
@@ -690,39 +659,32 @@ msgid "Can see hidden categories"
 msgstr "Gizli kategoriyi görebilir"
 
 #: forum/models.py:328 tema/models.py:290
-#, fuzzy
 msgid "Reporter"
-msgstr "Raporlayan:"
+msgstr "Raporlayan"
 
 #: forum/models.py:329 tema/models.py:291
-#, fuzzy
 msgid "Reason"
-msgstr "Sebep:"
+msgstr "Sebep"
 
 #: forum/models.py:335 tema/models.py:294
-#, fuzzy
 msgid "Abuse Report"
-msgstr "Sebep:"
+msgstr "İleti Şikayeti"
 
 #: forum/models.py:336 tema/models.py:295
-#, fuzzy
 msgid "Abuse Reports"
-msgstr "Sebep:"
+msgstr "İleti Şikayetleri"
 
 #: forum/models.py:339 profile/models.py:52
-#, fuzzy
 msgid "User"
-msgstr "Kullanıcılar"
+msgstr "Kullanıcı"
 
 #: forum/models.py:349
-#, fuzzy
 msgid "Watchlist"
-msgstr "Şikayet Listesinden Çıkar"
+msgstr "İzleme Listesi"
 
 #: forum/models.py:350
-#, fuzzy
 msgid "Watchlists"
-msgstr "İstatistikler"
+msgstr "İzleme Listesi"
 
 #: forum/views.py:509 forum/views.py:562 forum/views.py:933
 #: forum/views.py:1005
@@ -730,23 +692,20 @@ msgid "Topic is locked."
 msgstr "Başlık kilitli."
 
 #: forum/views.py:519
-#, fuzzy
 msgid "Can't marge same topic"
-msgstr "Başlığı Birleştir"
+msgstr "Aynı başlık birleştirilemez"
 
 #: forum/views.py:548 forum/views.py:613
-#, fuzzy
 msgid "Invalid forum."
-msgstr "Okunmamış Forum"
+msgstr "Geçersiz forum."
 
 #: forum/views.py:573
 msgid "Topic is already in this forum."
 msgstr "Başlık zaten bu forumda."
 
 #: forum/views.py:745
-#, fuzzy
 msgid "Spread Pardus Forum - Abuse Report"
-msgstr "Özgürlükİçin Forum"
+msgstr "Özgürlükİçin Forum - İleti Şikayeti"
 
 #: forum/views.py:746
 #, python-format
@@ -774,62 +733,52 @@ msgid "Voting time has expired."
 msgstr ""
 
 #: ideas/feeds.py:16
-#, fuzzy
 msgid " Brainstorm"
-msgstr "Yeni Fikirler"
+msgstr " Yeni Fikirler"
 
 #: ideas/forms.py:10
-#, fuzzy
 msgid "Your comment"
-msgstr "Yorum"
+msgstr "Yorumunuz"
 
 #: ideas/forms.py:13
 msgid "Idea title"
 msgstr ""
 
 #: ideas/forms.py:14
-#, fuzzy
 msgid "Related package"
-msgstr "İlgili Sayfalar"
+msgstr "İlgili paket"
 
 #: ideas/forms.py:14
 msgid "Can be left blank."
 msgstr ""
 
 #: ideas/models.py:19 ideas/models.py:23
-#, fuzzy
 msgid "Status Category"
-msgstr "Kategoriler"
+msgstr "Durum Kategorisi"
 
 #: ideas/models.py:20
-#, fuzzy
 msgid "Status Categories"
-msgstr "Kategoriler"
+msgstr "Durum Kategorileri"
 
 #: ideas/models.py:25
-#, fuzzy
 msgid "Invalid"
-msgstr "Geçersiz fikirler"
+msgstr "Geçersiz"
 
 #: ideas/models.py:31 ideas/models.py:76
-#, fuzzy
 msgid "Status"
-msgstr "İstatistikler"
+msgstr "Durum"
 
 #: ideas/models.py:32
-#, fuzzy
 msgid "Statuses"
-msgstr "İstatistikler"
+msgstr "Durumlar"
 
 #: ideas/models.py:56
-#, fuzzy
 msgid "Related Category"
-msgstr "İlgili Sayfalar"
+msgstr "İlgili Kategorisi"
 
 #: ideas/models.py:57
-#, fuzzy
 msgid "Related Categories"
-msgstr "İlgili Sayfalar"
+msgstr "İlgili Kategorileri"
 
 #: ideas/models.py:67
 msgid "Idea relation"
@@ -840,46 +789,40 @@ msgid "Idea relations"
 msgstr ""
 
 #: ideas/models.py:72
-#, fuzzy
 msgid "Idea Title"
-msgstr "Dosya"
+msgstr "Fikir Başlığı"
 
 #: ideas/models.py:74
-#, fuzzy
 msgid "Submitter"
-msgstr "Gönder"
+msgstr "Gönderen"
 
 #: ideas/models.py:75
 msgid "Write something to describe your idea."
 msgstr ""
 
 #: ideas/models.py:78
-#, fuzzy
 msgid "Related Package"
-msgstr "İlgili Sayfalar"
+msgstr "İlgili Paket"
 
 #: ideas/models.py:78
 msgid "This can be left blank."
 msgstr ""
 
 #: ideas/models.py:80
-#, fuzzy
 msgid "Vote Count"
-msgstr "Paketler (%(count)s)"
+msgstr "Oy Sayısı"
 
 #: ideas/models.py:81
-#, fuzzy
 msgid "Duplicate Idea"
-msgstr "Fikir tekrarı bildir"
+msgstr "Fikir Tekrarı"
 
 #: ideas/models.py:82
 msgid "Idea is Duplicate"
 msgstr ""
 
 #: ideas/models.py:83
-#, fuzzy
 msgid "Related forum link"
-msgstr "İlgili Forum Bağlantısı"
+msgstr "İlgili forum bağlantısı"
 
 #: ideas/models.py:83
 msgid "Paste a topic address if you think it's related."
