@@ -20,7 +20,7 @@ from django.utils.translation import ugettext as _
 class Tema_RSS(Feed):
     title = SITE_NAME + _("Themes")
     link = WEB_URL
-    description = SITE_DESC + _("Wallapers, fonts and more.")
+    description = SITE_DESC + _("Wallpapers, fonts and more.")
     title_template = 'tema/feed_title.html'
     description_template = 'tema/feed_description.html'
 
