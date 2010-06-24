@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-06-23 13:13+0300\n"
-"PO-Revision-Date: 2010-06-23 15:34+0300\n"
+"PO-Revision-Date: 2010-06-24 12:11+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -1425,9 +1425,8 @@ msgid ""
 msgstr ""
 
 #: profile/forms.py:37
-#, fuzzy
 msgid "Contribution comment"
-msgstr "Katkıda bulunun"
+msgstr "Katkı açıklaması"
 
 #: profile/forms.py:37
 msgid "Make comments about your contribution (not required)"
@@ -3874,13 +3873,12 @@ msgid ""
 msgstr ""
 
 #: templates/user/login.html:31
-#, fuzzy
 msgid ""
 "You're already logged in. Click <a href=\"/kullanici/cikis/\">here</a> to "
 "logout"
 msgstr ""
-"Raporlanmış herhangi bir ileti bulunmamaktadır. Foruma dönmek için <a href="
-"\"/forum/\">Tıklayın"
+"Zaten giriş yapmışsınız. Çıkmak için <a href="
+"\"/kullanici/cikis/\">tıklayın</a>"
 
 #: templates/user/logout.html:14
 msgid ""
@@ -3917,9 +3915,8 @@ msgid ""
 msgstr ""
 
 #: templates/user/password.html:10
-#, fuzzy
 msgid "Password couldn't be changed, please correct the errors below"
-msgstr "Anket değiştirilemedi, lütfen aşağıdaki hataları düzeltin"
+msgstr "Parola değiştirilemedi, lütfen aşağıdaki hataları düzeltin"
 
 #: templates/user/password.html:14
 msgid "Password was successfully changed."
@@ -3946,9 +3943,8 @@ msgid "Personal Information"
 msgstr ""
 
 #: templates/user/profile.html:74
-#, fuzzy
 msgid "Registration Date"
-msgstr "Kayıt Tarihi:"
+msgstr "Kayıt Tarihi"
 
 #: templates/user/profile.html:82
 msgid "Contact Information"
@@ -3967,14 +3963,12 @@ msgid "ICQ"
 msgstr ""
 
 #: templates/user/profile_edit.html:3
-#, fuzzy
 msgid "Edit Profile"
-msgstr "Profil"
+msgstr "Profili Düzenle"
 
 #: templates/user/profile_edit.html:48
-#, fuzzy
 msgid "Profile couldn't be updated, please fix the errors below"
-msgstr "Anket oluşturulamadı, lütfen aşağıdaki hataları düzeltin."
+msgstr "Profil güncellenemedi, lütfen aşağıdaki hataları düzeltin."
 
 #: templates/user/profile_edit.html:53
 msgid "Your profile is updated successfully"
@@ -3992,21 +3986,19 @@ msgid "Map"
 msgstr ""
 
 #: templates/user/register.html:3
-#, fuzzy
 msgid "Registration"
-msgstr "Kayıt Ol"
+msgstr "Kayıt"
 
 #: templates/user/register.html:10
-#, fuzzy
 msgid ""
 "Your registration couldn't be completed, please fill the from completely"
-msgstr "Fikir eklenemedi, lütfen aşağıdaki hataları düzeltin."
+msgstr "Kayıt tamamlanamadı, lütfen aşağıdaki hataları düzeltin"
 
 #: templates/user/register.html:13
-#, fuzzy
 msgid ""
 "You are already logged in, click <a href=\"/\">here</a> to visit mainpage."
-msgstr "Anasayfa'ya gitmek için <a href=\"/\">tıklayın</a>."
+msgstr ""
+"Zaten giriş yapmışsınız. Anasayfaya gitmek için <a href=\"/\">tıklayın</a>."
 
 #: templates/user/register.html:20
 msgid ""
@@ -4023,9 +4015,8 @@ msgid "I Accept"
 msgstr ""
 
 #: templates/user/register_done.html:3
-#, fuzzy
 msgid "Registration Done"
-msgstr "Kayıt Tarihi:"
+msgstr "Kayıt Tamamlandı"
 
 #: templates/user/register_done.html:8
 #, python-format
@@ -4035,14 +4026,12 @@ msgid ""
 msgstr ""
 
 #: templates/user/register_done.html:9
-#, fuzzy
 msgid "Homepage"
 msgstr "Anasayfa"
 
 #: templates/user/user_list.html:41
-#, fuzzy
 msgid "Spread Pardus Users List"
-msgstr "Özgürlükiçin"
+msgstr "Özgürlükiçin Kullanıcıları Listesi"
 
 #: templates/user/user_list.html:42
 msgid "More users will appear when you zoom in."
@@ -4059,14 +4048,12 @@ msgid ""
 msgstr ""
 
 #: templates/user/user_list.html:48
-#, fuzzy
 msgid "Pardus versions chart"
-msgstr "Ajans"
+msgstr "Pardus sürümleri grafiği"
 
 #: templates/user/user_list.html:96
-#, fuzzy
 msgid "spreadpardus.com"
-msgstr "Özgürlükiçin"
+msgstr "ozgurlukicin.com"
 
 #: templates/workshop/workshop_main.html:26
 #, python-format
@@ -4076,18 +4063,16 @@ msgid ""
 msgstr ""
 
 #: upload/models.py:28
-#, fuzzy
 msgid "Images"
-msgstr "Anasayfa"
+msgstr "Görseller"
 
 #: upload/models.py:41
 msgid "Icon"
 msgstr ""
 
 #: upload/models.py:42
-#, fuzzy
 msgid "Icons"
-msgstr "Yorumlar"
+msgstr "Simgeler"
 
 #: webalizer/templates/webalizer/index.html:7
 msgid "settings.WEBALIZER_DIR is not configured"
