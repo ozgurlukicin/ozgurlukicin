@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-23 13:13+0300\n"
-"PO-Revision-Date: 2010-06-24 12:11+0300\n"
+"POT-Creation-Date: 2010-06-24 12:12+0300\n"
+"PO-Revision-Date: 2010-06-24 12:38+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -325,11 +325,11 @@ msgstr ""
 
 #: flatpages/admin.py:16
 msgid "General"
-msgstr ""
+msgstr "Genel"
 
 #: flatpages/admin.py:17
 msgid "Other"
-msgstr ""
+msgstr "Diğer"
 
 #: flatpages/models.py:16
 msgid "URL"
@@ -719,18 +719,27 @@ msgid ""
 "This was the reporter's comment (written by %(reporter)s):\n"
 "%(reason)s\n"
 msgstr ""
+"\n"
+"%(topic)s başlığı altındaki bir ileti şikayet edildi..\n"
+"Forumda görmek için tıklayın: %(link)s\n"
+"\n"
+"İleti metni buydu (%(sender)s tarafından yazılmış):\n"
+"%(message)s\n"
+"Şikayet metni buydu (%(reporter)s tarafından yazılmış):\n"
+"%(reason)s\n"
 
 #: forum/views.py:765
 msgid "Your report has been sent to admins. Thank you for your support."
 msgstr ""
+"Şikayetiniz ilgililere ulaştırılmıştır. Desteğiniz için teşekkür ederiz."
 
 #: forum/views.py:802
 msgid "There's already a poll in this topic."
-msgstr ""
+msgstr "Bu başlıkta zaten anket var."
 
 #: forum/views.py:937
 msgid "Voting time has expired."
-msgstr ""
+msgstr "Oylama süresi sona erdi."
 
 #: ideas/feeds.py:16
 msgid " Brainstorm"
@@ -742,7 +751,7 @@ msgstr "Yorumunuz"
 
 #: ideas/forms.py:13
 msgid "Idea title"
-msgstr ""
+msgstr "Fikir başlığı"
 
 #: ideas/forms.py:14
 msgid "Related package"
@@ -750,7 +759,7 @@ msgstr "İlgili paket"
 
 #: ideas/forms.py:14
 msgid "Can be left blank."
-msgstr ""
+msgstr "Boş bırakılabilir."
 
 #: ideas/models.py:19 ideas/models.py:23
 msgid "Status Category"
@@ -782,11 +791,11 @@ msgstr "İlgili Kategorileri"
 
 #: ideas/models.py:67
 msgid "Idea relation"
-msgstr ""
+msgstr "Fikir ilişkisi"
 
 #: ideas/models.py:68
 msgid "Idea relations"
-msgstr ""
+msgstr "Fikir ilişkileri"
 
 #: ideas/models.py:72
 msgid "Idea Title"
@@ -798,7 +807,7 @@ msgstr "Gönderen"
 
 #: ideas/models.py:75
 msgid "Write something to describe your idea."
-msgstr ""
+msgstr "Fikrinizi burada anlatın."
 
 #: ideas/models.py:78
 msgid "Related Package"
@@ -806,7 +815,7 @@ msgstr "İlgili Paket"
 
 #: ideas/models.py:78
 msgid "This can be left blank."
-msgstr ""
+msgstr "Boş bırakılabilir."
 
 #: ideas/models.py:80
 msgid "Vote Count"
@@ -818,7 +827,7 @@ msgstr "Fikir Tekrarı"
 
 #: ideas/models.py:82
 msgid "Idea is Duplicate"
-msgstr ""
+msgstr "Fikir Tekrarı"
 
 #: ideas/models.py:83
 msgid "Related forum link"
@@ -826,7 +835,7 @@ msgstr "İlgili forum bağlantısı"
 
 #: ideas/models.py:83
 msgid "Paste a topic address if you think it's related."
-msgstr ""
+msgstr "İlgili olduğunu düşündüğünüz başlığın adresini girin."
 
 #: ideas/models.py:84
 msgid "Bug Numbers"
@@ -836,6 +845,7 @@ msgstr "Hata Numaraları"
 msgid ""
 "Enter related bug numbers with commas between them. (This can be left blank)"
 msgstr ""
+"İlgili hata numaralarını aralarına virgül koyarak girin. (Boş bırakılabilir)"
 
 #: ideas/models.py:85 st/models.py:65 tema/models.py:245
 #: templates/file_upload/file_upload.html:14
@@ -858,22 +868,22 @@ msgstr "Yeni Fikirler"
 #: ideas/views.py:25
 #, python-format
 msgid "ideas in %s category"
-msgstr ""
+msgstr "%s kategorisindeki fikirler"
 
 #: ideas/views.py:28
 #, python-format
 msgid "ideas tagged %s"
-msgstr ""
+msgstr "%s etiketli fikirler"
 
 #: ideas/views.py:32
 #, python-format
 msgid "ideas related to %s"
-msgstr ""
+msgstr "%s ile ilgili fikirler"
 
 #: ideas/views.py:36
 #, python-format
 msgid "ideas added by %s"
-msgstr ""
+msgstr "%s tarafından eklenen fikirler"
 
 #: ideas/views.py:40 ideas/templates/idea_base.html:66
 msgid "Today's popular ideas"
@@ -917,7 +927,7 @@ msgstr "Favori Fikirler"
 
 #: ideas/views.py:88
 msgid "Popular ideas of last two days"
-msgstr ""
+msgstr "Son iki günün popüler fikirleri"
 
 #: ideas/views.py:92
 msgid "Last five ideas"
@@ -926,7 +936,7 @@ msgstr "Son 5 fikir"
 #: ideas/views.py:146
 #, python-format
 msgid "Details of idea number %d"
-msgstr ""
+msgstr "%d numaralı fikrin ayrıntıları"
 
 #: ideas/views.py:180 ideas/templates/idea_detail.html:30
 msgid "Related Forum Link"
@@ -1146,6 +1156,10 @@ msgid ""
 "\">%(submitter)s</a> on %(submitted_date)s to <a href=\"%(category_url)s\" "
 "title=\"%(category)s\">%(category)s</a> category."
 msgstr ""
+"<a href=\"%(profile_url)s\" title=\"go to %(submitter)s's profile"
+"\">%(submitter)s</a> tarafından %(submitted_date)s tarihinde <a "
+"href=\"%(category_url)s\" "
+"title=\"%(category)s\">%(category)s</a> kategorisine gönderilmiştir."
 
 #: ideas/templates/idea_top.html:21
 #, python-format
@@ -1153,6 +1167,8 @@ msgid ""
 "It's related to <a href=\"/yenifikir/listele/ilgili/%(related_to)s\" title="
 "\"%(related_to)s\">%(related_to)s</a>."
 msgstr ""
+"<a href=\"/yenifikir/listele/ilgili/%(related_to)s\" title="
+"\"%(related_to)s\">%(related_to)s</a> ile ilgilidir."
 
 #: ideas/templates/idea_top.html:25 st/forms.py:53
 msgid "Comment"
@@ -1189,7 +1205,7 @@ msgstr "Düz metin"
 
 #: paste/models.py:35
 msgid "250000 characters at most"
-msgstr ""
+msgstr "en fazla 250000 karakter"
 
 #: paste/models.py:37 poll/models.py:16
 msgid "IP Address"
@@ -1197,11 +1213,11 @@ msgstr "IP Adresi"
 
 #: paste/models.py:40
 msgid "Syntax"
-msgstr ""
+msgstr "Sözdizimi"
 
 #: paste/models.py:41
 msgid "Colorified Text"
-msgstr ""
+msgstr "Renklendirilmiş Yazı"
 
 #: paste/models.py:48
 msgid "Can hide pasted text"
@@ -1210,21 +1226,21 @@ msgstr "Yapıştırılmıiş yazıyı gizleyebilir"
 #: petition/models.py:18 petition/models.py:44 profile/forms.py:25
 #: profile/forms.py:106 templates/user/profile.html:63
 msgid "Surname"
-msgstr ""
+msgstr "Soyadı"
 
 #: petition/models.py:19 petition/models.py:45 profile/forms.py:30
 #: profile/forms.py:109 profile/models.py:78 templates/user/profile.html:66
 msgid "City"
-msgstr ""
+msgstr "Şehir"
 
 #: petition/models.py:20 petition/models.py:46
 msgid "Job"
-msgstr ""
+msgstr "İş"
 
 #: petition/models.py:21 profile/forms.py:27 profile/forms.py:108
 #: profile/forms.py:158 templates/user/profile.html:86
 msgid "E-mail"
-msgstr ""
+msgstr "E-posta"
 
 #: petition/models.py:22 templates/forum/change_poll.html:5
 #: templates/forum/create_poll.html:5 templates/forum/forum_detail.html:13
@@ -1242,13 +1258,13 @@ msgstr "İmzalama tarihi"
 
 #: petition/models.py:24
 msgid "Activation Key"
-msgstr ""
+msgstr "Etkinleştirme Anahtarı"
 
 #: petition/models.py:25 podcast/models.py:43 seminar/models.py:46
 #: st/models.py:163 st/models.py:188 st/models.py:220 st/models.py:262
 #: st/models.py:291 st/models.py:329 st/models.py:359 st/models.py:378
 msgid "Active"
-msgstr ""
+msgstr "Etkin"
 
 #: petition/models.py:26
 msgid "Inform"
@@ -1264,7 +1280,7 @@ msgstr "İmzalayanlar"
 
 #: petition/models.py:47
 msgid "E-Mail"
-msgstr ""
+msgstr "E-Posta"
 
 #: petition/models.py:48 st/models.py:249 st/models.py:320 tema/forms.py:57
 #: templates/user/profile.html:90
@@ -1273,19 +1289,21 @@ msgstr "Web Sitesi"
 
 #: petition/models.py:48
 msgid "(not required)"
-msgstr ""
+msgstr "(zorunlu değil)"
 
 #: petition/models.py:49
 msgid "Inform me about events:"
-msgstr ""
+msgstr "Etkinliklerden haber ver:"
 
 #: petition/models.py:49
 msgid "Select this if you want to get news about other Spread Pardus events."
 msgstr ""
+"Diğer Özgürlükiçin etkinlikleri hakkında haberler almak istiyorsanız bunu "
+"seçin."
 
 #: petition/models.py:59
 msgid "This e-mail address has already signed the petition."
-msgstr ""
+msgstr "Bu e-posta adresiyle imza atılmış."
 
 #: podcast/models.py:19 profile/forms.py:23 profile/forms.py:157
 #: profile/models.py:31 seminar/models.py:30 templates/user/login.html:18
@@ -1298,7 +1316,7 @@ msgstr "Konuşmacı"
 
 #: podcast/models.py:27 seminar/models.py:38
 msgid "Speakers"
-msgstr ""
+msgstr "Konuşmacılar"
 
 #: podcast/models.py:31 st/models.py:154 st/models.py:180 st/models.py:210
 #: st/models.py:242 st/models.py:284 st/models.py:313 tema/models.py:64
@@ -1314,24 +1332,24 @@ msgstr "Görsel"
 #: podcast/models.py:33 st/models.py:156 st/models.py:182 st/models.py:212
 #: st/models.py:244 st/models.py:286 st/models.py:315
 msgid "Summary"
-msgstr ""
+msgstr "Özet"
 
 #: podcast/models.py:37 templates/podcast/detail.html:63
 #: templates/podcast/main.html:57
 msgid "Guests"
-msgstr ""
+msgstr "Misafirler"
 
 #: podcast/models.py:70
 msgid "Episode"
-msgstr ""
+msgstr "Bölüm"
 
 #: podcast/models.py:71
 msgid "Episodes"
-msgstr ""
+msgstr "Bölümler"
 
 #: poll/models.py:14
 msgid "Option"
-msgstr ""
+msgstr "Seçenek"
 
 #: poll/models.py:43
 msgid "Question"
@@ -1339,21 +1357,25 @@ msgstr "Soru"
 
 #: poll/models.py:44
 msgid "Changing vote is allowed"
-msgstr ""
+msgstr "Oy değiştirmek izinli"
 
 #: poll/models.py:44
 msgid "Check this if you want users to be able to change votes after casting."
 msgstr ""
+"Kullanıcıların oy kullandıktan sonra karar değiştirebilmelerine izin verir."
 
 #: poll/models.py:45
 msgid "Multiple options allowed"
-msgstr ""
+msgstr "Çoklu seçenek izinli"
 
 #: poll/models.py:45
 msgid ""
 "Check this if you want users to be able to cast votes on multiple options. "
 "Warning: You can't change this option later."
 msgstr ""
+"Kullanıcıların birden fazla seçeneğe oy verebilmesini istiyorsanız "
+"etkinleştirin. "
+"Uyarı bunu daha sonra değiştiremezsiniz."
 
 #: poll/models.py:46
 msgid "Timed"
@@ -1361,11 +1383,11 @@ msgstr "Süreli"
 
 #: poll/models.py:46
 msgid "Check this if you want voting to end at a specified date."
-msgstr ""
+msgstr "Oylamanın belli bir zamandan sonra kapanmasını istiyorsanız seçin."
 
 #: poll/models.py:47
 msgid "Specify when vote casting will be disabled. like 30/8/2008."
-msgstr ""
+msgstr "Oylamanın ne zaman biteceğini yazın. 30/8/2008 gibi."
 
 #: poll/models.py:48 tema/models.py:73
 msgid "Creation Date"
@@ -1377,7 +1399,7 @@ msgstr "Anketler"
 
 #: profile/forms.py:23
 msgid "Minimum 3, maximum 20 characters"
-msgstr ""
+msgstr "En az 3 en fazla 20 karakter"
 
 #: profile/forms.py:26 profile/forms.py:107 templates/user/profile.html:70
 msgid "Birth Date"
@@ -1385,7 +1407,7 @@ msgstr "Doğum Tarihi"
 
 #: profile/forms.py:26
 msgid "like 23/4/1985"
-msgstr ""
+msgstr "23/4/1985 gibi"
 
 #: profile/forms.py:28 profile/forms.py:197 profile/forms.py:265
 #: templates/user/login.html:22
@@ -1398,7 +1420,7 @@ msgstr "Parola (tekrar)"
 
 #: profile/forms.py:29
 msgid "Minimum 5 characters"
-msgstr ""
+msgstr "En az 5 karakter"
 
 #: profile/forms.py:31 profile/forms.py:110 profile/models.py:74
 #: templates/tema/themeitem_font_detail.html:49
@@ -1408,7 +1430,7 @@ msgstr "Web Sayfası"
 #: profile/forms.py:31 profile/forms.py:33 profile/forms.py:34
 #: profile/forms.py:35 seminar/models.py:30 seminar/models.py:45
 msgid "Not required"
-msgstr ""
+msgstr "Zorunlu değil"
 
 #: profile/forms.py:32 profile/forms.py:114
 msgid "Pardus version that you're using"
@@ -1423,6 +1445,8 @@ msgid ""
 "How can you contribute our community? (you may select more than one choice "
 "with holding down ctrl key, not required)"
 msgstr ""
+"Topluluğumuza nasıl katkıda bulunabilirsiniz? (ctrl tuşuna basarak birden "
+"fazla seçim yapabilirsiniz, zorunlu değil)"
 
 #: profile/forms.py:37
 msgid "Contribution comment"
@@ -1430,16 +1454,18 @@ msgstr "Katkı açıklaması"
 
 #: profile/forms.py:37
 msgid "Make comments about your contribution (not required)"
-msgstr ""
+msgstr "Katkılarınız hakkında açıklama yapın (zorunlu değil)"
 
 #: profile/forms.py:38
 msgid "Show my e-mail address"
-msgstr ""
+msgstr "E-posta adresimi göster"
 
 #: profile/forms.py:38 profile/forms.py:115
 msgid ""
 "Do you want other members to see your e-mail address in your profile page?"
 msgstr ""
+"Profil sayfanızda diğer kullanıcıların e-posta adresinizi görmesini istiyor "
+"musunuz?"
 
 #: profile/forms.py:39 profile/forms.py:116 profile/models.py:81
 msgid "Show birth date"
@@ -1448,32 +1474,36 @@ msgstr "Doğum tarihini göster"
 #: profile/forms.py:39 profile/forms.py:116
 msgid "Do you want other members to see your birth date in your profile page?"
 msgstr ""
+"Profil sayfanızda diğer kullanıcıların doğum tarihinizi görmesini istiyor "
+"musunuz?"
 
 #: profile/forms.py:45
 msgid "Username must be at least 3 characters long"
-msgstr ""
+msgstr "Kullanıcı adı en az 3 karakter olmalıdır"
 
 #: profile/forms.py:48
 msgid ""
 "Invalid username. Username can only contain \"a-z A-Z 0-9 _\" characters"
 msgstr ""
+"Geçersiz kullanıcı adı. Kullanıcı adı sadece \"a-z A-Z 0-9 _\" "
+"karakterlerinden oluşabilir"
 
 #: profile/forms.py:52
 msgid "This username is forbidden"
-msgstr ""
+msgstr "Bu kullanıcı adı yasaklanmıştır"
 
 #: profile/forms.py:56
 msgid "This username is in use"
-msgstr ""
+msgstr "Bu kullanıcı adı başkası tarafından kullanılıyor"
 
 #: profile/forms.py:68 profile/forms.py:150
 msgid "This e-mail address is in use"
-msgstr ""
+msgstr "Bu e-posta adresi başkası tarafından kullanılıyor"
 
 #: profile/forms.py:81 profile/forms.py:207 profile/forms.py:221
 #: profile/forms.py:243
 msgid "Password may not contain space character"
-msgstr ""
+msgstr "Parola boşluk karakteri içeremez"
 
 #: profile/forms.py:84 profile/forms.py:213 profile/forms.py:227
 #: profile/forms.py:249
@@ -1482,15 +1512,15 @@ msgstr "Parola en az 5 karakter olmalıdır"
 
 #: profile/forms.py:87 profile/forms.py:252 profile/forms.py:277
 msgid "Passwords don't match"
-msgstr ""
+msgstr "Parolalar uyuşmuyor"
 
 #: profile/forms.py:98 profile/forms.py:136
 msgid "ICQ number must be a positive integer"
-msgstr ""
+msgstr "ICQ numarası 0'dan büyük bir sayı olmalıdır"
 
 #: profile/forms.py:101 profile/forms.py:139
 msgid "ICQ number can only contain numbers"
-msgstr ""
+msgstr "ICQ numarası sadece rakam içermelidir"
 
 #: profile/forms.py:104 profile/models.py:48 profile/models.py:72
 #: templates/user/profile.html:47
@@ -1499,17 +1529,19 @@ msgstr "Avatar"
 
 #: profile/forms.py:115 profile/models.py:80
 msgid "Show e-mail address"
-msgstr ""
+msgstr "E-posta adresini göster"
 
 #: profile/forms.py:117 profile/models.py:84
 msgid "Introduce yourself"
-msgstr ""
+msgstr "Kendinizi tanıtın"
 
 #: profile/forms.py:117
 msgid ""
 "Here, you can introduce yourself briefly. This will be shown in your profile "
 "page."
 msgstr ""
+"Burada kısaca kendinizi tanıtabilirsiniz. Yazdıklarınız profil sayfanızda "
+"gösterilecektir."
 
 #: profile/forms.py:118 profile/models.py:87
 msgid "Signature"
@@ -1519,6 +1551,7 @@ msgstr "İmza"
 msgid ""
 "This will be shown under your posts in forum pages (512 characters max.)"
 msgstr ""
+"Forumdaki iletilerinizin altında gösterilecektir (en fazla 512 karakter)"
 
 #: profile/forms.py:119 profile/models.py:88 seminar/models.py:17
 msgid "Latitude"
@@ -1526,19 +1559,19 @@ msgstr "Enlem"
 
 #: profile/forms.py:120 profile/models.py:89 seminar/models.py:18
 msgid "Longitude"
-msgstr ""
+msgstr "Boylam"
 
 #: profile/forms.py:169
 msgid "This username is not registered"
-msgstr ""
+msgstr "Bu kullanıcı adı kayıtlı değil"
 
 #: profile/forms.py:173
 msgid "This username has already requested a new password"
-msgstr ""
+msgstr "Bu kullanıcı adı zaten yeni parola isteğinde bulunmuş"
 
 #: profile/forms.py:189
 msgid "This e-mail address is not registered"
-msgstr ""
+msgstr "Bu e-posta adresi kayıtlı değil"
 
 #: profile/forms.py:196
 msgid "Old password"
@@ -1550,15 +1583,15 @@ msgstr "Parola (Tekrar)"
 
 #: profile/forms.py:210 profile/forms.py:224 profile/forms.py:246
 msgid "Password must contain less than 32 characters"
-msgstr ""
+msgstr "Parola 32 karakterden kısa olmalıdır"
 
 #: profile/forms.py:256
 msgid "Old password is wrong"
-msgstr ""
+msgstr "Eski parola hatalı"
 
 #: profile/forms.py:260
 msgid "Fill all of the fields to change password"
-msgstr ""
+msgstr "Parolayı değiştirmek için bütün alanları doldurun"
 
 #: profile/models.py:37
 msgid "Forbidden Username"
@@ -1566,7 +1599,7 @@ msgstr "Yasaklı Kullanıcı Adı"
 
 #: profile/models.py:38
 msgid "Forbidden Usernames"
-msgstr ""
+msgstr "Yasaklı Kullanıcılar"
 
 #: profile/models.py:49
 msgid "Avatars"
@@ -1574,7 +1607,7 @@ msgstr "Avatarlar"
 
 #: profile/models.py:53
 msgid "Key"
-msgstr ""
+msgstr "Anahtar"
 
 #: profile/models.py:54
 msgid "Timeout"
@@ -1586,7 +1619,7 @@ msgstr "Kayıp Parolalar"
 
 #: profile/models.py:71
 msgid "example: 'Forum Moderator'"
-msgstr ""
+msgstr "örnek: 'Forum Yöneticisi'"
 
 #: profile/models.py:83
 msgid "Contribution Comment"
@@ -1602,12 +1635,12 @@ msgstr "Kullanıcı Profilleri"
 
 #: profile/views.py:40
 msgid "Topic does not belong to this user!"
-msgstr ""
+msgstr "Başlık bu kullanıcıya ait değil!"
 
 #: profile/views.py:196
 #, python-format
 msgid "%(SITE_NAME)s User Account, %(user)s"
-msgstr ""
+msgstr "%(SITE_NAME)s Kullanıcı Hesabı, %(user)s"
 
 #: profile/views.py:254
 #, python-format
@@ -3287,9 +3320,8 @@ msgid ""
 "If you want to contribute to games section, click <a href=\"/katki/oyun/"
 "\">here</a> to visit the contribution guide."
 msgstr ""
-"Oyunlar bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
-"oyun/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
-"gidebilirsiniz."
+"Oyunlar bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/oyun/"
+"\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya gidebilirsiniz."
 
 #: templates/game/game_main.html:16 templates/howto/howto_main.html:16
 #: templates/news/news_main.html:16 templates/package/package_main.html:16
@@ -3311,9 +3343,8 @@ msgid ""
 "If you want to contribute games section click <a href=\"/katki/oyun/\">here</"
 "a> to view our contribution guide."
 msgstr ""
-"Oyunlar bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
-"oyun/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
-"gidebilirsiniz."
+"Oyunlar bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/oyun/"
+"\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya gidebilirsiniz."
 
 #: templates/howto/howto_detail.html:48
 #: templates/workshop/workshop_detail.html:47
@@ -3333,9 +3364,8 @@ msgid ""
 "If you want to contribute to howto section, click <a href=\"/katki/nasil/"
 "\">here</a> to visit the contribution guide."
 msgstr ""
-"Nasıl bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
-"nasil/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
-"gidebilirsiniz."
+"Nasıl bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/nasil/"
+"\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya gidebilirsiniz."
 
 #: templates/howto/howto_main.html:26
 #, python-format
@@ -3471,9 +3501,8 @@ msgid ""
 "If you want to contribute to packages section, click <a href=\"/katki/paket/"
 "\">here</a> to visit the contribution guide."
 msgstr ""
-"Paketler bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
-"paket/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
-"gidebilirsiniz."
+"Paketler bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/paket/"
+"\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya gidebilirsiniz."
 
 #: templates/package/package_main.html:26
 #, python-format
@@ -3487,9 +3516,8 @@ msgid ""
 "If you want to contribute packages section click <a href=\"/katki/paket/"
 "\">here</a> to view our contribution guide."
 msgstr ""
-"Paketler bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/"
-"paket/\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya "
-"gidebilirsiniz."
+"Paketler bölümüne katkıda bulunmak istiyorsanız <a href=\"/katki/paket/"
+"\">buraya</a> tıklayarak size kılavuzluk edecek sayfaya gidebilirsiniz."
 
 #: templates/paste/pastedtext_add.html:9
 msgid ""
@@ -3624,8 +3652,7 @@ msgid ""
 "theme page."
 msgstr ""
 "Raporlanmış herhangi bir ileti bulunmamaktadır. Tema ana sayfasına dönmek "
-"için <a href="
-"\"/tema/\">tıklayın</a>."
+"için <a href=\"/tema/\">tıklayın</a>."
 
 #: templates/tema/abuse_list.html:9
 msgid "Reported Themes:"
@@ -3845,8 +3872,8 @@ msgid ""
 "There's no topic that you have been following. Click <a href=\"/forum/"
 "\">here</a> to return forum."
 msgstr ""
-"Takip ettiğiniz bir ileti bulunmamaktadır. Foruma dönmek için <a href="
-"\"/forum/\">tıklayın</a>."
+"Takip ettiğiniz bir ileti bulunmamaktadır. Foruma dönmek için <a href=\"/"
+"forum/\">tıklayın</a>."
 
 #: templates/user/followed_topics.html:12
 msgid "Followed topics"
@@ -3877,8 +3904,8 @@ msgid ""
 "You're already logged in. Click <a href=\"/kullanici/cikis/\">here</a> to "
 "logout"
 msgstr ""
-"Zaten giriş yapmışsınız. Çıkmak için <a href="
-"\"/kullanici/cikis/\">tıklayın</a>"
+"Zaten giriş yapmışsınız. Çıkmak için <a href=\"/kullanici/cikis/\">tıklayın</"
+"a>"
 
 #: templates/user/logout.html:14
 msgid ""
@@ -4068,7 +4095,7 @@ msgstr "Görseller"
 
 #: upload/models.py:41
 msgid "Icon"
-msgstr ""
+msgstr "Simge"
 
 #: upload/models.py:42
 msgid "Icons"
