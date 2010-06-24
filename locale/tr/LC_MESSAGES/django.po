@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-24 12:12+0300\n"
-"PO-Revision-Date: 2010-06-24 12:38+0300\n"
+"POT-Creation-Date: 2010-06-24 15:29+0300\n"
+"PO-Revision-Date: 2010-06-24 15:28+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -1156,10 +1156,10 @@ msgid ""
 "\">%(submitter)s</a> on %(submitted_date)s to <a href=\"%(category_url)s\" "
 "title=\"%(category)s\">%(category)s</a> category."
 msgstr ""
-"<a href=\"%(profile_url)s\" title=\"go to %(submitter)s's profile"
-"\">%(submitter)s</a> tarafından %(submitted_date)s tarihinde <a "
-"href=\"%(category_url)s\" "
-"title=\"%(category)s\">%(category)s</a> kategorisine gönderilmiştir."
+"<a href=\"%(profile_url)s\" title=\"go to %(submitter)s's profile\">%"
+"(submitter)s</a> tarafından %(submitted_date)s tarihinde <a href=\"%"
+"(category_url)s\" title=\"%(category)s\">%(category)s</a> kategorisine "
+"gönderilmiştir."
 
 #: ideas/templates/idea_top.html:21
 #, python-format
@@ -1167,8 +1167,8 @@ msgid ""
 "It's related to <a href=\"/yenifikir/listele/ilgili/%(related_to)s\" title="
 "\"%(related_to)s\">%(related_to)s</a>."
 msgstr ""
-"<a href=\"/yenifikir/listele/ilgili/%(related_to)s\" title="
-"\"%(related_to)s\">%(related_to)s</a> ile ilgilidir."
+"<a href=\"/yenifikir/listele/ilgili/%(related_to)s\" title=\"%(related_to)s"
+"\">%(related_to)s</a> ile ilgilidir."
 
 #: ideas/templates/idea_top.html:25 st/forms.py:53
 msgid "Comment"
@@ -1374,8 +1374,7 @@ msgid ""
 "Warning: You can't change this option later."
 msgstr ""
 "Kullanıcıların birden fazla seçeneğe oy verebilmesini istiyorsanız "
-"etkinleştirin. "
-"Uyarı bunu daha sonra değiştiremezsiniz."
+"etkinleştirin. Uyarı bunu daha sonra değiştiremezsiniz."
 
 #: poll/models.py:46
 msgid "Timed"
@@ -1645,7 +1644,7 @@ msgstr "%(SITE_NAME)s Kullanıcı Hesabı, %(user)s"
 #: profile/views.py:254
 #, python-format
 msgid "%(SITE_NAME)s User Password"
-msgstr ""
+msgstr "%(SITE_NAME)s Kullanıcı Parolası"
 
 #: seminar/models.py:14 seminar/models.py:25
 msgid "Seminar Location"
@@ -1657,19 +1656,19 @@ msgstr "Yer Bilgisi"
 
 #: seminar/models.py:16
 msgid "Telephone"
-msgstr ""
+msgstr "Telefon"
 
 #: seminar/models.py:17
 msgid "like 40.903823"
-msgstr ""
+msgstr "40.903823 gibi"
 
 #: seminar/models.py:18
 msgid "like 29.226723"
-msgstr ""
+msgstr "29.226723 gibi"
 
 #: seminar/models.py:26
 msgid "Seminar Locations"
-msgstr ""
+msgstr "Seminer Yerleri"
 
 #: seminar/models.py:29
 msgid "Real Name"
@@ -1685,7 +1684,7 @@ msgstr "Yer"
 
 #: seminar/models.py:43
 msgid "Attenders"
-msgstr ""
+msgstr "Katılımcılar"
 
 #: seminar/models.py:44
 msgid "Start date"
@@ -1759,7 +1758,7 @@ msgstr " - Atölye"
 
 #: st/forms.py:14 st/forms.py:17
 msgid "Keyword"
-msgstr ""
+msgstr "Anahtar kelime"
 
 #: st/forms.py:18
 msgid "Search Sections"
@@ -1771,7 +1770,7 @@ msgstr "Diğer Bölümler"
 
 #: st/forms.py:22
 msgid "All"
-msgstr ""
+msgstr "Tümü"
 
 #: st/forms.py:24
 msgid "Search Depth"
@@ -1779,19 +1778,19 @@ msgstr "Arama Derinliği"
 
 #: st/forms.py:25
 msgid "Only Search in Titles"
-msgstr ""
+msgstr "Sadece Başlıklarda Ara"
 
 #: st/forms.py:26
 msgid "Search in Titles and Content"
-msgstr ""
+msgstr "Başlıklarda ve İçerikte Ara"
 
 #: st/models.py:33
 msgid "Article Name"
-msgstr ""
+msgstr "Madde Adı"
 
 #: st/models.py:43
 msgid "Wiki page"
-msgstr ""
+msgstr "Wiki sayfası"
 
 #: st/models.py:44
 msgid "Wiki pages"
@@ -1811,12 +1810,12 @@ msgstr "Dosyalar"
 
 #: st/models.py:93 tema/models.py:253 tema/models.py:259
 msgid "Screenshot"
-msgstr ""
+msgstr "Ekran Görüntüsü"
 
 #: st/models.py:94 tema/models.py:25 tema/models.py:260
 #: templates/package/package_detail.html:75
 msgid "Screenshots"
-msgstr ""
+msgstr "Ekran Görüntüleri"
 
 #: st/models.py:108
 msgid "Video"
@@ -1829,11 +1828,11 @@ msgstr "Videolar"
 #: st/models.py:149 tema/forms.py:56 tema/forms.py:89 tema/forms.py:107
 #: tema/models.py:58 tema/models.py:67 templates/game/game_detail.html:46
 msgid "License"
-msgstr ""
+msgstr "Lisans"
 
 #: st/models.py:150 tema/models.py:59
 msgid "Licenses"
-msgstr ""
+msgstr "Lisanslar"
 
 #: st/models.py:160 st/models.py:186 st/models.py:218 st/models.py:260
 #: st/models.py:327 templates/feedjack/oi/post_list.html:64
@@ -1854,7 +1853,7 @@ msgstr "İlk Adımlar"
 
 #: st/models.py:181 st/models.py:211
 msgid "must be 114x114 in size"
-msgstr ""
+msgstr "114x114 boyutlarında olmalıdır"
 
 #: st/models.py:205
 msgid "Workshop Article"
@@ -1882,7 +1881,7 @@ msgstr "Kurulum boyutu"
 
 #: st/models.py:247 st/models.py:248 st/models.py:318 st/models.py:319
 msgid "in MB"
-msgstr ""
+msgstr "MB cinsinden"
 
 #: st/models.py:248
 msgid "Download size"
@@ -1890,7 +1889,7 @@ msgstr "İndirme boyutu"
 
 #: st/models.py:249 st/models.py:320
 msgid "Add http:// in front"
-msgstr ""
+msgstr "başına http:// ekleyin"
 
 #: st/models.py:250 st/models.py:322
 msgid "Location in Menu"
@@ -1898,19 +1897,19 @@ msgstr "Menüdeki Yeri"
 
 #: st/models.py:250 st/models.py:322
 msgid "like Programs > Accesories > KNazar)"
-msgstr ""
+msgstr "Programlar > Yardımcı Programlar > KNazar gibi)"
 
 #: st/models.py:251
 msgid "Playability"
-msgstr ""
+msgstr "Oynanabilirlik"
 
 #: st/models.py:252 templates/game/game_detail.html:70
 msgid "Graphics"
-msgstr ""
+msgstr "Grafikler"
 
 #: st/models.py:253 templates/game/game_detail.html:75
 msgid "Sound"
-msgstr ""
+msgstr "Ses"
 
 #: st/models.py:254 templates/game/game_detail.html:80
 msgid "Scenario"
@@ -1918,15 +1917,15 @@ msgstr "Senaryo"
 
 #: st/models.py:255 templates/game/game_detail.html:85
 msgid "Atmosphere"
-msgstr ""
+msgstr "Atmosfer"
 
 #: st/models.py:256
 msgid "Learning Time"
-msgstr ""
+msgstr "Öğrenme Süresi"
 
 #: st/models.py:256
 msgid "like 1 day, 3 hours, 5 months, years."
-msgstr ""
+msgstr "1 gün, 3 saat, 5 ay, yıllarca gibi."
 
 #: st/models.py:279 templates/home.html:80
 msgid "Game"
@@ -1942,6 +1941,7 @@ msgstr "Oyunlar"
 #: st/models.py:284
 msgid "Should be the same as title but only consist of small letters and -"
 msgstr ""
+"Başlıkla aynı olmalı fakat sadece küçük harfler ve - işareti içermelidir"
 
 #: st/models.py:285
 msgid "Headline Image"
@@ -1950,10 +1950,12 @@ msgstr "Açılış Görseli"
 #: st/models.py:285
 msgid "Image should be 310x205 in size! Press + to upload a new image."
 msgstr ""
+"Görsel 310x205 boyutlarında olmalıdır! Yeni görsel eklemek için + işaretine "
+"tıklayın."
 
 #: st/models.py:286
 msgid "Headline image will be added to summary automaticly."
-msgstr ""
+msgstr "Açılış görseli otomatik olarak özete eklenecektir."
 
 #: st/models.py:289 tema/models.py:74
 msgid "Update Date"
@@ -2002,19 +2004,19 @@ msgstr "Kod Adı"
 
 #: st/models.py:352
 msgid "MD5 sum of Install"
-msgstr ""
+msgstr "kurulanın MD5sum'ı"
 
 #: st/models.py:353
 msgid "SHA1 sum of Install"
-msgstr ""
+msgstr "Kurulanın SHA1sum'ı"
 
 #: st/models.py:354
 msgid "MD5 sum of Live"
-msgstr ""
+msgstr "Çalışanın MD5sum'ı"
 
 #: st/models.py:355
 msgid "SHA1 sum of Live"
-msgstr ""
+msgstr "Çalışanın SHA1sum'ı"
 
 #: st/models.py:356
 msgid "Release Notes"
@@ -2026,7 +2028,7 @@ msgstr "Kurulan Torrent"
 
 #: st/models.py:358
 msgid "Live Torrent"
-msgstr ""
+msgstr "Çalışan Torrenti"
 
 #: st/models.py:368 templates/user/profile.html:78
 msgid "Pardus Version"
@@ -2042,7 +2044,7 @@ msgstr "Kurulan"
 
 #: st/models.py:372
 msgid "Live"
-msgstr ""
+msgstr "Çalışan"
 
 #: st/models.py:374
 msgid "Server name"
@@ -2054,7 +2056,7 @@ msgstr "Adres"
 
 #: st/models.py:376
 msgid "CD Type"
-msgstr ""
+msgstr "CD Türü"
 
 #: st/models.py:385
 msgid "Pardus Mirror"
@@ -2074,41 +2076,41 @@ msgid "Themes"
 msgstr "Temalar"
 
 #: tema/feeds.py:23
-msgid "Wallapers, fonts and more."
-msgstr ""
+msgid "Wallpapers, fonts and more."
+msgstr "Duvar kağıtları, yazıtipleri ve daha fazlası."
 
 #: tema/feeds.py:84
 #, python-format
 msgid "%(site_name)s Theme: %(username)s"
-msgstr ""
+msgstr "%(site_name)s Tema: %(username)s"
 
 #: tema/forms.py:32 tema/forms.py:33
 msgid "very bad"
-msgstr ""
+msgstr "çok kötü"
 
 #: tema/forms.py:34 tema/forms.py:35
 msgid "bad"
-msgstr ""
+msgstr "kötü"
 
 #: tema/forms.py:36 tema/forms.py:37
 msgid "good"
-msgstr ""
+msgstr "iyi"
 
 #: tema/forms.py:38 tema/forms.py:39
 msgid "very good"
-msgstr ""
+msgstr "çok iyi"
 
 #: tema/forms.py:40 tema/forms.py:41
 msgid "excellent"
-msgstr ""
+msgstr "harika"
 
 #: tema/forms.py:51
 msgid "Choose a category for your content"
-msgstr ""
+msgstr "İçeriğiniz için bir kategori seçin"
 
 #: tema/forms.py:54 tema/forms.py:87 tema/forms.py:105 tema/models.py:68
 msgid "You can specify your description about the files you submitted here."
-msgstr ""
+msgstr "Buraya gönderdiğiniz dosyalar hakkında açıklama yazabilirsiniz."
 
 #: tema/forms.py:55 tema/forms.py:88 tema/forms.py:106
 msgid "Confirmation"
@@ -2116,44 +2118,46 @@ msgstr "Onay"
 
 #: tema/forms.py:55
 msgid "I have the right to give this font away to everyone."
-msgstr ""
+msgstr "Bu yazıtipini dağıtma hakkında sahibim."
 
 #: tema/forms.py:57
 msgid "Web site of font maker."
-msgstr ""
+msgstr "Yazıtipi üreticisinin web sitesi."
 
 #: tema/forms.py:81
 msgid "Your font couldn't be read."
-msgstr ""
+msgstr "Yazıtipi okunamadı."
 
 #: tema/forms.py:88
 msgid "I have the right to give this screenshot away to everyone."
-msgstr ""
+msgstr "Bu ekran görüntüsünü dağıtma hakkına sahibim."
 
 #: tema/forms.py:90 tema/forms.py:108 tema/models.py:81
+#: templates/tema/themeitem_desktopscreenshot_detail.html:51
+#: templates/tema/themeitem_wallpaper_detail.html:54
 msgid "Original Work"
-msgstr ""
+msgstr "Özgün Çalışma"
 
 #: tema/forms.py:90 tema/forms.py:108 tema/models.py:81
 msgid "Link to original work if exists."
-msgstr ""
+msgstr "Başka bir çalışmayı temel aldıysanız bunun bağlantısını yazın."
 
 #: tema/forms.py:106
 msgid "I have the right to give this wallpaper away to everyone."
-msgstr ""
+msgstr "Bu duvar kağıdını dağıtma hakkına sahibim."
 
 #: tema/forms.py:122
 msgid "Create Smaller Wallpapers"
-msgstr ""
+msgstr "Küçüklerini Oluştur"
 
 #: tema/forms.py:128
 #, python-format
 msgid "%(size)s is not a valid wallpaper size."
-msgstr ""
+msgstr "%(size)s geçerli bir duvar kağıdı boyutu değil."
 
 #: tema/models.py:24 tema/models.py:209 templates/tema/base.html:15
 msgid "Wallpapers"
-msgstr ""
+msgstr "Duvar Kağıtları"
 
 #: tema/models.py:26 tema/models.py:175 templates/tema/base.html:17
 msgid "Fonts"
@@ -2161,7 +2165,7 @@ msgstr "Yazıtipleri"
 
 #: tema/models.py:63
 msgid "Type the name of your content here."
-msgstr ""
+msgstr "İçeriğinizin adını yazın."
 
 #: tema/models.py:69
 msgid "Change List"
@@ -2169,7 +2173,7 @@ msgstr "Değişiklikler"
 
 #: tema/models.py:69
 msgid "You can specify your changes with version numbers and list them here."
-msgstr ""
+msgstr "Değişikliklerinizi sürüm numarasıyla birlikte listeleyebilirsiniz."
 
 #: tema/models.py:70
 msgid "Version Number"
@@ -2186,24 +2190,25 @@ msgstr "Yoruma Açık"
 #: tema/models.py:75
 msgid "You can specify if you want other members to comment on your work."
 msgstr ""
+"Diğer üyelerin içeriğiniz hakkında yorum yapmasına izin vermeyebilirsiniz."
 
 #: tema/models.py:76
 msgid "Thumbnail"
-msgstr ""
+msgstr "Küçük resim"
 
 #: tema/models.py:77
 msgid "Approved"
-msgstr ""
+msgstr "Onaylanmış"
 
 #: tema/models.py:78
 msgid "Non-approval Reason"
-msgstr ""
+msgstr "Onaylanmama Sebebi"
 
 #: tema/models.py:79
 msgid ""
 "Type the reason here if you don't approve (this will be sent as an e-mail to "
 "submitter)"
-msgstr ""
+msgstr "Onaylamıyorsanız sebebini yazın (gönderene e-posta olarak gidecektir)"
 
 #: tema/models.py:99
 msgid "Spread Pardus Theme - Non-approved content"
@@ -2227,8 +2232,8 @@ msgid "Theme Items"
 msgstr "Tema Birimleri"
 
 #: tema/models.py:166
-msgid "Can Manage Tema Queue"
-msgstr ""
+msgid "Can Manage Theme Queue"
+msgstr "Tema Kuyruğunu Yönetebilir"
 
 #: tema/models.py:170
 msgid "Font file"
@@ -2236,39 +2241,39 @@ msgstr "Yazıtipi dosyası"
 
 #: tema/models.py:171
 msgid "Includes Turkish Characters"
-msgstr ""
+msgstr "Türkçe Karakterleri İçerir"
 
 #: tema/models.py:174 templates/tema/base.html:25
 msgid "Font"
-msgstr ""
+msgstr "Yazıtipi"
 
 #: tema/models.py:191 templates/tema/base.html:24
 msgid "Desktop Screenshot"
-msgstr ""
+msgstr "Masaüstü Görüntüsü"
 
 #: tema/models.py:192 templates/tema/base.html:16
 msgid "Desktop Screenshots"
-msgstr ""
+msgstr "Masaüstü Görüntüleri"
 
 #: tema/models.py:208 tema/models.py:266 templates/tema/base.html:23
 msgid "Wallpaper"
-msgstr ""
+msgstr "Duvar Kağıdı"
 
 #: tema/models.py:241
 msgid "Type here the name of file to show users."
-msgstr ""
+msgstr "Dosyanın kullanıcılara görünecek ismini yazın."
 
 #: tema/models.py:264
 msgid "Leave blank if you want automatic naming by size."
-msgstr ""
+msgstr "Boyuta göre otomatik adlandırmak için boş bırakın."
 
 #: tema/models.py:278
 msgid "Wallpaper File"
-msgstr ""
+msgstr "Duvar Kağıdı Dosyası"
 
 #: tema/models.py:279
 msgid "Wallpaper Files"
-msgstr ""
+msgstr "Duvar Kağıdı Dosyaları"
 
 #: tema/models.py:289
 msgid "Theme Content"
@@ -2290,30 +2295,39 @@ msgid ""
 "Reporter's Comment (written by %(reporter)s):\n"
 "%(reason)s\n"
 msgstr ""
+"\n"
+"%(topic)s başlığı şikayet edildi.\n"
+"İçeriği görmek için buraya tıklayın: %(link)s\n"
+"\n"
+"İçerik İletisi (<b>%(sender)s</b> tarafından yazılmış):\n"
+"%(message)s\n"
+"Şikayet sebebi (%(reporter)s tarafından yazılmış):\n"
+"%(reason)s\n"
 
 #: tema/views.py:147
 msgid "Your abuse report has been sent to admins. Thank you for your support."
 msgstr ""
+"Şikayetiniz ilgililere ulaştırılmıştır. Desteğiniz için teşekkür ederiz."
 
 #: tema/views.py:159
 msgid "You have to login before voting!"
-msgstr ""
+msgstr "Oylamadan önce giriş yapmalısınız!"
 
 #: tema/templatetags/tema.py:24
 msgid "Most Popular Wallpapers"
-msgstr ""
+msgstr "En Beğenilen Duvar Kağıtları"
 
 #: tema/templatetags/tema.py:27
 msgid "Most Popular Desktop Screenshots"
-msgstr ""
+msgstr "En Beğenilen Masaüstü Görüntüleri"
 
 #: tema/templatetags/tema.py:30
 msgid "Most Popular Fonts"
-msgstr ""
+msgstr "En Beğenilen Yazıtipleri"
 
 #: tema/templatetags/tema.py:33
 msgid "Most Popular"
-msgstr ""
+msgstr "En Beğenilenler"
 
 #: templates/404.html:3
 msgid "Page Not Found"
@@ -2502,7 +2516,7 @@ msgstr "Pardus 2009 İndir"
 
 #: templates/home.html:11
 msgid "Pardus Events"
-msgstr ""
+msgstr "Pardus Etkinlikleri"
 
 #: templates/home.html:17 templates/news/news_main.html:39
 msgid "Place:"
@@ -2510,18 +2524,18 @@ msgstr "Yer:"
 
 #: templates/home.html:18 templates/news/news_main.html:40
 msgid "Speakers:"
-msgstr ""
+msgstr "Konuşmacılar:"
 
 #: templates/home.html:36 templates/home.html.py:51 templates/home.html:64
 #: templates/home.html.py:77
 #, python-format
 msgid "<span class=\"bold\">%(number_of_comments)s</span> Comment"
 msgid_plural "<span class=\"bold\">%(number_of_comments)s</span> Comments"
-msgstr[0] ""
+msgstr[0] "<span class=\"bold\">%(number_of_comments)s</span> Yorum"
 
 #: templates/home.html:44
 msgid "Previous News"
-msgstr ""
+msgstr "Önceki Haber"
 
 #: templates/home.html:44
 msgid "Next news"
@@ -2533,11 +2547,11 @@ msgstr "İlk Sayfa"
 
 #: templates/paginator.html:5
 msgid "Previous Page"
-msgstr ""
+msgstr "Önceki Sayfa"
 
 #: templates/paginator.html:8
 msgid "Current Page"
-msgstr ""
+msgstr "Şimdiki Sayfa"
 
 #: templates/paginator.html:10
 #, python-format
@@ -3254,6 +3268,8 @@ msgid ""
 "There's a total of <span class=\"bold\">%(hits)s</span> first step articles "
 "in <span class=\"bold\">%(pages)s</span> pages."
 msgstr ""
+"<span class=\"bold\">{{ pages }}</span> sayfada toplam <span class=\"bold\">"
+"{{ hits }}</span> ilk adım yazısı bulunmaktadır."
 
 #: templates/fs/fs_main.html:37
 msgid ""
@@ -3270,22 +3286,22 @@ msgstr ""
 #, python-format
 msgid "%(number_of_comments)s comment"
 msgid_plural "%(number_of_comments)s comments"
-msgstr[0] ""
+msgstr[0] "%(number_of_comments)s yorum"
 
 #: templates/game/game_detail.html:36 templates/howto/howto_detail.html:34
 #: templates/news/news_detail.html:42 templates/package/package_detail.html:34
 msgid "print"
-msgstr ""
+msgstr "yazdır"
 
 #: templates/game/game_detail.html:36 templates/howto/howto_detail.html:34
 #: templates/news/news_detail.html:42 templates/package/package_detail.html:34
 #: templates/workshop/workshop_detail.html:35
 msgid "printer friendly view"
-msgstr ""
+msgstr "yazıcı dostu görünüm"
 
 #: templates/game/game_detail.html:43 templates/package/package_detail.html:39
 msgid "Details"
-msgstr ""
+msgstr "Ayrıntılar"
 
 #: templates/game/game_detail.html:50
 msgid "Package size"
@@ -3293,15 +3309,15 @@ msgstr "Paket boyutu"
 
 #: templates/game/game_detail.html:59
 msgid "Web site of the game"
-msgstr ""
+msgstr "Oyunun web sitesi"
 
 #: templates/game/game_detail.html:62
 msgid "Ratings"
-msgstr ""
+msgstr "Puanlar"
 
 #: templates/game/game_detail.html:63
 msgid "Learning Time:"
-msgstr ""
+msgstr "Öğrenme Süresi:"
 
 #: templates/game/game_detail.html:64
 msgid "Gameplay"
@@ -3309,7 +3325,7 @@ msgstr "Oynanabilirlik"
 
 #: templates/game/game_detail.html:92
 msgid "Place in Menu"
-msgstr ""
+msgstr "Menüdeki Yeri"
 
 #: templates/game/game_detail.html:99 templates/package/package_detail.html:68
 msgid "Related Wiki Pages"
@@ -3329,7 +3345,7 @@ msgstr ""
 #, python-format
 msgid "<span class=\"bold\">%(number_of_comments)s</span> comment"
 msgid_plural "<span class=\"bold\">%(number_of_comments)s</span> comments"
-msgstr[0] ""
+msgstr[0] "<span class=\"bold\">%(number_of_comments)s</span> yorum"
 
 #: templates/game/game_main.html:26
 #, python-format
@@ -3337,6 +3353,8 @@ msgid ""
 "There's a total of <span class=\"bold\">%(hits)s</span> game reviews in "
 "<span class=\"bold\">%(pages)s</span> pages."
 msgstr ""
+"<span class=\"bold\">{{ pages }}</span> sayfada toplam <span class=\"bold\">"
+"{{ hits }}</span> oyun incelemesi bulunmaktadır."
 
 #: templates/game/game_main.html:34
 msgid ""
@@ -3373,6 +3391,8 @@ msgid ""
 "There's a total of <span class=\"bold\">%(hits)s</span> howto articles in "
 "<span class=\"bold\">%(pages)s</span> pages."
 msgstr ""
+"<span class=\"bold\">{{ pages }}</span> sayfada toplam <span class=\"bold\">"
+"{{ hits }}</span> nasıl yazısı bulunmaktadır."
 
 #: templates/mails/abusereport.html:2
 #, python-format
@@ -3424,31 +3444,31 @@ msgstr "Paylaş"
 
 #: templates/news/news_detail.html:62 templates/podcast/detail.html:75
 msgid "add to del.icio.us"
-msgstr ""
+msgstr "del.icio.us'a ekle"
 
 #: templates/news/news_detail.html:63 templates/podcast/detail.html:76
 msgid "add to facebook"
-msgstr ""
+msgstr "facebook'a ekle"
 
 #: templates/news/news_detail.html:64 templates/podcast/detail.html:77
 msgid "add to identica"
-msgstr ""
+msgstr "identica'ya ekle"
 
 #: templates/news/news_detail.html:65 templates/podcast/detail.html:78
 msgid "add to twitter"
-msgstr ""
+msgstr "twitter'a ekle"
 
 #: templates/news/news_detail.html:66 templates/podcast/detail.html:79
 msgid "add to stumbleupon"
-msgstr ""
+msgstr "stumbleupon'a ekle"
 
 #: templates/news/news_detail.html:67 templates/podcast/detail.html:80
 msgid "add to google buzz"
-msgstr ""
+msgstr "google buzz'a ekle"
 
 #: templates/news/news_detail.html:68 templates/podcast/detail.html:81
 msgid "add to technorati"
-msgstr ""
+msgstr "technorati'ye ekle"
 
 #: templates/news/news_main.html:26
 #, python-format
@@ -3456,11 +3476,13 @@ msgid ""
 "There's a total of <span class=\"bold\">%(hits)s</span> news in <span class="
 "\"bold\">%(pages)s</span> pages."
 msgstr ""
+"<span class=\"bold\">{{ pages }}</span> sayfada toplam <span class=\"bold\">"
+"{{ hits }}</span> haber bulunmaktadır."
 
 #: templates/package/package_detail.html:30
 #: templates/user/change_password.html:32 templates/user/lostpassword.html:35
 msgid "Send"
-msgstr ""
+msgstr "Gönder"
 
 #: templates/package/package_detail.html:42
 #: templates/tema/themeitem_desktopscreenshot_detail.html:48
@@ -3468,7 +3490,7 @@ msgstr ""
 #: templates/tema/themeitem_font_detail.html:46
 #: templates/tema/themeitem_wallpaper_detail.html:51
 msgid "License:"
-msgstr ""
+msgstr "Lisans:"
 
 #: templates/package/package_detail.html:46
 msgid "Package size:"
@@ -3480,7 +3502,7 @@ msgstr "Kurulum boyutu:"
 
 #: templates/package/package_detail.html:55
 msgid "Web site of the package"
-msgstr ""
+msgstr "Paketin web sitesi"
 
 #: templates/package/package_detail.html:58
 msgid "Editors Note"
@@ -3494,7 +3516,7 @@ msgstr[0] "%(points)s puan"
 
 #: templates/package/package_detail.html:61
 msgid "Place in Pardus Menu"
-msgstr ""
+msgstr "Pardus Menüsündeki Yeri"
 
 #: templates/package/package_detail.html:82
 msgid ""
@@ -3510,6 +3532,8 @@ msgid ""
 "There's a total of <span class=\"bold\">%(hits)s</span> package reviews in "
 "<span class=\"bold\">%(pages)s</span> pages."
 msgstr ""
+"<span class=\"bold\">{{ pages }}</span> sayfada toplam <span class=\"bold\">"
+"{{ hits }}</span> paket incelemesi bulunmaktadır."
 
 #: templates/package/package_main.html:34
 msgid ""
@@ -3533,7 +3557,7 @@ msgstr "Yapıştır"
 
 #: templates/paste/pastedtext_detail.html:9
 msgid "This text has been hidden by an admin."
-msgstr ""
+msgstr "Bu yazı yönetici tarafından gizlenmiştir."
 
 #: templates/paste/pastedtext_detail.html:12
 #, python-format
@@ -3555,7 +3579,7 @@ msgstr "Bu yazıyı gizlemek/göstermek istediğinizden emin misiniz?"
 
 #: templates/paste/pastedtext_toggle.html:9
 msgid "Yes"
-msgstr ""
+msgstr "Evet"
 
 #: templates/paste/pastedtext_toggle.html:10
 #: templates/tema/themeitem_delete.html:8
@@ -3564,11 +3588,11 @@ msgstr "İptal"
 
 #: templates/podcast/detail.html:51 templates/podcast/main.html:47
 msgid "ogg feed"
-msgstr ""
+msgstr "ogg baslemesi"
 
 #: templates/podcast/detail.html:52 templates/podcast/main.html:48
 msgid "mp3 feed"
-msgstr ""
+msgstr "mp3 beslemesi"
 
 #: templates/podcast/detail.html:54
 msgid "Duration"
@@ -3609,6 +3633,8 @@ msgid ""
 "There's a total of <span class=\"bold\">%(hits)s</span> podcasts in <span "
 "class=\"bold\">%(pages)s</span> pages."
 msgstr ""
+"<span class=\"bold\">{{ pages }}</span> sayfada toplam <span class=\"bold\">"
+"{{ hits }}</span> ajans bulunmaktadır."
 
 #: templates/podcast/main.html:43
 msgid "Latest Podcast"
@@ -3616,17 +3642,17 @@ msgstr "Güncel Ajans"
 
 #: templates/seminar/seminar_detail.html:39
 msgid "TEL:"
-msgstr ""
+msgstr "TEL:"
 
 #: templates/tag/tag_detail.html:3
 #, python-format
 msgid "%(tag)s Tagged Content"
-msgstr ""
+msgstr "%(tag)s Etiketli İçerik"
 
 #: templates/tag/tag_detail.html:10
 #, python-format
 msgid "%(tag)s tagged content"
-msgstr ""
+msgstr "%(tag)s etiketli içerik"
 
 #: templates/tag/tag_detail.html:14 templates/tag/tag_detail.html.py:25
 #: templates/tag/tag_detail.html:36 templates/tag/tag_detail.html.py:47
@@ -3660,23 +3686,23 @@ msgstr "Raporlanmış Temalar:"
 
 #: templates/tema/base.html:19
 msgid "License Information"
-msgstr ""
+msgstr "Lisans Bilgisi"
 
 #: templates/tema/base.html:20
 msgid "Theme Abuse Reports"
-msgstr ""
+msgstr "Tema Şikayetleri"
 
 #: templates/tema/base.html:22
 msgid "Add Content"
-msgstr ""
+msgstr "İçerik Ekle"
 
 #: templates/tema/forum_wallpaper.html:4
 msgid "Link to theme page"
-msgstr ""
+msgstr "Tema sayfasına bağlantı"
 
 #: templates/tema/forum_wallpaper.html:5
 msgid "Link to original work"
-msgstr ""
+msgstr "Özgün çalışma bağlantısı"
 
 #: templates/tema/report.html:13
 msgid "Theme"
@@ -3689,6 +3715,8 @@ msgstr "Şikayet Et"
 #: templates/tema/themeitem_add_complete.html:4
 msgid "Your content is awaiting for review now."
 msgstr ""
+"Gönderdiğiniz içerik yöneticilerimiz tarafından incelendikten sonra yayına "
+"alınacaktır."
 
 #: templates/tema/themeitem_change.html:12
 msgid "Save Changes"
@@ -3713,7 +3741,7 @@ msgstr "Diğer İçerik"
 
 #: templates/tema/themeitem_desktopscreenshot_detail.html:35
 msgid "Larger Picture"
-msgstr ""
+msgstr "Büyük Resim"
 
 #: templates/tema/themeitem_desktopscreenshot_detail.html:47
 #: templates/tema/themeitem_font_detail.html:45
@@ -3732,11 +3760,6 @@ msgstr "Gönderildiği Tarih:"
 #: templates/tema/themeitem_desktopscreenshot_detail.html:50
 msgid "Views:"
 msgstr "Gösterim Sayısı:"
-
-#: templates/tema/themeitem_desktopscreenshot_detail.html:51
-#: templates/tema/themeitem_wallpaper_detail.html:54
-msgid "Originalk Work"
-msgstr ""
 
 #: templates/tema/themeitem_detail.html:15
 msgid "Description:"
