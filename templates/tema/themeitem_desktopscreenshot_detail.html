@@ -48,7 +48,7 @@
                 <b>{% trans "License:" %}</b> <a href="{{ object.license.url }}">{{ object.license.name }}</a> <br />
                 <b>{% trans "Submit Date:" %}</b> {{ object.submit|date:"d F Y" }} <br />
                 <b>{% trans "Views:" %}</b> {{ object.download_count }} <br />
-                {% if object.origin_url %}<b><a href="{{ object.origin_url }}" target="_blank">{% trans "Originalk Work" %}</a></b><br />{% endif %}<br />
+                {% if object.origin_url %}<b><a href="{{ object.origin_url }}" target="_blank">{% trans "Original Work" %}</a></b><br />{% endif %}<br />
                 <hr />
                 <br />
                 {{ object.text }}
