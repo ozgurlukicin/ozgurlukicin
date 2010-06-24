@@ -163,7 +163,7 @@ class ThemeItem(models.Model):
 
     class Meta:
         permissions = (
-            ("manage_queue", _("Can Manage Tema Queue")),
+            ("manage_queue", _("Can Manage Theme Queue")),
         )
 
 class Font(ThemeItem):
