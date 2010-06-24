@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-24 15:29+0300\n"
-"PO-Revision-Date: 2010-06-24 15:28+0300\n"
+"POT-Creation-Date: 2010-06-24 15:50+0300\n"
+"PO-Revision-Date: 2010-06-24 17:02+0300\n"
 "Last-Translator: Uğur Çetin <jnmbk@users.sourceforge.net>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -3409,6 +3409,15 @@ msgid ""
 "s):\n"
 "%(report.reason)s\n"
 msgstr ""
+"\"%(post.topic)s\" başlığındaki bir ileti şikayet edildi. İletiyi görmek "
+"için tıklayın:\n"
+"%(WEB_URL)s%(post.get_absolute_url)s\n"
+"\n"
+"İletinin içeriği buydu (%(post.author)s tarafından yazılmış):\n"
+"%(post.text)s\n"
+"\n"
+"Şikayet metni buydu (%(report.submitter)s tarafından yazılmış):\n"
+"%(report.reason)s\n"
 
 #: templates/mails/password.html:2
 #, python-format
@@ -3423,6 +3432,16 @@ msgid ""
 "Thanks,\n"
 "%(SITE_NAME)s"
 msgstr ""
+"Merhaba!\n"
+"%(ip)s adresli biri %(date)s  tarihinde hesabınız için parola sıfırlama "
+"isteğinde bulunmuştur. "
+"Parolanızı değiştirmek için lütfen 24 saat içinde aşağıdaki bağlantıyı "
+"ziyaret ediniz.\n"
+"\n"
+"%(link)s\n"
+"\n"
+"Teşekkürler,\n"
+"%(SITE_NAME)s"
 
 #: templates/mails/register.html:2
 #, python-format
@@ -3437,6 +3456,15 @@ msgid ""
 "Thanks,\n"
 "%(SITE_NAME)s"
 msgstr ""
+"Merhaba!\n"
+"%(SITE_NAME)s web sitesinde %(ip) ip numarasıyla %(date)s tarihinde bir "
+"hesap oluşturdunuz. "
+"Onaylıyorsanız lütfen aşağıdaki bağlantıyı 48 saat içinde ziyaret ediniz.\n"
+"\n "
+"%(link)s\n"
+"\n"
+"Teşekkürler,\n"
+"%(SITE_NAME)s"
 
 #: templates/news/news_detail.html:55 templates/podcast/detail.html:68
 msgid "Share"
@@ -3550,6 +3578,10 @@ msgid ""
 "a> and <a href=\"/forum-kurallari/\">forum</a> policies also applies to this "
 "paste tool."
 msgstr ""
+"Özgürlükiçin yapıştırma aracını, foruma ekleyeceğiniz konsol komutlarının "
+"çıktılarını ve yazdığınız kodları paylaşmak için kullanabilirsiniz. <a "
+"href=\"/icerik-politikasi/\">İçerik</a> ve <a href=\"/forum-kurallari/\">"
+"forum</a> kuralları yapıştırma aracımız için de geçerlidir."
 
 #: templates/paste/pastedtext_add.html:12
 msgid "Paste"
@@ -3563,6 +3595,8 @@ msgstr "Bu yazı yönetici tarafından gizlenmiştir."
 #, python-format
 msgid "It was sent by %(author)s on %(date)s and was hidden by an admin."
 msgstr ""
+"%(author)s tarafından %(date)s tarihinde gönderilmiş ve yönetici tarafından "
+"gizlenmiştir."
 
 #: templates/paste/pastedtext_detail.html:21
 #, python-format
@@ -3571,7 +3605,7 @@ msgstr "%(author)s tarafından %(date)s tarihinde gönderildi."
 
 #: templates/paste/pastedtext_detail.html:22
 msgid "you can copy link by right clicking this"
-msgstr ""
+msgstr "sağ tıklayıp bağlantıyı kopyalayabilirsiniz"
 
 #: templates/paste/pastedtext_toggle.html:8
 msgid "Are you sure you want to hide/show this text?"
@@ -3771,6 +3805,8 @@ msgid ""
 "Your download will start in 3 seconds. Click <a href=\"%(download_url)s"
 "\">here</a> if it doesn't start."
 msgstr ""
+"İndirmeniz 3 saniye içinde başlayacaktır. Eğer başlamazsa <a "
+"href=\"%(download_url)s\">buraya</a> tıklayın."
 
 #: templates/tema/themeitem_font_detail.html:48
 #: templates/tema/themeitem_wallpaper_detail.html:53
@@ -3779,11 +3815,11 @@ msgstr "İndirme Sayısı:"
 
 #: templates/tema/themeitem_font_detail.html:54
 msgid "Preview"
-msgstr ""
+msgstr "Önizleme"
 
 #: templates/tema/themeitem_font_detail.html:54
 msgid "write something in the box below and press Enter"
-msgstr ""
+msgstr "aşağıdaki kutuya bir şeyler yazıp Enter'e basın"
 
 #: templates/tema/themeitem_list.html:8
 #, python-format
@@ -3796,14 +3832,16 @@ msgid ""
 "There's a total of <span class=\"bold\">%(hits)s</span> contents in <span "
 "class=\"bold\">%(pages)s</span> pages."
 msgstr ""
+"<span class=\"bold\">{{ pages }}</span> sayfada toplam <span class=\"bold\">"
+"{{ hits }}</span> içerik bulunmaktadır."
 
 #: templates/user/change_password.html:3
 msgid "Change Lost Password"
 msgstr "Kayıp Parola Değiştir"
 
-#: templates/user/change_password.html:10
-msgid "You have alredy logged in."
-msgstr ""
+#: templates/user/change_password.html:10 templates/user/confirm.html:10
+msgid "You have already logged in."
+msgstr "Zaten giriş yapmışsınız."
 
 #: templates/user/change_password.html:10
 msgid "Click <a href=\"/\">here</a> to return to mainpage."
@@ -3813,16 +3851,21 @@ msgstr "Anasayfaya gitmek için <a href=\"/\">tıklayın</a>."
 msgid ""
 "Incorrect key. Please use the link that has been sent to your e-mail address!"
 msgstr ""
+"Anahtar geçersiz, lütfen e-posta adresinize gönderilen bağlantıya "
+"tıkladığınızdan emin olun."
 
 #: templates/user/change_password.html:17
 msgid ""
 "Your key has expired, please click <a href=\"/kullanici/kayip\">here</a> to "
 "request e-mail again and click the link within 24 hours."
 msgstr ""
+"Anahtarın geçerlilik süresi geçmiş, lütfen <a href=\"/kullanici/kayip"
+"\">buraya</a> tıklayıp yeniden istekte bulunarak e-postaya gönderilen "
+"bağlantıya 24 saat içerisinde tıklayın."
 
 #: templates/user/change_password.html:22
 msgid "There were some errors. Please fill the form again."
-msgstr ""
+msgstr "Lütfen aşağıdaki hataları düzeltin."
 
 #: templates/user/change_password_done.html:3 templates/user/password.html:3
 #: templates/user/password.html.py:23 templates/user/profile_edit.html:83
@@ -3831,7 +3874,7 @@ msgstr "Parolayı Değiştir"
 
 #: templates/user/change_password_done.html:9
 msgid "Your password has been changed successfully."
-msgstr ""
+msgstr "Parolanız başarılı bir şekilde değiştirildi."
 
 #: templates/user/change_password_done.html:9
 #, python-format
@@ -3840,15 +3883,11 @@ msgstr "Giriş yapmak için <a href=\"%(login_url)s\">tıklayın</a>."
 
 #: templates/user/confirm.html:3
 msgid "Registration Approval"
-msgstr ""
+msgstr "Kayıt Onayı"
 
 #: templates/user/confirm.html:9
 msgid "There's no such user!"
-msgstr ""
-
-#: templates/user/confirm.html:10
-msgid "You have already logged in."
-msgstr ""
+msgstr "Böyle bir kullanıcı yok!"
 
 #: templates/user/confirm.html:10 templates/user/confirm.html.py:11
 msgid "Click <a href=\"/\">here</a> to return to mainpage"
@@ -3856,13 +3895,14 @@ msgstr "Anasayfaya gitmek için <a href=\"/\">tıklayın</a>."
 
 #: templates/user/confirm.html:11
 msgid "This account has already been activated!"
-msgstr ""
+msgstr "Bu hesap zaten etkinleştirilmiş!"
 
 #: templates/user/confirm.html:12
 msgid ""
 "Your key has expired, please try to register again and activate within 48 "
 "hours."
 msgstr ""
+"Anahtarınız eskimiş, lütfen tekrar kaydolup 48 saat içinde etkinleştirin."
 
 #: templates/user/confirm.html:13
 msgid "Click <a href=\"/kullanici/kayit/\">here</a> to register again."
@@ -3873,10 +3913,12 @@ msgid ""
 "Your account has been activated successfully! You can login using the User "
 "Box on the right side of this page."
 msgstr ""
+"Hesabınız başarılı bir şekilde etkinleştirildi! Sayfanın sağındaki Kullanıcı "
+"Kutusunu kullanarak giriş yapabilirsiniz."
 
 #: templates/user/dashboard.html:3
 msgid "Dashboard"
-msgstr ""
+msgstr "Yönetim Paneli"
 
 #: templates/user/dashboard.html:8
 #, python-format
@@ -3889,6 +3931,8 @@ msgid ""
 "You have been registered since %(join_date)s. <br/><br />You can edit your "
 "profile by clicking <a href=\"/kullanici/duzenle/\">here</a>."
 msgstr ""
+"%(join_date)s tarihinden beri kayıtlısınız. <br /><br />Profilinizi "
+"düzenlemek için <a href=\"/kullanici/duzenle/\">buraya</a> tıklayın."
 
 #: templates/user/followed_topics.html:9
 msgid ""
@@ -3912,7 +3956,7 @@ msgstr "Kullanıcı Girişi"
 
 #: templates/user/login.html:11
 msgid "Username or password doesn't match, please try again."
-msgstr ""
+msgstr "Kullanıcı adı ve parola eşleşmiyor, lütfen tekrar deneyin."
 
 #: templates/user/login.html:13
 msgid ""
@@ -3921,6 +3965,11 @@ msgid ""
 "your password click <a href=\"/kullanici/kayip/\">here</a>. If you're not "
 "registered click <a href=\"/kullanici/kayit/\">here</a> to register."
 msgstr ""
+"Bu işlemi yapmak için yetkiniz yok. Eğer Özgürlükİçin.com'a üyeyseniz "
+"aşağıya kullanıcı adı ve parolanızı girin. Parolanızı bilmiyor ya da "
+"unuttuysanız <a href=\"/kullanici/kayip/\">kayıp parola</a> bağlantısını "
+"izleyin. Eğer üye değilseniz <a href=\"/kullanici/kayit/\">buradan</a> "
+"Özgürlükİçin.com'a üye olabilirsiniz."
 
 #: templates/user/login.html:31
 msgid ""
@@ -3935,34 +3984,45 @@ msgid ""
 "You have logged out. You're being redirected to mainpage now. Click <a href="
 "\"/\">here</a> if you don't want to wait."
 msgstr ""
+"Sistemden çıktınız. Ana sayfaya yönlendiriliyorsunuz. Beklemek "
+"istemiyorsanız <a href=\"/\">buraya tıklayın.</a>"
 
 #: templates/user/logout.html:16
 msgid ""
 "You haven't logged in yet, click <a href=\"/kullanici/giris/\">here</a> to "
 "login."
 msgstr ""
+"Henüz giriş yapmamışsınız, giriş yapmak için <a href=\"/kullanici/giris/"
+"\">buraya</a> tıklayın."
 
 #: templates/user/lostpassword.html:16
 msgid ""
 "You have already logged in. You're being redirected to mainpage now. Click "
 "<a href=\"/\">here</a> if you don't want to wait."
 msgstr ""
+"Zaten giriş yapmışsınız. Ana sayfaya yönlendiriliyorsunuz. Beklemek "
+"istemiyorsanız <a href=\"/\">buraya tıklayın.</a>"
 
 #: templates/user/lostpassword.html:19
 msgid ""
 "Please enter your username and e-mail address to recover your password. Then "
 "click on the link that has been sent to your e-mail address."
 msgstr ""
+"Lütfen kayıp parolanızı öğrenmek için kullanıcı adınızı ve E-posta "
+"adresinizi giriniz. Parolanızı sıfırlamak için size bir adres "
+"gönderilecektir, o adrese tıklayarak parolanızı değiştirin."
 
 #: templates/user/lostpassword.html:22
 msgid "Operation couldn't be completed."
-msgstr ""
+msgstr "İşlem tamamlanamadı."
 
 #: templates/user/lostpassword_done.html:8
 msgid ""
 "A password reset link has been sent to your e-mail address, you can change "
 "your password by clicking it within the following 24 hours."
 msgstr ""
+"E-mail adresinize parolanızı değiştirmeniz için bir adres gönderildi, 24 "
+"saat içerisinde tıklayarak yeni parolanızı alabilirsiniz."
 
 #: templates/user/password.html:10
 msgid "Password couldn't be changed, please correct the errors below"
@@ -3970,27 +4030,27 @@ msgstr "Parola değiştirilemedi, lütfen aşağıdaki hataları düzeltin"
 
 #: templates/user/password.html:14
 msgid "Password was successfully changed."
-msgstr ""
+msgstr "Parola değiştirildi."
 
 #: templates/user/password.html:14
 msgid "Return to profile page"
-msgstr ""
+msgstr "Profil sayfasına dön"
 
 #: templates/user/profile.html:49
 msgid "Edit my profile"
-msgstr ""
+msgstr "Profilimi düzenle"
 
 #: templates/user/profile.html:52
 msgid "Posts in Forum"
-msgstr ""
+msgstr "Forumdaki İletileri"
 
 #: templates/user/profile.html:52
 msgid "No Posts in Forum"
-msgstr ""
+msgstr "Forumda İletisi Yok"
 
 #: templates/user/profile.html:58
 msgid "Personal Information"
-msgstr ""
+msgstr "Kişisel Bilgiler"
 
 #: templates/user/profile.html:74
 msgid "Registration Date"
@@ -3998,19 +4058,19 @@ msgstr "Kayıt Tarihi"
 
 #: templates/user/profile.html:82
 msgid "Contact Information"
-msgstr ""
+msgstr "İletişim Bilgisi"
 
 #: templates/user/profile.html:93
 msgid "Jabber"
-msgstr ""
+msgstr "Jabber"
 
 #: templates/user/profile.html:96
 msgid "MSN"
-msgstr ""
+msgstr "MSN"
 
 #: templates/user/profile.html:99
 msgid "ICQ"
-msgstr ""
+msgstr "ICQ"
 
 #: templates/user/profile_edit.html:3
 msgid "Edit Profile"
@@ -4022,7 +4082,7 @@ msgstr "Profil güncellenemedi, lütfen aşağıdaki hataları düzeltin."
 
 #: templates/user/profile_edit.html:53
 msgid "Your profile is updated successfully"
-msgstr ""
+msgstr "Profiliniz başarılı bir şekilde güncellendi"
 
 #: templates/user/profile_edit.html:74
 msgid ""
@@ -4030,10 +4090,13 @@ msgid ""
 "displayed instead of this. For more information about gravatar click <a href="
 "\"http://www.gravatar.com\" target=\"_blank\">here</a>."
 msgstr ""
+"E-posta adresinize kayıtlı bir gravatarınız varsa bunun yerine "
+"kullanılacaktır. Gravatar hakkında bilgi için <a href=\"/haber/"
+"profillerinizi-senlendirin/\">buraya</a> tıklayın."
 
 #: templates/user/profile_edit.html:81
 msgid "Map"
-msgstr ""
+msgstr "Harita"
 
 #: templates/user/register.html:3
 msgid "Registration"
@@ -4055,14 +4118,16 @@ msgid ""
 "I have read the <a href=\"/hakkinda/icerik-politikasi/\" target=\"_blank"
 "\">Content Policy</a> and"
 msgstr ""
+"<a href=\"/hakkinda/icerik-politikasi/\" target=\"_blank\">İçerik "
+"Politikasını</a> okudum ve"
 
 #: templates/user/register.html:20
 msgid "I Decline"
-msgstr ""
+msgstr "Kabul Etmiyorum"
 
 #: templates/user/register.html:20
 msgid "I Accept"
-msgstr ""
+msgstr "Kabul Ediyorum"
 
 #: templates/user/register_done.html:3
 msgid "Registration Done"
@@ -4074,6 +4139,8 @@ msgid ""
 "%(user)s</b>, you have successfully registered! Please\n"
 "activate your account by clicking the link sent to your e-mail address."
 msgstr ""
+"%(user)s </b>, kayıt işleminiz başarıyla tamamlandı! Lütfen e-posta "
+"adresinize gönderilen bağlantıya tıklayarak üyeliğinizi aktif hale getirin."
 
 #: templates/user/register_done.html:9
 msgid "Homepage"
@@ -4085,17 +4152,19 @@ msgstr "Özgürlükiçin Kullanıcıları Listesi"
 
 #: templates/user/user_list.html:42
 msgid "More users will appear when you zoom in."
-msgstr ""
+msgstr "Haritayı yaklaştırdıkça daha çok kullanıcı listelenecektir."
 
 #: templates/user/user_list.html:45
 msgid "Pardus Versions Chart"
-msgstr ""
+msgstr "Pardus Sürümleri Grafiği"
 
 #: templates/user/user_list.html:46
 msgid ""
 "Only users who has chosen their Pardus version in profile page are shown in "
 "the chart below."
 msgstr ""
+"Aşağıdaki grafikte, profilinde kullandığı Pardus sürümünü seçen "
+"kullanıcılarımızın sayısı görülmektedir."
 
 #: templates/user/user_list.html:48
 msgid "Pardus versions chart"
@@ -4111,6 +4180,8 @@ msgid ""
 "There's a total of <span class=\"bold\">%(hits)s</span> workshop articles in "
 "<span class=\"bold\">%(pages)s</span> pages."
 msgstr ""
+"<span class=\"bold\">{{ pages }}</span> sayfada toplam <span class=\"bold\">"
+"{{ hits }}</span> atölye yazısı bulunmaktadır."
 
 #: upload/models.py:28
 msgid "Images"
@@ -4127,6 +4198,9 @@ msgstr "Simgeler"
 #: webalizer/templates/webalizer/index.html:7
 msgid "settings.WEBALIZER_DIR is not configured"
 msgstr "settings.WEBALIZER_DIR ayarlanmamış"
+
+#~ msgid "You have alredy logged in."
+#~ msgstr "Zaten giriş yapmışsınız."
 
 #, fuzzy
 #~ msgid "Userbox"
