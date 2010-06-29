@@ -11,6 +11,7 @@ from django.contrib.auth.views import login
 urlpatterns = patterns('oi.beyin2.views',
 
     (r'^$', 'main'),
+    url(r'^add/$','add_new', name='add_new'),
     #url(r'^(?P<blog_id>\d+)/$',"blog_goster",name="blog_goster"),
     #url(r'^(?P<blog_id>\d+)/(?P<yazi_id>\d+)/yorum_ekle/$',"yorum_ekle",name="yorum_ekle"),
 )
