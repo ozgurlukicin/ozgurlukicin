@@ -6,6 +6,8 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.http import HttpResponse
+from oi.beyin2.models import Idea
 
-def index(request):
-    return HttpResponse("Merhaba Dunya!")
+def main(request):
+    idea_list = Idea.objects.all().order_by('dateSubmitted')[:10]
+    return render_to_response('beyin2/idea_list',{'idea_list': idea_list})
