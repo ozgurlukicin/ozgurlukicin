@@ -202,7 +202,7 @@ urlpatterns = patterns('',
     url(r'^admin/webalizer/', include('webalizer.urls')),
 
     #Beyin2
-    (r'^beyin2/',include("oi.beyin2.urls")),
+    (r'^beyin2/',include('oi.beyin2.urls')),
 
     #Django
     (r'^$', 'oi.st.views.home'),
