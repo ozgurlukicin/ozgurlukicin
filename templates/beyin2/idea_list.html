@@ -1,0 +1,7 @@
+{% if idea_list %}
+    {% for idea in idea_list %}
+	<h2>{% idea.title %}</h2>
+	<p>{% idea.description %}</p>
+	<p><b>Status: </b>{% idea.status %} - <b>Category: </b>{% idea.category %}</p>	
+    {% endfor %}
+{% endif %}
