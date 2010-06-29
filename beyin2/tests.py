@@ -1,3 +1,10 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#
+# Copyright 2010 TÜBİTAK UEKAE
+# Licensed under the GNU General Public License, version 3.
+# See the file http://www.gnu.org/copyleft/gpl.txt.
+
 """
 This file demonstrates two different styles of tests (one doctest and one
 unittest). These will both pass when you run "manage.py test".
