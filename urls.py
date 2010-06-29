@@ -201,6 +201,9 @@ urlpatterns = patterns('',
     #Webalizer
     url(r'^admin/webalizer/', include('webalizer.urls')),
 
+    #Beyin2
+    (r'^beyin2/',include("oi.beyin2.urls")),
+
     #Django
     (r'^$', 'oi.st.views.home'),
     (r'^admin/upload_progress/$', 'oi.upload.views.upload_progress'),
