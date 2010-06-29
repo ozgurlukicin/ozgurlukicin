@@ -1,5 +1,4 @@
-# Create your views here.
+from django.http import HttpResponse
 
-
-def index(self):
-    pass
+def index(request):
+    return HttpResponse("Merhaba Dünya!")
