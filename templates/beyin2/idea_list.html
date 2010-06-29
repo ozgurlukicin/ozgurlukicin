@@ -1,7 +1,22 @@
+
+{% extends "base.html" %}
+{% load library %}
+
+{% block title %}beyin2 arayuzu denemesi{% endblock %}
+
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
+
+{% endblock %}
+
+{% block content %}
 {% if idea_list %}
     {% for idea in idea_list %}
 	<h2>{{ idea.title }}</h2>
 	<p>{{ idea.description }}</p>
 	<p><b>Status: </b>{{ idea.status }} - <b>Category: </b>{{ idea.category }}</p>
+    <br />
     {% endfor %}
 {% endif %}
+{% endblock %}
