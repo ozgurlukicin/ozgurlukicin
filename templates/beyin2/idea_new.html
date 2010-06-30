@@ -10,12 +10,18 @@
 {% endblock %}
 
 {% block content %}
-    {% if perms.beyin2.can_change_status %}
-        {{ form.as_p }}
-        <p>change status</p>
-    {% else %}
-        {{ form.title }}
-        {{ form.description }}
-        {{ form.category }}
-    {% endif %}
+    <form action='{% url add_new %}' methot='post' name='add_new_idea'>
+        {% if perms.beyin2.can_change_status %}
+            {% for field in form %}
+                {% include "field.html" %}
+            {% endfor %}
+        {% else %}
+            {% for field in form %}
+                {% if field.label != "Category" and field.label != "Status" %}
+                    {% include "field.html" %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+                <input type='submit' value='send' name='send_new_idea'>
+    </form>
 {% endblock %}
