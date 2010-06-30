@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load library %}
 
-{% block title %}Beyin2 yeni öneri ekle{% endblock %}
+{% block title %}Beyin2 Öneri Düzenle{% endblock %}
 
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
@@ -10,18 +10,10 @@
 {% endblock %}
 
 {% block content %}
-    <form action='{% url add_new %}' methot='post' name='add_new_idea'>
-        {% if perms.beyin2.can_change_status %}
+    <form action='{{ url edit_idea idea_id }}' methot='post' name='edit_idea'>
             {% for field in form %}
                 {% include "field.html" %}
             {% endfor %}
-        {% else %}
-            {% for field in form %}
-                {% if field.label != "Category" and field.label != "Status" %}
-                    {% include "field.html" %}
-                {% endif %}
-            {% endfor %}
-        {% endif %}
                 <input type='submit' value='Send Idea' name='send_new_idea'>
     </form>
 {% endblock %}

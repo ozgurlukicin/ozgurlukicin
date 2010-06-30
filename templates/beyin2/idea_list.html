@@ -12,11 +12,22 @@
 
 {% block content %}
 {% if idea_list %}
-    {% for idea in idea_list %}
-	<h2>{{ idea.title }}</h2>
-	<p>{{ idea.description }}</p>
-	<p><b>Status: </b>{{ idea.status }} - <b>Category: </b>{{ idea.category }}</p>
-    <br />
+{% for idea in idea_list %}
+    <table>
+        <tr>
+            <td>
+                <h2>{{ idea.title }}</h2>
+                <p>{{ idea.description }}</p>
+                <p><b>Status: </b>{{ idea.status }} - <b>Category: </b>{{ idea.category }}</p>
+                <br />
+            </td>
+            <td>
+                {% if perms.beyin2.change_idea %}
+                <a href='{% url edit_idea idea.id %}'>edit idea</a>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
     {% endfor %}
 {% endif %}
 {% endblock %}
