@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load library %}
+
+{% block title %}Beyin2 yeni öneri ekle{% endblock %}
+
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
+
+{% endblock %}
+
+{% block content %}
+    {% if perms.beyin2.can_change_status %}
+        {{ form.as_p }}
+        <p>change status</p>
+    {% else %}
+        {{ form.title }}
+        {{ form.description }}
+        {{ form.category }}
+    {% endif %}
+{% endblock %}
