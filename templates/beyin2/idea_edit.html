@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-    <form action='{{ url edit_idea idea_id }}' methot='post' name='edit_idea'>
+    <form action='{% url edit_idea idea.id %}' method="POST" name='edit_idea'>
             {% for field in form %}
                 {% include "field.html" %}
             {% endfor %}

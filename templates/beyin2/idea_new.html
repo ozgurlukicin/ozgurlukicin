@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-    <form action='{% url add_new %}' methot='post' name='add_new_idea'>
+    <form action='{% url add_new %}' method="POST" name='add_new_idea'>
         {% if perms.beyin2.can_change_status %}
             {% for field in form %}
                 {% include "field.html" %}

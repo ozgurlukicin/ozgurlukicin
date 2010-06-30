@@ -15,19 +15,41 @@
 {% for idea in idea_list %}
     <table>
         <tr>
-            <td>
+            <td rowspan='5'>
                 <h2>{{ idea.title }}</h2>
                 <p>{{ idea.description }}</p>
                 <p><b>Status: </b>{{ idea.status }} - <b>Category: </b>{{ idea.category }}</p>
                 <br />
             </td>
+        {% if perms.beyin2.change_idea %}
             <td>
-                {% if perms.beyin2.change_idea %}
                 <a href='{% url edit_idea idea.id %}'>edit idea</a>
-                {% endif %}
             </td>
         </tr>
+        <tr>
+            <td>
+                <p>fikir tekrarı</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>status</p>
+            </td>
+        </tr>
+                <tr>
+            <td>
+                <p>category</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>sil</p>
+            </td>
+        {% endif %}
+        </tr>
     </table>
-    {% endfor %}
+    <br />
+{% endfor %}
 {% endif %}
+<a href='{% url add_new %}'>Add New Idea</a>
 {% endblock %}
