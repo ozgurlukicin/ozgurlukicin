@@ -29,7 +29,7 @@
         </tr>
         <tr>
             <td>
-                <a>fikir tekrarı</a>
+                <a href='{% url mark_duplicate idea.id %}'>mark duplicate</a>
             </td>
         </tr>
         <form action="{% url main_post idea.id %}" method="POST" name="select_boxes">

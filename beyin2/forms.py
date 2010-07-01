@@ -12,3 +12,8 @@ class IdeaForm(forms.ModelForm):
     class Meta:
         model = Idea
         exclude = ('dateSubmitted', 'submitter','topic','is_hidden','duplicate','is_duplicate')
+
+class IdeaDuplicateForm(forms.ModelForm):
+    class Meta:
+        model = Idea
+        fields = ('duplicate',)

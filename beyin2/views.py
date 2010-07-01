@@ -112,18 +112,19 @@ def delete_idea(request, idea_id):
     
     return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
     
-def mark_duplicate(request, idea_id):    
+def mark_duplicate(request, idea_id):
     if request.POST:
-	if request.POST['dupple_number']:
-	    form = IdeaDuplicateForm({'duplicate': get_object_or_404(Idea, pk = request.POST['dupple_number'])})
-	else:
-	    form = IdeaDuplicateForm({'duplicate': request.POST['dupple']})
-	form.save()
-	return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
+        idea = get_object_or_404(Idea, pk = idea_id)
+        if request.POST['dupple_number']:
+            idea.duplicate = get_object_or_404(Idea, pk= request.POST['dupple_number'])
+        else:
+            idea.duplicate = get_object_or_404(Idea, title= request.POST['dupple'])
+        idea.is_duplicate = True
+        idea.save()
+        return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
     else:
-	idea = get_object_or_404(Idea, pk = idea_id)
-	idea_list = Idea.objects.all()
-	return render_reponse(request, 'beyin2/idea_duplicate.html', {'idea': idea,'idea_list': idea_list})
+        idea = get_object_or_404(Idea, pk = idea_id)
+        idea_list = Idea.objects.exclude(pk=idea.id).filter(is_hidden=False)
+        return render_response(request, 'beyin2/idea_duplicate.html', {'idea': idea,'idea_list': idea_list})
 	
-
 

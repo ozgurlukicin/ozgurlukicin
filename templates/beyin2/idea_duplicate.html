@@ -10,19 +10,17 @@
 {% endblock %}
 
 {% block content %}
-    <form action='{% url change_to_duplicate %}' method="POST" name='change_to_duplicate'>
-        {% if perms.beyin2.can_change_status %}
-            {% for field in form %}
-                {% include "field.html" %}
+    <form action='{% url mark_duplicate idea.id %}' method="POST" name='mark_duplicate'>
+        <label>{{ idea.title }}<label><br />
+        <p>fikri icin es gosterin</p>
+        <select name='dupple'>
+            {%for idea_dub in idea_list %}
+                <option value="{{ idea_dub.title }}">{{ idea_dub.title }}</option>
             {% endfor %}
-        {% else %}
-            {% for field in form %}
-                {% if field.label != "Category" and field.label != "Status" %}
-                    {% include "field.html" %}
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-                <input type='submit' value='Send Idea' name='send_new_idea'>
+        </select><br />
+        <p> yada fikir numarası giriniz</p>
+        <input type="text" name='dupple_number' />
+        <input type='submit' value='Mark Duplicate' name='mark_duplicate'/>
     </form>
 {% endblock %}
 
