@@ -36,7 +36,7 @@
         <tr>
             <td>
                 <p>status</p>
-                <select onchange=this.submit() name='status'>
+                <select onchange='this.submit()' name='status'>
                     {%for status in status_list %}
                         <option value="{{ status.name }}" {% if status.name == idea.status.name %} default {% endif %} >{{ status.name }}</option>
                     {% endfor %}
@@ -46,7 +46,7 @@
          <tr>
              <td>
                  <p>category</p>
-                 <select onchange=this.submit() name='category'>
+                 <select onchange='this.submit()' name='category'>
                      {% for category in category_list %}
                          <option value="{{ category.name }}" {% if category.name == idea.category.name %} default {% endif %}>{{ category.name }}</option>
                      {% endfor %}
