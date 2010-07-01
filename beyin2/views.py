@@ -12,9 +12,11 @@ from oi.st.wrappers import render_response
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
+from oi.forum.models import Topic, Forum, Post
 
 DefaultCategory = 4
 DefaultStatus = 3
+ForumCategory = "Yeni Fikirler"
 
 def main(request):
     idea_list = Idea.objects.all().order_by('-dateSubmitted')[:10]
@@ -22,20 +24,43 @@ def main(request):
 
 @login_required
 def add_new(request):
-    try:
+    #try:
         form = IdeaForm({'title': '', 'description': '', 'status': DefaultStatus, 'category': DefaultCategory})
         if request.POST:
             form = IdeaForm(request.POST)
             if form.is_valid():
-                i = form.save(commit = False)
-                i.submitter = request.user
-                i.save()
+                forum = Forum.objects.get(name = ForumCategory)
+                topic = Topic(forum = forum,
+			      title = form.cleaned_data['title']
+			      )
+		topic.save()
+		
+		idea = form.save(commit = False)
+                idea.submitter = request.user
+                idea.topic = topic
+                idea.save()
+		
+		post_text = "<p>#" + str(idea.id) + " "
+		post_text += idea.title + "</p>"
+		post_text += "<p>" + idea.description + "</p>"
+		post = Post(topic=topic,
+                            author=request.user,
+                            text=post_text
+                            )
+		post.save()
+		topic.topic_latest_post = post
+		topic.posts = 1
+		topic.save()
+		topic.forum.forum_latest_post = post
+		topic.forum.topics += 1
+		topic.forum.posts += 1
+		topic.forum.save()
                 return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
             else:
                 return render_response(request, 'beyin2/idea_errorpage.html')
         else:
             return render_response(request, 'beyin2/idea_new.html', {'form':form,})
-    except:
+    #except:
         return render_response(request, 'beyin2/idea_errorpage.html')
 
 @permission_required('beyin2.change_idea')
