@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load library %}
+
+{% block title %}Beyin2 Oneri tekrari{% endblock %}
+
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
+
+{% endblock %}
+
+{% block content %}
+    <form action='{% url change_to_duplicate %}' method="POST" name='change_to_duplicate'>
+        {% if perms.beyin2.can_change_status %}
+            {% for field in form %}
+                {% include "field.html" %}
+            {% endfor %}
+        {% else %}
+            {% for field in form %}
+                {% if field.label != "Category" and field.label != "Status" %}
+                    {% include "field.html" %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+                <input type='submit' value='Send Idea' name='send_new_idea'>
+    </form>
+{% endblock %}
+

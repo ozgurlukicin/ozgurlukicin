@@ -19,48 +19,43 @@ DefaultStatus = 3
 ForumCategory = "Yeni Fikirler"
 
 def main(request):
-    idea_list = Idea.objects.all().order_by('-dateSubmitted')[:10]
+    idea_list = Idea.objects.filter(is_hidden=False).order_by('-dateSubmitted')[:10]
     return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list})
 
 @login_required
 def add_new(request):
-    #try:
+    try:
         form = IdeaForm({'title': '', 'description': '', 'status': DefaultStatus, 'category': DefaultCategory})
         if request.POST:
             form = IdeaForm(request.POST)
             if form.is_valid():
                 forum = Forum.objects.get(name = ForumCategory)
-                topic = Topic(forum = forum,
-			      title = form.cleaned_data['title']
-			      )
-		topic.save()
-		
-		idea = form.save(commit = False)
+                topic = Topic(forum = forum,title = form.cleaned_data['title'])
+                topic.save()
+
+                idea = form.save(commit = False)
                 idea.submitter = request.user
                 idea.topic = topic
                 idea.save()
-		
-		post_text = "<p>#" + str(idea.id) + " "
-		post_text += idea.title + "</p>"
-		post_text += "<p>" + idea.description + "</p>"
-		post = Post(topic=topic,
-                            author=request.user,
-                            text=post_text
-                            )
-		post.save()
-		topic.topic_latest_post = post
-		topic.posts = 1
-		topic.save()
-		topic.forum.forum_latest_post = post
-		topic.forum.topics += 1
-		topic.forum.posts += 1
-		topic.forum.save()
+
+                post_text = "<p>#" + str(idea.id) + " "
+                post_text += idea.title + "</p>"
+                post_text += "<p>" + idea.description + "</p>"
+                post = Post(topic=topic, author=request.user, text=post_text )
+                post.save()
+                topic.topic_latest_post = post
+                topic.posts = 1
+                topic.save()
+                topic.forum.forum_latest_post = post
+                topic.forum.topics += 1
+                topic.forum.posts += 1
+                topic.forum.save()
                 return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
             else:
                 return render_response(request, 'beyin2/idea_errorpage.html')
         else:
             return render_response(request, 'beyin2/idea_new.html', {'form':form,})
-    #except:
+    except:
         return render_response(request, 'beyin2/idea_errorpage.html')
 
 @permission_required('beyin2.change_idea')
@@ -74,6 +69,7 @@ def edit_idea(request, idea_id):
                 """
                 i = form.save(commit = False, instance=idea)
                 i.submitter = request.user
+                
                 i.save()
                 """
                 i = IdeaForm(request.POST, instance = idea)
@@ -86,3 +82,12 @@ def edit_idea(request, idea_id):
             return render_response(request, 'beyin2/idea_edit.html', {'form':form, 'idea':idea})
     except:
         return render_response(request, 'beyin2/idea_errorpage.html')
+
+
+def delete_idea(request, idea_id):
+    idea = Idea.objects.get(pk=idea_id)
+    idea.is_hidden = True
+    idea.save()
+    return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
+
+

@@ -13,6 +13,7 @@
 {% block content %}
 {% if idea_list %}
 {% for idea in idea_list %}
+
     <table>
         <tr>
             <td rowspan='5'>
@@ -28,7 +29,7 @@
         </tr>
         <tr>
             <td>
-                <p>fikir tekrarı</p>
+                <a>fikir tekrarı</a>
             </td>
         </tr>
         <tr>
@@ -43,7 +44,7 @@
         </tr>
         <tr>
             <td>
-                <p>sil</p>
+                <a href ='{% url delete_idea idea.id %}'>sil</a>
             </td>
         {% endif %}
         </tr>
