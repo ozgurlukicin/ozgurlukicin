@@ -136,7 +136,6 @@ def mark_duplicate(request, idea_id):
         topic.topic_latest_post = post
         topic.save()
         topic.forum.forum_latest_post = post
-        topic.forum.topics += 1
         topic.forum.posts += 1
         topic.forum.save()
         #the original idea
@@ -150,7 +149,6 @@ def mark_duplicate(request, idea_id):
         topic.topic_latest_post = post
         topic.save()
         topic.forum.forum_latest_post = post
-        topic.forum.topics += 1
         topic.forum.posts += 1
         topic.forum.save()
         return HttpResponseRedirect(reverse('oi.beyin2.views.delete_idea', args=(idea.id,)))

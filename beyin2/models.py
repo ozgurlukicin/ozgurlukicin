@@ -25,13 +25,13 @@ class Idea(models.Model):
     title = models.CharField(max_length = 128)
     description = models.TextField()
     dateSubmitted = models.DateTimeField("date submitted",default=datetime.now())
-    submitter = models.ForeignKey(User)
+    submitter = models.ForeignKey(User, related_name="idea_submitter")
     status = models.ForeignKey("Status")
     category = models.ForeignKey("Category")
     duplicate = models.ForeignKey("self", blank=True, null=True)
     is_duplicate = models.BooleanField("Idea Duplicate", default=False)
     is_hidden = models.BooleanField("Hiddden", default=False)
-    topic = models.ForeignKey(Topic)
+    topic = models.ForeignKey(Topic, related_name="Idea_topic")
 
     def __unicode__(self):
 	return self.title
