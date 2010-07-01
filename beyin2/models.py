@@ -1,5 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+#ifndef BEYIN2/MODELS.PY
+#define BEYIN2/MODELS.PY
 #
 # Copyright 2010 TÜBİTAK UEKAE
 # Licensed under the GNU General Public License, version 3.
@@ -8,7 +10,7 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
-
+from oi.forum.models import Topic
 # Create your models here.
 
 
@@ -26,7 +28,11 @@ class Idea(models.Model):
     submitter = models.ForeignKey(User)
     status = models.ForeignKey("Status")
     category = models.ForeignKey("Category")
-    
+    duplicate = models.ForeignKey("self", blank=True, null=True)
+    is_duplicate = models.BooleanField("Idea Duplicate", default=False)
+    is_hidden = models.BooleanField("Hiddden", default=False)
+    topic = models.ForeignKey(Topic)
+
     def __unicode__(self):
 	return self.title
 
@@ -59,3 +65,4 @@ class ScreenShot(models.Model):
 
 
 
+#endif // BEYIN2/MODELS.PY
