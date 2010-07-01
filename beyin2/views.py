@@ -20,19 +20,21 @@ ForumCategory = "Yeni Fikirler"
 
 def main(request, idea_id = -1):
     if request.POST:
-	idea = get_object_or_404(Idea, pk = idea_id)
-	idea.status = request.POST['status']
-	idea.category = request.POST['category']
-	idea.save()
-	idea_list = Idea.objects.filter(is_hidden=False).order_by('-dateSubmitted')[:10]
-	status_list = Status.objects.all()
-	category_list = Category.objects.all()
-	return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list})
+        idea = get_object_or_404(Idea, pk = idea_id)
+        idea.status = get_object_or_404(Status, name = request.POST['status'])
+        idea.category = get_object_or_404(Category, name = request.POST['category'])
+        idea.save()
+        """idea_list = Idea.objects.filter(is_hidden=False).order_by('-dateSubmitted')[:10]
+        status_list = Status.objects.all()
+        category_list = Category.objects.all()
+        return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list})
+        """
+        return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
     else:
-	idea_list = Idea.objects.filter(is_hidden=False).order_by('-dateSubmitted')[:10]
-	status_list = Status.objects.all()
-	category_list = Category.objects.all()
-	return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list})
+        idea_list = Idea.objects.filter(is_hidden=False).order_by('-dateSubmitted')[:10]
+        status_list = Status.objects.all()
+        category_list = Category.objects.all()
+        return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list})
 
 @login_required
 def add_new(request):
