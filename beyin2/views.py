@@ -116,15 +116,47 @@ def mark_duplicate(request, idea_id):
     if request.POST:
         idea = get_object_or_404(Idea, pk = idea_id)
         if request.POST['dupple_number']:
-            idea.duplicate = get_object_or_404(Idea, pk= request.POST['dupple_number'])
+            idea_original = get_object_or_404(Idea, pk= int(request.POST['dupple_number']))
+            idea.duplicate = idea_original
         else:
-            idea.duplicate = get_object_or_404(Idea, title= request.POST['dupple'])
+            idea_original = get_object_or_404(Idea, pk = int(request.POST['dupple']))
+            idea.duplicate = idea_original
         idea.is_duplicate = True
         idea.save()
-        return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
+        #changes for forum
+        #the duplicate
+        topic = idea.topic
+        post_text = "<h1> This idea marked duplicate to another idea </h1>"
+        post_text += "<p>#" + str(idea_original.id) + " "
+        post_text += idea_original.title + "</p>"
+        post_text += "<p>" + idea_original.description + "</p>"
+        post_text += "<br /> <h1>continue on this forum instead please</h1>"
+        post = Post(topic=topic, author=request.user, text=post_text )
+        post.save()
+        topic.topic_latest_post = post
+        topic.save()
+        topic.forum.forum_latest_post = post
+        topic.forum.topics += 1
+        topic.forum.posts += 1
+        topic.forum.save()
+        #the original idea
+        topic = idea_original.topic
+        post_text = "<h1> Another idea marked duplicate to this idea </h1>"
+        post_text += "<p>#" + str(idea.id) + " "
+        post_text += idea.title + "</p>"
+        post_text += "<p>" + idea.description + "</p>"
+        post = Post(topic=topic, author=request.user, text=post_text )
+        post.save()
+        topic.topic_latest_post = post
+        topic.save()
+        topic.forum.forum_latest_post = post
+        topic.forum.topics += 1
+        topic.forum.posts += 1
+        topic.forum.save()
+        return HttpResponseRedirect(reverse('oi.beyin2.views.delete_idea', args=(idea.id,)))
     else:
         idea = get_object_or_404(Idea, pk = idea_id)
         idea_list = Idea.objects.exclude(pk=idea.id).filter(is_hidden=False)
         return render_response(request, 'beyin2/idea_duplicate.html', {'idea': idea,'idea_list': idea_list})
-	
+
 
