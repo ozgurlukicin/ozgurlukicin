@@ -32,14 +32,25 @@
                 <a>fikir tekrarı</a>
             </td>
         </tr>
+        <form action="{% url main_post idea.id %}" method="POST" name="select_boxes">
         <tr>
             <td>
                 <p>status</p>
+                <select onchange=this.submit() name='status'>
+                    {%for status in status_list %}
+                        <option value="{{ status.name }}" {% if status.name == idea.status.name %} default {% endif %} >{{ status.name }}</option>
+                    {% endfor %}
+                </select>
             </td>
         </tr>
-                <tr>
-            <td>
-                <p>category</p>
+         <tr>
+             <td>
+                 <p>category</p>
+                 <select onchange=this.submit() name='category'>
+                     {% for category in category_list %}
+                         <option value="{{ category.name }}" {% if category.name == idea.category.name %} default {% endif %}>{{ category.name }}</option>
+                     {% endfor %}
+                </select>
             </td>
         </tr>
         <tr>
