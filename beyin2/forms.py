@@ -11,4 +11,4 @@ from oi.beyin2.models import Idea
 class IdeaForm(forms.ModelForm):
     class Meta:
 	model = Idea
-	exclude = ('dateSubmitted', 'submitter')
+	exclude = ('dateSubmitted', 'submitter','topic','is_hidden','duplicate','is_duplicate')
