@@ -44,6 +44,9 @@ class CdClient(models.Model):
     def get_full_phone(self):
         return u"(%s) %s" % (self.phone_area, self.phone_number)
 
+    def get_full_gsm(self):
+        return u"(%s) %s" % (self.gsm_area, self.gsm_number)
+
     def __unicode__(self):
         return self.get_full_name()
 
