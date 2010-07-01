@@ -20,7 +20,9 @@ ForumCategory = "Yeni Fikirler"
 
 def main(request):
     idea_list = Idea.objects.filter(is_hidden=False).order_by('-dateSubmitted')[:10]
-    return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list})
+    status_list = Status.objects.all()
+    category_list = Category.objects.all()
+    return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list})
 
 @login_required
 def add_new(request):
@@ -88,6 +90,14 @@ def delete_idea(request, idea_id):
     idea = Idea.objects.get(pk=idea_id)
     idea.is_hidden = True
     idea.save()
+    
+    # and lock the topic from forum
+    if idea.topic.locked:
+        return HttpResponse("already locked?")
+    else:
+        idea.topic.locked = 1
+        idea.topic.save()
+    
     return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
 
 
