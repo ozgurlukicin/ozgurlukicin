@@ -25,7 +25,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "oi",
         "USER": "root",
-        "PASSWORD": "root",
+        "PASSWORD": "",
         "HOST": "localhost",
         "PORT": "",
     }
@@ -133,7 +133,6 @@ INSTALLED_APPS = (
     'oi.shop.shopprofile',
     'oi.shop.product',
     'oi.shop.cart',
-    'oi.ideas',
     'oi.ezine',
     'oi.webalizer',
     'oi.editor',
@@ -141,6 +140,7 @@ INSTALLED_APPS = (
     'oi.shipit',
     'oi.piyango',
     'oi.podcast',
+    'oi.beyin2'
 )
 
 CITY_LIST = (
