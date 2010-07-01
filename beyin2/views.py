@@ -7,7 +7,7 @@
 
 from django.http import HttpResponse, HttpResponseRedirect
 from oi.beyin2.models import Idea, Status, Category
-from oi.beyin2.forms import IdeaForm
+from oi.beyin2.forms import IdeaForm, IdeaDuplicateForm
 from oi.st.wrappers import render_response
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.urlresolvers import reverse
@@ -111,5 +111,19 @@ def delete_idea(request, idea_id):
         idea.topic.save()
     
     return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
+    
+def mark_duplicate(request, idea_id):    
+    if request.POST:
+	if request.POST['dupple_number']:
+	    form = IdeaDuplicateForm({'duplicate': get_object_or_404(Idea, pk = request.POST['dupple_number'])})
+	else:
+	    form = IdeaDuplicateForm({'duplicate': request.POST['dupple']})
+	form.save()
+	return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
+    else:
+	idea = get_object_or_404(Idea, pk = idea_id)
+	idea_list = Idea.objects.all()
+	return render_reponse(request, 'beyin2/idea_duplicate.html', {'idea': idea,'idea_list': idea_list})
+	
 
 
