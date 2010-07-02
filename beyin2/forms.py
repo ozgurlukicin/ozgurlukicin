@@ -6,7 +6,7 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django import forms
-from oi.beyin2.models import Idea
+from oi.beyin2.models import Idea, ScreenShot
 
 class IdeaForm(forms.ModelForm):
     class Meta:
@@ -17,3 +17,8 @@ class IdeaDuplicateForm(forms.ModelForm):
     class Meta:
         model = Idea
         fields = ('duplicate',)
+
+class ScreenShotForm(forms.ModelForm):
+    class Meta:
+        model = ScreenShot
+        fields = ('image',)

@@ -7,12 +7,13 @@
 
 from django.http import HttpResponse, HttpResponseRedirect
 from oi.beyin2.models import Idea, Status, Category
-from oi.beyin2.forms import IdeaForm, IdeaDuplicateForm
+from oi.beyin2.forms import IdeaForm, IdeaDuplicateForm, ScreenShotForm
 from oi.st.wrappers import render_response
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from oi.forum.models import Topic, Forum, Post
+from django.forms.formsets import formset_factory
 
 DefaultCategory = 4
 DefaultStatus = 3
@@ -38,8 +39,9 @@ def main(request, idea_id = -1):
 
 @login_required
 def add_new(request):
-    try:
-        form = IdeaForm({'title': '', 'description': '', 'status': DefaultStatus, 'category': DefaultCategory})
+    #try:
+        ScreenShotSet = formset_factory(ScreenShotForm, extra=1, max_num=2)
+        form = IdeaForm({'title': '', 'description': '', 'status': DefaultStatus, 'category': DefaultCategory}, prefix = 'ideaform')
         if request.POST:
             form = IdeaForm(request.POST)
             if form.is_valid():
@@ -68,8 +70,9 @@ def add_new(request):
             else:
                 return render_response(request, 'beyin2/idea_errorpage.html')
         else:
-            return render_response(request, 'beyin2/idea_new.html', {'form':form,})
-    except:
+            ScreenShotFormSet = ScreenShotSet(prefix = 'imageform')
+            return render_response(request, 'beyin2/idea_new.html', {'form':form,'ScreenShotFormSet':ScreenShotFormSet})
+    #except:
         return render_response(request, 'beyin2/idea_errorpage.html')
 
 @permission_required('beyin2.change_idea')

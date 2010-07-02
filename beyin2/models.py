@@ -1,7 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-#ifndef BEYIN2/MODELS.PY
-#define BEYIN2/MODELS.PY
 #
 # Copyright 2010 TÜBİTAK UEKAE
 # Licensed under the GNU General Public License, version 3.
@@ -65,4 +63,4 @@ class ScreenShot(models.Model):
 
 
 
-#endif // BEYIN2/MODELS.PY
+
