@@ -40,8 +40,8 @@ def main(request, idea_id = -1):
 @login_required
 def add_new(request):
     #try:
-        ScreenShotSet = formset_factory(ScreenShotForm, extra=1, max_num=2)
         form = IdeaForm({'title': '', 'description': '', 'status': DefaultStatus, 'category': DefaultCategory}, prefix = 'ideaform')
+        ScreenShotSet = formset_factory(ScreenShotForm, extra=1, max_num=2)
         if request.POST:
             form = IdeaForm(request.POST, prefix = 'ideaform')
             ScreenShotFormSet = ScreenShotSet(request.POST, prefix = 'imageform')
@@ -55,9 +55,10 @@ def add_new(request):
                 idea.topic = topic
                 idea.save()
 
-                image = ScreenShotFormSet.save(commit = False)
-                image.idea = idea
-                image.save()
+                for screenshotform in ScreenShotFormSet.forms:
+                    image = screenshotform.save(commit = False)
+                    image.idea = idea
+                    image.save()
 
                 post_text = "<p>#" + str(idea.id) + " "
                 post_text += idea.title + "</p>"

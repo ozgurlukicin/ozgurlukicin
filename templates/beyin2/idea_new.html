@@ -23,8 +23,9 @@
             {% endfor %}
         {% endif %}
         {# now add screen shot form #}
+        {{ ScreenShotFormSet.management_form }}.
         {% for form in ScreenShotFormSet.forms %}
-            {{form }}
+            {{ form }}
         {% endfor %}
         <br />
                 <input type='submit' value='Send Idea' name='send_new_idea'>
