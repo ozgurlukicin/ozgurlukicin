@@ -19,7 +19,10 @@
             <td rowspan='5'>
                 <h2>{{ idea.title }}</h2>
                 <p>{{ idea.description }}</p>
-                <p><b>Status: </b>{{ idea.status }} - <b>Category: </b>{{ idea.category }}</p>
+                <p><b>Status: </b>{{ idea.status }} - <b>Category: </b>{{ idea.category }}</p><br />
+                {% for image in idea.screenshot_set.all %}
+                    <img src="{{ image.image.url }}" />
+                {% endfor %}
                 <a href='{{idea.topic.get_latest_post_url}}'>
                     {% if idea.topic.posts|add:"-1"  %}
                         {{ idea.topic.posts|add:"-1"  }} tane yorum yapıldı.

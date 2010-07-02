@@ -35,13 +35,13 @@ def main(request, idea_id = -1):
         idea_list = Idea.objects.filter(is_hidden=False).order_by('-dateSubmitted')[:10]
         status_list = Status.objects.all()
         category_list = Category.objects.all()
-        return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list})
+        return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list,})
 
 @login_required
 def add_new(request):
     #try:
         form = IdeaForm({'title': '', 'description': '', 'status': DefaultStatus, 'category': DefaultCategory}, prefix = 'ideaform')
-        ScreenShotSet = formset_factory(ScreenShotForm, extra=1, max_num=2)
+        ScreenShotSet = formset_factory(ScreenShotForm, extra=3, max_num=3)
         if request.POST:
             form = IdeaForm(request.POST, prefix = 'ideaform')
             ScreenShotFormSet = ScreenShotSet(request.POST, request.FILES, prefix = 'imageform')
@@ -56,9 +56,10 @@ def add_new(request):
                 idea.save()
 
                 for screenshotform in ScreenShotFormSet.forms:
-                    image = screenshotform.save(commit = False)
-                    image.idea = idea
-                    image.save()
+                        image = screenshotform.save(commit = False)
+                        if image.image:
+                            image.idea = idea
+                            image.save()
 
                 post_text = "<p>#" + str(idea.id) + " "
                 post_text += idea.title + "</p>"
