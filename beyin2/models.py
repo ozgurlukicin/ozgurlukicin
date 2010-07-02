@@ -32,34 +32,34 @@ class Idea(models.Model):
     topic = models.ForeignKey(Topic, related_name="Idea_topic")
 
     def __unicode__(self):
-	return self.title
+        return self.title
 
 class Status(models.Model):
     name = models.CharField(max_length = 128)
     
     def __unicode__(self):
-	return self.name
+        return self.name
 
 
 class Category(models.Model):
     name = models.CharField(max_length = 128)
     
     def __unicode__(self):
-	return self.name
+        return self.name
 
 class Vote(models.Model):
     idea = models.ForeignKey("Idea")
     vote = models.CharField(max_length= 1, choices=voteChoices)
     
     def __unicode__(self):
-	return self.vote
+        return self.vote
 
 class ScreenShot(models.Model):
     idea = models.ForeignKey("Idea")
     image = models.ImageField(upload_to="beyin2/")
     
     def __unicode__(self):
-	return self.image.file.name
+        return self.image.file.name
 
 
 

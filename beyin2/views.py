@@ -64,6 +64,9 @@ def add_new(request):
                 post_text = "<p>#" + str(idea.id) + " "
                 post_text += idea.title + "</p>"
                 post_text += "<p>" + idea.description + "</p>"
+                post_text += "<p>" + idea.description + "</p>"
+                for image in idea.screenshot_set.all():
+                    post_text += '<img src="'+image.image.url+'" height="320" width"240" /><br />'
                 post = Post(topic=topic, author=request.user, text=post_text )
                 post.save()
                 topic.topic_latest_post = post
@@ -141,6 +144,8 @@ def mark_duplicate(request, idea_id):
         post_text += idea_original.title + "</p>"
         post_text += "<p>" + idea_original.description + "</p>"
         post_text += "<br /> <h1>continue on this forum instead please</h1>"
+        for image in idea.screenshot_set.all():
+            post_text += '<img src="'+image.image.url+'" height="320" width"240" /><br />'
         post = Post(topic=topic, author=request.user, text=post_text )
         post.save()
         topic.topic_latest_post = post
@@ -154,6 +159,8 @@ def mark_duplicate(request, idea_id):
         post_text += "<p>#" + str(idea.id) + " "
         post_text += idea.title + "</p>"
         post_text += "<p>" + idea.description + "</p>"
+        for image in idea_original.screenshot_set.all():
+            post_text += '<img src="'+image.image.url+'" height="320" width"240" /><br />'
         post = Post(topic=topic, author=request.user, text=post_text )
         post.save()
         topic.topic_latest_post = post

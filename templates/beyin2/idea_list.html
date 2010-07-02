@@ -21,7 +21,7 @@
                 <p>{{ idea.description }}</p>
                 <p><b>Status: </b>{{ idea.status }} - <b>Category: </b>{{ idea.category }}</p><br />
                 {% for image in idea.screenshot_set.all %}
-                    <img src="{{ image.image.url }}" />
+                    <img src="{{ image.image.url }}" height="320" width"240" /><br />
                 {% endfor %}
                 <a href='{{idea.topic.get_latest_post_url}}'>
                     {% if idea.topic.posts|add:"-1"  %}
