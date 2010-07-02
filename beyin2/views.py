@@ -43,8 +43,9 @@ def add_new(request):
         ScreenShotSet = formset_factory(ScreenShotForm, extra=1, max_num=2)
         form = IdeaForm({'title': '', 'description': '', 'status': DefaultStatus, 'category': DefaultCategory}, prefix = 'ideaform')
         if request.POST:
-            form = IdeaForm(request.POST)
-            if form.is_valid():
+            form = IdeaForm(request.POST, prefix = 'ideaform')
+            ScreenShotFormSet = ScreenShotSet(request.POST, prefix = 'imageform')
+            if form.is_valid() and ScreenShotFormSet.is_valid():
                 forum = Forum.objects.get(name = ForumCategory)
                 topic = Topic(forum = forum,title = form.cleaned_data['title'])
                 topic.save()
@@ -53,6 +54,10 @@ def add_new(request):
                 idea.submitter = request.user
                 idea.topic = topic
                 idea.save()
+
+                image = ScreenShotFormSet.save(commit = False)
+                image.idea = idea
+                image.save()
 
                 post_text = "<p>#" + str(idea.id) + " "
                 post_text += idea.title + "</p>"
