@@ -44,7 +44,7 @@ def add_new(request):
         ScreenShotSet = formset_factory(ScreenShotForm, extra=1, max_num=2)
         if request.POST:
             form = IdeaForm(request.POST, prefix = 'ideaform')
-            ScreenShotFormSet = ScreenShotSet(request.POST, prefix = 'imageform')
+            ScreenShotFormSet = ScreenShotSet(request.POST, request.FILES, prefix = 'imageform')
             if form.is_valid() and ScreenShotFormSet.is_valid():
                 forum = Forum.objects.get(name = ForumCategory)
                 topic = Topic(forum = forum,title = form.cleaned_data['title'])
