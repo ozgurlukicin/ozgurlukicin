@@ -49,7 +49,7 @@ class Category(models.Model):
 
 class Vote(models.Model):
     idea = models.ForeignKey("Idea")
-    user = models.ForeignKey(User)
+    voter = models.ForeignKey(User, related_name = "voter_user")
     vote = models.CharField(max_length = 1, choices = voteChoices)
     
     def __unicode__(self):
