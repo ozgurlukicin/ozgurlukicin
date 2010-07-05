@@ -49,14 +49,15 @@ class Category(models.Model):
 
 class Vote(models.Model):
     idea = models.ForeignKey("Idea")
-    vote = models.CharField(max_length= 1, choices=voteChoices)
+    user = models.ForeignKey(User)
+    vote = models.CharField(max_length = 1, choices = voteChoices)
     
     def __unicode__(self):
         return self.vote
 
 class ScreenShot(models.Model):
     idea = models.ForeignKey("Idea")
-    image = models.ImageField(upload_to="beyin2/")
+    image = models.ImageField(upload_to = "beyin2/")
     
     def __unicode__(self):
         return self.image.file.name
