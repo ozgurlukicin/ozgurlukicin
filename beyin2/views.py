@@ -6,7 +6,7 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.http import HttpResponse, HttpResponseRedirect
-from oi.beyin2.models import Idea, Status, Category
+from oi.beyin2.models import Idea, Status, Category, Vote
 from oi.beyin2.forms import IdeaForm, IdeaDuplicateForm, ScreenShotForm
 from oi.st.wrappers import render_response
 from django.contrib.auth.decorators import login_required, permission_required
@@ -15,8 +15,8 @@ from django.shortcuts import get_object_or_404
 from oi.forum.models import Topic, Forum, Post
 from django.forms.formsets import formset_factory
 
-DefaultCategory = 4
-DefaultStatus = 3
+DefaultCategory = 1
+DefaultStatus = 1
 ForumCategory = "Yeni Fikirler"
 
 def main(request, idea_id = -1):
@@ -37,16 +37,29 @@ def main(request, idea_id = -1):
         category_list = Category.objects.all()
         return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list,})
 
+def vote(request, idea_id,vote):
+    voter = request.user
+    idea = get_object_or_404(Idea, pk = idea_id)
+    if vote=="1":
+        vote_choice = "U"
+    elif vote=="0":
+        vote_choice = "N"
+    elif vote=="2":
+        vote_choice = "D"
+    new_vote = Vote( idea = idea, voter = voter, vote = vote_choice )
+    new_vote.save()
+
+    return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
 
 @login_required
 def add_new(request):
-    #try:
+    try:
         form = IdeaForm({'title': '', 'description': '', 'status': DefaultStatus, 'category': DefaultCategory}, prefix = 'ideaform')
         ScreenShotSet = formset_factory(ScreenShotForm, extra=3, max_num=3)
         if request.POST:
             form = IdeaForm(request.POST, prefix = 'ideaform')
             ScreenShotFormSet = ScreenShotSet(request.POST, request.FILES, prefix = 'imageform')
-            if form.is_valid() and ScreenShotFormSet.is_valid():
+            if form.is_valid() and  ScreenShotFormSet.is_valid():
                 forum = Forum.objects.get(name = ForumCategory)
                 topic = Topic(forum = forum,title = form.cleaned_data['title'])
                 topic.save()
@@ -79,12 +92,12 @@ def add_new(request):
                 topic.forum.save()
                 return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
             else:
-                return render_response(request, 'beyin2/idea_errorpage.html')
+                return render_response(request, 'beyin2/idea_errorpage.html',{'error':form.errors,})
         else:
             ScreenShotFormSet = ScreenShotSet(prefix = 'imageform')
             return render_response(request, 'beyin2/idea_new.html', {'form':form,'ScreenShotFormSet':ScreenShotFormSet})
-    #except:
-        return render_response(request, 'beyin2/idea_errorpage.html')
+    except:
+        return render_response(request, 'beyin2/idea_errorpage.html',{'error':form.errors,})
 
 @permission_required('beyin2.change_idea')
 def edit_idea(request, idea_id):
