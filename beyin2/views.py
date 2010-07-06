@@ -37,18 +37,44 @@ def main(request, idea_id = -1):
         category_list = Category.objects.all()
         return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list,})
 
-def vote(request, idea_id,vote):
+def vote(request, idea_id, vote ):
+    if vote == "1":
+        vote_choice = "U"
+    elif vote == "0":
+        vote_choice = "N"
+    elif vote == "2":
+        vote_choice = "D"
+
     voter = request.user
     idea = get_object_or_404(Idea, pk = idea_id)
-    if vote=="1":
-        vote_choice = "U"
-    elif vote=="0":
-        vote_choice = "N"
-    elif vote=="2":
-        vote_choice = "D"
-    new_vote = Vote( idea = idea, voter = voter, vote = vote_choice )
-    new_vote.save()
-
+    working_vote = Vote.objects.filter( voter=voter, idea=idea )
+    
+    if working_vote.count() !=0:
+        working_vote = working_vote[0]
+        
+        # if already voted choice removed from template, this control can also removed
+        if vote_choice != working_vote.vote:
+            #remove the old vote
+            if working_vote.vote == "U":
+                idea.vote_value -=10
+            elif working_vote.vote == "D":
+                idea.vote_value +=9
+            # add new votes value
+            if vote_choice == "U":
+                idea.vote_value +=10
+            elif vote_choice == "D":
+                idea.vote_value -=9
+    else:
+            if vote_choice == "U":
+                idea.vote_value +=10
+            elif vote_choice == "D":
+                idea.vote_value -=9
+            #add 1 to vote count
+            idea.vote_count +=1
+            working_vote = Vote.objects.create( voter=voter, idea=idea, vote=vote_choice )
+    idea.save()
+    working_vote.vote = vote_choice
+    working_vote.save()
     return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
 
 @login_required

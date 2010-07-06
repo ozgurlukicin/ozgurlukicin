@@ -11,7 +11,7 @@ from oi.beyin2.models import Idea, ScreenShot
 class IdeaForm(forms.ModelForm):
     class Meta:
         model = Idea
-        exclude = ('dateSubmitted', 'submitter','topic','is_hidden','duplicate','is_duplicate')
+        fields = ('title', 'description', 'status', 'category' )
 
 class IdeaDuplicateForm(forms.ModelForm):
     class Meta:

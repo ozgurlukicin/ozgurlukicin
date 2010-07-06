@@ -18,6 +18,7 @@
         <tr>
             <td rowspan='5'>
                 <h2>#{{ idea.id }}: {{ idea.title }}</h2>
+                <p>Submitted by:{{ idea.submitter }} at {{idea.dateSubmitted}}</p>
                 <p>{{ idea.description }}</p>
                 <p><b>Status: </b>{{ idea.status }} - <b>Category: </b>{{ idea.category }}</p><br />
                 {% for image in idea.screenshot_set.all %}
@@ -33,8 +34,8 @@
                 <br />
             {% if user.is_authenticated %}
             {# 1=up, 2=down 0=notr #}
-            <a href='{% url vote idea.id 1 %}'>I like it</a>
-            <a href='{% url vote idea.id 0 %}'>I am not sure</a>
+            <a href='{% url vote idea.id 1 %}'>I like it</a>   
+            <a href='{% url vote idea.id 0 %}'>I am not sure</a>   
             <a href='{% url vote idea.id 2 %}'>I dislike it</a>
             {% endif %}
             </td>
