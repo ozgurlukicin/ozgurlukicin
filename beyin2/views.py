@@ -14,12 +14,14 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from oi.forum.models import Topic, Forum, Post
 from django.forms.formsets import formset_factory
+from django.core.paginator import Paginator
 
 DefaultCategory = 1
 DefaultStatus = 1
+idea_per_page = 10
 ForumCategory = "Yeni Fikirler"
 
-def main(request, idea_id = -1):
+def main(request, idea_id = -1,page_number = 1):
     if request.POST:
         idea = get_object_or_404(Idea, pk = idea_id)
         idea.status = get_object_or_404(Status, name = request.POST['status'])
@@ -32,10 +34,14 @@ def main(request, idea_id = -1):
         """
         return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
     else:
-        idea_list = Idea.objects.filter(is_hidden=False).order_by('-dateSubmitted')[:10]
+        all_idea_list = Idea.objects.filter(is_hidden=False).order_by('-dateSubmitted')
         status_list = Status.objects.all()
         category_list = Category.objects.all()
+
+        paginator = Paginator(all_idea_list, idea_per_page)
+        idea_list=paginator.page(page_number)
         return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list,})
+
 
 def vote(request, idea_id, vote ):
     if vote == "1":

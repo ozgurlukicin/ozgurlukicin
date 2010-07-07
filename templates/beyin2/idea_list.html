@@ -11,8 +11,23 @@
 {% endblock %}
 
 {% block content %}
-{% if idea_list %}
-{% for idea in idea_list %}
+<div class="pagination">
+    <span class="step-links">
+        {% if idea_list.has_previous %}
+            <a href="{% url main_page idea_list.previous_page_number %}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ idea_list.number }} of {{ idea_list.paginator.num_pages }}.
+        </span>
+
+        {% if idea_list.has_next %}
+            <a href="{% url main_page idea_list.next_page_number %}">next</a>
+        {% endif %}
+    </span>
+</div>
+{% if idea_list.object_list %}
+{% for idea in idea_list.object_list %}
 
     <table>
         <tr>
@@ -82,4 +97,19 @@
 {% endfor %}
 {% endif %}
 <a href='{% url add_new %}'>Add New Idea</a>
+<div class="pagination">
+    <span class="step-links">
+        {% if idea_list.has_previous %}
+            <a href="{% url main_page idea_list.previous_page_number %}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ idea_list.number }} of {{ idea_list.paginator.num_pages }}.
+        </span>
+
+        {% if idea_list.has_next %}
+            <a href="{% url main_page idea_list.next_page_number %}">next</a>
+        {% endif %}
+    </span>
+</div>
 {% endblock %}

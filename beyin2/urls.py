@@ -11,6 +11,7 @@ from django.contrib.auth.views import login
 urlpatterns = patterns('oi.beyin2.views',
 
     (r'^$', 'main'),
+    url(r'^page_(?P<page_number>\d+)/$', 'main',name='main_page'),
     url(r'^edited_(?P<idea_id>\d+)/$', 'main',name='main_post'),
     url(r'^add/$','add_new', name='add_new'),
     url(r'^idea_(?P<idea_id>\d+)/edit/$','edit_idea', name='edit_idea'),
