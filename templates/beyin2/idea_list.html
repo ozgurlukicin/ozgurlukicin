@@ -1,7 +1,7 @@
 
 {% extends "base.html" %}
 {% load library %}
-
+{% load list_view_filter %}
 {% block title %}beyin2 arayuzu denemesi{% endblock %}
 
 {% block extrahead %}
@@ -52,10 +52,7 @@
                 </a>
                 <br />
             {% if user.is_authenticated %}
-            {# 1=up, 2=down 0=notr #}
-            <a href='{% url vote idea.id 1 %}'>I like it</a>   
-            <a href='{% url vote idea.id 0 %}'>I am not sure</a>   
-            <a href='{% url vote idea.id 2 %}'>I dislike it</a>
+                {% is_voted idea user %}
             {% endif %}
             </td>
         {% if perms.beyin2.change_idea %}

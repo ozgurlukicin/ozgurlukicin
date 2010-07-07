@@ -58,7 +58,7 @@ def vote(request, idea_id, vote ):
     elif vote == "2":
         vote_choice = "D"
 
-    vote = request.user
+    voter = request.user
     idea = get_object_or_404(Idea, pk = idea_id)
     working_vote = Vote.objects.filter( voter=voter, idea=idea )
     
