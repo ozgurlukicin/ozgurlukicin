@@ -18,10 +18,10 @@ from django.core.paginator import Paginator
 
 DefaultCategory = 1
 DefaultStatus = 1
-idea_per_page = 10
+idea_per_page = 2
 ForumCategory = "Yeni Fikirler"
 
-def main(request, idea_id = -1,page_number = 1):
+def main(request, idea_id = -1,page_number = 1, order = "date"):
     if request.POST:
         idea = get_object_or_404(Idea, pk = idea_id)
         idea.status = get_object_or_404(Status, name = request.POST['status'])
@@ -34,13 +34,20 @@ def main(request, idea_id = -1,page_number = 1):
         """
         return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
     else:
-        all_idea_list = Idea.objects.filter(is_hidden=False).order_by('-dateSubmitted')
+        #idea list order changes
+        if order == "date":
+            all_idea_list = Idea.objects.filter(is_hidden=False).order_by('-dateSubmitted')
+        elif order == "vote_value":
+            all_idea_list = Idea.objects.filter(is_hidden=False).order_by('vote_value')
+        elif order == "vote_count":
+            all_idea_list = Idea.objects.filter(is_hidden=False).order_by('vote_count')
+        elif order == "title":
+            all_idea_list = Idea.objects.filter(is_hidden=False).order_by('title')
         status_list = Status.objects.all()
         category_list = Category.objects.all()
-
         paginator = Paginator(all_idea_list, idea_per_page)
         idea_list=paginator.page(page_number)
-        return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list,})
+        return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list,'order':order})
 
 
 def vote(request, idea_id, vote ):
@@ -51,7 +58,7 @@ def vote(request, idea_id, vote ):
     elif vote == "2":
         vote_choice = "D"
 
-    voter = request.user
+    vote = request.user
     idea = get_object_or_404(Idea, pk = idea_id)
     working_vote = Vote.objects.filter( voter=voter, idea=idea )
     
