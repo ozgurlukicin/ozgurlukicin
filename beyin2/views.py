@@ -19,6 +19,7 @@ from django.core.paginator import Paginator
 DefaultCategory = 1
 DefaultStatus = 1
 idea_per_page = 2
+# if it doesnot exist ??
 ForumCategory = "Yeni Fikirler"
 
 def main(request, idea_id = -1,page_number = 1, order = "date"):
@@ -96,7 +97,10 @@ def add_new(request):
         form = IdeaForm({'title': '', 'description': '', 'status': DefaultStatus, 'category': DefaultCategory}, prefix = 'ideaform')
         ScreenShotSet = formset_factory(ScreenShotForm, extra=3, max_num=3)
         if request.POST:
-            form = IdeaForm(request.POST, prefix = 'ideaform')
+            try:
+                form = IdeaForm(request.POST, prefix = 'ideaform')
+            except:
+                return HttpResponse("forum  does not exist")
             ScreenShotFormSet = ScreenShotSet(request.POST, request.FILES, prefix = 'imageform')
             if form.is_valid() and  ScreenShotFormSet.is_valid():
                 forum = Forum.objects.get(name = ForumCategory)
