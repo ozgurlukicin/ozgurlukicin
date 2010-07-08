@@ -1,0 +1,15 @@
+{% if vote == "U" %}
+  <a>I like it</a>
+{% else %}
+  <a href='{% url vote idea.id "U" %}'>I like it</a>
+{% endif %}
+{% if vote == "N" %}
+  <a>I am not sure</a>
+{% else %}
+  <a href='{% url vote idea.id "N" %}'>I am not sure</a>
+{% endif %}
+{% if vote == "D" %}
+  <a>I dislike it</a>
+{% else %}
+  <a href='{% url vote idea.id "D" %}'>I dislike it</a>
+{% endif %}
