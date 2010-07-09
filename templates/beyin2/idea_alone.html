@@ -11,28 +11,8 @@
 {% endblock %}
 
 {% block content %}
-<a href='{% url main_page "date" 1 %}'>tarih</a>
-<a href='{% url main_page "vote_count" 1 %}'>oy sayısı</a>
-<a href='{% url main_page "vote_value" 1 %}'>Popülerlik</a>
-<a href='{% url main_page "title" 1 %}'>Başlık</a>
-<div class="pagination">
-    <span class="step-links">
-        {% if idea_list.has_previous %}
-            <a href="{% url main_page order idea_list.previous_page_number %}">previous</a>
-        {% endif %}
 
-        <span class="current">
-            Page {{ idea_list.number }} of {{ idea_list.paginator.num_pages }}.
-        </span>
-
-        {% if idea_list.has_next %}
-            <a href="{% url main_page order idea_list.next_page_number %}">next</a>
-        {% endif %}
-    </span>
-</div>
-{% if idea_list.object_list %}
-{% for idea in idea_list.object_list %}
-
+{% if idea %}
     <table>
         <tr>
             <td rowspan='5'>
@@ -52,7 +32,7 @@
                 </a>
                 <br />
             {% if user.is_authenticated %}
-                {% is_voted idea user "main" %}
+                {% is_voted idea user "detail"%}
             {% endif %}
             </td>
         {% if perms.beyin2.change_idea %}
@@ -95,22 +75,5 @@
         </tr>
     </table>
     <br />
-{% endfor %}
 {% endif %}
-<a href='{% url add_new %}'>Add New Idea</a>
-<div class="pagination">
-    <span class="step-links">
-        {% if idea_list.has_previous %}
-            <a href="{% url main_page order idea_list.previous_page_number %}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ idea_list.number }} of {{ idea_list.paginator.num_pages }}.
-        </span>
-
-        {% if idea_list.has_next %}
-            <a href="{% url main_page order idea_list.next_page_number %}">next</a>
-        {% endif %}
-    </span>
-</div>
 {% endblock %}

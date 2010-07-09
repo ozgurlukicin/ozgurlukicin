@@ -11,6 +11,7 @@ from django.contrib.auth.views import login
 urlpatterns = patterns('oi.beyin2.views',
 
     (r'^$', 'main'),
+    url(r'^idea_(?P<idea_id>\d+)/detail/$','idea_detail', name='idea_detail'),
     url(r'^order_(?P<order>\w+)/page_(?P<page_number>\d+)/$', 'main',name='main_page'),
     url(r'^order_(?P<order>\w+)/$', 'main',name='main_order'),
     url(r'^edited_(?P<idea_id>\d+)/$', 'main',name='main_post'),
@@ -18,7 +19,7 @@ urlpatterns = patterns('oi.beyin2.views',
     url(r'^idea_(?P<idea_id>\d+)/edit/$','edit_idea', name='edit_idea'),
     url(r'^idea_(?P<idea_id>\d+)/delete/$','delete_idea', name='delete_idea'),
     url(r'^idea_(?P<idea_id>\d+)/duplicate/$',"mark_duplicate",name="mark_duplicate"),
-    url(r'^idea_(?P<idea_id>\d+)/vote-(?P<vote>\d+)/$',"vote",name="vote"),
+    url(r'^idea_(?P<idea_id>\d+)/vote-(?P<vote>\d+)/from_(?P<come_from>\w+)/$',"vote",name="vote"),
     #url(r'^(?P<blog_id>\d+)/$',"blog_goster",name="blog_goster"),
     #url(r'^(?P<blog_id>\d+)/(?P<yazi_id>\d+)/yorum_ekle/$',"yorum_ekle",name="yorum_ekle"),
 )

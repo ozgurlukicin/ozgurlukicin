@@ -51,7 +51,17 @@ def main(request, idea_id = -1,page_number = 1, order = "date"):
         return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list,'order':order})
 
 
-def vote(request, idea_id, vote ):
+
+def idea_detail(request,idea_id):
+    idea = get_object_or_404(Idea, pk = idea_id)
+    if idea.is_hidden:
+        return HttpResponse("Missing idea")
+    status_list = Status.objects.all()
+    category_list = Category.objects.all()
+    return render_response(request,'beyin2/idea_alone.html',{'idea': idea, 'status_list':status_list, 'category_list': category_list,})
+
+
+def vote(request, idea_id, vote ,come_from):
     if vote == "1":
         vote_choice = "U"
     elif vote == "0":
@@ -89,6 +99,8 @@ def vote(request, idea_id, vote ):
     idea.save()
     working_vote.vote = vote_choice
     working_vote.save()
+    if come_from == "detail":
+        return HttpResponseRedirect(reverse('oi.beyin2.views.idea_detail', args=(idea_id,)))
     return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
 
 @login_required
