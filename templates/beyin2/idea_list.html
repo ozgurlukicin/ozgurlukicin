@@ -36,7 +36,7 @@
     <table>
         <tr>
             <td rowspan='5'>
-                <h2>#{{ idea.id }}: {{ idea.title }}</h2>
+                <a href="{% url idea_detail idea.id %}">#{{ idea.id }}: {{ idea.title }}</a>
                 <p>Submitted by:{{ idea.submitter }} at {{idea.dateSubmitted}}</p>
                 <p>{{ idea.description }}</p>
                 <p><b>Status: </b>{{ idea.status }} - <b>Category: </b>{{ idea.category }}</p><br />
