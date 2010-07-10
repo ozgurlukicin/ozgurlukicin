@@ -3,7 +3,7 @@
 #
 # Copyright 2007 TÜBİTAK UEKAE
 # Licensed under the GNU General Public License, version 3.
-# See the file http://www.gnu.org/copyleft/gpl.txt.
+# See the file http://www.gnu.org/copyleft/gpl.txt
 
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
