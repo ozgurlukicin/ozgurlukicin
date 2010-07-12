@@ -7,7 +7,7 @@
 {% block extrahead %}
 <!--<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>-->
 <style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
-<style type="text/css" media="screen">@import url('/media/css/new/brainstorm.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/beyin2/beyin2.css');</style>
 <script type="text/javascript" src="/media/js/brainstorm.js"></script>
 {% endblock %}
 
@@ -35,75 +35,11 @@
         {% endif %}
     </span>
 </div>
+
 {% if idea_list.object_list %}
 {% for idea in idea_list.object_list %}
-<div class="idea_container">
-<div class='idea_right'>
-
-<table>
-        <tr>
-            <td rowspan='5'>
-                <div class="h1"><a href="{% url idea_detail idea.id %}">#{{ idea.id }}: {{ idea.title }}</a></div>
-                <div class="idea_info"><p>Submitted by:{{ idea.submitter }} at {{idea.dateSubmitted}}</p></div>
-                <div class="idea_content"><p>{{ idea.description }}</p></div>
-                <p><b>Status: </b>{{ idea.status }} - <b>Category: </b>{{ idea.category }}</p><br />
-                {% for image in idea.screenshot_set.all %}
-                    <img src="{{ image.image.url }}" height="320" width"240" /><br />
-                {% endfor %}
-                <a href='{{idea.topic.get_latest_post_url}}'>
-                    {% if idea.topic.posts|add:"-1"  %}
-                        {{ idea.topic.posts|add:"-1"  }} tane yorum yapıldı.
-                    {% else %}
-                        İlk yorum yapan siz olun !
-                    {% endif %}
-                </a>
-                <br />
-            {% if user.is_authenticated %}
-                {% is_voted idea user "main" %}
-            {% endif %}
-            </td>
-        {% if perms.beyin2.change_idea %}
-            <td>
-                <a href='{% url edit_idea idea.id %}'>edit idea</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a href='{% url mark_duplicate idea.id %}'>mark duplicate</a>
-            </td>
-        </tr>
-        <form action="{% url main_post idea.id %}" method="POST" name="select_boxes">
-        <tr>
-            <td>
-                <p>status</p>
-                <select onchange=this.form.submit() name='status'>
-                    {%for status in status_list %}
-                        <option value="{{ status.name }}" {% if status.name == idea.status.name %}selected{% endif %}>{{ status.name }}</option>
-                    {% endfor %}
-                </select>
-            </td>
-        </tr>
-         <tr>
-             <td>
-                 <p>category</p>
-                 <select onchange=this.submit() name='category'>
-                     {% for category in category_list %}
-                         <option value="{{ category.name }}" {% if category.name == idea.category.name %}selected{% endif %}>{{ category.name }}</option>
-                     {% endfor %}
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a href ='{% url delete_idea idea.id %}'>sil</a>
-            </td>
-        </form>
-        {% endif %}
-        </tr>
-    </table>
-    <br />
-</div>
-</div>
+    {% include "beyin2/idea_alone.html" %}
+    <div style="clear:both;"></div>
 {% endfor %}
 {% endif %}
 <a href='{% url add_new %}'>Add New Idea</a>

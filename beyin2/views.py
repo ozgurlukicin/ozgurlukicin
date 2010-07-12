@@ -58,7 +58,7 @@ def idea_detail(request,idea_id):
         return HttpResponse("Missing idea")
     status_list = Status.objects.all()
     category_list = Category.objects.all()
-    return render_response(request,'beyin2/idea_alone.html',{'idea': idea, 'status_list':status_list, 'category_list': category_list,})
+    return render_response(request,'beyin2/idea_detail.html',{'idea': idea, 'status_list':status_list, 'category_list': category_list,})
 
 
 def vote(request, idea_id, vote ,come_from):

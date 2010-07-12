@@ -1,13 +1,26 @@
+
+{% extends "beyin2/idea_base.html" %}
 {% load library %}
 {% load list_view_filter %}
+{% block title %}beyin2 arayuzu denemesi{% endblock %}
+
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/beyin2/beyin2.css');</style>
+{% endblock %}
+
+{% block content %}
 
 {% if idea %}
 <div class="idea_left">
-    {% vote_value_calc idea %}
+    <div class="idea_vote"><p>{{ idea.vote_value }}</p>
+        {# this part is for the vote bar#}
+        <div class="idea_vote_bar">
+            <img width="15" src="/media/img/beyin2/green_bar.png"/><img width="15" src="/media/img/beyin2/yellow_bar.png"/><img width="15" src="/media/img/beyin2/red_bar.png"/>
+        </div>
         {% if user.is_authenticated %}
             {% is_voted idea user "detail"%}
             {% endif %}
-    {#this is for template tag#}
     </div>
 </div>
 <div class="idea_middle">
@@ -60,3 +73,4 @@
         {% endif %}
 </div>
 {% endif %}
+{% endblock %}
