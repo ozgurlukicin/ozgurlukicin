@@ -70,7 +70,6 @@ def vote(request, idea_id, vote ,come_from):
     voter = request.user
     idea = get_object_or_404(Idea, pk = idea_id)
     working_vote = Vote.objects.filter( voter=voter, idea=idea )
-    
     if working_vote.count() !=0:
         working_vote = working_vote[0]
         
@@ -102,9 +101,24 @@ def vote(request, idea_id, vote ,come_from):
             #and for every vote add 1
             idea.vote_value +=1
             working_vote = Vote.objects.create( voter=voter, idea=idea, vote=vote_choice )
-    idea.save()
     working_vote.vote = vote_choice
     working_vote.save()
+    all_votes = Vote.objects.filter( idea=idea ).count()
+    all_votes = float(all_votes)
+    print "\n\n\n\n",all_votes
+    u_votes = Vote.objects.filter( idea=idea, vote="U").count()
+    print "\n\n\n\n",u_votes
+    n_votes = Vote.objects.filter( idea=idea, vote="N").count()
+    print "\n\n\n\n",n_votes
+    d_votes = Vote.objects.filter( idea=idea, vote="D").count()
+    print "\n\n\n\n",d_votes
+    u_percent = int((u_votes/all_votes)*100)
+    n_percent = int((n_votes/all_votes)*100)
+    d_percent = int((d_votes/all_votes)*100)
+    percent = (u_percent*1000000)+(n_percent*1000)+d_percent
+    print "\n\n\n\n",percent
+    idea.vote_percent=percent
+    idea.save()
     if come_from == "detail":
         return HttpResponseRedirect(reverse('oi.beyin2.views.idea_detail', args=(idea_id,)))
     return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
