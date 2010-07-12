@@ -105,18 +105,13 @@ def vote(request, idea_id, vote ,come_from):
     working_vote.save()
     all_votes = Vote.objects.filter( idea=idea ).count()
     all_votes = float(all_votes)
-    print "\n\n\n\n",all_votes
     u_votes = Vote.objects.filter( idea=idea, vote="U").count()
-    print "\n\n\n\n",u_votes
     n_votes = Vote.objects.filter( idea=idea, vote="N").count()
-    print "\n\n\n\n",n_votes
     d_votes = Vote.objects.filter( idea=idea, vote="D").count()
-    print "\n\n\n\n",d_votes
     u_percent = int((u_votes/all_votes)*100)
     n_percent = int((n_votes/all_votes)*100)
     d_percent = int((d_votes/all_votes)*100)
     percent = (u_percent*1000000)+(n_percent*1000)+d_percent
-    print "\n\n\n\n",percent
     idea.vote_percent=percent
     idea.save()
     if come_from == "detail":
