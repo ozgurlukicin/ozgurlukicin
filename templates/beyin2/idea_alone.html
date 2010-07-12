@@ -5,7 +5,7 @@
 <div class="idea_left">
     {% vote_value_calc idea %}
         {% if user.is_authenticated %}
-            {% is_voted idea user "detail"%}
+            {% is_voted idea user come_from %}
             {% endif %}
     {#this is for template tag#}
     </div>

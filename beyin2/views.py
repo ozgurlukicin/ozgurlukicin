@@ -22,7 +22,7 @@ idea_per_page = 2
 # if it doesnot exist ??
 ForumCategory = "Yeni Fikirler"
 
-def main(request, idea_id = -1,page_number = 1, order = "date"):
+def main(request, idea_id = -1, page_number = 1, order = "date"):
     if request.POST:
         idea = get_object_or_404(Idea, pk = idea_id)
         idea.status = get_object_or_404(Status, name = request.POST['status'])
@@ -40,15 +40,13 @@ def main(request, idea_id = -1,page_number = 1, order = "date"):
             all_idea_list = Idea.objects.filter(is_hidden=False).order_by('-dateSubmitted')
         elif order == "vote_value":
             all_idea_list = Idea.objects.filter(is_hidden=False).order_by('vote_value')
-        elif order == "vote_count":
-            all_idea_list = Idea.objects.filter(is_hidden=False).order_by('vote_count')
         elif order == "title":
             all_idea_list = Idea.objects.filter(is_hidden=False).order_by('title')
         status_list = Status.objects.all()
         category_list = Category.objects.all()
         paginator = Paginator(all_idea_list, idea_per_page)
         idea_list=paginator.page(page_number)
-        return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list,'order':order})
+        return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list,'order':order,'come_from':'main'})
 
 
 
@@ -58,7 +56,7 @@ def idea_detail(request,idea_id):
         return HttpResponse("Missing idea")
     status_list = Status.objects.all()
     category_list = Category.objects.all()
-    return render_response(request,'beyin2/idea_detail.html',{'idea': idea, 'status_list':status_list, 'category_list': category_list,})
+    return render_response(request,'beyin2/idea_detail.html',{'idea': idea, 'status_list':status_list, 'category_list': category_list,'come_from':'detail'})
 
 
 def vote(request, idea_id, vote ,come_from):
