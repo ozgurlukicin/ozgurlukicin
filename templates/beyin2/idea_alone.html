@@ -21,12 +21,12 @@
         <p>{{ idea.description }}</p>
     </div>
 
+    {% for image in idea.screenshot_set.all %}
+        <img src="{{ image.image.url }}" height="320" width"240" /><br />
+    {% endfor %}
     <div class="idea_status">
         <p><b>Status: </b> {{ idea.status }} - <b>Category: </b> {{ idea.category }} </p>
     </div>
-        {% for image in idea.screenshot_set.all %}
-            <img src="{{ image.image.url }}" height="320" width"240" /><br />
-        {% endfor %}
     <div class="idea_comments">
         <a href='{{idea.topic.get_latest_post_url}}'>
             {% if idea.topic.posts|add:"-1"  %}

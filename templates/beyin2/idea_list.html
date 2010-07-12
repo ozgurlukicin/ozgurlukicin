@@ -12,29 +12,16 @@
 {% endblock %}
 
 {% block content %}
-<div id="idea_topbar"><span id="idea_list_title">{{ page_title }}</span>
+<div id="idea_topbar">
     <span id="idea_submit"><a href="/yenifikir/ekle/" title="Yeni Fikir Ekle"><img src="/media/img/beyin2/ideas_submit.png" alt="submit idea" /></a></span>
+    <div class="idea_list_title" >
+        <a href='{% url main_page "date" 1 %}'>Tarih  <img src="/media/img/beyin2/takvim.png" /></a>
+        <a href='{% url main_page "vote_value" 1 %}'>Popülerlik  <img src="/media/img/beyin2/popu.png" /></a>
+        <a href='{% url main_page "title" 1 %}'>Başlık  <img src="/media/img/beyin2/baslik.png" /></a>
+    </div>
 </div>
 
-<a href='{% url main_page "date" 1 %}'>tarih</a>
-<a href='{% url main_page "vote_count" 1 %}'>oy sayısı</a>
-<a href='{% url main_page "vote_value" 1 %}'>Popülerlik</a>
-<a href='{% url main_page "title" 1 %}'>Başlık</a>
-<div class="pagination">
-    <span class="step-links">
-        {% if idea_list.has_previous %}
-            <a href="{% url main_page order idea_list.previous_page_number %}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ idea_list.number }} of {{ idea_list.paginator.num_pages }}.
-        </span>
-
-        {% if idea_list.has_next %}
-            <a href="{% url main_page order idea_list.next_page_number %}">next</a>
-        {% endif %}
-    </span>
-</div>
+<div style="clear:both;"></div>
 
 {% if idea_list.object_list %}
 {% for idea in idea_list.object_list %}

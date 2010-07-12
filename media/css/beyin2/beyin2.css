@@ -4,10 +4,15 @@
     line-height: 40px;
     text-indent: 10px;
 }
-#idea_topbar #idea_list_title {
+#idea_topbar .idea_list_title a{
     float: left;
-    font-size: 12px;
-    color: #fff;
+    background: url('/media/img/beyin2/order_bar.png') bottom no-repeat;
+    width:130px;
+    padding-top:10px;
+    padding-left:7px;
+    padding-right:7px;
+    font-size: 17px;
+    color: #0000FF;
 }
 #idea_topbar #idea_submit {
     float: right;
