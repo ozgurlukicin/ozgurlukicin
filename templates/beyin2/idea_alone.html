@@ -1,79 +1,76 @@
 
-{% extends "base.html" %}
+{% extends "beyin2/idea_base.html" %}
 {% load library %}
 {% load list_view_filter %}
 {% block title %}beyin2 arayuzu denemesi{% endblock %}
 
 {% block extrahead %}
-<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
-
+<style type="text/css" media="screen">@import url('/media/css/beyin2/beyin2.css');</style>
 {% endblock %}
 
 {% block content %}
 
 {% if idea %}
-    <table>
-        <tr>
-            <td rowspan='5'>
-                <h2>#{{ idea.id }}: {{ idea.title }}</h2>
-                <p>Submitted by:{{ idea.submitter }} at {{idea.dateSubmitted}}</p>
-                <p>{{ idea.description }}</p>
-                <p><b>Status: </b>{{ idea.status }} - <b>Category: </b>{{ idea.category }}</p><br />
-                {% for image in idea.screenshot_set.all %}
-                    <img src="{{ image.image.url }}" height="320" width"240" /><br />
-                {% endfor %}
-                <a href='{{idea.topic.get_latest_post_url}}'>
-                    {% if idea.topic.posts|add:"-1"  %}
-                        {{ idea.topic.posts|add:"-1"  }} tane yorum yapıldı.
-                    {% else %}
-                        İlk yorum yapan siz olun !
-                    {% endif %}
-                </a>
-                <br />
-            {% if user.is_authenticated %}
-                {% is_voted idea user "detail"%}
+<div class="idea_left">
+    <div class="idea_vote"><p>{{ idea.vote_value }}</p>
+        {# this part is for the vote bar#}
+        <div class="idea_vote_bar">
+            <img width="15" src="/media/img/beyin2/green_bar.png"/><img width="15" src="/media/img/beyin2/yellow_bar.png"/><img width="15" src="/media/img/beyin2/red_bar.png"/>
+        </div>
+        {% if user.is_authenticated %}
+            {% is_voted idea user "detail"%}
             {% endif %}
-            </td>
+    </div>
+</div>
+<div class="idea_middle">
+    <h1>#{{ idea.id }}: {{ idea.title }}</h1>
+    
+    <div class="idea_info">
+        <p>Submitted by:{{ idea.submitter }} at {{idea.dateSubmitted}}</p>
+    </div>
+    
+    <div class="idea_content">
+        <p>{{ idea.description }}</p>
+    </div>
+
+    <div class="idea_status">
+        <p><b>Status: </b> {{ idea.status }} - <b>Category: </b> {{ idea.category }} </p>
+    </div>
+        {% for image in idea.screenshot_set.all %}
+            <img src="{{ image.image.url }}" height="320" width"240" /><br />
+        {% endfor %}
+    <div class="idea_comments">
+        <a href='{{idea.topic.get_latest_post_url}}'>
+            {% if idea.topic.posts|add:"-1"  %}
+                {{ idea.topic.posts|add:"-1"  }} tane yorum yapıldı.
+            {% else %}
+                İlk yorum yapan siz olun !
+            {% endif %}
+        </a>
+    </div>
+</div>
+
+<div class="idea_right"
         {% if perms.beyin2.change_idea %}
-            <td>
-                <a href='{% url edit_idea idea.id %}'>edit idea</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a href='{% url mark_duplicate idea.id %}'>mark duplicate</a>
-            </td>
-        </tr>
         <form action="{% url main_post idea.id %}" method="POST" name="select_boxes">
-        <tr>
-            <td>
-                <p>status</p>
-                <select onchange=this.form.submit() name='status'>
-                    {%for status in status_list %}
-                        <option value="{{ status.name }}" {% if status.name == idea.status.name %}selected{% endif %}>{{ status.name }}</option>
-                    {% endfor %}
-                </select>
-            </td>
-        </tr>
-         <tr>
-             <td>
-                 <p>category</p>
-                 <select onchange=this.submit() name='category'>
-                     {% for category in category_list %}
-                         <option value="{{ category.name }}" {% if category.name == idea.category.name %}selected{% endif %}>{{ category.name }}</option>
-                     {% endfor %}
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a href ='{% url delete_idea idea.id %}'>sil</a>
-            </td>
+            <a href='{% url edit_idea idea.id %}'><img src="/media/img/beyin2/duzenle.png" /></a>
+            <a href='{% url mark_duplicate idea.id %}'><img src="/media/img/beyin2/tekrar.png" /></a>
+            <p>status</p>
+            <select onchange=this.form.submit() name='status'>
+                {%for status in status_list %}
+                    <option value="{{ status.name }}" {% if status.name == idea.status.name %}selected{% endif %}>{{ status.name }}</option>
+                {% endfor %}
+            </select>
+            <p>category</p>
+            <select onchange=this.submit() name='category'>
+                {% for category in category_list %}
+                    <option value="{{ category.name }}" {% if category.name == idea.category.name %}selected{% endif %}>{{ category.name }}</option>
+                {% endfor %}
+            </select>
+            <a href ='{% url delete_idea idea.id %}'><img src="/media/img/beyin2/sil.png" /></a>
         </form>
         {% endif %}
-        </tr>
-    </table>
-    <br />
+</div>
 {% endif %}
 {% endblock %}

@@ -30,8 +30,10 @@ class Idea(models.Model):
     is_duplicate = models.BooleanField("Idea Duplicate", default=False)
     is_hidden = models.BooleanField("Hiddden", default=False)
     topic = models.ForeignKey(Topic, related_name="Idea_topic")
-    vote_count = models.IntegerField(default=0)
+    # percent will be processed as %UUU,%NNN %DDD
+    vote_percent = models.IntegerField(default=0)
     vote_value = models.IntegerField(default=0)
+    
 
     def __unicode__(self):
         return self.title
@@ -59,7 +61,7 @@ class Vote(models.Model):
 
 class ScreenShot(models.Model):
     idea = models.ForeignKey("Idea")
-    image = models.ImageField(upload_to = "beyin2/")
+    image = models.ImageField(upload_to = "beyin2/upload")
     
     def __unicode__(self):
         return self.image.file.name

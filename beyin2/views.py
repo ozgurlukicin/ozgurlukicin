@@ -82,19 +82,27 @@ def vote(request, idea_id, vote ,come_from):
             if working_vote.vote == "U":
                 idea.vote_value -=10
             elif working_vote.vote == "D":
-                idea.vote_value +=9
+                idea.vote_value +=10
+            else:
+                idea.vote_value -=1
             # add new votes value
             if vote_choice == "U":
                 idea.vote_value +=10
             elif vote_choice == "D":
-                idea.vote_value -=9
+                idea.vote_value -=10
+            else:
+                idea.vote_value +=1
+        else:
+            return HttpResponse("you have already voted, dont cheat!")
     else:
             if vote_choice == "U":
                 idea.vote_value +=10
             elif vote_choice == "D":
-                idea.vote_value -=9
-            #add 1 to vote count
-            idea.vote_count +=1
+                idea.vote_value -=10
+            else:
+                idea.vote_value +=1
+            #and for every vote add 1
+            idea.vote_value +=1
             working_vote = Vote.objects.create( voter=voter, idea=idea, vote=vote_choice )
     idea.save()
     working_vote.vote = vote_choice
