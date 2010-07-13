@@ -187,9 +187,16 @@ def edit_idea(request, idea_id):
         if request.POST:
             form = IdeaForm(request.POST)
             if form.is_valid():
-                i = IdeaForm(request.POST, instance = idea)
-                i.description = form.cleaned_data['description']
-                i.save()
+                idea.description = form.cleaned_data['description']
+                if form.cleaned_data['status']:
+		    idea.status = form.cleaned_data['status']
+		else:
+		    idea.status = Status()
+                if form.cleaned_data['category']:
+		    idea.category = form.cleaned_data['category']
+		else:
+		    idea.category = Category()
+                idea.save()
                 return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
             else:
                 return render_response(request, 'beyin2/idea_errorpage.html')
