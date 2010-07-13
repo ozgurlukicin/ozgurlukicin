@@ -27,6 +27,7 @@
     <div class="idea_status">
         <p><b>Status: </b> {{ idea.status }} - <b>Category: </b> {{ idea.category }} </p>
     </div>
+    <br /><br /><br />
     <div class="idea_comments">
         <a href='{{idea.topic.get_latest_post_url}}'>
             {% if idea.topic.posts|add:"-1"  %}
