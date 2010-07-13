@@ -13,7 +13,7 @@
 
 {% block content %}
 <div id="idea_topbar">
-    <span id="idea_submit"><a href="/yenifikir/ekle/" title="Yeni Fikir Ekle"><img src="/media/img/beyin2/ideas_submit.png" alt="submit idea" /></a></span>
+<span id="idea_submit"><a href="{% url add_new %}" title="Yeni Fikir Ekle"><img src="/media/img/beyin2/ideas_submit.png" alt="submit idea" /></a></span>
     <div class="idea_list_title" >
         <a href='{% url main_page "date" 1 %}'>Tarih  <img src="/media/img/beyin2/takvim.png" /></a>
         <a href='{% url main_page "vote_value" 1 %}'>Popülerlik  <img src="/media/img/beyin2/popu.png" /></a>
@@ -29,7 +29,6 @@
     <div style="clear:both;"></div>
 {% endfor %}
 {% endif %}
-<a href='{% url add_new %}'>Add New Idea</a>
 <div class="pagination">
     <span class="step-links">
         {% if idea_list.has_previous %}

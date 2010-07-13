@@ -43,19 +43,19 @@
         <form action="{% url main_post idea.id %}" method="POST" name="select_boxes">
             <a href='{% url edit_idea idea.id %}'><img src="/media/img/beyin2/duzenle.png" /></a>
             <a href='{% url mark_duplicate idea.id %}'><img src="/media/img/beyin2/tekrar.png" /></a>
-            <p>status</p>
             <select onchange=this.form.submit() name='status'>
+                    <option value="status">Status</option>
                 {%for status in status_list %}
                     <option value="{{ status.name }}" {% if status.name == idea.status.name %}selected{% endif %}>{{ status.name }}</option>
                 {% endfor %}
             </select>
-            <p>category</p>
             <select onchange=this.submit() name='category'>
+                    <option value="category">Category</option>
                 {% for category in category_list %}
                     <option value="{{ category.name }}" {% if category.name == idea.category.name %}selected{% endif %}>{{ category.name }}</option>
                 {% endfor %}
             </select>
-            <a href ='{% url delete_idea idea.id %}'><img src="/media/img/beyin2/sil.png" /></a>
+            <a href ='{% url delete_idea idea.id %}' onclick="return confirm('Bu fikri silmek istediğinizden emin misiniz?');"><img src="/media/img/beyin2/sil.png" /></a>
         </form>
         {% endif %}
 </div>

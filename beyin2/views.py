@@ -120,7 +120,7 @@ def vote(request, idea_id, vote ,come_from):
 
 @login_required
 def add_new(request):
-    try:
+    #try:
         form = IdeaForm({'title': '', 'description': '', 'status': DefaultStatus, 'category': DefaultCategory}, prefix = 'ideaform')
         ScreenShotSet = formset_factory(ScreenShotForm, extra=3, max_num=3)
         if request.POST:
@@ -145,8 +145,9 @@ def add_new(request):
                             image.idea = idea
                             image.save()
 
-                post_text = "<p>#" + str(idea.id) + " "
-                post_text += idea.title + "</p>"
+                post_text = '<a href="'+  reverse('idea_detail', args =( idea.id,))
+                post_text += '">#' + str(idea.id) + " "
+                post_text += idea.title + "</a>"
                 post_text += "<p>" + idea.description + "</p>"
                 post_text += "<p>" + idea.description + "</p>"
                 for image in idea.screenshot_set.all():
@@ -166,12 +167,12 @@ def add_new(request):
         else:
             ScreenShotFormSet = ScreenShotSet(prefix = 'imageform')
             return render_response(request, 'beyin2/idea_new.html', {'form':form,'ScreenShotFormSet':ScreenShotFormSet})
-    except:
+    #except:
         return render_response(request, 'beyin2/idea_errorpage.html',{'error':form.errors,})
 
 @permission_required('beyin2.change_idea')
 def edit_idea(request, idea_id):
-    try:
+    #try:
         idea = get_object_or_404(Idea, pk=idea_id)
         form = IdeaForm({'title': idea.title, 'description': idea.description, 'status': idea.status.id, 'category': idea.category.id})
         if request.POST:
@@ -191,7 +192,7 @@ def edit_idea(request, idea_id):
         else:
 
             return render_response(request, 'beyin2/idea_edit.html', {'form':form, 'idea':idea})
-    except:
+    #except:
         return render_response(request, 'beyin2/idea_errorpage.html')
 
 

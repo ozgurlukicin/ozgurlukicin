@@ -131,12 +131,21 @@
 }
 .idea_right form {
     background:#FFFFFF;
+    padding:2px 0 2px 0;
+}
+
+.idea_right img {
+    padding:2px 0 2px 0;
 }
 .idea_right p{ 
     font-size: 11px;
     clear: both;
     margin-top: 1px;
     color: #009FE9;
+}
+.idea_right select{
+    padding:2px 0 2px 0;
+    width: 114px;
 }
 .brainmenu {
     font-size: 11px;
