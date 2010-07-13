@@ -14,6 +14,13 @@
     font-size: 17px;
     color: #0000FF;
 }
+
+#idea_topbar .idea_new_title {
+    color:#FFFFFF;
+    float:left;
+    font-size:12px;    
+}
+
 #idea_topbar #idea_submit {
     float: right;
     margin: 7px 10px 0 0;
@@ -186,5 +193,22 @@
     cursor: default;
 }
 textarea#description {
+    width: 500px;
+}
+.idea_new {
+    padding-top:25px;
+    float: left;
+    width: 125px;
+}
+.idea_new form {
+    background:#FFFFFF;
+    padding:2px 0 2px 0;
+}
+.idea_new input[type=text] {
+    float: center;
+    width: 400px;
+}
+.idea_new textarea {
+    float: center;
     width: 500px;
 }

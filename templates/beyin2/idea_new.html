@@ -1,16 +1,22 @@
-{% extends "base.html" %}
+{% extends "beyin2/idea_base.html" %}
 {% load library %}
 
 {% block title %}Beyin2 yeni öneri ekle{% endblock %}
 
 {% block extrahead %}
-<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+<!--<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>-->
 <style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/beyin2/beyin2.css');</style>
 
 {% endblock %}
 
 {% block content %}
-    {# enc type is for file upload #}
+<div id="idea_topbar">
+    <span id="idea_submit"><a href="{% url add_new %}" title="Yeni Fikir Ekle"><img src="/media/img/beyin2/ideas_submit.png" alt="submit idea" /></a></span>
+    <span class="idea_new_title">Yeni Fikir Ekle</span>
+</div>
+    
+<div class="idea_new">
     <form action='{% url add_new %}' enctype="multipart/form-data" method="POST" name='add_new_idea'>
         {% if perms.beyin2.can_change_status %}
             {% for field in form %}
@@ -31,4 +37,5 @@
         <br />
                 <input type='submit' value='Send Idea' name='send_new_idea'>
     </form>
+</div>
 {% endblock %}

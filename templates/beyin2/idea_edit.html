@@ -4,16 +4,24 @@
 {% block title %}Beyin2 Öneri Düzenle{% endblock %}
 
 {% block extrahead %}
-<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+<!--<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>-->
 <style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/beyin2/beyin2.css');</style>
 
 {% endblock %}
 
 {% block content %}
+<div id="idea_topbar">
+    <span id="idea_submit"><a href="{% url add_new %}" title="Yeni Fikir Ekle"><img src="/media/img/beyin2/ideas_submit.png" alt="submit idea" /></a></span>
+    <span class="idea_new_title">Fikri Düzenle</span>
+</div>
+
+<div class="idea_new">
     <form action='{% url edit_idea idea.id %}' method="POST" name='edit_idea'>
             {% for field in form %}
                 {% include "field.html" %}
             {% endfor %}
                 <input type='submit' value='Send Idea' name='send_new_idea'>
     </form>
+</div>
 {% endblock %}
