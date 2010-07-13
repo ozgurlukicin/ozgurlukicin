@@ -18,7 +18,7 @@
     </div>
     
     <div class="idea_content">
-        <p>{{ idea.description }}</p>
+        <p>{{ idea.description|renderbbcode|safe }}</p>
     </div>
 
     {% for image in idea.screenshot_set.all %}

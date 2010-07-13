@@ -5,6 +5,8 @@
 
 {% block extrahead %}
 <!--<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>-->
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/idea.js"></script>
 <style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/beyin2/beyin2.css');</style>
 
@@ -35,7 +37,7 @@
             {{ form }}<br />
         {% endfor %}
         <br />
-                <input type='submit' value='Send Idea' name='send_new_idea'>
+	<input type='submit' value='Send Idea' name='send_new_idea'>
     </form>
 </div>
 {% endblock %}

@@ -121,7 +121,7 @@ def vote(request, idea_id, vote ,come_from):
 @login_required
 def add_new(request):
     #try:
-        form = IdeaForm({'title': '', 'description': '', 'status': DefaultStatus, 'category': DefaultCategory}, prefix = 'ideaform')
+        form = IdeaForm(prefix = 'ideaform')
         ScreenShotSet = formset_factory(ScreenShotForm, extra=3, max_num=3)
         if request.POST:
             try:
@@ -136,6 +136,7 @@ def add_new(request):
 
                 idea = form.save(commit = False)
                 idea.submitter = request.user
+                idea.description = form.cleaned_data['description']
                 idea.topic = topic
                 idea.save()
 
@@ -148,7 +149,6 @@ def add_new(request):
                 post_text = '<a href="'+  reverse('idea_detail', args =( idea.id,))
                 post_text += '">#' + str(idea.id) + " "
                 post_text += idea.title + "</a>"
-                post_text += "<p>" + idea.description + "</p>"
                 post_text += "<p>" + idea.description + "</p>"
                 for image in idea.screenshot_set.all():
                     post_text += '<img src="'+image.image.url+'" height="320" width"240" /><br />'
@@ -178,13 +178,8 @@ def edit_idea(request, idea_id):
         if request.POST:
             form = IdeaForm(request.POST)
             if form.is_valid():
-                """
-                i = form.save(commit = False, instance=idea)
-                i.submitter = request.user
-                
-                i.save()
-                """
                 i = IdeaForm(request.POST, instance = idea)
+                i.description = form.cleaned_data['description']
                 i.save()
                 return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
             else:
