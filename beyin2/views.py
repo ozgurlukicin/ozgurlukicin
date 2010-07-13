@@ -42,8 +42,8 @@ def main(request, idea_id = -1, page_number = 1, order = "date"):
             all_idea_list = Idea.objects.filter(is_hidden=False).order_by('vote_value')
         elif order == "title":
             all_idea_list = Idea.objects.filter(is_hidden=False).order_by('title')
-        status_list = Status.objects.all()
-        category_list = Category.objects.all()
+        status_list = Status.objects.all().order_by("name")
+        category_list = Category.objects.all().order_by("name")
         paginator = Paginator(all_idea_list, idea_per_page)
         idea_list=paginator.page(page_number)
         return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list,'order':order,'come_from':'main'})
@@ -174,7 +174,16 @@ def add_new(request):
 def edit_idea(request, idea_id):
     #try:
         idea = get_object_or_404(Idea, pk=idea_id)
-        form = IdeaForm({'title': idea.title, 'description': idea.description, 'status': idea.status.id, 'category': idea.category.id})
+        if idea.status:
+            if idea.category:
+                form = IdeaForm({'title': idea.title, 'description': idea.description, 'status': idea.status.id, 'category': idea.category.id})
+            else:
+                form = IdeaForm({'title': idea.title, 'description': idea.description, 'status': idea.status.id,})
+        else:
+            if idea.category:
+                form = IdeaForm({'title': idea.title, 'description': idea.description, 'category': idea.category.id})
+            else:
+                form = IdeaForm({'title': idea.title, 'description': idea.description})
         if request.POST:
             form = IdeaForm(request.POST)
             if form.is_valid():
