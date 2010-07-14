@@ -58,7 +58,7 @@ def idea_detail(request,idea_id):
     category_list = Category.objects.all()
     return render_response(request,'beyin2/idea_detail.html',{'idea': idea, 'status_list':status_list, 'category_list': category_list,'come_from':'detail'})
 
-
+@login_required
 def vote(request, idea_id, vote ,come_from):
     if vote == "1":
         vote_choice = "U"

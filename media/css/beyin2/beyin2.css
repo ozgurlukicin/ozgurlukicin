@@ -3,6 +3,7 @@
     height: 40px;
     line-height: 40px;
     text-indent: 10px;
+    margin-bottom: 10px;
 }
 #idea_topbar .idea_list_order a{
     float: left;
@@ -35,20 +36,24 @@
     float: right;
     margin: 7px 10px 0 0;
 }
+
 #idea_topbar h3 {
     background:#ccc;
     margin: 30px;
 }
+
 .idea_container {
     margin-top:30px;
     padding:3px;
 }
+
 .idea_left {
     padding-top:0px;
     padding-left:0px;
     float: left;
     width: 60px;
 }
+
 .idea_left .idea_vote {
     background: url('/media/img/beyin2/beyin2_back.png') no-repeat;
     width: 61px;
@@ -65,6 +70,7 @@
 .idea_left .idea_vote p {
     font-size: 19px;
 }
+
 .idea_left .idea_vote_bar img {
     height: 5px;
     padding-top: 10px;
@@ -80,12 +86,14 @@
     padding-bottom: 10px;
     border-bottom: 1px solid #EAEAEA;
 }
+
 .idea_middle h1 {
     float: left;
     font-size: 17px;
     color: #009FE9;
     text-decoration: none;
 }
+
 .idea_middle h2 {
     float: left;
     font-size: 10px;
@@ -100,16 +108,19 @@
     margin: 20px 0 20px 0;
     text-decoration: none;
 }
+
 .idea_middle .idea_content {
     font-size: 11px;
     line-height: 15px;
     margin-top: 20px;
     margin-bottom: 30px;
 }
+
 .idea_middle .idea_content p {
     margin-bottom: 20px;
     display: block;
 }
+
 .idea_middle .idea_info p{
     font-size: 11px;
     clear: both;
@@ -121,18 +132,22 @@
     color: #009FE9;
     text-decoration: none;
 }
+
 .idea_middle .idea_comments {
     font-size: 11px;
     margin-bottom: 15px;
 }
+
 .idea_middle .idea_comments img {
     float:left;
     margin-right:5px;
 }
+
 .idea_middle .idea_comments a {
     color: #999;
     text-decoration: none;
 }
+
 .idea_middle .idea_status p{
     float: left;
     font-size: 11px;
@@ -147,6 +162,7 @@
     float: left;
     width: 125px;
 }
+
 .idea_right form {
     background:#FFFFFF;
     padding:2px 0 2px 0;
@@ -155,71 +171,87 @@
 .idea_right img {
     padding:2px 0 2px 0;
 }
+
 .idea_right p{ 
     font-size: 11px;
     clear: both;
     margin-top: 1px;
     color: #009FE9;
 }
+
 .idea_right select{
     padding:2px 0 2px 0;
     font-size: 11px;
     width: 114px;
 }
+
 .brainmenu {
     font-size: 11px;
     margin-bottom: 30px;
 }
+
 .brainmenu a {
     color: #777;
     text-decoration: none;
 }
+
 .brainmenu ul {
     list-style-image: url('/media/img/new/ideas_list_style.png');
     margin-left: 15px;
 }
+
 .brainmenu ul li {
     margin: 3px;
     padding: 0;
 }
+
 .brainmenu h2 {
     font-weight: bold;
     font-size: 12px;
 }
+
 .tags a {
     color: #009fe0;
     text-decoration: none;
     font-size: 11px;
 }
+
 .idea_detail_box {
     background: #F3F3F3;
     border: 1px #ccc solid;
     padding: 20px;
     font-size: 11px;
 }
+
 .idea_detail_box a {
     color: #666;
     text-decoration: none;
 }
+
 .cursor_default {
     cursor: default;
 }
+
 textarea#description {
     width: 500px;
 }
+
 .idea_new {
     padding-top:25px;
     float: left;
     width: 125px;
 }
+
 .idea_new form {
     background:#FFFFFF;
     padding:2px 0 2px 0;
 }
+
 .idea_new input[type=text] {
     float: center;
     width: 400px;
 }
+
 .idea_new textarea {
     float: center;
     width: 500px;
