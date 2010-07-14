@@ -10,7 +10,7 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from oi.forum.models import Topic
 # Create your models here.
-
+import os
 
 voteChoices = (
             ( 'U', '+1'),
@@ -62,7 +62,19 @@ class Vote(models.Model):
 class ScreenShot(models.Model):
     idea = models.ForeignKey("Idea")
     image = models.ImageField(upload_to = "beyin2/upload")
-    
+
+    def save(self):
+        super(ScreenShot,self).save()
+
+        old_path = os.path.split(self.image.file.name)[0]
+        extension =  os.path.splitext(self.image.file.name)[-1]
+        new_name = "beyin2-%s%s" % (self.id, extension)
+        os.rename(self.image.file.name, old_path+"/"+new_name)
+        
+        old_url_head = os.path.split(self.image.url)[0]
+        self.image.name = "beyin2/upload/"+new_name
+        super(ScreenShot,self).save()
+
     def __unicode__(self):
         return self.image.file.name
 
