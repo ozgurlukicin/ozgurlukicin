@@ -25,17 +25,17 @@ ForumCategory = "Yeni Fikirler"
 def main(request, idea_id = -1, page_number = 1, order = "date"):
     if request.POST:
         idea = get_object_or_404(Idea, pk = idea_id)
-	try:
-	    idea.status = get_object_or_404(Status, name = request.POST['status'])
-	except:
-	    idea.status = Status()
-	try:
-	    idea.category = get_object_or_404(Category, name = request.POST['category'])
-	except:
-	    idea.category = Category()
+        try:
+            idea.status = get_object_or_404(Status, name = request.POST['status'])
+        except:
+            idea.status = Status()
+        try:
+            idea.category = get_object_or_404(Category, name = request.POST['category'])
+        except:
+            idea.category = Category()
         
-	idea.save()
-	return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
+        idea.save()
+        return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
     else:
         #idea list order changes
         if order == "date":
@@ -122,99 +122,99 @@ def add_new(request):
     form = IdeaForm(prefix = 'ideaform')
     ScreenShotSet = formset_factory(ScreenShotForm, extra=3, max_num=3)
     if request.POST:
-	try:
-	    form = IdeaForm(request.POST, prefix = 'ideaform')
-	except:
-	    return HttpResponse("forum does not exist")
-	ScreenShotFormSet = ScreenShotSet(request.POST, request.FILES, prefix = 'imageform')
-	if form.is_valid() and  ScreenShotFormSet.is_valid():
-	    forum = Forum.objects.get(name = ForumCategory)
-	    topic = Topic(forum = forum,title = form.cleaned_data['title'])
-	    topic.save()
+        try:
+            form = IdeaForm(request.POST, prefix = 'ideaform')
+        except:
+            return HttpResponse("forum does not exist")
+        ScreenShotFormSet = ScreenShotSet(request.POST, request.FILES, prefix = 'imageform')
+        if form.is_valid() and  ScreenShotFormSet.is_valid():
+            forum = Forum.objects.get(name = ForumCategory)
+            topic = Topic(forum = forum,title = form.cleaned_data['title'])
+            topic.save()
 
-	    idea = form.save(commit = False)
-	    idea.submitter = request.user
-	    idea.description = form.cleaned_data['description']
-	    idea.topic = topic
-	    idea.save()
+            idea = form.save(commit = False)
+            idea.submitter = request.user
+            idea.description = form.cleaned_data['description']
+            idea.topic = topic
+            idea.save()
 
-	    for screenshotform in ScreenShotFormSet.forms:
-		image = screenshotform.save(commit = False)
-		if image.image:
-		    image.idea = idea
-		    image.save()
+            for screenshotform in ScreenShotFormSet.forms:
+                image = screenshotform.save(commit = False)
+                if image.image:
+                    image.idea = idea
+                    image.save()
 
-	    post_text = '<a href="'+  reverse('idea_detail', args =( idea.id,))
-	    post_text += '">#' + str(idea.id) + " "
-	    post_text += idea.title + "</a>"
-	    post_text += "<p>" + idea.description + "</p>"
-	    for image in idea.screenshot_set.all():
-		post_text += '<br /><img src="'+image.image.url+'" height="320" width"240" /><br />'
-	    post = Post(topic=topic, author=request.user, text=post_text )
-	    post.save()
-	    topic.topic_latest_post = post
-	    topic.posts = 1
-	    topic.save()
-	    topic.forum.forum_latest_post = post
-	    topic.forum.topics += 1
-	    topic.forum.posts += 1
-	    topic.forum.save()
-	    return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
-	else:
-	    return render_response(request, 'beyin2/idea_errorpage.html',{'error':form.errors,})
+            post_text = '<a href="'+  reverse('idea_detail', args =( idea.id,))
+            post_text += '">#' + str(idea.id) + " "
+            post_text += idea.title + "</a>"
+            post_text += "<p>" + idea.description + "</p>"
+            for image in idea.screenshot_set.all():
+                post_text += '<br /><img src="'+image.image.url+'" height="320" width"240" /><br />'
+            post = Post(topic=topic, author=request.user, text=post_text )
+            post.save()
+            topic.topic_latest_post = post
+            topic.posts = 1
+            topic.save()
+            topic.forum.forum_latest_post = post
+            topic.forum.topics += 1
+            topic.forum.posts += 1
+            topic.forum.save()
+            return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
+        else:
+            return render_response(request, 'beyin2/idea_errorpage.html',{'error':form.errors,})
     else:
-	ScreenShotFormSet = ScreenShotSet(prefix = 'imageform')
-	return render_response(request, 'beyin2/idea_new.html', {'form':form,'ScreenShotFormSet':ScreenShotFormSet})
+        ScreenShotFormSet = ScreenShotSet(prefix = 'imageform')
+        return render_response(request, 'beyin2/idea_new.html', {'form':form,'ScreenShotFormSet':ScreenShotFormSet})
     return render_response(request, 'beyin2/idea_errorpage.html',{'error':form.errors,})
 
 @permission_required('beyin2.change_idea')
 def edit_idea(request, idea_id):
     idea = get_object_or_404(Idea, pk=idea_id)
     if idea.status:
-	if idea.category:
-	    form = IdeaForm({'title': idea.title, 'description': idea.description, 'status': idea.status.id, 'category': idea.category.id})
-	else:
-	    form = IdeaForm({'title': idea.title, 'description': idea.description, 'status': idea.status.id,})
+        if idea.category:
+            form = IdeaForm({'title': idea.title, 'description': idea.description, 'status': idea.status.id, 'category': idea.category.id})
+        else:
+            form = IdeaForm({'title': idea.title, 'description': idea.description, 'status': idea.status.id,})
     else:
-	if idea.category:
-	    form = IdeaForm({'title': idea.title, 'description': idea.description, 'category': idea.category.id})
-	else:
-	    form = IdeaForm({'title': idea.title, 'description': idea.description})
+        if idea.category:
+            form = IdeaForm({'title': idea.title, 'description': idea.description, 'category': idea.category.id})
+        else:
+            form = IdeaForm({'title': idea.title, 'description': idea.description})
     if request.POST:
-	form = IdeaForm(request.POST)
-	if form.is_valid():
-	    idea.title = form.cleaned_data['title']
-	    idea.description = form.cleaned_data['description']
-	    if form.cleaned_data['status']:
-		idea.status = form.cleaned_data['status']
-	    else:
-		idea.status = Status()
-	    if form.cleaned_data['category']:
-		idea.category = form.cleaned_data['category']
-	    else:
-		idea.category = Category()
-	    idea.save()
-	    idea.topic.title = idea.title
-	    idea.topic.save()
-	    
-	    post_text = '<a href="'+  reverse('idea_detail', args =( idea.id,))
-	    post_text += '">#' + str(idea.id) + " "
-	    post_text += idea.title + "</a>"
-	    post_text += "<p>" + idea.description + "</p>"
-	    for image in idea.screenshot_set.all():
-		post_text += '<br /><img src="'+image.image.url+'" height="320" width"240" /><br />'
-	    
-	    post = idea.topic.post_set.all().order_by('created')[0]
-	    
-	    post.text = post_text
-	    post.save()
-	    
-	    return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
-	else:
-	    return render_response(request, 'beyin2/idea_errorpage.html')
+        form = IdeaForm(request.POST)
+        if form.is_valid():
+            idea.title = form.cleaned_data['title']
+            idea.description = form.cleaned_data['description']
+            if form.cleaned_data['status']:
+                idea.status = form.cleaned_data['status']
+            else:
+                idea.status = Status()
+            if form.cleaned_data['category']:
+                idea.category = form.cleaned_data['category']
+            else:
+                idea.category = Category()
+            idea.save()
+            idea.topic.title = idea.title
+            idea.topic.save()
+            
+            post_text = '<a href="'+  reverse('idea_detail', args =( idea.id,))
+            post_text += '">#' + str(idea.id) + " "
+            post_text += idea.title + "</a>"
+            post_text += "<p>" + idea.description + "</p>"
+            for image in idea.screenshot_set.all():
+                post_text += '<br /><img src="'+image.image.url+'" height="320" width"240" /><br />'
+            
+            post = idea.topic.post_set.all().order_by('created')[0]
+            
+            post.text = post_text
+            post.save()
+            
+            return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
+        else:
+            return render_response(request, 'beyin2/idea_errorpage.html')
     else:
 
-	return render_response(request, 'beyin2/idea_edit.html', {'form':form, 'idea':idea})
+        return render_response(request, 'beyin2/idea_edit.html', {'form':form, 'idea':idea})
     return render_response(request, 'beyin2/idea_errorpage.html')
 
 
