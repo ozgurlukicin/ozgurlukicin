@@ -14,7 +14,7 @@ class IdeaForm(forms.ModelForm):
     description = XssField(label='Description', required=True, widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
     class Meta:
         model = Idea
-        fields = ('title', 'status', 'category')
+        fields = ('title', 'description', 'status', 'category')
 
 class IdeaDuplicateForm(forms.ModelForm):
     class Meta:

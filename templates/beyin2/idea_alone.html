@@ -22,7 +22,7 @@
     </div>
 
     {% for image in idea.screenshot_set.all %}
-        <img src="{{ image.image.url }}" height="320" width"240" /><br />
+        <img src="{{ image.image.url }}" height="320" width"240" /><br /><br />
     {% endfor %}
     <div class="idea_status">
         <p><b>Status: </b> {{ idea.status }} - <b>Category: </b> {{ idea.category }} </p>
@@ -39,24 +39,24 @@
     </div>
 </div>
 
-<div class="idea_right"
+<div class="idea_right">
         {% if perms.beyin2.change_idea %}
         <form action="{% url main_post idea.id %}" method="POST" name="select_boxes">
             <a href='{% url edit_idea idea.id %}'><img src="/media/img/beyin2/duzenle.png" /></a>
             <a href='{% url mark_duplicate idea.id %}'><img src="/media/img/beyin2/tekrar.png" /></a>
+            <a href='{% url delete_idea idea.id %}' onclick="return confirm('Bu fikri silmek istediğinizden emin misiniz?');"><img src="/media/img/beyin2/sil.png" /></a>
             <select onchange=this.form.submit() name='status'>
-                    <option value="status">Status</option>
+                    <option value="status">Select Status</option>
                 {%for status in status_list %}
                     <option value="{{ status.name }}" {% if status.name == idea.status.name %}selected{% endif %}>{{ status.name }}</option>
                 {% endfor %}
             </select>
-            <select onchange=this.submit() name='category'>
-                    <option value="category">Category</option>
+            <select onchange=this.form.submit() name='category'>
+                    <option value="category">Select Category</option>
                 {% for category in category_list %}
                     <option value="{{ category.name }}" {% if category.name == idea.category.name %}selected{% endif %}>{{ category.name }}</option>
                 {% endfor %}
             </select>
-            <a href ='{% url delete_idea idea.id %}' onclick="return confirm('Bu fikri silmek istediğinizden emin misiniz?');"><img src="/media/img/beyin2/sil.png" /></a>
         </form>
         {% endif %}
 </div>

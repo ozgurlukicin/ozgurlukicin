@@ -44,7 +44,7 @@
     padding:3px;
 }
 .idea_left {
-    padding-top:25px;
+    padding-top:0px;
     padding-left:0px;
     float: left;
     width: 60px;
@@ -56,7 +56,7 @@
     text-align: center;
     color: #666666;
     font-size: 19px;
-    margin-top: 10px;
+    margin-top: 0px;
     padding-top: 4px;
     line-height: 18px;
     font-weight: 600;
@@ -163,6 +163,7 @@
 }
 .idea_right select{
     padding:2px 0 2px 0;
+    font-size: 11px;
     width: 114px;
 }
 .brainmenu {
