@@ -41,7 +41,7 @@ def main(request, idea_id = -1, page_number = 1, order = "date"):
         if order == "date":
             all_idea_list = Idea.objects.filter(is_hidden=False).order_by('-dateSubmitted')
         elif order == "vote_value":
-            all_idea_list = Idea.objects.filter(is_hidden=False).order_by('vote_value')
+            all_idea_list = Idea.objects.filter(is_hidden=False).order_by('-vote_value')
         elif order == "title":
             all_idea_list = Idea.objects.filter(is_hidden=False).order_by('title')
         status_list = Status.objects.all().order_by("name")

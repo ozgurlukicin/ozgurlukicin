@@ -13,10 +13,23 @@
     </div>
 </div>
 <div class="idea_middle">
-    <h1>#{{ idea.id }}: {{ idea.title }}</h1>
-    
+    {% if come_from == 'detail' %}
+        <h1>#{{ idea.id }}: {{ idea.title }}</h1>
+    {% else %}
+        <a href="{% url idea_detail idea.id %}">
+            <h1>#{{ idea.id }}: {{ idea.title }}</h1>
+        </a>
+    {% endif %}
+    <div class="idea_status">
+        <p>{{ idea.status }}</p>
+    </div>    
+
     <div class="idea_info">
-        <p>Submitted by:{{ idea.submitter }} at {{idea.dateSubmitted}}</p>
+            <p>Submitted by
+            <a href= "{{ idea.submitter.get_profile.get_absolute_url }}">
+                {{ idea.submitter }}
+            </a>
+                at {{idea.dateSubmitted}} to {{ idea.category }} category</p>
     </div>
     
     <div class="idea_content">
@@ -28,9 +41,6 @@
             <img src="{{ image.image.url|thumbnail:"240" }}"/>
         </a>
     {% endfor %}
-    <div class="idea_status">
-        <p><b>Status: </b> {{ idea.status }} - <b>Category: </b> {{ idea.category }} </p>
-    </div>
     <br /><br /><br />
     <div class="idea_comments">
         <a href='{{idea.topic.get_latest_post_url}}'>
