@@ -1,5 +1,7 @@
 {% load library %}
 {% load list_view_filter %}
+{%load thumbnail %}
+
 
 {% if idea %}
 <div class="idea_left">
@@ -22,7 +24,9 @@
     </div>
 
     {% for image in idea.screenshot_set.all %}
-        <img src="{{ image.image.url }}" height="320" width"240" /><br /><br />
+        <a href="{{ image.image.url }}">
+            <img src="{{ image.image.url|thumbnail:"240" }}"/>
+        </a>
     {% endfor %}
     <div class="idea_status">
         <p><b>Status: </b> {{ idea.status }} - <b>Category: </b> {{ idea.category }} </p>

@@ -33,7 +33,7 @@ def main(request, idea_id = -1, page_number = 1, order = "date"):
             idea.category = get_object_or_404(Category, name = request.POST['category'])
         except:
             idea.category = Category()
-        
+
         idea.save()
         return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
     else:
@@ -71,7 +71,7 @@ def vote(request, idea_id, vote ,come_from):
     working_vote = Vote.objects.filter( voter=voter, idea=idea )
     if working_vote.count() !=0:
         working_vote = working_vote[0]
-        
+
         # if already voted choice removed from template, this control can also removed
         if vote_choice != working_vote.vote:
             #remove the old vote
@@ -222,16 +222,16 @@ def delete_idea(request, idea_id):
     idea = Idea.objects.get(pk=idea_id)
     idea.is_hidden = True
     idea.save()
-    
+
     # and lock the topic from forum
     if idea.topic.locked:
         return HttpResponse("already locked?")
     else:
         idea.topic.locked = 1
         idea.topic.save()
-    
+
     return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
-    
+
 def mark_duplicate(request, idea_id):
     if request.POST:
         idea = get_object_or_404(Idea, pk = idea_id)
