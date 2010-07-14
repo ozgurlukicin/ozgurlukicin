@@ -18,7 +18,7 @@ from django.core.paginator import Paginator
 
 DefaultCategory = 1
 DefaultStatus = 1
-idea_per_page = 2
+idea_per_page = 10
 # if it doesnot exist ??
 ForumCategory = "Yeni Fikirler"
 
