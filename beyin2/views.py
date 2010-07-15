@@ -185,14 +185,14 @@ def edit_idea(request, idea_id):
     idea = get_object_or_404(Idea, pk=idea_id)
     if idea.status:
         if idea.category:
-            form = IdeaForm({'title': idea.title, 'description': idea.description, 'status': idea.status.id, 'category': idea.category.id})
+            form = IdeaForm({'title': idea.title, 'description': idea.description, 'status': idea.status.id, 'category': idea.category.id, 'tags': [tag.id for tag in idea.tags.all()]})
         else:
-            form = IdeaForm({'title': idea.title, 'description': idea.description, 'status': idea.status.id,})
+            form = IdeaForm({'title': idea.title, 'description': idea.description, 'status': idea.status.id, 'tags': [tag.id for tag in idea.tags.all()]})
     else:
         if idea.category:
-            form = IdeaForm({'title': idea.title, 'description': idea.description, 'category': idea.category.id})
+            form = IdeaForm({'title': idea.title, 'description': idea.description, 'category': idea.category.id, 'tags': [tag.id for tag in idea.tags.all()]})
         else:
-            form = IdeaForm({'title': idea.title, 'description': idea.description})
+            form = IdeaForm({'title': idea.title, 'description': idea.description, 'tags': [tag.id for tag in idea.tags.all()]})
     if request.POST:
         form = IdeaForm(request.POST)
         if form.is_valid():
@@ -209,6 +209,13 @@ def edit_idea(request, idea_id):
             idea.save()
             idea.topic.title = idea.title
             idea.topic.save()
+            
+            idea.tags.clear()
+            idea.topic.tags.clear()
+            for tag in form.cleaned_data['tags']:
+                tag = Tag.objects.get(name=tag)
+                idea.tags.add(tag)
+                idea.topic.tags.add(tag)
             
             post_text = '<a href="'+  reverse('idea_detail', args =( idea.id,))
             post_text += '">#' + str(idea.id) + " "

@@ -7,6 +7,7 @@
 
 import oi.ideas.models
 import oi.beyin2.models
+from oi.st.models import Tag
 from django.core.urlresolvers import reverse
 
 def convert():
@@ -14,15 +15,23 @@ def convert():
     i = 0
     for ideas_idea in ideas_idea_list:
         i += 1
-        beyin2_idea = oi.beyin2.models.Idea(title = ideas_idea.title, 
+        beyin2_idea = oi.beyin2.models.Idea(
+                                            title = ideas_idea.title, 
                                             dateSubmitted = ideas_idea.submitted_date, 
                                             submitter = ideas_idea.submitter, 
                                             description = ideas_idea.description, 
                                             is_hidden = ideas_idea.is_hidden, 
-                                            topic = ideas_idea.topic)
+                                            topic = ideas_idea.topic,
+                                           )
         beyin2_idea.save()
         beyin2_idea.topic.title = beyin2_idea.title
         beyin2_idea.topic.save()
+        
+        for tag in ideas_idea.tags.all():
+                tags = Tag.objects.filter(name=tag)
+                for tag in tags:
+                    beyin2_idea.tags.add(tag)
+                    beyin2_idea.topic.tags.add(tag)
         
         post_text = '<a href="'+  reverse('idea_detail', args =( beyin2_idea.id,))
         post_text += '">#' + str(beyin2_idea.id) + " "
