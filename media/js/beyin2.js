@@ -29,7 +29,7 @@ function oyla(idea_id, vote, go_to ){
             yellow_bar.attr("width", String(notr_width));
             red_bar.attr("width", String(no_width));
 
-            vote_show = parseInt(vote_value/10.0);
+            vote_show = Math.round(vote_value/10.0);
             vote_count.text(vote_show);
             
             yes_arrow = $('#vote_yes_'+idea_id);
