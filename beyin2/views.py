@@ -115,6 +115,8 @@ def vote(request, idea_id, vote ,come_from):
     idea.save()
     if come_from == "detail":
         return HttpResponseRedirect(reverse('oi.beyin2.views.idea_detail', args=(idea_id,)))
+    if come_from == "js_oyla":
+        return HttpResponse( str(idea.vote_percent))
     return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
 
 @login_required
