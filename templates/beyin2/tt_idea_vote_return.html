@@ -5,14 +5,14 @@
 {% if notr_percent == 0%}
     {% if no_percent == 0%}
         {% if yes_percent == 0%}
-            <img width="54" src="/media/img/beyin2/white_bar.png">
+            <img id="white_bar_{{ idea_id }}" width="54" src="/media/img/beyin2/white_bar.png">
         {% else %}
-            <img width="{{ yes_percent }}" src="/media/img/beyin2/green_bar.png"/><img width="{{ notr_percent }}" src="/media/img/beyin2/yellow_bar.png"/><img width="{{ no_percent }}" src="/media/img/beyin2/red_bar.png"/>
+        <img id="green_bar_{{ idea_id }}" width="{{ yes_percent }}" src="/media/img/beyin2/green_bar.png"/><img id="yellow_bar_{{ idea_id }}" width="{{ notr_percent }}" src="/media/img/beyin2/yellow_bar.png"/><img id="red_bar_{{ idea_id }}" width="{{ no_percent }}" src="/media/img/beyin2/red_bar.png"/>
         {% endif %}
     {% else %}
-        <img width="{{ yes_percent }}" src="/media/img/beyin2/green_bar.png"/><img width="{{ notr_percent }}" src="/media/img/beyin2/yellow_bar.png"/><img width="{{ no_percent }}" src="/media/img/beyin2/red_bar.png"/>
+        <img id="green_bar_{{ idea_id }}" width="{{ yes_percent }}" src="/media/img/beyin2/green_bar.png"/><img id="yellow_bar_{{ idea_id }}" width="{{ notr_percent }}" src="/media/img/beyin2/yellow_bar.png"/><img id="red_bar_{{ idea_id }}" width="{{ no_percent }}" src="/media/img/beyin2/red_bar.png"/>
     {% endif %}
 {% else %}
-    <img width="{{ yes_percent }}" src="/media/img/beyin2/green_bar.png"/><img width="{{ notr_percent }}" src="/media/img/beyin2/yellow_bar.png"/><img width="{{ no_percent }}" src="/media/img/beyin2/red_bar.png"/>
+<img id="green_bar_{{ idea_id }}" width="{{ yes_percent }}" src="/media/img/beyin2/green_bar.png"/><img id="yellow_bar_{{ idea_id }}" width="{{ notr_percent }}" src="/media/img/beyin2/yellow_bar.png"/><img id="red_bar_{{ idea_id }}" width="{{ no_percent }}" src="/media/img/beyin2/red_bar.png"/>
 {% endif %}
 </div>
