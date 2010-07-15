@@ -14,7 +14,11 @@ class IdeaForm(forms.ModelForm):
     description = XssField(label='Description', required=True, widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
     class Meta:
         model = Idea
-        fields = ('title', 'description', 'status', 'category')
+        fields = ('title', 'description', 'status', 'category', 'tags')
+        
+    def clean_tags(self):
+        field_data = self.cleaned_data['tags']
+        return field_data
 
 class IdeaDuplicateForm(forms.ModelForm):
     class Meta:

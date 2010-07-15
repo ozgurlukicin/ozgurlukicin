@@ -13,7 +13,7 @@ tinyMCE.init({
     entity_encoding : "raw",
     relative_urls : false,
     convert_urls : false,
-    width : "630",
+    width : "500",
     height : "300",
     extended_valid_elements : "a[name|href|target|title],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|name|style],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
     advimage_update_dimensions_onchange: true,

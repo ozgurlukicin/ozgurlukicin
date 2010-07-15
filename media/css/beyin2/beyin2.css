@@ -242,11 +242,6 @@ textarea#description {
     width: 125px;
 }
 
-.idea_new form {
-    background:#FFFFFF;
-    padding:2px 0 2px 0;
-}
-
 .idea_new input[type=text] {
     float: center;
     width: 400px;
@@ -255,4 +250,9 @@ textarea#description {
 .idea_new textarea {
     float: center;
     width: 500px;
+}
+
+.idea_new form {
+    background:#FFFFFF;
+    padding:2px 0 2px 0;
 }

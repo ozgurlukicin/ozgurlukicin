@@ -15,6 +15,7 @@ from django.shortcuts import get_object_or_404
 from oi.forum.models import Topic, Forum, Post
 from django.forms.formsets import formset_factory
 from django.core.paginator import Paginator
+from oi.st.tags import Tag
 
 DefaultCategory = 1
 DefaultStatus = 1
@@ -150,6 +151,11 @@ def add_new(request):
                 if image.image:
                     image.idea = idea
                     image.save()
+            
+            for tag in form.cleaned_data['tags']:
+                tag = Tag.objects.get(name=tag)
+                idea.tags.add(tag)
+                topic.tags.add(tag)
 
             post_text = '<a href="'+  reverse('idea_detail', args =( idea.id,))
             post_text += '">#' + str(idea.id) + " "

@@ -18,12 +18,11 @@
     <span class="idea_new_title">Fikri Düzenle</span>
 </div>
 
-<div class="idea_new">
-    <form action='{% url edit_idea idea.id %}' method="POST" name='edit_idea'>
-            {% for field in form %}
-                {% include "field.html" %}
-            {% endfor %}
-                <input type='submit' value='Send Idea' name='send_new_idea'>
-    </form>
-</div>
+<form action='{% url edit_idea idea.id %}' method="POST" name='edit_idea'>
+    {% for field in form %}
+        {% include "formfields.html" %}
+    {% endfor %}
+<input type='submit' value='Send Idea' name='send_new_idea'>
+</form>
+
 {% endblock %}

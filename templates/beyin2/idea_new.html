@@ -7,6 +7,7 @@
 <!--<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>-->
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/idea.js"></script>
+<!--<script type="text/javascript" src="/media/js/taghelper_idea.js"></script>-->
 <style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/beyin2/beyin2.css');</style>
 
@@ -17,27 +18,28 @@
     <span id="idea_submit"><a href="{% url add_new %}" title="Yeni Fikir Ekle"><img src="/media/img/beyin2/ideas_submit.png" alt="submit idea" /></a></span>
     <span class="idea_new_title">Yeni Fikir Ekle</span>
 </div>
-    
-<div class="idea_new">
+
+
     <form action='{% url add_new %}' enctype="multipart/form-data" method="POST" name='add_new_idea'>
-        {% if perms.beyin2.can_change_status %}
-            {% for field in form %}
-                {% include "field.html" %}
-            {% endfor %}
-        {% else %}
-            {% for field in form %}
-                {% if field.label != "Category" and field.label != "Status" %}
-                    {% include "field.html" %}
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-        {# now add screen shot form #}
-        {{ ScreenShotFormSet.management_form }}
-        {% for form in ScreenShotFormSet.forms %}
-            {{ form }}<br />
+    {% if perms.beyin2.can_change_status %}
+        {% for field in form %}
+            {% include "formfields.html" %}
         {% endfor %}
-        <br />
-	<input type='submit' value='Send Idea' name='send_new_idea'>
+    {% else %}
+        {% for field in form %}
+            {% if field.label != "Category" and field.label != "Status" %}
+                  {% include "formfields.html" %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <br />
+    {{ ScreenShotFormSet.management_form }}
+    {% for form in ScreenShotFormSet.forms %}
+        {% for field in form%}
+            {% include "formfields.html" %}
+        {% endfor %}
+    {% endfor %}
+    <input type='submit' value='Send Idea' name='send_new_idea'>
     </form>
-</div>
+
 {% endblock %}
