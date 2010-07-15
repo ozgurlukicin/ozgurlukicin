@@ -22,14 +22,14 @@
 </div>
 <div class="idea_middle">
     {% if come_from == 'detail' %}
-        <h1>#{{ idea.id }}: {{ idea.title }}</h1>
+    <h1 id="header_{{ idea.id }}" >#{{ idea.id }}: {{ idea.title }}</h1>
     {% else %}
         <a href="{% url idea_detail idea.id %}">
-            <h1>#{{ idea.id }}: {{ idea.title }}</h1>
+            <h1 id="header_{{ idea.id }}" >#{{ idea.id }}: {{ idea.title }}</h1>
         </a>
     {% endif %}
     <div class="idea_status">
-        <p>{{ idea.status }}</p>
+        <p id="current_status_{{ idea.id }}">{{ idea.status }}</p>
     </div>    
 
     <div class="idea_info">
@@ -37,7 +37,7 @@
             <a href= "{{ idea.submitter.get_profile.get_absolute_url }}">
                 {{ idea.submitter }}
             </a>
-                at {{idea.dateSubmitted}} to {{ idea.category }} category</p>
+            at {{idea.dateSubmitted}} to<span id="current_category_{{ idea.id }}"> {{ idea.category }} </span>category</p>
     </div>
     
     <div class="idea_content">
@@ -68,23 +68,25 @@
 
 <div class="idea_right">
         {% if perms.beyin2.change_idea %}
-        <form action="{% url main_post idea.id %}" method="POST" name="select_boxes">
-            <a href='{% url edit_idea idea.id %}'><img src="/media/img/beyin2/duzenle.png" /></a>
-            <a href='{% url mark_duplicate idea.id %}'><img src="/media/img/beyin2/tekrar.png" /></a>
-            <a href='{% url delete_idea idea.id %}' onclick="return confirm('Bu fikri silmek istediğinizden emin misiniz?');"><img src="/media/img/beyin2/sil.png" /></a>
-            <select onchange=this.form.submit() name='status'>
+        
+            <input onclick="yonetim('{% url edit_idea idea.id %}', {{ idea.id }}, 'edit_idea')" type="image" src="/media/img/beyin2/duzenle.png" />
+            <input onclick="yonetim('{% url mark_duplicate idea.id %}', {{ idea.id }}, 'mark_duplicate')" type="image" src="/media/img/beyin2/tekrar.png" />
+            <input onclick="yonetim('{% url delete_idea idea.id %}', {{ idea.id }}, 'delete_idea')" type="image" src="/media/img/beyin2/sil.png" />
+            
+            <select onchange="yonetim('{% url main_post idea.id %}', {{ idea.id }}, 'status_change')" name='status' id="status_{{ idea.id }}" >
                     <option value="status">Select Status</option>
                 {%for status in status_list %}
                     <option value="{{ status.name }}" {% if status.name == idea.status.name %}selected{% endif %}>{{ status.name }}</option>
                 {% endfor %}
             </select>
-            <select onchange=this.form.submit() name='category'>
+            <select onchange="yonetim('{% url main_post idea.id %}', {{ idea.id }}, 'category_change')" name='category' id="category_{{ idea.id }}" >
                     <option value="category">Select Category</option>
                 {% for category in category_list %}
                     <option value="{{ category.name }}" {% if category.name == idea.category.name %}selected{% endif %}>{{ category.name }}</option>
                 {% endfor %}
             </select>
-        </form>
+           
+        
         {% endif %}
 </div>
 {% endif %}

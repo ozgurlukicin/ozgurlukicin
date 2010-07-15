@@ -72,6 +72,43 @@ function oyla(idea_id, vote, go_to ){
         in_ajax = 0;
 }
 
+function yonetim(go_to, idea_id, func_to_do){
+    in_ajax = 1;
+        if (func_to_do == "mark_duplicate" ){
+            original_idea_id = prompt("please enter the original ideas id number");
+            $.post(go_to, { dupple_number: original_idea_id}, function(data){
+                header = $('#header_'+idea_id);
+                header.text("THIS IDEA IS MARKED DUPLICATE");
+                    });
+        }
+        else if ( func_to_do == "edit_idea" ){
+            window.location = go_to
+        }
+        else if ( func_to_do == "delete_idea" ){
+            is_confirmed = confirm('Bu fikri silmek istediğinizden emin misiniz?');
+            if ( is_confirmed ){
+                $.post(go_to, function(data){
+                    header = $('#header_'+idea_id);
+                    header.text("THIS IDEA IS REMOVED");
+                });
+            }
+        }
+        else if ( func_to_do == "category_change" ){
+            category = $('#category_'+idea_id);
+            $.post(go_to,{ category : category.val()}, function(data){
+                    current_category = $('#current_category_'+idea_id);
+                    current_category.text(category.val());
+                    });
+        }
+        else if ( func_to_do == "status_change" ){
+            status = $('#status_'+idea_id);
+            $.post(go_to,{ status : status.val()}, function(data){
+                    current_status = $('#current_status_'+idea_id);
+                    current_status.text(status.val());
+                    });
+        }
+        in_ajax = 0;
+}
 
 function oylae(goto_,new_){
     if(in_ajax != 1){
