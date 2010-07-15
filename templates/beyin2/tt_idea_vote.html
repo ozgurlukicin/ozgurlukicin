@@ -2,20 +2,17 @@
 {% if vote == "U" %}
     <img src="/media/img/beyin2/arti_de.png" value="I like it" /> 
 {% else %}
-    <a href='{% url vote idea.id 1 come_from %}'>
-        <img src="/media/img/beyin2/arti.png" value="I like it" /></a>
+        <input type="image" src="/media/img/beyin2/arti.png" value="I like it" onclick="oyla('{% url vote idea.id 1 come_from %}');" />
 {% endif %} 
 
 {% if vote == "N"%}
     <img src="/media/img/beyin2/notr_de.png" value="I am not sure" /> 
 {% else %}
-    <a href='{% url vote idea.id 0 come_from %}'>
-        <img src="/media/img/beyin2/notr.png" value="I am not sure" /></a>
+        <input type="image" src="/media/img/beyin2/notr.png" value="I like it" onclick="oyla('{% url vote idea.id 0 come_from %}');" />
 {% endif %} 
 
 {% if vote == "D"%}
     <img src="/media/img/beyin2/eksi_de.png" value="I dislike it" /> 
 {% else %}
-    <a href='{% url vote idea.id 2 come_from %}'>
-        <img src="/media/img/beyin2/eksi.png" value="I dislike it" /></a>
+        <input type="image" src="/media/img/beyin2/eksi.png" value="I like it" onclick="oyla('{% url vote idea.id 2 come_from %}');" />
 {% endif %} 
