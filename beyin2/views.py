@@ -117,12 +117,13 @@ def vote(request, idea_id, vote ,come_from):
     if come_from == "detail":
         return HttpResponseRedirect(reverse('oi.beyin2.views.idea_detail', args=(idea_id,)))
     if come_from == "js_oyla":
-        if idea.vote_value > 0:
+        return HttpResponse( "%s_%s" %(idea.vote_value, idea.vote_percent))
+        """if idea.vote_value > 0:
             idea_calc= idea.vote_value*1000000000+idea.vote_percent
         else:
             idea_calc = idea.vote_value*-1000000000+idea.vote_percent
             idea_calc += 1000000000000000
-        return HttpResponse( str(idea_calc))
+        return HttpResponse( str(idea_calc))"""
     return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
 
 @login_required

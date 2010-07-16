@@ -1,6 +1,7 @@
 function oyla(idea_id, vote, go_to ){
         in_ajax = 1;
         $.post(go_to, function(data){
+            /*
             if (data > 1000000000000000){
                 data2 = data - 1000000000000000;
                 vote_value = parseInt(data2/1000000000.0);
@@ -10,7 +11,10 @@ function oyla(idea_id, vote, go_to ){
             else {
                 vote_value = parseInt(data/1000000000.0);
                 data_work = data - vote_value*1000000000;
-            }
+            }*/
+            data_list = data.split("_");
+            vote_value = data_list[0];
+            data_work = data_list[1];
             vote_percent = data_work;
             yes_percent = parseInt(vote_percent/1000000.0);
             notr_percent = parseInt((vote_percent-yes_percent*1000000)/1000.0);
@@ -72,14 +76,23 @@ function oyla(idea_id, vote, go_to ){
         in_ajax = 0;
 }
 
-function yonetim(go_to, idea_id, func_to_do){
+function yonetim(go_to, idea_id, func_to_do, from){
     in_ajax = 1;
         if (func_to_do == "mark_duplicate" ){
-            original_idea_id = prompt("please enter the original ideas id number");
+            original_idea_id = prompt("please enter the original ideas id number");*
             $.post(go_to, { dupple_number: original_idea_id}, function(data){
                 header = $('#header_'+idea_id);
+                div_left = $('#div_left_'+idea_id);
+                div_middle = $('#div_middle_'+idea_id);
+                div_right = $('#div_right_'+idea_id);
                 header.text("THIS IDEA IS MARKED DUPLICATE");
-                    });
+                div_left.hide()
+                div_middle.hide()
+                div_right.hide()
+                if (from == "detail" ){
+                    window.location = "/beyin2/"
+                    }
+                });
         }
         else if ( func_to_do == "edit_idea" ){
             window.location = go_to
@@ -89,7 +102,16 @@ function yonetim(go_to, idea_id, func_to_do){
             if ( is_confirmed ){
                 $.post(go_to, function(data){
                     header = $('#header_'+idea_id);
+                    div_left = $('#div_left_'+idea_id);
+                    div_middle = $('#div_middle_'+idea_id);
+                    div_right = $('#div_right_'+idea_id);
                     header.text("THIS IDEA IS REMOVED");
+                    div_left.hide()
+                    div_middle.hide()
+                    div_right.hide()
+                if (from == "detail" ){
+                    window.location = "/beyin2/"
+                    }
                 });
             }
         }

@@ -3,7 +3,7 @@
 {%load thumbnail %}
 
 {% if idea %}
-<div class="idea_left">
+<div id="div_left_{{ idea.id }}" class="idea_left">
     {% vote_value_calc idea %}
         {% if user.is_authenticated %}
             {% is_voted idea user come_from %}
@@ -20,7 +20,7 @@
         {#this is for template tag#}
     </div>
 </div>
-<div class="idea_middle">
+<div id="div_middle_{{ idea.id }}" class="idea_middle">
     {% if come_from == 'detail' %}
     <h1 id="header_{{ idea.id }}" >#{{ idea.id }}: {{ idea.title }}</h1>
     {% else %}
@@ -46,7 +46,7 @@
 
     {% for image in idea.screenshot_set.all %}
         <a href="{{ image.image.url }}">
-            <img src="{{ image.image.url|thumbnail:"200" }}"/>
+            <img src="{{ image.image.url|thumbnail:"180" }}"/>
         </a>
     {% endfor %}
     <br /><br /><br />
@@ -66,20 +66,20 @@
     </div>
 </div>
 
-<div class="idea_right">
+<div id="div_right_{{ idea.id }}" class="idea_right">
         {% if perms.beyin2.change_idea %}
         
-            <input onclick="yonetim('{% url edit_idea idea.id %}', {{ idea.id }}, 'edit_idea')" type="image" src="/media/img/beyin2/duzenle.png" />
-            <input onclick="yonetim('{% url mark_duplicate idea.id %}', {{ idea.id }}, 'mark_duplicate')" type="image" src="/media/img/beyin2/tekrar.png" />
-            <input onclick="yonetim('{% url delete_idea idea.id %}', {{ idea.id }}, 'delete_idea')" type="image" src="/media/img/beyin2/sil.png" />
+        <input onclick="yonetim('{% url edit_idea idea.id %}', {{ idea.id }}, 'edit_idea', '{{ come_from }}')" type="image" src="/media/img/beyin2/duzenle.png" />
+        <input onclick="yonetim('{% url mark_duplicate idea.id %}', {{ idea.id }}, 'mark_duplicate', '{{ come_from }}')" type="image" src="/media/img/beyin2/tekrar.png" />
+        <input onclick="yonetim('{% url delete_idea idea.id %}', {{ idea.id }}, 'delete_idea', '{{ come_from }}')" type="image" src="/media/img/beyin2/sil.png" />
             
-            <select onchange="yonetim('{% url main_post idea.id %}', {{ idea.id }}, 'status_change')" name='status' id="status_{{ idea.id }}" >
+        <select onchange="yonetim('{% url main_post idea.id %}', {{ idea.id }}, 'status_change', '{{ come_from }}')" name='status' id="status_{{ idea.id }}" >
                     <option value="status">Select Status</option>
                 {%for status in status_list %}
                     <option value="{{ status.name }}" {% if status.name == idea.status.name %}selected{% endif %}>{{ status.name }}</option>
                 {% endfor %}
             </select>
-            <select onchange="yonetim('{% url main_post idea.id %}', {{ idea.id }}, 'category_change')" name='category' id="category_{{ idea.id }}" >
+            <select onchange="yonetim('{% url main_post idea.id %}', {{ idea.id }}, 'category_change', '{{ come_from }}')" name='category' id="category_{{ idea.id }}" >
                     <option value="category">Select Category</option>
                 {% for category in category_list %}
                     <option value="{{ category.name }}" {% if category.name == idea.category.name %}selected{% endif %}>{{ category.name }}</option>
