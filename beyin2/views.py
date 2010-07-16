@@ -49,7 +49,20 @@ def main(request, idea_id = -1, page_number = 1, order = "date"):
         category_list = Category.objects.all().order_by("name")
         paginator = Paginator(all_idea_list, idea_per_page)
         idea_list=paginator.page(page_number)
-        return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list,'order':order,'come_from':'main'})
+        last_page = len(paginator.page_range)
+        if int(page_number) < last_page - 4:
+            show_go_to_last = True
+        else:
+            show_go_to_last = False
+        if int(page_number) > 5:
+            show_go_to_first = True
+        else:
+            show_go_to_first = False
+        if int(page_number) > 4:
+            page_range = paginator.page_range[int(page_number)-5:(int(page_number)+4)]
+        else:
+            page_range = paginator.page_range[0:(int(page_number)+4)]
+        return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list,'order':order,'come_from':'main', 'page_range': page_range, 'show_go_to_last': show_go_to_last, 'show_go_to_first': show_go_to_first, 'last_page': last_page})
 
 def idea_detail(request,idea_id):
     idea = get_object_or_404(Idea, pk = idea_id)
