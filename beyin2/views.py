@@ -281,10 +281,10 @@ def mark_duplicate(request, idea_id):
         #the duplicate
         topic = idea.topic
         post_text = "<h1> This idea marked duplicate to another idea </h1>"
-        post_text += "<p>#" + str(idea_original.id) + " "
-        post_text += idea_original.title + "</p>"
+        post_text += "<a href='"+reverse('oi.beyin2.views.idea_detail', args=(idea_original.id,))+"'>#" + str(idea_original.id) + " "
+        post_text += idea_original.title + "</a>"
         post_text += "<p>" + idea_original.description + "</p>"
-        post_text += "<br /> <h1>continue on this forum instead please</h1>"
+        post_text += "<br /> <a href='"+idea_original.topic.get_latest_post_url()+"'>continue on this forum instead please</a>"
         for image in idea_original.screenshot_set.all():
             post_text += '<img src="'+image.image.url+'" height="320" width"240" /><br />'
         post = Post(topic=topic, author=request.user, text=post_text )
@@ -297,8 +297,8 @@ def mark_duplicate(request, idea_id):
         #the original idea
         topic = idea_original.topic
         post_text = "<h1> Another idea marked duplicate to this idea </h1>"
-        post_text += "<p>#" + str(idea.id) + " "
-        post_text += idea.title + "</p>"
+        post_text += "<a href='"+reverse('oi.beyin2.views.idea_detail', args=(idea.id,))+"'>#" + str(idea.id) + " "
+        post_text += idea.title + "</a>"
         post_text += "<p>" + idea.description + "</p>"
         for image in idea.screenshot_set.all():
             post_text += '<img src="'+image.image.url+'" height="320" width"240" /><br />'
