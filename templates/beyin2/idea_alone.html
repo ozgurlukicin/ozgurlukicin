@@ -30,8 +30,13 @@
     {% endif %}
     <div class="idea_status">
         <p id="current_status_{{ idea.id }}">{{ idea.status }}</p>
-    </div>    
-
+    </div>
+    <input id="yes_favorite_{{ idea.id }}"type="image" src="/media/img/beyin2/favori.png" width="25" height="25" align="right" 
+    onclick='add_remove_favorite({{ idea.id }},"{% url add_remove_favorite idea.id %}","{% url is_favorite idea.id %}");' 
+    style="display:none;">
+        <input id="no_favorite_{{ idea.id }}"type="image" src="/media/img/beyin2/no_favori.png" width="25" height="25" align="right"
+        onload='is_favorite({{ idea.id }} , "{% url is_favorite idea.id %}");'src="/media/img/beyin2/favori.png" 
+        onclick='add_remove_favorite({{ idea.id }},"{% url add_remove_favorite idea.id %}","{% url is_favorite idea.id %}");' > 
     <div class="idea_info">
             <p>Submitted by
             <a href= "{{ idea.submitter.get_profile.get_absolute_url }}">

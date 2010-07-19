@@ -167,3 +167,31 @@ function oylae(goto_,new_){
         });
     }
 }
+
+
+
+
+function is_favorite(idea_id,go_to){
+    in_ajax = 1;
+    $.post(go_to, function(data){
+        yes_favorite = $('#yes_favorite_'+idea_id);
+        no_favorite = $('#no_favorite_'+idea_id);
+        if(data.substr(0,2) == "NO"){
+        yes_favorite.hide();
+        no_favorite.show();
+        }
+        else if(data.substr(0,3) == "YES"){
+            yes_favorite.show();
+            no_favorite.hide();
+        }
+    });
+    in_ajax = 0;
+}
+
+function add_remove_favorite(idea_id, go_to, favorite_go_to){
+    in_ajax = 1;
+    $.post(go_to, function(data){
+        is_favorite(idea_id,favorite_go_to);
+        });
+
+}

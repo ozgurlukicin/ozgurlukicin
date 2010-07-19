@@ -79,5 +79,10 @@ class ScreenShot(models.Model):
         return self.image.file.name
 
 
+class Favorite(models.Model):
+    idea = models.ForeignKey("Idea")
+    user = models.ForeignKey( User, related_name = "favorite_user" )
 
+    def __unicode__(self):
+        return "%s_%s" %(idea, user)
 

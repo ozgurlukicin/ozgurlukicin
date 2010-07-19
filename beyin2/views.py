@@ -6,7 +6,7 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.http import HttpResponse, HttpResponseRedirect
-from oi.beyin2.models import Idea, Status, Category, Vote
+from oi.beyin2.models import Idea, Status, Category, Vote, Favorite
 from oi.beyin2.forms import IdeaForm, IdeaDuplicateForm, ScreenShotForm
 from oi.st.wrappers import render_response
 from django.contrib.auth.decorators import login_required, permission_required
@@ -314,5 +314,34 @@ def mark_duplicate(request, idea_id):
         idea = get_object_or_404(Idea, pk = idea_id)
         idea_list = Idea.objects.exclude(pk=idea.id).filter(is_hidden=False)
         return render_response(request, 'beyin2/idea_duplicate.html', {'idea': idea,'idea_list': idea_list})
+
+def add_remove_favorite(request,idea_id):
+    favorite_user = request.user
+    idea = get_object_or_404(Idea, pk = idea_id)
+    try:
+        favorite = Favorite.objects.filter( user = favorite_user, idea = idea )
+        if favorite.count() !=0:
+            favorite = favorite[0]
+            favorite.delete()
+        else:
+            favorite = Favorite(user = favorite_user, idea = idea)
+            favorite.save()
+    except ObjectDoesNotExist:
+        favorite = Favorite(user = favorite_user, idea = idea)
+        favorite.save()
+    return HttpResponse("OK")
+
+def is_favorite(request,idea_id):
+    favorite_user = request.user
+    idea = get_object_or_404(Idea, pk = idea_id)
+    try:
+        favorite = Favorite.objects.filter( user = favorite_user, idea = idea )
+        if favorite.count() != 0:
+            return HttpResponse("YES")
+        else:
+            return HttpResponse("NO")
+    except ObjectDoesNotExist:
+        return HttpResponse("NO")
+
 
 
