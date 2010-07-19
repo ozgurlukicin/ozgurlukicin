@@ -2,17 +2,23 @@
 <div class="idea_vote"><p id="vote_count_{{ idea_id }}" >{{ vote_value }}</p>
     {# this part is for the vote bar#}
     <div class="idea_vote_bar">
-{% if notr_percent == 0%}
-    {% if no_percent == 0%}
-        {% if yes_percent == 0%}
-            <img id="white_bar_{{ idea_id }}" width="54" src="/media/img/beyin2/white_bar.png"><img id="green_bar_{{ idea_id }}" width="0" src="/media/img/beyin2/green_bar.png"/><img id="yellow_bar_{{ idea_id }}" width="0" src="/media/img/beyin2/yellow_bar.png"/><img id="red_bar_{{ idea_id }}" width="0" src="/media/img/beyin2/red_bar.png"/>
-        {% else %}
-        <img id="green_bar_{{ idea_id }}" width="{{ yes_percent }}" src="/media/img/beyin2/green_bar.png"/><img id="yellow_bar_{{ idea_id }}" width="{{ notr_percent }}" src="/media/img/beyin2/yellow_bar.png"/><img id="red_bar_{{ idea_id }}" width="{{ no_percent }}" src="/media/img/beyin2/red_bar.png"/>
-        {% endif %}
-    {% else %}
-        <img id="green_bar_{{ idea_id }}" width="{{ yes_percent }}" src="/media/img/beyin2/green_bar.png"/><img id="yellow_bar_{{ idea_id }}" width="{{ notr_percent }}" src="/media/img/beyin2/yellow_bar.png"/><img id="red_bar_{{ idea_id }}" width="{{ no_percent }}" src="/media/img/beyin2/red_bar.png"/>
+    {% if notr_percent == 0 and no_percent == 0 and yes_percent == 0 %}
+            <img id="white_bar_{{ idea_id }}" width="54" src="/media/img/beyin2/white_bar.png" ><img id="green_bar_{{ idea_id }}" width="0" src="/media/img/beyin2/green_bar.png" style="display:none;" /><img id="yellow_bar_{{ idea_id }}" width="0" src="/media/img/beyin2/yellow_bar.png" style="display:none;" /><img id="red_bar_{{ idea_id }}" width="0" src="/media/img/beyin2/red_bar.png" style="display:none;" />
+    {% endif %} 
+    <img id="green_bar_{{ idea_id }}" width="{{ yes_percent }}" src="/media/img/beyin2/green_bar.png"/><img id="yellow_bar_{{ idea_id }}" width="{{ notr_percent }}" src="/media/img/beyin2/yellow_bar.png"/><img id="red_bar_{{ idea_id }}" width="{{ no_percent }}" src="/media/img/beyin2/red_bar.png"/>
+    {% if yes_percent == 0%}
+    <script type="text/javascript" >{
+        hide_by_id("green_bar_{{ idea_id }}");}
+    </script>
     {% endif %}
-{% else %}
-<img id="green_bar_{{ idea_id }}" width="{{ yes_percent }}" src="/media/img/beyin2/green_bar.png"/><img id="yellow_bar_{{ idea_id }}" width="{{ notr_percent }}" src="/media/img/beyin2/yellow_bar.png"/><img id="red_bar_{{ idea_id }}" width="{{ no_percent }}" src="/media/img/beyin2/red_bar.png"/>
-{% endif %}
+    {% if notr_percent == 0%}
+    <script type="text/javascript" >{
+            hide_by_id("yellow_bar_{{ idea_id }}");}
+    </script>
+    {% endif %}
+    {% if no_percent == 0%}
+    <script type="text/javascript" >{
+        hide_by_id("red_bar_{{ idea_id }}");}
+    </script>
+    {% endif %}
 </div>

@@ -31,12 +31,16 @@
     <div class="idea_status">
         <p id="current_status_{{ idea.id }}">{{ idea.status }}</p>
     </div>
-    <input id="yes_favorite_{{ idea.id }}"type="image" src="/media/img/beyin2/favori.png" width="25" height="25" align="right" 
+    <input id="yes_favorite_{{ idea.id }}"type="image" src="/media/img/beyin2/favori_yes.png" width="30" height="30" align="right" 
     onclick='add_remove_favorite({{ idea.id }},"{% url add_remove_favorite idea.id %}","{% url is_favorite idea.id %}");' 
+    onmouseover='document.getElementById("yes_favorite_{{ idea.id }}").src="/media/img/beyin2/favori_minus.png";'
+    onmouseout='document.getElementById("yes_favorite_{{ idea.id }}").src="/media/img/beyin2/favori_yes.png";'
     style="display:none;">
-        <input id="no_favorite_{{ idea.id }}"type="image" src="/media/img/beyin2/no_favori.png" width="25" height="25" align="right"
-        onload='is_favorite({{ idea.id }} , "{% url is_favorite idea.id %}");'src="/media/img/beyin2/favori.png" 
-        onclick='add_remove_favorite({{ idea.id }},"{% url add_remove_favorite idea.id %}","{% url is_favorite idea.id %}");' > 
+        <input id="no_favorite_{{ idea.id }}"type="image" src="/media/img/beyin2/favori_no.png" width="30" height="30" align="right"
+        onload='is_favorite({{ idea.id }} , "{% url is_favorite idea.id %}");' 
+        onclick='add_remove_favorite({{ idea.id }},"{% url add_remove_favorite idea.id %}","{% url is_favorite idea.id %}");' 
+        onmouseover='document.getElementById("no_favorite_{{ idea.id }}").src="/media/img/beyin2/favori_plus.png";' 
+        onmouseout='document.getElementById("no_favorite_{{ idea.id }}").src="/media/img/beyin2/favori_no.png";' >
     <div class="idea_info">
             <p>Submitted by
             <a href= "{{ idea.submitter.get_profile.get_absolute_url }}">

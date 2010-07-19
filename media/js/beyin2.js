@@ -195,3 +195,8 @@ function add_remove_favorite(idea_id, go_to, favorite_go_to){
         });
 
 }
+
+function hide_by_id(element_id){
+    element_to_hide = $( element_id );
+    element_to_hide.hide();
+}
