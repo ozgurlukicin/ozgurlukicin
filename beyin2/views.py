@@ -309,6 +309,31 @@ def mark_duplicate(request, idea_id):
         topic.forum.forum_latest_post = post
         topic.forum.posts += 1
         topic.forum.save()
+        votes_list = Vote.objects.filter( idea = idea)
+        for vote in votes_list:
+            if vote.vote == "U":
+                idea_original.vote_value +=10
+            elif vote.vote == "D":
+                idea_original.vote_value -=10
+            elif vote.vote == "N":
+                idea_original.vote_value +=1
+            vote.idea = idea_original
+            vote.save()
+        
+        all_votes = Vote.objects.filter( idea=idea_original ).count()
+        all_votes = float(all_votes)
+        u_votes = Vote.objects.filter( idea=idea_original, vote="U").count()
+        n_votes = Vote.objects.filter( idea=idea_original, vote="N").count()
+        d_votes = Vote.objects.filter( idea=idea_original, vote="D").count()
+        if all_votes != 0:
+            u_percent = int((u_votes/all_votes)*100)
+            n_percent = int((n_votes/all_votes)*100)
+            d_percent = int((d_votes/all_votes)*100)
+        else:
+            u_percent = n_percent = d_percent = 0
+        percent = (u_percent*1000000)+(n_percent*1000)+d_percent
+        idea_original.vote_percent=percent
+        idea_original.save()
         return HttpResponseRedirect(reverse('oi.beyin2.views.delete_idea', args=(idea.id,)))
     else:
         idea = get_object_or_404(Idea, pk = idea_id)
@@ -342,6 +367,11 @@ def is_favorite(request,idea_id):
             return HttpResponse("NO")
     except ObjectDoesNotExist:
         return HttpResponse("NO")
-
+ 
+def vote_values_report(request,idea_id):
+    idea = get_object_or_404(Idea, pk = idea_id)
+    votes_value = idea.vote_value
+    vote_percent = idea.vote_percent
+    return HttpResponse( "%s_%s" %(idea.vote_value, idea.vote_percent))
 
 

@@ -22,6 +22,7 @@ urlpatterns = patterns('oi.beyin2.views',
     url(r'^idea_(?P<idea_id>\d+)/vote-(?P<vote>\d+)/from_(?P<come_from>\w+)/$',"vote",name="vote"),
     url(r'^(?P<idea_id>\d+)_is_favorite/$','is_favorite', name='is_favorite'),
     url(r'^(?P<idea_id>\d+)_add_remove_favorite/$','add_remove_favorite', name='add_remove_favorite'),
+    url(r'^report_(?P<idea_id>\d+)/$','vote_values_report', name='vote_values_report'),
     #url(r'^(?P<blog_id>\d+)/$',"blog_goster",name="blog_goster"),
     #url(r'^(?P<blog_id>\d+)/(?P<yazi_id>\d+)/yorum_ekle/$',"yorum_ekle",name="yorum_ekle"),
 )

@@ -99,8 +99,10 @@ function yonetim(go_to, idea_id, func_to_do, from){
                 div_right.hide("slow");
                 div_middle.hide("slow");
                 if (from == "detail" ){
-                    window.location = "/beyin2/"
-                    }
+                    window.location = "/beyin2/"; }
+                else{
+                original_idea_report_address = "/beyin2/report_"+original_idea_id+"/";
+                re_draw_vote( original_idea_id, original_idea_report_address);}
                 });
         }
         else if ( func_to_do == "edit_idea" ){
@@ -170,7 +172,6 @@ function oylae(goto_,new_){
 
 
 
-
 function is_favorite(idea_id,go_to){
     in_ajax = 1;
     $.post(go_to, function(data){
@@ -199,4 +200,42 @@ function add_remove_favorite(idea_id, go_to, favorite_go_to){
 function hide_by_id(element_id){
     element_to_hide = $( element_id );
     element_to_hide.hide();
+}
+
+
+function re_draw_vote(idea_id,go_to){
+    $.post(go_to, function(data){
+            data_list = data.split("_");
+            vote_value = data_list[0];
+            data_work = data_list[1];
+            vote_percent = data_work;
+            yes_percent = parseInt(vote_percent/1000000.0);
+            notr_percent = parseInt((vote_percent-yes_percent*1000000)/1000.0);
+            no_percent = parseInt(((vote_percent-yes_percent*1000000)-notr_percent*1000));
+            yes_width = yes_percent*54/100.0;
+            notr_width = notr_percent*54/100.0;
+            no_width = no_percent*54/100.0;
+            white_bar = $('#white_bar_'+idea_id);
+            green_bar = $('#green_bar_'+idea_id);
+            yellow_bar = $('#yellow_bar_'+idea_id);
+            red_bar = $('#red_bar_'+idea_id);
+            vote_count = $('#vote_count_'+idea_id);
+
+            if ( yes_width != 0 ){
+                green_bar.show();
+                green_bar.attr("width", String(yes_width));}
+            else { green_bar.hide(); }
+            if ( notr_width != 0 ){
+                yellow_bar.show();
+                yellow_bar.attr("width", String(notr_width));}
+            else { yellow_bar.hide(); }
+            if ( no_width != 0 ){
+                red_bar.show();
+                red_bar.attr("width", String(no_width));}
+            else { red_bar.hide(); }
+
+            vote_show = Math.round(vote_value/10.0);
+            vote_count.text(vote_show);
+
+            });
 }
