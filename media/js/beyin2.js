@@ -27,11 +27,20 @@ function oyla(idea_id, vote, go_to ){
             yellow_bar = $('#yellow_bar_'+idea_id);
             red_bar = $('#red_bar_'+idea_id);
             vote_count = $('#vote_count_'+idea_id);
-
-            white_bar.attr("width", "0");
-            green_bar.attr("width", String(yes_width));
-            yellow_bar.attr("width", String(notr_width));
-            red_bar.attr("width", String(no_width));
+            
+            white_bar.hide();
+            if ( yes_width != 0 ){
+                green_bar.show();
+                green_bar.attr("width", String(yes_width));}
+            else { green_bar.hide(); }
+            if ( notr_width != 0 ){
+                yellow_bar.show();
+                yellow_bar.attr("width", String(notr_width));}
+            else { yellow_bar.hide(); }
+            if ( no_width != 0 ){
+                red_bar.show();
+                red_bar.attr("width", String(no_width));}
+            else { red_bar.hide(); }
 
             vote_show = Math.round(vote_value/10.0);
             vote_count.text(vote_show);
