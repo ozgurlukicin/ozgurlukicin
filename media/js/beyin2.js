@@ -79,16 +79,16 @@ function oyla(idea_id, vote, go_to ){
 function yonetim(go_to, idea_id, func_to_do, from){
     in_ajax = 1;
         if (func_to_do == "mark_duplicate" ){
-            original_idea_id = prompt("please enter the original ideas id number");*
+            original_idea_id = prompt("please enter the original ideas id number");
             $.post(go_to, { dupple_number: original_idea_id}, function(data){
                 header = $('#header_'+idea_id);
                 div_left = $('#div_left_'+idea_id);
                 div_middle = $('#div_middle_'+idea_id);
                 div_right = $('#div_right_'+idea_id);
                 header.text("THIS IDEA IS MARKED DUPLICATE");
-                div_left.hide()
-                div_middle.hide()
-                div_right.hide()
+                div_left.hide("slow");
+                div_right.hide("slow");
+                div_middle.hide("slow");
                 if (from == "detail" ){
                     window.location = "/beyin2/"
                     }
@@ -106,9 +106,9 @@ function yonetim(go_to, idea_id, func_to_do, from){
                     div_middle = $('#div_middle_'+idea_id);
                     div_right = $('#div_right_'+idea_id);
                     header.text("THIS IDEA IS REMOVED");
-                    div_left.hide()
-                    div_middle.hide()
-                    div_right.hide()
+                    div_left.hide("slow");
+                    div_right.hide("slow");
+                    div_middle.hide("slow");
                 if (from == "detail" ){
                     window.location = "/beyin2/"
                     }
