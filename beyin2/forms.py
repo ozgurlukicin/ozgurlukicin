@@ -24,7 +24,7 @@ class IdeaForm(forms.ModelForm):
 class TagsForm(forms.ModelForm):
     class Meta:
         model = Idea
-        fields = ('tags',)
+        fields = ('title', 'tags',)
     
     def clean_tags(self):
         field_data = self.cleaned_data['tags']

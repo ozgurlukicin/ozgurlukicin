@@ -168,7 +168,12 @@ def select_tags(request):
                         
                         for i in range(0, tags.count()):
                             if tags.count() - counter == i:
-                                value = '<a href="' + reverse('idea_detail', args =( idea.id,)) + '">#' + str(idea.id) + " " + idea.title + '</a>' + '<br />'
+                                value = '<a href="' + reverse('idea_detail', args =( idea.id,)) + '">' + idea.title
+                                if idea.category:
+                                    value += ' | ' + str(idea.vote_value / 10) + ' Puan' + ' | ' + idea.category + '</a>'                                    
+                                else:
+                                    value += ' | ' + str(idea.vote_value / 10) + ' Puan' + ' | ' + 'Kategori Belirlenmemiş' + '</a>'
+                                value += '<br />' + idea.description[:140] + '...' + '<br /><br />'
                                 similars_dict[str(i) + " " + value] = value
             else:
                 return HttpResponse("IdeaYok")
@@ -188,65 +193,78 @@ def select_tags(request):
 
 @login_required
 def add_new(request):
-    form = IdeaForm(prefix = 'ideaform')
+    #try:
+    form = TagsForm(request.POST)
+    dummy_idea = form.save(commit = False)
+    tags = form.cleaned_data['tags']
+    title = form.cleaned_data['title']
+    
+    form = IdeaForm({'ideaform-title': title, 'ideaform-tags': [tag.id for tag in tags]}, prefix = 'ideaform')
     ScreenShotSet = formset_factory(ScreenShotForm, extra=3, max_num=3)
-    if request.POST:
-        try:
-            form = IdeaForm(request.POST, prefix = 'ideaform')
-        except:
-            return HttpResponse("forum does not exist")
-        ScreenShotFormSet = ScreenShotSet(request.POST, request.FILES, prefix = 'imageform')
-        if form.is_valid() and  ScreenShotFormSet.is_valid():
-            forum = Forum.objects.get(name = ForumCategory)
-            topic = Topic(forum = forum,title = form.cleaned_data['title'])
-            topic.save()
+    #except:
+        #pass
+    try:
+        if request.POST['add_new_idea']:
+            try:
+                form = IdeaForm(request.POST, prefix = 'ideaform')
+            except:
+                return HttpResponse("forum does not exist")
+            ScreenShotFormSet = ScreenShotSet(request.POST, request.FILES, prefix = 'imageform')
+            if form.is_valid() and  ScreenShotFormSet.is_valid():
+                forum = Forum.objects.get(name = ForumCategory)
+                topic = Topic(forum = forum,title = form.cleaned_data['title'])
+                topic.save()
 
-            idea = form.save(commit = False)
-            idea.submitter = request.user
-            idea.description = form.cleaned_data['description']
-            idea.dateSubmitted = datetime.now()
-            idea.topic = topic
-            if not idea.status:
-                def_stat = get_object_or_404(Status, pk = DefaultStatus )
-                idea.status = def_stat
-            if not idea.category:
-                def_cate = get_object_or_404(Category, pk = DefaultCategory )
-                idea.category = def_cate
-            idea.save()
+                idea = form.save(commit = False)
+                idea.submitter = request.user
+                idea.description = form.cleaned_data['description']
+                idea.dateSubmitted = datetime.now()
+                idea.topic = topic
+                if not idea.status:
+                    def_stat = get_object_or_404(Status, pk = DefaultStatus )
+                    idea.status = def_stat
+                if not idea.category:
+                    def_cate = get_object_or_404(Category, pk = DefaultCategory )
+                    idea.category = def_cate
+                idea.save()
 
-            for screenshotform in ScreenShotFormSet.forms:
-                image = screenshotform.save(commit = False)
-                if image.image:
-                    image.idea = idea
-                    image.save()
-            
-            for tag in form.cleaned_data['tags']:
-                tag = Tag.objects.get(name=tag)
-                idea.tags.add(tag)
-                topic.tags.add(tag)
+                for screenshotform in ScreenShotFormSet.forms:
+                    image = screenshotform.save(commit = False)
+                    if image.image:
+                        image.idea = idea
+                        image.save()
+                
+                for tag in form.cleaned_data['tags']:
+                    tag = Tag.objects.get(name=tag)
+                    idea.tags.add(tag)
+                    topic.tags.add(tag)
 
-            post_text = '<a href="'+  reverse('idea_detail', args =( idea.id,))
-            post_text += '">#' + str(idea.id) + " "
-            post_text += idea.title + "</a>"
-            post_text += "<p>" + idea.description + "</p>"
-            for image in idea.screenshot_set.all():
-                post_text += '<br /><img src="'+image.image.url+'" height="320" width"240" /><br />'
-            post = Post(topic=topic, author=request.user, text=post_text )
-            post.save()
-            topic.topic_latest_post = post
-            topic.posts = 1
-            topic.save()
-            topic.forum.forum_latest_post = post
-            topic.forum.topics += 1
-            topic.forum.posts += 1
-            topic.forum.save()
-            return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
+                post_text = '<a href="'+  reverse('idea_detail', args =( idea.id,))
+                post_text += '">#' + str(idea.id) + " "
+                post_text += idea.title + "</a>"
+                post_text += "<p>" + idea.description + "</p>"
+                for image in idea.screenshot_set.all():
+                    post_text += '<br /><img src="'+image.image.url+'" height="320" width"240" /><br />'
+                post = Post(topic=topic, author=request.user, text=post_text )
+                post.save()
+                topic.topic_latest_post = post
+                topic.posts = 1
+                topic.save()
+                topic.forum.forum_latest_post = post
+                topic.forum.topics += 1
+                topic.forum.posts += 1
+                topic.forum.save()
+                return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
+            else:
+                return render_response(request, 'beyin2/idea_errorpage.html',{'error':form.errors,})
         else:
-            return render_response(request, 'beyin2/idea_errorpage.html',{'error':form.errors,})
-    else:
+            ScreenShotFormSet = ScreenShotSet(prefix = 'imageform')
+            return render_response(request, 'beyin2/idea_new.html', {'form':form,'ScreenShotFormSet':ScreenShotFormSet})
+        return render_response(request, 'beyin2/idea_errorpage.html',{'error':form.errors,})
+    except:    
+        ScreenShotSet = formset_factory(ScreenShotForm, extra=3, max_num=3)
         ScreenShotFormSet = ScreenShotSet(prefix = 'imageform')
         return render_response(request, 'beyin2/idea_new.html', {'form':form,'ScreenShotFormSet':ScreenShotFormSet})
-    return render_response(request, 'beyin2/idea_errorpage.html',{'error':form.errors,})
 
 @permission_required('beyin2.change_idea')
 def edit_idea(request, idea_id):

@@ -146,7 +146,8 @@ function yonetim(go_to, idea_id, func_to_do, from){
 function search_tags(go_to){
     in_ajax = 1;
     tags_list = $('#id_tags');
-    $.post(go_to,{tags : tags_list.val()},function(data){
+    title = $('#id_title');
+    $.post(go_to,{tags : tags_list.val(), title : title.val()},function(data){
             form = $('#select_tags_form');
             form.hide("slow");
             if(data.substr(0,10) == "EslesmeYok"){
@@ -160,6 +161,8 @@ function search_tags(go_to){
 }
 
 function add_new_idea(go_to){
+    form = $('#select_tags_form');
+    form.submit();
     window.location = go_to;
 }
 

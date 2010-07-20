@@ -16,16 +16,17 @@
 {% block content %}
 <div id="idea_topbar">
     <span id="idea_submit"><a href="{% url select_tags %}" title="Yeni Fikir Ekle"><img src="/media/img/beyin2/ideas_submit.png" alt="submit idea" /></a></span>
-    <span class="idea_new_title">Etiketler</span>
+    <span class="idea_new_title">Yeni Fikir Ekle</span>
 </div>
+
+<div id="results_list" ></div>
 
 <form id="select_tags_form" action='{% url select_tags %}' enctype="multipart/form-data" method="POST" name='add_new'>
 {% for field in form %}
     {% include "formfields.html" %}
 {% endfor %}
 <input type='button' value='Continue' name='continue' onclick='search_tags("{% url select_tags %}");'>
+
+    <input type="button" id="next_button" onclick='add_new_idea("{% url add_new %}");' style="display:none;" value="Add New"/>
 </form>
-<div id="results_list" >
-    <input type="button" id="next_button" onclick='add_new_idea("{% url add_new %}");' style="display:none;" value="next"/>
-</div>
 {% endblock %}
