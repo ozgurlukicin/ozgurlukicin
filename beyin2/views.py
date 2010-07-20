@@ -16,6 +16,7 @@ from oi.forum.models import Topic, Forum, Post
 from django.forms.formsets import formset_factory
 from django.core.paginator import Paginator
 from oi.st.tags import Tag
+from datetime import datetime
 
 DefaultCategory = 1
 DefaultStatus = 1
@@ -62,7 +63,9 @@ def main(request, idea_id = -1, page_number = 1, order = "date"):
             page_range = paginator.page_range[int(page_number)-5:(int(page_number)+4)]
         else:
             page_range = paginator.page_range[0:(int(page_number)+4)]
-        return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list,'order':order,'come_from':'main', 'page_range': page_range, 'show_go_to_last': show_go_to_last, 'show_go_to_first': show_go_to_first, 'last_page': last_page})
+        #we dont want to show default category, so we sould send the name to check if it is
+        def_cate = get_object_or_404(Status, pk = DefaultCategory )
+        return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list,'order':order,'come_from':'main', 'page_range': page_range, 'show_go_to_last': show_go_to_last, 'show_go_to_first': show_go_to_first, 'last_page': last_page, 'default_category' : def_cate})
 
 def idea_detail(request,idea_id):
     idea = get_object_or_404(Idea, pk = idea_id)
@@ -70,7 +73,8 @@ def idea_detail(request,idea_id):
         return HttpResponse("Missing idea")
     status_list = Status.objects.all()
     category_list = Category.objects.all()
-    return render_response(request,'beyin2/idea_detail.html',{'idea': idea, 'status_list':status_list, 'category_list': category_list,'come_from':'detail'})
+    def_cate = get_object_or_404(Status, pk = DefaultCategory )
+    return render_response(request,'beyin2/idea_detail.html',{'idea': idea, 'status_list':status_list, 'category_list': category_list,'come_from':'detail', 'default_category' : def_cate})
 
 @login_required
 def vote(request, idea_id, vote ,come_from):
@@ -200,7 +204,14 @@ def add_new(request):
             idea = form.save(commit = False)
             idea.submitter = request.user
             idea.description = form.cleaned_data['description']
+            idea.dateSubmitted = datetime.now()
             idea.topic = topic
+            if not idea.status:
+                def_stat = get_object_or_404(Status, pk = DefaultStatus )
+                idea.status = def_stat
+            if not idea.category:
+                def_cate = get_object_or_404(Category, pk = DefaultCategory )
+                idea.category = def_cate
             idea.save()
 
             for screenshotform in ScreenShotFormSet.forms:

@@ -19,11 +19,13 @@
     <span class="idea_new_title">Etiketler</span>
 </div>
 
-<form action='{% url select_tags %}' enctype="multipart/form-data" method="POST" name='add_new'>
+<form id="select_tags_form" action='{% url select_tags %}' enctype="multipart/form-data" method="POST" name='add_new'>
 {% for field in form %}
     {% include "formfields.html" %}
 {% endfor %}
-<input type='submit' value='Continue' name='continue'>
+<input type='button' value='Continue' name='continue' onclick='search_tags("{% url select_tags %}");'>
 </form>
-
+<div id="results_list" >
+    <input type="button" id="next_button" onclick='add_new_idea("{% url add_new %}");' style="display:none;" value="next"/>
+</div>
 {% endblock %}

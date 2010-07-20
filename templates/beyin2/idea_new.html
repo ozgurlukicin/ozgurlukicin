@@ -20,7 +20,7 @@
 </div>
 
 
-<form action='{% url select_tags %}' enctype="multipart/form-data" method="POST" name='add_new_idea'>
+<form action='{% url add_new %}' enctype="multipart/form-data" method="POST" name='add_new_idea'>
 {% if perms.beyin2.can_change_status %}
     {% for field in form %}
         {% include "formfields.html" %}

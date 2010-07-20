@@ -48,7 +48,7 @@
             <a href= "{{ idea.submitter.get_profile.get_absolute_url }}">
                 {{ idea.submitter }}
             </a>
-            at {{idea.dateSubmitted}} to<span id="current_category_{{ idea.id }}"> {{ idea.category }} </span>category</p>
+            at {{idea.dateSubmitted}}{% if idea.category.id != default_category.id %} to<span id="current_category_{{ idea.id }}"> {{ idea.category }} </span>category {% else %} <span id="current_category_{{ idea.id }}" style="display:none;" > {{ idea.category }} </span> {% endif %}</p>
     </div>
     
     <div class="idea_content">
