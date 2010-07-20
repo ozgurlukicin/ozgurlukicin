@@ -12,6 +12,9 @@ function oyla(idea_id, vote, go_to ){
                 vote_value = parseInt(data/1000000000.0);
                 data_work = data - vote_value*1000000000;
             }*/
+            if(data.substr(0,3) == "you"){
+            }
+            else{
             data_list = data.split("_");
             vote_value = data_list[0];
             data_work = data_list[1];
@@ -81,7 +84,7 @@ function oyla(idea_id, vote, go_to ){
                 }
 
                // alert("data :"+data+"\ndata2 :"+data2+"\ndata_work :"+data_work+"\nvote_value"+vote_value+"\nyes    :"+yes_percent+"\nnotr    :"+notr_percent+"\nno    :"+no_percent);
-                });
+                }});
         in_ajax = 0;
 }
 
@@ -148,13 +151,13 @@ function search_tags(go_to){
     tags_list = $('#id_tags');
     title = $('#id_title');
     $.post(go_to,{tags : tags_list.val(), title : title.val()},function(data){
-            form = $('#select_tags_form');
-            form.hide("slow");
+            hiding_div = $('#hiding_div');
             if(data.substr(0,10) == "EslesmeYok"){
                 window.location = "/beyin2/add/";}
             else {
             results = $('#results_list');
             results.prepend(data);
+            hiding_div.hide();
             $('#next_button').show();}
     });
     in_ajax = 0;
@@ -163,7 +166,6 @@ function search_tags(go_to){
 function add_new_idea(go_to){
     form = $('#select_tags_form');
     form.submit();
-    window.location = go_to;
 }
 
 function oylae(goto_,new_){

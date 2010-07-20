@@ -170,7 +170,7 @@ def select_tags(request):
                             if tags.count() - counter == i:
                                 value = '<a href="' + reverse('idea_detail', args =( idea.id,)) + '">' + idea.title
                                 if idea.category:
-                                    value += ' | ' + str(idea.vote_value / 10) + ' Puan' + ' | ' + idea.category + '</a>'                                    
+                                    value += ' | ' + str(idea.vote_value / 10) + ' Puan' + ' | ' + idea.category.name + '</a>'                                    
                                 else:
                                     value += ' | ' + str(idea.vote_value / 10) + ' Puan' + ' | ' + 'Kategori Belirlenmemiş' + '</a>'
                                 value += '<br />' + idea.description[:140] + '...' + '<br /><br />'
@@ -193,16 +193,16 @@ def select_tags(request):
 
 @login_required
 def add_new(request):
-    #try:
-    form = TagsForm(request.POST)
-    dummy_idea = form.save(commit = False)
-    tags = form.cleaned_data['tags']
-    title = form.cleaned_data['title']
+    try:
+        form = TagsForm(request.POST)
+        dummy_idea = form.save(commit = False)
+        tags = form.cleaned_data['tags']
+        title = form.cleaned_data['title']
     
-    form = IdeaForm({'ideaform-title': title, 'ideaform-tags': [tag.id for tag in tags]}, prefix = 'ideaform')
-    ScreenShotSet = formset_factory(ScreenShotForm, extra=3, max_num=3)
-    #except:
-        #pass
+        form = IdeaForm({'ideaform-title': title, 'ideaform-tags': [tag.id for tag in tags]}, prefix = 'ideaform')
+        ScreenShotSet = formset_factory(ScreenShotForm, extra=3, max_num=3)
+    except:
+        pass
     try:
         if request.POST['add_new_idea']:
             try:

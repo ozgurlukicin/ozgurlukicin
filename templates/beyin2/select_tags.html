@@ -21,12 +21,14 @@
 
 <div id="results_list" ></div>
 
-<form id="select_tags_form" action='{% url select_tags %}' enctype="multipart/form-data" method="POST" name='add_new'>
-{% for field in form %}
-    {% include "formfields.html" %}
-{% endfor %}
-<input type='button' value='Continue' name='continue' onclick='search_tags("{% url select_tags %}");'>
+<form id="select_tags_form" action='{% url add_new %}' enctype="multipart/form-data" method="POST" name='add_new'>
+    <div id="hiding_div">
+        {% for field in form %}
+            {% include "formfields.html" %}
+        {% endfor %}
+        <input type='button' value='Continue' name='continue' onclick='search_tags("{% url select_tags %}");'>
+    </div>
 
-    <input type="button" id="next_button" onclick='add_new_idea("{% url add_new %}");' style="display:none;" value="Add New"/>
+    <input type="submit" id="next_button" style="display:none;" value="Add New"/>
 </form>
 {% endblock %}
