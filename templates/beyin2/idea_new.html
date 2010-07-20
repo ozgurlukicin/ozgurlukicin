@@ -20,26 +20,26 @@
 </div>
 
 
-    <form action='{% url add_new %}' enctype="multipart/form-data" method="POST" name='add_new_idea'>
-    {% if perms.beyin2.can_change_status %}
-        {% for field in form %}
-            {% include "formfields.html" %}
-        {% endfor %}
-    {% else %}
-        {% for field in form %}
-            {% if field.label != "Category" and field.label != "Status" %}
-                  {% include "formfields.html" %}
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-    <br />
-    {{ ScreenShotFormSet.management_form }}
-    {% for form in ScreenShotFormSet.forms %}
-        {% for field in form%}
-            {% include "formfields.html" %}
-        {% endfor %}
+<form action='{% url select_tags %}' enctype="multipart/form-data" method="POST" name='add_new_idea'>
+{% if perms.beyin2.can_change_status %}
+    {% for field in form %}
+        {% include "formfields.html" %}
     {% endfor %}
-    <input type='submit' value='Send Idea' name='send_new_idea'>
-    </form>
+{% else %}
+    {% for field in form %}
+        {% if field.label != "Category" and field.label != "Status" %}
+              {% include "formfields.html" %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+<br />
+{{ ScreenShotFormSet.management_form }}
+{% for form in ScreenShotFormSet.forms %}
+    {% for field in form%}
+        {% include "formfields.html" %}
+    {% endfor %}
+{% endfor %}
+<input type='submit' value='Send Idea' name='send_new_idea'>
+</form>
 
 {% endblock %}

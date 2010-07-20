@@ -7,6 +7,7 @@
 
 from django import forms
 from oi.beyin2.models import Idea, ScreenShot
+from oi.st.tags import Tag
 
 from oi.st.forms import XssField
 
@@ -16,6 +17,15 @@ class IdeaForm(forms.ModelForm):
         model = Idea
         fields = ('title', 'description', 'status', 'category', 'tags')
         
+    def clean_tags(self):
+        field_data = self.cleaned_data['tags']
+        return field_data
+        
+class TagsForm(forms.ModelForm):
+    class Meta:
+        model = Idea
+        fields = ('tags',)
+    
     def clean_tags(self):
         field_data = self.cleaned_data['tags']
         return field_data

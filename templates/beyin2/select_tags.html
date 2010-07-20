@@ -1,12 +1,13 @@
 {% extends "beyin2/idea_base.html" %}
 {% load library %}
 
-{% block title %}Beyin2 Öneri Düzenle{% endblock %}
+{% block title %}Beyin2 yeni öneri ekle{% endblock %}
 
 {% block extrahead %}
 <!--<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>-->
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/idea.js"></script>
+<!--<script type="text/javascript" src="/media/js/taghelper_idea.js"></script>-->
 <style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/beyin2/beyin2.css');</style>
 
@@ -15,14 +16,14 @@
 {% block content %}
 <div id="idea_topbar">
     <span id="idea_submit"><a href="{% url select_tags %}" title="Yeni Fikir Ekle"><img src="/media/img/beyin2/ideas_submit.png" alt="submit idea" /></a></span>
-    <span class="idea_new_title">Fikri Düzenle</span>
+    <span class="idea_new_title">Etiketler</span>
 </div>
 
-<form action='{% url edit_idea idea.id %}' method="POST" name='edit_idea'>
-    {% for field in form %}
-        {% include "formfields.html" %}
-    {% endfor %}
-<input type='submit' value='Send Idea' name='send_new_idea'>
+<form action='{% url select_tags %}' enctype="multipart/form-data" method="POST" name='add_new'>
+{% for field in form %}
+    {% include "formfields.html" %}
+{% endfor %}
+<input type='submit' value='Continue' name='continue'>
 </form>
 
 {% endblock %}

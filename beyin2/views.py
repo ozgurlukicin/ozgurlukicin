@@ -7,7 +7,7 @@
 
 from django.http import HttpResponse, HttpResponseRedirect
 from oi.beyin2.models import Idea, Status, Category, Vote, Favorite
-from oi.beyin2.forms import IdeaForm, IdeaDuplicateForm, ScreenShotForm
+from oi.beyin2.forms import IdeaForm, IdeaDuplicateForm, ScreenShotForm, TagsForm
 from oi.st.wrappers import render_response
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.urlresolvers import reverse
@@ -138,6 +138,49 @@ def vote(request, idea_id, vote ,come_from):
             idea_calc += 1000000000000000
         return HttpResponse( str(idea_calc))"""
     return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
+
+@login_required
+def select_tags(request):
+    form = TagsForm()
+    if request.POST:
+        form = TagsForm(request.POST)
+        if form.is_valid:
+            dummy_idea = form.save(commit = False)
+            
+            tags = form.cleaned_data['tags']
+            
+            idea_list = Idea.objects.all()
+            
+            similars_dict = {}
+            
+            if idea_list:
+                for idea in idea_list:
+                    if idea.is_hidden == False and idea.is_duplicate == False:
+                        idea_tag_list = idea.tags.all()
+                        counter = 0
+                        for tag in tags:
+                            if tag in idea_tag_list:
+                                counter = counter + 1
+                        
+                        for i in range(0, tags.count()):
+                            if tags.count() - counter == i:
+                                value = '<a href="' + reverse('idea_detail', args =( idea.id,)) + '">#' + str(idea.id) + " " + idea.title + '</a>' + '<br />'
+                                similars_dict[str(i) + " " + value] = value
+            else:
+                return HttpResponse("IdeaYok")
+            
+            if similars_dict:
+                output = ""
+                liste = sorted(similars_dict.keys())
+                for k in liste[:10]:
+                    output += similars_dict[k]
+                return HttpResponse(output)
+            else:
+                return HttpResponse("EslesmeYok")
+        else:
+            form = TagsForm()
+            return render_response(request, 'beyin2/select_tags.html', {'form': form})
+    return render_response(request, 'beyin2/select_tags.html', {'form': form})
 
 @login_required
 def add_new(request):
