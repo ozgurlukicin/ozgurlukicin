@@ -297,9 +297,10 @@ def mark_duplicate(request, idea_id):
         #the original idea
         topic = idea_original.topic
         post_text = "<h1> Another idea marked duplicate to this idea </h1>"
-        post_text += "<a href='"+reverse('oi.beyin2.views.idea_detail', args=(idea.id,))+"'>#" + str(idea.id) + " "
-        post_text += idea.title + "</a>"
+        post_text += "<p>#" + str(idea.id) + " "
+        post_text += idea.title + "</p>"
         post_text += "<p>" + idea.description + "</p>"
+        post_text += "<a href='"+idea.topic.get_absolute_url()+"'>  it was discussed here  </a>"
         for image in idea.screenshot_set.all():
             post_text += '<img src="'+image.image.url+'" height="320" width"240" /><br />'
         post = Post(topic=topic, author=request.user, text=post_text )
