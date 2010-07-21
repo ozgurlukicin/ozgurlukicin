@@ -16,7 +16,7 @@ from oi.forum.models import Topic, Forum, Post
 from django.forms.formsets import formset_factory
 from django.core.paginator import Paginator
 from oi.st.tags import Tag
-from datetime import datetime
+from datetime import datetime, timedelta
 
 DefaultCategory = 1
 DefaultStatus = 1
@@ -53,6 +53,15 @@ def main(request, idea_id = -1, page_number = 1, order = "date", filter_by = "no
         if filter_by == "tag":
             tag = Tag.objects.get(name=filter)
             all_idea_list = tag.idea_set.filter(is_hidden=False).order_by(order_dict[order])
+        #if filter_by == "favorite":
+        #    favorites = Favorite.objects.get( user = request.user )
+        #    all_idea_list = favorites.idea_set.filter(is_hidden=False).order_by(order_dict[order])
+        if filter_by == "today":
+            all_idea_list = Idea.objects.filter( dateSubmitted__gt = datetime.now() - timedelta(1)).order_by(order_dict[order])
+        if filter_by == "this_week":
+            all_idea_list =Idea.objects.filter( dateSubmitted__gt = datetime.now() - timedelta(7)).order_by(order_dict[order])
+        if filter_by == "this_month":
+            all_idea_list =Idea.objects.filter( dateSubmitted__gt = datetime.now() - timedelta(10)).order_by(order_dict[order])
         status_list = Status.objects.all().order_by("name")
         category_list = Category.objects.all().order_by("name")
         paginator = Paginator(all_idea_list, idea_per_page)
