@@ -24,7 +24,12 @@ idea_per_page = 10
 # if it doesnot exist ??
 ForumCategory = "Yeni Fikirler"
 
-def main(request, idea_id = -1, page_number = 1, order = "date"):
+def main(request, idea_id = -1, page_number = 1, order = "date", filter = "none" ):
+    order_dict = {
+        'date': '-dateSubmitted',
+        'vote_value': '-vote_value',
+        'title': 'title'}
+
     if request.POST:
         idea = get_object_or_404(Idea, pk = idea_id)
         try:
@@ -40,12 +45,11 @@ def main(request, idea_id = -1, page_number = 1, order = "date"):
         return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
     else:
         #idea list order changes
-        if order == "date":
-            all_idea_list = Idea.objects.filter(is_hidden=False).order_by('-dateSubmitted')
-        elif order == "vote_value":
-            all_idea_list = Idea.objects.filter(is_hidden=False).order_by('-vote_value')
-        elif order == "title":
-            all_idea_list = Idea.objects.filter(is_hidden=False).order_by('title')
+        all_idea_list = Idea.objects.filter(is_hidden=False).order_by(order_dict[order])
+        #idea list filter changes
+        if filter == "user":
+            all_idea_list = Idea.objects.filter(is_hidden = False, submitter = request.user ).order_by(order_dict[order])
+            
         status_list = Status.objects.all().order_by("name")
         category_list = Category.objects.all().order_by("name")
         paginator = Paginator(all_idea_list, idea_per_page)
@@ -65,7 +69,7 @@ def main(request, idea_id = -1, page_number = 1, order = "date"):
             page_range = paginator.page_range[0:(int(page_number)+4)]
         #we dont want to show default category, so we sould send the name to check if it is
         def_cate = get_object_or_404(Status, pk = DefaultCategory )
-        return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list,'order':order,'come_from':'main', 'page_range': page_range, 'show_go_to_last': show_go_to_last, 'show_go_to_first': show_go_to_first, 'last_page': last_page, 'default_category' : def_cate})
+        return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list,'order':order,'come_from':'main', 'page_range': page_range, 'show_go_to_last': show_go_to_last, 'show_go_to_first': show_go_to_first, 'last_page': last_page, 'default_category' : def_cate,'filter':filter})
 
 def idea_detail(request,idea_id):
     idea = get_object_or_404(Idea, pk = idea_id)

@@ -27,6 +27,8 @@ from oi.profile.forms import RegisterForm, ProfileEditForm, LostPasswordForm, Ch
 from oi.profile.settings import googleMapsApiKey
 from oi.st.wrappers import render_response
 
+from oi.beyin2.models import Idea
+
 @login_required
 def followed_topics(request):
     if request.method == 'POST':
@@ -144,6 +146,8 @@ def user_profile(request, name):
     info = get_object_or_404(User, username=name)
     has_sent_messages = info.post_set.filter(hidden=False).count() > 0
     apikey = googleMapsApiKey
+    # beyin2 entities
+    ideas = Idea.objects.filter(is_hidden = False, submitter = info)
     if not info.is_active:
         del info
     return render_response(request, 'user/profile.html', locals())
