@@ -39,7 +39,7 @@ class Idea(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return "beyin2/%s/detail/" % self.id
+        return "/beyin2/%s/detail/" % self.id
 
 class Status(models.Model):
     name = models.CharField(max_length = 128)
@@ -47,12 +47,17 @@ class Status(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return "/beyin2/filter/status/%s/" % self.id
 
 class Category(models.Model):
     name = models.CharField(max_length = 128)
 
     def __unicode__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return "/beyin2/filter/category/%s/" % self.id
 
 class Vote(models.Model):
     idea = models.ForeignKey("Idea")

@@ -1,4 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% load ideas %}
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>{% block component_name %}Yeni Fikirler{% endblock %} - {% block title %}{% endblock %}Özgürlük için...</title>
@@ -64,17 +65,24 @@ class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabil
 <li><a href='{% url main_filter "user" user.id %} '>Eklediğim Fikirler</a></li>
 <li><a href='{% url main_filter "favorite" filter_by %}'>Favorilerim</a></li>
 {% endif %}
-{% if perms.beyin2.change_idea %}
+{% if perms.beyin2.change_status %}
+<li><a href='{% url main_filter "deleted" filter_by %}'>Silinmiş Fikirler</a></li>
 {% endif %}
 <li><a href='{% url main_filter "today" filter_by %}'>Bugünkü popüler fikirler</a></li>
 <li><a href='{% url main_filter "this_week" filter_by %}'>Bu haftaki popüler fikirler</a></li>
 <li><a href='{% url main_filter "this_month" filter_by %}'>Bu ayki popüler fikirler</a></li>
-<li><a href='{% url main_filter "volunteer" filter_by %}'>Gönüllü arananlar</a></li>
-<li><a href='{% url main_filter "working_on" filter_by %}'>Çözüm sürecindeki fikirler</a></li>
-<li><a href='{% url main_filter "done" filter_by %}'>Çözülen fikirler</a></li>
 </ul>
 <br />
     <h2>Kategoriler</h2>
+    <ul>
+        {% category_list %}
+    </ul>
+<br />
+    <h2>Durumlar</h2>
+    <ul>
+        {% status_list %}
+    </ul>
+
 </div>
         {% endblock %}
         <div class="sidebar_content">

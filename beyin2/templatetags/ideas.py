@@ -8,7 +8,7 @@
 from django.template import Library
 from django.template.defaultfilters import truncatewords_html
 
-from oi.beyin2.models import Idea, Category
+from oi.beyin2.models import Idea, Category, Status
 IDEAS_IN_HOMEPAGE = 5
 
 register = Library()
@@ -28,8 +28,21 @@ def category_list():
     html = ""
     for category in categories:
         html += "<li><a href=\"%s\" title=\"%s\">%s</a></li>" % (
-                category.name,
+                category.get_absolute_url(),
                 category.name,
                 category.name,
                 )
     return html
+
+@register.simple_tag
+def status_list():
+    statuses = Status.objects.all()
+    html = ""
+    for status in statuses:
+        html += "<li><a href=\"%s\" title=\"%s\">%s</a></li>" % (
+                status.get_absolute_url(),
+                status.name,
+                status.name,
+                )
+    return html
+
