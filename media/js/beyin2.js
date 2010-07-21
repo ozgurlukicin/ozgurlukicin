@@ -153,7 +153,7 @@ function search_tags(go_to){
     $.post(go_to,{tags : tags_list.val(), title : title.val()},function(data){
             hiding_div = $('#hiding_div');
             if(data.substr(0,10) == "EslesmeYok"){
-                window.location = "/beyin2/add/";}
+                window.location = "/beyin2/add1/";}
             else {
             results = $('#results_list');
             results.prepend(data);
