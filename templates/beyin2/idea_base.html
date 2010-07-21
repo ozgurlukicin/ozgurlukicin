@@ -2,7 +2,7 @@
 {% load ideas %}
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>{% block component_name %}Yeni Fikirler{% endblock %} - {% block title %}{% endblock %}Özgürlük için...</title>
+    <title>{% block component_name %}Beyin2{% endblock %} - {% block title %}{% endblock %} - Özgürlük için...</title>
 <meta name="description" content="Pardus'un yaygınlığını artırmak ve bilgi paylaşımı için kurulan bir topluluk sitesi. Haberler, yardım belgeleri ve forum ve daha fazlasını içeriyor." />
 <meta name="keywords" content="Pardus, Linux, kurulum, özgür yazılım, KDE, haber, forum" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -65,12 +65,13 @@ class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabil
 <li><a href='{% url main_filter "user" user.id %} '>Eklediğim Fikirler</a></li>
 <li><a href='{% url main_filter "favorite" filter_by %}'>Favorilerim</a></li>
 {% endif %}
-{% if perms.beyin2.change_status %}
-<li><a href='{% url main_filter "deleted" filter_by %}'>Silinmiş Fikirler</a></li>
-{% endif %}
 <li><a href='{% url main_filter "today" filter_by %}'>Bugünkü popüler fikirler</a></li>
 <li><a href='{% url main_filter "this_week" filter_by %}'>Bu haftaki popüler fikirler</a></li>
 <li><a href='{% url main_filter "this_month" filter_by %}'>Bu ayki popüler fikirler</a></li>
+{% if perms.beyin2.change_status %}
+<br /><br />
+<li><a href='{% url main_filter "deleted" filter_by %}'>Silinmiş Fikirler</a></li>
+{% endif %}
 </ul>
 <br />
     <h2>Kategoriler</h2>
