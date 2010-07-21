@@ -56,9 +56,11 @@
     </div>
 
     {% for image in idea.screenshot_set.all %}
-        <a href="{{ image.image.url }}">
-            <img src="{{ image.image.url|thumbnail:"180" }}"/>
-        </a>
+        {% if not image.is_hidden %}
+            <a href="{{ image.image.url }}">
+                <img src="{{ image.image.url|thumbnail:"180" }}"/>
+            </a>
+        {% endif %}
     {% endfor %}
     <br /><br /><br />
     <div class="idea_comments">

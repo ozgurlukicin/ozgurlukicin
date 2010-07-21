@@ -6,7 +6,7 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.http import HttpResponse, HttpResponseRedirect
-from oi.beyin2.models import Idea, Status, Category, Vote, Favorite
+from oi.beyin2.models import Idea, Status, Category, Vote, Favorite, ScreenShot
 from oi.beyin2.forms import IdeaForm, IdeaDuplicateForm, ScreenShotForm, TagsForm
 from oi.st.wrappers import render_response
 from django.contrib.auth.decorators import login_required, permission_required
@@ -150,13 +150,13 @@ def select_tags(request):
         form = TagsForm(request.POST)
         if form.is_valid:
             dummy_idea = form.save(commit = False)
-            
+
             tags = form.cleaned_data['tags']
-            
+
             idea_list = Idea.objects.all()
-            
+
             similars_dict = {}
-            
+
             if idea_list:
                 for idea in idea_list:
                     if idea.is_hidden == False and idea.is_duplicate == False:
@@ -165,19 +165,19 @@ def select_tags(request):
                         for tag in tags:
                             if tag in idea_tag_list:
                                 counter = counter + 1
-                        
+
                         for i in range(0, tags.count()):
                             if tags.count() - counter == i:
                                 value = '<a href="' + reverse('idea_detail', args =( idea.id,)) + '">' + idea.title
                                 if idea.category:
-                                    value += ' | ' + str(idea.vote_value / 10) + ' Puan' + ' | ' + idea.category.name + '</a>'                                    
+                                    value += ' | ' + str(idea.vote_value / 10) + ' Puan' + ' | ' + idea.category.name + '</a>'
                                 else:
                                     value += ' | ' + str(idea.vote_value / 10) + ' Puan' + ' | ' + 'Kategori Belirlenmemiş' + '</a>'
                                 value += '<br />' + idea.description[:140] + '...' + '<br /><br />'
                                 similars_dict[str(i) + " " + value] = value
             else:
                 return HttpResponse("IdeaYok")
-            
+
             if similars_dict:
                 output = ""
                 liste = sorted(similars_dict.keys())
@@ -192,25 +192,37 @@ def select_tags(request):
     return render_response(request, 'beyin2/select_tags.html', {'form': form})
 
 @login_required
-def add_new(request):
-    try:
-        form = TagsForm(request.POST)
-        dummy_idea = form.save(commit = False)
-        tags = form.cleaned_data['tags']
-        title = form.cleaned_data['title']
-    
-        form = IdeaForm({'ideaform-title': title, 'ideaform-tags': [tag.id for tag in tags]}, prefix = 'ideaform')
+def add_new(request,phase ):
+    if phase == "1":
         ScreenShotSet = formset_factory(ScreenShotForm, extra=3, max_num=3)
-    except:
-        pass
-    try:
-        if request.POST['add_new_idea']:
+        print "\n\n\n\n\n\n\n\n\n ScreenShotSet olusturuldu"
+        ScreenShotFormSet = ScreenShotSet(prefix = 'imageform')
+        form = TagsForm(request.POST)
+        print "\n\n\n\n\n\n\n\n\n form olusturuldu"
+        dummy_idea = form.save(commit = False)
+        print "\n\n\n\n\n\n\n\n\n dummy_idea olusturuldu"
+        tags = form.cleaned_data['tags']
+        print "\n\n\n\n\n\n\n\n\n tags olusturuldu"
+        title = form.cleaned_data['title']
+        print "\n\n\n\n\n\n\n\n\n title olusturuldu"
+        form = IdeaForm({'ideaform-title': title, 'ideaform-tags': [tag.id for tag in tags]}, prefix = 'ideaform')
+        print "\n\n\n\n\n\n\n\n\n real form olusturuldu"
+        return render_response(request, 'beyin2/idea_new.html', {'form':form,'ScreenShotFormSet':ScreenShotFormSet})
+    if phase == "2":
+        form = IdeaForm({'title': '', 'description': '', 'status': DefaultStatus, 'category': DefaultCategory}, prefix = 'ideaform')
+        ScreenShotSet = formset_factory(ScreenShotForm, extra=3, max_num=3) 
+        if request.POST:
+            print "\n\n\n\n\n\n\n\n\n if request.POST dogru"
             try:
                 form = IdeaForm(request.POST, prefix = 'ideaform')
+                ScreenShotFormSet  = ScreenShotSet(request.POST, request.FILES, prefix = 'imageform') 
             except:
-                return HttpResponse("forum does not exist")
-            ScreenShotFormSet = ScreenShotSet(request.POST, request.FILES, prefix = 'imageform')
-            if form.is_valid() and  ScreenShotFormSet.is_valid():
+                return HttpResponse("form does not exist")
+
+            print "\n\n\n\n\n\n\n\n\n if request.POST tamam"
+            
+            if form.is_valid():
+                print "\n\n\n\n\n\n\n\n\n if form.is_valid() dogru"
                 forum = Forum.objects.get(name = ForumCategory)
                 topic = Topic(forum = forum,title = form.cleaned_data['title'])
                 topic.save()
@@ -233,7 +245,7 @@ def add_new(request):
                     if image.image:
                         image.idea = idea
                         image.save()
-                
+
                 for tag in form.cleaned_data['tags']:
                     tag = Tag.objects.get(name=tag)
                     idea.tags.add(tag)
@@ -257,14 +269,29 @@ def add_new(request):
                 return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
             else:
                 return render_response(request, 'beyin2/idea_errorpage.html',{'error':form.errors,})
+
         else:
+            print "\n\n\n\n\nform.POST degilmis"
             ScreenShotFormSet = ScreenShotSet(prefix = 'imageform')
             return render_response(request, 'beyin2/idea_new.html', {'form':form,'ScreenShotFormSet':ScreenShotFormSet})
-        return render_response(request, 'beyin2/idea_errorpage.html',{'error':form.errors,})
-    except:    
+
+
+
+
+
+
+
+
+
+
+
+
+        """return render_response(request, 'beyin2/idea_errorpage.html',{'error':form.errors,})
+    except:
+        print "\n\n\n\n\n\n\n last except"
         ScreenShotSet = formset_factory(ScreenShotForm, extra=3, max_num=3)
         ScreenShotFormSet = ScreenShotSet(prefix = 'imageform')
-        return render_response(request, 'beyin2/idea_new.html', {'form':form,'ScreenShotFormSet':ScreenShotFormSet})
+        return render_response(request, 'beyin2/idea_new.html', {'form':form,'ScreenShotFormSet':ScreenShotFormSet})"""
 
 @permission_required('beyin2.change_idea')
 def edit_idea(request, idea_id):
@@ -279,6 +306,7 @@ def edit_idea(request, idea_id):
             form = IdeaForm({'title': idea.title, 'description': idea.description, 'category': idea.category.id, 'tags': [tag.id for tag in idea.tags.all()]})
         else:
             form = IdeaForm({'title': idea.title, 'description': idea.description, 'tags': [tag.id for tag in idea.tags.all()]})
+    images = ScreenShot.objects.filter(is_hidden = False, idea = idea )
     if request.POST:
         form = IdeaForm(request.POST)
         if form.is_valid():
@@ -295,32 +323,31 @@ def edit_idea(request, idea_id):
             idea.save()
             idea.topic.title = idea.title
             idea.topic.save()
-            
+
             idea.tags.clear()
             idea.topic.tags.clear()
             for tag in form.cleaned_data['tags']:
                 tag = Tag.objects.get(name=tag)
                 idea.tags.add(tag)
                 idea.topic.tags.add(tag)
-            
+
             post_text = '<a href="'+  reverse('idea_detail', args =( idea.id,))
             post_text += '">#' + str(idea.id) + " "
             post_text += idea.title + "</a>"
             post_text += "<p>" + idea.description + "</p>"
             for image in idea.screenshot_set.all():
                 post_text += '<br /><img src="'+image.image.url+'" height="320" width"240" /><br />'
-            
+
             post = idea.topic.post_set.all().order_by('created')[0]
-            
+
             post.text = post_text
             post.save()
-            
+
             return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
         else:
             return render_response(request, 'beyin2/idea_errorpage.html')
     else:
-
-        return render_response(request, 'beyin2/idea_edit.html', {'form':form, 'idea':idea})
+        return render_response(request, 'beyin2/idea_edit.html', {'form':form, 'idea':idea,'images':images})
     return render_response(request, 'beyin2/idea_errorpage.html')
 
 
@@ -392,7 +419,7 @@ def mark_duplicate(request, idea_id):
                 idea_original.vote_value +=1
             vote.idea = idea_original
             vote.save()
-        
+
         all_votes = Vote.objects.filter( idea=idea_original ).count()
         all_votes = float(all_votes)
         u_votes = Vote.objects.filter( idea=idea_original, vote="U").count()
@@ -440,11 +467,16 @@ def is_favorite(request,idea_id):
             return HttpResponse("NO")
     except ObjectDoesNotExist:
         return HttpResponse("NO")
- 
+
 def vote_values_report(request,idea_id):
     idea = get_object_or_404(Idea, pk = idea_id)
     votes_value = idea.vote_value
     vote_percent = idea.vote_percent
     return HttpResponse( "%s_%s" %(idea.vote_value, idea.vote_percent))
 
+def image_remove(request,image_id):
+    image = get_object_or_404(ScreenShot, pk = image_id)
+    image.is_hidden = True
+    image.save()
+    return HttpResponse("OK")
 

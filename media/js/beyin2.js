@@ -265,3 +265,16 @@ function re_draw_vote(idea_id,go_to){
 
             });
 }
+
+function remove_image(image_id,go_to){
+    in_ajax = 1;
+    $.post(go_to, function(data){
+            link = $('#link_to_image_'+image_id);
+            image = $('#image_'+image_id);
+            remove_button = $('#remove_image_'+image_id);
+            link.hide();
+            image.hide();
+            remove_button.hide();
+            });
+    in_ajax = 0;
+}

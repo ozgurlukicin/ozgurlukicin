@@ -34,20 +34,20 @@ class Idea(models.Model):
     # percent will be processed as %UUU,%NNN %DDD
     vote_percent = models.IntegerField(default=0)
     vote_value = models.IntegerField(default=0)
-    
+
     def __unicode__(self):
         return self.title
 
 class Status(models.Model):
     name = models.CharField(max_length = 128)
-    
+
     def __unicode__(self):
         return self.name
 
 
 class Category(models.Model):
     name = models.CharField(max_length = 128)
-    
+
     def __unicode__(self):
         return self.name
 
@@ -55,24 +55,26 @@ class Vote(models.Model):
     idea = models.ForeignKey("Idea")
     voter = models.ForeignKey(User, related_name = "voter_user")
     vote = models.CharField(max_length = 1, choices = voteChoices)
-    
+
     def __unicode__(self):
         return self.vote
 
 class ScreenShot(models.Model):
     idea = models.ForeignKey("Idea")
     image = models.ImageField(upload_to = "beyin2/upload")
+    is_hidden = models.BooleanField( default = False )
 
     def save(self):
-        super(ScreenShot,self).save()
+        if not self.is_hidden:
+            super(ScreenShot,self).save()
 
-        old_path = os.path.split(self.image.file.name)[0]
-        extension =  os.path.splitext(self.image.file.name)[-1]
-        new_name = "beyin2-%s%s" % (self.id, extension)
-        os.rename(self.image.file.name, old_path+"/"+new_name)
-        
-        old_url_head = os.path.split(self.image.url)[0]
-        self.image.name = "beyin2/upload/"+new_name
+            old_path = os.path.split(self.image.file.name)[0]
+            extension =  os.path.splitext(self.image.file.name)[-1]
+            new_name = "beyin2-%s%s" % (self.id, extension)
+            os.rename(self.image.file.name, old_path+"/"+new_name)
+
+            old_url_head = os.path.split(self.image.url)[0]
+            self.image.name = "beyin2/upload/"+new_name
         super(ScreenShot,self).save()
 
     def __unicode__(self):

@@ -15,12 +15,12 @@
 
 {% block content %}
 <div id="idea_topbar">
-    <span id="idea_submit"><a href="{% url add_new %}" title="Yeni Fikir Ekle"><img src="/media/img/beyin2/ideas_submit.png" alt="submit idea" /></a></span>
+    <span id="idea_submit"><a href="{% url select_tags %}" title="Yeni Fikir Ekle"><img src="/media/img/beyin2/ideas_submit.png" alt="submit idea" /></a></span>
     <span class="idea_new_title">Yeni Fikir Ekle</span>
 </div>
 
 
-<form action='{% url add_new %}' enctype="multipart/form-data" method="POST" name='add_new_idea'>
+<form action='{% url add_new 2 %}' enctype="multipart/form-data" method="POST" name='add_new_idea'>
 {% if perms.beyin2.can_change_status %}
     {% for field in form %}
         {% include "formfields.html" %}

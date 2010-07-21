@@ -1,5 +1,6 @@
 {% extends "beyin2/idea_base.html" %}
 {% load library %}
+{% load thumbnail %}
 
 {% block title %}Beyin2 Öneri Düzenle{% endblock %}
 
@@ -22,6 +23,13 @@
     {% for field in form %}
         {% include "formfields.html" %}
     {% endfor %}
+    {% for image in images %}
+    <a id="link_to_image_{{ image.id }}" href="{{ image.image.url }}">
+        <img id="image_{{ image_id }}" src={{ image.image.url|thumbnail:"180" }} />
+        </a>
+        <input id="remove_image_{{ image.id }}" type="button" value = "remove image" onclick='remove_image({{ image.id }},"{% url image_remove image.id %}");'/><br />
+    {% endfor %}
+
 <input type='submit' value='Send Idea' name='send_new_idea'>
 </form>
 
