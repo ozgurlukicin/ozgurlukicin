@@ -50,7 +50,8 @@
             <br />
             {% if has_sent_messages %}<a href="/kullanici/iletiler/{{ info }}/">Forumdaki İletileri</a>{% else %}<a>Forumda İletisi Yok</a>{% endif %}
             <br />
-            <a href="{{ info.get_profile.get_theme_content_url }}">Eklediği Temalar</a>
+            <a href="{{ info.get_profile.get_theme_content_url }}">Eklediği Temalar</a><br />
+            {% if ideas %}<a href="{% url main_filter "user" %}">Beyindeki Fikirleri </a>{% endif %}
         </div>
     </div>
     <div id="user_profile_right">
