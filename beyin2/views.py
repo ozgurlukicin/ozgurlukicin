@@ -28,7 +28,8 @@ def main(request, idea_id = -1, page_number = 1, order = "date", filter = "none"
     order_dict = {
         'date': '-dateSubmitted',
         'vote_value': '-vote_value',
-        'title': 'title'}
+        'title': 'title',
+        'vote_count': 'vote_count'}
 
     if request.POST:
         idea = get_object_or_404(Idea, pk = idea_id)

@@ -74,7 +74,7 @@
     </div>
     <div class="tags"><span class="h3">Etiketler :</span>
         {% for tag in idea.tags.all %}
-            <a href="">{{ tag.name }}</a>
+            <a href='{% url main_filter 'tag' %}' >{{ tag.name }}</a>
         {% endfor %}
     </div>
 </div>
