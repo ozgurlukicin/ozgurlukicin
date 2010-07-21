@@ -174,7 +174,7 @@ urlpatterns = patterns('',
     (r'^tema/', include('oi.tema.urls')),
 
     #Yeni Fikirler
-    (r'^yenifikir/', include('oi.ideas.urls')),
+    #(r'^yenifikir/', include('oi.ideas.urls')),
 
     # Shop
     (r'^dukkan/', include('oi.shop.urls')),

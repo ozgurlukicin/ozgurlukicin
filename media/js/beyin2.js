@@ -288,3 +288,9 @@ function remove_image(image_id,go_to){
             });
     in_ajax = 0;
 }
+
+function filter_ideas( url,tag_end){
+    go_to = url.substr(0,(url.length-1));
+    go_to = go_to+"__"+tag_end+"/";
+    window.location = go_to;
+}

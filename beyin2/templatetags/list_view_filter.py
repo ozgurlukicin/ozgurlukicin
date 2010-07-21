@@ -25,3 +25,4 @@ def vote_value_calc(idea_to_calc):
     notr_width = notr_percent*54/100
     no_width = no_percent*54/100
     return {'vote_value':vote_value, 'yes_percent':yes_width, 'notr_percent':notr_width, 'no_percent':no_width,'percent':idea_to_calc.vote_percent,'idea_id':idea_to_calc.id}
+

@@ -30,13 +30,16 @@ class Idea(models.Model):
     is_duplicate = models.BooleanField("Idea Duplicate", default=False)
     is_hidden = models.BooleanField("Hiddden", default=False)
     topic = models.ForeignKey(Topic, related_name="Idea_topic")
-    tags = models.ManyToManyField(Tag, blank=True, null=True, related_name="idea_tags")
+    tags = models.ManyToManyField(Tag, blank=True, null=True)
     # percent will be processed as %UUU,%NNN %DDD
     vote_percent = models.IntegerField(default=0)
     vote_value = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return "beyin2/%s/detail/" % self.id
 
 class Status(models.Model):
     name = models.CharField(max_length = 128)

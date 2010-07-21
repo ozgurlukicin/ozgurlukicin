@@ -14,31 +14,31 @@
 <span id="idea_submit"><a href="{% url select_tags %}" title="Yeni Fikir Ekle"><img src="/media/img/beyin2/ideas_submit.png" alt="submit idea" /></a></span>
         {% if order == "date" %} 
             <div class="idea_list_order" >
-                <a href='{% url main_page "date" filter 1 %}'>Tarih <img src="/media/img/beyin2/takvim.png" style="margin-left:25px;"></a>
+                <a href='{% url main_page "date" filter_by filter 1 %}'>Tarih <img src="/media/img/beyin2/takvim.png" style="margin-left:25px;"></a>
             </div>
             <div class="idea_list_title" >
-                <a href='{% url main_page "vote_value" filter 1 %}'>Popülerlik </a>
-                <a href='{% url main_page "title" filter 1 %}'>Başlık </a>
+                <a href='{% url main_page "vote_value" filter_by filter 1 %}'>Popülerlik </a>
+                <a href='{% url main_page "title" filter_by filter 1 %}'>Başlık </a>
             </div>
         {% else %}
             {% if order == "vote_value" %}
                 <div class="idea_list_title" >
-                    <a href='{% url main_page "date" filter 1 %}'>Tarih </a>
+                    <a href='{% url main_page "date" filter_by filter 1 %}'>Tarih </a>
                 </div>
                 <div class="idea_list_order" >
-                    <a href='{% url main_page "vote_value" filter 1 %}'>Popülerlik  <img src="/media/img/beyin2/popu.png" /></a>
+                    <a href='{% url main_page "vote_value" filter_by filter 1 %}'>Popülerlik  <img src="/media/img/beyin2/popu.png" /></a>
                 </div>
                 <div class="idea_list_title" >
-                    <a href='{% url main_page "title" filter 1 %}'>Başlık </a>
+                    <a href='{% url main_page "title" filter_by filter 1 %}'>Başlık </a>
                 </div>
             {% else %}
                 {% if order == "title" %}
                     <div class="idea_list_title" >
-                        <a href='{% url main_page "date" filter 1 %}'>Tarih </a>
-                        <a href='{% url main_page "vote_value" filter 1 %}'>Popülerlik </a>
+                        <a href='{% url main_page "date" filter_by filter 1 %}'>Tarih </a>
+                        <a href='{% url main_page "vote_value" filter_by filter 1 %}'>Popülerlik </a>
                     </div>
                     <div class="idea_list_order" >
-                        <a href='{% url main_page "title" filter 1 %}'>Başlık     <img src="/media/img/beyin2/baslik.png" style="margin-left:25px;"/></a>
+                        <a href='{% url main_page "title" filter_by filter 1 %}'>Başlık     <img src="/media/img/beyin2/baslik.png" style="margin-left:25px;"/></a>
                     </div>
                 {% endif %}
             {% endif %}
@@ -56,27 +56,27 @@
 <div class="paginator_block">
     <div class="paginator">
         {% if show_go_to_first %}
-            <div><a href="{% url main_page order filter 1 %}"><<</a></div>
+            <div><a href="{% url main_page order filter_by filter 1 %}"><<</a></div>
         {% endif %}
         
         {% if idea_list.has_previous %}
-            <div><a href="{% url main_page order filter idea_list.previous_page_number %}"><</a></div>
+            <div><a href="{% url main_page order filter_by filter idea_list.previous_page_number %}"><</a></div>
         {% endif %}
         
         {% for page in page_range %}
             {% if page == idea_list.number %}
                 <div class="curr">{{ page }}</div>
             {% else %}
-                <div><a href="{% url main_page order filter page %}">{{ page }}</a></div>
+                <div><a href="{% url main_page order filter_by filter page %}">{{ page }}</a></div>
             {% endif %}
         {% endfor %}
 
         {% if idea_list.has_next %}
-            <div><a href="{% url main_page order filter idea_list.next_page_number %}">></a></div>
+            <div><a href="{% url main_page order filter_by filter idea_list.next_page_number %}">></a></div>
         {% endif %}
         
         {% if show_go_to_last %}
-            <div><a href="{% url main_page order filter last_page %}">>></a></div>
+            <div><a href="{% url main_page order filter_by filter last_page %}">>></a></div>
         {% endif %}
     </div>
 </div>
