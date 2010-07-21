@@ -42,3 +42,8 @@ def convert():
         
         post.text = post_text
         post.save()
+
+def del_old():
+    oi.ideas.models.Idea.objects.all().delete()
+    oi.ideas.models.ScreenShot.objects.all().delete()
+
