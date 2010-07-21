@@ -44,6 +44,6 @@ def convert():
         post.save()
 
 def del_old():
-    oi.ideas.models.Idea.objects.all().delete()
-    oi.ideas.models.ScreenShot.objects.all().delete()
+    oi.beyin2.models.Idea.objects.all().delete()
+    oi.beyin2.models.ScreenShot.objects.all().delete()
 
