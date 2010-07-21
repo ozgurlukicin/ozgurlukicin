@@ -42,5 +42,3 @@ def convert():
         
         post.text = post_text
         post.save()
-        if i == 100:
-            break
