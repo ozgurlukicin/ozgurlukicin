@@ -153,15 +153,18 @@ function search_tags(go_to){
     if ( tags_list.val() != null ){
         if ( tags_list.val()[5] == null ){
             if (title.val() != "" ){
+                hiding_div = $('#hiding_div');
+                hiding_div.hide();
+                search_text = $('#searching');
+                search_text.show();
                 $.post(go_to,{tags : tags_list.val(), title : title.val()},function(data){
-                    hiding_div = $('#hiding_div');
                     if(data.substr(0,10) == "EslesmeYok"){
                         form = $('#select_tags_form');
                         form.submit();}
                     else {
+                        search_text.hide();
                         results = $('#results_list');
                         results.prepend(data);
-                        hiding_div.hide();
                         $('#next_button').show();}
                 });}
             else{
