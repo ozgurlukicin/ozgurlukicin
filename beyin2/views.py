@@ -53,9 +53,15 @@ def main(request, idea_id = -1, page_number = 1, order = "date", filter_by = "no
         if filter_by == "tag":
             tag = Tag.objects.get(name=filter)
             all_idea_list = tag.idea_set.filter(is_hidden=False).order_by(order_dict[order])
-        #if filter_by == "favorite":
-        #    favorites = Favorite.objects.get( user = request.user )
-        #    all_idea_list = favorites.idea_set.filter(is_hidden=False).order_by(order_dict[order])
+        if filter_by == "favorite":
+            favorites = Favorite.objects.filter( user = request.user )
+            try: 
+                favorites[0]
+                all_idea_list = []
+                for favorite in favorites:
+                    all_idea_list.append(favorite.idea)
+            except:
+                return HttpResponse("you have no favorite idea")
         if filter_by == "today":
             all_idea_list = Idea.objects.filter( is_hidden = False, dateSubmitted__gt = datetime.now() - timedelta(1)).order_by(order_dict[order])
         if filter_by == "this_week":
