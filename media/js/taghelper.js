@@ -30,6 +30,7 @@ function toggleTagMode() {
 }
 $(document).ready(function() {
     $("#tags").attr("id", "id_tags"); /* I'll use this on forum too, but it has tags instead of id_tags, that's why I'm modifying it */
+    $("#id_ideaform-tags").attr("id", "id_tags"); /* I am adding this for beyin2.   Engin Manap */
     $("#id_tags").change(updateSelectedList);
     /* create a tag input field for filtering through tags */
     $("#id_tags, #add_id_tags, #id_tags ~ .help:last").hide();

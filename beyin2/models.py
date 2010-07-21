@@ -70,7 +70,7 @@ class ScreenShot(models.Model):
 
             old_path = os.path.split(self.image.file.name)[0]
             extension =  os.path.splitext(self.image.file.name)[-1]
-            new_name = "beyin2-%s%s" % (self.id, extension)
+            new_name = "%s-%s%s" % (self.idea.title,self.id, extension)
             os.rename(self.image.file.name, old_path+"/"+new_name)
 
             old_url_head = os.path.split(self.image.url)[0]
