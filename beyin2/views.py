@@ -195,34 +195,25 @@ def select_tags(request):
 def add_new(request,phase ):
     if phase == "1":
         ScreenShotSet = formset_factory(ScreenShotForm, extra=3, max_num=3)
-        print "\n\n\n\n\n\n\n\n\n ScreenShotSet olusturuldu"
         ScreenShotFormSet = ScreenShotSet(prefix = 'imageform')
         form = TagsForm(request.POST)
-        print "\n\n\n\n\n\n\n\n\n form olusturuldu"
         dummy_idea = form.save(commit = False)
-        print "\n\n\n\n\n\n\n\n\n dummy_idea olusturuldu"
         tags = form.cleaned_data['tags']
-        print "\n\n\n\n\n\n\n\n\n tags olusturuldu"
         title = form.cleaned_data['title']
-        print "\n\n\n\n\n\n\n\n\n title olusturuldu"
         form = IdeaForm({'ideaform-title': title, 'ideaform-tags': [tag.id for tag in tags]}, prefix = 'ideaform')
-        print "\n\n\n\n\n\n\n\n\n real form olusturuldu"
         return render_response(request, 'beyin2/idea_new.html', {'form':form,'ScreenShotFormSet':ScreenShotFormSet})
     if phase == "2":
         form = IdeaForm({'title': '', 'description': '', 'status': DefaultStatus, 'category': DefaultCategory}, prefix = 'ideaform')
         ScreenShotSet = formset_factory(ScreenShotForm, extra=3, max_num=3) 
         if request.POST:
-            print "\n\n\n\n\n\n\n\n\n if request.POST dogru"
             try:
                 form = IdeaForm(request.POST, prefix = 'ideaform')
                 ScreenShotFormSet  = ScreenShotSet(request.POST, request.FILES, prefix = 'imageform') 
             except:
                 return HttpResponse("form does not exist")
 
-            print "\n\n\n\n\n\n\n\n\n if request.POST tamam"
             
             if form.is_valid():
-                print "\n\n\n\n\n\n\n\n\n if form.is_valid() dogru"
                 forum = Forum.objects.get(name = ForumCategory)
                 topic = Topic(forum = forum,title = form.cleaned_data['title'])
                 topic.save()
@@ -271,7 +262,6 @@ def add_new(request,phase ):
                 return render_response(request, 'beyin2/idea_errorpage.html',{'error':form.errors,})
 
         else:
-            print "\n\n\n\n\nform.POST degilmis"
             ScreenShotFormSet = ScreenShotSet(prefix = 'imageform')
             return render_response(request, 'beyin2/idea_new.html', {'form':form,'ScreenShotFormSet':ScreenShotFormSet})
 
