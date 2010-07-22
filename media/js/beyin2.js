@@ -91,13 +91,13 @@ function oyla(idea_id, vote, go_to ){
 function yonetim(go_to, idea_id, func_to_do, from){
     in_ajax = 1;
         if (func_to_do == "mark_duplicate" ){
-            original_idea_id = prompt("please enter the original ideas id number");
+            original_idea_id = prompt("Asıl fikrin ID'sini girin:");
             $.post(go_to, { dupple_number: original_idea_id}, function(data){
                 header = $('#header_'+idea_id);
                 div_left = $('#div_left_'+idea_id);
                 div_middle = $('#div_middle_'+idea_id);
                 div_right = $('#div_right_'+idea_id);
-                header.text("THIS IDEA IS MARKED DUPLICATE");
+                header.text("FİKİR TEKRARI OLARAK BELİRLENDİ");
                 div_left.hide("slow");
                 div_right.hide("slow");
                 div_middle.hide("slow");
@@ -119,7 +119,7 @@ function yonetim(go_to, idea_id, func_to_do, from){
                     div_left = $('#div_left_'+idea_id);
                     div_middle = $('#div_middle_'+idea_id);
                     div_right = $('#div_right_'+idea_id);
-                    header.text("THIS IDEA IS REMOVED");
+                    header.text("SİLİNDİ");
                     div_left.hide("slow");
                     div_right.hide("slow");
                     div_middle.hide("slow");
@@ -173,11 +173,11 @@ function search_tags(go_to){
                         $('#next_button').show();}
                 });}
             else{
-                alert("please make sure you entered a title");}}
+                alert("Lütfen geçerli bir başlık yazın.");}}
         else{
-            alert("please make sure you selected less than 5 tags");}}
+            alert("En fazla 5 etiket seçebilirsiniz.");}}
     else{
-        alert("please make sure you selected atleast 1 tag");}
+        alert("Lütfen en az 1 etiket seçin.");}
     in_ajax = 0;
 }
 
@@ -314,10 +314,10 @@ function control_entry( dull ){
                 if ( tags_list.val()[5] == null ){
                     form = $('#add_new_idea');
                     form.submit();}
-                else{ alert("please make sure you selected less than 5 tags"); }}
-            else{ alert("please make sure you selected atleast 1 tag"); }}
-        else{ alert("please make sure you entered a description"); }}
-    else{ alert("please make sure you entered a title"); }
+                else{ alert("En fazla 5 etiket seçebilirsiniz."); }}
+            else{ alert("Lütfen en az 1 etiket seçin."); }}
+        else{ alert("Lütfen geçerli bir açıklama yazın."); }}
+    else{ alert("Lütfen geçerli bir başlık yazın."); }
 }
 
 function control_entry_edit( dull ){
@@ -329,8 +329,8 @@ function control_entry_edit( dull ){
                 if ( tags_list.val()[5] == null ){
                     form = $('#edit_idea');
                     form.submit();}
-                else{ alert("please make sure you selected less than 5 tags"); }}
-            else{ alert("please make sure you selected atleast 1 tag"); }}
-        else{ alert("please make sure you entered a description"); }}
-    else{ alert("please make sure you entered a title"); }
+                else{ alert("En fazla 5 etiket seçebilirsiniz."); }}
+            else{ alert("Lütfen en az 1 etiket seçin."); }}
+        else{ alert("Lütfen geçerli bir açıklama yazın."); }}
+    else{ alert("Lütfen geçerli bir başlık yazın."); }
 }   
