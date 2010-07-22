@@ -131,7 +131,8 @@ function yonetim(go_to, idea_id, func_to_do, from){
         }
         else if ( func_to_do == "category_change" ){
             category = $('#category_'+idea_id);
-            $.post(go_to,{ category : category.val()}, function(data){
+            status = $('#status_'+idea_id);
+            $.post(go_to,{ category : category.val(), status : status.val() }, function(data){
                     current_category = $('#current_category_'+idea_id);
                     current_category.text(category.val());
                     current_category.show();
@@ -139,7 +140,8 @@ function yonetim(go_to, idea_id, func_to_do, from){
         }
         else if ( func_to_do == "status_change" ){
             status = $('#status_'+idea_id);
-            $.post(go_to,{ status : status.val()}, function(data){
+            category = $('#category_'+idea_id);
+            $.post(go_to,{ status : status.val(), category : category.val() }, function(data){
                     current_status = $('#current_status_'+idea_id);
                     current_status.text(status.val());
                     });
