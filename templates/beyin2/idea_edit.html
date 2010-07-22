@@ -19,10 +19,11 @@
 
 {% block content %}
 <div id="idea_topbar">
+    <span id="idea_submit"><a href="{% url select_tags %}" title="Yeni Fikir Ekle"><img src="/media/img/beyin2/ideas_submit.png" alt="submit idea" /></a></span>
     <span class="idea_new_title">Fikri Düzenle</span>
 </div>
 
-<form action='{% url edit_idea idea.id %}' method="POST" name='edit_idea'>
+<form action='{% url edit_idea idea.id %}' method="POST" name='edit_idea' id='edit_idea' >
     {% for field in form %}
         {% include "field.html" %}
     {% endfor %}
@@ -34,8 +35,7 @@
         <input id="remove_image_{{ image.id }}" type="button" value = "remove image" onclick='remove_image({{ image.id }},"{% url image_remove image.id %}");'/><br />
     {% endfor %}
 
-<br />
-<input type='submit' value='Gönder' name='send_new_idea'>
+<input type='button' onclick='control_entry_edit("dull");' value='Send Idea' name='send_new_idea'>
 </form>
 
 {% endblock %}

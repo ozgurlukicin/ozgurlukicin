@@ -19,11 +19,8 @@
 
 {% block content %}
 
-<div id="idea_topbar">
-    <span class="idea_new_title">Yeni Fikir Ekle</span>
-</div>
 
-<form action='{% url add_new 2 %}' enctype="multipart/form-data" method="POST" name='add_new_idea'>
+<form action='{% url add_new 2 %}' enctype="multipart/form-data" method="POST" name='add_new_idea'  id='add_new_idea' >
 {% if perms.beyin2.can_change_status %}
     {% for field in form %}
         {% include "field.html" %}
@@ -42,8 +39,7 @@
         {% include "formfields.html" %}
     {% endfor %}
 {% endfor %}
-<br />
-<input type='submit' value='Gönder' name='send_new_idea'>
+<input type='button' onclick='control_entry("dull");' value='Send Idea' name='send_new_idea'>
 </form>
 
 {% endblock %}

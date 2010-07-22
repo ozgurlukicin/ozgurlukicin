@@ -300,3 +300,35 @@ function filter_ideas( url,tag_end){
     go_to = go_to+"__"+tag_end+"/";
     window.location = go_to;
 }
+
+
+
+function control_entry( dull ){
+    tags_list = $('#id_tags');
+    title = $('#id_ideaform-title');
+    if (title.val() != "" ){
+        if  ( tinyMCE.get('id_ideaform-description').getContent() != "" ) {
+            if ( tags_list.val() != null ){
+                if ( tags_list.val()[5] == null ){
+                    form = $('#add_new_idea');
+                    form.submit();}
+                else{ alert("please make sure you selected less than 5 tags"); }}
+            else{ alert("please make sure you selected atleast 1 tag"); }}
+        else{ alert("please make sure you entered a description"); }}
+    else{ alert("please make sure you entered a title"); }
+}
+
+function control_entry_edit( dull ){
+    tags_list = $('#id_tags');
+    title = $('#id_ideaform-title');
+    if (title.val() != "" ){
+        if  ( tinyMCE.get('id_description').getContent() != "" ) {
+            if ( tags_list.val() != null ){
+                if ( tags_list.val()[5] == null ){
+                    form = $('#edit_idea');
+                    form.submit();}
+                else{ alert("please make sure you selected less than 5 tags"); }}
+            else{ alert("please make sure you selected atleast 1 tag"); }}
+        else{ alert("please make sure you entered a description"); }}
+    else{ alert("please make sure you entered a title"); }
+}   
