@@ -20,7 +20,7 @@
 {% block content %}
 
 <div id="idea_topbar">
-    <span class="idea_new_title">Yeni Fikir Ekle</span>
+    <span id="top_bar_title" class="idea_new_title">Yeni fikir için öneri arama</span>
 </div>
 
 <div id="results_list" ></div>
@@ -35,7 +35,7 @@
         <input type='button' value='Devam' name='continue' onclick='search_tags("{% url select_tags %}");'>
     </div>
     <img id="searching_image" align="center" src="/media/img/beyin2/searching.gif" style="display:none;" />
-    <span id="searching" style="display:none;"> Arama yapılıyor...</span>
+    <span id="searching" style="display:none;"> Benzer fikirler araştırılıyor...</span>
     <input type="submit" id="next_button" style="display:none;" value="Yeni Ekle"/>
 </form>
 {% endblock %}

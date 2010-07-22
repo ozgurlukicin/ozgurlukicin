@@ -168,6 +168,7 @@ function search_tags(go_to){
                         form = $('#select_tags_form');
                         form.submit();}
                     else {
+                        $('#top_bar_title').text( "Eklemek istediğini fikir, aşağıdakilerle ilgili mi?");
                         search_text.hide();
                         search_image.hide();
                         results = $('#results_list');
