@@ -25,6 +25,7 @@
 
 <form action='{% url add_new 2 %}' enctype="multipart/form-data" method="POST" name='add_new_idea'  id='add_new_idea' >
 {% if perms.beyin2.can_change_status %}
+    <br />
     {% for field in form %}
         {% include "field.html" %}
     {% endfor %}

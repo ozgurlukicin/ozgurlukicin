@@ -23,6 +23,7 @@
 </div>
 
 <form action='{% url edit_idea idea.id %}' method="POST" name='edit_idea' id='edit_idea' >
+    <br />
     {% for field in form %}
         {% include "field.html" %}
     {% endfor %}
