@@ -295,22 +295,6 @@ def add_new(request,phase ):
 
 
 
-
-
-
-
-
-
-
-
-
-        """return render_response(request, 'beyin2/idea_errorpage.html',{'error':form.errors,})
-    except:
-        print "\n\n\n\n\n\n\n last except"
-        ScreenShotSet = formset_factory(ScreenShotForm, extra=3, max_num=3)
-        ScreenShotFormSet = ScreenShotSet(prefix = 'imageform')
-        return render_response(request, 'beyin2/idea_new.html', {'form':form,'ScreenShotFormSet':ScreenShotFormSet})"""
-
 @permission_required('beyin2.change_idea')
 def edit_idea(request, idea_id):
     idea = get_object_or_404(Idea, pk=idea_id)
