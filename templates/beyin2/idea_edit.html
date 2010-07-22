@@ -8,9 +8,13 @@
 <!--<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>-->
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
 <script language="javascript" type="text/javascript" src="/media/js/tinymce/idea.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/taghelper.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/jquery.autocomplete.js"></script>
+
 <style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/beyin2/beyin2.css');</style>
-
+<style type="text/css" media="screen">@import url('/media/css/new/autocomplete.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/formfield.css');</style>
 {% endblock %}
 
 {% block content %}
@@ -21,12 +25,13 @@
 
 <form action='{% url edit_idea idea.id %}' method="POST" name='edit_idea'>
     {% for field in form %}
-        {% include "formfields.html" %}
+        {% include "field.html" %}
     {% endfor %}
+    <br /><br />
     {% for image in images %}
     <a id="link_to_image_{{ image.id }}" href="{{ image.image.url }}">
-        <img id="image_{{ image_id }}" src={{ image.image.url|thumbnail:"180" }} />
-        </a>
+        <img id="image_{{ image_id }}" src="{{ image.image.url|thumbnail:"180" }}" />
+    </a>
         <input id="remove_image_{{ image.id }}" type="button" value = "remove image" onclick='remove_image({{ image.id }},"{% url image_remove image.id %}");'/><br />
     {% endfor %}
 

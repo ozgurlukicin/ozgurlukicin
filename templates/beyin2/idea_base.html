@@ -59,7 +59,6 @@ class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabil
 <div class="brainmenu">
     <h2>Yeni Fikirler</h2>
     <ul>
-    <li><a href="/beyin2/" title="Yeni Fikirler">Yeni Fikirler Anasayfa</a></li>
 {% if user.is_authenticated %}
 <li><a href='{% url main_filter "user" user.id %} '>Eklediğim Fikirler</a></li>
 <li><a href='{% url main_filter "favorite" filter_by %}'>Favorilerim</a></li>
