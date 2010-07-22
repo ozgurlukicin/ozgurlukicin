@@ -63,6 +63,17 @@
         {% endif %}
     {% endfor %}
     <br /><br /><br />
+    {% if idea.duplicate_list %}
+    <div class="h3">Bu fikrin aynısı olarak işaretlenen fikirler </div>
+    <ul class="idea_detail_box">
+    {% for duplicate in idea.duplicate_list %}
+    <li>
+        <a href="{{ duplicate.topic.get_absolute_url }}" >{{ duplicate.title }}</a>
+    </li>    
+    {% endfor %}
+    </ul>
+    <br />
+    {% endif %}
     <div class="idea_comments">
         <a href='{{idea.topic.get_latest_post_url}}'>
             {% if idea.topic.posts|add:"-1"  %}

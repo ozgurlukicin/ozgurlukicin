@@ -93,15 +93,20 @@ def main(request, idea_id = -1, page_number = 1, order = "date", filter_by = "no
             page_range = paginator.page_range[0:(int(page_number)+4)]
         #we dont want to show default category, so we sould send the name to check if it is
         def_cate = get_object_or_404(Status, pk = DefaultCategory )
+        for idea in idea_list.object_list:
+            idea.duplicate_list = Idea.objects.filter( duplicate = idea )
+            if idea.duplicate_list:
+                print "\n\n\n\n\n\n\n dupplicate bulundu"
         return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list,'order':order,'come_from':'main', 'page_range': page_range, 'show_go_to_last': show_go_to_last, 'show_go_to_first': show_go_to_first, 'last_page': last_page, 'default_category' : def_cate,'filter':filter,'filter_by':filter_by})
 
 def idea_detail(request,idea_id):
     idea = get_object_or_404(Idea, pk = idea_id)
     if idea.is_hidden:
-        return HttpResponse("Missing idea")
+        return render_response(request,'beyin2/idea_errorpage.html',{'error':'Fikir bulunamadı',})
     status_list = Status.objects.all()
     category_list = Category.objects.all()
     def_cate = get_object_or_404(Status, pk = DefaultCategory )
+    idea.duplicate_list = Idea.objects.filter( duplicate = idea )
     return render_response(request,'beyin2/idea_detail.html',{'idea': idea, 'status_list':status_list, 'category_list': category_list,'come_from':'detail', 'default_category' : def_cate})
 
 @login_required
@@ -122,25 +127,25 @@ def vote(request, idea_id, vote ,come_from):
         if vote_choice != working_vote.vote:
             #remove the old vote
             if working_vote.vote == "U":
-                idea.vote_value -=10
+                idea.vote_value -=9
             elif working_vote.vote == "D":
-                idea.vote_value +=10
+                idea.vote_value +=11
             else:
                 idea.vote_value -=1
             # add new votes value
             if vote_choice == "U":
-                idea.vote_value +=10
+                idea.vote_value +=9
             elif vote_choice == "D":
-                idea.vote_value -=10
+                idea.vote_value -=11
             else:
                 idea.vote_value +=1
         else:
             return HttpResponse("you have already voted, dont cheat!")
     else:
             if vote_choice == "U":
-                idea.vote_value +=10
+                idea.vote_value +=9
             elif vote_choice == "D":
-                idea.vote_value -=10
+                idea.vote_value -=11
             else:
                 idea.vote_value +=1
             #and for every vote add 1
@@ -238,7 +243,7 @@ def add_new(request,phase ):
                 form = IdeaForm(request.POST, prefix = 'ideaform')
                 ScreenShotFormSet  = ScreenShotSet(request.POST, request.FILES, prefix = 'imageform') 
             except:
-                return HttpResponse("form does not exist")
+                return render_response(request,'beyin2/idea_errorpage.html',{'error':'Form bulunamadı.',})
 
             
             if form.is_valid():
@@ -364,7 +369,7 @@ def delete_idea(request, idea_id):
 
     # and lock the topic from forum
     if idea.topic.locked:
-        return HttpResponse("already locked?")
+        return render_response(request,'beyin2/idea_errorpage.html',{'error':'Fikir başlığı zaten kilitli?',})
     else:
         idea.topic.locked = 1
         idea.topic.save()
