@@ -76,6 +76,8 @@ def main(request, idea_id = -1, page_number = 1, order = "date", filter_by = "no
             all_idea_list = Idea.objects.filter( is_hidden = True ).order_by(order_dict[order])
         status_list = Status.objects.all().order_by("name")
         category_list = Category.objects.all().order_by("name")
+        if not all_idea_list:
+            return render_response(request,'beyin2/idea_errorpage.html',{'error':'İsteğe uygun fikir bulunamadı.',})
         paginator = Paginator(all_idea_list, idea_per_page)
         idea_list=paginator.page(page_number)
         last_page = len(paginator.page_range)
