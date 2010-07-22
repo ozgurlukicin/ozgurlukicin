@@ -48,7 +48,7 @@
             <a href= "{{ idea.submitter.get_profile.get_absolute_url }}">
                 {{ idea.submitter }}
             </a>
-            tarafından {{idea.dateSubmitted}} tarihinde {% if idea.category.id != default_category.id %} <span id="current_category_{{ idea.id }}"> {{ idea.category }} </span> kategorisine {% else %} <span id="current_category_{{ idea.id }}" style="display:none;" > {{ idea.category }} </span>{% endif %}gönderildi.</p>
+            tarafından {{idea.dateSubmitted}} tarihinde {% if idea.category.id != default_category.id %} <span id="current_category_{{ idea.id }}"> {{ idea.category }} </span> kategorisine {% else %} <span id="current_category_{{ idea.id }}" style="display:none;" > {{ idea.category }} </span>{% endif %} gönderildi.</p>
     </div>
     
     <div class="idea_content">

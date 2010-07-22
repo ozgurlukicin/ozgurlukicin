@@ -17,6 +17,8 @@ def convert():
     
     for ideas_idea in ideas_idea_list:
         if ideas_idea.status.id in prefered_status:
+            if ideas_idea.is_duplicate == True:
+                ideas_idea.is_hidden = True
             beyin2_idea = oi.beyin2.models.Idea(
                                                 title = ideas_idea.title, 
                                                 dateSubmitted = ideas_idea.submitted_date, 
