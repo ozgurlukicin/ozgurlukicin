@@ -157,12 +157,15 @@ function search_tags(go_to){
                 hiding_div.hide();
                 search_text = $('#searching');
                 search_text.show();
+                search_image = $('#searching_image');
+                search_image.show();
                 $.post(go_to,{tags : tags_list.val(), title : title.val()},function(data){
                     if(data.substr(0,10) == "EslesmeYok"){
                         form = $('#select_tags_form');
                         form.submit();}
                     else {
                         search_text.hide();
+                        search_image.hide();
                         results = $('#results_list');
                         results.prepend(data);
                         $('#next_button').show();}
