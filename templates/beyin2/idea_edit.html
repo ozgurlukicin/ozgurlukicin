@@ -32,7 +32,7 @@
     <a id="link_to_image_{{ image.id }}" href="{{ image.image.url }}">
         <img id="image_{{ image_id }}" src="{{ image.image.url|thumbnail:"180" }}" />
     </a>
-        <input id="remove_image_{{ image.id }}" type="button" value = "remove image" onclick='remove_image({{ image.id }},"{% url image_remove image.id %}");'/><br />
+        <input id="remove_image_{{ image.id }}" type="button" value = "Resmi sil" onclick='remove_image({{ image.id }},"{% url image_remove image.id %}");'/><br />
     {% endfor %}
 
 <br />

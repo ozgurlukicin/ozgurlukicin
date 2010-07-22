@@ -9,6 +9,7 @@ import oi.ideas.models
 import oi.beyin2.models
 from oi.st.models import Tag
 from django.core.urlresolvers import reverse
+from oi.beyin2.views import DefaultCategory, DefaultStatus
 
 def convert():
     ideas_idea_list = oi.ideas.models.Idea.objects.all()
@@ -20,13 +21,15 @@ def convert():
             if ideas_idea.is_duplicate == True:
                 ideas_idea.is_hidden = True
             beyin2_idea = oi.beyin2.models.Idea(
-                                                title = ideas_idea.title, 
+                                                title = ideas_idea.title,
                                                 dateSubmitted = ideas_idea.submitted_date, 
-                                                submitter = ideas_idea.submitter, 
-                                                description = ideas_idea.description, 
-                                                is_hidden = ideas_idea.is_hidden, 
+                                                submitter = ideas_idea.submitter,
+                                                description = ideas_idea.description,
+                                                is_hidden = ideas_idea.is_hidden,
                                                 is_duplicate = ideas_idea.is_duplicate,
                                                 topic = ideas_idea.topic,
+                                                status = oi.beyin2.models.Status.objects.get(pk=DefaultStatus),
+                                                category = oi.beyin2.models.Category.objects.get(pk=DefaultCategory),
                                                )
             beyin2_idea.save()
             beyin2_idea.topic.title = beyin2_idea.title
