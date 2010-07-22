@@ -169,7 +169,6 @@ def advanced_search(request):
                     posts = Post.objects.filter(text__icontains=term, hidden=False).order_by("-created")[:50]
                 if search_in == 3 or search_in == 2:
                     ideas = Idea.objects.filter(Q(title__icontains=term)|Q(description__icontains=term)).filter(is_hidden=False).order_by('-vote_value')[:50]
-                    print "\n\n\n\n\n\n\n\n\n\n\n\n searched \n\n\n\n\n\n"
                     #removed because Idea is also used in beyin2, from now on, ideas is out of search
                     #ideas = Idea.objects.filter(Q(title__icontains=term)|Q(description__icontains=term)).filter(is_hidden=False).order_by('-vote_count')[:50]
                 if search_in == 1 or search_in == 2:

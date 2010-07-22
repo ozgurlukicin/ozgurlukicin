@@ -96,7 +96,6 @@ def main(request, idea_id = -1, page_number = 1, order = "date", filter_by = "no
         for idea in idea_list.object_list:
             idea.duplicate_list = Idea.objects.filter( duplicate = idea )
             if idea.duplicate_list:
-                print "\n\n\n\n\n\n\n dupplicate bulundu"
         return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list,'order':order,'come_from':'main', 'page_range': page_range, 'show_go_to_last': show_go_to_last, 'show_go_to_first': show_go_to_first, 'last_page': last_page, 'default_category' : def_cate,'filter':filter,'filter_by':filter_by})
 
 def idea_detail(request,idea_id):
