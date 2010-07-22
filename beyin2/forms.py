@@ -23,6 +23,7 @@ class IdeaForm(forms.ModelForm):
         return field_data
         
 class TagsForm(forms.ModelForm):
+    title = forms.CharField(label='Başlık', required=True, widget=forms.TextInput(attrs={'size': '40',}))
     class Meta:
         model = Idea
         fields = ('title', 'tags',)

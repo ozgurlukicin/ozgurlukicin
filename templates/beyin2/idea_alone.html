@@ -36,12 +36,12 @@
             onclick='add_remove_favorite({{ idea.id }},"{% url add_remove_favorite idea.id %}","{% url is_favorite idea.id %}");' 
             onmouseover='document.getElementById("yes_favorite_{{ idea.id }}").src="/media/img/beyin2/favori_minus.png";'
             onmouseout='document.getElementById("yes_favorite_{{ idea.id }}").src="/media/img/beyin2/favori_yes.png";'
-            style="display:none;" title="remove from favorites" >
+            style="display:none;" title="Favorilerimden sil" >
         <input id="no_favorite_{{ idea.id }}"type="image" src="/media/img/beyin2/favori_no.png" width="30" height="30" align="right"
             onload='is_favorite({{ idea.id }} , "{% url is_favorite idea.id %}");' 
             onclick='add_remove_favorite({{ idea.id }},"{% url add_remove_favorite idea.id %}","{% url is_favorite idea.id %}");' 
             onmouseover='document.getElementById("no_favorite_{{ idea.id }}").src="/media/img/beyin2/favori_plus.png";' 
-            onmouseout='document.getElementById("no_favorite_{{ idea.id }}").src="/media/img/beyin2/favori_no.png";' title="add to favorites" >
+            onmouseout='document.getElementById("no_favorite_{{ idea.id }}").src="/media/img/beyin2/favori_no.png";' title="Favorilerime ekle" >
     {% endif %}
     <div class="idea_info">
             <p>
