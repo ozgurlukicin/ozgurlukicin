@@ -1,24 +1,17 @@
-
 {% if vote == "U" %}
-    <img id="vote_yes_{{ idea.id }}_de" src="/media/img/beyin2/arti_de.png" value="I like it" /> 
-    <input id="vote_yes_{{ idea.id }}"type="image" src="/media/img/beyin2/arti.png" value="I like it" onclick="oyla(  {{ idea.id }} ,1 ,'{% url vote idea.id 1 "js_oyla" %}');" style="display:none" title="Bu fikri beğendim" alt="Bu fikri beğendim"/>
+    <img id="vote_yes_{{ idea.id }}_de" src="/media/img/beyin2/arti_de.png" value="I like it" /><input id="vote_yes_{{ idea.id }}"type="image" src="/media/img/beyin2/arti.png" value="I like it" onclick="oyla(  {{ idea.id }} ,1 ,'{% url vote idea.id 1 "js_oyla" %}');" style="display:none" title="Bu fikri beğendim" alt="Bu fikri beğendim"/>
 {% else %}
-    <img id="vote_yes_{{ idea.id }}_de" src="/media/img/beyin2/arti_de.png" value="I like it" style="display:none" /> 
-    <input id="vote_yes_{{ idea.id }}"type="image" src="/media/img/beyin2/arti.png" value="I like it" onclick="oyla(  {{ idea.id }} ,1 ,'{% url vote idea.id 1 "js_oyla" %}');" title="Bu fikri beğendim" alt="Bu fikri beğendim" />
+    <img id="vote_yes_{{ idea.id }}_de" src="/media/img/beyin2/arti_de.png" value="I like it" style="display:none" /><input id="vote_yes_{{ idea.id }}"type="image" src="/media/img/beyin2/arti.png" value="I like it" onclick="oyla(  {{ idea.id }} ,1 ,'{% url vote idea.id 1 "js_oyla" %}');" title="Bu fikri beğendim" alt="Bu fikri beğendim" />
 {% endif %} 
 
 {% if vote == "N"%}
-    <img id="vote_notr_{{ idea.id }}_de" src="/media/img/beyin2/notr_de.png" value="I am not sure" /> 
-    <input id="vote_notr_{{ idea.id }}" type="image" src="/media/img/beyin2/notr.png" value="I like it" onclick="oyla( {{ idea.id }} ,0 ,'{% url vote idea.id 0 "js_oyla" %}');" style="display:none" title="Kararsızım" alt="Kararsızım" />
+    <img id="vote_notr_{{ idea.id }}_de" src="/media/img/beyin2/notr_de.png" value="I am not sure" /><input id="vote_notr_{{ idea.id }}" type="image" src="/media/img/beyin2/notr.png" value="I like it" onclick="oyla( {{ idea.id }} ,0 ,'{% url vote idea.id 0 "js_oyla" %}');" style="display:none" title="Kararsızım" alt="Kararsızım" />
 {% else %}
-    <img id="vote_notr_{{ idea.id }}_de" src="/media/img/beyin2/notr_de.png" value="I am not sure" style="display:none" /> 
-    <input id="vote_notr_{{ idea.id }}" type="image" src="/media/img/beyin2/notr.png" value="I like it" onclick="oyla( {{ idea.id }} ,0 ,'{% url vote idea.id 0 "js_oyla" %}');" title="Kararsızım" alt="Kararsızım" />
+    <img id="vote_notr_{{ idea.id }}_de" src="/media/img/beyin2/notr_de.png" value="I am not sure" style="display:none" /><input id="vote_notr_{{ idea.id }}" type="image" src="/media/img/beyin2/notr.png" value="I like it" onclick="oyla( {{ idea.id }} ,0 ,'{% url vote idea.id 0 "js_oyla" %}');" title="Kararsızım" alt="Kararsızım" />
 {% endif %} 
 
 {% if vote == "D"%}
-    <img id="vote_no_{{ idea.id }}_de" src="/media/img/beyin2/eksi_de.png" value="I dislike it" /> 
-    <input id="vote_no_{{ idea.id }}" type="image" src="/media/img/beyin2/eksi.png" value="I like it" onclick="oyla( {{ idea.id }} , 2, '{% url vote idea.id 2 "js_oyla" %}');" style="display:none" title="Bu fikri beğenmedim" alt="Bu fikri beğenmedim" />
+    <img id="vote_no_{{ idea.id }}_de" src="/media/img/beyin2/eksi_de.png" value="I dislike it" /><input id="vote_no_{{ idea.id }}" type="image" src="/media/img/beyin2/eksi.png" value="I like it" onclick="oyla( {{ idea.id }} , 2, '{% url vote idea.id 2 "js_oyla" %}');" style="display:none" title="Bu fikri beğenmedim" alt="Bu fikri beğenmedim" />
 {% else %}
-    <img id="vote_no_{{ idea.id }}_de" src="/media/img/beyin2/eksi_de.png" value="I dislike it" style="display:none" /> 
-    <input id="vote_no_{{ idea.id }}" type="image" src="/media/img/beyin2/eksi.png" value="I like it" onclick="oyla( {{ idea.id }} , 2, '{% url vote idea.id 2 "js_oyla" %}');" title="Bu fikri beğenmedim" alt="Bu fikri beğenmedim" />
+    <img id="vote_no_{{ idea.id }}_de" src="/media/img/beyin2/eksi_de.png" value="I dislike it" style="display:none" /><input id="vote_no_{{ idea.id }}" type="image" src="/media/img/beyin2/eksi.png" value="I like it" onclick="oyla( {{ idea.id }} , 2, '{% url vote idea.id 2 "js_oyla" %}');" title="Bu fikri beğenmedim" alt="Bu fikri beğenmedim" />
 {% endif %} 
