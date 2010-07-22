@@ -92,6 +92,8 @@ function yonetim(go_to, idea_id, func_to_do, from){
     in_ajax = 1;
         if (func_to_do == "mark_duplicate" ){
             original_idea_id = prompt("Asıl fikrin ID'sini girin:");
+            if ( idea_id == original_idea_id ) { alert("Bir fikir kendisinin tekrarı olamaz.") }
+            else{
             $.post(go_to, { dupple_number: original_idea_id}, function(data){
                 header = $('#header_'+idea_id);
                 div_left = $('#div_left_'+idea_id);
@@ -107,7 +109,7 @@ function yonetim(go_to, idea_id, func_to_do, from){
                 original_idea_report_address = "/beyin2/report_"+original_idea_id+"/";
                 re_draw_vote( original_idea_id, original_idea_report_address);}
                 });
-        }
+        }}
         else if ( func_to_do == "edit_idea" ){
             window.location = go_to
         }
