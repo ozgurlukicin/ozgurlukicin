@@ -259,11 +259,14 @@ def add_new(request,phase ):
                     idea.category = def_cate
                 idea.save()
 
-                for screenshotform in ScreenShotFormSet.forms:
-                    image = screenshotform.save(commit = False)
-                    if image.image:
-                        image.idea = idea
-                        image.save()
+                try:
+                    for screenshotform in ScreenShotFormSet.forms:
+                        image = screenshotform.save(commit = False)
+                        if image.image:
+                            image.idea = idea
+                            image.save()
+                except:
+                    pass
 
                 for tag in form.cleaned_data['tags']:
                     tag = Tag.objects.get(name=tag)
