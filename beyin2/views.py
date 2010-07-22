@@ -200,7 +200,7 @@ def select_tags(request):
                                 if idea.category:
                                     value += ' | ' + str(idea.vote_value / 10) + ' Puan' + ' | ' + idea.category.name + '</a>'
                                 else:
-                                    value += ' | ' + str(idea.vote_value / 10) + ' Puan' + ' | ' + 'Kategori Belirlenmemiş' + '</a>'
+                                    value += ' | ' + str(idea.vote_value / 10) + ' Puan' + ' | ' + 'Kategori belirtilmemiş' + '</a>'
                                 value += '<br />' + idea.description[:140] + '...' + '<br /><br />'
                                 similars_dict[str(i) + " " + value] = value
             else:
@@ -271,7 +271,7 @@ def add_new(request,phase ):
                     topic.tags.add(tag)
 
                 post_text = '<a href="'+  reverse('idea_detail', args =( idea.id,))
-                post_text += '">#' + str(idea.id) + " "
+                post_text += '">#' + str(idea.id) + ": "
                 post_text += idea.title + "</a>"
                 post_text += "<p>" + idea.description + "</p>"
                 for image in idea.screenshot_set.all():
@@ -334,11 +334,12 @@ def edit_idea(request, idea_id):
                 idea.topic.tags.add(tag)
 
             post_text = '<a href="'+  reverse('idea_detail', args =( idea.id,))
-            post_text += '">#' + str(idea.id) + " "
+            post_text += '">#' + str(idea.id) + ": "
             post_text += idea.title + "</a>"
             post_text += "<p>" + idea.description + "</p>"
             for image in idea.screenshot_set.all():
-                post_text += '<br /><img src="'+image.image.url+'" height="320" width"240" /><br />'
+                if image.is_hidden == False:
+                    post_text += '<br /><img src="'+image.image.url+'" height="320" width"240" /><br />'
 
             post = idea.topic.post_set.all().order_by('created')[0]
 
@@ -381,13 +382,14 @@ def mark_duplicate(request, idea_id):
         #changes for forum
         #the duplicate
         topic = idea.topic
-        post_text = "<h1> This idea marked duplicate to another idea </h1>"
-        post_text += "<a href='"+reverse('oi.beyin2.views.idea_detail', args=(idea_original.id,))+"'>#" + str(idea_original.id) + " "
-        post_text += idea_original.title + "</a>"
-        post_text += "<p>" + idea_original.description + "</p>"
-        post_text += "<br /> <a href='"+idea_original.topic.get_latest_post_url()+"'>continue on this forum instead please</a>"
+        post_text = "<h1> Bu fikir başka bir fikrin tekrarı olarak belirlenmiş </h1>"
+        post_text += '<a href="'+  reverse('idea_detail', args =( idea_original.id,))
+        post_text += '">#' + str(idea_original.id) + ": " + idea_original.title + "</a>"
+        post_text += "<p>" + idea_original.description + "</p><br />"
         for image in idea_original.screenshot_set.all():
-            post_text += '<img src="'+image.image.url+'" height="320" width"240" /><br />'
+            if image.is_hidden == False:
+                post_text += '<br /><img src="'+image.image.url+'" height="320" width"240" /><br />'
+        post_text += "<br /><a href='"+idea_original.topic.get_latest_post_url()+"'>Lütfen buradan devam ediniz...</a>"
         post = Post(topic=topic, author=request.user, text=post_text )
         post.save()
         topic.topic_latest_post = post
@@ -397,15 +399,28 @@ def mark_duplicate(request, idea_id):
         topic.forum.save()
         #the original idea
         topic = idea_original.topic
-        post_text = "<h1> Another idea marked duplicate to this idea </h1>"
-        post_text += "<p>#" + str(idea.id) + " "
+        post_text = "<h1> Başka bir fikir bu fikrin tekrarı olarak belirlenmiş </h1>"
+        post_text += "<p>#" + str(idea.id) + ": "
         post_text += idea.title + "</p>"
-        post_text += "<p>" + idea.description + "</p>"
-        post_text += "<a href='"+idea.topic.get_absolute_url()+"'>  it was discussed here  </a>"
+        post_text += "<p>" + idea.description + "</p><br />"
         for image in idea.screenshot_set.all():
-            post_text += '<img src="'+image.image.url+'" height="320" width"240" /><br />'
+            if image.is_hidden == False:
+                post_text += '<br /><img src="'+image.image.url+'" height="320" width"240" /><br />'
+        post_text += "<br /><a href='"+idea.topic.get_absolute_url()+"'>Daha önce şu başlık altında tartışılmış...</a>"
         post = Post(topic=topic, author=request.user, text=post_text )
         post.save()
+        
+        post_text = '#' + str(idea.id) + ": " + idea.title
+        post_text += "<p>" + idea.description + "</p><br />"
+        for image in idea.screenshot_set.all():
+            if image.is_hidden == False:
+                post_text += '<br /><img src="'+image.image.url+'" height="320" width"240" /><br />'
+
+        post = idea.topic.post_set.all().order_by('created')[0]
+
+        post.text = post_text
+        post.save()
+        
         topic.topic_latest_post = post
         topic.save()
         topic.forum.forum_latest_post = post

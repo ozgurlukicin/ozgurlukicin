@@ -20,17 +20,17 @@ voteChoices = (
 )
 
 class Idea(models.Model):
-    title = models.CharField(max_length = 512)
-    description = models.TextField()
+    title = models.CharField(max_length = 512, verbose_name = "Başlık")
+    description = models.TextField(verbose_name = "Açıklama")
     dateSubmitted = models.DateTimeField("date submitted", default=datetime.now())
     submitter = models.ForeignKey(User, related_name="idea_submitter")
-    status = models.ForeignKey("Status", blank=True, null=True)
-    category = models.ForeignKey("Category", blank=True, null=True)
+    status = models.ForeignKey("Status", blank=True, null=True, verbose_name = "Durum")
+    category = models.ForeignKey("Category", blank=True, null=True, verbose_name = "Kategori")
     duplicate = models.ForeignKey("self", blank=True, null=True)
     is_duplicate = models.BooleanField("Idea Duplicate", default=False)
     is_hidden = models.BooleanField("Hiddden", default=False)
     topic = models.ForeignKey(Topic, related_name="Idea_topic")
-    tags = models.ManyToManyField(Tag, blank=True, null=True)
+    tags = models.ManyToManyField(Tag, blank=True, null=True, verbose_name = "Etiketler")
     # percent will be processed as %UUU,%NNN %DDD
     vote_percent = models.IntegerField(default=0)
     vote_value = models.IntegerField(default=0)
@@ -69,7 +69,7 @@ class Vote(models.Model):
 
 class ScreenShot(models.Model):
     idea = models.ForeignKey("Idea")
-    image = models.ImageField(upload_to = "beyin2/upload")
+    image = models.ImageField(upload_to = "beyin2/upload", verbose_name = "Resim")
     is_hidden = models.BooleanField( default = False )
 
     def save(self):

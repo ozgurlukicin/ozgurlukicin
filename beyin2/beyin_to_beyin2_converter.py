@@ -12,36 +12,39 @@ from django.core.urlresolvers import reverse
 
 def convert():
     ideas_idea_list = oi.ideas.models.Idea.objects.all()
-    i = 0
+    
+    prefered_status = [4, 5, 6, 7]
+    
     for ideas_idea in ideas_idea_list:
-        i += 1
-        beyin2_idea = oi.beyin2.models.Idea(
-                                            title = ideas_idea.title, 
-                                            dateSubmitted = ideas_idea.submitted_date, 
-                                            submitter = ideas_idea.submitter, 
-                                            description = ideas_idea.description, 
-                                            is_hidden = ideas_idea.is_hidden, 
-                                            topic = ideas_idea.topic,
-                                           )
-        beyin2_idea.save()
-        beyin2_idea.topic.title = beyin2_idea.title
-        beyin2_idea.topic.save()
-        
-        for tag in ideas_idea.tags.all():
-                tags = Tag.objects.filter(name=tag)
-                for tag in tags:
-                    beyin2_idea.tags.add(tag)
-                    beyin2_idea.topic.tags.add(tag)
-        
-        post_text = '<a href="'+  reverse('idea_detail', args =( beyin2_idea.id,))
-        post_text += '">#' + str(beyin2_idea.id) + " "
-        post_text += beyin2_idea.title + "</a>"
-        post_text += "<p>" + beyin2_idea.description + "</p>"
-        
-        post = beyin2_idea.topic.post_set.all().order_by('created')[0]
-        
-        post.text = post_text
-        post.save()
+        if ideas_idea.status.id in prefered_status:
+            beyin2_idea = oi.beyin2.models.Idea(
+                                                title = ideas_idea.title, 
+                                                dateSubmitted = ideas_idea.submitted_date, 
+                                                submitter = ideas_idea.submitter, 
+                                                description = ideas_idea.description, 
+                                                is_hidden = ideas_idea.is_hidden, 
+                                                is_duplicate = ideas_idea.is_duplicate,
+                                                topic = ideas_idea.topic,
+                                               )
+            beyin2_idea.save()
+            beyin2_idea.topic.title = beyin2_idea.title
+            beyin2_idea.topic.save()
+            
+            for tag in ideas_idea.tags.all():
+                    tags = Tag.objects.filter(name=tag)
+                    for tag in tags:
+                        beyin2_idea.tags.add(tag)
+                        beyin2_idea.topic.tags.add(tag)
+            
+            post_text = '<a href="'+  reverse('idea_detail', args =( beyin2_idea.id,))
+            post_text += '">#' + str(beyin2_idea.id) + " "
+            post_text += beyin2_idea.title + "</a>"
+            post_text += "<p>" + beyin2_idea.description + "</p>"
+            
+            post = beyin2_idea.topic.post_set.all().order_by('created')[0]
+            
+            post.text = post_text
+            post.save()
 
 def del_old():
     oi.beyin2.models.Idea.objects.all().delete()

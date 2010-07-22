@@ -44,11 +44,11 @@
             onmouseout='document.getElementById("no_favorite_{{ idea.id }}").src="/media/img/beyin2/favori_no.png";' title="add to favorites" >
     {% endif %}
     <div class="idea_info">
-            <p>Submitted by
+            <p>
             <a href= "{{ idea.submitter.get_profile.get_absolute_url }}">
                 {{ idea.submitter }}
             </a>
-            at {{idea.dateSubmitted}}{% if idea.category.id != default_category.id %} to<span id="current_category_{{ idea.id }}"> {{ idea.category }} </span>category {% else %} <span id="current_category_{{ idea.id }}" style="display:none;" > {{ idea.category }} </span> {% endif %}</p>
+            tarafından {{idea.dateSubmitted}} tarihinde {% if idea.category.id != default_category.id %} <span id="current_category_{{ idea.id }}"> {{ idea.category }} </span> kategorisine {% else %} <span id="current_category_{{ idea.id }}" style="display:none;" > {{ idea.category }} </span>{% endif %}gönderildi.</p>
     </div>
     
     <div class="idea_content">
@@ -87,13 +87,13 @@
         <input onclick="yonetim('{% url delete_idea idea.id %}', {{ idea.id }}, 'delete_idea', '{{ come_from }}')" type="image" src="/media/img/beyin2/sil.png" />
             
         <select onchange="yonetim('{% url main_post idea.id %}', {{ idea.id }}, 'status_change', '{{ come_from }}')" name='status' id="status_{{ idea.id }}" >
-                    <option value="status">Select Status</option>
+                    <option value="status">Durum</option>
                 {%for status in status_list %}
                     <option value="{{ status.name }}" {% if status.name == idea.status.name %}selected{% endif %}>{{ status.name }}</option>
                 {% endfor %}
             </select>
             <select onchange="yonetim('{% url main_post idea.id %}', {{ idea.id }}, 'category_change', '{{ come_from }}')" name='category' id="category_{{ idea.id }}" >
-                    <option value="category">Select Category</option>
+                    <option value="category">Kategori</option>
                 {% for category in category_list %}
                     <option value="{{ category.name }}" {% if category.name == idea.category.name %}selected{% endif %}>{{ category.name }}</option>
                 {% endfor %}

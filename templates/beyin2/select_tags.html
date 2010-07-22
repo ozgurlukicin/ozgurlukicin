@@ -19,6 +19,10 @@
 
 {% block content %}
 
+<div id="idea_topbar">
+    <span class="idea_new_title">Yeni Fikir Ekle</span>
+</div>
+
 <div id="results_list" ></div>
 
 <form id="select_tags_form" action='{% url add_new 1 %}' enctype="multipart/form-data" method="POST" name='add_new'>
@@ -26,11 +30,11 @@
         {% for field in form %}
             {% include "field.html" %}
         {% endfor %}
-        <br /><br />
-        <input type='button' value='Continue' name='continue' onclick='search_tags("{% url select_tags %}");'>
+        <br /><br /><br />
+        <input type='button' value='Devam' name='continue' onclick='search_tags("{% url select_tags %}");'>
     </div>
-    <span id="searching" style="display:none;">Searching</span>
-    <img id="searching_image" src="/media/img/beyin2/searching.gif" style="display:none;" />
-    <input type="submit" id="next_button" style="display:none;" value="Add New"/>
+    <img id="searching_image" align="center" src="/media/img/beyin2/searching.gif" style="display:none;" />
+    <span id="searching" style="display:none;"> Arama yapılıyor...</span>
+    <input type="submit" id="next_button" style="display:none;" value="Yeni Ekle"/>
 </form>
 {% endblock %}

@@ -12,7 +12,7 @@ from oi.st.tags import Tag
 from oi.st.forms import XssField
 
 class IdeaForm(forms.ModelForm):
-    description = XssField(label='Description', required=True, widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
+    description = XssField(label='Açıklama', required=True, widget=forms.Textarea(attrs={'rows': '20', 'cols': '60',}))
     class Meta:
         model = Idea
         fields = ('title', 'description', 'status', 'category', 'tags')
