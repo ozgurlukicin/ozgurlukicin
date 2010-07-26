@@ -3,6 +3,7 @@ from django.template import loader, RequestContext
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
+#from django.core.context_processors import csrf
 
 DEFAULT_TEMPLATE = 'flatpages/default.html'
 

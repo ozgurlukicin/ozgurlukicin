@@ -44,9 +44,6 @@ class CdClient(models.Model):
     def get_full_phone(self):
         return u"(%s) %s" % (self.phone_area, self.phone_number)
 
-    def get_full_gsm(self):
-        return u"(%s) %s" % (self.gsm_area, self.gsm_number)
-
     def __unicode__(self):
         return self.get_full_name()
 
@@ -80,7 +77,7 @@ class CargoCompany(models.Model):
 
 class Cargo(models.Model):
     cdclient = models.ForeignKey(CdClient, unique=True)
-    serial = models.CharField("Seri No", max_length=8, default="9I")
+    serial = models.CharField("Seri No", max_length=8, default="9P")
     follow_code = models.CharField("Takip kodu", max_length=20)
     company = models.ForeignKey(CargoCompany, verbose_name="Kargo şirketi")
     date = models.DateField()
