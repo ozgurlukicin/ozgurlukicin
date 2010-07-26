@@ -376,6 +376,22 @@ def delete_idea(request, idea_id):
 
     return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
 
+
+def undelete_idea(request, idea_id):
+    idea = Idea.objects.get( pk= idea_id)
+    idea.is_hidden = False
+    idea.save()
+
+    # unlock the topic
+    if not idea.topic.locked:
+        return render_response(request,'beyin2/idea_errorpage.html',{'error':'Fikir başlığı kilitli değil?',})
+    else:
+        idea.topic.locked = 0
+        idea.topic.save()
+
+    return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
+
+
 def mark_duplicate(request, idea_id):
     if request.POST:
         idea = get_object_or_404(Idea, pk = idea_id)
