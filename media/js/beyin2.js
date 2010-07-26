@@ -131,6 +131,24 @@ function yonetim(go_to, idea_id, func_to_do, from){
                 });
             }
         }
+        else if ( func_to_do == "undelete_idea" ){
+            is_confirmed = confirm('Bu fikri geri getirmek istediğinizden emin misiniz?');
+            if ( is_confirmed ){
+                $.post(go_to, function(data){
+                    header = $('#header_'+idea_id);
+                    div_left = $('#div_left_'+idea_id);
+                    div_middle = $('#div_middle_'+idea_id);
+                    div_right = $('#div_right_'+idea_id);
+                    header.text("SİLİNDİ");
+                    div_left.hide("slow");
+                    div_right.hide("slow");
+                    div_middle.hide("slow");
+                if (from == "detail" ){
+                    window.location = "/beyin2/"
+                    }
+                });
+            }
+        }
         else if ( func_to_do == "category_change" ){
             category = $('#category_'+idea_id);
             status = $('#status_'+idea_id);

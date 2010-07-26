@@ -95,8 +95,11 @@
         
         <input onclick="yonetim('{% url edit_idea idea.id %}', {{ idea.id }}, 'edit_idea', '{{ come_from }}')" type="image" src="/media/img/beyin2/duzenle.png" />
         <input onclick="yonetim('{% url mark_duplicate idea.id %}', {{ idea.id }}, 'mark_duplicate', '{{ come_from }}')" type="image" src="/media/img/beyin2/tekrar.png" />
+        {% if filter_by == "deleted" %} 
+        <input onclick="yonetim('{% url undelete_idea idea.id %}', {{ idea.id }}, 'undelete_idea', '{{ come_from }}')" type="image" src="/media/img/beyin2/gerigetir.png" />
+        {% else %}
         <input onclick="yonetim('{% url delete_idea idea.id %}', {{ idea.id }}, 'delete_idea', '{{ come_from }}')" type="image" src="/media/img/beyin2/sil.png" />
-            
+        {% endif %}
         <select onchange="yonetim('{% url main_post idea.id %}', {{ idea.id }}, 'status_change', '{{ come_from }}')" name='status' id="status_{{ idea.id }}" >
                     <option value="status">Durum</option>
                 {%for status in status_list %}

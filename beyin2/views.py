@@ -61,7 +61,7 @@ def main(request, idea_id = -1, page_number = 1, order = "date", filter_by = "no
                 for favorite in favorites:
                     all_idea_list.append(favorite.idea)
             except:
-                return HttpResponse("you have no favorite idea")
+                return render_response(request,'beyin2/idea_errorpage.html',{'error':'İsteğe uygun fikir bulunamadı.',})
         if filter_by == "today":
             all_idea_list = Idea.objects.filter( is_hidden = False, dateSubmitted__gt = datetime.now() - timedelta(1)).order_by(order_dict[order])
         if filter_by == "this_week":
@@ -73,7 +73,9 @@ def main(request, idea_id = -1, page_number = 1, order = "date", filter_by = "no
         if filter_by == "status":
             all_idea_list = Idea.objects.filter( is_hidden = False, status = filter ).order_by(order_dict[order])
         if filter_by == "deleted":
-            all_idea_list = Idea.objects.filter( is_hidden = True ).order_by(order_dict[order])
+            all_idea_list = Idea.objects.filter( is_hidden = True, is_duplicate = False ).order_by(order_dict[order])
+        if filter_by == "duplicate":
+            all_idea_list = Idea.objects.filter( is_duplicate = True ).order_by(order_dict[order])
         status_list = Status.objects.all().order_by("name")
         category_list = Category.objects.all().order_by("name")
         if not all_idea_list:
@@ -362,6 +364,7 @@ def edit_idea(request, idea_id):
     return render_response(request, 'beyin2/idea_errorpage.html')
 
 
+@permission_required('beyin2.change_idea')
 def delete_idea(request, idea_id):
     idea = Idea.objects.get(pk=idea_id)
     idea.is_hidden = True
@@ -377,6 +380,7 @@ def delete_idea(request, idea_id):
     return HttpResponseRedirect(reverse('oi.beyin2.views.main'))
 
 
+@permission_required('beyin2.change_idea')
 def undelete_idea(request, idea_id):
     idea = Idea.objects.get( pk= idea_id)
     idea.is_hidden = False
