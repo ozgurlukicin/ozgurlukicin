@@ -8,7 +8,7 @@
 from django import forms
 from oi.beyin2.models import Idea, ScreenShot
 from oi.st.tags import Tag
-
+from django.core.urlresolvers import reverse
 from oi.st.forms import XssField
 
 class IdeaForm(forms.ModelForm):
@@ -23,7 +23,7 @@ class IdeaForm(forms.ModelForm):
         return field_data
         
 class TagsForm(forms.ModelForm):
-    title = forms.CharField(label='Başlık', required=True, widget=forms.TextInput(attrs={'size': '40',}))
+    title = forms.CharField(label='Başlık', required=True, widget=forms.TextInput(attrs={'size': '40','onkeypress': "to_search_tags('/beyin2/select', event);" }))
     class Meta:
         model = Idea
         fields = ('title', 'tags',)

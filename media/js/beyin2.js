@@ -201,6 +201,10 @@ function search_tags(go_to){
         alert("Lütfen en az 1 etiket seçin.");}
     in_ajax = 0;
 }
+function to_search_tags( go_to, evt){
+    if ( evt.keyCode==13 || evt.which==13 ){
+        search_tags(go_to);}
+}
 
 function add_new_idea(go_to){
     form = $('#select_tags_form');
