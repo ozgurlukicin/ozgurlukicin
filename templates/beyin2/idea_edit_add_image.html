@@ -22,21 +22,15 @@
     <span class="idea_new_title">Fikri Düzenle</span>
 </div>
 
-<form action='{% url edit_idea idea.id %}' method="POST" name='edit_idea' id='edit_idea' >
+<form action='{% url edit_idea_add_image idea.id %}' enctype="multipart/form-data" method="POST" name='edit_idea' id='edit_idea' >
     <br />
-    {% for field in form %}
+    {% for field in image_form %}
         {% include "field.html" %}
     {% endfor %}
     <br /><br />
-    {% for image in images %}
-    <a id="link_to_image_{{ image.id }}" href="{{ image.image.url }}">
-        <img id="image_{{ image_id }}" src="{{ image.image.url|thumbnail:"180" }}" />
-    </a>
-        <input id="remove_image_{{ image.id }}" type="button" value = "Resmi sil" onclick='remove_image({{ image.id }},"{% url image_remove image.id %}");'/><br />
-    {% endfor %}
 
-    <br /><br />
-    <a href='{% url edit_idea_add_image idea.id %}'>add image</a><br />
-    <input type='button' onclick='control_entry_edit("dull");' value='Gönder' name='send_new_idea'>
+<br />
+<input type='submit' value='Gönder' name='send_new_idea'>
 </form>
+
 {% endblock %}

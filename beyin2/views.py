@@ -361,8 +361,24 @@ def edit_idea(request, idea_id):
             return render_response(request, 'beyin2/idea_errorpage.html')
     else:
         return render_response(request, 'beyin2/idea_edit.html', {'form':form, 'idea':idea,'images':images})
-    return render_response(request, 'beyin2/idea_errorpage.html')
 
+@permission_required('beyin2.change_idea')
+def edit_idea_add_image(request,idea_id):
+    idea = get_object_or_404(Idea, pk=idea_id)
+    image_form = ScreenShotForm()
+    if request.POST:
+        image_form_post  = ScreenShotForm(request.POST, request.FILES,)
+        if image_form_post.is_valid():
+            try:
+                image = image_form_post.save(commit = False)
+                if image.image:
+                    image.idea = idea
+                    image.save()
+            except:
+                return render_response(request, 'beyin2/idea_errorpage.html',{'error': 'image cannot be saved'})
+            return HttpResponseRedirect(reverse('oi.beyin2.views.edit_idea', args=(idea.id,)))
+        return render_response(request, 'beyin2/idea_errorpage.html',{'error': 'Form is not valid'})
+    return render_response(request, 'beyin2/idea_edit_add_image.html', {'image_form':image_form, 'idea':idea})
 
 @permission_required('beyin2.change_idea')
 def delete_idea(request, idea_id):
