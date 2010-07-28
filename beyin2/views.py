@@ -29,7 +29,11 @@ def main(request, idea_id = -1, page_number = 1, order = "date", filter_by = "no
         'date': '-dateSubmitted',
         'vote_value': '-vote_value',
         'title': 'title',
-        'vote_count': 'vote_count'}
+        'vote_count': 'vote_count',
+        'neg_date': 'dateSubmitted',
+        'neg_vote_value': 'vote_value',
+        'neg_title': '-title',
+        'neg_vote_count': '-vote_count'}
 
     if request.POST:
         idea = get_object_or_404(Idea, pk = idea_id)

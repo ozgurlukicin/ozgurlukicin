@@ -12,33 +12,45 @@
 {% block content %}
 <div id="idea_topbar">
 <span id="idea_submit"><a href="{% url select_tags %}" title="Yeni Fikir Ekle"><img src="/media/img/beyin2/ideas_submit.png" alt="submit idea" /></a></span>
-        {% if order == "date" %} 
+        {% if order == "date" or order == "neg_date" %} 
             <div class="idea_list_order" >
-                <a href='{% url main_page "date" filter_by filter 1 %}'>Tarih <img src="/media/img/beyin2/takvim.png" style="margin-left:25px;"></a>
+                {% if order == "date" %} 
+                    <a href='{% url main_page "neg_date" filter_by filter 1 %}'>Tarih <img src="/media/img/beyin2/takvim.png" style="margin-left:25px;"></a>
+                {% else %}
+                    <a href='{% url main_page "date" filter_by filter 1 %}'>Tarih <img src="/media/img/beyin2/takvim.png" style="margin-left:25px;"></a>
+                {% endif %}
             </div>
             <div class="idea_list_title" >
                 <a href='{% url main_page "vote_value" filter_by filter 1 %}'>Popülerlik </a>
                 <a href='{% url main_page "title" filter_by filter 1 %}'>Başlık </a>
             </div>
         {% else %}
-            {% if order == "vote_value" %}
+            {% if order == "vote_value" or order == "neg_vote_value" %}
                 <div class="idea_list_title" >
                     <a href='{% url main_page "date" filter_by filter 1 %}'>Tarih </a>
                 </div>
                 <div class="idea_list_order" >
-                    <a href='{% url main_page "vote_value" filter_by filter 1 %}'>Popülerlik  <img src="/media/img/beyin2/popu.png" /></a>
+                    {% if order == "vote_value" %}
+                        <a href='{% url main_page "neg_vote_value" filter_by filter 1 %}'>Popülerlik  <img src="/media/img/beyin2/popu.png" /></a>
+                    {% else %}
+                        <a href='{% url main_page "vote_value" filter_by filter 1 %}'>Popülerlik  <img src="/media/img/beyin2/popu.png" /></a>
+                    {%endif %}
                 </div>
                 <div class="idea_list_title" >
                     <a href='{% url main_page "title" filter_by filter 1 %}'>Başlık </a>
                 </div>
             {% else %}
-                {% if order == "title" %}
+                {% if order == "title" or order == "neg_title" %}
                     <div class="idea_list_title" >
                         <a href='{% url main_page "date" filter_by filter 1 %}'>Tarih </a>
                         <a href='{% url main_page "vote_value" filter_by filter 1 %}'>Popülerlik </a>
                     </div>
                     <div class="idea_list_order" >
-                        <a href='{% url main_page "title" filter_by filter 1 %}'>Başlık     <img src="/media/img/beyin2/baslik.png" style="margin-left:25px;"/></a>
+                        {% if order == "title" %}
+                            <a href='{% url main_page "neg_title" filter_by filter 1 %}'>Başlık     <img src="/media/img/beyin2/baslik.png" style="margin-left:25px;"/></a>
+                        {% else %}
+                            <a href='{% url main_page "neg_title" filter_by filter 1 %}'>Başlık     <img src="/media/img/beyin2/baslik.png" style="margin-left:25px;"/></a>
+                        {% endif %}
                     </div>
                 {% endif %}
             {% endif %}
