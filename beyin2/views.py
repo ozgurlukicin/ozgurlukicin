@@ -37,12 +37,40 @@ def main(request, idea_id = -1, page_number = 1, order = "date", filter_by = "no
 
     if request.POST:
         idea = get_object_or_404(Idea, pk = idea_id)
+        is_change_status = 0
         try:
-            idea.status = get_object_or_404(Status, name = request.POST['status'])
+            if idea.status != get_object_or_404(Status, name = request.POST['status']):
+                is_change_status = 1
+                idea.status = get_object_or_404(Status, name = request.POST['status'])
+                #and send forum that status changed
+                topic = idea.topic
+                post_text = "<b> Bu fikrin durumu "+ idea.status.name+" olarak değiştirildi </b>"
+                post = Post(topic=topic, author=request.user, text=post_text )
+                post.save()
+                topic.topic_latest_post = post
+                topic.posts += 1
+                topic.save()
+                topic.forum.forum_latest_post = post
+                topic.forum.posts += 1
+                topic.forum.save()
         except:
             idea.status = Status()
         try:
-            idea.category = get_object_or_404(Category, name = request.POST['category'])
+            if is_change_status:
+                is_change_status = 0
+            else:
+                idea.category = get_object_or_404(Category, name = request.POST['category'])
+                #and send forum that category changed
+                topic = idea.topic
+                post_text = "<b> Bu fikrin kategorisi "+ idea.category.name+" olarak değiştirildi </b>"
+                post = Post(topic=topic, author=request.user, text=post_text )
+                post.save()
+                topic.topic_latest_post = post
+                topic.posts += 1
+                topic.save()
+                topic.forum.forum_latest_post = post
+                topic.forum.posts += 1
+                topic.forum.save()
         except:
             idea.category = Category()
 
@@ -447,6 +475,7 @@ def mark_duplicate(request, idea_id):
         post = Post(topic=topic, author=request.user, text=post_text )
         post.save()
         topic.topic_latest_post = post
+        topic.posts += 1
         topic.save()
         topic.forum.forum_latest_post = post
         topic.forum.posts += 1
@@ -476,6 +505,7 @@ def mark_duplicate(request, idea_id):
         post.save()
         
         topic.topic_latest_post = post
+        topic.posts += 1
         topic.save()
         topic.forum.forum_latest_post = post
         topic.forum.posts += 1
