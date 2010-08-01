@@ -25,6 +25,7 @@ urlpatterns = patterns('oi.beyin2.views',
     url(r'^add_remove_favorite/(?P<idea_id>\d+)/$','add_remove_favorite', name='add_remove_favorite'),
     url(r'^(?P<idea_id>\d+)/report/$','vote_values_report', name='vote_values_report'),
     url(r'^(?P<image_id>\d+)/remove_image/$','image_remove', name='image_remove'),
+    url(r'^promo/(?P<idea_id>\d+)/$', 'promo',name='promo'),
     (r'^$', 'main'),
 )
 

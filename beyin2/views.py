@@ -143,6 +143,11 @@ def idea_detail(request,idea_id):
     idea = get_object_or_404(Idea, pk = idea_id)
     if idea.is_hidden:
         return render_response(request,'beyin2/idea_errorpage.html',{'error':'Fikir bulunamadı',})
+    pos_votes = Vote.objects.filter( vote = 'U', idea = idea).count()
+    notr_votes = Vote.objects.filter( vote = 'N', idea = idea ).count()
+    neg_votes = Vote.objects.filter( vote = 'D', idea = idea ).count()
+    idea.vote_text =  "Arti:%s kararsiz:%s Eksi:%s" %(pos_votes, notr_votes, neg_votes )
+
     status_list = Status.objects.all()
     category_list = Category.objects.all()
     def_cate = get_object_or_404(Status, pk = DefaultCategory )
@@ -581,3 +586,10 @@ def image_remove(request,image_id):
     image.save()
     return HttpResponse("OK")
 
+def promo(request,idea_id):
+    idea = get_object_or_404(Idea, pk = idea_id)
+    pos_votes = Vote.objects.filter( vote = 'U', idea = idea).count()
+    notr_votes = Vote.objects.filter( vote = 'N', idea = idea ).count()
+    neg_votes = Vote.objects.filter( vote = 'D', idea = idea ).count()
+    vote_text =  "Arti:%s kararsiz:%s Eksi:%s" %(pos_votes, notr_votes, neg_votes )
+    return render_response(request, 'beyin2/idea_promote.html', { 'title': idea.title, 'id':idea.id, 'vote_text':vote_text })
