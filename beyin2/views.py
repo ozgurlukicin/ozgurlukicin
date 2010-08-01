@@ -80,6 +80,12 @@ def main(request, idea_id = -1, page_number = 1, order = "date", filter_by = "no
             all_idea_list = Idea.objects.filter( is_hidden = True, is_duplicate = False ).order_by(order_dict[order])
         if filter_by == "duplicate":
             all_idea_list = Idea.objects.filter( is_duplicate = True ).order_by(order_dict[order])
+        # add vote_counts for every vote, intended to use in preview on votebar
+        for idea in all_idea_list:
+            pos_votes = Vote.objects.filter( vote = 'U', idea = idea).count()
+            notr_votes = Vote.objects.filter( vote = 'N', idea = idea ).count()
+            neg_votes = Vote.objects.filter( vote = 'D', idea = idea ).count()
+            idea.vote_text =  "Arti:%s kararsiz:%s Eksi:%s" %(pos_votes, notr_votes, neg_votes )
         status_list = Status.objects.all().order_by("name")
         category_list = Category.objects.all().order_by("name")
         if not all_idea_list:
