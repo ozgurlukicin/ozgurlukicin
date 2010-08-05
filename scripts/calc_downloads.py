@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+# important command: sed -i "s|op_podcast|oi_podcast|g" oi_podcast.log
+
 import re
 
 LOGPODCAST = "oi_podcast.log"
