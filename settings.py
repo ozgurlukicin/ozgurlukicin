@@ -118,6 +118,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
+    'django_evolution',
     'oi.flatpages',
     'oi.st',
     'oi.upload',

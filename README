@@ -6,6 +6,8 @@ Requires:
  DBMS (MySQL recommended)
  Pygments (for colorizing text in paste application)
  PyMAD (for gathering podcast information)
+ django-evolution (temporary library for altering tables, will be removed from dependencies after table alterings are completed (for tema). 
+                    apply tmp/django1.2.patch to django-evolution before installing  with Django 1.2)
 
 Note About TinyMCE:
 * We're using a patch to hide unneeded tabs in advimage and advlink plugins. It can be found under patches directory.
