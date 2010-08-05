@@ -57,22 +57,10 @@ class License(models.Model):
         verbose_name = "Lisans"
         verbose_name_plural = "Lisanslar"
 
-class Category(models.Model):
-    name = models.CharField(max_length=50, unique=True)
-
-    def __unicode__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = u"Kategori"
-        verbose_name_plural = u"Kategoriler"
-
-
 class ThemeItem(models.Model):
     "A theme item mainly consists of screenshots and files to download"
     title = models.CharField(max_length=100, verbose_name="Başlık", help_text="Buraya, ekleyeceğiniz içeriğin ismini yazın.")
     slug = models.SlugField('SEF Başlık', unique=True, blank=True)
-    category = models.ForeignKey(Category, null=True)
     tags = models.ManyToManyField(Tag, verbose_name="Etiketler")
     author = models.ForeignKey(User)
     license = models.ForeignKey(License, verbose_name="Lisans")
@@ -309,4 +297,3 @@ class ThemeAbuseReport(models.Model):
     class Meta:
         verbose_name = 'İleti şikayeti'
         verbose_name_plural = 'İleti şikayetleri'
-
