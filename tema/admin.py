@@ -33,7 +33,7 @@ class ThemeItemAdmin(admin.ModelAdmin):
 class WallpaperAdmin(ThemeItemAdmin):
     fieldsets = (
             (None, {
-                "fields": ("thumbnail", "title", "slug", "origin_url", "text",
+                "fields": ("thumbnail", "title", "slug","category", "origin_url", "text",
                     "changelog", "papers", "status", "deny_reason", "tags")
                 }),
             ("Diğer", {
@@ -68,9 +68,14 @@ class FontAdmin(ThemeItemAdmin):
                 })
             )
 
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("name",)}
+
+
 admin.site.register(ThemeItem, ThemeItemAdmin)
 admin.site.register(Wallpaper, WallpaperAdmin)
 admin.site.register(DesktopScreenshot, DesktopScreenshotAdmin)
 admin.site.register(Font, FontAdmin)
 admin.site.register(WallpaperFile, admin.ModelAdmin)
 admin.site.register(License, admin.ModelAdmin)
+admin.site.register(WallpaperCategory, CategoryAdmin)

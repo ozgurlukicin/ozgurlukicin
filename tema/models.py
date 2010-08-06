@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 from django.core.files.base import ContentFile
 from django.template import Context, loader
 from django.core.mail import EmailMessage
+from django.db.models.signals import post_save,post_delete
 
 from oi.st.tags import Tag
 from oi.forum.models import Topic
@@ -56,6 +57,24 @@ class License(models.Model):
     class Meta:
         verbose_name = "Lisans"
         verbose_name_plural = "Lisanslar"
+
+class Category(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    slug = models.SlugField()
+    order = models.PositiveIntegerField(verbose_name='Sıralama')
+    count = models.IntegerField(blank=True, null=True, default=0)
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        abstract = True
+
+
+class WallpaperCategory(Category):
+    class Meta:
+        verbose_name = u"Duvar Kağıdı Kategorisi"
+        verbose_name_plural = u"Duvar Kağıdı Kategorileri"
 
 class ThemeItem(models.Model):
     "A theme item mainly consists of screenshots and files to download"
@@ -200,8 +219,10 @@ class DesktopScreenshot(ThemeItem):
         return self.image.url
 
 
+
 class Wallpaper(ThemeItem):
     papers = models.ManyToManyField("WallpaperFile", blank=True)
+    category = models.ForeignKey("WallpaperCategory", null=True,verbose_name="Kategori")
 
     class Meta:
         verbose_name="Duvar Kağıdı"
@@ -295,5 +316,18 @@ class ThemeAbuseReport(models.Model):
     reason = models.TextField(max_length=512, blank=False, verbose_name="Sebep")
 
     class Meta:
-        verbose_name = 'İleti şikayeti'
+verbose_name = 'İleti şikayeti'
         verbose_name_plural = 'İleti şikayetleri'
+
+def category_counter_callback(sender, **kwargs):
+    print "heloo worrlld"
+    instance = kwargs["instance"]
+    Model = instance.__class__
+    Category = Model.category.field.rel.to
+    for category in Category.objects.all():
+        category.count = Model.objects.filter(category=category,status=True).count()
+        category.save()
+
+post_save.connect(category_counter_callback, sender=Wallpaper)
+post_delete.connect(category_counter_callback, sender=Wallpaper)
+
