@@ -44,9 +44,12 @@ urlpatterns = patterns ('oi.tema.views',
         (r'^yonetim/$', 'themeitem_queue'),
         #(r'^listele/(?P<category>[a-z0-9-_]+)/(?P<sort_type>[a-z0-9-_]+)/$','themeitem_sort'),
         (r'^yazitipleri/(?P<slug>[a-z0-9-_]+)/onizle/(?P<text>.{1,20})/$','font_image'),
-        (r'^(?P<category>[a-z0-9-_]+)/$','themeitem_list'),
-        (r'^(?P<category>[a-z0-9-_]+)/(?P<slug>[a-z0-9-_]+)/$','themeitem_detail'),
-        (r'^(?P<category>[a-z0-9-_]+)/(?P<slug>[a-z0-9-_]+)/(?P<id>\d+)/$','themeitem_download'),
+        #category listings
+        (r'^([a-z0-9-_]+)?/$','themeitem_list'),
+        (r'^([a-z0-9-_]+)/([a-z0-9-_]+)/$','themeitem_list'),
+        #object detail
+        (r'^detay/(?P<slug>[a-z0-9-_]+)/$','themeitem_detail'),
+        (r'^detay/(?P<slug>[a-z0-9-_]+)/(?P<id>\d+)/$','themeitem_download'),
 )
 """
 urlpatterns+=patterns('',
