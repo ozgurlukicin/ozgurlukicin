@@ -333,12 +333,28 @@ function filter_ideas( url,tag_end){
 function control_entry( dull ){
     tags_list = $('#id_tags');
     title = $('#id_ideaform-title');
+    images = 0;
     if (title.val() != "" ){
         if  ( tinyMCE.get('id_ideaform-description').getContent() != "" ) {
             if ( tags_list.val() != null ){
                 if ( tags_list.val()[5] == null ){
                     form = $('#add_new_idea');
-                    form.submit();}
+                    for (i=0;i<3;i++){
+                        image = document.getElementById("id_imageform-"+i+"-image");
+                        if( image.value.lastIndexOf(".jpg")!=-1 ){ 
+                            images += 1;}
+                        if ( image.value.lastIndexOf(".png")!=-1 ){
+                            images += 1;}
+                        if ( image.value.lastIndexOf(".bmp")!=-1 ){
+                            images += 1;}
+                        if ( image.value == ""){
+                            images += 1;}
+                    }
+                    if ( images == 3) {
+                        form.submit();}
+                    else {
+                        alert (" eklediğiniz resimlerin uzantısı jpg, png yada bmp olmalıdır.");}
+                }
                 else{ alert("En fazla 5 etiket seçebilirsiniz."); }}
             else{ alert("Lütfen en az 1 etiket seçin."); }}
         else{ alert("Lütfen geçerli bir açıklama yazın."); }}
