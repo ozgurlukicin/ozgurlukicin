@@ -361,6 +361,24 @@ function control_entry( dull ){
     else{ alert("Lütfen geçerli bir başlık yazın."); }
 }
 
+function control_image_edit( dull ){
+    form = $('#edit_idea');
+    image = document.getElementById("id_image");
+    images = 0;
+    if( image.value.lastIndexOf(".jpg")!=-1 ){
+        images += 1;}
+    if ( image.value.lastIndexOf(".png")!=-1 ){
+        images += 1;}
+    if ( image.value.lastIndexOf(".bmp")!=-1 ){
+        images += 1;}
+    if ( image.value == ""){
+        images += 1;}
+    if ( images == 1) {
+        form.submit();}
+    else {
+        alert (" eklediğiniz resimlerin uzantısı jpg, png yada bmp olmalıdır.");}
+}
+
 function control_entry_edit( dull ){
     tags_list = $('#id_tags');
     title = $('#id_ideaform-title');

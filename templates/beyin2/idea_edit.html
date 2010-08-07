@@ -28,15 +28,21 @@
         {% include "field.html" %}
     {% endfor %}
     <br /><br />
+    <a href='{% url edit_idea_add_image idea.id %}' style="cursor:pointer" ><img src="/media/img/beyin2/resim_ekle.png" /></a>
+    <br /><br />
     {% for image in images %}
     <a id="link_to_image_{{ image.id }}" href="{{ image.image.url }}">
         <img id="image_{{ image_id }}" src="{{ image.image.url|thumbnail:"180" }}" />
     </a>
-        <input id="remove_image_{{ image.id }}" type="button" value = "Resmi sil" onclick='remove_image({{ image.id }},"{% url image_remove image.id %}");'/><br />
+    <a id="remove_image_{{ image.id }}"  onclick='remove_image({{ image.id }},"{% url image_remove image.id %}");' style="cursor:pointer" />
+        <img src="/media/img/beyin2/resmi_sil.png" />
+    </a>
+        <br />
     {% endfor %}
 
     <br /><br />
-    <a href='{% url edit_idea_add_image idea.id %}'>add image</a><br />
-    <input type='button' onclick='control_entry_edit("dull");' value='Gönder' name='send_new_idea'>
-</form>
+    <div style="float:right;">
+        <input type='button' onclick='control_entry_edit("dull");' value='Gönder' name='send_new_idea'>
+    </div>
+    </form>
 {% endblock %}
