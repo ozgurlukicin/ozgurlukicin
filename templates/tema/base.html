@@ -9,8 +9,18 @@
 {% block leftcolumn %}
 <div class="sidebarcolumn leftcolumn">
 <div class="tema_order_by">
+    {% if sub_categories %}
+        <ul>
+            <li><b>Kategoriler</b></li>
+            <li><a href="/tema/{{category}}">Hepsi</a></li>
+            {% for sub_category in sub_categories %}
+            <li><a href="/tema/{{category}}/{{sub_category.slug}}">{{sub_category.name.title}} ({{sub_categories.count}})</a></li>
+            {% endfor %}
+            <li></li>
+        </ul>
+    {% endif %}
     <ul>
-        <li><b>Kategoriler</b></li>
+        <li><b>İçerikler</b></li>
         <li><a href="/tema/duvar-kagitlari/">Duvar Kağıtları</a></li>
         <li><a href="/tema/masaustu-goruntuleri/">Masaüstü Görüntüleri</a></li>
         <li><a href="/tema/yazitipleri/">Yazıtipleri</a></li>
@@ -24,6 +34,8 @@
         <li><a href="/tema/ekle/yazitipleri/">Yazıtipi</a></li>
         <li></li>
     </ul>
+
+
     {% if category %}
     {% top_content category %}
     {% else %}
