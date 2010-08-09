@@ -48,8 +48,8 @@ urlpatterns = patterns ('oi.tema.views',
         (r'^([a-z0-9-_]+)?/$','themeitem_list'),
         (r'^([a-z0-9-_]+)/([a-z0-9-_]+)/$','themeitem_list'),
         #object detail
-        (r'^detay/(?P<slug>[a-z0-9-_]+)/$','themeitem_detail'),
-        (r'^detay/(?P<slug>[a-z0-9-_]+)/(?P<id>\d+)/$','themeitem_download'),
+        (r'^(?P<category>[a-z0-9-_]+)/detay/(?P<slug>[a-z0-9-_]+)/$','themeitem_detail'),
+        (r'^([a-z0-9-_]+)/detay/(?P<slug>[a-z0-9-_]+)/(?P<id>\d+)/$','themeitem_download'),
 )
 """
 urlpatterns+=patterns('',

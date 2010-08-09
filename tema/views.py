@@ -51,9 +51,9 @@ TURKISH_CHARS = (
 )
 
 category_dict = {
-    "duvar-kagitlari": (Wallpaper, "tema/themeitem_wallpaper_detail.html"),
-    "masaustu-goruntuleri": (DesktopScreenshot, "tema/themeitem_desktopscreenshot_detail.html"),
-    "yazitipleri": (Font, "tema/themeitem_font_detail.html"),
+    "duvar-kagitlari": (Wallpaper, "tema/themeitem_wallpaper_detail.html", WallpaperCategory),
+    "masaustu-goruntuleri": (DesktopScreenshot, "tema/themeitem_desktopscreenshot_detail.html", None),
+    "yazitipleri": (Font, "tema/themeitem_font_detail.html", None),
 }
 
 def replace_turkish(text):
@@ -62,19 +62,35 @@ def replace_turkish(text):
         text = text.replace(i[0], i[1])
     return text
 
-def themeitem_list(request, category=None):
+order = {"update" : "-update",
+        "popularity" : "-rating",
+        "downloads" : "-download_count"}
+
+def themeitem_list(request, category=None, sub_category=None):
     "List approved theme items"
+    sub_categories = []
     if category_dict.has_key(category):
         themeItems = category_dict[category][0].objects.all()
-    else:
+        SubCategoryModel = category_dict[category][2]
+        if SubCategoryModel:
+            sub_categories = SubCategoryModel.objects.all()
+        if sub_category:
+            if not SubCategoryModel:
+                raise Http404
+            sub_category = get_object_or_404(SubCategoryModel, slug=sub_category) 
+            themeItems = themeItems.filter(category=sub_category)
+    elif not category:
         themeItems = ThemeItem.objects.all()
+    else:
+        raise Http404
 
-    themeItems = themeItems.filter(status=True).order_by("-update")
+    order_by = order[request.GET.get("order","update")]
+    themeItems = themeItems.filter(status=True).order_by(order_by)
     params = {
             "queryset": themeItems,
             "paginate_by": THEME_ITEM_PER_PAGE,
             "template_name": "tema/themeitem_list.html",
-            "extra_context": {"category":category},
+            "extra_context": {"category":category,"sub_categories":sub_categories,"order":request.GET.get("order","update")},
     }
     return object_list(request, **params)
 
