@@ -141,11 +141,12 @@ class ThemeItem(models.Model):
     # Later, fix this
     def get_absolute_url(self):
         if Wallpaper.objects.filter(id = self.id).count():
-            return "/tema/duvar-kagitlari/%s/" % self.slug
+            return "/tema/duvar-kagitlari/detay/%s/" % self.slug
         elif DesktopScreenshot.objects.filter(id = self.id).count():
-            return "/tema/masaustu-goruntuleri/%s/" % self.slug
+            return "/tema/masaustu-goruntuleri/detay/%s/" % self.slug
         elif Font.objects.filter(id = self.id).count():
-            return "/tema/yazitipleri/%s/" % self.slug
+            return "/tema/yazitipleri/detay/%s/" % self.slug
+
 
     class Meta:
         verbose_name="Sanat Birimi"
@@ -179,6 +180,16 @@ class ThemeItem(models.Model):
     def get_delete_url(self):
         return "/tema/sil/%d/" % self.id
 
+    def is_new(self):
+        now = datetime.datetime.now()
+        one_week = 7 * 24 * 60
+        if self.submit - now < one_week:
+            return "new"
+        elif self.update - now < one_week:
+            return "updated"
+        else:
+            return "not-new"
+
     class Meta:
         permissions = (
             ("manage_queue", "Can Manage Tema Queue"),
@@ -193,7 +204,7 @@ class Font(ThemeItem):
         verbose_name_plural="Yazıtipleri"
 
     def get_absolute_url(self):
-        return "/tema/yazitipleri/%s/" % (self.slug)
+        return "/tema/yazitipleri/detay/%s/" % (self.slug)
 
     def get_redirect_url(self):
         return "/tema/yazitipleri/%s/%s/" % (self.slug, self.id)
@@ -210,10 +221,10 @@ class DesktopScreenshot(ThemeItem):
         verbose_name_plural="Masaüstü Görüntüleri"
 
     def get_absolute_url(self):
-        return "/tema/masaustu-goruntuleri/%s/" % (self.slug)
+        return "/tema/masaustu-goruntuleri/detay/%s/" % (self.slug)
 
     def get_redirect_url(self):
-        return "/tema/masaustu-goruntuleri/%s/%s/" % (self.slug, self.id)
+        return "/tema/masaustu-goruntuleri/detay/%s/%s/" % (self.slug, self.id)
 
     def get_download_url(self):
         return self.image.url
@@ -229,7 +240,7 @@ class Wallpaper(ThemeItem):
         verbose_name_plural="Duvar Kağıtları"
 
     def get_absolute_url(self):
-        return "/tema/duvar-kagitlari/%s/" % (self.slug)
+        return "/tema/duvar-kagitlari/detay/%s/" % (self.slug)
 
     def get_download_url(self):
         return self.papers.all()[0].image.url
@@ -286,7 +297,7 @@ class WallpaperFile(models.Model):
     image = models.ImageField(upload_to="upload/tema/duvar-kagidi/", verbose_name="Duvar Kağıdı")
 
     def get_absolute_url(self):
-        return "/tema/duvar-kagitlari/%s/%s/" % (self.wallpaper_set.all()[0].slug, self.id)
+        return "/tema/duvar-kagitlari/detay/%s/%s/" % (self.wallpaper_set.all()[0].slug, self.id)
 
     def get_download_url(self):
         return self.image.url
@@ -316,11 +327,10 @@ class ThemeAbuseReport(models.Model):
     reason = models.TextField(max_length=512, blank=False, verbose_name="Sebep")
 
     class Meta:
-verbose_name = 'İleti şikayeti'
+        verbose_name = 'İleti şikayeti'
         verbose_name_plural = 'İleti şikayetleri'
 
 def category_counter_callback(sender, **kwargs):
-    print "heloo worrlld"
     instance = kwargs["instance"]
     Model = instance.__class__
     Category = Model.category.field.rel.to
