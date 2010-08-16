@@ -1,5 +1,5 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
+#!/usr/bin/python
 #
 # Copyright 2007 TÜBİTAK UEKAE
 # Licensed under the GNU General Public License, version 3.
@@ -76,6 +76,16 @@ class WallpaperCategory(Category):
         verbose_name = u"Duvar Kağıdı Kategorisi"
         verbose_name_plural = u"Duvar Kağıdı Kategorileri"
 
+class OpenOfficeTemplateCategory(Category):
+    class Meta:
+        verbose_name = u"Open Office Şablon Kategorisi"
+        verbose_name_plural = u"Open Office Şablon Kategorileri"
+
+class OpenOfficeExtensionCategory(Category):
+    class Meta:
+        verbose_name = u"Open Office Eklenti Kategorisi"
+        verbose_name_plural = u"Open Office Eklenti Kategorileri"
+
 class ThemeItem(models.Model):
     "A theme item mainly consists of screenshots and files to download"
     title = models.CharField(max_length=100, verbose_name="Başlık", help_text="Buraya, ekleyeceğiniz içeriğin ismini yazın.")
@@ -137,8 +147,6 @@ class ThemeItem(models.Model):
             )
             mail.send(fail_silently=True)
 
-    # we only support wallpaper for now, so return wallpaper url.
-    # Later, fix this
     def get_absolute_url(self):
         if Wallpaper.objects.filter(id = self.id).count():
             return "/tema/duvar-kagitlari/detay/%s/" % self.slug
@@ -146,6 +154,11 @@ class ThemeItem(models.Model):
             return "/tema/masaustu-goruntuleri/detay/%s/" % self.slug
         elif Font.objects.filter(id = self.id).count():
             return "/tema/yazitipleri/detay/%s/" % self.slug
+        elif OpenOfficeTemplate.objects.filter(id = self.id).count():
+            return "/tema/open-office-sablon/detay/%s/" % self.slug
+        elif OpenOfficeExtension.objects.filter(id = self.id).count():
+            return "/tema/open-office-eklenti/detay/%s/" % self.slug
+
 
 
     class Meta:
@@ -194,6 +207,59 @@ class ThemeItem(models.Model):
         permissions = (
             ("manage_queue", "Can Manage Tema Queue"),
         )
+
+
+class OpenOfficeApplication(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        return self.name
+
+class OpenOfficeVersion(models.Model):
+    version = models.CharField(max_length=50)
+    version_number = models.PositiveIntegerField()
+
+    def __unicode__(self):
+        return self.version
+
+class OpenOfficeTheme(ThemeItem):
+    file = models.FileField("OpenOffice dosyası", upload_to="upload/tema/openoffice/%Y/%m/%d")
+    screenshot = models.ImageField("Ekran görüntüsü", help_text="Şablonunuzun nasıl göründüğüne dair bir ekran görüntünüzü burada paylaşın",upload_to="upload/tema/openoffice/%Y/%m/%d",blank=False,null=True)
+    competible_with = models.ManyToManyField(OpenOfficeVersion, verbose_name=u"Uyumlu olduğu OpenOffice.org versiyonları")
+
+    #competible_with_higher = models.BooleanField(verbose_name=u"Üstü ile uyumlu")
+
+    class Meta:
+        verbose_name = "Open Office özelleştirmesi"
+        verbose_name_plural = "Open Office özelleştirmeleri"
+
+    def get_absolute_url(self):
+        if OpenOfficeTemplate.objects.filter(id = self.id).count():
+            return "/tema/open-office-sablon/detay/%s/" % self.slug
+        elif OpenOfficeExtension.objects.filter(id = self.id).count():
+            return "/tema/open-office-eklenti/detay/%s/" % self.slug
+
+class OpenOfficeTemplate(OpenOfficeTheme):
+    category = models.ForeignKey("OpenOfficeTemplateCategory",verbose_name="Kategori")
+    application = models.ForeignKey(OpenOfficeApplication,verbose_name="OpenOffice.org uygulaması",help_text="Şablonun ait olduğu OpenOffice.org uygulaması")
+
+    class Meta:
+        verbose_name = u"Open Office Şablonu"
+        verbose_name_plural = u"Open Office Şablonları"
+
+
+    def get_absolute_url(self):
+        return "/tema/open-office-sablon/detay/%s/" % (self.slug)
+
+class OpenOfficeExtension(OpenOfficeTheme):
+    category = models.ForeignKey("OpenOfficeExtensionCategory") 
+
+    class Meta:
+        verbose_name = u"Open Office Eklentisi"
+        verbose_name_plural = u"Open Office Eklentileri"
+
+    def get_absolute_url(self):
+        return "/tema/open-office-eklenti/detay/%s/" % (self.slug)
 
 class Font(ThemeItem):
     font = models.FileField("Yazıtipi dosyası", upload_to="upload/tema/yazitipi/")
