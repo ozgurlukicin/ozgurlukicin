@@ -9,6 +9,25 @@
 {% block leftcolumn %}
 <div class="sidebarcolumn leftcolumn">
 <div class="tema_order_by">
+    <ul>
+        <li><b>İçerikler</b></li>
+        <li><a href="/tema/duvar-kagitlari/">Duvar Kağıtları</a></li>
+        <li><a href="/tema/masaustu-goruntuleri/">Masaüstü Görüntüleri</a></li>
+        <li><a href="/tema/yazitipleri/">Yazıtipleri</a></li>
+        <li><a href="/tema/open-office/">OpenOffice.org Öğeleri</a></li>
+        <li></li>
+        <li><a href="/hakkinda/lisanslar/">Lisans Bilgileri</a></li>
+        {% if perms.tema.change_themeabusereport %}<li><a href="/tema/raporlanmis-temalar/">Tema Şikayetleri ({% number_of_theme_abuse %})</a></li>{% endif %}
+        <li></li>
+    </ul>
+    {% if open_office %}
+        <ul>
+            <li><b>OpenOffice.org Öğeleri</b></li>
+            <li><a href="/tema/open-office-eklenti">Eklentiler</a></li>
+            <li><a href="/tema/open-office-sablon">Şablonlar</a></li>
+            <li></li>
+        </ul>
+    {% endif %}
     {% if sub_categories %}
         <ul>
             <li><b>Kategoriler</b></li>
@@ -19,21 +38,16 @@
             <li></li>
         </ul>
     {% endif %}
+
     <ul>
-        <li><b>İçerikler</b></li>
-        <li><a href="/tema/duvar-kagitlari/">Duvar Kağıtları</a></li>
-        <li><a href="/tema/masaustu-goruntuleri/">Masaüstü Görüntüleri</a></li>
-        <li><a href="/tema/yazitipleri/">Yazıtipleri</a></li>
-        <li></li>
-        <li><a href="/hakkinda/lisanslar/">Lisans Bilgileri</a></li>
-        {% if perms.tema.change_themeabusereport %}<li><a href="/tema/raporlanmis-temalar/">Tema Şikayetleri ({% number_of_theme_abuse %})</a></li>{% endif %}
-        <li></li>
         <li><b>İçerik Ekle</b></li>
         <li><a href="/tema/ekle/duvar-kagitlari/">Duvar Kağıdı</a></li>
         <li><a href="/tema/ekle/masaustu-goruntuleri/">Masaüstü Görüntüsü</a></li>
         <li><a href="/tema/ekle/yazitipleri/">Yazıtipi</a></li>
+        <li><a href="/tema/ekle/open-office-ogesi/">OpenOffice.org Öğesi</a>
         <li></li>
     </ul>
+    
 
 
     {% if category %}
