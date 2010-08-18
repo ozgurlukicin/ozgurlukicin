@@ -107,7 +107,7 @@ class WallpaperForm(forms.ModelForm):
 
     class Meta:
         model = Wallpaper
-        exclude = ("author", "rating", "category", "thumbnail",
+        exclude = ("author", "rating", "thumbnail",
                 "download_count", "submit", "update", "status", "deny_reason" , "scalable", "papers", "changelog", "slug", "topic", "version")
 
     def clean_tags(self):
@@ -132,3 +132,38 @@ class WallpaperFileForm(forms.ModelForm):
 
 class ThemeRatingForm(forms.Form):
     rating = forms.ChoiceField(choices=RATINGS)
+
+
+class OpenOfficeTemplateForm(forms.ModelForm):
+    text = forms.CharField(label="Tanım", required=True, help_text="Ekleyeceğiniz şablon hakkındaki açıklamalarınızı bu bölümde belirtebilirsiniz.", widget=forms.Textarea(attrs={"style":"width:400px"}))
+    confirmation = forms.BooleanField(label="Onay", required=True, help_text="Bu OpenOffice.org şablonunu dağıtma hakkına sahibim.")
+    license = forms.ModelChoiceField(label="Lisans", queryset=License.objects.order_by("name"), empty_label="---------")
+    origin_url = forms.URLField(label="Özgün Çalışma", required=False, help_text="Başka bir çalışmayı temel aldıysanız bunun bağlantısını yazın.", widget=forms.TextInput(attrs={"style":"width:400px"}))
+
+    class Meta:
+        model = OpenOfficeTemplate
+        exclude = ("author", "rating", "thumbnail",
+                "download_count", "submit", "update", "status", "deny_reason", "scalable",  "changelog", "slug", "topic", "version")
+
+    def clean_tags(self):
+        field_data = self.cleaned_data['tags']
+        if len(field_data) > 5:
+            raise forms.ValidationError("En fazla 5 etiket seçebilirsiniz. Lütfen açtığınız başlığa uygun etiket seçiniz.")
+        return field_data
+
+class OpenOfficeExtensionForm(OpenOfficeTemplateForm):
+    text = forms.CharField(label="Tanım", required=True, help_text="Ekleyeceğiniz eklenti hakkındaki açıklamalarınızı bu bölümde belirtebilirsiniz.", widget=forms.Textarea(attrs={"style":"width:400px"}))
+    confirmation = forms.BooleanField(label="Onay", required=True, help_text="Bu OpenOffice.org eklentisini dağıtma hakkına sahibim.")
+    license = forms.ModelChoiceField(label="Lisans", queryset=License.objects.order_by("name"), empty_label="---------")
+    origin_url = forms.URLField(label="Özgün Çalışma", required=False, help_text="Başka bir çalışmayı temel aldıysanız bunun bağlantısını yazın.", widget=forms.TextInput(attrs={"style":"width:400px"}))
+        
+    class Meta:
+        model = OpenOfficeExtension
+        exclude = ("author", "rating", "thumbnail",
+                "download_count", "submit", "update", "status", "deny_reason", "scalable",  "changelog", "slug", "topic", "version")
+
+    def clean_tags(self):
+        field_data = self.cleaned_data['tags']
+        if len(field_data) > 5:
+            raise forms.ValidationError("En fazla 5 etiket seçebilirsiniz. Lütfen açtığınız başlığa uygun etiket seçiniz.")
+        return field_data
