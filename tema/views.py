@@ -54,6 +54,9 @@ category_dict = {
     "duvar-kagitlari": (Wallpaper, "tema/themeitem_wallpaper_detail.html", WallpaperCategory),
     "masaustu-goruntuleri": (DesktopScreenshot, "tema/themeitem_desktopscreenshot_detail.html", None),
     "yazitipleri": (Font, "tema/themeitem_font_detail.html", None),
+    "open-office": (OpenOfficeTheme,"tema/themeitem_openofficetheme_detail.html",None),
+    "open-office-sablon": (OpenOfficeTemplate,"tema/themeitem_openofficetemplate_detail.html",OpenOfficeTemplateCategory),
+    "open-office-eklenti": (OpenOfficeExtension,"tema/themeitem_openofficeextension_detail.html",OpenOfficeExtensionCategory),
 }
 
 def replace_turkish(text):
@@ -65,6 +68,12 @@ def replace_turkish(text):
 order = {"update" : "-update",
         "popularity" : "-rating",
         "downloads" : "-download_count"}
+
+add_new_links = {"duvar-kagitlari":"/tema/ekle/duvar-kagitlari",
+                "yazitipleri":"/tema/ekle/yazitipleri",
+                "open-office":"/tema/ekle/open-office-ogesi",
+                "open-office-eklenti":"/tema/ekle/open-office-ogesi",
+                "open-office-sablon":"/tema/ekle/open-office-ogesi",}
 
 def themeitem_list(request, category=None, sub_category=None):
     "List approved theme items"
@@ -89,9 +98,10 @@ def themeitem_list(request, category=None, sub_category=None):
     params = {
             "queryset": themeItems,
             "paginate_by": THEME_ITEM_PER_PAGE,
-            "template_name": "tema/themeitem_list.html",
-            "extra_context": {"category":category,"sub_categories":sub_categories,"order":request.GET.get("order","update")},
+            "template_name": category and "tema/themeitem_list.html" or "tema/themeitem_welcome.html",
+            "extra_context": {"add_new_link":category and add_new_links[category] or "", "category":category,"sub_categories":sub_categories,"order":request.GET.get("order","update"),"open_office":category and "open-office" in category},
     }
+
     return object_list(request, **params)
 
 def themeitem_detail(request, category, slug):
@@ -214,6 +224,62 @@ def font_image(request, slug, text):
     data = open(tmp).read()
     os.unlink(tmp)
     return HttpResponse(data, mimetype="image/png")
+
+verbose_names = {"sablon":u"Şablon",
+                "eklenti":u"Eklenti"}
+@login_required
+def themeitem_add_openoffice_element(request):
+    chosen = ""
+    if request.method == "POST":
+        type = request.POST["type"]
+        chosen = {"name":type,"verbose_name":verbose_names[type]}
+        if type == "sablon":
+            form = OpenOfficeTemplateForm(request.POST,request.FILES)
+            template_form = form
+            extension_form = OpenOfficeExtensionForm()
+        elif type == "eklenti":
+            form = OpenOfficeExtensionForm(request.POST, request.FILES)
+            extension_form = form
+            template_form = OpenOfficeTemplateForm()
+        if form.is_valid():
+            item = form.save(commit=False)
+            item.author = request.user
+            item.submit = item.update = datetime.datetime.now()
+            slug = slugify(replace_turkish(item.title))
+            item.save()
+            for tag in form.cleaned_data["tags"]:
+                t = Tag.objects.get(name=tag)
+                item.tags.add(t)
+            item.slug = str(item.id) + "-" + slug
+
+            for version in form.cleaned_data["competible_with"]:
+                item.competible_with.add(version)
+            item.save()
+
+
+            thumbnail = Image.open(item.screenshot.path)
+            thumbnail.thumbnail((150,200), Image.ANTIALIAS)
+            file = ContentFile("")
+            item.thumbnail.save(item.screenshot.path, file, save=True)
+            thumbnail.save(item.thumbnail.path)
+
+            #TODO: Send e-mail to admins
+            return render_response(request, "tema/themeitem_add_complete.html", locals())
+    else:
+        tags = [t.pk for t in Tag.objects.filter(name="openoffice.org şablonu")]
+        template_form = OpenOfficeTemplateForm(initial={"tags":tags})
+
+        tags = [t.pk for t in Tag.objects.filter(name="openoffice.org eklentisi")]
+        extension_form = OpenOfficeExtensionForm(initial={"tags":tags})
+    return render_response(request,"tema/themeitem_add_openoffice_element.html",{"chosen":chosen,"extension_form":extension_form,"template_form":template_form})
+
+@login_required
+def themeitem_add_openoffice_template(request):
+    pass
+
+@login_required
+def themeitem_add_openoffice_extension(request):
+    pass
 
 @login_required
 def themeitem_add_font(request):
@@ -414,9 +480,17 @@ def themeitem_download(request, category, slug, id):
         object = get_object_or_404(Font, id=id)
         object.download_count += 1
         object.save()
+    elif category == "open-office-sablon":
+        object = get_object_or_404(OpenOfficeTemplate, id=id)
+        object.download_count += 1
+        object.save()
+    elif category == "open-office-eklenti":
+        object = get_object_or_404(OpenOfficeExtension, id=id)
+        object.download_count += 1
+        object.save()
     else:
         raise Http404
-    return render_response(request, "tema/themeitem_download.html", locals())
+    return HttpResponseRedirect(object.get_download_url())
 
 def ghns_wallpapers(request):
     xml = loader.get_template("tema/wallpaper-providers.xml").render(Context({"SITE_URL":settings.WEB_URL}))
