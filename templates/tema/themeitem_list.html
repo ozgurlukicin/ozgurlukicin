@@ -8,6 +8,7 @@
 {% block title %}Temalar - {% if author %}{{ author }} tarafından gönderilen içerik - {% endif %}{% endblock %}
 {% block content %}
 <div id="idea_topbar">
+    <span style="float:right" id="idea_submit"><a href="{{add_new_link}}" title="Yeni Öğe Ekle"><img src="/media/img/tema/new_themeitem.png" alt="submit idea" /></a></span>
     <div class="idea_list_{% ifequal order "update"%}order{%else%}title{%endifequal%}">
         <a href="?order=update">Tarih {% ifequal order "update" %}<img style="margin-left: 25px;" src="/media/img/beyin2/takvim.png">{% endifequal %}</a>
     </div>
