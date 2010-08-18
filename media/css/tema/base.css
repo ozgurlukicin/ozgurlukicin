@@ -1,0 +1,73 @@
+#idea_topbar {
+    background: #219cde;
+    height: 40px;
+    line-height: 40px;
+    text-indent: 10px;
+    margin-bottom: 10px;
+}
+
+#idea_topbar .idea_list_order a{
+    float: left;
+    background: url('/media/img/beyin2/order_bar2.png') bottom no-repeat;
+    width:9em;
+    padding-top:10px;
+    padding-left:0px;
+    padding-right:0px;
+    font-size: 12px;
+    color: #219cde;
+}
+
+#idea_topbar .idea_list_title a{
+    float: left;
+    width:9em;
+    padding-top:10px;
+    padding-left:0px;
+    padding-right:0px;
+    font-size: 12px;
+    color: #FFFFFF;
+}
+
+#idea_topbar .idea_new_title {
+    color:#FFFFFF;
+    float:left;
+    font-size:12px;
+}
+
+#idea_topbar #idea_submit {
+    float: right;
+    margin: 7px 10px 0 0;
+}
+
+#idea_topbar h3 {
+    background:#ccc;
+    margin: 30px;
+}
+
+.idea_container {
+    margin-top:30px;
+    padding:3px;
+}
+
+.idea_left {
+    padding-top:0px;
+    padding-left:0px;
+    float: left;
+    width: 60px;
+}
+
+a:link {
+    color: #51798E;
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:visited {
+    color: #375261;
+}
+
+a:active {
+    color: #375261;
+}
