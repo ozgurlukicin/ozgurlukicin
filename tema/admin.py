@@ -68,6 +68,12 @@ class FontAdmin(ThemeItemAdmin):
                 })
             )
 
+class IconSetAdmin(ThemeItemAdmin):
+    list_display = ("title", "version", "author", "license", "status")
+
+class OpenOfficeTemplateAdmin(ThemeItemAdmin):
+    list_display = ("title", "version", "author", "license", "status")
+    
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
@@ -79,3 +85,11 @@ admin.site.register(Font, FontAdmin)
 admin.site.register(WallpaperFile, admin.ModelAdmin)
 admin.site.register(License, admin.ModelAdmin)
 admin.site.register(WallpaperCategory, CategoryAdmin)
+admin.site.register(OpenOfficeTemplateCategory)
+admin.site.register(OpenOfficeExtensionCategory)
+admin.site.register(OpenOfficeTheme)
+admin.site.register(OpenOfficeTemplate,OpenOfficeTemplateAdmin)
+admin.site.register(OpenOfficeExtension)
+admin.site.register(OpenOfficeApplication)
+admin.site.register(OpenOfficeVersion)
+admin.site.register(IconSet,IconSetAdmin)

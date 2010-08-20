@@ -57,6 +57,7 @@ category_dict = {
     "open-office": (OpenOfficeTheme,"tema/themeitem_openofficetheme_detail.html",None),
     "open-office-sablon": (OpenOfficeTemplate,"tema/themeitem_openofficetemplate_detail.html",OpenOfficeTemplateCategory),
     "open-office-eklenti": (OpenOfficeExtension,"tema/themeitem_openofficeextension_detail.html",OpenOfficeExtensionCategory),
+    "simge-seti":(IconSet, "tema/themeitem_iconset_detail.html", None),
 }
 
 def replace_turkish(text):
@@ -73,7 +74,10 @@ add_new_links = {"duvar-kagitlari":"/tema/ekle/duvar-kagitlari",
                 "yazitipleri":"/tema/ekle/yazitipleri",
                 "open-office":"/tema/ekle/open-office-ogesi",
                 "open-office-eklenti":"/tema/ekle/open-office-ogesi",
-                "open-office-sablon":"/tema/ekle/open-office-ogesi",}
+                "open-office-sablon":"/tema/ekle/open-office-ogesi",
+                "simge-seti":"/tema/ekle/simge-seti",
+                }
+
 
 def themeitem_list(request, category=None, sub_category=None):
     "List approved theme items"
@@ -273,13 +277,38 @@ def themeitem_add_openoffice_element(request):
         extension_form = OpenOfficeExtensionForm(initial={"tags":tags})
     return render_response(request,"tema/themeitem_add_openoffice_element.html",{"chosen":chosen,"extension_form":extension_form,"template_form":template_form})
 
-@login_required
-def themeitem_add_openoffice_template(request):
-    pass
 
 @login_required
-def themeitem_add_openoffice_extension(request):
-    pass
+def themeitem_add_iconset(request):
+    if request.method == "POST":
+        form = IconSetForm(request.POST,request.FILES)
+        if form.is_valid():
+            item = form.save(commit=False)
+            item.author = request.user
+            item.submit = item.update = datetime.datetime.now()
+            item.slug = "somekindof unique value"
+            slug = slugify(replace_turkish(item.title))
+            print slug
+            item.save()
+            for tag in form.cleaned_data["tags"]:
+                t = Tag.objects.get(name=tag)
+                item.tags.add(t)
+            item.slug = str(item.id) + "-" + slug
+
+
+            thumbnail = Image.open(item.screenshot.path)
+            thumbnail.thumbnail((150,200), Image.ANTIALIAS)
+            file = ContentFile("")
+            item.thumbnail.save(item.screenshot.path, file, save=True)
+            thumbnail.save(item.thumbnail.path)
+
+            #TODO: Send e-mail to admins
+            return render_response(request, "tema/themeitem_add_complete.html", locals())
+    else:
+        tags = [t.pk for t in Tag.objects.filter(name="ikon seti")]
+        form = IconSetForm(initial={"tags":tags})
+
+    return render_response(request,"tema/themeitem_add_iconset.html", locals())
 
 @login_required
 def themeitem_add_font(request):

@@ -158,6 +158,8 @@ class ThemeItem(models.Model):
             return "/tema/open-office-sablon/detay/%s/" % self.slug
         elif OpenOfficeExtension.objects.filter(id = self.id).count():
             return "/tema/open-office-eklenti/detay/%s/" % self.slug
+        elif IconSet.objects.filter(id = self.id).count():
+            return "/tema/simge-seti/detay/%s/" % self.slug
 
 
 
@@ -208,6 +210,22 @@ class ThemeItem(models.Model):
             ("manage_queue", "Can Manage Tema Queue"),
         )
 
+class IconSet(ThemeItem):
+    file = models.FileField("Simge Seti Dosyası", upload_to="upload/tema/iconset/%Y/%m/%d")
+    screenshot = models.ImageField("Ekran görüntüsü", help_text="Simge setinizin nasıl göründüğüne dair bir ekran görüntünüzü burada paylaşın",upload_to="upload/tema/openoffice/%Y/%m/%d",blank=False,null=True)
+
+    class Meta:
+        verbose_name = "Simge Seti"
+        verbose_name_plural = "Simge Setleri"
+
+    def get_absolute_url(self):
+        return "/tema/simge-seti/detay/%s/" % self.slug
+
+    def get_redirect_url(self):
+        return "/tema/simge-seti/detay/%s/%s/" % (self.slug, self.id)
+
+    def get_download_url(self):
+        return self.file.url
 
 class OpenOfficeApplication(models.Model):
     name = models.CharField(max_length=50)
@@ -221,6 +239,7 @@ class OpenOfficeVersion(models.Model):
 
     def __unicode__(self):
         return self.version
+
 
 class OpenOfficeTheme(ThemeItem):
     file = models.FileField("OpenOffice dosyası", upload_to="upload/tema/openoffice/%Y/%m/%d")
@@ -247,9 +266,14 @@ class OpenOfficeTemplate(OpenOfficeTheme):
         verbose_name = u"Open Office Şablonu"
         verbose_name_plural = u"Open Office Şablonları"
 
-
     def get_absolute_url(self):
         return "/tema/open-office-sablon/detay/%s/" % (self.slug)
+
+    def get_redirect_url(self):
+        return "/tema/open-office-sablon/detay/%s/%s/" % (self.slug, self.id)
+
+    def get_download_url(self):
+        return self.file.url
 
 class OpenOfficeExtension(OpenOfficeTheme):
     category = models.ForeignKey("OpenOfficeExtensionCategory") 
@@ -260,6 +284,12 @@ class OpenOfficeExtension(OpenOfficeTheme):
 
     def get_absolute_url(self):
         return "/tema/open-office-eklenti/detay/%s/" % (self.slug)
+
+    def get_redirect_url(self):
+        return "/tema/open-office-eklenti/detay/%s/%s" % (self.slug, self.id)
+
+    def get_download_url(self):
+        return self.file.url
 
 class Font(ThemeItem):
     font = models.FileField("Yazıtipi dosyası", upload_to="upload/tema/yazitipi/")
@@ -273,7 +303,7 @@ class Font(ThemeItem):
         return "/tema/yazitipleri/detay/%s/" % (self.slug)
 
     def get_redirect_url(self):
-        return "/tema/yazitipleri/%s/%s/" % (self.slug, self.id)
+        return "/tema/yazitipleri/detay/%s/%s/" % (self.slug, self.id)
 
     def get_download_url(self):
         return self.font.url
@@ -404,6 +434,6 @@ def category_counter_callback(sender, **kwargs):
         category.count = Model.objects.filter(category=category,status=True).count()
         category.save()
 
-post_save.connect(category_counter_callback, sender=Wallpaper)
-post_delete.connect(category_counter_callback, sender=Wallpaper)
-
+for Model in [Wallpaper,OpenOfficeTemplate, OpenOfficeExtension]:
+    post_save.connect(category_counter_callback, sender=Model)
+    post_delete.connect(category_counter_callback, sender=Model)

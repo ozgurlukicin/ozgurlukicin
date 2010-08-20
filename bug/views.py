@@ -16,8 +16,17 @@ from oi.forum.views import flood_control
 from oi.bug.models import Bug, Comment
 from oi.bug.forms import BugForm, FullBugForm, CommentForm
 from oi.bug.settings import BUGS_PER_PAGE
+from oi.settings import DEBUG
 
-BUG_MAILLIST = User.objects.get(username="akin").email
+try:
+    BUG_USER = User.objects.get(username="akin")
+except User.DoesNotExist:
+    if DEBUG:
+        BUG_USER = User.objects.filter(is_superuser=True)[0]
+    else:
+        raise
+
+BUG_MAILLIST = BUG_USER.email
 BUG_FROM_EMAIL = "hata@ozgurlukicin.com"
 
 @login_required
@@ -32,7 +41,7 @@ def add_bug(request):
                 submitter = request.user,
                 description = form.cleaned_data["description"],
                 priority = form.cleaned_data["priority"],
-                assigned_to = User.objects.get(username="akin"),
+                assigned_to = BUG_USER,
                 )
             bug.save()
             email_dict = {

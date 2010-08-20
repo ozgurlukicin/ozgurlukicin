@@ -38,6 +38,7 @@ urlpatterns = patterns ('oi.tema.views',
         (r'^ekle/masaustu-goruntuleri/$','themeitem_add_desktopscreenshot'),
         (r'^ekle/yazitipleri/$','themeitem_add_font'),
         (r'^ekle/open-office-ogesi/$','themeitem_add_openoffice_element'),
+        (r'^ekle/simge-seti/$','themeitem_add_iconset'),
 
         (r'^khotnewstuff/wallpaper-providers.xml$', 'ghns_wallpapers'),
         (r'^khotnewstuff/wallpaper/wallpaper.xml$', 'ghns_wallpaper'),

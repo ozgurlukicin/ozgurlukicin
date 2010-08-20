@@ -167,3 +167,20 @@ class OpenOfficeExtensionForm(OpenOfficeTemplateForm):
         if len(field_data) > 5:
             raise forms.ValidationError("En fazla 5 etiket seçebilirsiniz. Lütfen açtığınız başlığa uygun etiket seçiniz.")
         return field_data
+
+class IconSetForm(OpenOfficeTemplateForm):
+    text = forms.CharField(label="Tanım", required=True, help_text="Ekleyeceğiniz ikon seti hakkındaki açıklamalarınızı, kurulum ile ilgili ekstra notlarınız bu bölümde belirtebilirsiniz..", widget=forms.Textarea(attrs={"style":"width:400px"}))
+    confirmation = forms.BooleanField(label="Onay", required=True, help_text="Bu tema setini dağıtma hakkına sahibim.")
+    license = forms.ModelChoiceField(label="Lisans", queryset=License.objects.order_by("name"), empty_label="---------")
+    origin_url = forms.URLField(label="Özgün Çalışma", required=False, help_text="Başka bir çalışmayı temel aldıysanız bunun bağlantısını yazın.", widget=forms.TextInput(attrs={"style":"width:400px"}))
+        
+    class Meta:
+        model = IconSet
+        exclude = ("author", "rating", "thumbnail",
+                "download_count", "submit", "update", "status", "deny_reason", "scalable",  "changelog", "slug", "topic", "version")
+
+    def clean_tags(self):
+        field_data = self.cleaned_data['tags']
+        if len(field_data) > 5:
+            raise forms.ValidationError("En fazla 5 etiket seçebilirsiniz. Lütfen açtığınız başlığa uygun etiket seçiniz.")
+        return field_data
