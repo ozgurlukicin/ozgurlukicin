@@ -8,56 +8,16 @@ Legend:
 / In progress
 + Completed
 
-/ General 404 error pages
 / User management system (basic login/logout/register and user profiles)
-  + ignored user names
-  + login
-  + logout
-  + register
-  + edit profile
   - user list
-  + show profile
-  + avatar support
-  + lost password support
 
-- FreeComment support for news (also maybe packages, games etc.)
 - Download documents as PDF support (packages, first steps)
-- Search support
 
 / Forum
-  + Category
-    + Hidden
-    + Sorting
-  / Forum
-    + Category
-    + Hidden
-    + Sorting
-    + Lock
-    + Pagination
-  / Topic
-    + Flood Control
-    + Tags
-    + Hidden
-    + Hide
-    + Lock
-    + Stick
-    + Edit
-    ? Split
-    ? Merge
   / Post
-    + Flood control
-    + Hidden
-    + Hide
-    + Edit
     - Markup language (BBCode??)
     - Smiley
-    + Quotations
-  + Feeds
-  - Search
   - Log & monitor all IP's
   - User/IP Ban
-  - Migration
-  - Multi language
-
 
 * fill alt info for all images on ui
