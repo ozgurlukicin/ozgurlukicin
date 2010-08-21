@@ -4,7 +4,7 @@
     <div class="idea_vote_bar">
     {% if notr_percent == 0 and no_percent == 0 and yes_percent == 0 %}
             <img id="white_bar_{{ idea_id }}" width="54" src="/media/img/beyin2/white_bar.png" ><img id="green_bar_{{ idea_id }}" width="0" src="/media/img/beyin2/green_bar.png" style="display:none;" /><img id="yellow_bar_{{ idea_id }}" width="0" src="/media/img/beyin2/yellow_bar.png" style="display:none;" /><img id="red_bar_{{ idea_id }}" width="0" src="/media/img/beyin2/red_bar.png" style="display:none;" />
-    {% endif %} 
+    {% endif %}
     <img id="green_bar_{{ idea_id }}" width="{{ yes_percent }}" src="/media/img/beyin2/green_bar.png" alt="{{ vote_text }}" title="{{ vote_text }}" /><img id="yellow_bar_{{ idea_id }}" width="{{ notr_percent }}" src="/media/img/beyin2/yellow_bar.png" alt="{{ vote_text }}" title="{{ vote_text }}" /><img id="red_bar_{{ idea_id }}" width="{{ no_percent }}" src="/media/img/beyin2/red_bar.png" alt="{{ vote_text }}" title="{{ vote_text }}" />
     {% if yes_percent == 0 %}
     <script type="text/javascript" >{

@@ -113,7 +113,7 @@ def main(request, idea_id = -1, page_number = 1, order = "date", filter_by = "no
             pos_votes = Vote.objects.filter( vote = 'U', idea = idea).count()
             notr_votes = Vote.objects.filter( vote = 'N', idea = idea ).count()
             neg_votes = Vote.objects.filter( vote = 'D', idea = idea ).count()
-            idea.vote_text =  "Arti:%s kararsiz:%s Eksi:%s" %(pos_votes, notr_votes, neg_votes )
+            idea.vote_text =  "Olumlu: %s Kararsız: %s Olumsuz: %s" %(pos_votes, notr_votes, neg_votes )
         status_list = Status.objects.all().order_by("name")
         category_list = Category.objects.all().order_by("name")
         if not all_idea_list:
