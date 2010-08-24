@@ -59,7 +59,6 @@ class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabil
 <div class="idea-rules"><a href='/hakkinda/beyin-bileseni-kurallari'>Beyin Bileşeni Kurallari</a></div>
 <div class="brainmenu">
     <h2>Yeni Fikirler</h2>
-</ul>
     <ul>
 {% if user.is_authenticated %}
 <li><a href='{% url main_filter "user" user.id %} '>Eklediğim Fikirler</a></li>
