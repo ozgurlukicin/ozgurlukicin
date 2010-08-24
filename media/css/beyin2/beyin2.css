@@ -256,3 +256,8 @@ textarea#description {
     background:#FFFFFF;
     padding:2px 0 2px 0;
 }
+
+.idea-rules {
+    float:left;
+    margin-bottom:15px;
+}
