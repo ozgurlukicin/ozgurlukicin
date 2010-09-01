@@ -15,7 +15,7 @@ from oi.middleware import threadlocals
 from oi.st.tags import Tag
 from oi.poll.models import Poll
 
-from oi.forum.settings import FORUM_FROM_EMAIL
+from oi.forum.settings import FORUM_FROM_EMAIL, POSTS_PER_PAGE
 
 
 class Post(models.Model):
@@ -41,22 +41,10 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         """Use topic/forum.get_latest_post_url whenever you can"""
-        # all the mess is about pages
-        import oi.forum.settings
 
         posts = self.topic.post_set.all().order_by('created')
 
-        # binary search position of this post
-        i = 0
-        j = int(self.topic.posts)
-        k = (i + j) / 2
-        while i < j:
-            k = (i + j) / 2
-            if self.id > posts[k].id:
-                i = k + 1
-            else:
-                j = k
-        page = i / oi.forum.settings.POSTS_PER_PAGE + 1
+        page = posts.count() / POSTS_PER_PAGE + 1
 
         return '/forum/%s/%s/?page=%s#post%s' % (self.topic.forum.slug, self.topic.id, page, self.id)
 
@@ -170,9 +158,7 @@ class Topic(models.Model):
         return '/forum/%s/%s/?page=1' % (self.forum.slug, self.id)
 
     def get_latest_post_url(self):
-        import oi.forum.settings
-        lastpage = ((self.posts - 1) / oi.forum.settings.POSTS_PER_PAGE) + 1
-        return '/forum/%s/%s/?page=%s#post%s' % (self.forum.slug, self.id, lastpage, self.topic_latest_post.id)
+        return self.topic_latest_post.get_absolute_url()
 
     def get_follow_url(self):
         return '/forum/%s/%s/follow' % (self.forum.slug, self.id)
@@ -283,11 +269,7 @@ class Forum(models.Model):
         return "/forum/rss/forum/%s/" % self.slug
 
     def get_latest_post_url(self):
-        import oi.forum.settings
-
-        latest_topic = self.forum_latest_post.topic
-        lastpage = ((latest_topic.posts - 1) / oi.forum.settings.POSTS_PER_PAGE) + 1
-        return '/forum/%s/%s/?page=%s#post%s' % (self.slug, latest_topic.id, lastpage, self.forum_latest_post.id)
+        return self.forum_latest_post.get_absolute_url()
 
     def __unicode__(self):
         return self.name
