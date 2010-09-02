@@ -20,6 +20,7 @@ from oi.shop.shopprofile.models import ShopProfile
 
 PARDUS_VERSIONS = (
     (0, "---"),
+    (5,"Pardus 2011"),
     (4,"Pardus 2009"),
     (3,"Pardus 2008"),
     (2,"Pardus 2007"),
