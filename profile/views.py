@@ -329,6 +329,7 @@ def user_list(request):
         "Pardus 2007": Profile.objects.filter(pardus_version=2).count(),
         "Pardus 2008": Profile.objects.filter(pardus_version=3).count(),
         "Pardus 2009": Profile.objects.filter(pardus_version=4).count(),
+        "Pardus 2011": Profile.objects.filter(pardus_version=5).count(),
     }
     chl, chd, total = "", "", 0
     for value in versions.values():
