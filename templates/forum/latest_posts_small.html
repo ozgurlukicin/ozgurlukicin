@@ -1,8 +1,8 @@
 {% for topic in latest_posts %}
 <div class="post" id="{{ topic.topic_latest_post.id }}">
     <div class="forum">[<a href="{{ topic.forum.get_absolute_url }}">{{ topic.forum }}</a>]</div>
-    <div class="topic"><a href="{{ topic.get_absolute_url }}">{{ topic }}</a></div>
-    <div class="link"><span class="profile_link"><a href="{{ topic.topic_latest_post.author.get_profile.get_absolute_url }}">{{ topic.topic_latest_post.author }}</a> <a href="{{ topic.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="iletiye git" /></a></span></div>
+    <div class="topic"><a href="{{ topic.get_latest_post_url }}">{{ topic }}</a></div>
+    <div class="link"><span class="profile_link"><a href="{{ topic.topic_latest_post.author.get_profile.get_absolute_url }}">{{ topic.topic_latest_post.author }}</a> <a href="{{ topic.topic_latest_post.get_absolute_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="iletiye git" /></a></span></div>
     <div class="date">{{ topic.topic_latest_post.created|date:"d F Y H:i" }}</div>
 </div>
 {% endfor %}
