@@ -43,8 +43,13 @@ class Post(models.Model):
         """Use topic/forum.get_latest_post_url whenever you can"""
 
         posts = self.topic.post_set.all().order_by('created')
+        posts_count = posts.count()
 
-        page = posts.count() / POSTS_PER_PAGE + 1
+        if posts_count == POSTS_PER_PAGE:
+            page = 1
+
+        else:
+            page = posts.count() / POSTS_PER_PAGE + 1
 
         return '/forum/%s/%s/?page=%s#post%s' % (self.topic.forum.slug, self.topic.id, page, self.id)
 
