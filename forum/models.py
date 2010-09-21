@@ -45,11 +45,9 @@ class Post(models.Model):
         posts = self.topic.post_set.all().order_by('created')
         posts_count = posts.count()
 
-        if posts_count == POSTS_PER_PAGE:
-            page = 1
-
-        else:
-            page = posts.count() / POSTS_PER_PAGE + 1
+        page = posts_count / POSTS_PER_PAGE
+        if posts_count % POSTS_PER_PAGE:
+            page += 1
 
         return '/forum/%s/%s/?page=%s#post%s' % (self.topic.forum.slug, self.topic.id, page, self.id)
 
