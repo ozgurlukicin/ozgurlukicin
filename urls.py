@@ -190,7 +190,7 @@ urlpatterns = patterns('',
     (r'^e-dergi/', include('oi.ezine.urls')),
 
     #Shipit
-    #(r'^cdgonder/', include('oi.shipit.urls')),
+    (r'^cdgonder/', include('oi.shipit.urls')),
 
     #Piyango
     (r'^piyango/', include('oi.piyango.urls')),
