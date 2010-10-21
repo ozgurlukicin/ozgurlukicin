@@ -39,10 +39,10 @@ class CdClient(models.Model):
     hash = models.CharField("Etkinleştirme Anahtarı", max_length=40)
 
     def get_full_name(self):
-        return u"%s %s" % (self.first_name, self.last_name)
+        return unicode("%s %s") % (self.first_name, self.last_name)
 
     def get_full_phone(self):
-        return u"(%s) %s" % (self.phone_area, self.phone_number)
+        return unicode("(%s) %s") % (self.phone_area, self.phone_number)
 
     def __unicode__(self):
         return self.get_full_name()
