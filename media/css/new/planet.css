@@ -62,3 +62,11 @@
     margin-bottom: 10px;
 }
 
+.planet-styles blockquote {
+    padding: 5px 10px;
+    margin-bottom: 12px;
+    background-color: #EEE;
+    border: 1px solid #BBB;
+    color: #000;
+    clear: both;
+}
