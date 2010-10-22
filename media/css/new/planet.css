@@ -53,6 +53,12 @@
     text-decoration: none;
 }
 
-.feedjack ul {
-    list-style-type: circle;
+.planet-styles ul {
+    margin-left: 20px;
+    list-style-type: disc;
 }
+
+.planet-styles ul li {
+    margin-bottom: 10px;
+}
+
