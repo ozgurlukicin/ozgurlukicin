@@ -6,7 +6,7 @@
 {% endblock %}}
 {% block content %}
 {% for item in object_list %}
-<div class="post">
+<div class="post feedjack">
     {% ifchanged %}
     <div class="date"><div class="day">{{ item.date_modified|date:"j" }}</div><div class="month">{{ item.date_modified|date:"F"|slice:":3" }}</div></div>
     {% endifchanged %}
