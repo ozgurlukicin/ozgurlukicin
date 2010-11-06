@@ -8,57 +8,104 @@
 {% block title %}Temalar - {% if author %}{{ author }} tarafından gönderilen içerik - {% endif %}{% endblock %}
 {% block content %}
 <style type="text/css">
-    #choice-container {float:left}
-    #choice-container .top {float:left;width:195px;height:290px}
+    #choice-container {float:left;height:310px}
+    #choice-container * {float:left}
+    #choice-container .top {float:left;}
     #choice-container .top img{}
     #choice-container .bottom img{}
 
     #choice-container .top{cursor:pointer}
     #choice-container .bottom{cursor:pointer}
-    #choice-container>*{float:left;width:195px;margin-left:15px}
+    #choice-container>*{float:left;margin-left:-5px}
+    #choice-container>div>a{clear:both}
+    #choice-container .bottom{margin-top:-10px}
 
+
+    #choice-container2 {float:left;padding:20px 80px}
+    #choice-container2 * {float:left}
+    #choice-container2 .top {float:left;}
+    #choice-container2 .top img{}
+    #choice-container2 .bottom img{}
+
+    #choice-container2 .top{cursor:pointer}
+    #choice-container2 .bottom{cursor:pointer}
+    #choice-container2>*{float:left;margin-left:-5px}
+    #choice-container2>div>a{}
+    #choice-container2 #screenshot {height:160px}
+    #choice-container2 .bottom{margin-left:-7px}
 
 </style>
+
 <div id="choice-container">
-    <div id="wallpaper">
+    <div id="wallpaper" style="">
         <a href="/tema/duvar-kagitlari">
             <div class="top">
-                <img class="over" src="/media/img/tema/duvarUstover.png" />
-                <img class="not-over" style="margin-top:-1px" src="/media/img/tema/duvarUst.png" />
+                <img class="over" src="/media/img/tema/new/duvarUstMai.png" />
+                <img class="not-over" src="/media/img/tema/new/duvarUstGri.png" />
             </div>
         </a>
         <a href="/tema/ekle/duvar-kagitlari">
             <div class="bottom" style="">
-                <img class="over" style="margin-left:1px" src="/media/img/tema/duvarAltOver.png" />
-                <img class="not-over" src="/media/img/tema/duvarAlt.png" />
+                <img class="over" src="/media/img/tema/new/duvarAltMai.png" />
+                <img class="not-over" src="/media/img/tema/new/duvarAltGri.png" />
             </div>
         </a>
     </div>
-    <div id="font">
+    <div id="font" style="">
         <a href="/tema/yazitipleri">
             <div class="top">
-                <img class="over" src="/media/img/tema/tipoUst_over.png" />
-                <img class="not-over" style="margin-top:1px" src="/media/img/tema/tipoUst.png" />
+                <img class="over" style="margin-left:1px" src="/media/img/tema/new/TipoUstMai.png" />
+                <img class="not-over" src="/media/img/tema/new/TipoUstGri.png" />
             </div>
         </a>
         <a href="/tema/ekle/yazitipleri">
             <div class="bottom" style="">
-                <img class="over" style="margin-left:1px" src="/media/img/tema/tipoAlt_over.png" />
-                <img class="not-over" src="/media/img/tema/tipoalt.png" />
+                <img class="over" style="margin-top:1px" src="/media/img/tema/new/TipoAltMai.png" />
+                <img class="not-over" src="/media/img/tema/new/TipoAltGri.png" />
             </div>
         </a>
     </div>
     <div id="open-office">
         <a href="/tema/open-office">
             <div class="top">
-                <img class="over" src="/media/img/tema/ooust_over.png" />
-                <img class="not-over" style="margin-top:0px" src="/media/img/tema/ooust.png" /> 
+                <img class="over" style="margin-left:0px" src="/media/img/tema/new/sablonUstMai.png" />
+                <img class="not-over" src="/media/img/tema/new/sablonUstGri.png" />
             </div>
         </a>
         <a href="/tema/ekle/open-office-ogesi">
             <div class="bottom" style="">
-                <img class="over" src="/media/img/tema/ooAlt_over.png" />
-                <img class="not-over" src="/media/img/tema/ooAlt.png" />
+                <img class="over" style="margin-top:1px" src="/media/img/tema/new/sablonAltMai.png" />
+                <img class="not-over" src="/media/img/tema/new/sablonAltgri.png" />
+            </div>
+        </a>
+    </div>
+    <div id="open-office">
+        <a href="/tema/simge-seti">
+            <div class="top">
+                <img class="over" src="/media/img/tema/new/simgeUstMai.png" />
+                <img class="not-over" style="margin-left:5px" src="/media/img/tema/new/simgeUstGri.png" />
+            </div>
+        </a>
+        <a href="/tema/ekle/simge-seti">
+            <div class="bottom"> 
+                <img class="over" style="margin-top:-1px" src="/media/img/tema/new/simgeAltMai.png" />
+                <img class="not-over" src="/media/img/tema/new/simgeAltGri.png" />
+            </div>
+        </a>
+    </div>
+</div>
+<div id="choice-container2">
+    <div id="screenshot">
+        <a href="/tema/masaustu-goruntuleri">
+            <div class="top" style="width:325px">
+                <img class="over" style="margin-left:-1px;margin-top:1px" src="/media/img/tema/new/masaUstMai.png" />
+                <img class="not-over" src="/media/img/tema/new/masaUstGri.png" />
+            </div>
+        </a>
+        <a href="/tema/ekle/masaustu-goruntuleri">
+            <div class="bottom">
+                <img class="over" src="/media/img/tema/new/masaAltMai.png" />
+                <img class="not-over" src="/media/img/tema/new/masaAltGri.png" />
             </div>
         </a>
     </div>
