@@ -1,7 +1,7 @@
 {% extends "tema/base.html" %}
 {% load library %}
 {% block temaextrahead %}
-<style type="text/css" media="screen">@import url('/media/css/tema/object_lists.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/object_lists.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/tema/base.css');</style>
 {% endblock %}
@@ -23,41 +23,6 @@
 <!-- taken from news list -->
 <div class="summary_container">
 {% for object in object_list %}
-    <div class="object">
-        <div class="image-container">
-            <div class="image">
-                {% if object.thumbnail %}<img src="{{ object.thumbnail.url }}" alt="{{ object.title }}" />{% endif %}<br />
-                <img src="/media/img/new/image_bottom.png" alt="gölge" />
-            </div>
-        </div>
-        <div class="info-container">
-            <div class="title-container">
-                <div class="title"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></div>
-                <div class="version">     </div>
-            </div>
-            <div class="description-container">
-                <div class="description">   </div>
-            </div>
-            <div class="comments-container">
-                <div class="comments">    </div>
-            </div>
-        </div>
-        <div class="info2-container">
-            <div class="score-container">
-                <div class="score">   </div>
-            </div>
-            <div class="date-container">
-                <div class="date">    </div>
-            </div>
-        <div class="info3-container">
-                <div class="more">
-                </div>
-            </div>
-        </div>
-
-
-
-
     <div class="column first">
         {% if object.thumbnail %}<img src="{{ object.thumbnail.url }}" alt="{{ object.title }}" />{% endif %}<br />
         <img src="/media/img/new/image_bottom.png" alt="gölge" />

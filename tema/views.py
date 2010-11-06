@@ -76,6 +76,7 @@ add_new_links = {"duvar-kagitlari":"/tema/ekle/duvar-kagitlari",
                 "open-office-eklenti":"/tema/ekle/open-office-ogesi",
                 "open-office-sablon":"/tema/ekle/open-office-ogesi",
                 "simge-seti":"/tema/ekle/simge-seti",
+                "masaustu-goruntuleri":"/tema/ekle/masaustu-goruntuleri/",
                 }
 
 
