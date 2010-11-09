@@ -75,7 +75,7 @@ SITE_ID = 1
 
 MEDIA_ROOT = '%s/media/' % DOCUMENT_ROOT
 MEDIA_URL = '%s/media/' % WEB_URL
-ADMIN_MEDIA_PREFIX = '%s/media/' % WEB_URL
+ADMIN_MEDIA_PREFIX = '/media/admin/'
 WEBALIZER_DIR = ''
 
 SECRET_KEY = 'n9-*x3!&!(x*z_!13)cyxil4fh+ov_+3!y($&4t7iit=)d)=93'
@@ -89,7 +89,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'oi.context_processors.testing',
     'django.core.context_processors.auth',
     'django.core.context_processors.request',
-)
+    'grappelli.context_processors.admin_template_path',
+    )
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -111,6 +112,7 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'grappelli',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
