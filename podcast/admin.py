@@ -12,7 +12,7 @@ from oi.podcast.models import *
 class EpisodeAdmin(admin.ModelAdmin):
     exclude = ("topic", "minutes", "seconds")
     class Media:
-        js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js", "js/jquery-1.2.6.min.js", "js/adminimages.js", "js/jquery.autocomplete.js", "js/taghelper.js")
+        js = ("admin/tinymce/jscripts/tiny_mce/tiny_mce.js", "js/tinymce_setup.js", "js/jquery-1.4.3.min.js", "js/adminimages.js", "js/jquery.autocomplete.js", "js/taghelper.js")
         css = {
             "all": ("css/new/autocomplete.css",),
         }
