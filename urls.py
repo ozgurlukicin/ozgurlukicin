@@ -208,7 +208,7 @@ urlpatterns = patterns('',
     (r'^$', 'oi.st.views.home'),
     (r'^admin/upload_progress/$', 'oi.upload.views.upload_progress'),
     (r'^admin/upload/image/tinymce/$', 'oi.upload.views.image_upload'),
-    (r'^admin/(.*)', admin.site.root),
+    (r'^admin/', include(admin.site.urls)),
     (r'^media/(.*)$', 'django.views.static.serve', {'document_root': '%s/media' % DOCUMENT_ROOT, 'show_indexes': True}),
 
     #Feeds
