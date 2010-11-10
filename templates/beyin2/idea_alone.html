@@ -63,10 +63,10 @@
         {% endif %}
     {% endfor %}
     <br /><br /><br />
-    {% if idea.duplicate_list %}
+    {% if idea.get_duplications.count %}
     <div class="h3">Bu fikrin aynısı olarak işaretlenen fikirler </div>
     <ul class="idea_detail_box">
-    {% for duplicate in idea.duplicate_list %}
+    {% for duplicate in idea.get_duplications %}
     <li>
         <a href="{{ duplicate.topic.get_absolute_url }}" >{{ duplicate.title }}</a>
     </li>    

@@ -41,6 +41,16 @@ class Idea(models.Model):
     def get_absolute_url(self):
         return "/beyin2/%s/detail/" % self.id
 
+    def get_duplications(self):
+        return Idea.objects.filter(duplicate=self)
+
+    def get_vote_text(self):
+        pos_votes = Vote.objects.filter( vote = 'U', idea = self).count()
+        notr_votes = Vote.objects.filter( vote = 'N', idea = self ).count()
+        neg_votes = Vote.objects.filter( vote = 'D', idea = self ).count()
+        return "Olumlu: %s Kararsız: %s Olumsuz: %s" %(pos_votes, notr_votes, neg_votes )
+
+
 class Status(models.Model):
     name = models.CharField(max_length = 128)
 

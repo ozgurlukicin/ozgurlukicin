@@ -109,11 +109,17 @@ def main(request, idea_id = -1, page_number = 1, order = "date", filter_by = "no
         if filter_by == "duplicate":
             all_idea_list = Idea.objects.filter( is_duplicate = True ).order_by(order_dict[order])
         # add vote_counts for every vote, intended to use in preview on votebar
+        '''
+        # using this causes Django to fetch all object from database
+        # refer to this : http://docs.djangoproject.com/en/dev/topics/db/queries/#querysets-are-lazy
+        # set vote_text when user votes or just calculate this for listed objects
         for idea in all_idea_list:
             pos_votes = Vote.objects.filter( vote = 'U', idea = idea).count()
             notr_votes = Vote.objects.filter( vote = 'N', idea = idea ).count()
             neg_votes = Vote.objects.filter( vote = 'D', idea = idea ).count()
             idea.vote_text =  "Olumlu: %s Kararsız: %s Olumsuz: %s" %(pos_votes, notr_votes, neg_votes )
+        '''
+
         status_list = Status.objects.all().order_by("name")
         category_list = Category.objects.all().order_by("name")
         if not all_idea_list:
@@ -135,8 +141,10 @@ def main(request, idea_id = -1, page_number = 1, order = "date", filter_by = "no
             page_range = paginator.page_range[0:(int(page_number)+4)]
         #we dont want to show default category, so we sould send the name to check if it is
         def_cate = get_object_or_404(Status, pk = DefaultCategory )
+        '''
         for idea in idea_list.object_list:
             idea.duplicate_list = Idea.objects.filter( duplicate = idea )
+        '''
         return render_response(request,'beyin2/idea_list.html',{'idea_list': idea_list, 'status_list':status_list, 'category_list': category_list,'order':order,'come_from':'main', 'page_range': page_range, 'show_go_to_last': show_go_to_last, 'show_go_to_first': show_go_to_first, 'last_page': last_page, 'default_category' : def_cate,'filter':filter,'filter_by':filter_by})
 
 def idea_detail(request,idea_id):
