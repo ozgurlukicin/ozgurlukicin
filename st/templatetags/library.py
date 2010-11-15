@@ -81,7 +81,7 @@ def timedelta(value, arg=None):
 @register.filter
 def rfc822datetime(value):
     if value:
-        rfc822months = ("Jan", "Feb", "Mar", "Apr", "Jun", "Jul", "Aug", "Oct", "Nov", "Dec")
+        rfc822months = ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
         return "%s %s %d %s:%s:%s +0200" % (str(value.day).zfill(2), rfc822months[value.month-1], value.year, str(value.hour).zfill(2), str(value.minute).zfill(2), str(value.second).zfill(2))
     else:
         return ""
