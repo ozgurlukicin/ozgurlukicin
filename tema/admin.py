@@ -45,7 +45,7 @@ class WallpaperAdmin(ThemeItemAdmin):
 class DesktopScreenshotAdmin(ThemeItemAdmin):
     fieldsets = (
             (None, {
-                "fields": ("thumbnail", "title", "slug", "origin_url", "text",
+                "fields": ("thumbnail", "title", "slug", "text",
                     "changelog", "image", "status", "deny_reason", "tags")
                 }),
             ("Diğer", {
@@ -74,6 +74,19 @@ class IconSetAdmin(ThemeItemAdmin):
 class OpenOfficeTemplateAdmin(ThemeItemAdmin):
     list_display = ("title", "version", "author", "license", "status")
     
+class PackageScreenshotAdmin(ThemeItemAdmin):
+    fieldsets = (
+            (None, {
+                "fields": ("thumbnail", "title", "slug", "pardusVersion", "text",
+                    "changelog", "image", "s_image""status", "deny_reason", "tags")
+                }),
+            ("Diğer", {
+                "classes": "collapse",
+                "fields": ("author", "license", "rating", "download_count", "submit", "update", "comment_enabled")
+                })
+            )
+
+
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
@@ -93,3 +106,5 @@ admin.site.register(OpenOfficeExtension)
 admin.site.register(OpenOfficeApplication)
 admin.site.register(OpenOfficeVersion)
 admin.site.register(IconSet,IconSetAdmin)
+admin.site.register(PackageScreenshot)
+admin.site.register(PardusVersion)

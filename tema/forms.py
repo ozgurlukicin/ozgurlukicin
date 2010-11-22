@@ -116,6 +116,22 @@ class WallpaperForm(forms.ModelForm):
             raise forms.ValidationError("En fazla 5 etiket seçebilirsiniz. Lütfen açtığınız başlığa uygun etiket seçiniz.")
         return field_data
 
+class PackageScreenshotForm(forms.ModelForm):
+    text = forms.CharField(label="Tanım", required=True, help_text="Ekleyeceğiniz dosyalar hakkındaki açıklamalarınızı bu bölümde belirtebilirsiniz.", widget=forms.Textarea(attrs={"style":"width:400px"}))
+    confirmation = forms.BooleanField(label="Onay", required=True, help_text="Bu paket görüntüsünü dağıtma hakkına sahibim.")
+    license = forms.ModelChoiceField(label="Lisans", queryset=License.objects.order_by("name"), empty_label="---------")
+
+    class Meta:
+        model = PackageScreenshot
+        exclude = ("author", "rating", "category", "thumbnail", "origin_url",
+                "download_count", "submit", "update", "status", "deny_reason", "scalable", "papers", "changelog", "slug", "topic")
+
+    def clean_tags(self):
+        field_data = self.cleaned_data['tags']
+        if len(field_data) > 5:
+            raise forms.ValidationError("En fazla 5 etiket seçebilirsiniz. Lütfen açtığınız başlığa uygun etiket seçiniz.")
+        return field_data
+
 class WallpaperFileForm(forms.ModelForm):
     create_smaller_wallpapers = forms.BooleanField(label="Küçüklerini Oluştur", required=False, initial=True, help_text="Büyük bir duvar kağıdı gönderiyorsanız bu seçenekle küçüklerinin otomatik oluşturulmasını sağlayabilirsiniz.")
 

@@ -70,6 +70,10 @@ class Category(models.Model):
     class Meta:
         abstract = True
 
+class PardusVersion(Category):
+    class Meta:
+        verbose_name = u"Pardus Sürümü"
+        verbose_name_plural = u"Pardus Sürümü"
 
 class WallpaperCategory(Category):
     class Meta:
@@ -160,6 +164,8 @@ class ThemeItem(models.Model):
             return "/tema/open-office-eklenti/detay/%s/" % self.slug
         elif IconSet.objects.filter(id = self.id).count():
             return "/tema/simge-seti/detay/%s/" % self.slug
+        elif PackageScreenshot.objects.filter(id= self.id).count():
+            return "/tema/paket-goruntuleri/detay/%s/" % self.slug
 
 
 
@@ -362,6 +368,26 @@ class Wallpaper(ThemeItem):
                     file = ContentFile("")
                     newPaper.image.save(wallpaper.image.path, file, save=True)
                     image.save(newPaper.image.path)
+
+
+class PackageScreenshot(ThemeItem):
+    image = models.ImageField(upload_to="upload/tema/paket-goruntusu", verbose_name="Paket Görüntüsü")
+    s_image = models.ImageField(upload_to="upload/tema/paket-goruntusu", verbose_name="Küçük Resim")
+    pardusVersion = models.ForeignKey("PardusVersion", null=True,verbose_name="Pardus Sürümü")
+
+    class Meta:
+        verbose_name = "Paket Görüntüsü"
+        verbose_name_plural = "Paket Görüntüleri"
+
+    def get_absolute_url(self):
+        return "/tema/paket-goruntuleri/detay/%s/" % self.slug
+
+    def get_redirect_url(self):
+        return "tema/paket-goruntuleri/detay/%s/%s/" % (self.slug, self.id)
+
+    def get_download_url(self):
+        return self.image.url
+
 
 class File(models.Model):
     "File for download"

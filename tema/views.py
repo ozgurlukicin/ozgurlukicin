@@ -11,7 +11,7 @@ import Image, ImageFont, ImageDraw
 
 from oi.forum.views import flood_control
 from oi.st.wrappers import render_response
-from oi.tema.models import ThemeItem, File, ScreenShot, Vote, ThemeAbuseReport, DesktopScreenshot, Wallpaper, Font
+from oi.tema.models import ThemeItem, File, ScreenShot, Vote, ThemeAbuseReport, DesktopScreenshot, Wallpaper, Font, PackageScreenshot
 from oi.tema.forms import *
 from oi.tema.settings import THEME_ITEM_PER_PAGE
 
@@ -58,6 +58,7 @@ category_dict = {
     "open-office-sablon": (OpenOfficeTemplate,"tema/themeitem_openofficetemplate_detail.html",OpenOfficeTemplateCategory),
     "open-office-eklenti": (OpenOfficeExtension,"tema/themeitem_openofficeextension_detail.html",OpenOfficeExtensionCategory),
     "simge-seti":(IconSet, "tema/themeitem_iconset_detail.html", None),
+    "paket-goruntuleri": (PackageScreenshot, "tema/themeitem_packagescreenshot_detail.html", PardusVersion),
 }
 
 def replace_turkish(text):
@@ -77,6 +78,7 @@ add_new_links = {"duvar-kagitlari":"/tema/ekle/duvar-kagitlari",
                 "open-office-sablon":"/tema/ekle/open-office-ogesi",
                 "simge-seti":"/tema/ekle/simge-seti",
                 "masaustu-goruntuleri":"/tema/ekle/masaustu-goruntuleri/",
+                "paket-goruntuleri":"/tema/ekle/paket-goruntuleri/",
                 }
 
 
@@ -91,7 +93,7 @@ def themeitem_list(request, category=None, sub_category=None):
         if sub_category:
             if not SubCategoryModel:
                 raise Http404
-            sub_category = get_object_or_404(SubCategoryModel, slug=sub_category) 
+            sub_category = get_object_or_404(SubCategoryModel, slug=sub_category)
             themeItems = themeItems.filter(category=sub_category)
     elif not category:
         themeItems = ThemeItem.objects.all()
@@ -443,6 +445,38 @@ def themeitem_add_wallpaper(request):
     return render_response(request, "tema/themeitem_add_wallpaper.html", locals())
 
 @login_required
+def themeitem_add_packagescreenshot(request):
+    if request.method == "POST":
+        form = PackageScreenshotForm(request.POST.copy(), request.FILES)
+        flood, timeout = flood_control(request)
+
+        if form.is_valid() and not flood:
+            item = form.save(commit=False)
+            item.author = request.user
+            item.submit = item.update = datetime.datetime.now()
+            slug = slugify(replace_turkish(item.title))
+            item.save()
+            for tag in form.cleaned_data["tags"]:
+                t=Tag.objects.get(name=tag)
+                item.tags.add(t)
+            item.slug = str(item.id) + "-" + slug
+            item.save()
+
+            #create thumbnail
+            thumbnail = Image.open(item.image.path)
+            thumbnail.thumbnail((150, 200), Image.ANTIALIAS)
+            file = ContentFile("")
+            item.thumbnail.save(item.image.path, file, save=True)
+            thumbnail.save(item.thumbnail.path)
+
+            #TODO: Send e-mail to admins
+            return render_response(request, "tema/themeitem_add_complete.html", locals())
+        else:
+            tags = [t.pk for t in Tag.objects.filter(name="paket görüntüsü")]
+            form = PackageScreenshotForm(initial={"tags":tags})
+    return render_response(request, "tema/themeitem_add_packagescreenshot.html", locals())
+
+@login_required
 def themeitem_change(request, item_id):
     object = get_object_or_404(ThemeItem, pk=item_id)
     if request.user == object.author or request.user.has_perm("can_change_themeitem"):
@@ -516,6 +550,10 @@ def themeitem_download(request, category, slug, id):
         object.save()
     elif category == "open-office-eklenti":
         object = get_object_or_404(OpenOfficeExtension, id=id)
+        object.download_count += 1
+        object.save()
+    elif category == "paket-goruntuleri":
+        object = get_object_or_404(PackageScreenshot, id=id)
         object.download_count += 1
         object.save()
     else:
