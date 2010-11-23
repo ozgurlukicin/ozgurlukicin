@@ -58,7 +58,7 @@ category_dict = {
     "open-office-sablon": (OpenOfficeTemplate,"tema/themeitem_openofficetemplate_detail.html",OpenOfficeTemplateCategory),
     "open-office-eklenti": (OpenOfficeExtension,"tema/themeitem_openofficeextension_detail.html",OpenOfficeExtensionCategory),
     "simge-seti":(IconSet, "tema/themeitem_iconset_detail.html", None),
-    "paket-goruntuleri": (PackageScreenshot, "tema/themeitem_packagescreenshot_detail.html", PardusVersion),
+    "paket-goruntuleri": (PackageScreenshot, "tema/themeitem_packagescreenshot_detail.html", None),
 }
 
 def replace_turkish(text):
@@ -469,6 +469,13 @@ def themeitem_add_packagescreenshot(request):
             item.thumbnail.save(item.image.path, file, save=True)
             thumbnail.save(item.thumbnail.path)
 
+            #create thumbnail for package manager
+            s_image = Image.open(item.image.path)
+            s_image.thumbnail((270, 190), Image.ANTIALIAS)
+            file = ContentFile("")
+            item.s_image.save(item.image.path, file, save=True)
+            s_image.save(item.s_image.path)
+
             #TODO: Send e-mail to admins
             return render_response(request, "tema/themeitem_add_complete.html", locals())
         else:
@@ -487,26 +494,32 @@ def themeitem_change(request, item_id):
                 render_response(request, "tema/message.html", {"type": "error", "message": "Lütfen %s saniye sonra tekrar deneyiniz." % timeout })
 
             if form.is_valid():
-                object.name = form.cleaned_data["name"]
-                object.category = form.cleaned_data["category"]
+                object.title = form.cleaned_data["title"]
+                try:
+                    object.category = form.cleaned_data["category"]
+                    object.parentcategory = object.category.parent
+                except KeyError:
+                    pass
                 object.license = form.cleaned_data["license"]
-                object.description = form.cleaned_data["description"]
+                object.text = form.cleaned_data["text"]
                 object.changelog = form.cleaned_data["changelog"]
                 object.comment_enabled = form.cleaned_data["comment_enabled"]
-                object.parentcategory = object.category.parent
                 object.save()
                 return HttpResponseRedirect(object.get_absolute_url())
             else:
                 return render_response(request, "tema/themeitem_change.html", locals())
         else:
             default_data = {
-                    "name": object.name,
-                    "category": object.category.id,
+                    "name": object.title,
                     "license": object.license.id,
-                    "description": object.description,
+                    "description": object.text,
                     "changelog": object.changelog,
                     "comment_enabled": object.comment_enabled,
                     }
+            try:
+                default_data += { "category": object.category.id }
+            except AttributeError:
+                pass
             form = ThemeItemForm(initial=default_data)
         return render_response(request, "tema/themeitem_change.html", locals())
     else:
