@@ -70,10 +70,6 @@ class Category(models.Model):
     class Meta:
         abstract = True
 
-class PardusVersion(Category):
-    class Meta:
-        verbose_name = u"Pardus Sürümü"
-        verbose_name_plural = u"Pardus Sürümü"
 
 class WallpaperCategory(Category):
     class Meta:
@@ -371,9 +367,8 @@ class Wallpaper(ThemeItem):
 
 
 class PackageScreenshot(ThemeItem):
-    image = models.ImageField(upload_to="upload/tema/paket-goruntusu", verbose_name="Paket Görüntüsü")
-    s_image = models.ImageField(upload_to="upload/tema/paket-goruntusu", verbose_name="Küçük Resim")
-    pardusVersion = models.ForeignKey("PardusVersion", null=True,verbose_name="Pardus Sürümü")
+    image = models.ImageField(upload_to="upload/tema/paket-goruntusu/buyuk", verbose_name="Paket Görüntüsü")
+    s_image = models.ImageField(upload_to="upload/tema/paket-goruntusu/kucuk", verbose_name="Küçük Resim")
 
     class Meta:
         verbose_name = "Paket Görüntüsü"
