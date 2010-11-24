@@ -478,9 +478,10 @@ def themeitem_add_packagescreenshot(request):
 
             #TODO: Send e-mail to admins
             return render_response(request, "tema/themeitem_add_complete.html", locals())
-        else:
-            tags = [t.pk for t in Tag.objects.filter(name="paket görüntüsü")]
-            form = PackageScreenshotForm(initial={"tags":tags})
+    else:
+        tags = [t.pk for t in Tag.objects.filter(name="paket görüntüsü")]
+        form = PackageScreenshotForm(initial={"tags":tags})
+
     return render_response(request, "tema/themeitem_add_packagescreenshot.html", locals())
 
 @login_required
