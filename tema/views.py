@@ -36,18 +36,18 @@ from django.conf import settings
 from django.template.defaultfilters import slugify
 
 TURKISH_CHARS = (
-    ("ç", "c"),
-    ("ğ", "g"),
-    ("ı", "i"),
-    ("ö", "o"),
-    ("ş", "s"),
-    ("ü", "u"),
-    ("Ç", "c"),
-    ("Ğ", "g"),
-    ("İ", "i"),
-    ("Ö", "o"),
-    ("Ş", "s"),
-    ("Ü", "u"),
+    (u"ç", "c"),
+    (u"ğ", "g"),
+    (u"ı", "i"),
+    (u"ö", "o"),
+    (u"ş", "s"),
+    (u"ü", "u"),
+    (u"Ç", "c"),
+    (u"Ğ", "g"),
+    (u"İ", "i"),
+    (u"Ö", "o"),
+    (u"Ş", "s"),
+    (u"Ü", "u"),
 )
 
 category_dict = {
