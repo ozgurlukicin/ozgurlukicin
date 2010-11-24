@@ -122,7 +122,7 @@ def themeitem_detail(request, category, slug):
     object = get_object_or_404(object_type, slug=slug, status=True)
 
     if request.user == object.author or request.user.has_perm("tema.change_themeitem"):
-        object.button_change = True
+        button_change = True
 
     return render_response(request, template_name, locals())
 
