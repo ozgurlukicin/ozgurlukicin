@@ -10,7 +10,7 @@ form .wrapper {
 }
 form p.help {
     padding-left: 38px;
-    margin-left: 7em;
+    margin: 4px 0 0 7em;
     color: #888888;
     float: left;
     font-size: 11px;
