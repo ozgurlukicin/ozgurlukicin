@@ -502,26 +502,34 @@ def themeitem_change(request, item_id):
                     pass
                 object.license = form.cleaned_data["license"]
                 object.text = form.cleaned_data["text"]
+                object.version = form.cleaned_data.get("version")
                 object.changelog = form.cleaned_data["changelog"]
                 object.comment_enabled = form.cleaned_data["comment_enabled"]
                 object.save()
+
                 return HttpResponseRedirect(object.get_absolute_url())
+
             else:
                 return render_response(request, "tema/themeitem_change.html", locals())
         else:
-            default_data = {
-                    "name": object.title,
-                    "license": object.license.id,
-                    "description": object.text,
-                    "changelog": object.changelog,
-                    "comment_enabled": object.comment_enabled,
-                    }
+            default_data = {"title": object.title,
+                            "license": object.license,
+                            "text": object.text,
+                            "version": object.version,
+                            "changelog": object.changelog,
+                            "tags": object.tags.all(),
+                            "origin_url": object.origin_url,
+                            "comment_enabled": object.comment_enabled,
+                            }
             try:
-                default_data += { "category": object.category.id }
+                default_data["category"] = object.category
             except AttributeError:
                 pass
+
             form = ThemeItemForm(initial=default_data)
+
         return render_response(request, "tema/themeitem_change.html", locals())
+
     else:
         return render_response(request, "tema/message.html", {"type": "error", "message": "Bu işlemi yapmak için yetkiniz yok."})
 
