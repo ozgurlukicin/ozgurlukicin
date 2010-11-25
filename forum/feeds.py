@@ -24,13 +24,13 @@ class RSS(Feed):
     description_template = 'forum/feed_description.html'
 
     def items(self):
-        objects = Post.objects.filter(hidden=0, topic__forum__is_published=True, topic__forum__hidden=False).order_by('-edited')[:120]
+        objects = Post.objects.filter(hidden=0, topic__forum__is_published=True, topic__forum__hidden=False).order_by('-created')[:120]
         for post in objects:
             post.title = post.topic.title
         return objects
 
     def item_pubdate(self, item):
-        return item.edited
+        return item.created
 
     def item_author_name(self, item):
         return item.author
@@ -47,7 +47,7 @@ class Forum_Rss(RSS):
         return Forum.objects.get(slug=bits[0])
 
     def items(self, obj):
-        objects = Post.objects.filter(hidden=False, topic__forum=obj, topic__forum__hidden=False).order_by('-edited')[:40]
+        objects = Post.objects.filter(hidden=False, topic__forum=obj, topic__forum__hidden=False).order_by('-created')[:40]
         for post in objects:
             post.title = post.topic.title
         return objects
@@ -93,7 +93,7 @@ class Topic_Rss(Feed):
 
     def items(self,obj):
         """ Istenilen Konular burada olacak"""
-        return Post.objects.filter(topic=obj,hidden=0).order_by('-edited')[:10]
+        return Post.objects.filter(topic=obj,hidden=0).order_by('-created')[:10]
 
     def item_link(self, item):
         """ her biri icin """
