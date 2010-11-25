@@ -1,12 +1,14 @@
 from oi.flatpages.models import FlatPage
+from oi.st.wrappers import render_response
 from django.template import loader, RequestContext
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
-#from django.core.context_processors import csrf
+from django.views.decorators.csrf import csrf_protect
 
 DEFAULT_TEMPLATE = 'flatpages/default.html'
 
+@csrf_protect
 def flatpage(request, url):
     """
     Flat page view.
