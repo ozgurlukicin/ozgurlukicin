@@ -454,10 +454,17 @@ def themeitem_add_packagescreenshot(request):
             item.author = request.user
             item.submit = item.update = datetime.datetime.now()
             slug = slugify(replace_turkish(item.title))
+
+            #save images with ID
+            count = len(PackageScreenshot.objects.filter(title=item.title))
+            path, extension = '/'.join(item.image.name.split('/')[:-1]), item.image.name.split('.')[-1]
+            item.image.name = "%s/%s_%d.%s" % (path, item.title, count, extension)
             item.save()
+
             for tag in form.cleaned_data["tags"]:
                 t=Tag.objects.get(name=tag)
                 item.tags.add(t)
+
             item.slug = str(item.id) + "-" + slug
             item.save()
 
