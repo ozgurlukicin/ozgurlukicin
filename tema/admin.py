@@ -25,7 +25,7 @@ class ThemeItemAdmin(admin.ModelAdmin):
     search_fields = ["title", "text", "changelog"]
 
     class Media:
-        js = ("js/jquery-1.4.3.min.js", "js/temaimages.js", "js/jquery.autocomplete.js", "js/taghelper.js")
+        js = ("js/jquery-1.2.6.min.js", "js/temaimages.js", "js/jquery.autocomplete.js", "js/taghelper.js")
         css = {
             "all": ("css/new/autocomplete.css",),
         }
@@ -73,7 +73,7 @@ class IconSetAdmin(ThemeItemAdmin):
 
 class OpenOfficeTemplateAdmin(ThemeItemAdmin):
     list_display = ("title", "version", "author", "license", "status")
-    
+
 class PackageScreenshotAdmin(ThemeItemAdmin):
     fieldsets = (
             (None, {
