@@ -1,0 +1,15 @@
+{% extends "beyin2/idea_base.html" %}
+{% load library %}
+
+{% block title %}Beyin2 yeni öneri hata{% endblock %}
+
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/beyin2/beyin2.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/forum_paginator.css');</style>
+
+{% endblock %}
+
+{% block content %}
+    <p> {{ error }} </p>
+{% endblock %}

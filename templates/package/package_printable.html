@@ -1,0 +1,12 @@
+{% extends "printable.html" %}
+
+{% block title %}{{ package.title }} - Paketler - {% endblock %}
+
+{% block pagetype %}page{% endblock %}
+
+{% block content %}
+<h1>{{ package.title }}</h1>
+<div class="page_content">
+{{ package.text|safe }}
+</div>
+{% endblock %}

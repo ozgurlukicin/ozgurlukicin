@@ -1,0 +1,37 @@
+{% extends "beyin2/idea_base.html" %}
+{% load library %}
+{% load thumbnail %}
+
+{% block title %}Fikir Düzenle{% endblock %}
+
+{% block extrahead %}
+<!--<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>-->
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/idea.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/taghelper.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/jquery.autocomplete.js"></script>
+
+<style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/beyin2/beyin2.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/autocomplete.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/formfield.css');</style>
+{% endblock %}
+
+{% block content %}
+<div id="idea_topbar">
+    <span class="idea_new_title">Fikri Düzenle</span>
+</div>
+
+<form action='{% url edit_idea_add_image idea.id %}' enctype="multipart/form-data" method="POST" name='edit_idea' id='edit_idea' >
+    <br />
+    {% for field in image_form %}
+        {% include "field.html" %}
+    {% endfor %}
+    <br /><br />
+
+<br />
+<input type='button' value='Gönder' onclick="control_image_edit('dull');" name='send_new_idea'>
+
+</form>
+
+{% endblock %}

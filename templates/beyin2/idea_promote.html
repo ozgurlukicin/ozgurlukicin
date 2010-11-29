@@ -1,0 +1,21 @@
+{% load library %}
+{% load list_view_filter %}
+<head>
+    <title>Beyin2 - Özgürlük için...</title>
+    <link rel="shortcut icon" href="/media/img/fav.png" />
+    <style type="text/css" media="screen">@import url('/media/css/beyin2/promote.css');</style>
+</head>
+<body>
+    {% if id %}
+    <div id="div_image_{{ id }}" class="promo_left">
+        <img src="/media/img/beyin2/promo.png" />
+    </div>
+    <div id="div_title_{{ id }}" class="promo_right">
+        <a href="{% url idea_detail id %}">
+            <h2 id="header_{{ id }}" >{{ title }}</h2>
+        </a>
+        <h3>{{ vote_text }}</h3>
+        <div style="clear:both;"></div>
+    </div>
+    {% endif %}
+</body>

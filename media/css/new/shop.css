@@ -1,0 +1,182 @@
+#shop_intro {
+    width: 640px;
+    height: 270px;
+    background: url(/media/img/new/pardus_tshirts.png) no-repeat top center;
+}
+#shop_intro div {
+    width: 273px;
+    margin-left: 15px;
+}
+#shop_intro .title {
+    font-weight: bold;
+    padding-top: 130px;
+    padding-bottom: 10px;
+}
+.leftcolumn {
+    padding-top: 12px;
+    background-color: #E7E7E7;
+}
+.leftcolumn .leftcolumn_content {
+    margin-left: 8px;
+}
+.leftcolumn_content .shop_category {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.leftcolumn_content a {
+    text-decoration: none;
+    color: #666666;
+}
+#buy {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 9;
+    background-color: gray;
+    opacity: 0.7;
+    display: none;
+}
+#buymessage {
+    position: absolute;
+    width: 305px;
+    height: 125px;
+    background-color: #2b8ed4;
+    z-index: 10;
+    display: none;
+}
+#buymessage p {
+    color:white;
+}
+#buymessage .buttons {
+    overflow: hidden;
+}
+#buymessage p, #buymessage input, #buymessage .buttons {
+    margin:10px;
+}
+#product_list .product_item {
+    float: left;
+    text-align: center;
+    width: 210px;
+    margin-bottom: 10px;
+}
+.product_item .photo img {
+    width: 140px;
+}
+.product_item .title {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+#product_list .rightborder {
+    border-right: 1px #EAEAEA solid;
+}
+.product_info {
+    overflow: hidden;
+    margin: 4px;
+}
+.product_info .price {
+    float: left;
+    width: 193px;
+    height: 60px;
+    overflow: hidden;
+    border-bottom: 1px #EAEAEA solid;
+}
+.product_info .description {
+    width: 135px;
+    height: 194px;
+    float: right;
+    border-left: 1px #EAEAEA solid;
+    margin-top: 35px;
+    padding-left: 16px;
+}
+.product_big_image {
+    float: left;
+    margin: 4px;
+    padding: 4px;
+    border: 1px #EAEAEA solid;
+}
+.product_big_image img {
+    width: 260px;
+    height: 271px;
+}
+.product_little_images {
+    float: left;
+    overflow: hidden;
+}
+.product_little_image {
+    float: left;
+    margin: 4px;
+    border: 1px #EAEAEA solid;
+}
+.product_little_image img {
+    width: 42px;
+    max-height: 42px;
+}
+.product_info .buttons {
+    width: 193px;
+    height: 153px;
+    float: left;
+}
+.buttons .button {
+    float: left;
+    margin: 3px;
+    height: 22px;
+    border: 1px #EAEAEA solid;
+    font-size: 10px;
+    line-height: 22px;
+    padding-left: 4px;
+    padding-right: 4px;
+    background-image: url(/media/img/new/forum_category_bg.png);
+    background-color: white;
+}
+.buttons .button a {
+    color: #999;
+}
+.product_info .description h2 {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.product {
+    float: left;
+    text-align: center;
+    width: 200px;
+}
+.product img {
+    width: 140px;
+}
+.cart_item {
+    border-bottom: 1px #666 dotted;
+    width: 135px;
+    padding-bottom: 8px;
+    margin-top: 10px;
+}
+.cart_item .cart_item_info {
+    width: 105px;
+    float: right;
+}
+.cart_item .count {
+    width: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    float: left;
+}
+.cart_item .cart_product {
+    font-weight: bold;
+    width: 105px;
+}
+.cart_item .type {
+    float: left;
+}
+.cart_item .remove_button {
+    float: right;
+}
+.buy_cart {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.kdv {
+    float: right;
+    margin-right: 10px;
+    height: 15px;
+}

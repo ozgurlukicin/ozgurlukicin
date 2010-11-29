@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load shop_library %}
+{% block title %}E-Dükkan - {% endblock %}
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/shop.css');</style>
+<script type="text/javascript" src="/media/js/shop.js"></script>
+{% endblock %}
+{% block leftcolumn %}
+<div class="sidebarcolumn leftcolumn">
+    <div class="leftcolumn_content">
+        <img src="/media/img/new/cart_title.png" alt="sepetinizde bulunan ürünler" />
+        {% if user.is_authenticated %}
+        {% if user.get_profile.have_shopprofile %}
+        <div id="cart">
+            {% get_cart user %}
+            <a href="/dukkan/profil/">Alışveriş Profili</a>
+        </div>
+        {% else %}
+        <p>Sepeti kullanabilmek için öncelikle bir alışveriş profili oluşturmalısınız. <a href="/dukkan/profil/olustur/" style="color: #009FE0">Buraya</a> tıklayarak profilinizi oluşturabilir ve ürün siparişi vermeye başlayabilirsiniz.</p>
+        {% endif %}
+        {% else %}
+        <p>Sepeti kullanabilmek için sağdaki kullanıcı kutusundan giriş yapmalısınız.</p>
+        {% endif %}
+    </div>
+    <div class="leftcolumn_content">
+        <div class="shop_category">Ürünler</div>
+        {% category_tree %}
+    </div>
+    <div class="leftcolumn_content">
+        <div class="shop_category">E-Dükkan Hakkında</div>
+        <ul>
+            <li><a href="/beden_tablosu/">Beden Tablosu</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+{% block sidebar_bottom %}{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "beyin2/idea_base.html" %}
+{% load library %}
+
+{% block title %}Yeni Öneri Ekle{% endblock %}
+
+{% block extrahead %}
+<!--<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>-->
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/idea.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/jquery.autocomplete.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/taghelper.js"></script>
+<!--<script type="text/javascript" src="/media/js/taghelper_idea.js"></script>-->
+<style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/beyin2/beyin2.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/autocomplete.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/formfield.css');</style>
+
+{% endblock %}
+
+{% block content %}
+
+<div id="idea_topbar">
+    <span id="top_bar_title" class="idea_new_title">Yeni Fikir Ekle</span>
+</div>
+
+<div id="results_list" ></div>
+
+<form id="select_tags_form" action='{% url add_new 1 %}' enctype="multipart/form-data" method="POST" name='add_new'>
+    <br />
+    <div id="hiding_div">
+        {% for field in form %}
+            {% include "field.html" %}
+        {% endfor %}
+        <br /><br /><br />
+        <input type='button' value='Devam' name='continue' onclick='search_tags("{% url select_tags %}");'>
+    </div>
+    <img id="searching_image" align="center" src="/media/img/beyin2/searching.gif" style="display:none;" />
+    <span id="searching" style="display:none;"> Benzer fikirler araştırılıyor...</span>
+    <input type="button" onclick="$('#select_tags_form').submit();" id="next_button" style="display:none;" value="Yeni Ekle"/>
+</form>
+{% endblock %}

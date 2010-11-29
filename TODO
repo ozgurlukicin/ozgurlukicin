@@ -1,0 +1,23 @@
+===============================================
+Don't code today what you can't debug tomorrow
+===============================================
+
+Legend:
+- To do
+? Not sure
+/ In progress
++ Completed
+
+/ User management system (basic login/logout/register and user profiles)
+  - user list
+
+- Download documents as PDF support (packages, first steps)
+
+/ Forum
+  / Post
+    - Markup language (BBCode??)
+    - Smiley
+  - Log & monitor all IP's
+  - User/IP Ban
+
+* fill alt info for all images on ui

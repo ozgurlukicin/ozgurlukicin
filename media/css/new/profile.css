@@ -1,0 +1,50 @@
+#user_profile_left {
+    float: left;
+    margin-left: 10px;
+}
+#user_profile_left h3 {
+    color: #009FE9;
+    font-size:16px;
+    margin-bottom: 10px;
+}
+.img_container img {
+    margin: 30px;
+}
+#user_profile_left a {
+    margin:0px 30px;
+    text-align: center;
+    display: block;
+}
+#user_profile_left .img_container {
+    border: 1px #ccc solid;
+    margin-bottom: 10px;
+}
+#user_profile_right {
+    float: left;
+    width: 400px;
+    margin-left: 10px;
+}
+#user_profile_right .profile_info {
+    clear: both;
+    width: 100%;
+    margin-top:5px;
+}
+#user_profile_right h3 {
+    margin-top: 30px;
+}
+#user_profile_right .profile_titles {
+    float: left;
+    width: 30%;
+}
+#profile_bio {
+    overflow: hidden;
+    clear: both;
+    width: 447px;
+    margin-top: 8px;
+}
+#id_map {
+    margin-top: 8px;
+    width: 447px;
+    height: 300px;
+    overflow: hidden;
+}

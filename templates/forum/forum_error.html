@@ -1,0 +1,8 @@
+{% extends "forum/forum_base.html" %}
+
+{% block title %}Hata! - {% endblock %}
+
+{% block content %}
+    <div id="space">&nbsp;</div>
+    <div class="forum_error">{{ message }}<br /><a href="javascript: history.go(-1)">Geri dönmek için tıklayın</a></div>
+{% endblock %}

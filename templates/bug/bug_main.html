@@ -1,0 +1,39 @@
+{% extends "forum/forum_base.html" %}
+{% load library %}
+{% block title %}Hata Raporları - {% endblock %}
+{% block extrahead %}
+    <style type="text/css" media="screen">@import url('/media/css/new/bug.css');</style>
+    <style type="text/css" media="screen">@import url('/media/css/new/forum_paginator.css');</style>
+{% endblock %}
+{% block content %}
+<div class="topbar">
+    <div class="navigation"><a href="/">Ana Sayfa</a> &#62; <a href="/hata/" class="bold">Hata</a></div><div class="notice"><a href="/hata/ekle/"><img src="/media/img/new/button_report_bug.png" alt="Yeni Hata Bildir" /></a></div>
+</div>
+<div class="headerbar">
+    <div class="title">Başlık</div>
+    <div class="spacer">&nbsp;</div>
+    <div class="submitter">Gönderen</div>
+    <div class="spacer">&nbsp;</div>
+    <div class="status">Durum</div>
+    <div class="spacer">&nbsp;</div>
+    <div class="priority">Öncelik</div>
+    <div class="spacer">&nbsp;</div>
+    <div class="submitted_date">Tarih</div>
+</div>
+<div class="bug_list">
+    {% for bug in bug_list %}
+    <div class="bug">
+        <div class="title"><a href="{{ bug.get_absolute_url }}" style="text-decoration:none">#{{ bug.id }} {{ bug.title }}</a></div>
+        <div class="spacer">&nbsp;</div>
+        <div class="submitter">{{ bug.submitter.first_name }} {{ bug.submitter.last_name }}</div>
+        <div class="spacer">&nbsp;</div>
+        <div class="status" style="color:{% ifequal bug.status 1 %}#009900{% else %}{% ifequal bug.status 2 %}#229ADD{% else %}#FF3300{% endifequal %}{% endifequal %}">{{ bug.get_status_display }}</div>
+        <div class="spacer">&nbsp;</div>
+        <div class="priority">{{ bug.get_priority_display }}</div>
+        <div class="spacer">&nbsp;</div>
+        <div class="submitted_date">{{ bug.submitted_date|date:"d/m/Y H:i" }}</div>
+    </div>
+    {% endfor %}
+</div>
+{% if is_paginated %}<div class="paginator_block"><div class"paginator_pages">{% paginator %}</div></div>{% endif %}
+{% endblock %}

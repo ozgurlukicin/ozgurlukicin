@@ -1,0 +1,8 @@
+{# Copyright (c) 2006-2007, PreFab Software Inc. #}
+
+
+{# Display the comment #}
+<div class="comment_display">
+<div class='comment_infos'>{% if comment.person_www %}<a href="{{ comment.person_www }}" rel="nofollow">{% endif %}{{ comment.person_name|striptags }}{% if comment.person_www %}</a>{% endif %} on {% if comment.submit_date %}{{ comment.submit_date|date:"F d, Y" }} at {{ comment.submit_date|time }}{% else %}{% now "F d" %} at {% now "f:i a" %}{% endif %}</div>
+<div class='comment_body'>{{ comment.comment|urlize|linebreaksbr|removetags:"script embed object frameset frame iframe meta link style" }}</div>
+</div>

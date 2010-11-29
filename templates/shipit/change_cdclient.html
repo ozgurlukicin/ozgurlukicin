@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+{% endblock %}
+{% block title %}CD Gönder - {% endblock %}
+{% block content %}
+<form method="POST" action="">
+    {% if flood %}<div class="error">Lütfen formu tekrar göndermeden önce {{ timeout }} saniye bekleyiniz.</div>{% endif %}
+    {% for field in form %}
+    {% include "formfields.html" %}
+    {% endfor %}
+    <input type="Submit" value="Kaydet" />
+</form>
+{% endblock %}

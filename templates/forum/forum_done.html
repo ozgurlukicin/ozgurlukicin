@@ -1,0 +1,8 @@
+{% extends "forum/forum_base.html" %}
+
+{% block title %}İşlem Tamamlandı - {% endblock %}
+
+{% block content %}
+    <div id="space">&nbsp;</div>
+    <div class="forum_done">{{ message }}<br /><a href="{% if back %}{{ back }}{% else %}javascript: history.go(-1){% endif %}">Geri dönmek için tıklayın</a></div>
+{% endblock %}

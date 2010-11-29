@@ -1,0 +1,50 @@
+{% extends "beyin2/idea_base.html" %}
+{% load library %}
+
+{% block title %}Yeni Öneri Ekle{% endblock %}
+
+{% block extrahead %}
+<!--<style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>-->
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/tinymce/idea.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/jquery.autocomplete.js"></script>
+<script language="javascript" type="text/javascript" src="/media/js/taghelper.js"></script>
+<!--<script type="text/javascript" src="/media/js/taghelper_idea.js"></script>-->
+<style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/beyin2/beyin2.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/autocomplete.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/formfield.css');</style>
+
+{% endblock %}
+
+{% block content %}
+
+<div id="idea_topbar">
+    <span class="idea_new_title">Yeni Fikir Ekle</span>
+</div>
+
+<form action='{% url add_new 2 %}' enctype="multipart/form-data" method="POST" name='add_new_idea'  id='add_new_idea' >
+{% if perms.beyin2.can_change_status %}
+    <br />
+    {% for field in form %}
+        {% include "field.html" %}
+    {% endfor %}
+{% else %}
+    {% for field in form %}
+        {% if field.label != "Category" and field.label != "Status" %}
+              {% include "field.html" %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+<div style="clear: both;"></div>
+{{ ScreenShotFormSet.management_form }}
+{% for form in ScreenShotFormSet.forms %}
+    {% for field in form%}
+        {% include "formfields.html" %}
+    {% endfor %}
+{% endfor %}
+<br />
+<input type='button' onclick='control_entry("dull");' value='Gönder' name='send_new_idea'>
+</form>
+
+{% endblock %}

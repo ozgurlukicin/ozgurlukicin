@@ -1,0 +1,84 @@
+div#content {
+    width: 804px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 4px;
+    border-right: 1px #EAEAEA solid;
+    float: left;
+    display: inline;
+}
+div#sidebar {
+    width: 153px;
+    float: left;
+    margin-top: 10px;
+    overflow: hidden;
+}
+div.sidebar_content {
+    margin-left: 4px;
+    padding-bottom: 10px;
+    border-bottom: 1px #EAEAEA solid;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+div.sidebar_content h2 {
+    font-family: "Georgia", serif;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+div.sidebar_content input[type="text"], div.sidebar_content input[type="password"] {
+    padding-top: 5px;
+    padding-left: 8px;
+    height: 16px;
+    margin-bottom: 5px;
+}
+div.sidebar_content input[type="image"] { float: left; }
+div.sidebar_content span.loginlinks {
+    float: right;
+}
+div.sidebar_content span.loginlinks a {
+    font-size: 9px;
+}
+div.category div.titlebar {
+    height: 39px;
+    width: 801px;
+    background: url(/media/img/new/forum_category_bg.png) repeat-x;
+}
+div.category h2 {
+    font-size: 12px;
+    font-style: "Arial";
+    font-weight: bold;
+    margin-top: 17px;
+    margin-left: 9px;
+    float: left;
+}
+div.topbar {
+    width: 801px;
+    font-size: 11px;
+    overflow: hidden;
+}
+div.topbar a {
+    color: #666666;
+    text-decoration: none;
+}
+div.topbar a.bold {
+    font-weight: bold;
+}
+div.topbar div.navigation {
+    width: 520px;
+    float: left;
+}
+div.topbar div.notice {
+    float: right;
+}
+
+span.tagMatches {
+    margin-left: 10px;
+}
+
+span.tagMatches span {
+    padding: 2px;
+    margin-right: 4px;
+    background-color: #2A8ED5;
+    color: #fff;
+    cursor: pointer;
+}

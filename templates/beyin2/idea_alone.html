@@ -1,0 +1,120 @@
+{% load library %}
+{% load list_view_filter %}
+{%load thumbnail %}
+
+{% if idea %}
+<div id="div_left_{{ idea.id }}" class="idea_left">
+    {% vote_value_calc idea %}
+        {% if user.is_authenticated %}
+            {% is_voted idea user come_from %}
+        {% else %}
+            <a href='{% url vote idea.id 1 come_from %}'>
+            <img src="/media/img/beyin2/arti.png" value="I like it" /></a>
+
+            <a href='{% url vote idea.id 0 come_from %}'>
+            <img src="/media/img/beyin2/notr.png" value="I am not sure" /></a>
+
+            <a href='{% url vote idea.id 2 come_from %}'>
+            <img src="/media/img/beyin2/eksi.png" value="I dislike it" /></a>
+        {% endif %}
+        {#this is for template tag#}
+    </div>
+</div>
+<div id="div_middle_{{ idea.id }}" class="idea_middle">
+    {% if come_from == 'detail' %}
+    <h1 id="header_{{ idea.id }}" >#{{ idea.id }}: {{ idea.title }}</h1>
+    {% else %}
+        <a href="{% url idea_detail idea.id %}">
+            <h1 id="header_{{ idea.id }}" >#{{ idea.id }}: {{ idea.title }}</h1>
+        </a>
+    {% endif %}
+    <div class="idea_status">
+        <p id="current_status_{{ idea.id }}">{{ idea.status }}</p>
+    </div>
+    {% if user.is_authenticated %}
+        <input id="yes_favorite_{{ idea.id }}"type="image" src="/media/img/beyin2/favori_yes.png" width="30" height="30" align="right" 
+            onclick='add_remove_favorite({{ idea.id }},"{% url add_remove_favorite idea.id %}","{% url is_favorite idea.id %}");' 
+            onmouseover='document.getElementById("yes_favorite_{{ idea.id }}").src="/media/img/beyin2/favori_minus.png";'
+            onmouseout='document.getElementById("yes_favorite_{{ idea.id }}").src="/media/img/beyin2/favori_yes.png";'
+            style="display:none;" title="Favorilerimden sil" >
+        <input id="no_favorite_{{ idea.id }}"type="image" src="/media/img/beyin2/favori_no.png" width="30" height="30" align="right"
+            onload='is_favorite({{ idea.id }} , "{% url is_favorite idea.id %}");' 
+            onclick='add_remove_favorite({{ idea.id }},"{% url add_remove_favorite idea.id %}","{% url is_favorite idea.id %}");' 
+            onmouseover='document.getElementById("no_favorite_{{ idea.id }}").src="/media/img/beyin2/favori_plus.png";' 
+            onmouseout='document.getElementById("no_favorite_{{ idea.id }}").src="/media/img/beyin2/favori_no.png";' title="Favorilerime ekle" >
+    {% endif %}
+    <div class="idea_info">
+            <p>
+            <a href= "{{ idea.submitter.get_profile.get_absolute_url }}">
+                {{ idea.submitter }}
+            </a>
+            tarafından {{idea.dateSubmitted}} tarihinde {% if idea.category.id != default_category.id %} <span id="current_category_{{ idea.id }}"> {{ idea.category }} </span> kategorisine {% else %} <span id="current_category_{{ idea.id }}" style="display:none;" > {{ idea.category }} </span>{% endif %} gönderildi.</p>
+    </div>
+    
+    <div class="idea_content">
+        <p>{{ idea.description|renderbbcode|safe }}</p>
+    </div>
+
+    {% for image in idea.screenshot_set.all %}
+        {% if not image.is_hidden %}
+            <a href="{{ image.image.url }}">
+                <img src="{{ image.image.url|thumbnail:"180" }}"/>
+            </a>
+        {% endif %}
+    {% endfor %}
+    <br /><br /><br />
+    {% if idea.get_duplications.count %}
+    <div class="h3">Bu fikrin aynısı olarak işaretlenen fikirler </div>
+    <ul class="idea_detail_box">
+    {% for duplicate in idea.get_duplications %}
+    <li>
+        <a href="{{ duplicate.topic.get_absolute_url }}" >{{ duplicate.title }}</a>
+    </li>    
+    {% endfor %}
+    </ul>
+    <br />
+    {% endif %}
+    <div class="idea_comments">
+        <a href='{{idea.topic.get_latest_post_url}}'>
+            {% if idea.topic.posts|add:"-1"  %}
+                {{ idea.topic.posts|add:"-1"  }} tane yorum yapıldı.
+            {% else %}
+                İlk yorum yapan siz olun !
+            {% endif %}
+        </a>
+    </div>
+    <div class="tags"><span class="h3">Etiketler :</span>
+        {% for tag in idea.tags.all %}
+        <a href="{% url main_filter 'tag' tag.name %}" >{{ tag.name }}</a>
+        {% endfor %}
+    </div>
+</div>
+
+<div id="div_right_{{ idea.id }}" class="idea_right">
+        {% if perms.beyin2.change_idea %}
+        
+        <input onclick="yonetim('{% url edit_idea idea.id %}', {{ idea.id }}, 'edit_idea', '{{ come_from }}')" type="image" src="/media/img/beyin2/duzenle.png" />
+        <input onclick="yonetim('{% url mark_duplicate idea.id %}', {{ idea.id }}, 'mark_duplicate', '{{ come_from }}')" type="image" src="/media/img/beyin2/tekrar.png" />
+        {% if filter_by == "deleted" %} 
+        <input onclick="yonetim('{% url undelete_idea idea.id %}', {{ idea.id }}, 'undelete_idea', '{{ come_from }}')" type="image" src="/media/img/beyin2/gerigetir.png" />
+        {% else %}
+        <input onclick="yonetim('{% url delete_idea idea.id %}', {{ idea.id }}, 'delete_idea', '{{ come_from }}')" type="image" src="/media/img/beyin2/sil.png" />
+        {% endif %}
+        <select onchange="yonetim('{% url main_post idea.id %}', {{ idea.id }}, 'status_change', '{{ come_from }}')" name='status' id="status_{{ idea.id }}" >
+                    <option value="status">Durum</option>
+                {%for status in status_list %}
+                    <option value="{{ status.name }}" {% if status.name == idea.status.name %}selected{% endif %}>{{ status.name }}</option>
+                {% endfor %}
+            </select>
+            <select onchange="yonetim('{% url main_post idea.id %}', {{ idea.id }}, 'category_change', '{{ come_from }}')" name='category' id="category_{{ idea.id }}" >
+                    <option value="category">Kategori</option>
+                {% for category in category_list %}
+                    <option value="{{ category.name }}" {% if category.name == idea.category.name %}selected{% endif %}>{{ category.name }}</option>
+                {% endfor %}
+            </select>
+           
+        
+        {% endif %}
+</div>
+<br />
+{% endif %}

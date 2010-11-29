@@ -1,0 +1,79 @@
+.titlebar h2 {
+    margin-left: 4px;
+    margin-top: 7px;
+    width: 380px;
+    float: left;
+}
+.titlebar h2 a {
+    color: #666666;
+    text-decoration: none;
+}
+.latest {
+    overflow: hidden;
+    margin-bottom: 1px;
+}
+.latest .post {
+    border-bottom: 1px #EAEAEA solid;
+    overflow: hidden;
+    margin-right: 4px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.latest .post div {
+    float:left;
+    width:20%;
+}
+.latest .post a {
+    color: #666666;
+    text-decoration: none;
+}
+.post .profile_link {
+    float: right;
+}
+.post .forum a { color: #999999; }
+.post div.forum {
+    color: #999999;
+}
+.post div.topic {
+    width: 44%;
+    font-weight: bold;
+}
+.post div.date {
+    color: #999;
+    width: 19%;
+    float: right;
+    text-align: right;
+}
+.post div.link {
+    width: 17%;
+}
+.ajaxloader {
+    display: none;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+.newcomer {
+    display: none;
+}
+.stats {
+    overflow: hidden;
+    margin: 10px 0px;
+}
+.stats div { float: left; }
+.stats .image {
+    width: 35px;
+    margin: 5px 0px 0px 15px;
+}
+.stats .text .labels, .stats .text .spacers { font-weight: bold; }
+.stats .text .spacers { margin: 0px 4px; }
+.stats .userlist {
+    clear: left;
+    margin: 1px 0 0 50px;
+}
+.stats .left { width: 360px; }
+.icons_help { margin: 10px 0px 0px 20px; }
+.icons_help div {
+    width: 260px;
+    float: left;
+    overflow: hidden;
+}

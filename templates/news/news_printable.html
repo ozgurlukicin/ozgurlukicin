@@ -1,0 +1,13 @@
+{% extends "printable.html" %}
+
+{% block title %}{{ news.title }} - Haberler - {% endblock %}
+
+{% block pagetype %}page{% endblock %}
+
+{% block content %}
+<h1>{{ news.title }}</h1>
+<div class="page_content">
+{{ news.text|safe }}
+</div>
+<div style="margin-top: 10px; float: right; font-size: 12px;">{{ news.date|date:"d" }} {{ news.date|date:"F" }} {{ news.date|date:"Y" }} - {{ news.date|date:"H" }}:{{ news.date|date:"i" }}</div>
+{% endblock %}

@@ -1,0 +1,201 @@
+div#content {
+    border: none;
+}
+
+
+/* copied from forum, used in abuse report */
+.post_message {
+    width: 465px;
+}
+
+.themeitem_main {
+    width: 644px;
+}
+
+/* Top Menu */
+
+.themeitem_top {
+    height: 72px;
+    border: 1px #EDEDED solid;
+}
+
+.themeitem_top_title {
+    width: 420px;
+    height: 40px;
+    padding: 10px;
+    float: left;
+    font-size: 17px;
+    color: #00A1EB;
+}
+
+.themeitem_top_user {
+    height: 50px;
+    width: 197px;
+    float: right;
+    margin-top: 4px;
+    margin-right: 5px;
+}
+
+.themeitem_top_user img {
+    height: 60px;
+}
+
+.themeitem_top_user_content {
+    height: 12px;
+    width: 137px;
+    text-align: center;
+    float: right;
+    clear: right;
+}
+
+.themeitem_top_user_avatar {
+    float: left;
+    height: 50px;
+}
+
+.themeitem_top_user_name {
+    height: 20px;
+    width: 137px;
+    text-align: center;
+    float: left;
+    margin-top: 15px;
+}
+
+/* middle */
+/* Gökmen Görgen's additions (2010-11-24) */
+.themeitem {
+    height: 250px;
+    padding-right: 10px;
+}
+
+.themeitem.first {
+    float: left;
+    width: 50%;
+}
+
+.themeitem .title a {
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.themeitem .summary {
+    margin-top: 10px;
+}
+
+.themeitem_thumbnail {
+    float: left;
+}
+
+.themeitem_thumbnail img {
+    margin-right: 10px;
+}
+/* End of Gökmen's additions */
+
+
+.themeitem_middle {
+    height: 300px;
+}
+
+.themeitem_middle_leftcolumn {
+    float: left;
+    width: 180px;
+    margin-top: 1px;
+    padding-bottom: 11px;
+    border: 1px #EDEDED solid;
+}
+
+.themeitem_middle_leftcolumn_thumbnail {
+    float: left;
+    width: 150px;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+.themeitem_middle_leftcolumn_resolution {
+    float: left;
+    width: 100px;
+    margin-left: 30px;
+    margin-top: 13px;
+    text-align: center;
+}
+
+.themeitem_middle_leftcolumn_buttons {
+    float: left;
+    width: 100px;
+    margin-left: 30px;
+    margin-top: 13px;
+    text-align: center;
+}
+
+.themeitem_middle_rightcolumn {
+    float: left;
+    margin-left: 1px;
+    margin-top: 1px;
+    width: 459px;
+    border: 1px #EDEDED solid;
+    min-height: 219px;
+}
+
+.themeitem_middle_rightcolumn hr {
+    color: #FFFFFF;
+}
+
+.themeitem_middle_rightcolumn_context {
+    margin: 5px 8px 8px 8px;
+    margin-top: 5px;
+    margin-left: 8px;
+}
+
+/* bottom */
+
+.themeitem_middle_rightcolumn_bottom {
+    height: 20px;
+    margin-top: 2px;
+}
+
+.themeitem_middle_rightcolumn_bottom_inner {
+    float: right;
+    width: 250px;
+    height: 20px;
+    margin-top: 2px;
+    text-align: right;
+    padding-right: 15px;
+}
+
+.themeitem_middle_rightcolumn_bottom_inner2 {
+    float:left
+    height: 20px;
+    width: 56px;
+    margin-left: 8px;
+    text-align: left;
+}
+
+/* forms */
+#id_comment_enabled, #id_form-0-create_smaller_wallpapers {
+    float: left;
+}
+.field_container {
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.help {
+    clear:left;
+}
+
+.themeitem_middle_stars {
+    width: 100px;
+    float: right;
+}
+.themeitem_middle_stars .rating {
+    margin:0px;
+}
+.rating .cancel {
+    display: none;
+}
+#themeitem_middle_stars_text {
+    float: right;
+    clear: right;
+    text-align: center;
+    width: 120px;
+    margin-top: 5px;
+}

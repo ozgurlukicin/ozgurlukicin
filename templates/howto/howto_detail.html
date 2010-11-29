@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load library %}
+
+{% block title %}{{ howto.title }} - Nasıl - {% endblock %}
+{% block metadescription %}{{ howto.sum|safe|striptags|cut:"\"" }}{% endblock %}
+{% block metakeywords %}{% for tag in howto.tags.all %}{{ tag.name }}{% if not forloop.last %},{% endif %}{% endfor %}{% endblock %}
+
+{% block extrahead %}
+    <style type="text/css" media="screen">@import url('/media/css/new/article.css');</style>
+    <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
+{% if user.is_authenticated %}
+    <script language="javascript" type="text/javascript" src="/media/js/tinymce/tiny_mce.js"></script>
+    <script language="javascript" type="text/javascript" src="/media/js/tinymce/forum.js"></script>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="page_title">{{ howto.title }}</div>
+<div class="page_content">
+{{ howto.text|safe }}
+</div>
+<div style="float:right; margin-right:10px"><a href="{{ howto.topic.get_latest_post_url }}">{{ howto.topic.posts|add:"-1" }} yorum</a> <a href="{{ howto.topic.get_latest_post_url }}"><img src="/media/img/new/forum/go_to_msg.png" alt="." /></a></div>
+<p>
+{% if user.is_authenticated %}
+    {% if form %}
+        <form method="post" action="{{ howto.topic.get_reply_url }}">
+            {{ form }}
+            <br />
+            <input type="submit" value="Gönder" />
+        </form>
+    {% endif %}
+{% endif %}
+</p>
+<div class="page_printable"><a href="{{ howto.get_printable_url }}"><img src="/media/img/print.png" alt="yazdır" title="yazıcı dostu görünüm" /></a></div>
+<div class="page_last_update">Son güncelleme: {{ howto.update|date:"d F Y" }}</div>
+
+{% endblock %}
+
+{% block leftcolumn %}
+<div class="sidebarcolumn leftcolumn">
+    {% if howto.logo %}
+    <div class="leftcolumn_content">
+        <img src="{{ howto.logo.file.url }}" alt="{{ howto.logo.get_alt_text }}" style="width:114px;height:114px;margin-left:20px;margin-top:24px" />
+    </div>
+    {% endif %}
+    {% if related_howtos %}
+    <div class="leftcolumn_content">
+        <h2>İlgili Yazılar</h2>
+        <ul>
+        {% for article in related_howtos %}
+            <li><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <div class="leftcolumn_content">
+        <h2>Etiketler</h2>
+        <p><img src="/media/img/new/tag.png" style="vertical-align: middle;" /> {% for tag in howto.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if forloop.last %}{% else %},{% endif %} {% endfor %}
+        </p>
+    </div>
+    {% if howto.wiki.all %}
+    <div class="leftcolumn_content">
+        <h2>İlgili wiki sayfaları</h2>
+        <ul class="sidebar_firststeps">
+            {% for wiki in howto.wiki.all %}<li><a href="{{ wiki.get_absolute_url }}">{{ wiki.name }}</a></li>{% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% if howto.videos.all %}
+    <div class="leftcolumn_content">
+        <h2>İlgili Videolar</h2>
+        <p>
+        {% for video in howto.videos.all %}
+            {% include "video.html" %}
+        {% endfor %}
+        </p>
+    </div>
+    {% endif %}
+    <div class="leftcolumn_content">
+        <h2>Yazar</h2>
+        <p>{{ howto.author }}</p>
+    </div>
+
+    <div class="leftcolumn_content">
+        <h2>Katkıda bulunun</h2>
+        <p>Nasıl bölümüne katkıda bulunmak istiyorsanız <a href="/katki/nasil/">buraya</a> tıklayarak size kılavuzluk edecek sayfaya gidebilirsiniz.</p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "printable.html" %}
+
+{% block title %}{{ workshop.title }} - Nasıl - {% endblock %}
+
+{% block content %}
+<h1>{{ workshop.title }}</h1>
+<div class="page_content">
+{{ workshop.text|safe }}
+</div>
+<div style="margin-top: 10px; float: right; font-size: 12px;">{{ workshop.update|date:"d" }} {{ workshop.update|date:"F" }} {{ workshop.update|date:"Y" }} - {{ workshop.update|date:"H" }}:{{ workshop.update|date:"i" }}</div>
+{% endblock %}

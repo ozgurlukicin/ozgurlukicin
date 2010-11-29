@@ -1,0 +1,12 @@
+{% extends "bug/bug_main.html" %}
+{% block title %}Hata Raporları - Sil #{{ bug.id }} - {% endblock %}
+{% block extrahead %}
+    <style type="text/css" media="screen">@import url('/media/css/new/bug.css');</style>
+{% endblock %}
+{% block content %}
+<form method="POST" target="">
+<p>#{{ bug.id }} numaralı hatayı silmek istediğinizden emin misiniz?</p>
+<input type="submit" value="Sil" />
+<input type="button" value="Vazgeç" onclick="history.back()" />
+</form>
+{% endblock %}
