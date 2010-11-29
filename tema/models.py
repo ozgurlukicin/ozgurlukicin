@@ -378,7 +378,7 @@ class PackageScreenshot(ThemeItem):
         return "/tema/paket-goruntuleri/detay/%s/" % self.slug
 
     def get_redirect_url(self):
-        return "tema/paket-goruntuleri/detay/%s/%s/" % (self.slug, self.id)
+        return "/tema/paket-goruntuleri/detay/%s/%s/" % (self.slug, self.id)
 
     def get_download_url(self):
         return self.image.url
