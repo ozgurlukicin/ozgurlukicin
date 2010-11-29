@@ -231,3 +231,5 @@ CITY_LIST = (
     ('zonguldak','Zonguldak'),
     ('zzyurtdisi', 'Yurtdışı'),
 )
+
+GRAPPELLI_ADMIN_TITLE = "Özgürlükİçin"
