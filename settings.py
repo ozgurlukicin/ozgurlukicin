@@ -87,7 +87,7 @@ TEMPLATE_LOADERS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'oi.context_processors.testing',
-    'django.core.context_processors.auth',
+    'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.request',
     'grappelli.context_processors.admin_template_path',
     )
@@ -120,7 +120,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
-    'django_evolution',
+    'django.contrib.webdesign',
+    'south',
     'oi.flatpages',
     'oi.st',
     'oi.upload',

@@ -135,7 +135,7 @@ class ThemeItem(models.Model):
         if self.id == None:
             new_content = True
 
-        super(ThemeItem, self).save()
+        #super(ThemeItem, self).save()
         if new_content:
             #send mail to admins
             message = loader.get_template("tema/mail/new_content.html").render(Context({"themeitem":self,"WEB_URL":WEB_URL}))
@@ -278,7 +278,7 @@ class OpenOfficeTemplate(OpenOfficeTheme):
         return self.file.url
 
 class OpenOfficeExtension(OpenOfficeTheme):
-    category = models.ForeignKey("OpenOfficeExtensionCategory") 
+    category = models.ForeignKey("OpenOfficeExtensionCategory")
 
     class Meta:
         verbose_name = u"Open Office Eklentisi"

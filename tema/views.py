@@ -271,7 +271,7 @@ def themeitem_add_openoffice_element(request):
 
             #TODO: Send e-mail to admins
             return render_response(request, "tema/themeitem_add_complete.html", locals())
-    else:
+    else:e
         tags = [t.pk for t in Tag.objects.filter(name="openoffice.org şablonu")]
         template_form = OpenOfficeTemplateForm(initial={"tags":tags})
 
