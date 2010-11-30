@@ -1,3 +1,9 @@
+- Grappelli: Fix tags javascript integration. (ilker)
+- Tema: The openoffice.org extensions maybe not image. (ilker)
+- Tema: Update welcome theme design. Fix cosmetic errors. (gökmen)
+- Feedjack: Update feedjack application for Django 1.2.3. (ilker)
+- Server: Update repository in oi server. (gökmen)
+
 ===============================================
 Don't code today what you can't debug tomorrow
 ===============================================
