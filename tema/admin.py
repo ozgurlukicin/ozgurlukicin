@@ -31,6 +31,7 @@ class ThemeItemAdmin(admin.ModelAdmin):
         }
 
 class WallpaperAdmin(ThemeItemAdmin):
+    list_display = ("title", "author", "license", "status")
     fieldsets = (
             (None, {
                 "fields": ("thumbnail", "title", "slug","category", "origin_url", "text",
@@ -43,6 +44,7 @@ class WallpaperAdmin(ThemeItemAdmin):
             )
 
 class DesktopScreenshotAdmin(ThemeItemAdmin):
+    list_display = ("title", "author", "license", "status")
     fieldsets = (
             (None, {
                 "fields": ("thumbnail", "title", "slug", "text",
@@ -69,7 +71,7 @@ class FontAdmin(ThemeItemAdmin):
             )
 
 class IconSetAdmin(ThemeItemAdmin):
-    list_display = ("title", "version", "author", "license", "status")
+    list_display = ("title", "author", "license", "status")
 
 class OpenOfficeTemplateAdmin(ThemeItemAdmin):
     list_display = ("title", "version", "author", "license", "status")
