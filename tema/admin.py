@@ -73,19 +73,12 @@ class IconSetAdmin(ThemeItemAdmin):
 
 class OpenOfficeTemplateAdmin(ThemeItemAdmin):
     list_display = ("title", "version", "author", "license", "status")
-    
-class PackageScreenshotAdmin(ThemeItemAdmin):
-    fieldsets = (
-            (None, {
-                "fields": ("thumbnail", "title", "slug", "pardusVersion", "text",
-                    "changelog", "image", "s_image""status", "deny_reason", "tags")
-                }),
-            ("Diğer", {
-                "classes": "collapse",
-                "fields": ("author", "license", "rating", "download_count", "submit", "update", "comment_enabled")
-                })
-            )
 
+class OpenOfficeExtensionAdmin(ThemeItemAdmin):
+    list_display = ("title", "version", "author", "license", "status")
+
+class PackageScreenshotAdmin(ThemeItemAdmin):
+    list_display = ("title", "version", "author", "license", "status")
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
@@ -102,8 +95,6 @@ admin.site.register(OpenOfficeTemplateCategory)
 admin.site.register(OpenOfficeExtensionCategory)
 admin.site.register(OpenOfficeTheme)
 admin.site.register(OpenOfficeTemplate,OpenOfficeTemplateAdmin)
-admin.site.register(OpenOfficeExtension)
-admin.site.register(OpenOfficeApplication)
-admin.site.register(OpenOfficeVersion)
+admin.site.register(OpenOfficeExtension, OpenOfficeExtensionAdmin)
 admin.site.register(IconSet,IconSetAdmin)
-admin.site.register(PackageScreenshot)
+admin.site.register(PackageScreenshot, PackageScreenshotAdmin)
