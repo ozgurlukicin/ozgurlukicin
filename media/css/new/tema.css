@@ -70,7 +70,12 @@ div#content {
 
 .themeitem.first {
     float: left;
-    width: 50%;
+    width: 49%;
+    border-right: 1px solid #EAEAEA;
+    margin-right: 4px;
+}
+
+.themeitem.second {
 }
 
 .themeitem .title a {
