@@ -129,7 +129,7 @@ def themeitem_detail(request, category, slug):
 def list_user(request, username):
     "Theme items of a user"
     user = get_object_or_404(User, username=username)
-    themeItems = ThemeItem.objects.filter(status=True, author=user)
+    themeItems = ThemeItem.objects.filter(status=True, author=user).order_by("-update")
 
     params={
             'queryset': themeItems,
