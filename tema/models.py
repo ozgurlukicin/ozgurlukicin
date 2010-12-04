@@ -245,10 +245,7 @@ class OpenOfficeVersion(models.Model):
 
 class OpenOfficeTheme(ThemeItem):
     file = models.FileField("OpenOffice dosyası", upload_to="upload/tema/openoffice/%Y/%m/%d")
-    screenshot = models.ImageField("Ekran görüntüsü", help_text="Şablonunuzun nasıl göründüğüne dair bir ekran görüntünüzü burada paylaşın",upload_to="upload/tema/openoffice/%Y/%m/%d",blank=False,null=True)
-    competible_with = models.ManyToManyField(OpenOfficeVersion, verbose_name=u"Uyumlu olduğu OpenOffice.org versiyonları")
-
-    #competible_with_higher = models.BooleanField(verbose_name=u"Üstü ile uyumlu")
+    screenshot = models.ImageField("Ekran görüntüsü", help_text="Şablonunuzun nasıl göründüğüne dair bir ekran görüntünüzü burada paylaşın", upload_to="upload/tema/openoffice/%Y/%m/%d",blank=True,null=True)
 
     class Meta:
         verbose_name = "Open Office özelleştirmesi"
@@ -262,7 +259,6 @@ class OpenOfficeTheme(ThemeItem):
 
 class OpenOfficeTemplate(OpenOfficeTheme):
     category = models.ForeignKey("OpenOfficeTemplateCategory",verbose_name="Kategori")
-    application = models.ForeignKey(OpenOfficeApplication,verbose_name="OpenOffice.org uygulaması",help_text="Şablonun ait olduğu OpenOffice.org uygulaması")
 
     class Meta:
         verbose_name = u"Open Office Şablonu"
