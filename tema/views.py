@@ -252,16 +252,16 @@ def themeitem_add_openoffice_element(request):
             item.author = request.user
             item.submit = item.update = datetime.datetime.now()
             slug = slugify(replace_turkish(item.title))
+
+            if not item.screenshot:
+                item.screenshot.name = "img/tema/openoffice-default.png"
+
             item.save()
+
             for tag in form.cleaned_data["tags"]:
                 t = Tag.objects.get(name=tag)
                 item.tags.add(t)
             item.slug = str(item.id) + "-" + slug
-
-            for version in form.cleaned_data["competible_with"]:
-                item.competible_with.add(version)
-            item.save()
-
 
             thumbnail = Image.open(item.screenshot.path)
             thumbnail.thumbnail((150,200), Image.ANTIALIAS)
