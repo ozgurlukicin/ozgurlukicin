@@ -172,7 +172,7 @@ class OpenOfficeExtensionForm(OpenOfficeTemplateForm):
     confirmation = forms.BooleanField(label="Onay", required=True, help_text="Bu OpenOffice.org eklentisini dağıtma hakkına sahibim.")
     license = forms.ModelChoiceField(label="Lisans", queryset=License.objects.order_by("name"), empty_label="---------")
     origin_url = forms.URLField(label="Özgün Çalışma", required=False, help_text="Başka bir çalışmayı temel aldıysanız bunun bağlantısını yazın.", widget=forms.TextInput(attrs={"style":"width:400px"}))
-        
+
     class Meta:
         model = OpenOfficeExtension
         exclude = ("author", "rating", "thumbnail",
@@ -189,7 +189,7 @@ class IconSetForm(OpenOfficeTemplateForm):
     confirmation = forms.BooleanField(label="Onay", required=True, help_text="Bu tema setini dağıtma hakkına sahibim.")
     license = forms.ModelChoiceField(label="Lisans", queryset=License.objects.order_by("name"), empty_label="---------")
     origin_url = forms.URLField(label="Özgün Çalışma", required=False, help_text="Başka bir çalışmayı temel aldıysanız bunun bağlantısını yazın.", widget=forms.TextInput(attrs={"style":"width:400px"}))
-        
+
     class Meta:
         model = IconSet
         exclude = ("author", "rating", "thumbnail",
