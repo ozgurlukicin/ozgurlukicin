@@ -229,19 +229,6 @@ class IconSet(ThemeItem):
     def get_download_url(self):
         return self.file.url
 
-class OpenOfficeApplication(models.Model):
-    name = models.CharField(max_length=50)
-
-    def __unicode__(self):
-        return self.name
-
-class OpenOfficeVersion(models.Model):
-    version = models.CharField(max_length=50)
-    version_number = models.PositiveIntegerField()
-
-    def __unicode__(self):
-        return self.version
-
 
 class OpenOfficeTheme(ThemeItem):
     file = models.FileField("OpenOffice dosyası", upload_to="upload/tema/openoffice/%Y/%m/%d")
