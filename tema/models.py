@@ -232,7 +232,7 @@ class IconSet(ThemeItem):
 
 class OpenOfficeTheme(ThemeItem):
     file = models.FileField("OpenOffice dosyası", upload_to="upload/tema/openoffice/%Y/%m/%d")
-    screenshot = models.ImageField("Ekran görüntüsü", help_text="Şablonunuzun nasıl göründüğüne dair bir ekran görüntünüzü burada paylaşın", upload_to="upload/tema/openoffice/%Y/%m/%d",blank=True,null=True)
+    screenshot = models.ImageField("Ekran görüntüsü", help_text="Şablonunuzun nasıl göründüğüne dair bir ekran görüntüsü varsa burada paylaşın", upload_to="upload/tema/openoffice/%Y/%m/%d",blank=True,null=True)
 
     class Meta:
         verbose_name = "Open Office özelleştirmesi"
