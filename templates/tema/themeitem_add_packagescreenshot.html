@@ -8,6 +8,7 @@
 {% endblock %}
 {% block content %}
 <form action="" method="POST" enctype="multipart/form-data">
+    <p>Paket yöneticimizde görüntülenecek bu paket görüntülerini eklemeden önce <a href="/ekran-goruntusu-ekleme/">burada</a> bulunan kuralları okuyup en doğru şekilde görsellerinizi yükleyebilirsiniz.</p></br>
     <p>{{ form.non_field_errors }}</p>
     {% for field in form %}
     {% include "field.html" %}
