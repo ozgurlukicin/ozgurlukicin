@@ -70,21 +70,20 @@ class Category(models.Model):
     class Meta:
         abstract = True
 
+class OpenOfficeThemeKind(Category):
+    class Meta:
+        verbose_name = u"OpenOffice Öğe Türü"
+        verbose_name_plural = u"OpenOffice Öğe Türleri"
 
 class WallpaperCategory(Category):
     class Meta:
         verbose_name = u"Duvar Kağıdı Kategorisi"
         verbose_name_plural = u"Duvar Kağıdı Kategorileri"
 
-class OpenOfficeTemplateCategory(Category):
+class OpenOfficeThemeCategory(Category):
     class Meta:
-        verbose_name = u"Open Office Şablon Kategorisi"
-        verbose_name_plural = u"Open Office Şablon Kategorileri"
-
-class OpenOfficeExtensionCategory(Category):
-    class Meta:
-        verbose_name = u"Open Office Eklenti Kategorisi"
-        verbose_name_plural = u"Open Office Eklenti Kategorileri"
+        verbose_name = u"Open Office Öğe Kategorisi"
+        verbose_name_plural = u"Open Office Öğe Kategorileri"
 
 class ThemeItem(models.Model):
     "A theme item mainly consists of screenshots and files to download"
@@ -233,48 +232,22 @@ class IconSet(ThemeItem):
 class OpenOfficeTheme(ThemeItem):
     file = models.FileField("OpenOffice dosyası", upload_to="upload/tema/openoffice/%Y/%m/%d")
     screenshot = models.ImageField("Ekran görüntüsü", help_text="Şablonunuzun nasıl göründüğüne dair bir ekran görüntüsü varsa burada paylaşın", upload_to="upload/tema/openoffice/%Y/%m/%d",blank=True,null=True)
+    kind = models.ForeignKey("OpenOfficeThemeKind", verbose_name="Öğe Türü")
+    category = models.ForeignKey("OpenOfficeThemeCategory", verbose_name="Kategori")
 
     class Meta:
-        verbose_name = "Open Office özelleştirmesi"
-        verbose_name_plural = "Open Office özelleştirmeleri"
+        verbose_name = "Open Office Özelleştirmesi"
+        verbose_name_plural = "Open Office Özelleştirmeleri"
 
     def get_absolute_url(self):
-        if OpenOfficeTemplate.objects.filter(id = self.id).count():
-            return "/tema/open-office-sablon/detay/%s/" % self.slug
-        elif OpenOfficeExtension.objects.filter(id = self.id).count():
-            return "/tema/open-office-eklenti/detay/%s/" % self.slug
-
-class OpenOfficeTemplate(OpenOfficeTheme):
-    category = models.ForeignKey("OpenOfficeTemplateCategory",verbose_name="Kategori")
-
-    class Meta:
-        verbose_name = u"Open Office Şablonu"
-        verbose_name_plural = u"Open Office Şablonları"
-
-    def get_absolute_url(self):
-        return "/tema/open-office-sablon/detay/%s/" % (self.slug)
+        return "/tema/open-office-ogesi/detay/%s/" % (self.slug)
 
     def get_redirect_url(self):
-        return "/tema/open-office-sablon/detay/%s/%s/" % (self.slug, self.id)
+        return "/tema/open-office-ogesi/detay/%s/%s" % (self.slug, self.id)
 
     def get_download_url(self):
         return self.file.url
 
-class OpenOfficeExtension(OpenOfficeTheme):
-    category = models.ForeignKey("OpenOfficeExtensionCategory") 
-
-    class Meta:
-        verbose_name = u"Open Office Eklentisi"
-        verbose_name_plural = u"Open Office Eklentileri"
-
-    def get_absolute_url(self):
-        return "/tema/open-office-eklenti/detay/%s/" % (self.slug)
-
-    def get_redirect_url(self):
-        return "/tema/open-office-eklenti/detay/%s/%s" % (self.slug, self.id)
-
-    def get_download_url(self):
-        return self.file.url
 
 class Font(ThemeItem):
     font = models.FileField("Yazıtipi dosyası", upload_to="upload/tema/yazitipi/")

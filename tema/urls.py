@@ -37,7 +37,7 @@ urlpatterns = patterns ('oi.tema.views',
         (r'^ekle/duvar-kagitlari/$','themeitem_add_wallpaper'),
         (r'^ekle/masaustu-goruntuleri/$','themeitem_add_desktopscreenshot'),
         (r'^ekle/yazitipleri/$','themeitem_add_font'),
-        (r'^ekle/open-office-ogesi/$','themeitem_add_openoffice_element'),
+        (r'^ekle/open-office-ogesi/$','themeitem_add_openofficetheme'),
         (r'^ekle/simge-seti/$','themeitem_add_iconset'),
         (r'^ekle/paket-goruntuleri/$', 'themeitem_add_packagescreenshot'),
 

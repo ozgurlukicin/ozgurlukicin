@@ -73,10 +73,7 @@ class FontAdmin(ThemeItemAdmin):
 class IconSetAdmin(ThemeItemAdmin):
     list_display = ("title", "author", "license", "status")
 
-class OpenOfficeTemplateAdmin(ThemeItemAdmin):
-    list_display = ("title", "version", "author", "license", "status")
-
-class OpenOfficeExtensionAdmin(ThemeItemAdmin):
+class OpenOfficeThemeAdmin(ThemeItemAdmin):
     list_display = ("title", "version", "author", "license", "status")
 
 class PackageScreenshotAdmin(ThemeItemAdmin):
@@ -85,7 +82,6 @@ class PackageScreenshotAdmin(ThemeItemAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
-
 admin.site.register(ThemeItem, ThemeItemAdmin)
 admin.site.register(Wallpaper, WallpaperAdmin)
 admin.site.register(DesktopScreenshot, DesktopScreenshotAdmin)
@@ -93,10 +89,8 @@ admin.site.register(Font, FontAdmin)
 admin.site.register(WallpaperFile, admin.ModelAdmin)
 admin.site.register(License, admin.ModelAdmin)
 admin.site.register(WallpaperCategory, CategoryAdmin)
-admin.site.register(OpenOfficeTemplateCategory)
-admin.site.register(OpenOfficeExtensionCategory)
-admin.site.register(OpenOfficeTheme)
-admin.site.register(OpenOfficeTemplate,OpenOfficeTemplateAdmin)
-admin.site.register(OpenOfficeExtension, OpenOfficeExtensionAdmin)
+admin.site.register(OpenOfficeThemeCategory)
+admin.site.register(OpenOfficeTheme,OpenOfficeThemeAdmin)
+admin.site.register(OpenOfficeThemeKind)
 admin.site.register(IconSet,IconSetAdmin)
 admin.site.register(PackageScreenshot, PackageScreenshotAdmin)
