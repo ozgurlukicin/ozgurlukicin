@@ -72,8 +72,8 @@ class Category(models.Model):
 
 class OpenOfficeThemeKind(Category):
     class Meta:
-        verbose_name = u"OpenOffice Öğe Türü"
-        verbose_name_plural = u"OpenOffice Öğe Türleri"
+        verbose_name = "OpenOffice Öğe Türü"
+        verbose_name_plural = "OpenOffice Öğe Türleri"
 
 class WallpaperCategory(Category):
     class Meta:
@@ -153,10 +153,8 @@ class ThemeItem(models.Model):
             return "/tema/masaustu-goruntuleri/detay/%s/" % self.slug
         elif Font.objects.filter(id = self.id).count():
             return "/tema/yazitipleri/detay/%s/" % self.slug
-        elif OpenOfficeTemplate.objects.filter(id = self.id).count():
-            return "/tema/open-office-sablon/detay/%s/" % self.slug
-        elif OpenOfficeExtension.objects.filter(id = self.id).count():
-            return "/tema/open-office-eklenti/detay/%s/" % self.slug
+        elif OpenOfficeThene.objects.filter(id = self.id).count():
+            return "/tema/open-office-oge/detay/%s/" % self.slug
         elif IconSet.objects.filter(id = self.id).count():
             return "/tema/simge-seti/detay/%s/" % self.slug
         elif PackageScreenshot.objects.filter(id= self.id).count():
@@ -243,7 +241,7 @@ class OpenOfficeTheme(ThemeItem):
         return "/tema/open-office-ogesi/detay/%s/" % (self.slug)
 
     def get_redirect_url(self):
-        return "/tema/open-office-ogesi/detay/%s/%s" % (self.slug, self.id)
+        return "/tema/open-office-ogesi/detay/%s/%s/" % (self.slug, self.id)
 
     def get_download_url(self):
         return self.file.url
@@ -411,6 +409,6 @@ def category_counter_callback(sender, **kwargs):
         category.count = Model.objects.filter(category=category,status=True).count()
         category.save()
 
-for Model in [Wallpaper,OpenOfficeTemplate, OpenOfficeExtension]:
+for Model in [Wallpaper,OpenOfficeTheme]:
     post_save.connect(category_counter_callback, sender=Model)
     post_delete.connect(category_counter_callback, sender=Model)

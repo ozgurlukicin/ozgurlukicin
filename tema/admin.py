@@ -73,8 +73,8 @@ class FontAdmin(ThemeItemAdmin):
 class IconSetAdmin(ThemeItemAdmin):
     list_display = ("title", "author", "license", "status")
 
-class OpenOfficeThemeAdmin(ThemeItemAdmin):
-    list_display = ("title", "version", "author", "license", "status")
+ #class OpenOfficeThemeAdmin(ThemeItemAdmin):
+#    list_display = ("title", "version", "author", "license", "status")
 
 class PackageScreenshotAdmin(ThemeItemAdmin):
     list_display = ("title", "version", "author", "license", "status")
@@ -90,7 +90,7 @@ admin.site.register(WallpaperFile, admin.ModelAdmin)
 admin.site.register(License, admin.ModelAdmin)
 admin.site.register(WallpaperCategory, CategoryAdmin)
 admin.site.register(OpenOfficeThemeCategory)
-admin.site.register(OpenOfficeTheme,OpenOfficeThemeAdmin)
+admin.site.register(OpenOfficeTheme)
 admin.site.register(OpenOfficeThemeKind)
 admin.site.register(IconSet,IconSetAdmin)
 admin.site.register(PackageScreenshot, PackageScreenshotAdmin)
