@@ -2,14 +2,46 @@
 # -*- coding: utf-8 -*-
 
 # important command: sed -i "s|op_podcast|oi_podcast|g" oi_podcast.log
+#
+# Important Notes:
+# - First ejournal file names: edergi_200804_300dpi.pdf & edergi_200804_96dpi.pdf
+# - 10th podcast names start with op_podcast
+# - In podcast name, character "E" may be small.
+#   |--> podcast 35
+#   |--> podcast 36
+#   |--> podcast 40
+#
+# - In podcast name, character "_" may be "-".
+#   |--> podcast 26: oi-podcast-E26
+#
+# - In podcast name, it may be end with _N.
+#   |--> podcast 28: oi_podcast_E28_1
+#
+# Total of old logs:
+# |
+# |--> Podcast
+# |    |
+# |    |--> nginx  =>
+# |    |
+# |    |--> apache =>
+# |    |
+# |    |--> total  =>
+# |
+# |--> Ejournal
+#      |
+#      |--> nginx  =>
+#      |
+#      |--> apache =>
+#      |
+#      |--> total  =>
+#
 
 import re
 
-LOGPODCAST = "oi_podcast.log"
+LOGPODCAST = "podcast.log"
 LOGEDERGI = "edergi.log"
-EPISODELISTPODCAST = range(1, 18)
-EPISODELISTEDERGI = range(1, 23)
-
+COUNT_OF_PODCAST = 40
+COUNT_OF_JOURNAL = 28
 
 def get_amount_list(log_file, regex):
     log_list = file(log_file).readlines()
@@ -34,7 +66,7 @@ def print_output():
 
     # podcasts
     amount_list = get_amount_list(LOGPODCAST, regex_podcast)
-    for episode in EPISODELISTPODCAST:
+    for episode in range(1, COUNT_OF_PODCAST + 1):
         if episode < 10: # dirty hacking
             episode = "0%s" % episode
         amount_ogg = amount_list.count('%s.ogg' % episode)
@@ -46,7 +78,7 @@ def print_output():
 
     # edergis
     amount_list = get_amount_list(LOGEDERGI, regex_edergi)
-    for episode in EPISODELISTEDERGI:
+    for episode in range(1, COUNT_OF_JOURNAL + 1):
         if episode < 10: # still dirty hacking
             episode = "0%s" % episode
         amount_buyuk = amount_list.count('%s_buyuk.pdf' % episode)
