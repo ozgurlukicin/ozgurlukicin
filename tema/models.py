@@ -153,7 +153,7 @@ class ThemeItem(models.Model):
             return "/tema/masaustu-goruntuleri/detay/%s/" % self.slug
         elif Font.objects.filter(id = self.id).count():
             return "/tema/yazitipleri/detay/%s/" % self.slug
-        elif OpenOfficeThene.objects.filter(id = self.id).count():
+        elif OpenOfficeTheme.objects.filter(id = self.id).count():
             return "/tema/open-office-oge/detay/%s/" % self.slug
         elif IconSet.objects.filter(id = self.id).count():
             return "/tema/simge-seti/detay/%s/" % self.slug
