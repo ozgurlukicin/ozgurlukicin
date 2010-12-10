@@ -14,12 +14,12 @@ from django.conf import settings
 
 
 class AdminSite(sites.AdminSite):
-    
+
     def __init__(self, *args, **kwargs):
         self.grappelli_title = kwargs.pop('title', 'Grappelli')
         self.grappelli_headline = kwargs.pop('headline', 'Grappelli')
         super(AdminSite, self).__init__(*args, **kwargs)
-    
+
     def annotate_context(self, extra_context):
         extra_context = extra_context or {}
         extra_context.update({
@@ -27,7 +27,7 @@ class AdminSite(sites.AdminSite):
             'grappelli_admin_headline': self.grappelli_headline,
         })
         return extra_context
-    
+
     def admin_view(self, view, cacheable=False):
         # not everything can take extra_context
         excludes = [
@@ -56,7 +56,7 @@ class AdminSite(sites.AdminSite):
 
 
 class RelatedLookupAdmin(admin.ModelAdmin):
-    
+
     def has_change_permission(self, request, obj=None):
         if not obj:
             opts = self.opts
