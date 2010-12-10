@@ -71,7 +71,7 @@ order = {"update" : "-update",
 
 add_new_links = {"duvar-kagitlari":"/tema/ekle/duvar-kagitlari",
                 "yazitipleri":"/tema/ekle/yazitipleri",
-                "open-office":"/tema/ekle/open-office-ogesi",
+                "open-office":"/tema/ekle/open-office",
                 "simge-seti":"/tema/ekle/simge-seti",
                 "masaustu-goruntuleri":"/tema/ekle/masaustu-goruntuleri/",
                 "paket-goruntuleri":"/tema/ekle/paket-goruntuleri/",

@@ -238,10 +238,10 @@ class OpenOfficeTheme(ThemeItem):
         verbose_name_plural = "Open Office Özelleştirmeleri"
 
     def get_absolute_url(self):
-        return "/tema/open-office-ogesi/detay/%s/" % (self.slug)
+        return "/tema/open-office/detay/%s/" % (self.slug)
 
     def get_redirect_url(self):
-        return "/tema/open-office-ogesi/detay/%s/%s/" % (self.slug, self.id)
+        return "/tema/open-office/detay/%s/%s/" % (self.slug, self.id)
 
     def get_download_url(self):
         return self.file.url
