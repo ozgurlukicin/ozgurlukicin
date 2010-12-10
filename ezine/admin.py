@@ -16,6 +16,6 @@ class EzineAdmin(admin.ModelAdmin):
     class Media:
         js = (
             'admin/tinymce/jscripts/tiny_mce/tiny_mce.js',
-            'js/jquery-1.4.3.min.js', 'js/adminimages.js', 'js/tinymce_setup.js')
+            'js/jquery-1.4.2.min.js', 'js/adminimages.js', 'js/tinymce_setup.js')
 
 admin.site.register(Ezine, EzineAdmin)
