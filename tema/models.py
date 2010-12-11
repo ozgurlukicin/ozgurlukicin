@@ -22,8 +22,11 @@ from oi.tema.settings import TEMA_ADMIN_MAIL
 
 CATEGORIES = (
     ("duvar-kagitlari", "Duvar Kağıtları"),
-    ("masaustu-goruntuleri", "Ekran Görüntüleri"),
+    ("simge-seti", "Simge Setleri"),
     ("yazitipleri", "Yazıtipleri"),
+    ("open-office", "OpenOffice.org Öğeleri"),
+    ("masaustu-goruntuleri", "Ekran Görüntüleri"),
+    ("paket-goruntuleri", "Paket Görüntüleri"),
 )
 
 class WallPaperSize:
@@ -154,7 +157,7 @@ class ThemeItem(models.Model):
         elif Font.objects.filter(id = self.id).count():
             return "/tema/yazitipleri/detay/%s/" % self.slug
         elif OpenOfficeTheme.objects.filter(id = self.id).count():
-            return "/tema/open-office-oge/detay/%s/" % self.slug
+            return "/tema/open-office/detay/%s/" % self.slug
         elif IconSet.objects.filter(id = self.id).count():
             return "/tema/simge-seti/detay/%s/" % self.slug
         elif PackageScreenshot.objects.filter(id= self.id).count():
