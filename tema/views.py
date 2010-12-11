@@ -11,7 +11,7 @@ import Image, ImageFont, ImageDraw
 
 from oi.forum.views import flood_control
 from oi.st.wrappers import render_response
-from oi.tema.models import ThemeItem, File, ScreenShot, Vote, ThemeAbuseReport, DesktopScreenshot, Wallpaper, Font, PackageScreenshot
+from oi.tema.models import ThemeItem, File, ScreenShot, Vote, ThemeAbuseReport, DesktopScreenshot, Wallpaper, Font, PackageScreenshot, OpenOfficeTheme
 from oi.tema.forms import *
 from oi.tema.settings import THEME_ITEM_PER_PAGE
 
@@ -241,12 +241,12 @@ def themeitem_add_openofficetheme(request):
             item.author = request.user
             item.submit = item.update = datetime.datetime.now()
             slug = slugify(replace_turkish(item.title))
-            
+
             if not item.screenshot:
-	        item.screenshot.name = "img/tema/openoffice-default.png"
-            
+                item.screenshot.name = "img/tema/openoffice-default.png"
+
             item.save()
-            
+
             for tag in form.cleaned_data["tags"]:
                 t=Tag.objects.get(name=tag)
                 item.tags.add(t)
@@ -285,7 +285,7 @@ def themeitem_add_iconset(request):
                 item.tags.add(t)
             item.slug = str(item.id) + "-" + slug
 
-
+            #create thumbnail
             thumbnail = Image.open(item.screenshot.path)
             thumbnail.thumbnail((150,200), Image.ANTIALIAS)
             file = ContentFile("")
