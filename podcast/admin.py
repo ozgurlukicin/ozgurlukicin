@@ -14,7 +14,7 @@ class EpisodeAdmin(admin.ModelAdmin):
     class Media:
         js = ("admin/tinymce/jscripts/tiny_mce/tiny_mce.js", "js/tinymce_setup.js", "js/jquery-1.4.2.min.js", "js/adminimages.js", "js/jquery.autocomplete.js", "js/taghelper.js")
         css = {
-                "all": ("media/admin/css/jquery-ui-grappelli-extensions.css",),
+                "all": ("css/new/grappelli.autocomplete.css",),
         }
 
 admin.site.register(Author)
