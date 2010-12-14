@@ -22,14 +22,7 @@
         {% if perms.tema.change_themeabusereport %}<li><a href="/tema/raporlanmis-temalar/">Tema Şikayetleri ({% number_of_theme_abuse %})</a></li>{% endif %}
         <li></li>
     </ul>
-    {% if open_office %}
-        <ul>
-            <li><b>OpenOffice.org Öğeleri</b></li>
-            <li><a href="/tema/open-office-eklenti">Eklentiler</a></li>
-            <li><a href="/tema/open-office-sablon">Şablonlar</a></li>
-            <li></li>
-        </ul>
-    {% endif %}
+
     {% if sub_categories %}
         <ul>
             <li><b>Kategoriler</b></li>
