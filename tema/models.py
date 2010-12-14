@@ -73,11 +73,6 @@ class Category(models.Model):
     class Meta:
         abstract = True
 
-class OpenOfficeThemeKind(Category):
-    class Meta:
-        verbose_name = "OpenOffice Öğe Türü"
-        verbose_name_plural = "OpenOffice Öğe Türleri"
-
 class WallpaperCategory(Category):
     class Meta:
         verbose_name = u"Duvar Kağıdı Kategorisi"
@@ -233,7 +228,6 @@ class IconSet(ThemeItem):
 class OpenOfficeTheme(ThemeItem):
     file = models.FileField("OpenOffice dosyası", upload_to="upload/tema/openoffice/%Y/%m/%d")
     screenshot = models.ImageField("Ekran görüntüsü", help_text="Şablonunuzun nasıl göründüğüne dair bir ekran görüntüsü varsa burada paylaşın", upload_to="upload/tema/openoffice/%Y/%m/%d",blank=True,null=True)
-    kind = models.ForeignKey("OpenOfficeThemeKind", verbose_name="Öğe Türü")
     category = models.ForeignKey("OpenOfficeThemeCategory", verbose_name="Kategori")
 
     class Meta:

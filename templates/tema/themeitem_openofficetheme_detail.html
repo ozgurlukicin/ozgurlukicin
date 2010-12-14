@@ -50,7 +50,6 @@
                 <b>Lisans:</b> <a href="{{ object.license.url }}">{{ object.license.name }}</a> <br />
                 <b>Gönderildiği Tarih:</b> {{ object.submit|date:"d F Y" }} <br />
                 <b>İndirilme Sayısı:</b> {{ object.download_count }} <br />
-                <b>Öğe Türü:</b> {{ object.kind.name.title }} <br />
                 <b>Kategori:</b> {{object.category.name.title}} <br />
                 {% if object.origin_url %}<b><a href="{{ object.origin_url }}" target="_blank">Özgün Çalışma</a></b><br />{% endif %}<br />
                 <hr />
