@@ -89,7 +89,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'oi.context_processors.testing',
     'django.core.context_processors.auth',
     'django.core.context_processors.request',
-    'grappelli.context_processors.admin_template_path',
     )
 
 MIDDLEWARE_CLASSES = (
