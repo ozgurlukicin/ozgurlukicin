@@ -72,14 +72,25 @@ class FontAdmin(ThemeItemAdmin):
 
 class IconSetAdmin(ThemeItemAdmin):
     list_display = ("title", "author", "license", "status")
+    fieldsets = (
+            (None, {
+                "fields": ("thumbnail", "title", "slug", "version",
+                    "origin_url", "text", "changelog", "screenshot", "file",
+                    "status", "deny_reason", "tags")
+                }),
+            ("Diğer", {
+                "classes": "collapse",
+                "fields": ("author", "license", "rating", "download_count", "submit", "update", "comment_enabled")
+                }),
+            )
 
 class OpenOfficeThemeAdmin(ThemeItemAdmin):
     list_display = ("title", "author", "license", "status")
     fieldsets = (
             (None, {
                 "fields": ("thumbnail", "title", "slug", "version",
-                    "text", "changelog", "screenshot", "file", "status",
-                    "deny_reason", "tags")
+                    "origin_url", "text", "changelog", "screenshot", "file",
+                    "status", "deny_reason", "tags")
                 }),
             ("Diğer", {
                 "classes": "collapse",
