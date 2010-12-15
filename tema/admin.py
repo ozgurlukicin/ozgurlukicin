@@ -27,7 +27,7 @@ class ThemeItemAdmin(admin.ModelAdmin):
     class Media:
         js = ("js/jquery-1.2.6.min.js", "js/temaimages.js", "js/jquery.autocomplete.js", "js/taghelper.js")
         css = {
-            "all": ("css/new/grappelli.autocomplete.css",),
+                "all": ("css/new/autocomplete.css",),
         }
 
 class WallpaperAdmin(ThemeItemAdmin):
