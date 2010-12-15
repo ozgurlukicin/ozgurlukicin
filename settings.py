@@ -113,6 +113,7 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = (
     'grappelli',
+    'filebrowser',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -233,3 +234,4 @@ CITY_LIST = (
 )
 
 GRAPPELLI_ADMIN_TITLE = "Özgürlükİçin"
+FILEBROWSER_DIRECTORY = "upload/"
