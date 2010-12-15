@@ -14,8 +14,6 @@ class EzineAdmin(admin.ModelAdmin):
     list_display = ('title',)
 
     class Media:
-        js = (
-            'admin/tinymce/jscripts/tiny_mce/tiny_mce.js',
-            'js/jquery-1.4.2.min.js', 'js/adminimages.js', 'js/tinymce_setup.js')
+        js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js", "js/jquery-1.2.6.min.js", "js/adminimages.js")
 
 admin.site.register(Ezine, EzineAdmin)

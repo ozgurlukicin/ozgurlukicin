@@ -28,7 +28,7 @@ class ArticleAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ("title",)}
 
     class Media:
-        js = ("admin/tinymce/jscripts/tiny_mce/tiny_mce.js", "js/tinymce_setup.js", "js/jquery-1.4.2.min.js", "js/adminimages.js", "js/jquery.autocomplete.js", "js/taghelper.js")
+        js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js", "js/jquery-1.2.6.min.js", "js/adminimages.js", "js/jquery.autocomplete.js", "js/taghelper.js")
         css = {
             "all": ("css/new/grappelli.autocomplete.css",),
         }

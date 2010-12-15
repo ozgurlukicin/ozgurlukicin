@@ -25,7 +25,7 @@ class ThemeItemAdmin(admin.ModelAdmin):
     search_fields = ["title", "text", "changelog"]
 
     class Media:
-        js = ("js/jquery-1.4.2.min.js", "js/temaimages.js", "js/jquery.autocomplete.js", "js/taghelper.js")
+        js = ("js/jquery-1.2.6.min.js", "js/temaimages.js", "js/jquery.autocomplete.js", "js/taghelper.js")
         css = {
             "all": ("css/new/grappelli.autocomplete.css",),
         }
