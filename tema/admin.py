@@ -75,9 +75,31 @@ class IconSetAdmin(ThemeItemAdmin):
 
 class OpenOfficeThemeAdmin(ThemeItemAdmin):
     list_display = ("title", "author", "license", "status")
+    fieldsets = (
+            (None, {
+                "fields": ("thumbnail", "title", "slug", "version",
+                    "text", "changelog", "screenshot", "file", "status",
+                    "deny_reason", "tags")
+                }),
+            ("Diğer", {
+                "classes": "collapse",
+                "fields": ("author", "license", "rating", "download_count", "submit", "update", "comment_enabled")
+                })
+            )
 
 class PackageScreenshotAdmin(ThemeItemAdmin):
     list_display = ("title", "version", "author", "license", "status")
+    fieldsets = (
+            (None, {
+                "fields": ("thumbnail", "title", "slug", "version",
+                    "text", "changelog", "image", "s_image", "status",
+                    "deny_reason", "tags")
+                }),
+            ("Diğer", {
+                "classes": "collapse",
+                "fields": ("author", "license", "rating", "download_count", "submit", "update", "comment_enabled")
+                })
+            )
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
