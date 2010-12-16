@@ -231,8 +231,8 @@ class OpenOfficeTheme(ThemeItem):
     category = models.ForeignKey("OpenOfficeThemeCategory", verbose_name="Kategori")
 
     class Meta:
-        verbose_name = "Open Office Özelleştirmesi"
-        verbose_name_plural = "Open Office Özelleştirmeleri"
+        verbose_name = "Open Office Öğesi"
+        verbose_name_plural = "Open Office Öğeleri"
 
     def get_absolute_url(self):
         return "/tema/open-office/detay/%s/" % (self.slug)
