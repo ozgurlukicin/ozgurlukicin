@@ -28,7 +28,7 @@
             <li><b>Kategoriler</b></li>
             <li><a href="/tema/{{category}}">Hepsi</a></li>
             {% for sub_category in sub_categories %}
-            <li><a href="/tema/{{category}}/{{sub_category.slug}}">{{sub_category.name}} ({{sub_categories.count}})</a></li>
+            <li><a href="/tema/{{category}}/{{sub_category.slug}}">{{sub_category.name}} ({{sub_category.count}})</a></li>
             {% endfor %}
             <li></li>
         </ul>
