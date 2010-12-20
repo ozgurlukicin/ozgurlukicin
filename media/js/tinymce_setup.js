@@ -36,7 +36,8 @@ tinyMCE.init({
     dialog_type: 'window',
     editor_deselector: 'mceNoEditor',
     keep_styles : false,
-    language: 'en',
+    entity_encoding: 'raw',
+    language: 'tr',
     object_resizing: false,
     media_strict: true,
     
