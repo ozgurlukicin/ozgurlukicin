@@ -1,4 +1,4 @@
 tinyMCE.addI18n('tr.autosave',{
-restore_content: "Restore auto-saved content",
-warning_message: "If you restore the saved content, you will lose all the content that is currently in the editor.\n\nAre you sure you want to restore the saved content?"
+restore_content: "Otomatik kaydedilmiş içeriği geri getir",
+warning_message: "Kaydedilmiş içeriği geri getirirsiniz, editörde mevcut olan tüm içeriği kaybedeceksiniz.\n\nBu işleme devam etmek istiyor musunuz?"
 });
