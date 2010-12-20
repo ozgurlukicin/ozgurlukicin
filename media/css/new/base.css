@@ -19,6 +19,15 @@ img {
     border: 0px;
     behavior: url(/media/css/new/iepngfix.htc);
 }
+
+.img_right_nospacetop {
+    float: right;
+}
+
+.img_left_nospacetop {
+    float: left;
+}
+
 body {
     background-color: #EAEAEA;
     font-family: sans-serif;
