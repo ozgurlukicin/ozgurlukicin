@@ -47,7 +47,7 @@ urlpatterns = patterns ('oi.tema.views',
         (r'^khotnewstuff/wallpaper/wallpaper-downloads.xml$', 'ghns_wallpaper_downloads'),
         (r'^yonetim/$', 'themeitem_queue'),
         #(r'^listele/(?P<category>[a-z0-9-_]+)/(?P<sort_type>[a-z0-9-_]+)/$','themeitem_sort'),
-        (r'^yazitipleri/(?P<slug>[a-z0-9-_]+)/onizle/(?P<text>.{1,20})/$','font_image'),
+        (r'^yazitipleri/detay/(?P<slug>[a-z0-9-_]+)/onizle/(?P<text>.{1,20})/$','font_image'),
         #category listings
         (r'^([a-z0-9-_]+)?/$','themeitem_list'),
         (r'^([a-z0-9-_]+)/([a-z0-9-_]+)/$','themeitem_list'),
