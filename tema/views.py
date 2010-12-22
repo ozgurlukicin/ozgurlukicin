@@ -276,9 +276,7 @@ def themeitem_add_iconset(request):
             item = form.save(commit=False)
             item.author = request.user
             item.submit = item.update = datetime.datetime.now()
-            item.slug = "somekindof unique value"
             slug = slugify(replace_turkish(item.title))
-            print slug
             item.save()
             for tag in form.cleaned_data["tags"]:
                 t = Tag.objects.get(name=tag)
