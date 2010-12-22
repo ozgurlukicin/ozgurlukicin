@@ -234,4 +234,4 @@ CITY_LIST = (
 )
 
 GRAPPELLI_ADMIN_TITLE = "Özgürlükİçin"
-FILEBROWSER_DIRECTORY = "upload/"
+FILEBROWSER_DIRECTORY = "uploads/"
