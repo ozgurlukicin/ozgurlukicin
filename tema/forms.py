@@ -159,7 +159,7 @@ class OpenOfficeThemeForm(forms.ModelForm):
     class Meta:
         model = OpenOfficeTheme
         exclude = ("author", "rating", "thumbnail",
-                "download_count", "submit", "update", "status", "deny_reason", "scalable",  "changelog", "slug", "topic", "version")
+                "download_count", "submit", "update", "status", "deny_reason", "scalable",  "changelog", "slug", "topic")
 
     def clean_tags(self):
         field_data = self.cleaned_data['tags']
@@ -177,7 +177,7 @@ class IconSetForm(forms.ModelForm):
     class Meta:
         model = IconSet
         exclude = ("author", "rating", "thumbnail",
-                "download_count", "submit", "update", "status", "deny_reason", "scalable",  "changelog", "slug", "topic", "version")
+                "download_count", "submit", "update", "status", "deny_reason", "scalable",  "changelog", "slug", "topic")
 
     def clean_tags(self):
         field_data = self.cleaned_data['tags']
