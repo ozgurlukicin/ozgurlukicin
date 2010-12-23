@@ -8,7 +8,7 @@
 {% block title %}Temalar - {% if author %}{{ author }} tarafından gönderilen içerik - {% endif %}{% endblock %}
 {% block content %}
 <style type="text/css">
-    #choice-container {float:left;height:310px}
+    #choice-container {float:left;}
     #choice-container * {float:left}
     #choice-container .top {float:left;}
     #choice-container .top img{}
@@ -16,12 +16,12 @@
 
     #choice-container .top{cursor:pointer}
     #choice-container .bottom{cursor:pointer}
-    #choice-container>*{float:left;margin-left:-5px}
+    #choice-container>*{float:left;margin: 0 6px}
     #choice-container>div>a{clear:both}
-    #choice-container .bottom{margin-top:-10px}
+    #choice-container .bottom{margin-top:2px}
 
 
-    #choice-container2 {float:left;padding:10px 10px}
+    #choice-container2 {float:left;padding:10px 5px}
     #choice-container2 * {float:left}
     #choice-container2 .top {float:left;padding 10px 10px}
     #choice-container2 .top img{}
@@ -29,10 +29,10 @@
 
     #choice-container2 .top{cursor:pointer}
     #choice-container2 .bottom{cursor:pointer}
-    #choice-container2>*{float:left;margin-left:-5px}
+    #choice-container2>*{float:left;margin-left:0}
     #choice-container2>div>a{}
-    #choice-container2 #screenshot {height:120px; margin-left: -5px}
-    #choice-container2 .bottom{margin-left:-1px}
+    #choice-container2 #screenshot {height:120px; margin-left: 0px}
+    #choice-container2 .bottom{margin-left:0}
     #choice-container2 #pkgshot{margin-left: 10px;}
 
 </style>
@@ -55,13 +55,13 @@
     <div id="font">
         <a href="/tema/yazitipleri">
             <div class="top">
-                <img class="over" style="margin-left:1px" src="/media/img/tema/new/TipoUstMai.png" />
+                <img class="over" src="/media/img/tema/new/TipoUstMai.png" />
                 <img class="not-over" src="/media/img/tema/new/TipoUstGri.png" />
             </div>
         </a>
         <a href="/tema/ekle/yazitipleri">
-            <div class="bottom" style="">
-                <img class="over" style="margin-top:1px" src="/media/img/tema/new/TipoAltMai.png" />
+            <div class="bottom">
+                <img class="over" src="/media/img/tema/new/TipoAltMai.png" />
                 <img class="not-over" src="/media/img/tema/new/TipoAltGri.png" />
             </div>
         </a>
@@ -84,9 +84,9 @@
         <a href="/tema/simge-seti">
             <div class="top">
                 <img class="over" src="/media/img/tema/new/simgeUstMai.png" />
-                <img class="not-over" style="margin-left:5px" src="/media/img/tema/new/simgeUstGri.png" />
+                <img class="not-over" src="/media/img/tema/new/simgeUstGri.png" />
             </div>
-        </a>
+
         <a href="/tema/ekle/simge-seti">
             <div class="bottom">
                 <img class="over" src="/media/img/tema/new/simgeAltMai.png" />
@@ -99,7 +99,7 @@
 <div id="choice-container2">
     <div id="screenshot">
         <a href="/tema/masaustu-goruntuleri">
-            <div class="top" style="width:225px">
+            <div class="top">
                 <img class="over" src="/media/img/tema/new/masaustuMai.png" />
                 <img class="not-over" src="/media/img/tema/new/masaustuGri.png" />
             </div>
@@ -113,7 +113,7 @@
     </div>
     <div id="pkgshot">
         <a href="/tema/paket-goruntuleri">
-            <div class="top" style="width:225px">
+            <div class="top">
                 <img class="over" src="/media/img/tema/new/uygulamaMai.png" />
                 <img class="not-over" src="/media/img/tema/new/uygulamaGri.png" />
             </div>
