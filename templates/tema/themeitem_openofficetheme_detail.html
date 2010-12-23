@@ -51,7 +51,7 @@
                 <b>Gönderildiği Tarih:</b> {{ object.submit|date:"d F Y" }} <br />
                 <b>İndirilme Sayısı:</b> {{ object.download_count }} <br />
                 <b>Kategori:</b> {{object.category.name}} <br />
-                {% if object.origin_url %}<b><a href="{{ object.origin_url }}" target="_blank">Özgün Çalışma</a></b><br />{% endif %}<br />
+                {% if object.origin_url %}<b><a href="{{ object.origin_url }}" target="_blank">Web Sitesi</a></b><br />{% endif %}<br />
                 <hr />
                 <br />
                 {{ object.text }}
