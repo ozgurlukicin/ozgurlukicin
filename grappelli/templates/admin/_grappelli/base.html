@@ -49,7 +49,7 @@
     {% block extrahead %}{% endblock %}
 {% endspaceless %}
 </head>
-<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
+<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}" {% block extrabody %}{% endblock %}>
     <div id="container">
         
         <!-- HEADER -->
