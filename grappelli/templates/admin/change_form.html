@@ -14,11 +14,9 @@
     </script>
     <!-- enable autocomplete for tags -->
     <script type="text/javascript" charset="utf-8">
-        (function($).ready(function(){
-            $("#row cells-1 tags").autocomplete({
-            });
-        });
-    }(django.jQuery));
+        $(function(){
+                $("#tagfilter").autocomplete();
+         });
     </script>
 {% endblock %}
 
