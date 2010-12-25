@@ -498,6 +498,7 @@ def themeitem_change(request, item_id):
                 object.version = form.cleaned_data.get("version")
                 object.changelog = form.cleaned_data["changelog"]
                 object.comment_enabled = form.cleaned_data["comment_enabled"]
+                object.update = datetime.datetime.now()
                 object.save()
 
                 return HttpResponseRedirect(object.get_absolute_url())
