@@ -7,7 +7,7 @@
 
 from django import template
 from django.template import Context, loader
-from oi.tema.models import ThemeAbuseReport
+from oi.tema.models import ThemeAbuseReport, ThemeItem
 import datetime
 
 register = template.Library()
@@ -15,6 +15,11 @@ register = template.Library()
 @register.simple_tag
 def number_of_theme_abuse():
     return ThemeAbuseReport.objects.count()
+
+@register.simple_tag
+def recently_updated():
+    items = ThemeItem.objects.filter(status=True).order_by("-update")[:10]
+    return loader.get_template("tema/sidebar.html").render(Context({"items": items}))
 
 @register.simple_tag
 def fresh_or_updated(item):
