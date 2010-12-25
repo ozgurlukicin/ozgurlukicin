@@ -1,0 +1,8 @@
+<div style="margin-top:10px" class="leftcolumn_content">
+    <h2 style="margin:5px">En Güncel İçerikler</h2>
+<ul>
+    {% for item in items %}
+    <li style="margin-bottom:5px"><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></li>
+    {% endfor %}
+</ul>
+</div>
