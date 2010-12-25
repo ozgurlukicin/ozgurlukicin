@@ -1,5 +1,6 @@
 {% extends "tema/base.html" %}
 {% load library %}
+{% load tema %}
 {% block temaextrahead %}
 <style type="text/css" media="screen">@import url('/media/css/tema/object_lists.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/new/paginator.css');</style>
@@ -30,7 +31,9 @@
         <img src="/media/img/new/image_bottom.png" alt="gölge" />
         <div class="info"><span class="bold">{{ object.update|date:"d" }} {{ object.update|date:"F"|slice:":3" }}</span> {{ object.update|date:"Y" }} <span class="bold">/</span> <a href="{{ object.topic.get_latest_post_url }}"><span class="bold">{{ object.topic.posts|add:"-1" }}</span> Yorum</a></div>
       </div>
-      <div class="title"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></div>
+      <div class="title"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
+          {% fresh_or_updated object %}
+      </div>
       <div class="summary">{{ object.text|safe|truncatewords_html:23 }}</div>
     </div>
 {% endfor %}
