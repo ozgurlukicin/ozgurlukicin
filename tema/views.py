@@ -567,6 +567,10 @@ def themeitem_download(request, category, slug, id):
         object = get_object_or_404(PackageScreenshot, id=id)
         object.download_count += 1
         object.save()
+    elif category == "simge-seti":
+        object = get_object_or_404(IconSet, id=id)
+        object.download_count += 1
+        object.save()
     else:
         raise Http404
     return HttpResponseRedirect(object.get_download_url())
