@@ -1,3 +1,6 @@
+#include <px.h>
+#include <10px.h>
+
 div#content {
     border: none;
 }
@@ -119,16 +122,16 @@ div#content {
 
 .themeitem_middle_leftcolumn_resolution {
     float: left;
-    width: 100px;
-    margin-left: 30px;
+    width: 106px;
+    margin-left: 33px;
     margin-top: 13px;
     text-align: center;
 }
 
 .themeitem_middle_leftcolumn_buttons {
     float: left;
-    width: 100px;
-    margin-left: 30px;
+    width: 106px;
+    margin-left: 33px;
     margin-top: 13px;
     text-align: center;
 }
