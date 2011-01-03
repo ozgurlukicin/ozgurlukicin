@@ -209,7 +209,7 @@ class ThemeItem(models.Model):
 
 class IconSet(ThemeItem):
     file = models.FileField("Simge Seti Dosyası", upload_to="upload/tema/iconset/%Y/%m/%d")
-    screenshot = models.ImageField("Ekran görüntüsü", help_text="Simge setinizin nasıl göründüğüne dair bir ekran görüntünüzü burada paylaşın",upload_to="upload/tema/openoffice/%Y/%m/%d",blank=False,null=True)
+    screenshot = models.ImageField("Ekran görüntüsü", help_text="Simge setinizin nasıl göründüğüne dair bir ekran görüntünüzü burada paylaşın",upload_to="upload/tema/iconset/%Y/%m/%d",blank=False,null=True)
 
     class Meta:
         verbose_name = "Simge Seti"
