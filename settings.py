@@ -137,7 +137,7 @@ INSTALLED_APPS = (
     'oi.shop.shopprofile',
     'oi.shop.product',
     'oi.shop.cart',
-    'oi.ideas',
+    'oi.beyin2',
     'oi.ezine',
     'oi.webalizer',
     'oi.editor',
