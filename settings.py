@@ -26,7 +26,7 @@ DATABASES = {
         "NAME": "oi",
         "USER": "root",
         "PASSWORD": "root",
-        "HOST": "localhost",
+        "HOST": "/var/run/mysqld/mysqld.sock",
         "PORT": "",
     }
 }
@@ -78,7 +78,7 @@ MEDIA_URL = '%s/media/' % WEB_URL
 ADMIN_MEDIA_PREFIX = '/media/admin/'
 WEBALIZER_DIR = ''
 
-SECRET_KEY = 'n9-*x3!&!(x*z_!13)cyxil4fh+ov_+3!y($&4t7iit=)d)=93'
+#SECRET_KEY = 'GENERATE YOUR OWN SECRET KEY'
 
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
