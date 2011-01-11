@@ -26,13 +26,11 @@ user_feed_dict = {
 urlpatterns = patterns ('oi.tema.views',
         #URL for Home Page
         (r'^$','themeitem_list'),
-        #(r'^duzenle/(?P<item_id>[0-9]+)/$','themeitem_change_openofficetheme'),
-        (r'^kullanici/(?P<username>.+)/$','list_user'),
-        #(r'^oyla/(?P<item_id>[0-9]+)/(?P<rating>[0-4])/$','vote'),
+
+        #URLs for ACTIONS
         (r'^raporla/(?P<item_id>\d+)/$', 'report_abuse'),
         (r'^oyla/(?P<item_id>\d+)/$', 'themeitem_rate'),
         (r'^sil/(?P<item_id>\d+)/$', 'themeitem_delete'),
-        (r'^raporlanmis-temalar/$', 'list_abuse'),
 
         #URLs for ADD Function
         (r'^ekle/$','themeitem_add'),
@@ -51,25 +49,30 @@ urlpatterns = patterns ('oi.tema.views',
         (r'^duzenle/simge-seti/(?P<item_id>[0-9]+)/$','themeitem_change_iconset'),
         (r'^duzenle/paket-goruntuleri/(?P<item_id>[0-9]+)/$', 'themeitem_change_packagescreenshot'),
 
+        #URLs for KHOTNEWSTUFF
         (r'^khotnewstuff/wallpaper-providers.xml$', 'ghns_wallpapers'),
         (r'^khotnewstuff/wallpaper/wallpaper.xml$', 'ghns_wallpaper'),
         (r'^khotnewstuff/wallpaper/wallpaper-score.xml$', 'ghns_wallpaper_score'),
         (r'^khotnewstuff/wallpaper/wallpaper-downloads.xml$', 'ghns_wallpaper_downloads'),
+
+        #URLs for MODERATION
         (r'^yonetim/$', 'themeitem_queue'),
-        #(r'^listele/(?P<category>[a-z0-9-_]+)/(?P<sort_type>[a-z0-9-_]+)/$','themeitem_sort'),
+        (r'^raporlanmis-temalar/$', 'list_abuse'),
+
+        #URL for PREVIEW function
         (r'^yazitipleri/detay/(?P<slug>[a-z0-9-_]+)/onizle/(?P<text>.{1,20})/$','font_image'),
-        #category listings
+
+        #URLs for LISTS
         (r'^([a-z0-9-_]+)?/$','themeitem_list'),
         (r'^([a-z0-9-_]+)/([a-z0-9-_]+)/$','themeitem_list'),
-        #object detail
+        (r'^kullanici/(?P<username>.+)/$','list_user'),
+
+        #URLS for DETAIL and DOWNLOAD functions
         (r'^(?P<category>[a-z0-9-_]+)/detay/(?P<slug>[a-z0-9-_]+)/$','themeitem_detail'),
         (r'^(?P<category>[a-z0-9-_]+)/detay/(?P<slug>[a-z0-9-_]+)/(?P<id>\d+)/$','themeitem_download'),
-)
-"""
-urlpatterns+=patterns('',
-        #the rss feeds
-        #(r'^feed/(?P<url>.*)/yeni/$', 'django.contrib.syndication.views.feed', {'feed_dict': feed_dict}),
+
+        #URLs for FEEDS
         (r'^feed/kategori/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': cat_feed_dict}),
         (r'^feed/kullanici/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': user_feed_dict}),
+
 )
-"""
