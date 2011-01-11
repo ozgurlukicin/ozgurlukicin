@@ -164,9 +164,6 @@ class ThemeItem(models.Model):
         verbose_name="Sanat Birimi"
         verbose_name_plural="Sanat Birimleri"
 
-    def get_change_url(self):
-        return "/tema/duzenle/%s/" % self.id
-
     def get_abuse_url(self):
         return "/tema/raporla/%s/" % self.id
 
@@ -207,79 +204,6 @@ class ThemeItem(models.Model):
             ("manage_queue", "Can Manage Tema Queue"),
         )
 
-class IconSet(ThemeItem):
-    file = models.FileField("Simge Seti Dosyası", upload_to="upload/tema/iconset/%Y/%m/%d")
-    screenshot = models.ImageField("Ekran görüntüsü", help_text="Simge setinizin nasıl göründüğüne dair bir ekran görüntünüzü burada paylaşın",upload_to="upload/tema/iconset/%Y/%m/%d",blank=False,null=True)
-
-    class Meta:
-        verbose_name = "Simge Seti"
-        verbose_name_plural = "Simge Setleri"
-
-    def get_absolute_url(self):
-        return "/tema/simge-seti/detay/%s/" % self.slug
-
-    def get_redirect_url(self):
-        return "/tema/simge-seti/detay/%s/%s/" % (self.slug, self.id)
-
-    def get_download_url(self):
-        return self.file.url
-
-
-class OpenOfficeTheme(ThemeItem):
-    file = models.FileField("OpenOffice dosyası", upload_to="upload/tema/openoffice/%Y/%m/%d")
-    screenshot = models.ImageField("Ekran görüntüsü", help_text="Şablonunuzun nasıl göründüğüne dair bir ekran görüntüsü varsa burada paylaşın", upload_to="upload/tema/openoffice/%Y/%m/%d",blank=True,null=True)
-    category = models.ForeignKey("OpenOfficeThemeCategory", verbose_name="Kategori")
-
-    class Meta:
-        verbose_name = "Open Office Öğesi"
-        verbose_name_plural = "Open Office Öğeleri"
-
-    def get_absolute_url(self):
-        return "/tema/open-office/detay/%s/" % (self.slug)
-
-    def get_redirect_url(self):
-        return "/tema/open-office/detay/%s/%s/" % (self.slug, self.id)
-
-    def get_download_url(self):
-        return self.file.url
-
-
-class Font(ThemeItem):
-    font = models.FileField("Yazıtipi dosyası", upload_to="upload/tema/yazitipi/")
-    is_turkish = models.BooleanField("Türkçe karakterleri içeriyor", default=True)
-
-    class Meta:
-        verbose_name="Yazıtipi"
-        verbose_name_plural="Yazıtipleri"
-
-    def get_absolute_url(self):
-        return "/tema/yazitipleri/detay/%s/" % (self.slug)
-
-    def get_redirect_url(self):
-        return "/tema/yazitipleri/detay/%s/%s/" % (self.slug, self.id)
-
-    def get_download_url(self):
-        return self.font.url
-
-
-class DesktopScreenshot(ThemeItem):
-    image = models.ImageField(upload_to="upload/tema/masaustu-goruntusu/", verbose_name="Masaüstü Görüntüsü")
-
-    class Meta:
-        verbose_name="Masaüstü Görüntüsü"
-        verbose_name_plural="Masaüstü Görüntüleri"
-
-    def get_absolute_url(self):
-        return "/tema/masaustu-goruntuleri/detay/%s/" % (self.slug)
-
-    def get_redirect_url(self):
-        return "/tema/masaustu-goruntuleri/detay/%s/%s/" % (self.slug, self.id)
-
-    def get_download_url(self):
-        return self.image.url
-
-
-
 class Wallpaper(ThemeItem):
     papers = models.ManyToManyField("WallpaperFile", blank=True)
     category = models.ForeignKey("WallpaperCategory", null=True,verbose_name="Kategori")
@@ -293,6 +217,9 @@ class Wallpaper(ThemeItem):
 
     def get_download_url(self):
         return self.papers.all()[0].image.url
+
+    def get_change_url(self):
+        return "/tema/duzenle/duvar-kagitlari/%s/" % self.id
 
     def create_smaller_wallpapers(self, wallpaper, create_other_ratioes=False):
         "create smaller wallpapers from given one"
@@ -316,6 +243,85 @@ class Wallpaper(ThemeItem):
                     newPaper.image.save(wallpaper.image.path, file, save=True)
                     image.save(newPaper.image.path)
 
+class IconSet(ThemeItem):
+    file = models.FileField("Simge Seti Dosyası", upload_to="upload/tema/iconset/%Y/%m/%d")
+    screenshot = models.ImageField("Ekran görüntüsü", help_text="Simge setinizin nasıl göründüğüne dair bir ekran görüntünüzü burada paylaşın",upload_to="upload/tema/iconset/%Y/%m/%d",blank=False,null=True)
+
+    class Meta:
+        verbose_name = "Simge Seti"
+        verbose_name_plural = "Simge Setleri"
+
+    def get_absolute_url(self):
+        return "/tema/simge-seti/detay/%s/" % self.slug
+
+    def get_redirect_url(self):
+        return "/tema/simge-seti/detay/%s/%s/" % (self.slug, self.id)
+
+    def get_download_url(self):
+        return self.file.url
+
+    def get_change_url(self):
+        return "/tema/duzenle/simge-seti/%s/" % self.id
+
+class Font(ThemeItem):
+    font = models.FileField("Yazıtipi dosyası", upload_to="upload/tema/yazitipi/")
+    is_turkish = models.BooleanField("Türkçe karakterleri içeriyor", default=True)
+
+    class Meta:
+        verbose_name="Yazıtipi"
+        verbose_name_plural="Yazıtipleri"
+
+    def get_absolute_url(self):
+        return "/tema/yazitipleri/detay/%s/" % (self.slug)
+
+    def get_redirect_url(self):
+        return "/tema/yazitipleri/detay/%s/%s/" % (self.slug, self.id)
+
+    def get_download_url(self):
+        return self.font.url
+
+    def get_change_url(self):
+        return "/tema/duzenle/yazitipleri/%s/" % self.id
+
+class OpenOfficeTheme(ThemeItem):
+    file = models.FileField("OpenOffice dosyası", upload_to="upload/tema/openoffice/%Y/%m/%d")
+    screenshot = models.ImageField("Ekran görüntüsü", help_text="Şablonunuzun nasıl göründüğüne dair bir ekran görüntüsü varsa burada paylaşın", upload_to="upload/tema/openoffice/%Y/%m/%d",blank=True,null=True)
+    category = models.ForeignKey("OpenOfficeThemeCategory", verbose_name="Kategori")
+
+    class Meta:
+        verbose_name = "Open Office Öğesi"
+        verbose_name_plural = "Open Office Öğeleri"
+
+    def get_absolute_url(self):
+        return "/tema/open-office/detay/%s/" % (self.slug)
+
+    def get_redirect_url(self):
+        return "/tema/open-office/detay/%s/%s/" % (self.slug, self.id)
+
+    def get_download_url(self):
+        return self.file.url
+
+    def get_change_url(self):
+        return "/tema/duzenle/open-office/%s/" % self.id
+
+class DesktopScreenshot(ThemeItem):
+    image = models.ImageField(upload_to="upload/tema/masaustu-goruntusu/", verbose_name="Masaüstü Görüntüsü")
+
+    class Meta:
+        verbose_name="Masaüstü Görüntüsü"
+        verbose_name_plural="Masaüstü Görüntüleri"
+
+    def get_absolute_url(self):
+        return "/tema/masaustu-goruntuleri/detay/%s/" % (self.slug)
+
+    def get_redirect_url(self):
+        return "/tema/masaustu-goruntuleri/detay/%s/%s/" % (self.slug, self.id)
+
+    def get_download_url(self):
+        return self.image.url
+
+    def get_change_url(self):
+        return "/tema/duzenle/masaustu-goruntuleri/%s/" % self.id
 
 class PackageScreenshot(ThemeItem):
     image = models.ImageField(upload_to="upload/tema/paket-goruntusu/buyuk", verbose_name="Paket Görüntüsü")
@@ -334,6 +340,8 @@ class PackageScreenshot(ThemeItem):
     def get_download_url(self):
         return self.image.url
 
+    def get_change_url(self):
+        return "/tema/duzenle/paket-goruntuleri/%s/" % self.id
 
 class File(models.Model):
     "File for download"

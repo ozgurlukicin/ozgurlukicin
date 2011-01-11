@@ -24,22 +24,32 @@ user_feed_dict = {
             }
 
 urlpatterns = patterns ('oi.tema.views',
-        #the first page listing
+        #URL for Home Page
         (r'^$','themeitem_list'),
-        (r'^duzenle/(?P<item_id>[0-9]+)/$','themeitem_change'),
+        #(r'^duzenle/(?P<item_id>[0-9]+)/$','themeitem_change_openofficetheme'),
         (r'^kullanici/(?P<username>.+)/$','list_user'),
         #(r'^oyla/(?P<item_id>[0-9]+)/(?P<rating>[0-4])/$','vote'),
-        (r'^ekle/$','themeitem_add'),
         (r'^raporla/(?P<item_id>\d+)/$', 'report_abuse'),
         (r'^oyla/(?P<item_id>\d+)/$', 'themeitem_rate'),
         (r'^sil/(?P<item_id>\d+)/$', 'themeitem_delete'),
         (r'^raporlanmis-temalar/$', 'list_abuse'),
+
+        #URLs for ADD Function
+        (r'^ekle/$','themeitem_add'),
         (r'^ekle/duvar-kagitlari/$','themeitem_add_wallpaper'),
         (r'^ekle/masaustu-goruntuleri/$','themeitem_add_desktopscreenshot'),
         (r'^ekle/yazitipleri/$','themeitem_add_font'),
         (r'^ekle/open-office/$','themeitem_add_openofficetheme'),
         (r'^ekle/simge-seti/$','themeitem_add_iconset'),
         (r'^ekle/paket-goruntuleri/$', 'themeitem_add_packagescreenshot'),
+
+        #URLs for CHANGE Function
+        (r'^duzenle/duvar-kagitlari/(?P<item_id>[0-9]+)/$','themeitem_change_wallpaper'),
+        (r'^duzenle/masaustu-goruntuleri/(?P<item_id>[0-9]+)/$','themeitem_change_desktopscreenshot'),
+        (r'^duzenle/yazitipleri/(?P<item_id>[0-9]+)/$','themeitem_change_font'),
+        (r'^duzenle/open-office/(?P<item_id>[0-9]+)/$','themeitem_change_openofficetheme'),
+        (r'^duzenle/simge-seti/(?P<item_id>[0-9]+)/$','themeitem_change_iconset'),
+        (r'^duzenle/paket-goruntuleri/(?P<item_id>[0-9]+)/$', 'themeitem_change_packagescreenshot'),
 
         (r'^khotnewstuff/wallpaper-providers.xml$', 'ghns_wallpapers'),
         (r'^khotnewstuff/wallpaper/wallpaper.xml$', 'ghns_wallpaper'),

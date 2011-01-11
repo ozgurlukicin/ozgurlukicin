@@ -231,42 +231,50 @@ verbose_names = {"sablon":u"Şablon",
                 "eklenti":u"Eklenti"}
 
 @login_required
-def themeitem_add_openofficetheme(request):
+def themeitem_add_wallpaper(request):
+    #TODO: add SVG support
+    WallpaperFileFormSet = formset_factory(WallpaperFileForm)
     if request.method == "POST":
-        form = OpenOfficeThemeForm(request.POST.copy(), request.FILES)
+        form = WallpaperForm(request.POST.copy())
+        fileforms = WallpaperFileFormSet(request.POST.copy(), request.FILES)
         flood, timeout = flood_control(request)
 
-        if form.is_valid() and not flood:
+        if form.is_valid() and fileforms.is_valid() and not flood:
             item = form.save(commit=False)
             item.author = request.user
             item.submit = item.update = datetime.datetime.now()
             slug = slugify(replace_turkish(item.title))
-
-            if not item.screenshot:
-                item.screenshot.name = "img/tema/openoffice-default.png"
-
             item.save()
-
             for tag in form.cleaned_data["tags"]:
                 t=Tag.objects.get(name=tag)
                 item.tags.add(t)
             item.slug = str(item.id) + "-" + slug
             item.save()
+            for form in fileforms.forms:
+                paper = form.save(commit=False)
+                paper.title = "%dx%d" % (paper.image.width, paper.image.height)
+                paper.save()
+                item.title = item.title.replace(paper.title, "")
+                item.save()
+                if form.cleaned_data["create_smaller_wallpapers"]:
+                    item.create_smaller_wallpapers(paper)
+                item.papers.add(paper)
 
-            #create thumbnail
-            thumbnail = Image.open(item.screenshot.path)
+            #create thumbnail from first paper
+            firstpaper = item.papers.all()[0]
+            thumbnail = Image.open(firstpaper.image.path)
             thumbnail.thumbnail((150,200), Image.ANTIALIAS)
             file = ContentFile("")
-            item.thumbnail.save(item.screenshot.path, file, save=True)
+            item.thumbnail.save(firstpaper.image.path, file, save=True)
             thumbnail.save(item.thumbnail.path)
 
             #TODO: Send e-mail to admins
             return render_response(request, "tema/themeitem_add_complete.html", locals())
     else:
-        tags = [t.pk for t in Tag.objects.filter(name="openoffice öğesi")]
-        form = OpenOfficeThemeForm(initial={"tags":tags})
-    return render_response(request, "tema/themeitem_add_openofficetheme.html", locals())
-
+        tags = [t.pk for t in Tag.objects.filter(name="duvar kağıdı")]
+        form = WallpaperForm(initial={"tags":tags})
+        fileforms = WallpaperFileFormSet()
+    return render_response(request, "tema/themeitem_add_wallpaper.html", locals())
 
 @login_required
 def themeitem_add_iconset(request):
@@ -349,6 +357,42 @@ def themeitem_add_font(request):
         form = FontForm(initial={"tags":tags})
     return render_response(request, "tema/themeitem_add_font.html", locals())
 
+@login_required
+def themeitem_add_openofficetheme(request):
+    if request.method == "POST":
+        form = OpenOfficeThemeForm(request.POST.copy(), request.FILES)
+        flood, timeout = flood_control(request)
+
+        if form.is_valid() and not flood:
+            item = form.save(commit=False)
+            item.author = request.user
+            item.submit = item.update = datetime.datetime.now()
+            slug = slugify(replace_turkish(item.title))
+
+            if not item.screenshot:
+                item.screenshot.name = "img/tema/openoffice-default.png"
+
+            item.save()
+
+            for tag in form.cleaned_data["tags"]:
+                t=Tag.objects.get(name=tag)
+                item.tags.add(t)
+            item.slug = str(item.id) + "-" + slug
+            item.save()
+
+            #create thumbnail
+            thumbnail = Image.open(item.screenshot.path)
+            thumbnail.thumbnail((150,200), Image.ANTIALIAS)
+            file = ContentFile("")
+            item.thumbnail.save(item.screenshot.path, file, save=True)
+            thumbnail.save(item.thumbnail.path)
+
+            #TODO: Send e-mail to admins
+            return render_response(request, "tema/themeitem_add_complete.html", locals())
+    else:
+        tags = [t.pk for t in Tag.objects.filter(name="openoffice öğesi")]
+        form = OpenOfficeThemeForm(initial={"tags":tags})
+    return render_response(request, "tema/themeitem_add_openofficetheme.html", locals())
 
 @login_required
 def themeitem_add_desktopscreenshot(request):
@@ -381,53 +425,6 @@ def themeitem_add_desktopscreenshot(request):
         tags = [t.pk for t in Tag.objects.filter(name="masaüstü")]
         form = DesktopScreenShotForm(initial={"tags":tags})
     return render_response(request, "tema/themeitem_add_desktopscreenshot.html", locals())
-
-
-@login_required
-def themeitem_add_wallpaper(request):
-    #TODO: add SVG support
-    WallpaperFileFormSet = formset_factory(WallpaperFileForm)
-    if request.method == "POST":
-        form = WallpaperForm(request.POST.copy())
-        fileforms = WallpaperFileFormSet(request.POST.copy(), request.FILES)
-        flood, timeout = flood_control(request)
-
-        if form.is_valid() and fileforms.is_valid() and not flood:
-            item = form.save(commit=False)
-            item.author = request.user
-            item.submit = item.update = datetime.datetime.now()
-            slug = slugify(replace_turkish(item.title))
-            item.save()
-            for tag in form.cleaned_data["tags"]:
-                t=Tag.objects.get(name=tag)
-                item.tags.add(t)
-            item.slug = str(item.id) + "-" + slug
-            item.save()
-            for form in fileforms.forms:
-                paper = form.save(commit=False)
-                paper.title = "%dx%d" % (paper.image.width, paper.image.height)
-                paper.save()
-                item.title = item.title.replace(paper.title, "")
-                item.save()
-                if form.cleaned_data["create_smaller_wallpapers"]:
-                    item.create_smaller_wallpapers(paper)
-                item.papers.add(paper)
-
-            #create thumbnail from first paper
-            firstpaper = item.papers.all()[0]
-            thumbnail = Image.open(firstpaper.image.path)
-            thumbnail.thumbnail((150,200), Image.ANTIALIAS)
-            file = ContentFile("")
-            item.thumbnail.save(firstpaper.image.path, file, save=True)
-            thumbnail.save(item.thumbnail.path)
-
-            #TODO: Send e-mail to admins
-            return render_response(request, "tema/themeitem_add_complete.html", locals())
-    else:
-        tags = [t.pk for t in Tag.objects.filter(name="duvar kağıdı")]
-        form = WallpaperForm(initial={"tags":tags})
-        fileforms = WallpaperFileFormSet()
-    return render_response(request, "tema/themeitem_add_wallpaper.html", locals())
 
 @login_required
 def themeitem_add_packagescreenshot(request):
@@ -476,30 +473,239 @@ def themeitem_add_packagescreenshot(request):
 
     return render_response(request, "tema/themeitem_add_packagescreenshot.html", locals())
 
+
 @login_required
-def themeitem_change(request, item_id):
-    object = get_object_or_404(ThemeItem, pk=item_id)
+def themeitem_change_wallpaper(request, item_id):
+    object = get_object_or_404(Wallpaper, pk=item_id)
+    WallpaperFileFormSet = formset_factory(WallpaperFileForm)
     if request.user == object.author or request.user.has_perm("can_change_themeitem"):
         if request.method == "POST":
-            form = ThemeItemForm(request.POST.copy())
+            form = WallpaperForm(request.POST.copy())
+            fileforms = WallpaperFileFormSet(request.POST.copy(), request.FILES)
+            flood, timeout = flood_control(request)
+            if flood:
+                render_response(request, "tema/message.html", {"type": "error", "message": "Lütfen %s saniye sonra tekrar deneyiniz." % timeout })
+
+            if form.is_valid() and fileforms.is_valid():
+                object.title = form.cleaned_data["title"]
+                object.category = form.cleaned_data["category"]
+                object.license = form.cleaned_data["license"]
+                object.text = form.cleaned_data["text"]
+                object.update = datetime.datetime.now()
+
+                #change slug
+                slug = slugify(replace_turkish(object.title))
+                object.slug = str(object.id) + "-" + slug
+
+                object.save()
+
+                for form in fileforms.forms:
+                    paper = form.save(commit=False)
+                    paper.title = "%dx%d" % (paper.image.width, paper.image.height)
+                    paper.save()
+                    object.title = object.title.replace(paper.title, "")
+                    object.save()
+                    if form.cleaned_data["create_smaller_wallpapers"]:
+                        object.create_smaller_wallpapers(paper)
+                    object.papers.add(paper)
+
+                #create thumbnail from first paper
+                firstpaper = object.papers.all()[0]
+                thumbnail = Image.open(firstpaper.object.path)
+                thumbnail.thumbnail((150,200), Image.ANTIALIAS)
+                file = ContentFile("")
+                object.thumbnail.save(firstpaper.object.path, file, save=True)
+                thumbnail.save(object.thumbnail.path)
+
+                return HttpResponseRedirect(object.get_absolute_url())
+
+            else:
+                return render_response(request, "tema/themeitem_change.html", locals())
+        else:
+            default_data = {"title": object.title,
+                            "license": object.license,
+                            "text": object.text,
+                            "version": object.version,
+                            "tags": object.tags.all(),
+                            "origin_url": object.origin_url,
+                            "category": object.category
+                            }
+
+            form = WallpaperForm(initial=default_data)
+            fileforms = WallpaperFileFormSet()
+
+        return render_response(request, "tema/themeitem_change.html", locals())
+
+    else:
+        return render_response(request, "tema/message.html", {"type": "error", "message": "Bu işlemi yapmak için yetkiniz yok."})
+
+
+@login_required
+def themeitem_change_desktopscreenshot(request, item_id):
+    object = get_object_or_404(DesktopScreenshot, pk=item_id)
+    if request.user == object.author or request.user.has_perm("can_change_themeitem"):
+        if request.method == "POST":
+            form = DesktopScreenShotForm(request.POST.copy(), request.FILES)
             flood, timeout = flood_control(request)
             if flood:
                 render_response(request, "tema/message.html", {"type": "error", "message": "Lütfen %s saniye sonra tekrar deneyiniz." % timeout })
 
             if form.is_valid():
                 object.title = form.cleaned_data["title"]
-                try:
-                    object.category = form.cleaned_data["category"]
-                    object.parentcategory = object.category.parent
-                except KeyError:
-                    pass
                 object.license = form.cleaned_data["license"]
                 object.text = form.cleaned_data["text"]
-                object.version = form.cleaned_data.get("version")
-                object.changelog = form.cleaned_data["changelog"]
-                object.comment_enabled = form.cleaned_data["comment_enabled"]
                 object.update = datetime.datetime.now()
+                object.image = form.cleaned_data["image"]
+
+                #change slug
+                slug = slugify(replace_turkish(object.title))
+                object.slug = str(object.id) + "-" + slug
+
                 object.save()
+
+                #create thumbnail
+                thumbnail = Image.open(object.image.path)
+                thumbnail.thumbnail((150,200), Image.ANTIALIAS)
+                file = ContentFile("")
+                object.thumbnail.save(object.image.path, file, save=True)
+                thumbnail.save(object.image.path)
+
+                return HttpResponseRedirect(object.get_absolute_url())
+
+            else:
+                return render_response(request, "tema/themeitem_change.html", locals())
+        else:
+            default_data = {"title": object.title,
+                            "license": object.license,
+                            "text": object.text,
+                            "tags": object.tags.all(),
+                            "origin_url": object.origin_url,
+                            "image": object.image,
+                            }
+
+            form = DesktopScreenShotForm(initial=default_data)
+
+        return render_response(request, "tema/themeitem_change.html", locals())
+
+    else:
+        return render_response(request, "tema/message.html", {"type": "error", "message": "Bu işlemi yapmak için yetkiniz yok."})
+
+
+@login_required
+def themeitem_change_packagescreenshot(request, item_id):
+    object = get_object_or_404(PackageScreenshot, pk=item_id)
+    if request.user == object.author or request.user.has_perm("can_change_themeitem"):
+        if request.method == "POST":
+            form = PackageScreenshotForm(request.POST.copy(), request.FILES)
+            flood, timeout = flood_control(request)
+            if flood:
+                render_response(request, "tema/message.html", {"type": "error", "message": "Lütfen %s saniye sonra tekrar deneyiniz." % timeout })
+
+            if form.is_valid():
+                object.title = form.cleaned_data["title"]
+                object.license = form.cleaned_data["license"]
+                object.text = form.cleaned_data["text"]
+                object.version = form.cleaned_data["version"]
+                object.update = datetime.datetime.now()
+                object.image = form.cleaned_data["image"]
+
+                #change slug
+                slug = slugify(replace_turkish(object.title))
+                object.slug = str(object.id) + "-" + slug
+
+                #save images with ID
+                count = len(PackageScreenshot.objects.filter(title=object.title))
+                path, extension = '/'.join(object.image.name.split('/')[:-1]), object.image.name.split('.')[-1]
+                object.image.name = "%s/%s_%d.%s" % (path, object.title, count, extension)
+
+                object.save()
+
+                #create thumbnail
+                thumbnail = Image.open(object.image.path)
+                thumbnail.thumbnail((150,200), Image.ANTIALIAS)
+                file = ContentFile("")
+                object.thumbnail.save(object.image.path, file, save=True)
+                thumbnail.save(object.image.path)
+
+                #create thumbnail for package manager
+                thumbnail = Image.open(object.image.path)
+                thumbnail.thumbnail((150,200), Image.ANTIALIAS)
+                file = ContentFile("")
+                object.thumbnail.save(object.image.path, file, save=True)
+                thumbnail.save(object.thumbnail.path)
+
+                return HttpResponseRedirect(object.get_absolute_url())
+
+            else:
+                return render_response(request, "tema/themeitem_change.html", locals())
+        else:
+            default_data = {"title": object.title,
+                            "license": object.license,
+                            "text": object.text,
+                            "version": object.version,
+                            "tags": object.tags.all(),
+                            "origin_url": object.origin_url,
+                            "image": object.origin_url,
+                            }
+
+            form = PackageScreenshotForm(initial=default_data)
+
+        return render_response(request, "tema/themeitem_change.html", locals())
+
+    else:
+        return render_response(request, "tema/message.html", {"type": "error", "message": "Bu işlemi yapmak için yetkiniz yok."})
+
+
+@login_required
+def themeitem_change_font(request, item_id):
+    object = get_object_or_404(Font, pk=item_id)
+    if request.user == object.author or request.user.has_perm("can_change_themeitem"):
+        if request.method == "POST":
+            form = FontForm(request.POST.copy(), request.FILES)
+            flood, timeout = flood_control(request)
+            if flood:
+                render_response(request, "tema/message.html", {"type": "error", "message": "Lütfen %s saniye sonra tekrar deneyiniz." % timeout })
+
+            if form.is_valid():
+                object.title = form.cleaned_data["title"]
+                object.license = form.cleaned_data["license"]
+                object.text = form.cleaned_data["text"]
+                object.version = form.cleaned_data["version"]
+                object.font = form.cleaned_data["font"]
+                object.is_turkish = form.cleaned_data["is_turkish"]
+                object.update = datetime.datetime.now()
+
+                #change slug
+                slug = slugify(replace_turkish(object.title))
+                object.slug = str(object.id) + "-" + slug
+
+                object.save()
+                
+                #create thumbnail
+                twidth = 150
+                theight = 100
+                thumbnail = Image.new("RGBA", (twidth, theight))
+                draw = ImageDraw.Draw(thumbnail)
+                bigfont = ImageFont.truetype(object.font.path, 22)
+                smallfont = ImageFont.truetype(object.font.path, 14)
+                fill = (112,112,112)
+                draw.text((5, 5), "Aa Ee Rr", font=bigfont, fill=fill)
+                text_list = (
+                    (30, "Dag basini", u"Dağ başını"),
+                    (45, "duman almis,", u"duman almış,"),
+                    (60, "Gumus dere", u"Gümüş dere"),
+                    (75, "durmaz akar.", u"durmaz akar."),
+                )
+                for text in text_list:
+                    s = draw.textsize(text[1], font=smallfont)
+                    x = twidth - s[0] - 5
+                    if object.is_turkish:
+                        draw.text((x, text[0]), text[2], font=smallfont, fill=fill)
+                    else:
+                        draw.text((x, text[0]), text[1], font=smallfont, fill=fill)
+                file = ContentFile("")
+                object.thumbnail.save(object.font.path[:object.font.path.rfind(".")]+".png", file, save=True)
+                thumbnail.save(object.thumbnail.path)
 
                 return HttpResponseRedirect(object.get_absolute_url())
 
@@ -513,20 +719,128 @@ def themeitem_change(request, item_id):
                             "changelog": object.changelog,
                             "tags": object.tags.all(),
                             "origin_url": object.origin_url,
-                            "comment_enabled": object.comment_enabled,
+                            "font": object.font,
+                            "is_turkish": object.is_turkish,
                             }
-            try:
-                default_data["category"] = object.category
-            except AttributeError:
-                pass
 
-            form = ThemeItemForm(initial=default_data)
+            form = FontForm(initial=default_data)
 
         return render_response(request, "tema/themeitem_change.html", locals())
 
     else:
         return render_response(request, "tema/message.html", {"type": "error", "message": "Bu işlemi yapmak için yetkiniz yok."})
 
+
+@login_required
+def themeitem_change_iconset(request, item_id):
+    object = get_object_or_404(IconSet, pk=item_id)
+    if request.user == object.author or request.user.has_perm("can_change_themeitem"):
+        if request.method == "POST":
+            form = IconSetForm(request.POST.copy(), request.FILES)
+            flood, timeout = flood_control(request)
+            if flood:
+                render_response(request, "tema/message.html", {"type": "error", "message": "Lütfen %s saniye sonra tekrar deneyiniz." % timeout })
+
+            if form.is_valid():
+                object.title = form.cleaned_data["title"]
+                object.license = form.cleaned_data["license"]
+                object.text = form.cleaned_data["text"]
+                object.version = form.cleaned_data["version"]
+                object.file = form.cleaned_data["file"]
+                object.screenshot = form.cleaned_data["screenshot"]
+                object.update = datetime.datetime.now()
+
+                #change slug
+                slug = slugify(replace_turkish(object.title))
+                object.slug = str(object.id) + "-" + slug
+
+                object.save()
+                
+                #create thumbnail
+                thumbnail = Image.open(object.screenshot.path)
+                thumbnail.thumbnail((150,200), Image.ANTIALIAS)
+                file = ContentFile("")
+                object.thumbnail.save(object.screenshot.path, file, save=True)
+                thumbnail.save(object.thumbnail.path)
+
+                return HttpResponseRedirect(object.get_absolute_url())
+
+            else:
+                return render_response(request, "tema/themeitem_change.html", locals())
+        else:
+            default_data = {"title": object.title,
+                            "license": object.license,
+                            "text": object.text,
+                            "version": object.version,
+                            "tags": object.tags.all(),
+                            "origin_url": object.origin_url,
+                            "file": object.file,
+                            "screenshot": object.screenshot,
+                            }
+
+            form = IconSetForm(initial=default_data)
+
+        return render_response(request, "tema/themeitem_change.html", locals())
+
+    else:
+        return render_response(request, "tema/message.html", {"type": "error", "message": "Bu işlemi yapmak için yetkiniz yok."})
+
+
+@login_required
+def themeitem_change_openofficetheme(request, item_id):
+    object = get_object_or_404(OpenOfficeTheme, pk=item_id)
+    if request.user == object.author or request.user.has_perm("can_change_themeitem"):
+        if request.method == "POST":
+            form = OpenOfficeThemeForm(request.POST.copy(), request.FILES)
+            flood, timeout = flood_control(request)
+
+            if flood:
+                render_response(request, "tema/message.html", {"type": "error", "message": "Lütfen %s saniye sonra tekrar deneyiniz." % timeout })
+
+            if form.is_valid():
+                object.title = form.cleaned_data["title"]
+                object.category = form.cleaned_data["category"]
+                object.license = form.cleaned_data["license"]
+                object.text = form.cleaned_data["text"]
+                object.version = form.cleaned_data["version"]
+                object.file = form.cleaned_data["file"]
+                object.screenshot = form.cleaned_data["screenshot"]
+                object.update = datetime.datetime.now()
+
+                #change slug
+                slug = slugify(replace_turkish(object.title))
+                object.slug = str(object.id) + "-" + slug
+
+                object.save()
+                
+                #create thumbnail
+                thumbnail = Image.open(object.screenshot.path)
+                thumbnail.thumbnail((150,200), Image.ANTIALIAS)
+                file = ContentFile("")
+                object.thumbnail.save(object.screenshot.path, file, save=True)
+                thumbnail.save(object.thumbnail.path)
+
+                return HttpResponseRedirect(object.get_absolute_url())
+
+            else:
+                return render_response(request, "tema/themeitem_add_openofficetheme.html", locals())
+        else:
+            default_data = {"title": object.title,
+                            "category": object.category,
+                            "license": object.license,
+                            "text": object.text,
+                            "version": object.version,
+                            "tags": object.tags.all(),
+                            "origin_url": object.origin_url,
+                            "file": object.file,
+                            "screenshot": object.screenshot,
+                            }
+            form = OpenOfficeThemeForm(initial=default_data)
+
+        return render_response(request, "tema/themeitem_change.html", locals())
+
+    else:
+        return render_response(request, "tema/message.html", {"type": "error", "message": "Bu işlemi yapmak için yetkiniz yok."})
 
 @permission_required('tema.change_themeabusereport', login_url="/kullanici/giris/")
 def list_abuse(request):
