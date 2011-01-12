@@ -72,7 +72,7 @@ urlpatterns = patterns ('oi.tema.views',
         (r'^(?P<category>[a-z0-9-_]+)/detay/(?P<slug>[a-z0-9-_]+)/(?P<id>\d+)/$','themeitem_download'),
 
         #URLs for FEEDS
-        (r'^feed/kategori/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': cat_feed_dict}),
-        (r'^feed/kullanici/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': user_feed_dict}),
+        #(r'^feed/kategori/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': cat_feed_dict}),
+        #(r'^feed/kullanici/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': user_feed_dict}),
 
 )
