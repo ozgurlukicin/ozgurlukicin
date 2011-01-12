@@ -554,6 +554,7 @@ def themeitem_change_desktopscreenshot(request, item_id):
                 object.title = form.cleaned_data["title"]
                 object.license = form.cleaned_data["license"]
                 object.text = form.cleaned_data["text"]
+                object.origin_url = form.cleaned_data["origin_url"]
                 object.update = datetime.datetime.now()
                 object.image = form.cleaned_data["image"]
 
@@ -568,7 +569,7 @@ def themeitem_change_desktopscreenshot(request, item_id):
                 thumbnail.thumbnail((150,200), Image.ANTIALIAS)
                 file = ContentFile("")
                 object.thumbnail.save(object.image.path, file, save=True)
-                thumbnail.save(object.image.path)
+                thumbnail.save(object.thumbnail.path)
 
                 return HttpResponseRedirect(object.get_absolute_url())
 
@@ -645,7 +646,7 @@ def themeitem_change_packagescreenshot(request, item_id):
                             "version": object.version,
                             "tags": object.tags.all(),
                             "origin_url": object.origin_url,
-                            "image": object.origin_url,
+                            "image": object.image,
                             }
 
             form = PackageScreenshotForm(initial=default_data)
