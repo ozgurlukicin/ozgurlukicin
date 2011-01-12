@@ -492,6 +492,7 @@ def themeitem_change_wallpaper(request, item_id):
                 object.license = form.cleaned_data["license"]
                 object.text = form.cleaned_data["text"]
                 object.update = datetime.datetime.now()
+                object.papers = []
 
                 #change slug
                 slug = slugify(replace_turkish(object.title))
@@ -499,22 +500,22 @@ def themeitem_change_wallpaper(request, item_id):
 
                 object.save()
 
-                for form in fileforms.forms:
-                    paper = form.save(commit=False)
+                for fileform in fileforms.forms:
+                    paper = fileform.save(commit=False)
                     paper.title = "%dx%d" % (paper.image.width, paper.image.height)
                     paper.save()
                     object.title = object.title.replace(paper.title, "")
                     object.save()
-                    if form.cleaned_data["create_smaller_wallpapers"]:
+                    if fileform.cleaned_data["create_smaller_wallpapers"]:
                         object.create_smaller_wallpapers(paper)
                     object.papers.add(paper)
 
                 #create thumbnail from first paper
                 firstpaper = object.papers.all()[0]
-                thumbnail = Image.open(firstpaper.object.path)
+                thumbnail = Image.open(firstpaper.image.path)
                 thumbnail.thumbnail((150,200), Image.ANTIALIAS)
                 file = ContentFile("")
-                object.thumbnail.save(firstpaper.object.path, file, save=True)
+                object.thumbnail.save(firstpaper.image.path, file, save=True)
                 thumbnail.save(object.thumbnail.path)
 
                 return HttpResponseRedirect(object.get_absolute_url())
