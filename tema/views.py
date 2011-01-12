@@ -682,7 +682,7 @@ def themeitem_change_font(request, item_id):
                 object.slug = str(object.id) + "-" + slug
 
                 object.save()
-                
+
                 #create thumbnail
                 twidth = 150
                 theight = 100
@@ -738,7 +738,7 @@ def themeitem_change_iconset(request, item_id):
     object = get_object_or_404(IconSet, pk=item_id)
     if request.user == object.author or request.user.has_perm("can_change_themeitem"):
         if request.method == "POST":
-            form = IconSetForm(request.POST.copy(), request.FILES)
+            form = IconSetChangeForm(request.POST.copy(), request.FILES)
             flood, timeout = flood_control(request)
             if flood:
                 render_response(request, "tema/message.html", {"type": "error", "message": "Lütfen %s saniye sonra tekrar deneyiniz." % timeout })
@@ -749,15 +749,18 @@ def themeitem_change_iconset(request, item_id):
                 object.text = form.cleaned_data["text"]
                 object.version = form.cleaned_data["version"]
                 object.file = form.cleaned_data["file"]
-                object.screenshot = form.cleaned_data["screenshot"]
+                screenshot = form.cleaned_data["screenshot"]
                 object.update = datetime.datetime.now()
+
+                if screenshot != None:
+                    object.screenshot = screenshot
 
                 #change slug
                 slug = slugify(replace_turkish(object.title))
                 object.slug = str(object.id) + "-" + slug
 
                 object.save()
-                
+
                 #create thumbnail
                 thumbnail = Image.open(object.screenshot.path)
                 thumbnail.thumbnail((150,200), Image.ANTIALIAS)
@@ -806,15 +809,18 @@ def themeitem_change_openofficetheme(request, item_id):
                 object.text = form.cleaned_data["text"]
                 object.version = form.cleaned_data["version"]
                 object.file = form.cleaned_data["file"]
-                object.screenshot = form.cleaned_data["screenshot"]
+                screenshot = form.cleaned_data["screenshot"]
                 object.update = datetime.datetime.now()
+
+                if screenshot != None:
+                    object.screenshot = screenshot
 
                 #change slug
                 slug = slugify(replace_turkish(object.title))
                 object.slug = str(object.id) + "-" + slug
 
                 object.save()
-                
+
                 #create thumbnail
                 thumbnail = Image.open(object.screenshot.path)
                 thumbnail.thumbnail((150,200), Image.ANTIALIAS)

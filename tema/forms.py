@@ -184,3 +184,6 @@ class IconSetForm(forms.ModelForm):
         if len(field_data) > 5:
             raise forms.ValidationError("En fazla 5 etiket seçebilirsiniz. Lütfen açtığınız başlığa uygun etiket seçiniz.")
         return field_data
+
+class IconSetChangeForm(IconSetForm):
+    screenshot = forms.ImageField(label="Ekran görüntüsü", required=False, help_text="Simge setinizin nasıl göründüğüne dair bir ekran görüntünüzü burada paylaşın",)
