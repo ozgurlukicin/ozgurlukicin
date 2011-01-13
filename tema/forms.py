@@ -123,7 +123,7 @@ class PackageScreenshotForm(forms.ModelForm):
 
     class Meta:
         model = PackageScreenshot
-        exclude = ("author", "rating", "category", "thumbnail", "origin_url", "s_image",
+        exclude = ("author", "rating", "category", "thumbnail", "origin_url", "s_image", "default",
                 "download_count", "submit", "update", "status", "deny_reason", "scalable", "papers", "changelog", "slug", "topic")
 
     def clean_tags(self):

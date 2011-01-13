@@ -99,12 +99,12 @@ class OpenOfficeThemeAdmin(ThemeItemAdmin):
             )
 
 class PackageScreenshotAdmin(ThemeItemAdmin):
-    list_display = ("title", "version", "author", "license", "status")
+    list_display = ("title", "version", "author", "license", "default", "status")
     fieldsets = (
             (None, {
                 "fields": ("thumbnail", "title", "slug", "version",
                     "text", "changelog", "image", "s_image", "status",
-                    "deny_reason", "tags")
+                    "deny_reason", "tags", "default")
                 }),
             ("Diğer", {
                 "classes": "collapse",

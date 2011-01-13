@@ -326,6 +326,7 @@ class DesktopScreenshot(ThemeItem):
 class PackageScreenshot(ThemeItem):
     image = models.ImageField(upload_to="upload/tema/paket-goruntusu/buyuk", verbose_name="Paket Görüntüsü")
     s_image = models.ImageField(upload_to="upload/tema/paket-goruntusu/kucuk", verbose_name="Küçük Resim")
+    default = models.BooleanField(default=False, verbose_name="Öntanımlı")
 
     class Meta:
         verbose_name = "Paket Görüntüsü"

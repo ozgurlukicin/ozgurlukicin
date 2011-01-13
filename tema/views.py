@@ -438,10 +438,9 @@ def themeitem_add_packagescreenshot(request):
             item.submit = item.update = datetime.datetime.now()
             slug = slugify(replace_turkish(item.title))
 
-            #save images with ID
-            count = len(PackageScreenshot.objects.filter(title=item.title))
+            #change image file name
             path, extension = '/'.join(item.image.name.split('/')[:-1]), item.image.name.split('.')[-1]
-            item.image.name = "%s/%s_%d.%s" % (path, item.title, count, extension)
+            item.image.name = "%s/%s.%s" % (path, item.title, extension)
             item.save()
 
             for tag in form.cleaned_data["tags"]:
@@ -615,10 +614,9 @@ def themeitem_change_packagescreenshot(request, item_id):
                 slug = slugify(replace_turkish(object.title))
                 object.slug = str(object.id) + "-" + slug
 
-                #save images with ID
-                count = len(PackageScreenshot.objects.filter(title=object.title))
+                #change image file name
                 path, extension = '/'.join(object.image.name.split('/')[:-1]), object.image.name.split('.')[-1]
-                object.image.name = "%s/%s_%d.%s" % (path, object.title, count, extension)
+                object.image.name = "%s/%s.%s" % (path, object.title, extension)
 
                 object.save()
 
@@ -934,3 +932,11 @@ def themeitem_delete(request, item_id):
         return HttpResponseRedirect("/tema/")
     else:
         return render_response(request, "tema/themeitem_delete.html", locals())
+
+def show_default_image(request, package_name, size):
+    theme = get_object_or_404(PackageScreenshot, title=package_name, default=True)
+    shot = { "buyuk": theme.image, "kucuk": theme.s_image }
+    try:
+        return HttpResponse(shot[size], mimetype="image/png")
+    except KeyError:
+        raise Http404
