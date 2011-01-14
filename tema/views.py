@@ -29,7 +29,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound, Http404
 from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import get_object_or_404
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.forms.formsets import formset_factory
 from django.template import Context, loader
 from django.conf import settings
@@ -940,3 +940,13 @@ def show_default_image(request, package_name, size):
         return HttpResponse(shot[size], mimetype="image/png")
     except KeyError:
         raise Http404
+
+def default_image_exists(request, package_name):
+    try:
+        object = PackageScreenshot.objects.get(title=package_name, default=True)
+    except ObjectDoesNotExist:
+        return HttpResponse("False", mimetype="text/plain")
+    except MultipleObjectsReturned:
+        return HttpResponse("False", mimetype="text/plain")
+    else:
+        return HttpResponse("True", mimetype="text/plain")
