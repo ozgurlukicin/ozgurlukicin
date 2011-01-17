@@ -63,14 +63,14 @@ class="sari" href="/kullanici/cikis/">buraya</a> tıklayarak sistemden çıkabil
     <ul>
 {% if user.is_authenticated %}
 <li><a href='{% url main_filter "user" user.id %} '>Eklediğim Fikirler</a></li>
-<li><a href='{% url main_filter "favorite" filter %}'>Favorilerim</a></li>
+<li><a href='{% url main_filter "favorite" "none" %}'>Favorilerim</a></li>
 {% endif %}
-<li><a href='{% url main_filter "this_week" filter %}'>Bu haftaki popüler fikirler</a></li>
-<li><a href='{% url main_filter "this_month" filter %}'>Bu ayki popüler fikirler</a></li>
+<li><a href='{% url main_filter "this_week" "none" %}'>Bu haftaki popüler fikirler</a></li>
+<li><a href='{% url main_filter "this_month" "none" %}'>Bu ayki popüler fikirler</a></li>
 {% if perms.beyin2.change_status %}
 <br /><br />
-<li><a href='{% url main_filter "deleted" filter %}'>Silinmiş Fikirler</a></li>
-<li><a href='{% url main_filter "duplicate" filter %}'>Tekrar olarak işaretlenmiş fikirler</a></li>
+<li><a href='{% url main_filter "deleted" "none" %}'>Silinmiş Fikirler</a></li>
+<li><a href='{% url main_filter "duplicate" "none" %}'>Tekrar olarak işaretlenmiş fikirler</a></li>
 {% endif %}
 </ul>
 <br />
