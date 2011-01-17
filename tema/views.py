@@ -16,6 +16,7 @@ from oi.tema.forms import *
 from oi.tema.settings import THEME_ITEM_PER_PAGE
 
 
+from oi.forum.models import Post
 from oi.forum.forms import AbuseForm
 from oi.forum.postmarkup import render_bbcode
 from oi.forum.settings import ABUSE_MAIL_LIST
@@ -606,6 +607,7 @@ def themeitem_change_packagescreenshot(request, item_id):
                 object.title = form.cleaned_data["title"]
                 object.license = form.cleaned_data["license"]
                 object.text = form.cleaned_data["text"]
+                old_version = object.version
                 object.version = form.cleaned_data["version"]
                 object.update = datetime.datetime.now()
                 object.image = form.cleaned_data["image"]
@@ -633,6 +635,15 @@ def themeitem_change_packagescreenshot(request, item_id):
                 file = ContentFile("")
                 object.thumbnail.save(object.image.path, file, save=True)
                 thumbnail.save(object.thumbnail.path)
+
+                #post changes
+                if object.version != old_version:
+                    text="%s %s uygulamasının %s sürümüne ait paket görüntüsünü %s sürümüne güncelledi." % (request.user, object.title, old_version, object.version)
+                    post = Post(topic=object.topic,
+                                author=request.user,
+                                text=text,
+                            )
+                    post.save()
 
                 return HttpResponseRedirect(object.get_absolute_url())
 
@@ -670,6 +681,7 @@ def themeitem_change_font(request, item_id):
                 object.title = form.cleaned_data["title"]
                 object.license = form.cleaned_data["license"]
                 object.text = form.cleaned_data["text"]
+                old_version = object.version
                 object.version = form.cleaned_data["version"]
                 object.font = form.cleaned_data["font"]
                 object.is_turkish = form.cleaned_data["is_turkish"]
@@ -706,6 +718,15 @@ def themeitem_change_font(request, item_id):
                 file = ContentFile("")
                 object.thumbnail.save(object.font.path[:object.font.path.rfind(".")]+".png", file, save=True)
                 thumbnail.save(object.thumbnail.path)
+
+                #post changes
+                if object.version != old_version:
+                    text = "%s %s sürümlü %s yazitipini %s sürümüne güncelledi." % (request.user, old_version, object.title, object.version)
+                    post = Post(topic=object.topic,
+                                author=request.user,
+                                text=text,
+                                )
+                    post.save()
 
                 return HttpResponseRedirect(object.get_absolute_url())
 
@@ -745,6 +766,7 @@ def themeitem_change_iconset(request, item_id):
                 object.title = form.cleaned_data["title"]
                 object.license = form.cleaned_data["license"]
                 object.text = form.cleaned_data["text"]
+                old_version = object.version
                 object.version = form.cleaned_data["version"]
                 object.file = form.cleaned_data["file"]
                 screenshot = form.cleaned_data["screenshot"]
@@ -765,6 +787,15 @@ def themeitem_change_iconset(request, item_id):
                 file = ContentFile("")
                 object.thumbnail.save(object.screenshot.path, file, save=True)
                 thumbnail.save(object.thumbnail.path)
+
+                #post changes
+                if object.version != old_version:
+                    text = "%s %s sürümlü %s simge setini %s sürümüne güncelledi." % (request.user, old_version, object.title, object.version)
+                    post = Post(topic=object.topic,
+                                author=request.user,
+                                text=text,
+                                )
+                    post.save()
 
                 return HttpResponseRedirect(object.get_absolute_url())
 
@@ -805,6 +836,7 @@ def themeitem_change_openofficetheme(request, item_id):
                 object.category = form.cleaned_data["category"]
                 object.license = form.cleaned_data["license"]
                 object.text = form.cleaned_data["text"]
+                old_version = object.version
                 object.version = form.cleaned_data["version"]
                 object.file = form.cleaned_data["file"]
                 screenshot = form.cleaned_data["screenshot"]
@@ -825,6 +857,15 @@ def themeitem_change_openofficetheme(request, item_id):
                 file = ContentFile("")
                 object.thumbnail.save(object.screenshot.path, file, save=True)
                 thumbnail.save(object.thumbnail.path)
+
+                #post changes
+                if object.version != old_version:
+                    text = "%s %s sürümlü %s OpenOffice.org öğesi %s sürümüne güncelledi." % (request.user, old_version, object.title, object.version)
+                    post = Post(topic=object.topic,
+                                author=request.user,
+                                text=text,
+                                )
+                    post.save()
 
                 return HttpResponseRedirect(object.get_absolute_url())
 
