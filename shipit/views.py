@@ -5,7 +5,7 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.core.mail import EmailMessage
 from django.template import Context, loader
 from django.contrib.auth.decorators import permission_required
@@ -154,3 +154,6 @@ def cdclient_list_cities(request):
     city_list.reverse()
     total = CdClient.objects.filter(sent=True).count()
     return render_response(request, "shipit/city_list.html", locals())
+
+def redirect_to_new_url(request):
+    return redirect('/dvdgonder/')
