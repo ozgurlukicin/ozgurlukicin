@@ -14,9 +14,15 @@ from django.contrib.sites.models import Site
 from oi.shipit.settings import CITY_LIST
 from oi.middleware import threadlocals
 
+class PardusVersion(models.Model):
+    version = models.CharField("Sürüm", max_length=64, unique=True)
+
+    def __unicode__(self):
+        return self.version
+
 class CdClient(models.Model):
-    number_of_cds = models.PositiveIntegerField("CD adedi", default=1)
-    reason = models.TextField("CD isteme sebebiniz", max_length=512, blank=True)
+    number_of_cds = models.PositiveIntegerField("DVD adedi", default=1)
+    reason = models.TextField("DVD isteme sebebiniz", max_length=512, blank=True)
     first_name = models.CharField("Ad", max_length=30)
     last_name = models.CharField("Soyad", max_length=30)
     tcidentity = models.CharField("TC kimlik no", max_length="11")
@@ -32,6 +38,7 @@ class CdClient(models.Model):
     gsm_number = models.CharField("Cep telefonu numarası", max_length=7, blank=True)
     ip = models.IPAddressField(blank=True, verbose_name='IP adresi')
     date = models.DateTimeField(auto_now_add=True)
+    version = models.ForeignKey("PardusVersion", verbose_name="Sürüm")
 
     confirmed = models.BooleanField("Onaylandı")
     sent = models.BooleanField("Gönderildi")
@@ -81,3 +88,4 @@ class Cargo(models.Model):
     follow_code = models.CharField("Takip kodu", max_length=20)
     company = models.ForeignKey(CargoCompany, verbose_name="Kargo şirketi")
     date = models.DateField()
+

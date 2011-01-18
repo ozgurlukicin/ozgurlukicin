@@ -70,7 +70,7 @@ class CdClientForm(forms.ModelForm):
         if self.cleaned_data.has_key("number_of_cds"):
             if self.cleaned_data["number_of_cds"]>1:
                 if not self.cleaned_data["reason"]:
-                    raise forms.ValidationError("Birden fazla CD istiyorsanız sebebini yazmalısınız.")
+                    raise forms.ValidationError("Birden fazla DVD istiyorsanız sebebini yazmalısınız.")
 
         _phone_area = self.cleaned_data.get('phone_area')
         _phone_number = self.cleaned_data.get('phone_number')
@@ -135,7 +135,7 @@ class CdClientForm(forms.ModelForm):
     def clean_number_of_cds(self):
         number_of_cds = self.cleaned_data["number_of_cds"]
         if number_of_cds < 1:
-            raise forms.ValidationError("Lütfen geçerli bir CD sayısı girin.")
+            raise forms.ValidationError("Lütfen geçerli bir DVD sayısı girin.")
         return number_of_cds
 
 class CdClientChangeForm(CdClientForm):

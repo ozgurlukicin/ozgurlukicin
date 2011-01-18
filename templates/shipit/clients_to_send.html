@@ -5,10 +5,10 @@
     <body>
         <style>td{ border-top:1px solid black;font-size:10px;font-family:"DejaVu Sans Condensed" }</style>
         <table>
-            <tr><td style="width:100px">İsim ({{ cdclient_list.count }})</td><td style="width:450px">Adres</td><td style="width:80px">Telefon</td>{% if show_date %}<td>Başvuru Tarihi</td>{% endif %}</tr>
+            <tr><td style="width:100px">İsim ({{ cdclient_list.count }})</td><td style="width:450px">Adres</td><td style="width:80px">Telefon</td>{% if show_date %}<td>Başvuru Tarihi</td>{% endif %}<td>Sürüm</td></tr>
             {% for client in cdclient_list %}
             <tr>
-                <td>{{ client.get_full_name }}</td><td>{{ client.address }} {{ client.town }}/{{ client.get_city_display }}</td><td>{{ client.get_full_phone }}</td>{% if show_date %}<td>{{ client.date }}</td>{% endif %}
+                <td>{{ client.get_full_name }}</td><td>{{ client.address }} {{ client.town }}/{{ client.get_city_display }}</td><td>{{ client.get_full_phone }}</td>{% if show_date %}<td>{{ client.date }}</td>{% endif %}<td>{{ client.version }}</td>
             </tr>
             {% endfor %}
         </table>

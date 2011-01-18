@@ -5,8 +5,8 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
-CDCLIENTS_PER_PAGE = 100
-CD_MAIL_LIST = "cdgonder@liste.ozgurlukicin.com"
+DVDCLIENTS_PER_PAGE = 100
+DVD_MAIL_LIST = "cdgonder@liste.ozgurlukicin.com"
 CITY_LIST = (
     ('adana','Adana'),
     ('adiyaman','Adıyaman'),

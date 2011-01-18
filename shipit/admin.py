@@ -6,7 +6,7 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.contrib import admin
-
 from oi.shipit.models import *
 
-admin.site.register(CargoCompany, admin.ModelAdmin)
+admin.site.register(CargoCompany)
+admin.site.register(PardusVersion)

@@ -12,6 +12,7 @@
                 <td style="width:80px">İl</td>
                 <td style="width:80px">Telefon</td>
                 <td style="width:80px">GSM</td>
+                <td style="width:80px">Sürüm</td>
                 {% if show_date %}<td>Başvuru Tarihi</td>{% endif %}
             </tr>
             {% for client in cdclient_list %}
@@ -23,6 +24,7 @@
                 <td>{{ client.get_city_display }}</td>
                 <td>{{ client.get_full_phone }}</td>
                 <td>{{ client.get_full_gsm }}</td>
+                <td>{{ client.version }}</td>
                 {% if show_date %}<td>{{ client.date }}</td>{% endif %}
             </tr>
             {% endif %}

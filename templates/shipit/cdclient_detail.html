@@ -36,7 +36,11 @@
         <td>{{ cdClient.get_full_phone }}</td>
     </tr>
     <tr>
-        <td>CD Miktarı</td>
+        <td>Sürüm</td>
+        <td>{{ cdClient.version }}</td>
+    </tr>
+    <tr>
+        <td>DVD Miktarı</td>
         <td>{{ cdClient.number_of_cds }}</td>
     </tr>
     {% if cdClient.reason %}

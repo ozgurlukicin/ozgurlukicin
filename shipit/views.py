@@ -27,7 +27,7 @@ def create_cdclient(request):
         if form.is_valid() and not flood:
             cdClient = form.save()
             message = loader.get_template("shipit/confirm_email.html").render(Context({"cdClient":cdClient}))
-            mail = EmailMessage("Pardus CD isteğiniz", message, "Özgürlükiçin <%s>" % DEFAULT_FROM_EMAIL, ["%s <%s>" % (cdClient.get_full_name(), cdClient.email)])
+            mail = EmailMessage("Pardus DVD isteğiniz", message, "Özgürlükiçin <%s>" % DEFAULT_FROM_EMAIL, ["%s <%s>" % (cdClient.get_full_name(), cdClient.email)])
             mail.content_subtype = "html"
             mail.send(fail_silently=True)
             return render_response(request, "shipit/sent.html", locals())
@@ -50,10 +50,10 @@ def confirm_cdclient(request, id, hash):
     #send mail to lists
     message = loader.get_template("shipit/confirmed_email.html").render(Context({"cdClient":cdClient,"WEB_URL":WEB_URL}))
     mail = EmailMessage(
-        "Pardus CD isteği",
+        "Pardus DVD isteği",
         message,
         "Özgürlükiçin <%s>" % DEFAULT_FROM_EMAIL,
-        [CD_MAIL_LIST],
+        [DVD_MAIL_LIST],
         headers={"Message-ID":"%s-%s" % (cdClient.id, cdClient.hash)}
     )
     mail.content_subtype = "html"
@@ -101,10 +101,10 @@ def cdclient_cargo(request, id):
             cargo.save()
             message = loader.get_template("shipit/sent_email.html").render(Context({"cdClient":cdClient,"cargo":cargo}))
             mail = EmailMessage(
-                "Pardus CD isteğiniz",
+                "Pardus DVD isteğiniz",
                 message,
                 "Özgürlükiçin <%s>" % DEFAULT_FROM_EMAIL,
-                [CD_MAIL_LIST, cdClient.email],
+                [DVD_MAIL_LIST, cdClient.email],
                 headers={"Message-ID":"%s-%s" % (cdClient.id, cdClient.hash)}
             )
             mail.content_subtype = "html"
