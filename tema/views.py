@@ -860,7 +860,7 @@ def themeitem_change_openofficetheme(request, item_id):
 
                 #post changes
                 if object.version != old_version:
-                    text = "%s %s sürümlü %s OpenOffice.org öğesi %s sürümüne güncelledi." % (request.user, old_version, object.title, object.version)
+                    text = "%s %s sürümlü %s OpenOffice.org öğesini %s sürümüne güncelledi." % (request.user, old_version, object.title, object.version)
                     post = Post(topic=object.topic,
                                 author=request.user,
                                 text=text,
