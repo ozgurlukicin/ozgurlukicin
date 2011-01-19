@@ -627,14 +627,14 @@ def themeitem_change_packagescreenshot(request, item_id):
                 thumbnail.thumbnail((150,200), Image.ANTIALIAS)
                 file = ContentFile("")
                 object.thumbnail.save(object.image.path, file, save=True)
-                thumbnail.save(object.image.path)
+                thumbnail.save(object.thumbnail.path)
 
                 #create thumbnail for package manager
-                thumbnail = Image.open(object.image.path)
-                thumbnail.thumbnail((150,200), Image.ANTIALIAS)
+                s_image = Image.open(object.image.path)
+                s_image.thumbnail((270,190), Image.ANTIALIAS)
                 file = ContentFile("")
-                object.thumbnail.save(object.image.path, file, save=True)
-                thumbnail.save(object.thumbnail.path)
+                object.s_image.save(object.image.path, file, save=True)
+                s_image.save(object.s_image.path)
 
                 #post changes
                 if object.version != old_version:
