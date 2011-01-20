@@ -76,7 +76,8 @@ class PardusVersionAdmin(admin.ModelAdmin):
     list_display = ('number', 'codename', 'status')
     ordering = ['-number']
     search_fields = ['codename']
-    js = ("js/tinymce/tiny_mce.js", "js/tinymce/textareas.js",)
+    class Media:
+        js = ("admin/tinymce/jscripts/tiny_mce/tiny_mce.js", "js/tinymce_setup.js", "js/jquery-1.4.2.min.js")
 
 class PardusMirrorAdmin(admin.ModelAdmin):
     list_display = ('name', 'url', 'status')
