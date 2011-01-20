@@ -11,15 +11,21 @@
 {% block content %}
 <div class="page_title">Pardus {% if version.number %}{{ version.number }} {#({{ version.codename }})#} {% endif %}indir</div>
 <div class="page_content">
-<h2>Kurulan CD</h2>
-    <p>md5: <strong>{{ version.install_md5sum }}</strong><br />
+<h2>32bit Kurulan DVD</h2>
+    <p>md5sum: <strong>{{ version.install_md5sum }}</strong><br />
     sha1sum: <strong>{{ version.install_sha1sum }}</strong></p>
 
+    {% if version.second_version_exists %}
+    <h2>64bit Kurulan DVD</h2>
+    <p>md5sum: <strong>{{ version.install_64bit_md5sum }}</strong><br />
+    sha1sum: <strong>{{ version.install_64bit_sha1sum }}</strong></p>
+    {% endif %}
+
     <div>
-        <p>Pardus kurulum kalıbının CD'ye aktarılmasıyla ilgili yardım için, <a href="http://www.ozgurlukicin.com/ia/pardus-20092-cdsi-yazmak/">Pardus {{ version.number }} CD'si Yazmak</a>,  Pardus kurulumu için detaylı bilgiler içinse <a href="http://www.ozgurlukicin.com/ia/pardus-nasil-kurulur/">Pardus {{ version.number }} Nasıl Kurulur?</a> belgelerine başvurabilirsiniz. Ayrıca {{ version.number }} {{ version.codename }} sürümü özellikleri hakkında bilgi almak için <a href="/indir/{{ version.number }}/surum_notu/">sürüm notları</a> belgesini okuyabilirsiniz.</p>
+        <p>Pardus kurulum kalıbının DVD'ye aktarılmasıyla ilgili yardım için, <a href="http://www.ozgurlukicin.com/ia/pardus-20092-cdsi-yazmak/">Pardus {{ version.number }} CD'si Yazmak</a>,  Pardus kurulumu için detaylı bilgiler içinse <a href="http://www.ozgurlukicin.com/ia/pardus-nasil-kurulur/">Pardus {{ version.number }} Nasıl Kurulur?</a> belgelerine başvurabilirsiniz. Ayrıca {{ version.number }} {{ version.codename }} sürümü özellikleri hakkında bilgi almak için <a href="/indir/{{ version.number }}/surum_notu/">sürüm notları</a> belgesini okuyabilirsiniz.</p>
 
         {% if install_mirrors %}
-        <p>Pardus {{ version.number }} {{ version.codename }} Kurulan CD'sini indirmek için aşağıdaki linkleri kullanabilirsiniz.</p>
+        <p>Pardus {{ version.number }} {{ version.codename }} Kurulan DVD'sini indirmek için aşağıdaki linkleri kullanabilirsiniz.</p>
 
         <ul style="margin-top: -6px;">
             {% for mirror in install_mirrors %}
@@ -28,7 +34,7 @@
         </ul>
         {% endif %}
 
-        <p>Ayrıca {{ version.number }} {{ version.codename }} Kurulan CD'sini <a href="{{ version.install_torrent }}">torrent</a> adresini kullanarak P2P araçları ile de indirebilirsiniz.  Torrent ile indirme yapmak için Ktorrent uygulamasını kullanabilirsiniz. Pardus ile birlikte gelen KTorrent ile ilgili yazımızı okumak için <a href="/paket/ktorrent/">tıklayın</a>.</p>
+        <p>Ayrıca {{ version.number }} {{ version.codename }} Kurulan DVD'sini <a href="{{ version.install_torrent }}">torrent</a> adresini kullanarak P2P araçları ile de indirebilirsiniz.  Torrent ile indirme yapmak için Ktorrent uygulamasını kullanabilirsiniz. Pardus ile birlikte gelen KTorrent ile ilgili yazımızı okumak için <a href="/paket/ktorrent/">tıklayın</a>.</p>
     </div>
 </div>
 {% endblock %}

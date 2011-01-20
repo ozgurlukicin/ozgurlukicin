@@ -346,15 +346,24 @@ class Package(models.Model):
 
 class PardusVersion(models.Model):
     number = models.CharField('Sürüm numarası', max_length = 16, blank = False, unique = True)
-    codename = models.CharField('Kod adı', max_length = 64, unique = True)
-    install_md5sum = models.CharField('Kurulan md5 özeti', max_length = 32, blank = False, unique = True)
-    install_sha1sum = models.CharField('Kurulan sha1 özeti', max_length = 40, blank = False, unique = True)
-    live_md5sum = models.CharField('Çalışan md5 özeti', max_length = 32, blank = False, unique = True)
-    live_sha1sum = models.CharField('Çalışan sha1 özeti', max_length = 40, blank = False, unique = True)
+    codename = models.CharField('Kod adı', max_length = 64, blank = True, unique = True)
+    install_md5sum = models.CharField('Kurulan 32bit md5 özeti', max_length = 32, blank = False, unique = True)
+    install_sha1sum = models.CharField('Kurulan 32bit sha1 özeti', max_length = 40, blank = False, unique = True)
+    live_md5sum = models.CharField('Çalışan 32bit md5 özeti', max_length = 32, blank = False, unique = True)
+    live_sha1sum = models.CharField('Çalışan 32bit sha1 özeti', max_length = 40, blank = False, unique = True)
     releasenote = models.TextField('Sürüm notu', blank = False)
-    install_torrent = models.CharField('Kurulan Torrent', max_length = 128)
-    live_torrent = models.CharField('Çalışan Torrent', max_length = 128)
+    install_torrent = models.CharField('Kurulan 32bit Torrent', max_length = 128)
+    live_torrent = models.CharField('Çalışan 32bit Torrent', max_length = 128)
     status = models.BooleanField('Aktif')
+
+    #FIELDs for 64bit versions
+    install_64bit_md5sum = models.CharField('Kurulan 64bit md5 özeti', max_length = 32, blank = True, unique = True)
+    install_64bit_sha1sum = models.CharField('Kurulan 64bit sha1 özeti', max_length = 40, blank = True, unique = True)
+    live_64bit_md5sum = models.CharField('Çalışan 64bit md5 özeti', max_length = 32, blank = True, unique = True)
+    live_64bit_sha1sum = models.CharField('Çalışan 64bit sha1 özeti', max_length = 40, blank = True, unique = True)
+    install_64bit_torrent = models.CharField('Kurulan 64bit Torrent', max_length = 128, blank = True)
+    live_64bit_torrent = models.CharField('Çalışan 64bit Torrent', max_length = 128, blank = True)
+    second_version_exists = models.BooleanField('Bu ürünün 64bit versiyonu mevcut')
 
     def __unicode__(self):
         return "Pardus %s" % self.number
@@ -371,7 +380,7 @@ class PardusMirror(models.Model):
 
     name = models.CharField('Sunucu adı', max_length = 64, blank = False)
     url = models.CharField('Adres', max_length = 128)
-    type = models.SmallIntegerField('CD Tipi', max_length=1, choices=cdtype)
+    type = models.SmallIntegerField('DVD Tipi', max_length=1, choices=cdtype)
     order = models.PositiveIntegerField(verbose_name='Sıralama')
     status = models.BooleanField('Aktif')
 
