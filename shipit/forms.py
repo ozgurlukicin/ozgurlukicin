@@ -57,6 +57,9 @@ class TurkishIdentityNumberField(forms.Field):
         return value
 
 class CdClientForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CdClientForm,self ).__init__(*args,**kwargs)
+        self.fields["version"].queryset = PardusVersion.objects.filter(status=True)
     tcidentity = TurkishIdentityNumberField(label="TC kimlik no")
     phone_area = forms.CharField(label="Telefon (sabit hat)", max_length=3, required=False, widget=forms.TextInput(attrs={"style":"width:30px;margin-right:5px"}))
     phone_number = forms.CharField(label="Telefon Numarası", max_length=7, required=False, widget=forms.TextInput(attrs={"style":"width:130px"}))

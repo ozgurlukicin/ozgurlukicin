@@ -16,6 +16,7 @@ from oi.middleware import threadlocals
 
 class PardusVersion(models.Model):
     version = models.CharField("Sürüm", max_length=64, unique=True)
+    status = models.BooleanField("Aktif")
 
     def __unicode__(self):
         return self.version

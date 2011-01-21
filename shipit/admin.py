@@ -8,5 +8,8 @@
 from django.contrib import admin
 from oi.shipit.models import *
 
+class PardusVersionAdmin(admin.ModelAdmin):
+    list_display = ("version", "status")
+
 admin.site.register(CargoCompany)
-admin.site.register(PardusVersion)
+admin.site.register(PardusVersion, PardusVersionAdmin)
