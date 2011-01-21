@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="page_title">Pardus {% if version.number %}{{ version.number }} {#({{ version.codename }})#} {% endif %}indir</div>
+<div class="page_title">Pardus {% if version.number %}{{ version.number }} Kurulan {#({{ version.codename }})#} {% endif %}indir</div>
 <div class="page_content">
 <h2>32bit Kurulan DVD</h2>
     <p>md5sum: <strong>{{ version.install_md5sum }}</strong><br />
@@ -34,7 +34,33 @@
         </ul>
         {% endif %}
 
-        <p>Ayrıca {{ version.number }} {{ version.codename }} Kurulan DVD'sini <a href="{{ version.install_torrent }}">torrent</a> adresini kullanarak P2P araçları ile de indirebilirsiniz.  Torrent ile indirme yapmak için Ktorrent uygulamasını kullanabilirsiniz. Pardus ile birlikte gelen KTorrent ile ilgili yazımızı okumak için <a href="/paket/ktorrent/">tıklayın</a>.</p>
+        <p>Ayrıca Pardus {{ version.number }} {{ version.codename }} Kurulan DVD'sini <a href="{{ version.install_torrent }}">torrent</a> adresini kullanarak P2P araçları ile de indirebilirsiniz.  Torrent ile indirme yapmak için Ktorrent uygulamasını kullanabilirsiniz. Pardus ile birlikte gelen KTorrent ile ilgili yazımızı okumak için <a href="/paket/ktorrent/">tıklayın</a>.</p>
+    </div>
+
+    <div class="page_title">Pardus {% if version.number %}{{ version.number }} Çalışan {% endif %}indir</div>
+    <h2>32bit Çalışan DVD</h2>
+    <p>md5sum: <strong>{{ version.live_md5sum }}</strong><br />
+    sha1sum: <strong>{{ version.live_sha1sum }}</strong></p>
+
+    {% if version.second_version_exists %}
+    <h2>64bit Çalışan DVD</h2>
+    <p>md5sum: <strong>{{ version.live_64bit_md5sum }}</strong><br />
+    sha1sum: <strong>{{ version.live_64bit_sha1sum }}</strong></p>
+    {% endif %}
+
+    <div>
+        <p>Pardus çalışan kalıbının DVD'ye aktarılmasıyla ilgili yardım için, <a href="http://www.ozgurlukicin.com/ia/pardus-2011-dvdsi-yazmak/">Pardus {{ version.number }} DVD'si Yazmak</a> belgesine başvurabilirsiniz. Ayrıca {{ version.number }} {{ version.codename }} sürümü özellikleri hakkında bilgi almak için <a href="/indir/{{ version.number }}/surum_notu/">sürüm notları</a> belgesini okuyabilirsiniz.</p>
+
+        {% if live_mirrors %}
+        <p>Pardus {{ version.number }} {{ version.codename }} Çalışan DVD'sini indirmek için aşağıdaki linkleri kullanabilirsiniz.</p>
+
+        <ul style="margin-top: -6px;">
+            {% for mirror in live_mirrors %}
+            <li><a href="{{ mirror.url }}">{{ mirror.name }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <p>Ayrıca Pardus {{ version.number }} {{ version.codename }} Çalışan DVD'sini <a href="{{ version.live_torrent }}">torrent</a> adresini kullanarak P2P araçları ile de indirebilirsiniz. Torrent ile indirme yapmak için Ktorrent uygulamasını kullanabilirsiniz. Pardus ile birlikte gelen KTorrent ile ilgili yazımızı okumak için <a href="/paket/ktorrent/">tıklayın</a>.</p>
     </div>
 </div>
 {% endblock %}
