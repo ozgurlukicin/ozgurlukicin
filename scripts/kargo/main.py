@@ -15,10 +15,15 @@ sys.path.append(os.path.split(project_dir)[0])
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
 from oi.shipit.models import CdClient
+from oi.shipit.models import PardusVersion
+
+from django.template.defaultfilters import slugify
 
 
 if __name__ == '__main__':
     args = sys.argv
+    pardus_versions = PardusVersion.objects.all()
+
     if len(args) != 2:
         print("Usage: python %s [limit]") % __file__
         sys.exit()
@@ -29,8 +34,10 @@ if __name__ == '__main__':
         print("Invalid limit: %s") % args[-1]
         sys.exit()
 
-    locale.setlocale(locale.LC_ALL, "tr_TR.UTF-8")
-    cdclient = CdClient.objects.filter(confirmed=1,
-        sent=0, taken=0).order_by('date')[:limit]
+    #locale.setlocale(locale.LC_ALL, "tr_TR.UTF-8")
 
-    add_column(cdclient, date.today().isoformat())
+    for version in pardus_versions:
+        cdclient = CdClient.objects.filter(confirmed=1,
+            sent=0, taken=0, version=version).order_by('date')[:limit]
+
+        add_column(cdclient, date.today().isoformat(), slugify(version))

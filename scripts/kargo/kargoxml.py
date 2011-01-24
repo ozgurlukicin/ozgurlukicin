@@ -4,7 +4,7 @@
 from xml.etree import ElementTree as ET
 
 
-def add_column(cdclient, timestamp):
+def add_column(cdclient, timestamp, version):
     root = ET.Element('document')
 
     for field in cdclient:
@@ -32,4 +32,4 @@ def add_column(cdclient, timestamp):
             ET.SubElement(cargo, element).text = sub_elements[element]
 
     tree = ET.ElementTree(root)
-    tree.write('kargo_%s.xml' % timestamp, encoding='utf-8')
+    tree.write('kargo_%s_%s.xml' % (timestamp, version), encoding='utf-8')
