@@ -6,6 +6,7 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.conf.urls.defaults import *
+from oi.beyin2.feeds import RSS, Atom
 
 urlpatterns = patterns('oi.beyin2.views',
     url(r'^(?P<idea_id>\d+)/detail/$','idea_detail', name='idea_detail'),
@@ -27,5 +28,8 @@ urlpatterns = patterns('oi.beyin2.views',
     url(r'^(?P<image_id>\d+)/remove_image/$','image_remove', name='image_remove'),
     url(r'^promo/(?P<idea_id>\d+)/$', 'promo',name='promo'),
     (r'^$', 'main'),
-)
 
+    #URLs for FEEDs
+    (r'feed/rss/$', RSS()),
+    (r'feed/atom/$', Atom()),
+)
