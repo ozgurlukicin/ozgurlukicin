@@ -8,6 +8,8 @@
 from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Atom1Feed
 from django.contrib.syndication.feeds import FeedDoesNotExist
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 
 from oi.tema.models import ThemeItem
 from oi.settings import SITE_NAME, WEB_URL, SITE_DESC
@@ -32,3 +34,26 @@ class RSS(Feed):
 class Atom(RSS):
     feed_type = Atom1Feed
     subtitle = RSS.description
+
+class User_RSS(Feed):
+    def get_object(self, request, username):
+        return get_object_or_404(User, username=username)
+
+    def title(self, obj):
+        return "%s Tema Kullanıcı: %s" % (SITE_NAME, obj.username)
+
+    def description(self, obj):
+        return SITE_DESC
+
+    def link(self, obj):
+        return "%s/tema/kullanici/%s/" % (WEB_URL, obj.username)
+
+    def items(self, obj):
+        return ThemeItem.objects.filter(author=obj, status=True).order_by("-update")[:20]
+
+    def item_link(self, item):
+        return "%s%s" % (WEB_URL, item.get_absolute_url())
+
+class User_Atom(User_RSS):
+    feed_type = Atom1Feed
+    subtitle = User_RSS.description
