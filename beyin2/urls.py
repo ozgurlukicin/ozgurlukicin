@@ -30,6 +30,6 @@ urlpatterns = patterns('oi.beyin2.views',
     (r'^$', 'main'),
 
     #URLs for FEEDs
-    (r'feed/rss/$', RSS()),
-    (r'feed/atom/$', Atom()),
+    (r'^feed/rss/$', RSS()),
+    (r'^feed/atom/$', Atom()),
 )
