@@ -6,22 +6,7 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.conf.urls.defaults import *
-from oi.tema.feeds import *
-
-feed_dict = {
-             'rss': Tema_RSS,
-             'atom': Tema_Atom,
-            }
-
-cat_feed_dict = {
-             'rss': Category_Tema_Rss,
-             'atom': Category_Tema_Atom,
-            }
-
-user_feed_dict = {
-             'rss': User_Tema_Rss,
-             'atom': User_Tema_Atom,
-            }
+from oi.tema.feeds import RSS, Atom
 
 urlpatterns = patterns ('oi.tema.views',
         #URL for Home Page
@@ -62,6 +47,10 @@ urlpatterns = patterns ('oi.tema.views',
         #URL for PREVIEW function
         (r'^yazitipleri/detay/(?P<slug>[a-z0-9-_]+)/onizle/(?P<text>.{1,20})/$','font_image'),
 
+        #URLs for FEEDs
+        (r'^feed/rss/$', RSS()),
+        (r'^feed/atom/$', Atom()),
+
         #URLs for LISTS
         (r'^([a-z0-9-_]+)?/$','themeitem_list'),
         (r'^([a-z0-9-_]+)/([a-z0-9-_]+)/$','themeitem_list'),
@@ -74,9 +63,4 @@ urlpatterns = patterns ('oi.tema.views',
         #URLs for Package Manager
         (r'^paket-goruntuleri/exists/(?P<package_name>[a-z0-9-_]+)/$', 'default_image_exists'),
         (r'^paket-goruntuleri/ontanimli/(?P<size>[a-z0-9-_]+)/(?P<package_name>[a-z0-9-_]+)/$', 'show_default_image'),
-
-        #URLs for FEEDS
-        #(r'^feed/kategori/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': cat_feed_dict}),
-        #(r'^feed/kullanici/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': user_feed_dict}),
-
 )
