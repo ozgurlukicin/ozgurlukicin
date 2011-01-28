@@ -6,7 +6,7 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt.
 
 from django.conf.urls.defaults import *
-from oi.tema.feeds import RSS, Atom, User_RSS, User_Atom
+from oi.tema.feeds import *
 
 urlpatterns = patterns ('oi.tema.views',
         #URL for Home Page
@@ -52,6 +52,8 @@ urlpatterns = patterns ('oi.tema.views',
         (r'^feed/atom/$', Atom()),
         (r'^feed/rss/kullanici/(?P<username>.+)/$', User_RSS()),
         (r'^feed/atom/kullanici/(?P<username>.+)/$', User_Atom()),
+        (r'^feed/rss/kategori/(?P<category>.+)/$', Category_RSS()),
+        (r'^feed/atom/kategori/(?P<category>.+)/$', Category_Atom()),
 
         #URLs for LISTS
         (r'^([a-z0-9-_]+)?/$','themeitem_list'),
