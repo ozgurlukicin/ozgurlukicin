@@ -10,7 +10,8 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from oi.forum.models import Topic
 from oi.st.tags import Tag
-# Create your models here.
+
+from oi.utils import replace_turkish
 import os
 
 voteChoices = (
@@ -88,7 +89,7 @@ class ScreenShot(models.Model):
 
             old_path = os.path.split(self.image.file.name)[0]
             extension =  os.path.splitext(self.image.file.name)[-1]
-            new_name = "%s-%s%s" % (self.idea.title,self.id, extension)
+            new_name = "%s-%s%s" % (replace_turkish(self.idea.title).lower(), self.id, extension)
             os.rename(self.image.file.name, old_path+"/"+new_name)
 
             old_url_head = os.path.split(self.image.url)[0]
