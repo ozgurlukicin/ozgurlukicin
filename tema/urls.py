@@ -56,9 +56,9 @@ urlpatterns = patterns ('oi.tema.views',
         (r'^feed/atom/kategori/(?P<category>.+)/$', Category_Atom()),
 
         #URLs for LISTS
+        (r'^kullanici/(?P<username>.+)/$','list_user'),
         (r'^([a-z0-9-_]+)?/$','themeitem_list'),
         (r'^([a-z0-9-_]+)/([a-z0-9-_]+)/$','themeitem_list'),
-        (r'^kullanici/(?P<username>.+)/$','list_user'),
 
         #URLS for DETAIL and DOWNLOAD functions
         (r'^(?P<category>[a-z0-9-_]+)/detay/(?P<slug>[a-z0-9-_]+)/$','themeitem_detail'),
