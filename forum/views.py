@@ -814,7 +814,7 @@ def create_poll(request, forum_slug, topic_id):
             poll.save()
 
             # create poll options
-            for i in range(8):
+            for i in range(16):
                 if form.cleaned_data["option%d" % i]:
                     option = PollOption(
                             poll = poll,
@@ -877,7 +877,7 @@ def change_poll(request, forum_slug, topic_id):
                 option.delete()
 
             # create non-existing options
-            for i in range(j, 8):
+            for i in range(j, 16):
                 if form.cleaned_data["option%d" % i]:
                     option = PollOption(
                             poll = poll,

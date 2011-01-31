@@ -68,6 +68,14 @@ class PollForm(forms.ModelForm):
     option5 = forms.CharField(label='6. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
     option6 = forms.CharField(label='7. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
     option7 = forms.CharField(label='8. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
+    option8 = forms.CharField(label='9. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
+    option9 = forms.CharField(label='10. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
+    option10 = forms.CharField(label='11. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
+    option11 = forms.CharField(label='12. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
+    option12 = forms.CharField(label='13. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
+    option13 = forms.CharField(label='14. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
+    option14 = forms.CharField(label='15. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
+    option15 = forms.CharField(label='16. Seçenek', required=False, max_length=128, widget=forms.TextInput(attrs={'size': '40',}))
 
     class Meta:
         model = Poll
