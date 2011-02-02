@@ -1,22 +1,24 @@
 {% extends "forum/forum_base.html" %}
 
+{% block extrahead %}
+<style type="text/css" media="screen">@import url('/media/css/new/formfield.css');</style>
+<style type="text/css" media="screen">@import url('/media/css/new/poll_form_extra.css');</style>
+{% endblock %}
+
 {% block content %}
 <div class="forum_address">
     <div class="current_topic"><a href="/">Ana Sayfa</a> &#62; <a href="/forum/">Forum</a> &#62; <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> &#62; <a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a> &#62; Anket Ekle</div>
 </div>
+<br />
 {% if form.errors %}
-<font color="red">Anket oluşturulamadı, lütfen aşağıdaki hataları düzeltin</font><br />
+<font class="error">Anket oluşturulamadı, lütfen aşağıdaki hataları düzeltin</font><br /><br />
 {% endif %}
 
-<form action="" method="post">
-<dl>
-{% for field in form %}
-    <dt>{{ field.label_tag }}</dt>
-    <dd>{{ field }}</dd>
-    {% if field.help_text %}<dd>{{ field.help_text }}</dd>{% endif %}
-    {% if field.errors %}<dd class="myerrors" style="font-color: red">{{ field.errors }}</dd>{% endif %}
-{% endfor %}
-</dl>
-<input type="submit" value="Anket Oluştur">
+<form action="" method="POST" enctype="multipart/form-data">
+    <br /><p>{{ form.non_field_errors }}</p>
+    {% for field in form %}
+    {% include "field.html" %}
+    {% endfor %}
+    <input style="float: left; margin-left: 10px;" type="submit" value="Anket Oluştur" />
 </form>
 {% endblock %}
