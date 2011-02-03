@@ -222,8 +222,8 @@ def topic(request, forum_slug, topic_id):
         poll_options = poll.polloption_set.all()
         total_vote_count = poll.pollvote_set.count() * 1.0
         for option in poll_options:
-            if len(option.text) > 16:
-                option.text = option.text[:16] + "..."
+            if len(option.text) > 24:
+                option.text = option.text[:24] + "..."
             if total_vote_count < 1:
                 option.percent = 0
             else:
