@@ -20,7 +20,6 @@ from oi.settings import DEFAULT_FROM_EMAIL
 from oi.forum.views import flood_control
 from oi.settings import WEB_URL, CITY_LIST
 
-version_dict = { "32bit" : "Pardus 2011 32 bit", "64bit" : "Pardus 2011 64 bit" }
 
 def create_cdclient(request):
     if request.method == "POST":
@@ -120,9 +119,9 @@ def cdclient_cargo(request, id):
     return render_response(request, "shipit/cargo.html", locals())
 
 @permission_required("shipit.change_cdclient")
-def cdclient_list_to_send(request, version=None):
-    if version != None:
-        version = get_object_or_404(PardusVersion, version=version_dict[version])
+def cdclient_list_to_send(request, version_slug=None):
+    if version_slug != None:
+        version = get_object_or_404(PardusVersion, slug=version_slug)
         cdclient_list = CdClient.objects.filter(confirmed=True, sent=False, version=version)
     else:
         cdclient_list = CdClient.objects.filter(confirmed=True, sent=False)
@@ -130,9 +129,9 @@ def cdclient_list_to_send(request, version=None):
     return render_response(request, "shipit/clients_to_send.html", locals())
 
 @permission_required("shipit.change_cdclient")
-def cdclient_list_sent(request, version=None):
-    if version != None:
-        version = get_object_or_404(PardusVersion, version=version_dict[version])
+def cdclient_list_sent(request, version_slug=None):
+    if version_slug != None:
+        version = get_object_or_404(PardusVersion, slug=version_slug)
         cdclient_list = CdClient.objects.filter(confirmed=True, sent=True, version=version)
     else:
         cdclient_list = CdClient.objects.filter(confirmed=True, sent=True)
@@ -146,9 +145,9 @@ def cdclient_list_delivered(request):
     return render_response(request, "shipit/clients_delivered.html", locals())
 
 @permission_required("shipit.change_cdclient")
-def cdclient_list_not_sent(request, version=None):
-    if version != None:
-        version = get_object_or_404(PardusVersion, version=version_dict[version])
+def cdclient_list_not_sent(request, version_slug=None):
+    if version_slug != None:
+        version = get_object_or_404(PardusVersion, slug=version_slug)
         cdclient_list = CdClient.objects.filter(confirmed=True, sent=False, version=version).order_by('-date')
     else:
         cdclient_list = CdClient.objects.filter(confirmed=True, sent=False).order_by('-date')
