@@ -1017,7 +1017,6 @@ def toggle_general_topic(request, forum_slug, topic_id):
     if topic.general:
         topic.general = False
     else:
-        topic.locked = True
         topic.general = True
         topic.sticky = True
     topic.save()
