@@ -133,7 +133,7 @@ def list_user(request, username):
             'queryset': themeItems,
             'paginate_by': THEME_ITEM_PER_PAGE,
             "template_name": "tema/themeitem_list.html",
-            "extra_context": {"author":user,"category":None, "order":request.GET.get("order", "update")},
+            "extra_context": {"author":user,"category":None, "order":request.GET.get("order", "update") , "add_new_link":"/tema/ekle/"},
             }
     return object_list(request, **params)
 
