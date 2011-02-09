@@ -7,7 +7,7 @@
 
 from django.contrib import admin
 
-from oi.ezine.models import Ezine
+from oi.ezine.models import Ezine, EzineFile
 from oi.st.tags import Tag
 
 class EzineAdmin(admin.ModelAdmin):
@@ -19,3 +19,4 @@ class EzineAdmin(admin.ModelAdmin):
             'js/jquery-1.4.2.min.js', 'js/adminimages.js', 'js/tinymce_setup.js')
 
 admin.site.register(Ezine, EzineAdmin)
+admin.site.register(EzineFile)
