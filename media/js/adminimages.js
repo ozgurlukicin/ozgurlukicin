@@ -3,7 +3,7 @@ function update_image() {
     $("#image_thumb").attr("src", "/media/" + path);
 }
 $(document).ready(function() {
-    $("#id_image").bind("change", update_image);
+    $("#id_image").bind("change keyup", update_image);
     $(".image").before("<div class=\"row cells-1 image_filter\"><div><div class=\"column span-4\"><label for=\"image_filter\">Görselleri Filtrele:</label></div><div class=\"column span-flexible\"><input type=\"text\" maxlength=\"32\" name=\"image_filter\" class=\"vTextField\" id=\"filter\"/><p class=\"help\">Burayı kullanarak görsellerde arama yapabilirsiniz.</p></div></div></div>");
     $(".image > div").after("<img src=\"\" id=\"image_thumb\" alt=\"Üstteki arama kutusunu kullanıp listeden bir görsel seçiniz\" />");
     $("#filter").bind("change keyup", filter_images);
