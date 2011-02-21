@@ -26,6 +26,7 @@ img {
 
 .img_left_nospacetop {
     float: left;
+    margin-right: 25px !important;
 }
 
 body {
