@@ -1,5 +1,5 @@
 function update_image() {
-    var path = $("#id_image option:selected").text()
+    var path = $("#id_image option:selected").text();
     $("#image_thumb").attr("src", "/media/" + path);
 }
 $(document).ready(function() {
