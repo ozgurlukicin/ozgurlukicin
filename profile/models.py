@@ -20,12 +20,12 @@ from oi.shop.shopprofile.models import ShopProfile
 
 PARDUS_VERSIONS = (
     (0, "---"),
-    (6, "Pardus 2011"),
-    (5, "Pardus 2009"),
-    (4, "Pardus 2008"),
-    (3, "Pardus 2007"),
-    (2, "Pardus 1.0"),
-    (1, "Pardus Kurumsal2"),
+    (6,"Pardus Kurumsal2"),
+    (5,"Pardus 2011"),
+    (4,"Pardus 2009"),
+    (3,"Pardus 2008"),
+    (2,"Pardus 2007"),
+    (1,"Pardus 1.0"),
 )
 
 class ForbiddenUsername(models.Model):
