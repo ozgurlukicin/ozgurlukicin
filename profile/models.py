@@ -18,14 +18,18 @@ from oi.settings import CITY_LIST
 from oi.st.models import Contribute
 from oi.shop.shopprofile.models import ShopProfile
 
+# 0, n, n-1, ..., 1 ordering is used here because we want;
+# to select --- by default,
+# newer version to be shown on top of older ones,
+# database number not to conflict with older versions.
 PARDUS_VERSIONS = (
-    (0, "---"),
-    (6,"Pardus Kurumsal2"),
-    (5,"Pardus 2011"),
-    (4,"Pardus 2009"),
-    (3,"Pardus 2008"),
-    (2,"Pardus 2007"),
-    (1,"Pardus 1.0"),
+    (0, "---"), #add new version below this line
+    (6, "Pardus Kurumsal2"),
+    (5, "Pardus 2011"),
+    (4, "Pardus 2009"),
+    (3, "Pardus 2008"),
+    (2, "Pardus 2007"),
+    (1, "Pardus 1.0"),
 )
 
 class ForbiddenUsername(models.Model):
