@@ -26,6 +26,10 @@ img {
 
 .img_left_nospacetop {
     float: left;
+}
+
+.img_left {
+    float: left;
     margin-right: 25px !important;
 }
 
