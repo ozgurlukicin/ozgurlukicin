@@ -15,6 +15,8 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
 from django.views.generic.list_detail import object_list
+from django.utils import simplejson
+from django.core.exceptions import ObjectDoesNotExist
 
 from oi.settings import DEFAULT_FROM_EMAIL, LOGIN_URL, WEB_URL, PROFILE_EDIT_URL
 
@@ -151,6 +153,19 @@ def user_profile(request, name):
     if not info.is_active:
         del info
     return render_response(request, 'user/profile.html', locals())
+
+def user_profile_json(request, name, password):
+    data = {}
+    if request.method == "POST" 
+        try:
+            user = User.objects.get(username=name)
+        except ObjectDoesNotExist:
+            pass
+        else:
+            if user.check_password(request.POST["password"]):
+                data = {'name': user.first_name, 'surname': user.last_name}
+    data = simplejson.dumps(data)
+    return HttpResponse(data, mimetype='application/javascript')
 
 def user_register(request):
     if request.method == 'POST':
