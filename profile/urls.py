@@ -26,5 +26,5 @@ urlpatterns = patterns('',
     #(r'^kullanici/(?P<name>[\w-]+)/yorumlar/$', 'oi.profile.views.user_comments'),
     (r'^profil/(?P<name>[\w-]+)/$', 'oi.profile.views.user_profile'),
     (r'^iletiler/(?P<name>[\w-]+)/$', 'oi.profile.views.posts_for_user'),
-    (r'^json/(?P<name>[\w-]+)/$', 'oi.profile.views.user_profile_json'),
+    (r'^json/$', 'oi.profile.views.user_profile_json'),
 )

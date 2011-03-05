@@ -154,18 +154,44 @@ def user_profile(request, name):
         del info
     return render_response(request, 'user/profile.html', locals())
 
-def user_profile_json(request, name, password):
-    data = {}
-    if request.method == "POST" 
+def user_profile_json(request):
+    if request.method == 'POST' and request.is_ajax():
+        data = {}
+        errors = []
+
         try:
-            user = User.objects.get(username=name)
+            user = User.objects.get(username=request.POST.get('username'))
+            if user.check_password(request.POST.get('password')):
+                profile = user.get_profile()
+                data.update({
+                    'user': {
+                        'first_name': user.first_name,
+                        'last_name': user.last_name,
+                        'email': user.email,
+                        'homepage': profile.homepage,
+                        'birth_date': profile.birthday.isoformat(),
+                        'city': profile.city,
+                        'msn': profile.msn,
+                        'jabber': profile.jabber,
+                        'icq': profile.icq
+                    }
+                })
+
+            else:
+                errors.append('invalid_password')
+
         except ObjectDoesNotExist:
-            pass
-        else:
-            if user.check_password(request.POST["password"]):
-                data = {'name': user.first_name, 'surname': user.last_name}
-    data = simplejson.dumps(data)
-    return HttpResponse(data, mimetype='application/javascript')
+            errors.append('invalid_user')
+
+        data.update({
+            'errors': errors,
+            'success': True if not len(errors) else False
+        })
+        data = simplejson.dumps(data).encode('utf-8')
+
+        return HttpResponse(data, mimetype='application/javascript')
+
+    return HttpResponse(status=403)
 
 def user_register(request):
     if request.method == 'POST':
