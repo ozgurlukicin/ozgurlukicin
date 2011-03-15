@@ -190,8 +190,8 @@ urlpatterns = patterns('',
     (r'^e-dergi/', include('oi.ezine.urls')),
 
     #Shipit
-    (r'^dvdgonder/', include('oi.shipit.urls')),
-    (r'^cdgonder/', 'oi.shipit.views.redirect_to_new_url'),
+    #(r'^dvdgonder/', include('oi.shipit.urls')),
+    #(r'^cdgonder/', 'oi.shipit.views.redirect_to_new_url'),
 
     #Piyango
     (r'^piyango/', include('oi.piyango.urls')),
