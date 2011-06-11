@@ -16,7 +16,7 @@ class AdvancedSearchForm(forms.Form):
     term = forms.CharField(label='Anahtar kelime', required=True, min_length=3, widget=forms.TextInput(attrs={'size': '40',}))
     search_in = forms.ChoiceField(label="Aranacak Bölümler", widget=forms.RadioSelect, choices=(
         (0, "Forum"),
-        (3, "Beyin (Yeni Fikirler)"),
+        #(3, "Beyin (Yeni Fikirler)"),
         (1, "Diğer Bölümler"),
         (2, "Tümü"),
         ))
