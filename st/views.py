@@ -152,12 +152,14 @@ def advanced_search(request):
             if depth == 0:
                 if search_in == 0 or search_in == 2:
                     topics = Topic.objects.filter(title__icontains=term, hidden=False)[:50]
+                """
                 if search_in == 3 or search_in == 2:
                     ideas = Idea.objects.filter(title__icontains=term, is_hidden=False).order_by('-vote_value')[:50]
                     for idea in ideas:
                         idea.vote_value = idea.vote_value//10
                     #removed because Idea is also used in beyin2, from now on, ideas is out of search
                     #ideas = Idea.objects.filter(Q(title__icontains=term)|Q(description__icontains=term)).filter(is_hidden=False).order_by('-vote_count')[:50]
+                """
                 if search_in == 1 or search_in == 2:
                     news = News.objects.filter(title__icontains=term, status=True).order_by('-update')[:50]
                     packages = Package.objects.filter(title__icontains=term, status=True).order_by('-update')[:50]

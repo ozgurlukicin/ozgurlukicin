@@ -8,7 +8,9 @@
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 <style type="text/css" media="screen">@import url('/media/css/new/profile.css');</style>
+{% comment %}
 <script type="text/javascript" src="/media/js/beyin2.js"></script>
+{% endcomment %}
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={{ apikey }}" type="text/javascript"></script>
     <script type="text/javascript">
     //<![CDATA[
@@ -52,7 +54,7 @@
             {% if has_sent_messages %}<a href="/kullanici/iletiler/{{ info }}/">Forumdaki İletileri</a>{% else %}<a>Forumda İletisi Yok</a>{% endif %}
             <br />
             <a href="{{ info.get_profile.get_theme_content_url }}">Eklediği Temalar</a><br />
-            {% if ideas %}<a href="{% url main_filter 'user' info.id %}" >Beyindeki Fikirleri </a>{% endif %}
+            {% comment %}{% if ideas %}<a href="{% url main_filter 'user' info.id %}" >Beyindeki Fikirleri </a>{% endif %}{% endcomment %}
         </div>
     </div>
     <div id="user_profile_right">

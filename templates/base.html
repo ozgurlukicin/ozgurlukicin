@@ -1,5 +1,7 @@
 {% load petition %}
+{% comment %}
 {% load ideas %}
+{% endcomment %}
 {% load ezine %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -43,10 +45,12 @@
         <div class="sidebarcolumn leftcolumn">
             {% block leftcolumn_top %}
             {% endblock %}
+            {% comment %}
             <div class="brainstorm">
                 <h2>Beyin Fırtınası</h2>
                 {% idea_list %}
             </div>
+            {% endcomment %}
             {% block leftcolumn_bottom %}
             {% endblock %}
         </div>
