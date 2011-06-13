@@ -48,8 +48,11 @@ div#header #logo {
     z-index: 1;
     top: 35px;
     left: 19px;
-    width: 355px;
+    width: 365px;
     margin-bottom: -7px;
+}
+div#header #logo img {
+    margin-right: 5px;
 }
 div#header #header_img {
     position: relative;
