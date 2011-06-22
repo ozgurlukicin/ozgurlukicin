@@ -46,13 +46,14 @@ div#header {
 div#header #logo {
     position: relative;
     z-index: 1;
-    top: 35px;
-    left: 19px;
-    width: 365px;
+    top: 18px;
+    left: 10px;
+    width: 385px;
     margin-bottom: -7px;
 }
-div#header #logo img {
-    margin-right: 5px;
+div#header #logo .text {
+    float: right;
+    margin-top: 15px;
 }
 div#header #header_img {
     position: relative;
