@@ -48,17 +48,17 @@ div#header #logo {
     z-index: 1;
     top: 18px;
     left: 10px;
-    width: 370px;
+    width: 215px;
     margin-bottom: -7px;
 }
 div#header #logo .text {
     float: right;
-    margin-top: 15px;
+    margin-top: 37px;
 }
 div#header #header_img {
     position: relative;
     z-index: 1;
-    top: -35px;
+    top: -65px;
     margin-bottom: -235px;
     float: right;
 }
