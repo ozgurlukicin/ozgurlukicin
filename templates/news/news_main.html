@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load library %}
+{% load forum %}
 {% block title %}Haberler - {% endblock %}
 {% block extrahead %}
 <style type="text/css" media="screen">@import url('/media/css/new/object_lists.css');</style>
@@ -41,6 +42,11 @@
         {% endfor %}
     </ul>
     </div>
+</div>
+{% else %}
+<div class="brainstorm">
+    <h2>Son İletiler</h2>
+    {% forum_sidebar %}
 </div>
 {% endif %}
 {% endblock %}
