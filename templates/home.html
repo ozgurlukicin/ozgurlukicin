@@ -4,6 +4,7 @@
 <style type="text/css" media="screen">@import url('/media/css/new/st.css');</style>
 <script type="text/javascript" src="/media/js/home.js"></script>
 {% endblock %}
+{% comment %}
 {% block leftcolumn %}
     <div class="sidebarcolumn leftcolumn">
     <div class="leftcolumn_content">
@@ -21,6 +22,7 @@
     </div>
     </div>
 {% endblock %}
+{% endcomment %}
 {% block content %}
     {% for news in news %}
     <div id="news_{{ forloop.counter0 }}" class="news_container{% if forloop.first %} active"{% else %}" style="display: none;"{% endif %}>

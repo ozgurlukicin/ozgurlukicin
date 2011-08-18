@@ -35,7 +35,7 @@ def home(request):
     packages = Package.objects.filter(status=True).order_by('-update')[:PACKAGES_IN_HOMEPAGE]
     games = Game.objects.filter(status=True).order_by('-update')[:GAMES_IN_HOMEPAGE]
     howtos = HowTo.objects.filter(status=True).order_by('-update')[:HOWTOS_IN_HOMEPAGE]
-    seminar = Seminar.objects.filter(status=True).order_by('start_date')
+    #seminar = Seminar.objects.filter(status=True).order_by('start_date')
     return render_response(request, 'home.html', locals())
 
 def fs_detail(request, slug):
