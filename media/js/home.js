@@ -8,6 +8,12 @@ var current_news = 0;
 var news_count = 5;
 $(document).ready(function() {
     news_count = $(".news_container").length;
+    $("#community_box a").tooltip({
+        delay: 500,
+        track: true,
+        showURL: false,
+        fade: 350
+    });
 });
 function select_news(i) {
     $("#news_count>img").attr("src", "/media/img/new/news_progress.png");
