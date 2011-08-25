@@ -65,6 +65,6 @@ urlpatterns = patterns ('oi.tema.views',
         (r'^(?P<category>[a-z0-9-_]+)/detay/(?P<slug>[a-z0-9-_]+)/(?P<id>\d+)/$','themeitem_download'),
 
         #URLs for Package Manager
-        (r'^paket-goruntuleri/exists/(?P<package_name>[a-z0-9-_]+)/$', 'default_image_exists'),
-        (r'^paket-goruntuleri/ontanimli/(?P<size>[a-z0-9-_]+)/(?P<package_name>[a-z0-9-_]+)/$', 'show_default_image'),
+        (r'^paket-goruntuleri/exists/(?P<package_name>[A-Za-z0-9-_]+)/$', 'default_image_exists'),
+        (r'^paket-goruntuleri/ontanimli/(?P<size>[A-Za-z0-9-_]+)/(?P<package_name>[A-Za-z0-9-_]+)/$', 'show_default_image'),
 )
