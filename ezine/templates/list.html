@@ -8,7 +8,7 @@
 <div class="page_title">Özgürlükİçin e-dergi yayında!</div>
 <div class="page_content">
 {% ifnotequal ezines.count 1 %}
-    <p><a href="http://www.ozgurlukicin.com/">Özgürlükİçin</a> topluluğu tarafından hazırlanan "<strong>Özgürlükİçin e-dergi</strong>"nin {{ ezines.0.issue }}. sayısı yayımlandı. Yola çıktığı günden bugüne koskocaman bir yayına dönüşen e-dergimiz bu ay tam <strong>{{ ezines.0.page_count }} sayfa</strong> olarak sitemizde yerini aldı.</p>
+    <p><a href="http://www.ozgurlukicin.com/">Pardus</a> topluluğu tarafından hazırlanan "<strong>Pardus e-dergi</strong>"nin {{ ezines.0.issue }}. sayısı yayımlandı. Yola çıktığı günden bugüne koskocaman bir yayına dönüşen e-dergimiz bu ay tam <strong>{{ ezines.0.page_count }} sayfa</strong> olarak sitemizde yerini aldı.</p>
     <p>E-derginin içeriği ise şöyle:</p>
 {% endifnotequal %}
 {% for ezine in ezines %}
@@ -21,7 +21,7 @@
     <div class="first_ezine_content" style="clear:left;">{{ ezine.description|safe }}</div>
 {% ifnotequal ezines.count 1 %}
     <hr />
-    <p style="margin-top:20px">Özgürlükİçin topluluğu tarafından hazırlanan "Özgürlükİçin e-dergi"nin eski sayılarına aşağıdan ulaşabilirsiniz. Tüm dergilerin içerikleri göstermek için <a onclick="$('.ezine_content').show()" style="cursor:pointer">buraya</a> tıklayın.</p>
+    <p style="margin-top:20px">Pardus topluluğu tarafından hazırlanan "Pardus e-dergi"nin ve "Özgürlükİçin e-dergi"nin eski sayılarına aşağıdan ulaşabilirsiniz. Tüm dergilerin içerikleri göstermek için <a onclick="$('.ezine_content').show()" style="cursor:pointer">buraya</a> tıklayın.</p>
 {% endifnotequal %}
 {% else %}
     <p style="margin-top:30px"><img src="{{ ezine.image.file.url }}" alt="{{ ezine.title }}" align="left" style="width:250px"/> <span style="font-size: large;">{{ ezine.title|safe }}</span></p>
