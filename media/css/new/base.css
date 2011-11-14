@@ -46,8 +46,8 @@ div#header {
 div#header #logo {
     position: relative;
     z-index: 1;
-    top: 88px;
-    left: 12px;
+    top: 83px;
+    left: 21px;
     width: 215px;
     margin-bottom: -7px;
 }
@@ -71,10 +71,11 @@ div#page {
     padding-bottom: 8px;
 }
 div#menu {
-    width: 963px;
+    width: 813px;
     height: 98px;
     margin-top: 10px;
     margin-left: 10px;
+    padding-left: 150px;
     background: url(/media/img/new/menu/bg.png) repeat-x;
 }
 div#menu img {
