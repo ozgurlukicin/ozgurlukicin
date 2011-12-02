@@ -55,3 +55,6 @@ pre {
     overflow: auto;
     margin-bottom: 10px;
 }
+.leftcolumn div {
+    margin-left: 5px !important;
+}
