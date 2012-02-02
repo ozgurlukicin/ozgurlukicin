@@ -198,7 +198,7 @@ class Topic(models.Model):
         return '/forum/%s/%s/poll/delete/' % (self.forum.slug, self.id)
 
     def get_email_id(self):
-        return '<%s.%s@%s>' % (md5(self.title).hexdigest(), self.id, FORUM_FROM_EMAIL.split('@')[1])
+        return '<%s.%s@%s>' % (md5(str(self.id)).hexdigest(), self.id, FORUM_FROM_EMAIL.split('@')[1])
 
     # <a title="...."> for tooltip. Just get a short context of first post on the topic.
     def get_tooltip_context(self):
