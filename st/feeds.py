@@ -38,11 +38,11 @@ class Main_RSS(CommonFeed):
             output.append(game)
 
         for fs in FS.objects.filter(status=1).order_by('-update')[:FS_IN_HOMEPAGE]:
-            fs.title = 'İlk Adım: %s' % fs.title
+            fs.title = u'İlk Adım: %s' % fs.title
             output.append(fs)
 
         for howto in HowTo.objects.filter(status=1).order_by('-update')[:HOWTOS_IN_HOMEPAGE]:
-            howto.title = 'Nasıl: %s' % howto.title
+            howto.title = u'Nasıl: %s' % howto.title
             output.append(howto)
 
         return output
