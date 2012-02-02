@@ -139,7 +139,7 @@ def latest_topics(request):
         abuse_count = AbuseReport.objects.count()
 
     forum = Forum(
-            name = "Güncellenen Başlıklar",
+            name = u"Güncellenen Başlıklar",
             slug = "guncellenen-basliklar",
             )
 
